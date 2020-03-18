@@ -1,0 +1,50 @@
+{
+  "id": "20200317",
+  "questions": [
+    {
+      "id": "temperatura",
+      "title": "Temperatura",
+      "description": "Inserisci la tua temperatura corporea",
+      "type": {
+        "widget": "picker",
+        "components": [
+          ["35", "36", "37", "38", "39", "40", "41", "42", "43", "44"],
+          [".0", ".1", ".2", ".3", ".4", ".5", ".6", ".7", ".8", ".9"]
+        ]
+      }
+    },
+    {
+      "id": "sintomi",
+      "title": "Hai riscontrato questi sintomi influenzali?",
+      "description": "Puoi selezionare piú di un sintomo",
+      "type": {
+        "widget": "multiple_choices",
+        "min_answers": 1,
+        "answers": [
+          "Febbre",
+          "Congestione Nasale",
+          "Naso che cola",
+          "Mal di gola"
+        ]
+      }
+    },
+    {
+      "id": "tosse",
+      "title": "Hai avuto tosse secca?",
+      "description": "...",
+      "type": {
+        "widget": "radio",
+        "answers": ["Si", "No"]
+      }
+    },
+    {
+      "id": "stanco",
+      "title": "Ti sei sentito stanco?",
+      "description": "...",
+      "type": {
+        "widget": "radio",
+        "answers": ["Si", "No", "Ogni Tanto"]
+      }
+    }
+  ]
+}

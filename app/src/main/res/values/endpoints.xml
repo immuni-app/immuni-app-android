@@ -1,0 +1,4 @@
+<resources>
+    <string name="oracle_base_url" translatable="false">https://example.com</string>
+    <string name="pico_base_url" translatable="false">https://api.staging.pico.bendingspoonsapps.com</string>
+</resources>

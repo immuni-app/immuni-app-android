@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Ascolto</string>
+
+    <string name="app_setup_check_connection">Setup error, retry...</string>
+    <string name="no_app_can_open_the_link">Nessuna app può aprire questo link...</string>
 </resources>

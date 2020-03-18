@@ -3,10 +3,11 @@ package com.bendingspoons.ascolto.ui.log
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
+import com.bendingspoons.ascolto.AscoltoActivity
 import com.bendingspoons.ascolto.R
 import org.koin.androidx.viewmodel.ext.android.getStateViewModel
 
-class LogActivity : AppCompatActivity() {
+class LogActivity : AscoltoActivity() {
 
     private lateinit var viewModel: LogViewModel
 
