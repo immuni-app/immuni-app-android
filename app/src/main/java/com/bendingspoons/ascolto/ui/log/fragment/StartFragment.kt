@@ -50,7 +50,7 @@ class StartFragment : Fragment() {
          */
 
         next.setOnClickListener {
-            val action = OnboardingDirections.actionGlobalProfileFragment()
+            val action = StartFragmentDirections.actionGlobalForm()
             findNavController().navigate(action)
         }
     }
