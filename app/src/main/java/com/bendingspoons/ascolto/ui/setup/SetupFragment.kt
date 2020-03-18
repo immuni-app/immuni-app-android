@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.AscoltoApplication
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.log.LogActivity
+import com.bendingspoons.ascolto.ui.onboarding.OnboardingActivity
 import com.bendingspoons.base.extensions.invisible
 import com.bendingspoons.base.extensions.visible
 import kotlinx.android.synthetic.main.setup_fragment.*
@@ -55,8 +56,7 @@ class SetupFragment : Fragment(R.layout.setup_fragment) {
         viewModel.navigateToOnboarding.observe(viewLifecycleOwner, Observer { it ->
             it.getContentIfNotHandled()?.let { navigate ->// Only proceed if the event has never been handled
                 if(navigate) {
-                    //goToOnboardingActivity()
-                    goToLogActivity()
+                    goToOnboardingActivity()
                 }
             }
         })
@@ -76,13 +76,10 @@ class SetupFragment : Fragment(R.layout.setup_fragment) {
     }
 
     private fun goToOnboardingActivity() {
-        /*
         val intent = Intent(AscoltoApplication.appContext, OnboardingActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
         activity?.finish()
-
-         */
     }
 }

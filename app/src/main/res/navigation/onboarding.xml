@@ -20,21 +20,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/onboarding"
-    app:startDestination="@id/startFragment">
+    app:startDestination="@id/welcomeFragment">
     <fragment
-        android:id="@+id/startFragment"
-        android:name="com.bendingspoons.ascolto.ui.log.fragment.StartFragment"
-        android:label="startFragment"
-        tools:layout="@layout/start_fragment"/>
+        android:id="@+id/welcomeFragment"
+        android:name="com.bendingspoons.ascolto.ui.onboarding.fragments.WelcomeFragment"
+        android:label="WelcomeFragment"
+        tools:layout="@layout/onboarding_welcome_fragment"/>
     <fragment
-        android:id="@+id/formFragment"
-        android:name="com.bendingspoons.ascolto.ui.log.fragment.FormFragment"
-        android:label="formFragment"
-        tools:layout="@layout/form_fragment"/>
-
+        android:id="@+id/profileFragment"
+        android:name="com.bendingspoons.ascolto.ui.onboarding.fragments.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/onboarding_profile_fragment"/>
+    <fragment
+        android:id="@+id/doneFragment"
+        android:name="com.bendingspoons.ascolto.ui.onboarding.fragments.DoneFragment"
+        android:label="doneFragment"
+        tools:layout="@layout/onboarding_done_fragment"/>
     <action
-        android:id="@+id/action_global_form"
-        app:destination="@id/formFragment"
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_global_doneFragment"
+        app:destination="@id/doneFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"

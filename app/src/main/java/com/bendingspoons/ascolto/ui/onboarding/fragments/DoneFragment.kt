@@ -1,4 +1,4 @@
-package com.bendingspoons.ascolto.ui.log.fragment
+package com.bendingspoons.ascolto.ui.onboarding.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,24 +8,23 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.bendingspoons.ascolto.OnboardingDirections
+import androidx.lifecycle.Observer
+import com.bendingspoons.ascolto.AscoltoApplication
 import com.bendingspoons.ascolto.R
-import com.bendingspoons.ascolto.ui.log.LogViewModel
+import com.bendingspoons.ascolto.toast
+import com.bendingspoons.ascolto.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import kotlinx.android.synthetic.main.start_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
-class StartFragment : Fragment() {
+class DoneFragment : Fragment() {
 
-    private lateinit var viewModel: LogViewModel
+    private lateinit var viewModel: OnboardingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //requireActivity().onBackPressedDispatcher.addCallback(this) {
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
             // users must select a choice
-        //}
+        }
     }
 
     override fun onCreateView(
@@ -34,24 +33,33 @@ class StartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = getSharedViewModel()
-        return inflater.inflate(R.layout.start_fragment, container, false)
+        return inflater.inflate(R.layout.onboarding_done_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
+        (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        /*
         viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 goToMainActivity()
             }
         })
+
+        viewModel.onOnboardingComplete()
+    }
+
+    private fun goToMainActivity() {
+        /*
+        val intent = Intent(AscoltoApplication.appContext, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
+        activity?.finish()
+
          */
 
-        next.setOnClickListener {
-            val action = OnboardingDirections.actionGlobalProfileFragment()
-            findNavController().navigate(action)
-        }
+        toast("Andiamo alla HOME qui")
     }
+
 }

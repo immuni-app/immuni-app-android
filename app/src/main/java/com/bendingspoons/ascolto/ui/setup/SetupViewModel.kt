@@ -3,6 +3,7 @@ package com.bendingspoons.ascolto.ui.setup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bendingspoons.ascolto.ui.onboarding.Onboarding
 import com.bendingspoons.base.livedata.Event
 import org.koin.core.KoinComponent
 import kotlinx.coroutines.*
@@ -14,7 +15,7 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val setup: Setup by inject()
-    //private val onboarding: Onboarding by inject()
+    private val onboarding: Onboarding by inject()
 
     private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
     val navigateToMainPage : LiveData<Event<Boolean>>
@@ -96,10 +97,8 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
     }
 
     private fun navigateTo() {
-        /*
         if(onboarding.isComplete()) _navigateToMainPage.value = Event(true)
         else _navigateToOnboarding.value = Event(true)
-         */
 
         _navigateToOnboarding.value = Event(true)
     }

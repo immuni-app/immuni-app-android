@@ -6,6 +6,8 @@ import com.bendingspoons.ascolto.api.oracle.repository.OracleRepository
 import com.bendingspoons.ascolto.api.oracle.repository.OracleRepositoryImpl
 import com.bendingspoons.ascolto.db.AscoltoDatabase
 import com.bendingspoons.ascolto.ui.log.LogViewModel
+import com.bendingspoons.ascolto.ui.onboarding.Onboarding
+import com.bendingspoons.ascolto.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.ascolto.ui.setup.Setup
 import com.bendingspoons.ascolto.ui.setup.SetupRepository
 import com.bendingspoons.ascolto.ui.setup.SetupRepositoryImpl
@@ -36,6 +38,9 @@ val appModule = module {
 
     // single instance of Setup
     single { Setup() }
+
+    // single instance of Onboarding
+    single { Onboarding() }
 
     // single instance of SetupRepository
     single<SetupRepository> {
@@ -80,5 +85,9 @@ val appModule = module {
     // SetupViewModel ViewModel
     viewModel { SetupViewModel(get()) }
 
+    // OnboardingViewModel ViewModel
+    viewModel { (handle: SavedStateHandle) -> OnboardingViewModel(handle, get()) }
+
+    // LogViewModel
     viewModel { (handle: SavedStateHandle) -> LogViewModel(handle, get()) }
 }
