@@ -99,8 +99,6 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
     private fun navigateTo() {
         if(onboarding.isComplete()) _navigateToMainPage.value = Event(true)
         else _navigateToOnboarding.value = Event(true)
-
-        _navigateToOnboarding.value = Event(true)
     }
 
     companion object {
