@@ -75,8 +75,8 @@ class AscoltoProgressView(context: Context, attrs: AttributeSet) : View(context,
                 val translation = target - (target - lastTranslation)*animatedProgress
                 lastTranslation = translation
                 canvas.translate(translation, 0f)
-                canvas.drawRoundRect(-STEP_W, 0f, W, H, H/2, H/2, completedPaint)
-                canvas.drawRoundRect(STEP_W * (steps-1), 0f, W, H, H/2, H/2, inProgressPaint)
+                canvas.drawRoundRect(-STEP_W, 0f, W, H, 0f, 0f, completedPaint)
+                canvas.drawRoundRect(STEP_W * (steps-1), 0f, W, H, 0f, 0f, inProgressPaint)
                 if(currentStep > 1) canvas.drawRect(STEP_W * (steps-1), 0f, STEP_W * (steps-1) + H/2, H, separatorPaint)
                 canvas.restore()
             }
@@ -86,7 +86,8 @@ class AscoltoProgressView(context: Context, attrs: AttributeSet) : View(context,
                 val translation = target - (target - lastTranslation)*animatedProgress
                 lastTranslation = translation
                 canvas.translate(translation, 0f)
-                canvas.drawRoundRect(-STEP_W, 0f, W, H, H/2, H/2, completedPaint)
+                //canvas.drawRoundRect(-STEP_W, 0f, W, H, H/2, H/2, completedPaint)
+                canvas.drawRoundRect(-STEP_W, 0f, W, H, 0f, 0f, completedPaint)
                 canvas.restore()
             }
         }

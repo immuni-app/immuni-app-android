@@ -17,6 +17,9 @@ import com.bendingspoons.ascolto.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.form_fragment.*
+import kotlinx.android.synthetic.main.form_fragment.progress
+import kotlinx.android.synthetic.main.form_fragment.viewPager
+import kotlinx.android.synthetic.main.onboarding_profile_fragment.*
 import kotlinx.android.synthetic.main.start_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -27,6 +30,9 @@ class FormFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            onBackPressed()
+        }
     }
 
     override fun onCreateView(
@@ -42,10 +48,13 @@ class FormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
+        progress.clipToOutline = true
+
         pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
+                progress.setStep(position + 1, viewPager.adapter?.itemCount?:1)
             }
 
             override fun onPageScrolled(
@@ -75,5 +84,14 @@ class FormFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun onBackPressed() {
+        val newPos = viewPager.currentItem - 1
+        if(newPos >= 0) {
+            viewPager.setCurrentItem(newPos, true)
+        } else {
+            findNavController().popBackStack()
+        }
     }
 }

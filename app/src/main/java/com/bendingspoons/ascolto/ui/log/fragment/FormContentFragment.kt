@@ -22,7 +22,7 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
         viewModel = getSharedViewModel()
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        nextButton.isEnabled = true
+        nextButton.isEnabled = false
 
         viewModel.formModel.observe(viewLifecycleOwner, Observer { info ->
             onFormModelUpdate(info)
@@ -38,6 +38,8 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
     protected abstract val description: TextView
 
     abstract fun onFormModelUpdate(model: FormModel)
+
+    abstract fun validate(): Boolean
 
     fun updateFormModel(model: FormModel) {
         viewModel.updateFormModel(model)

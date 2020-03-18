@@ -36,23 +36,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/question" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="0dp"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.7"
-        app:endIconMode="clear_text"
-        android:hint="Hint"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginStart="32dp"
+        android:checkedButton="@+id/first"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/next"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:endIconMode="clear_text" />
-    </com.google.android.material.textfield.TextInputLayout>
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,13 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/onboardingBackground">
+    android:background="@color/background">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:fitsSystemWindows="true"
@@ -21,30 +20,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progress" />
 
-    <TextView
+    <com.bendingspoons.ascolto.ui.view.AscoltoProgressView
         android:id="@+id/progress"
+        android:layout_width="0dp"
+        android:layout_height="34dp"
+        android:layout_alignParentBottom="true"
         android:alpha="0.8"
+        android:background="@drawable/rounded_corners_9dp"
+        app:layout_constraintBottom_toBottomOf="@+id/back"
+        app:layout_constraintEnd_toEndOf="@+id/progressText"
+        app:layout_constraintStart_toStartOf="@+id/progressText"
+        app:layout_constraintTop_toTopOf="@+id/back"
+        app:progressColorBackground="@color/onboarding_progress_background"
+        app:progressColorCompleted="@color/colorPrimary"
+        app:progressColorPending="@color/colorPrimary"
+        app:progressColorSeparator="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/progressText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        android:text="Diario clinico per XYZ"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="32dp"
+        android:alpha="0.8"
         android:gravity="center"
+        android:text="Diario clinico per XYZ"
         app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/back"
         app:layout_constraintTop_toTopOf="@+id/back"
-        />
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintWidth_max="300dp"/>
 
     <ImageView
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
-        android:tint="@color/colorPrimary"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/ic_cross"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
