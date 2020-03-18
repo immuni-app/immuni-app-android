@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Generic -->
+    <color name="transparent">#00000000</color>
+    <color name="colorPrimary">#13D68F</color>
+    <color name="colorPrimaryDark">#00a361</color>
+    <color name="colorPrimaryLight">#65ffc0</color>
+    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="background">#FFFFFF</color>
+    <color name="tabTextColor">@color/colorAccent</color>
+    <color name="statusBarLight">#FCFCFC</color>
+    <color name="imagePlaceholder">#CECECE</color>
+
+    <!-- Buttons -->
+    <color name="button_generic">#13D68F</color>
+    <color name="button_generic_pressed">#4F4F5B</color>
+    <color name="button_generic_selected">#4F4F5B</color>
+    <color name="button_generic_disabled">#A5A7B7</color>
+
+    <color name="button_secondary">#33E8E8E8</color>
+    <color name="button_secondary_disabled">#0DE8E8E8</color>
+
+    <!-- Number picker -->
+    <color name="number_picker_separator">#33E4E6EB</color>
+    <color name="number_picker_values">@color/input_field</color>
+
+    <!-- Figma colors -->
+    <color name="h1_heading">#000000</color>
+    <color name="h2_sub_heading">#000000</color>
+    <color name="h1_nav_bar">#4F4F5B</color>
+    <color name="h3_section_heading">#4F4F5B</color>
+    <color name="h4_section_heading">#4F4F5B</color>
+    <color name="h5_section_heading">#4F4F5B</color>
+    <color name="p1_text">#CC5D5A6C</color>
+    <color name="p2_text">#A5A7B7</color>
+    <color name="label">#A5A7B7</color>
+    <color name="button_label">#13D68F</color>
+    <color name="input_label">#C6C7D2</color>
+    <color name="input_field">#A5A7B7</color>
+    <color name="workout_details_bg">#F8F7FA</color>
+    <color name="live_view_button_background">#323240</color>
+    <color name="workout_progress_complete">@color/colorPrimary</color>
+    <color name="workout_progress_progress">#fff</color>
+    <color name="workout_feedback_background">#191924</color>
+    <color name="workout_feedback_header_text">#FFFFFF</color>
+    <color name="workout_feedback_button_title">#F4F4F6</color>
+    <color name="workout_feedback_button_selected_title">#FFFFFF</color>
+    <color name="workout_feedback_button_selected_background">#424256</color>
+    <color name="geraldine">#F48B8B</color>
+    <color name="filter_button">#1A13D68F</color>
+    <color name="filter_button_active">@color/colorPrimary</color>
+    <color name="challenge_card_completed">#A30CE38E</color>
+    <color name="onboarding_progress_background">#ECECEC</color>
+    <color name="onboardingBackground">#F8F7FA</color>
+</resources>

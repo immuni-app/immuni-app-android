@@ -1,0 +1,141 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        applicationId "com.bendingspoons.ascolto"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(":base")
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    //implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.2.0-alpha04'
+
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.media:media:1.1.0'
+    implementation 'androidx.fragment:fragment:1.2.2'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation "androidx.work:work-runtime-ktx:2.3.2"
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
+    // Number Picker
+    implementation 'com.shawnlin:number-picker:2.4.8'
+
+    // Transparent Text
+    implementation 'it.gilvegliach.android:transparent-text-textview:1.0.3'
+
+    // Room components
+    implementation "androidx.room:room-runtime:2.2.4"
+    implementation "androidx.room:room-ktx:2.2.4"
+    implementation 'androidx.navigation:navigation-fragment:2.2.1'
+    implementation 'androidx.navigation:navigation-ui:2.2.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
+    kapt "androidx.room:room-compiler:2.2.4"
+    androidTestImplementation "androidx.room:room-testing:2.2.4"
+
+    // Koin
+    implementation 'org.koin:koin-android:2.1.4'
+    implementation 'org.koin:koin-androidx-scope:2.1.4'
+    implementation 'org.koin:koin-androidx-viewmodel:2.1.4'
+
+    // Exo Player
+    implementation "com.google.android.exoplayer:exoplayer:2.10.3"
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.bumptech.glide:annotations:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
+
+    //Moshi
+    implementation "com.squareup.moshi:moshi-kotlin:1.8.0"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.8.0"
+    implementation 'com.squareup.moshi:moshi-adapters:1.8.0'
+
+    //Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:2.6.1"
+    implementation "com.squareup.retrofit2:converter-moshi:2.6.1"
+
+    //Okhttp3
+    implementation "com.squareup.okhttp3:okhttp:4.2.1"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+    // Lottie
+    implementation 'com.airbnb.android:lottie:3.0.7'
+
+    // Billing
+    //implementation 'com.android.billingclient:billing:2.1.0'
+
+    // Crashlytics
+    //implementation 'com.google.firebase:firebase-core:17.2.3'
+    //implementation 'com.google.firebase:firebase-analytics:17.2.3'
+    //implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+    // Firebase FCM
+    //implementation 'com.google.firebase:firebase-messaging:20.1.0' // 20.1.1 has known issues
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.json:json:20140107'
+
+    // Koin testing tools
+    testImplementation 'org.koin:koin-test:2.0.1'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

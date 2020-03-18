@@ -1,0 +1,184 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- ASAP font -->
+        <item name="android:fontFamily">@font/firasans</item>
+
+        <!-- Full screen -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#ffffff</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Default background and text colors -->
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">@color/p1_text</item>
+
+        <!-- Ripple effect default color -->
+        <item name="colorControlHighlight">#42DDDDDD</item>
+    </style>
+
+    <!-- TabLayout Tab Style -->
+    <style name="AppTabLayout" parent="Widget.Design.TabLayout">
+        <!-- ASAP font -->
+        <item name="android:fontFamily">@font/firasans</item>
+        <!--<item name="tabMaxWidth">@dimen/tab_max_width</item>-->
+        <item name="android:background">@android:color/transparent</item>
+        <item name="tabIndicatorColor">@color/transparent</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabPaddingStart">16dp</item>
+        <item name="tabPaddingEnd">16dp</item>
+        <item name="tabRippleColor">@null</item>
+        <item name="tabTextAppearance">@style/AppTabTextAppearance</item>
+        <item name="tabSelectedTextColor">@color/p1_text</item>
+    </style>
+
+    <!-- TabLayout Text Style -->
+    <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <!-- ASAP font -->
+        <item name="android:fontFamily">@font/firasans</item>
+        <item name="android:textSize">19dp</item>
+        <item name="android:textColor">@color/tabTextColor</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="BSNumberPicker">
+        <item name="np_height">180dp</item>
+        <item name="np_width">64dp</item>
+        <item name="np_selectedTextColor">@color/number_picker_values</item>
+        <item name="np_textColor">@color/number_picker_values</item>
+        <item name="np_textSize">24dp</item>
+        <item name="np_dividerColor">@color/number_picker_separator</item>
+        <item name="np_dividerThickness">1dp</item>
+        <item name="np_formatter">%02d</item>
+    </style>
+
+    <!-- Figma styles -->
+    <style name="H1Heading">
+        <item name="android:fontFamily">@font/barlow_semi_bold</item>
+        <item name="android:textSize">52dp</item>
+        <item name="android:textColor">@color/h1_heading</item>
+    </style>
+
+    <style name="H2SubHeading">
+        <item name="android:fontFamily">@font/barlow_semi_bold</item>
+        <item name="android:textSize">40dp</item>
+        <item name="android:textColor">@color/h2_sub_heading</item>
+    </style>
+
+    <style name="LibraryCardTitle">
+        <item name="android:fontFamily">@font/barlow_semi_bold</item>
+        <item name="android:textSize">35dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="LibraryCardDescription">
+        <item name="android:fontFamily">@font/barlow_medium</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="HeaderDetails">
+        <item name="android:fontFamily">@font/barlow_regular</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="ChallengeLevel">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/barlow_condensed_medium</item>
+        <item name="android:textSize">17dp</item>
+    </style>
+
+    <style name="H1NavBar">
+        <item name="android:fontFamily">@font/barlow_semi_bold</item>
+        <item name="android:textSize">21dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/h1_nav_bar</item>
+    </style>
+
+    <style name="H3SectionHeading">
+        <item name="android:fontFamily">@font/barlow_medium</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/h3_section_heading</item>
+    </style>
+
+    <style name="H4Section">
+        <item name="android:fontFamily">@font/barlow_semi_bold</item>
+        <item name="android:textSize">19dp</item>
+        <item name="android:textColor">@color/h4_section_heading</item>
+    </style>
+
+    <style name="H5Section">
+        <item name="android:fontFamily">@font/firasans_medium</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/h5_section_heading</item>
+    </style>
+
+    <style name="H6Section">
+        <item name="android:fontFamily">@font/firasans_medium</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:lineHeight">34dp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="P1Text">
+        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/p1_text</item>
+        <item name="android:lineHeight">23dp</item>
+    </style>
+
+    <style name="P2Text">
+        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/p2_text</item>
+    </style>
+
+    <style name="Label">
+        <item name="android:fontFamily">@font/firasans_medium</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/label</item>
+    </style>
+
+    <style name="ButtonLabel">
+        <item name="android:fontFamily">@font/firasans_medium</item>
+        <item name="android:textSize">17dp</item>
+        <item name="android:textColor">@color/button_label</item>
+    </style>
+
+    <style name="ButtonLabelSmall">
+        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/button_label</item>
+    </style>
+
+    <style name="InputLabel">
+        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/input_label</item>
+    </style>
+
+    <style name="InputField">
+        <item name="android:fontFamily">@font/firasans_regular</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/input_field</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:fontFamily">@font/firasans_medium</item>
+        <item name="android:textSize">21dp</item>
+        <item name="android:textColor">#4F4F5B</item>
+    </style>
+
+    <style name="ToolbarLight" parent="Toolbar">
+        <item name="android:textColor">#fff</item>
+    </style>
+</resources>

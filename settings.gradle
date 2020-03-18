@@ -1,0 +1,4 @@
+rootProject.name='Ascolto'
+include ':app'
+include ':base'
+project(':base').projectDir=new File('../base-lib-kotlin/base')
