@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">Ascolto</string>
 
-    <string name="app_setup_check_connection">Setup error, retry...</string>
+    <string name="app_setup_check_connection">Si è verificato un errore, riprova...</string>
     <string name="no_app_can_open_the_link">Nessuna app può aprire questo link...</string>
+    <string name="home_tab">Home</string>
+    <string name="family_tab">Famiglia</string>
+    <string name="next">Avanti</string>
+
+    <string name="survey_exit_title">Uscire dal sondaggio</string>
+    <string name="survey_exit_message">Sei sicuro di voler uscire dal sondaggio?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
 </resources>

@@ -22,10 +22,12 @@
             <TextView
                 android:id="@+id/question"
                 style="@style/H1Heading"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                android:text="TextView"
+                android:layout_marginEnd="32dp"
+                android:text="In questo momento hai uno o più tra questi sintomi?"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -33,20 +35,18 @@
             <TextView
                 android:id="@+id/description"
                 style="@style/P1Text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="Puoi selezionare più di un elemento"
+                app:layout_constraintEnd_toEndOf="@+id/question"
+                app:layout_constraintStart_toStartOf="@+id/question"
                 app:layout_constraintTop_toBottomOf="@+id/question" />
 
             <LinearLayout
                 android:id="@+id/pickerGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:checkedButton="@+id/first"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -58,14 +58,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@drawable/gradient_form"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:layout_width="match_parent"
@@ -82,7 +74,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:layout_gravity="bottom|right"
-        android:text="Next"
+        android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

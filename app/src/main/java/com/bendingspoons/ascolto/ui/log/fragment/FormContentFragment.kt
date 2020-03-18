@@ -12,11 +12,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.ui.log.LogViewModel
 import com.bendingspoons.ascolto.ui.log.model.FormModel
+import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout) {
     private lateinit var viewModel: LogViewModel
+
+    override fun onResume() {
+        super.onResume()
+        view?.hideKeyboard()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

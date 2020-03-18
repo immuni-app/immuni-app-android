@@ -9,6 +9,7 @@ import androidx.core.widget.doOnTextChanged
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
 import com.bendingspoons.ascolto.ui.log.model.FormModel
+import com.bendingspoons.base.extensions.showKeyboard
 import kotlinx.android.synthetic.main.form_text_field.*
 
 class TextFieldFragment: FormContentFragment(R.layout.form_text_field) {
@@ -21,6 +22,11 @@ class TextFieldFragment: FormContentFragment(R.layout.form_text_field) {
         get() = question
     override val description: TextView
         get() = description
+
+    override fun onResume() {
+        super.onResume()
+        textField.showKeyboard()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

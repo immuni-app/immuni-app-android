@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.AscoltoApplication
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.ui.home.HomeActivity
 import com.bendingspoons.ascolto.ui.log.LogActivity
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingActivity
 import com.bendingspoons.base.extensions.invisible
@@ -48,7 +49,7 @@ class SetupFragment : Fragment(R.layout.setup_fragment) {
         viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer { it ->
             it.getContentIfNotHandled()?.let { navigate ->// Only proceed if the event has never been handled
                 if(navigate) {
-                    goToLogActivity()
+                    goToHomeActivity()
                 }
             }
         })
@@ -67,8 +68,8 @@ class SetupFragment : Fragment(R.layout.setup_fragment) {
         })
     }
 
-    private fun goToLogActivity() {
-        val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java).apply {
+    private fun goToHomeActivity() {
+        val intent = Intent(AscoltoApplication.appContext, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)

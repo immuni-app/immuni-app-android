@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.bendingspoons.ascolto.api.oracle.repository.OracleRepository
 import com.bendingspoons.ascolto.api.oracle.repository.OracleRepositoryImpl
 import com.bendingspoons.ascolto.db.AscoltoDatabase
+import com.bendingspoons.ascolto.ui.home.HomeSharedViewModel
 import com.bendingspoons.ascolto.ui.log.LogViewModel
 import com.bendingspoons.ascolto.ui.onboarding.Onboarding
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingViewModel
@@ -82,10 +83,13 @@ val appModule = module {
     // single instance of OracleRepository
     single<OracleRepository> { OracleRepositoryImpl(androidContext(), get(), get()) }
 
-    // SetupViewModel ViewModel
+    // SetupViewModel
     viewModel { SetupViewModel(get()) }
 
-    // OnboardingViewModel ViewModel
+    // HomeSharedViewModel
+    viewModel { HomeSharedViewModel(get()) }
+
+    // OnboardingViewModel
     viewModel { (handle: SavedStateHandle) -> OnboardingViewModel(handle, get()) }
 
     // LogViewModel
