@@ -6,8 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/next"
+        style="@style/RoundedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -18,6 +19,7 @@
 
     <TextView
         android:id="@+id/question"
+        style="@style/H1Heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -28,6 +30,7 @@
 
     <TextView
         android:id="@+id/description"
+        style="@style/P1Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -48,5 +51,16 @@
         app:layout_constraintTop_toBottomOf="@+id/description">
 
     </RadioGroup>
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:layout_gravity="bottom|left"
+        android:src="@drawable/ic_back_form"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

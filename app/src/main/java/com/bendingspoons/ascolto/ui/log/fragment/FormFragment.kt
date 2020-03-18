@@ -19,8 +19,6 @@ import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.form_fragment.*
 import kotlinx.android.synthetic.main.form_fragment.progress
 import kotlinx.android.synthetic.main.form_fragment.viewPager
-import kotlinx.android.synthetic.main.onboarding_profile_fragment.*
-import kotlinx.android.synthetic.main.start_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class FormFragment : Fragment() {
@@ -73,6 +71,10 @@ class FormFragment : Fragment() {
             registerOnPageChangeCallback(pageChangeCallback)
         }
 
+        close.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         viewModel.navigateToNextPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 val newPos = viewPager.currentItem + 1
@@ -82,6 +84,12 @@ class FormFragment : Fragment() {
                 } else {
                     viewPager.setCurrentItem(newPos, true)
                 }
+            }
+        })
+
+        viewModel.navigateToPrevPage.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                onBackPressed()
             }
         })
     }

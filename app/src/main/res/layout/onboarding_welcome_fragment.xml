@@ -8,6 +8,7 @@
 
     <Button
         android:id="@+id/next"
+        style="@style/RoundedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WELCOME TO THE ONBOARDING"

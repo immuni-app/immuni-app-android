@@ -26,11 +26,11 @@
         android:layout_height="34dp"
         android:layout_alignParentBottom="true"
         android:alpha="0.8"
-        android:background="@drawable/rounded_corners_9dp"
-        app:layout_constraintBottom_toBottomOf="@+id/back"
+        android:background="@drawable/rounded_corners_17dp"
+        app:layout_constraintBottom_toBottomOf="@+id/close"
         app:layout_constraintEnd_toEndOf="@+id/progressText"
         app:layout_constraintStart_toStartOf="@+id/progressText"
-        app:layout_constraintTop_toTopOf="@+id/back"
+        app:layout_constraintTop_toTopOf="@+id/close"
         app:progressColorBackground="@color/onboarding_progress_background"
         app:progressColorCompleted="@color/colorPrimary"
         app:progressColorPending="@color/colorPrimary"
@@ -46,16 +46,16 @@
         android:alpha="0.8"
         android:gravity="center"
         android:text="Diario clinico per XYZ"
-        app:layout_constraintBottom_toBottomOf="@+id/back"
+        app:layout_constraintBottom_toBottomOf="@+id/close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/back"
-        app:layout_constraintTop_toTopOf="@+id/back"
+        app:layout_constraintStart_toEndOf="@+id/close"
+        app:layout_constraintTop_toTopOf="@+id/close"
         app:layout_constraintWidth_percent="0.6"
         app:layout_constraintWidth_max="300dp"/>
 
     <ImageView
-        android:id="@+id/back"
+        android:id="@+id/close"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginStart="32dp"
@@ -63,6 +63,5 @@
         android:src="@drawable/ic_cross"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

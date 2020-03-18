@@ -2,20 +2,17 @@ package com.bendingspoons.ascolto.ui.log.fragment.types
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.CompoundButton
-import android.widget.TextView
+import android.widget.*
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
 import com.bendingspoons.ascolto.ui.log.model.FormModel
 import kotlinx.android.synthetic.main.form_multiple_choice_field.*
-import kotlinx.android.synthetic.main.form_text_field.*
-import kotlinx.android.synthetic.main.form_text_field.next
 
 class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_choice_field), CompoundButton.OnCheckedChangeListener {
     override val nextButton: Button
         get() = next
+    override val prevButton: ImageView
+        get() = back
     override val question: TextView
         get() = question
     override val description: TextView

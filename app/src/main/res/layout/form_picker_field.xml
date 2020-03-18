@@ -21,6 +21,7 @@
 
             <TextView
                 android:id="@+id/question"
+                style="@style/H1Heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -31,6 +32,7 @@
 
             <TextView
                 android:id="@+id/description"
+                style="@style/P1Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -46,7 +48,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:checkedButton="@+id/first"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,12 +69,13 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="150dp"
         android:layout_gravity="bottom"
         android:rotation="180"
         android:background="@drawable/gradient_form"/>
 
     <com.google.android.material.button.MaterialButton
+        style="@style/RoundedButton"
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -82,4 +85,15 @@
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:layout_gravity="bottom|left"
+        android:src="@drawable/ic_back_form"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </FrameLayout>

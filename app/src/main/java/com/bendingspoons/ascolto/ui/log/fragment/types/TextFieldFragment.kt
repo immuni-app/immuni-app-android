@@ -3,6 +3,7 @@ package com.bendingspoons.ascolto.ui.log.fragment.types
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import com.bendingspoons.ascolto.R
@@ -14,6 +15,8 @@ class TextFieldFragment: FormContentFragment(R.layout.form_text_field) {
 
     override val nextButton: Button
         get() = next
+    override val prevButton: ImageView
+        get() = back
     override val question: TextView
         get() = question
     override val description: TextView

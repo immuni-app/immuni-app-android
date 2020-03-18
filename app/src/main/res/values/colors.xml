@@ -26,13 +26,13 @@
     <color name="number_picker_values">@color/input_field</color>
 
     <!-- Figma colors -->
-    <color name="h1_heading">#000000</color>
+    <color name="h1_heading">#495D74</color>
     <color name="h2_sub_heading">#000000</color>
     <color name="h1_nav_bar">#4F4F5B</color>
     <color name="h3_section_heading">#4F4F5B</color>
     <color name="h4_section_heading">#4F4F5B</color>
     <color name="h5_section_heading">#4F4F5B</color>
-    <color name="p1_text">#CC5D5A6C</color>
+    <color name="p1_text">#99495D74</color>
     <color name="p2_text">#A5A7B7</color>
     <color name="label">@color/colorPrimary</color>
     <color name="button_label">@color/colorPrimary</color>
@@ -40,4 +40,6 @@
     <color name="input_field">#A5A7B7</color>
     <color name="geraldine">#F48B8B</color>
     <color name="onboarding_progress_background">#ECECEC</color>
+
+    <color name="picker_divider_color">#33B7B7B7</color>
 </resources>

@@ -8,12 +8,13 @@ import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
 import com.bendingspoons.ascolto.ui.log.model.FormModel
 import kotlinx.android.synthetic.main.form_radio_field.*
-import kotlinx.android.synthetic.main.form_text_field.*
 import kotlinx.android.synthetic.main.form_text_field.next
 
 class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnCheckedChangeListener {
     override val nextButton: Button
         get() = next
+    override val prevButton: ImageView
+        get() = back
     override val question: TextView
         get() = question
     override val description: TextView

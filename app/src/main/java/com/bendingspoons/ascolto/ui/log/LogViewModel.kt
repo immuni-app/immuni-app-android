@@ -23,6 +23,10 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
     val navigateToNextPage: LiveData<Event<Boolean>>
         get() = _navigateToNextPage
 
+    private val _navigateToPrevPage = MutableLiveData<Event<Boolean>>()
+    val navigateToPrevPage: LiveData<Event<Boolean>>
+        get() = _navigateToPrevPage
+
     init {
         // init
         if(handle.get<Serializable>(STATE_KEY) != null) {
@@ -36,6 +40,10 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
 
     fun onNextTap() {
         _navigateToNextPage.value = Event(true)
+    }
+
+    fun onPrevTap() {
+        _navigateToPrevPage.value = Event(true)
     }
 
     override fun onCleared() {

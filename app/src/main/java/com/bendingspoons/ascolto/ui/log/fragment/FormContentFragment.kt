@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -31,9 +32,14 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
         nextButton.setOnClickListener {
             viewModel.onNextTap()
         }
+
+        prevButton.setOnClickListener {
+            viewModel.onPrevTap()
+        }
     }
 
     protected abstract val nextButton: Button
+    protected abstract val prevButton: ImageView
     protected abstract val question: TextView
     protected abstract val description: TextView
 
