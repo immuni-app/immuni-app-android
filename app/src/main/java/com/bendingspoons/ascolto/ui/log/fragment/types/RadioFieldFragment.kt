@@ -32,7 +32,7 @@ class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnChec
             for(i in 1..4) {
                 add(RadioButton(context).apply {
                     tag = "0"
-                    text = "Text Dynamic"
+                    text = "Scelta singola medio lunga"
                     val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
                     typeface = tf
                     textSize = 18f

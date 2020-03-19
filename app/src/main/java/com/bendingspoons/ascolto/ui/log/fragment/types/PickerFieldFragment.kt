@@ -1,5 +1,6 @@
 package com.bendingspoons.ascolto.ui.log.fragment.types
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -42,6 +43,8 @@ class PickerFieldFragment: FormContentFragment(R.layout.form_picker_field) {
                         validate()
                     }
                     dividerColor = resources.getColor(R.color.picker_divider_color)
+                    textColor = Color.parseColor("#495D74")
+                    selectedTextColor = Color.parseColor("#495D74")
                 })
             }
         }
