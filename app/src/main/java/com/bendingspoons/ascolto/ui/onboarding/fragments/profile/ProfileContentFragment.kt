@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingUserInfo
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingViewModel
+import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 

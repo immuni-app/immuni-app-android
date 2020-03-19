@@ -2,6 +2,7 @@ package com.bendingspoons.ascolto.ui.onboarding.fragments.profile
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingUserInfo
@@ -15,31 +16,30 @@ class NameFragment : ProfileContentFragment(R.layout.onboarding_name_fragment) {
 
     override fun onResume() {
         super.onResume()
-        this.view?.showKeyboard()
+        textField.showKeyboard()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        textField.hideKeyboard()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        textField.doOnTextChanged { text, _, _, _ ->
+            if(validate()) {
+                // TODO save form data
+            }
+        }
     }
 
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {
         //updateUI(userInfo.gender)
     }
-/*
-    private fun updateGender(gender: Gender?) {
-        userInfo()?.let {
-            updateUserInfo(
-                it.copy(gender = gender)
-            )
-        }
+
+    private fun validate(): Boolean {
+        val valid = textField.text.toString().trim().isNotEmpty()
+        nextButton.isEnabled = valid
+        return valid
     }
-
-
-
-    private fun updateUI(gender: Gender?) {
-        female.isActivated = gender == Gender.FEMALE
-        male.isActivated = gender == Gender.MALE
-        next.isEnabled = gender != null
-    } */
 }
