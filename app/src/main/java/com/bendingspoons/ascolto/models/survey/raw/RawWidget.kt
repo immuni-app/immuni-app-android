@@ -33,8 +33,8 @@ data class RawWidget(
         }
         RawWidgetType.MULTIPLE_CHOICES -> {
             MultipleChoicesWidget(
-                minNumberOfAnswers = minNumberOfAnswers!!,
-                maxNumberOfAnswers = maxNumberOfAnswers!!,
+                minNumberOfAnswers = minNumberOfAnswers ?: 0,
+                maxNumberOfAnswers = maxNumberOfAnswers ?: 9999,
                 answers = answers!!
             )
         }

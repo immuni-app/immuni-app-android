@@ -13,7 +13,7 @@ data class RawQuestion(
     @field:Json(name = "description") val description: String,
     @field:Json(name = "frequency") val frequency: Int,
     @field:Json(name = "only_when") val showConditions: List<RawConditionItem>? = null,
-    @field:Json(name = "stop_if") val stopSurveyCondition: RawConditionPredicate? = null,
+    @field:Json(name = "stop_if") val stopSurveyCondition: RawConditionItem? = null,
     @field:Json(name = "widget") val widget: RawWidget
 ) {
     fun question() = Question(
@@ -24,9 +24,7 @@ data class RawQuestion(
         showCondition = showConditions?.let {
             Condition(it.map { item -> item.conditionItem() })
         },
-        stopSurveyCondition = stopSurveyCondition?.let {
-            RawConditionItem(id, it)
-        }?.conditionItem(),
+        stopSurveyCondition = stopSurveyCondition?.conditionItem(),
         widget = widget.widget()
     )
 }

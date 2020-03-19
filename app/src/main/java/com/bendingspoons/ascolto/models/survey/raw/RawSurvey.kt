@@ -11,18 +11,12 @@ import com.squareup.moshi.JsonClass
 data class RawSurvey(
     @field:Json(name = "version") val version: String,
     @field:Json(name = "questions") val questions: List<RawQuestion>,
-    @field:Json(name = "triage") val triage: Map<RawHealthStatus, List<RawConditionItem>>
+    @field:Json(name = "triage") val triage: List<RawHealthStatusTriage>
 ) {
     fun survey() = Survey(
         version = version,
         questions = questions.map { it.question() },
-        triage = Triage(
-            triage.mapKeys {
-                it.key.healthStatus()
-            }.mapValues {
-                Condition(it.value.map { item -> item.conditionItem() })
-            }
-        )
+        triage = Triage(triage.map { it.healthStatusTriage() })
     )
 }
 
