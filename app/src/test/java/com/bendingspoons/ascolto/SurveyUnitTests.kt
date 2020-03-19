@@ -1,8 +1,6 @@
 package com.bendingspoons.ascolto
 
-import com.bendingspoons.ascolto.models.survey.*
-import com.bendingspoons.ascolto.models.survey.raw.RawConditionItem
-import com.bendingspoons.ascolto.models.survey.raw.RawWidgetType
+import com.bendingspoons.ascolto.models.survey.raw.RawSurvey
 import com.squareup.moshi.Moshi
 import org.junit.Test
 
@@ -248,28 +246,27 @@ class SurveyUnitTests {
                         ]
                     }
                 }
-            ]
-        },
-        "triage": {
-            "status": "infected",
-            "conditions": [
-                {
-                    "question_id": "question3",
-                    "answers_predicate": {
-                        "type": "two_dimensional",
-                        "matching_component_indexes": [
-                            [
-                                2,
-                                null
-                            ],
-                            [
-                                3,
-                                null
+            ],
+            "triage": {
+                "covid_positive": [
+                    {
+                        "question_id": "question3",
+                        "answers_predicate": {
+                            "type": "two_dimensional",
+                            "matching_component_indexes": [
+                                [
+                                    2,
+                                    null
+                                ],
+                                [
+                                    3,
+                                    null
+                                ]
                             ]
-                        ]
+                        }
                     }
-                }
-            ]
+                ]
+            }
         }
     """.trimIndent()
 

@@ -7,10 +7,11 @@ class Triage(private val mapping: Map<HealthStatus, Condition>) {
     }
 }
 
-enum class HealthStatus(val id: String) {
-    INFECTED("infected");
 
-    companion object {
-        fun fromId(id: String) = values().first { it.id == id }
-    }
+enum class HealthStatus {
+    COVID_POSITIVE,
+    SERIOUS_SYMPTOMS,
+    HEALTHY_WITH_ESTABLISHED_CONTACT,
+    MILD_SYMPTOMS_NO_ESTABLISHED_CONTACT,
+    HEALTHY_NO_ESTABLISHED_CONTACT
 }
