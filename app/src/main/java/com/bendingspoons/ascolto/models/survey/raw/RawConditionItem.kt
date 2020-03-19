@@ -1,44 +1,43 @@
 package com.bendingspoons.ascolto.models.survey.raw
 
 import com.bendingspoons.ascolto.models.survey.*
+import com.bendingspoons.ascolto.models.survey.raw.RawConditionType.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
-data class RawConditionPredicate(
-    @field:Json(name = "type")
-    val type: RawConditionPredicateType,
-    @field:Json(name = "matching_indexes")
-    val matchingIndexes: List<AnswerIndex>? = null,
-    @field:Json(name = "matching_component_indexes")
-    val matchingComponentIndexes: List<List<AnswerIndex>>? = null
-) {
-    fun conditionPredicate(): ConditionPredicate {
-        return when (type) {
-            RawConditionPredicateType.SIMPLE -> SimpleConditionPredicate(
-                matchingIndexes!!
-            )
-            RawConditionPredicateType.COMPOSITE -> CompositeConditionPredicate(
-                matchingComponentIndexes!!
-            )
-        }
-    }
-}
-
-enum class RawConditionPredicateType {
-    @Json(name = "one_dimensional")
+enum class RawConditionType {
+    @Json(name = "simple")
     SIMPLE,
-    @Json(name = "two_dimensional")
-    COMPOSITE
+    @Json(name = "composite")
+    COMPOSITE,
+    @Json(name = "current_user_status")
+    CURRENT_USER_STATUS
 }
 
 @JsonClass(generateAdapter = true)
 data class RawConditionItem(
-    @field:Json(name = "question_id") val questionId: QuestionId,
-    @field:Json(name = "answers_predicate") val predicate: RawConditionPredicate
+    @field:Json(name = "type")
+    val type: RawConditionType,
+    @field:Json(name = "question_id")
+    val questionId: QuestionId?,
+    @field:Json(name = "matching_indexes")
+    val matchingIndexes: List<AnswerIndex>? = null,
+    @field:Json(name = "matching_component_indexes")
+    val matchingComponentIndexes: List<List<AnswerIndex>>? = null,
+    @field:Json(name = "matching_statuses")
+    val matchingStatuses: List<RawHealthStatus>? = null
 ) {
-    fun conditionItem() = ConditionItem(
-        questionId,
-        predicate.conditionPredicate()
-    )
+    fun conditionItem() = when (type) {
+        SIMPLE -> SimpleConditionItem(
+            questionId!!,
+            matchingIndexes!!
+        )
+        COMPOSITE -> CompositeConditionItem(
+            questionId!!,
+            matchingComponentIndexes!!
+        )
+        CURRENT_USER_STATUS -> HealthStatusConditionItem(
+            matchingStatuses!!.map { it.healthStatus() }
+        )
+    }
 }

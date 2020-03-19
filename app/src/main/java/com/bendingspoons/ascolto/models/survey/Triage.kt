@@ -1,12 +1,25 @@
 package com.bendingspoons.ascolto.models.survey
 
-class Triage(private val mapping: Map<HealthStatus, Condition>) {
+data class HealthStatusTriage(
+    val status: HealthStatus,
+    val condition: Condition
+) {
     fun check(healthStatus: HealthStatus, answers: SurveyAnswers): Boolean {
-        val condition = mapping[healthStatus] ?: error("HealthStatus $healthStatus not handled")
-        return condition.isSatisfied(answers)
+        return condition.isSatisfied(healthStatus, answers)
     }
 }
 
+data class Triage(private val statusTriages: List<HealthStatusTriage>) {
+    fun triage(healthStatus: HealthStatus, answers: SurveyAnswers): HealthStatus {
+        return statusTriages.firstOrNull { it.check(healthStatus, answers) }?.status
+            ?: HealthStatus.HEALTHY_NO_ESTABLISHED_CONTACT
+    }
+
+    fun check(healthStatus: HealthStatus, answers: SurveyAnswers): Boolean {
+        val statusTriage = statusTriages.first { it.status == healthStatus }
+        return statusTriage.check(healthStatus, answers)
+    }
+}
 
 enum class HealthStatus {
     COVID_POSITIVE,
