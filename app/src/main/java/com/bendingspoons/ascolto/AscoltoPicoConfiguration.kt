@@ -1,9 +1,11 @@
 package com.bendingspoons.ascolto
 
 import android.content.Context
+import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
+import com.bendingspoons.oracle.api.model.OracleMe
 import com.bendingspoons.oracle.api.model.OracleSettings
 import com.bendingspoons.pico.PicoConfiguration
 import com.bendingspoons.theirs.adjust.Adjust
@@ -14,7 +16,7 @@ import org.koin.core.inject
 class AscoltoPicoConfiguration(val context: Context): PicoConfiguration, KoinComponent {
 
     val concierge: ConciergeManager by inject()
-    val oracle: Oracle<AscoltoSettings> by inject()
+    val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     val sesame: Sesame by inject()
     val adjust: Adjust by inject()
 
@@ -30,7 +32,7 @@ class AscoltoPicoConfiguration(val context: Context): PicoConfiguration, KoinCom
         return concierge
     }
 
-    override fun oracle(): Oracle<out OracleSettings> {
+    override fun oracle(): Oracle<out OracleSettings, out OracleMe> {
         return oracle
     }
 

@@ -2,6 +2,8 @@ package com.bendingspoons.ascolto
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
+import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
+import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.ascolto.api.oracle.repository.OracleRepository
 import com.bendingspoons.ascolto.api.oracle.repository.OracleRepositoryImpl
 import com.bendingspoons.ascolto.db.AscoltoDatabase
@@ -62,7 +64,7 @@ val appModule = module {
 
     // Oracle - Lib
     single {
-        Oracle(androidContext(), AscoltoOracleConfiguration(androidContext()))
+        Oracle<AscoltoSettings, AscoltoMe>(androidContext(), AscoltoOracleConfiguration(androidContext()))
     }
 
     // Secret Menu - Lib

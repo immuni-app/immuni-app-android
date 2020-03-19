@@ -1,7 +1,7 @@
 package com.bendingspoons.ascolto
 
-import android.util.Log
 import com.bendingspoons.ascolto.api.oracle.CustomOracleAPI
+import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.ascolto.api.oracle.model.FcmTokenRequest
 import com.bendingspoons.concierge.ConciergeManager
@@ -14,7 +14,6 @@ import com.bendingspoons.theirs.adjust.AdjustConfiguration
 import com.bendingspoons.theirs.adjust.AdjustEnvironment
 import com.bendingspoons.theirs.fcm.FirebaseFCMConfiguration
 import com.google.firebase.messaging.RemoteMessage
-import kotlinx.coroutines.delay
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -40,7 +39,7 @@ class AscoltoTheirsConfiguration: TheirsConfiguration, KoinComponent {
         }
 
         override suspend fun onNewToken(token: String) {
-            val oracle: Oracle<AscoltoSettings> by inject()
+            val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
 
             // be sure to call settings before
             oracle.api.devices(DevicesRequest(

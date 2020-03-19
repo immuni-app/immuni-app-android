@@ -2,6 +2,7 @@ package com.bendingspoons.ascolto
 
 import android.app.Application
 import android.content.Context
+import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
@@ -19,7 +20,7 @@ import org.koin.core.context.startKoin
 class AscoltoApplication : Application() {
 
     private lateinit var concierge: ConciergeManager
-    private lateinit var oracle: Oracle<AscoltoSettings>
+    private lateinit var oracle: Oracle<AscoltoSettings, AscoltoMe>
     private lateinit var pico: Pico
     private lateinit var theirs: Theirs
 

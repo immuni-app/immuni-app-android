@@ -2,6 +2,7 @@ package com.bendingspoons.ascolto.ui.onboarding
 
 import androidx.lifecycle.*
 import com.bendingspoons.ascolto.AscoltoApplication
+import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.ascolto.db.AscoltoDatabase
 import com.bendingspoons.oracle.Oracle
@@ -12,7 +13,6 @@ import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
-import java.util.*
 
 class OnboardingViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) : ViewModel(), KoinComponent {
 
@@ -23,7 +23,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val onboarding: Onboarding by inject()
-    private val oracle: Oracle<AscoltoSettings> by inject()
+    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
 
     var partialUserInfo = MediatorLiveData<OnboardingUserInfo>()
 
