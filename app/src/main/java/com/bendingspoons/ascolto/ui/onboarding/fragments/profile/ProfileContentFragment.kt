@@ -27,7 +27,7 @@ abstract class ProfileContentFragment(@LayoutRes val layout: Int) : Fragment(lay
         viewModel = getSharedViewModel()
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        nextButton.isEnabled = true
+        nextButton.isEnabled = false
 
         viewModel.partialUserInfo.observe(viewLifecycleOwner, Observer { info ->
             onUserInfoUpdate(info)

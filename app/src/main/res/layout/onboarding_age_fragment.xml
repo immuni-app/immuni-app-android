@@ -29,7 +29,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:text="@string/onboarding_gender_title"
+            android:text="@string/onboarding_age_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,37 +40,35 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/onboarding_gender_description"
+            android:text="@string/onboarding_age_description"
             app:layout_constraintEnd_toEndOf="@+id/question"
             app:layout_constraintStart_toStartOf="@+id/question"
             app:layout_constraintTop_toBottomOf="@+id/question" />
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="48dp"
-            android:checkedButton="@+id/first"
-            android:orientation="vertical"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:paddingBottom="36dp"
+            app:boxBackgroundColor="@color/background"
+            app:layout_constraintBottom_toTopOf="@+id/next"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description">
-            <RadioButton
-                style="@style/RadioButton"
-                android:id="@+id/male"
-                android:checked="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/onboarding_female"/>
-            <RadioButton
-                style="@style/RadioButton"
-                android:id="@+id/female"
-                android:checked="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/onboarding_male"/>
-        </RadioGroup>
+            app:layout_constraintTop_toBottomOf="@+id/description"
+            app:layout_constraintVertical_bias="0.45">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textField"
+                style="@style/EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="3"
+                android:inputType="number"
+                app:endIconMode="clear_text" />
+        </com.google.android.material.textfield.TextInputLayout>
         <ImageView
             android:id="@+id/back"
             android:layout_width="55dp"

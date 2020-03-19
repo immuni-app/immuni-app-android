@@ -11,6 +11,8 @@
     <string name="survey_exit_message">Sei sicuro di voler uscire dal sondaggio?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <string name="confirm">Conferma</string>
+    <string name="cancel">Annulla</string>
     <string name="survey_progress_text">Diario clinico di %s</string>
     <string name="welcome_lets_start">Iniziamo</string>
 
@@ -31,7 +33,15 @@
     <string name="profile_completed_description">Tutti i tuoi dati sono al sicuro.</string>
     <string name="onboarding_name_title">Come ti chiami?</string>
     <string name="onboarding_name_description">Inserire il cognome non è necessario. Il tuo nome o anche un soprannome sarà sufficiente.</string>
-    <string name="insert_your_name">Inserisci il tuo nome qui</string>
     <string name="onboarding_gender_title">Di che sesso sei?</string>
     <string name="onboarding_gender_description">La probabilità di contagio e il rischio di sviluppare sintomi piú severi dipendono da questa informazione.</string>
+
+    <string name="onboarding_age_title">Quanti anni hai?</string>
+    <string name="onboarding_age_description">Questa informazione è importante per consigliarti al meglio come proteggerti dal coronavirus.</string>
+
+    <string name="onboarding_age_confirmation_title">Confermi di avere %d anni?</string>
+    <string name="onboarding_age_confirmation_message">Questa informazione è importante per consigliarti al meglio come proteggerti dal coronavirus.</string>
+
+    <string name="onboarding_female">Femmina</string>
+    <string name="onboarding_male">Maschio</string>
 </resources>

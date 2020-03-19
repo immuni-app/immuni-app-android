@@ -104,13 +104,14 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     }
 
     fun onPrivacyPolicyAccepted() {
-        uiScope.launch {
+        // TODO agreed no privacy policy API for now
+        /*uiScope.launch {
             oracle.api.privacyNotice(PrivacyNoticeRequest(
                 oracle.settings()?.privacyVersion ?: "",
                 hashMapOf(),
                 "unknown"
             ))
-        }
+        }*/
         _navigateToNextPage.value = Event(true)
     }
 }

@@ -46,26 +46,26 @@
             app:layout_constraintTop_toBottomOf="@+id/question" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
+            app:boxBackgroundColor="@color/background"
             android:paddingBottom="36dp"
-            android:hint="Hint"
             app:endIconMode="clear_text"
             app:layout_constraintBottom_toTopOf="@+id/next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description"
-            app:layout_constraintWidth_percent="0.7">
+            app:layout_constraintTop_toBottomOf="@+id/description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textField"
-                android:inputType="textNoSuggestions|textVisiblePassword"
+                style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textNoSuggestions|textVisiblePassword"
                 app:endIconMode="clear_text" />
         </com.google.android.material.textfield.TextInputLayout>
 

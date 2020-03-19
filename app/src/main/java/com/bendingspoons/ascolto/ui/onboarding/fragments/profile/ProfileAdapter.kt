@@ -8,6 +8,7 @@ class ProfileAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     var items: List<Class<out ProfileContentFragment>> = listOf(
         NameFragment::class.java,
+        AgeFragment::class.java,
         GenderFragment::class.java
     )
 

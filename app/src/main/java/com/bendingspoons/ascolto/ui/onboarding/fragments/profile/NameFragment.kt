@@ -19,11 +19,6 @@ class NameFragment : ProfileContentFragment(R.layout.onboarding_name_fragment) {
         textField.showKeyboard()
     }
 
-    override fun onPause() {
-        super.onPause()
-        textField.hideKeyboard()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         textField.doOnTextChanged { text, _, _, _ ->
