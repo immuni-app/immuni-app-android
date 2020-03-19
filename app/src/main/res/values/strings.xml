@@ -26,4 +26,12 @@
     <string name="privacy_checkbox">Ho letto e accetto la {privacy policy}</string>
     <string name="privacy_title">Tuteliamo la tua privacy</string>
     <string name="privacy_message">Raccoglieremo e proteggeremo i tuoi dati responsabilmente.</string>
+
+    <string name="profile_completed">Profilo completato</string>
+    <string name="profile_completed_description">Tutti i tuoi dati sono al sicuro.</string>
+    <string name="onboarding_name_title">Come ti chiami?</string>
+    <string name="onboarding_name_description">Inserire il cognome non è necessario. Il tuo nome o anche un soprannome sarà sufficiente.</string>
+    <string name="insert_your_name">Inserisci il tuo nome qui</string>
+    <string name="onboarding_gender_title">Di che sesso sei?</string>
+    <string name="onboarding_gender_description">La probabilità di contagio e il rischio di sviluppare sintomi piú severi dipendono da questa informazione.</string>
 </resources>

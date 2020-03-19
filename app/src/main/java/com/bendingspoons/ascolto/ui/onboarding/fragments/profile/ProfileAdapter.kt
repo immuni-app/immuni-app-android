@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class ProfileAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     var items: List<Class<out ProfileContentFragment>> = listOf(
-        GenderFragment::class.java,
+        NameFragment::class.java,
         GenderFragment::class.java
     )
 

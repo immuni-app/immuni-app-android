@@ -90,7 +90,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
 
              */
             onboarding.setCompleted(true)
-            delay(1000)
+            delay(2000)
             _navigateToMainPage.value = Event(true)
         }
     }

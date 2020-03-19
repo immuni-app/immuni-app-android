@@ -6,6 +6,7 @@ import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.ascolto.api.oracle.model.FcmTokenRequest
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
+import com.bendingspoons.oracle.api.model.DevicesRequest
 import com.bendingspoons.pico.Pico
 import com.bendingspoons.theirs.TheirsConfiguration
 import com.bendingspoons.theirs.adjust.AdjustAppSecret
@@ -42,7 +43,9 @@ class AscoltoTheirsConfiguration: TheirsConfiguration, KoinComponent {
             val oracle: Oracle<AscoltoSettings> by inject()
 
             // be sure to call settings before
-            oracle.api.fetchSettings()
+            oracle.api.devices(DevicesRequest(
+                uniqueId = concierge.backupPersistentId.id
+            ))
 
             oracle.customServiceAPI(CustomOracleAPI::class).fcmNotificationToken(FcmTokenRequest(
                 token = token
