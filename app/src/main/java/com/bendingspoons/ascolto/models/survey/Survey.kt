@@ -1,7 +1,9 @@
 package com.bendingspoons.ascolto.models.survey
 
+import com.squareup.moshi.JsonClass
+
 data class Survey(
-    val id: String,
+    val version: String,
     val questions: List<Question>,
     val triage: Triage
 ) {
