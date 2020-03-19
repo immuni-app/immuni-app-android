@@ -21,8 +21,8 @@ enum class RawWidgetType {
 data class RawWidget(
     @field:Json(name = "type") val type: RawWidgetType,
     @field:Json(name = "components") val components: List<List<String>>? = null,
-    @field:Json(name = "min_number_of_answers") val minNumberOfAnswers: Int? = null,
-    @field:Json(name = "max_number_of_answers") val maxNumberOfAnswers: Int? = null,
+    @field:Json(name = "min_answers") val minNumberOfAnswers: Int? = null,
+    @field:Json(name = "max_answers") val maxNumberOfAnswers: Int? = null,
     @field:Json(name = "answers") val answers: List<String>? = null
 ) {
     fun widget() = when (type) {
