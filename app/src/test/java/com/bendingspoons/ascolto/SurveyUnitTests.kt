@@ -518,7 +518,6 @@ class SurveyUnitTests {
                 question6,
                 question7,
                 question8
-
             ),
             triage = Triage(
                 values().map {
@@ -548,6 +547,10 @@ class SurveyUnitTests {
                             it,
                             Condition(listOf())
                         )
+                        UNKNOWN -> HealthStatusTriage(
+                            it,
+                            Condition(listOf())
+                        )
                     }
                 }
             )
@@ -571,13 +574,13 @@ class SurveyUnitTests {
             )
         )
 
-        assertTrue("Should show question 2", question2.shouldBeShown(HEALTHY_NO_ESTABLISHED_CONTACT, answers))
-        assertTrue("Should show question 3", question3.shouldBeShown(HEALTHY_NO_ESTABLISHED_CONTACT, answers))
-        assertTrue("Should show question 4", question4.shouldBeShown(HEALTHY_NO_ESTABLISHED_CONTACT, answers))
-        assertFalse("Should not show question 5", question5.shouldBeShown(HEALTHY_NO_ESTABLISHED_CONTACT, answers))
-        assertTrue("Should not show question 6", question6.shouldBeShown(HEALTHY_NO_ESTABLISHED_CONTACT, answers))
-        assertTrue("Should not show question 7", question7.shouldBeShown(HEALTHY_NO_ESTABLISHED_CONTACT, answers))
-        assertTrue("Should not show question 8", question8.shouldBeShown(HEALTHY_NO_ESTABLISHED_CONTACT, answers))
+        assertTrue("Should show question 2", question2.shouldBeShown(UNKNOWN, answers))
+        assertTrue("Should show question 3", question3.shouldBeShown(UNKNOWN, answers))
+        assertTrue("Should show question 4", question4.shouldBeShown(UNKNOWN, answers))
+        assertFalse("Should not show question 5", question5.shouldBeShown(UNKNOWN, answers))
+        assertTrue("Should not show question 6", question6.shouldBeShown(UNKNOWN, answers))
+        assertTrue("Should not show question 7", question7.shouldBeShown(UNKNOWN, answers))
+        assertTrue("Should not show question 8", question8.shouldBeShown(UNKNOWN, answers))
 
         assertTrue("Has Covid-19", survey.triage(HealthStatus.COVID_POSITIVE, answers))
     }

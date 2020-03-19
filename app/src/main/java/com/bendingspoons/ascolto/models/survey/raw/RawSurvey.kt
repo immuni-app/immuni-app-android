@@ -30,7 +30,9 @@ enum class RawHealthStatus {
     @Json(name = "mild_symptoms_no_established_contact")
     MILD_SYMPTOMS_NO_ESTABLISHED_CONTACT,
     @Json(name = "healthy_no_established_contact")
-    HEALTHY_NO_ESTABLISHED_CONTACT;
+    HEALTHY_NO_ESTABLISHED_CONTACT,
+    @Json(name = "unknown")
+    UNKNOWN;
 
     fun healthStatus() = when (this) {
         COVID_POSITIVE -> HealthStatus.COVID_POSITIVE
@@ -38,5 +40,6 @@ enum class RawHealthStatus {
         HEALTHY_WITH_ESTABLISHED_CONTACT -> HealthStatus.HEALTHY_WITH_ESTABLISHED_CONTACT
         MILD_SYMPTOMS_NO_ESTABLISHED_CONTACT -> HealthStatus.MILD_SYMPTOMS_NO_ESTABLISHED_CONTACT
         HEALTHY_NO_ESTABLISHED_CONTACT -> HealthStatus.HEALTHY_NO_ESTABLISHED_CONTACT
+        UNKNOWN -> HealthStatus.UNKNOWN
     }
 }
