@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1028388914484",
+    "firebase_url": "https://ascolto-add03.firebaseio.com",
+    "project_id": "ascolto-add03",
+    "storage_bucket": "ascolto-add03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028388914484:android:d0421da190180554215161",
+        "android_client_info": {
+          "package_name": "com.bendingspoons.ascolto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028388914484-3b8gecuenm7msf58mrc0k69kfsrcb3sr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCORagVAIIjFhYw2CKTYxIoW7hQqzSRO9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028388914484-3b8gecuenm7msf58mrc0k69kfsrcb3sr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1028388914484-sbt99dlpepjd1ric7b7gkmn1h8kfu1j6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bendingspoonsapps.Ascolto",
+                "app_store_id": "1503408118"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

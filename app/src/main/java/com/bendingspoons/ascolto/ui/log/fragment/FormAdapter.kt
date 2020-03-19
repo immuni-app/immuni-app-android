@@ -1,5 +1,6 @@
 package com.bendingspoons.ascolto.ui.log.fragment
 
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.bendingspoons.ascolto.ui.log.fragment.types.MultipleChoiceFieldFragment
@@ -19,6 +20,8 @@ class FormAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = items.size
 
     override fun createFragment(position: Int): Fragment {
-        return items[position].newInstance()
+        return items[position].newInstance().apply {
+            arguments = bundleOf("position" to position)
+        }
     }
 }

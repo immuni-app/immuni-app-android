@@ -27,6 +27,10 @@ class GenderFragment : ProfileContentFragment(R.layout.onboarding_gender_fragmen
         female.setOnClickListener {
 
         }
+
+        back.setOnClickListener {
+            viewModel.onPrevTap()
+        }
     }
 
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {

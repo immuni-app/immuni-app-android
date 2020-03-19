@@ -68,10 +68,6 @@ class ProfileFragment : Fragment() {
             registerOnPageChangeCallback(pageChangeCallback)
         }
 
-        back.setOnClickListener {
-            onBackPressed()
-        }
-
         viewModel.navigateToNextPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 val newPos = viewPager.currentItem + 1
@@ -80,6 +76,12 @@ class ProfileFragment : Fragment() {
                 } else {
                     viewPager.setCurrentItem(newPos, true)
                 }
+            }
+        })
+
+        viewModel.navigateToPrevPage.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                onBackPressed()
             }
         })
     }

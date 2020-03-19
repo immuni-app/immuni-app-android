@@ -14,6 +14,12 @@ import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 abstract class ProfileContentFragment(@LayoutRes val layout: Int) : Fragment(layout) {
     protected lateinit var viewModel: OnboardingViewModel
+    protected var position: Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        position = arguments?.getInt("position") ?: 0
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

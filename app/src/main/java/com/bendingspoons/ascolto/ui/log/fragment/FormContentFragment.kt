@@ -18,6 +18,12 @@ import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout) {
     private lateinit var viewModel: LogViewModel
+    protected var position: Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        position = arguments?.getInt("position") ?: 0
+    }
 
     override fun onResume() {
         super.onResume()

@@ -21,7 +21,7 @@ class AscoltoApplication : Application() {
     private lateinit var concierge: ConciergeManager
     private lateinit var oracle: Oracle<AscoltoSettings>
     private lateinit var pico: Pico
-    //private lateinit var theirs: Theirs
+    private lateinit var theirs: Theirs
 
     override fun onCreate() {
         super.onCreate()
@@ -37,7 +37,7 @@ class AscoltoApplication : Application() {
         concierge = get()
         oracle = get()
         pico = get()
-        //theirs = get()
+        theirs = get()
 
         pico.setup()
 

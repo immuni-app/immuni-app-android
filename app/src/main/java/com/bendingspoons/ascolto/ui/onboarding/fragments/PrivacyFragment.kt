@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
+import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -37,7 +38,7 @@ class PrivacyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
+        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
         next.setOnClickListener {
             viewModel.onPrivacyPolicyAccepted()

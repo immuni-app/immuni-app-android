@@ -37,6 +37,10 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     val navigateToNextPage: LiveData<Event<Boolean>>
         get() = _navigateToNextPage
 
+    private val _navigateToPrevPage = MutableLiveData<Event<Boolean>>()
+    val navigateToPrevPage: LiveData<Event<Boolean>>
+        get() = _navigateToPrevPage
+
     init {
         // init
         if(handle.get<Serializable>(STATE_KEY) != null) {
@@ -95,6 +99,10 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
         _navigateToNextPage.value = Event(true)
     }
 
+    fun onPrevTap() {
+        _navigateToPrevPage.value = Event(true)
+    }
+
     fun onPrivacyPolicyAccepted() {
         uiScope.launch {
             oracle.api.privacyNotice(PrivacyNoticeRequest(
@@ -102,7 +110,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
                 hashMapOf(),
                 "unknown"
             ))
-            _navigateToNextPage.value = Event(true)
         }
+        _navigateToNextPage.value = Event(true)
     }
 }
