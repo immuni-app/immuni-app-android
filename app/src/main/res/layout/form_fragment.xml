@@ -49,13 +49,15 @@
         app:layout_constraintEnd_toEndOf="@+id/progressText"
         app:layout_constraintStart_toStartOf="@+id/progressText"
         app:layout_constraintTop_toTopOf="@+id/close"
-        app:progressColorBackground="@color/onboarding_progress_background"
-        app:progressColorCompleted="@color/colorPrimary"
-        app:progressColorPending="@color/colorPrimary"
-        app:progressColorSeparator="@color/colorPrimary" />
+        app:progressColorBackground="#66495D74"
+        app:progressColorCompleted="#728497"
+        app:progressColorPending="#728497"
+        app:progressColorSeparator="#728497" />
 
     <TextView
         android:id="@+id/progressText"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:textSize="14sp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -63,7 +65,8 @@
         android:layout_marginEnd="32dp"
         android:alpha="0.8"
         android:gravity="center"
-        android:text="Diario clinico per XYZ"
+        android:text="@string/survey_progress_text"
+        android:textColor="@color/background"
         app:layout_constraintBottom_toBottomOf="@+id/close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

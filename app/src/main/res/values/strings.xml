@@ -11,4 +11,5 @@
     <string name="survey_exit_message">Sei sicuro di voler uscire dal sondaggio?</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
+    <string name="survey_progress_text">Diario clinico di %s</string>
 </resources>
