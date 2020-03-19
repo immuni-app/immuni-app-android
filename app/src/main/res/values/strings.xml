@@ -44,4 +44,8 @@
 
     <string name="onboarding_female">Femmina</string>
     <string name="onboarding_male">Maschio</string>
+
+    <string name="choose_person_bottom_message">Ti chiederemo di effettuare la compilazione per tutti i tuoi familiari in successione</string>
+
+    <string name="compile_your_clinical_diary">Compila il diario clinico</string>
 </resources>

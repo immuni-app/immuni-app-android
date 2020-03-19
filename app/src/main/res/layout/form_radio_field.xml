@@ -12,7 +12,6 @@ android:layout_height="match_parent">
     android:scrollbars="none"
     android:clipToPadding="false"
     android:paddingBottom="120dp"
-    android:overScrollMode="never"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout

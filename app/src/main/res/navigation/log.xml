@@ -23,14 +23,14 @@
     app:startDestination="@id/startFragment">
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.bendingspoons.ascolto.ui.log.fragment.StartFragment"
+        android:name="com.bendingspoons.ascolto.ui.log.fragment.ChoosePersonFragment"
         android:label="startFragment"
-        tools:layout="@layout/start_fragment"/>
+        tools:layout="@layout/log_choose_person_fragment"/>
     <fragment
         android:id="@+id/formFragment"
         android:name="com.bendingspoons.ascolto.ui.log.fragment.FormFragment"
         android:label="formFragment"
-        tools:layout="@layout/form_fragment"/>
+        tools:layout="@layout/log_form_fragment"/>
 
     <action
         android:id="@+id/action_global_form"

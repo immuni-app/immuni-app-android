@@ -1,6 +1,5 @@
 package com.bendingspoons.ascolto.ui.log.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,14 +13,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.toast
 import com.bendingspoons.ascolto.ui.log.LogViewModel
-import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.form_fragment.*
-import kotlinx.android.synthetic.main.form_fragment.progress
-import kotlinx.android.synthetic.main.form_fragment.viewPager
+import kotlinx.android.synthetic.main.log_form_fragment.*
+import kotlinx.android.synthetic.main.log_form_fragment.progress
+import kotlinx.android.synthetic.main.log_form_fragment.viewPager
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
-import com.bendingspoons.base.extensions.*
 
 class FormFragment : Fragment() {
 
@@ -41,7 +38,7 @@ class FormFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = getSharedViewModel()
-        return inflater.inflate(R.layout.form_fragment, container, false)
+        return inflater.inflate(R.layout.log_form_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

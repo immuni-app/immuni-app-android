@@ -50,7 +50,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:paddingBottom="36dp"
             app:boxBackgroundColor="@color/background"
@@ -65,8 +64,8 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="3"
                 android:inputType="number"
+                android:maxLength="3"
                 app:endIconMode="clear_text" />
         </com.google.android.material.textfield.TextInputLayout>
         <ImageView

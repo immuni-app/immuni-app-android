@@ -11,7 +11,7 @@ import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.home.HomeSharedViewModel
 import com.bendingspoons.ascolto.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import kotlinx.android.synthetic.main.start_fragment.*
+import kotlinx.android.synthetic.main.log_choose_person_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class FamilyFragment : Fragment() {

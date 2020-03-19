@@ -1,23 +1,20 @@
 package com.bendingspoons.ascolto.ui.log.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bendingspoons.ascolto.OnboardingDirections
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import kotlinx.android.synthetic.main.start_fragment.*
+import kotlinx.android.synthetic.main.log_choose_person_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
-class StartFragment : Fragment() {
+class ChoosePersonFragment : Fragment() {
 
     private lateinit var viewModel: LogViewModel
 
@@ -34,12 +31,12 @@ class StartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         viewModel = getSharedViewModel()
-        return inflater.inflate(R.layout.start_fragment, container, false)
+        return inflater.inflate(R.layout.log_choose_person_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
+        (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
         /*
         viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer {
@@ -50,8 +47,12 @@ class StartFragment : Fragment() {
          */
 
         next.setOnClickListener {
-            val action = StartFragmentDirections.actionGlobalForm()
+            val action = ChoosePersonFragmentDirections.actionGlobalForm()
             findNavController().navigate(action)
+        }
+
+        back.setOnClickListener {
+            activity?.finish()
         }
     }
 }
