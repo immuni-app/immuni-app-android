@@ -40,7 +40,6 @@ class PrivacyFragment : Fragment() {
         (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
         next.setOnClickListener {
-            // TODO oracle /privacy_notice
             viewModel.onPrivacyPolicyAccepted()
         }
 
@@ -62,6 +61,10 @@ class PrivacyFragment : Fragment() {
 
         checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
             updateUI()
+        }
+
+        back.setOnClickListener {
+            activity?.finish()
         }
 
         viewModel.navigateToNextPage.observe(viewLifecycleOwner, Observer {
