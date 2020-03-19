@@ -27,7 +27,7 @@
 
     <!-- Figma colors -->
     <color name="h1_heading">#495D74</color>
-    <color name="h2_sub_heading">#000000</color>
+    <color name="h2_sub_heading">#495D74</color>
     <color name="h1_nav_bar">#4F4F5B</color>
     <color name="h3_section_heading">#4F4F5B</color>
     <color name="h4_section_heading">#4F4F5B</color>

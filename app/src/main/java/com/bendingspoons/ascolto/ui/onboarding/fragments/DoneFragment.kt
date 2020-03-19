@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.AscoltoApplication
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.toast
+import com.bendingspoons.ascolto.ui.home.HomeActivity
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -50,16 +51,11 @@ class DoneFragment : Fragment() {
     }
 
     private fun goToMainActivity() {
-        /*
-        val intent = Intent(AscoltoApplication.appContext, MainActivity::class.java).apply {
+        val intent = Intent(AscoltoApplication.appContext, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
         activity?.finish()
-
-         */
-
-        toast("Andiamo alla HOME qui")
     }
 
 }

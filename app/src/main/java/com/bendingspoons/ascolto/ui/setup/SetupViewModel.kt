@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bendingspoons.ascolto.ui.onboarding.Onboarding
+import com.bendingspoons.ascolto.ui.welcome.Welcome
 import com.bendingspoons.base.livedata.Event
 import org.koin.core.KoinComponent
 import kotlinx.coroutines.*
@@ -16,6 +17,7 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val setup: Setup by inject()
     private val onboarding: Onboarding by inject()
+    private val welcome: Welcome by inject()
 
     private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
     val navigateToMainPage : LiveData<Event<Boolean>>
@@ -24,6 +26,10 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
     private val _navigateToOnboarding = MutableLiveData<Event<Boolean>>()
     val navigateToOnboarding : LiveData<Event<Boolean>>
         get() = _navigateToOnboarding
+
+    private val _navigateToWelcome = MutableLiveData<Event<Boolean>>()
+    val navigateToWelcome : LiveData<Event<Boolean>>
+        get() = _navigateToWelcome
 
     val errorDuringSetup = MutableLiveData<Boolean>()
 
@@ -97,8 +103,9 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
     }
 
     private fun navigateTo() {
-        if(onboarding.isComplete()) _navigateToMainPage.value = Event(true)
-        else _navigateToOnboarding.value = Event(true)
+        if(!welcome.isComplete()) _navigateToWelcome.value = Event(true)
+        else if(!onboarding.isComplete()) _navigateToOnboarding.value = Event(true)
+        else _navigateToMainPage.value = Event(true)
     }
 
     companion object {

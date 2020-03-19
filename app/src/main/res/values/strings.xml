@@ -12,4 +12,5 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="survey_progress_text">Diario clinico di %s</string>
+    <string name="welcome_lets_start">Iniziamo</string>
 </resources>
