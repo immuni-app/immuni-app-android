@@ -1,8 +1,10 @@
 package com.bendingspoons.ascolto.db.entity
 
+import com.squareup.moshi.Json
+
 enum class Gender(val id: String) {
-    MALE("male"),
-    FEMALE("female");
+    @Json(name = "M") MALE("M"),
+    @Json(name = "F") FEMALE("F");
 
     companion object {
         fun fromId(id: String): Gender = values().first { it.id == id }

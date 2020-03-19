@@ -9,12 +9,12 @@ data class Question(
     val description: String,
     val frequency: Int,
     val showCondition: Condition?,
-    val stopSurveyCondition: ConditionItem?,
+    val stopSurveyCondition: Condition?,
     val widget: QuestionWidget
 ) {
     fun shouldBeShown(healthStatus: HealthStatus, surveyAnswers: SurveyAnswers) =
         showCondition?.isSatisfied(healthStatus, surveyAnswers) ?: true
 
-    fun shouldStopSurvey(healthStatus: HealthStatus, answers: QuestionAnswers) =
+    fun shouldStopSurvey(healthStatus: HealthStatus, answers: SurveyAnswers) =
         stopSurveyCondition?.isSatisfied(healthStatus, answers) ?: false
 }
