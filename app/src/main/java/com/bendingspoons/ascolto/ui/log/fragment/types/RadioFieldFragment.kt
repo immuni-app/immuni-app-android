@@ -1,12 +1,15 @@
 package com.bendingspoons.ascolto.ui.log.fragment.types
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import android.widget.CompoundButton.*
+import androidx.core.content.res.ResourcesCompat
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
 import com.bendingspoons.ascolto.ui.log.model.FormModel
+import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.form_radio_field.*
 import kotlinx.android.synthetic.main.form_text_field.next
 
@@ -26,21 +29,21 @@ class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnChec
         super.onViewCreated(view, savedInstanceState)
 
         items.apply {
-            add(RadioButton(context).apply {
-                tag = "0"
-                text = "Text Dynamic"
-                setOnCheckedChangeListener(this@RadioFieldFragment)
-            })
-            add(RadioButton(context).apply {
-                tag = "1"
-                text = "Text Dynamic 2"
-                setOnCheckedChangeListener(this@RadioFieldFragment)
-            })
-            add(RadioButton(context).apply {
-                tag = "2"
-                text = "Text Dynamic 3"
-                setOnCheckedChangeListener(this@RadioFieldFragment)
-            })
+            for(i in 1..4) {
+                add(RadioButton(context).apply {
+                    tag = "0"
+                    text = "Text Dynamic"
+                    val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
+                    typeface = tf
+                    textSize = 18f
+                    val paddingLeft = ScreenUtils.convertDpToPixels(context, 4)
+                    val paddingTop = ScreenUtils.convertDpToPixels(context, 8)
+                    val paddingBottom = ScreenUtils.convertDpToPixels(context, 8)
+                    setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
+                    setTextColor(Color.parseColor("#495D74"))
+                    setOnCheckedChangeListener(this@RadioFieldFragment)
+                })
+            }
         }
 
         radioGroup.apply {

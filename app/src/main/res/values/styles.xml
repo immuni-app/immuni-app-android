@@ -198,6 +198,13 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="CheckboxButton">
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:textColor">#495D74</item>
+        <item name="android:fontFamily">@font/euclid_circular_bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="EditText">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
         <item name="android:textColor">#495D74</item>
