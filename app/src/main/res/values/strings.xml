@@ -22,4 +22,8 @@
     <string name="welcome_3_description">Con l\'aiuto di tutti possiamo individuare rapidamente le zone a rischio e proteggere la popolazione al meglio.</string>
     <string name="welcome_4_title">Ricerca scientifica</string>
     <string name="welcome_4_description">Le informazioni raccolte sono preziosissime per aiutare la ricerca contro le epidemie ed evitare che questa crisi si ripeta.</string>
+
+    <string name="privacy_checkbox">Ho letto e accetto la {privacy policy}</string>
+    <string name="privacy_title">Tuteliamo la tua privacy</string>
+    <string name="privacy_message">Raccoglieremo e proteggeremo i tuoi dati responsabilmente.</string>
 </resources>

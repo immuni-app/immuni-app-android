@@ -7,6 +7,7 @@ import com.bendingspoons.ascolto.db.AscoltoDatabase
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.utils.ExternalLinksHelper
+import com.bendingspoons.oracle.api.model.PrivacyNoticeRequest
 import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -92,5 +93,16 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
 
     fun onNextTap() {
         _navigateToNextPage.value = Event(true)
+    }
+
+    fun onPrivacyPolicyAccepted() {
+        uiScope.launch {
+            oracle.api.privacyNotice(PrivacyNoticeRequest(
+                oracle.settings()?.privacyVersion ?: "",
+                hashMapOf(),
+                "unknown"
+            ))
+            _navigateToNextPage.value = Event(true)
+        }
     }
 }

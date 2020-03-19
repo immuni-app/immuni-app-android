@@ -15,7 +15,6 @@ import com.bendingspoons.ascolto.AscoltoApplication
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingActivity
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingViewModel
-import com.bendingspoons.ascolto.ui.onboarding.fragments.WelcomeFragmentDirections
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.onboarding_profile_fragment.*

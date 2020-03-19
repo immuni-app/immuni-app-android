@@ -23,9 +23,9 @@
     app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.bendingspoons.ascolto.ui.onboarding.fragments.WelcomeFragment"
+        android:name="com.bendingspoons.ascolto.ui.onboarding.fragments.PrivacyFragment"
         android:label="WelcomeFragment"
-        tools:layout="@layout/onboarding_welcome_fragment"/>
+        tools:layout="@layout/onboarding_privacy_fragment"/>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.bendingspoons.ascolto.ui.onboarding.fragments.profile.ProfileFragment"

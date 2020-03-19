@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingViewModel
-import com.bendingspoons.ascolto.ui.onboarding.fragments.WelcomeFragmentDirections
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.onboarding_profile_fragment.*
 import kotlinx.coroutines.Dispatchers
@@ -87,7 +86,7 @@ class ProfileFragment : Fragment() {
 
     private fun navigateToDone() {
         val action =
-            WelcomeFragmentDirections.actionGlobalDoneFragment()
+            ProfileFragmentDirections.actionGlobalDoneFragment()
         findNavController().navigate(action)
     }
 
