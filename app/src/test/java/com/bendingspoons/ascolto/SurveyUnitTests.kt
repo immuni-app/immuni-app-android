@@ -582,6 +582,6 @@ class SurveyUnitTests {
         assertTrue("Should not show question 7", question7.shouldBeShown(UNKNOWN, answers))
         assertTrue("Should not show question 8", question8.shouldBeShown(UNKNOWN, answers))
 
-        assertTrue("Has Covid-19", survey.triage(HealthStatus.COVID_POSITIVE, answers))
+        assertTrue("Has Covid-19", survey.triage(COVID_POSITIVE, answers))
     }
 }
