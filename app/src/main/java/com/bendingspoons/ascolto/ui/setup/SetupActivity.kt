@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.bendingspoons.ascolto.AscoltoActivity
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.base.extensions.setDarkStatusBar
 import com.bendingspoons.base.extensions.setLightStatusBar
 
 class SetupActivity : AscoltoActivity() {
@@ -26,7 +27,7 @@ class SetupActivity : AscoltoActivity() {
                 .commitNow()
         }
 
-        setLightStatusBar(resources.getColor(R.color.statusBarLight))
+        setDarkStatusBar(resources.getColor(R.color.colorPrimary))
     }
 
 }

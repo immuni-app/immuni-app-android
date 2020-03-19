@@ -5,15 +5,15 @@
     android:id="@+id/setup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FCFCFC"
+    android:background="@color/colorPrimary"
     tools:context=".ui.setup.SetupActivity">
 
-    <ImageView
+    <ProgressBar
         android:id="@+id/background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher_foreground"
-        android:tint="@color/colorPrimary"
+        android:indeterminateTint="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,15 +22,16 @@
     <TextView
         android:id="@+id/error"
         style="@style/P1Text"
-        android:textColor="#A5A7B7"
         android:layout_width="0dp"
-        android:gravity="center"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
         android:text="@string/app_setup_check_connection"
-        app:layout_constraintWidth_max="230dp"
+        android:textColor="@color/background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/background" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

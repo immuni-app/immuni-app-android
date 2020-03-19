@@ -5,41 +5,41 @@
 
     <!-- normal -->
     <font
-            android:font="@font/barlow_medium"
+            android:font="@font/euclid_circular_medium"
             android:fontStyle="normal"
             android:fontWeight="400"
 
-            app:font="@font/barlow_medium"
+            app:font="@font/euclid_circular_medium"
             app:fontStyle="normal"
             app:fontWeight="400" />
 
     <!-- book -->
     <font
-            android:font="@font/barlow_semi_bold"
+            android:font="@font/euclid_circular_semi_bold"
             android:fontStyle="normal"
             android:fontWeight="300"
 
-            app:font="@font/barlow_semi_bold"
+            app:font="@font/euclid_circular_semi_bold"
             app:fontStyle="normal"
             app:fontWeight="300" />
 
     <!-- bold -->
     <font
-            android:font="@font/barlow_bold"
+            android:font="@font/euclid_circular_bold"
             android:fontStyle="normal"
             android:fontWeight="700"
 
-            app:font="@font/barlow_bold"
+            app:font="@font/euclid_circular_bold"
             app:fontStyle="normal"
             app:fontWeight="700" />
 
     <!-- light -->
     <font
-            android:font="@font/barlow_regular"
+            android:font="@font/euclid_circular_regular"
             android:fontStyle="normal"
             android:fontWeight="100"
 
-            app:font="@font/barlow_regular"
+            app:font="@font/euclid_circular_regular"
             app:fontStyle="normal"
             app:fontWeight="100" />
 </font-family>
