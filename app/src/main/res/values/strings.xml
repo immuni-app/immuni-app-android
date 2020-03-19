@@ -13,4 +13,13 @@
     <string name="no">No</string>
     <string name="survey_progress_text">Diario clinico di %s</string>
     <string name="welcome_lets_start">Iniziamo</string>
+
+    <string name="welcome_1_title">Benvenuto</string>
+    <string name="welcome_1_description">Uniti e grazie all\'aiuto della tecnologia possiamo sconfiggere il coronavirus.</string>
+    <string name="welcome_2_title">Diagnosi precoce</string>
+    <string name="welcome_2_description">Anche sintomi lievi possono essere sufficienti per effettuare una diagnosi preliminare e darti consigli personalizzati.</string>
+    <string name="welcome_3_title">Identificazione dei focolai</string>
+    <string name="welcome_3_description">Con l\'aiuto di tutti possiamo individuare rapidamente le zone a rischio e proteggere la popolazione al meglio.</string>
+    <string name="welcome_4_title">Ricerca scientifica</string>
+    <string name="welcome_4_description">Le informazioni raccolte sono preziosissime per aiutare la ricerca contro le epidemie ed evitare che questa crisi si ripeta.</string>
 </resources>

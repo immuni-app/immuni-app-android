@@ -30,24 +30,24 @@ class WelcomeItemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         image.setImageResource(when(position) {
-            0 -> R.drawable.ic_back_form
-            1 -> R.drawable.ic_cross
-            2 -> R.drawable.ic_tab_home
-            else -> R.drawable.ic_cross
+            0 -> R.drawable.welcome_1
+            1 -> R.drawable.welcome_2
+            2 -> R.drawable.welcome_3
+            else -> R.drawable.welcome_4
         })
 
         title.text = when(position) {
-            0 -> "$position"
-            1 -> "$position"
-            2 -> "$position"
-            else -> "$position"
+            0 -> getString(R.string.welcome_1_title)
+            1 -> getString(R.string.welcome_2_title)
+            2 -> getString(R.string.welcome_3_title)
+            else -> getString(R.string.welcome_4_title)
         }
 
         description.text = when(position) {
-            0 -> "$position"
-            1 -> "$position"
-            2 -> "$position"
-            else -> "$position"
+            0 -> getString(R.string.welcome_1_description)
+            1 -> getString(R.string.welcome_2_description)
+            2 -> getString(R.string.welcome_3_description)
+            else -> getString(R.string.welcome_4_description)
         }
     }
 

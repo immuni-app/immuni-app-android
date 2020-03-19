@@ -17,6 +17,7 @@ import com.bendingspoons.ascolto.ui.onboarding.OnboardingActivity
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.ascolto.ui.onboarding.fragments.WelcomeFragmentDirections
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.onboarding_profile_fragment.*
 import kotlinx.android.synthetic.main.welcome_fragment.*
 import kotlinx.android.synthetic.main.welcome_fragment.viewPager
@@ -69,6 +70,10 @@ class WelcomeFragment : Fragment() {
             registerOnPageChangeCallback(pageChangeCallback)
         }
 
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            //Some implementation
+        }.attach()
+
         next.setOnClickListener {
             val newPos = viewPager.currentItem + 1
             if(newPos ==  (viewPager.adapter?.itemCount ?: 0)) {
@@ -103,7 +108,7 @@ class WelcomeFragment : Fragment() {
         if(newPos >= 0) {
             viewPager.setCurrentItem(newPos, true)
         } else {
-            findNavController().popBackStack()
+            activity?.finish()
         }
     }
 }
