@@ -5,7 +5,8 @@ data class Triage(
     val conditions: List<TriageCondition>
 ) {
     fun triage(lastStatus: TriageStatus?, answers: SurveyAnswers): TriageStatus? {
-        return conditions.firstOrNull { it.check(lastStatus, answers) }?.status
+        val statusId = conditions.firstOrNull { it.check(lastStatus, answers) }?.statusId
+        return statusId?.let { statuses.first { it.id == statusId } }
     }
 }
 
@@ -18,13 +19,11 @@ data class TriageStatus(
 )
 
 enum class Severity {
-    LOW, MID, HIGH;
-
-    val value = values().indexOf(this)
+    LOW, MID, HIGH
 }
 
 data class TriageCondition(
-    val status: TriageStatus,
+    val statusId: TriageStatusId,
     val condition: Condition
 ) {
     fun check(triageStatus: TriageStatus?, answers: SurveyAnswers): Boolean {

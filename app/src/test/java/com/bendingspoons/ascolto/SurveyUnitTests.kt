@@ -232,27 +232,46 @@ class SurveyUnitTests {
                     }
                 }
             ],
-            "triage": [
-                {
-                    "status": "covid_positive",
-                    "conditions": [
-                        {
-                            "type": "composite",
-                            "question_id": "question3",
-                            "matching_component_indexes": [
-                                [
-                                    2,
-                                    null
-                                ],
-                                [
-                                    3,
-                                    null
+            "triage": {
+                "statuses": [
+                    {
+                        "id": "covid_positive",
+                        "url": "http://someuniqueurl.com/covid_positive",
+                        "severity": "high"
+                    },
+                    {
+                        "id": "fever",
+                        "url": "http://someuniqueurl.com/fever",
+                        "severity": "mid"
+                    },
+                    {
+                        "id": "nothing",
+                        "url": "http://someuniqueurl.com/nothing",
+                        "severity": "low"
+                    }
+                ],
+                "logic": [
+                    {
+                        "status": "covid_positive",
+                        "conditions": [
+                            {
+                                "type": "composite",
+                                "question_id": "question3",
+                                "matching_component_indexes": [
+                                    [
+                                        2,
+                                        null
+                                    ],
+                                    [
+                                        3,
+                                        null
+                                    ]
                                 ]
-                            ]
-                        }
-                    ]
-                }
-            ]
+                            }
+                        ]
+                    }
+                ]
+            }
         }
     """.trimIndent()
 
@@ -506,6 +525,24 @@ class SurveyUnitTests {
             )
         )
 
+        val statuses = listOf(
+            TriageStatus(
+                id = "healthy",
+                url = "http://someuniqueurl.com/healthy",
+                severity = Severity.LOW
+            ),
+            TriageStatus(
+                id = "fever",
+                url = "http://someuniqueurl.com/fever",
+                severity = Severity.MID
+            ),
+            TriageStatus(
+                id = "covid_positive",
+                url = "http://someuniqueurl.com/covid_positive",
+                severity = Severity.HIGH
+            )
+        )
+
         val survey = Survey(
             version = "20200319",
             questions = listOf(
@@ -519,39 +556,32 @@ class SurveyUnitTests {
                 question8
             ),
             triage = Triage(
-                values().map {
-                    when (it) {
-                        COVID_POSITIVE -> TriageCondition(
-                            it,
-                            Condition(
-                                listOf(
-                                    hasNausea,
-                                    hasFever
-                                )
+                statuses = statuses,
+                conditions = listOf(
+                    TriageCondition(
+                        statuses.first().id,
+                        Condition(
+                            listOf()
+                        )
+                    ),
+                    TriageCondition(
+                        statuses[1].id,
+                        Condition(
+                            listOf(
+                                hasFever
                             )
                         )
-                        SERIOUS_SYMPTOMS -> TriageCondition(
-                            it,
-                            Condition(listOf())
+                    ),
+                    TriageCondition(
+                        statuses.last().id,
+                        Condition(
+                            listOf(
+                                hasNausea,
+                                hasFever
+                            )
                         )
-                        HEALTHY_WITH_ESTABLISHED_CONTACT -> TriageCondition(
-                            it,
-                            Condition(listOf())
-                        )
-                        MILD_SYMPTOMS_NO_ESTABLISHED_CONTACT -> TriageCondition(
-                            it,
-                            Condition(listOf())
-                        )
-                        HEALTHY_NO_ESTABLISHED_CONTACT -> TriageCondition(
-                            it,
-                            Condition(listOf())
-                        )
-                        UNKNOWN -> TriageCondition(
-                            it,
-                            Condition(listOf())
-                        )
-                    }
-                }
+                    )
+                )
             )
         )
 
@@ -573,14 +603,14 @@ class SurveyUnitTests {
             )
         )
 
-        assertTrue("Should show question 2", question2.shouldBeShown(UNKNOWN, answers))
-        assertTrue("Should show question 3", question3.shouldBeShown(UNKNOWN, answers))
-        assertTrue("Should show question 4", question4.shouldBeShown(UNKNOWN, answers))
-        assertFalse("Should not show question 5", question5.shouldBeShown(UNKNOWN, answers))
-        assertTrue("Should not show question 6", question6.shouldBeShown(UNKNOWN, answers))
-        assertTrue("Should not show question 7", question7.shouldBeShown(UNKNOWN, answers))
-        assertTrue("Should not show question 8", question8.shouldBeShown(UNKNOWN, answers))
+        assertTrue("Should show question 2", question2.shouldBeShown(null, answers))
+        assertTrue("Should show question 3", question3.shouldBeShown(null, answers))
+        assertTrue("Should show question 4", question4.shouldBeShown(null, answers))
+        assertFalse("Should not show question 5", question5.shouldBeShown(null, answers))
+        assertTrue("Should not show question 6", question6.shouldBeShown(null, answers))
+        assertTrue("Should not show question 7", question7.shouldBeShown(null, answers))
+        assertTrue("Should not show question 8", question8.shouldBeShown(null, answers))
 
-        assertTrue("Has Covid-19", survey.triage(COVID_POSITIVE, answers))
+        assertEquals("Has Covid-19", statuses.last(), survey.triage(null, answers))
     }
 }

@@ -18,20 +18,20 @@ data class RawTriage(
 
 @JsonClass(generateAdapter = true)
 data class RawTriageCondition(
-    @field:Json(name = "status") val status: RawTriageStatus,
+    @field:Json(name = "status") val statusId: TriageStatusId,
     @field:Json(name = "conditions") val conditions: List<RawConditionItem>
 ) {
     fun triageCondition() = TriageCondition(
-        status = status.triageStatus(),
+        statusId = statusId,
         condition = Condition(conditions.map { it.conditionItem() })
     )
 }
 
 @JsonClass(generateAdapter = true)
 data class RawTriageStatus(
-    val id: String,
-    val url: String,
-    val severity: RawSeverity
+    @field:Json(name = "id") val id: String,
+    @field:Json(name = "url") val url: String,
+    @field:Json(name = "severity") val severity: RawSeverity
 ) {
     fun triageStatus() = TriageStatus(
         id = id,
