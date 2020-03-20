@@ -45,7 +45,7 @@ class NameFragment : ProfileContentFragment(R.layout.onboarding_name_fragment) {
     }
 
     private fun updateUI(name: String?) {
-        textField.setText(name?.toString() ?: "")
+        updateEditText(textField, name?.toString() ?: "")
     }
 
 }

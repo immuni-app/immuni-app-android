@@ -78,7 +78,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
         uiScope.launch {
             database.userInfoDao().insert(
                 UserInfoEntity(
-                    name = userInfo.name!!,
+                    name = userInfo.name ?: "",
                     gender = userInfo.gender!!,
                     isMainUser = true,
                     birthDate = Calendar.getInstance().apply {

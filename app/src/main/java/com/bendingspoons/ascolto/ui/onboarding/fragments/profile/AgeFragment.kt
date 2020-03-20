@@ -69,6 +69,6 @@ class AgeFragment : ProfileContentFragment(R.layout.onboarding_age_fragment) {
     }
 
     private fun updateUI(age: Int?) {
-        textField.setText(age?.toString() ?: "")
+        updateEditText(textField, age?.toString() ?: "")
     }
 }
