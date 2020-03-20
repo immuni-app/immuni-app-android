@@ -16,6 +16,5 @@ class User(
     @field:Json(name = "last_survey_at") val lastSurveyDate: Date,
     @field:Json(name = "last_survey_version") val lastSurveyVersion: String,
     @field:Json(name = "last_triage_status") val lastTriageStatus: TriageStatus,
-    @field:Json(name = "next_survey_at") val nextSurveyDate: Date,
-    @field:Json(name = "relatives") val familyMembers: List<User>? = null
+    @field:Json(name = "next_survey_at") val nextSurveyDate: Date
 )

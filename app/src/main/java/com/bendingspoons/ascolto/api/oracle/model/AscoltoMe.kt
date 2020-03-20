@@ -9,5 +9,6 @@ import java.util.*
 @JsonClass(generateAdapter = true)
 class AscoltoMe(
     @field:Json(name = "next_survey_at") val nextSurveyDate: Date? = null,
+    @field:Json(name = "householder") val mainUser: User,
     @field:Json(name = "relatives") val familyMembers: List<User> = listOf()
 ): OracleMe()
