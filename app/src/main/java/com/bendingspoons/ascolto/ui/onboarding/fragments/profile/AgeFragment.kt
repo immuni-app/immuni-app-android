@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.db.entity.Gender
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingUserInfo
 import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.showKeyboard
@@ -28,11 +29,7 @@ class AgeFragment : ProfileContentFragment(R.layout.onboarding_age_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         textField.doOnTextChanged { text, _, _, _ ->
-            if(validate()) {
-                viewModel.userInfo()?.let {
-                    viewModel.updateUserInfo(it.copy(age = text.toString().trim().toInt()))
-                }
-            }
+            validate(true)
         }
 
         nextButton.setOnClickListener(null) // override the default behaviour
@@ -52,14 +49,26 @@ class AgeFragment : ProfileContentFragment(R.layout.onboarding_age_fragment) {
     }
 
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {
-        //updateUI(userInfo.gender)
+        updateUI(userInfo.age)
+        validate(false)
     }
 
-    private fun validate(): Boolean {
+    private fun validate(updateModel: Boolean = true): Boolean {
         val text = textField.text.toString().trim()
         var valid = text.isNotEmpty()
         valid = valid && (text.toIntOrNull() != null)
         nextButton.isEnabled = valid
+        if(valid && updateModel) updateModel(text.toInt())
         return valid
+    }
+
+    private fun updateModel(age: Int) {
+        viewModel.userInfo()?.let {
+            viewModel.updateUserInfo(it.copy(age = age))
+        }
+    }
+
+    private fun updateUI(age: Int?) {
+        textField.setText(age?.toString() ?: "")
     }
 }

@@ -22,19 +22,30 @@ class NameFragment : ProfileContentFragment(R.layout.onboarding_name_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         textField.doOnTextChanged { text, _, _, _ ->
-            if(validate()) {
-                // TODO save form data
-            }
+            validate(true)
         }
     }
 
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {
-        //updateUI(userInfo.gender)
+        updateUI(userInfo.name)
+        validate(false)
     }
 
-    private fun validate(): Boolean {
+    private fun validate(updateModel: Boolean = true): Boolean {
         val valid = textField.text.toString().trim().isNotEmpty()
         nextButton.isEnabled = valid
+        if(valid && updateModel) updateModel(textField.text.toString().trim())
         return valid
     }
+
+    private fun updateModel(name: String) {
+        viewModel.userInfo()?.let {
+            viewModel.updateUserInfo(it.copy(name = name))
+        }
+    }
+
+    private fun updateUI(name: String?) {
+        textField.setText(name?.toString() ?: "")
+    }
+
 }

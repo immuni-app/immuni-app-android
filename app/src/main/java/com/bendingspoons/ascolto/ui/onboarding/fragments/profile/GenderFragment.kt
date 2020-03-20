@@ -22,19 +22,11 @@ class GenderFragment : ProfileContentFragment(R.layout.onboarding_gender_fragmen
         super.onViewCreated(view, savedInstanceState)
 
         male.setOnClickListener {
-            if(validate()) {
-                viewModel.userInfo()?.let {
-                    viewModel.updateUserInfo(it.copy(gender = Gender.MALE))
-                }
-            }
+            validate(true)
         }
 
         female.setOnClickListener {
-            if(validate()) {
-                viewModel.userInfo()?.let {
-                    viewModel.updateUserInfo(it.copy(gender = Gender.FEMALE))
-                }
-            }
+            validate(true)
         }
 
         back.setOnClickListener {
@@ -43,12 +35,36 @@ class GenderFragment : ProfileContentFragment(R.layout.onboarding_gender_fragmen
     }
 
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {
-        //updateUI(userInfo.gender)
+        updateUI(userInfo.gender)
+        validate(false)
     }
 
-    private fun validate(): Boolean {
+    private fun validate(updateModel: Boolean = true): Boolean {
         val valid = male.isChecked || female.isChecked
         nextButton.isEnabled = valid
+        if(valid && updateModel) updateModel(when {
+            male.isChecked -> Gender.MALE
+            else -> Gender.FEMALE
+        })
         return valid
+    }
+
+    private fun updateModel(gender: Gender) {
+        viewModel.userInfo()?.let {
+            viewModel.updateUserInfo(it.copy(gender = gender))
+        }
+    }
+
+    private fun updateUI(gender: Gender?) {
+        when(gender) {
+            Gender.MALE -> {
+                male.isChecked = true
+                female.isChecked = false
+            }
+            else  -> {
+                male.isChecked = false
+                female.isChecked = true
+            }
+        }
     }
 }
