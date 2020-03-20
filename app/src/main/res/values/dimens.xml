@@ -10,7 +10,7 @@
     <dimen name="offset">150dp</dimen>
 
     <!-- Override default bottom nav bar dimens -->
-    <dimen name="design_bottom_navigation_height" tools:override="true">65dp</dimen>
+    <dimen name="design_bottom_navigation_height" tools:override="true">70dp</dimen>
     <dimen name="design_bottom_navigation_text_size" tools:override="true">12dp</dimen>
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12dp</dimen>
     <dimen name="design_bottom_navigation_shadow_height" tools:override="true">0dp</dimen>
