@@ -25,7 +25,7 @@ data class RawConditionItem(
     @field:Json(name = "matching_component_indexes")
     val matchingComponentIndexes: List<List<AnswerIndex>>? = null,
     @field:Json(name = "matching_statuses")
-    val matchingStatuses: List<RawHealthStatus>? = null
+    val matchingStatuses: List<TriageStatusId?>? = null
 ) {
     fun conditionItem() = when (type) {
         SIMPLE -> SimpleConditionItem(
@@ -37,7 +37,7 @@ data class RawConditionItem(
             matchingComponentIndexes!!
         )
         CURRENT_USER_STATUS -> TriageStatusConditionItem(
-            matchingStatuses!!.map { it.healthStatus() }
+            matchingStatuses!!
         )
     }
 }
