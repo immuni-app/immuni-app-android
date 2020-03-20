@@ -1,7 +1,6 @@
 package com.bendingspoons.ascolto
 
 import com.bendingspoons.ascolto.models.survey.*
-import com.bendingspoons.ascolto.models.survey.HealthStatus.*
 import com.bendingspoons.ascolto.models.survey.raw.RawSurvey
 import com.squareup.moshi.Moshi
 import org.junit.Test
@@ -522,7 +521,7 @@ class SurveyUnitTests {
             triage = Triage(
                 values().map {
                     when (it) {
-                        COVID_POSITIVE -> HealthStatusTriage(
+                        COVID_POSITIVE -> TriageCondition(
                             it,
                             Condition(
                                 listOf(
@@ -531,23 +530,23 @@ class SurveyUnitTests {
                                 )
                             )
                         )
-                        SERIOUS_SYMPTOMS -> HealthStatusTriage(
+                        SERIOUS_SYMPTOMS -> TriageCondition(
                             it,
                             Condition(listOf())
                         )
-                        HEALTHY_WITH_ESTABLISHED_CONTACT -> HealthStatusTriage(
+                        HEALTHY_WITH_ESTABLISHED_CONTACT -> TriageCondition(
                             it,
                             Condition(listOf())
                         )
-                        MILD_SYMPTOMS_NO_ESTABLISHED_CONTACT -> HealthStatusTriage(
+                        MILD_SYMPTOMS_NO_ESTABLISHED_CONTACT -> TriageCondition(
                             it,
                             Condition(listOf())
                         )
-                        HEALTHY_NO_ESTABLISHED_CONTACT -> HealthStatusTriage(
+                        HEALTHY_NO_ESTABLISHED_CONTACT -> TriageCondition(
                             it,
                             Condition(listOf())
                         )
-                        UNKNOWN -> HealthStatusTriage(
+                        UNKNOWN -> TriageCondition(
                             it,
                             Condition(listOf())
                         )

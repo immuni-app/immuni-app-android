@@ -1,31 +1,33 @@
 package com.bendingspoons.ascolto.models.survey
 
-data class HealthStatusTriage(
-    val status: HealthStatus,
+data class Triage(
+    val statuses: List<TriageStatus>,
+    val conditions: List<TriageCondition>
+) {
+    fun triage(lastStatus: TriageStatus?, answers: SurveyAnswers): TriageStatus? {
+        return conditions.firstOrNull { it.check(lastStatus, answers) }?.status
+    }
+}
+
+typealias TriageStatusId = String
+
+data class TriageStatus(
+    val id: TriageStatusId,
+    val url: String,
+    val severity: Severity
+)
+
+enum class Severity {
+    LOW, MID, HIGH;
+
+    val value = values().indexOf(this)
+}
+
+data class TriageCondition(
+    val status: TriageStatus,
     val condition: Condition
 ) {
-    fun check(healthStatus: HealthStatus, answers: SurveyAnswers): Boolean {
-        return condition.isSatisfied(healthStatus, answers)
+    fun check(triageStatus: TriageStatus?, answers: SurveyAnswers): Boolean {
+        return condition.isSatisfied(triageStatus, answers)
     }
-}
-
-data class Triage(private val statusTriages: List<HealthStatusTriage>) {
-    fun triage(healthStatus: HealthStatus, answers: SurveyAnswers): HealthStatus {
-        return statusTriages.firstOrNull { it.check(healthStatus, answers) }?.status
-            ?: HealthStatus.HEALTHY_NO_ESTABLISHED_CONTACT
-    }
-
-    fun check(healthStatus: HealthStatus, answers: SurveyAnswers): Boolean {
-        val statusTriage = statusTriages.first { it.status == healthStatus }
-        return statusTriage.check(healthStatus, answers)
-    }
-}
-
-enum class HealthStatus {
-    COVID_POSITIVE,
-    SERIOUS_SYMPTOMS,
-    HEALTHY_WITH_ESTABLISHED_CONTACT,
-    MILD_SYMPTOMS_NO_ESTABLISHED_CONTACT,
-    HEALTHY_NO_ESTABLISHED_CONTACT,
-    UNKNOWN
 }
