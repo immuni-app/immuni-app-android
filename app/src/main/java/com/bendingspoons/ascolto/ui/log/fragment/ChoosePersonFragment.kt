@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.db.entity.Gender
+import com.bendingspoons.ascolto.db.entity.age
 import com.bendingspoons.ascolto.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
@@ -42,7 +43,7 @@ class ChoosePersonFragment : Fragment() {
 
         viewModel.mainUserInfo.observe(viewLifecycleOwner, Observer {
             it?.let {
-                age.text = it.birthDate.toString()
+                age.text = it.age().toString()
                 name.text = when(it.isMainUser) {
                     true -> getString(R.string.you)
                     false -> it.name

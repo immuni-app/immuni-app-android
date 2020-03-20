@@ -61,9 +61,13 @@ class GenderFragment : ProfileContentFragment(R.layout.onboarding_gender_fragmen
                 male.isChecked = true
                 female.isChecked = false
             }
-            else  -> {
+            Gender.FEMALE  -> {
                 male.isChecked = false
                 female.isChecked = true
+            }
+            else -> {
+                male.isChecked = false
+                female.isChecked = false
             }
         }
     }

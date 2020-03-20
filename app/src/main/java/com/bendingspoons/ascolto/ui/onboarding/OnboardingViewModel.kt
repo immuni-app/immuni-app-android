@@ -82,6 +82,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
                     gender = userInfo.gender!!,
                     isMainUser = true,
                     birthDate = Calendar.getInstance().apply {
+                        time = Date()
                         add(Calendar.YEAR, -userInfo.age!!)
                     }.time
                 )

@@ -2,10 +2,8 @@ package com.bendingspoons.ascolto.db.entity
 
 import androidx.room.Entity
 import androidx.room.Ignore
-import androidx.room.PrimaryKey
 import com.bendingspoons.ascolto.db.AscoltoDatabase
 import java.util.*
-import kotlin.math.roundToInt
 
 @Entity(tableName = "user_info_table", primaryKeys = ["id"])
 data class UserInfoEntity(
@@ -22,4 +20,12 @@ data class UserInfoEntity(
     suspend fun fillWithRelations(db: AscoltoDatabase) {
         familyMembers = db.userInfoDao().getFamilyMembersUserInfo()
     }
+}
+
+fun UserInfoEntity.age(): Int {
+    val birthdayCalendar = Calendar.getInstance().apply {
+        time = birthDate
+    }
+    val today = Calendar.getInstance()
+    return today[Calendar.YEAR] - birthdayCalendar[Calendar.YEAR]
 }
