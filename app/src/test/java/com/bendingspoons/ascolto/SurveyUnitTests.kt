@@ -543,6 +543,30 @@ class SurveyUnitTests {
             )
         )
 
+        val healthy = TriageCondition(
+            statuses.first().id,
+            Condition(
+                listOf()
+            )
+        )
+        val withFever = TriageCondition(
+            statuses[1].id,
+            Condition(
+                listOf(
+                    hasFever
+                )
+            )
+        )
+        val covid19Positive = TriageCondition(
+            statuses.last().id,
+            Condition(
+                listOf(
+                    hasNausea,
+                    hasFever
+                )
+            )
+        )
+
         val survey = Survey(
             version = "20200319",
             questions = listOf(
@@ -558,29 +582,9 @@ class SurveyUnitTests {
             triage = Triage(
                 statuses = statuses,
                 conditions = listOf(
-                    TriageCondition(
-                        statuses.first().id,
-                        Condition(
-                            listOf()
-                        )
-                    ),
-                    TriageCondition(
-                        statuses[1].id,
-                        Condition(
-                            listOf(
-                                hasFever
-                            )
-                        )
-                    ),
-                    TriageCondition(
-                        statuses.last().id,
-                        Condition(
-                            listOf(
-                                hasNausea,
-                                hasFever
-                            )
-                        )
-                    )
+                    covid19Positive,
+                    withFever,
+                    healthy
                 )
             )
         )
