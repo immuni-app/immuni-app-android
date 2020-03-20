@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.db.entity.Gender
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingUserInfo
 import com.bendingspoons.base.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.onboarding_gender_fragment.*
@@ -21,11 +22,19 @@ class GenderFragment : ProfileContentFragment(R.layout.onboarding_gender_fragmen
         super.onViewCreated(view, savedInstanceState)
 
         male.setOnClickListener {
-            validate()
+            if(validate()) {
+                viewModel.userInfo()?.let {
+                    viewModel.updateUserInfo(it.copy(gender = Gender.MALE))
+                }
+            }
         }
 
         female.setOnClickListener {
-            validate()
+            if(validate()) {
+                viewModel.userInfo()?.let {
+                    viewModel.updateUserInfo(it.copy(gender = Gender.FEMALE))
+                }
+            }
         }
 
         back.setOnClickListener {

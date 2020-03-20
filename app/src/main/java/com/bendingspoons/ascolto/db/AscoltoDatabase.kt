@@ -8,7 +8,7 @@ import com.bendingspoons.ascolto.db.converter.GenderConverter
 import com.bendingspoons.ascolto.db.dao.UserInfoDao
 import com.bendingspoons.ascolto.db.entity.UserInfoEntity
 
-const val DATABASE_VERSION = 1
+const val DATABASE_VERSION = 2
 
 @Database(
     entities = [

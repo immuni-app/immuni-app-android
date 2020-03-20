@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-
+                android:id="@+id/gender"
                 android:layout_weight="1"
                 android:src="@drawable/ic_avatar_female_purple"
                 app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +70,7 @@
 
             <TextView
                 style="@style/H2SubHeading"
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -80,6 +81,7 @@
 
             <TextView
                 style="@style/P1Text"
+                android:id="@+id/age"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"

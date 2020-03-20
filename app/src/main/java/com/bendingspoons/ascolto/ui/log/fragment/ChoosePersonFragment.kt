@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.db.entity.Gender
 import com.bendingspoons.ascolto.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
@@ -38,13 +40,19 @@ class ChoosePersonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        /*
-        viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let {
-                goToMainActivity()
+        viewModel.mainUserInfo.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                age.text = it.birthDate.toString()
+                name.text = when(it.isMainUser) {
+                    true -> getString(R.string.you)
+                    false -> it.name
+                }
+                gender.setImageResource(when(it.gender) {
+                    Gender.FEMALE -> R.drawable.ic_avatar_female_purple
+                    Gender.MALE -> R.drawable.ic_avatar_female_purple
+                })
             }
         })
-         */
 
         next.setOnClickListener {
             val action = ChoosePersonFragmentDirections.actionGlobalForm()

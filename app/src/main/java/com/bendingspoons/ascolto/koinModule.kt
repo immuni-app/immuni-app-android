@@ -22,7 +22,6 @@ import com.bendingspoons.pico.Pico
 import com.bendingspoons.secretmenu.SecretMenu
 import com.bendingspoons.sesame.Sesame
 import com.bendingspoons.theirs.Theirs
-import com.bendingspoons.thirtydayfitness.AscoltoConciergeCustomIdProvider
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

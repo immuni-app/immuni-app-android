@@ -29,7 +29,9 @@ class AgeFragment : ProfileContentFragment(R.layout.onboarding_age_fragment) {
         super.onViewCreated(view, savedInstanceState)
         textField.doOnTextChanged { text, _, _, _ ->
             if(validate()) {
-                // TODO save form data
+                viewModel.userInfo()?.let {
+                    viewModel.updateUserInfo(it.copy(age = text.toString().trim().toInt()))
+                }
             }
         }
 

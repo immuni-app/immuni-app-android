@@ -1,4 +1,4 @@
-package com.bendingspoons.thirtydayfitness
+package com.bendingspoons.ascolto
 
 import com.bendingspoons.concierge.Concierge
 import com.bendingspoons.concierge.ConciergeCustomIdProvider

@@ -5,6 +5,7 @@ import com.bendingspoons.ascolto.AscoltoApplication
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.ascolto.db.AscoltoDatabase
+import com.bendingspoons.ascolto.db.entity.UserInfoEntity
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.utils.ExternalLinksHelper
@@ -13,6 +14,7 @@ import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
+import java.util.*
 
 class OnboardingViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) : ViewModel(), KoinComponent {
 
@@ -74,21 +76,16 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     fun onOnboardingComplete() {
         val userInfo = partialUserInfo.value!!
         uiScope.launch {
-            /*
             database.userInfoDao().insert(
                 UserInfoEntity(
                     name = userInfo.name!!,
-                    fitnessLevel = userInfo.fitnessLevel!!,
-                    totalLevelWorkoutTime = userInfo.totalLevelWorkoutTime!!,
-                    birthDate = userInfo.birthDate!!,
-                    height = userInfo.height!!,
-                    weight = userInfo.weight!!,
-                    targetWeight = userInfo.targetWeight!!,
-                    gender = userInfo.gender!!
+                    gender = userInfo.gender!!,
+                    isMainUser = true,
+                    birthDate = Calendar.getInstance().apply {
+                        add(Calendar.YEAR, -userInfo.age!!)
+                    }.time
                 )
             )
-
-             */
             onboarding.setCompleted(true)
             delay(2000)
             _navigateToMainPage.value = Event(true)

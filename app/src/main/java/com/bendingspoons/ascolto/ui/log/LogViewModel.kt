@@ -14,6 +14,8 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    val mainUserInfo = database.userInfoDao().getMainUserInfoLiveData()
+
     var formModel = MediatorLiveData<FormModel>()
     private var savedStateLiveData = handle.getLiveData<Serializable>(STATE_KEY)
 
