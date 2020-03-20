@@ -50,4 +50,7 @@
 
     <string name="compile_your_clinical_diary">Compila il diario clinico</string>
     <string name="choose_person_button_start">Inizia</string>
+
+    <string name="log_completed">Diario clinico inviato!</string>
+    <string name="log_completed_message">Tutti i tuoi dati sono al sicuro.</string>
 </resources>

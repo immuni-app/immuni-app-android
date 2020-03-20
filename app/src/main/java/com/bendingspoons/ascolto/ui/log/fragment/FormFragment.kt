@@ -84,8 +84,8 @@ class FormFragment : Fragment() {
             it.getContentIfNotHandled()?.let {
                 val newPos = viewPager.currentItem + 1
                 if(newPos ==  (viewPager.adapter?.itemCount ?: 0)) {
-                    //navigateToDone()
-                    toast("Finish form, navigate next")
+                    val action = FormFragmentDirections.actionGlobalFormDone()
+                    findNavController().navigate(action)
                 } else {
                     viewPager.setCurrentItem(newPos, true)
                 }

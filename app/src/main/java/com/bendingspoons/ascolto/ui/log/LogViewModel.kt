@@ -4,9 +4,7 @@ import androidx.lifecycle.*
 import com.bendingspoons.ascolto.db.AscoltoDatabase
 import com.bendingspoons.ascolto.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import java.io.Serializable
 
@@ -18,6 +16,10 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
 
     var formModel = MediatorLiveData<FormModel>()
     private var savedStateLiveData = handle.getLiveData<Serializable>(STATE_KEY)
+
+    private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
+    val navigateToMainPage: LiveData<Event<Boolean>>
+        get() = _navigateToMainPage
 
     private val _navigateToNextPage = MutableLiveData<Event<Boolean>>()
     val navigateToNextPage: LiveData<Event<Boolean>>
@@ -58,6 +60,30 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
     fun formModel(): FormModel? {
         return formModel.value
     }
+
+    fun onLogComplete() {
+        //val userInfo = partialUserInfo.value!!
+        uiScope.launch {
+            /*
+            database.userInfoDao().insert(
+                UserInfoEntity(
+                    name = userInfo.name!!,
+                    fitnessLevel = userInfo.fitnessLevel!!,
+                    totalLevelWorkoutTime = userInfo.totalLevelWorkoutTime!!,
+                    birthDate = userInfo.birthDate!!,
+                    height = userInfo.height!!,
+                    weight = userInfo.weight!!,
+                    targetWeight = userInfo.targetWeight!!,
+                    gender = userInfo.gender!!
+                )
+            )
+
+             */
+            delay(2000)
+            _navigateToMainPage.value = Event(true)
+        }
+    }
+
 
     companion object {
         const val STATE_KEY = "STATE_KEY"
