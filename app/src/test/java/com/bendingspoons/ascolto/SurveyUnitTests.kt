@@ -569,6 +569,7 @@ class SurveyUnitTests {
 
         val survey = Survey(
             version = "20200319",
+            logicVersion = "20200320",
             questions = listOf(
                 question1,
                 question2,
