@@ -4,6 +4,7 @@
     android:id="@+id/family"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/home_background"
     android:layout_height="match_parent">
 
     <Button

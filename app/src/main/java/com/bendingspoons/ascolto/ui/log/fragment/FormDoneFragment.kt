@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.AscoltoApplication
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.toast
+import com.bendingspoons.ascolto.ui.dialog.AddFamilyMemberDialog
 import com.bendingspoons.ascolto.ui.home.HomeActivity
 import com.bendingspoons.ascolto.ui.log.LogViewModel
 import com.bendingspoons.ascolto.ui.onboarding.OnboardingViewModel

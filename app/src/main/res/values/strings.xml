@@ -53,4 +53,7 @@
 
     <string name="log_completed">Diario clinico inviato!</string>
     <string name="log_completed_message">Tutti i tuoi dati sono al sicuro.</string>
+    <string name="old_people_in_family_title">Hai anziani o minorenni in famiglia?</string>
+    <string name="old_people_in_family_description">Registra i dati dei familiari che non possono farlo autonomamente (per esempio, minorenni, anziani e familiari che non possiedono uno smartphone).</string>
+    <string name="add_family_member_yes_button">Si, aggiungi famigliare</string>
 </resources>
