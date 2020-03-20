@@ -18,9 +18,9 @@ class TextFieldFragment: FormContentFragment(R.layout.form_text_field) {
         get() = next
     override val prevButton: ImageView
         get() = back
-    override val question: TextView
+    override val questionText: TextView
         get() = question
-    override val description: TextView
+    override val descriptionText: TextView
         get() = description
 
     override fun onResume() {

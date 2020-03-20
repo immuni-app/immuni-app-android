@@ -6,11 +6,17 @@ import android.view.View
 import android.widget.*
 import android.widget.CompoundButton.*
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.models.survey.RadioWidget
+import com.bendingspoons.ascolto.models.survey.Survey
 import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
 import com.bendingspoons.ascolto.ui.log.model.FormModel
+import com.bendingspoons.base.extensions.gone
+import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.form_radio_field.*
+import kotlinx.android.synthetic.main.form_radio_field.view.*
 import kotlinx.android.synthetic.main.form_text_field.next
 
 class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnCheckedChangeListener {
@@ -18,9 +24,9 @@ class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnChec
         get() = next
     override val prevButton: ImageView
         get() = back
-    override val question: TextView
+    override val questionText: TextView
         get() = question
-    override val description: TextView
+    override val descriptionText: TextView
         get() = description
 
     val items = mutableListOf<RadioButton>()
@@ -28,11 +34,26 @@ class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnChec
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        items.apply {
-            for(i in 1..4) {
+        viewModel.survey.observe(viewLifecycleOwner, Observer {
+            buildWidget(it)
+        })
+    }
+
+    private fun buildWidget(it: Survey) {
+        val question = it.questions.first { it.id == questionId }
+
+        questionText.text = question.title
+        descriptionText.text = question.description
+
+        if(question.description.isEmpty()) descriptionText.gone()
+        else descriptionText.visible()
+
+        val widget = question.widget as RadioWidget
+        widget.answers.forEachIndexed { index, answer ->
+            items.apply {
                 add(RadioButton(context).apply {
-                    tag = "0"
-                    text = "Scelta singola medio lunga"
+                    tag = "$index"
+                    text = answer
                     val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
                     typeface = tf
                     textSize = 18f

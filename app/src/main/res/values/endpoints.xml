@@ -1,4 +1,4 @@
 <resources>
     <string name="oracle_base_url" translatable="false">https://ascolto.bendingspoonsapps.com</string>
-    <string name="pico_base_url" translatable="false">https://api.staging.pico.bendingspoonsapps.com</string>
+    <string name="pico_base_url" translatable="false">https://analytics.staging.ascolto-onlus.org</string>
 </resources>

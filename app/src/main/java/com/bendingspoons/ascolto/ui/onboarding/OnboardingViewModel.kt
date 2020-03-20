@@ -2,6 +2,7 @@ package com.bendingspoons.ascolto.ui.onboarding
 
 import androidx.lifecycle.*
 import com.bendingspoons.ascolto.AscoltoApplication
+import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.ascolto.db.AscoltoDatabase
@@ -9,7 +10,6 @@ import com.bendingspoons.ascolto.db.entity.UserInfoEntity
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.utils.ExternalLinksHelper
-import com.bendingspoons.oracle.api.model.PrivacyNoticeRequest
 import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -78,7 +78,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
         uiScope.launch {
             database.userInfoDao().insert(
                 UserInfoEntity(
-                    name = userInfo.name ?: "",
+                    name = userInfo.name ?: AscoltoApplication.appContext.getString(R.string.you),
                     gender = userInfo.gender!!,
                     isMainUser = true,
                     birthDate = Calendar.getInstance().apply {

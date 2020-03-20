@@ -62,7 +62,7 @@ class FormFragment : Fragment() {
         }
 
         with(viewPager) {
-            adapter = FormAdapter(this@FormFragment)
+            adapter = FormAdapter(viewModel.survey.value, this@FormFragment)
             clipToPadding = false
             clipChildren = false
             isUserInputEnabled = false
@@ -95,6 +95,15 @@ class FormFragment : Fragment() {
         viewModel.navigateToPrevPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 onBackPressed()
+            }
+        })
+
+        viewModel.mainUserInfo.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                progressText.text = when(it.isMainUser) {
+                    true -> getString(R.string.your_clinic_diary)
+                    false -> String.format(getString(R.string.survey_progress_text), it.name)
+                }
             }
         })
     }

@@ -17,12 +17,14 @@ import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout) {
-    private lateinit var viewModel: LogViewModel
+    lateinit var viewModel: LogViewModel
     protected var position: Int = 0
+    protected var questionId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         position = arguments?.getInt("position") ?: 0
+        questionId = arguments?.getString("questionId") ?: "0"
     }
 
     override fun onResume() {
@@ -52,8 +54,8 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
 
     protected abstract val nextButton: Button
     protected abstract val prevButton: ImageView
-    protected abstract val question: TextView
-    protected abstract val description: TextView
+    protected abstract val questionText: TextView
+    protected abstract val descriptionText: TextView
 
     abstract fun onFormModelUpdate(model: FormModel)
 

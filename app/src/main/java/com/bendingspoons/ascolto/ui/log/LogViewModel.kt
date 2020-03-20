@@ -1,20 +1,29 @@
 package com.bendingspoons.ascolto.ui.log
 
 import androidx.lifecycle.*
+import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
+import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
+import com.bendingspoons.ascolto.api.oracle.model.getSettingsSurvey
 import com.bendingspoons.ascolto.db.AscoltoDatabase
+import com.bendingspoons.ascolto.models.survey.Survey
 import com.bendingspoons.ascolto.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
+import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
+import org.koin.core.inject
 import java.io.Serializable
 
 class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) : ViewModel(),
     KoinComponent {
 
+    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     val mainUserInfo = database.userInfoDao().getMainUserInfoLiveData()
+
+    var survey = MutableLiveData<Survey>()
 
     var formModel = MediatorLiveData<FormModel>()
     private var savedStateLiveData = handle.getLiveData<Serializable>(STATE_KEY)
@@ -40,6 +49,8 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
         formModel.addSource(savedStateLiveData) {
             formModel.value = it as? FormModel
         }
+
+        survey.value = getSettingsSurvey()?.survey()!!
     }
 
     fun onNextTap() {

@@ -6,10 +6,14 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.models.survey.PickerWidget
+import com.bendingspoons.ascolto.models.survey.Survey
 import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
 import com.bendingspoons.ascolto.ui.log.model.FormModel
-import com.bendingspoons.base.utils.ScreenUtils
+import com.bendingspoons.base.extensions.gone
+import com.bendingspoons.base.extensions.visible
 import com.shawnlin.numberpicker.NumberPicker
 import kotlinx.android.synthetic.main.form_picker_field.*
 import kotlinx.android.synthetic.main.form_text_field.next
@@ -20,21 +24,37 @@ class PickerFieldFragment: FormContentFragment(R.layout.form_picker_field) {
         get() = next
     override val prevButton: ImageView
         get() = back
-    override val question: TextView
+    override val questionText: TextView
         get() = question
-    override val description: TextView
+    override val descriptionText: TextView
         get() = description
 
     val items = mutableListOf<NumberPicker>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        items.apply {
-            for(i in 1..3) {
+
+        viewModel.survey.observe(viewLifecycleOwner, Observer {
+            buildWidget(it)
+        })
+    }
+
+    private fun buildWidget(it: Survey) {
+        val question = it.questions.first { it.id == questionId }
+
+        questionText.text = question.title
+        descriptionText.text = question.description
+
+        if(question.description.isEmpty()) descriptionText.gone()
+        else descriptionText.visible()
+
+        val widget = question.widget as PickerWidget
+        widget.components.forEachIndexed { index, picker ->
+            items.apply {
                 add(NumberPicker(context).apply {
+                    tag = "$index"
                     // IMPORTANT! setMinValue to 1 and call setDisplayedValues after setMinValue and setMaxValue
-                    val data =
-                        arrayOf("A", "B", "C", "D", "E", "F", "G", "H", "I")
+                    val data = picker.toTypedArray()
                     minValue = 1
                     maxValue = data.size
                     displayedValues = data
@@ -52,8 +72,6 @@ class PickerFieldFragment: FormContentFragment(R.layout.form_picker_field) {
         pickerGroup.apply {
             items.forEach { addView(it) }
         }
-
-        validate()
     }
 
     override fun onFormModelUpdate(model: FormModel) {

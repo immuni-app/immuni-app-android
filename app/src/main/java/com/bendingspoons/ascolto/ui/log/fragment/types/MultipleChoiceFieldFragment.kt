@@ -5,9 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.models.survey.MultipleChoicesWidget
+import com.bendingspoons.ascolto.models.survey.Survey
 import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
 import com.bendingspoons.ascolto.ui.log.model.FormModel
+import com.bendingspoons.base.extensions.gone
+import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.form_multiple_choice_field.*
 
@@ -16,22 +21,42 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
         get() = next
     override val prevButton: ImageView
         get() = back
-    override val question: TextView
+    override val questionText: TextView
         get() = question
-    override val description: TextView
+    override val descriptionText: TextView
         get() = description
 
-    val items = mutableListOf<CheckBox>()
+    private val items = mutableListOf<CheckBox>()
+    private var minimumAnswer = 1
+    private var maximumAnswer = 10000
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        items.apply {
+        viewModel.survey.observe(viewLifecycleOwner, Observer {
+            buildWidget(it)
+        })
+    }
 
-            for(i in 0..20) {
+    private fun buildWidget(it: Survey) {
+        val question = it.questions.first { it.id == questionId }
+        val widget = question.widget as MultipleChoicesWidget
+
+        questionText.text = question.title
+        descriptionText.text = question.description
+
+        minimumAnswer = widget.minNumberOfAnswers
+        maximumAnswer = widget.maxNumberOfAnswers
+
+        if(question.description.isEmpty()) descriptionText.gone()
+        else descriptionText.visible()
+
+
+        widget.answers.forEachIndexed { index, answer ->
+            items.apply {
                 add(CheckBox(context).apply {
-                    tag = "$i"
-                    text = "Text $i descrizione medio lunga"
+                    tag = "$index"
+                    text = answer
                     val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
                     typeface = tf
                     textSize = 18f
@@ -59,7 +84,11 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
     }
 
     override fun validate(): Boolean {
-        val valid = items.any{ it.isChecked }
+        val count = items.count { it.isChecked }
+        var valid = count > 0
+
+        valid = valid && count >= minimumAnswer && count <= maximumAnswer
+
         nextButton.isEnabled = valid
         return valid
     }
