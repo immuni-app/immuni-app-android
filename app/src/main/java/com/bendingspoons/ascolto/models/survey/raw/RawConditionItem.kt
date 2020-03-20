@@ -36,7 +36,7 @@ data class RawConditionItem(
             questionId!!,
             matchingComponentIndexes!!
         )
-        CURRENT_USER_STATUS -> HealthStatusConditionItem(
+        CURRENT_USER_STATUS -> TriageStatusConditionItem(
             matchingStatuses!!.map { it.healthStatus() }
         )
     }

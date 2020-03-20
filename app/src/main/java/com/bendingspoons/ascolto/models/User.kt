@@ -1,7 +1,7 @@
 package com.bendingspoons.ascolto.models
 
 import com.bendingspoons.ascolto.db.entity.Gender
-import com.bendingspoons.ascolto.models.survey.HealthStatus
+import com.bendingspoons.ascolto.models.survey.TriageStatus
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.util.*
@@ -15,7 +15,7 @@ class User(
     @field:Json(name = "name") val name: String,
     @field:Json(name = "last_survey_at") val lastSurveyDate: Date,
     @field:Json(name = "last_survey_version") val lastSurveyVersion: String,
-    @field:Json(name = "last_triage_status") val lastTriageStatus: HealthStatus,
+    @field:Json(name = "last_triage_status") val lastTriageStatus: TriageStatus,
     @field:Json(name = "next_survey_at") val nextSurveyDate: Date,
     @field:Json(name = "relatives") val familyMembers: List<User>? = null
 )

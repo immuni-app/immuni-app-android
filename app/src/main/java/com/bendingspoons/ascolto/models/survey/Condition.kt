@@ -13,12 +13,12 @@ class CompositeConditionItem(
     val matchingComponentIndexes: List<List<AnswerIndex?>>
 ): ConditionItem()
 
-class HealthStatusConditionItem(
-    val matchingStatuses: List<HealthStatus>
+class TriageStatusConditionItem(
+    val matchingStatuses: List<TriageStatusId?>
 ): ConditionItem()
 
 sealed class ConditionItem {
-    fun isSatisfied(healthStatus: HealthStatus, answers: QuestionAnswers): Boolean {
+    fun isSatisfied(triageStatus: TriageStatus?, answers: QuestionAnswers): Boolean {
         return when (this) {
             is SimpleConditionItem -> {
                 val answerIndexes = answers.map { (it as SimpleAnswer).index }
@@ -42,8 +42,8 @@ sealed class ConditionItem {
                     exactMatch || wildcardAwareMatch()
                 }
             }
-            is HealthStatusConditionItem -> {
-                matchingStatuses.contains(healthStatus)
+            is TriageStatusConditionItem -> {
+                matchingStatuses.contains(triageStatus?.id)
             }
         }
     }
@@ -52,16 +52,16 @@ sealed class ConditionItem {
 data class Condition(
     val conditionItems: List<ConditionItem>
 ) {
-    fun isSatisfied(healthStatus: HealthStatus, surveyAnswers: SurveyAnswers): Boolean {
+    fun isSatisfied(triageStatus: TriageStatus?, surveyAnswers: SurveyAnswers): Boolean {
         return conditionItems.all { item ->
             when (item) {
                 is SimpleConditionItem -> surveyAnswers[item.questionId]?.let { answers ->
-                    item.isSatisfied(healthStatus, answers)
+                    item.isSatisfied(triageStatus, answers)
                 } ?: false
                 is CompositeConditionItem -> surveyAnswers[item.questionId]?.let { answers ->
-                    item.isSatisfied(healthStatus, answers)
+                    item.isSatisfied(triageStatus, answers)
                 } ?: false
-                is HealthStatusConditionItem -> item.isSatisfied(healthStatus, listOf())
+                is TriageStatusConditionItem -> item.isSatisfied(triageStatus, listOf())
             }
         }
     }

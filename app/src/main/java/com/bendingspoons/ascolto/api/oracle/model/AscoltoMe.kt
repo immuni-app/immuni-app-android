@@ -1,8 +1,6 @@
 package com.bendingspoons.ascolto.api.oracle.model
 
-import com.bendingspoons.ascolto.db.entity.Gender
 import com.bendingspoons.ascolto.models.User
-import com.bendingspoons.ascolto.models.survey.HealthStatus
 import com.bendingspoons.oracle.api.model.OracleMe
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
