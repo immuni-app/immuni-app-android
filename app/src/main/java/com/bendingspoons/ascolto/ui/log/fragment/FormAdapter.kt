@@ -12,9 +12,7 @@ class FormAdapter(val survey: Survey?, fragment: Fragment) : FragmentStateAdapte
         is PickerWidget -> PickerFieldFragment::class.java
         is MultipleChoicesWidget -> MultipleChoiceFieldFragment::class.java
         is RadioWidget -> RadioFieldFragment::class.java
-    } }.toMutableList().apply {
-        add(0, SomethingChangedFieldFragment::class.java)
-    }
+    } }.toList()
 
     override fun getItemCount(): Int = items.size
 
@@ -22,7 +20,7 @@ class FormAdapter(val survey: Survey?, fragment: Fragment) : FragmentStateAdapte
         return items[position].newInstance().apply {
             arguments = bundleOf(
                 "position" to position,
-                "questionId" to (survey?.questions?.get((position-1).coerceAtLeast(0))?.id ?: "")
+                "questionId" to (survey?.questions?.get((position).coerceAtLeast(0))?.id ?: "")
             )
         }
     }
