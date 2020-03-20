@@ -92,6 +92,12 @@ class FormFragment : Fragment() {
             }
         })
 
+        viewModel.navigateToPosition.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                viewPager.setCurrentItem(it, true)
+            }
+        })
+
         viewModel.navigateToPrevPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 onBackPressed()
