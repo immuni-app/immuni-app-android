@@ -7,9 +7,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class ProfileAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     var items: List<Class<out ProfileContentFragment>> = listOf(
-        NameFragment::class.java,
+        //NameFragment::class.java,
         AgeFragment::class.java,
-        GenderFragment::class.java
+        GenderFragment::class.java,
+        GeolocationPermissionsFragment::class.java
     )
 
     override fun getItemCount(): Int = items.size
