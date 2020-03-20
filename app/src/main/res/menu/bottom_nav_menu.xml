@@ -18,10 +18,8 @@
         android:icon="@drawable/ic_tab_family"
         android:title="@string/family_tab" />
 
-    <!--
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_tab_settings"
         android:title="@string/settings_tab" />
--->
 </menu>

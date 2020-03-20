@@ -47,10 +47,10 @@ class HomeActivity : AscoltoActivity()  {
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
-        val navGraphIds = listOf(R.navigation.home, R.navigation.family)
-        val menuItemsIds = listOf(R.id.home, R.id.family)
-        val defaultIconsIds = listOf(R.drawable.ic_tab_home, R.drawable.ic_tab_family)
-        val selectedIconsIds = listOf(R.drawable.ic_tab_home_selected, R.drawable.ic_tab_family_selected)
+        val navGraphIds = listOf(R.navigation.home, R.navigation.family, R.navigation.settings)
+        val menuItemsIds = listOf(R.id.home, R.id.family, R.id.settings)
+        val defaultIconsIds = listOf(R.drawable.ic_tab_home, R.drawable.ic_tab_family, R.drawable.ic_tab_settings)
+        val selectedIconsIds = listOf(R.drawable.ic_tab_home_selected, R.drawable.ic_tab_family_selected, R.drawable.ic_tab_settings_selected)
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(
