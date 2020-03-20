@@ -5,18 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.AscoltoApplication
-import com.bendingspoons.ascolto.OnboardingDirections
 import com.bendingspoons.ascolto.R
-import com.bendingspoons.ascolto.ui.home.HomeActivity
+import com.bendingspoons.ascolto.ui.dialog.AddFamilyMemberActivity
 import com.bendingspoons.ascolto.ui.home.HomeSharedViewModel
 import com.bendingspoons.ascolto.ui.log.LogActivity
-import com.bendingspoons.ascolto.ui.log.LogViewModel
-import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.log_choose_person_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -32,6 +28,11 @@ class HomeFragment : Fragment() {
         //}
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.onHomeResumed()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,13 +46,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        /*
-        viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer {
+        viewModel.showAddFamilyMemberDialog.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                goToMainActivity()
+                showAddFamilyMemberDialog()
             }
         })
-        */
 
         next.setOnClickListener {
             val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java).apply {
@@ -59,5 +58,12 @@ class HomeFragment : Fragment() {
             }
             activity?.startActivity(intent)
         }
+    }
+
+    private fun showAddFamilyMemberDialog() {
+        val intent = Intent(AscoltoApplication.appContext, AddFamilyMemberActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
     }
 }

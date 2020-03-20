@@ -58,6 +58,12 @@
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.dialog.AddFamilyMemberActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

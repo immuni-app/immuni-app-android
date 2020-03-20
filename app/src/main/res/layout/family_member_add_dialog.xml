@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true"
+    android:background="#4D000000"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,7 +13,7 @@
         android:background="@color/background">
 
         <Button
-            android:id="@+id/noButton"
+            android:id="@+id/goAhead"
             style="@style/RoundedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -27,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/next"
+            android:id="@+id/addMember"
             style="@style/RoundedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -35,18 +36,17 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
             android:text="@string/add_family_member_yes_button"
-            app:layout_constraintBottom_toTopOf="@+id/noButton"
+            app:layout_constraintBottom_toTopOf="@+id/goAhead"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/grandma_illustration" />
@@ -72,6 +72,7 @@
             style="@style/P1Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
@@ -79,12 +80,11 @@
             android:maxLines="4"
             android:text="@string/old_people_in_family_description"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@+id/noButton"
+            app:layout_constraintBottom_toTopOf="@+id/addMember"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintVertical_bias="0.07999998" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <ImageView
             android:id="@+id/back"
