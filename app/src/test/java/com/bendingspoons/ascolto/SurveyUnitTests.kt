@@ -12,6 +12,7 @@ class SurveyUnitTests {
     val surveyJson: String = """
         {
             "version": "20200319",
+            "logic_version": "20200319",
             "questions": [
                 {
                     "id": "question1",
@@ -569,6 +570,7 @@ class SurveyUnitTests {
 
         val survey = Survey(
             version = "20200319",
+            logicVersion = "20200320",
             questions = listOf(
                 question1,
                 question2,
