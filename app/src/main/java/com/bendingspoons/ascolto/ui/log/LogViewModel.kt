@@ -5,6 +5,7 @@ import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.ascolto.api.oracle.model.getSettingsSurvey
 import com.bendingspoons.ascolto.db.AscoltoDatabase
+import com.bendingspoons.ascolto.models.survey.Answer
 import com.bendingspoons.ascolto.models.survey.Survey
 import com.bendingspoons.ascolto.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
@@ -70,6 +71,16 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
         handle.set(STATE_KEY, model)
     }
 
+    fun saveAnswer(questionId: String, answer: Answer) {
+        formModel.value?.answers?.put(questionId, answer)
+        handle.set(STATE_KEY, formModel.value)
+    }
+
+    fun resetAnswers() {
+        formModel.value?.answers?.clear()
+        handle.set(STATE_KEY, formModel.value)
+    }
+
     fun formModel(): FormModel? {
         return formModel.value
     }
@@ -96,7 +107,6 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
             _navigateToMainPage.value = Event(true)
         }
     }
-
 
     companion object {
         const val STATE_KEY = "STATE_KEY"

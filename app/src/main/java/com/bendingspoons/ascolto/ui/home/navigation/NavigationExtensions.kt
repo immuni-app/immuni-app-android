@@ -20,11 +20,13 @@ import android.content.Intent
 import android.util.SparseArray
 import androidx.core.util.forEach
 import androidx.core.util.set
+import androidx.core.view.iterator
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.bendingspoons.ascolto.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 /**
@@ -34,6 +36,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  */
 fun BottomNavigationView.setupWithNavController(
     navGraphIds: List<Int>,
+    menuItemsIds: List<Int>,
+    defaultIconsIds: List<Int>,
+    selectedIconsIds: List<Int>,
     fragmentManager: FragmentManager,
     containerId: Int,
     intent: Intent
@@ -85,6 +90,12 @@ fun BottomNavigationView.setupWithNavController(
 
     // When a navigation item is selected
     setOnNavigationItemSelectedListener { item ->
+
+        this.menu.iterator().forEach { it ->
+            it.setIcon(defaultIconsIds[menuItemsIds.indexOf(it.itemId)])
+        }
+
+        item.setIcon(selectedIconsIds[menuItemsIds.indexOf(item.itemId)])
 
         // notify the current visible fragment it is going to be hidden
         val navHostFragment = fragmentManager.primaryNavigationFragment as? NavHostFragment
@@ -140,7 +151,7 @@ fun BottomNavigationView.setupWithNavController(
     }
 
     // Optional: on item reselected, pop back stack to the destination of the graph
-    setupItemReselected(graphIdToTagMap, fragmentManager)
+    setupItemReselected(menuItemsIds, defaultIconsIds, selectedIconsIds, graphIdToTagMap, fragmentManager)
 
     // Handle deep link
     setupDeepLinks(navGraphIds, fragmentManager, containerId, intent)
@@ -187,10 +198,20 @@ private fun BottomNavigationView.setupDeepLinks(
 }
 
 private fun BottomNavigationView.setupItemReselected(
+    menuItemsIds: List<Int>,
+    defaultIconsIds: List<Int>,
+    selectedIconsIds: List<Int>,
     graphIdToTagMap: SparseArray<String>,
     fragmentManager: FragmentManager
 ) {
     setOnNavigationItemReselectedListener { item ->
+
+        this.menu.iterator().forEach { it ->
+            it.setIcon(defaultIconsIds[menuItemsIds.indexOf(it.itemId)])
+        }
+
+        item.setIcon(selectedIconsIds[menuItemsIds.indexOf(item.itemId)])
+
         val newlySelectedItemTag = graphIdToTagMap[item.itemId]
         val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
             as NavHostFragment

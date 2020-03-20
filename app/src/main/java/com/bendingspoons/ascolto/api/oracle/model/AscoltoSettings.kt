@@ -22,6 +22,7 @@ fun getSettingsSurvey(): RawSurvey? {
 val surveyJson: String = """
         {
             "version": "20200319",
+            "logic_version": "20200319",
             "questions": [
                 {
                     "id": "question1",

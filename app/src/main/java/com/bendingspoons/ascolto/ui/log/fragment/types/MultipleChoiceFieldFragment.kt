@@ -7,6 +7,7 @@ import android.widget.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.models.survey.CompositeAnswer
 import com.bendingspoons.ascolto.models.survey.MultipleChoicesWidget
 import com.bendingspoons.ascolto.models.survey.Survey
 import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
@@ -55,7 +56,7 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
         widget.answers.forEachIndexed { index, answer ->
             items.apply {
                 add(CheckBox(context).apply {
-                    tag = "$index"
+                    tag = index
                     text = answer
                     val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
                     typeface = tf
@@ -73,10 +74,18 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
         multipleChoiceGroup.apply {
             items.forEach { addView(it) }
         }
+
+        formModel()?.let {
+            onFormModelUpdate(it)
+        }
     }
 
     override fun onFormModelUpdate(model: FormModel) {
-
+        model.answers[questionId]?.let {
+            (it as CompositeAnswer).componentIndexes.forEach { index ->
+                items.find { (it.tag as Int) == index }?.isChecked = true
+            }
+        }
     }
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
@@ -90,8 +99,13 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
         valid = valid && count >= minimumAnswer && count <= maximumAnswer
 
         nextButton.isEnabled = valid
+        if(valid) saveData()
         return valid
     }
 
+    private fun saveData() {
+        val indexes = items.filter { it.isChecked }.mapNotNull { it.tag as? Int }
+        viewModel.saveAnswer(questionId, CompositeAnswer(indexes))
+    }
 
 }

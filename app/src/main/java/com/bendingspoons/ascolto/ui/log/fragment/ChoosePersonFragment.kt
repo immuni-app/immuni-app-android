@@ -56,6 +56,7 @@ class ChoosePersonFragment : Fragment() {
         })
 
         next.setOnClickListener {
+            viewModel.resetAnswers()
             val action = ChoosePersonFragmentDirections.actionGlobalForm()
             findNavController().navigate(action)
         }

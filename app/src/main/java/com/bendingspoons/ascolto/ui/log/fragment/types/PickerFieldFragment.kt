@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.models.survey.CompositeAnswer
 import com.bendingspoons.ascolto.models.survey.PickerWidget
 import com.bendingspoons.ascolto.models.survey.Survey
 import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
@@ -37,6 +38,8 @@ class PickerFieldFragment: FormContentFragment(R.layout.form_picker_field) {
         viewModel.survey.observe(viewLifecycleOwner, Observer {
             buildWidget(it)
         })
+
+        nextButton.isEnabled = true
     }
 
     private fun buildWidget(it: Survey) {
@@ -52,7 +55,7 @@ class PickerFieldFragment: FormContentFragment(R.layout.form_picker_field) {
         widget.components.forEachIndexed { index, picker ->
             items.apply {
                 add(NumberPicker(context).apply {
-                    tag = "$index"
+                    tag = index
                     // IMPORTANT! setMinValue to 1 and call setDisplayedValues after setMinValue and setMaxValue
                     val data = picker.toTypedArray()
                     minValue = 1
@@ -72,15 +75,31 @@ class PickerFieldFragment: FormContentFragment(R.layout.form_picker_field) {
         pickerGroup.apply {
             items.forEach { addView(it) }
         }
+
+        formModel()?.let {
+            onFormModelUpdate(it)
+        }
     }
 
     override fun onFormModelUpdate(model: FormModel) {
-
+        model.answers[questionId]?.let {
+            (it as CompositeAnswer).componentIndexes.forEachIndexed { pickerIndex, valueIndex ->
+                if(items.size > pickerIndex) {
+                    items[pickerIndex].value = valueIndex
+                }
+            }
+        }
     }
 
     override fun validate(): Boolean {
         val valid = true
         nextButton.isEnabled = valid
+        if(valid) saveData()
         return valid
+    }
+
+    private fun saveData() {
+        val indexes = items.map { it.value }
+        viewModel.saveAnswer(questionId, CompositeAnswer(indexes))
     }
 }
