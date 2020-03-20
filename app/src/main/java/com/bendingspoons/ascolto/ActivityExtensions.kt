@@ -19,17 +19,17 @@ fun FragmentActivity.loading(loading: Boolean) {
         val dialogFragment = ProgressDialogFragment()
         val ft = supportFragmentManager.beginTransaction()
 
-        val prev = supportFragmentManager.findFragmentByTag("dialog")
+        val prev = supportFragmentManager.findFragmentByTag("loading_dialog")
         if (prev != null) {
             ft.remove(prev)
         }
         ft.addToBackStack(null)
 
-        dialogFragment.show(ft, "dialog")
+        dialogFragment.show(ft, "loading_dialog")
     } else {
         val ft = supportFragmentManager.beginTransaction()
 
-        val prev = supportFragmentManager.findFragmentByTag("dialog")
+        val prev = supportFragmentManager.findFragmentByTag("loading_dialog")
         if (prev != null) {
             (prev as? DialogFragment)?.dismiss()
             ft.remove(prev)

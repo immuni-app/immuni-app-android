@@ -74,8 +74,8 @@ class FormFragment : Fragment() {
             MaterialAlertDialogBuilder(context)
                 .setTitle(getString(R.string.survey_exit_title))
                 .setMessage(getString(R.string.survey_exit_message))
-                .setPositiveButton(getString(R.string.yes)) { d, _ -> activity?.finish()}
-                .setNegativeButton(getString(R.string.no)) { d, _ -> d.dismiss()}
+                .setPositiveButton(getString(R.string.exit)) { d, _ -> activity?.finish()}
+                .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss()}
                 .setOnCancelListener {  }
                 .show()
         }

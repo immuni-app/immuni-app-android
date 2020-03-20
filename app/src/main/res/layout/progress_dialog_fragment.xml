@@ -3,13 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#4D3F4A73"
     android:orientation="vertical" >
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:indeterminateTint="@color/colorAccent"
-        style="?android:attr/progressBarStyle"
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/background"
+        android:background="@drawable/rounded_corners_9dp"
+        android:padding="32dp"
+        >
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:indeterminateTint="@color/colorAccent"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 </LinearLayout>

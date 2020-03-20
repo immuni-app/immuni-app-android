@@ -40,65 +40,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_corners_20dp"
-        android:backgroundTint="@color/background"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintWidth_max="315dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
-
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
-
-            android:layout_weight="1"
-            android:src="@drawable/ic_avatar_female_purple"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            style="@style/H2SubHeading"
-            android:fontFamily="@font/euclid_circular_bold"
-            android:gravity="center_horizontal|bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="2dp"
-            android:text="Tu" />
-
-        <TextView
-            android:layout_weight="1"
-            style="@style/P1Text"
-            android:fontFamily="@font/euclid_circular_bold"
-            android:gravity="center_horizontal|top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="24dp"
-            android:text="26 anni" />
-
-        <Button
-            android:id="@+id/next"
-            style="@style/RoundedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="START LOG"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/rounded_corners_20dp"
+            android:backgroundTint="@color/background"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintWidth_max="315dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+
+                android:layout_weight="1"
+                android:src="@drawable/ic_avatar_female_purple"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/H2SubHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="2dp"
+                android:fontFamily="@font/euclid_circular_bold"
+                android:gravity="center_horizontal|bottom"
+                android:text="Tu" />
+
+            <TextView
+                style="@style/P1Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/euclid_circular_bold"
+                android:gravity="center_horizontal|top"
+                android:text="26 anni" />
+
+            <Button
+                android:id="@+id/next"
+                style="@style/RoundedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="@string/choose_person_button_start"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
     <TextView
         android:id="@+id/textView5"
