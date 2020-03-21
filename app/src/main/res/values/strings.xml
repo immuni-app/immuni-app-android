@@ -62,4 +62,8 @@
     <string name="always_consent">Consenti sempre</string>
     <string name="you">Tu</string>
     <string name="something_changed_since_last_time">È cambiato qualcosa dall\'ultima compilazione di questo diario clinico?</string>
+    <string name="update">Aggiorna</string>
+
+    <string name="app_update_title">È disponibile una nuova versione</string>
+    <string name="app_update_message">Aggiorna l\'app per continuare</string>
 </resources>

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.bendingspoons.ascolto.R
-import com.bendingspoons.base.playStore.PlayStoreActions
 import kotlinx.android.synthetic.main.force_update_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
