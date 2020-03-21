@@ -127,7 +127,7 @@ class FormFragment : Fragment() {
             }
         })
 
-        viewModel.mainUserInfo.observe(viewLifecycleOwner, Observer {
+        viewModel.userInfo.observe(viewLifecycleOwner, Observer {
             it?.let {
                 progressText.text = when(it.isMainUser) {
                     true -> getString(R.string.your_clinic_diary)

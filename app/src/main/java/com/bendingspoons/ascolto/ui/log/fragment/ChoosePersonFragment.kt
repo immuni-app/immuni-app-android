@@ -13,7 +13,6 @@ import com.bendingspoons.ascolto.db.entity.Gender
 import com.bendingspoons.ascolto.db.entity.age
 import com.bendingspoons.ascolto.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.log_choose_person_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -41,7 +40,7 @@ class ChoosePersonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        viewModel.mainUserInfo.observe(viewLifecycleOwner, Observer {
+        viewModel.userInfo.observe(viewLifecycleOwner, Observer {
             it?.let {
                 age.text = it.age().toString()
                 name.text = when(it.isMainUser) {

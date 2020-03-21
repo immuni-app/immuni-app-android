@@ -5,12 +5,14 @@ import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.ascolto.api.oracle.model.getSettingsSurvey
 import com.bendingspoons.ascolto.db.AscoltoDatabase
+import com.bendingspoons.ascolto.db.entity.UserInfoEntity
 import com.bendingspoons.ascolto.models.survey.Answer
 import com.bendingspoons.ascolto.models.survey.Survey
 import com.bendingspoons.ascolto.models.survey.nextQuestion
 import com.bendingspoons.ascolto.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
+import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -20,15 +22,18 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
     KoinComponent {
 
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val pico: Pico by inject()
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val mainUserInfo = database.userInfoDao().getMainUserInfoLiveData()
+    var userInfo = MediatorLiveData<UserInfoEntity>()
 
     var survey = MutableLiveData<Survey>()
 
+    // internal state
     var formModel = MediatorLiveData<FormModel>()
     private var savedStateLiveData = handle.getLiveData<Serializable>(STATE_KEY)
+    // end internal state
 
     private val _navigateToDonePage = MutableLiveData<Event<Boolean>>()
     val navigateToDonePage: LiveData<Event<Boolean>>
@@ -51,7 +56,7 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
         get() = _navigateToPrevPage
 
     init {
-        // init
+        // internal state
         if(handle.get<Serializable>(STATE_KEY) != null) {
             formModel.value = handle.get<Serializable>(STATE_KEY) as FormModel
         } else formModel.value = FormModel()
@@ -59,7 +64,16 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
         formModel.addSource(savedStateLiveData) {
             formModel.value = it as? FormModel
         }
+        // end internal state
 
+        // TODO select the user for the survay (main or family member)
+        uiScope.launch {
+            val allUsers = database.userInfoDao().getFamilyMembersUserInfo()
+            //TODO use the logic to choose the correct user
+            userInfo.value = database.userInfoDao().getMainUserInfo()
+        }
+
+        // TODO load current survey from settings
         survey.value = getSettingsSurvey()?.survey()!!
     }
 
@@ -116,22 +130,27 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
     fun onLogComplete() {
         //val userInfo = partialUserInfo.value!!
         uiScope.launch {
+            // TODO this are the survey data
+            val surveyVersion = survey.value!!.version
+            val userId = userInfo.value!!.id
+            val answers = formModel.value!!.answers.filterKeys { questionId ->
+                questionId in formModel.value!!.questionsOrdered
+            }
+            // TODO send to Pico
             /*
-            database.userInfoDao().insert(
-                UserInfoEntity(
-                    name = userInfo.name!!,
-                    fitnessLevel = userInfo.fitnessLevel!!,
-                    totalLevelWorkoutTime = userInfo.totalLevelWorkoutTime!!,
-                    birthDate = userInfo.birthDate!!,
-                    height = userInfo.height!!,
-                    weight = userInfo.weight!!,
-                    targetWeight = userInfo.targetWeight!!,
-                    gender = userInfo.gender!!
+            pico.trackUserAction(
+                "survey",
+                    "user_id" to userId,
+                    "version" to surveyVersion,
+                    "answers" to answers  // TODO check correct serialization of Answer, or do custom list
                 )
-            )
-
              */
+
+            // TODO do we need to store the data in local database too?
+            // At least the last user timestamp
             delay(2000)
+
+            // TODO now choose another family member to do the survet, or go home if there is not
             _navigateToMainPage.value = Event(true)
         }
     }
