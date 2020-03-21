@@ -38,6 +38,19 @@ val surveyJson: String = """
                     }
                 },
                 {
+                                    "id": "question1a",
+                                    "title": "Come stai b  ?",
+                                    "description": "Dimmi se stai bene o male",
+                                    "frequency": 0,
+                                    "widget": {
+                                        "type": "radio",
+                                        "answers": [
+                                            "Bene",
+                                            "Male"
+                                        ]
+                                    }
+                                },
+                {
                     "id": "question2",
                     "title": "Che sintomi hai?",
                     "description": "Dimmi che sintomi hai",
@@ -241,7 +254,20 @@ val surveyJson: String = """
                             "No"
                         ]
                     }
-                }
+                },
+                {
+                                    "id": "question1z",
+                                    "title": "Come stai?",
+                                    "description": "Dimmi se stai bene o male",
+                                    "frequency": 0,
+                                    "widget": {
+                                        "type": "radio",
+                                        "answers": [
+                                            "Bene",
+                                            "Male"
+                                        ]
+                                    }
+                                }
             ],
             "triage": {
                 "statuses": [

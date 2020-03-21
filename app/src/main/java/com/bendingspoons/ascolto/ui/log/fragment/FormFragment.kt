@@ -24,6 +24,7 @@ class FormFragment : Fragment() {
 
     private lateinit var viewModel: LogViewModel
     private lateinit var pageChangeCallback: ViewPager2.OnPageChangeCallback
+    lateinit var listAdapter: FormAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +52,6 @@ class FormFragment : Fragment() {
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                progress.setStep(position + 1, viewPager.adapter?.itemCount?:1)
             }
 
             override fun onPageScrolled(
@@ -60,9 +60,9 @@ class FormFragment : Fragment() {
                 positionOffsetPixels: Int
             ) {}
         }
-
+        listAdapter = FormAdapter(viewModel.survey.value, this@FormFragment)
         with(viewPager) {
-            adapter = FormAdapter(viewModel.survey.value, this@FormFragment)
+            adapter = listAdapter
             clipToPadding = false
             clipChildren = false
             isUserInputEnabled = false
@@ -80,9 +80,12 @@ class FormFragment : Fragment() {
                 .show()
         }
 
+
         viewModel.navigateToNextPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
+                toast("ON NEXT PAGE GO")
                 val newPos = viewPager.currentItem + 1
+
                 if(newPos ==  (viewPager.adapter?.itemCount ?: 0)) {
                     val action = FormFragmentDirections.actionGlobalFormDone()
                     findNavController().navigate(action)
@@ -92,13 +95,33 @@ class FormFragment : Fragment() {
             }
         })
 
-        viewModel.navigateToPosition.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToDonePage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                viewPager.setCurrentItem(it, true)
+                val action = FormFragmentDirections.actionGlobalFormDone()
+                findNavController().navigate(action)
             }
         })
 
+        viewModel.navigateToQuestion.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                toast("GO $it")
+                // add the new fragment to adapter
+                listAdapter.addNextWidget(it)
+                listAdapter.notifyDataSetChanged()
+
+                // navigate there
+                val newPos = viewPager.currentItem + 1
+                viewPager.setCurrentItem(newPos, true)
+            }
+        })
+
+
         viewModel.navigateToPrevPage.observe(viewLifecycleOwner, Observer {
+
+            // add the new fragment to adapter
+            //listAdapter.addPrevWidget("question$i")
+            //listAdapter.notifyDataSetChanged()
+
             it.getContentIfNotHandled()?.let {
                 onBackPressed()
             }

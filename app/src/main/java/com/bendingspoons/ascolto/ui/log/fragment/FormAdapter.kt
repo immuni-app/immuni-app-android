@@ -8,19 +8,42 @@ import com.bendingspoons.ascolto.ui.log.fragment.types.*
 
 class FormAdapter(val survey: Survey?, fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-    var items: List<Class<out FormContentFragment>> = (survey?.questions ?: listOf()).map { when(it.widget) {
+    /*
+    var items: MutableList<Class<out FormContentFragment>> = (survey?.questions ?: listOf()).map { when(it.widget) {
         is PickerWidget -> PickerFieldFragment::class.java
         is MultipleChoicesWidget -> MultipleChoiceFieldFragment::class.java
         is RadioWidget -> RadioFieldFragment::class.java
-    } }.toList()
+    } }.toMutableList()
 
-    override fun getItemCount(): Int = items.size
+     */
+
+    // initialize with only the first question
+    var questionIds: MutableList<String> = mutableListOf(survey?.questions?.map{ it.id }?.first()!!)
+
+    fun addNextWidget(questionId: String) {
+        val index = questionIds.indexOf(questionId)
+        if(index != -1) {
+            questionIds = questionIds.subList(0, index)
+        }
+        questionIds.apply {
+            add(questionId)
+        }
+    }
+
+    override fun getItemCount(): Int = questionIds.size
 
     override fun createFragment(position: Int): Fragment {
-        return items[position].newInstance().apply {
+
+        val question = (survey?.questions ?: listOf()).find { it.id == questionIds[position] }!!
+
+        return when(question.widget) {
+            is PickerWidget -> PickerFieldFragment()
+            is MultipleChoicesWidget -> MultipleChoiceFieldFragment()
+            is RadioWidget -> RadioFieldFragment()
+        }.apply {
             arguments = bundleOf(
                 "position" to position,
-                "questionId" to (survey?.questions?.get((position).coerceAtLeast(0))?.id ?: "")
+                "questionId" to question.id
             )
         }
     }

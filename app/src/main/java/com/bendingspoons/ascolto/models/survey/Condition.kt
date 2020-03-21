@@ -1,7 +1,7 @@
 package com.bendingspoons.ascolto.models.survey
 
 typealias QuestionAnswers = List<Answer>
-typealias SurveyAnswers = Map<QuestionId, QuestionAnswers>
+typealias SurveyAnswers = MutableMap<QuestionId, QuestionAnswers>
 
 class SimpleConditionItem(
     val questionId: QuestionId,

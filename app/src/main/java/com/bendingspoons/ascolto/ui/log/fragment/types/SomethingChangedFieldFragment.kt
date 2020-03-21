@@ -33,7 +33,7 @@ class SomethingChangedFieldFragment: FormContentFragment(R.layout.form_something
         next.setOnClickListener(null)
         next.setOnClickListener {
             if(yes.isChecked) {
-                viewModel.onNextTap()
+                viewModel.onNextTap(null)
             } else {
                 toast("NO decide what to do next")
             }

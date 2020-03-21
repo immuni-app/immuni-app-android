@@ -7,6 +7,7 @@ import com.bendingspoons.ascolto.api.oracle.model.getSettingsSurvey
 import com.bendingspoons.ascolto.db.AscoltoDatabase
 import com.bendingspoons.ascolto.models.survey.Answer
 import com.bendingspoons.ascolto.models.survey.Survey
+import com.bendingspoons.ascolto.models.survey.nextQuestion
 import com.bendingspoons.ascolto.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
@@ -29,13 +30,17 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
     var formModel = MediatorLiveData<FormModel>()
     private var savedStateLiveData = handle.getLiveData<Serializable>(STATE_KEY)
 
+    private val _navigateToDonePage = MutableLiveData<Event<Boolean>>()
+    val navigateToDonePage: LiveData<Event<Boolean>>
+        get() = _navigateToDonePage
+
     private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
     val navigateToMainPage: LiveData<Event<Boolean>>
         get() = _navigateToMainPage
 
-    private val _navigateToPosition = MutableLiveData<Event<Int>>()
-    val navigateToPosition: LiveData<Event<Int>>
-        get() = _navigateToPosition
+    private val _navigateToQuestion = MutableLiveData<Event<String>>()
+    val navigateToQuestion: LiveData<Event<String>>
+        get() = _navigateToQuestion
 
     private val _navigateToNextPage = MutableLiveData<Event<Boolean>>()
     val navigateToNextPage: LiveData<Event<Boolean>>
@@ -58,12 +63,30 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
         survey.value = getSettingsSurvey()?.survey()!!
     }
 
-    fun onNextTap() {
-        _navigateToNextPage.value = Event(true)
-        //_navigateToPosition.value = Event(4)
+    fun onNextTap(questionId: String?) {
+        if(questionId != null) {
+            // override current if any and delete ahead
+            formModel.value?.addQuestion(questionId)
+            handle.set(STATE_KEY, formModel.value)
+
+            // 1 check the next question to be shown
+            val answers = mutableMapOf<String, List<Answer>>()
+            formModel.value?.answers?.keys?.forEach { i ->
+                answers.put(i, listOf(formModel.value?.answers?.get(i)!!))
+            }
+            val nextQuestion = survey.value?.nextQuestion(questionId, answers)
+            // 2 check if should stop survey or finish
+            if (nextQuestion == null) {
+                _navigateToDonePage.value = Event(true)
+            } else {
+                _navigateToQuestion.value = Event(nextQuestion.id)
+            }
+        } else {
+            _navigateToNextPage.value = Event(true)
+        }
     }
 
-    fun onPrevTap() {
+    fun onPrevTap(questionId: String) {
         _navigateToPrevPage.value = Event(true)
     }
 
@@ -77,7 +100,7 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
     }
 
     fun saveAnswer(questionId: String, answer: Answer) {
-        formModel.value?.answers?.put(questionId, answer)
+        formModel.value?.addAnswer(questionId, answer)
         handle.set(STATE_KEY, formModel.value)
     }
 

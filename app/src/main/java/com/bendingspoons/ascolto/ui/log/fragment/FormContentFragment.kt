@@ -44,11 +44,11 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
         })
 
         nextButton.setOnClickListener {
-            viewModel.onNextTap()
+            viewModel.onNextTap(questionId)
         }
 
         prevButton.setOnClickListener {
-            viewModel.onPrevTap()
+            viewModel.onPrevTap(questionId)
         }
     }
 

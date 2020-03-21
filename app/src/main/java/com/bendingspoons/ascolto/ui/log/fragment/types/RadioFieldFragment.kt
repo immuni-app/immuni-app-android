@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.models.survey.CompositeAnswer
 import com.bendingspoons.ascolto.models.survey.RadioWidget
+import com.bendingspoons.ascolto.models.survey.SimpleAnswer
 import com.bendingspoons.ascolto.models.survey.Survey
 import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
 import com.bendingspoons.ascolto.ui.log.model.FormModel
@@ -82,10 +83,8 @@ class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnChec
     }
 
     override fun onFormModelUpdate(model: FormModel) {
-        model.answers[questionId]?.let {
-            (it as CompositeAnswer).componentIndexes.forEach { index ->
-                items.find { (it.tag as Int) == index }?.isChecked = true
-            }
+        model.answers[questionId]?.let { answer ->
+            items.find { (it.tag as Int) == (answer as SimpleAnswer).index }?.isChecked = true
         }
     }
 
@@ -98,6 +97,6 @@ class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnChec
 
     private fun saveData() {
         val indexes = items.filter { it.isChecked }.mapNotNull { it.tag as? Int }
-        viewModel.saveAnswer(questionId, CompositeAnswer(indexes))
+        viewModel.saveAnswer(questionId, SimpleAnswer(indexes[0]))
     }
 }
