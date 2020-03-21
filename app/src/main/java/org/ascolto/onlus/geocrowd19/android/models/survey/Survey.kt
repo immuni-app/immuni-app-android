@@ -31,7 +31,7 @@ data class Survey(
     ): SurveyNextDestination {
         val currentQuestion = questions.first { it.id == questionId }
         val currentPosition = questions.indexOf(currentQuestion)
-        val nextQuestions = questions.takeLast(questions.size - currentPosition)
+        val nextQuestions = questions.takeLast(questions.size - currentPosition - 1)
 
         val jumpDestination = currentQuestion.jump(
             healthState = healthState,
