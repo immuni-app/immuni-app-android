@@ -10,13 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.AscoltoApplication
 import com.bendingspoons.ascolto.R
-import com.bendingspoons.ascolto.ui.dialog.AddFamilyMemberActivity
+import com.bendingspoons.ascolto.ui.dialog.AddFamilyMemberDialog
+import com.bendingspoons.ascolto.ui.dialog.GeolocationDisabledDialog
+import com.bendingspoons.ascolto.ui.dialog.NotificationsDisabledDialog
 import com.bendingspoons.ascolto.ui.dialog.WebViewActivity
 import com.bendingspoons.ascolto.ui.home.HomeSharedViewModel
 import com.bendingspoons.ascolto.ui.log.LogActivity
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.log_choose_person_fragment.*
 import kotlinx.android.synthetic.main.log_choose_person_fragment.next
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -69,12 +70,21 @@ class HomeFragment : Fragment() {
             }
             activity?.startActivity(intent)
         }
+
+        geolocation.setOnClickListener {
+            GeolocationDisabledDialog().show(childFragmentManager, "geolocation_diabled_dialog")
+        }
+
+        notifications.setOnClickListener {
+            NotificationsDisabledDialog().show(childFragmentManager, "notification_diabled_dialog")
+        }
+
+        addMembers.setOnClickListener {
+            showAddFamilyMemberDialog()
+        }
     }
 
     private fun showAddFamilyMemberDialog() {
-        val intent = Intent(AscoltoApplication.appContext, AddFamilyMemberActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        activity?.startActivity(intent)
+        AddFamilyMemberDialog().show(childFragmentManager, "add_family_member")
     }
 }

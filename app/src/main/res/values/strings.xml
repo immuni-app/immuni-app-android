@@ -68,4 +68,5 @@
     <string name="app_update_title">È disponibile una nuova versione</string>
     <string name="app_update_message">Aggiorna l\'app per continuare</string>
     <string name="compile_for_message">Stai per effettuare la compilazione per conto di</string>
+    <string name="open_settings">Apri le impostazioni</string>
 </resources>

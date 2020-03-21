@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true"
+    android:background="#4D000000"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,44 +12,19 @@
         android:layout_height="match_parent"
         android:background="@color/background">
 
+
         <Button
-            android:id="@+id/goAhead"
+            android:id="@+id/button"
             style="@style/RoundedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:text="@string/next"
-            android:textColor="@color/p1_text"
-            android:backgroundTint="@color/background"
+            android:text="@string/open_settings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/addMember"
-            style="@style/RoundedButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/add_family_member_yes_button"
-            app:layout_constraintBottom_toTopOf="@+id/goAhead"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/grandma_illustration" />
 
         <TextView
             android:id="@+id/textView"
@@ -59,12 +35,12 @@
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:maxLines="2"
-            android:text="@string/old_people_in_family_title"
+            android:text="abilita localizzazione"
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/back" />
 
         <TextView
             android:id="@+id/textView2"
@@ -77,9 +53,9 @@
             android:layout_marginBottom="32dp"
             android:gravity="center"
             android:maxLines="4"
-            android:text="@string/old_people_in_family_description"
+            android:text="abilita localizzazione"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@+id/addMember"
+            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

@@ -42,4 +42,5 @@
     <color name="onboarding_progress_background">#ECECEC</color>
     <color name="picker_divider_color">#33B7B7B7</color>
     <color name="home_background">#F9F9FF</color>
+    <color name="dialog_status_bar_color">#66000000</color>
 </resources>
