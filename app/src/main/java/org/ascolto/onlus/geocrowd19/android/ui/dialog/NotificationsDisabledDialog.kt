@@ -23,49 +23,26 @@ import kotlinx.android.synthetic.main.enable_notifications_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 
 
-class NotificationsDisabledDialog: BottomSheetDialogFragment()  {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
-        //setStyle(STYLE_NO_FRAME, R.style.AppTheme)
-    }
+class NotificationsDisabledDialog: FullScreenBottomSheetDialogFragment()  {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return inflater.inflate(R.layout.enable_notifications_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dialog?.setOnShowListener { dialog ->
-            val d = dialog as BottomSheetDialog
-            val bottomSheet = d.findViewById<View>(R.id.design_bottom_sheet) as FrameLayout
-            val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            bottomSheetBehavior.peekHeight = bottomSheet.height
-        }
 
         button.setOnClickListener {
             openNotificationSettings()
-        }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dialog?.window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            dialog?.window?.statusBarColor = resources.getColor(R.color.dialog_status_bar_color)
         }
 
         back.setOnClickListener {
             dismiss()
         }
-
     }
 
     private fun openNotificationSettings() {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
@@ -13,7 +14,7 @@ import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.AddFamilyMemberDialog
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDisabledDialog
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDisabledDialog
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewActivity
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialog
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
@@ -64,11 +65,9 @@ class HomeFragment : Fragment() {
         }
 
         webViewButton.setOnClickListener {
-            val intent = Intent(AscoltoApplication.appContext, WebViewActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                putExtra("url", "https://www.google.com")
-            }
-            activity?.startActivity(intent)
+            WebViewDialog().apply {
+                arguments = bundleOf("url" to "https://www.google.com")
+            }.show(childFragmentManager, "webview_dialog")
         }
 
         geolocation.setOnClickListener {
