@@ -17,7 +17,6 @@ class AscoltoPicoConfiguration(val context: Context): PicoConfiguration, KoinCom
 
     val concierge: ConciergeManager by inject()
     val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
-    val sesame: Sesame by inject()
     val adjust: Adjust by inject()
 
     override fun endpoint(): String {
@@ -37,7 +36,7 @@ class AscoltoPicoConfiguration(val context: Context): PicoConfiguration, KoinCom
     }
 
     override fun sesame(): Sesame {
-        return sesame
+        return Sesame(PicoSesameConfiguration())
     }
 
     override fun additionalMonetizationInfo(): Map<String, Any> {

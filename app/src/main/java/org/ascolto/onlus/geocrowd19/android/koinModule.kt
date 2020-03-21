@@ -78,10 +78,6 @@ val appModule = module {
         Theirs(androidContext(), AscoltoTheirsConfiguration())
     }
 
-    single {
-        Sesame(AscoltoSesameConfiguration())
-    }
-
     // Pico - Lib
     single {
         Pico(androidContext(), AscoltoPicoConfiguration(androidContext()))

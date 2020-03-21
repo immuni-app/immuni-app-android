@@ -6,6 +6,7 @@ import android.util.Log
 import org.ascolto.onlus.geocrowd19.android.ui.force_update.ForceUpdateActivity
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.OracleConfiguration
+import com.bendingspoons.sesame.Sesame
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -28,5 +29,9 @@ class AscoltoOracleConfiguration(val context: Context) : OracleConfiguration, Ko
         val intent = Intent(context, ForceUpdateActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         context.startActivity(intent)
+    }
+
+    override fun sesame(): Sesame? {
+        return Sesame(OracleSesameConfiguration())
     }
 }
