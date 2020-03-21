@@ -3,37 +3,55 @@ package org.ascolto.onlus.geocrowd19.android.ui.home.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.appcompat.view.ContextThemeWrapper
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bendingspoons.base.utils.ScreenUtils
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import org.ascolto.onlus.geocrowd19.android.R
+import org.ascolto.onlus.geocrowd19.android.models.survey.Survey
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
 
 class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var items = mutableListOf<String>()
+    var items = mutableListOf<HomeItemType>()
 
     val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(false).build()
 
-    inner class ItemViewHolder(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class SurveyCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         override fun onClick(v: View) {
-            clickListener.onClick(SurveyCard())
+            clickListener.onClick(items[adapterPosition])
+        }
+    }
+
+    inner class HeaderCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v) {
+
+    }
+
+    inner class GeolocationCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+
+        override fun onClick(v: View) {
+            clickListener.onClick(items[adapterPosition])
+        }
+    }
+
+    inner class NotificationsCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+
+        override fun onClick(v: View) {
+            clickListener.onClick(items[adapterPosition])
+        }
+    }
+
+    inner class SuggestionsCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+
+        override fun onClick(v: View) {
+            clickListener.onClick(items[adapterPosition])
         }
     }
 
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
-        holder.itemView.setOnClickListener(holder as? ItemViewHolder)
+        holder.itemView.setOnClickListener(holder as? View.OnClickListener)
     }
 
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
@@ -45,7 +63,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.home_survey_card_item, parent, false)
 
-        return ItemViewHolder(v as LinearLayout)
+        return SurveyCardVH(v as LinearLayout)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {}
@@ -59,16 +77,18 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
     }
 
     override fun getItemViewType(position: Int): Int {
-        return 0
+        return when(items[position]) {
+            is SurveyCard -> 0
+            is EnableGeolocationCard -> 1
+            is EnableNotificationCard -> 2
+            is HeaderCard -> 3
+            is SuggestionsCard -> 4
+        }
     }
 
     override fun getItemCount(): Int = items.size
 }
 
 interface HomeClickListener {
-    fun onClick(item: ItemType)
+    fun onClick(item: HomeItemType)
 }
-
-sealed class ItemType
-
-class SurveyCard: ItemType()

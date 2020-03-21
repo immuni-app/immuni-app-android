@@ -24,6 +24,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.log_choose_person_fragment.next
 import org.ascolto.onlus.geocrowd19.android.toast
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.HomeItemType
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import java.lang.Math.abs
 
@@ -82,7 +83,7 @@ class HomeFragment : Fragment(), HomeClickListener {
         viewModel.listModel.observe(viewLifecycleOwner, Observer {
             (homeList.adapter as? HomeListAdapter)?.items?.apply {
                 clear()
-                addAll(it)
+                //addAll(it)
             }
 
             homeList.adapter?.notifyDataSetChanged()
@@ -93,7 +94,7 @@ class HomeFragment : Fragment(), HomeClickListener {
         AddFamilyMemberDialog().show(childFragmentManager, "add_family_member")
     }
 
-    override fun onClick(item: ItemType) {
+    override fun onClick(item: HomeItemType) {
         toast(item.toString())
     }
 }
