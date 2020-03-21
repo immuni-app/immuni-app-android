@@ -11,15 +11,13 @@ data class Survey(
 }
 
 fun Survey.nextQuestion(questionId: String, answers: SurveyAnswers): Question? {
-    val currentPosition = questions.map { it.id }.indexOf(questionId)
-    val nextQuestions = questions.filterIndexed { index, question -> index > currentPosition }
+    val currentQuestion = questions.first { it.id == questionId }
+    val currentPosition = questions.indexOf(currentQuestion)
+    val nextQuestions = questions.takeLast(questions.size - currentPosition)
 
-    nextQuestions.forEach { nextQuestion ->
-        if(nextQuestion.shouldBeShown(null, answers)) {
-            if(nextQuestion.shouldStopSurvey(null, answers)) return null
-            return  nextQuestion
-        }
+    if (currentQuestion.shouldStopSurvey(null, answers)) {
+        return null
     }
 
-    return null
+    return nextQuestions.firstOrNull { it.shouldBeShown(null, answers) }
 }

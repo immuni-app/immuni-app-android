@@ -1,15 +1,13 @@
 package org.ascolto.onlus.geocrowd19.android.ui.log
 
 import androidx.lifecycle.*
-import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
-import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
-import org.ascolto.onlus.geocrowd19.android.api.oracle.model.getSettingsSurvey
-import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
-import org.ascolto.onlus.geocrowd19.android.db.entity.UserInfoEntity
-import org.ascolto.onlus.geocrowd19.android.models.survey.Answer
-import org.ascolto.onlus.geocrowd19.android.models.survey.Survey
-import org.ascolto.onlus.geocrowd19.android.models.survey.nextQuestion
-import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
+import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
+import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
+import com.bendingspoons.ascolto.api.oracle.model.getSettingsSurvey
+import com.bendingspoons.ascolto.db.AscoltoDatabase
+import com.bendingspoons.ascolto.db.entity.UserInfoEntity
+import com.bendingspoons.ascolto.models.survey.*
+import com.bendingspoons.ascolto.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
@@ -86,7 +84,7 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
             // 1 check the next question to be shown
             val answers = mutableMapOf<String, List<Answer>>()
             formModel.value?.answers?.keys?.forEach { i ->
-                answers.put(i, listOf(formModel.value?.answers?.get(i)!!))
+                answers[i] = formModel.value?.answers?.get(i)!!
             }
             val nextQuestion = survey.value?.nextQuestion(questionId, answers)
             // 2 check if should stop survey or finish
@@ -113,8 +111,17 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
         handle.set(STATE_KEY, model)
     }
 
+    // For radio and picker widgets
     fun saveAnswer(questionId: String, answer: Answer) {
         formModel.value?.addAnswer(questionId, answer)
+        handle.set(STATE_KEY, formModel.value)
+    }
+
+    // For multiple choice widgets
+    fun saveAnswers(questionId: String, answers: QuestionAnswers) {
+        answers.forEach { answer ->
+            formModel.value?.addAnswer(questionId, answer)
+        }
         handle.set(STATE_KEY, formModel.value)
     }
 

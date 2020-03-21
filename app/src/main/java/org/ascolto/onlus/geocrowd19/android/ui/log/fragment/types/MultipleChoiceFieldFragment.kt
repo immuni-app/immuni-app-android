@@ -6,12 +6,13 @@ import android.view.View
 import android.widget.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
-import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.models.survey.CompositeAnswer
-import org.ascolto.onlus.geocrowd19.android.models.survey.MultipleChoicesWidget
-import org.ascolto.onlus.geocrowd19.android.models.survey.Survey
-import org.ascolto.onlus.geocrowd19.android.ui.log.fragment.FormContentFragment
-import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
+import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.models.survey.CompositeAnswer
+import com.bendingspoons.ascolto.models.survey.MultipleChoicesWidget
+import com.bendingspoons.ascolto.models.survey.SimpleAnswer
+import com.bendingspoons.ascolto.models.survey.Survey
+import com.bendingspoons.ascolto.ui.log.fragment.FormContentFragment
+import com.bendingspoons.ascolto.ui.log.model.FormModel
 import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.ScreenUtils
@@ -104,8 +105,7 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
     }
 
     private fun saveData() {
-        val indexes = items.filter { it.isChecked }.mapNotNull { it.tag as? Int }
-        viewModel.saveAnswer(questionId, CompositeAnswer(indexes))
+        val indexes = items.filter { it.isChecked }.map { SimpleAnswer(it.tag as Int) }
+        viewModel.saveAnswers(questionId, indexes)
     }
-
 }
