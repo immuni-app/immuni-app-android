@@ -15,6 +15,7 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.bendingspoons.ascolto.AscoltoApplication
 import com.bendingspoons.ascolto.R
+import com.bendingspoons.ascolto.managers.GeolocationManager
 import com.bendingspoons.ascolto.toast
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -22,6 +23,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.enable_notifications_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
+import org.koin.android.ext.android.inject
 
 
 class GeolocationDisabledDialog: BottomSheetDialogFragment()  {
@@ -53,6 +55,8 @@ class GeolocationDisabledDialog: BottomSheetDialogFragment()  {
 
         button.setOnClickListener {
             openAppSettings()
+            //val geolocationManager: GeolocationManager by inject()
+            //geolocationManager.requestPermissions(activity = activity as AppCompatActivity)
         }
     }
 
