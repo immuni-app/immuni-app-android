@@ -49,6 +49,7 @@
     <string name="onboarding_male">Maschio</string>
 
     <string name="choose_person_bottom_message">Ti chiederemo di effettuare la compilazione per tutti i tuoi familiari in successione</string>
+    <string name="choose_person_bottom_message_members">Ti chiederemo di effettuare la compilazione in sucessione per tutti i profili che hai registrato</string>
 
     <string name="compile_your_clinical_diary">Compila il diario clinico</string>
     <string name="choose_person_button_start">Inizia</string>
@@ -66,4 +67,5 @@
 
     <string name="app_update_title">È disponibile una nuova versione</string>
     <string name="app_update_message">Aggiorna l\'app per continuare</string>
+    <string name="compile_for_message">Stai per effettuare la compilazione per conto di</string>
 </resources>

@@ -12,7 +12,9 @@ import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.db.entity.Gender
 import com.bendingspoons.ascolto.db.entity.age
 import com.bendingspoons.ascolto.ui.log.LogViewModel
+import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
+import com.bendingspoons.base.extensions.visible
 import kotlinx.android.synthetic.main.log_choose_person_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -51,6 +53,17 @@ class ChoosePersonFragment : Fragment() {
                     Gender.FEMALE -> R.drawable.ic_avatar_female_purple
                     Gender.MALE -> R.drawable.ic_avatar_female_purple
                 })
+
+                when(it.isMainUser) {
+                    true -> {
+                        compileFor.gone()
+                        compileFor.text = getString(R.string.choose_person_bottom_message)
+                    }
+                    false -> {
+                        compileFor.visible()
+                        compileFor.text = getString(R.string.choose_person_bottom_message_members)
+                    }
+                }
             }
         })
 

@@ -11,10 +11,13 @@ import androidx.lifecycle.Observer
 import com.bendingspoons.ascolto.AscoltoApplication
 import com.bendingspoons.ascolto.R
 import com.bendingspoons.ascolto.ui.dialog.AddFamilyMemberActivity
+import com.bendingspoons.ascolto.ui.dialog.WebViewActivity
 import com.bendingspoons.ascolto.ui.home.HomeSharedViewModel
 import com.bendingspoons.ascolto.ui.log.LogActivity
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.log_choose_person_fragment.*
+import kotlinx.android.synthetic.main.log_choose_person_fragment.next
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class HomeFragment : Fragment() {
@@ -55,6 +58,14 @@ class HomeFragment : Fragment() {
         next.setOnClickListener {
             val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+            activity?.startActivity(intent)
+        }
+
+        webViewButton.setOnClickListener {
+            val intent = Intent(AscoltoApplication.appContext, WebViewActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra("url", "https://www.google.com")
             }
             activity?.startActivity(intent)
         }
