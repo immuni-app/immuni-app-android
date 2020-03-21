@@ -1,13 +1,13 @@
 package org.ascolto.onlus.geocrowd19.android.ui.log
 
 import androidx.lifecycle.*
-import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
-import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
-import com.bendingspoons.ascolto.api.oracle.model.getSettingsSurvey
-import com.bendingspoons.ascolto.db.AscoltoDatabase
-import com.bendingspoons.ascolto.db.entity.UserInfoEntity
-import com.bendingspoons.ascolto.models.survey.*
-import com.bendingspoons.ascolto.ui.log.model.FormModel
+import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
+import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
+import org.ascolto.onlus.geocrowd19.android.api.oracle.model.getSettingsSurvey
+import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
+import org.ascolto.onlus.geocrowd19.android.db.entity.UserInfoEntity
+import org.ascolto.onlus.geocrowd19.android.models.survey.*
+import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico

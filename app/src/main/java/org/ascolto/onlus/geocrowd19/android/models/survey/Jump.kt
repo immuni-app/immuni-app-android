@@ -1,4 +1,4 @@
-package com.bendingspoons.ascolto.models.survey
+package org.ascolto.onlus.geocrowd19.android.models.survey
 
 sealed class JumpDestination
 class QuestionJumpDestination(val questionId: QuestionId) : JumpDestination()

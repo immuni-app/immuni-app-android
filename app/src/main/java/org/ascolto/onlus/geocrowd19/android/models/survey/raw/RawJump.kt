@@ -1,6 +1,6 @@
-package com.bendingspoons.ascolto.models.survey.raw
+package org.ascolto.onlus.geocrowd19.android.models.survey.raw
 
-import com.bendingspoons.ascolto.models.survey.*
+import org.ascolto.onlus.geocrowd19.android.models.survey.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

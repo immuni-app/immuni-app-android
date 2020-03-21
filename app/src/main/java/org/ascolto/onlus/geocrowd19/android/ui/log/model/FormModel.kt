@@ -1,6 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.log.model
 
-import com.bendingspoons.ascolto.models.survey.*
+import org.ascolto.onlus.geocrowd19.android.models.survey.*
 import java.io.Serializable
 
 data class FormModel(

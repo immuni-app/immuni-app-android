@@ -1,6 +1,6 @@
-package com.bendingspoons.ascolto.models.survey
+package org.ascolto.onlus.geocrowd19.android.models.survey
 
-import com.bendingspoons.ascolto.models.survey.HealthStateUpdaterItemType.*
+import org.ascolto.onlus.geocrowd19.android.models.survey.HealthStateUpdaterItemType.*
 
 enum class HealthStateUpdaterItemType {
     ADD, REMOVE
