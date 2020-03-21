@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:601241847437:android:182d2fb8bfe3575b5d84c4",
+        "mobilesdk_app_id": "1:601241847437:android:8f4f2769d58911a55d84c4",
         "android_client_info": {
-          "package_name": "com.bendingspoons.ascolto"
+          "package_name": "org.ascolto.onlus.geocrowd19.android"
         }
       },
       "oauth_client": [

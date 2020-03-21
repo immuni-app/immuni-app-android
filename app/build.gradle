@@ -10,7 +10,7 @@ android {
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.bendingspoons.ascolto"
+        applicationId "org.ascolto.onlus.geocrowd19.android"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1

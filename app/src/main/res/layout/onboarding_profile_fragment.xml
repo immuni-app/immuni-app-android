@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progress" />
 
-    <com.bendingspoons.ascolto.ui.view.AscoltoProgressView
+    <org.ascolto.onlus.geocrowd19.android.ui.view.AscoltoProgressView
         android:id="@+id/progress"
         android:layout_width="0dp"
         android:layout_height="6dp"

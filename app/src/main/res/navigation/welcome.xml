@@ -23,7 +23,7 @@
     app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.bendingspoons.ascolto.ui.welcome.WelcomeFragment"
+        android:name="org.ascolto.onlus.geocrowd19.android.ui.welcome.WelcomeFragment"
         android:label="homeFragment"
         tools:layout="@layout/welcome_fragment"/>
 </navigation>

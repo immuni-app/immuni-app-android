@@ -23,17 +23,17 @@
     app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.bendingspoons.ascolto.ui.onboarding.fragments.PrivacyFragment"
+        android:name="org.ascolto.onlus.geocrowd19.android.ui.onboarding.fragments.PrivacyFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/onboarding_privacy_fragment"/>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.bendingspoons.ascolto.ui.onboarding.fragments.profile.ProfileFragment"
+        android:name="org.ascolto.onlus.geocrowd19.android.ui.onboarding.fragments.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/onboarding_profile_fragment"/>
     <fragment
         android:id="@+id/doneFragment"
-        android:name="com.bendingspoons.ascolto.ui.onboarding.fragments.DoneFragment"
+        android:name="org.ascolto.onlus.geocrowd19.android.ui.onboarding.fragments.DoneFragment"
         android:label="doneFragment"
         tools:layout="@layout/onboarding_done_fragment"/>
     <action

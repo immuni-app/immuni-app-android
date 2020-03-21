@@ -23,7 +23,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.bendingspoons.ascolto.ui.home.home.HomeFragment"
+        android:name="org.ascolto.onlus.geocrowd19.android.ui.home.home.HomeFragment"
         android:label="homeFragment"
         tools:layout="@layout/home_fragment"/>
 </navigation>
