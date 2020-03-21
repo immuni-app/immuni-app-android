@@ -7,14 +7,35 @@ data class Question(
     val id: QuestionId,
     val title: String,
     val description: String,
+    val widget: QuestionWidget,
     val frequency: Int,
-    val showCondition: Condition?,
-    val stopSurveyCondition: Condition?,
-    val widget: QuestionWidget
+    val showCondition: Condition,
+    val healthStateUpdater: HealthStateUpdater,
+    val jump: Jump
 ) {
-    fun shouldBeShown(triageStatus: TriageStatus?, surveyAnswers: SurveyAnswers) =
-        showCondition?.isSatisfied(triageStatus, surveyAnswers) ?: true
+    fun shouldBeShown(
+        healthState: UserHealthState,
+        triageProfile: TriageProfile?,
+        surveyAnswers: SurveyAnswers
+    ) = showCondition.isSatisfied(healthState, triageProfile, surveyAnswers)
 
-    fun shouldStopSurvey(triageStatus: TriageStatus?, answers: SurveyAnswers) =
-        stopSurveyCondition?.isSatisfied(triageStatus, answers) ?: false
+    fun updatedHealthState(
+        healthState: UserHealthState,
+        triageProfile: TriageProfile?,
+        surveyAnswers: SurveyAnswers
+    ) = healthStateUpdater.updatedState(
+        healthState = healthState,
+        triageProfile = triageProfile,
+        surveyAnswers = surveyAnswers
+    )
+
+    fun jump(
+        healthState: UserHealthState,
+        triageProfile: TriageProfile?,
+        surveyAnswers: SurveyAnswers
+    ) = jump.jump(
+        healthState = healthState,
+        triageProfile = triageProfile,
+        surveyAnswers = surveyAnswers
+    )
 }

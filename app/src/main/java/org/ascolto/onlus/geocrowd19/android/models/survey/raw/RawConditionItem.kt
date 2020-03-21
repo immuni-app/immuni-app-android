@@ -10,8 +10,12 @@ enum class RawConditionType {
     SIMPLE,
     @Json(name = "composite")
     COMPOSITE,
-    @Json(name = "current_user_status")
-    CURRENT_USER_STATUS
+    @Json(name = "current_user_triage_profile")
+    CURRENT_USER_TRIAGE_PROFILE,
+    @Json(name = "states_contain")
+    STATES_CONTAIN,
+    @Json(name = "states_not_contain")
+    STATES_DO_NOT_CONTAIN
 }
 
 @JsonClass(generateAdapter = true)
@@ -24,8 +28,10 @@ data class RawConditionItem(
     val matchingIndexes: List<AnswerIndex>? = null,
     @field:Json(name = "matching_component_indexes")
     val matchingComponentIndexes: List<List<AnswerIndex>>? = null,
-    @field:Json(name = "matching_statuses")
-    val matchingStatuses: List<TriageStatusId?>? = null
+    @field:Json(name = "matching_profiles")
+    val matchingProfiles: List<TriageProfileId?>? = null,
+    @field:Json(name = "states")
+    val matchingStates: List<HealthState>? = null
 ) {
     fun conditionItem() = when (type) {
         SIMPLE -> SimpleConditionItem(
@@ -36,8 +42,14 @@ data class RawConditionItem(
             questionId!!,
             matchingComponentIndexes!!
         )
-        CURRENT_USER_STATUS -> TriageStatusConditionItem(
-            matchingStatuses!!
+        CURRENT_USER_TRIAGE_PROFILE -> TriageProfileConditionItem(
+            matchingProfiles!!
+        )
+        STATES_CONTAIN -> StatesContainConditionItem(
+            matchingStates!!.toSet()
+        )
+        STATES_DO_NOT_CONTAIN -> StatesDoNotContainConditionItem(
+            matchingStates!!.toSet()
         )
     }
 }

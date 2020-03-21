@@ -83,7 +83,7 @@ class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnChe
     }
 
     override fun onFormModelUpdate(model: FormModel) {
-        model.answers[questionId]?.let { answers ->
+        model.surveyAnswers[questionId]?.let { answers ->
             items.find {
                 (it.tag as Int) == (answers.first() as SimpleAnswer).index
             }?.isChecked = true
@@ -98,7 +98,9 @@ class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnChe
     }
 
     private fun saveData() {
-        val indexes = items.filter { it.isChecked }.mapNotNull { it.tag as? Int }
-        viewModel.saveAnswer(questionId, SimpleAnswer(indexes[0]))
+        val index = items.find { it.isChecked }?.tag as? Int
+        if (index != null) {
+            viewModel.saveAnswers(questionId, listOf(SimpleAnswer(index)))
+        }
     }
 }

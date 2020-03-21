@@ -1,15 +1,15 @@
 package org.ascolto.onlus.geocrowd19.android.ui.log.model
 
-import com.bendingspoons.ascolto.models.survey.Answer
-import com.bendingspoons.ascolto.models.survey.QuestionAnswers
-import com.bendingspoons.ascolto.models.survey.QuestionId
+import com.bendingspoons.ascolto.models.survey.*
 import java.io.Serializable
 
 data class FormModel(
-    var answers: HashMap<String, QuestionAnswers> = hashMapOf(),
-    var answeredQuestionsOrdered: MutableList<String> = mutableListOf()): Serializable {
-
-    fun addQuestion(id: String) {
+    var healthState: UserHealthState = setOf(),
+    var triageProfile: TriageProfile? = null,
+    var surveyAnswers: HashMap<QuestionId, QuestionAnswers> = hashMapOf(),
+    var answeredQuestionsOrdered: MutableList<QuestionId> = mutableListOf()
+): Serializable {
+    private fun addQuestion(id: QuestionId) {
         val index = answeredQuestionsOrdered.indexOf(id)
         if(index != -1) {
             answeredQuestionsOrdered = answeredQuestionsOrdered.subList(0, index)
@@ -17,12 +17,16 @@ data class FormModel(
         answeredQuestionsOrdered.add(id)
     }
 
-    fun addAnswer(id: String, answer: Answer) {
-        var questionAnswers = answers[id]
-        if (questionAnswers == null) {
-            questionAnswers = listOf()
+    fun addAnswers(id: QuestionId, answers: QuestionAnswers) {
+        addQuestion(id)
+
+        for (answer in answers) {
+            var questionAnswers = surveyAnswers[id]
+            if (questionAnswers == null) {
+                questionAnswers = listOf()
+            }
+            questionAnswers = questionAnswers.toMutableList().apply { add(answer) }
+            surveyAnswers[id] = questionAnswers
         }
-        questionAnswers = questionAnswers.toMutableList().apply { add(answer) }
-        answers[id] = questionAnswers
     }
 }

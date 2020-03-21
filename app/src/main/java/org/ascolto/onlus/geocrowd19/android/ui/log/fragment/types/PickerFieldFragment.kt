@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.form_picker_field.*
 import kotlinx.android.synthetic.main.form_text_field.next
 
 
-class PickerFieldFragment: FormContentFragment(R.layout.form_picker_field) {
+class PickerFieldFragment : FormContentFragment(R.layout.form_picker_field) {
     override val nextButton: Button
         get() = next
     override val prevButton: ImageView
@@ -48,7 +48,7 @@ class PickerFieldFragment: FormContentFragment(R.layout.form_picker_field) {
         questionText.text = question.title
         descriptionText.text = question.description
 
-        if(question.description.isEmpty()) descriptionText.gone()
+        if (question.description.isEmpty()) descriptionText.gone()
         else descriptionText.visible()
 
         val widget = question.widget as PickerWidget
@@ -82,9 +82,10 @@ class PickerFieldFragment: FormContentFragment(R.layout.form_picker_field) {
     }
 
     override fun onFormModelUpdate(model: FormModel) {
-        model.answers[questionId]?.let {
-            (it as CompositeAnswer).componentIndexes.forEachIndexed { pickerIndex, valueIndex ->
-                if(items.size > pickerIndex) {
+        model.surveyAnswers[questionId]?.let { answers ->
+            val answer = answers.first() as CompositeAnswer
+            answer.componentIndexes.forEachIndexed { pickerIndex, valueIndex ->
+                if (items.size > pickerIndex) {
                     items[pickerIndex].value = valueIndex
                 }
             }
@@ -92,14 +93,14 @@ class PickerFieldFragment: FormContentFragment(R.layout.form_picker_field) {
     }
 
     override fun validate(): Boolean {
-        val valid = true
-        nextButton.isEnabled = valid
-        if(valid) saveData()
-        return valid
+        val isValid = true
+        nextButton.isEnabled = isValid
+        if (isValid) saveData()
+        return isValid
     }
 
     private fun saveData() {
         val indexes = items.map { it.value }
-        viewModel.saveAnswer(questionId, CompositeAnswer(indexes))
+        viewModel.saveAnswers(questionId, listOf(CompositeAnswer(indexes)))
     }
 }

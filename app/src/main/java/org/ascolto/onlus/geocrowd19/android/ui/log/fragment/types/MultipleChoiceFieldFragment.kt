@@ -18,7 +18,8 @@ import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.form_multiple_choice_field.*
 
-class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_choice_field), CompoundButton.OnCheckedChangeListener {
+class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_choice_field),
+    CompoundButton.OnCheckedChangeListener {
     override val nextButton: Button
         get() = next
     override val prevButton: ImageView
@@ -50,7 +51,7 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
         minimumAnswer = widget.minNumberOfAnswers
         maximumAnswer = widget.maxNumberOfAnswers
 
-        if(question.description.isEmpty()) descriptionText.gone()
+        if (question.description.isEmpty()) descriptionText.gone()
         else descriptionText.visible()
 
 
@@ -82,9 +83,11 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
     }
 
     override fun onFormModelUpdate(model: FormModel) {
-        model.answers[questionId]?.let {
-            (it as CompositeAnswer).componentIndexes.forEach { index ->
-                items.find { (it.tag as Int) == index }?.isChecked = true
+        model.surveyAnswers[questionId]?.let { answers ->
+            for (answer in answers) {
+                items.find {
+                    (it.tag as Int) == (answer as SimpleAnswer).index
+                }?.isChecked = true
             }
         }
     }
@@ -95,13 +98,13 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
 
     override fun validate(): Boolean {
         val count = items.count { it.isChecked }
-        var valid = count > 0
+        var isValid = count > 0
 
-        valid = valid && count >= minimumAnswer && count <= maximumAnswer
+        isValid = isValid && count >= minimumAnswer && count <= maximumAnswer
 
-        nextButton.isEnabled = valid
-        if(valid) saveData()
-        return valid
+        nextButton.isEnabled = isValid
+        if (isValid) saveData()
+        return isValid
     }
 
     private fun saveData() {
