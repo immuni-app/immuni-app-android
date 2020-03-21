@@ -7,6 +7,7 @@ import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.ascolto.api.oracle.repository.OracleRepository
 import com.bendingspoons.ascolto.api.oracle.repository.OracleRepositoryImpl
 import com.bendingspoons.ascolto.db.AscoltoDatabase
+import com.bendingspoons.ascolto.managers.GeolocationManager
 import com.bendingspoons.ascolto.ui.home.HomeSharedViewModel
 import com.bendingspoons.ascolto.ui.log.LogViewModel
 import com.bendingspoons.ascolto.ui.onboarding.Onboarding
@@ -22,6 +23,7 @@ import com.bendingspoons.pico.Pico
 import com.bendingspoons.secretmenu.SecretMenu
 import com.bendingspoons.sesame.Sesame
 import com.bendingspoons.theirs.Theirs
+import com.geouniq.android.GeoUniq
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -87,6 +89,16 @@ val appModule = module {
 
     // single instance of OracleRepository
     single<OracleRepository> { OracleRepositoryImpl(androidContext(), get(), get()) }
+
+    // single instance of GeoUniq
+    single {
+        GeoUniq.getInstance(androidContext());
+    }
+
+    // single instance of GeolocationManager
+    single {
+        GeolocationManager(androidContext())
+    }
 
     // SetupViewModel
     viewModel { SetupViewModel(get()) }

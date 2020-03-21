@@ -7,10 +7,15 @@ import com.bendingspoons.ascolto.api.oracle.model.AscoltoMe
 import com.bendingspoons.ascolto.api.oracle.model.AscoltoSettings
 import com.bendingspoons.ascolto.db.AscoltoDatabase
 import com.bendingspoons.ascolto.db.entity.UserInfoEntity
+import com.bendingspoons.ascolto.managers.GeolocationManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.utils.ExternalLinksHelper
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.drop
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
@@ -26,6 +31,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val onboarding: Onboarding by inject()
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val geolocationManager: GeolocationManager by inject()
 
     var partialUserInfo = MediatorLiveData<OnboardingUserInfo>()
 
@@ -51,6 +57,12 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
 
         partialUserInfo.addSource(savedStateLiveData) {
             partialUserInfo.value = it as? OnboardingUserInfo
+        }
+
+        uiScope.launch {
+            geolocationManager.isActive.asFlow().drop(1).collect {
+                _navigateToNextPage.value = Event(true)
+            }
         }
     }
 

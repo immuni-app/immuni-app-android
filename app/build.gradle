@@ -40,6 +40,10 @@ android {
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
+
+    repositories {
+        maven { url 'https://dl.bintray.com/geouniq/com.geouniq.android' }
+    }
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
@@ -124,6 +128,9 @@ dependencies {
 
     // Lottie
     implementation 'com.airbnb.android:lottie:3.0.7'
+
+    // Geouniq
+    implementation 'com.geouniq.android:sdk-library:2.4.8'
 
     // Billing
     //implementation 'com.android.billingclient:billing:2.1.0'
