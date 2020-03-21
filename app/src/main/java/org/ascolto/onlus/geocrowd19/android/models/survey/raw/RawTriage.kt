@@ -7,22 +7,22 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class RawTriage(
-    @field:Json(name = "statuses") val statuses: List<RawTriageStatus>,
+    @field:Json(name = "profiles") val profiles: List<RawTriageStatus>,
     @field:Json(name = "logic") val logic: List<RawTriageCondition>
 ) {
     fun triage() = Triage(
-        statuses = statuses.map { it.triageStatus() },
+        profiles = profiles.map { it.triageStatus() },
         conditions = logic.map { it.triageCondition() }
     )
 }
 
 @JsonClass(generateAdapter = true)
 data class RawTriageCondition(
-    @field:Json(name = "status") val statusId: TriageStatusId,
+    @field:Json(name = "profile_id") val profileId: TriageProfileId,
     @field:Json(name = "conditions") val conditions: List<RawConditionItem>
 ) {
     fun triageCondition() = TriageCondition(
-        statusId = statusId,
+        profileId = profileId,
         condition = Condition(conditions.map { it.conditionItem() })
     )
 }
@@ -33,7 +33,7 @@ data class RawTriageStatus(
     @field:Json(name = "url") val url: String,
     @field:Json(name = "severity") val severity: RawSeverity
 ) {
-    fun triageStatus() = TriageStatus(
+    fun triageStatus() = TriageProfile(
         id = id,
         url = url,
         severity = when (severity) {

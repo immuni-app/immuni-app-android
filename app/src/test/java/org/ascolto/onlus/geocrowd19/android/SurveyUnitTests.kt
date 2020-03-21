@@ -527,17 +527,17 @@ class SurveyUnitTests {
         )
 
         val statuses = listOf(
-            TriageStatus(
+            TriageProfile(
                 id = "healthy",
                 url = "http://someuniqueurl.com/healthy",
                 severity = Severity.LOW
             ),
-            TriageStatus(
+            TriageProfile(
                 id = "fever",
                 url = "http://someuniqueurl.com/fever",
                 severity = Severity.MID
             ),
-            TriageStatus(
+            TriageProfile(
                 id = "covid_positive",
                 url = "http://someuniqueurl.com/covid_positive",
                 severity = Severity.HIGH
@@ -582,7 +582,7 @@ class SurveyUnitTests {
                 question8
             ),
             triage = Triage(
-                statuses = statuses,
+                profiles = statuses,
                 conditions = listOf(
                     covid19Positive,
                     withFever,

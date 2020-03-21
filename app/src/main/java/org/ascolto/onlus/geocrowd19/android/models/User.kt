@@ -1,7 +1,7 @@
 package org.ascolto.onlus.geocrowd19.android.models
 
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
-import org.ascolto.onlus.geocrowd19.android.models.survey.TriageStatus
+import org.ascolto.onlus.geocrowd19.android.models.survey.TriageProfile
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.util.*
@@ -15,6 +15,6 @@ class User(
     @field:Json(name = "name") val name: String,
     @field:Json(name = "last_survey_at") val lastSurveyDate: Date,
     @field:Json(name = "last_survey_version") val lastSurveyVersion: String,
-    @field:Json(name = "last_triage_status") val lastTriageStatus: TriageStatus,
+    @field:Json(name = "last_triage_status") val lastTriageProfile: TriageProfile,
     @field:Json(name = "next_survey_at") val nextSurveyDate: Date
 )

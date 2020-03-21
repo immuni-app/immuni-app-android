@@ -11,20 +11,34 @@ class SimpleConditionItem(
 class CompositeConditionItem(
     val questionId: QuestionId,
     val matchingComponentIndexes: List<List<AnswerIndex?>>
-): ConditionItem()
+) : ConditionItem()
 
-class TriageStatusConditionItem(
-    val matchingStatuses: List<TriageStatusId?>
-): ConditionItem()
+class TriageProfileConditionItem(
+    val matchingProfiles: List<TriageProfileId?>
+) : ConditionItem()
+
+class StatesContainConditionItem(
+    val matchingStates: Set<HealthState>
+) : ConditionItem()
+
+class StatesDoNotContainConditionItem(
+    val matchingStates: Set<HealthState>
+) : ConditionItem()
 
 sealed class ConditionItem {
-    fun isSatisfied(triageStatus: TriageStatus?, answers: QuestionAnswers): Boolean {
-        return when (this) {
-            is SimpleConditionItem -> {
+    fun isSatisfied(
+        healthState: UserHealthState,
+        triageProfile: TriageProfile?,
+        surveyAnswers: SurveyAnswers
+    ) = when (this) {
+        is SimpleConditionItem -> {
+            surveyAnswers[questionId]?.let { answers ->
                 val answerIndexes = answers.map { (it as SimpleAnswer).index }
                 matchingIndexes.any { answerIndexes.contains(it) }
-            }
-            is CompositeConditionItem -> {
+            } ?: false
+        }
+        is CompositeConditionItem -> {
+            surveyAnswers[questionId]?.let { answers ->
                 val answerComponentsIndexes = answers.map {
                     (it as CompositeAnswer).componentIndexes
                 }
@@ -32,8 +46,7 @@ sealed class ConditionItem {
                     val exactMatch = answerComponentsIndexes.contains(matchingComponentIndexes)
                     val wildcardAwareMatch = {
                         answerComponentsIndexes.any { componentIndexes ->
-                            (componentIndexes zip matchingComponentIndexes).all {
-                                    (componentIdex, matchingComponentIndex) ->
+                            (componentIndexes zip matchingComponentIndexes).all { (componentIdex, matchingComponentIndex) ->
                                 // null acts as a wildcard component
                                 matchingComponentIndex == null || componentIdex == matchingComponentIndex
                             }
@@ -41,28 +54,26 @@ sealed class ConditionItem {
                     }
                     exactMatch || wildcardAwareMatch()
                 }
-            }
-            is TriageStatusConditionItem -> {
-                matchingStatuses.contains(triageStatus?.id)
-            }
+            } ?: false
+        }
+        is TriageProfileConditionItem -> {
+            matchingProfiles.contains(triageProfile?.id)
+        }
+        is StatesContainConditionItem -> {
+            matchingStates.intersect(healthState).isNotEmpty()
+        }
+        is StatesDoNotContainConditionItem -> {
+            matchingStates.intersect(healthState).isEmpty()
         }
     }
 }
 
-data class Condition(
-    val conditionItems: List<ConditionItem>
-) {
-    fun isSatisfied(triageStatus: TriageStatus?, surveyAnswers: SurveyAnswers): Boolean {
-        return conditionItems.all { item ->
-            when (item) {
-                is SimpleConditionItem -> surveyAnswers[item.questionId]?.let { answers ->
-                    item.isSatisfied(triageStatus, answers)
-                } ?: false
-                is CompositeConditionItem -> surveyAnswers[item.questionId]?.let { answers ->
-                    item.isSatisfied(triageStatus, answers)
-                } ?: false
-                is TriageStatusConditionItem -> item.isSatisfied(triageStatus, listOf())
-            }
-        }
+data class Condition(val conditions: List<ConditionItem>) {
+    fun isSatisfied(
+        healthState: UserHealthState,
+        triageProfile: TriageProfile?,
+        surveyAnswers: SurveyAnswers
+    ) = conditions.all {
+        it.isSatisfied(healthState, triageProfile, surveyAnswers)
     }
 }

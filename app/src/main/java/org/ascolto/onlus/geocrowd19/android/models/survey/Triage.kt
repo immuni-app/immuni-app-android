@@ -1,19 +1,28 @@
 package org.ascolto.onlus.geocrowd19.android.models.survey
 
+typealias HealthState = String
+typealias UserHealthState = Set<HealthState>
+
 data class Triage(
-    val statuses: List<TriageStatus>,
+    val profiles: List<TriageProfile>,
     val conditions: List<TriageCondition>
 ) {
-    fun triage(lastStatus: TriageStatus?, answers: SurveyAnswers): TriageStatus? {
-        val statusId = conditions.firstOrNull { it.check(lastStatus, answers) }?.statusId
-        return statusId?.let { statuses.first { it.id == statusId } }
+    fun triage(
+        healthState: UserHealthState,
+        triageProfile: TriageProfile?,
+        answers: SurveyAnswers
+    ): TriageProfile? {
+        val statusId = conditions.firstOrNull {
+            it.check(healthState, triageProfile, answers)
+        }?.profileId
+        return statusId?.let { profiles.first { it.id == statusId } }
     }
 }
 
-typealias TriageStatusId = String
+typealias TriageProfileId = String
 
-data class TriageStatus(
-    val id: TriageStatusId,
+data class TriageProfile(
+    val id: TriageProfileId,
     val url: String,
     val severity: Severity
 )
@@ -23,10 +32,14 @@ enum class Severity {
 }
 
 data class TriageCondition(
-    val statusId: TriageStatusId,
+    val profileId: TriageProfileId,
     val condition: Condition
 ) {
-    fun check(triageStatus: TriageStatus?, answers: SurveyAnswers): Boolean {
-        return condition.isSatisfied(triageStatus, answers)
+    fun check(
+        healthState: UserHealthState,
+        triageProfile: TriageProfile?,
+        answers: SurveyAnswers
+    ): Boolean {
+        return condition.isSatisfied(healthState, triageProfile, answers)
     }
 }

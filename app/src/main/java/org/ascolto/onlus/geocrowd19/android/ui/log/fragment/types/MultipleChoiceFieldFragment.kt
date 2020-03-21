@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.models.survey.CompositeAnswer
 import org.ascolto.onlus.geocrowd19.android.models.survey.MultipleChoicesWidget
+import org.ascolto.onlus.geocrowd19.android.models.survey.SimpleAnswer
 import org.ascolto.onlus.geocrowd19.android.models.survey.Survey
 import org.ascolto.onlus.geocrowd19.android.ui.log.fragment.FormContentFragment
 import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
@@ -17,7 +18,8 @@ import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.form_multiple_choice_field.*
 
-class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_choice_field), CompoundButton.OnCheckedChangeListener {
+class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_choice_field),
+    CompoundButton.OnCheckedChangeListener {
     override val nextButton: Button
         get() = next
     override val prevButton: ImageView
@@ -49,7 +51,7 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
         minimumAnswer = widget.minNumberOfAnswers
         maximumAnswer = widget.maxNumberOfAnswers
 
-        if(question.description.isEmpty()) descriptionText.gone()
+        if (question.description.isEmpty()) descriptionText.gone()
         else descriptionText.visible()
 
 
@@ -81,9 +83,11 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
     }
 
     override fun onFormModelUpdate(model: FormModel) {
-        model.answers[questionId]?.let {
-            (it as CompositeAnswer).componentIndexes.forEach { index ->
-                items.find { (it.tag as Int) == index }?.isChecked = true
+        model.surveyAnswers[questionId]?.let { answers ->
+            for (answer in answers) {
+                items.find {
+                    (it.tag as Int) == (answer as SimpleAnswer).index
+                }?.isChecked = true
             }
         }
     }
@@ -94,18 +98,17 @@ class MultipleChoiceFieldFragment: FormContentFragment(R.layout.form_multiple_ch
 
     override fun validate(): Boolean {
         val count = items.count { it.isChecked }
-        var valid = count > 0
+        var isValid = count > 0
 
-        valid = valid && count >= minimumAnswer && count <= maximumAnswer
+        isValid = isValid && count >= minimumAnswer && count <= maximumAnswer
 
-        nextButton.isEnabled = valid
-        if(valid) saveData()
-        return valid
+        nextButton.isEnabled = isValid
+        if (isValid) saveData()
+        return isValid
     }
 
     private fun saveData() {
-        val indexes = items.filter { it.isChecked }.mapNotNull { it.tag as? Int }
-        viewModel.saveAnswer(questionId, CompositeAnswer(indexes))
+        val indexes = items.filter { it.isChecked }.map { SimpleAnswer(it.tag as Int) }
+        viewModel.saveAnswers(questionId, indexes)
     }
-
 }

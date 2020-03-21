@@ -2,24 +2,65 @@ package org.ascolto.onlus.geocrowd19.android.models.survey
 
 data class Survey(
     val version: String,
-    val logicVersion: String,
     val questions: List<Question>,
     val triage: Triage
 ) {
-    fun triage(triageStatus: TriageStatus?, answers: SurveyAnswers) =
-        triage.triage(triageStatus, answers)
-}
+    fun triage(
+        healthState: UserHealthState,
+        triageProfile: TriageProfile?,
+        answers: SurveyAnswers
+    ) = triage.triage(healthState, triageProfile, answers)
 
-fun Survey.nextQuestion(questionId: String, answers: SurveyAnswers): Question? {
-    val currentPosition = questions.map { it.id }.indexOf(questionId)
-    val nextQuestions = questions.filterIndexed { index, question -> index > currentPosition }
+    fun updatedHealthState(
+        questionId: String,
+        healthState: UserHealthState,
+        triageProfile: TriageProfile?,
+        answers: SurveyAnswers
+    ) = question(questionId).updatedHealthState(
+        healthState = healthState,
+        triageProfile = triageProfile,
+        surveyAnswers = answers
+    )
 
-    nextQuestions.forEach { nextQuestion ->
-        if(nextQuestion.shouldBeShown(null, answers)) {
-            if(nextQuestion.shouldStopSurvey(null, answers)) return null
-            return  nextQuestion
+    fun next(
+        // FIXME: add check on frequency
+        questionId: String,
+        healthState: UserHealthState,
+        triageProfile: TriageProfile?,
+        answers: SurveyAnswers
+    ): SurveyNextDestination {
+        val currentQuestion = questions.first { it.id == questionId }
+        val currentPosition = questions.indexOf(currentQuestion)
+        val nextQuestions = questions.takeLast(questions.size - currentPosition - 1)
+
+        val jumpDestination = currentQuestion.jump(
+            healthState = healthState,
+            triageProfile = triageProfile,
+            surveyAnswers = answers
+        )
+
+        return when (jumpDestination) {
+            is QuestionJumpDestination -> {
+                SurveyQuestionDestination(questions.first { it.id == jumpDestination.questionId })
+            }
+            is EndOfSurveyJumpDestination -> {
+                SurveyEndDestination()
+            }
+            null -> {
+                nextQuestions.firstOrNull {
+                    it.shouldBeShown(healthState, triageProfile, answers)
+                }?.let {
+                    SurveyQuestionDestination(it)
+                } ?: SurveyEndDestination()
+            }
         }
     }
 
-    return null
+    fun question(id: QuestionId) = questions.first { it.id == id }
 }
+
+sealed class SurveyNextDestination
+
+class SurveyQuestionDestination(val question: Question) : SurveyNextDestination()
+
+class SurveyEndDestination : SurveyNextDestination()

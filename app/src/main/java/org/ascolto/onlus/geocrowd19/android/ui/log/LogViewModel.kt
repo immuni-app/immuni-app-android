@@ -6,9 +6,7 @@ import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.getSettingsSurvey
 import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import org.ascolto.onlus.geocrowd19.android.db.entity.UserInfoEntity
-import org.ascolto.onlus.geocrowd19.android.models.survey.Answer
-import org.ascolto.onlus.geocrowd19.android.models.survey.Survey
-import org.ascolto.onlus.geocrowd19.android.models.survey.nextQuestion
+import org.ascolto.onlus.geocrowd19.android.models.survey.*
 import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
@@ -18,7 +16,8 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
 
-class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) : ViewModel(),
+class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) :
+    ViewModel(),
     KoinComponent {
 
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
@@ -57,7 +56,7 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
 
     init {
         // internal state
-        if(handle.get<Serializable>(STATE_KEY) != null) {
+        if (handle.get<Serializable>(STATE_KEY) != null) {
             formModel.value = handle.get<Serializable>(STATE_KEY) as FormModel
         } else formModel.value = FormModel()
 
@@ -77,26 +76,41 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
         survey.value = getSettingsSurvey()?.survey()!!
     }
 
-    fun onNextTap(questionId: String?) {
-        if(questionId != null) {
-            // override current if any and delete ahead
-            formModel.value?.addQuestion(questionId)
-            handle.set(STATE_KEY, formModel.value)
+    fun onNextTap(questionId: String) {
+        val form = formModel.value
+        val survey = survey.value
+        if (form == null || survey == null) {
+            assert(false) { "FormModel and Survey should never be null here" }
+            return
+        }
 
-            // 1 check the next question to be shown
-            val answers = mutableMapOf<String, List<Answer>>()
-            formModel.value?.answers?.keys?.forEach { i ->
-                answers.put(i, listOf(formModel.value?.answers?.get(i)!!))
+        // override current if any and delete ahead
+        form.addAnswers(questionId, form.surveyAnswers[questionId] ?: listOf())
+
+        val updatedHealthState = survey.updatedHealthState(
+            questionId,
+            form.healthState,
+            form.triageProfile,
+            form.surveyAnswers
+        )
+        form.healthState = updatedHealthState
+
+        handle.set(STATE_KEY, form)
+
+        val nextDestination = survey.next(
+            questionId,
+            form.healthState,
+            form.triageProfile,
+            form.surveyAnswers
+        )
+
+        when (nextDestination) {
+            is SurveyQuestionDestination -> {
+                _navigateToQuestion.value = Event(nextDestination.question.id)
             }
-            val nextQuestion = survey.value?.nextQuestion(questionId, answers)
-            // 2 check if should stop survey or finish
-            if (nextQuestion == null) {
+            is SurveyEndDestination -> {
                 _navigateToDonePage.value = Event(true)
-            } else {
-                _navigateToQuestion.value = Event(nextQuestion.id)
             }
-        } else {
-            _navigateToNextPage.value = Event(true)
         }
     }
 
@@ -113,13 +127,14 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
         handle.set(STATE_KEY, model)
     }
 
-    fun saveAnswer(questionId: String, answer: Answer) {
-        formModel.value?.addAnswer(questionId, answer)
+    // For multiple choice widgets
+    fun saveAnswers(questionId: String, answers: QuestionAnswers) {
+        formModel.value?.addAnswers(questionId, answers)
         handle.set(STATE_KEY, formModel.value)
     }
 
     fun resetAnswers() {
-        formModel.value?.answers?.clear()
+        formModel.value?.surveyAnswers?.clear()
         handle.set(STATE_KEY, formModel.value)
     }
 
@@ -133,7 +148,7 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
             // TODO this are the survey data
             val surveyVersion = survey.value!!.version
             val userId = userInfo.value!!.id
-            val answers = formModel.value!!.answers.filterKeys { questionId ->
+            val answers = formModel.value!!.surveyAnswers.filterKeys { questionId ->
                 questionId in formModel.value!!.answeredQuestionsOrdered
             }
             //val triage = survey.value!!.triage(null, answers)
@@ -158,11 +173,12 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
 
     fun getProgressPercentage(pos: Int): Float {
         val totalQuestions = survey.value?.questions?.size ?: 0
-        if(pos == 0) return 1f / totalQuestions
-        if(totalQuestions == 0) return 0f
+        if (pos == 0) return 1f / totalQuestions
+        if (totalQuestions == 0) return 0f
         val currentQuestion = formModel.value?.answeredQuestionsOrdered?.getOrNull(pos - 1)
-        val index = survey.value?.questions?.map { it.id }?.indexOf(currentQuestion)?.coerceAtLeast(0) ?: 0
-        return ((index+2).toFloat()/totalQuestions.toFloat()).coerceIn(0f, 1f)
+        val index =
+            survey.value?.questions?.map { it.id }?.indexOf(currentQuestion)?.coerceAtLeast(0) ?: 0
+        return ((index + 2).toFloat() / totalQuestions.toFloat()).coerceIn(0f, 1f)
     }
 
     companion object {

@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.form_radio_field.*
 import kotlinx.android.synthetic.main.form_radio_field.view.*
 import kotlinx.android.synthetic.main.form_text_field.next
 
-class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnCheckedChangeListener {
+class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnCheckedChangeListener {
     override val nextButton: Button
         get() = next
     override val prevButton: ImageView
@@ -47,7 +47,7 @@ class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnChec
         questionText.text = question.title
         descriptionText.text = question.description
 
-        if(question.description.isEmpty()) descriptionText.gone()
+        if (question.description.isEmpty()) descriptionText.gone()
         else descriptionText.visible()
 
         val widget = question.widget as RadioWidget
@@ -83,20 +83,24 @@ class RadioFieldFragment: FormContentFragment(R.layout.form_radio_field), OnChec
     }
 
     override fun onFormModelUpdate(model: FormModel) {
-        model.answers[questionId]?.let { answer ->
-            items.find { (it.tag as Int) == (answer as SimpleAnswer).index }?.isChecked = true
+        model.surveyAnswers[questionId]?.let { answers ->
+            items.find {
+                (it.tag as Int) == (answers.first() as SimpleAnswer).index
+            }?.isChecked = true
         }
     }
 
     override fun validate(): Boolean {
         val valid = items.any { it.isChecked }
         nextButton.isEnabled = valid
-        if(valid) saveData()
+        if (valid) saveData()
         return valid
     }
 
     private fun saveData() {
-        val indexes = items.filter { it.isChecked }.mapNotNull { it.tag as? Int }
-        viewModel.saveAnswer(questionId, SimpleAnswer(indexes[0]))
+        val index = items.find { it.isChecked }?.tag as? Int
+        if (index != null) {
+            viewModel.saveAnswers(questionId, listOf(SimpleAnswer(index)))
+        }
     }
 }
