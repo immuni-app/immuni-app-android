@@ -9,18 +9,16 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import org.ascolto.onlus.geocrowd19.android.toast
-import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
-import org.ascolto.onlus.geocrowd19.android.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_fragment.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
+import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.AddFamilyMemberDialog
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDisabledDialog
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDisabledDialog
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialog
+import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
