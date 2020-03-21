@@ -134,7 +134,7 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
             val surveyVersion = survey.value!!.version
             val userId = userInfo.value!!.id
             val answers = formModel.value!!.answers.filterKeys { questionId ->
-                questionId in formModel.value!!.questionsOrdered
+                questionId in formModel.value!!.answeredQuestionsOrdered
             }
             // TODO send to Pico
             /*
@@ -153,6 +153,15 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
             // TODO now choose another family member to do the survet, or go home if there is not
             _navigateToMainPage.value = Event(true)
         }
+    }
+
+    fun getProgressPercentage(pos: Int): Float {
+        val totalQuestions = survey.value?.questions?.size ?: 0
+        if(pos == 0) return 1f / totalQuestions
+        if(totalQuestions == 0) return 0f
+        val currentQuestion = formModel.value?.answeredQuestionsOrdered?.getOrNull(pos - 1)
+        val index = survey.value?.questions?.map { it.id }?.indexOf(currentQuestion)?.coerceAtLeast(0) ?: 0
+        return ((index+2).toFloat()/totalQuestions.toFloat()).coerceIn(0f, 1f)
     }
 
     companion object {

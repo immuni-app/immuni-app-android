@@ -52,6 +52,7 @@ class FormFragment : Fragment() {
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
+                progress.setPercentage(viewModel.getProgressPercentage(viewPager.currentItem))
             }
 
             override fun onPageScrolled(
