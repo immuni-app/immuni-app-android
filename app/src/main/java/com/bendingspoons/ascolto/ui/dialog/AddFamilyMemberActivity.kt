@@ -15,6 +15,10 @@ class AddFamilyMemberActivity: AscoltoActivity()  {
         setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
         setContentView(R.layout.family_member_add_dialog)
 
+        back.setOnClickListener {
+            finish()
+        }
+
         goAhead.setOnClickListener {
             finish()
         }
