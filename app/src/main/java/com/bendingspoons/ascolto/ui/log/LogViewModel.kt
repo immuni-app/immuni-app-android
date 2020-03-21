@@ -136,6 +136,7 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
             val answers = formModel.value!!.answers.filterKeys { questionId ->
                 questionId in formModel.value!!.answeredQuestionsOrdered
             }
+            //val triage = survey.value!!.triage(null, answers)
             // TODO send to Pico
             /*
             pico.trackUserAction(
