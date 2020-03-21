@@ -19,11 +19,11 @@ import org.ascolto.onlus.geocrowd19.android.R
 
 class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var items = mutableListOf<String>()
+    var items = mutableListOf<String>()
 
     val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(false).build()
 
-    inner class ItemViewHolder(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class ItemViewHolder(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         override fun onClick(v: View) {
             clickListener.onClick(SurveyCard())
@@ -45,7 +45,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.home_survey_card_item, parent, false)
 
-        return ItemViewHolder(v as ConstraintLayout)
+        return ItemViewHolder(v as LinearLayout)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {}

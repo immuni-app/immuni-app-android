@@ -65,7 +65,7 @@ class HomeFragment : Fragment(), HomeClickListener {
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val ratio = kotlin.math.abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
-            title?.alpha = ratio
+            title?.alpha = 1f - ratio
         })
 
         with(homeList) {
@@ -80,6 +80,11 @@ class HomeFragment : Fragment(), HomeClickListener {
         })
 
         viewModel.listModel.observe(viewLifecycleOwner, Observer {
+            (homeList.adapter as? HomeListAdapter)?.items?.apply {
+                clear()
+                addAll(it)
+            }
+
             homeList.adapter?.notifyDataSetChanged()
         })
     }
