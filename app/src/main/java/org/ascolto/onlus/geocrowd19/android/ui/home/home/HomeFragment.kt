@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -18,19 +19,29 @@ import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialog
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.android.synthetic.main.log_choose_person_fragment.next
+import org.ascolto.onlus.geocrowd19.android.toast
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
+import java.lang.Math.abs
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomeClickListener {
 
     private lateinit var viewModel: HomeSharedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //requireActivity().onBackPressedDispatcher.addCallback(this) {
-            // users must select a choice
-        //}
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            MaterialAlertDialogBuilder(context)
+                .setTitle(getString(R.string.app_exit_title))
+                .setMessage(getString(R.string.app_exit_message))
+                .setPositiveButton(getString(R.string.exit)) { d, _ -> activity?.finish()}
+                .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss()}
+                .setOnCancelListener {  }
+                .show()
+        }
     }
 
     override fun onResume() {
@@ -51,39 +62,33 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
+        // Fade out toolbar on scroll
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val ratio = kotlin.math.abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
+            title?.alpha = ratio
+        })
+
+        with(homeList) {
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+            adapter = HomeListAdapter(this@HomeFragment)
+        }
+
         viewModel.showAddFamilyMemberDialog.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 showAddFamilyMemberDialog()
             }
         })
 
-        next.setOnClickListener {
-            val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            }
-            activity?.startActivity(intent)
-        }
-
-        webViewButton.setOnClickListener {
-            WebViewDialog().apply {
-                arguments = bundleOf("url" to "https://www.google.com")
-            }.show(childFragmentManager, "webview_dialog")
-        }
-
-        geolocation.setOnClickListener {
-            GeolocationDisabledDialog().show(childFragmentManager, "geolocation_diabled_dialog")
-        }
-
-        notifications.setOnClickListener {
-            NotificationsDisabledDialog().show(childFragmentManager, "notification_diabled_dialog")
-        }
-
-        addMembers.setOnClickListener {
-            showAddFamilyMemberDialog()
-        }
+        viewModel.listModel.observe(viewLifecycleOwner, Observer {
+            homeList.adapter?.notifyDataSetChanged()
+        })
     }
 
     private fun showAddFamilyMemberDialog() {
         AddFamilyMemberDialog().show(childFragmentManager, "add_family_member")
+    }
+
+    override fun onClick(item: ItemType) {
+        toast(item.toString())
     }
 }

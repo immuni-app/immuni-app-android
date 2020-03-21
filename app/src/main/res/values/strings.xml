@@ -69,4 +69,7 @@
     <string name="app_update_message">Aggiorna l\'app per continuare</string>
     <string name="compile_for_message">Stai per effettuare la compilazione per conto di</string>
     <string name="open_settings">Apri le impostazioni</string>
+
+    <string name="app_exit_title">Uscire</string>
+    <string name="app_exit_message">Sei sicuro di voler uscire?</string>
 </resources>
