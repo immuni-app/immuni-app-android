@@ -76,4 +76,8 @@
     <string name="onboarding_geolocation_message">Consenti l\'accesso alla posizione durante tutto l\'arco della giornata per permettere alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
     <string name="onboarding_permissions_sample">Seleziona \"Consenti sempre\" nel popup che ti apparirà qui sotto</string>
     <string name="indication_for">Indicazioni su cosa fare per %s</string>
+    <string name="enable_geolocation">Attiva la localizzazione</string>
+    <string name="enable_geolocation_message">Permetti il calcolo del tuo fattore di rischio</string>
+    <string name="enable_notification">Attiva le notifiche</string>
+    <string name="enable_notification_message">Consentici di comunicare con te in caso di necessità</string>
 </resources>

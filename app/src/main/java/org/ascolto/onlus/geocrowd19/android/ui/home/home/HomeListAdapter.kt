@@ -39,7 +39,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
 
     }
 
-    inner class GeolocationCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class GeolocationCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         override fun onClick(v: View) {
             clickListener.onClick(items[adapterPosition])
@@ -84,7 +84,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
             val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.home_geolocation_card_item, parent, false)
 
-            return GeolocationCardVH(v as LinearLayout)
+            return GeolocationCardVH(v as ConstraintLayout)
         }
         else if(viewType == 2) {
             val v = LayoutInflater.from(parent.context)

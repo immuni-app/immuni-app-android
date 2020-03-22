@@ -12,10 +12,12 @@ import kotlinx.coroutines.flow.collect
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.getSettingsSurvey
+import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.HomeListAdapter
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
 import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComponent {
 
@@ -33,6 +35,10 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     val listModel = MutableLiveData<List<HomeItemType>>()
 
     init {
+        refreshListModel()
+    }
+
+    private fun refreshListModel() {
         uiScope.launch {
             val model = database.userInfoDao().getMainUserInfoFlow().collect {
 
@@ -44,15 +50,27 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 val suggestionTitle3 = String.format(ctx.resources.getString(R.string.indication_for),
                     "<b>Roddy</b>")
 
-                listModel.value = listOf(
+                val itemsList = mutableListOf(
                     SurveyCard(true, 1),
                     HeaderCard("ciao"),
-                    EnableGeolocationCard(),
-                    EnableNotificationCard(),
                     SuggestionsCard(suggestionTitle, Severity.LOW),
                     SuggestionsCard(suggestionTitle2, Severity.MID),
                     SuggestionsCard(suggestionTitle3, Severity.HIGH)
                 )
+
+                // check geolocation disabled
+
+                if(!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext)) {
+                    itemsList.add(EnableGeolocationCard())
+                }
+
+                // check notifications disabled
+
+                if(!PushNotificationUtils.areNotificationsEnabled(AscoltoApplication.appContext)) {
+                    itemsList.add(EnableNotificationCard())
+                }
+
+                listModel.value = itemsList.toList()
             }
         }
     }
@@ -63,11 +81,19 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     }
 
     fun onHomeResumed() {
+        refreshListModel()
+        checkAddFamilyMembersDialog()
+    }
+
+    // check if this one shot dialog has been alredy triggered before
+    // if not show it
+    private fun checkAddFamilyMembersDialog() {
+        val flag = "family_add_member_popup_showed"
         uiScope.launch {
             delay(500)
-            if(!isFlagSet("family_add_member_popup_showed")) {
+            if(!isFlagSet(flag)) {
                 _showAddFamilyMemberDialog.value = Event(true)
-                setFlag("family_add_member_popup_showed", true)
+                setFlag(flag, true)
             }
         }
     }

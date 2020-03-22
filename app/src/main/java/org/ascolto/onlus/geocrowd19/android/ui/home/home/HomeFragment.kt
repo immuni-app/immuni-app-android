@@ -19,9 +19,9 @@ import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.FamilyDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDialogActivity
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.HomeItemType
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCard
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class HomeFragment : Fragment(), HomeClickListener {
@@ -108,6 +108,29 @@ class HomeFragment : Fragment(), HomeClickListener {
             is SuggestionsCard -> {
                 viewModel.openSuggestions(item.severity)
             }
+            is EnableNotificationCard -> {
+                openNotificationDialog()
+            }
+            is EnableGeolocationCard -> {
+                openGeolocationDialog()
+            }
+            is SurveyCard -> {
+
+            }
         }
+    }
+
+    private fun openNotificationDialog() {
+        val intent = Intent(AscoltoApplication.appContext, NotificationsDialogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
+    }
+
+    private fun openGeolocationDialog() {
+        val intent = Intent(AscoltoApplication.appContext, GeolocationDialogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
     }
 }

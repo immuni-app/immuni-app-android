@@ -33,7 +33,7 @@
         style="@style/P1Text"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="24dp"
         android:layout_weight="1"
         android:gravity="center_vertical|left"
