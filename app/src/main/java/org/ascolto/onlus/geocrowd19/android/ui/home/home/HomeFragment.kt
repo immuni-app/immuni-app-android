@@ -7,26 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.AddFamilyMemberDialog
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDisabledDialog
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDisabledDialog
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialog
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
-import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.home_fragment.*
-import kotlinx.android.synthetic.main.log_choose_person_fragment.next
+import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.toast
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.FamilyDialogActivity
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.HomeItemType
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
-import java.lang.Math.abs
 
 class HomeFragment : Fragment(), HomeClickListener {
 
@@ -91,7 +85,10 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun showAddFamilyMemberDialog() {
-        AddFamilyMemberDialog().show(childFragmentManager, "add_family_member")
+        val intent = Intent(AscoltoApplication.appContext, FamilyDialogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
     }
 
     override fun onClick(item: HomeItemType) {

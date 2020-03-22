@@ -14,10 +14,7 @@ import kotlinx.android.synthetic.main.family_fragment.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.toast
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.AddFamilyMemberDialog
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDisabledDialog
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDisabledDialog
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialog
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.*
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -54,23 +51,33 @@ class FamilyFragment : Fragment() {
         }
 
         webViewButton.setOnClickListener {
-            WebViewDialog().apply {
-                arguments = bundleOf("url" to "https://www.google.com")
-            }.show(childFragmentManager, "webview_dialog")
+
+            val intent = Intent(AscoltoApplication.appContext, WebViewDialogActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra("url", "https://content.ascolto-onlus.org/77e2e08cd1b72d9529493b8fabcb8804/5b35a7d7f1fa8119cde5d6702806cbb4.html#/temperature/warning")
+            }
+            activity?.startActivity(intent)
         }
 
         geolocation.setOnClickListener {
-            GeolocationDisabledDialog().show(childFragmentManager, "geolocation_diabled_dialog")
+            val intent = Intent(AscoltoApplication.appContext, GeolocationDialogActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+            activity?.startActivity(intent)
         }
 
         notifications.setOnClickListener {
-            NotificationsDisabledDialog().show(childFragmentManager, "notification_diabled_dialog")
+            val intent = Intent(AscoltoApplication.appContext, NotificationsDialogActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+            activity?.startActivity(intent)
         }
 
         addMembers.setOnClickListener {
-            AddFamilyMemberDialog().show(childFragmentManager, "add_family_member")
-
-            toast("Push notification enabled" + PushNotificationUtils.getPushNotificationState(requireContext()).toString())
+            val intent = Intent(AscoltoApplication.appContext, FamilyDialogActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+            activity?.startActivity(intent)
         }
     }
 }

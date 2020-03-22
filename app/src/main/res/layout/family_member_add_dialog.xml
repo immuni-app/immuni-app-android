@@ -14,43 +14,6 @@
             android:layout_height="match_parent"
             android:background="@color/background">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/goAhead"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:theme="@style/Theme.MaterialComponents"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
-                app:rippleColor="@color/colorPrimary"
-                android:text="@string/no"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                app:strokeColor="#99495D74"
-                app:strokeWidth="1dp"
-                app:cornerRadius="27dp"
-                android:minHeight="55dp"
-                android:textAllCaps="false"
-                android:paddingEnd="50dp"
-                android:paddingStart="50dp"
-                android:textColor="@color/p1_text"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/addMember"
-                style="@style/RoundedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/add_family_member_yes_button"
-                app:layout_constraintBottom_toTopOf="@+id/goAhead"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -58,7 +21,7 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="32dp"
                 android:scaleType="fitCenter"
-                app:layout_constraintHeight_percent="0.4"
+                app:layout_constraintHeight_percent="0.35"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -85,17 +48,15 @@
                 style="@style/P1Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginTop="24dp"
                 android:gravity="center"
                 android:maxLines="4"
-                android:paddingBottom="16dp"
+                android:paddingBottom="200dp"
                 android:text="@string/old_people_in_family_description"
                 app:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toTopOf="@+id/addMember"
-                app:layout_constraintEnd_toEndOf="@+id/addMember"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/addMember"
+                app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
@@ -115,4 +76,70 @@
         android:layout_gravity="top|left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="60dp"
+            android:rotation="180"
+            android:background="@drawable/gradient_form"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@color/background"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/addMember"
+            style="@style/RoundedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/add_family_member_yes_button"
+            app:layout_constraintBottom_toTopOf="@+id/goAhead"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/goAhead"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:theme="@style/Theme.MaterialComponents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            app:rippleColor="@color/colorPrimary"
+            android:text="@string/no"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:strokeColor="#99495D74"
+            app:strokeWidth="1dp"
+            app:cornerRadius="27dp"
+            android:minHeight="55dp"
+            android:textAllCaps="false"
+            android:paddingEnd="50dp"
+            android:paddingStart="50dp"
+            android:textColor="@color/p1_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </LinearLayout>
+
 </FrameLayout>

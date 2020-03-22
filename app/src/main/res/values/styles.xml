@@ -22,6 +22,9 @@
 
         <!-- Ripple effect default color -->
         <item name="colorControlHighlight">#42DDDDDD</item>
+        <!--
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        -->
     </style>
 
     <!-- TabLayout Tab Style -->
