@@ -80,4 +80,8 @@
     <string name="enable_geolocation_message">Permetti il calcolo del tuo fattore di rischio</string>
     <string name="enable_notification">Attiva le notifiche</string>
     <string name="enable_notification_message">Consentici di comunicare con te in caso di necessità</string>
+    <string name="update_your_clinic_diary">Aggiorna il tuo diario clinico</string>
+    <string name="update_your_family_diary">Aggiorna i diari clinici per la tua famiglia</string>
+    <string name="you_have_clinic_diaries_to_update">Hai 3 diari clinici da aggiornare</string>
+    <string name="start_survey_filling">Inizia compilazione</string>
 </resources>

@@ -6,7 +6,9 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="32dp"
+    android:layout_marginStart="32dp"
+    android:layout_marginEnd="32dp"
+    android:layout_marginTop="8dp"
     android:background="@drawable/rounded_corners_20dp"
     android:backgroundTint="@color/background"
     android:gravity="center"
@@ -16,22 +18,36 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_weight="1"
-        android:src="@drawable/ic_avatar_female_purple"
+        android:src="@drawable/ic_illustration_survey"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name"
-        style="@style/H2SubHeading"
+        style="@style/H3SectionHeading"
+        android:textColor="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32sp"
+        android:layout_marginTop="-8dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/euclid_circular_bold"
         android:gravity="center_horizontal|bottom"
-        android:text="Tu" />
+        android:text="@string/update_your_clinic_diary" />
+
+    <Button
+        android:id="@+id/next"
+        style="@style/RoundedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/start_survey_filling"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/age"
@@ -42,17 +58,5 @@
         android:layout_weight="1"
         android:fontFamily="@font/euclid_circular_bold"
         android:gravity="center_horizontal|top"
-        android:text="26 anni" />
-
-    <Button
-        android:id="@+id/next"
-        style="@style/RoundedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="FAI SURVEY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/you_have_clinic_diaries_to_update" />
 </LinearLayout>

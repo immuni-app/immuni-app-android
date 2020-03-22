@@ -45,7 +45,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
                 android:clipChildren="false"
                 app:layout_collapseMode="pin"
                 app:layout_collapseParallaxMultiplier="0.5">
