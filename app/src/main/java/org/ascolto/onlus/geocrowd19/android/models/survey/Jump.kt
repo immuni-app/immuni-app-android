@@ -7,7 +7,7 @@ class EndOfSurveyJumpDestination() : JumpDestination()
 class JumpItem(val destination: JumpDestination, private val condition: Condition) {
     fun shouldJump(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
     ) = condition.isSatisfied(
         healthState = healthState,
@@ -19,9 +19,9 @@ class JumpItem(val destination: JumpDestination, private val condition: Conditio
 class Jump(private val jumps: List<JumpItem>) {
     fun jump(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
-    ) = jumps.firstOrNull {
+    ) = jumps.find {
         it.shouldJump(
             healthState = healthState,
             triageProfile = triageProfile,

@@ -7,14 +7,14 @@ data class Survey(
 ) {
     fun triage(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         answers: SurveyAnswers
     ) = triage.triage(healthState, triageProfile, answers)
 
     fun updatedHealthState(
         questionId: String,
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         answers: SurveyAnswers
     ) = question(questionId).updatedHealthState(
         healthState = healthState,
@@ -26,7 +26,7 @@ data class Survey(
         // FIXME: add check on frequency
         questionId: String,
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         answers: SurveyAnswers
     ): SurveyNextDestination {
         val currentQuestion = questions.first { it.id == questionId }
@@ -47,7 +47,7 @@ data class Survey(
                 SurveyEndDestination()
             }
             null -> {
-                nextQuestions.firstOrNull {
+                nextQuestions.find {
                     it.shouldBeShown(healthState, triageProfile, answers)
                 }?.let {
                     SurveyQuestionDestination(it)

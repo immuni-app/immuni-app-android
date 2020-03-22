@@ -1,7 +1,7 @@
 package org.ascolto.onlus.geocrowd19.android.models.survey
 
 typealias QuestionAnswers = List<Answer>
-typealias SurveyAnswers = MutableMap<QuestionId, QuestionAnswers>
+typealias SurveyAnswers = Map<QuestionId, QuestionAnswers>
 
 class SimpleConditionItem(
     val questionId: QuestionId,
@@ -28,7 +28,7 @@ class StatesDoNotContainConditionItem(
 sealed class ConditionItem {
     fun isSatisfied(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
     ) = when (this) {
         is SimpleConditionItem -> {
@@ -57,7 +57,7 @@ sealed class ConditionItem {
             } ?: false
         }
         is TriageProfileConditionItem -> {
-            matchingProfiles.contains(triageProfile?.id)
+            matchingProfiles.contains(triageProfile)
         }
         is StatesContainConditionItem -> {
             matchingStates.intersect(healthState).isNotEmpty()
@@ -71,7 +71,7 @@ sealed class ConditionItem {
 data class Condition(val conditions: List<ConditionItem>) {
     fun isSatisfied(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
     ) = conditions.all {
         it.isSatisfied(healthState, triageProfile, surveyAnswers)

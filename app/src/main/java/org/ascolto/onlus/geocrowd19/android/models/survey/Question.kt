@@ -15,13 +15,13 @@ data class Question(
 ) {
     fun shouldBeShown(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
     ) = showCondition.isSatisfied(healthState, triageProfile, surveyAnswers)
 
     fun updatedHealthState(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
     ) = healthStateUpdater.updatedState(
         healthState = healthState,
@@ -31,7 +31,7 @@ data class Question(
 
     fun jump(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
     ) = jump.jump(
         healthState = healthState,

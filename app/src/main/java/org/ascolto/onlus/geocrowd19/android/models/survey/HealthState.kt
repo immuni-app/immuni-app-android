@@ -13,7 +13,7 @@ data class HealthStateUpdaterItem(
 ) {
     fun updatedState(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
     ): UserHealthState {
         val allConditionsSatisfied = conditions.all {
@@ -35,7 +35,7 @@ data class HealthStateUpdaterItem(
 data class HealthStateUpdater(val updaters: List<HealthStateUpdaterItem>) {
     fun updatedState(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
     ) = updaters.fold(healthState) { healthState, updater ->
         updater.updatedState(healthState, triageProfile, surveyAnswers)

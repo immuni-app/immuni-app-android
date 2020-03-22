@@ -2,6 +2,7 @@ package org.ascolto.onlus.geocrowd19.android
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
+import com.bendingspoons.base.storage.KVStorage
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.api.oracle.repository.OracleRepository
@@ -29,6 +30,8 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
+
+    single { KVStorage("state", androidContext()) }
 
     // single instance of TDFDatabase
     single {

@@ -36,7 +36,7 @@ class GeolocationManager(val context: Context) : KoinComponent, GeoUniq.IDeviceI
         }
 
         fun getNextPermissionToGrant(context: Context): String? {
-            return allPermissions.firstOrNull { checkHasPermission(context, it) }
+            return allPermissions.find { checkHasPermission(context, it) }
         }
 
         fun checkHasPermission(context: Context, permission: String): Boolean {

@@ -9,17 +9,22 @@ import org.ascolto.onlus.geocrowd19.android.db.entity.UserInfoEntity
 import org.ascolto.onlus.geocrowd19.android.models.survey.*
 import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
+import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
+import org.ascolto.onlus.geocrowd19.android.models.UserHealthProfile
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
+import java.util.*
 
-class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) :
-    ViewModel(),
-    KoinComponent {
+class LogViewModel(
+    private val handle: SavedStateHandle,
+    private val database: AscoltoDatabase
+) : ViewModel(), KoinComponent {
 
+    private val state: KVStorage by inject()
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val pico: Pico by inject()
     private val viewModelJob = SupervisorJob()
@@ -28,6 +33,7 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
     var userInfo = MediatorLiveData<UserInfoEntity>()
 
     var survey = MutableLiveData<Survey>()
+    lateinit var currentQuestion: QuestionId
 
     // internal state
     var formModel = MediatorLiveData<FormModel>()
@@ -58,22 +64,52 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
         // internal state
         if (handle.get<Serializable>(STATE_KEY) != null) {
             formModel.value = handle.get<Serializable>(STATE_KEY) as FormModel
-        } else formModel.value = FormModel()
+        }
 
         formModel.addSource(savedStateLiveData) {
             formModel.value = it as? FormModel
         }
         // end internal state
 
-        // TODO select the user for the survay (main or family member)
+        // TODO load current survey from settings
+        val _survey = getSettingsSurvey()!!.survey()
+        survey.value = _survey
+
+        // TODO select the user for the survey (main or family member)
         uiScope.launch {
             val allUsers = database.userInfoDao().getFamilyMembersUserInfo()
             //TODO use the logic to choose the correct user
             userInfo.value = database.userInfoDao().getMainUserInfo()
-        }
+            userInfo.value?.let { user ->
+                val lastProfile = state.load(
+                    UserHealthProfile.key(user.id),
+                    defValue = UserHealthProfile(
+                        userId = user.id,
+                        healthState = setOf(),
+                        triageProfileId = null,
+                        lastSurveyVersion = null,
+                        lastSurveyDate = null
+                    )
+                )
 
-        // TODO load current survey from settings
-        survey.value = getSettingsSurvey()?.survey()!!
+                currentQuestion = _survey.questions.first {
+                    it.shouldBeShown(
+                        healthState = lastProfile.healthState,
+                        triageProfile = lastProfile.triageProfileId,
+                        surveyAnswers = linkedMapOf()
+                    )
+                }.id
+
+                if (formModel.value == null) {
+                    formModel.value = FormModel(
+                        currentQuestion = currentQuestion,
+                        healthState = lastProfile.healthState,
+                        triageProfile = lastProfile.triageProfileId,
+                        surveyAnswers = linkedMapOf()
+                    )
+                }
+            }
+        }
     }
 
     fun onNextTap(questionId: String) {
@@ -145,13 +181,28 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
     fun onLogComplete() {
         //val userInfo = partialUserInfo.value!!
         uiScope.launch {
-            // TODO this are the survey data
-            val surveyVersion = survey.value!!.version
+            val form = formModel.value!!
+            val survey = survey.value!!
             val userId = userInfo.value!!.id
-            val answers = formModel.value!!.surveyAnswers.filterKeys { questionId ->
-                questionId in formModel.value!!.answeredQuestionsOrdered
-            }
-            //val triage = survey.value!!.triage(null, answers)
+
+            form.triageProfile = survey.triage(
+                form.healthState,
+                form.triageProfile,
+                form.surveyAnswers
+            )?.id
+
+            val userHealthProfile = UserHealthProfile(
+                userId = userId,
+                healthState = form.healthState,
+                triageProfileId = form.triageProfile,
+                lastSurveyVersion = survey.version,
+                lastSurveyDate = Date()
+            )
+            state.save(userHealthProfile.key, userHealthProfile)
+
+            // At least the last user timestamp
+            delay(2000)
+
             // TODO send to Pico
             /*
             pico.trackUserAction(
@@ -162,22 +213,20 @@ class LogViewModel(val handle: SavedStateHandle, private val database: AscoltoDa
                 )
              */
 
-            // TODO do we need to store the data in local database too?
-            // At least the last user timestamp
-            delay(2000)
-
-            // TODO now choose another family member to do the survet, or go home if there is not
+            // TODO now choose another family member to do the survey, or go home if there is none
             _navigateToMainPage.value = Event(true)
         }
     }
 
     fun getProgressPercentage(pos: Int): Float {
-        val totalQuestions = survey.value?.questions?.size ?: 0
+        val form = formModel.value!!
+        val survey = survey.value!!
+        val totalQuestions = survey.questions.size
         if (pos == 0) return 1f / totalQuestions
         if (totalQuestions == 0) return 0f
-        val currentQuestion = formModel.value?.answeredQuestionsOrdered?.getOrNull(pos - 1)
+        val currentQuestion = form.surveyAnswers.toList()[pos - 1].first
         val index =
-            survey.value?.questions?.map { it.id }?.indexOf(currentQuestion)?.coerceAtLeast(0) ?: 0
+            survey.questions.map { it.id }.indexOf(currentQuestion).coerceAtLeast(0)
         return ((index + 2).toFloat() / totalQuestions.toFloat()).coerceIn(0f, 1f)
     }
 
