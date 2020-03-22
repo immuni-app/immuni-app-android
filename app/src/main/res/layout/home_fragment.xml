@@ -15,6 +15,7 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:background="@color/home_background"
         android:paddingBottom="100dp"
         android:scrollbars="none"
         android:overScrollMode="never"

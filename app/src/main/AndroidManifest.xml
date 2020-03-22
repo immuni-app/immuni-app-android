@@ -40,7 +40,7 @@
         </activity>
         <activity
             android:name=".ui.log.LogActivity"
-            android:launchMode="singleTop"
+            android:launchMode="standard"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity

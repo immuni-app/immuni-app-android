@@ -57,10 +57,9 @@ class FormDoneFragment : Fragment() {
     }
 
     private fun goToNextLogStart() {
-        val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }
+        val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java)
         activity?.startActivity(intent)
+        activity?.finish()
     }
 
     private fun goToMainActivity() {

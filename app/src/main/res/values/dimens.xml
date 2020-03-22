@@ -15,4 +15,6 @@
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12dp</dimen>
     <dimen name="design_bottom_navigation_shadow_height" tools:override="true">0dp</dimen>
     <dimen name="button_corner_radius">27dp</dimen>
+
+    <dimen name="home_card_elevation">20dp</dimen>
 </resources>

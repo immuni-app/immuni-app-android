@@ -7,11 +7,13 @@ import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import org.ascolto.onlus.geocrowd19.android.util.isFlagSet
 import org.ascolto.onlus.geocrowd19.android.util.setFlag
 import com.bendingspoons.base.livedata.Event
+import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.api.oracle.model.getSettingsSurvey
+import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
+import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.HomeListAdapter
@@ -23,6 +25,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
 
     private val _showAddFamilyMemberDialog = MutableLiveData<Event<Boolean>>()
     val showAddFamilyMemberDialog: LiveData<Event<Boolean>>
@@ -99,7 +102,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     }
 
     fun openSuggestions(severity: Severity) {
-        val survey = getSettingsSurvey()?.survey()
+        val survey = oracle.settings()?.survey
         survey?.let { s ->
             val url = s.triage.profiles.firstOrNull { it.severity == severity }?.url
             url?.let { _showSuggestionDialog.value = Event(it) }
