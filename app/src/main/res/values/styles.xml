@@ -51,6 +51,15 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="DialogFragmentTheme" parent="AppTheme">
+        <item name="android:windowAnimationStyle">@style/DialogFragmentTheme.Window</item>
+    </style>
+
+    <style name="DialogFragmentTheme.Window" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/fragment_fade_enter</item>
+        <item name="android:windowExitAnimation">@anim/fragment_fade_exit</item>
+    </style>
+
     <style name="BSNumberPicker">
         <item name="np_height">180dp</item>
         <item name="np_width">64dp</item>

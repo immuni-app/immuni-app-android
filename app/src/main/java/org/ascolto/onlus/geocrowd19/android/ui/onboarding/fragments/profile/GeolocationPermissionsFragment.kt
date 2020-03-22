@@ -12,6 +12,7 @@ import org.ascolto.onlus.geocrowd19.android.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.base.extensions.hideKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.onboarding_geolocation_fragment.*
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.PermissionsTutorialDialog
 import org.koin.android.ext.android.inject
 
 class GeolocationPermissionsFragment : ProfileContentFragment(R.layout.onboarding_geolocation_fragment) {
@@ -35,8 +36,13 @@ class GeolocationPermissionsFragment : ProfileContentFragment(R.layout.onboardin
         next.isEnabled = true
         next.setOnClickListener(null)
         next.setOnClickListener {
-            geolocationManager.requestPermissions(activity as AppCompatActivity)
+            openPermissionsTutorialDialog()
+            //geolocationManager.requestPermissions(activity as AppCompatActivity)
         }
+    }
+
+    private fun openPermissionsTutorialDialog() {
+        PermissionsTutorialDialog().show(childFragmentManager, "permissions_tutorial")
     }
 
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {

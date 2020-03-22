@@ -43,5 +43,6 @@
     <color name="picker_divider_color">#33B7B7B7</color>
     <color name="home_background">#F9F9FF</color>
     <color name="dialog_status_bar_color">#66000000</color>
-    <color name="dialog_status_bar_alpha">#4DFFFFFF</color>
+    <color name="web_view_dialog_status_bar">#4DFFFFFF</color>
+    <color name="dialog_background_mask_color">#B3000000</color>
 </resources>
