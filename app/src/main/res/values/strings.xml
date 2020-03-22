@@ -72,4 +72,6 @@
 
     <string name="app_exit_title">Uscire</string>
     <string name="app_exit_message">Sei sicuro di voler uscire?</string>
+    <string name="onboarding_geolocation_title">Permetti il calcolo del tuo fattore di rischio</string>
+    <string name="onboarding_geolocation_message">Consenti l\'accesso alla posizione durante tutto l\'arco della giornata per permettere alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
 </resources>

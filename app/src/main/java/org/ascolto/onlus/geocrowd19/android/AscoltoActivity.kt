@@ -3,6 +3,7 @@ package org.ascolto.onlus.geocrowd19.android
 import android.annotation.SuppressLint
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
+import com.bendingspoons.secretmenu.SecretMenu
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.koin.android.ext.android.inject
 
@@ -10,19 +11,18 @@ import org.koin.android.ext.android.inject
 open class AscoltoActivity : AppCompatActivity() {
 
     val geolocationManager: GeolocationManager by inject()
-
-    //val secretMenu: SecretMenu by inject()
+    val secretMenu: SecretMenu by inject()
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         ev?.let {
-            //secretMenu.onTouchEvent(it)
+            secretMenu.onTouchEvent(it)
         }
         return super.dispatchTouchEvent(ev)
     }
 
     fun dispatchDialogTouchEvent(ev: MotionEvent?) {
         ev?.let {
-            //secretMenu.onTouchEvent(it)
+            secretMenu.onTouchEvent(it)
         }
     }
 

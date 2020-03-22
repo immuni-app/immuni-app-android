@@ -19,7 +19,8 @@ class AscoltoSecretMenuConfiguration(val context: Context): SecretMenuConfigurat
     private val theirs: Theirs by inject()
 
     override val isDevelopmentDevice = {
-        oracle.settings()?.developmentDevices?.contains(concierge.aaid.id) == true
+        true
+        //oracle.settings()?.developmentDevices?.contains(concierge.aaid.id) == true
     }
 
     override fun concierge(): ConciergeManager {

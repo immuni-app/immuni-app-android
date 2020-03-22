@@ -32,7 +32,9 @@ class GeolocationPermissionsFragment : ProfileContentFragment(R.layout.onboardin
             viewModel.onPrevTap()
         }
 
-        geolocation.setOnClickListener {
+        next.isEnabled = true
+        next.setOnClickListener(null)
+        next.setOnClickListener {
             geolocationManager.requestPermissions(activity as AppCompatActivity)
         }
     }
