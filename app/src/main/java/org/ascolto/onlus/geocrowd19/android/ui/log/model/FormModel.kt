@@ -17,15 +17,8 @@ data class FormModel(
         questionHistory.push(questionId)
     }
 
-    fun addAnswers(answers: QuestionAnswers) {
-        for (answer in answers) {
-            var questionAnswers = surveyAnswers[currentQuestion]
-            if (questionAnswers == null) {
-                questionAnswers = listOf()
-            }
-            questionAnswers = questionAnswers.toMutableList().apply { add(answer) }
-            surveyAnswers[currentQuestion] = questionAnswers
-        }
+    fun saveAnswers(answers: QuestionAnswers) {
+        surveyAnswers[currentQuestion] = answers
     }
 
     fun goBack() {

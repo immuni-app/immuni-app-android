@@ -163,7 +163,7 @@ class LogViewModel(
     }
 
     fun saveAnswers(questionId: String, answers: QuestionAnswers) {
-        formModel.value?.addAnswers(answers)
+        formModel.value?.saveAnswers(answers)
         handle.set(STATE_KEY, formModel.value)
     }
 
