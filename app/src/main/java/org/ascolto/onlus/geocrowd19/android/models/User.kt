@@ -8,13 +8,13 @@ import java.util.*
 
 @JsonClass(generateAdapter = true)
 class User(
-    @field:Json(name = "id") val id: String,
-    @field:Json(name = "householder") val isMain: Boolean,
-    @field:Json(name = "age") val age: Int,
-    @field:Json(name = "gender") val gender: Gender,
-    @field:Json(name = "name") val name: String,
-    @field:Json(name = "last_survey_at") val lastSurveyDate: Date,
-    @field:Json(name = "last_survey_version") val lastSurveyVersion: String,
-    @field:Json(name = "last_triage_status") val lastTriageProfile: TriageProfile,
-    @field:Json(name = "next_survey_at") val nextSurveyDate: Date
+    @field:Json(name = "id") val id: String = "",
+    @field:Json(name = "householder") val isMain: Boolean = false,
+    @field:Json(name = "age") val age: Int = 0,
+    @field:Json(name = "gender") val gender: Gender = Gender.FEMALE,
+    @field:Json(name = "name") val name: String = "",
+    @field:Json(name = "last_survey_at") val lastSurveyDate: Double = 0.0,
+    @field:Json(name = "last_survey_version") val lastSurveyVersion: String  = "",
+    @field:Json(name = "last_triage_status") val lastTriageProfile: TriageProfile?,
+    @field:Json(name = "next_survey_at") val nextSurveyDate: Double = 0.0
 )
