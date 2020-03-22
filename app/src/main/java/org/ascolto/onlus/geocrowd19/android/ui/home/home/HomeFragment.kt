@@ -105,7 +105,13 @@ class HomeFragment : Fragment(), HomeClickListener {
 
     override fun onClick(item: HomeItemType) {
         when(item) {
-            is SuggestionsCard -> {
+            is SuggestionsCardWhite -> {
+                viewModel.openSuggestions(item.severity)
+            }
+            is SuggestionsCardYellow -> {
+                viewModel.openSuggestions(item.severity)
+            }
+            is SuggestionsCardRed -> {
                 viewModel.openSuggestions(item.severity)
             }
             is EnableNotificationCard -> {

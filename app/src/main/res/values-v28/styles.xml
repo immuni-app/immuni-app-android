@@ -1,0 +1,22 @@
+<resources>
+    <!-- From API 28 we support colored shadows for cards -->
+    <style name="CardShadowYellow">
+        <item name="android:elevation">@dimen/home_card_elevation</item>
+        <item name="android:outlineSpotShadowColor">@color/card_yellow</item>
+    </style>
+
+    <style name="CardShadowRed">
+        <item name="android:elevation">0.5dp</item>
+        <item name="android:outlineSpotShadowColor">@color/card_red</item>
+    </style>
+
+    <style name="CardShadowWhite">
+        <item name="android:elevation">@dimen/home_card_elevation</item>
+        <item name="android:outlineSpotShadowColor">#08000000</item>
+    </style>
+
+    <style name="CardShadowBlue">
+        <item name="android:elevation">@dimen/home_card_elevation</item>
+        <item name="android:outlineSpotShadowColor">#99495D74</item>
+    </style>
+</resources>

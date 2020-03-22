@@ -19,7 +19,17 @@ class HeaderCard(
     val title: String
 ): HomeItemType()
 
-class SuggestionsCard(
+class SuggestionsCardWhite(
+    val title: String,
+    val severity: Severity
+): HomeItemType()
+
+class SuggestionsCardYellow(
+    val title: String,
+    val severity: Severity
+): HomeItemType()
+
+class SuggestionsCardRed(
     val title: String,
     val severity: Severity
 ): HomeItemType()

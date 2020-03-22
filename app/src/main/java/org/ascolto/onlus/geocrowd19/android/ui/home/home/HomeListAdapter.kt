@@ -1,9 +1,5 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home.home
 
-import android.graphics.Color
-import android.media.Image
-import android.os.Build
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +14,6 @@ import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
-import org.ascolto.onlus.geocrowd19.android.models.survey.Survey
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
 
 class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -53,7 +48,25 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         }
     }
 
-    inner class SuggestionsCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class SuggestionsCardWhiteVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+        var container: ConstraintLayout = v
+        var title: TextView = v.findViewById(R.id.title)
+        var icon: ImageView = v.findViewById(R.id.icon)
+        override fun onClick(v: View) {
+            clickListener.onClick(items[adapterPosition])
+        }
+    }
+
+    inner class SuggestionsCardYellowVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+        var container: ConstraintLayout = v
+        var title: TextView = v.findViewById(R.id.title)
+        var icon: ImageView = v.findViewById(R.id.icon)
+        override fun onClick(v: View) {
+            clickListener.onClick(items[adapterPosition])
+        }
+    }
+
+    inner class SuggestionsCardRedVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var container: ConstraintLayout = v
         var title: TextView = v.findViewById(R.id.title)
         var icon: ImageView = v.findViewById(R.id.icon)
@@ -98,11 +111,23 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
 
             return HeaderCardVH(v as LinearLayout)
         }
+        else if(viewType == 4) {
+            val v = LayoutInflater.from(parent.context)
+                .inflate(R.layout.home_suggestions_card_white_item, parent, false)
+
+            return SuggestionsCardWhiteVH(v as ConstraintLayout)
+        }
+        else if(viewType == 5) {
+            val v = LayoutInflater.from(parent.context)
+                .inflate(R.layout.home_suggestions_card_yellow_item, parent, false)
+
+            return SuggestionsCardYellowVH(v as ConstraintLayout)
+        }
         else {
             val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_suggestions_card_item, parent, false)
+                .inflate(R.layout.home_suggestions_card_red_item, parent, false)
 
-            return SuggestionsCardVH(v as ConstraintLayout)
+            return SuggestionsCardRedVH(v as ConstraintLayout)
         }
     }
 
@@ -114,32 +139,17 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         payload: List<Any>
     ) {
         when(holder) {
-            is SuggestionsCardVH -> {
-                val item = items[position] as SuggestionsCard
-                val color = when(item.severity) {
-                    Severity.LOW -> context.resources.getColor(R.color.background)
-                    Severity.MID -> context.resources.getColor(R.color.card_yellow)
-                    Severity.HIGH -> context.resources.getColor(R.color.card_red)
-                }
-
-                holder.container.background = when(item.severity) {
-                    Severity.LOW -> context.resources.getDrawable(R.drawable.card_white_bg)
-                    Severity.MID -> context.resources.getDrawable(R.drawable.card_yellow_bg)
-                    Severity.HIGH -> context.resources.getDrawable(R.drawable.card_red_bg)
-                }
-                holder.container.setTint(color)
+            is SuggestionsCardWhiteVH -> {
+                val item = items[position] as SuggestionsCardWhite
                 holder.title.text = HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
-                
-                holder.title.setTextColor(when(item.severity) {
-                    Severity.LOW -> context.resources.getColor(R.color.colorPrimary)
-                    Severity.MID -> context.resources.getColor(R.color.background)
-                    Severity.HIGH -> context.resources.getColor(R.color.background)
-                })
-                holder.icon.setImageResource(when(item.severity) {
-                    Severity.LOW -> R.drawable.ic_info
-                    Severity.MID -> R.drawable.ic_danger
-                    Severity.HIGH -> R.drawable.ic_danger
-                })
+            }
+            is SuggestionsCardYellowVH -> {
+                val item = items[position] as SuggestionsCardYellow
+                holder.title.text = HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            }
+            is SuggestionsCardRedVH -> {
+                val item = items[position] as SuggestionsCardRed
+                holder.title.text = HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
         }
     }
@@ -150,7 +160,9 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
             is EnableGeolocationCard -> 1
             is EnableNotificationCard -> 2
             is HeaderCard -> 3
-            is SuggestionsCard -> 4
+            is SuggestionsCardWhite -> 4
+            is SuggestionsCardYellow -> 5
+            is SuggestionsCardRed -> 6
         }
     }
 

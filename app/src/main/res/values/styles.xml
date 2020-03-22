@@ -236,4 +236,19 @@
         <item name="android:textColor">#495D74</item>
         <item name="android:textSize">35sp</item>
     </style>
+
+    <!-- From API 28 we support colored shadows for cards -->
+    <style name="CardShadowYellow">
+    </style>
+
+    <style name="CardShadowRed">
+    </style>
+
+    <style name="CardShadowWhite">
+        <item name="android:elevation">1dp</item>
+    </style>
+
+    <style name="CardShadowBlue">
+    </style>
+
 </resources>

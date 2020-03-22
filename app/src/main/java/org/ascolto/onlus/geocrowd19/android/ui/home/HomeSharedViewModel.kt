@@ -69,9 +69,9 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                     "<b>Roddy</b>")
                 itemsList.add(SurveyCard(true, 1))
                 itemsList.add(HeaderCard("ciao"))
-                itemsList.add(SuggestionsCard(suggestionTitle, Severity.LOW))
-                itemsList.add(SuggestionsCard(suggestionTitle2, Severity.MID))
-                itemsList.add(SuggestionsCard(suggestionTitle3, Severity.HIGH))
+                itemsList.add(SuggestionsCardWhite(suggestionTitle, Severity.LOW))
+                itemsList.add(SuggestionsCardYellow(suggestionTitle2, Severity.MID))
+                itemsList.add(SuggestionsCardRed(suggestionTitle3, Severity.HIGH))
 
                 listModel.value = itemsList.toList()
             }
