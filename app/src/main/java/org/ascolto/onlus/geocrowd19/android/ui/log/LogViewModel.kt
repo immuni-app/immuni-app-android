@@ -1,5 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.log
 
+import android.util.Log
 import androidx.lifecycle.*
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
@@ -14,6 +15,7 @@ import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import org.ascolto.onlus.geocrowd19.android.models.UserHealthProfile
+import org.ascolto.onlus.geocrowd19.android.picoEvents.SurveyCompleted
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
@@ -198,11 +200,22 @@ class LogViewModel(
                 lastSurveyVersion = survey.version,
                 lastSurveyDate = Date()
             )
+            val previousUserHealthProfile: UserHealthProfile? = state.load(userHealthProfile.key)
             state.save(userHealthProfile.key, userHealthProfile)
 
             // At least the last user timestamp
             delay(2000)
 
+            val surveyCompletedEvent = SurveyCompleted(
+                userId = userHealthProfile.userId,
+                surveyVersion = survey.version,
+                answers = form.surveyAnswers,
+                triageProfile = userHealthProfile.triageProfileId,
+                previousUserHealthState = previousUserHealthProfile?.healthState ?: setOf(),
+                userHealthState = userHealthProfile.healthState
+            )
+            Log.d("survey completed", surveyCompletedEvent.userAction.info.toString())
+            pico.trackEvent(surveyCompletedEvent.userAction)
             // TODO send to Pico
             /*
             pico.trackUserAction(
