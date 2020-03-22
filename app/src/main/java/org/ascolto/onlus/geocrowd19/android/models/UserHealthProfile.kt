@@ -11,8 +11,8 @@ data class UserHealthProfile(
     @field:Json(name = "user_id") val userId: String,
     @field:Json(name = "health_state") val healthState: UserHealthState,
     @field:Json(name = "triage_profile_id") val triageProfileId: TriageProfileId?,
-    @field:Json(name = "lastSurveyVersion") val lastSurveyVersion: String?,
-    @field:Json(name = "lastSurveyDate") val lastSurveyDate: Date?
+    @field:Json(name = "last_survey_version") val lastSurveyVersion: String?,
+    @field:Json(name = "last_survey_date") val lastSurveyDate: Date?
 ) {
     val key = key(userId)
 

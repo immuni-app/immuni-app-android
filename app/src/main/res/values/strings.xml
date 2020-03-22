@@ -84,4 +84,5 @@
     <string name="update_your_family_diary">Aggiorna i diari clinici per la tua famiglia</string>
     <string name="you_have_clinic_diaries_to_update">Hai 3 diari clinici da aggiornare</string>
     <string name="start_survey_filling">Inizia compilazione</string>
+    <string name="reminder_notification_channel_name">Compila il questionario</string>
 </resources>

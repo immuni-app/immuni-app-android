@@ -4,9 +4,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.*
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
-import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
-import org.ascolto.onlus.geocrowd19.android.db.entity.UserInfoEntity
 import org.ascolto.onlus.geocrowd19.android.models.survey.*
 import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
@@ -15,6 +13,9 @@ import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
+import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
+import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
+import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.UserHealthProfile
 import org.ascolto.onlus.geocrowd19.android.picoEvents.SurveyCompleted
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
@@ -31,10 +32,11 @@ class LogViewModel(
     private val state: KVStorage by inject()
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val pico: Pico by inject()
+    private val surveyManager: SurveyManager by inject()
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    var userInfo = MediatorLiveData<UserInfoEntity>()
+    var user = MediatorLiveData<User>()
 
     var survey = MutableLiveData<Survey>()
 
@@ -87,39 +89,26 @@ class LogViewModel(
         val _survey = settings.survey
         survey.value = _survey
 
-        // TODO select the user for the survey (main or family member)
         uiScope.launch {
-            val allUsers = database.userInfoDao().getFamilyMembersUserInfo()
-            //TODO use the logic to choose the correct user
-            userInfo.value = database.userInfoDao().getMainUserInfo()
-            userInfo.value?.let { user ->
-                val lastProfile = state.load(
-                    UserHealthProfile.key(user.id),
-                    defValue = UserHealthProfile(
-                        userId = user.id,
-                        healthState = setOf(),
-                        triageProfileId = null,
-                        lastSurveyVersion = null,
-                        lastSurveyDate = null
-                    )
+            val _user = surveyManager.nextUserToLog()!!
+            user.value = _user
+            val lastProfile = surveyManager.userHealthProfile(_user.id)
+
+            val currentQuestion = _survey.questions.first {
+                it.shouldBeShown(
+                    healthState = lastProfile.healthState,
+                    triageProfile = lastProfile.triageProfileId,
+                    surveyAnswers = linkedMapOf()
                 )
+            }.id
 
-                val currentQuestion = _survey.questions.first {
-                    it.shouldBeShown(
-                        healthState = lastProfile.healthState,
-                        triageProfile = lastProfile.triageProfileId,
-                        surveyAnswers = linkedMapOf()
-                    )
-                }.id
-
-                if (formModel.value == null) {
-                    formModel.value = FormModel(
-                        questionHistory = Stack<QuestionId>().apply { push(currentQuestion) },
-                        healthState = lastProfile.healthState,
-                        triageProfile = lastProfile.triageProfileId,
-                        surveyAnswers = linkedMapOf()
-                    )
-                }
+            if (formModel.value == null) {
+                formModel.value = FormModel(
+                    questionHistory = Stack<QuestionId>().apply { push(currentQuestion) },
+                    healthState = lastProfile.healthState,
+                    triageProfile = lastProfile.triageProfileId,
+                    surveyAnswers = linkedMapOf()
+                )
             }
         }
     }
@@ -193,7 +182,7 @@ class LogViewModel(
         uiScope.launch {
             val form = formModel.value!!
             val survey = survey.value!!
-            val userId = userInfo.value!!.id
+            val userId = user.value!!.id
 
             form.triageProfile = survey.triage(
                 form.healthState,
@@ -203,31 +192,13 @@ class LogViewModel(
 
             updateFormModel(form)
 
-            val userHealthProfile = UserHealthProfile(
-                userId = userId,
-                healthState = form.healthState,
-                triageProfileId = form.triageProfile,
-                lastSurveyVersion = survey.version,
-                lastSurveyDate = form.startDate
-            )
-            val previousUserHealthProfile: UserHealthProfile? = state.load(userHealthProfile.key)
-            state.save(userHealthProfile.key, userHealthProfile)
-
-            val surveyCompletedEvent = SurveyCompleted(
-                userId = userHealthProfile.userId,
-                surveyVersion = survey.version,
-                answers = form.surveyAnswers,
-                triageProfile = userHealthProfile.triageProfileId,
-                previousUserHealthState = previousUserHealthProfile?.healthState ?: setOf(),
-                userHealthState = userHealthProfile.healthState
-            )
-            Log.d("survey completed", surveyCompletedEvent.userAction.info.toString())
-            pico.trackEvent(surveyCompletedEvent.userAction)
+            val updatedUserHealthProfile =
+                surveyManager.completeSurvey(userId = userId, form = form, survey = survey)
 
             // At least the last user timestamp
             delay(2000)
 
-            userHealthProfile.triageProfileId?.let { profileId ->
+            updatedUserHealthProfile.triageProfileId?.let { profileId ->
                 survey.triage.profile(profileId)?.let { profile ->
                     openTriageDialog(profile)
                 }
@@ -236,12 +207,10 @@ class LogViewModel(
             // TODO: check why removing this delay prevents the Triage dialog webView from showing
             delay(1000)
 
-            // TODO check which - if any - family member has to do the survey, or go home
-            val hasNetFamilyMemberToLog = true
-            if (hasNetFamilyMemberToLog) {
-                _navigateToNextLogStartPage.value = Event(true)
-            } else {
+            if (surveyManager.areAllSurveysLogged()) {
                 _navigateToMainPage.value = Event(true)
+            } else {
+                _navigateToNextLogStartPage.value = Event(true)
             }
         }
     }
