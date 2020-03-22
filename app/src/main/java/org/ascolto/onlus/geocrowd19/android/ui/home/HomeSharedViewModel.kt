@@ -41,22 +41,9 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     private fun refreshListModel() {
         uiScope.launch {
             val model = database.userInfoDao().getMainUserInfoFlow().collect {
-
                 val ctx = AscoltoApplication.appContext
-                val suggestionTitle = String.format(ctx.resources.getString(R.string.indication_for),
-                    "<b>Giulia</b>")
-                val suggestionTitle2 = String.format(ctx.resources.getString(R.string.indication_for),
-                    "<b>Marco e Matteo</b>")
-                val suggestionTitle3 = String.format(ctx.resources.getString(R.string.indication_for),
-                    "<b>Roddy</b>")
 
-                val itemsList = mutableListOf(
-                    SurveyCard(true, 1),
-                    HeaderCard("ciao"),
-                    SuggestionsCard(suggestionTitle, Severity.LOW),
-                    SuggestionsCard(suggestionTitle2, Severity.MID),
-                    SuggestionsCard(suggestionTitle3, Severity.HIGH)
-                )
+                val itemsList = mutableListOf<HomeItemType>()
 
                 // check geolocation disabled
 
@@ -69,6 +56,19 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 if(!PushNotificationUtils.areNotificationsEnabled(AscoltoApplication.appContext)) {
                     itemsList.add(EnableNotificationCard())
                 }
+
+                // fake cards
+                val suggestionTitle = String.format(ctx.resources.getString(R.string.indication_for),
+                    "<b>Giulia</b>")
+                val suggestionTitle2 = String.format(ctx.resources.getString(R.string.indication_for),
+                    "<b>Marco e Matteo</b>")
+                val suggestionTitle3 = String.format(ctx.resources.getString(R.string.indication_for),
+                    "<b>Roddy</b>")
+                itemsList.add(SurveyCard(true, 1))
+                itemsList.add(HeaderCard("ciao"))
+                itemsList.add(SuggestionsCard(suggestionTitle, Severity.LOW))
+                itemsList.add(SuggestionsCard(suggestionTitle2, Severity.MID))
+                itemsList.add(SuggestionsCard(suggestionTitle3, Severity.HIGH))
 
                 listModel.value = itemsList.toList()
             }
