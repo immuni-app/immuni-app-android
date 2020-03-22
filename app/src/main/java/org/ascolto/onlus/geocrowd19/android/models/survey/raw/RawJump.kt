@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 class RawJumpItem(
     @field:Json(name = "to") val destination: String,
-    @field:Json(name = "conditions") val conditions: List<RawConditionItem>
+    @field:Json(name = "condition") val condition: RawCondition
 ) {
     companion object {
         const val END_OF_SURVEY = "__end__"
@@ -20,7 +20,7 @@ class RawJumpItem(
 
         return JumpItem(
             destination = destination,
-            condition = Condition(conditions.map { it.conditionItem() })
+            condition = condition.condition()
         )
     }
 }

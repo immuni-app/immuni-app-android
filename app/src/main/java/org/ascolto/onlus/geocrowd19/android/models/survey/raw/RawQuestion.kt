@@ -11,7 +11,7 @@ data class RawQuestion(
     @field:Json(name = "description") val description: String,
     @field:Json(name = "widget") val widget: RawWidget,
     @field:Json(name = "frequency") val frequency: Int,
-    @field:Json(name = "only_when") val showConditions: List<RawConditionItem>,
+    @field:Json(name = "only_when") val showCondition: RawCondition,
     @field:Json(name = "state_updater") val healthStateUpdaters: List<RawHealthStateUpdaterItem>,
     @field:Json(name = "jump") val jumps: List<RawJumpItem>
 ) {
@@ -21,7 +21,7 @@ data class RawQuestion(
         description = description,
         widget = widget.widget(),
         frequency = frequency,
-        showCondition = Condition(showConditions.map { item -> item.conditionItem() }),
+        showCondition = showCondition.condition(),
         healthStateUpdater = HealthStateUpdater(healthStateUpdaters.map { it.healthStateUpdaterItem() }),
         jump = Jump(jumps.map { item -> item.jumpItem() })
     )

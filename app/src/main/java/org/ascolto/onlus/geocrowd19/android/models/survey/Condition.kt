@@ -3,41 +3,34 @@ package org.ascolto.onlus.geocrowd19.android.models.survey
 typealias QuestionAnswers = List<Answer>
 typealias SurveyAnswers = Map<QuestionId, QuestionAnswers>
 
-class SimpleConditionItem(
-    val questionId: QuestionId,
-    val matchingIndexes: List<AnswerIndex>
-) : ConditionItem()
-
-class CompositeConditionItem(
-    val questionId: QuestionId,
-    val matchingComponentIndexes: List<List<AnswerIndex?>>
-) : ConditionItem()
-
-class TriageProfileConditionItem(
-    val matchingProfiles: List<TriageProfileId?>
-) : ConditionItem()
-
-class StatesContainConditionItem(
-    val matchingStates: Set<HealthState>
-) : ConditionItem()
-
-class StatesDoNotContainConditionItem(
-    val matchingStates: Set<HealthState>
-) : ConditionItem()
-
-sealed class ConditionItem {
+sealed class Condition {
     fun isSatisfied(
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
-    ) = when (this) {
-        is SimpleConditionItem -> {
+    ): Boolean = when (this) {
+        is TrueCondition -> {
+            true
+        }
+        is FalseCondition -> {
+            false
+        }
+        is OrCondition -> {
+            conditions.any { it.isSatisfied(healthState, triageProfile, surveyAnswers) }
+        }
+        is AndCondition -> {
+            conditions.all { it.isSatisfied(healthState, triageProfile, surveyAnswers) }
+        }
+        is NotCondition -> {
+            !condition.isSatisfied(healthState, triageProfile, surveyAnswers)
+        }
+        is SimpleCondition -> {
             surveyAnswers[questionId]?.let { answers ->
                 val answerIndexes = answers.map { (it as SimpleAnswer).index }
                 matchingIndexes.any { answerIndexes.contains(it) }
             } ?: false
         }
-        is CompositeConditionItem -> {
+        is CompositeCondition -> {
             surveyAnswers[questionId]?.let { answers ->
                 val answerComponentsIndexes = answers.map {
                     (it as CompositeAnswer).componentIndexes
@@ -56,24 +49,35 @@ sealed class ConditionItem {
                 }
             } ?: false
         }
-        is TriageProfileConditionItem -> {
+        is TriageProfileCondition -> {
             matchingProfiles.contains(triageProfile)
         }
-        is StatesContainConditionItem -> {
+        is StatesContainCondition -> {
             matchingStates.intersect(healthState).isNotEmpty()
-        }
-        is StatesDoNotContainConditionItem -> {
-            matchingStates.intersect(healthState).isEmpty()
         }
     }
 }
 
-data class Condition(val conditions: List<ConditionItem>) {
-    fun isSatisfied(
-        healthState: UserHealthState,
-        triageProfile: TriageProfileId?,
-        surveyAnswers: SurveyAnswers
-    ) = conditions.all {
-        it.isSatisfied(healthState, triageProfile, surveyAnswers)
-    }
-}
+object TrueCondition : Condition()
+
+object FalseCondition : Condition()
+
+class OrCondition(val conditions: List<Condition>) : Condition()
+
+class AndCondition(val conditions: List<Condition>) : Condition()
+
+class NotCondition(val condition: Condition) : Condition()
+
+class SimpleCondition(
+    val questionId: QuestionId,
+    val matchingIndexes: List<AnswerIndex>
+) : Condition()
+
+class CompositeCondition(
+    val questionId: QuestionId,
+    val matchingComponentIndexes: List<List<AnswerIndex?>>
+) : Condition()
+
+class TriageProfileCondition(val matchingProfiles: List<TriageProfileId?>) : Condition()
+
+class StatesContainCondition(val matchingStates: Set<HealthState>) : Condition()
