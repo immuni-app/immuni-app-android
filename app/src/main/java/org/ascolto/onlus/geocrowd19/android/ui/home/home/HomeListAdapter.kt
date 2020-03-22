@@ -46,7 +46,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         }
     }
 
-    inner class NotificationsCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class NotificationsCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         override fun onClick(v: View) {
             clickListener.onClick(items[adapterPosition])
@@ -90,7 +90,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
             val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.home_notifications_card_item, parent, false)
 
-            return NotificationsCardVH(v as LinearLayout)
+            return NotificationsCardVH(v as ConstraintLayout)
         }
         else if(viewType == 3) {
             val v = LayoutInflater.from(parent.context)
