@@ -1,5 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.log.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.log_form_fragment.*
 import kotlinx.android.synthetic.main.log_form_fragment.progress
 import kotlinx.android.synthetic.main.log_form_fragment.viewPager
+import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
+import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class FormFragment : Fragment() {
