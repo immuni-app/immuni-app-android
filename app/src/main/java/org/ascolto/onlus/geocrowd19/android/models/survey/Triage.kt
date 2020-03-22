@@ -9,13 +9,13 @@ data class Triage(
 ) {
     fun triage(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         answers: SurveyAnswers
     ): TriageProfile? {
-        val statusId = conditions.firstOrNull {
+        val profileId = conditions.find {
             it.check(healthState, triageProfile, answers)
         }?.profileId
-        return statusId?.let { profiles.first { it.id == statusId } }
+        return profileId?.let { profiles.first { it.id == profileId } }
     }
 }
 
@@ -37,7 +37,7 @@ data class TriageCondition(
 ) {
     fun check(
         healthState: UserHealthState,
-        triageProfile: TriageProfile?,
+        triageProfile: TriageProfileId?,
         answers: SurveyAnswers
     ): Boolean {
         return condition.isSatisfied(healthState, triageProfile, answers)

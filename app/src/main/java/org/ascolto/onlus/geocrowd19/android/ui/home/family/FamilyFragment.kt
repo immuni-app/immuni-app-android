@@ -51,7 +51,6 @@ class FamilyFragment : Fragment() {
         }
 
         webViewButton.setOnClickListener {
-
             val intent = Intent(AscoltoApplication.appContext, WebViewDialogActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 putExtra("url", "https://content.ascolto-onlus.org/77e2e08cd1b72d9529493b8fabcb8804/5b35a7d7f1fa8119cde5d6702806cbb4.html#/temperature/warning")

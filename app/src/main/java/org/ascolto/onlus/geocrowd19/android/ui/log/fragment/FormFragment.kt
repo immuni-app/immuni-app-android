@@ -59,9 +59,15 @@ class FormFragment : Fragment() {
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
-            ) {}
+            ) {
+            }
         }
-        listAdapter = FormAdapter(viewModel.survey.value, this@FormFragment)
+
+        listAdapter = FormAdapter(
+            viewModel.survey.value!!,
+            viewModel.currentQuestion,
+            this@FormFragment
+        )
         with(viewPager) {
             adapter = listAdapter
             clipToPadding = false
@@ -75,19 +81,18 @@ class FormFragment : Fragment() {
             MaterialAlertDialogBuilder(context)
                 .setTitle(getString(R.string.survey_exit_title))
                 .setMessage(getString(R.string.survey_exit_message))
-                .setPositiveButton(getString(R.string.exit)) { d, _ -> activity?.finish()}
-                .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss()}
-                .setOnCancelListener {  }
+                .setPositiveButton(getString(R.string.exit)) { d, _ -> activity?.finish() }
+                .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss() }
+                .setOnCancelListener { }
                 .show()
         }
-
 
         viewModel.navigateToNextPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 toast("ON NEXT PAGE GO")
                 val newPos = viewPager.currentItem + 1
 
-                if(newPos ==  (viewPager.adapter?.itemCount ?: 0)) {
+                if (newPos == (viewPager.adapter?.itemCount ?: 0)) {
                     val action = FormFragmentDirections.actionGlobalFormDone()
                     findNavController().navigate(action)
                 } else {
@@ -110,12 +115,13 @@ class FormFragment : Fragment() {
                 listAdapter.addNextWidget(it)
                 listAdapter.notifyDataSetChanged()
 
+                viewModel.currentQuestion = it
+
                 // navigate there
                 val newPos = viewPager.currentItem + 1
                 viewPager.setCurrentItem(newPos, true)
             }
         })
-
 
         viewModel.navigateToPrevPage.observe(viewLifecycleOwner, Observer {
 
@@ -130,7 +136,7 @@ class FormFragment : Fragment() {
 
         viewModel.userInfo.observe(viewLifecycleOwner, Observer {
             it?.let {
-                progressText.text = when(it.isMainUser) {
+                progressText.text = when (it.isMainUser) {
                     true -> getString(R.string.your_clinic_diary)
                     false -> String.format(getString(R.string.survey_progress_text), it.name)
                 }
@@ -140,7 +146,7 @@ class FormFragment : Fragment() {
 
     private fun onBackPressed() {
         val newPos = viewPager.currentItem - 1
-        if(newPos >= 0) {
+        if (newPos >= 0) {
             viewPager.setCurrentItem(newPos, true)
         } else {
             findNavController().popBackStack()
