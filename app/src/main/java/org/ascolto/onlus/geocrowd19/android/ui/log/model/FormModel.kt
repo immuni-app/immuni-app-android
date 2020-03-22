@@ -6,12 +6,13 @@ import java.util.*
 import kotlin.collections.LinkedHashMap
 
 data class FormModel(
-    var questionHistory: Stack<QuestionId>,
+    val questionHistory: Stack<QuestionId>,
     var healthState: UserHealthState,
     var triageProfile: TriageProfileId?,
-    var surveyAnswers: LinkedHashMap<QuestionId, QuestionAnswers>
-): Serializable {
-    val currentQuestion = questionHistory.peek()
+    val surveyAnswers: LinkedHashMap<QuestionId, QuestionAnswers>
+) : Serializable {
+    val currentQuestion
+        get() = questionHistory.peek()
 
     fun advanceTo(questionId: QuestionId) {
         questionHistory.push(questionId)
