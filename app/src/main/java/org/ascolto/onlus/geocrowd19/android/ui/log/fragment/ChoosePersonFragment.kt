@@ -42,19 +42,16 @@ class ChoosePersonFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        viewModel.userInfo.observe(viewLifecycleOwner, Observer {
+        viewModel.user.observe(viewLifecycleOwner, Observer {
             it?.let {
-                age.text = it.age().toString()
-                name.text = when(it.isMainUser) {
-                    true -> getString(R.string.you)
-                    false -> it.name
-                }
+                age.text = it.age.toString()
+                name.text = if (it.isMain) getString(R.string.you) else it.name
                 gender.setImageResource(when(it.gender) {
                     Gender.FEMALE -> R.drawable.ic_avatar_female_purple
                     Gender.MALE -> R.drawable.ic_avatar_female_purple
                 })
 
-                when(it.isMainUser) {
+                when(it.isMain) {
                     true -> {
                         compileFor.gone()
                         compileFor.text = getString(R.string.choose_person_bottom_message)

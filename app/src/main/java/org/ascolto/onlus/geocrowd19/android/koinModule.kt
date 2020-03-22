@@ -25,6 +25,7 @@ import com.bendingspoons.secretmenu.SecretMenu
 import com.bendingspoons.sesame.Sesame
 import com.bendingspoons.theirs.Theirs
 import com.geouniq.android.GeoUniq
+import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -97,6 +98,11 @@ val appModule = module {
     // single instance of GeolocationManager
     single {
         GeolocationManager(androidContext())
+    }
+
+    // single instance of SurveyManager
+    single {
+        SurveyManager(androidContext())
     }
 
     // SetupViewModel

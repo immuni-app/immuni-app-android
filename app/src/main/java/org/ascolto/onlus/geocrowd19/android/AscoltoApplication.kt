@@ -4,12 +4,16 @@ import android.app.Application
 import android.content.Context
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
+import androidx.lifecycle.ProcessLifecycleOwner
+import com.bendingspoons.base.lifecycle.AppLifecycleEvent
+import com.bendingspoons.base.lifecycle.AppLifecycleObserver
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import com.bendingspoons.theirs.Theirs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
@@ -24,9 +28,27 @@ class AscoltoApplication : Application() {
     private lateinit var pico: Pico
     private lateinit var theirs: Theirs
 
+
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext
+
+        val lifecycleObserver = AppLifecycleObserver()
+        GlobalScope.launch {
+            lifecycleObserver.consumeEach { event ->
+                when (event) {
+                    AppLifecycleEvent.ON_START -> {
+                        isForeground = true
+                    }
+                    AppLifecycleEvent.ON_STOP -> {
+                        isForeground = false
+                    }
+                    else -> {
+                    }
+                }
+            }
+        }
+        ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
 
         // Start Koin
         startKoin {
@@ -55,5 +77,6 @@ class AscoltoApplication : Application() {
 
     companion object {
         lateinit var appContext: Context
+        var isForeground = false
     }
 }
