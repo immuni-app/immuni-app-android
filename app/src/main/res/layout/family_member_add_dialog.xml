@@ -21,7 +21,7 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="32dp"
                 android:scaleType="fitCenter"
-                app:layout_constraintHeight_percent="0.35"
+                app:layout_constraintBottom_toTopOf="@+id/textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -38,10 +38,11 @@
                 android:maxLines="3"
                 android:text="@string/old_people_in_family_title"
                 app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -65,7 +66,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/gradient_form"/>
+        android:background="@drawable/gradient_dialogs_top"/>
     <ImageView
         android:id="@+id/back"
         android:layout_width="wrap_content"
