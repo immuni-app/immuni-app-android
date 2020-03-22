@@ -23,18 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/name"
-        style="@style/H2SubHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="2dp"
-        android:fontFamily="@font/euclid_circular_bold"
-        android:gravity="center_horizontal|bottom"
-        android:text="Tu" />
-
-    <TextView
-        android:id="@+id/age"
+        android:id="@+id/title"
         style="@style/P1Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,17 +31,6 @@
         android:layout_weight="1"
         android:fontFamily="@font/euclid_circular_bold"
         android:gravity="center_horizontal|top"
-        android:text="26 anni" />
+        android:text="NOTIFICHE DISABILITATA" />
 
-    <Button
-        android:id="@+id/next"
-        style="@style/RoundedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="FAI SURVEY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </LinearLayout>

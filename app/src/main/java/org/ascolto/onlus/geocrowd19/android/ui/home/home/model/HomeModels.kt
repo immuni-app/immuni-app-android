@@ -1,4 +1,7 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home.home.model
+
+import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
+
 // this represent an item in the home list
 
 sealed class HomeItemType
@@ -20,7 +23,3 @@ class SuggestionsCard(
     val title: String,
     val severity: Severity
 ): HomeItemType()
-
-enum class Severity {
-    NONE, YELLOW, RED
-}

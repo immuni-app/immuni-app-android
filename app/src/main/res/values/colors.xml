@@ -45,4 +45,6 @@
     <color name="dialog_status_bar_color">#66000000</color>
     <color name="web_view_dialog_status_bar">#4DFFFFFF</color>
     <color name="dialog_background_mask_color">#B3000000</color>
+    <color name="card_yellow">#FFB930</color>
+    <color name="card_red">#FE7D6C</color>
 </resources>

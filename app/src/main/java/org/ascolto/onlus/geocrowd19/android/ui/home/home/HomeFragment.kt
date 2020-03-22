@@ -19,7 +19,9 @@ import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.FamilyDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDialogActivity
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.HomeItemType
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCard
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class HomeFragment : Fragment(), HomeClickListener {
@@ -74,10 +76,20 @@ class HomeFragment : Fragment(), HomeClickListener {
             }
         })
 
+        viewModel.showSuggestionDialog.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { url ->
+                val intent = Intent(AscoltoApplication.appContext, WebViewDialogActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    putExtra("url", url)
+                }
+                activity?.startActivity(intent)
+            }
+        })
+
         viewModel.listModel.observe(viewLifecycleOwner, Observer {
             (homeList.adapter as? HomeListAdapter)?.items?.apply {
                 clear()
-                //addAll(it)
+                addAll(it)
             }
 
             homeList.adapter?.notifyDataSetChanged()
@@ -92,6 +104,10 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     override fun onClick(item: HomeItemType) {
-        toast(item.toString())
+        when(item) {
+            is SuggestionsCard -> {
+                viewModel.openSuggestions(item.severity)
+            }
+        }
     }
 }
