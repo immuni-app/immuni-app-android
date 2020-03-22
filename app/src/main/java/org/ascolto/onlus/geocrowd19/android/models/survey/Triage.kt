@@ -17,6 +17,8 @@ data class Triage(
         }?.profileId
         return profileId?.let { profiles.first { it.id == profileId } }
     }
+
+    fun profile(id: TriageProfileId) = profiles.find { it.id == id }
 }
 
 typealias TriageProfileId = String

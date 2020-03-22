@@ -1,10 +1,10 @@
 package org.ascolto.onlus.geocrowd19.android.ui.log
 
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.*
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
-import org.ascolto.onlus.geocrowd19.android.api.oracle.model.getSettingsSurvey
 import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import org.ascolto.onlus.geocrowd19.android.db.entity.UserInfoEntity
 import org.ascolto.onlus.geocrowd19.android.models.survey.*
@@ -14,8 +14,10 @@ import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
+import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.models.UserHealthProfile
 import org.ascolto.onlus.geocrowd19.android.picoEvents.SurveyCompleted
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
@@ -41,14 +43,6 @@ class LogViewModel(
     private var savedStateLiveData = handle.getLiveData<Serializable>(STATE_KEY)
     // end internal state
 
-    private val _navigateToDonePage = MutableLiveData<Event<Boolean>>()
-    val navigateToDonePage: LiveData<Event<Boolean>>
-        get() = _navigateToDonePage
-
-    private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
-    val navigateToMainPage: LiveData<Event<Boolean>>
-        get() = _navigateToMainPage
-
     private val _navigateToQuestion = MutableLiveData<Event<String>>()
     val navigateToQuestion: LiveData<Event<String>>
         get() = _navigateToQuestion
@@ -60,6 +54,22 @@ class LogViewModel(
     private val _navigateToPrevPage = MutableLiveData<Event<Boolean>>()
     val navigateToPrevPage: LiveData<Event<Boolean>>
         get() = _navigateToPrevPage
+
+    private val _navigateToDonePage = MutableLiveData<Event<Boolean>>()
+    val navigateToDonePage: LiveData<Event<Boolean>>
+        get() = _navigateToDonePage
+
+    private val _navigateToTriagePage = MutableLiveData<Event<Boolean>>()
+    val navigateToTriagePage: LiveData<Event<Boolean>>
+        get() = _navigateToTriagePage
+
+    private val _navigateToNextLogStartPage = MutableLiveData<Event<Boolean>>()
+    val navigateToNextLogStartPage: LiveData<Event<Boolean>>
+        get() = _navigateToNextLogStartPage
+
+    private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
+    val navigateToMainPage: LiveData<Event<Boolean>>
+        get() = _navigateToMainPage
 
     init {
         // internal state
@@ -73,8 +83,8 @@ class LogViewModel(
         }
         // end internal state
 
-        // TODO load current survey from settings
-        val _survey = getSettingsSurvey()!!.survey()
+        val settings = oracle.settings()!!
+        val _survey = settings.survey
         survey.value = _survey
 
         // TODO select the user for the survey (main or family member)
@@ -198,13 +208,10 @@ class LogViewModel(
                 healthState = form.healthState,
                 triageProfileId = form.triageProfile,
                 lastSurveyVersion = survey.version,
-                lastSurveyDate = Date()
+                lastSurveyDate = form.startDate
             )
             val previousUserHealthProfile: UserHealthProfile? = state.load(userHealthProfile.key)
             state.save(userHealthProfile.key, userHealthProfile)
-
-            // At least the last user timestamp
-            delay(2000)
 
             val surveyCompletedEvent = SurveyCompleted(
                 userId = userHealthProfile.userId,
@@ -216,19 +223,36 @@ class LogViewModel(
             )
             Log.d("survey completed", surveyCompletedEvent.userAction.info.toString())
             pico.trackEvent(surveyCompletedEvent.userAction)
-            // TODO send to Pico
-            /*
-            pico.trackUserAction(
-                "survey",
-                    "user_id" to userId,
-                    "version" to surveyVersion,
-                    "answers" to answers  // TODO check correct serialization of Answer, or do custom list
-                )
-             */
 
-            // TODO now choose another family member to do the survey, or go home if there is none
-            _navigateToMainPage.value = Event(true)
+            // At least the last user timestamp
+            delay(2000)
+
+            userHealthProfile.triageProfileId?.let { profileId ->
+                survey.triage.profile(profileId)?.let { profile ->
+                    openTriageDialog(profile)
+                }
+            }
+
+            // TODO: check why removing this delay prevents the Triage dialog webView from showing
+            delay(1000)
+
+            // TODO check which - if any - family member has to do the survey, or go home
+            val hasNetFamilyMemberToLog = true
+            if (hasNetFamilyMemberToLog) {
+                _navigateToNextLogStartPage.value = Event(true)
+            } else {
+                _navigateToMainPage.value = Event(true)
+            }
         }
+    }
+
+    private fun openTriageDialog(triageProfile: TriageProfile) {
+        val context = AscoltoApplication.appContext
+        val intent = Intent(context, WebViewDialogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            putExtra("url", triageProfile.url)
+        }
+        context.startActivity(intent)
     }
 
     fun getProgressPercentage(pos: Int): Float {

@@ -14,6 +14,7 @@ import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeActivity
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
+import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class FormDoneFragment : Fragment() {
@@ -40,6 +41,12 @@ class FormDoneFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
+        viewModel.navigateToNextLogStartPage.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                goToNextLogStart()
+            }
+        })
+
         viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 goToMainActivity()
@@ -49,6 +56,13 @@ class FormDoneFragment : Fragment() {
         viewModel.onLogComplete()
     }
 
+    private fun goToNextLogStart() {
+        val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        activity?.startActivity(intent)
+    }
+
     private fun goToMainActivity() {
         val intent = Intent(AscoltoApplication.appContext, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -56,5 +70,4 @@ class FormDoneFragment : Fragment() {
         activity?.startActivity(intent)
         activity?.finish()
     }
-
 }

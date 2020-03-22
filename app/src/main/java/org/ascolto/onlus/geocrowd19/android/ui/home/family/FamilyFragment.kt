@@ -1,20 +1,20 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home.family
 
-import PushNotificationUtils
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_fragment.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.toast
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.*
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.FamilyDialogActivity
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDialogActivity
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDialogActivity
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
