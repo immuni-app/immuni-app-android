@@ -1,5 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.log
 
+import android.util.Log
 import androidx.lifecycle.*
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
@@ -14,6 +15,7 @@ import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import org.ascolto.onlus.geocrowd19.android.models.UserHealthProfile
+import org.ascolto.onlus.geocrowd19.android.picoEvents.SurveyCompleted
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
@@ -33,7 +35,6 @@ class LogViewModel(
     var userInfo = MediatorLiveData<UserInfoEntity>()
 
     var survey = MutableLiveData<Survey>()
-    lateinit var currentQuestion: QuestionId
 
     // internal state
     var formModel = MediatorLiveData<FormModel>()
@@ -63,7 +64,8 @@ class LogViewModel(
     init {
         // internal state
         if (handle.get<Serializable>(STATE_KEY) != null) {
-            formModel.value = handle.get<Serializable>(STATE_KEY) as FormModel
+            val form = handle.get<Serializable>(STATE_KEY) as FormModel
+            formModel.value = form
         }
 
         formModel.addSource(savedStateLiveData) {
@@ -92,7 +94,7 @@ class LogViewModel(
                     )
                 )
 
-                currentQuestion = _survey.questions.first {
+                val currentQuestion = _survey.questions.first {
                     it.shouldBeShown(
                         healthState = lastProfile.healthState,
                         triageProfile = lastProfile.triageProfileId,
@@ -102,7 +104,7 @@ class LogViewModel(
 
                 if (formModel.value == null) {
                     formModel.value = FormModel(
-                        currentQuestion = currentQuestion,
+                        questionHistory = Stack<QuestionId>().apply { push(currentQuestion) },
                         healthState = lastProfile.healthState,
                         triageProfile = lastProfile.triageProfileId,
                         surveyAnswers = linkedMapOf()
@@ -120,9 +122,6 @@ class LogViewModel(
             return
         }
 
-        // override current if any and delete ahead
-        form.addAnswers(questionId, form.surveyAnswers[questionId] ?: listOf())
-
         val updatedHealthState = survey.updatedHealthState(
             questionId,
             form.healthState,
@@ -131,7 +130,7 @@ class LogViewModel(
         )
         form.healthState = updatedHealthState
 
-        handle.set(STATE_KEY, form)
+        updateFormModel(form)
 
         val nextDestination = survey.next(
             questionId,
@@ -142,6 +141,7 @@ class LogViewModel(
 
         when (nextDestination) {
             is SurveyQuestionDestination -> {
+                form.advanceTo(nextDestination.question.id)
                 _navigateToQuestion.value = Event(nextDestination.question.id)
             }
             is SurveyEndDestination -> {
@@ -151,6 +151,7 @@ class LogViewModel(
     }
 
     fun onPrevTap(questionId: String) {
+        formModel.value?.goBack()
         _navigateToPrevPage.value = Event(true)
     }
 
@@ -163,9 +164,8 @@ class LogViewModel(
         handle.set(STATE_KEY, model)
     }
 
-    // For multiple choice widgets
     fun saveAnswers(questionId: String, answers: QuestionAnswers) {
-        formModel.value?.addAnswers(questionId, answers)
+        formModel.value?.saveAnswers(answers)
         handle.set(STATE_KEY, formModel.value)
     }
 
@@ -191,6 +191,8 @@ class LogViewModel(
                 form.surveyAnswers
             )?.id
 
+            updateFormModel(form)
+
             val userHealthProfile = UserHealthProfile(
                 userId = userId,
                 healthState = form.healthState,
@@ -198,11 +200,22 @@ class LogViewModel(
                 lastSurveyVersion = survey.version,
                 lastSurveyDate = Date()
             )
+            val previousUserHealthProfile: UserHealthProfile? = state.load(userHealthProfile.key)
             state.save(userHealthProfile.key, userHealthProfile)
 
             // At least the last user timestamp
             delay(2000)
 
+            val surveyCompletedEvent = SurveyCompleted(
+                userId = userHealthProfile.userId,
+                surveyVersion = survey.version,
+                answers = form.surveyAnswers,
+                triageProfile = userHealthProfile.triageProfileId,
+                previousUserHealthState = previousUserHealthProfile?.healthState ?: setOf(),
+                userHealthState = userHealthProfile.healthState
+            )
+            Log.d("survey completed", surveyCompletedEvent.userAction.info.toString())
+            pico.trackEvent(surveyCompletedEvent.userAction)
             // TODO send to Pico
             /*
             pico.trackUserAction(
@@ -224,7 +237,7 @@ class LogViewModel(
         val totalQuestions = survey.questions.size
         if (pos == 0) return 1f / totalQuestions
         if (totalQuestions == 0) return 0f
-        val currentQuestion = form.surveyAnswers.toList()[pos - 1].first
+        val currentQuestion = form.currentQuestion
         val index =
             survey.questions.map { it.id }.indexOf(currentQuestion).coerceAtLeast(0)
         return ((index + 2).toFloat() / totalQuestions.toFloat()).coerceIn(0f, 1f)

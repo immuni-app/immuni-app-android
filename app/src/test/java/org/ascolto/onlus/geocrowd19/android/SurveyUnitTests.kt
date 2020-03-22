@@ -301,7 +301,7 @@ class SurveyUnitTests {
             )
         )
 
-        val isntFeelingWell = SimpleConditionItem(
+        val isntFeelingWell = SimpleCondition(
             questionId = question1.id,
             matchingIndexes = listOf(
                 (question1.widget as RadioWidget).answers.indexOf("Male")
@@ -330,19 +330,19 @@ class SurveyUnitTests {
             )
         )
 
-        val hasNausea = SimpleConditionItem(
+        val hasNausea = SimpleCondition(
             questionId = question2.id,
             matchingIndexes = listOf(
                 (question2.widget as MultipleChoicesWidget).answers.indexOf("Nausea")
             )
         )
-        val hasFever = SimpleConditionItem(
+        val hasFever = SimpleCondition(
             questionId = question2.id,
             matchingIndexes = listOf(
                 (question2.widget as MultipleChoicesWidget).answers.indexOf("Febbre")
             )
         )
-        val hasHeadache = SimpleConditionItem(
+        val hasHeadache = SimpleCondition(
             questionId = question2.id,
             matchingIndexes = listOf(
                 (question2.widget as MultipleChoicesWidget).answers.indexOf("Mal di testa")
@@ -388,7 +388,7 @@ class SurveyUnitTests {
             )
         )
 
-        val has37OfFever = CompositeConditionItem(
+        val has37OfFever = CompositeCondition(
             questionId = question3.id,
             matchingComponentIndexes = listOf(
                 listOf(
@@ -397,7 +397,7 @@ class SurveyUnitTests {
                 )
             )
         )
-        val has38OfFever = CompositeConditionItem(
+        val has38OfFever = CompositeCondition(
             questionId = question3.id,
             matchingComponentIndexes = listOf(
                 listOf(
@@ -406,7 +406,7 @@ class SurveyUnitTests {
                 )
             )
         )
-        val has37or38OfFever = CompositeConditionItem(
+        val has37or38OfFever = CompositeCondition(
             questionId = question3.id,
             matchingComponentIndexes = listOf(
                 listOf(
@@ -419,7 +419,7 @@ class SurveyUnitTests {
                 )
             )
         )
-        val hasExactly38Point5OfFever = CompositeConditionItem(
+        val hasExactly38Point5OfFever = CompositeCondition(
             questionId = question3.id,
             matchingComponentIndexes = listOf(
                 listOf(

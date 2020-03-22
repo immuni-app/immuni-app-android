@@ -6,6 +6,16 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 enum class RawConditionType {
+    @Json(name = "true")
+    TRUE,
+    @Json(name = "false")
+    FALSE,
+    @Json(name = "or")
+    OR,
+    @Json(name = "and")
+    AND,
+    @Json(name = "not")
+    NOT,
     @Json(name = "simple")
     SIMPLE,
     @Json(name = "composite")
@@ -13,13 +23,11 @@ enum class RawConditionType {
     @Json(name = "current_user_triage_profile")
     CURRENT_USER_TRIAGE_PROFILE,
     @Json(name = "states_contain")
-    STATES_CONTAIN,
-    @Json(name = "states_not_contain")
-    STATES_DO_NOT_CONTAIN
+    STATES_CONTAIN
 }
 
 @JsonClass(generateAdapter = true)
-data class RawConditionItem(
+data class RawCondition(
     @field:Json(name = "type")
     val type: RawConditionType,
     @field:Json(name = "question_id")
@@ -31,24 +39,30 @@ data class RawConditionItem(
     @field:Json(name = "matching_profiles")
     val matchingProfiles: List<TriageProfileId?>? = null,
     @field:Json(name = "states")
-    val matchingStates: List<HealthState>? = null
+    val matchingStates: List<HealthState>? = null,
+    @field:Json(name = "conditions")
+    val conditions: List<RawCondition>? = null,
+    @field:Json(name = "condition")
+    val condition: RawCondition? = null
 ) {
-    fun conditionItem() = when (type) {
-        SIMPLE -> SimpleConditionItem(
+    fun condition(): Condition = when (type) {
+        TRUE -> TrueCondition
+        FALSE -> FalseCondition
+        OR -> OrCondition(conditions!!.map { it.condition() })
+        AND -> AndCondition(conditions!!.map { it.condition() })
+        NOT -> NotCondition(condition!!.condition())
+        SIMPLE -> SimpleCondition(
             questionId!!,
             matchingIndexes!!
         )
-        COMPOSITE -> CompositeConditionItem(
+        COMPOSITE -> CompositeCondition(
             questionId!!,
             matchingComponentIndexes!!
         )
-        CURRENT_USER_TRIAGE_PROFILE -> TriageProfileConditionItem(
+        CURRENT_USER_TRIAGE_PROFILE -> TriageProfileCondition(
             matchingProfiles!!
         )
-        STATES_CONTAIN -> StatesContainConditionItem(
-            matchingStates!!.toSet()
-        )
-        STATES_DO_NOT_CONTAIN -> StatesDoNotContainConditionItem(
+        STATES_CONTAIN -> StatesContainCondition(
             matchingStates!!.toSet()
         )
     }

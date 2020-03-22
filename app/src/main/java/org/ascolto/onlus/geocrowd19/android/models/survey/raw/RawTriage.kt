@@ -19,11 +19,11 @@ data class RawTriage(
 @JsonClass(generateAdapter = true)
 data class RawTriageCondition(
     @field:Json(name = "profile_id") val profileId: TriageProfileId,
-    @field:Json(name = "conditions") val conditions: List<RawConditionItem>
+    @field:Json(name = "condition") val condition: RawCondition
 ) {
     fun triageCondition() = TriageCondition(
         profileId = profileId,
-        condition = Condition(conditions.map { it.conditionItem() })
+        condition = condition.condition()
     )
 }
 

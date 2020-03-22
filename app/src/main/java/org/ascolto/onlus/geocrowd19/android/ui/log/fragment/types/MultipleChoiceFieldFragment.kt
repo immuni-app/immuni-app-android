@@ -7,7 +7,6 @@ import android.widget.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.models.survey.CompositeAnswer
 import org.ascolto.onlus.geocrowd19.android.models.survey.MultipleChoicesWidget
 import org.ascolto.onlus.geocrowd19.android.models.survey.SimpleAnswer
 import org.ascolto.onlus.geocrowd19.android.models.survey.Survey
@@ -30,8 +29,8 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
         get() = description
 
     private val items = mutableListOf<CheckBox>()
-    private var minimumAnswer = 1
-    private var maximumAnswer = 10000
+    private var minimumAnswers = 0
+    private var maximumAnswers = 10000
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,8 +47,8 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
         questionText.text = question.title
         descriptionText.text = question.description
 
-        minimumAnswer = widget.minNumberOfAnswers
-        maximumAnswer = widget.maxNumberOfAnswers
+        minimumAnswers = widget.minNumberOfAnswers
+        maximumAnswers = widget.maxNumberOfAnswers
 
         if (question.description.isEmpty()) descriptionText.gone()
         else descriptionText.visible()
@@ -77,6 +76,8 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
             items.forEach { addView(it) }
         }
 
+        validate()
+
         formModel()?.let {
             onFormModelUpdate(it)
         }
@@ -98,9 +99,7 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
 
     override fun validate(): Boolean {
         val count = items.count { it.isChecked }
-        var isValid = count > 0
-
-        isValid = isValid && count >= minimumAnswer && count <= maximumAnswer
+        val isValid = count in minimumAnswers..maximumAnswers
 
         nextButton.isEnabled = isValid
         if (isValid) saveData()

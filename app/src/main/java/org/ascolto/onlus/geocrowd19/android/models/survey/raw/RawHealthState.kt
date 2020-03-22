@@ -16,7 +16,7 @@ enum class RawHealthStateUpdaterItemType {
 data class RawHealthStateUpdaterItem(
     @field:Json(name = "state") val state: HealthState,
     @field:Json(name = "type") val type: RawHealthStateUpdaterItemType,
-    @field:Json(name = "conditions") val conditions: List<RawConditionItem>
+    @field:Json(name = "condition") val condition: RawCondition
 ) {
     fun healthStateUpdaterItem() = HealthStateUpdaterItem(
         state = state,
@@ -24,6 +24,6 @@ data class RawHealthStateUpdaterItem(
             ADD -> HealthStateUpdaterItemType.ADD
             REMOVE -> HealthStateUpdaterItemType.REMOVE
         },
-        conditions = conditions.map { it.conditionItem() }
+        condition = condition.condition()
     )
 }

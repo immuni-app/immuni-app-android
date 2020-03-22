@@ -65,7 +65,7 @@ class FormFragment : Fragment() {
 
         listAdapter = FormAdapter(
             viewModel.survey.value!!,
-            viewModel.currentQuestion,
+            viewModel.formModel.value!!.currentQuestion,
             this@FormFragment
         )
         with(viewPager) {
@@ -109,13 +109,10 @@ class FormFragment : Fragment() {
         })
 
         viewModel.navigateToQuestion.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let {
-                toast("GO $it")
+            it.getContentIfNotHandled()?.let { nextQuestion ->
                 // add the new fragment to adapter
-                listAdapter.addNextWidget(it)
+                listAdapter.addNextWidget(nextQuestion)
                 listAdapter.notifyDataSetChanged()
-
-                viewModel.currentQuestion = it
 
                 // navigate there
                 val newPos = viewPager.currentItem + 1

@@ -9,17 +9,14 @@ enum class HealthStateUpdaterItemType {
 data class HealthStateUpdaterItem(
     val state: HealthState,
     val type: HealthStateUpdaterItemType,
-    val conditions: List<ConditionItem>
+    val condition: Condition
 ) {
     fun updatedState(
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
     ): UserHealthState {
-        val allConditionsSatisfied = conditions.all {
-            it.isSatisfied(healthState, triageProfile, surveyAnswers)
-        }
-        return if (allConditionsSatisfied) {
+        return if (condition.isSatisfied(healthState, triageProfile, surveyAnswers)) {
             healthState.toMutableSet().apply {
                 when (type) {
                     ADD -> add(state)
