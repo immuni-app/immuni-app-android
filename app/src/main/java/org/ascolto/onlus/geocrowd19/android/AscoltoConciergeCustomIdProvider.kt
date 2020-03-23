@@ -12,6 +12,6 @@ class AscoltoConciergeCustomIdProvider: ConciergeCustomIdProvider, KoinComponent
     override val ids: Set<Concierge.Id>
         get() {
             val geoUniqId = geolocationManager.deviceId.value ?: return setOf()
-            return setOf(Concierge.Id.Custom("geouniq", geoUniqId))
+            return setOf(Concierge.Id.Custom("geouniq_id", geoUniqId))
         }
 }

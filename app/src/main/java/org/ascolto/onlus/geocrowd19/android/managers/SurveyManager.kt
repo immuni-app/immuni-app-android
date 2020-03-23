@@ -12,7 +12,7 @@ import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.UserHealthProfile
 import org.ascolto.onlus.geocrowd19.android.models.survey.Survey
-import org.ascolto.onlus.geocrowd19.android.picoEvents.SurveyCompleted
+import org.ascolto.onlus.geocrowd19.android.picoMetrics.SurveyCompleted
 import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import org.koin.core.KoinComponent
 import org.koin.core.inject

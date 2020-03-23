@@ -10,6 +10,8 @@ import com.bendingspoons.oracle.api.model.OracleSettings
 import com.bendingspoons.pico.PicoConfiguration
 import com.bendingspoons.theirs.adjust.Adjust
 import com.bendingspoons.sesame.Sesame
+import org.ascolto.onlus.geocrowd19.android.picoMetrics.LocationPermissionLevel
+import org.ascolto.onlus.geocrowd19.android.picoMetrics.PushPermissionLevel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -48,5 +50,8 @@ class AscoltoPicoConfiguration(val context: Context): PicoConfiguration, KoinCom
     }
 
     override val userInfo: Map<String, Any>
-        get() = mapOf()
+        get() = mapOf(
+            LocationPermissionLevel.instance().userInfo(),
+            PushPermissionLevel.instance().userInfo()
+        )
 }
