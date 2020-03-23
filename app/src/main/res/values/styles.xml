@@ -121,7 +121,7 @@
 
     <style name="H4Section">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">19dp</item>
+        <item name="android:textSize">18dp</item>
         <item name="android:textColor">@color/h4_section_heading</item>
     </style>
 

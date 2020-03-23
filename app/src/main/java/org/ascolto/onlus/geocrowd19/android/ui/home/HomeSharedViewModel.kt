@@ -1,6 +1,5 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home
 
-import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +7,7 @@ import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import org.ascolto.onlus.geocrowd19.android.util.isFlagSet
 import org.ascolto.onlus.geocrowd19.android.util.setFlag
 import com.bendingspoons.base.livedata.Event
+import com.bendingspoons.base.utils.DeviceUtils
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
@@ -17,10 +17,19 @@ import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
+import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
 import org.ascolto.onlus.geocrowd19.android.toast
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
-import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
+import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.*
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.EnableGeolocationCard
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.EnableNotificationCard
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.HeaderCard
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.HomeItemType
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardRed
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardWhite
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardYellow
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SurveyCard
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SurveyCardDone
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -43,7 +52,8 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     val navigateToSurvey: LiveData<Event<Boolean>>
         get() = _navigateToSurvey
 
-    val listModel = MutableLiveData<List<HomeItemType>>()
+    val homelistModel = MutableLiveData<List<HomeItemType>>()
+    val familylistModel = MutableLiveData<List<FamilyItemType>>()
 
     override fun onCleared() {
         super.onCleared()
@@ -51,10 +61,11 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     }
 
     init {
-        refreshListModel()
+        refreshHomeListModel()
+        startListenToMeModel()
     }
 
-    private fun refreshListModel() {
+    private fun refreshHomeListModel() {
         uiScope.launch {
             val model = database.userInfoDao().getMainUserInfoFlow().collect {
                 val ctx = AscoltoApplication.appContext
@@ -99,7 +110,54 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 itemsList.add(SuggestionsCardYellow(suggestionTitle2, Severity.MID))
                 itemsList.add(SuggestionsCardRed(suggestionTitle3, Severity.HIGH))
 
-                listModel.value = itemsList.toList()
+                homelistModel.value = itemsList.toList()
+            }
+        }
+    }
+
+    private fun startListenToMeModel() {
+        uiScope.launch {
+            oracle.meFlow().collect { me ->
+                refreshHomeListModel()
+                
+                val ctx = AscoltoApplication.appContext
+
+                val itemsList = mutableListOf<FamilyItemType>()
+
+                val mainUser = me.mainUser
+                val familyMembers = me.familyMembers
+
+                // add first main users
+                mainUser?.let {
+                    itemsList.add(UserCard(it))
+                }
+
+                // if there are family members, add header and all the members and a add button
+                if(familyMembers.isNotEmpty())
+                    familyMembers.let { members ->
+                        itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
+                        familyMembers.forEach {
+                            itemsList.add(UserCard(it))
+                        }
+                        itemsList.add(AddFamilyMemberButtonCard())
+                    }
+                // otherwise add only the add member tutorial button
+                else {
+                    itemsList.add(AddFamilyMemberTutorialCard())
+                }
+
+                // TODO REMOVE
+                itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
+
+                mainUser?.let {
+                    itemsList.add(UserCard(it))
+                }
+                mainUser?.let {
+                    itemsList.add(UserCard(it))
+                }
+                itemsList.add(AddFamilyMemberButtonCard())
+
+                familylistModel.value = itemsList.toList()
             }
         }
     }
@@ -114,7 +172,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     }
 
     fun onHomeResumed() {
-        refreshListModel()
+        refreshHomeListModel()
         checkAddFamilyMembersDialog()
     }
 
@@ -137,5 +195,11 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
             val url = s.triage.profiles.firstOrNull { it.severity == severity }?.url
             url?.let { _showSuggestionDialog.value = Event(it) }
         }
+    }
+
+    fun onUserIdTap(user: User) {
+        // copy to clipboard
+        DeviceUtils.copyToClipBoard(AscoltoApplication.appContext, text = user.id)
+        toast(AscoltoApplication.appContext.resources.getString(R.string.user_id_copied))
     }
 }

@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/title"
         style="@style/H3SectionHeading"
         android:textColor="@color/colorPrimary"
         android:layout_width="wrap_content"

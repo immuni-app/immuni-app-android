@@ -1,32 +1,26 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home.family
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.family_fragment.*
-import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
-import org.ascolto.onlus.geocrowd19.android.toast
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.FamilyDialogActivity
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDialogActivity
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDialogActivity
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
-import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
+import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.AddFamilyMemberButtonCard
+import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.AddFamilyMemberTutorialCard
+import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.FamilyItemType
+import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.UserCard
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class FamilyFragment : Fragment(), KoinComponent {
+class FamilyFragment : Fragment(), FamilyClickListener {
 
     private lateinit var viewModel: HomeSharedViewModel
-    private val surveyManager: SurveyManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,45 +42,42 @@ class FamilyFragment : Fragment(), KoinComponent {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        next.setOnClickListener {
-            if (surveyManager.areAllSurveysLogged()) {
-                toast("All users already took the survey for today!")
-                return@setOnClickListener
-            }
+        // Fade out toolbar on scroll
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val ratio = kotlin.math.abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
+            pageTitle?.alpha = 1f - ratio
+        })
 
-            val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            }
-            activity?.startActivity(intent)
+        with(familyList) {
+            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+            adapter = FamilyListAdapter(this@FamilyFragment)
         }
 
-        webViewButton.setOnClickListener {
-            val intent = Intent(AscoltoApplication.appContext, WebViewDialogActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                putExtra("url", "https://content.ascolto-onlus.org/77e2e08cd1b72d9529493b8fabcb8804/5b35a7d7f1fa8119cde5d6702806cbb4.html#/temperature/warning")
+        viewModel.familylistModel.observe(viewLifecycleOwner, Observer {
+            (familyList.adapter as? FamilyListAdapter)?.items?.apply {
+                clear()
+                addAll(it)
             }
-            activity?.startActivity(intent)
-        }
 
-        geolocation.setOnClickListener {
-            val intent = Intent(AscoltoApplication.appContext, GeolocationDialogActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            }
-            activity?.startActivity(intent)
-        }
+            familyList.adapter?.notifyDataSetChanged()
+        })
+    }
 
-        notifications.setOnClickListener {
-            val intent = Intent(AscoltoApplication.appContext, NotificationsDialogActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+    override fun onClick(item: FamilyItemType) {
+        when(item) {
+            is UserCard -> {
+                if(item.userIdTapped) {
+                    viewModel.onUserIdTap(item.user)
+                } else {
+                    // TODO
+                }
             }
-            activity?.startActivity(intent)
-        }
-
-        addMembers.setOnClickListener {
-            val intent = Intent(AscoltoApplication.appContext, FamilyDialogActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            is AddFamilyMemberTutorialCard -> {
+                //viewModel.openSuggestions(item.severity)
             }
-            activity?.startActivity(intent)
+            is AddFamilyMemberButtonCard -> {
+                //viewModel.openSuggestions(item.severity)
+            }
         }
     }
 }

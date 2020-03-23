@@ -16,12 +16,18 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
-import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.FamilyDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.EnableGeolocationCard
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.EnableNotificationCard
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.HomeItemType
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardRed
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardWhite
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardYellow
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SurveyCard
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SurveyCardDone
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -63,7 +69,7 @@ class HomeFragment : Fragment(), HomeClickListener {
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val ratio = kotlin.math.abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
-            title?.alpha = 1f - ratio
+            pageTitle?.alpha = 1f - ratio
         })
 
         with(homeList) {
@@ -96,7 +102,7 @@ class HomeFragment : Fragment(), HomeClickListener {
             }
         })
 
-        viewModel.listModel.observe(viewLifecycleOwner, Observer {
+        viewModel.homelistModel.observe(viewLifecycleOwner, Observer {
             (homeList.adapter as? HomeListAdapter)?.items?.apply {
                 clear()
                 addAll(it)

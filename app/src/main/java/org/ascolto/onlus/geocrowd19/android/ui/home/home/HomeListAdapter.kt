@@ -8,16 +8,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.Group
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bendingspoons.base.extensions.gone
-import com.bendingspoons.base.extensions.setTint
 import com.bendingspoons.base.extensions.visible
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
 
 class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -25,11 +21,10 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
     val context = AscoltoApplication.appContext
     var items = mutableListOf<HomeItemType>()
 
-    val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(false).build()
-
     inner class SurveyCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var bottomMessage: TextView = v.findViewById(R.id.bottomMessage)
         val button: Button = v.findViewById(R.id.next)
+        val title: TextView = v.findViewById(R.id.title)
 
         init {
             button.setOnClickListener {
@@ -180,12 +175,10 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
 
                 if(item.surveyNumber == 1) {
                     holder.bottomMessage.gone()
-                    // TODO
-                    //update_your_family_diary
+                    holder.title.text = AscoltoApplication.appContext.resources.getString(R.string.update_your_clinic_diary)
                 } else if(item.surveyNumber > 1) {
                     holder.bottomMessage.visible()
-                    // TODO
-                    //update_your_family_diary
+                    holder.title.text = AscoltoApplication.appContext.resources.getString(R.string.update_your_family_diary)
                 }
             }
         }
