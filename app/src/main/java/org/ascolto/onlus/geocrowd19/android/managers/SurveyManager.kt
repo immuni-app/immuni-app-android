@@ -132,7 +132,7 @@ class SurveyManager(private val context: Context) : KoinComponent {
         }
     }
 
-    fun usersToLogSize() : Int {
+    fun usersToLogCount() : Int {
         return allUsers().count {
             !isSurveyCompletedForUser(it)
         }
