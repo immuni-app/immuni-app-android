@@ -13,6 +13,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 
 class ApiManager : KoinComponent {
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
@@ -38,7 +39,7 @@ class ApiManager : KoinComponent {
 
     suspend fun createFamilyMember(user: User) = updateMe(api.createFamilyMember(user))
 
-    suspend fun updateExistingFamilyMember(user: User) = updateMe(api.updateExistingFamilyMember(user))
+    suspend fun updateExistingFamilyMember(userId: String, user: User) = updateMe(api.updateExistingFamilyMember(userId, user))
 }
 
 interface CustomOracleAPI {
@@ -51,7 +52,6 @@ interface CustomOracleAPI {
     @POST("relatives")
     suspend fun createFamilyMember(@Body user: User): Response<ResponseBody>
 
-    // FIXME: come si fa?!
-//    @PUT("relatives/${user.id}")
-    suspend fun updateExistingFamilyMember(@Body user: User): Response<ResponseBody>
+    @PUT("relatives/{userId}")
+    suspend fun updateExistingFamilyMember(@Path("userId") userId: String, @Body user: User): Response<ResponseBody>
 }
