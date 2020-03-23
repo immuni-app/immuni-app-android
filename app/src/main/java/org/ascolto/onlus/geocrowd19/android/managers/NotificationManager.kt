@@ -61,6 +61,10 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
     }
 
     fun scheduleNext(fromActivity: Boolean) {
+        // avoid scheduling notifications if onboarding is not completed
+        if (surveyManager.allUsers().isEmpty()) {
+            return
+        }
         if (fromActivity && surveyManager.areAllSurveysLogged()) {
             androidNotificationManager.cancel(notificationId)
         }
