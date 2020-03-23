@@ -60,7 +60,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
 
     private fun refreshHomeListModel() {
         uiScope.launch {
-            val model = database.userInfoDao().getMainUserInfoFlow().collect {
+            oracle.me()?.let {
                 val ctx = AscoltoApplication.appContext
 
                 val itemsList = mutableListOf<HomeItemType>()
@@ -120,8 +120,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     private fun startListenToMeModel() {
         uiScope.launch {
             oracle.meFlow().collect { me ->
-                refreshHomeListModel()
-                
+
                 val ctx = AscoltoApplication.appContext
 
                 val itemsList = mutableListOf<FamilyItemType>()
