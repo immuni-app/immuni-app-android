@@ -17,9 +17,9 @@ class AscoltoSettings(
     @field:Json(name = "privacy_url") val privacyPolicyUrl: String? = null,
     @field:Json(name = "survey_json") val _survey: RawSurvey? = null
 ) : OracleSettings() {
-    val survey: Survey
-        //        get() = _survey.survey() // FIXME
-        get() = testSurvey().survey()
+    val survey: Survey?
+        get() = _survey?.survey()
+//        get() = testSurvey().survey()
 }
 
 private fun testSurvey(): RawSurvey {
