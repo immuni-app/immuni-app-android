@@ -19,6 +19,7 @@ import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
 import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
+import org.ascolto.onlus.geocrowd19.android.models.survey.Severity.*
 import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.*
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
@@ -101,11 +102,13 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                     val triageProfile = triageProfileId?.let {
                         oracle.settings()?.survey?.triage?.profile(it)
                     }
+                    val severity = triageProfile?.severity ?: LOW
                     itemsList.add(
-                        SuggestionsCardWhite(
-                            suggestionTitle,
-                            triageProfile?.severity ?: Severity.LOW
-                        )
+                        when (severity) {
+                            LOW -> SuggestionsCardWhite(suggestionTitle, severity)
+                            MID -> SuggestionsCardYellow(suggestionTitle, severity)
+                            HIGH -> SuggestionsCardRed(suggestionTitle, severity)
+                        }
                     )
                 }
 
