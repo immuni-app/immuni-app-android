@@ -11,6 +11,8 @@ import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_fragment.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
+import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
+import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.FamilyDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDialogActivity
@@ -18,10 +20,13 @@ import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class FamilyFragment : Fragment() {
+class FamilyFragment : Fragment(), KoinComponent {
 
     private lateinit var viewModel: HomeSharedViewModel
+    private val surveyManager: SurveyManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +49,11 @@ class FamilyFragment : Fragment() {
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
         next.setOnClickListener {
+            if (surveyManager.areAllSurveysLogged()) {
+                toast("All users already took the survey for today!")
+                return@setOnClickListener
+            }
+
             val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             }

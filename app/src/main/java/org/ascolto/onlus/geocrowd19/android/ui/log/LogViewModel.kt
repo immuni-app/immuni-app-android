@@ -1,24 +1,21 @@
 package org.ascolto.onlus.geocrowd19.android.ui.log
 
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.*
-import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
-import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
-import org.ascolto.onlus.geocrowd19.android.models.survey.*
-import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
+import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
+import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
 import org.ascolto.onlus.geocrowd19.android.models.User
-import org.ascolto.onlus.geocrowd19.android.models.UserHealthProfile
-import org.ascolto.onlus.geocrowd19.android.picoEvents.SurveyCompleted
+import org.ascolto.onlus.geocrowd19.android.models.survey.*
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
+import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
@@ -85,6 +82,10 @@ class LogViewModel(
         }
         // end internal state
 
+        setup()
+    }
+
+    private fun setup(reset: Boolean = false) {
         val settings = oracle.settings()!!
         val _survey = settings.survey
         survey.value = _survey
@@ -102,13 +103,14 @@ class LogViewModel(
                 )
             }.id
 
-            if (formModel.value == null) {
+            if (formModel.value == null || reset) {
                 formModel.value = FormModel(
                     questionHistory = Stack<QuestionId>().apply { push(currentQuestion) },
                     healthState = lastProfile.healthState,
                     triageProfile = lastProfile.triageProfileId,
                     surveyAnswers = linkedMapOf()
                 )
+                handle.set(STATE_KEY, formModel.value)
             }
         }
     }
@@ -168,9 +170,8 @@ class LogViewModel(
         handle.set(STATE_KEY, formModel.value)
     }
 
-    fun resetAnswers() {
-        formModel.value?.surveyAnswers?.clear()
-        handle.set(STATE_KEY, formModel.value)
+    fun reset() {
+        setup(reset = true)
     }
 
     fun formModel(): FormModel? {

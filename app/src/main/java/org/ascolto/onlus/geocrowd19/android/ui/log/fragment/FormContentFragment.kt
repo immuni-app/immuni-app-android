@@ -39,8 +39,8 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
 
         nextButton.isEnabled = false
 
-        viewModel.formModel.observe(viewLifecycleOwner, Observer { info ->
-            onFormModelUpdate(info)
+        viewModel.formModel.observe(viewLifecycleOwner, Observer { form ->
+            onFormModelUpdate(form)
         })
 
         nextButton.setOnClickListener {

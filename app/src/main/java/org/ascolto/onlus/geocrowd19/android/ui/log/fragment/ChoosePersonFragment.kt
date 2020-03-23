@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
-import org.ascolto.onlus.geocrowd19.android.db.entity.age
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
@@ -65,7 +64,7 @@ class ChoosePersonFragment : Fragment() {
         })
 
         next.setOnClickListener {
-            viewModel.resetAnswers()
+            viewModel.reset()
             val action = ChoosePersonFragmentDirections.actionGlobalForm()
             findNavController().navigate(action)
         }
