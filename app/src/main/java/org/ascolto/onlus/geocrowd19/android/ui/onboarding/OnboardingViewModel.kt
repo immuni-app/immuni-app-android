@@ -1,5 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.onboarding
 
+import android.util.Log
 import androidx.lifecycle.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
@@ -10,18 +11,27 @@ import org.ascolto.onlus.geocrowd19.android.db.entity.UserInfoEntity
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.base.livedata.Event
+import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.base.utils.ExternalLinksHelper
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
+import okhttp3.ResponseBody.Companion.toResponseBody
+import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
+import org.ascolto.onlus.geocrowd19.android.api.oracle.CustomOracleAPI
+import org.ascolto.onlus.geocrowd19.android.db.entity.age
+import org.ascolto.onlus.geocrowd19.android.models.User
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import retrofit2.Response
 import java.io.Serializable
 import java.util.*
 
-class OnboardingViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) : ViewModel(), KoinComponent {
+class OnboardingViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) :
+    ViewModel(), KoinComponent {
 
     companion object {
         const val STATE_KEY = "STATE_KEY"
@@ -31,6 +41,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val onboarding: Onboarding by inject()
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val apiManager: ApiManager by inject()
     private val geolocationManager: GeolocationManager by inject()
 
     var partialUserInfo = MediatorLiveData<OnboardingUserInfo>()
@@ -51,7 +62,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
 
     init {
         // init
-        if(handle.get<Serializable>(STATE_KEY) != null) {
+        if (handle.get<Serializable>(STATE_KEY) != null) {
             partialUserInfo.value = handle.get<Serializable>(STATE_KEY) as OnboardingUserInfo
         } else partialUserInfo.value = OnboardingUserInfo()
 
@@ -88,19 +99,30 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     fun onOnboardingComplete() {
         val userInfo = partialUserInfo.value!!
         uiScope.launch {
-            database.userInfoDao().insert(
-                UserInfoEntity(
-                    name = userInfo.name ?: AscoltoApplication.appContext.getString(R.string.you),
-                    gender = userInfo.gender!!,
-                    isMainUser = true,
-                    birthDate = Calendar.getInstance().apply {
-                        time = Date()
-                        add(Calendar.YEAR, -userInfo.age!!)
-                    }.time
+            val userInfoEntity = UserInfoEntity(
+                name = userInfo.name ?: AscoltoApplication.appContext.getString(R.string.you),
+                gender = userInfo.gender!!,
+                isMainUser = true,
+                birthDate = Calendar.getInstance().apply {
+                    time = Date()
+                    add(Calendar.YEAR, -userInfo.age!!)
+                }.time
+            )
+
+            database.userInfoDao().insert(userInfoEntity)
+
+            onboarding.setCompleted(true)
+
+            apiManager.updateMainUser(
+                User(
+                    id = "",
+                    age = userInfoEntity.age(),
+                    gender = userInfoEntity.gender
                 )
             )
-            onboarding.setCompleted(true)
+
             delay(2000)
+
             _navigateToMainPage.value = Event(true)
         }
     }
