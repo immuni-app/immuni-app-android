@@ -152,7 +152,10 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
                 holder.title.text = HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
             is SurveyCardVH -> {
-                holder.bottomMessage.text = HtmlCompat.fromHtml("Hai <font color=\"#6993FF\"><b>5 diari clinici</b></font> da compilare", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                val item = items[position] as SurveyCard
+                val placeholder = AscoltoApplication.appContext.resources.getString(R.string.you_have_clinic_diaries_to_update)
+                val titleHtml = String.format(placeholder, item.surveyNumber)
+                holder.bottomMessage.text = HtmlCompat.fromHtml(titleHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
         }
     }

@@ -66,7 +66,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                     "<b>Marco e Matteo</b>")
                 val suggestionTitle3 = String.format(ctx.resources.getString(R.string.indication_for),
                     "<b>Roddy</b>")
-                itemsList.add(SurveyCard(true, 1))
+                itemsList.add(SurveyCard(true, 3))
                 itemsList.add(HeaderCard("ciao"))
                 itemsList.add(SuggestionsCardWhite(suggestionTitle, Severity.LOW))
                 itemsList.add(SuggestionsCardYellow(suggestionTitle2, Severity.MID))
