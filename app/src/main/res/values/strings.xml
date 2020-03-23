@@ -107,5 +107,5 @@
     <string name="do_you_have_old_young_in_family">Hai anziani o minorenni in famiglia?</string>
     <string name="do_you_have_old_young_in_family_message">Registra i dati dei familiari che non possono farlo autonomamente (per esempio, minorenni, anziani e familiari che non possiedono uno smartphone).</string>
     <string name="add_family_member">Aggiungi famigliare</string>
-    <string name="user_id_copied">Identificativo utente copiato</string>
+    <string name="user_id_copied">Identificativo copiato!</string>
 </resources>
