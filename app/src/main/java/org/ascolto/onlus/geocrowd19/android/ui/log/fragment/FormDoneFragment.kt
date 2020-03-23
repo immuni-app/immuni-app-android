@@ -14,6 +14,9 @@ import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeActivity
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
+import org.ascolto.onlus.geocrowd19.android.models.survey.TriageProfile
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity.Companion.TRIAGE_DIALOG_RESULT
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -53,7 +56,22 @@ class FormDoneFragment : Fragment() {
             }
         })
 
+        viewModel.navigateToTriagePage.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { profile ->
+                openTriageDialog(profile)
+            }
+        })
+
         viewModel.onLogComplete()
+    }
+
+    private fun openTriageDialog(triageProfile: TriageProfile) {
+        val context = AscoltoApplication.appContext
+        val intent = Intent(context, WebViewDialogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            putExtra("url", triageProfile.url)
+        }
+        startActivityForResult(intent, TRIAGE_DIALOG_RESULT)
     }
 
     private fun goToNextLogStart() {
@@ -63,10 +81,13 @@ class FormDoneFragment : Fragment() {
     }
 
     private fun goToMainActivity() {
-        val intent = Intent(AscoltoApplication.appContext, HomeActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        activity?.startActivity(intent)
         activity?.finish()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == TRIAGE_DIALOG_RESULT) {
+            viewModel.navigateToNextStep()
+        }
     }
 }

@@ -58,8 +58,8 @@ class LogViewModel(
     val navigateToDonePage: LiveData<Event<Boolean>>
         get() = _navigateToDonePage
 
-    private val _navigateToTriagePage = MutableLiveData<Event<Boolean>>()
-    val navigateToTriagePage: LiveData<Event<Boolean>>
+    private val _navigateToTriagePage = MutableLiveData<Event<TriageProfile>>()
+    val navigateToTriagePage: LiveData<Event<TriageProfile>>
         get() = _navigateToTriagePage
 
     private val _navigateToNextLogStartPage = MutableLiveData<Event<Boolean>>()
@@ -196,33 +196,29 @@ class LogViewModel(
             val updatedUserHealthProfile =
                 surveyManager.completeSurvey(userId = userId, form = form, survey = survey)
 
-            // At least the last user timestamp
+            // Show the DONE page for 2 seconds before proceed
             delay(2000)
 
-            updatedUserHealthProfile.triageProfileId?.let { profileId ->
+            val triageProfile = updatedUserHealthProfile.triageProfileId?.let { profileId ->
                 survey.triage.profile(profileId)?.let { profile ->
-                    openTriageDialog(profile)
+                    _navigateToTriagePage.value = Event(profile)
+                    profile
                 }
             }
 
-            // TODO: check why removing this delay prevents the Triage dialog webView from showing
-            delay(1000)
-
-            if (surveyManager.areAllSurveysLogged()) {
-                _navigateToMainPage.value = Event(true)
-            } else {
-                _navigateToNextLogStartPage.value = Event(true)
+            // TODO if triage profile is null let's log this event to Pico
+            if(triageProfile == null) {
+                navigateToNextStep()
             }
         }
     }
 
-    private fun openTriageDialog(triageProfile: TriageProfile) {
-        val context = AscoltoApplication.appContext
-        val intent = Intent(context, WebViewDialogActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-            putExtra("url", triageProfile.url)
+    fun navigateToNextStep() {
+        if (surveyManager.areAllSurveysLogged()) {
+            _navigateToMainPage.value = Event(true)
+        } else {
+            _navigateToNextLogStartPage.value = Event(true)
         }
-        context.startActivity(intent)
     }
 
     fun getProgressPercentage(pos: Int): Float {

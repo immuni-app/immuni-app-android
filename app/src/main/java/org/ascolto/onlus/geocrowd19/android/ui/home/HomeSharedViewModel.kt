@@ -180,7 +180,6 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     private fun checkAddFamilyMembersDialog() {
         val flag = "family_add_member_popup_showed"
         uiScope.launch {
-            delay(500)
             if (!isFlagSet(flag)) {
                 _showAddFamilyMemberDialog.value = Event(true)
                 setFlag(flag, true)

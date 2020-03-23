@@ -10,6 +10,10 @@ import org.ascolto.onlus.geocrowd19.android.R
 
 class WebViewDialogActivity: AscoltoActivity() {
 
+    companion object {
+        const val TRIAGE_DIALOG_RESULT = 900
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.web_view_dialog)

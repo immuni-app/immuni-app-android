@@ -99,6 +99,8 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     fun onOnboardingComplete() {
         val userInfo = partialUserInfo.value!!
         uiScope.launch {
+            delay(2000) // keep here to allow smooth page transition
+
             val userInfoEntity = UserInfoEntity(
                 name = userInfo.name ?: AscoltoApplication.appContext.getString(R.string.you),
                 gender = userInfo.gender!!,
@@ -120,8 +122,6 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
                 )
             )
             onboarding.setCompleted(updatedMe?.mainUser != null)
-
-            delay(2000)
 
             _navigateToMainPage.value = Event(true)
         }
