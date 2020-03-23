@@ -97,4 +97,7 @@
     <string name="geolocation">Geolocalizzazione</string>
     <string name="authorizations">Autorizzazioni</string>
     <string name="authorizations_subtitle">Archiviazione, Attività fisica, Contatti e...</string>
+    <string name="show_notifications">Mostra notifiche</string>
+    <string name="notifications_instruction_enable">1. Abilita</string>
+    <string name="enable_notification_dialog_message">Verrai notificato in caso di importanti comunicazioni e quando è il momento di aggiornare il diario clinico.</string>
 </resources>

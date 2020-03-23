@@ -6,94 +6,140 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.core.widget.NestedScrollView
-        android:fillViewport="true"
-        android:background="#4D000000"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:background="@color/home_background"
+        android:paddingBottom="120dp"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background">
-
-
-            <Button
-                android:id="@+id/button"
-                style="@style/RoundedButton"
-                android:layout_width="0dp"
+            android:clipChildren="false"
+            app:layout_collapseMode="pin">
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
-                android:text="@string/open_settings"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/playbackButton"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:scaleType="fitCenter"
-                app:lottie_rawRes="@raw/lottie_switch_icon"
-                app:lottie_loop="false"
-                app:lottie_autoPlay="true"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/ic_cross"
+                android:layout_gravity="top|left"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:src="@drawable/ic_tab_home"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/title"
                 style="@style/H1Heading"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
-                android:gravity="center"
-                android:maxLines="2"
-                android:text="abilita PUSH"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/enable_notification"
+                android:textColor="#4F4F5B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@+id/back" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/message"
                 style="@style/P1Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
-                android:gravity="center"
-                android:maxLines="4"
-                android:text="abilita PUSH"
-                app:autoSizeTextType="uniform"
-                app:layout_constraintBottom_toTopOf="@+id/button"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:alpha="0.6"
+                android:text="@string/enable_notification_dialog_message"
+                android:textColor="#4F4F5B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/message">
+
+                <TextView
+                    style="@style/H5Section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/notifications_instruction_enable" />
+                <LinearLayout
+                    style="@style/CardShadowWhite"
+                    android:background="@drawable/rounded_corners_9dp"
+                    android:backgroundTint="@color/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:orientation="horizontal">
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/playbackButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginBottom="17dp"
+                        android:layout_marginLeft="19dp"
+                        android:scaleType="fitCenter"
+                        app:lottie_rawRes="@raw/lottie_switch_icon"
+                        app:lottie_loop="false"
+                        app:lottie_autoPlay="true"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:src="@drawable/ic_tab_home"/>
+                    <TextView
+                        style="@style/H5Section"
+                        android:layout_marginLeft="19dp"
+                        android:fontFamily="@font/euclid_circular_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_notifications" />
+                </LinearLayout>
+
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
     <View
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/gradient_dialogs_top"/>
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_gravity="bottom"
+        android:rotation="180"
+        android:background="@drawable/gradient_center_home_color"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="top"
+        android:background="@drawable/gradient_home_top"/>
+    <Button
+        android:id="@+id/button"
+        style="@style/RoundedButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/ic_cross"
-        android:layout_gravity="top|left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="32dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="32dp"
+        android:text="@string/open_settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </FrameLayout>
