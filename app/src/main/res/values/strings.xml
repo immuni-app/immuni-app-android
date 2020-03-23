@@ -70,6 +70,10 @@
     <string name="compile_for_message">Stai per effettuare la compilazione per conto di</string>
     <string name="open_settings">Apri le impostazioni</string>
 
+    <string name="geolocation_instruction_1">1. Seleziona</string>
+    <string name="geolocation_instruction_2">2. Seleziona "Geolocalizzazione"</string>
+    <string name="geolocation_instruction_3">3. Imposta</string>
+
     <string name="app_exit_title">Uscire</string>
     <string name="app_exit_message">Sei sicuro di voler uscire?</string>
     <string name="onboarding_geolocation_title">Permetti il calcolo del tuo fattore di rischio</string>
@@ -88,4 +92,9 @@
     <string name="home_separator_suggestions">Come comportarsi</string>
     <string name="clinic_diary_updated">Diario clinico aggiornato</string>
     <string name="clinic_diary_updated_message">Riceverai una notifica quando dovrai aggiornare il diario nuovamente</string>
+    <string name="enable_geolocation_title">Attiva la localizzazione</string>
+    <string name="enable_geolocation_dialog_message">Consenti l\'accesso alla posizione durante tutto l\'arco della giornata per permettere alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
+    <string name="geolocation">Geolocalizzazione</string>
+    <string name="authorizations">Autorizzazioni</string>
+    <string name="authorizations_subtitle">Archiviazione, Attività fisica, Contatti e...</string>
 </resources>

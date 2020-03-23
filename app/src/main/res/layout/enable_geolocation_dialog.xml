@@ -5,81 +5,195 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<androidx.core.widget.NestedScrollView
-    android:fillViewport="true"
-    android:background="#4D000000"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:background="@color/home_background"
+        android:paddingBottom="120dp"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            app:layout_collapseMode="pin">
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/ic_cross"
+                android:layout_gravity="top|left"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/title"
+                style="@style/H1Heading"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:text="@string/enable_geolocation_title"
+                android:textColor="#4F4F5B"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/back" />
 
-        <Button
-            android:id="@+id/button"
-            style="@style/RoundedButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
-            android:text="@string/open_settings"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/message"
+                style="@style/P1Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:alpha="0.6"
+                android:text="@string/enable_geolocation_dialog_message"
+                android:textColor="#4F4F5B"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
-        <TextView
-            android:id="@+id/textView"
-            style="@style/H1Heading"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"
-            android:gravity="center"
-            android:maxLines="2"
-            android:text="abilita localizzazione"
-            app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/message">
 
-        <TextView
-            android:id="@+id/textView2"
-            style="@style/P1Text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"
-            android:gravity="center"
-            android:maxLines="4"
-            android:text="abilita localizzazione"
-            app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@+id/button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    style="@style/H5Section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/geolocation_instruction_1" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+                <LinearLayout
+                    style="@style/CardShadowWhite"
+                    android:background="@drawable/rounded_corners_9dp"
+                    android:backgroundTint="@color/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        style="@style/H5Section"
+                        android:fontFamily="@font/euclid_circular_medium"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/authorizations" />
+                    <TextView
+                        android:layout_marginStart="19dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="17dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/authorizations_subtitle" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/H5Section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/geolocation_instruction_2" />
+                <LinearLayout
+                    style="@style/CardShadowWhite"
+                    android:background="@drawable/rounded_corners_9dp"
+                    android:backgroundTint="@color/background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_marginTop="17dp"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="17dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_localization" />
+                    <TextView
+                        style="@style/H5Section"
+                        android:fontFamily="@font/euclid_circular_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/geolocation" />
+                </LinearLayout>
+                <TextView
+                    style="@style/H5Section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/geolocation_instruction_3" />
+
+                <LinearLayout
+                    style="@style/CardShadowWhite"
+                    android:background="@drawable/rounded_corners_9dp"
+                    android:backgroundTint="@color/background"
+                    android:layout_width="match_parent"
+                    android:gravity="left|center_vertical"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_marginTop="17dp"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="17dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_fake_radio" />
+                    <TextView
+                        style="@style/H5Section"
+                        android:fontFamily="@font/euclid_circular_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/always_consent" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
     <View
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/gradient_dialogs_top"/>
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_gravity="bottom"
+        android:rotation="180"
+        android:background="@drawable/gradient_center_home_color"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="top"
+        android:background="@drawable/gradient_home_top"/>
+    <Button
+        android:id="@+id/button"
+        style="@style/RoundedButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/ic_cross"
-        android:layout_gravity="top|left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="32dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="32dp"
+        android:text="@string/open_settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </FrameLayout>

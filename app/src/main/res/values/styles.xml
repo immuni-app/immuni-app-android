@@ -126,7 +126,7 @@
     </style>
 
     <style name="H5Section">
-        <item name="android:fontFamily">@font/euclid_circular_medium</item>
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/h5_section_heading</item>
     </style>

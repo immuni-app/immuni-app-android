@@ -28,10 +28,10 @@
     <!-- Figma colors -->
     <color name="h1_heading">#495D74</color>
     <color name="h2_sub_heading">#495D74</color>
-    <color name="h1_nav_bar">#4F4F5B</color>
-    <color name="h3_section_heading">#4F4F5B</color>
-    <color name="h4_section_heading">#4F4F5B</color>
-    <color name="h5_section_heading">#4F4F5B</color>
+    <color name="h1_nav_bar">#495D74</color>
+    <color name="h3_section_heading">#495D74</color>
+    <color name="h4_section_heading">#495D74</color>
+    <color name="h5_section_heading">#495D74</color>
     <color name="p1_text">#99495D74</color>
     <color name="p2_text">#A5A7B7</color>
     <color name="label">@color/colorPrimary</color>
