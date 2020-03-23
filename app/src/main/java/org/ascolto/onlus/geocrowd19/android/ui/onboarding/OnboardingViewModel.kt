@@ -77,8 +77,8 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
         }
     }
 
-    fun onTosClick() {
-        oracle.settings()?.tosUrl?.let { url ->
+    fun onPrivacyPolicyClick() {
+        oracle.settings()?.privacyPolicyUrl?.let { url ->
             ExternalLinksHelper.openLink(AscoltoApplication.appContext, url)
         }
     }
