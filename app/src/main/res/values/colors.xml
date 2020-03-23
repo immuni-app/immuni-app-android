@@ -47,4 +47,5 @@
     <color name="dialog_background_mask_color">#B3000000</color>
     <color name="card_yellow">#FFB930</color>
     <color name="card_red">#FE7D6C</color>
+    <color name="danger">#FE7D6C</color>
 </resources>

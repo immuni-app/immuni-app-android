@@ -17,9 +17,9 @@ data class UserInfoEntity(
     @Ignore
     var familyMembers: List<UserInfoEntity> = listOf()
 ) {
-    suspend fun fillWithRelations(db: AscoltoDatabase) {
-        familyMembers = db.userInfoDao().getFamilyMembersUserInfo()
-    }
+    //suspend fun fillWithRelations(db: AscoltoDatabase) {
+        //familyMembers = db.userInfoDao().getFamilyMembersUserInfo()
+    //}
 }
 
 fun UserInfoEntity.age(): Int {

@@ -21,5 +21,5 @@ const val DATABASE_VERSION = 2
     GenderConverter::class
 )
 abstract class AscoltoDatabase : RoomDatabase() {
-    abstract fun userInfoDao(): UserInfoDao
+    //abstract fun userInfoDao(): UserInfoDao
 }

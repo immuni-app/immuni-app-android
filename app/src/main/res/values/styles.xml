@@ -182,9 +182,9 @@
     </style>
 
     <style name="Toolbar">
-        <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">21dp</item>
-        <item name="android:textColor">#4F4F5B</item>
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#495D74</item>
     </style>
 
     <style name="ToolbarLight" parent="Toolbar">

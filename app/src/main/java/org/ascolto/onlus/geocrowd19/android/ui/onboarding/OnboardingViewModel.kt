@@ -101,24 +101,11 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
         uiScope.launch {
             delay(2000) // keep here to allow smooth page transition
 
-            val userInfoEntity = UserInfoEntity(
-                name = userInfo.name ?: AscoltoApplication.appContext.getString(R.string.you),
-                gender = userInfo.gender!!,
-                isMainUser = true,
-                birthDate = Calendar.getInstance().apply {
-                    time = Date()
-                    add(Calendar.YEAR, -userInfo.age!!)
-                }.time
-            )
-
-            database.userInfoDao().insert(userInfoEntity)
-
-
             val updatedMe = apiManager.updateMainUser(
                 User(
                     id = "",
-                    age = userInfoEntity.age(),
-                    gender = userInfoEntity.gender
+                    age = userInfo.age!!,
+                    gender = userInfo.gender!!
                 )
             )
             onboarding.setCompleted(updatedMe?.mainUser != null)

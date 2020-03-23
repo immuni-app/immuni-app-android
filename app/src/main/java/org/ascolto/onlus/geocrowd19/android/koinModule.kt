@@ -28,6 +28,7 @@ import com.geouniq.android.GeoUniq
 import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.managers.AscoltoNotificationManager
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
+import org.ascolto.onlus.geocrowd19.android.ui.home.family.details.UserDetailsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -127,4 +128,8 @@ val appModule = module {
 
     // LogViewModel
     viewModel { (handle: SavedStateHandle) -> LogViewModel(handle, get()) }
+
+    // UserDetailsViewModel
+    viewModel { (userId: String) -> UserDetailsViewModel(userId) }
+
 }

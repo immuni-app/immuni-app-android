@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.family_fragment.*
@@ -69,7 +70,8 @@ class FamilyFragment : Fragment(), FamilyClickListener {
                 if(item.userIdTapped) {
                     viewModel.onUserIdTap(item.user)
                 } else {
-                    // TODO
+                    val action = FamilyFragmentDirections.actionUserDetails(item.user.id)
+                    findNavController().navigate(action)
                 }
             }
             is AddFamilyMemberTutorialCard -> {
