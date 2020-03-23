@@ -90,11 +90,13 @@ class SurveyManager(private val context: Context) : KoinComponent {
     }
 
     fun nextSurveyDate() : Date {
-        val gc = GregorianCalendar()
-        gc.set(Calendar.HOUR, 18)
-        gc.set(Calendar.MINUTE, 0)
-        gc.set(Calendar.SECOND, 0)
-        gc.add(Calendar.SECOND, additionalDelay)
+        val gc = GregorianCalendar().apply {
+            set(Calendar.HOUR, 6)
+            set(Calendar.AM_PM, Calendar.PM)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            add(Calendar.SECOND, additionalDelay)
+        }
         val todaySurveyDate = gc.time
         if (todaySurveyDate > Date()) {
             return todaySurveyDate

@@ -26,6 +26,7 @@ import com.bendingspoons.sesame.Sesame
 import com.bendingspoons.theirs.Theirs
 import com.geouniq.android.GeoUniq
 import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
+import org.ascolto.onlus.geocrowd19.android.managers.AscoltoNotificationManager
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -108,6 +109,11 @@ val appModule = module {
     // single instance of SurveyManager
     single {
         SurveyManager(androidContext())
+    }
+
+    // single instance of AscoltoNotificationManager
+    single {
+        AscoltoNotificationManager(androidContext())
     }
 
     // SetupViewModel
