@@ -105,8 +105,8 @@ class LogViewModel(
 
             if (formModel.value == null || reset) {
                 formModel.value = FormModel(
-                    questionHistory = Stack<QuestionId>().apply { push(currentQuestion) },
-                    healthState = lastProfile.healthState,
+                    initialQuestion = currentQuestion,
+                    initialHealthState = lastProfile.healthState,
                     triageProfile = lastProfile.triageProfileId,
                     surveyAnswers = linkedMapOf()
                 )
@@ -129,7 +129,7 @@ class LogViewModel(
             form.triageProfile,
             form.surveyAnswers
         )
-        form.healthState = updatedHealthState
+        form.saveHealthState(updatedHealthState)
 
         updateFormModel(form)
 
