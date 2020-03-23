@@ -119,7 +119,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
                     gender = userInfoEntity.gender
                 )
             )
-            onboarding.setCompleted(updatedMe != null)
+            onboarding.setCompleted(updatedMe?.mainUser != null)
 
             delay(2000)
 
