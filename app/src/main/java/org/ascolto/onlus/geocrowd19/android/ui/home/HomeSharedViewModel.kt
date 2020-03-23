@@ -109,7 +109,6 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                             MID -> SuggestionsCardYellow(suggestionTitle, severity)
                             HIGH -> SuggestionsCardRed(suggestionTitle, severity)
                         }
-
                     )
                 }
 
