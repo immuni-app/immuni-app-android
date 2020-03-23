@@ -87,7 +87,7 @@ class LogViewModel(
 
     private fun setup(reset: Boolean = false) {
         val settings = oracle.settings()!!
-        val _survey = settings.survey
+        val _survey = settings.survey!!
         survey.value = _survey
 
         uiScope.launch {

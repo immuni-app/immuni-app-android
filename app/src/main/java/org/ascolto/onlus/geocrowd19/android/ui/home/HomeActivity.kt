@@ -13,6 +13,8 @@ import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.home.navigation.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.home_activity.*
+import org.ascolto.onlus.geocrowd19.android.managers.AscoltoNotificationManager
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HomeActivity : AscoltoActivity()  {
@@ -22,6 +24,7 @@ class HomeActivity : AscoltoActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.home_activity)
 
         viewModel = getViewModel()

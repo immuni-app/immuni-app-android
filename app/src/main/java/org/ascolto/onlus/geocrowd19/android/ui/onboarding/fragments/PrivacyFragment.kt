@@ -1,6 +1,5 @@
 package org.ascolto.onlus.geocrowd19.android.ui.onboarding.fragments
 
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -14,7 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.ui.onboarding.OnboardingViewModel
-import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -57,7 +55,7 @@ class PrivacyFragment : Fragment() {
         tos.text = spannable;
 
         tos.setOnClickListener {
-            viewModel.onTosClick()
+            viewModel.onPrivacyPolicyClick()
         }
 
         checkBox.setOnCheckedChangeListener { buttonView, isChecked ->

@@ -12,13 +12,14 @@ import testSurveyJson
 class AscoltoSettings(
     // app specific properties
     @field:Json(name = "development_devices") val developmentDevices: List<String> = listOf(),
-    @field:Json(name = "reminder_notification_title") val reminderNotificationTitle: String = "",
-    @field:Json(name = "reminder_notification_message") val reminderNotificationMessage: String = "",
-    @field:Json(name = "survey") val _survey: RawSurvey? = null
+    @field:Json(name = "reminder_notification_title") val reminderNotificationTitle: String = "Compila il diario",
+    @field:Json(name = "reminder_notification_message") val reminderNotificationMessage: String = "Ricordati di compilare il diario clinico di oggi",
+    @field:Json(name = "privacy_url") val privacyPolicyUrl: String? = null,
+    @field:Json(name = "survey_json") val _survey: RawSurvey? = null
 ) : OracleSettings() {
-    val survey: Survey
-        //        get() = _survey.survey() // FIXME
-        get() = testSurvey().survey()
+    val survey: Survey?
+        get() = _survey?.survey()
+//        get() = testSurvey().survey()
 }
 
 private fun testSurvey(): RawSurvey {

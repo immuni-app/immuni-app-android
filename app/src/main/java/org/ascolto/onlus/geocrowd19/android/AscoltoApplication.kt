@@ -13,6 +13,7 @@ import com.bendingspoons.pico.Pico
 import com.bendingspoons.theirs.Theirs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -38,10 +39,10 @@ class AscoltoApplication : Application() {
             lifecycleObserver.consumeEach { event ->
                 when (event) {
                     AppLifecycleEvent.ON_START -> {
-                        isForeground = true
+                        isForeground.send(true)
                     }
                     AppLifecycleEvent.ON_STOP -> {
-                        isForeground = false
+                        isForeground.send(false)
                     }
                     else -> {
                     }
@@ -77,6 +78,6 @@ class AscoltoApplication : Application() {
 
     companion object {
         lateinit var appContext: Context
-        var isForeground = false
+        val isForeground = ConflatedBroadcastChannel(false)
     }
 }

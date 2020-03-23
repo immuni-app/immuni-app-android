@@ -77,8 +77,8 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
         }
     }
 
-    fun onTosClick() {
-        oracle.settings()?.tosUrl?.let { url ->
+    fun onPrivacyPolicyClick() {
+        oracle.settings()?.privacyPolicyUrl?.let { url ->
             ExternalLinksHelper.openLink(AscoltoApplication.appContext, url)
         }
     }
@@ -111,15 +111,15 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
 
             database.userInfoDao().insert(userInfoEntity)
 
-            onboarding.setCompleted(true)
 
-            apiManager.updateMainUser(
+            val updatedMe = apiManager.updateMainUser(
                 User(
                     id = "",
                     age = userInfoEntity.age(),
                     gender = userInfoEntity.gender
                 )
             )
+            onboarding.setCompleted(updatedMe != null)
 
             delay(2000)
 

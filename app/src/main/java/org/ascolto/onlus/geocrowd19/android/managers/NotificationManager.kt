@@ -2,19 +2,26 @@ package org.ascolto.onlus.geocrowd19.android.managers
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.oracle.Oracle
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
+import org.ascolto.onlus.geocrowd19.android.ui.home.HomeActivity
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
@@ -25,13 +32,21 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
     companion object {
         private const val workTag = "NotificationManager"
         const val reminderNotificationChannelId = "reminder"
+        const val notificationId = 123456
     }
 
-    val workManager = WorkManager.getInstance(context)
-    val surveyManager: SurveyManager by inject()
+    private val workManager = WorkManager.getInstance(context)
+    private val surveyManager: SurveyManager by inject()
+    private val androidNotificationManager = NotificationManagerCompat.from(context)
+    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
 
     init {
         createNotificationChannel()
+        GlobalScope.launch {
+            AscoltoApplication.isForeground.consumeEach {
+                scheduleNext(fromActivity = true)
+            }
+        }
     }
 
     private fun createNotificationChannel() {
@@ -41,25 +56,58 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
             val name = context.getString(R.string.reminder_notification_channel_name)
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(reminderNotificationChannelId, name, importance)
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
+            androidNotificationManager.createNotificationChannel(channel)
         }
     }
 
+    fun scheduleNext(fromActivity: Boolean) {
+        // avoid scheduling notifications if onboarding is not completed
+        if (surveyManager.allUsers().isEmpty()) {
+            return
+        }
+        if (fromActivity && surveyManager.areAllSurveysLogged()) {
+            androidNotificationManager.cancel(notificationId)
+        }
+        schedule(initialDelay())
+    }
 
-    fun scheduleNext() {
+    fun scheduleMock() {
+        androidNotificationManager.cancel(notificationId)
+        schedule(5000)
+    }
+
+    fun triggerNotification() {
+        val settings = oracle.settings() ?: return
+        // resume the app from its previous state (or open it if it's closed)
+        val notificationIntent = Intent(context, HomeActivity::class.java).apply {
+            action = Intent.ACTION_MAIN
+            addCategory(Intent.CATEGORY_LAUNCHER)
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        }
+        val pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0)
+        val builder = NotificationCompat.Builder(
+            context, AscoltoNotificationManager.reminderNotificationChannelId
+        )
+            .setSmallIcon(R.drawable.ic_notification_app)
+            .setContentTitle(settings.reminderNotificationTitle)
+            .setContentText(settings.reminderNotificationMessage)
+            .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+
+        androidNotificationManager.notify(notificationId, builder.build())
+    }
+
+    private fun schedule(delay: Long) {
         workManager.cancelAllWorkByTag(workTag)
-        val notificationWork = OneTimeWorkRequestBuilder<NotifyWorker>()
-        notificationWork.setInitialDelay(initialDelay(), TimeUnit.MILLISECONDS)
-            .addTag(workTag)
+
+        val notificationWork = OneTimeWorkRequestBuilder<NotifyWorker>().apply {
+            setInitialDelay(delay, TimeUnit.MILLISECONDS).addTag(workTag)
+        }
         workManager.enqueue(notificationWork.build())
     }
 
-    fun initialDelay(): Long {
-        // schedule for later today if today's poll is not yet completed
-        // schedule for tomorrow if it is
+    private fun initialDelay(): Long {
         return surveyManager.nextSurveyDate().time - Date().time
     }
 }
@@ -67,28 +115,13 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
 
 class NotifyWorker(val context: Context, params: WorkerParameters) : Worker(context, params),
     KoinComponent {
-    val notificationManager: AscoltoNotificationManager by inject()
-    val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+
+    private val notificationManager: AscoltoNotificationManager by inject()
 
     override fun doWork(): Result { // Method to trigger an instant notification
-        if (!AscoltoApplication.isForeground) {
-            triggerNotification()
-        }
-        notificationManager.scheduleNext()
+        notificationManager.triggerNotification()
+        notificationManager.scheduleNext(fromActivity = false)
         return Result.success()
-        // (Returning RETRY tells WorkManager to try this task again
-        // later; FAILURE says not to try again.)
     }
 
-    private fun triggerNotification() {
-        val settings = oracle.settings() ?: return
-        val builder = NotificationCompat.Builder(
-            context,
-            AscoltoNotificationManager.reminderNotificationChannelId
-        )
-            //.setSmallIcon(R.drawable.notification_icon) // FIXME
-            .setContentTitle(settings.reminderNotificationTitle)
-            .setContentText(settings.reminderNotificationMessage)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-    }
 }
