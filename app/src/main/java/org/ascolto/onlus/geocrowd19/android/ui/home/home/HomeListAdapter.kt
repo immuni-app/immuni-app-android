@@ -3,6 +3,7 @@ package org.ascolto.onlus.geocrowd19.android.ui.home.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -25,6 +26,13 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
 
     inner class SurveyCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var bottomMessage: TextView = v.findViewById(R.id.bottomMessage)
+        val button: Button = v.findViewById(R.id.next)
+
+        init {
+            button.setOnClickListener {
+                clickListener.onClick(items[adapterPosition])
+            }
+        }
         override fun onClick(v: View) {
             clickListener.onClick(items[adapterPosition])
         }

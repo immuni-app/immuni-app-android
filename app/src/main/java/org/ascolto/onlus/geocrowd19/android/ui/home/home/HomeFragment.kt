@@ -121,7 +121,7 @@ class HomeFragment : Fragment(), HomeClickListener {
                 openGeolocationDialog()
             }
             is SurveyCard -> {
-
+                toast("click")
             }
         }
     }
