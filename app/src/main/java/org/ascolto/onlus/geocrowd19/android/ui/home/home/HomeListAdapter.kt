@@ -180,8 +180,12 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
 
                 if(item.surveyNumber == 1) {
                     holder.bottomMessage.gone()
+                    // TODO
+                    //update_your_family_diary
                 } else if(item.surveyNumber > 1) {
                     holder.bottomMessage.visible()
+                    // TODO
+                    //update_your_family_diary
                 }
             }
         }
