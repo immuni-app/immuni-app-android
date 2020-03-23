@@ -8,9 +8,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Group
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.setTint
+import com.bendingspoons.base.extensions.visible
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
@@ -36,6 +39,10 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         override fun onClick(v: View) {
             clickListener.onClick(items[adapterPosition])
         }
+    }
+
+    inner class SurveyCardDoneVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v) {
+
     }
 
     inner class HeaderCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v) {
@@ -131,6 +138,12 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
 
             return SuggestionsCardYellowVH(v as ConstraintLayout)
         }
+        else if(viewType == 7) {
+            val v = LayoutInflater.from(parent.context)
+                .inflate(R.layout.home_survey_card_done_item, parent, false)
+
+            return SurveyCardDoneVH(v as ConstraintLayout)
+        }
         else {
             val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.home_suggestions_card_red_item, parent, false)
@@ -164,6 +177,12 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
                 val placeholder = AscoltoApplication.appContext.resources.getString(R.string.you_have_clinic_diaries_to_update)
                 val titleHtml = String.format(placeholder, item.surveyNumber)
                 holder.bottomMessage.text = HtmlCompat.fromHtml(titleHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+                if(item.surveyNumber == 1) {
+                    holder.bottomMessage.gone()
+                } else if(item.surveyNumber > 1) {
+                    holder.bottomMessage.visible()
+                }
             }
         }
     }
@@ -177,6 +196,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
             is SuggestionsCardWhite -> 4
             is SuggestionsCardYellow -> 5
             is SuggestionsCardRed -> 6
+            is SurveyCardDone -> 7
         }
     }
 

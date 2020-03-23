@@ -22,6 +22,7 @@ import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
+import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class HomeFragment : Fragment(), HomeClickListener {
@@ -86,6 +87,15 @@ class HomeFragment : Fragment(), HomeClickListener {
             }
         })
 
+        viewModel.navigateToSurvey.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { url ->
+                val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                }
+                activity?.startActivity(intent)
+            }
+        })
+
         viewModel.listModel.observe(viewLifecycleOwner, Observer {
             (homeList.adapter as? HomeListAdapter)?.items?.apply {
                 clear()
@@ -121,8 +131,9 @@ class HomeFragment : Fragment(), HomeClickListener {
                 openGeolocationDialog()
             }
             is SurveyCard -> {
-                toast("click")
+                viewModel.onSurveyCardTap()
             }
+            is SurveyCardDone -> { }
         }
     }
 

@@ -1,5 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home
 
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,8 +16,11 @@ import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
+import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
+import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
+import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -24,7 +28,8 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val surveyManager: SurveyManager by inject()
 
     private val _showAddFamilyMemberDialog = MutableLiveData<Event<Boolean>>()
     val showAddFamilyMemberDialog: LiveData<Event<Boolean>>
@@ -34,7 +39,16 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     val showSuggestionDialog: LiveData<Event<String>>
         get() = _showSuggestionDialog
 
+    private val _navigateToSurvey = MutableLiveData<Event<Boolean>>()
+    val navigateToSurvey: LiveData<Event<Boolean>>
+        get() = _navigateToSurvey
+
     val listModel = MutableLiveData<List<HomeItemType>>()
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 
     init {
         refreshListModel()
@@ -59,6 +73,20 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                     itemsList.add(EnableNotificationCard())
                 }
 
+                // survey card
+
+                if(surveyManager.areAllSurveysLogged()) {
+                    itemsList.add(SurveyCardDone())
+                } else {
+                    itemsList.add(SurveyCard(surveyManager.usersToLogSize()))
+                }
+
+                // suggestions card
+
+                // TODO remove this header is there are no suggestions card yet (at startup?)
+                itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
+
+                // TODO for each user (or group uf users by severity) create a suggestion card
                 // fake cards
                 val suggestionTitle = String.format(ctx.resources.getString(R.string.indication_for),
                     "<b>Giulia</b>")
@@ -66,8 +94,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                     "<b>Marco e Matteo</b>")
                 val suggestionTitle3 = String.format(ctx.resources.getString(R.string.indication_for),
                     "<b>Roddy</b>")
-                itemsList.add(SurveyCard(true, 3))
-                itemsList.add(HeaderCard("ciao"))
+
                 itemsList.add(SuggestionsCardWhite(suggestionTitle, Severity.LOW))
                 itemsList.add(SuggestionsCardYellow(suggestionTitle2, Severity.MID))
                 itemsList.add(SuggestionsCardRed(suggestionTitle3, Severity.HIGH))
@@ -77,9 +104,13 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
+    fun onSurveyCardTap() {
+        if (surveyManager.areAllSurveysLogged()) {
+            // All users already took the survey for today!
+            return
+        }
+
+        _navigateToSurvey.value = Event(true)
     }
 
     fun onHomeResumed() {

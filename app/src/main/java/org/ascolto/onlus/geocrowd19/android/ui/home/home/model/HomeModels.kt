@@ -7,9 +7,10 @@ import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
 sealed class HomeItemType
 
 data class SurveyCard(
-    val active: Boolean,
     val surveyNumber: Int
 ): HomeItemType()
+
+class SurveyCardDone: HomeItemType()
 
 class EnableGeolocationCard: HomeItemType()
 
