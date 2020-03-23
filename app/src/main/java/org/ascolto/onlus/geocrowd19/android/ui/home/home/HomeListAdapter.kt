@@ -24,7 +24,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
     val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(false).build()
 
     inner class SurveyCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
-
+        var bottomMessage: TextView = v.findViewById(R.id.bottomMessage)
         override fun onClick(v: View) {
             clickListener.onClick(items[adapterPosition])
         }
@@ -150,6 +150,9 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
             is SuggestionsCardRedVH -> {
                 val item = items[position] as SuggestionsCardRed
                 holder.title.text = HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            }
+            is SurveyCardVH -> {
+                holder.bottomMessage.text = HtmlCompat.fromHtml("Hai <font color=\"#6993FF\"><b>5 diari clinici</b></font> da compilare", HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
         }
     }

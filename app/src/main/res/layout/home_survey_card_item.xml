@@ -51,13 +51,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/age"
+        android:id="@+id/bottomMessage"
         style="@style/P1Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:layout_weight="1"
-        android:fontFamily="@font/euclid_circular_bold"
         android:gravity="center_horizontal|top"
         android:text="@string/you_have_clinic_diaries_to_update" />
 </LinearLayout>
