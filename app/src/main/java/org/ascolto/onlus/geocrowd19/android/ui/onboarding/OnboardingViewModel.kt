@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.utils.ExternalLinksHelper
 import com.bendingspoons.oracle.Oracle
+import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
@@ -35,6 +36,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val onboarding: Onboarding by inject()
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val pico: Pico by inject()
     private val apiManager: ApiManager by inject()
     private val geolocationManager: GeolocationManager by inject()
 
@@ -102,7 +104,11 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
                     gender = userInfo.gender!!
                 )
             )
-            onboarding.setCompleted(updatedMe?.mainUser != null)
+            val isCompleted = updatedMe?.mainUser != null
+            onboarding.setCompleted(isCompleted)
+            if (isCompleted) {
+                pico.trackEvent(OnboardingCompleted().userAction)
+            }
 
             _navigateToMainPage.value = Event(true)
         }
