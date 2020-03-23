@@ -17,6 +17,6 @@ class User(
     @field:Json(name = "last_triage_status") val lastTriageProfile: TriageProfile? = null,
     @field:Json(name = "next_survey_at") val nextSurveyDate: Double? = null,
     @field:Json(name = "same_house") val isInSameHouse: Boolean? = null,
-
-    @Transient var isMain: Boolean = false
+    // is_main doesn't arrive from the backend, but we set it later
+    @field:Json(name = "is_main") var isMain: Boolean = false
 )

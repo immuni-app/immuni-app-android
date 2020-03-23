@@ -21,15 +21,7 @@ import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
 import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.*
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.EnableGeolocationCard
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.EnableNotificationCard
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.HeaderCard
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.HomeItemType
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardRed
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardWhite
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardYellow
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SurveyCard
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SurveyCardDone
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -74,22 +66,22 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
 
                 // check geolocation disabled
 
-                if(!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext)) {
+                if (!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext)) {
                     itemsList.add(EnableGeolocationCard())
                 }
 
                 // check notifications disabled
 
-                if(!PushNotificationUtils.areNotificationsEnabled(AscoltoApplication.appContext)) {
+                if (!PushNotificationUtils.areNotificationsEnabled(AscoltoApplication.appContext)) {
                     itemsList.add(EnableNotificationCard())
                 }
 
                 // survey card
 
-                if(surveyManager.areAllSurveysLogged()) {
+                if (surveyManager.areAllSurveysLogged()) {
                     itemsList.add(SurveyCardDone())
                 } else {
-                    itemsList.add(SurveyCard(surveyManager.usersToLogSize()))
+                    itemsList.add(SurveyCard(surveyManager.usersToLogCount()))
                 }
 
                 // suggestions card
@@ -97,18 +89,25 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 // TODO remove this header is there are no suggestions card yet (at startup?)
                 itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
 
-                // TODO for each user (or group uf users by severity) create a suggestion card
-                // fake cards
-                val suggestionTitle = String.format(ctx.resources.getString(R.string.indication_for),
-                    "<b>Giulia</b>")
-                val suggestionTitle2 = String.format(ctx.resources.getString(R.string.indication_for),
-                    "<b>Marco e Matteo</b>")
-                val suggestionTitle3 = String.format(ctx.resources.getString(R.string.indication_for),
-                    "<b>Roddy</b>")
 
-                itemsList.add(SuggestionsCardWhite(suggestionTitle, Severity.LOW))
-                itemsList.add(SuggestionsCardYellow(suggestionTitle2, Severity.MID))
-                itemsList.add(SuggestionsCardRed(suggestionTitle3, Severity.HIGH))
+                for (user in surveyManager.allUsers()) {
+                    val name =
+                        if (user.isMain) ctx.resources.getString(R.string.you_as_complement) else user.name
+                    val suggestionTitle = String.format(
+                        ctx.resources.getString(R.string.indication_for),
+                        "<b>$name</b>"
+                    )
+                    val triageProfileId = surveyManager.userHealthProfile(user.id)?.triageProfileId
+                    val triageProfile = triageProfileId?.let {
+                        oracle.settings()?.survey?.triage?.profile(it)
+                    }
+                    itemsList.add(
+                        SuggestionsCardWhite(
+                            suggestionTitle,
+                            triageProfile?.severity ?: Severity.LOW
+                        )
+                    )
+                }
 
                 homelistModel.value = itemsList.toList()
             }
@@ -182,7 +181,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
         val flag = "family_add_member_popup_showed"
         uiScope.launch {
             delay(500)
-            if(!isFlagSet(flag)) {
+            if (!isFlagSet(flag)) {
                 _showAddFamilyMemberDialog.value = Event(true)
                 setFlag(flag, true)
             }
