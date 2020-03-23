@@ -16,7 +16,6 @@ import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.HomeListAdapter
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject

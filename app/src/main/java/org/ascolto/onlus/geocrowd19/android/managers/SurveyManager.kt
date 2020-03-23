@@ -119,12 +119,7 @@ class SurveyManager(private val context: Context) : KoinComponent {
     }
 
     fun allUsers() : List<User> {
-        return listOf(
-            User(id="PRIMO", isMain = true),
-            User(id="SECONDO", name = "KAROLA"),
-            User(id="TERZO", name = "GERTHRUDE")
-            ) // FIXME
-        val me = oracle.me() ?: return listOf()
+        val me: AscoltoMe = oracle.me() ?: return listOf()
         val mainUser = me.mainUser ?: return listOf()
         return listOf(mainUser) + me.familyMembers
     }
