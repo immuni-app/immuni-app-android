@@ -11,8 +11,7 @@ import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.UserHealthProfile
-import org.ascolto.onlus.geocrowd19.android.models.survey.QuestionId
-import org.ascolto.onlus.geocrowd19.android.models.survey.Survey
+import org.ascolto.onlus.geocrowd19.android.models.survey.*
 import org.ascolto.onlus.geocrowd19.android.picoMetrics.SurveyCompleted
 import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import org.koin.core.KoinComponent
@@ -54,7 +53,8 @@ class SurveyManager(private val context: Context) : KoinComponent {
                 healthState = setOf(),
                 triageProfileId = null,
                 lastSurveyVersion = null,
-                lastSurveyDate = null
+                lastSurveyDate = null,
+                lastSurveyAnswers = null
             )
         )
     }
@@ -80,30 +80,23 @@ class SurveyManager(private val context: Context) : KoinComponent {
     }
 
     fun completeSurvey(userId: String, form: FormModel, survey: Survey): UserHealthProfile {
-        val previousUserHealthProfile = userHealthProfile(userId)
         val updatedUserHealthProfile = UserHealthProfile(
             userId = userId,
             healthState = form.healthState,
             triageProfileId = form.triageProfile,
             lastSurveyVersion = survey.version,
-            lastSurveyDate = form.startDate
+            lastSurveyDate = form.startDate,
+            lastSurveyAnswers = form.surveyAnswers.mapValues {
+                it.value.map { answer ->
+                    when (answer) {
+                        is SimpleAnswer -> answer.index
+                        is CompositeAnswer -> answer.componentIndexes
+                    }
+                }
+            }
         )
         storage.save(updatedUserHealthProfile.key, updatedUserHealthProfile)
         saveAnseredQuestions(form.answeredQuestions.toSet())
-
-        val surveyCompletedEvent = SurveyCompleted(
-            userId = updatedUserHealthProfile.userId,
-            surveyVersion = survey.version,
-            answers = form.surveyAnswers,
-            triageProfile = updatedUserHealthProfile.triageProfileId,
-            previousUserHealthState = previousUserHealthProfile.healthState,
-            userHealthState = updatedUserHealthProfile.healthState
-        )
-        Log.d("survey completed", surveyCompletedEvent.userAction.info.toString())
-
-        GlobalScope.launch {
-            pico.trackEvent(surveyCompletedEvent.userAction)
-        }
 
         return updatedUserHealthProfile
     }
