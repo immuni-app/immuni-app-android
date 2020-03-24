@@ -72,7 +72,7 @@ class UserDetailsFragment : Fragment() {
             identifier.text = it.id
 
             // main user cannot be deleted
-            
+
             if(it.isMain) delete.gone()
             else delete.visible()
 

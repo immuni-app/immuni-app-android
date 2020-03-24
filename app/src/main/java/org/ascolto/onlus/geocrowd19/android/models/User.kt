@@ -10,6 +10,7 @@ import java.util.*
 class User(
     @field:Json(name = "identifier") val id: String,
     @field:Json(name = "age_group") val ageGroup: String = "",
+    @field:Json(name = "age") val age: Int = 999,
     @field:Json(name = "gender") val gender: Gender = Gender.FEMALE,
     @field:Json(name = "name") val name: String? = null,
     @field:Json(name = "last_survey_at") val lastSurveyDate: Double? = null,
