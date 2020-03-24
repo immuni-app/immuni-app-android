@@ -51,7 +51,6 @@ class AscoltoPicoConfiguration(val context: Context): PicoConfiguration, KoinCom
 
     override val userInfo: Map<String, Any>
         get() = mapOf(
-            LocationPermissionLevel.instance().userInfo(),
             PushPermissionLevel.instance().userInfo()
         )
 }
