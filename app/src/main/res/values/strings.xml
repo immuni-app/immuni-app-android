@@ -148,4 +148,8 @@
     <string name="nickname_paternalGrandparent_male">Nonno Paterno</string>
     <string name="nickname_maternalGrandparent_male">Nonno Materno</string>
     <string name="nickname_not_specified">Non specificato</string>
+
+    <string name="other">Altro</string>
+
+    <string name="server_generic_error">Si è verificato un errore. Riprova più tardi.</string>
 </resources>

@@ -8,7 +8,7 @@ import com.bendingspoons.base.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.add_relative_already_registered_fragment.*
 import org.ascolto.onlus.geocrowd19.android.ui.addrelative.RelativeInfo
 
-class LiveWithYouFragment : RelativeContentFragment(R.layout.add_relative_already_registered_fragment) {
+class LiveWithYouFragment : RelativeContentFragment(R.layout.add_relative_live_with_you_fragment) {
     override val nextButton: View
         get() = next
 
@@ -54,7 +54,7 @@ class LiveWithYouFragment : RelativeContentFragment(R.layout.add_relative_alread
         }
     }
 
-    private fun updateUI(answer: Boolean) {
+    private fun updateUI(answer: Boolean?) {
         when(answer) {
             true -> {
                 yes.isChecked = true
@@ -63,6 +63,10 @@ class LiveWithYouFragment : RelativeContentFragment(R.layout.add_relative_alread
             false -> {
                 yes.isChecked = false
                 no.isChecked = true
+            }
+            else -> {
+                yes.isChecked = false
+                no.isChecked = false
             }
         }
     }

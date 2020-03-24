@@ -10,10 +10,10 @@ data class RelativeInfo(
     var name: String? = null,
     var gender: Gender? = null,
     var ageGroup: AgeGroup? = null,
-    var sameHouse: Boolean = false,
+    var sameHouse: Boolean? = null,
     var nickname: Nickname? = null,
-    var adult: Boolean = false,
-    var hasSmartphone: Boolean = false,
-    var canAddInfoHimself: Boolean = false,
-    var alreadyAddedFromAnotherRelative: Boolean = false
+    var adult: Boolean? = null,
+    var hasSmartphone: Boolean? = null,
+    var canAddInfoHimself: Boolean? = null,
+    var alreadyAddedFromAnotherRelative: Boolean? = null
 ): Serializable

@@ -5,6 +5,8 @@ import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
+import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
+import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
@@ -76,12 +78,13 @@ class AddRelativeViewModel(val handle: SavedStateHandle, private val database: A
         val userInfo = partialUserInfo.value!!
         uiScope.launch {
             loading.value = true
+            delay(500)
             val result = apiManager.createFamilyMember(
                 User(
                     id = "",
                     ageGroup = userInfo.ageGroup!!,
                     gender = userInfo.gender!!,
-                    nickname = Nickname(userInfo.nicknameType, userInfo.nickname) ,
+                    nickname = userInfo.nickname ,
                     isInSameHouse = userInfo.sameHouse
                 )
             )
@@ -89,7 +92,7 @@ class AddRelativeViewModel(val handle: SavedStateHandle, private val database: A
             if (result != null) {
                 _navigateToMainPage.value = Event(true)
             } else {
-                toast("Si è verificato un errore, riprovare.")
+                toast(AscoltoApplication.appContext.getString(R.string.server_generic_error))
             }
         }
     }

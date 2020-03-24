@@ -15,6 +15,7 @@ import org.ascolto.onlus.geocrowd19.android.ui.home.HomeActivity
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import org.ascolto.onlus.geocrowd19.android.models.survey.TriageProfile
+import org.ascolto.onlus.geocrowd19.android.models.survey.backgroundColor
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity.Companion.TRIAGE_DIALOG_RESULT
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
@@ -72,6 +73,7 @@ class FormDoneFragment : Fragment() {
         val intent = Intent(context, WebViewDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             putExtra("url", triageProfile.url)
+            putExtra("color", triageProfile.severity.backgroundColor())
         }
         startActivityForResult(intent, TRIAGE_DIALOG_RESULT)
     }

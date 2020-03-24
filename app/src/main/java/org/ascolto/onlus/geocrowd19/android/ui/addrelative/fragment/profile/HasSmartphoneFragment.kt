@@ -58,7 +58,7 @@ class HasSmartphoneFragment : RelativeContentFragment(R.layout.add_relative_has_
         }
     }
 
-    private fun updateUI(answer: Boolean) {
+    private fun updateUI(answer: Boolean?) {
         when(answer) {
             true -> {
                 yes.isChecked = true
@@ -67,6 +67,10 @@ class HasSmartphoneFragment : RelativeContentFragment(R.layout.add_relative_has_
             false -> {
                 yes.isChecked = false
                 no.isChecked = true
+            }
+            else -> {
+                yes.isChecked = false
+                no.isChecked = false
             }
         }
     }

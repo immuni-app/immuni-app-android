@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.user_details_fragment.name
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
+import org.ascolto.onlus.geocrowd19.android.loading
 import org.ascolto.onlus.geocrowd19.android.models.Nickname
 import org.ascolto.onlus.geocrowd19.android.toast
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -49,7 +50,18 @@ class UserDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            activity?.loading(it)
+        })
+
+        viewModel.navigateBack.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                findNavController().popBackStack()
+            }
+        })
+
         viewModel.user.observe(viewLifecycleOwner, Observer {
+            if(it == null) return@Observer
             pageTitle.text = when (it.isMain) {
                 true -> requireContext().resources.getString(R.string.you)
                 false -> it.name
@@ -107,7 +119,7 @@ class UserDetailsFragment : Fragment() {
         }
 
         delete.setOnClickListener {
-            toast("DELETE")
+            viewModel.deleteUser()
         }
     }
 }

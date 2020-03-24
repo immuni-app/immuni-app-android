@@ -91,6 +91,12 @@ class RelativeProfileFragment : Fragment() {
             }
         })
 
+        viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                activity?.finish()
+            }
+        })
+
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             activity?.loading(it)
         })
@@ -98,12 +104,6 @@ class RelativeProfileFragment : Fragment() {
         close.setOnClickListener {
             activity?.finish()
         }
-    }
-
-    private fun navigateToDone() {
-        val action =
-            RelativeProfileFragmentDirections.actionInterrupt("titolo mu", "descrizione mu")
-        findNavController().navigate(action)
     }
 
     private fun onBackPressed() {

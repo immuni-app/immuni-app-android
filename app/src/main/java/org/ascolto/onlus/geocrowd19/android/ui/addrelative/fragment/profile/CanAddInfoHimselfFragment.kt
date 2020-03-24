@@ -62,7 +62,7 @@ class CanAddInfoHimselfFragment : RelativeContentFragment(R.layout.add_relative_
         }
     }
 
-    private fun updateUI(answer: Boolean) {
+    private fun updateUI(answer: Boolean?) {
         when(answer) {
             true -> {
                 yes.isChecked = true
@@ -71,6 +71,10 @@ class CanAddInfoHimselfFragment : RelativeContentFragment(R.layout.add_relative_
             false -> {
                 yes.isChecked = false
                 no.isChecked = true
+            }
+            else -> {
+                yes.isChecked = false
+                no.isChecked = false
             }
         }
     }

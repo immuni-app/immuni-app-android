@@ -5,6 +5,7 @@ import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
 import org.ascolto.onlus.geocrowd19.android.models.survey.TriageProfile
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.models.NicknameType.*
 
@@ -14,7 +15,6 @@ class User(
     @field:Json(name = "age_group") val ageGroup: AgeGroup = AgeGroup.ZERO_SEVENTEEN,
     @field:Json(name = "age") val age: Int = 999,
     @field:Json(name = "gender") val gender: Gender = Gender.FEMALE,
-    @field:Json(name = "name") val name: String? = null,
     @field:Json(name = "nickname") val nickname: Nickname? = null,
     @field:Json(name = "last_survey_at") val lastSurveyDate: Double? = null,
     @field:Json(name = "last_survey_version") val lastSurveyVersion: String?  = null,
@@ -23,7 +23,13 @@ class User(
     @field:Json(name = "same_house") val isInSameHouse: Boolean? = null,
     // is_main doesn't arrive from the backend, but we set it later
     @field:Json(name = "is_main") var isMain: Boolean = false
-)
+) {
+    val name: String
+        get() {
+            if(isMain) return "-"
+            else return nickname?.humanReadable(AscoltoApplication.appContext, gender) ?: "-"
+        }
+}
 
 enum class AgeGroup(val id: String) {
     @Json(name = "0-17")
