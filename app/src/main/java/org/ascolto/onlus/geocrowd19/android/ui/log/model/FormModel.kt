@@ -9,12 +9,16 @@ data class FormModel(
     private val initialHealthState: Set<HealthState>,
     var triageProfile: TriageProfileId?,
     val surveyAnswers: LinkedHashMap<QuestionId, QuestionAnswers>,
-    val startDate: Date = Date()
+    val startDate: Date = Date(),
+    val answeredQuestionsElapsedDays: Map<QuestionId, Int>
 ) : Serializable {
-    val questionHistory = Stack<QuestionId>().apply {
+    private val questionHistory = Stack<QuestionId>().apply {
         add(initialQuestion)
     }
-    val healthStateHistory = Stack<UserHealthState>().apply {
+
+    val answeredQuestions: Collection<QuestionId> = questionHistory
+
+    private val healthStateHistory = Stack<UserHealthState>().apply {
         add(initialHealthState.toMutableSet())
     }
 

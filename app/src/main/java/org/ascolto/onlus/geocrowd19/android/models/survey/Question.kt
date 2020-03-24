@@ -8,16 +8,24 @@ data class Question(
     val title: String,
     val description: String,
     val widget: QuestionWidget,
-    val frequency: Int,
+    val periodicity: Int,
     val showCondition: Condition,
     val healthStateUpdater: HealthStateUpdater,
     val jump: Jump
 ) {
     fun shouldBeShown(
+        daysSinceItWasLastAnswered: Int?,
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,
         surveyAnswers: SurveyAnswers
-    ) = showCondition.isSatisfied(healthState, triageProfile, surveyAnswers)
+    ): Boolean {
+        val hasEnoughTimeElapsed = daysSinceItWasLastAnswered?.let { it >= periodicity } ?: true
+        return hasEnoughTimeElapsed && showCondition.isSatisfied(
+            healthState,
+            triageProfile,
+            surveyAnswers
+        )
+    }
 
     fun updatedHealthState(
         healthState: UserHealthState,

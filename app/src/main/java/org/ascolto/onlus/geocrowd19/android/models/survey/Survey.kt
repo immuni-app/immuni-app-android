@@ -23,11 +23,11 @@ data class Survey(
     )
 
     fun next(
-        // FIXME: add check on frequency
         questionId: String,
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,
-        answers: SurveyAnswers
+        answers: SurveyAnswers,
+        answeredQuestionsElapsedDays: Map<QuestionId, Int>
     ): SurveyNextDestination {
         val currentQuestion = questions.first { it.id == questionId }
         val currentPosition = questions.indexOf(currentQuestion)
@@ -48,7 +48,12 @@ data class Survey(
             }
             null -> {
                 nextQuestions.find {
-                    it.shouldBeShown(healthState, triageProfile, answers)
+                    it.shouldBeShown(
+                        answeredQuestionsElapsedDays[it.id],
+                        healthState,
+                        triageProfile,
+                        answers
+                    )
                 }?.let {
                     SurveyQuestionDestination(it)
                 } ?: SurveyEndDestination()

@@ -94,9 +94,11 @@ class LogViewModel(
             val _user = surveyManager.nextUserToLog()!!
             user.value = _user
             val lastProfile = surveyManager.userHealthProfile(_user.id)
+            val answeredQuestionsElapsedDays = surveyManager.answeredQuestionsElapsedDays()
 
             val currentQuestion = _survey.questions.first {
                 it.shouldBeShown(
+                    daysSinceItWasLastAnswered = answeredQuestionsElapsedDays[it.id],
                     healthState = lastProfile.healthState,
                     triageProfile = lastProfile.triageProfileId,
                     surveyAnswers = linkedMapOf()
@@ -108,7 +110,8 @@ class LogViewModel(
                     initialQuestion = currentQuestion,
                     initialHealthState = lastProfile.healthState,
                     triageProfile = lastProfile.triageProfileId,
-                    surveyAnswers = linkedMapOf()
+                    surveyAnswers = linkedMapOf(),
+                    answeredQuestionsElapsedDays = answeredQuestionsElapsedDays
                 )
                 handle.set(STATE_KEY, formModel.value)
             }
@@ -137,7 +140,8 @@ class LogViewModel(
             questionId,
             form.healthState,
             form.triageProfile,
-            form.surveyAnswers
+            form.surveyAnswers,
+            form.answeredQuestionsElapsedDays
         )
 
         when (nextDestination) {
