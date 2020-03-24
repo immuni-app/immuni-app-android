@@ -66,10 +66,11 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 val itemsList = mutableListOf<HomeItemType>()
 
                 // check geolocation disabled
-
+                /*
                 if (!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext)) {
                     itemsList.add(EnableGeolocationCard())
                 }
+                 */
 
                 // check notifications disabled
 
