@@ -62,7 +62,9 @@ class FormDoneFragment : Fragment() {
             }
         })
 
-        viewModel.onLogComplete()
+        if(savedInstanceState == null) {
+            viewModel.onLogComplete()
+        }
     }
 
     private fun openTriageDialog(triageProfile: TriageProfile) {

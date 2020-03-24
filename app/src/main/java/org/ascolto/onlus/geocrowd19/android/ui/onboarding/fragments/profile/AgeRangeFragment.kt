@@ -10,6 +10,7 @@ import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.showKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.onboarding_age_range_fragment.*
+import org.ascolto.onlus.geocrowd19.android.models.AgeGroup
 
 class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fragment),
                             CompoundButton.OnCheckedChangeListener{
@@ -66,18 +67,18 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
     private fun updateModel(id: Int) {
         viewModel.userInfo()?.let {
             viewModel.updateUserInfo(it.copy(ageGroup = when(id) {
-                R.id.age_range_0_17 -> "0-17"
-                R.id.age_range_18_35 -> "18-35"
-                R.id.age_range_36_45 -> "36-45"
-                R.id.age_range_46_55 -> "46-55"
-                R.id.age_range_56_65 -> "56-65"
-                R.id.age_range_66_75 -> "66-75"
-                else -> "75+"
+                R.id.age_range_0_17 -> AgeGroup.ZERO_SEVENTEEN
+                R.id.age_range_18_35 -> AgeGroup.EIGHTEEN_THIRTYFIVE
+                R.id.age_range_36_45 -> AgeGroup.THRITYSIX_FORTYFIVE
+                R.id.age_range_46_55 -> AgeGroup.FORTYSIX_FIFTYFIVE
+                R.id.age_range_56_65 -> AgeGroup.FIFTYSIX_SIXTYFIVE
+                R.id.age_range_66_75 -> AgeGroup.SIXTYSIX_SEVENTYFIVE
+                else -> AgeGroup.MORE_THAN_SEVENTYFIVE
             }))
         }
     }
 
-    private fun updateUI(string: String?) {
+    private fun updateUI(ageGroup: AgeGroup?) {
         radioGroup.clearCheck()
 
         age_range_0_17.isChecked = false
@@ -88,24 +89,24 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
         age_range_66_75.isChecked = false
         age_range_75.isChecked = false
 
-        when(string) {
-            "0-17" -> age_range_0_17.isChecked = true
-            "18-35" -> age_range_18_35.isChecked = true
-            "36-45" -> age_range_36_45.isChecked = true
-            "46-55" -> age_range_46_55.isChecked = true
-            "56-65" -> age_range_56_65.isChecked = true
-            "66-75" -> age_range_66_75.isChecked = true
-            "75+" -> age_range_75.isChecked = true
+        when(ageGroup) {
+            AgeGroup.ZERO_SEVENTEEN -> age_range_0_17.isChecked = true
+            AgeGroup.EIGHTEEN_THIRTYFIVE -> age_range_18_35.isChecked = true
+            AgeGroup.THRITYSIX_FORTYFIVE -> age_range_36_45.isChecked = true
+            AgeGroup.FORTYSIX_FIFTYFIVE -> age_range_46_55.isChecked = true
+            AgeGroup.FIFTYSIX_SIXTYFIVE -> age_range_56_65.isChecked = true
+            AgeGroup.SIXTYSIX_SEVENTYFIVE -> age_range_66_75.isChecked = true
+            AgeGroup.MORE_THAN_SEVENTYFIVE -> age_range_75.isChecked = true
         }
 
-        when(string) {
-            "0-17" -> lastRadioSelected = R.id.age_range_0_17
-            "18-35" -> lastRadioSelected = R.id.age_range_18_35
-            "36-45" -> lastRadioSelected = R.id.age_range_36_45
-            "46-55" -> lastRadioSelected = R.id.age_range_46_55
-            "56-65" -> lastRadioSelected = R.id.age_range_56_65
-            "66-75" -> lastRadioSelected = R.id.age_range_66_75
-            "75+" -> lastRadioSelected = R.id.age_range_75
+        when(ageGroup) {
+            AgeGroup.ZERO_SEVENTEEN -> lastRadioSelected = R.id.age_range_0_17
+            AgeGroup.EIGHTEEN_THIRTYFIVE -> lastRadioSelected = R.id.age_range_18_35
+            AgeGroup.THRITYSIX_FORTYFIVE -> lastRadioSelected = R.id.age_range_36_45
+            AgeGroup.FORTYSIX_FIFTYFIVE -> lastRadioSelected = R.id.age_range_46_55
+            AgeGroup.FIFTYSIX_SIXTYFIVE -> lastRadioSelected = R.id.age_range_56_65
+            AgeGroup.SIXTYSIX_SEVENTYFIVE -> lastRadioSelected = R.id.age_range_66_75
+            AgeGroup.MORE_THAN_SEVENTYFIVE -> lastRadioSelected = R.id.age_range_75
         }
     }
 
