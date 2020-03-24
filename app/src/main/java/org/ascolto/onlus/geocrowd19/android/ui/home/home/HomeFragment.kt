@@ -16,6 +16,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
+import org.ascolto.onlus.geocrowd19.android.models.survey.backgroundColor
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.FamilyDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDialogActivity
@@ -84,10 +85,11 @@ class HomeFragment : Fragment(), HomeClickListener {
         })
 
         viewModel.showSuggestionDialog.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let { url ->
+            it.getContentIfNotHandled()?.let { (url, severity) ->
                 val intent = Intent(AscoltoApplication.appContext, WebViewDialogActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     putExtra("url", url)
+                    putExtra("color", severity.backgroundColor())
                 }
                 activity?.startActivity(intent)
             }

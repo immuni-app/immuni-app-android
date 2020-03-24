@@ -1,5 +1,7 @@
 package org.ascolto.onlus.geocrowd19.android.models.survey
 
+import org.ascolto.onlus.geocrowd19.android.R
+
 typealias HealthState = String
 typealias UserHealthState = Set<HealthState>
 
@@ -43,5 +45,13 @@ data class TriageCondition(
         answers: SurveyAnswers
     ): Boolean {
         return condition.isSatisfied(healthState, triageProfile, answers)
+    }
+}
+
+fun Severity.backgroundColor(): Int {
+    return when(this) {
+        Severity.LOW -> R.color.home_background
+        Severity.MID -> R.color.card_yellow_bg
+        Severity.HIGH -> R.color.card_red_bg
     }
 }

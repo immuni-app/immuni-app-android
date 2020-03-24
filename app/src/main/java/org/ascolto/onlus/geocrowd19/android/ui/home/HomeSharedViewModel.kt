@@ -41,8 +41,8 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     val showAddFamilyMemberDialog: LiveData<Event<Boolean>>
         get() = _showAddFamilyMemberDialog
 
-    private val _showSuggestionDialog = MutableLiveData<Event<String>>()
-    val showSuggestionDialog: LiveData<Event<String>>
+    private val _showSuggestionDialog = MutableLiveData<Event<Pair<String, Severity>>>()
+    val showSuggestionDialog: LiveData<Event<Pair<String, Severity>>>
         get() = _showSuggestionDialog
 
     private val _navigateToSurvey = MutableLiveData<Event<Boolean>>()
@@ -198,7 +198,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
         val survey = oracle.settings()?.survey
         survey?.let { s ->
             val url = s.triage.profiles.firstOrNull { it.severity == severity }?.url
-            url?.let { _showSuggestionDialog.value = Event(it) }
+            url?.let { _showSuggestionDialog.value = Event(Pair(it, severity)) }
         }
     }
 
