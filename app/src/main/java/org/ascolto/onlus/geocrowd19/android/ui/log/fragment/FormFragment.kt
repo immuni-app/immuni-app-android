@@ -109,7 +109,7 @@ class FormFragment : Fragment() {
         viewModel.navigateToQuestion.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { nextQuestion ->
                 // add the new fragment to adapter
-                listAdapter.addNextWidget(nextQuestion)
+                listAdapter.updateAdapter(viewModel.formModel()!!.answeredQuestions)
                 listAdapter.notifyDataSetChanged()
 
                 // navigate there
@@ -148,4 +148,16 @@ class FormFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
+
+    // Uncomment this if we want to restart the survey after the system kill the app
+    /*
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+
+        // avoid using outdated settings survey, or even worse
+        // misaligned with the current survey answers
+
+        if(savedInstanceState != null) activity?.finish()
+    }
+     */
 }

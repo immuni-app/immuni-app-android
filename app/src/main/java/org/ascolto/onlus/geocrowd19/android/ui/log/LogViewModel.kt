@@ -91,7 +91,7 @@ class LogViewModel(
         survey.value = _survey
 
         uiScope.launch {
-            val _user = surveyManager.nextUserToLog()!!
+            val _user = surveyManager.nextUserToLog() ?: return@launch
             user.value = _user
             val lastProfile = surveyManager.userHealthProfile(_user.id)
             val answeredQuestionsElapsedDays = surveyManager.answeredQuestionsElapsedDays()

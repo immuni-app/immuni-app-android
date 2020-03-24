@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import org.ascolto.onlus.geocrowd19.android.R
@@ -62,9 +63,10 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
                     val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
                     typeface = tf
                     textSize = 18f
-                    val paddingLeft = ScreenUtils.convertDpToPixels(context, 4)
-                    val paddingTop = ScreenUtils.convertDpToPixels(context, 8)
-                    val paddingBottom = ScreenUtils.convertDpToPixels(context, 8)
+                    buttonDrawable = ContextCompat.getDrawable(context, R.drawable.checkbox)
+                    val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
+                    val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
+                    val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
                     setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
                     setTextColor(Color.parseColor("#495D74"))
                     setOnCheckedChangeListener(this@MultipleChoiceFieldFragment)
@@ -84,17 +86,26 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
     }
 
     override fun onFormModelUpdate(model: FormModel) {
+        disableTriggeringEvent = true
+        items.forEach {
+            it.isChecked = false
+        }
         model.surveyAnswers[questionId]?.let { answers ->
             for (answer in answers) {
-                items.find {
+                val checkbox = items.find {
                     (it.tag as Int) == (answer as SimpleAnswer).index
-                }?.isChecked = true
+                }
+                checkbox?.apply {
+                    isChecked = true
+                }
             }
         }
+        disableTriggeringEvent = false
     }
 
+    var disableTriggeringEvent = false
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-        validate()
+        if(!disableTriggeringEvent) validate()
     }
 
     override fun validate(): Boolean {

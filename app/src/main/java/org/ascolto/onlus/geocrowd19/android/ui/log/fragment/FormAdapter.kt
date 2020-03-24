@@ -12,14 +12,18 @@ class FormAdapter(
     fragment: Fragment
 ) : FragmentStateAdapter(fragment) {
     // initialize with only the first question
-    private var questionIds: MutableList<String> = mutableListOf(firstQuestion)
+    var questionIds: MutableList<String> = mutableListOf(firstQuestion)
 
-    fun addNextWidget(questionId: String) {
-        val index = questionIds.indexOf(questionId)
-        if (index != -1) {
-            questionIds = questionIds.subList(0, index)
-        }
-        questionIds.add(questionId)
+    fun updateAdapter(questions: Collection<String>) {
+        questionIds.clear()
+        questionIds.addAll(questions)
+    }
+
+    // IMPORTANT: this is critically important to allow the viewpager to instantiate the correct
+    // fragment instance
+
+    override fun getItemId(position: Int): Long {
+        return survey.questions.indexOfFirst { it.id == questionIds[position] }.toLong()
     }
 
     override fun getItemCount(): Int = questionIds.size

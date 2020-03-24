@@ -22,6 +22,9 @@ data class FormModel(
         add(initialHealthState.toMutableSet())
     }
 
+    //val questionsList: List<QuestionId>
+        //get() = questionHistory.toList()
+
     val currentQuestion: QuestionId
         get() = questionHistory.peek()
 

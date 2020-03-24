@@ -2,9 +2,11 @@ package org.ascolto.onlus.geocrowd19.android.ui.log.fragment.types
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import android.widget.CompoundButton.*
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import org.ascolto.onlus.geocrowd19.android.R
@@ -54,14 +56,16 @@ class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnChe
         widget.answers.forEachIndexed { index, answer ->
             items.apply {
                 add(RadioButton(context).apply {
+                    id = index
                     tag = index
                     text = answer
                     val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
                     typeface = tf
                     textSize = 18f
-                    val paddingLeft = ScreenUtils.convertDpToPixels(context, 4)
-                    val paddingTop = ScreenUtils.convertDpToPixels(context, 8)
-                    val paddingBottom = ScreenUtils.convertDpToPixels(context, 8)
+                    buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button)
+                    val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
+                    val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
+                    val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
                     setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
                     setTextColor(Color.parseColor("#495D74"))
                     setOnCheckedChangeListener(this@RadioFieldFragment)
@@ -78,16 +82,30 @@ class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnChe
         }
     }
 
+    var lastRadioSelected = -1
+    var disableTriggeringEvent = false
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-        validate()
+        if(isChecked) lastRadioSelected = buttonView?.id ?: -1
+        if(!disableTriggeringEvent) validate()
     }
 
     override fun onFormModelUpdate(model: FormModel) {
+        disableTriggeringEvent = true
+        items.forEach {
+            it.isChecked = false
+        }
+
+        radioGroup.clearCheck()
+
         model.surveyAnswers[questionId]?.let { answers ->
             items.find {
-                (it.tag as Int) == (answers.first() as SimpleAnswer).index
-            }?.isChecked = true
+                it.id == (answers.first() as SimpleAnswer).index
+            }?.apply {
+                isChecked = true
+            }
         }
+
+        disableTriggeringEvent = false
     }
 
     override fun validate(): Boolean {
@@ -98,9 +116,8 @@ class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnChe
     }
 
     private fun saveData() {
-        val index = items.find { it.isChecked }?.tag as? Int
-        if (index != null) {
-            viewModel.saveAnswers(questionId, listOf(SimpleAnswer(index)))
+        if (lastRadioSelected != -1) {
+            viewModel.saveAnswers(questionId, listOf(SimpleAnswer(lastRadioSelected)))
         }
     }
 }

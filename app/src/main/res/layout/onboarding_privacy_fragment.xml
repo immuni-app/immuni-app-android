@@ -64,14 +64,14 @@
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkBox"
+            style="@style/CheckboxButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="32dp"
-            android:gravity="top"
             app:layout_constraintBottom_toTopOf="@+id/next"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
@@ -81,7 +81,8 @@
             android:id="@+id/tos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/euclid_circular_bold"
             android:lineSpacingMultiplier="1.1"
             android:text="@string/privacy_checkbox"

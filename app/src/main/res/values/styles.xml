@@ -218,17 +218,23 @@
     </style>
 
     <style name="RadioButton">
-        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
         <item name="android:textColor">#495D74</item>
         <item name="android:fontFamily">@font/euclid_circular_bold</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:button">@drawable/radio_button</item>
     </style>
 
     <style name="CheckboxButton">
-        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
         <item name="android:textColor">#495D74</item>
         <item name="android:fontFamily">@font/euclid_circular_bold</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:button">@drawable/checkbox</item>
     </style>
 
     <style name="EditText">
