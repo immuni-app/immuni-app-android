@@ -1,5 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home.family
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,11 @@ import androidx.navigation.fragment.findNavController
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.family_fragment.*
+import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
+import org.ascolto.onlus.geocrowd19.android.toast
+import org.ascolto.onlus.geocrowd19.android.ui.addrelative.AddRelativeActivity
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.AddFamilyMemberButtonCard
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.AddFamilyMemberTutorialCard
@@ -75,11 +80,18 @@ class FamilyFragment : Fragment(), FamilyClickListener {
                 }
             }
             is AddFamilyMemberTutorialCard -> {
-                //viewModel.openSuggestions(item.severity)
+                navigateToAddRelative()
             }
             is AddFamilyMemberButtonCard -> {
-                //viewModel.openSuggestions(item.severity)
+                navigateToAddRelative()
             }
         }
+    }
+
+    private fun navigateToAddRelative() {
+        val intent = Intent(AscoltoApplication.appContext, AddRelativeActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
     }
 }

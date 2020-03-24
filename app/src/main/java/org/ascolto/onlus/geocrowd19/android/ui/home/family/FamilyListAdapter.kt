@@ -3,6 +3,7 @@ package org.ascolto.onlus.geocrowd19.android.ui.home.family
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -46,12 +47,26 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) : RecyclerView.A
 
     inner class AddFamilyMemberCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
+        private val addButton: Button = v.findViewById(R.id.addButton)
+        init {
+            addButton.setOnClickListener {
+                clickListener.onClick(items[adapterPosition])
+            }
+        }
+
         override fun onClick(v: View) {
             clickListener.onClick(items[adapterPosition])
         }
     }
 
     inner class AddFamilyMemberTutorialCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+
+        private val addButton: Button = v.findViewById(R.id.addButton)
+        init {
+            addButton.setOnClickListener {
+                clickListener.onClick(items[adapterPosition])
+            }
+        }
 
         override fun onClick(v: View) {
             clickListener.onClick(items[adapterPosition])

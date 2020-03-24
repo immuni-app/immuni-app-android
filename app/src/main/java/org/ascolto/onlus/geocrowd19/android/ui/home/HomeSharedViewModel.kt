@@ -92,11 +92,20 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
 
                 // suggestions card
 
-                // TODO remove this header is there are no suggestions card yet (at startup?)
-                itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
+                // first check if there is at least one card to show
+                var showCards = false
+                for (user in surveyManager.allUsers()) {
+                    val hasTookSurvey = surveyManager.userHealthProfile(user.id).lastSurveyDate != null
+                    showCards = showCards || hasTookSurvey
+                }
 
+                if(showCards) {
+                    itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
+                }
 
                 for (user in surveyManager.allUsers()) {
+                    val hasTookSurvey = surveyManager.userHealthProfile(user.id).lastSurveyDate != null
+                    if(!hasTookSurvey) continue
                     val name =
                         if (user.isMain) ctx.resources.getString(R.string.you_as_complement) else user.name
                     val suggestionTitle = String.format(
@@ -151,17 +160,6 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 else {
                     itemsList.add(AddFamilyMemberTutorialCard())
                 }
-
-                // TODO REMOVE
-                itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
-
-                mainUser?.let {
-                    itemsList.add(UserCard(it))
-                }
-                mainUser?.let {
-                    itemsList.add(UserCard(it))
-                }
-                itemsList.add(AddFamilyMemberButtonCard())
 
                 familylistModel.value = itemsList.toList()
             }

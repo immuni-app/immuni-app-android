@@ -207,6 +207,7 @@
     <style name="WhiteRoundedButton">
         <item name="cornerRadius">27dp</item>
         <item name="textAllCaps">false</item>
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:minHeight">55dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

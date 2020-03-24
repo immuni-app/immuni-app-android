@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".ui.setup.SetupActivity">
+
+    <Button
+        android:id="@+id/finish"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:theme="@style/Theme.MaterialComponents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:strokeColor="@color/background"
+        app:rippleColor="@color/background"
+        app:strokeWidth="1dp"
+        app:cornerRadius="27dp"
+        android:minHeight="55dp"
+        android:textAllCaps="false"
+        android:paddingEnd="50dp"
+        android:paddingStart="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/i_have_finished"
+        android:textStyle="bold"
+        android:textColor="@color/background"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/addAnotherRelative"
+        style="@style/WhiteRoundedButton"
+        app:rippleColor="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/background"
+        android:text="@string/add_another_relative"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/finish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/H1Heading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
+        android:maxLines="3"
+        android:text="Lascia che sia Nonna materna a inserire i suoi dati"
+        android:textColor="@color/background"
+        app:layout_constraintBottom_toTopOf="@+id/message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/message"
+        style="@style/P1Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
+        android:maxLines="3"
+        tools:text="Chiedi a Nonna Sofia di installare l’app e di compilare in autonomia il diario clinico."
+        android:textColor="@color/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

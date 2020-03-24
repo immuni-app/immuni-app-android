@@ -127,4 +127,8 @@
     <string name="settings_privacy_policy">Privacy policy</string>
     <string name="settings_download_data">Scarica dati</string>
     <string name="settings_erase_data">Elimina dati</string>
+    <string name="i_have_finished">Ho finito</string>
+    <string name="add_another_relative">Aggiungi un altro familiare</string>
+    <string name="add_relative_age_title">Quanti anni ha la persona che vuoi aggiungere?</string>
+    <string name="add_relative_age_description">Questa informazione è importante per consigliarti al meglio come proteggere la persona dal coronavirus.</string>
 </resources>

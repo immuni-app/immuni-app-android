@@ -78,6 +78,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.addrelative.AddRelativeActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>

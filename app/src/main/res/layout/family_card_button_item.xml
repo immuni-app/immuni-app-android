@@ -14,7 +14,7 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/next"
+        android:id="@+id/addButton"
         style="@style/RoundedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

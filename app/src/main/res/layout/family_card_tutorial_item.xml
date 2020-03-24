@@ -43,7 +43,7 @@
         app:layout_constraintWidth_percent="0.7" />
 
     <Button
-        android:id="@+id/next"
+        android:id="@+id/addButton"
         style="@style/RoundedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         android:textSize="14sp"
         android:fontFamily="@font/euclid_circular_medium"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/next"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/title"
