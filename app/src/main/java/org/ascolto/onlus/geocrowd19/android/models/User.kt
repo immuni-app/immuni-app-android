@@ -1,14 +1,16 @@
 package org.ascolto.onlus.geocrowd19.android.models
 
+import android.content.Context
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
 import org.ascolto.onlus.geocrowd19.android.models.survey.TriageProfile
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import java.util.*
+import org.ascolto.onlus.geocrowd19.android.R
+import org.ascolto.onlus.geocrowd19.android.models.NicknameType.*
 
 @JsonClass(generateAdapter = true)
 class User(
-    @field:Json(name = "identifier") val id: String,
+    @field:Json(name = "identifier") val id: String = "",
     @field:Json(name = "age_group") val ageGroup: AgeGroup = AgeGroup.ZERO_SEVENTEEN,
     @field:Json(name = "age") val age: Int = 999,
     @field:Json(name = "gender") val gender: Gender = Gender.FEMALE,
@@ -39,6 +41,18 @@ enum class AgeGroup(val id: String) {
     @Json(name = "75+")
     MORE_THAN_SEVENTYFIVE("75+");
 
+    fun humanReadable(context: Context): String {
+        return when (this) {
+            ZERO_SEVENTEEN -> context.getString(R.string.age_range_1)
+            EIGHTEEN_THIRTYFIVE -> context.getString(R.string.age_range_2)
+            THRITYSIX_FORTYFIVE -> context.getString(R.string.age_range_3)
+            FORTYSIX_FIFTYFIVE -> context.getString(R.string.age_range_4)
+            FIFTYSIX_SIXTYFIVE -> context.getString(R.string.age_range_5)
+            SIXTYSIX_SEVENTYFIVE -> context.getString(R.string.age_range_6)
+            MORE_THAN_SEVENTYFIVE -> context.getString(R.string.age_range_7)
+        }
+    }
+
     companion object {
         fun fromId(id: String): AgeGroup = values().first { it.id == id }
     }
@@ -46,9 +60,29 @@ enum class AgeGroup(val id: String) {
 
 @JsonClass(generateAdapter = true)
 data class Nickname(
-    @field:Json(name = "type") val type: NicknameType? = null,
+    @field:Json(name = "type") val type: NicknameType = PARENT,
     @field:Json(name = "value") val value: String? = null
-)
+) {
+    fun humanReadable(context: Context, gender: Gender): String {
+        return when (Pair(type, gender)) {
+            Pair(PARENT, Gender.FEMALE) -> context.getString(R.string.nickname_parent_female)
+            Pair(CHILD_1, Gender.FEMALE) -> context.getString(R.string.nickname_child1_female)
+            Pair(CHILD_2, Gender.FEMALE) -> context.getString(R.string.nickname_child2_female)
+            Pair(CHILD_3, Gender.FEMALE) -> context.getString(R.string.nickname_child3_female)
+            Pair(CHILD_4, Gender.FEMALE) -> context.getString(R.string.nickname_child4_female)
+            Pair(PATERNAL_GRANDPARENT, Gender.FEMALE) -> context.getString(R.string.nickname_paternal_grandparent_female)
+            Pair(MATERNAL_GRANDPARENT, Gender.FEMALE) -> context.getString(R.string.nickname_maternal_grandparent_female)
+            Pair(PARENT, Gender.MALE) -> context.getString(R.string.nickname_parent_male)
+            Pair(CHILD_1, Gender.MALE) -> context.getString(R.string.nickname_child1_male)
+            Pair(CHILD_2, Gender.MALE) -> context.getString(R.string.nickname_child2_male)
+            Pair(CHILD_3, Gender.MALE) -> context.getString(R.string.nickname_child3_male)
+            Pair(CHILD_4, Gender.MALE) -> context.getString(R.string.nickname_child4_male)
+            Pair(PATERNAL_GRANDPARENT, Gender.MALE) -> context.getString(R.string.nickname_paternalGrandparent_male)
+            Pair(MATERNAL_GRANDPARENT, Gender.MALE) -> context.getString(R.string.nickname_maternalGrandparent_male)
+            else -> if (type == OTHER) value!! else context.getString(R.string.nickname_not_specified)
+        }
+    }
+}
 
 enum class NicknameType(val id: String) {
     @Json(name = "child1")

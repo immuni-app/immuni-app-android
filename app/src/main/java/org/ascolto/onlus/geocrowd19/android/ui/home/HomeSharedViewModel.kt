@@ -1,6 +1,7 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home
 
 import android.content.Intent
+import android.util.Log
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,10 +17,15 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
+import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
+import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
+import org.ascolto.onlus.geocrowd19.android.models.AgeGroup
+import org.ascolto.onlus.geocrowd19.android.models.Nickname
+import org.ascolto.onlus.geocrowd19.android.models.NicknameType
 import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity.*
@@ -36,6 +42,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val surveyManager: SurveyManager by inject()
+    private val apiManager: ApiManager by inject()
 
     private val _showAddFamilyMemberDialog = MutableLiveData<Event<Boolean>>()
     val showAddFamilyMemberDialog: LiveData<Event<Boolean>>
@@ -148,7 +155,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 }
 
                 // if there are family members, add header and all the members and a add button
-                if(familyMembers.isNotEmpty())
+                if (familyMembers.isNotEmpty())
                     familyMembers.let { members ->
                         itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
                         familyMembers.forEach {
