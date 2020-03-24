@@ -12,6 +12,7 @@ import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.family_fragment.*
 import org.ascolto.onlus.geocrowd19.android.R
+import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeSharedViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.AddFamilyMemberButtonCard
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.AddFamilyMemberTutorialCard
@@ -19,28 +20,13 @@ import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.FamilyItemType
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.UserCard
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
-class FamilyFragment : Fragment(), FamilyClickListener {
+class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
 
     private lateinit var viewModel: HomeSharedViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //requireActivity().onBackPressedDispatcher.addCallback(this) {
-            // users must select a choice
-        //}
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        viewModel = getSharedViewModel()
-        return inflater.inflate(R.layout.family_fragment, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = getSharedViewModel()
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
         // Fade out toolbar on scroll
@@ -79,6 +65,7 @@ class FamilyFragment : Fragment(), FamilyClickListener {
             }
             is AddFamilyMemberButtonCard -> {
                 //viewModel.openSuggestions(item.severity)
+                viewModel.createFamilyMember()
             }
         }
     }

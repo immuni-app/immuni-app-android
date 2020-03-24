@@ -127,4 +127,20 @@
     <string name="settings_privacy_policy">Privacy policy</string>
     <string name="settings_download_data">Scarica dati</string>
     <string name="settings_erase_data">Elimina dati</string>
+
+    <string name="nickname_parent_female">Madre</string>
+    <string name="nickname_child1_female">Prima Figlia</string>
+    <string name="nickname_child2_female">Seconda Figlia</string>
+    <string name="nickname_child3_female">Terza Figlia</string>
+    <string name="nickname_child4_female">Quarta Figlia</string>
+    <string name="nickname_paternal_grandparent_female">Nonna Paterna</string>
+    <string name="nickname_maternal_grandparent_female">Nonna Materna</string>
+    <string name="nickname_parent_male">Padre</string>
+    <string name="nickname_child1_male">Primo Figlio</string>
+    <string name="nickname_child2_male">Secondo Figlio</string>
+    <string name="nickname_child3_male">Terzo Figlio</string>
+    <string name="nickname_child4_male">Quarto Figlio</string>
+    <string name="nickname_paternalGrandparent_male">Nonno Paterno</string>
+    <string name="nickname_maternalGrandparent_male">Nonno Materno</string>
+    <string name="nickname_not_specified">Non specificato</string>
 </resources>
