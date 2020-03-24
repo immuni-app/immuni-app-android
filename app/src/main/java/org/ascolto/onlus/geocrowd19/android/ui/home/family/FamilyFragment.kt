@@ -65,7 +65,6 @@ class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
             }
             is AddFamilyMemberButtonCard -> {
                 //viewModel.openSuggestions(item.severity)
-                viewModel.createFamilyMember()
             }
         }
     }

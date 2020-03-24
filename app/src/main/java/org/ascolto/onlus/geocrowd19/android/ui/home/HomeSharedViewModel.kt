@@ -241,24 +241,4 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
         }
         context.startActivity(intent)
     }
-
-    fun createFamilyMember() {
-        GlobalScope.launch {
-            val updatedMe = apiManager.createFamilyMember(
-                User(
-                    nickname = Nickname(
-                        type = NicknameType.MATERNAL_GRANDPARENT,
-                        value = "Agnese"
-                    ),
-                    ageGroup = AgeGroup.MORE_THAN_SEVENTYFIVE,
-                    gender = Gender.FEMALE,
-                    isInSameHouse = true
-                )
-            )
-
-            if (updatedMe != null) {
-                Log.d("Member", "family members: ${updatedMe.familyMembers.map { it.nickname }}")
-            }
-        }
-    }
 }

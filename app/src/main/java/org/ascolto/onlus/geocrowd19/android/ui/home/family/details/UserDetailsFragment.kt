@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.user_details_fragment.name
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
+import org.ascolto.onlus.geocrowd19.android.models.Nickname
 import org.ascolto.onlus.geocrowd19.android.toast
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -31,7 +32,7 @@ class UserDetailsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //requireActivity().onBackPressedDispatcher.addCallback(this) {
-            // users must select a choice
+        // users must select a choice
         //}
     }
 
@@ -49,21 +50,23 @@ class UserDetailsFragment : Fragment() {
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            pageTitle.text = when(it.isMain) {
+            pageTitle.text = when (it.isMain) {
                 true -> requireContext().resources.getString(R.string.you)
                 false -> it.name
             }
-            name.text = when(it.isMain) {
+            val ctx = requireContext()
+            name.text = when (it.isMain) {
                 true -> requireContext().resources.getString(R.string.you)
-                false -> it.name
+                false -> it.nickname?.humanReadable(ctx, it.gender)
+                    ?: ctx.getString(R.string.nickname_not_specified)
             }
             age.text = it.ageGroup.id
-            sex.text = when(it.gender) {
+            sex.text = when (it.gender) {
                 Gender.MALE -> requireContext().resources.getString(R.string.onboarding_male)
                 Gender.FEMALE -> requireContext().resources.getString(R.string.onboarding_female)
             }
 
-            liveWithYou.text = when(it.isInSameHouse) {
+            liveWithYou.text = when (it.isInSameHouse) {
                 true -> requireContext().resources.getString(R.string.yes)
                 false -> requireContext().resources.getString(R.string.no)
                 else -> "-"
@@ -73,7 +76,7 @@ class UserDetailsFragment : Fragment() {
 
             // main user cannot be deleted
 
-            if(it.isMain) delete.gone()
+            if (it.isMain) delete.gone()
             else delete.visible()
 
         })
