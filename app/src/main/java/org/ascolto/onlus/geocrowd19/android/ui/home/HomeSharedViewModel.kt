@@ -1,5 +1,7 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home
 
+import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +10,7 @@ import org.ascolto.onlus.geocrowd19.android.util.isFlagSet
 import org.ascolto.onlus.geocrowd19.android.util.setFlag
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.utils.DeviceUtils
+import com.bendingspoons.base.utils.ExternalLinksHelper
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
@@ -21,6 +24,7 @@ import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity.*
 import org.ascolto.onlus.geocrowd19.android.toast
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.*
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
 import org.koin.core.KoinComponent
@@ -202,5 +206,32 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
         // copy to clipboard
         DeviceUtils.copyToClipBoard(AscoltoApplication.appContext, text = user.id)
         toast(AscoltoApplication.appContext.resources.getString(R.string.user_id_copied))
+    }
+
+    fun onPrivacyPolicyClick() {
+        oracle.settings()?.privacyPolicyUrl?.let {
+            openUrlInDialog(it)
+        }
+    }
+
+    fun onFaqClick() {
+        oracle.settings()?.faqUrl?.let {
+            openUrlInDialog(it)
+        }
+    }
+
+    fun onTosClick() {
+        oracle.settings()?.tosUrl?.let {
+            openUrlInDialog(it)
+        }
+    }
+
+    private fun openUrlInDialog(url: String) {
+        val context = AscoltoApplication.appContext
+        val intent = Intent(context, WebViewDialogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            putExtra("url", url)
+        }
+        context.startActivity(intent)
     }
 }
