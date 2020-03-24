@@ -7,5 +7,5 @@ import java.util.*
 data class OnboardingUserInfo(
     var name: String? = null,
     var gender: Gender? = null,
-    var age: Int? = null
+    var ageGroup: String? = null
 ): Serializable

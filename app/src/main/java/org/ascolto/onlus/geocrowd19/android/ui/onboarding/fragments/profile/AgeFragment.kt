@@ -34,13 +34,14 @@ class AgeFragment : ProfileContentFragment(R.layout.onboarding_age_fragment) {
 
         nextButton.setOnClickListener(null) // override the default behaviour
         nextButton.setOnClickListener {
-            MaterialAlertDialogBuilder(context)
+            /*MaterialAlertDialogBuilder(context)
                 .setTitle(String.format(getString(R.string.onboarding_age_confirmation_title, textField.text.toString().toIntOrNull() ?: 0)))
                 .setMessage(getString(R.string.onboarding_age_confirmation_message))
                 .setPositiveButton(getString(R.string.confirm)) { d, _ -> viewModel.onNextTap() }
                 .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss() }
                 .setOnCancelListener {  }
-                .show()
+                .show()*/
+            viewModel.onNextTap()
         }
 
         back.setOnClickListener {
@@ -49,7 +50,7 @@ class AgeFragment : ProfileContentFragment(R.layout.onboarding_age_fragment) {
     }
 
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {
-        updateUI(userInfo.age)
+        //updateUI(userInfo.age)
         validate(false)
     }
 
@@ -64,7 +65,7 @@ class AgeFragment : ProfileContentFragment(R.layout.onboarding_age_fragment) {
 
     private fun updateModel(age: Int) {
         viewModel.userInfo()?.let {
-            viewModel.updateUserInfo(it.copy(age = age))
+            //viewModel.updateUserInfo(it.copy(age = age))
         }
     }
 

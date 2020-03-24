@@ -55,55 +55,55 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description">
 
-                <RadioButton
-                    android:id="@+id/r1"
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/age_range_0_17"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="@string/onboarding_female" />
-                <RadioButton
-                    android:id="@+id/r2"
+                    android:text="@string/age_range_1" />
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/age_range_18_35"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="@string/onboarding_male" />
-                <RadioButton
-                    android:id="@+id/r3"
+                    android:text="@string/age_range_2" />
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/age_range_36_45"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="@string/onboarding_male" />
-                <RadioButton
-                    android:id="@+id/r4"
+                    android:text="@string/age_range_3" />
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/age_range_46_55"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="@string/onboarding_male" />
-                <RadioButton
-                    android:id="@+id/r5"
+                    android:text="@string/age_range_4" />
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/age_range_56_65"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="@string/onboarding_male" />
-                <RadioButton
-                    android:id="@+id/r6"
+                    android:text="@string/age_range_5" />
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/age_range_66_75"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="@string/onboarding_male" />
-                <RadioButton
-                    android:id="@+id/r7"
+                    android:text="@string/age_range_6" />
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/age_range_75"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="@string/onboarding_male" />
+                    android:text="@string/age_range_7" />
             </RadioGroup>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

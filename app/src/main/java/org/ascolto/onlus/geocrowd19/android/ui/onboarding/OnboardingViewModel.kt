@@ -10,20 +10,16 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
-import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
-import org.ascolto.onlus.geocrowd19.android.db.entity.UserInfoEntity
-import org.ascolto.onlus.geocrowd19.android.db.entity.age
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.picoMetrics.OnboardingCompleted
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
-import java.util.*
 
 class OnboardingViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) :
     ViewModel(), KoinComponent {
@@ -100,7 +96,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
             val updatedMe = apiManager.updateMainUser(
                 User(
                     id = "",
-                    age = userInfo.age!!,
+                    ageGroup = userInfo.ageGroup!!,
                     gender = userInfo.gender!!
                 )
             )

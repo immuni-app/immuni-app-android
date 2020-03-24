@@ -42,8 +42,8 @@
     <string name="onboarding_age_title">Quanti anni hai?</string>
     <string name="onboarding_age_description">Questa informazione è importante per consigliarti al meglio come proteggerti dal coronavirus.</string>
 
-    <string name="onboarding_age_confirmation_title">Confermi di avere %d anni?</string>
-    <string name="onboarding_age_confirmation_message">Questa informazione è importante per consigliarti al meglio come proteggerti dal coronavirus.</string>
+    <string name="onboarding_age_more_than_18_title">Devi avere almeno 18 anni per usare Immuni</string>
+    <string name="onboarding_age_more_than_18_message">Se hai meno di 18 anni, chiedi ad un genitore o ad un altro maggiorenne di creare un profilo per te sul loro smartphone, nella sezione \"Famiglia\" dell\'app.</string>
 
     <string name="onboarding_female">Femmina</string>
     <string name="onboarding_male">Maschio</string>
@@ -113,4 +113,12 @@
     <string name="age">Età</string>
     <string name="sex">Sesso</string>
     <string name="live_with_you">Vive con te</string>
+
+    <string name="age_range_1">Meno di 18 anni</string>
+    <string name="age_range_2">18 - 35 anni</string>
+    <string name="age_range_3">36 - 45 anni</string>
+    <string name="age_range_4">46 - 55 anni</string>
+    <string name="age_range_5">56 - 65</string>
+    <string name="age_range_6">66 - 75</string>
+    <string name="age_range_7">Più di 75 anni</string>
 </resources>

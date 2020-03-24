@@ -23,6 +23,10 @@ class DoneFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // prevent crashes for invalid state
+        if(savedInstanceState != null) activity?.finish()
+
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             // users must select a choice
         }
@@ -47,7 +51,9 @@ class DoneFragment : Fragment() {
             }
         })
 
-        viewModel.onOnboardingComplete()
+        if(savedInstanceState == null) {
+            viewModel.onOnboardingComplete()
+        }
     }
 
     private fun goToMainActivity() {

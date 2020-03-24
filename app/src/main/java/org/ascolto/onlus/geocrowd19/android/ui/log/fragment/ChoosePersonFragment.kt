@@ -43,7 +43,7 @@ class ChoosePersonFragment : Fragment() {
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
             it?.let {
-                age.text = it.age.toString()
+                age.text = it.ageGroup
                 name.text = if (it.isMain) getString(R.string.you) else it.name
                 gender.setImageResource(when(it.gender) {
                     Gender.FEMALE -> R.drawable.ic_avatar_female_purple

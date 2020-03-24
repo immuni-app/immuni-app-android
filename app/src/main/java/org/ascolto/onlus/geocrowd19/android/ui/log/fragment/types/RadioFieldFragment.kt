@@ -102,6 +102,7 @@ class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnChe
                 it.id == (answers.first() as SimpleAnswer).index
             }?.apply {
                 isChecked = true
+                lastRadioSelected = this.id
             }
         }
 
@@ -109,7 +110,7 @@ class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnChe
     }
 
     override fun validate(): Boolean {
-        val valid = items.any { it.isChecked }
+        val valid = lastRadioSelected != -1
         nextButton.isEnabled = valid
         if (valid) saveData()
         return valid
