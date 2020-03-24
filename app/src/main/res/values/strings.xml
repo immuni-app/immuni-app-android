@@ -121,4 +121,10 @@
     <string name="age_range_5">56 - 65</string>
     <string name="age_range_6">66 - 75</string>
     <string name="age_range_7">Più di 75 anni</string>
+
+    <string name="settings_faq">Domande frequenti</string>
+    <string name="settings_tos">Termini di utilizzo</string>
+    <string name="settings_privacy_policy">Privacy policy</string>
+    <string name="settings_download_data">Scarica dati</string>
+    <string name="settings_erase_data">Elimina dati</string>
 </resources>
