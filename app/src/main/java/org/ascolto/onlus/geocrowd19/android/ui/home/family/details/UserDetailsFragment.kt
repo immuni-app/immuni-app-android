@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.DeviceUtils
 import kotlinx.android.synthetic.main.user_details_fragment.*
 import kotlinx.android.synthetic.main.user_details_fragment.identifier
@@ -68,6 +70,12 @@ class UserDetailsFragment : Fragment() {
             }
 
             identifier.text = it.id
+
+            // main user cannot be deleted
+            
+            if(it.isMain) delete.gone()
+            else delete.visible()
+
         })
 
         back.setOnClickListener {
