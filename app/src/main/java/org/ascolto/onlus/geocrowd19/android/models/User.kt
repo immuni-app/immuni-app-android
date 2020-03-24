@@ -46,7 +46,7 @@ enum class AgeGroup(val id: String) {
 
 @JsonClass(generateAdapter = true)
 data class Nickname(
-    @field:Json(name = "type") val type: NicknameType,
+    @field:Json(name = "type") val type: NicknameType? = null,
     @field:Json(name = "value") val value: String? = null
 )
 
