@@ -221,7 +221,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     }
 
     fun onTosClick() {
-        oracle.settings()?.tosUrl?.let {
+        oracle.settings()?.termsOfServiceUrl?.let {
             openUrlInDialog(it)
         }
     }

@@ -10,9 +10,11 @@ import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.showKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.onboarding_age_range_fragment.*
+import org.ascolto.onlus.geocrowd19.android.models.AgeGroup
+import org.ascolto.onlus.geocrowd19.android.models.AgeGroup.*
 
 class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fragment),
-                            CompoundButton.OnCheckedChangeListener{
+    CompoundButton.OnCheckedChangeListener {
     override val nextButton: View
         get() = next
 
@@ -23,7 +25,7 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
         nextButton.setOnClickListener(null) // override the default behaviour
         nextButton.setOnClickListener {
 
-            if(lastRadioSelected == R.id.age_range_0_17) {
+            if (lastRadioSelected == R.id.age_range_0_17) {
                 MaterialAlertDialogBuilder(context)
                     .setTitle(getString(R.string.onboarding_age_more_than_18_title))
                     .setMessage(getString(R.string.onboarding_age_more_than_18_message))
@@ -59,25 +61,29 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
     private fun validate(updateModel: Boolean = true): Boolean {
         var valid = lastRadioSelected != -1
         nextButton.isEnabled = valid
-        if(valid && updateModel) updateModel(lastRadioSelected)
+        if (valid && updateModel) updateModel(lastRadioSelected)
         return valid
     }
 
     private fun updateModel(id: Int) {
         viewModel.userInfo()?.let {
-            viewModel.updateUserInfo(it.copy(ageGroup = when(id) {
-                R.id.age_range_0_17 -> "0-17"
-                R.id.age_range_18_35 -> "18-35"
-                R.id.age_range_36_45 -> "36-45"
-                R.id.age_range_46_55 -> "46-55"
-                R.id.age_range_56_65 -> "56-65"
-                R.id.age_range_66_75 -> "66-75"
-                else -> "75+"
-            }))
+            viewModel.updateUserInfo(
+                it.copy(
+                    ageGroup = when (id) {
+                        R.id.age_range_0_17 -> ZERO_SEVENTEEN
+                        R.id.age_range_18_35 -> EIGHTEEN_THIRTYFIVE
+                        R.id.age_range_36_45 -> THRITYSIX_FORTYFIVE
+                        R.id.age_range_46_55 -> FORTYSIX_FIFTYFIVE
+                        R.id.age_range_56_65 -> FIFTYSIX_SIXTYFIVE
+                        R.id.age_range_66_75 -> SIXTYSIX_SEVENTYFIVE
+                        else -> MORE_THAN_SEVENTYFIVE
+                    }
+                )
+            )
         }
     }
 
-    private fun updateUI(string: String?) {
+    private fun updateUI(ageGroup: AgeGroup?) {
         radioGroup.clearCheck()
 
         age_range_0_17.isChecked = false
@@ -88,31 +94,44 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
         age_range_66_75.isChecked = false
         age_range_75.isChecked = false
 
-        when(string) {
-            "0-17" -> age_range_0_17.isChecked = true
-            "18-35" -> age_range_18_35.isChecked = true
-            "36-45" -> age_range_36_45.isChecked = true
-            "46-55" -> age_range_46_55.isChecked = true
-            "56-65" -> age_range_56_65.isChecked = true
-            "66-75" -> age_range_66_75.isChecked = true
-            "75+" -> age_range_75.isChecked = true
-        }
-
-        when(string) {
-            "0-17" -> lastRadioSelected = R.id.age_range_0_17
-            "18-35" -> lastRadioSelected = R.id.age_range_18_35
-            "36-45" -> lastRadioSelected = R.id.age_range_36_45
-            "46-55" -> lastRadioSelected = R.id.age_range_46_55
-            "56-65" -> lastRadioSelected = R.id.age_range_56_65
-            "66-75" -> lastRadioSelected = R.id.age_range_66_75
-            "75+" -> lastRadioSelected = R.id.age_range_75
+        when (ageGroup) {
+            ZERO_SEVENTEEN -> {
+                age_range_0_17.isChecked = true
+                lastRadioSelected = R.id.age_range_0_17
+            }
+            EIGHTEEN_THIRTYFIVE -> {
+                age_range_18_35.isChecked = true
+                lastRadioSelected = R.id.age_range_18_35
+            }
+            THRITYSIX_FORTYFIVE -> {
+                age_range_36_45.isChecked = true
+                lastRadioSelected = R.id.age_range_36_45
+            }
+            FORTYSIX_FIFTYFIVE -> {
+                age_range_46_55.isChecked = true
+                lastRadioSelected = R.id.age_range_46_55
+            }
+            FIFTYSIX_SIXTYFIVE -> {
+                age_range_56_65.isChecked = true
+                lastRadioSelected = R.id.age_range_56_65
+            }
+            SIXTYSIX_SEVENTYFIVE -> {
+                age_range_66_75.isChecked = true
+                lastRadioSelected = R.id.age_range_66_75
+            }
+            MORE_THAN_SEVENTYFIVE -> {
+                age_range_75.isChecked = true
+                lastRadioSelected = R.id.age_range_75
+            }
+            null -> {
+            }
         }
     }
 
     var lastRadioSelected = -1
     var disableTriggeringEvent = false
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-        if(isChecked) lastRadioSelected = buttonView?.id ?: -1
-        if(!disableTriggeringEvent) validate(true)
+        if (isChecked) lastRadioSelected = buttonView?.id ?: -1
+        if (!disableTriggeringEvent) validate(true)
     }
 }

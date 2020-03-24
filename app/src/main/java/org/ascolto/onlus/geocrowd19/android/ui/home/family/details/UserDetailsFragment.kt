@@ -57,7 +57,7 @@ class UserDetailsFragment : Fragment() {
                 true -> requireContext().resources.getString(R.string.you)
                 false -> it.name
             }
-            age.text = it.ageGroup
+            age.text = it.ageGroup.id
             sex.text = when(it.gender) {
                 Gender.MALE -> requireContext().resources.getString(R.string.onboarding_male)
                 Gender.FEMALE -> requireContext().resources.getString(R.string.onboarding_female)

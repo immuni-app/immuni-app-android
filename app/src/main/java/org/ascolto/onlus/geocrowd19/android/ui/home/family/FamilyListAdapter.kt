@@ -111,7 +111,7 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) : RecyclerView.A
                     true -> AscoltoApplication.appContext.resources.getString(R.string.you)
                     false -> item.user.name
                 }
-                holder.age.text = item.user.ageGroup
+                holder.age.text = item.user.ageGroup.id
                 holder.userId.text = item.user.id
                 holder.icon.setImageResource(when(item.user.gender) {
                     Gender.MALE -> listOf(
