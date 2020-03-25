@@ -37,7 +37,7 @@
     <string name="onboarding_name_title">Come ti chiami?</string>
     <string name="onboarding_name_description">Inserire il cognome non è necessario. Il tuo nome o anche un soprannome sarà sufficiente.</string>
     <string name="onboarding_gender_title">Di che sesso sei?</string>
-    <string name="onboarding_gender_description">La probabilità di contagio e il rischio di sviluppare sintomi piú severi dipendono da questa informazione.</string>
+    <string name="onboarding_gender_description">La probabilità di contagio e il rischio di sviluppare sintomi più severi dipendono da questa informazione.</string>
 
     <string name="onboarding_age_title">Quanti anni hai?</string>
     <string name="onboarding_age_description">Questa informazione è importante per consigliarti al meglio come proteggerti dal coronavirus.</string>
@@ -57,7 +57,7 @@
     <string name="log_completed">Diario clinico inviato!</string>
     <string name="log_completed_message">Tutti i tuoi dati sono al sicuro.</string>
     <string name="old_people_in_family_title">Hai anziani o minorenni in famiglia?</string>
-    <string name="old_people_in_family_description">Registra i dati dei familiari che non possono farlo autonomamente (per esempio, minorenni, anziani e familiari che non possiedono uno smartphone).</string>
+    <string name="old_people_in_family_description">Registra i dati dei familiari che non possono farlo autonomamente (per esempio: minorenni, anziani e familiari che non possiedono uno smartphone).</string>
     <string name="add_family_member_yes_button">Si, aggiungi famigliare</string>
 
     <string name="always_consent">Consenti sempre</string>
