@@ -90,7 +90,7 @@ class LogViewModel(
             val _user = surveyManager.nextUserToLog() ?: return@launch
             user.value = _user
             val lastProfile = surveyManager.lastHealthProfile(_user.id)
-            val answeredQuestionsElapsedDays = surveyManager.answeredQuestionsElapsedDays()
+            val answeredQuestionsElapsedDays = surveyManager.answeredQuestionsElapsedDays(_user.id)
 
             val currentQuestion = _survey.questions.first {
                 it.shouldBeShown(

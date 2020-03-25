@@ -19,8 +19,10 @@ import kotlin.random.Random
 
 class SurveyManager(private val context: Context) : KoinComponent {
     companion object {
-        private const val answeredQuestionsKey = "answeredQuestions"
         private const val additionalDelayKey = "additionalDelay"
+
+        private fun answeredQuestionsKey(userId: String) = "answeredQuestions-$userId"
+
         fun getOrSetAdditionalDelay(storage: KVStorage): Int {
             val storedValue = storage.load<Int>(additionalDelayKey)
             if (storedValue != null) {
@@ -70,19 +72,19 @@ class SurveyManager(private val context: Context) : KoinComponent {
         return healthProfileIds(userId).mapNotNull { storage.load<HealthProfile>(it) }
     }
 
-    private fun loadLastAnsweredQuestions(): Map<QuestionId, Long> {
-        return storage.load(answeredQuestionsKey, defValue = mapOf())
+    private fun loadLastAnsweredQuestions(userId: String): Map<QuestionId, Long> {
+        return storage.load(answeredQuestionsKey(userId), defValue = mapOf())
     }
 
-    private fun saveAnseredQuestions(questions: Set<QuestionId>) {
-        val lastAnsweredQuestions = loadLastAnsweredQuestions().toMutableMap()
+    private fun saveAnseredQuestions(userId: String, questions: Set<QuestionId>) {
+        val lastAnsweredQuestions = loadLastAnsweredQuestions(userId).toMutableMap()
         val date = todayAtMidnight()
         lastAnsweredQuestions.putAll(questions.map { it to date.time })
-        storage.save(answeredQuestionsKey, lastAnsweredQuestions)
+        storage.save(answeredQuestionsKey(userId), lastAnsweredQuestions)
     }
 
-    fun answeredQuestionsElapsedDays(): Map<QuestionId, Int> {
-        val lastAnsweredQuestions = loadLastAnsweredQuestions()
+    fun answeredQuestionsElapsedDays(userId: String): Map<QuestionId, Int> {
+        val lastAnsweredQuestions = loadLastAnsweredQuestions(userId)
         val date = todayAtMidnight()
         return lastAnsweredQuestions.mapValues {
             val days = TimeUnit.MILLISECONDS.toDays(date.time - it.value).toInt()
@@ -107,7 +109,7 @@ class SurveyManager(private val context: Context) : KoinComponent {
             }
         )
         saveHealthProfile(updatedHealthProfile)
-        saveAnseredQuestions(form.answeredQuestions.toSet())
+        saveAnseredQuestions(userId, form.answeredQuestions.toSet())
 
         return updatedHealthProfile
     }
