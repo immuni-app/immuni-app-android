@@ -16,21 +16,21 @@ class EnableGeolocationCard: HomeItemType()
 
 class EnableNotificationCard: HomeItemType()
 
-class HeaderCard(
+data class HeaderCard(
     val title: String
 ): HomeItemType()
 
-class SuggestionsCardWhite(
+data class SuggestionsCardWhite(
     val title: String,
     val severity: Severity
 ): HomeItemType()
 
-class SuggestionsCardYellow(
+data class SuggestionsCardYellow(
     val title: String,
     val severity: Severity
 ): HomeItemType()
 
-class SuggestionsCardRed(
+data class SuggestionsCardRed(
     val title: String,
     val severity: Severity
 ): HomeItemType()

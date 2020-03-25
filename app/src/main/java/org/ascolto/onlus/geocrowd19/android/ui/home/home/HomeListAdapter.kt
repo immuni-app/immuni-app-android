@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.HtmlCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.visible
@@ -19,7 +20,20 @@ import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
 class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val context = AscoltoApplication.appContext
-    var items = mutableListOf<HomeItemType>()
+    private var items = mutableListOf<HomeItemType>()
+
+    fun update(newList: List<HomeItemType>) {
+        val diffCallback =
+            HomeDiffCallback(
+                items,
+                newList
+            )
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        diffResult.dispatchUpdatesTo(this)
+        items.clear()
+        items.addAll(newList)
+    }
 
     inner class SurveyCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var bottomMessage: TextView = v.findViewById(R.id.bottomMessage)

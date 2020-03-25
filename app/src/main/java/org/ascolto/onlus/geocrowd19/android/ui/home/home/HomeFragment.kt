@@ -104,13 +104,12 @@ class HomeFragment : Fragment(), HomeClickListener {
             }
         })
 
-        viewModel.homelistModel.observe(viewLifecycleOwner, Observer {
-            (homeList.adapter as? HomeListAdapter)?.items?.apply {
-                clear()
-                addAll(it)
+        viewModel.homelistModel.observe(viewLifecycleOwner, Observer { newList ->
+            (homeList.adapter as? HomeListAdapter)?.apply {
+                update(newList)
             }
 
-            homeList.adapter?.notifyDataSetChanged()
+            //homeList.adapter?.notifyDataSetChanged()
         })
     }
 
