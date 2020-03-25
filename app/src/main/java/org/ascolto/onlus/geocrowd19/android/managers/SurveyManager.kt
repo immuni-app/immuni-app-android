@@ -1,18 +1,15 @@
 package org.ascolto.onlus.geocrowd19.android.managers
 
 import android.content.Context
-import android.util.Log
 import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.models.User
-import org.ascolto.onlus.geocrowd19.android.models.UserHealthProfile
+import org.ascolto.onlus.geocrowd19.android.models.HealthProfile
+import org.ascolto.onlus.geocrowd19.android.models.HealthProfileIdList
 import org.ascolto.onlus.geocrowd19.android.models.survey.*
-import org.ascolto.onlus.geocrowd19.android.picoMetrics.SurveyCompleted
 import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -22,8 +19,10 @@ import kotlin.random.Random
 
 class SurveyManager(private val context: Context) : KoinComponent {
     companion object {
-        private const val answeredQuestionsKey = "answeredQuestions"
         private const val additionalDelayKey = "additionalDelay"
+
+        private fun answeredQuestionsKey(userId: String) = "answeredQuestions-$userId"
+
         fun getOrSetAdditionalDelay(storage: KVStorage): Int {
             val storedValue = storage.load<Int>(additionalDelayKey)
             if (storedValue != null) {
@@ -46,32 +45,46 @@ class SurveyManager(private val context: Context) : KoinComponent {
         additionalDelay = getOrSetAdditionalDelay(storage)
     }
 
-    fun userHealthProfile(userId: String): UserHealthProfile {
-        return storage.load(
-            UserHealthProfile.key(userId), defValue = UserHealthProfile(
-                userId = userId,
-                healthState = setOf(),
-                triageProfileId = null,
-                lastSurveyVersion = null,
-                lastSurveyDate = null,
-                lastSurveyAnswers = null
-            )
+    fun healthProfileIds(userId: String): List<String> {
+        return storage.load<HealthProfileIdList>(HealthProfileIdList.id(userId))?.profileIds
+            ?: listOf()
+    }
+
+    private fun saveHealthProfile(healthProfile: HealthProfile) {
+        val healthProfileIdList = storage.load(
+            HealthProfileIdList.id(healthProfile.userId),
+            defValue = HealthProfileIdList(userId = healthProfile.userId, profileIds = listOf())
         )
+        storage.save(healthProfileIdList.id, healthProfileIdList.copy(
+            profileIds = healthProfileIdList.profileIds.toMutableList().apply {
+                add(healthProfile.id)
+            }
+        ))
+        storage.save(healthProfile.id, healthProfile)
     }
 
-    private fun loadLastAnsweredQuestions(): Map<QuestionId, Long> {
-        return storage.load(answeredQuestionsKey, defValue = mapOf())
+    fun lastHealthProfile(userId: String): HealthProfile? {
+        val profileIds = healthProfileIds(userId)
+        return if (profileIds.isNotEmpty()) storage.load(profileIds.last()) else null
     }
 
-    private fun saveAnseredQuestions(questions: Set<QuestionId>) {
-        val lastAnsweredQuestions = loadLastAnsweredQuestions().toMutableMap()
+    fun allHealthProfiles(userId: String): List<HealthProfile> {
+        return healthProfileIds(userId).mapNotNull { storage.load<HealthProfile>(it) }
+    }
+
+    private fun loadLastAnsweredQuestions(userId: String): Map<QuestionId, Long> {
+        return storage.load(answeredQuestionsKey(userId), defValue = mapOf())
+    }
+
+    private fun saveAnseredQuestions(userId: String, questions: Set<QuestionId>) {
+        val lastAnsweredQuestions = loadLastAnsweredQuestions(userId).toMutableMap()
         val date = todayAtMidnight()
         lastAnsweredQuestions.putAll(questions.map { it to date.time })
-        storage.save(answeredQuestionsKey, lastAnsweredQuestions)
+        storage.save(answeredQuestionsKey(userId), lastAnsweredQuestions)
     }
 
-    fun answeredQuestionsElapsedDays(): Map<QuestionId, Int> {
-        val lastAnsweredQuestions = loadLastAnsweredQuestions()
+    fun answeredQuestionsElapsedDays(userId: String): Map<QuestionId, Int> {
+        val lastAnsweredQuestions = loadLastAnsweredQuestions(userId)
         val date = todayAtMidnight()
         return lastAnsweredQuestions.mapValues {
             val days = TimeUnit.MILLISECONDS.toDays(date.time - it.value).toInt()
@@ -79,14 +92,14 @@ class SurveyManager(private val context: Context) : KoinComponent {
         }
     }
 
-    fun completeSurvey(userId: String, form: FormModel, survey: Survey): UserHealthProfile {
-        val updatedUserHealthProfile = UserHealthProfile(
+    fun completeSurvey(userId: String, form: FormModel, survey: Survey): HealthProfile {
+        val updatedHealthProfile = HealthProfile(
             userId = userId,
             healthState = form.healthState,
             triageProfileId = form.triageProfile,
-            lastSurveyVersion = survey.version,
-            lastSurveyDate = form.startDate,
-            lastSurveyAnswers = form.surveyAnswers.mapValues {
+            surveyVersion = survey.version,
+            surveyDate = form.startDate,
+            surveyAnswers = form.surveyAnswers.mapValues {
                 it.value.map { answer ->
                     when (answer) {
                         is SimpleAnswer -> answer.index
@@ -95,15 +108,15 @@ class SurveyManager(private val context: Context) : KoinComponent {
                 }
             }
         )
-        storage.save(updatedUserHealthProfile.key, updatedUserHealthProfile)
-        saveAnseredQuestions(form.answeredQuestions.toSet())
+        saveHealthProfile(updatedHealthProfile)
+        saveAnseredQuestions(userId, form.answeredQuestions.toSet())
 
-        return updatedUserHealthProfile
+        return updatedHealthProfile
     }
 
     fun isSurveyCompletedForUser(user: User): Boolean {
-        val userHealthProfile = userHealthProfile(user.id)
-        val lastSurveyDate = userHealthProfile.lastSurveyDate ?: return false
+        val lastHealthProfile = lastHealthProfile(user.id)
+        val lastSurveyDate = lastHealthProfile?.surveyDate ?: return false
 
         return lastSurveyDate > lastAvailableSurveyDate()
     }

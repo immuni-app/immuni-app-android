@@ -1,25 +1,21 @@
 package org.ascolto.onlus.geocrowd19.android.ui.log
 
-import android.content.Intent
 import androidx.lifecycle.*
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
-import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
 import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.survey.*
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
-import java.util.*
 
 class LogViewModel(
     private val handle: SavedStateHandle,
@@ -93,14 +89,14 @@ class LogViewModel(
         uiScope.launch {
             val _user = surveyManager.nextUserToLog() ?: return@launch
             user.value = _user
-            val lastProfile = surveyManager.userHealthProfile(_user.id)
-            val answeredQuestionsElapsedDays = surveyManager.answeredQuestionsElapsedDays()
+            val lastProfile = surveyManager.lastHealthProfile(_user.id)
+            val answeredQuestionsElapsedDays = surveyManager.answeredQuestionsElapsedDays(_user.id)
 
             val currentQuestion = _survey.questions.first {
                 it.shouldBeShown(
                     daysSinceItWasLastAnswered = answeredQuestionsElapsedDays[it.id],
-                    healthState = lastProfile.healthState,
-                    triageProfile = lastProfile.triageProfileId,
+                    healthState = lastProfile?.healthState ?: setOf(),
+                    triageProfile = lastProfile?.triageProfileId,
                     surveyAnswers = linkedMapOf()
                 )
             }.id
@@ -108,8 +104,8 @@ class LogViewModel(
             if (formModel.value == null || reset) {
                 formModel.value = FormModel(
                     initialQuestion = currentQuestion,
-                    initialHealthState = lastProfile.healthState,
-                    triageProfile = lastProfile.triageProfileId,
+                    initialHealthState = lastProfile?.healthState ?: setOf(),
+                    triageProfile = lastProfile?.triageProfileId,
                     surveyAnswers = linkedMapOf(),
                     answeredQuestionsElapsedDays = answeredQuestionsElapsedDays
                 )

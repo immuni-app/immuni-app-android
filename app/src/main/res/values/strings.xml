@@ -166,4 +166,9 @@
     <string name="upload">Carica</string>
     <string name="user_data">Dati utente</string>
     <string name="consent">Consenti</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="insert_upload_data_code">Inserisci il codice per il caricamento dei dati</string>
+    <string name="upload_data">Carica i dati</string>
 </resources>

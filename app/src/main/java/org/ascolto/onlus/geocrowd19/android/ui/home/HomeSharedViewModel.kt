@@ -1,8 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home
 
 import android.content.Intent
-import android.util.Log
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +11,6 @@ import org.ascolto.onlus.geocrowd19.android.util.isFlagSet
 import org.ascolto.onlus.geocrowd19.android.util.setFlag
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.utils.DeviceUtils
-import com.bendingspoons.base.utils.ExternalLinksHelper
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
@@ -22,13 +19,9 @@ import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
-import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
 import org.ascolto.onlus.geocrowd19.android.managers.BluetoothManager
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
-import org.ascolto.onlus.geocrowd19.android.models.AgeGroup
-import org.ascolto.onlus.geocrowd19.android.models.Nickname
-import org.ascolto.onlus.geocrowd19.android.models.NicknameType
 import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
 import org.ascolto.onlus.geocrowd19.android.models.survey.Severity.*
@@ -36,7 +29,9 @@ import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.*
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
+
 import org.ascolto.onlus.geocrowd19.android.workers.BLEForegroundServiceWorker
+import org.ascolto.onlus.geocrowd19.android.util.Flags
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -112,40 +107,39 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                     itemsList.add(SurveyCard(surveyManager.usersToLogCount()))
                 }
 
-                // suggestions card
+                // suggestion cards
 
-                // first check if there is at least one card to show
-                var showCards = false
-                for (user in surveyManager.allUsers()) {
-                    val hasTookSurvey = surveyManager.userHealthProfile(user.id).lastSurveyDate != null
-                    showCards = showCards || hasTookSurvey
-                }
+                val suggestionCards = mutableListOf<HomeItemType>()
 
-                if(showCards) {
-                    itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
-                }
+                val survey = oracle.settings()?.survey
 
                 for (user in surveyManager.allUsers()) {
-                    val hasTookSurvey = surveyManager.userHealthProfile(user.id).lastSurveyDate != null
-                    if(!hasTookSurvey) continue
+                    val hasNeverCompletedSurveys = surveyManager.lastHealthProfile(user.id) == null
+                    if (hasNeverCompletedSurveys) continue
+
                     val name =
                         if (user.isMain) ctx.resources.getString(R.string.you_as_complement) else user.name
                     val suggestionTitle = String.format(
                         ctx.resources.getString(R.string.indication_for),
                         "<b>$name</b>"
                     )
-                    val triageProfileId = surveyManager.userHealthProfile(user.id)?.triageProfileId
+                    val triageProfileId = surveyManager.lastHealthProfile(user.id)?.triageProfileId
                     val triageProfile = triageProfileId?.let {
-                        oracle.settings()?.survey?.triage?.profile(it)
+                        survey?.triage?.profile(it)
                     }
                     val severity = triageProfile?.severity ?: LOW
-                    itemsList.add(
+                    suggestionCards.add(
                         when (severity) {
                             LOW -> SuggestionsCardWhite(suggestionTitle, severity)
                             MID -> SuggestionsCardYellow(suggestionTitle, severity)
                             HIGH -> SuggestionsCardRed(suggestionTitle, severity)
                         }
                     )
+                }
+
+                if (suggestionCards.isNotEmpty()) {
+                    itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
+                    itemsList.addAll(suggestionCards)
                 }
 
                 homelistModel.value = itemsList.toList()
@@ -205,9 +199,9 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     // check if this one shot dialog has been alredy triggered before
     // if not show it
     private fun checkAddFamilyMembersDialog() {
-        val flag = "family_add_member_popup_showed"
-        uiScope.launch {
-            if (!isFlagSet(flag)) {
+        val flag = Flags.ADD_FAMILY_MEMBER_DIALOG_SHOWN
+        if (!isFlagSet(flag)) {
+            uiScope.launch {
                 _showAddFamilyMemberDialog.value = Event(true)
                 setFlag(flag, true)
             }

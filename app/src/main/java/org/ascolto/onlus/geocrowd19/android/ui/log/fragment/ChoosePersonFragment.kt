@@ -24,7 +24,7 @@ class ChoosePersonFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //requireActivity().onBackPressedDispatcher.addCallback(this) {
-            // users must select a choice
+        // users must select a choice
         //}
     }
 
@@ -45,12 +45,14 @@ class ChoosePersonFragment : Fragment() {
             it?.let {
                 age.text = it.ageGroup.humanReadable(requireContext())
                 name.text = if (it.isMain) getString(R.string.you) else it.name
-                gender.setImageResource(when(it.gender) {
-                    Gender.FEMALE -> R.drawable.ic_avatar_female_purple
-                    Gender.MALE -> R.drawable.ic_avatar_female_purple
-                })
+                gender.setImageResource(
+                    when (it.gender) {
+                        Gender.FEMALE -> R.drawable.ic_avatar_female_purple
+                        Gender.MALE -> R.drawable.ic_avatar_female_purple
+                    }
+                )
 
-                when(it.isMain) {
+                when (it.isMain) {
                     true -> {
                         compileFor.gone()
                         compileFor.text = getString(R.string.choose_person_bottom_message)
