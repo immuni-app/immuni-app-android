@@ -72,7 +72,7 @@ class UserDetailsFragment : Fragment() {
                 false -> it.nickname?.humanReadable(ctx, it.gender)
                     ?: ctx.getString(R.string.nickname_not_specified)
             }
-            age.text = it.ageGroup.id
+            age.text = it.ageGroup.humanReadable(ctx)
             sex.text = when (it.gender) {
                 Gender.MALE -> requireContext().resources.getString(R.string.onboarding_male)
                 Gender.FEMALE -> requireContext().resources.getString(R.string.onboarding_female)

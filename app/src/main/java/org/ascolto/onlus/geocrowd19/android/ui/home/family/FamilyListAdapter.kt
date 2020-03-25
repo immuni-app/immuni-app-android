@@ -126,7 +126,7 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) : RecyclerView.A
                     true -> AscoltoApplication.appContext.resources.getString(R.string.you)
                     false -> item.user.name
                 }
-                holder.age.text = item.user.ageGroup.id
+                holder.age.text = item.user.ageGroup.humanReadable(context)
                 holder.icon.setImageResource(when(item.user.gender) {
                     Gender.MALE -> listOf(
                         R.drawable.ic_male_purple,
