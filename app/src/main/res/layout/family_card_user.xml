@@ -88,28 +88,28 @@
         android:text="@string/identifier"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/userId"
+        app:layout_constraintEnd_toStartOf="@+id/uploadText"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/icon"
         app:layout_constraintTop_toBottomOf="@+id/separator" />
 
     <TextView
-        android:id="@+id/userId"
+        android:id="@+id/uploadText"
         style="@style/P1Text"
-        android:fontFamily="@font/euclid_circular_medium"
+        android:fontFamily="@font/euclid_circular_semi_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="20dp"
         android:layout_weight="1"
-        android:textColor="#99495D74"
+        android:textColor="@color/colorPrimary"
         android:gravity="left"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/copyIdentifier"
+        app:layout_constraintEnd_toStartOf="@+id/upload"
         app:layout_constraintTop_toBottomOf="@+id/separator"
-        tools:text="XKSL46" />
+        android:text="@string/upload" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -123,13 +123,12 @@
         app:srcCompat="@drawable/ic_next" />
 
     <ImageView
-        android:id="@+id/copyIdentifier"
-        android:tint="#99495D74"
-        android:alpha="0.5"
+        android:id="@+id/upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/userId"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/uploadText"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="@+id/userId"
-        app:srcCompat="@drawable/ic_copy" />
+        app:layout_constraintTop_toTopOf="@+id/uploadText"
+        app:srcCompat="@drawable/ic_upload" />
 </androidx.constraintlayout.widget.ConstraintLayout>

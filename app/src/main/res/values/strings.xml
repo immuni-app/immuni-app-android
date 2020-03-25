@@ -76,8 +76,8 @@
 
     <string name="app_exit_title">Uscire</string>
     <string name="app_exit_message">Sei sicuro di voler uscire?</string>
-    <string name="onboarding_geolocation_title">Permetti il calcolo del tuo fattore di rischio</string>
-    <string name="onboarding_geolocation_message">Consenti l\'accesso alla posizione durante tutto l\'arco della giornata per permettere alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
+    <string name="onboarding_bluetooth_title">Permetti il calcolo del tuo fattore di rischio</string>
+    <string name="onboarding_bluetooth_message">Consenti di utilizzare il Bluetooth durante tutto l\'arco della giornata per permettere alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
     <string name="onboarding_permissions_sample">Seleziona \"Consenti sempre\" nel popup che ti apparirà qui sotto</string>
     <string name="indication_for">Indicazioni su cosa fare per %s</string>
     <string name="you_as_complement">te</string>
@@ -163,4 +163,6 @@
     <string name="live_with_you_title">Vive con te %s?</string>
     <string name="this_person">questa persona</string>
     <string name="live_with_you_message">Questa informazione permettere alle autorità competenti di stimare l’esposizione di %s al virus.</string>
+    <string name="upload">Carica</string>
+    <string name="user_data">Dati utente</string>
 </resources>

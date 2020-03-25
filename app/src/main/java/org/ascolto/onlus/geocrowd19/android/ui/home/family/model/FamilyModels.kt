@@ -9,7 +9,7 @@ sealed class FamilyItemType
 data class UserCard(
     val user: User
 ): FamilyItemType() {
-    var userIdTapped: Boolean = false
+    var uploadTapped: Boolean = false
 }
 
 class AddFamilyMemberTutorialCard: FamilyItemType()

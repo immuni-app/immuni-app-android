@@ -7,11 +7,11 @@ import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.ui.onboarding.OnboardingUserInfo
 import com.bendingspoons.base.extensions.hideKeyboard
-import kotlinx.android.synthetic.main.onboarding_geolocation_fragment.*
+import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.PermissionsTutorialDialog
 import org.koin.android.ext.android.inject
 
-class GeolocationPermissionsFragment : ProfileContentFragment(R.layout.onboarding_geolocation_fragment) {
+class BluetoothPermissionsFragment : ProfileContentFragment(R.layout.onboarding_bluetooth_fragment) {
     val geolocationManager: GeolocationManager by inject()
 
     var tutorialOpened = false
@@ -34,8 +34,12 @@ class GeolocationPermissionsFragment : ProfileContentFragment(R.layout.onboardin
         next.isEnabled = true
         next.setOnClickListener(null)
         next.setOnClickListener {
-            if(!tutorialOpened) openPermissionsTutorialDialog()
-            else geolocationManager.requestPermissions(activity as AppCompatActivity)
+            if(!tutorialOpened) {
+                openPermissionsTutorialDialog()
+                geolocationManager.requestPermissions(activity as AppCompatActivity)
+            }
+            else viewModel.onNextTap()
+            //else geolocationManager.requestPermissions(activity as AppCompatActivity)
         }
     }
 

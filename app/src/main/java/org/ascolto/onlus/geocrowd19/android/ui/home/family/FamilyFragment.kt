@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.family_fragment.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
@@ -53,8 +54,14 @@ class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
     override fun onClick(item: FamilyItemType) {
         when(item) {
             is UserCard -> {
-                if(item.userIdTapped) {
-                    viewModel.onUserIdTap(item.user)
+                if(item.uploadTapped) {
+                    MaterialAlertDialogBuilder(context)
+                        .setTitle("Caricare i dati?")
+                        .setMessage("I tuoi dati verranno caricati sui nostri server in modo anonimo per consentirci di contattare tutte le persone che sono state a contatto con te negli ultimi giorni.")
+                        .setPositiveButton(getString(R.string.upload)) { d, _ -> d.dismiss()}
+                        .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss()}
+                        .setOnCancelListener {  }
+                        .show()
                 } else {
                     val action = FamilyFragmentDirections.actionUserDetails(item.user.id)
                     findNavController().navigate(action)

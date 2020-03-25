@@ -22,19 +22,19 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) : RecyclerView.A
     inner class UserCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var name: TextView = v.findViewById(R.id.name)
         val age: TextView = v.findViewById(R.id.age)
-        val userId: TextView = v.findViewById(R.id.userId)
+        val uploadText: TextView = v.findViewById(R.id.uploadText)
         val icon: ImageView = v.findViewById(R.id.icon)
-        val copyId: ImageView = v.findViewById(R.id.copyIdentifier)
+        val upload: ImageView = v.findViewById(R.id.upload)
 
         init {
-            copyId.setOnClickListener {
+            upload.setOnClickListener {
                 val userItem = items[adapterPosition] as UserCard
-                userItem.userIdTapped = true
+                userItem.uploadTapped = true
                 clickListener.onClick(userItem)
             }
-            userId.setOnClickListener {
+            uploadText.setOnClickListener {
                 val userItem = items[adapterPosition] as UserCard
-                userItem.userIdTapped = true
+                userItem.uploadTapped = true
                 clickListener.onClick(userItem)
             }
         }
@@ -127,7 +127,6 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) : RecyclerView.A
                     false -> item.user.name
                 }
                 holder.age.text = item.user.ageGroup.id
-                holder.userId.text = item.user.id
                 holder.icon.setImageResource(when(item.user.gender) {
                     Gender.MALE -> listOf(
                         R.drawable.ic_male_purple,

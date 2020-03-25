@@ -15,7 +15,6 @@ import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.DeviceUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.user_details_fragment.*
-import kotlinx.android.synthetic.main.user_details_fragment.identifier
 import kotlinx.android.synthetic.main.user_details_fragment.name
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
@@ -85,7 +84,7 @@ class UserDetailsFragment : Fragment() {
                 else -> "-"
             }
 
-            identifier.text = it.id
+            //identifier.text = it.id
 
             // main user cannot be deleted
 
@@ -98,9 +97,11 @@ class UserDetailsFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        copyIdentifier.setOnClickListener {
-            DeviceUtils.copyToClipBoard(AscoltoApplication.appContext, text = viewModel.userId)
-            toast(requireContext().resources.getString(R.string.user_id_copied))
+        uploadText.setOnClickListener {
+            showUploadDataMessage()
+        }
+        upload.setOnClickListener {
+            showUploadDataMessage()
         }
 
         editName.setOnClickListener {
@@ -128,5 +129,15 @@ class UserDetailsFragment : Fragment() {
                 .setOnCancelListener {  }
                 .show()
         }
+    }
+
+    private fun showUploadDataMessage() {
+        MaterialAlertDialogBuilder(context)
+            .setTitle("Caricare i dati?")
+            .setMessage("I tuoi dati verranno caricati sui nostri server in modo anonimo per consentirci di contattare tutte le persone che sono state a contatto con te negli ultimi giorni.")
+            .setPositiveButton(getString(R.string.upload)) { d, _ -> d.dismiss()}
+            .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss()}
+            .setOnCancelListener {  }
+            .show()
     }
 }

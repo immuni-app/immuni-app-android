@@ -31,7 +31,7 @@ open class PermissionsTutorialDialog(val dismissCallback: () -> Unit = {}) : Dia
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dialog?.window?.setBackgroundDrawable(resources.getColor(R.color.dialog_background_mask_color).toDrawable())
+        dialog?.window?.setBackgroundDrawable(resources.getColor(R.color.onboarding_dialog_background).toDrawable())
         return inflater.inflate(R.layout.onboarding_permissions_tutorial_dialog, container, false)
     }
 

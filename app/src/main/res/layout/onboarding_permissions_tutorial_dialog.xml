@@ -19,7 +19,7 @@
         android:layout_marginBottom="32dp"
         android:gravity="center|bottom"
         android:maxLines="2"
-        android:text="@string/onboarding_permissions_sample"
+        android:text="Seleziona OK nel popup che ti apparirà qui sotto"
         android:textColor="@color/background"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/imageView5"

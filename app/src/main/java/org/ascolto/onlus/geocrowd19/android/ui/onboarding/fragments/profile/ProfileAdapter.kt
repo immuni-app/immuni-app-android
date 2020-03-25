@@ -9,8 +9,8 @@ class ProfileAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     var items: List<Class<out ProfileContentFragment>> = listOf(
         //AgeFragment::class.java,
         AgeRangeFragment::class.java,
-        GenderFragment::class.java
-        //GeolocationPermissionsFragment::class.java
+        GenderFragment::class.java,
+        BluetoothPermissionsFragment::class.java
     )
 
     override fun getItemCount(): Int = items.size
