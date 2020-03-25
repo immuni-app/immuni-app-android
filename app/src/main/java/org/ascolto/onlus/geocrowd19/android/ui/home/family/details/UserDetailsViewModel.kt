@@ -13,8 +13,11 @@ import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
-import org.ascolto.onlus.geocrowd19.android.models.User
+import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
+import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
+import org.ascolto.onlus.geocrowd19.android.models.*
 import org.ascolto.onlus.geocrowd19.android.toast
+import org.koin.android.ext.android.inject
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.File
@@ -26,6 +29,8 @@ class UserDetailsViewModel(val userId: String) : ViewModel(),
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     val apiManager: ApiManager by inject()
+    val surveyManager: SurveyManager by inject()
+    val database: AscoltoDatabase by inject()
 
     val user = MediatorLiveData<User?>()
     val loading = MediatorLiveData<Boolean>()
@@ -60,6 +65,29 @@ class UserDetailsViewModel(val userId: String) : ViewModel(),
                 _navigateBack.value = Event(true)
             }
             loading.value = false
+        }
+    }
+
+    fun exportData() {
+        uiScope.launch {
+            val devices = database.bleContactDao().getAll().map {
+                ExportDevice(
+                    timestamp = it.timestamp,
+                    btId = it.btId,
+                    signalStrength = it.signalStrength
+                )
+            }
+            val surveys = surveyManager.allHealthProfiles(userId)
+                .map { ExportHealthProfile.fromHealthProfile(it) }
+
+
+            val exportData = ExportData(
+                profileId = userId,
+                surveys = surveys,
+                devices = devices
+            )
+
+            apiManager.exportData("F4P3WLJY", exportData)
         }
     }
 }

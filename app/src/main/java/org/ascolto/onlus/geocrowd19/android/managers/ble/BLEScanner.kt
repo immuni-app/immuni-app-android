@@ -34,12 +34,14 @@ class BLEScanner: KoinComponent {
             object: ScanCallback() {
             override fun onBatchScanResults(results: MutableList<ScanResult>?) {
                 super.onBatchScanResults(results)
-                results?.map { it.scanRecord?.serviceUuids?.first().toString() }?.toSet()?.toList()
+                results?.map { it.scanRecord?.serviceUuids?.firstOrNull().toString() }?.toSet()?.toList()?.let {
+                    processResult(it)
+                }
             }
 
             override fun onScanResult(callbackType: Int, result: ScanResult?) {
                 super.onScanResult(callbackType, result)
-                processResult(listOf(result?.scanRecord?.serviceUuids?.first().toString()))
+                processResult(listOf(result?.scanRecord?.serviceUuids?.firstOrNull().toString()))
             }
 
             override fun onScanFailed(errorCode: Int) {

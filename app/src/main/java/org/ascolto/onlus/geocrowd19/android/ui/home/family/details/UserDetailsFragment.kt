@@ -19,11 +19,13 @@ import kotlinx.android.synthetic.main.user_details_fragment.*
 import kotlinx.android.synthetic.main.user_details_fragment.name
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
+import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
 import org.ascolto.onlus.geocrowd19.android.loading
 import org.ascolto.onlus.geocrowd19.android.models.Nickname
 import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.uploadData.UploadDataActivity
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -131,10 +133,12 @@ class UserDetailsFragment : Fragment() {
     }
 
     private fun navigateToUploadData() {
-        val intent = Intent(AscoltoApplication.appContext, UploadDataActivity::class.java).apply {
+        /*val intent = Intent(AscoltoApplication.appContext, UploadDataActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
+         */
+        viewModel.exportData()
     }
 
     private fun showUploadDataMessage() {

@@ -6,6 +6,7 @@ import okhttp3.ResponseBody
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.FcmTokenRequest
+import org.ascolto.onlus.geocrowd19.android.models.ExportData
 import org.ascolto.onlus.geocrowd19.android.models.User
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -39,6 +40,10 @@ class ApiManager : KoinComponent {
     suspend fun updateExistingFamilyMember(userId: String, user: User) = updateMe(api.updateExistingFamilyMember(userId, user))
 
     suspend fun deleteFamilyMember(userId: String) = updateMe(api.deleteFamilyMember(userId))
+
+    suspend fun exportData(code: String, data: ExportData): Response<ResponseBody> {
+        return api.exportData(code, data)
+    }
 }
 
 interface CustomOracleAPI {
@@ -56,4 +61,7 @@ interface CustomOracleAPI {
 
     @DELETE("relatives/{userId}")
     suspend fun deleteFamilyMember(@Path("userId") userId: String): Response<ResponseBody>
+
+    @POST("data/{code}")
+    suspend fun exportData(@Path("code") code: String, @Body data: ExportData): Response<ResponseBody>
 }
