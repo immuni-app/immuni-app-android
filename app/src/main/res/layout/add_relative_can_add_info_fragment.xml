@@ -29,7 +29,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:text="Puo aggiungere info da solo?"
+            android:text="Questa persona è in grado di inserire i suoi dati autonomamente?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/onboarding_gender_description"
+            android:text=""
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/question"
             app:layout_constraintStart_toStartOf="@+id/question"
             app:layout_constraintTop_toBottomOf="@+id/question" />

@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
@@ -26,7 +27,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
-                android:text="NICKNAME"
+                android:text="Segli un grado di parentela o un nickname"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +38,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Puoi selezionare più di un elemento"
+                android:text=""
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/question"
                 app:layout_constraintStart_toStartOf="@+id/question"
                 app:layout_constraintTop_toBottomOf="@+id/question" />
@@ -50,8 +52,8 @@
                 android:layout_marginTop="48dp"
                 android:layout_marginEnd="32dp"
                 android:checkedButton="@+id/first"
-                android:orientation="vertical"
                 android:gravity="left"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +61,39 @@
 
             </RadioGroup>
 
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/P1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="79dp"
+                android:layout_marginEnd="32dp"
+                android:text="Puoi usare le sue iniziali o un nomignolo (massimo 5 caratteri per tutelare la sua privacy)."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+
+            <EditText
+                android:id="@+id/textField"
+                style="@style/EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="textNoSuggestions|textVisiblePassword"
+                app:endIconMode="clear_text"
+                android:hint="Zio"
+                android:textSize="30sp"
+                android:fontFamily="@font/euclid_circular_regular"
+                android:textColorHint="#33495D74"
+                app:layout_constraintEnd_toEndOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/editTextGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="textField,textView4" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

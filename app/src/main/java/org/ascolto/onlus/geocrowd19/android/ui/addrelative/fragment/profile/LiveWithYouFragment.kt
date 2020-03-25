@@ -2,10 +2,9 @@ package org.ascolto.onlus.geocrowd19.android.ui.addrelative.fragment.profile
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import org.ascolto.onlus.geocrowd19.android.R
 import com.bendingspoons.base.extensions.hideKeyboard
-import kotlinx.android.synthetic.main.add_relative_already_registered_fragment.*
+import kotlinx.android.synthetic.main.add_relative_live_with_you_fragment.*
 import org.ascolto.onlus.geocrowd19.android.ui.addrelative.RelativeInfo
 
 class LiveWithYouFragment : RelativeContentFragment(R.layout.add_relative_live_with_you_fragment) {
@@ -34,7 +33,7 @@ class LiveWithYouFragment : RelativeContentFragment(R.layout.add_relative_live_w
     }
 
     override fun onUserInfoUpdate(userInfo: RelativeInfo) {
-        updateUI(userInfo.sameHouse)
+        updateUI(userInfo)
         validate(false)
     }
 
@@ -54,8 +53,12 @@ class LiveWithYouFragment : RelativeContentFragment(R.layout.add_relative_live_w
         }
     }
 
-    private fun updateUI(answer: Boolean?) {
-        when(answer) {
+    private fun updateUI(userInfo: RelativeInfo) {
+        var name = userInfo.nickname?.humanReadable(requireContext(), userInfo.gender!!) ?: requireContext().getString(R.string.this_person)
+        question.text = String.format(requireContext().getString(R.string.live_with_you_title), name)
+        description.text = String.format(requireContext().getString(R.string.live_with_you_message), name)
+
+        when(userInfo.sameHouse) {
             true -> {
                 yes.isChecked = true
                 no.isChecked = false

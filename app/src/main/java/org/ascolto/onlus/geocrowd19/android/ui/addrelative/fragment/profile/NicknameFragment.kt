@@ -1,17 +1,26 @@
 package org.ascolto.onlus.geocrowd19.android.ui.addrelative.fragment.profile
 
 import android.graphics.Color
+import android.graphics.Path
 import android.os.Bundle
 import android.view.View
+import android.view.View.FOCUS_DOWN
 import android.widget.CompoundButton
 import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.doOnTextChanged
+import com.bendingspoons.base.extensions.gone
 import org.ascolto.onlus.geocrowd19.android.R
 import com.bendingspoons.base.extensions.hideKeyboard
+import com.bendingspoons.base.extensions.showKeyboard
+import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.ScreenUtils
-import kotlinx.android.synthetic.main.add_relative_nickname_fragment.next
-import kotlinx.android.synthetic.main.add_relative_nickname_fragment.radioGroup
+import kotlinx.android.synthetic.main.add_relative_nickname_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
 import org.ascolto.onlus.geocrowd19.android.models.Nickname
 import org.ascolto.onlus.geocrowd19.android.models.NicknameType
@@ -74,7 +83,7 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
                 RadioButton(context).apply {
                 id = cont++
                 tag = cont
-                text = context.getString(R.string.other)
+                text = context.getString(R.string.choose_a_nickname)
                 val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
                 typeface = tf
                 textSize = 18f
@@ -91,6 +100,20 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
         radioGroup.apply {
             items.values.forEach { addView(it) }
         }
+
+        textField.doOnTextChanged { text, _, _, _ ->
+            validate(true)
+        }
+
+        textField.setOnFocusChangeListener { v, hasFocus ->
+            if(hasFocus) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    delay(500)
+                    scrollView.fullScroll(FOCUS_DOWN)
+                }
+
+            }
+        }
     }
 
 
@@ -104,7 +127,13 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
                 }
             }
         }
-        if(!disableTriggeringEvent) validate()
+        if(!disableTriggeringEvent) {
+
+            if(lastRadioSelected == NicknameType.OTHER) textField.showKeyboard()
+            else view?.hideKeyboard()
+
+            validate()
+        }
     }
 
     override fun onUserInfoUpdate(userInfo: RelativeInfo) {
@@ -118,23 +147,37 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
         val type = userInfo.nickname?.type
         val gender = userInfo.gender!!
 
-        items[Pair(type, gender)]?.isChecked = true
+        items[Pair(type, Gender.MALE)]?.isChecked = true
+        items[Pair(type, Gender.FEMALE)]?.isChecked = true
         lastRadioSelected = type
         disableTriggeringEvent = false
         validate(false)
     }
 
     fun validate(updateModel: Boolean = true): Boolean {
-        val valid = lastRadioSelected != null
-        nextButton.isEnabled = valid
+        var valid = lastRadioSelected != null
+
+        if(lastRadioSelected == NicknameType.OTHER) {
+            editTextGroup.visible()
+            valid = valid && textField.text.toString().isNotEmpty()
+        } else {
+            editTextGroup.gone()
+        }
+
         if (valid && updateModel) saveData()
+        nextButton.isEnabled = valid
         return valid
     }
 
     private fun saveData() {
         lastRadioSelected?.let { type ->
 
-            val nickname = Nickname(type, "TODO")
+            val customName = when(type) {
+                NicknameType.OTHER -> textField.text.toString()
+                else -> null
+            }
+
+            val nickname = Nickname(type, customName)
 
             viewModel.userInfo()?.let {
                 viewModel.updateUserInfo(it.copy(nickname = nickname))

@@ -29,7 +29,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:text="@string/onboarding_gender_title"
+            android:text="Di che sesso è la persona che vuoi aggiungere?"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/onboarding_gender_description"
+            android:text="La probabilità di contagio e il rischio di sviluppare sintomi piú severi dipendono da questa informazione."
             app:layout_constraintEnd_toEndOf="@+id/question"
             app:layout_constraintStart_toStartOf="@+id/question"
             app:layout_constraintTop_toBottomOf="@+id/question" />
@@ -57,18 +57,19 @@
             app:layout_constraintTop_toBottomOf="@+id/description">
             <androidx.appcompat.widget.AppCompatRadioButton
                 style="@style/RadioButton"
-                android:id="@+id/male"
-                android:checked="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/onboarding_male"/>
-            <androidx.appcompat.widget.AppCompatRadioButton
-                style="@style/RadioButton"
                 android:id="@+id/female"
                 android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/onboarding_female"/>
+            <androidx.appcompat.widget.AppCompatRadioButton
+                style="@style/RadioButton"
+                android:id="@+id/male"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/onboarding_male"/>
+
         </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
