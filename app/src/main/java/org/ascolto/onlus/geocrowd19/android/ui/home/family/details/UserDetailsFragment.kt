@@ -13,6 +13,7 @@ import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.DeviceUtils
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.user_details_fragment.*
 import kotlinx.android.synthetic.main.user_details_fragment.identifier
 import kotlinx.android.synthetic.main.user_details_fragment.name
@@ -119,7 +120,13 @@ class UserDetailsFragment : Fragment() {
         }
 
         delete.setOnClickListener {
-            viewModel.deleteUser()
+            MaterialAlertDialogBuilder(context)
+                .setTitle(getString(R.string.delete_user_alert_title))
+                .setMessage(getString(R.string.delete_user_alert_message))
+                .setPositiveButton(getString(R.string.delete)) { d, _ -> viewModel.deleteUser()}
+                .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss()}
+                .setOnCancelListener {  }
+                .show()
         }
     }
 }

@@ -152,4 +152,7 @@
     <string name="other">Altro</string>
 
     <string name="server_generic_error">Si è verificato un errore. Riprova più tardi.</string>
+    <string name="delete_user_alert_title">Sei sicuro?</string>
+    <string name="delete_user_alert_message">Se scegli di eliminare questo profilo definitivamente non potrai più recuperare le sue informazioni.</string>
+    <string name="delete">Elimina</string>
 </resources>
