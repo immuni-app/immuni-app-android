@@ -1,5 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home.family.details
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
 import org.ascolto.onlus.geocrowd19.android.loading
 import org.ascolto.onlus.geocrowd19.android.models.Nickname
 import org.ascolto.onlus.geocrowd19.android.toast
+import org.ascolto.onlus.geocrowd19.android.ui.uploadData.UploadDataActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -97,11 +99,8 @@ class UserDetailsFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        uploadText.setOnClickListener {
-            showUploadDataMessage()
-        }
-        upload.setOnClickListener {
-            showUploadDataMessage()
+        uploadButton.setOnClickListener {
+            navigateToUploadData()
         }
 
         editName.setOnClickListener {
@@ -124,11 +123,18 @@ class UserDetailsFragment : Fragment() {
             MaterialAlertDialogBuilder(context)
                 .setTitle(getString(R.string.delete_user_alert_title))
                 .setMessage(getString(R.string.delete_user_alert_message))
-                .setPositiveButton(getString(R.string.delete)) { d, _ -> viewModel.deleteUser()}
-                .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss()}
+                .setPositiveButton(getString(R.string.delete)) { d, _ -> viewModel.deleteUser() }
+                .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss() }
                 .setOnCancelListener {  }
                 .show()
         }
+    }
+
+    private fun navigateToUploadData() {
+        val intent = Intent(AscoltoApplication.appContext, UploadDataActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
     }
 
     private fun showUploadDataMessage() {

@@ -29,6 +29,7 @@ import org.ascolto.onlus.geocrowd19.android.managers.BluetoothManager
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
 import org.ascolto.onlus.geocrowd19.android.ui.addrelative.AddRelativeViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.details.UserDetailsViewModel
+import org.ascolto.onlus.geocrowd19.android.ui.uploadData.UploadDataViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -135,4 +136,6 @@ val appModule = module {
     // UserDetailsViewModel
     viewModel { (userId: String) -> UserDetailsViewModel(userId) }
 
+    // UploadDataViewModel
+    viewModel { UploadDataViewModel() }
 }

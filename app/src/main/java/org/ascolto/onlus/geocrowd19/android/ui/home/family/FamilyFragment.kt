@@ -19,6 +19,7 @@ import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.AddFamilyMember
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.AddFamilyMemberTutorialCard
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.FamilyItemType
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.UserCard
+import org.ascolto.onlus.geocrowd19.android.ui.uploadData.UploadDataActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
@@ -54,14 +55,8 @@ class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
     override fun onClick(item: FamilyItemType) {
         when(item) {
             is UserCard -> {
-                if(item.uploadTapped) {
-                    MaterialAlertDialogBuilder(context)
-                        .setTitle("Caricare i dati?")
-                        .setMessage("I tuoi dati verranno caricati sui nostri server in modo anonimo per consentirci di contattare tutte le persone che sono state a contatto con te negli ultimi giorni.")
-                        .setPositiveButton(getString(R.string.upload)) { d, _ -> d.dismiss()}
-                        .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss()}
-                        .setOnCancelListener {  }
-                        .show()
+                if (item.uploadTapped) {
+                    navigateToUploadData()
                 } else {
                     val action = FamilyFragmentDirections.actionUserDetails(item.user.id)
                     findNavController().navigate(action)
@@ -74,6 +69,13 @@ class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
                 navigateToAddRelative()
             }
         }
+    }
+
+    private fun navigateToUploadData() {
+        val intent = Intent(AscoltoApplication.appContext, UploadDataActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
     }
 
     private fun navigateToAddRelative() {
