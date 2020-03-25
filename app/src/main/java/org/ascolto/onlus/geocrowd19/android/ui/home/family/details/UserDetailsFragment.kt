@@ -1,6 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home.family.details
 
-import android.content.Intent
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,22 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bendingspoons.base.extensions.gone
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import com.bendingspoons.base.extensions.visible
-import com.bendingspoons.base.utils.DeviceUtils
+import com.bendingspoons.base.extensions.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.user_details_fragment.*
 import kotlinx.android.synthetic.main.user_details_fragment.name
-import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
 import org.ascolto.onlus.geocrowd19.android.loading
-import org.ascolto.onlus.geocrowd19.android.models.Nickname
 import org.ascolto.onlus.geocrowd19.android.toast
-import org.ascolto.onlus.geocrowd19.android.ui.uploadData.UploadDataActivity
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -138,7 +130,20 @@ class UserDetailsFragment : Fragment() {
         }
         activity?.startActivity(intent)
          */
-        viewModel.exportData()
+        (activity as? AppCompatActivity)?.showEditAlert (
+            "Carica",
+            "Inserisci il codice che ti è stato comunicato dall'operatore.",
+            "",
+            "CARICA I DATI",
+            object : EditTextDialogInterface.OnClickListener {
+                override fun onClick(dialog: DialogInterface, which: Int, text: String) {
+                    viewModel.exportData(text)
+                }
+            },
+            getString(R.string.cancel),
+            DialogInterface.OnClickListener { d, _ -> d.dismiss() }
+        )
+
     }
 
     private fun showUploadDataMessage() {

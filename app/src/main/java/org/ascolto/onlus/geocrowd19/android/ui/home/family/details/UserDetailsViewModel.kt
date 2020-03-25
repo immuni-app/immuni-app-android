@@ -68,7 +68,7 @@ class UserDetailsViewModel(val userId: String) : ViewModel(),
         }
     }
 
-    fun exportData() {
+    fun exportData(code: String) {
         uiScope.launch {
             val devices = database.bleContactDao().getAll().map {
                 ExportDevice(
@@ -87,7 +87,12 @@ class UserDetailsViewModel(val userId: String) : ViewModel(),
                 devices = devices
             )
 
-            apiManager.exportData("F4P3WLJY", exportData)
+            val result = apiManager.exportData(code, exportData)
+            if(result.isSuccessful) {
+                toast("Dati caricati con successo!")
+            } else {
+                toast("Il codice inserito non è corretto. Riprova.")
+            }
         }
     }
 }

@@ -72,10 +72,13 @@ class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
     }
 
     private fun navigateToUploadData() {
+        /*
         val intent = Intent(AscoltoApplication.appContext, UploadDataActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
+        
+         */
     }
 
     private fun navigateToAddRelative() {
