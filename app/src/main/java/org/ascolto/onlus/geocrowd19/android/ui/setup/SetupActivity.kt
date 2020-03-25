@@ -27,7 +27,7 @@ class SetupActivity : AscoltoActivity() {
                 .commitNow()
         }
 
-        setDarkStatusBar(resources.getColor(R.color.colorPrimary))
+        setLightStatusBar(resources.getColor(R.color.transparent))
     }
 
 }

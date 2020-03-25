@@ -37,7 +37,7 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
         // auto retry when connection is available
         uiScope.launch {
             repeat(Int.MAX_VALUE) {
-                delay(5000)
+                delay(10000)
                 if (errorDuringSetup.value == true) {
                     initializeApp()
                 }
@@ -68,25 +68,26 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
                 repo.getOracleSetting()
             }
 
-            // TODO REMOVE TRUE
-            if(true || setup.isComplete()) {
+            if(setup.isComplete()) {
                 delay(2000)
                 navigateTo()
             }
-            else { // populate db from Emporium
+            else {
                 try {
 
                     // cleanup db
                     setup.setCompleted(false)
 
-                    // the first time the call to settings is blocking, you cannot proceed without
+                    // the first time the call to settings and me is blocking, you cannot proceed without
                     val settings = repo.getOracleSetting()
                     if (!settings.isSuccessful) {
                         throw IOException()
                     }
 
-                    // fill db with Emporium data
-                    repo.populateDb()
+                    val me = repo.getOracleMe()
+                    if (!me.isSuccessful) {
+                        throw IOException()
+                    }
 
                     // check all is ok
                     setup.setCompleted(true)

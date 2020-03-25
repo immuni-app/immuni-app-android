@@ -5,19 +5,31 @@
     android:id="@+id/setup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/background"
     tools:context=".ui.setup.SetupActivity">
 
-    <ProgressBar
-        android:id="@+id/background"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/playbackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_foreground"
-        android:indeterminateTint="@color/background"
+        android:scaleType="fitCenter"
+        app:lottie_rawRes="@raw/lottie_setup_logo_bg"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:src="@drawable/ic_tab_home"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/setup_icon_foreground"
+        app:layout_constraintBottom_toBottomOf="@+id/playbackButton"
+        app:layout_constraintEnd_toEndOf="@+id/playbackButton"
+        app:layout_constraintStart_toStartOf="@+id/playbackButton"
+        app:layout_constraintTop_toTopOf="@+id/playbackButton" />
 
     <TextView
         android:id="@+id/error"
@@ -29,7 +41,7 @@
         android:layout_marginBottom="32dp"
         android:gravity="center"
         android:text="@string/app_setup_check_connection"
-        android:textColor="@color/background"
+        android:textColor="#5181FD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

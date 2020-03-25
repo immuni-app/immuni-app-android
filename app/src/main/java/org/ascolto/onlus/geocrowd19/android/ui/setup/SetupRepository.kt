@@ -6,11 +6,12 @@ import org.ascolto.onlus.geocrowd19.android.api.oracle.repository.OracleReposito
 import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import retrofit2.Response
 
 interface SetupRepository {
     suspend fun getOracleSetting(): Response<AscoltoSettings>
-    suspend fun populateDb()
+    suspend fun getOracleMe(): Response<AscoltoMe>
 }
 
 class SetupRepositoryImpl(
@@ -19,14 +20,11 @@ class SetupRepositoryImpl(
     val oracleRepository: OracleRepository
 ) : SetupRepository {
 
-    val dataFile = "form/form.json"
-    val localesDataList = listOf(dataFile)
-
     override suspend fun getOracleSetting(): Response<AscoltoSettings> {
         return oracleRepository.settings()
     }
 
-    override suspend fun populateDb() = withContext(Dispatchers.IO) {
-
+    override suspend fun getOracleMe(): Response<AscoltoMe> {
+        return oracleRepository.me()
     }
 }
