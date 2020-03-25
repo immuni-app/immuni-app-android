@@ -6,6 +6,8 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import org.ascolto.onlus.geocrowd19.android.util.isFlagSet
 import org.ascolto.onlus.geocrowd19.android.util.setFlag
@@ -34,6 +36,7 @@ import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.model.*
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
+import org.ascolto.onlus.geocrowd19.android.workers.BLEForegroundServiceWorker
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -69,6 +72,17 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     init {
         refreshHomeListModel()
         startListenToMeModel()
+
+        scheduleBLEWorker()
+    }
+
+    private fun scheduleBLEWorker() {
+        val TAG = "BLE_WORKER"
+        val workManager = WorkManager.getInstance(AscoltoApplication.appContext)
+        workManager.cancelAllWorkByTag(TAG)
+
+        val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>().addTag(TAG)
+        workManager.enqueue(notificationWork.build())
     }
 
     private fun refreshHomeListModel() {

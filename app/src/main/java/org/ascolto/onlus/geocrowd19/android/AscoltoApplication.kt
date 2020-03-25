@@ -5,6 +5,8 @@ import android.content.Context
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.bendingspoons.base.lifecycle.AppLifecycleEvent
 import com.bendingspoons.base.lifecycle.AppLifecycleObserver
 import com.bendingspoons.concierge.ConciergeManager
@@ -17,10 +19,14 @@ import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.ascolto.onlus.geocrowd19.android.managers.AscoltoNotificationManager
+import org.ascolto.onlus.geocrowd19.android.managers.NotifyWorker
+import org.ascolto.onlus.geocrowd19.android.workers.BLEForegroundServiceWorker
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import java.util.concurrent.TimeUnit
 
 class AscoltoApplication : Application() {
 
@@ -28,7 +34,6 @@ class AscoltoApplication : Application() {
     private lateinit var oracle: Oracle<AscoltoSettings, AscoltoMe>
     private lateinit var pico: Pico
     private lateinit var theirs: Theirs
-
 
     override fun onCreate() {
         super.onCreate()
