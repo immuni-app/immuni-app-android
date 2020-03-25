@@ -26,7 +26,7 @@ class User(
 ) {
     val name: String
         get() {
-            if(isMain) return "-"
+            if (isMain) return "-"
             else return nickname?.humanReadable(AscoltoApplication.appContext, gender) ?: "-"
         }
 }

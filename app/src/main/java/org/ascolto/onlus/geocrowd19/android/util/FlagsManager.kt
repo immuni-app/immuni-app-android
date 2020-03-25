@@ -8,7 +8,9 @@ import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.util.*
 
-const val FLAG_MUTE_LIVE_VIEW = "FLAG_MUTE_LIVE_VIEW"
+object Flags {
+    const val ADD_FAMILY_MEMBER_DIALOG_SHOWN = "add_family_member_dialog_shown"
+}
 
 fun isFlagSet(flag: String): Boolean {
     val sharedPrefs = AscoltoApplication.appContext.getSharedPreferences("SLEEP_FLAGS", Context.MODE_PRIVATE)

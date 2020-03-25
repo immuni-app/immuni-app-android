@@ -8,24 +8,21 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
-import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.ui.onboarding.OnboardingActivity
-import org.ascolto.onlus.geocrowd19.android.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.onboarding_profile_fragment.*
 import kotlinx.android.synthetic.main.welcome_fragment.*
-import kotlinx.android.synthetic.main.welcome_fragment.viewPager
+import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
+import org.ascolto.onlus.geocrowd19.android.R
+import org.ascolto.onlus.geocrowd19.android.ui.home.HomeActivity
+import org.ascolto.onlus.geocrowd19.android.ui.onboarding.Onboarding
+import org.ascolto.onlus.geocrowd19.android.ui.onboarding.OnboardingActivity
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class WelcomeFragment : Fragment() {
 
     private lateinit var pageChangeCallback: ViewPager2.OnPageChangeCallback
+    private val onboarding: Onboarding by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +54,8 @@ class WelcomeFragment : Fragment() {
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
-            ) {}
+            ) {
+            }
         }
 
         with(viewPager) {
@@ -75,8 +73,8 @@ class WelcomeFragment : Fragment() {
 
         next.setOnClickListener {
             val newPos = viewPager.currentItem + 1
-            if(newPos ==  (viewPager.adapter?.itemCount ?: 0)) {
-                navigateToOnboarding()
+            if (newPos == (viewPager.adapter?.itemCount ?: 0)) {
+                navigateTo()
                 val welcome: Welcome by inject()
                 welcome.setCompleted(true)
             } else {
@@ -87,11 +85,16 @@ class WelcomeFragment : Fragment() {
 
     private fun updateUI() {
         val newPos = viewPager.currentItem + 1
-        if(newPos ==  (viewPager.adapter?.itemCount ?: 0)) {
+        if (newPos == (viewPager.adapter?.itemCount ?: 0)) {
             next.text = getString(R.string.welcome_lets_start)
         } else {
             next.text = getString(R.string.next)
         }
+    }
+
+    private fun navigateTo() {
+        if (!onboarding.isComplete()) navigateToOnboarding()
+        else navigateToHome()
     }
 
     private fun navigateToOnboarding() {
@@ -102,9 +105,17 @@ class WelcomeFragment : Fragment() {
         activity?.finish()
     }
 
+    private fun navigateToHome() {
+        val intent = Intent(AscoltoApplication.appContext, HomeActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
+        activity?.finish()
+    }
+
     private fun onBackPressed() {
         val newPos = viewPager.currentItem - 1
-        if(newPos >= 0) {
+        if (newPos >= 0) {
             viewPager.setCurrentItem(newPos, true)
         } else {
             activity?.finish()

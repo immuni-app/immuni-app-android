@@ -6,29 +6,35 @@ import androidx.lifecycle.ViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.onboarding.Onboarding
 import org.ascolto.onlus.geocrowd19.android.ui.welcome.Welcome
 import com.bendingspoons.base.livedata.Event
+import com.bendingspoons.oracle.Oracle
 import org.koin.core.KoinComponent
 import kotlinx.coroutines.*
+import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
+import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
+import org.ascolto.onlus.geocrowd19.android.util.Flags
+import org.ascolto.onlus.geocrowd19.android.util.setFlag
 import org.koin.core.inject
 import java.io.IOException
 
-class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
+class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val setup: Setup by inject()
     private val onboarding: Onboarding by inject()
     private val welcome: Welcome by inject()
+    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
 
     private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
-    val navigateToMainPage : LiveData<Event<Boolean>>
+    val navigateToMainPage: LiveData<Event<Boolean>>
         get() = _navigateToMainPage
 
     private val _navigateToOnboarding = MutableLiveData<Event<Boolean>>()
-    val navigateToOnboarding : LiveData<Event<Boolean>>
+    val navigateToOnboarding: LiveData<Event<Boolean>>
         get() = _navigateToOnboarding
 
     private val _navigateToWelcome = MutableLiveData<Event<Boolean>>()
-    val navigateToWelcome : LiveData<Event<Boolean>>
+    val navigateToWelcome: LiveData<Event<Boolean>>
         get() = _navigateToWelcome
 
     val errorDuringSetup = MutableLiveData<Boolean>()
@@ -68,13 +74,11 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
                 repo.getOracleSetting()
             }
 
-            if(setup.isComplete()) {
+            if (setup.isComplete()) {
                 delay(2000)
                 navigateTo()
-            }
-            else {
+            } else {
                 try {
-
                     // cleanup db
                     setup.setCompleted(false)
 
@@ -92,6 +96,12 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
                     // check all is ok
                     setup.setCompleted(true)
 
+                    oracle.me()?.let {
+                        if (it.familyMembers.isNotEmpty()) {
+                            setAddFamilyMemberDialogShown()
+                        }
+                    }
+
                     navigateTo()
 
                 } catch (e: Exception) {
@@ -104,9 +114,13 @@ class SetupViewModel(val repo : SetupRepository) : ViewModel(), KoinComponent {
     }
 
     private fun navigateTo() {
-        if(!welcome.isComplete()) _navigateToWelcome.value = Event(true)
-        else if(!onboarding.isComplete()) _navigateToOnboarding.value = Event(true)
+        if (!welcome.isComplete()) _navigateToWelcome.value = Event(true)
+        else if (!onboarding.isComplete()) _navigateToOnboarding.value = Event(true)
         else _navigateToMainPage.value = Event(true)
+    }
+
+    private fun setAddFamilyMemberDialogShown() {
+        setFlag(Flags.ADD_FAMILY_MEMBER_DIALOG_SHOWN, true)
     }
 
     companion object {

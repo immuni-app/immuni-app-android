@@ -56,7 +56,13 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
         // init
         if (handle.get<Serializable>(STATE_KEY) != null) {
             partialUserInfo.value = handle.get<Serializable>(STATE_KEY) as OnboardingUserInfo
-        } else partialUserInfo.value = OnboardingUserInfo()
+        } else {
+            val mainUser = oracle.me()?.mainUser
+            partialUserInfo.value = OnboardingUserInfo(
+                gender = mainUser?.gender,
+                ageGroup = mainUser?.ageGroup
+            )
+        }
 
         partialUserInfo.addSource(savedStateLiveData) {
             partialUserInfo.value = it as? OnboardingUserInfo
@@ -93,7 +99,8 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
         uiScope.launch {
             delay(2000) // keep here to allow smooth page transition
 
-            val updatedMe = apiManager.updateMainUser(
+            val me = oracle.me()
+            val updatedMe = if (me?.mainUser != null) me else apiManager.updateMainUser(
                 User(
                     id = "",
                     ageGroup = userInfo.ageGroup!!,
