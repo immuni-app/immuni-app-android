@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:drawableLeft="@drawable/ic_check_white"
+            android:drawableLeft="@drawable/ic_check_white_selector"
             android:text="@string/add_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

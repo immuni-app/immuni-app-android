@@ -155,4 +155,9 @@
     <string name="delete_user_alert_title">Sei sicuro?</string>
     <string name="delete_user_alert_message">Se scegli di eliminare questo profilo definitivamente non potrai più recuperare le sue informazioni.</string>
     <string name="delete">Elimina</string>
+    <string name="add_button">Aggiungi</string>
+    <string name="already_added_exit_point_title">Non occorre che tu crei un profilo per questa persona</string>
+    <string name="already_added_exit_point_message">C’è già qualcuno che sta inserendo i dati di questa persona, non serve che lo faccia anche tu.</string>
+    <string name="let_the_person_insert_the_data_title">Lascia che sia questa persona a inserire i suoi dati</string>
+    <string name="let_the_person_insert_the_data_message">Chiedi a questa persona di installare l’app e di compilare in autonomia il diario clinico.</string>
 </resources>

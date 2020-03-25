@@ -31,8 +31,8 @@ class CanAddInfoHimselfFragment : RelativeContentFragment(R.layout.add_relative_
         nextButton.setOnClickListener {
             if (yes.isChecked) {
                 val action = RelativeProfileFragmentDirections.actionInterrupt(
-                    "title",
-                    "message"
+                    requireContext().getString(R.string.let_the_person_insert_the_data_title),
+                    requireContext().getString(R.string.let_the_person_insert_the_data_message)
                 )
                 findNavController().navigate(action)
             } else {

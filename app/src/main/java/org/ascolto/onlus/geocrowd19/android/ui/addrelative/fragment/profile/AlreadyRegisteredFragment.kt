@@ -32,8 +32,8 @@ class AlreadyRegisteredFragment : RelativeContentFragment(R.layout.add_relative_
 
             if (yes.isChecked) {
                 val action = RelativeProfileFragmentDirections.actionInterrupt(
-                    "title",
-                    "message"
+                    requireContext().getString(R.string.already_added_exit_point_title),
+                    requireContext().getString(R.string.already_added_exit_point_message)
                 )
                 findNavController().navigate(action)
             } else {
