@@ -21,6 +21,7 @@ import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
+import org.ascolto.onlus.geocrowd19.android.managers.BluetoothManager
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
 import org.ascolto.onlus.geocrowd19.android.models.AgeGroup
@@ -43,6 +44,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val surveyManager: SurveyManager by inject()
     private val apiManager: ApiManager by inject()
+    private val bluetoothManager: BluetoothManager by inject()
 
     private val _showAddFamilyMemberDialog = MutableLiveData<Event<Boolean>>()
     val showAddFamilyMemberDialog: LiveData<Event<Boolean>>
@@ -76,12 +78,11 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
 
                 val itemsList = mutableListOf<HomeItemType>()
 
-                // check geolocation disabled
-                /*
-                if (!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext)) {
+                // check geolocation/bluetooth disabled
+                if (!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext) ||
+                    !bluetoothManager.isBluetoothEnabled()) {
                     itemsList.add(EnableGeolocationCard())
                 }
-                 */
 
                 // check notifications disabled
 

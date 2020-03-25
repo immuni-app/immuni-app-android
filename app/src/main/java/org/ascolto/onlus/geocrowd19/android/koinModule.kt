@@ -22,11 +22,10 @@ import com.bendingspoons.concierge.Concierge
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import com.bendingspoons.secretmenu.SecretMenu
-import com.bendingspoons.sesame.Sesame
 import com.bendingspoons.theirs.Theirs
-import com.geouniq.android.GeoUniq
 import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.managers.AscoltoNotificationManager
+import org.ascolto.onlus.geocrowd19.android.managers.BluetoothManager
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
 import org.ascolto.onlus.geocrowd19.android.ui.addrelative.AddRelativeViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.home.family.details.UserDetailsViewModel
@@ -98,14 +97,14 @@ val appModule = module {
         ApiManager()
     }
 
-    // single instance of GeoUniq
-    single {
-        GeoUniq.getInstance(androidContext());
-    }
-
     // single instance of GeolocationManager
     single {
         GeolocationManager(androidContext())
+    }
+
+    // single instance of BluetoothManager
+    single {
+        BluetoothManager(androidContext())
     }
 
     // single instance of SurveyManager

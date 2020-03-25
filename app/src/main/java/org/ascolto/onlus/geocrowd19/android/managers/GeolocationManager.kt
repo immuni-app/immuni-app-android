@@ -11,7 +11,6 @@ import org.ascolto.onlus.geocrowd19.android.api.oracle.CustomOracleAPI
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import com.bendingspoons.oracle.Oracle
-import com.geouniq.android.GeoUniq
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
@@ -20,7 +19,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.get
 import org.koin.core.inject
 
-class GeolocationManager(val context: Context) : KoinComponent, GeoUniq.IDeviceIdListener {
+class GeolocationManager(val context: Context) : KoinComponent {
     companion object {
         const val REQUEST_CODE = 620
         val allPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -49,13 +48,14 @@ class GeolocationManager(val context: Context) : KoinComponent, GeoUniq.IDeviceI
         }
     }
 
-    private val geoUniq: GeoUniq = get()
+    //private val geoUniq: GeoUniq = get()
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
 
     val isActive = ConflatedBroadcastChannel<Boolean>(hasAllPermissions((context)))
-    val deviceId = ConflatedBroadcastChannel<String?>(null)
+    //val deviceId = ConflatedBroadcastChannel<String?>(null)
 
     init {
+        /*
         geoUniq.enable()
         geoUniq.setDeviceIdListener(this)
         GlobalScope.launch {
@@ -66,7 +66,9 @@ class GeolocationManager(val context: Context) : KoinComponent, GeoUniq.IDeviceI
                 }
             }
         }
-        updatePrivacyConsents()
+       updatePrivacyConsents()
+         */
+
     }
 
     fun requestPermissions(activity: AppCompatActivity) {
@@ -89,10 +91,11 @@ class GeolocationManager(val context: Context) : KoinComponent, GeoUniq.IDeviceI
     private fun updateIsActive() {
         GlobalScope.launch {
             isActive.send(hasAllPermissions(context))
-            updatePrivacyConsents()
+            //updatePrivacyConsents()
         }
     }
 
+    /*
     private fun updatePrivacyConsents() {
         val isNowActive = isActive.value
         geoUniq.setPrivacyConsent(GeoUniq.ConsentItem.ANALYSIS, isNowActive)
@@ -105,4 +108,6 @@ class GeolocationManager(val context: Context) : KoinComponent, GeoUniq.IDeviceI
             deviceId.send(id)
         }
     }
+
+     */
 }

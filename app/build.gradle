@@ -129,9 +129,6 @@ dependencies {
     // Lottie
     implementation 'com.airbnb.android:lottie:3.0.7'
 
-    // Geouniq
-    implementation 'com.geouniq.android:sdk-library:2.4.8'
-
     // Billing
     //implementation 'com.android.billingclient:billing:2.1.0'
 

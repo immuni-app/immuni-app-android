@@ -34,7 +34,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val pico: Pico by inject()
     private val apiManager: ApiManager by inject()
-    //private val geolocationManager: GeolocationManager by inject()
+    private val geolocationManager: GeolocationManager by inject()
 
     var partialUserInfo = MediatorLiveData<OnboardingUserInfo>()
 
@@ -62,12 +62,11 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
             partialUserInfo.value = it as? OnboardingUserInfo
         }
 
-        /*uiScope.launch {
+        uiScope.launch {
             geolocationManager.isActive.asFlow().drop(1).collect {
                 _navigateToNextPage.value = Event(true)
             }
         }
-         */
     }
 
     fun onPrivacyPolicyClick() {

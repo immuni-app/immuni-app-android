@@ -19,7 +19,7 @@ android:layout_height="match_parent">
         android:layout_marginStart="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:text="@string/always_consent"
+        android:text="@string/consent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -30,12 +30,14 @@ android:layout_height="match_parent">
         android:id="@+id/imageView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitEnd"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        android:scaleType="fitCenter"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_illustration_geolocation" />
+        app:srcCompat="@drawable/illustration_bluetooth" />
 
     <TextView
         android:id="@+id/textView"
@@ -52,7 +54,8 @@ android:layout_height="match_parent">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/textView2"
@@ -78,5 +81,6 @@ android:layout_height="match_parent">
         android:src="@drawable/ic_back_form"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
