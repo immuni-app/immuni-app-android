@@ -17,6 +17,7 @@ class HomeDiffCallback(private val oldList: List<HomeItemType>, private val newL
         if(old is SurveyCardDone) return true
         if(old is EnableNotificationCard) return true
         if(old is EnableGeolocationCard) return true
+        if(old is EnableBluetoothCard) return true
         if(old is SurveyCard) return true
         else return old == new
     }

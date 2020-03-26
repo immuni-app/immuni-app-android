@@ -137,5 +137,5 @@ val appModule = module {
     viewModel { (userId: String) -> UserDetailsViewModel(userId) }
 
     // UploadDataViewModel
-    viewModel { UploadDataViewModel(get()) }
+    viewModel { (userId: String) -> UploadDataViewModel(userId, get()) }
 }

@@ -1,8 +1,9 @@
 package org.ascolto.onlus.geocrowd19.android.ui.uploadData
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.bendingspoons.base.livedata.Event
+import kotlinx.coroutines.*
 import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
 import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
@@ -13,12 +14,21 @@ import org.ascolto.onlus.geocrowd19.android.toast
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class UploadDataViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComponent {
+class UploadDataViewModel(val userId:String, val database: AscoltoDatabase) : ViewModel(), KoinComponent {
+
+    private val viewModelJob = SupervisorJob()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
     private val surveyManager: SurveyManager by inject()
     private val apiManager: ApiManager by inject()
 
-    fun exportData(userId: String, code: String) {
-        GlobalScope.launch {
+    val error = MutableLiveData<Event<Boolean>>()
+    val loading = MutableLiveData<Event<Boolean>>()
+
+    fun exportData(code: String) {
+        uiScope.launch {
+            loading.value = Event(true)
+            delay(500) // min loader time to avoid flickering
             val devices = database.bleContactDao().getAll().map {
                 ExportDevice(
                     timestamp = it.timestamp,
@@ -37,10 +47,11 @@ class UploadDataViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
             )
 
             val result = apiManager.exportData(code, exportData)
+            loading.value = Event(false)
             if (result.isSuccessful) {
-                toast("Dati caricati con successo!")
+                //error.value = Event(false)
             } else {
-                toast("Il codice inserito non è corretto. Riprova.")
+                error.value = Event(true)
             }
         }
     }

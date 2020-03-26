@@ -9,4 +9,18 @@
         android:name="org.ascolto.onlus.geocrowd19.android.ui.uploadData.InsertUploadDataCodeFragment"
         android:label="InsertUploadDataCode"
         tools:layout="@layout/insert_upload_data_code_fragment"/>
+
+    <fragment
+        android:id="@+id/instructionFragment"
+        android:name="org.ascolto.onlus.geocrowd19.android.ui.uploadData.WhereToFindTheCodeFragment"
+        android:label="Instruction"
+        tools:layout="@layout/insert_code_where_icanfind_dialog"/>
+
+    <action
+        android:id="@+id/action_global_instruction"
+        app:destination="@id/instructionFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 </navigation>

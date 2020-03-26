@@ -1,6 +1,7 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home.family.details
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,10 +15,12 @@ import com.bendingspoons.base.extensions.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.user_details_fragment.*
 import kotlinx.android.synthetic.main.user_details_fragment.name
+import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
 import org.ascolto.onlus.geocrowd19.android.loading
 import org.ascolto.onlus.geocrowd19.android.toast
+import org.ascolto.onlus.geocrowd19.android.ui.uploadData.UploadDataActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -74,10 +77,15 @@ class UserDetailsFragment : Fragment() {
                 Gender.FEMALE -> requireContext().resources.getString(R.string.onboarding_female)
             }
 
-            liveWithYou.text = when (it.isInSameHouse) {
-                true -> requireContext().resources.getString(R.string.yes)
-                false -> requireContext().resources.getString(R.string.no)
-                else -> "-"
+            if(it.isMain) {
+                liveWithYouGroup.gone()
+            } else {
+                liveWithYouGroup.visible()
+                liveWithYou.text = when (it.isInSameHouse) {
+                    true -> requireContext().resources.getString(R.string.yes)
+                    false -> requireContext().resources.getString(R.string.no)
+                    else -> "-"
+                }
             }
 
             //identifier.text = it.id
@@ -125,11 +133,12 @@ class UserDetailsFragment : Fragment() {
     }
 
     private fun navigateToUploadData() {
-        /*val intent = Intent(AscoltoApplication.appContext, UploadDataActivity::class.java).apply {
+        val intent = Intent(requireContext(), UploadDataActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            putExtra("userId", fragmentArgs.userId)
         }
         activity?.startActivity(intent)
-         */
+         /*
         (activity as? AppCompatActivity)?.showEditAlert (
             "Carica",
             "Inserisci il codice che ti è stato comunicato dall'operatore.",
@@ -143,7 +152,7 @@ class UserDetailsFragment : Fragment() {
             getString(R.string.cancel),
             DialogInterface.OnClickListener { d, _ -> d.dismiss() }
         )
-
+            */
     }
 
     private fun showUploadDataMessage() {

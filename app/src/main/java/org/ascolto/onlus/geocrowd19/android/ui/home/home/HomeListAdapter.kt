@@ -72,6 +72,13 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         }
     }
 
+    inner class BluetoothCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+
+        override fun onClick(v: View) {
+            clickListener.onClick(items[adapterPosition])
+        }
+    }
+
     inner class SuggestionsCardWhiteVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var container: ConstraintLayout = v
         var title: TextView = v.findViewById(R.id.title)
@@ -153,6 +160,12 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
 
             return SurveyCardDoneVH(v as ConstraintLayout)
         }
+        else if(viewType == 8) {
+            val v = LayoutInflater.from(parent.context)
+                .inflate(R.layout.home_bluetooth_card_item, parent, false)
+
+            return BluetoothCardVH(v as ConstraintLayout)
+        }
         else {
             val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.home_suggestions_card_red_item, parent, false)
@@ -208,6 +221,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
             is SuggestionsCardYellow -> 5
             is SuggestionsCardRed -> 6
             is SurveyCardDone -> 7
+            is EnableBluetoothCard -> 8
         }
     }
 

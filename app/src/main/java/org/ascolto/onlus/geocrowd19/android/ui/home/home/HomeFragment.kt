@@ -17,18 +17,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.models.survey.backgroundColor
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.FamilyDialogActivity
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.GeolocationDialogActivity
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.NotificationsDialogActivity
-import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.EnableGeolocationCard
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.EnableNotificationCard
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.HomeItemType
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardRed
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardWhite
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SuggestionsCardYellow
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SurveyCard
-import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.SurveyCardDone
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.*
+import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -137,6 +127,9 @@ class HomeFragment : Fragment(), HomeClickListener {
             is EnableGeolocationCard -> {
                 openGeolocationDialog()
             }
+            is EnableBluetoothCard -> {
+                openBluetoothDialog()
+            }
             is SurveyCard -> {
                 viewModel.onSurveyCardTap()
             }
@@ -153,6 +146,13 @@ class HomeFragment : Fragment(), HomeClickListener {
 
     private fun openGeolocationDialog() {
         val intent = Intent(AscoltoApplication.appContext, GeolocationDialogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
+    }
+
+    private fun openBluetoothDialog() {
+        val intent = Intent(AscoltoApplication.appContext, BluetoothDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)

@@ -14,6 +14,8 @@ class SurveyCardDone: HomeItemType()
 
 class EnableGeolocationCard: HomeItemType()
 
+class EnableBluetoothCard: HomeItemType()
+
 class EnableNotificationCard: HomeItemType()
 
 data class HeaderCard(

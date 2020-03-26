@@ -56,7 +56,7 @@ class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
         when(item) {
             is UserCard -> {
                 if (item.uploadTapped) {
-                    navigateToUploadData()
+                    navigateToUploadData(item.user.id)
                 } else {
                     val action = FamilyFragmentDirections.actionUserDetails(item.user.id)
                     findNavController().navigate(action)
@@ -71,14 +71,12 @@ class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
         }
     }
 
-    private fun navigateToUploadData() {
-        /*
-        val intent = Intent(AscoltoApplication.appContext, UploadDataActivity::class.java).apply {
+    private fun navigateToUploadData(userId: String) {
+        val intent = Intent(requireContext(), UploadDataActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            putExtra("userId", userId)
         }
         activity?.startActivity(intent)
-        
-         */
     }
 
     private fun navigateToAddRelative() {

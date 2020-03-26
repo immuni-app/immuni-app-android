@@ -81,7 +81,8 @@
     <string name="onboarding_permissions_sample">Seleziona \"Consenti sempre\" nel popup che ti apparirà qui sotto</string>
     <string name="indication_for">Indicazioni su cosa fare per %s</string>
     <string name="you_as_complement">te</string>
-    <string name="enable_geolocation">Attiva il Bluetooth</string>
+    <string name="enable_geolocation">Attiva la localizzazione</string>
+    <string name="enable_bluetooth">Attiva il Bluetooth</string>
     <string name="enable_geolocation_message">Permetti il calcolo del tuo fattore di rischio</string>
     <string name="enable_notification">Attiva le notifiche</string>
     <string name="enable_notification_message">Consentici di comunicare con te in caso di necessità</string>
@@ -167,10 +168,9 @@
     <string name="user_data">Dati utente</string>
     <string name="consent">Consenti</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="insert_upload_data_code">Inserisci il codice per il caricamento dei dati</string>
     <string name="upload_data">Carica i dati</string>
     <string name="where_to_find_the_code">Dove posso trovare il codice?</string>
     <string name="invalid_code">Il codice che hai inserito non è valido.</string>
+    <string name="ok">OK</string>
 </resources>

@@ -88,8 +88,12 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 val itemsList = mutableListOf<HomeItemType>()
 
                 // check geolocation/bluetooth disabled
-                if (!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext) ||
-                    !bluetoothManager.isBluetoothEnabled()) {
+                if (!bluetoothManager.isBluetoothEnabled()) { //!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext) ||
+                    itemsList.add(EnableBluetoothCard())
+                }
+
+                // check geolocation/bluetooth disabled
+                if (!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext)) {
                     itemsList.add(EnableGeolocationCard())
                 }
 

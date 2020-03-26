@@ -1,5 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.managers
 
+import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
@@ -25,6 +26,13 @@ class BluetoothManager(val context: Context) : KoinComponent {
         bluetoothAdapter.takeIf { !it.isEnabled }?.apply {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             fragment.startActivityForResult(enableBtIntent, requestCode)
+        }
+    }
+
+    fun openBluetoothSettings(activity: Activity, requestCode: Int = REQUEST_ENABLE_BT) {
+        bluetoothAdapter.takeIf { !it.isEnabled }?.apply {
+            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            activity.startActivityForResult(enableBtIntent, requestCode)
         }
     }
 

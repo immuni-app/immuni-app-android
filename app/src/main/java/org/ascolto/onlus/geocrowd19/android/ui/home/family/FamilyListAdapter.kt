@@ -41,7 +41,9 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) : RecyclerView.A
 
 
         override fun onClick(v: View) {
-            clickListener.onClick(items[adapterPosition])
+            val userItem = items[adapterPosition] as UserCard
+            userItem.uploadTapped = false
+            clickListener.onClick(userItem)
         }
     }
 
