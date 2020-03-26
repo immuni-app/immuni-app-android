@@ -63,7 +63,7 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
     }
 
     private fun validateCode(code: String) {
-        val isCodeValid = code.length == 6
+        val isCodeValid = code.length >= 1
         error.visibility = if (isCodeValid) View.VISIBLE else View.GONE
         okButton.isEnabled = isCodeValid
     }
