@@ -10,8 +10,13 @@ import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.secretmenu.SecretMenuConfiguration
 import com.bendingspoons.secretmenu.SecretMenuItem
+import com.bendingspoons.secretmenu.ui.ExitActivity
 import com.bendingspoons.theirs.Theirs
 import org.ascolto.onlus.geocrowd19.android.managers.AscoltoNotificationManager
+import org.ascolto.onlus.geocrowd19.android.ui.onboarding.Onboarding
+import org.ascolto.onlus.geocrowd19.android.ui.setup.Setup
+import org.ascolto.onlus.geocrowd19.android.ui.welcome.Welcome
+import org.koin.android.ext.android.inject
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -21,6 +26,9 @@ class AscoltoSecretMenuConfiguration(val context: Context): SecretMenuConfigurat
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val theirs: Theirs by inject()
     private val notificationManager: AscoltoNotificationManager by inject()
+    private val onboarding: Onboarding by inject()
+    private val setup: Setup by inject()
+    private val welcome: Welcome by inject()
 
     override val isDevelopmentDevice = {
         true
@@ -44,6 +52,13 @@ class AscoltoSecretMenuConfiguration(val context: Context): SecretMenuConfigurat
                 val value = oracle.me()?.btId ?: ""
                 DeviceUtils.copyToClipBoard(context, text = value)
                 Toast.makeText(context, value, Toast.LENGTH_LONG).show()
+            }){},
+            object : SecretMenuItem("\uD83D\uDCA5 Clear Immuni", { context, config ->
+                config.concierge().resetUserIds()
+                onboarding.setCompleted(false)
+                setup.setCompleted(false)
+                welcome.setCompleted(false)
+                ExitActivity.exitApplication(context)
             }){}
         )
     }
