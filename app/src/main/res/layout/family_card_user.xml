@@ -131,4 +131,13 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="@+id/uploadText"
         app:srcCompat="@drawable/ic_upload" />
+
+    <TextView
+        android:id="@+id/uploadButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/okButton"
+        app:layout_constraintStart_toStartOf="@+id/uploadText"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 </androidx.constraintlayout.widget.ConstraintLayout>

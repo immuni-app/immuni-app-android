@@ -22,23 +22,16 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) : RecyclerView.A
     inner class UserCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var name: TextView = v.findViewById(R.id.name)
         val age: TextView = v.findViewById(R.id.age)
-        val uploadText: TextView = v.findViewById(R.id.uploadText)
         val icon: ImageView = v.findViewById(R.id.icon)
-        val upload: ImageView = v.findViewById(R.id.okButton)
+        val uploadButton: TextView = v.findViewById(R.id.uploadButton)
 
         init {
-            upload.setOnClickListener {
-                val userItem = items[adapterPosition] as UserCard
-                userItem.uploadTapped = true
-                clickListener.onClick(userItem)
-            }
-            uploadText.setOnClickListener {
+            uploadButton.setOnClickListener {
                 val userItem = items[adapterPosition] as UserCard
                 userItem.uploadTapped = true
                 clickListener.onClick(userItem)
             }
         }
-
 
         override fun onClick(v: View) {
             val userItem = items[adapterPosition] as UserCard
