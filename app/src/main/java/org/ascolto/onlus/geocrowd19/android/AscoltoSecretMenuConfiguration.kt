@@ -16,6 +16,8 @@ import org.ascolto.onlus.geocrowd19.android.managers.AscoltoNotificationManager
 import org.ascolto.onlus.geocrowd19.android.ui.onboarding.Onboarding
 import org.ascolto.onlus.geocrowd19.android.ui.setup.Setup
 import org.ascolto.onlus.geocrowd19.android.ui.welcome.Welcome
+import org.ascolto.onlus.geocrowd19.android.util.Flags
+import org.ascolto.onlus.geocrowd19.android.util.setFlag
 import org.koin.android.ext.android.inject
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -58,6 +60,8 @@ class AscoltoSecretMenuConfiguration(val context: Context): SecretMenuConfigurat
                 onboarding.setCompleted(false)
                 setup.setCompleted(false)
                 welcome.setCompleted(false)
+                val flag = Flags.ADD_FAMILY_MEMBER_DIALOG_SHOWN
+                setFlag(flag, false)
                 ExitActivity.exitApplication(context)
             }){}
         )
