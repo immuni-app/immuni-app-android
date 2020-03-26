@@ -4,7 +4,10 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.webkit.WebViewClient
+import androidx.core.graphics.blue
 import androidx.core.graphics.drawable.toDrawable
+import androidx.core.graphics.green
+import androidx.core.graphics.red
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import kotlinx.android.synthetic.main.web_view_dialog.*
@@ -32,10 +35,11 @@ class WebViewDialogActivity: AscoltoActivity() {
 
         // top gradient color
         val colorRes = applicationContext.resources.getColor(intent.extras!!.getInt("color", R.color.home_background))
+        val colorAplhaZero = Color.argb(0, colorRes.red, colorRes.green, colorRes.blue)
         webView.setBackgroundColor(colorRes)
         val drawableTop = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(colorRes, colorRes, Color.TRANSPARENT)
+            intArrayOf(colorRes, colorRes, colorAplhaZero)
         )
         topGradient.background = drawableTop
     }
