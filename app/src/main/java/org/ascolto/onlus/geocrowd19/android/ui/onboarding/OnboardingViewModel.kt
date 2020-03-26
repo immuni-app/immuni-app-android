@@ -69,8 +69,8 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
         }
 
         uiScope.launch {
-            geolocationManager.isActive.asFlow().drop(1).collect {
-                _navigateToNextPage.value = Event(true)
+            geolocationManager.isActive.asFlow().drop(1).collect { active ->
+                if(active) _navigateToNextPage.value = Event(true)
             }
         }
     }

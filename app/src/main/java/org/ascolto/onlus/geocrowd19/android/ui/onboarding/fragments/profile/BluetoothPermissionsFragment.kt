@@ -13,11 +13,13 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.ascolto.onlus.geocrowd19.android.managers.BluetoothManager
+import org.ascolto.onlus.geocrowd19.android.managers.GpsUtils
 import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.PermissionsTutorialDialog
 import org.koin.android.ext.android.inject
 
-class BluetoothPermissionsFragment : ProfileContentFragment(R.layout.onboarding_bluetooth_fragment) {
+class BluetoothPermissionsFragment : ProfileContentFragment(R.layout.onboarding_bluetooth_fragment),
+    GpsUtils.onGpsListener {
     val geolocationManager: GeolocationManager by inject()
     val bluetoothManager: BluetoothManager by inject()
 
@@ -49,10 +51,9 @@ class BluetoothPermissionsFragment : ProfileContentFragment(R.layout.onboarding_
         if(!bluetoothManager.isBluetoothEnabled() && !alreadyAskedBluetooth) {
             bluetoothManager.openBluetoothSettings(this)
             alreadyAskedBluetooth = true
-        } else if(!GeolocationManager.hasAllPermissions(requireContext())) {
+        } else  {
             geolocationManager.requestPermissions(activity as AppCompatActivity)
-        } else {
-            viewModel.onNextTap()
+            //GpsUtils(requireContext()).turnGPSOn(this)
         }
     }
 
@@ -71,5 +72,9 @@ class BluetoothPermissionsFragment : ProfileContentFragment(R.layout.onboarding_
 
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {
         //updateUI(userInfo.gender)
+    }
+
+    override fun gpsStatus(isGPSEnable: Boolean) {
+        toast("GPS IS ON = " + isGPSEnable)
     }
 }
