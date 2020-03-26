@@ -58,15 +58,22 @@ class BLEScanner: KoinComponent {
     inner class MyScanCallback : ScanCallback() {
         override fun onBatchScanResults(results: MutableList<ScanResult>?) {
             super.onBatchScanResults(results)
-            results?.map { it.scanRecord?.serviceUuids?.firstOrNull().toString() }?.toSet()
-                ?.toList()?.let {
-                processResult(it)
+            val ret = mutableSetOf<String>()
+            results?.forEach { result ->
+                result.scanRecord?.serviceUuids?.forEach { uuid ->
+                    ret.add(uuid.toString())
+                }
             }
+            processResult(ret.toList())
         }
 
         override fun onScanResult(callbackType: Int, result: ScanResult?) {
             super.onScanResult(callbackType, result)
-            processResult(listOf(result?.scanRecord?.serviceUuids?.firstOrNull().toString()))
+            val ret = mutableSetOf<String>()
+            result?.scanRecord?.serviceUuids?.forEach { uuid ->
+                ret.add(uuid.toString())
+            }
+            processResult(ret.toList())
         }
 
         override fun onScanFailed(errorCode: Int) {
