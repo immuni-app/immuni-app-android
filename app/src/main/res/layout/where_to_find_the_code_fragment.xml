@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.uploadData.InsertUploadDataCodeFragment">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/close"
@@ -24,7 +24,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
-        android:text="@string/upload_data"
+        android:text="@android:string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -35,35 +35,33 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
-        android:text="@string/insert_upload_data_code"
+        android:text="@string/where_to_find_the_code"
         app:layout_constraintEnd_toEndOf="@+id/okButton"
         app:layout_constraintStart_toStartOf="@+id/okButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/codeTextField"
+    <TextView
+        android:id="@+id/subtitle"
+        style="@style/H5Section"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/okButton"
+        android:layout_marginTop="30dp"
+        tools:text="Subtitle"
         app:layout_constraintEnd_toEndOf="@+id/okButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/okButton"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="0.17000002" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
-        android:id="@+id/error"
+        android:id="@+id/text"
+        style="@style/P1Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/invalid_code"
-        app:layout_constraintEnd_toEndOf="@+id/codeTextField"
+        android:layout_marginTop="30dp"
+        tools:text="Text"
+        app:layout_constraintEnd_toEndOf="@+id/subtitle"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/codeTextField"
-        app:layout_constraintTop_toBottomOf="@+id/codeTextField"
-        android:visibility="gone"
-        tools:visibility="visible" />
+        app:layout_constraintStart_toStartOf="@+id/subtitle"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

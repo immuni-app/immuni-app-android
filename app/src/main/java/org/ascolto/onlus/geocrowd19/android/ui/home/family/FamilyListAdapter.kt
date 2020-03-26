@@ -24,7 +24,7 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) : RecyclerView.A
         val age: TextView = v.findViewById(R.id.age)
         val uploadText: TextView = v.findViewById(R.id.uploadText)
         val icon: ImageView = v.findViewById(R.id.icon)
-        val upload: ImageView = v.findViewById(R.id.upload)
+        val upload: ImageView = v.findViewById(R.id.okButton)
 
         init {
             upload.setOnClickListener {

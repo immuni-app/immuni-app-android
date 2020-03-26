@@ -171,4 +171,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="insert_upload_data_code">Inserisci il codice per il caricamento dei dati</string>
     <string name="upload_data">Carica i dati</string>
+    <string name="where_to_find_the_code">Dove posso trovare il codice?</string>
+    <string name="invalid_code">Il codice che hai inserito non è valido.</string>
 </resources>
