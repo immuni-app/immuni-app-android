@@ -3,6 +3,8 @@ package org.ascolto.onlus.geocrowd19.android.workers
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.bluetooth.le.AdvertiseCallback
+import android.bluetooth.le.ScanCallback
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -11,40 +13,55 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
-import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import kotlinx.coroutines.delay
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.managers.AscoltoNotificationManager
+import org.ascolto.onlus.geocrowd19.android.managers.BluetoothManager
 import org.ascolto.onlus.geocrowd19.android.managers.ble.BLEAdvertiser
 import org.ascolto.onlus.geocrowd19.android.managers.ble.BLEScanner
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeActivity
-import org.ascolto.onlus.geocrowd19.android.ui.setup.SetupActivity
+import org.ascolto.onlus.geocrowd19.android.ui.onboarding.Onboarding
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import java.lang.Exception
 
 class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParameters) :
-    CoroutineWorker(context, parameters) {
+    CoroutineWorker(context, parameters), KoinComponent {
+
+    val onboarding: Onboarding by inject()
+    val bluetoothManager: BluetoothManager by inject()
 
     companion object {
         const val BLE_CHANNLE = "BLE_CHANNEL"
+        var currentAdvertiser: BLEAdvertiser? = null
+        var currentScanner: BLEScanner? = null
     }
 
     private val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     override suspend fun doWork(): Result {
-        /*val inputUrl = inputData.getString(KEY_INPUT_URL)
-            ?: return Result.failure()
-        val outputFile = inputData.getString(KEY_OUTPUT_FILE_NAME)
-            ?: return Result.failure()
-         */
-        // Mark the Worker as important
-        //val progress = "Starting BLE"
+        // if the user didn't do the onboarding yet, not run the worker
+        if(!onboarding.isComplete()) return Result.success()
+
+        // cleanup current advertiser/scanner
+        try {
+            currentAdvertiser?.stop()
+        } catch (e: Exception) { e.printStackTrace() }
+        try {
+            currentScanner?.stop()
+        } catch (e: Exception) { e.printStackTrace() }
+
         setForeground(createForegroundInfo())
 
-        BLEAdvertiser().start()
-        BLEScanner().start()
+        currentAdvertiser = BLEAdvertiser().apply {
+            start()
+        }
+        currentScanner = BLEScanner().apply {
+            start()
+        }
         while(true) {
-            delay(10000)
+            delay(5000)
         }
         //download(inputUrl, outputFile)
         return Result.success()

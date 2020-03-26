@@ -68,16 +68,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
         refreshHomeListModel()
         startListenToMeModel()
 
-        scheduleBLEWorker()
-    }
-
-    private fun scheduleBLEWorker() {
-        val TAG = "BLE_WORKER"
-        val workManager = WorkManager.getInstance(AscoltoApplication.appContext)
-        workManager.cancelAllWorkByTag(TAG)
-
-        val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>().addTag(TAG)
-        workManager.enqueue(notificationWork.build())
+        bluetoothManager.scheduleBLEWorker()
     }
 
     private fun refreshHomeListModel() {

@@ -6,6 +6,10 @@ import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
 import androidx.fragment.app.Fragment
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
+import org.ascolto.onlus.geocrowd19.android.workers.BLEForegroundServiceWorker
 import org.koin.core.KoinComponent
 
 class BluetoothManager(val context: Context) : KoinComponent {
@@ -34,6 +38,15 @@ class BluetoothManager(val context: Context) : KoinComponent {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             activity.startActivityForResult(enableBtIntent, requestCode)
         }
+    }
+
+    fun scheduleBLEWorker() {
+        val TAG = "BLE_WORKER"
+        val workManager = WorkManager.getInstance(AscoltoApplication.appContext)
+        workManager.cancelAllWorkByTag(TAG)
+
+        val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>().addTag(TAG)
+        workManager.enqueue(notificationWork.build())
     }
 
     companion object {
