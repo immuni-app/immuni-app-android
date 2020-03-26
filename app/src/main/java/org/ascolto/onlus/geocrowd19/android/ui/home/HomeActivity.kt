@@ -1,22 +1,17 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home
 
-import android.bluetooth.BluetoothAdapter
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.widget.Toast
 import androidx.core.view.iterator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import org.ascolto.onlus.geocrowd19.android.AscoltoActivity
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.home.navigation.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.home_activity.*
-import org.ascolto.onlus.geocrowd19.android.managers.AscoltoNotificationManager
 import org.ascolto.onlus.geocrowd19.android.managers.BluetoothListenerLifecycle
-import org.koin.android.ext.android.inject
+import org.ascolto.onlus.geocrowd19.android.managers.GeolocalisationListenerLifecycle
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HomeActivity : AscoltoActivity()  {
@@ -24,17 +19,22 @@ class HomeActivity : AscoltoActivity()  {
     private var currentNavController: LiveData<NavController>? = null
     private lateinit var viewModel: HomeSharedViewModel
 
-    private lateinit var lifecycleRegistry: BluetoothListenerLifecycle
+    private lateinit var lifecycleBluetooth: BluetoothListenerLifecycle
+    private lateinit var lifecycleGeolocation: GeolocalisationListenerLifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_activity)
 
         // update the home list when bluetooth settings change
-        lifecycleRegistry = BluetoothListenerLifecycle(this, this.lifecycle) { bluetoothState ->
+        lifecycleBluetooth = BluetoothListenerLifecycle(this, this.lifecycle) { bluetoothState ->
             viewModel.onHomeResumed()
         }
-        lifecycle.addObserver(lifecycleRegistry)
+        lifecycleGeolocation = GeolocalisationListenerLifecycle(this, this.lifecycle) { active ->
+            viewModel.onHomeResumed()
+        }
+        lifecycle.addObserver(lifecycleBluetooth)
+        lifecycle.addObserver(lifecycleGeolocation)
 
         viewModel = getViewModel()
 
