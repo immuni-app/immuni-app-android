@@ -159,7 +159,7 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
 
         if(lastRadioSelected == NicknameType.OTHER) {
             editTextGroup.visible()
-            valid = valid && textField.text.toString().isNotEmpty()
+            valid = valid && textField.text.toString().isNotEmpty() && textField.text.toString().length <= 5
         } else {
             editTextGroup.gone()
         }

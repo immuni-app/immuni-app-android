@@ -82,6 +82,7 @@
                 android:inputType="textNoSuggestions|textVisiblePassword"
                 app:endIconMode="clear_text"
                 android:hint="Zio"
+                android:maxLength="5"
                 android:textSize="30sp"
                 android:fontFamily="@font/euclid_circular_regular"
                 android:textColorHint="#33495D74"
