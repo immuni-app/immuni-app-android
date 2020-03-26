@@ -1,6 +1,8 @@
 package org.ascolto.onlus.geocrowd19.android
 
 import android.content.Context
+import android.widget.Toast
+import com.bendingspoons.base.utils.DeviceUtils
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
@@ -37,6 +39,11 @@ class AscoltoSecretMenuConfiguration(val context: Context): SecretMenuConfigurat
         return listOf(
             object : SecretMenuItem("\uD83D\uDD14 Schedule a notification in 5 seconds", { _, _ ->
                 notificationManager.scheduleMock()
+            }){},
+            object : SecretMenuItem("ℹ️ Copy bt_id", { context, config ->
+                val value = oracle.me()?.btId ?: ""
+                DeviceUtils.copyToClipBoard(context, text = value)
+                Toast.makeText(context, value, Toast.LENGTH_LONG).show()
             }){}
         )
     }
