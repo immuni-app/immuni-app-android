@@ -31,21 +31,21 @@ class User(
         }
 }
 
-enum class AgeGroup(val id: String) {
+enum class AgeGroup {
     @Json(name = "0-17")
-    ZERO_SEVENTEEN("0-17"),
+    ZERO_SEVENTEEN,
     @Json(name = "18-35")
-    EIGHTEEN_THIRTYFIVE("18-35"),
+    EIGHTEEN_THIRTYFIVE,
     @Json(name = "36-45")
-    THRITYSIX_FORTYFIVE("36-45"),
+    THRITYSIX_FORTYFIVE,
     @Json(name = "46-55")
-    FORTYSIX_FIFTYFIVE("46-55"),
+    FORTYSIX_FIFTYFIVE,
     @Json(name = "56-65")
-    FIFTYSIX_SIXTYFIVE("56-65"),
+    FIFTYSIX_SIXTYFIVE,
     @Json(name = "66-75")
-    SIXTYSIX_SEVENTYFIVE("66-75"),
+    SIXTYSIX_SEVENTYFIVE,
     @Json(name = "75+")
-    MORE_THAN_SEVENTYFIVE("75+");
+    MORE_THAN_SEVENTYFIVE;
 
     fun humanReadable(context: Context): String {
         return when (this) {
@@ -59,9 +59,8 @@ enum class AgeGroup(val id: String) {
         }
     }
 
-    companion object {
-        fun fromId(id: String): AgeGroup = values().first { it.id == id }
-    }
+    val isAdult
+        get() = this != ZERO_SEVENTEEN
 }
 
 @JsonClass(generateAdapter = true)

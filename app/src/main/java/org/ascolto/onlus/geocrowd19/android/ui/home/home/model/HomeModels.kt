@@ -7,8 +7,11 @@ import org.ascolto.onlus.geocrowd19.android.models.survey.Severity
 sealed class HomeItemType
 
 data class SurveyCard(
-    val surveyNumber: Int
-): HomeItemType()
+    val doesMainUserNeedToLog: Boolean,
+    val familyMembersThatNeedToLog: Int
+): HomeItemType() {
+    val surveysToLog: Int = familyMembersThatNeedToLog + (if (doesMainUserNeedToLog) 1 else 0)
+}
 
 class SurveyCardDone: HomeItemType()
 

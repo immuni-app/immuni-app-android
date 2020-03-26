@@ -32,6 +32,8 @@ class AddRelativeViewModel(val handle: SavedStateHandle, private val database: A
     private val pico: Pico by inject()
     private val apiManager: ApiManager by inject()
 
+    val mainUser = oracle.me()!!.mainUser!!
+
     var partialUserInfo = MediatorLiveData<RelativeInfo>()
 
     private var savedStateLiveData = handle.getLiveData<Serializable>(STATE_KEY)
