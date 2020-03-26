@@ -12,7 +12,6 @@ data class RelativeInfo(
     var ageGroup: AgeGroup? = null,
     var sameHouse: Boolean? = null,
     var nickname: Nickname? = null,
-    var adult: Boolean? = null,
     var hasSmartphone: Boolean? = null,
     var canAddInfoHimself: Boolean? = null,
     var alreadyAddedFromAnotherRelative: Boolean? = null

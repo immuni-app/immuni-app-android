@@ -26,7 +26,8 @@ import org.ascolto.onlus.geocrowd19.android.models.Nickname
 import org.ascolto.onlus.geocrowd19.android.models.NicknameType
 import org.ascolto.onlus.geocrowd19.android.ui.addrelative.RelativeInfo
 
-class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContentFragment(R.layout.add_relative_nickname_fragment){
+class NicknameFragment : CompoundButton.OnCheckedChangeListener,
+    RelativeContentFragment(R.layout.add_relative_nickname_fragment) {
     override val nextButton: View
         get() = next
 
@@ -47,31 +48,37 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
         var cont = 0
         val userInfo = viewModel.userInfo()!!
         enumValues<NicknameType>().forEach { type ->
-            if(type == NicknameType.OTHER) { } // at the end
-            else if(userInfo.adult != true && type in setOf(
-                        NicknameType.PARENT,
-                        NicknameType.MATERNAL_GRANDPARENT,
-                        NicknameType.PATERNAL_GRANDPARENT)) { } // skip
+            if (type == NicknameType.OTHER) {
+            } // at the end
+            else if (userInfo.ageGroup?.isAdult != true && type in setOf(
+                    NicknameType.PARENT,
+                    NicknameType.MATERNAL_GRANDPARENT,
+                    NicknameType.PATERNAL_GRANDPARENT
+                )
+            ) {
+            } // skip
             else {
                 items.apply {
                     val gender = userInfo.gender!!
                     put(
                         Pair(type, gender),
                         RadioButton(context).apply {
-                        id = cont++
-                        tag = cont
-                        text = Nickname(type, "").humanReadable(context, gender)
-                        val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
-                        typeface = tf
-                        textSize = 18f
-                        buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button)
-                        val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
-                        val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
-                        val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
-                        setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
-                        setTextColor(Color.parseColor("#495D74"))
-                        setOnCheckedChangeListener(this@NicknameFragment)
-                    })
+                            id = cont++
+                            tag = cont
+                            text = Nickname(type, "").humanReadable(context, gender)
+                            val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
+                            typeface = tf
+                            textSize = 18f
+                            buttonDrawable =
+                                ContextCompat.getDrawable(context, R.drawable.radio_button)
+                            val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
+                            val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
+                            val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
+                            setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
+                            setTextColor(Color.parseColor("#495D74"))
+                            setOnCheckedChangeListener(this@NicknameFragment)
+                        }
+                    )
                 }
             }
         }
@@ -81,20 +88,20 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
             put(
                 Pair(NicknameType.OTHER, Gender.FEMALE),
                 RadioButton(context).apply {
-                id = cont++
-                tag = cont
-                text = context.getString(R.string.choose_a_nickname)
-                val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
-                typeface = tf
-                textSize = 18f
-                buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button)
-                val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
-                val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
-                val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
-                setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
-                setTextColor(Color.parseColor("#495D74"))
-                setOnCheckedChangeListener(this@NicknameFragment)
-            })
+                    id = cont++
+                    tag = cont
+                    text = context.getString(R.string.choose_a_nickname)
+                    val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
+                    typeface = tf
+                    textSize = 18f
+                    buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button)
+                    val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
+                    val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
+                    val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
+                    setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
+                    setTextColor(Color.parseColor("#495D74"))
+                    setOnCheckedChangeListener(this@NicknameFragment)
+                })
         }
 
         radioGroup.apply {
@@ -106,7 +113,7 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
         }
 
         textField.setOnFocusChangeListener { v, hasFocus ->
-            if(hasFocus) {
+            if (hasFocus) {
                 GlobalScope.launch(Dispatchers.Main) {
                     delay(500)
                     scrollView.fullScroll(FOCUS_DOWN)
@@ -120,16 +127,16 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
     var lastRadioSelected: NicknameType? = null
     var disableTriggeringEvent = false
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-        if(isChecked) {
+        if (isChecked) {
             items.keys.forEach { key ->
-                if(items[key] == buttonView) {
+                if (items[key] == buttonView) {
                     lastRadioSelected = key.first
                 }
             }
         }
-        if(!disableTriggeringEvent) {
+        if (!disableTriggeringEvent) {
 
-            if(lastRadioSelected == NicknameType.OTHER) textField.showKeyboard()
+            if (lastRadioSelected == NicknameType.OTHER) textField.showKeyboard()
             else view?.hideKeyboard()
 
             validate()
@@ -157,7 +164,7 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
     fun validate(updateModel: Boolean = true): Boolean {
         var valid = lastRadioSelected != null
 
-        if(lastRadioSelected == NicknameType.OTHER) {
+        if (lastRadioSelected == NicknameType.OTHER) {
             editTextGroup.visible()
             valid = valid && textField.text.toString().isNotEmpty() && textField.text.toString().length <= 5
         } else {
@@ -172,7 +179,7 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener, RelativeContent
     private fun saveData() {
         lastRadioSelected?.let { type ->
 
-            val customName = when(type) {
+            val customName = when (type) {
                 NicknameType.OTHER -> textField.text.toString()
                 else -> null
             }
