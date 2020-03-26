@@ -9,13 +9,10 @@ import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.close
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.okButton
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.title
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.api.oracle.ApiManager
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_fragment) {
     private lateinit var viewModel: UploadDataViewModel
-    private val apiManager: ApiManager by inject()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -28,7 +25,8 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
         }
 
         okButton.setOnClickListener {
-            uploadData(codeTextField.text.toString())
+            // TODO: retrieve userId
+            viewModel.exportData(userId, codeTextField.text.toString())
         }
 
         title.setOnClickListener {
@@ -44,11 +42,6 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
         val isCodeValid = true // TODO: insert code validation code
         error.visibility = if (isCodeValid) View.VISIBLE else View.GONE
         okButton.isEnabled = isCodeValid
-    }
-
-    private fun uploadData(code: String) {
-        // TODO: upload data
-//        apiManager.
     }
 
     private fun close() {
