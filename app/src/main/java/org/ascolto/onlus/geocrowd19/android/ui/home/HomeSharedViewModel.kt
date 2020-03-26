@@ -84,7 +84,8 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 }
 
                 // check geolocation/bluetooth disabled
-                if (!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext)) {
+                if (!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext) ||
+                    !GeolocationManager.globalLocalisationEnabled(AscoltoApplication.appContext)) {
                     itemsList.add(EnableGeolocationCard())
                 }
 

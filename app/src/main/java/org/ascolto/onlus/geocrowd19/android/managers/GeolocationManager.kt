@@ -2,7 +2,9 @@ package org.ascolto.onlus.geocrowd19.android.managers
 
 import android.Manifest
 import android.content.Context
+import android.content.Context.LOCATION_SERVICE
 import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.location.LocationManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -43,6 +45,11 @@ class GeolocationManager(val context: Context) : KoinComponent {
 
         fun hasAllPermissions(context: Context): Boolean {
             return getNextPermissionToGrant(context) == null
+        }
+
+        fun globalLocalisationEnabled(context: Context): Boolean {
+            val locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager
+            return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         }
     }
 
