@@ -47,19 +47,30 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
 
         var cont = 0
         val userInfo = viewModel.userInfo()!!
+
+        val mainUserAgeGroup = viewModel.mainUser.ageGroup
+
         enumValues<NicknameType>().forEach { type ->
+            val ageGroup = userInfo.ageGroup!!
+            val gender = userInfo.gender!!
+
             if (type == NicknameType.OTHER) {
             } // at the end
-            else if (userInfo.ageGroup?.isAdult != true && type in setOf(
+            else if (ageGroup < mainUserAgeGroup && type in setOf(
                     NicknameType.PARENT,
                     NicknameType.MATERNAL_GRANDPARENT,
                     NicknameType.PATERNAL_GRANDPARENT
-                )
-            ) {
+                )) {
+            } // skip
+            else if (ageGroup > mainUserAgeGroup && type in setOf(
+                    NicknameType.CHILD_1,
+                    NicknameType.CHILD_2,
+                    NicknameType.CHILD_3,
+                    NicknameType.CHILD_4
+                )) {
             } // skip
             else {
                 items.apply {
-                    val gender = userInfo.gender!!
                     put(
                         Pair(type, gender),
                         RadioButton(context).apply {
