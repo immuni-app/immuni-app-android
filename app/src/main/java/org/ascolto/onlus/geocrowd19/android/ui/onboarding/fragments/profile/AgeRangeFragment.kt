@@ -29,8 +29,7 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
                 MaterialAlertDialogBuilder(context)
                     .setTitle(getString(R.string.onboarding_age_more_than_18_title))
                     .setMessage(getString(R.string.onboarding_age_more_than_18_message))
-                    .setPositiveButton(getString(R.string.confirm)) { d, _ -> viewModel.onNextTap() }
-                    .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss() }
+                    .setPositiveButton(getString(R.string.ok)) { d, _ -> d.dismiss() }
                     .setOnCancelListener { }
                     .show()
             } else {
