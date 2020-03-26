@@ -114,8 +114,8 @@ class SurveyManager(private val context: Context) : KoinComponent {
         return updatedHealthProfile
     }
 
-    fun isSurveyCompletedForUser(user: User): Boolean {
-        val lastHealthProfile = lastHealthProfile(user.id)
+    fun isSurveyCompletedForUser(userId: String): Boolean {
+        val lastHealthProfile = lastHealthProfile(userId)
         val lastSurveyDate = lastHealthProfile?.surveyDate ?: return false
 
         return lastSurveyDate > lastAvailableSurveyDate()
@@ -167,13 +167,13 @@ class SurveyManager(private val context: Context) : KoinComponent {
 
     fun nextUserToLog(): User? {
         return allUsers().find {
-            !isSurveyCompletedForUser(it)
+            !isSurveyCompletedForUser(it.id)
         }
     }
 
     fun usersToLogCount(): Int {
         return allUsers().count {
-            !isSurveyCompletedForUser(it)
+            !isSurveyCompletedForUser(it.id)
         }
     }
 

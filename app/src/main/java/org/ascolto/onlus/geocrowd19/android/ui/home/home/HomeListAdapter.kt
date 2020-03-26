@@ -197,13 +197,13 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
             is SurveyCardVH -> {
                 val item = items[position] as SurveyCard
                 val placeholder = AscoltoApplication.appContext.resources.getString(R.string.you_have_clinic_diaries_to_update)
-                val titleHtml = String.format(placeholder, item.surveyNumber)
+                val titleHtml = String.format(placeholder, item.surveysToLog)
                 holder.bottomMessage.text = HtmlCompat.fromHtml(titleHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
 
-                if(item.surveyNumber == 1) {
+                if (item.doesMainUserNeedToLog) {
                     holder.bottomMessage.gone()
                     holder.title.text = AscoltoApplication.appContext.resources.getString(R.string.update_your_clinic_diary)
-                } else if(item.surveyNumber > 1) {
+                } else if (item.familyMembersThatNeedToLog > 0) {
                     holder.bottomMessage.visible()
                     holder.title.text = AscoltoApplication.appContext.resources.getString(R.string.update_your_family_diary)
                 }
