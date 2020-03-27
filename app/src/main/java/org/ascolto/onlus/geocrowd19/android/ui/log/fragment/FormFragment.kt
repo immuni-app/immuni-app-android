@@ -66,6 +66,7 @@ class FormFragment : Fragment() {
             viewModel.formModel.value!!.currentQuestion,
             this@FormFragment
         )
+        listAdapter.updateAdapter(viewModel.formModel()!!.answeredQuestions)
         with(viewPager) {
             adapter = listAdapter
             clipToPadding = false

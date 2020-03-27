@@ -26,6 +26,13 @@ class FormAdapter(
         return survey.questions.indexOfFirst { it.id == questionIds[position] }.toLong()
     }
 
+    // IMPORTANT: this is critically important in combination with getItemId to restore
+    // the adapter after activity restoration
+    override fun containsItem(itemId: Long): Boolean {
+        val surveyQuestion = survey.questions[itemId.toInt()]
+        return questionIds.contains(surveyQuestion.id)
+    }
+
     override fun getItemCount(): Int = questionIds.size
 
     override fun createFragment(position: Int): Fragment {
