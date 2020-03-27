@@ -1,6 +1,7 @@
 package org.ascolto.onlus.geocrowd19.android.ui.uploadData
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -25,6 +26,7 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
         viewModel = getSharedViewModel()
 
         okButton.isEnabled = false
+        codeTextField.filters = arrayOf(InputFilter.AllCaps())
 
         close.setOnClickListener {
             close()
