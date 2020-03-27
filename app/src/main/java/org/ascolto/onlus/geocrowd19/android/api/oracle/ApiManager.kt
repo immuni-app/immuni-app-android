@@ -28,7 +28,6 @@ class ApiManager : KoinComponent {
 
     private suspend fun updateMe(response: Response<ResponseBody>): AscoltoMe? {
         return decode<AscoltoMe>(response)?.also {
-            it.mainUser?.isMain = true
             oracle.updateMe(it)
         }
     }

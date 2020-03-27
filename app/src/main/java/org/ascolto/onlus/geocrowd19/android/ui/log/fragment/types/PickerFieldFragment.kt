@@ -57,7 +57,7 @@ class PickerFieldFragment : FormContentFragment(R.layout.form_picker_field) {
                 add(NumberPicker(context).apply {
                     tag = index
                     val data = picker.toTypedArray()
-                    minValue = 0
+                    minValue = 1
                     maxValue = minValue + data.size - 1
                     displayedValues = data
                     value = minValue
@@ -85,7 +85,7 @@ class PickerFieldFragment : FormContentFragment(R.layout.form_picker_field) {
             val answer = answers.first() as CompositeAnswer
             answer.componentIndexes.forEachIndexed { pickerIndex, valueIndex ->
                 if (items.size > pickerIndex) {
-                    items[pickerIndex].value = valueIndex
+                    items[pickerIndex].value = valueIndex + 1
                 }
             }
         }
@@ -99,7 +99,7 @@ class PickerFieldFragment : FormContentFragment(R.layout.form_picker_field) {
     }
 
     private fun saveData() {
-        val indexes = items.map { it.value }
+        val indexes = items.map { it.value - 1 }
         viewModel.saveAnswers(questionId, listOf(CompositeAnswer(indexes)))
     }
 }
