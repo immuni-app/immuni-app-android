@@ -57,14 +57,14 @@
             app:layout_constraintTop_toBottomOf="@+id/description">
             <androidx.appcompat.widget.AppCompatRadioButton
                 style="@style/RadioButton"
-                android:id="@+id/male"
+                android:id="@+id/female"
                 android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/onboarding_female"/>
             <androidx.appcompat.widget.AppCompatRadioButton
                 style="@style/RadioButton"
-                android:id="@+id/female"
+                android:id="@+id/male"
                 android:checked="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
