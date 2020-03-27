@@ -22,8 +22,9 @@ class UploadDataViewModel(val userId:String, val database: AscoltoDatabase) : Vi
     private val surveyManager: SurveyManager by inject()
     private val apiManager: ApiManager by inject()
 
-    val error = MutableLiveData<Event<Boolean>>()
     val loading = MutableLiveData<Event<Boolean>>()
+    val error = MutableLiveData<Event<Boolean>>()
+    val success = MutableLiveData<Event<Boolean>>()
 
     fun exportData(code: String) {
         uiScope.launch {
@@ -49,7 +50,7 @@ class UploadDataViewModel(val userId:String, val database: AscoltoDatabase) : Vi
             val result = apiManager.exportData(code, exportData)
             loading.value = Event(false)
             if (result.isSuccessful) {
-                //error.value = Event(false)
+                success.value = Event(true)
             } else {
                 error.value = Event(true)
             }

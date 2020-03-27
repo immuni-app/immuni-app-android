@@ -172,4 +172,8 @@
     <string name="where_to_find_the_code">Dove posso trovare il codice?</string>
     <string name="invalid_code">Il codice che hai inserito non è valido.</string>
     <string name="ok">OK</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="upload_data_success">I tuoi dati sono stati caricati correttamente!</string>
 </resources>
