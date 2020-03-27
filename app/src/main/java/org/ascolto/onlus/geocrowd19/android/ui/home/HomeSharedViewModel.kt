@@ -165,18 +165,17 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
 
                 // add first main users
                 mainUser?.let {
-                    itemsList.add(UserCard(it))
+                    itemsList.add(UserCard(it, 0))
                 }
 
                 // if there are family members, add header and all the members and a add button
-                if (familyMembers.isNotEmpty())
-                    familyMembers.let { members ->
-                        itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
-                        familyMembers.forEach {
-                            itemsList.add(UserCard(it))
-                        }
-                        itemsList.add(AddFamilyMemberButtonCard())
+                if (familyMembers.isNotEmpty()) {
+                    itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
+                    familyMembers.forEachIndexed { index, user ->
+                        itemsList.add(UserCard(user, index + 1))
                     }
+                    itemsList.add(AddFamilyMemberButtonCard())
+                }
                 // otherwise add only the add member tutorial button
                 else {
                     itemsList.add(AddFamilyMemberTutorialCard())
