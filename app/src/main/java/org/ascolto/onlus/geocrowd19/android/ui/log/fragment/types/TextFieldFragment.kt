@@ -41,7 +41,7 @@ class TextFieldFragment: FormContentFragment(R.layout.form_text_field) {
 
     }
 
-    override fun validate(): Boolean {
+    override fun validate(save: Boolean): Boolean {
         nextButton.isEnabled = !textField.text.toString().isEmpty()
         return nextButton.isEnabled
     }

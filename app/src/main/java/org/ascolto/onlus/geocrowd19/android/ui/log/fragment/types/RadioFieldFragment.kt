@@ -106,13 +106,16 @@ class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnChe
             }
         }
 
+        if(items.all { !it.isChecked }) lastRadioSelected = -1
+
+        validate(false)
         disableTriggeringEvent = false
     }
 
-    override fun validate(): Boolean {
+    override fun validate(save: Boolean): Boolean {
         val valid = lastRadioSelected != -1
         nextButton.isEnabled = valid
-        if (valid) saveData()
+        if (valid && save) saveData()
         return valid
     }
 

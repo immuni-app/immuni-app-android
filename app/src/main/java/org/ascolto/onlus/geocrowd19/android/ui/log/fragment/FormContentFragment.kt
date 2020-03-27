@@ -60,7 +60,7 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
 
     abstract fun onFormModelUpdate(model: FormModel)
 
-    abstract fun validate(): Boolean
+    abstract fun validate(save: Boolean = true): Boolean
 
     fun updateFormModel(model: FormModel) {
         viewModel.updateFormModel(model)

@@ -89,12 +89,13 @@ class PickerFieldFragment : FormContentFragment(R.layout.form_picker_field) {
                 }
             }
         }
+        validate(false)
     }
 
-    override fun validate(): Boolean {
+    override fun validate(save: Boolean): Boolean {
         val isValid = true
         nextButton.isEnabled = isValid
-        if (isValid) saveData()
+        if (isValid && save) saveData()
         return isValid
     }
 

@@ -100,6 +100,7 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
                 }
             }
         }
+        validate(false)
         disableTriggeringEvent = false
     }
 
@@ -108,12 +109,12 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
         if(!disableTriggeringEvent) validate()
     }
 
-    override fun validate(): Boolean {
+    override fun validate(save: Boolean): Boolean {
         val count = items.count { it.isChecked }
         val isValid = count in minimumAnswers..maximumAnswers
 
         nextButton.isEnabled = isValid
-        if (isValid) saveData()
+        if (isValid && save) saveData()
         return isValid
     }
 
