@@ -56,12 +56,11 @@ class PickerFieldFragment : FormContentFragment(R.layout.form_picker_field) {
             items.apply {
                 add(NumberPicker(context).apply {
                     tag = index
-                    // IMPORTANT! setMinValue to 1 and call setDisplayedValues after setMinValue and setMaxValue
                     val data = picker.toTypedArray()
-                    minValue = 1
-                    maxValue = data.size
+                    minValue = 0
+                    maxValue = minValue + data.size - 1
                     displayedValues = data
-                    value = 1
+                    value = minValue
                     setOnValueChangedListener { picker, oldVal, newVal ->
                         validate()
                     }
