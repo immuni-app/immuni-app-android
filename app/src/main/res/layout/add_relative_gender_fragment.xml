@@ -40,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="La probabilità di contagio e il rischio di sviluppare sintomi piú severi dipendono da questa informazione."
+            android:text="@string/onboarding_gender_description"
             app:layout_constraintEnd_toEndOf="@+id/question"
             app:layout_constraintStart_toStartOf="@+id/question"
             app:layout_constraintTop_toBottomOf="@+id/question" />
