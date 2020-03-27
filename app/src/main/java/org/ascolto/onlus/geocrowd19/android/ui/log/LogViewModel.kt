@@ -233,6 +233,8 @@ class LogViewModel(
         return ((index + 2).toFloat() / totalQuestions.toFloat()).coerceIn(0f, 1f)
     }
 
+    fun canGoBack() = oracle.settings()?.let { !it.disableSurveyBack } ?: true
+
     companion object {
         const val STATE_KEY = "STATE_KEY"
     }

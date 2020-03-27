@@ -38,6 +38,7 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
         nextButton.isEnabled = false
+        prevButton.isEnabled = viewModel.canGoBack()
 
         viewModel.formModel.observe(viewLifecycleOwner, Observer { form ->
             onFormModelUpdate(form)
