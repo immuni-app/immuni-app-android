@@ -172,4 +172,5 @@
     <string name="ok">OK</string>
     <string name="diary_resume_title">Riepilogo</string>
     <string name="upload_data_success">I tuoi dati sono stati caricati correttamente!</string>
+    <string name="nickname">Soprannome</string>
 </resources>
