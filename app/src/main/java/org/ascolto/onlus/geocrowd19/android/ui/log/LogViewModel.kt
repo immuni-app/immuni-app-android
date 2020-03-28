@@ -12,6 +12,9 @@ import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import org.ascolto.onlus.geocrowd19.android.managers.SurveyManager
 import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.models.survey.*
+import org.ascolto.onlus.geocrowd19.android.ui.log.fragment.model.QuestionType
+import org.ascolto.onlus.geocrowd19.android.ui.log.fragment.model.ResumeItemType
+import org.ascolto.onlus.geocrowd19.android.ui.log.fragment.model.UserType
 import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -33,6 +36,8 @@ class LogViewModel(
 
     var survey = MutableLiveData<Survey>()
 
+    var resumeModel = MediatorLiveData<List<ResumeItemType>>()
+
     // internal state
     var formModel = MediatorLiveData<FormModel>()
     private var savedStateLiveData = handle.getLiveData<Serializable>(STATE_KEY)
@@ -41,6 +46,10 @@ class LogViewModel(
     private val _navigateToQuestion = MutableLiveData<Event<String>>()
     val navigateToQuestion: LiveData<Event<String>>
         get() = _navigateToQuestion
+
+    private val _navigateToResume = MutableLiveData<Event<Boolean>>()
+    val navigateToResume: LiveData<Event<Boolean>>
+        get() = _navigateToResume
 
     private val _navigateToNextPage = MutableLiveData<Event<Boolean>>()
     val navigateToNextPage: LiveData<Event<Boolean>>
@@ -79,6 +88,22 @@ class LogViewModel(
         // end internal state
 
         setup()
+    }
+
+    fun onResumeRequested() {
+        resumeModel.removeSource(user)
+        resumeModel.addSource(user) {user ->
+            val survey = survey.value!!
+            val list = mutableListOf<ResumeItemType>()
+            list.add(UserType(user))
+
+            formModel()?.surveyAnswers?.keys?.forEach { questionId ->
+                val answers = formModel()?.surveyAnswers?.get(questionId)!!
+                val q = survey.questions.find { it.id == questionId }!!
+                list.add(QuestionType(q.title, q.humanReadableAnswers(answers)))
+            }
+            resumeModel.value = list
+        }
     }
 
     private fun setup(reset: Boolean = false) {
@@ -146,7 +171,7 @@ class LogViewModel(
                 _navigateToQuestion.value = Event(nextDestination.question.id)
             }
             is SurveyEndDestination -> {
-                _navigateToDonePage.value = Event(true)
+                _navigateToResume.value = Event(true)
             }
         }
     }
