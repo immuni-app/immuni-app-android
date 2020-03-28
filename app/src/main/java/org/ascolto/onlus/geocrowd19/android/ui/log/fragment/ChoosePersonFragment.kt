@@ -15,6 +15,7 @@ import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.visible
 import kotlinx.android.synthetic.main.log_choose_person_fragment.*
+import org.ascolto.onlus.geocrowd19.android.db.entity.iconResource
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class ChoosePersonFragment : Fragment() {
@@ -46,12 +47,12 @@ class ChoosePersonFragment : Fragment() {
                 age.text = it.ageGroup.humanReadable(requireContext())
                 name.text = if (it.isMain) getString(R.string.you) else it.name
                 gender.setImageResource(
-                    when (it.gender) {
-                        Gender.FEMALE -> R.drawable.ic_avatar_female_purple
-                        Gender.MALE -> R.drawable.ic_avatar_female_purple
-                    }
+                    it.gender.iconResource(
+                        requireContext(),
+                        viewModel.deviceId,
+                        viewModel.userIndex!!
+                    )
                 )
-
                 when (it.isMain) {
                     true -> {
                         compileFor.gone()

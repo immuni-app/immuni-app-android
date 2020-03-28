@@ -7,7 +7,8 @@ import org.ascolto.onlus.geocrowd19.android.models.User
 sealed class FamilyItemType
 
 data class UserCard(
-    val user: User
+    val user: User,
+    val userIndex: Int
 ): FamilyItemType() {
     var uploadTapped: Boolean = false
 }

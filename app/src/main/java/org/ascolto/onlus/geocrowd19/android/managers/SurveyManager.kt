@@ -171,6 +171,13 @@ class SurveyManager(private val context: Context) : KoinComponent {
         }
     }
 
+    fun indexForUser(userId: String): Int {
+        val (_, index) = allUsers().mapIndexed { index, user ->
+            Pair(user, index)
+        }.first { (user, _) -> user.id == userId }
+        return index
+    }
+
     fun usersToLogCount(): Int {
         return allUsers().count {
             !isSurveyCompletedForUser(it.id)

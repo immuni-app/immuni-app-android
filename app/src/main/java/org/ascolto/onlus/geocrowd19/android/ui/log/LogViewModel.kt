@@ -3,6 +3,7 @@ package org.ascolto.onlus.geocrowd19.android.ui.log
 import androidx.lifecycle.*
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.storage.KVStorage
+import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
@@ -27,12 +28,19 @@ class LogViewModel(
 
     private val state: KVStorage by inject()
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val concierge: ConciergeManager by inject()
     private val pico: Pico by inject()
     private val surveyManager: SurveyManager by inject()
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     var user = MediatorLiveData<User>()
+
+    val userIndex: Int?
+        get() = user.value?.let { surveyManager.indexForUser(it.id) }
+
+    val deviceId: String
+        get() = concierge.backupPersistentId.id
 
     var survey = MutableLiveData<Survey>()
 

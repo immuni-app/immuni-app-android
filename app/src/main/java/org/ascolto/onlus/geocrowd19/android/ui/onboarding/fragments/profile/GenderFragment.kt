@@ -2,7 +2,6 @@ package org.ascolto.onlus.geocrowd19.android.ui.onboarding.fragments.profile
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.db.entity.Gender
 import org.ascolto.onlus.geocrowd19.android.ui.onboarding.OnboardingUserInfo
@@ -21,11 +20,11 @@ class GenderFragment : ProfileContentFragment(R.layout.onboarding_gender_fragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        male.setOnClickListener {
+        female.setOnClickListener {
             validate(true)
         }
 
-        female.setOnClickListener {
+        male.setOnClickListener {
             validate(true)
         }
 
@@ -42,10 +41,7 @@ class GenderFragment : ProfileContentFragment(R.layout.onboarding_gender_fragmen
     private fun validate(updateModel: Boolean = true): Boolean {
         val valid = male.isChecked || female.isChecked
         nextButton.isEnabled = valid
-        if(valid && updateModel) updateModel(when {
-            male.isChecked -> Gender.MALE
-            else -> Gender.FEMALE
-        })
+        if (valid && updateModel) updateModel(if (male.isChecked) Gender.MALE else Gender.FEMALE)
         return valid
     }
 
@@ -56,19 +52,7 @@ class GenderFragment : ProfileContentFragment(R.layout.onboarding_gender_fragmen
     }
 
     private fun updateUI(gender: Gender?) {
-        when(gender) {
-            Gender.MALE -> {
-                male.isChecked = true
-                female.isChecked = false
-            }
-            Gender.FEMALE  -> {
-                male.isChecked = false
-                female.isChecked = true
-            }
-            else -> {
-                male.isChecked = false
-                female.isChecked = false
-            }
-        }
+        male.isChecked = gender == Gender.MALE
+        female.isChecked = gender == Gender.FEMALE
     }
 }

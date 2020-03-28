@@ -1,6 +1,7 @@
 package org.ascolto.onlus.geocrowd19.android.ui.uploadData
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -25,6 +26,7 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
         viewModel = getSharedViewModel()
 
         okButton.isEnabled = false
+        codeTextField.filters = arrayOf(InputFilter.AllCaps())
 
         close.setOnClickListener {
             close()
@@ -49,21 +51,28 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
             error.invisible()
         }
 
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                activity?.loading(it)
+            }
+        })
+
         viewModel.error.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 error.visible()
             }
         })
 
-        viewModel.loading.observe(viewLifecycleOwner, Observer {
+        viewModel.success.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                activity?.loading(it)
+                val action = UploadDataSuccessFragmentDirections.actionGlobalSuccess()
+                findNavController().navigate(action)
             }
         })
     }
 
     private fun validateCode(code: String) {
-        val isCodeValid = code.length >= 1
+        val isCodeValid = code.length == 8
         error.visibility = if (isCodeValid) View.VISIBLE else View.GONE
         okButton.isEnabled = isCodeValid
     }

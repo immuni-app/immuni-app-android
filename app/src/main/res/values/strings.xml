@@ -103,7 +103,6 @@
     <string name="notifications_instruction_enable">1. Abilita</string>
     <string name="enable_notification_dialog_message">Verrai notificato in caso di importanti comunicazioni e quando è il momento di aggiornare il diario clinico.</string>
     <string name="your_family_members_separator">I tuoi familiari</string>
-    <string name="identifier">Identificativo</string>
     <string name="age_placeholder">%d anni</string>
     <string name="do_you_have_old_young_in_family">Hai anziani o minorenni in famiglia?</string>
     <string name="do_you_have_old_young_in_family_message">Registra i dati dei familiari che non possono farlo autonomamente (per esempio, minorenni, anziani e familiari che non possiedono uno smartphone).</string>
@@ -119,8 +118,8 @@
     <string name="age_range_2">18 - 35 anni</string>
     <string name="age_range_3">36 - 45 anni</string>
     <string name="age_range_4">46 - 55 anni</string>
-    <string name="age_range_5">56 - 65</string>
-    <string name="age_range_6">66 - 75</string>
+    <string name="age_range_5">56 - 65 anni</string>
+    <string name="age_range_6">66 - 75 anni</string>
     <string name="age_range_7">Più di 75 anni</string>
 
     <string name="settings_faq">Domande frequenti</string>
@@ -174,4 +173,5 @@
     <string name="invalid_code">Il codice che hai inserito non è valido.</string>
     <string name="ok">OK</string>
     <string name="diary_resume_title">Riepilogo</string>
+    <string name="upload_data_success">I tuoi dati sono stati caricati correttamente!</string>
 </resources>

@@ -85,7 +85,7 @@
         android:layout_weight="1"
         android:textColor="#99495D74"
         android:gravity="left"
-        android:text="@string/identifier"
+        android:text="@string/user_data"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/uploadText"
