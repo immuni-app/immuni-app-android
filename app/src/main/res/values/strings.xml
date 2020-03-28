@@ -10,7 +10,7 @@
 
     <string name="survey_exit_title">Sei sicuro?</string>
     <string name="survey_exit_message">Se decidi di abbandonare ora la compilazione, le risposte date fino a qui andranno perse.</string>
-    <string name="yes">Si</string>
+    <string name="yes">Sì</string>
     <string name="no">No</string>
     <string name="exit">Esci</string>
     <string name="confirm">Conferma</string>
@@ -43,7 +43,7 @@
     <string name="onboarding_age_description">Questa informazione è importante per consigliarti al meglio come proteggerti dal coronavirus.</string>
 
     <string name="onboarding_age_more_than_18_title">Devi avere almeno 18 anni per usare Immuni</string>
-    <string name="onboarding_age_more_than_18_message">Se hai meno di 18 anni, chiedi ad un genitore o ad un altro maggiorenne di creare un profilo per te sul loro smartphone, nella sezione \"Famiglia\" dell\'app.</string>
+    <string name="onboarding_age_more_than_18_message">Se hai meno di 18 anni, chiedi a un genitore o a un altro maggiorenne di creare un profilo per te sul loro smartphone, nella sezione \"Famiglia\" dell\'app.</string>
 
     <string name="onboarding_female">Femmina</string>
     <string name="onboarding_male">Maschio</string>
@@ -58,7 +58,7 @@
     <string name="log_completed_message">Tutti i tuoi dati sono al sicuro.</string>
     <string name="old_people_in_family_title">Hai anziani o minorenni in famiglia?</string>
     <string name="old_people_in_family_description">Registra i dati dei familiari che non possono farlo autonomamente (per esempio: minorenni, anziani e familiari che non possiedono uno smartphone).</string>
-    <string name="add_family_member_yes_button">Si, aggiungi famigliare</string>
+    <string name="add_family_member_yes_button">Sì, aggiungi familiare</string>
 
     <string name="always_consent">Consenti sempre</string>
     <string name="you">Tu</string>
@@ -104,9 +104,7 @@
     <string name="enable_notification_dialog_message">Verrai notificato in caso di importanti comunicazioni e quando è il momento di aggiornare il diario clinico.</string>
     <string name="your_family_members_separator">I tuoi familiari</string>
     <string name="age_placeholder">%d anni</string>
-    <string name="do_you_have_old_young_in_family">Hai anziani o minorenni in famiglia?</string>
-    <string name="do_you_have_old_young_in_family_message">Registra i dati dei familiari che non possono farlo autonomamente (per esempio, minorenni, anziani e familiari che non possiedono uno smartphone).</string>
-    <string name="add_family_member">Aggiungi famigliare</string>
+    <string name="add_family_member">Aggiungi familiare</string>
     <string name="user_id_copied">Identificativo copiato!</string>
 
     <string name="name">Nome</string>
@@ -134,19 +132,19 @@
     <string name="add_relative_age_description">Questa informazione è importante per consigliarti al meglio come proteggere la persona dal coronavirus.</string>
 
     <string name="nickname_parent_female">Madre</string>
-    <string name="nickname_child1_female">Prima Figlia</string>
-    <string name="nickname_child2_female">Seconda Figlia</string>
-    <string name="nickname_child3_female">Terza Figlia</string>
-    <string name="nickname_child4_female">Quarta Figlia</string>
-    <string name="nickname_paternal_grandparent_female">Nonna Paterna</string>
-    <string name="nickname_maternal_grandparent_female">Nonna Materna</string>
+    <string name="nickname_child1_female">Prima figlia</string>
+    <string name="nickname_child2_female">Seconda figlia</string>
+    <string name="nickname_child3_female">Terza figlia</string>
+    <string name="nickname_child4_female">Quarta figlia</string>
+    <string name="nickname_paternal_grandparent_female">Nonna paterna</string>
+    <string name="nickname_maternal_grandparent_female">Nonna materna</string>
     <string name="nickname_parent_male">Padre</string>
-    <string name="nickname_child1_male">Primo Figlio</string>
-    <string name="nickname_child2_male">Secondo Figlio</string>
-    <string name="nickname_child3_male">Terzo Figlio</string>
-    <string name="nickname_child4_male">Quarto Figlio</string>
-    <string name="nickname_paternalGrandparent_male">Nonno Paterno</string>
-    <string name="nickname_maternalGrandparent_male">Nonno Materno</string>
+    <string name="nickname_child1_male">Primo figlio</string>
+    <string name="nickname_child2_male">Secondo figlio</string>
+    <string name="nickname_child3_male">Terzo figlio</string>
+    <string name="nickname_child4_male">Quarto figlio</string>
+    <string name="nickname_paternalGrandparent_male">Nonno paterno</string>
+    <string name="nickname_maternalGrandparent_male">Nonno materno</string>
     <string name="nickname_not_specified">Non specificato</string>
 
     <string name="choose_a_nickname">Scegli un nickname</string>
@@ -162,7 +160,7 @@
     <string name="let_the_person_insert_the_data_message">Chiedi a questa persona di installare l’app e di compilare in autonomia il diario clinico.</string>
     <string name="live_with_you_title">Vive con te %s?</string>
     <string name="this_person">questa persona</string>
-    <string name="live_with_you_message">Questa informazione permettere alle autorità competenti di stimare l’esposizione di %s al virus.</string>
+    <string name="live_with_you_message">Questa informazione permette alle autorità competenti di stimare l’esposizione di %s al virus.</string>
     <string name="upload">Carica</string>
     <string name="user_data">Dati utente</string>
     <string name="consent">Consenti</string>
