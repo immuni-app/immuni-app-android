@@ -2,6 +2,10 @@ package org.ascolto.onlus.geocrowd19.android.ui.uploadData
 
 import android.os.Bundle
 import android.text.InputFilter
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.DynamicDrawableSpan
+import android.text.style.ImageSpan
 import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -36,12 +40,7 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
             viewModel.exportData(codeTextField.text.toString())
         }
 
-        info.setOnClickListener {
-            val action = InsertUploadDataCodeFragmentDirections.actionGlobalInstruction()
-            findNavController().navigate(action)
-        }
-
-        infoText.setOnClickListener {
+        title.setOnClickListener {
             val action = InsertUploadDataCodeFragmentDirections.actionGlobalInstruction()
             findNavController().navigate(action)
         }
@@ -50,6 +49,14 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
             validateCode(text.toString())
             error.invisible()
         }
+
+        // add info icon at the end of the page title
+        val text = "${title.text}   "
+        val spannable = SpannableString(text)
+        spannable.setSpan(
+            ImageSpan(requireContext(), R.drawable.ic_info_medium, DynamicDrawableSpan.ALIGN_BASELINE),
+            text.length-1, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        title.text = spannable
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
