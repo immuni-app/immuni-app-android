@@ -12,6 +12,9 @@ import com.bendingspoons.secretmenu.SecretMenuConfiguration
 import com.bendingspoons.secretmenu.SecretMenuItem
 import com.bendingspoons.secretmenu.ui.ExitActivity
 import com.bendingspoons.theirs.Theirs
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.ascolto.onlus.geocrowd19.android.managers.AscoltoNotificationManager
 import org.ascolto.onlus.geocrowd19.android.ui.onboarding.Onboarding
 import org.ascolto.onlus.geocrowd19.android.ui.setup.Setup
@@ -63,6 +66,18 @@ class AscoltoSecretMenuConfiguration(val context: Context): SecretMenuConfigurat
                 val flag = Flags.ADD_FAMILY_MEMBER_DIALOG_SHOWN
                 setFlag(flag, false)
                 ExitActivity.exitApplication(context)
+            }){},
+            object : SecretMenuItem("ℹ️ Distinct bt_id count", { context, config ->
+                GlobalScope.launch(Dispatchers.Main) {
+                    val value = database.bleContactDao().getAllBtIdsCount()
+                    Toast.makeText(context, "# Devices found: $value", Toast.LENGTH_LONG).show()
+                }
+            }){},
+            object : SecretMenuItem("ℹ️ Copy distinct bt_ids found", { context, config ->
+                GlobalScope.launch(Dispatchers.Main) {
+                    val list = database.bleContactDao().getAllDistinctBtIds()
+                    Toast.makeText(context, "# Devices found: ${list.joinToString(separator = ", ")}", Toast.LENGTH_LONG).show()
+                }
             }){}
         )
     }
