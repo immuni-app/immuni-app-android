@@ -151,9 +151,12 @@ class LogViewModel(
     val TAP_MIN_TIME = 500
     fun onNextTap(questionId: String) {
         // avoid fast tapping to prevent viewpager inconsistent states
+        /*
         val now = System.currentTimeMillis()
         if(now - lastNextTap < TAP_MIN_TIME) return
         lastNextTap = now
+
+         */
 
         val form = formModel.value
         val survey = survey.value
@@ -182,8 +185,11 @@ class LogViewModel(
 
         when (nextDestination) {
             is SurveyQuestionDestination -> {
-                form.advanceTo(nextDestination.question.id)
-                _navigateToQuestion.value = Event(nextDestination.question.id)
+                // avoid fast tapping and inconsistent viewpager states
+                if(form.answeredQuestions.last() != nextDestination.question.id) {
+                    form.advanceTo(nextDestination.question.id)
+                    _navigateToQuestion.value = Event(nextDestination.question.id)
+                }
             }
             is SurveyEndDestination -> {
                 _navigateToResume.value = Event(true)
@@ -193,9 +199,12 @@ class LogViewModel(
 
     fun onPrevTap(questionId: String) {
         // avoid fast tapping to prevent viewpager inconsistent states
+        /*
         val now = System.currentTimeMillis()
         if(now - lastNextTap < TAP_MIN_TIME) return
         lastNextTap = now
+
+         */
 
         formModel.value?.goBack()
         _navigateToPrevPage.value = Event(true)
