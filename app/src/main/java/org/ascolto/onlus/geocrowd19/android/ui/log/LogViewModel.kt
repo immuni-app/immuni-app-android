@@ -175,8 +175,11 @@ class LogViewModel(
 
         when (nextDestination) {
             is SurveyQuestionDestination -> {
-                form.advanceTo(nextDestination.question.id)
-                _navigateToQuestion.value = Event(nextDestination.question.id)
+                // avoid fast tapping and inconsistent viewpager states
+                if(form.answeredQuestions.last() != nextDestination.question.id) {
+                    form.advanceTo(nextDestination.question.id)
+                    _navigateToQuestion.value = Event(nextDestination.question.id)
+                }
             }
             is SurveyEndDestination -> {
                 _navigateToResume.value = Event(true)
