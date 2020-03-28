@@ -11,6 +11,8 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.bendingspoons.base.extensions.animateHide
+import com.bendingspoons.base.extensions.animateShow
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogViewModel
 import org.ascolto.onlus.geocrowd19.android.ui.log.model.FormModel
 import com.bendingspoons.base.extensions.hideKeyboard
@@ -27,7 +29,7 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
         position = arguments?.getInt("position") ?: 0
         questionId = arguments?.getString("questionId") ?: "0"
     }
-
+    
     override fun onResume() {
         super.onResume()
         view?.hideKeyboard()

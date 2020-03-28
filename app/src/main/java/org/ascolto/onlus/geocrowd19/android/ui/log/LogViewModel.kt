@@ -147,17 +147,7 @@ class LogViewModel(
         }
     }
 
-    var lastNextTap = 0L
-    val TAP_MIN_TIME = 500
     fun onNextTap(questionId: String) {
-        // avoid fast tapping to prevent viewpager inconsistent states
-        /*
-        val now = System.currentTimeMillis()
-        if(now - lastNextTap < TAP_MIN_TIME) return
-        lastNextTap = now
-
-         */
-
         val form = formModel.value
         val survey = survey.value
         if (form == null || survey == null) {
@@ -198,14 +188,6 @@ class LogViewModel(
     }
 
     fun onPrevTap(questionId: String) {
-        // avoid fast tapping to prevent viewpager inconsistent states
-        /*
-        val now = System.currentTimeMillis()
-        if(now - lastNextTap < TAP_MIN_TIME) return
-        lastNextTap = now
-
-         */
-
         formModel.value?.goBack()
         _navigateToPrevPage.value = Event(true)
     }
