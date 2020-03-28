@@ -4,10 +4,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import android.widget.CompoundButton.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.children
 import androidx.lifecycle.Observer
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.models.survey.CompositeAnswer
@@ -20,6 +22,9 @@ import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.form_radio_field.*
+import kotlinx.android.synthetic.main.form_radio_field.back
+import kotlinx.android.synthetic.main.form_radio_field.description
+import kotlinx.android.synthetic.main.form_radio_field.question
 import kotlinx.android.synthetic.main.form_radio_field.view.*
 import kotlinx.android.synthetic.main.form_text_field.next
 
@@ -44,6 +49,7 @@ class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnChe
     }
 
     private fun buildWidget(it: Survey) {
+        items.clear()
         val question = it.questions.first { it.id == questionId }
 
         questionText.text = question.title
@@ -74,7 +80,9 @@ class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnChe
         }
 
         radioGroup.apply {
-            items.forEach { addView(it) }
+            items.forEach {
+                addView(it)
+            }
         }
 
         formModel()?.let {

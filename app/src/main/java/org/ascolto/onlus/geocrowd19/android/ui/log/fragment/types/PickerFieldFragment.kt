@@ -3,6 +3,7 @@ package org.ascolto.onlus.geocrowd19.android.ui.log.fragment.types
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -43,6 +44,7 @@ class PickerFieldFragment : FormContentFragment(R.layout.form_picker_field) {
     }
 
     private fun buildWidget(it: Survey) {
+        items.clear()
         val question = it.questions.first { it.id == questionId }
 
         questionText.text = question.title
@@ -72,7 +74,9 @@ class PickerFieldFragment : FormContentFragment(R.layout.form_picker_field) {
         }
 
         pickerGroup.apply {
-            items.forEach { addView(it) }
+            items.forEach {
+                addView(it)
+            }
         }
 
         formModel()?.let {

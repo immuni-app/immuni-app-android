@@ -2,7 +2,9 @@ package org.ascolto.onlus.geocrowd19.android.ui.log.fragment.types
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -42,6 +44,7 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
     }
 
     private fun buildWidget(it: Survey) {
+        items.clear()
         val question = it.questions.first { it.id == questionId }
         val widget = question.widget as MultipleChoicesWidget
 
@@ -75,10 +78,12 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
         }
 
         multipleChoiceGroup.apply {
-            items.forEach { addView(it) }
+            items.forEach {
+                addView(it)
+            }
         }
 
-        validate()
+        validate(false)
 
         formModel()?.let {
             onFormModelUpdate(it)
