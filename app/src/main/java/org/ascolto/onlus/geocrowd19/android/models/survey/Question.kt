@@ -1,5 +1,7 @@
 package org.ascolto.onlus.geocrowd19.android.models.survey
 
+import org.ascolto.onlus.geocrowd19.android.ui.log.fragment.model.QuestionType
+
 typealias QuestionId = String
 typealias AnswerIndex = Int
 
@@ -46,4 +48,38 @@ data class Question(
         triageProfile = triageProfile,
         surveyAnswers = surveyAnswers
     )
+}
+
+fun Question.humanReadableAnswers(qa: QuestionAnswers): String {
+    val builder = StringBuilder()
+    qa.forEach { answer ->
+        when (answer) {
+            is SimpleAnswer -> {
+                val index = answer.index
+                val str = when(widget) {
+                    is MultipleChoicesWidget -> {
+                        widget.answers[index]
+                    }
+                    is RadioWidget -> {
+                        widget.answers[index]
+                    }
+                    else -> {}
+                }
+                if(builder.isNotEmpty()) builder.append(", ")
+                builder.append(str)
+            }
+            is CompositeAnswer -> {
+                val indices = answer.componentIndexes
+                when(widget) {
+                    is PickerWidget -> {
+                        for(i in 0 until widget.components.size) {
+                            builder.append(widget.components[i][indices[i]])
+                        }
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+    return builder.toString()
 }

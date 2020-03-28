@@ -173,4 +173,5 @@
     <string name="where_to_find_the_code">Dove posso trovare il codice?</string>
     <string name="invalid_code">Il codice che hai inserito non è valido.</string>
     <string name="ok">OK</string>
+    <string name="diary_resume_title">Riepilogo</string>
 </resources>

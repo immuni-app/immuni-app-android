@@ -107,6 +107,13 @@ class FormFragment : Fragment() {
             }
         })
 
+        viewModel.navigateToResume.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                val action = FormFragmentDirections.actionGlobalFormResume()
+                findNavController().navigate(action)
+            }
+        })
+
         viewModel.navigateToQuestion.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { nextQuestion ->
                 // add the new fragment to adapter

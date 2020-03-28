@@ -14,6 +14,7 @@ import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeActivity
 import org.ascolto.onlus.geocrowd19.android.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
+import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import org.ascolto.onlus.geocrowd19.android.models.survey.TriageProfile
 import org.ascolto.onlus.geocrowd19.android.models.survey.backgroundColor
 import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
@@ -43,7 +44,7 @@ class FormDoneFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
+        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
         viewModel.navigateToNextLogStartPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
