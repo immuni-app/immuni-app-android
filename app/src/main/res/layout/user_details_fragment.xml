@@ -17,7 +17,7 @@
         android:fillViewport="true"
         android:overScrollMode="never"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="120dp"
+        android:paddingBottom="16dp"
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
