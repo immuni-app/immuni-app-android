@@ -30,7 +30,16 @@ class EditLiveWithYouActivity : AscoltoActivity() {
         })
 
         viewModel.user.observe(this, Observer {
-            // TODO fill current age group
+            when(it.isInSameHouse) {
+                true -> {
+                    yes.isChecked = true
+                    no.isChecked = false
+                }
+                false -> {
+                    no.isChecked = true
+                    yes.isChecked = false
+                }
+            }
         })
 
         viewModel.loading.observe(this, Observer {
@@ -40,12 +49,14 @@ class EditLiveWithYouActivity : AscoltoActivity() {
         back.setOnClickListener { finish() }
 
         update.setOnClickListener {
-            // TODO save new age group
-
+            val sameHouse = when {
+                yes.isChecked -> true
+                else -> false
+            }
 
             val user = viewModel.user()
             user?.let {
-                viewModel.updateUser(user.copy(isInSameHouse = true))
+                viewModel.updateUser(user.copy(isInSameHouse = sameHouse))
             }
         }
     }
