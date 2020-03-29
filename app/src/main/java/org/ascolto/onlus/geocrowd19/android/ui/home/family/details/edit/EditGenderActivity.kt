@@ -39,6 +39,11 @@ class EditGenderActivity : AscoltoActivity() {
                     female.isChecked = false
                 }
             }
+
+            pageTitle.text = when(it.isMain) {
+                true -> applicationContext.resources.getString(R.string.onboarding_gender_title)
+                false -> applicationContext.resources.getString(R.string.user_edit_gender_you_title)
+            }
         })
 
         viewModel.loading.observe(this, Observer {

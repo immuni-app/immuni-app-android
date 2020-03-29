@@ -47,6 +47,11 @@ class EditAgeGroupActivity : AscoltoActivity() {
                 AgeGroup.MORE_THAN_SEVENTYFIVE -> age_range_75.isChecked = true
             }
 
+            pageTitle.text = when(it.isMain) {
+                true -> applicationContext.getString(R.string.onboarding_age_title)
+                false -> String.format(applicationContext.getString(R.string.user_edit_age_you_title),
+                    it.nickname!!.humanReadable(applicationContext, it.gender))
+            }
         })
 
         viewModel.loading.observe(this, Observer {

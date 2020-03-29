@@ -3,7 +3,6 @@ package org.ascolto.onlus.geocrowd19.android.ui.home.family.details.edit
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import kotlinx.android.synthetic.main.user_details_fragment.*
 import kotlinx.android.synthetic.main.user_edit_livewithyou_activity.*
 import kotlinx.android.synthetic.main.user_edit_livewithyou_activity.back
 import org.ascolto.onlus.geocrowd19.android.AscoltoActivity
@@ -40,6 +39,9 @@ class EditLiveWithYouActivity : AscoltoActivity() {
                     yes.isChecked = false
                 }
             }
+
+            pageTitle.text = String.format(applicationContext.getString(R.string.user_edit_live_with_you_title),
+                it.nickname!!.humanReadable(applicationContext, it.gender))
         })
 
         viewModel.loading.observe(this, Observer {

@@ -29,14 +29,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/pageTitle"
                 style="@style/H1Heading"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:text="TODO Quanti anni ha nonna Pina?"
+                tools:text="Quanti anni ha nonna Pina?"
                 android:textColor="#4F4F5B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -54,7 +54,7 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title">
+                app:layout_constraintTop_toBottomOf="@+id/pageTitle">
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/age_range_0_17"

@@ -77,8 +77,10 @@ class UserDetailsFragment : Fragment() {
 
             if(it.isMain) {
                 liveWithYouGroup.gone()
+                nicknameGroup.gone()
             } else {
                 liveWithYouGroup.visible()
+                nicknameGroup.visible()
                 liveWithYou.text = when (it.isInSameHouse) {
                     true -> requireContext().resources.getString(R.string.yes)
                     false -> requireContext().resources.getString(R.string.no)

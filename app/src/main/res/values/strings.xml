@@ -173,4 +173,8 @@
     <string name="diary_resume_title">Riepilogo</string>
     <string name="upload_data_success">I tuoi dati sono stati caricati correttamente!</string>
     <string name="nickname">Soprannome</string>
+    <string name="user_edit_live_with_you_title">%s vive con te?</string>
+    <string name="user_edit_age_you_title">Quanti anni ha %s?</string>
+    <string name="user_edit_gender_you_title">Di che sesso è questa persona?</string>
+    <string name="user_edit_nickname_title">Il tuo famigliare è?</string>
 </resources>
