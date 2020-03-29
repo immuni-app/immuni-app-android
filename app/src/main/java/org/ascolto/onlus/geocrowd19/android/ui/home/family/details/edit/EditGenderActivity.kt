@@ -29,7 +29,16 @@ class EditGenderActivity : AscoltoActivity() {
         })
 
         viewModel.user.observe(this, Observer {
-            // TODO fill current age group
+            when(it.gender) {
+                Gender.FEMALE -> {
+                    female.isChecked = true
+                    male.isChecked = false
+                }
+                Gender.MALE -> {
+                    male.isChecked = true
+                    female.isChecked = false
+                }
+            }
         })
 
         viewModel.loading.observe(this, Observer {
@@ -39,8 +48,10 @@ class EditGenderActivity : AscoltoActivity() {
         back.setOnClickListener { finish() }
 
         update.setOnClickListener {
-            // TODO save new age group
-            val gender = Gender.MALE
+            val gender = when {
+                female.isChecked -> Gender.FEMALE
+                else -> Gender.MALE
+            }
 
             val user = viewModel.user()
             user?.let {
