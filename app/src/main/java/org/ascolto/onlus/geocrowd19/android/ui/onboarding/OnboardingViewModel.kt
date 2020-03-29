@@ -1,5 +1,6 @@
 package org.ascolto.onlus.geocrowd19.android.ui.onboarding
 
+import android.content.Intent
 import androidx.lifecycle.*
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.utils.ExternalLinksHelper
@@ -17,6 +18,7 @@ import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocationManager
 import org.ascolto.onlus.geocrowd19.android.models.User
 import org.ascolto.onlus.geocrowd19.android.picoMetrics.OnboardingCompleted
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.WebViewDialogActivity
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
@@ -77,8 +79,17 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
 
     fun onPrivacyPolicyClick() {
         oracle.settings()?.privacyPolicyUrl?.let { url ->
-            ExternalLinksHelper.openLink(AscoltoApplication.appContext, url)
+            openUrlInDialog(url)
         }
+    }
+
+    private fun openUrlInDialog(url: String) {
+        val context = AscoltoApplication.appContext
+        val intent = Intent(context, WebViewDialogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            putExtra("url", url)
+        }
+        context.startActivity(intent)
     }
 
     override fun onCleared() {
