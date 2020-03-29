@@ -29,7 +29,24 @@ class EditAgeGroupActivity : AscoltoActivity() {
         })
 
         viewModel.user.observe(this, Observer {
-            // TODO fill current age group
+            age_range_0_17.isChecked = false
+            age_range_18_35.isChecked = false
+            age_range_36_45.isChecked = false
+            age_range_46_55.isChecked = false
+            age_range_56_65.isChecked = false
+            age_range_66_75.isChecked = false
+            age_range_75.isChecked = false
+
+            when(it.ageGroup) {
+                AgeGroup.ZERO_SEVENTEEN -> age_range_0_17.isChecked = true
+                AgeGroup.EIGHTEEN_THIRTYFIVE -> age_range_18_35.isChecked = true
+                AgeGroup.THRITYSIX_FORTYFIVE -> age_range_36_45.isChecked = true
+                AgeGroup.FORTYSIX_FIFTYFIVE -> age_range_46_55.isChecked = true
+                AgeGroup.FIFTYSIX_SIXTYFIVE -> age_range_56_65.isChecked = true
+                AgeGroup.SIXTYSIX_SEVENTYFIVE -> age_range_66_75.isChecked = true
+                AgeGroup.MORE_THAN_SEVENTYFIVE -> age_range_75.isChecked = true
+            }
+
         })
 
         viewModel.loading.observe(this, Observer {
@@ -39,8 +56,15 @@ class EditAgeGroupActivity : AscoltoActivity() {
         back.setOnClickListener { finish() }
 
         update.setOnClickListener {
-            // TODO save new age group
-            val ageGroup = AgeGroup.SIXTYSIX_SEVENTYFIVE
+            val ageGroup = when {
+                age_range_0_17.isChecked -> AgeGroup.ZERO_SEVENTEEN
+                age_range_18_35.isChecked -> AgeGroup.EIGHTEEN_THIRTYFIVE
+                age_range_36_45.isChecked -> AgeGroup.THRITYSIX_FORTYFIVE
+                age_range_46_55.isChecked -> AgeGroup.FORTYSIX_FIFTYFIVE
+                age_range_56_65.isChecked -> AgeGroup.FIFTYSIX_SIXTYFIVE
+                age_range_66_75.isChecked -> AgeGroup.SIXTYSIX_SEVENTYFIVE
+                else -> AgeGroup.MORE_THAN_SEVENTYFIVE
+            }
 
             val user = viewModel.user()
             user?.let {
