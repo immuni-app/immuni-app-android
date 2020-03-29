@@ -107,7 +107,7 @@ class HomeFragment : Fragment(), HomeClickListener {
         val intent = Intent(AscoltoApplication.appContext, FamilyDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
-        activity?.startActivity(intent)
+        activity?.startActivityForResult(intent, FamilyDialogActivity.REQUEST_CODE_FAMILY_DIALOG)
     }
 
     override fun onClick(item: HomeItemType) {

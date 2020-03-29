@@ -1,6 +1,9 @@
 package org.ascolto.onlus.geocrowd19.android.ui.home
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.iterator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -12,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.home_activity.*
 import org.ascolto.onlus.geocrowd19.android.managers.BluetoothListenerLifecycle
 import org.ascolto.onlus.geocrowd19.android.managers.GeolocalisationListenerLifecycle
+import org.ascolto.onlus.geocrowd19.android.ui.dialog.FamilyDialogActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HomeActivity : AscoltoActivity()  {
@@ -93,5 +97,16 @@ class HomeActivity : AscoltoActivity()  {
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == FamilyDialogActivity.REQUEST_CODE_FAMILY_DIALOG) {
+            if(resultCode == Activity.RESULT_OK) {
+                bottom_nav.selectedItemId = R.id.family
+            } else {
+                // do nothing
+            }
+        }
     }
 }

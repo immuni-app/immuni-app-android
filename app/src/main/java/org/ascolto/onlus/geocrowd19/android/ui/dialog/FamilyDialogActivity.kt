@@ -1,17 +1,19 @@
 package org.ascolto.onlus.geocrowd19.android.ui.dialog
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_member_add_dialog.*
 import org.ascolto.onlus.geocrowd19.android.AscoltoActivity
-import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
-import org.ascolto.onlus.geocrowd19.android.toast
-import org.ascolto.onlus.geocrowd19.android.ui.addrelative.AddRelativeActivity
+
 
 class FamilyDialogActivity: AscoltoActivity() {
+
+    companion object {
+        const val REQUEST_CODE_FAMILY_DIALOG = 101
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,19 +25,23 @@ class FamilyDialogActivity: AscoltoActivity() {
         }
 
         goAhead.setOnClickListener {
+            val returnIntent = Intent()
+            setResult(Activity.RESULT_CANCELED, returnIntent)
             finish()
         }
 
         addMember.setOnClickListener {
-            navigateToAddRelative()
+            val returnIntent = Intent()
+            setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
     }
 
+    /*
     private fun navigateToAddRelative() {
         val intent = Intent(AscoltoApplication.appContext, AddRelativeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         startActivity(intent)
-    }
+    }*/
 }
