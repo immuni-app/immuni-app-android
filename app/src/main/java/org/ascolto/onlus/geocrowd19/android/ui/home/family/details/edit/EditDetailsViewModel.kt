@@ -41,6 +41,10 @@ class EditDetailsViewModel(val userId: String) : ViewModel(),
         viewModelJob.cancel()
     }
 
+    fun mainUser(): User {
+        return oracle.me()?.mainUser!!
+    }
+
     fun user(): User? {
         return mutableListOf<User>().apply {
             oracle.me()?.mainUser?.let { add(it) }

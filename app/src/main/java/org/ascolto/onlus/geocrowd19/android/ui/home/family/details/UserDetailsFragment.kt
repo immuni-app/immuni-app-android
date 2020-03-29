@@ -139,7 +139,7 @@ class UserDetailsFragment : Fragment() {
     }
 
     private fun navigateToEditName() {
-        val intent = Intent(requireContext(), EditNameActivity::class.java).apply {
+        val intent = Intent(requireContext(), EditNicknameActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             putExtra("userId", fragmentArgs.userId)
         }

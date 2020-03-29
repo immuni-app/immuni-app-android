@@ -122,10 +122,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.home.family.details.edit.EditNameActivity"
+            android:name=".ui.home.family.details.edit.EditNicknameActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.home.family.details.edit.EditGenderActivity"
             android:launchMode="standard"
