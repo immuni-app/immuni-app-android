@@ -15,6 +15,7 @@ import org.ascolto.onlus.geocrowd19.android.toast
 import org.ascolto.onlus.geocrowd19.android.ui.home.HomeActivity
 import org.ascolto.onlus.geocrowd19.android.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
+import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class DoneFragment : Fragment() {
@@ -43,7 +44,7 @@ class DoneFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
+        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
         viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {

@@ -17,7 +17,7 @@
         android:fillViewport="true"
         android:overScrollMode="never"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="120dp"
+        android:paddingBottom="16dp"
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -70,6 +70,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pageTitle">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/nicknameGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -85,7 +86,7 @@
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="24dp"
                         android:fontFamily="@font/euclid_circular_semi_bold"
-                        android:text="@string/name"
+                        android:text="@string/nickname"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -112,18 +113,22 @@
                         android:layout_marginEnd="24dp"
                         android:src="@drawable/ic_edit"
                         android:alpha="0.6"
-                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#1A495D74"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginEnd="32dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="#1A495D74" />
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -168,7 +173,6 @@
                         android:layout_marginEnd="24dp"
                         android:src="@drawable/ic_edit"
                         android:alpha="0.6"
-                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -224,7 +228,6 @@
                         android:layout_marginEnd="24dp"
                         android:src="@drawable/ic_edit"
                         android:alpha="0.6"
-                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -281,7 +284,6 @@
                         android:layout_marginEnd="24dp"
                         android:src="@drawable/ic_edit"
                         android:alpha="0.6"
-                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -356,12 +358,6 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="#1A495D74" />
             </LinearLayout>
 
             <TextView

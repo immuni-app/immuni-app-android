@@ -10,7 +10,7 @@ import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.models.NicknameType.*
 
 @JsonClass(generateAdapter = true)
-class User(
+data class User(
     @field:Json(name = "identifier") val id: String = "",
     @field:Json(name = "age_group") val ageGroup: AgeGroup = AgeGroup.ZERO_SEVENTEEN,
     @field:Json(name = "age") val age: Int = 999,
