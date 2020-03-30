@@ -42,11 +42,17 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
 
         init {
             button.setOnClickListener {
-                clickListener.onClick(items[adapterPosition])
+                onItemClick(adapterPosition)
             }
         }
         override fun onClick(v: View) {
-            clickListener.onClick(items[adapterPosition])
+            onItemClick(adapterPosition)
+        }
+    }
+
+    private fun onItemClick(pos: Int) {
+        if(pos != RecyclerView.NO_POSITION) {
+            clickListener.onClick(items[pos])
         }
     }
 
@@ -61,21 +67,21 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
     inner class GeolocationCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         override fun onClick(v: View) {
-            clickListener.onClick(items[adapterPosition])
+            onItemClick(adapterPosition)
         }
     }
 
     inner class NotificationsCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         override fun onClick(v: View) {
-            clickListener.onClick(items[adapterPosition])
+            onItemClick(adapterPosition)
         }
     }
 
     inner class BluetoothCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         override fun onClick(v: View) {
-            clickListener.onClick(items[adapterPosition])
+            onItemClick(adapterPosition)
         }
     }
 
@@ -84,7 +90,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         var title: TextView = v.findViewById(R.id.title)
         var icon: ImageView = v.findViewById(R.id.icon)
         override fun onClick(v: View) {
-            clickListener.onClick(items[adapterPosition])
+            onItemClick(adapterPosition)
         }
     }
 
@@ -93,7 +99,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         var title: TextView = v.findViewById(R.id.title)
         var icon: ImageView = v.findViewById(R.id.icon)
         override fun onClick(v: View) {
-            clickListener.onClick(items[adapterPosition])
+            onItemClick(adapterPosition)
         }
     }
 
@@ -102,7 +108,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         var title: TextView = v.findViewById(R.id.title)
         var icon: ImageView = v.findViewById(R.id.icon)
         override fun onClick(v: View) {
-            clickListener.onClick(items[adapterPosition])
+            onItemClick(adapterPosition)
         }
     }
 
