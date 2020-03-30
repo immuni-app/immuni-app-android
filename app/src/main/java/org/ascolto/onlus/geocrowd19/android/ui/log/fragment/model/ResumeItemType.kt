@@ -5,7 +5,8 @@ import org.ascolto.onlus.geocrowd19.android.models.User
 sealed class ResumeItemType
 
 class UserType(
-    val user: User
+    val user: User,
+    val userIndex: Int
 ): ResumeItemType()
 
 class QuestionType(
