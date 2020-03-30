@@ -148,7 +148,7 @@
     <string name="nickname_maternalGrandparent_male">Nonno materno</string>
     <string name="nickname_not_specified">Non specificato</string>
 
-    <string name="choose_a_nickname">Scegli un nickname</string>
+    <string name="choose_a_nickname">Altro</string>
 
     <string name="server_generic_error">Si è verificato un errore. Riprova più tardi.</string>
     <string name="delete_user_alert_title">Sei sicuro?</string>
@@ -177,6 +177,5 @@
     <string name="user_edit_live_with_you_title">%s vive con te?</string>
     <string name="user_edit_age_you_title">Quanti anni ha %s?</string>
     <string name="user_edit_gender_you_title">Di che sesso è questa persona?</string>
-    <string name="user_edit_nickname_title">Il tuo famigliare è?</string>
-    <string name="choose_a_relativeness_degree">Scegli un grado di parentela per identificare il familiare</string>
+    <string name="user_edit_nickname_title">Il tuo familiare è:</string>
 </resources>
