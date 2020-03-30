@@ -8,6 +8,7 @@ import com.squareup.moshi.JsonClass
 import org.immuni.android.AscoltoApplication
 import org.immuni.android.R
 import org.immuni.android.models.NicknameType.*
+import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class User(
@@ -67,7 +68,7 @@ enum class AgeGroup {
 data class Nickname(
     @field:Json(name = "type") val type: NicknameType = PARENT,
     @field:Json(name = "value") val value: String? = null
-) {
+): Serializable {
     fun humanReadable(context: Context, gender: Gender): String {
         return when (Pair(type, gender)) {
             Pair(PARENT, Gender.FEMALE) -> context.getString(R.string.nickname_parent_female)
