@@ -93,6 +93,7 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
             .setContentText(settings.reminderNotificationMessage)
             .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
             .setContentIntent(pendingIntent)
 
         androidNotificationManager.notify(notificationId, builder.build())

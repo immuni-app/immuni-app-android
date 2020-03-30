@@ -11,6 +11,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
@@ -99,6 +100,7 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
             .setTicker(title)
             .setContentText(message)
             .setSmallIcon(R.drawable.ic_notification_app)
+            .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
             .setOngoing(true)
             // Add the cancel action to the notification which can
             // be used to cancel the worker
