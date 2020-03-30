@@ -41,11 +41,10 @@ class BluetoothManager(val context: Context) : KoinComponent {
     }
 
     fun scheduleBLEWorker() {
-        val TAG = "BLE_WORKER"
         val workManager = WorkManager.getInstance(AscoltoApplication.appContext)
-        workManager.cancelAllWorkByTag(TAG)
+        workManager.cancelAllWorkByTag(BLEForegroundServiceWorker.TAG)
 
-        val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>().addTag(TAG)
+        val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>().addTag(BLEForegroundServiceWorker.TAG)
         workManager.enqueue(notificationWork.build())
     }
 

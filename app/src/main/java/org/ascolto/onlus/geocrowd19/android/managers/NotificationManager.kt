@@ -9,13 +9,11 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.Worker
-import androidx.work.WorkerParameters
+import androidx.work.*
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
@@ -116,13 +114,14 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
 }
 
 
-class NotifyWorker(val context: Context, params: WorkerParameters) : Worker(context, params),
+class NotifyWorker(val context: Context, params: WorkerParameters) : CoroutineWorker(context, params),
     KoinComponent {
 
     private val notificationManager: AscoltoNotificationManager by inject()
 
-    override fun doWork(): Result { // Method to trigger an instant notification
+    override suspend fun doWork(): Result { // Method to trigger an instant notification
         notificationManager.triggerNotification()
+        delay(2000)
         notificationManager.scheduleNext(fromActivity = false)
         return Result.success()
     }

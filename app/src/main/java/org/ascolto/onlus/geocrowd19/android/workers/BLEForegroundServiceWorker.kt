@@ -3,10 +3,12 @@ package org.ascolto.onlus.geocrowd19.android.workers
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.Service
 import android.bluetooth.le.AdvertiseCallback
 import android.bluetooth.le.ScanCallback
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ServiceInfo
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -16,6 +18,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import kotlinx.coroutines.delay
+import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.managers.BluetoothManager
 import org.ascolto.onlus.geocrowd19.android.managers.ble.BLEAdvertiser
@@ -34,7 +37,7 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
 
     companion object {
         const val TAG = "BLEForegroundServiceWorker"
-        const val BLE_CHANNLE = "BLE_CHANNEL"
+        const val BLE_CHANNLE = "Immuni Servizio Attivo"
         const val notificationId = 121
         var currentAdvertiser: BLEAdvertiser? = null
         var currentScanner: BLEScanner? = null
@@ -110,7 +113,7 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
             .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
             .build()
 
-        return ForegroundInfo(notificationId, notification)
+        return ForegroundInfo(notificationId, notification) //ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

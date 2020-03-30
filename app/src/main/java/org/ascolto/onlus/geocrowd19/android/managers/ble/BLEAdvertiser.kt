@@ -7,6 +7,7 @@ import android.bluetooth.le.BluetoothLeAdvertiser
 import android.os.ParcelUuid
 import android.util.Log
 import com.bendingspoons.oracle.Oracle
+import com.google.android.gms.common.util.Hex
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoMe
 import org.ascolto.onlus.geocrowd19.android.api.oracle.model.AscoltoSettings
 import org.ascolto.onlus.geocrowd19.android.managers.BluetoothManager
@@ -32,15 +33,16 @@ class BLEAdvertiser: KoinComponent {
         if (!adapter.isEnabled) adapter.enable()
         advertiser = adapter.bluetoothLeAdvertiser
         val builder = AdvertiseSettings.Builder()
-        builder.setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_POWER)
+        builder.setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
         builder.setConnectable(false)
         builder.setTimeout(0) // timeout max 180000 milliseconds
-        builder.setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW)
+        builder.setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
         val dataBuilder = AdvertiseData.Builder()
         dataBuilder.setIncludeDeviceName(false) // if true fail = 1
-        val serviceid = ParcelUuid.fromString(btId)
-        //val bytesMan = byteArrayOf(1)
-        //dataBuilder.addManufacturerData(CGAIdentifiers.ManufacturerID, bytesMan)
+        val serviceid = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString) //btId
+        val bytesMan = btId.replace("-", "")//byteArrayOf(1)
+        val data = Hex.stringToBytes(bytesMan)
+        dataBuilder.addServiceData(serviceid, data)
         dataBuilder.addServiceUuid(serviceid)
         dataBuilder.setIncludeTxPowerLevel(true)
         advertiser.startAdvertising(

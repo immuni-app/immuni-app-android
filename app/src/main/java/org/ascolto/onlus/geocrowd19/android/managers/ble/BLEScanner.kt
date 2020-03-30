@@ -1,9 +1,8 @@
 package org.ascolto.onlus.geocrowd19.android.managers.ble
 
 import android.bluetooth.le.*
-import android.content.res.TypedArray
+import android.os.ParcelUuid
 import android.util.Log
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.ascolto.onlus.geocrowd19.android.db.AscoltoDatabase
@@ -11,8 +10,8 @@ import org.ascolto.onlus.geocrowd19.android.db.entity.BLEContactEntity
 import org.ascolto.onlus.geocrowd19.android.managers.BluetoothManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.nio.ByteBuffer
 import kotlin.random.Random
+
 
 class BLEScanner: KoinComponent {
     val bluetoothManager: BluetoothManager by inject()
@@ -28,15 +27,22 @@ class BLEScanner: KoinComponent {
     fun start() {
         //bluetoothManager.adapter().startLeScan(leScanCallback)
         bluetoothLeScanner = bluetoothManager.adapter().bluetoothLeScanner
-        val filter = listOf(ScanFilter.Builder().apply {
+        val filter = listOf(/*ScanFilter.Builder().apply {
             val manData = byteArrayOf(1)
             val manMask = byteArrayOf(1)
             setManufacturerData(CGAIdentifiers.ManufacturerID, manData, manMask)
-        }.build())
+        }.build(),*/
+            ScanFilter.Builder().apply {
+                val serviceUuidString = CGAIdentifiers.ServiceDataUUIDString
+                val serviceUuidMaskString = "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"
+                val parcelUuid = ParcelUuid.fromString(serviceUuidString)
+                val parcelUuidMask = ParcelUuid.fromString(serviceUuidMaskString)
+                setServiceUuid(parcelUuid, parcelUuidMask)
+            }.build())
         bluetoothLeScanner.startScan(
-            null,
+            filter,
             ScanSettings.Builder().apply {
-                this.setReportDelay(5000)
+                this.setReportDelay(2000)
             }.build(),
             myScanCallback
         )
@@ -60,6 +66,10 @@ class BLEScanner: KoinComponent {
             super.onBatchScanResults(results)
             val ret = mutableSetOf<String>()
             results?.forEach { result ->
+
+                val serviceid = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
+                Log.d("TAHAHA", "### " + byteArrayToHex(result.scanRecord?.serviceData?.get(serviceid)!!))
+
                 result.scanRecord?.serviceUuids?.forEach { uuid ->
                     ret.add(uuid.toString())
                 }
@@ -67,10 +77,12 @@ class BLEScanner: KoinComponent {
             processResult(ret.toList())
         }
 
-        override fun onScanResult(callbackType: Int, result: ScanResult?) {
+        override fun onScanResult(callbackType: Int, result: ScanResult) {
             super.onScanResult(callbackType, result)
+            val serviceid = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
+            Log.d("TAHAHA", "### " + byteArrayToHex(result.scanRecord?.serviceData?.get(serviceid)!!))
             val ret = mutableSetOf<String>()
-            result?.scanRecord?.serviceUuids?.forEach { uuid ->
+            result.scanRecord?.serviceUuids?.forEach { uuid ->
                 ret.add(uuid.toString())
             }
             processResult(ret.toList())
@@ -81,4 +93,10 @@ class BLEScanner: KoinComponent {
             Log.d("SCAN RESULT", "### SCAN RESULT id=$id $errorCode")
         }
     }
+}
+
+fun byteArrayToHex(a: ByteArray): String? {
+    val sb = java.lang.StringBuilder(a.size * 2)
+    for (b in a) sb.append(String.format("%02x", b))
+    return sb.toString()
 }
