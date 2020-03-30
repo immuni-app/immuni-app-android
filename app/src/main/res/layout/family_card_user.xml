@@ -24,20 +24,9 @@
         android:layout_marginBottom="20dp"
         android:layout_weight="1"
         android:src="@drawable/ic_female_purple"
-        app:layout_constraintBottom_toTopOf="@+id/separator"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/separator"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="#1A495D74"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/age"
-        app:layout_constraintStart_toStartOf="@+id/icon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65999997" />
 
     <TextView
         android:id="@+id/name"
@@ -45,17 +34,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/euclid_circular_bold"
         android:gravity="left"
         android:maxLines="2"
-        tools:text="@string/you"
         app:layout_constraintBottom_toTopOf="@+id/age"
         app:layout_constraintEnd_toStartOf="@+id/imageView6"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@string/you" />
 
     <TextView
         android:id="@+id/age"
@@ -66,50 +56,11 @@
         android:fontFamily="@font/euclid_circular_semi_bold"
         android:gravity="left"
         android:maxLines="2"
-        tools:text="26 anni"
-        app:layout_constraintBottom_toTopOf="@+id/separator"
         app:layout_constraintEnd_toEndOf="@+id/name"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
-
-    <TextView
-        android:id="@+id/identifier"
-        style="@style/P1Text"
-        android:fontFamily="@font/euclid_circular_semi_bold"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="20dp"
-        android:layout_weight="1"
-        android:textColor="#99495D74"
-        android:gravity="left"
-        android:text="@string/user_data"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/uploadText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/icon"
-        app:layout_constraintTop_toBottomOf="@+id/separator" />
-
-    <TextView
-        android:id="@+id/uploadText"
-        style="@style/P1Text"
-        android:fontFamily="@font/euclid_circular_semi_bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="20dp"
-        android:layout_weight="1"
-        android:textColor="@color/colorPrimary"
-        android:gravity="left"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/okButton"
-        app:layout_constraintTop_toBottomOf="@+id/separator"
-        android:text="@string/upload" />
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:text="26 anni" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -122,22 +73,4 @@
         app:layout_constraintTop_toTopOf="@+id/icon"
         app:srcCompat="@drawable/ic_next" />
 
-    <ImageView
-        android:id="@+id/okButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/uploadText"
-        app:layout_constraintEnd_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="@+id/uploadText"
-        app:srcCompat="@drawable/ic_upload" />
-
-    <TextView
-        android:id="@+id/uploadButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/okButton"
-        app:layout_constraintStart_toStartOf="@+id/uploadText"
-        app:layout_constraintTop_toBottomOf="@+id/separator" />
 </androidx.constraintlayout.widget.ConstraintLayout>

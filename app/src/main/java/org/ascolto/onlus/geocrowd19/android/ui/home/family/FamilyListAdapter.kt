@@ -26,19 +26,10 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
     var items = mutableListOf<FamilyItemType>()
     val concierge: ConciergeManager by inject()
 
-    inner class UserCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class UserCardVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var name: TextView = v.findViewById(R.id.name)
         val age: TextView = v.findViewById(R.id.age)
         val icon: ImageView = v.findViewById(R.id.icon)
-        val uploadButton: TextView = v.findViewById(R.id.uploadButton)
-
-        init {
-            uploadButton.setOnClickListener {
-                val userItem = items[adapterPosition] as UserCard
-                userItem.uploadTapped = true
-                clickListener.onClick(userItem)
-            }
-        }
 
         override fun onClick(v: View) {
             val userItem = items[adapterPosition] as UserCard
@@ -47,7 +38,7 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
         }
     }
 
-    inner class AddFamilyMemberCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v),
+    inner class AddFamilyMemberCardVH(v: View) : RecyclerView.ViewHolder(v),
         View.OnClickListener {
 
         private val addButton: Button = v.findViewById(R.id.addButton)
@@ -63,7 +54,7 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
         }
     }
 
-    inner class AddFamilyMemberTutorialCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v),
+    inner class AddFamilyMemberTutorialCardVH(v: View) : RecyclerView.ViewHolder(v),
         View.OnClickListener {
 
         private val addButton: Button = v.findViewById(R.id.addButton)
@@ -79,7 +70,7 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
         }
     }
 
-    inner class FamilyHeaderCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v)
+    inner class FamilyHeaderCardVH(v: View) : RecyclerView.ViewHolder(v)
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
@@ -92,7 +83,6 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
         val layout = when (viewType) {
             0 -> R.layout.family_card_user
             1 -> R.layout.family_card_button_item
@@ -101,10 +91,10 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
         }
         val v = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         return when (viewType) {
-            0 -> UserCardVH(v as ConstraintLayout)
-            1 -> AddFamilyMemberCardVH(v as ConstraintLayout)
-            2 -> AddFamilyMemberTutorialCardVH(v as ConstraintLayout)
-            else -> FamilyHeaderCardVH(v as LinearLayout)
+            0 -> UserCardVH(v)
+            1 -> AddFamilyMemberCardVH(v)
+            2 -> AddFamilyMemberTutorialCardVH(v)
+            else -> FamilyHeaderCardVH(v)
         }
     }
 
