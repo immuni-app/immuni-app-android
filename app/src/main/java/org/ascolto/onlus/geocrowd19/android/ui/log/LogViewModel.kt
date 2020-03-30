@@ -100,10 +100,10 @@ class LogViewModel(
 
     fun onResumeRequested() {
         resumeModel.removeSource(user)
-        resumeModel.addSource(user) {user ->
+        resumeModel.addSource(user) { user ->
             val survey = survey.value!!
             val list = mutableListOf<ResumeItemType>()
-            list.add(UserType(user))
+            list.add(UserType(user, surveyManager.indexForUser(user.id)))
 
             formModel()?.surveyAnswers?.keys?.forEach { questionId ->
                 val answers = formModel()?.surveyAnswers?.get(questionId)!!
