@@ -34,6 +34,7 @@ class AscoltoApplication : Application() {
     private lateinit var oracle: Oracle<AscoltoSettings, AscoltoMe>
     private lateinit var pico: Pico
     private lateinit var theirs: Theirs
+    private lateinit var notificationManager: AscoltoNotificationManager
 
     override fun onCreate() {
         super.onCreate()
@@ -67,6 +68,7 @@ class AscoltoApplication : Application() {
         oracle = get()
         pico = get()
         theirs = get()
+        notificationManager = get()
 
         pico.setup()
 

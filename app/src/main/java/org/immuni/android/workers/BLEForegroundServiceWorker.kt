@@ -69,7 +69,6 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
         while(true) {
             delay(5000)
         }
-        //download(inputUrl, outputFile)
         return Result.success()
     }
 

@@ -8,6 +8,10 @@ import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.immuni.android.AscoltoApplication
 import org.immuni.android.workers.BLEForegroundServiceWorker
 import org.koin.core.KoinComponent
@@ -41,11 +45,16 @@ class BluetoothManager(val context: Context) : KoinComponent {
     }
 
     fun scheduleBLEWorker() {
-        val workManager = WorkManager.getInstance(AscoltoApplication.appContext)
-        workManager.cancelAllWorkByTag(BLEForegroundServiceWorker.TAG)
+        GlobalScope.launch(Dispatchers.Main) {
+            val workManager = WorkManager.getInstance(AscoltoApplication.appContext)
+            workManager.cancelAllWorkByTag(BLEForegroundServiceWorker.TAG)
 
-        val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>().addTag(BLEForegroundServiceWorker.TAG)
-        workManager.enqueue(notificationWork.build())
+            // let the previous worker stop before restarting it
+            delay(2000)
+
+            val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>().addTag(BLEForegroundServiceWorker.TAG)
+            workManager.enqueue(notificationWork.build())
+        }
     }
 
     companion object {

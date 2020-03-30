@@ -11,6 +11,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.work.*
 import com.bendingspoons.oracle.Oracle
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
@@ -71,7 +72,7 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
 
     fun scheduleMock() {
         androidNotificationManager.cancel(notificationId)
-        schedule(5000)
+        schedule(3000)
     }
 
     fun triggerNotification() {
@@ -100,12 +101,17 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
     }
 
     private fun schedule(delay: Long) {
-        workManager.cancelAllWorkByTag(workTag)
+        GlobalScope.launch(Dispatchers.Main) {
+            workManager.cancelAllWorkByTag(workTag)
 
-        val notificationWork = OneTimeWorkRequestBuilder<NotifyWorker>().apply {
-            setInitialDelay(delay, TimeUnit.MILLISECONDS).addTag(workTag)
+            // let the previous worker stop before restarting it
+            delay(2000)
+            
+            val notificationWork = OneTimeWorkRequestBuilder<NotifyWorker>().apply {
+                setInitialDelay(delay, TimeUnit.MILLISECONDS).addTag(workTag)
+            }
+            workManager.enqueue(notificationWork.build())
         }
-        workManager.enqueue(notificationWork.build())
     }
 
     private fun initialDelay(): Long {
