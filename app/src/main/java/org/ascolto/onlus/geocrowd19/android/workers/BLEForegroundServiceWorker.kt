@@ -33,7 +33,9 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
     val bluetoothManager: BluetoothManager by inject()
 
     companion object {
+        const val TAG = "BLEForegroundServiceWorker"
         const val BLE_CHANNLE = "BLE_CHANNEL"
+        const val notificationId = 121
         var currentAdvertiser: BLEAdvertiser? = null
         var currentScanner: BLEScanner? = null
     }
@@ -105,9 +107,10 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
             // Add the cancel action to the notification which can
             // be used to cancel the worker
             //.addAction(android.R.drawable.ic_delete, cancel, intent)
+            .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
             .build()
 
-        return ForegroundInfo(100, notification)
+        return ForegroundInfo(notificationId, notification)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -116,6 +119,8 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
 
             val importance = NotificationManager.IMPORTANCE_LOW
             val channel = NotificationChannel(BLE_CHANNLE, BLE_CHANNLE, importance)
+            channel.setSound(null, null)
+            channel.setShowBadge(false)
             val androidNotificationManager = NotificationManagerCompat.from(context)
             androidNotificationManager.createNotificationChannel(channel)
         }
