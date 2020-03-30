@@ -47,17 +47,17 @@
         style="@style/RoundedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/background"
-        app:rippleColor="@color/colorPrimary"
-        android:textColor="@color/colorPrimary"
         android:fontFamily="@font/euclid_circular_semi_bold"
         android:text="@string/add_family_member"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/bottomMessage"
