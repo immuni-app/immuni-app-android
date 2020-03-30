@@ -106,7 +106,7 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
 
             // let the previous worker stop before restarting it
             delay(2000)
-            
+
             val notificationWork = OneTimeWorkRequestBuilder<NotifyWorker>().apply {
                 setInitialDelay(delay, TimeUnit.MILLISECONDS).addTag(workTag)
             }

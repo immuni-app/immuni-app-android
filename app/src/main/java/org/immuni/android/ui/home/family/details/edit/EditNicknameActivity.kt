@@ -54,7 +54,11 @@ class EditNicknameActivity : AscoltoActivity(), CompoundButton.OnCheckedChangeLi
         viewModel.user.observe(this, Observer {
             buildWidget(it)
             items.values.forEach { it.isChecked = false}
-            items[Pair(it.nickname?.type, it.gender)]?.isChecked = true
+
+            items.keys.filter { key -> key.first == it.nickname?.type}.forEach {
+                items[it]?.isChecked = true
+            }
+
             if(it.nickname?.type == NicknameType.OTHER) {
                 textField.setText(it.nickname.value ?: "")
                 textField.setSelection(textField.text.length)

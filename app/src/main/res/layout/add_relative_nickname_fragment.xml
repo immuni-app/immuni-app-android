@@ -12,11 +12,11 @@
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:clipToPadding="false"
-        android:paddingBottom="120dp"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:paddingBottom="120dp"
             android:layout_height="match_parent">
 
             <TextView

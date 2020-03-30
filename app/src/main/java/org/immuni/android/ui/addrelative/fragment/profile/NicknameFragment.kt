@@ -163,10 +163,11 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
         radioGroup.clearCheck()
 
         val type = userInfo.nickname?.type
-        val gender = userInfo.gender!!
+        //val gender = userInfo.gender!!
 
-        items[Pair(type, Gender.MALE)]?.isChecked = true
-        items[Pair(type, Gender.FEMALE)]?.isChecked = true
+        items.keys.filter { key -> key.first == type}.forEach {
+            items[it]?.isChecked = true
+        }
         lastRadioSelected = type
         disableTriggeringEvent = false
         validate(false)
