@@ -54,7 +54,7 @@
     <string name="compile_your_clinical_diary">Compila il diario clinico</string>
     <string name="choose_person_button_start">Inizia</string>
 
-    <string name="log_completed">Diario clinico inviato!</string>
+    <string name="log_completed">Diario clinico salvato!</string>
     <string name="log_completed_message">Tutti i tuoi dati sono al sicuro.</string>
     <string name="old_people_in_family_title">Hai anziani o minorenni in famiglia?</string>
     <string name="old_people_in_family_description">Registra i dati dei familiari che non possono farlo autonomamente (per esempio: minorenni, anziani e familiari che non possiedono uno smartphone).</string>
