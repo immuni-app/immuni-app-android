@@ -178,4 +178,5 @@
     <string name="user_edit_age_you_title">Quanti anni ha %s?</string>
     <string name="user_edit_gender_you_title">Di che sesso è questa persona?</string>
     <string name="user_edit_nickname_title">Il tuo familiare è:</string>
+    <string name="delete_profile">Elimina profilo</string>
 </resources>
