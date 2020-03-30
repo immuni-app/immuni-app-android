@@ -6,19 +6,19 @@
     app:startDestination="@id/insertUploadDataCodeFragment">
     <fragment
         android:id="@+id/insertUploadDataCodeFragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.uploadData.InsertUploadDataCodeFragment"
+        android:name="org.immuni.android.ui.uploadData.InsertUploadDataCodeFragment"
         android:label="InsertUploadDataCode"
         tools:layout="@layout/insert_upload_data_code_fragment"/>
 
     <fragment
         android:id="@+id/instructionFragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.uploadData.WhereToFindTheCodeFragment"
+        android:name="org.immuni.android.ui.uploadData.WhereToFindTheCodeFragment"
         android:label="Instruction"
         tools:layout="@layout/insert_code_where_icanfind_dialog"/>
 
     <fragment
         android:id="@+id/uploadSuccessFragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.uploadData.UploadDataSuccessFragment"
+        android:name="org.immuni.android.ui.uploadData.UploadDataSuccessFragment"
         android:label="Success"
         tools:layout="@layout/upload_data_success_fragment"/>
 

@@ -23,22 +23,22 @@
     app:startDestination="@id/startFragment">
     <fragment
         android:id="@+id/startFragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.log.fragment.ChoosePersonFragment"
+        android:name="org.immuni.android.ui.log.fragment.ChoosePersonFragment"
         android:label="startFragment"
         tools:layout="@layout/log_choose_person_fragment"/>
     <fragment
         android:id="@+id/formFragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.log.fragment.FormFragment"
+        android:name="org.immuni.android.ui.log.fragment.FormFragment"
         android:label="formFragment"
         tools:layout="@layout/log_form_fragment"/>
     <fragment
         android:id="@+id/formDoneFragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.log.fragment.FormDoneFragment"
+        android:name="org.immuni.android.ui.log.fragment.FormDoneFragment"
         android:label="formDoneFragment"
         tools:layout="@layout/log_done_fragment"/>
     <fragment
         android:id="@+id/formResumeFragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.log.fragment.FormResumeFragment"
+        android:name="org.immuni.android.ui.log.fragment.FormResumeFragment"
         android:label="formDoneFragment"
         tools:layout="@layout/log_resume_fragment"/>
     <action

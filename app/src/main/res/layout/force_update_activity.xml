@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/force_update_fragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.force_update.ForceUpdateFragment"
+        android:name="org.immuni.android.ui.force_update.ForceUpdateFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"

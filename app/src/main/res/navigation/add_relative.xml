@@ -23,12 +23,12 @@
     app:startDestination="@id/profileFragment">
     <fragment
         android:id="@+id/profileFragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.addrelative.fragment.profile.RelativeProfileFragment"
+        android:name="org.immuni.android.ui.addrelative.fragment.profile.RelativeProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/onboarding_profile_fragment"/>
     <fragment
         android:id="@+id/interruptFragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.addrelative.fragment.InterruptFragment"
+        android:name="org.immuni.android.ui.addrelative.fragment.InterruptFragment"
         android:label="doneFragment"
         tools:layout="@layout/add_relative_interrupt_fragment">
         <argument

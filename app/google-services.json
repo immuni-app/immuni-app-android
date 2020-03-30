@@ -32,10 +32,46 @@
               "client_type": 3
             },
             {
-              "client_id": "601241847437-6p7hluanar4ufvlbd07ngm01t7uooi0u.apps.googleusercontent.com",
+              "client_id": "601241847437-m21qspucjdnp8j086hf79qhukht4dtlj.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.bendingspoonsapps.Ascolto"
+                "bundle_id": "org.ascolto-onlus.geocrowd19"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601241847437:android:69d2ebcaee6fff435d84c4",
+        "android_client_info": {
+          "package_name": "org.immuni.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601241847437-p1leftto6rmiv57lnfovku3ts24mj88h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXmGqIHcWLO0CZ4ycwKmL98WtLMyVdRsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "601241847437-p1leftto6rmiv57lnfovku3ts24mj88h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "601241847437-m21qspucjdnp8j086hf79qhukht4dtlj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.ascolto-onlus.geocrowd19"
               }
             }
           ]
