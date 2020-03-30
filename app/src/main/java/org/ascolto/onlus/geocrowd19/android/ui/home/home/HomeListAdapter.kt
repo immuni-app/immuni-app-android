@@ -16,8 +16,10 @@ import com.bendingspoons.base.extensions.visible
 import org.ascolto.onlus.geocrowd19.android.AscoltoApplication
 import org.ascolto.onlus.geocrowd19.android.R
 import org.ascolto.onlus.geocrowd19.android.ui.home.home.model.*
+import kotlin.reflect.full.primaryConstructor
 
-class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeListAdapter(val clickListener: HomeClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val context = AscoltoApplication.appContext
     private var items = mutableListOf<HomeItemType>()
@@ -35,7 +37,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         items.addAll(newList)
     }
 
-    inner class SurveyCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class SurveyCardVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var bottomMessage: TextView = v.findViewById(R.id.bottomMessage)
         val button: Button = v.findViewById(R.id.next)
         val title: TextView = v.findViewById(R.id.title)
@@ -45,6 +47,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
                 onItemClick(adapterPosition)
             }
         }
+
         override fun onClick(v: View) {
             onItemClick(adapterPosition)
         }
@@ -56,37 +59,37 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         }
     }
 
-    inner class SurveyCardDoneVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v) {
+    inner class SurveyCardDoneVH(v: View) : RecyclerView.ViewHolder(v) {
 
     }
 
-    inner class HeaderCardVH(v: LinearLayout) : RecyclerView.ViewHolder(v) {
+    inner class HeaderCardVH(v: View) : RecyclerView.ViewHolder(v) {
 
     }
 
-    inner class GeolocationCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class GeolocationCardVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         override fun onClick(v: View) {
             onItemClick(adapterPosition)
         }
     }
 
-    inner class NotificationsCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class NotificationsCardVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         override fun onClick(v: View) {
             onItemClick(adapterPosition)
         }
     }
 
-    inner class BluetoothCardVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class BluetoothCardVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         override fun onClick(v: View) {
             onItemClick(adapterPosition)
         }
     }
 
-    inner class SuggestionsCardWhiteVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        var container: ConstraintLayout = v
+    inner class SuggestionsCardWhiteVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+        var container = v as ConstraintLayout
         var title: TextView = v.findViewById(R.id.title)
         var icon: ImageView = v.findViewById(R.id.icon)
         override fun onClick(v: View) {
@@ -94,8 +97,9 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         }
     }
 
-    inner class SuggestionsCardYellowVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        var container: ConstraintLayout = v
+    inner class SuggestionsCardYellowVH(v: View) : RecyclerView.ViewHolder(v),
+        View.OnClickListener {
+        var container = v as ConstraintLayout
         var title: TextView = v.findViewById(R.id.title)
         var icon: ImageView = v.findViewById(R.id.icon)
         override fun onClick(v: View) {
@@ -103,8 +107,8 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         }
     }
 
-    inner class SuggestionsCardRedVH(v: ConstraintLayout) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        var container: ConstraintLayout = v
+    inner class SuggestionsCardRedVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+        var container = v as ConstraintLayout
         var title: TextView = v.findViewById(R.id.title)
         var icon: ImageView = v.findViewById(R.id.icon)
         override fun onClick(v: View) {
@@ -124,60 +128,21 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if(viewType == 0) {
-            val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_survey_card_item, parent, false)
-
-            return SurveyCardVH(v as LinearLayout)
+        val (layout, cardType) = when (viewType) {
+            0 -> Pair(R.layout.home_survey_card_item, SurveyCardVH::class)
+            1 -> Pair(R.layout.home_geolocation_card_item, GeolocationCardVH::class)
+            2 -> Pair(R.layout.home_notifications_card_item, NotificationsCardVH::class)
+            3 -> Pair(R.layout.home_header_card_item, HeaderCardVH::class)
+            4 -> Pair(R.layout.home_suggestions_card_white_item, SuggestionsCardWhiteVH::class)
+            5 -> Pair(R.layout.home_suggestions_card_yellow_item, SuggestionsCardYellowVH::class)
+            7 -> Pair(R.layout.home_survey_card_done_item, SurveyCardDoneVH::class)
+            8 -> Pair(R.layout.home_bluetooth_card_item, BluetoothCardVH::class)
+            else -> Pair(R.layout.home_suggestions_card_red_item, SuggestionsCardRedVH::class)
         }
-        else if(viewType == 1) {
-            val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_geolocation_card_item, parent, false)
 
-            return GeolocationCardVH(v as ConstraintLayout)
-        }
-        else if(viewType == 2) {
-            val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_notifications_card_item, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(layout, parent, false)
 
-            return NotificationsCardVH(v as ConstraintLayout)
-        }
-        else if(viewType == 3) {
-            val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_header_card_item, parent, false)
-
-            return HeaderCardVH(v as LinearLayout)
-        }
-        else if(viewType == 4) {
-            val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_suggestions_card_white_item, parent, false)
-
-            return SuggestionsCardWhiteVH(v as ConstraintLayout)
-        }
-        else if(viewType == 5) {
-            val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_suggestions_card_yellow_item, parent, false)
-
-            return SuggestionsCardYellowVH(v as ConstraintLayout)
-        }
-        else if(viewType == 7) {
-            val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_survey_card_done_item, parent, false)
-
-            return SurveyCardDoneVH(v as ConstraintLayout)
-        }
-        else if(viewType == 8) {
-            val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_bluetooth_card_item, parent, false)
-
-            return BluetoothCardVH(v as ConstraintLayout)
-        }
-        else {
-            val v = LayoutInflater.from(parent.context)
-                .inflate(R.layout.home_suggestions_card_red_item, parent, false)
-
-            return SuggestionsCardRedVH(v as ConstraintLayout)
-        }
+        return cardType.primaryConstructor!!.call(this, v)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {}
@@ -187,38 +152,48 @@ class HomeListAdapter(val clickListener: HomeClickListener) : RecyclerView.Adapt
         position: Int,
         payload: List<Any>
     ) {
-        when(holder) {
+        when (holder) {
             is SuggestionsCardWhiteVH -> {
                 val item = items[position] as SuggestionsCardWhite
-                holder.title.text = HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                holder.title.text =
+                    HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
             is SuggestionsCardYellowVH -> {
                 val item = items[position] as SuggestionsCardYellow
-                holder.title.text = HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                holder.title.text =
+                    HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
             is SuggestionsCardRedVH -> {
                 val item = items[position] as SuggestionsCardRed
-                holder.title.text = HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                holder.title.text =
+                    HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
             is SurveyCardVH -> {
                 val item = items[position] as SurveyCard
-                val placeholder = AscoltoApplication.appContext.resources.getString(R.string.you_have_clinic_diaries_to_update)
-                val titleHtml = String.format(placeholder, item.surveysToLog)
-                holder.bottomMessage.text = HtmlCompat.fromHtml(titleHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                val hasOneDiaryToLog = item.surveysToLog == 1
+                val string =
+                    if (hasOneDiaryToLog) R.string.you_have_one_clinic_diary_to_update else R.string.you_have_clinic_diaries_to_update
+                val placeholder = AscoltoApplication.appContext.resources.getString(string)
+                val titleHtml = if (hasOneDiaryToLog) placeholder else String.format(
+                    placeholder,
+                    item.surveysToLog
+                )
+                holder.bottomMessage.text =
+                    HtmlCompat.fromHtml(titleHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
 
                 if (item.doesMainUserNeedToLog) {
-                    holder.bottomMessage.gone()
-                    holder.title.text = AscoltoApplication.appContext.resources.getString(R.string.update_your_clinic_diary)
+                    holder.title.text =
+                        AscoltoApplication.appContext.resources.getString(R.string.update_your_clinic_diary)
                 } else if (item.familyMembersThatNeedToLog > 0) {
-                    holder.bottomMessage.visible()
-                    holder.title.text = AscoltoApplication.appContext.resources.getString(R.string.update_your_family_diary)
+                    holder.title.text =
+                        AscoltoApplication.appContext.resources.getString(R.string.update_your_family_diary)
                 }
             }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(items[position]) {
+        return when (items[position]) {
             is SurveyCard -> 0
             is EnableGeolocationCard -> 1
             is EnableNotificationCard -> 2

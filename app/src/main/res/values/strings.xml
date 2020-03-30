@@ -37,7 +37,7 @@
     <string name="onboarding_name_title">Come ti chiami?</string>
     <string name="onboarding_name_description">Inserire il cognome non è necessario. Il tuo nome o anche un soprannome sarà sufficiente.</string>
     <string name="onboarding_gender_title">Di che sesso sei?</string>
-    <string name="onboarding_gender_description">La probabilità di contagio e il rischio di sviluppare sintomi più severi dipendono da questa informazione.</string>
+    <string name="onboarding_gender_description">Seleziona il sesso che ti è stato assegnato alla nascita. Il rischio di sviluppare sintomi più severi dipende da questa informazione.</string>
 
     <string name="onboarding_age_title">Quanti anni hai?</string>
     <string name="onboarding_age_description">Questa informazione è importante per consigliarti al meglio come proteggerti dal coronavirus.</string>
@@ -89,6 +89,7 @@
     <string name="update_your_clinic_diary">Aggiorna il tuo diario clinico</string>
     <string name="update_your_family_diary">Aggiorna i diari clinici per la tua famiglia</string>
     <string name="you_have_clinic_diaries_to_update"><![CDATA[Hai <font color="#6993FF"><b>%d diari clinici</b></font> da aggiornare]]></string>
+    <string name="you_have_one_clinic_diary_to_update"><![CDATA[Hai <font color="#6993FF"><b>un diario clinico</b></font> da aggiornare]]></string>
     <string name="start_survey_filling">Inizia compilazione</string>
     <string name="reminder_notification_channel_name">Compila il questionario</string>
     <string name="home_separator_suggestions">Come comportarsi</string>
@@ -177,4 +178,5 @@
     <string name="user_edit_age_you_title">Quanti anni ha %s?</string>
     <string name="user_edit_gender_you_title">Di che sesso è questa persona?</string>
     <string name="user_edit_nickname_title">Il tuo famigliare è?</string>
+    <string name="choose_a_relativeness_degree">Scegli un grado di parentela per identificare il familiare</string>
 </resources>
