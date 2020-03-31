@@ -179,4 +179,6 @@
     <string name="user_edit_gender_you_title">Di che sesso è questa persona?</string>
     <string name="user_edit_nickname_title">Il tuo familiare è:</string>
     <string name="delete_profile">Elimina profilo</string>
+
+    <string name="ble_not_supported_by_this_device">Questo dispositivo non supporta Bluetooth Low Energy.</string>
 </resources>

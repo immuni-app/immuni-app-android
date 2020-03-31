@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.fragment.app.Fragment
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -13,6 +14,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.AscoltoApplication
+import org.immuni.android.R
+import org.immuni.android.toast
 import org.immuni.android.workers.BLEForegroundServiceWorker
 import org.koin.core.KoinComponent
 
@@ -30,6 +33,10 @@ class BluetoothManager(val context: Context) : KoinComponent {
         return bluetoothAdapter.isEnabled ?: false
     }
 
+    fun isBluetoothSupported(): Boolean {
+        return !context.packageManager.missingSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)
+    }
+
     fun openBluetoothSettings(fragment: Fragment, requestCode: Int = REQUEST_ENABLE_BT) {
         bluetoothAdapter.takeIf { !it.isEnabled }?.apply {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
@@ -45,6 +52,13 @@ class BluetoothManager(val context: Context) : KoinComponent {
     }
 
     fun scheduleBLEWorker() {
+
+        // check if the hardware support BLE
+        if(!isBluetoothSupported()) {
+            toast(context.getString(R.string.ble_not_supported_by_this_device))
+            return
+        }
+
         GlobalScope.launch(Dispatchers.Main) {
             val workManager = WorkManager.getInstance(AscoltoApplication.appContext)
             workManager.cancelAllWorkByTag(BLEForegroundServiceWorker.TAG)
@@ -60,4 +74,6 @@ class BluetoothManager(val context: Context) : KoinComponent {
     companion object {
         const val REQUEST_ENABLE_BT = 978
     }
+
+    private fun PackageManager.missingSystemFeature(name: String): Boolean = !hasSystemFeature(name)
 }
