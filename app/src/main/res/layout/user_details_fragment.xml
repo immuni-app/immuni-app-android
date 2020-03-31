@@ -308,17 +308,15 @@
                     <TextView
                         android:id="@+id/textView7e"
                         style="@style/P1Text"
-                        app:layout_constraintWidth_percent="0.35"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="24dp"
-                        android:layout_marginBottom="24dp"
                         android:fontFamily="@font/euclid_circular_semi_bold"
                         android:text="@string/user_data"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.35" />
 
                     <TextView
                         android:id="@+id/uploadText"
@@ -327,15 +325,15 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="15dp"
                         android:layout_weight="1"
+                        android:fontFamily="@font/euclid_circular_semi_bold"
                         android:gravity="right"
                         android:text="@string/upload"
-                        android:fontFamily="@font/euclid_circular_semi_bold"
                         android:textColor="@color/colorPrimary"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView7e"
                         app:layout_constraintEnd_toStartOf="@+id/okButton"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toEndOf="@+id/textView7e"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView7e" />
 
                     <ImageView
                         android:id="@+id/okButton"
@@ -344,18 +342,29 @@
                         android:layout_marginEnd="24dp"
                         android:src="@drawable/ic_upload"
                         android:tint="@color/colorPrimary"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/uploadText"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/uploadText" />
 
                     <TextView
                         android:id="@+id/uploadButton"
-                        android:layout_height="0dp"
                         android:layout_width="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_height="60dp"
                         app:layout_constraintEnd_toEndOf="@+id/okButton"
                         app:layout_constraintStart_toStartOf="@+id/uploadText"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="24dp"
+                        android:text="@string/upload_data_explanation"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/okButton"
+                        app:layout_constraintStart_toStartOf="@+id/textView7e"
+                        app:layout_constraintTop_toBottomOf="@+id/textView7e" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
