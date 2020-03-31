@@ -12,47 +12,42 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import kotlin.random.Random
 
-
 class BLEScanner: KoinComponent {
-    val bluetoothManager: BluetoothManager by inject()
-    val database: AscoltoDatabase by inject()
-    val id = Random.nextInt(0, 1000)
-    lateinit var bluetoothLeScanner: BluetoothLeScanner
-    var myScanCallback = MyScanCallback()
+    private val bluetoothManager: BluetoothManager by inject()
+    private val database: AscoltoDatabase by inject()
+    private val id = Random.nextInt(0, 1000)
+    private lateinit var bluetoothLeScanner: BluetoothLeScanner
+    private var myScanCallback = MyScanCallback()
 
     fun stop() {
         bluetoothLeScanner.stopScan(myScanCallback)
     }
 
     fun start() {
-        //bluetoothManager.adapter().startLeScan(leScanCallback)
         bluetoothLeScanner = bluetoothManager.adapter().bluetoothLeScanner
-        val filter = listOf(/*ScanFilter.Builder().apply {
-            val manData = byteArrayOf(1)
-            val manMask = byteArrayOf(1)
-            setManufacturerData(CGAIdentifiers.ManufacturerID, manData, manMask)
-        }.build(),*/
+        val filter = listOf(
             ScanFilter.Builder().apply {
                 val serviceUuidString = CGAIdentifiers.ServiceDataUUIDString
                 val serviceUuidMaskString = "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"
                 val parcelUuid = ParcelUuid.fromString(serviceUuidString)
                 val parcelUuidMask = ParcelUuid.fromString(serviceUuidMaskString)
                 setServiceUuid(parcelUuid, parcelUuidMask)
-            }.build())
+            }.build()
+        )
         bluetoothLeScanner.startScan(
             filter,
             ScanSettings.Builder().apply {
-                this.setReportDelay(2000)
+                setReportDelay(2000)
             }.build(),
             myScanCallback
         )
     }
 
-    private fun processResult(uuids: List<String>) {
-        Log.d("SCAN RESULT", "### SCAN RESULT id=$id ${uuids.joinToString()}")
+    private fun processResult(btIds: List<String>) {
+        Log.d("BLEScanner", "### SCAN RESULT id=$id ${btIds.joinToString()}")
         GlobalScope.launch {
             database.bleContactDao().insert(
-                *uuids.map {
+                *btIds.map {
                     BLEContactEntity(
                         btId = it
                     )
@@ -62,35 +57,35 @@ class BLEScanner: KoinComponent {
     }
 
     inner class MyScanCallback : ScanCallback() {
-        override fun onBatchScanResults(results: MutableList<ScanResult>?) {
+        override fun onBatchScanResults(results: MutableList<ScanResult>) {
             super.onBatchScanResults(results)
-            val ret = mutableSetOf<String>()
-            results?.forEach { result ->
-
-                val serviceid = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
-                Log.d("TAHAHA", "### " + byteArrayToHex(result.scanRecord?.serviceData?.get(serviceid)!!))
-
-                result.scanRecord?.serviceUuids?.forEach { uuid ->
-                    ret.add(uuid.toString())
-                }
-            }
-            processResult(ret.toList())
+            processResults(results)
         }
 
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             super.onScanResult(callbackType, result)
-            val serviceid = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
-            Log.d("TAHAHA", "### " + byteArrayToHex(result.scanRecord?.serviceData?.get(serviceid)!!))
-            val ret = mutableSetOf<String>()
-            result.scanRecord?.serviceUuids?.forEach { uuid ->
-                ret.add(uuid.toString())
+            processResults(listOf(result))
+        }
+
+        private fun processResults(results: List<ScanResult>) {
+            val btIds = mutableSetOf<String>()
+            results.forEach { result ->
+
+                val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
+                val bytesData = result.scanRecord?.serviceData?.get(serviceId)
+                bytesData?.let { bytes ->
+                    val scannedBtId = byteArrayToHex(bytes)
+                    scannedBtId?.let {
+                        btIds.add(it)
+                    }
+                }
             }
-            processResult(ret.toList())
+            processResult(btIds.toList())
         }
 
         override fun onScanFailed(errorCode: Int) {
             super.onScanFailed(errorCode)
-            Log.d("SCAN RESULT", "### SCAN RESULT id=$id $errorCode")
+            Log.d("BLEScanner", "### onScanFailed id=$id $errorCode")
         }
     }
 }

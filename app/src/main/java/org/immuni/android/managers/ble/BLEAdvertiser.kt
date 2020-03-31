@@ -16,35 +16,41 @@ import org.koin.core.inject
 import kotlin.random.Random
 
 class BLEAdvertiser: KoinComponent {
-    val bluetoothManager: BluetoothManager by inject()
-    val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
-    val btId = oracle.me()?.btId!!
-    lateinit var advertiser: BluetoothLeAdvertiser
-    var callback = MyAdvertiseCallback()
+    private val bluetoothManager: BluetoothManager by inject()
+    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val btId = oracle.me()?.btId!!
+    private lateinit var advertiser: BluetoothLeAdvertiser
+    private var callback = MyAdvertiseCallback()
 
-    val id = Random.nextInt(0, 1000)
+    private val id = Random.nextInt(0, 1000)
 
     fun stop() {
         advertiser.stopAdvertising(callback)
     }
 
     fun start() {
-        val adapter = bluetoothManager.adapter() ?: return
+        val adapter = bluetoothManager.adapter()
         if (!adapter.isEnabled) adapter.enable()
+
         advertiser = adapter.bluetoothLeAdvertiser
-        val builder = AdvertiseSettings.Builder()
-        builder.setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
-        builder.setConnectable(false)
-        builder.setTimeout(0) // timeout max 180000 milliseconds
-        builder.setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
-        val dataBuilder = AdvertiseData.Builder()
-        dataBuilder.setIncludeDeviceName(false) // if true fail = 1
-        val serviceid = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString) //btId
-        val bytesMan = btId.replace("-", "")//byteArrayOf(1)
-        val data = Hex.stringToBytes(bytesMan)
-        dataBuilder.addServiceData(serviceid, data)
-        dataBuilder.addServiceUuid(serviceid)
-        dataBuilder.setIncludeTxPowerLevel(true)
+
+        val builder = AdvertiseSettings.Builder().apply {
+            setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
+            setConnectable(false)
+            setTimeout(0) // timeout max 180000 milliseconds
+            setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
+        }
+
+        val dataBuilder = AdvertiseData.Builder().apply {
+            setIncludeDeviceName(false) // if true fail = 1
+            val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString) //btId
+            val bytesMan = btId.replace("-", "")//byteArrayOf(1)
+            val data = Hex.stringToBytes(bytesMan)
+            addServiceData(serviceId, data)
+            addServiceUuid(serviceId)
+            setIncludeTxPowerLevel(true)
+        }
+
         advertiser.startAdvertising(
             builder.build(), dataBuilder.build(),
             callback
@@ -54,12 +60,12 @@ class BLEAdvertiser: KoinComponent {
     inner class MyAdvertiseCallback: AdvertiseCallback() {
         override fun onStartFailure(errorCode: Int) {
             super.onStartFailure(errorCode)
-            Log.d("ADVERTISER", "### FAILURE START ADVERTISER id=$id error = $errorCode")
+            Log.d("BLEAdvertiser", "### FAILURE START BLEAdvertiser id=$id error = $errorCode")
         }
 
         override fun onStartSuccess(settingsInEffect: AdvertiseSettings?) {
             super.onStartSuccess(settingsInEffect)
-            Log.d("ADVERTISER", "### SUCCESS START ADVERTISER id=$id")
+            Log.d("BLEAdvertiser", "### SUCCESS START BLEAdvertiser id=$id")
         }
     }
 }
