@@ -16,6 +16,7 @@ import org.immuni.android.R
 import org.immuni.android.db.entity.Gender
 import org.immuni.android.db.entity.iconResource
 import org.immuni.android.ui.home.family.model.*
+import org.immuni.android.util.Flags
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -62,6 +63,11 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
         init {
             addButton.setOnClickListener {
                 clickListener.onClick(items[adapterPosition])
+            }
+
+            if (Flags.transient.shouldOpenAddRelativeActivity) {
+                Flags.transient.shouldOpenAddRelativeActivity = false
+                clickListener.onClick(AddFamilyMemberTutorialCard())
             }
         }
 
