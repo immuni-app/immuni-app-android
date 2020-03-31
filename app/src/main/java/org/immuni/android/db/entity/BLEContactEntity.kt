@@ -12,5 +12,6 @@ data class BLEContactEntity(
     var id: Int = 0,
     var timestamp: Double = Date().time / 1000.0,
     var signalStrength: Int = 0,
+    var distanceInMeters: Double = 0.0,
     var btId: String
 )

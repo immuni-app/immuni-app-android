@@ -3,10 +3,13 @@ package org.immuni.android.managers.ble
 import android.bluetooth.le.*
 import android.os.ParcelUuid
 import android.util.Log
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.bendingspoons.oracle.Oracle
+import de.fraunhofer.iis.Estimator
+import de.fraunhofer.iis.Measurement
+import de.fraunhofer.iis.ModelProvider
+import org.immuni.android.api.oracle.model.AscoltoMe
+import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.immuni.android.db.AscoltoDatabase
-import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.BluetoothManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -15,9 +18,16 @@ import kotlin.random.Random
 class BLEScanner: KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private val database: AscoltoDatabase by inject()
+    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val id = Random.nextInt(0, 1000)
     private lateinit var bluetoothLeScanner: BluetoothLeScanner
     private var myScanCallback = MyScanCallback()
+
+    // Distance estimator
+    private val rss0: Float = -78f
+    private val plExp: Float = 2f
+    private val distanceEstimationTime = 2L
+    private val distanceEstimator = Estimator(distanceEstimationTime * 1000, rss0, plExp)
 
     fun stop() {
         bluetoothLeScanner.stopScan(myScanCallback)
@@ -37,13 +47,45 @@ class BLEScanner: KoinComponent {
         bluetoothLeScanner.startScan(
             filter,
             ScanSettings.Builder().apply {
-                setReportDelay(2000)
+                //setReportDelay(5000)
+                setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
             }.build(),
             myScanCallback
         )
     }
 
-    private fun processResult(btIds: List<String>) {
+    private fun calculateDistance(measurement: Measurement) {
+        val list = distanceEstimator.push(measurement)
+        list.forEach {
+            Log.d("BLEScanner", "### Distance in meters between ${it.deviceId1} and ${it.deviceId2} = ${it.distance} meters")
+        }
+    }
+
+    private fun processResults(results: List<ScanResult>) {
+
+        val idsRssi = mutableListOf<Pair<String, Int>>()
+        results.forEach { result ->
+
+            val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
+            val bytesData = result.scanRecord?.serviceData?.get(serviceId)
+            val rssi = result.rssi
+            bytesData?.let { bytes ->
+                val scannedBtId = byteArrayToHex(bytes)
+                scannedBtId?.let { btId ->
+                    idsRssi.add(btId to rssi)
+
+                    calculateDistance(Measurement(
+                        System.currentTimeMillis(),
+                        rssi.toFloat(),
+                        oracle.me()?.btId!!,
+                        btId,
+                        ModelProvider.MOBILE_DEVICE.DEFAULT
+                    ))
+                }
+            }
+        }
+
+        /*
         Log.d("BLEScanner", "### SCAN RESULT id=$id ${btIds.joinToString()}")
         GlobalScope.launch {
             database.bleContactDao().insert(
@@ -53,7 +95,7 @@ class BLEScanner: KoinComponent {
                     )
                 }.toTypedArray()
             )
-        }
+        }*/
     }
 
     inner class MyScanCallback : ScanCallback() {
@@ -65,22 +107,6 @@ class BLEScanner: KoinComponent {
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             super.onScanResult(callbackType, result)
             processResults(listOf(result))
-        }
-
-        private fun processResults(results: List<ScanResult>) {
-            val btIds = mutableSetOf<String>()
-            results.forEach { result ->
-
-                val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
-                val bytesData = result.scanRecord?.serviceData?.get(serviceId)
-                bytesData?.let { bytes ->
-                    val scannedBtId = byteArrayToHex(bytes)
-                    scannedBtId?.let {
-                        btIds.add(it)
-                    }
-                }
-            }
-            processResult(btIds.toList())
         }
 
         override fun onScanFailed(errorCode: Int) {

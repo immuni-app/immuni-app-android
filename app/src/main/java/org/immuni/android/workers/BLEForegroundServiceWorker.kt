@@ -119,7 +119,7 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
     private fun createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            val importance = NotificationManager.IMPORTANCE_LOW
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(BLE_CHANNLE, BLE_CHANNLE, importance)
             channel.setSound(null, null)
             channel.setShowBadge(false)

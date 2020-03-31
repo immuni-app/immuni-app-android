@@ -26,6 +26,11 @@ class BluetoothDialogActivity: AscoltoActivity() {
 
         button.setOnClickListener {
             val btManager: BluetoothManager by inject()
+            if(!btManager.isBluetoothSupported()) {
+                toast(applicationContext.getString(R.string.ble_not_supported_by_this_device))
+                return@setOnClickListener
+            }
+
             btManager.openBluetoothSettings(this, REQUEST_ENABLE_BT)
         }
 
