@@ -11,6 +11,7 @@ import com.bendingspoons.base.extensions.hideKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
 import org.immuni.android.managers.BluetoothManager
+import org.immuni.android.toast
 import org.immuni.android.ui.dialog.PermissionsTutorialDialog
 import org.koin.android.ext.android.inject
 
@@ -44,7 +45,15 @@ class BluetoothPermissionsFragment :
     }
 
     private fun navigateNext() {
-        if (!bluetoothManager.isBluetoothEnabled() && !alreadyAskedBluetooth) {
+
+        if(!bluetoothManager.isBluetoothSupported()) {
+            toast(requireContext().getString(R.string.ble_not_supported_by_this_device))
+            viewModel.onNextTap()
+            return
+        }
+
+        if(!bluetoothManager.isBluetoothEnabled() && !alreadyAskedBluetooth) {
+
             bluetoothManager.openBluetoothSettings(this)
             alreadyAskedBluetooth = true
         } else {

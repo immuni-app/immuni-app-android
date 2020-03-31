@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "2902dbf202a4aedff3bfe38a4f07644a",
+    "identityHash": "f062fd080948a24ce1fa1783d2bce356",
     "entities": [
       {
         "tableName": "user_info_table",
@@ -62,7 +62,7 @@
       },
       {
         "tableName": "ble_contact_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestamp` REAL NOT NULL, `signalStrength` INTEGER NOT NULL, `btId` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestamp` REAL NOT NULL, `signalStrength` INTEGER NOT NULL, `distanceInMeters` REAL NOT NULL, `btId` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -80,6 +80,12 @@
             "fieldPath": "signalStrength",
             "columnName": "signalStrength",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "distanceInMeters",
+            "columnName": "distanceInMeters",
+            "affinity": "REAL",
             "notNull": true
           },
           {
@@ -102,7 +108,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2902dbf202a4aedff3bfe38a4f07644a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f062fd080948a24ce1fa1783d2bce356')"
     ]
   }
 }

@@ -1,6 +1,7 @@
 package org.immuni.android
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import com.bendingspoons.base.utils.DeviceUtils
 import org.immuni.android.api.oracle.model.AscoltoMe
@@ -16,6 +17,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.AscoltoNotificationManager
+import org.immuni.android.ui.ble.BleDebugActivity
+import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.setup.Setup
 import org.immuni.android.ui.welcome.Welcome
@@ -78,6 +81,13 @@ class AscoltoSecretMenuConfiguration(val context: Context): SecretMenuConfigurat
                     val list = database.bleContactDao().getAllDistinctBtIds()
                     Toast.makeText(context, "# Devices found: ${list.joinToString(separator = ", ")}", Toast.LENGTH_LONG).show()
                 }
+            }){},
+            object : SecretMenuItem("ℹ️ BLE distance debug", { context, config ->
+                val context = AscoltoApplication.appContext
+                val intent = Intent(context, BleDebugActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+                context.startActivity(intent)
             }){}
         )
     }

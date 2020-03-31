@@ -23,11 +23,13 @@ import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import com.bendingspoons.secretmenu.SecretMenu
 import com.bendingspoons.theirs.Theirs
+import de.fraunhofer.iis.Estimator
 import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.managers.AscoltoNotificationManager
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
+import org.immuni.android.ui.ble.BleDebugViewModel
 import org.immuni.android.ui.home.family.details.UserDetailsViewModel
 import org.immuni.android.ui.home.family.details.edit.EditDetailsViewModel
 import org.immuni.android.ui.uploadData.UploadDataViewModel
@@ -49,6 +51,9 @@ val appModule = module {
             .fallbackToDestructiveMigration()
             .build()
     }
+
+    // single distance Estimator
+    single { Estimator(2L*1000, -78F, 2f) }
 
     // single instance of Setup
     single { Setup() }
@@ -142,4 +147,8 @@ val appModule = module {
 
     // EditDetailsViewModel
     viewModel { (userId: String) -> EditDetailsViewModel(userId) }
+
+    // BleDebugViewModel
+    viewModel { BleDebugViewModel() }
+
 }
