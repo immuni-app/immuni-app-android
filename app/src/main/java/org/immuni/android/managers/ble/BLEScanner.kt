@@ -24,10 +24,7 @@ class BLEScanner: KoinComponent {
     private var myScanCallback = MyScanCallback()
 
     // Distance estimator
-    private val rss0: Float = -78f
-    private val plExp: Float = 2f
-    private val distanceEstimationTime = 2L
-    private val distanceEstimator = Estimator(distanceEstimationTime * 1000, rss0, plExp)
+    private val distanceEstimator: Estimator by inject()
 
     fun stop() {
         bluetoothLeScanner.stopScan(myScanCallback)
