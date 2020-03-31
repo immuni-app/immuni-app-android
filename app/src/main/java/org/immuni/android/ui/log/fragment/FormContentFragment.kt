@@ -48,6 +48,7 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
         })
 
         nextButton.setOnClickListener {
+            validate(save = true)
             viewModel.onNextTap(questionId)
         }
 
