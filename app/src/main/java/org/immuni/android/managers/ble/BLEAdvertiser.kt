@@ -38,7 +38,7 @@ class BLEAdvertiser: KoinComponent {
             setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
             setConnectable(false)
             setTimeout(0) // timeout max 180000 milliseconds
-            setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
+            setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW)
         }
 
         val dataBuilder = AdvertiseData.Builder().apply {

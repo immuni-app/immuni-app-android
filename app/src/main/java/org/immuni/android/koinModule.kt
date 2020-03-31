@@ -53,7 +53,7 @@ val appModule = module {
     }
 
     // single distance Estimator
-    single { Estimator(2L*1000, -78F, 2f) }
+    single { Estimator(2L*1000, -90F, 2f) }
 
     // single instance of Setup
     single { Setup() }
