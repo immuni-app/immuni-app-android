@@ -13,7 +13,7 @@ data class SurveyCard(
     val surveysToLog: Int = familyMembersThatNeedToLog + (if (doesMainUserNeedToLog) 1 else 0)
 }
 
-class SurveyCardDone: HomeItemType()
+class SurveyCardDone(val surveysLogged: Int): HomeItemType()
 
 class EnableGeolocationCard: HomeItemType()
 

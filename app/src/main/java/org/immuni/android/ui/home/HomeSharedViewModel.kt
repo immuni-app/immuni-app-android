@@ -98,7 +98,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 // survey card
 
                 if (surveyManager.areAllSurveysLogged()) {
-                    itemsList.add(SurveyCardDone())
+                    itemsList.add(SurveyCardDone(surveyManager.allUsers().size))
                 } else {
                     val mainUser = it.mainUser!!
                     val familyMembers = it.familyMembers

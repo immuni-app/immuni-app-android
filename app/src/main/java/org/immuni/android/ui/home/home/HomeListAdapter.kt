@@ -54,13 +54,14 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
     }
 
     private fun onItemClick(pos: Int) {
-        if(pos != RecyclerView.NO_POSITION) {
+        if (pos != RecyclerView.NO_POSITION) {
             clickListener.onClick(items[pos])
         }
     }
 
     inner class SurveyCardDoneVH(v: View) : RecyclerView.ViewHolder(v) {
-
+        val name: TextView = v.findViewById(R.id.name)
+        val bottomMessage: TextView = v.findViewById(R.id.bottomMessage)
     }
 
     inner class HeaderCardVH(v: View) : RecyclerView.ViewHolder(v) {
@@ -152,6 +153,8 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
         position: Int,
         payload: List<Any>
     ) {
+        val resources = AscoltoApplication.appContext.resources
+
         when (holder) {
             is SuggestionsCardWhiteVH -> {
                 val item = items[position] as SuggestionsCardWhite
@@ -173,7 +176,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
                 val hasOneDiaryToLog = item.surveysToLog == 1
                 val string =
                     if (hasOneDiaryToLog) R.string.you_have_one_clinic_diary_to_update else R.string.you_have_clinic_diaries_to_update
-                val placeholder = AscoltoApplication.appContext.resources.getString(string)
+                val placeholder = resources.getString(string)
                 val titleHtml = if (hasOneDiaryToLog) placeholder else String.format(
                     placeholder,
                     item.surveysToLog
@@ -182,11 +185,19 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
                     HtmlCompat.fromHtml(titleHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
 
                 if (item.doesMainUserNeedToLog) {
-                    holder.title.text =
-                        AscoltoApplication.appContext.resources.getString(R.string.update_your_clinic_diary)
+                    holder.title.text = resources.getString(R.string.update_your_clinic_diary)
                 } else if (item.familyMembersThatNeedToLog > 0) {
-                    holder.title.text =
-                        AscoltoApplication.appContext.resources.getString(R.string.update_your_family_diary)
+                    holder.title.text = resources.getString(R.string.update_your_family_diary)
+                }
+            }
+            is SurveyCardDoneVH -> {
+                val item = items[position] as SurveyCardDone
+                if (item.surveysLogged > 1) {
+                    holder.name.text = resources.getString(R.string.clinic_diaries_updated)
+                    holder.bottomMessage.text = resources.getString(R.string.clinic_diaries_updated_message)
+                } else {
+                    holder.name.text = resources.getString(R.string.clinic_diary_updated)
+                    holder.bottomMessage.text = resources.getString(R.string.clinic_diary_updated_message)
                 }
             }
         }

@@ -94,7 +94,9 @@
     <string name="reminder_notification_channel_name">Compila il questionario</string>
     <string name="home_separator_suggestions">Come comportarsi</string>
     <string name="clinic_diary_updated">Diario clinico aggiornato</string>
+    <string name="clinic_diaries_updated">Diari clinici aggiornati</string>
     <string name="clinic_diary_updated_message">Riceverai una notifica quando dovrai aggiornare il diario nuovamente</string>
+    <string name="clinic_diaries_updated_message">Riceverai una notifica quando dovrai aggiornare i diari nuovamente</string>
     <string name="enable_geolocation_title">Attiva la localizzazione</string>
     <string name="enable_geolocation_dialog_message">Consenti l\'accesso alla posizione durante tutto l\'arco della giornata per permettere alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
     <string name="geolocation">Geolocalizzazione</string>
