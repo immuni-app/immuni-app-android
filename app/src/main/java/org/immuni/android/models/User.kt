@@ -76,6 +76,9 @@ data class Nickname(
             Pair(CHILD_2, Gender.FEMALE) -> context.getString(R.string.nickname_child2_female)
             Pair(CHILD_3, Gender.FEMALE) -> context.getString(R.string.nickname_child3_female)
             Pair(CHILD_4, Gender.FEMALE) -> context.getString(R.string.nickname_child4_female)
+            Pair(YOUNGER_SIBLING, Gender.FEMALE) -> context.getString(R.string.nickname_younger_sibling_female)
+            Pair(PARTNER, Gender.FEMALE) -> context.getString(R.string.nickname_partner_female)
+            Pair(OLDER_SIBLING, Gender.FEMALE) -> context.getString(R.string.nickname_older_sibling_female)
             Pair(PATERNAL_GRANDPARENT, Gender.FEMALE) -> context.getString(R.string.nickname_paternal_grandparent_female)
             Pair(MATERNAL_GRANDPARENT, Gender.FEMALE) -> context.getString(R.string.nickname_maternal_grandparent_female)
             Pair(PARENT, Gender.MALE) -> context.getString(R.string.nickname_parent_male)
@@ -83,6 +86,9 @@ data class Nickname(
             Pair(CHILD_2, Gender.MALE) -> context.getString(R.string.nickname_child2_male)
             Pair(CHILD_3, Gender.MALE) -> context.getString(R.string.nickname_child3_male)
             Pair(CHILD_4, Gender.MALE) -> context.getString(R.string.nickname_child4_male)
+            Pair(YOUNGER_SIBLING, Gender.MALE) -> context.getString(R.string.nickname_younger_sibling_male)
+            Pair(PARTNER, Gender.MALE) -> context.getString(R.string.nickname_partner_male)
+            Pair(OLDER_SIBLING, Gender.MALE) -> context.getString(R.string.nickname_older_sibling_male)
             Pair(PATERNAL_GRANDPARENT, Gender.MALE) -> context.getString(R.string.nickname_paternalGrandparent_male)
             Pair(MATERNAL_GRANDPARENT, Gender.MALE) -> context.getString(R.string.nickname_maternalGrandparent_male)
             else -> if (type == OTHER) value!! else context.getString(R.string.nickname_not_specified)
@@ -90,25 +96,27 @@ data class Nickname(
     }
 }
 
-enum class NicknameType(val id: String) {
+enum class NicknameType {
     @Json(name = "child1")
-    CHILD_1("child1"),
+    CHILD_1,
     @Json(name = "child2")
-    CHILD_2("child2"),
+    CHILD_2,
     @Json(name = "child3")
-    CHILD_3("child3"),
+    CHILD_3,
     @Json(name = "child4")
-    CHILD_4("child4"),
+    CHILD_4,
+    @Json(name = "younger_sibling")
+    YOUNGER_SIBLING,
+    @Json(name = "partner")
+    PARTNER,
+    @Json(name = "older_sibling")
+    OLDER_SIBLING,
     @Json(name = "parent")
-    PARENT("parent"),
+    PARENT,
     @Json(name = "paternal_grandparent")
-    PATERNAL_GRANDPARENT("paternal_grandparent"),
+    PATERNAL_GRANDPARENT,
     @Json(name = "maternal_grandparent")
-    MATERNAL_GRANDPARENT("maternal_grandparent"),
+    MATERNAL_GRANDPARENT,
     @Json(name = "other")
-    OTHER("other");
-
-    companion object {
-        fun fromId(id: String): NicknameType = values().first { it.id == id }
-    }
+    OTHER
 }
