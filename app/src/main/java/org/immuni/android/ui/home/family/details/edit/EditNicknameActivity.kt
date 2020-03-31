@@ -157,6 +157,7 @@ class EditNicknameActivity : AscoltoActivity(), CompoundButton.OnCheckedChangeLi
             if (type == NicknameType.OTHER) {
             } // at the end
             else if (ageGroup < mainUser.ageGroup && type in setOf(
+                    NicknameType.OLDER_SIBLING,
                     NicknameType.PARENT,
                     NicknameType.MATERNAL_GRANDPARENT,
                     NicknameType.PATERNAL_GRANDPARENT
@@ -166,7 +167,8 @@ class EditNicknameActivity : AscoltoActivity(), CompoundButton.OnCheckedChangeLi
                     NicknameType.CHILD_1,
                     NicknameType.CHILD_2,
                     NicknameType.CHILD_3,
-                    NicknameType.CHILD_4
+                    NicknameType.CHILD_4,
+                    NicknameType.YOUNGER_SIBLING
                 )) {
             } // skip
             else {

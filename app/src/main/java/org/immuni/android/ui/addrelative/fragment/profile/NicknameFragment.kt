@@ -57,6 +57,7 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
             if (type == NicknameType.OTHER) {
             } // at the end
             else if (ageGroup < mainUserAgeGroup && type in setOf(
+                    NicknameType.OLDER_SIBLING,
                     NicknameType.PARENT,
                     NicknameType.MATERNAL_GRANDPARENT,
                     NicknameType.PATERNAL_GRANDPARENT
@@ -66,7 +67,8 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
                     NicknameType.CHILD_1,
                     NicknameType.CHILD_2,
                     NicknameType.CHILD_3,
-                    NicknameType.CHILD_4
+                    NicknameType.CHILD_4,
+                    NicknameType.YOUNGER_SIBLING
                 )) {
             } // skip
             else {
@@ -156,7 +158,7 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
 
     override fun onUserInfoUpdate(userInfo: RelativeInfo) {
         disableTriggeringEvent = true
-        items.values.forEach() {
+        items.values.forEach {
             it.isChecked = false
         }
 
