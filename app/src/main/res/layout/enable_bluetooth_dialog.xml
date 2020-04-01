@@ -74,7 +74,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
                 android:alpha="0.6"
-                android:text="Dando il consenso all'utilizzo del Bluetooth, ci permetti di calcolare il tuo fattore di rischio"
+                android:text="Dando il consenso all'utilizzo del Bluetooth, ci permetti di calcolare il tuo fattore di rischio."
                 android:textColor="#4F4F5B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -103,7 +103,7 @@
         android:layout_marginEnd="32dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="32dp"
-        android:text="@string/consent"
+        android:text="@string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
