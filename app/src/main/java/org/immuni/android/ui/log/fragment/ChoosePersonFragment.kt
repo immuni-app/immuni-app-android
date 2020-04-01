@@ -1,6 +1,7 @@
 package org.immuni.android.ui.log.fragment
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,8 +46,8 @@ class ChoosePersonFragment : Fragment() {
         viewModel.user.observe(viewLifecycleOwner, Observer {
             it?.let {
                 clinicDiaryForUser.text =
-                    if (it.isMain) getString(R.string.your_clinic_diary)
-                    else getString(R.string.clinic_diary_of, it.name)
+                    if (it.isMain) Html.fromHtml(getString(R.string.your_clinic_diary))
+                    else Html.fromHtml(getString(R.string.clinic_diary_of, it.name))
 
                 val themeColor = ContextCompat.getColor(
                     requireContext(),

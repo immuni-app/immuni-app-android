@@ -25,7 +25,7 @@
             android:gravity="center"
             android:text="@string/choose_person_bottom_message"
             android:textColor="@color/background"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,14 +87,15 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="50dp"
-            android:fontFamily="@font/euclid_circular_medium"
+            android:lineSpacingMultiplier="1.2"
+            android:fontFamily="@font/euclid_circular_regular"
             android:gravity="center_horizontal|bottom"
             android:text="@string/your_clinic_diary"
             android:textColor="#FFFFFF"
-            android:textSize="18dp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon" />
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <Button
             android:id="@+id/next"
@@ -106,7 +107,7 @@
             android:fontFamily="@font/euclid_circular_bold"
             android:text="@string/choose_person_button_start"
             android:textColor="@color/button_generic"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/clinicDiaryForUser" />

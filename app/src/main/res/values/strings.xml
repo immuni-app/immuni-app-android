@@ -15,8 +15,8 @@
     <string name="exit">Esci</string>
     <string name="confirm">Conferma</string>
     <string name="cancel">Annulla</string>
-    <string name="clinic_diary_of">Diario clinico di %s</string>
-    <string name="your_clinic_diary">Il tuo diario clinico</string>
+    <string name="clinic_diary_of"><![CDATA[Diario clinico di<br/><b>%s</b>]]></string>
+    <string name="your_clinic_diary"><![CDATA[<b>Il tuo</b><br/>diario clinico]]></string>
     <string name="welcome_lets_start">Iniziamo</string>
 
     <string name="welcome_1_title">Benvenuto</string>
