@@ -57,8 +57,10 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:capitalize="characters"
-                android:inputType="textVisiblePassword|textNoSuggestions|textCapCharacters"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                tools:text="abf34"
+                android:inputType="textCapWords|textVisiblePassword|textNoSuggestions|textCapCharacters"
                 app:endIconMode="clear_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
