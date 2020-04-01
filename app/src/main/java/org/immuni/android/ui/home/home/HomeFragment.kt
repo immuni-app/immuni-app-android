@@ -131,10 +131,21 @@ class HomeFragment : Fragment(), HomeClickListener {
                 openBluetoothDialog()
             }
             is SurveyCard -> {
-                viewModel.onSurveyCardTap()
+                if(item.tapQuestion) {
+                    openDiaryDialog()
+                } else {
+                    viewModel.onSurveyCardTap()
+                }
             }
             is SurveyCardDone -> { }
         }
+    }
+
+    private fun openDiaryDialog() {
+        val intent = Intent(AscoltoApplication.appContext, HomeDiaryDialogActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+        activity?.startActivity(intent)
     }
 
     private fun openNotificationDialog() {

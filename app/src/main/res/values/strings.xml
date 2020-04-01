@@ -96,8 +96,8 @@
     <string name="start_survey_filling">Inizia compilazione</string>
     <string name="reminder_notification_channel_name">Compila il questionario</string>
     <string name="home_separator_suggestions">Come comportarsi</string>
-    <string name="clinic_diary_updated">Diario clinico aggiornato</string>
-    <string name="clinic_diaries_updated">Diari clinici aggiornati</string>
+    <string name="clinic_diary_updated">Il tuo diario clinico è aggiornato</string>
+    <string name="clinic_diaries_updated">Il tuoi diari clinici sono aggiornati</string>
     <string name="clinic_diary_updated_message">Riceverai una notifica quando dovrai aggiornare il diario nuovamente</string>
     <string name="clinic_diaries_updated_message">Riceverai una notifica quando dovrai aggiornare i diari nuovamente</string>
     <string name="enable_geolocation_title">Attiva la localizzazione</string>
@@ -194,4 +194,5 @@
     <string name="ble_not_supported_by_this_device">Questo dispositivo non supporta Bluetooth Low Energy.</string>
     <string name="no_choice">Nessuna scelta</string>
     <string name="discover_why">Scopri perchè</string>
+    <string name="compile_the_clinical_diary">Compila il diario clinico</string>
 </resources>

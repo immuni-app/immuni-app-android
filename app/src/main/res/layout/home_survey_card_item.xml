@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
-    style="@style/CardShadowColorPrimary"
+    style="@style/CardShadowWhite"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="32dp"
     android:layout_marginEnd="32dp"
     android:layout_marginTop="8dp"
-    android:background="@drawable/rounded_corners_20dp_ripple_primary"
+    android:background="@drawable/rounded_corners_20dp"
     android:backgroundTint="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical">
@@ -34,7 +34,7 @@
         android:id="@+id/bottomContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corners_20dp_ripple_primary"
+        android:background="@drawable/rounded_corners_20dp"
         android:backgroundTint="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +92,7 @@
         app:layout_constraintWidth_percent="0.45" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/questionText"
         style="@style/P1Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -108,12 +108,15 @@
         app:layout_constraintWidth_percent="0.2" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/question"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:paddingRight="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:layout_constraintBottom_toBottomOf="@+id/questionText"
+        app:layout_constraintStart_toEndOf="@+id/questionText"
+        app:layout_constraintTop_toTopOf="@+id/questionText"
         app:srcCompat="@drawable/ic_question" />
 
 

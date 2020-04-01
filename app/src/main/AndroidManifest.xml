@@ -112,6 +112,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name=".ui.dialog.HomeDiaryDialogActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".ui.addrelative.AddRelativeActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"

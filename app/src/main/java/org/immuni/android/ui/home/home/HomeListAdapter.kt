@@ -38,14 +38,28 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
         var bottomMessage: TextView = v.findViewById(R.id.bottomMessage)
         val button: Button = v.findViewById(R.id.next)
         val title: TextView = v.findViewById(R.id.title)
+        val question: ImageView = v.findViewById(R.id.question)
+        val questionText: TextView = v.findViewById(R.id.questionText)
 
         init {
             button.setOnClickListener {
+                (items[adapterPosition] as? SurveyCard)?.tapQuestion = false
+                onItemClick(adapterPosition)
+            }
+
+            question.setOnClickListener {
+                (items[adapterPosition] as? SurveyCard)?.tapQuestion = true
+                onItemClick(adapterPosition)
+            }
+
+            questionText.setOnClickListener {
+                (items[adapterPosition] as? SurveyCard)?.tapQuestion = true
                 onItemClick(adapterPosition)
             }
         }
 
         override fun onClick(v: View) {
+            (items[adapterPosition] as? SurveyCard)?.tapQuestion = false
             onItemClick(adapterPosition)
         }
     }

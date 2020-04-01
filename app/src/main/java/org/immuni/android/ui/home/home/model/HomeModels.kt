@@ -11,6 +11,7 @@ data class SurveyCard(
     val familyMembersThatNeedToLog: Int
 ): HomeItemType() {
     val surveysToLog: Int = familyMembersThatNeedToLog + (if (doesMainUserNeedToLog) 1 else 0)
+    var tapQuestion = false
 }
 
 class SurveyCardDone(val surveysLogged: Int): HomeItemType()
