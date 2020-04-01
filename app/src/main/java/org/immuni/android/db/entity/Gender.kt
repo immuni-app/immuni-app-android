@@ -14,7 +14,7 @@ enum class Gender(val id: String) {
     }
 }
 
-fun Gender.iconResource(context: Context, deviceId: String, userIndex: Int): Int {
+fun Gender.iconResource(deviceId: String, userIndex: Int): Int {
     val random = Random(deviceId.hashCode())
     val list = when (this) {
         Gender.MALE -> listOf(
@@ -32,5 +32,17 @@ fun Gender.iconResource(context: Context, deviceId: String, userIndex: Int): Int
             R.drawable.ic_female_yellow
         )
     }.shuffled(random)
+    return list[userIndex % list.size]
+}
+
+fun colorResource(deviceId: String, userIndex: Int): Int {
+    val random = Random(deviceId.hashCode())
+    val list = listOf(
+        R.color.profile_purple,
+        R.color.profile_blue,
+        R.color.profile_violet,
+        R.color.profile_pink,
+        R.color.profile_yellow
+    ).shuffled(random)
     return list[userIndex % list.size]
 }

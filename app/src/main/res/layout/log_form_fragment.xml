@@ -70,7 +70,7 @@
         android:singleLine="true"
         android:alpha="0.8"
         android:gravity="center"
-        android:text="@string/survey_progress_text"
+        android:text="@string/clinic_diary_of"
         android:textColor="@color/background"
         app:layout_constraintBottom_toBottomOf="@+id/close"
         app:layout_constraintEnd_toEndOf="parent"

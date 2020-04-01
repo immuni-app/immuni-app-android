@@ -51,4 +51,10 @@
     <color name="card_yellow_bg">#FFE9AF</color>
     <color name="danger">#FE7D6C</color>
     <color name="onboarding_dialog_background">#E65181FD</color>
+
+    <color name="profile_purple">#917FFD</color>
+    <color name="profile_violet">#C993F3</color>
+    <color name="profile_yellow">#FFC48D</color>
+    <color name="profile_blue">#6993FF</color>
+    <color name="profile_pink">#F790AF</color>
 </resources>

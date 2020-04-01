@@ -5,15 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.bendingspoons.concierge.Concierge
 import com.bendingspoons.concierge.ConciergeManager
 import org.immuni.android.AscoltoApplication
 import org.immuni.android.R
-import org.immuni.android.db.entity.Gender
 import org.immuni.android.db.entity.iconResource
 import org.immuni.android.ui.home.family.model.*
 import org.immuni.android.util.Flags
@@ -121,7 +117,6 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
                 holder.age.text = item.user.ageGroup.humanReadable(context)
                 holder.icon.setImageResource(
                     item.user.gender.iconResource(
-                        context,
                         concierge.backupPersistentId.id,
                         item.userIndex
                     )

@@ -142,7 +142,7 @@ class FormFragment : Fragment() {
                 progressText.text = if (it.isMain) {
                     getString(R.string.your_clinic_diary)
                 } else {
-                    String.format(getString(R.string.survey_progress_text), it.name)
+                    String.format(getString(R.string.clinic_diary_of), it.name)
                 }
             }
         })

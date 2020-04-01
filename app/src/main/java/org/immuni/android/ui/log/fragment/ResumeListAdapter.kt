@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bendingspoons.concierge.ConciergeManager
 import org.immuni.android.AscoltoApplication
 import org.immuni.android.R
-import org.immuni.android.db.entity.Gender
 import org.immuni.android.db.entity.iconResource
 import org.immuni.android.ui.log.fragment.model.QuestionType
 import org.immuni.android.ui.log.fragment.model.ResumeItemType
@@ -72,7 +71,6 @@ class ResumeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinC
                 holder.age.text = item.user.ageGroup.humanReadable(AscoltoApplication.appContext)
                 holder.icon.setImageResource(
                     item.user.gender.iconResource(
-                        AscoltoApplication.appContext,
                         concierge.backupPersistentId.id,
                         item.userIndex
                     )
