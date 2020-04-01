@@ -11,7 +11,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.invisible
+import com.bendingspoons.base.extensions.showKeyboard
 import com.bendingspoons.base.extensions.visible
 import kotlinx.android.synthetic.main.insert_upload_data_code_fragment.*
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.close
@@ -24,6 +26,16 @@ import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_fragment) {
 
     private lateinit var viewModel: UploadDataViewModel
+
+    override fun onResume() {
+        super.onResume()
+        codeTextField.showKeyboard()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        codeTextField.hideKeyboard()
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
