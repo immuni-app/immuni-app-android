@@ -20,12 +20,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pageTitle" />
+
     <View
         android:id="@+id/bottomGradient"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="30dp"
         android:layout_gravity="top"
-        android:background="@drawable/gradient_home_top"
+        android:background="@drawable/gradient_center_home_color"
+        android:rotation="180"
+        app:layout_constraintBottom_toTopOf="@+id/bottomFillColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/bottomFillColor"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="top"
+        android:background="@color/home_background"
         android:rotation="180"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
