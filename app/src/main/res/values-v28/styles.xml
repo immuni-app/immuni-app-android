@@ -19,4 +19,9 @@
         <item name="android:elevation">@dimen/home_card_elevation</item>
         <item name="android:outlineSpotShadowColor">#99495D74</item>
     </style>
+
+    <style name="CardShadowColorPrimary">
+        <item name="android:elevation">@dimen/home_card_elevation</item>
+        <item name="android:outlineSpotShadowColor">@color/colorPrimary</item>
+    </style>
 </resources>

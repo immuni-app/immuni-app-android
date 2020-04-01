@@ -5,14 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bendingspoons.base.extensions.gone
-import com.bendingspoons.base.extensions.visible
 import org.immuni.android.AscoltoApplication
 import org.immuni.android.R
 import org.immuni.android.ui.home.home.model.*

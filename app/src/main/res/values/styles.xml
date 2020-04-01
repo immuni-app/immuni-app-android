@@ -142,7 +142,7 @@
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
         <item name="android:textSize">16dp</item>
         <item name="android:textColor">@color/p1_text</item>
-        <item name="android:lineSpacingMultiplier">1.3</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
     <style name="P2Text">
@@ -262,6 +262,9 @@
     </style>
 
     <style name="CardShadowBlue">
+    </style>
+
+    <style name="CardShadowColorPrimary">
     </style>
 
 </resources>

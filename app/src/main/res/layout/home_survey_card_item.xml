@@ -1,64 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
-    style="@style/CardShadowWhite"
+    style="@style/CardShadowColorPrimary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="32dp"
     android:layout_marginEnd="32dp"
     android:layout_marginTop="8dp"
     android:background="@drawable/rounded_corners_20dp_ripple_primary"
-    android:backgroundTint="@color/background"
+    android:backgroundTint="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="64dp"
         android:layout_weight="1"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_illustration_survey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/title"
-        style="@style/H3SectionHeading"
-        android:textColor="@color/colorPrimary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32sp"
-        android:layout_marginTop="-8dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/euclid_circular_bold"
-        android:gravity="center_horizontal|bottom"
-        android:text="@string/update_your_clinic_diary" />
-
-    <Button
-        android:id="@+id/next"
-        style="@style/RoundedButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39"
+        app:layout_constraintWidth_percent="0.5" />
+    <LinearLayout
+        android:id="@+id/bottomContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/start_survey_filling"
+        android:background="@drawable/rounded_corners_20dp_ripple_primary"
+        android:backgroundTint="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/bottomMessage"
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center_horizontal|top"
+            android:text="@string/you_have_clinic_diaries_to_update"
+            app:layout_constraintBottom_toTopOf="@+id/next"
+            app:layout_constraintEnd_toEndOf="@+id/next"
+            app:layout_constraintStart_toStartOf="@+id/next"
+            app:layout_constraintTop_toTopOf="@+id/view5" />
+        <Button
+            android:id="@+id/next"
+            style="@style/RoundedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/start_survey_filling"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/bottomMessage"
+        android:id="@+id/title"
+        style="@style/H2SubHeading"
+        android:lineSpacingMultiplier="1.1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:gravity="left"
+        android:text="@string/update_your_clinic_diary"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:maxLines="4"
+        android:autoSizeTextType="uniform"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.45" />
+
+    <TextView
+        android:id="@+id/textView11"
         style="@style/P1Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="64dp"
+        android:alpha="0.7"
+        android:gravity="left"
+        android:text="@string/discover_why"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/bottomContainer"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <ImageView
+        android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_weight="1"
-        android:gravity="center_horizontal|top"
-        android:text="@string/you_have_clinic_diaries_to_update" />
-</LinearLayout>
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:srcCompat="@drawable/ic_question" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
