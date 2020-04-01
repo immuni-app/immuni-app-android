@@ -76,11 +76,13 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 val itemsList = mutableListOf<HomeItemType>()
 
                 // check geolocation/bluetooth disabled
+
                 if (!bluetoothManager.isBluetoothSupported() || !bluetoothManager.isBluetoothEnabled()) { //!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext) ||
                     itemsList.add(EnableBluetoothCard())
                 }
 
                 // check geolocation/bluetooth disabled
+
                 if (!PermissionsManager.hasAllPermissions(AscoltoApplication.appContext) ||
                     !PermissionsManager.globalLocalisationEnabled(AscoltoApplication.appContext)) {
                     itemsList.add(EnableGeolocationCard())
@@ -110,38 +112,53 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 }
 
                 // suggestion cards
-
-                val suggestionCards = mutableListOf<HomeItemType>()
-
                 val survey = oracle.settings()?.survey
 
+                val userCardsMap = mutableMapOf<Severity, MutableList<String>>()
                 for (user in surveyManager.allUsers()) {
                     val hasNeverCompletedSurveys = surveyManager.lastHealthProfile(user.id) == null
                     if (hasNeverCompletedSurveys) continue
 
                     val name =
                         if (user.isMain) ctx.resources.getString(R.string.you_as_complement) else user.name
-                    val suggestionTitle = String.format(
-                        ctx.resources.getString(R.string.indication_for),
-                        "<b>$name</b>"
-                    )
+
                     val triageProfileId = surveyManager.lastHealthProfile(user.id)?.triageProfileId
                     val triageProfile = triageProfileId?.let {
                         survey?.triage?.profile(it)
                     }
                     val severity = triageProfile?.severity ?: LOW
-                    suggestionCards.add(
-                        when (severity) {
+
+                    userCardsMap[severity] = (userCardsMap[severity] ?: mutableListOf()).apply {
+                        add(name)
+                    }
+                }
+
+                if (userCardsMap.keys.isNotEmpty()) {
+                    itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
+                    userCardsMap.keys.forEach { severity ->
+                        val and = AscoltoApplication.appContext.getString(R.string.and)
+                        val names: String
+                        val namesList = userCardsMap[severity]!!
+                        if(namesList.size == 1) {
+                            names = namesList.first()
+                        } else {
+                            // remove last
+                            val lastItem = namesList.removeAt(namesList.size - 1)
+                            names = "${namesList.joinToString(separator = ", ")} $and $lastItem"
+                        }
+
+
+                        val suggestionTitle = String.format(
+                            ctx.resources.getString(R.string.indication_for),
+                            "<b>$names</b>"
+                        )
+
+                        itemsList.add(when (severity) {
                             LOW -> SuggestionsCardWhite(suggestionTitle, severity)
                             MID -> SuggestionsCardYellow(suggestionTitle, severity)
                             HIGH -> SuggestionsCardRed(suggestionTitle, severity)
-                        }
-                    )
-                }
-
-                if (suggestionCards.isNotEmpty()) {
-                    itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
-                    itemsList.addAll(suggestionCards)
+                        })
+                    }
                 }
 
                 homelistModel.value = itemsList.toList()

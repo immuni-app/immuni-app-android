@@ -7,6 +7,7 @@
     <string name="family_tab">Famiglia</string>
     <string name="next">Avanti</string>
     <string name="settings_tab">Informazioni</string>
+    <string name="and">e</string>
 
     <string name="survey_exit_title">Sei sicuro?</string>
     <string name="survey_exit_message">Se decidi di abbandonare ora la compilazione, le risposte date fino a qui andranno perse.</string>
@@ -17,6 +18,8 @@
     <string name="cancel">Annulla</string>
     <string name="clinic_diary_of"><![CDATA[Diario clinico di<br/><b>%s</b>]]></string>
     <string name="your_clinic_diary"><![CDATA[<b>Il tuo</b><br/>diario clinico]]></string>
+    <string name="clinic_diary_of_form">Diario clinico di %s</string>
+    <string name="your_clinic_diary_form">Il tuo diario clinico</string>
     <string name="welcome_lets_start">Iniziamo</string>
 
     <string name="welcome_1_title">Benvenuto</string>
