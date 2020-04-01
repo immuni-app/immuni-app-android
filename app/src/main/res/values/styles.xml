@@ -194,28 +194,32 @@
     <style name="RoundedButton">
         <item name="cornerRadius">27dp</item>
         <item name="textAllCaps">false</item>
+        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:minHeight">55dp</item>
+        <item name="android:minWidth">150dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
-        <item name="android:paddingEnd">50dp</item>
-        <item name="android:paddingStart">50dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingStart">24dp</item>
         <item name="android:letterSpacing">-0.01</item>
     </style>
 
     <style name="WhiteRoundedButton">
         <item name="cornerRadius">27dp</item>
+        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
         <item name="textAllCaps">false</item>
+        <item name="android:minWidth">150dp</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:minHeight">55dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
-        <item name="android:paddingEnd">50dp</item>
-        <item name="android:paddingStart">50dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingStart">24dp</item>
         <item name="color">@android:color/white</item>
         <item name="android:letterSpacing">-0.01</item>
     </style>

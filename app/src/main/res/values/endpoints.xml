@@ -1,4 +1,4 @@
 <resources>
-    <string name="oracle_base_url" translatable="false">https://android.ascolto-onlus.org</string>
+    <string name="oracle_base_url" translatable="false">https://android.staging.ascolto-onlus.org</string>
     <string name="pico_base_url" translatable="false">https://analytics.ascolto-onlus.org</string>
 </resources>
