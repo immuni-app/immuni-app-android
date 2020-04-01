@@ -15,7 +15,7 @@
     <string name="exit">Esci</string>
     <string name="confirm">Conferma</string>
     <string name="cancel">Annulla</string>
-    <string name="survey_progress_text">Diario clinico di %s</string>
+    <string name="clinic_diary_of">Diario clinico di %s</string>
     <string name="your_clinic_diary">Il tuo diario clinico</string>
     <string name="welcome_lets_start">Iniziamo</string>
 
@@ -51,7 +51,7 @@
     <string name="choose_person_bottom_message">Ti chiederemo di effettuare la compilazione per tutti i tuoi familiari in successione</string>
     <string name="choose_person_bottom_message_members">Ti chiederemo di effettuare la compilazione in sucessione per tutti i profili che hai registrato</string>
 
-    <string name="compile_your_clinical_diary">Compila il diario clinico</string>
+    <string name="compile_your_clinical_diary">Inizia la compilazione</string>
     <string name="choose_person_button_start">Inizia</string>
 
     <string name="log_completed">Diario clinico salvato!</string>

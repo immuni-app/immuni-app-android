@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.home_activity.*
 import org.immuni.android.managers.BluetoothListenerLifecycle
 import org.immuni.android.managers.GeolocalisationListenerLifecycle
 import org.immuni.android.ui.dialog.FamilyDialogActivity
+import org.immuni.android.util.Flags
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HomeActivity : AscoltoActivity()  {
@@ -103,6 +104,7 @@ class HomeActivity : AscoltoActivity()  {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == FamilyDialogActivity.REQUEST_CODE_FAMILY_DIALOG) {
             if(resultCode == Activity.RESULT_OK) {
+                Flags.transient.shouldOpenAddRelativeActivity = true
                 bottom_nav.selectedItemId = R.id.family
             } else {
                 // do nothing
