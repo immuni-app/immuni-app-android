@@ -81,7 +81,7 @@
                 style="@style/EditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textNoSuggestions|textVisiblePassword"
+                android:inputType="textNoSuggestions|textVisiblePassword|textCapSentences"
                 app:endIconMode="clear_text"
                 android:hint="Zio"
                 android:maxLength="5"
