@@ -11,7 +11,7 @@
     android:layout_marginEnd="32dp"
     android:layout_marginTop="8dp"
     android:background="@drawable/rounded_corners_20dp"
-    android:backgroundTint="#E9EFFF"
+    android:backgroundTint="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -35,7 +35,7 @@
         android:fontFamily="@font/euclid_circular_semi_bold"
         android:gravity="left"
         android:text="@string/old_people_in_family_title"
-        android:textColor="#5181FD"
+        android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
         android:text="@string/old_people_in_family_description"
         android:textSize="14sp"
         android:fontFamily="@font/euclid_circular_medium"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#fff"
         app:layout_constraintBottom_toTopOf="@+id/addButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
