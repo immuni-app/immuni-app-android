@@ -5,6 +5,7 @@ import com.bendingspoons.oracle.Oracle
 import okhttp3.ResponseBody
 import org.immuni.android.api.oracle.model.AscoltoMe
 import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.BtIds
 import org.immuni.android.api.oracle.model.FcmTokenRequest
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.User
@@ -43,11 +44,21 @@ class ApiManager : KoinComponent {
     suspend fun exportData(code: String, data: ExportData): Response<ResponseBody> {
         return api.exportData(code, data)
     }
+
+    suspend fun getBtIds() = api.getBtIds()
+}
+
+inline fun <reified T: Any> Response<ResponseBody>.modelFromJson() : T {
+    val ret : T? = body()?.string()?.let{ fromJson(it) }
+    return ret ?: throw RuntimeException("Unable to decode model ${T::class}")
 }
 
 interface CustomOracleAPI {
     @POST("notifications/fcm")
     suspend fun fcmNotificationToken(@Body reedem: FcmTokenRequest): Response<ResponseBody>
+
+    @GET("bt")
+    suspend fun getBtIds(): Response<ResponseBody>
 
     @POST("householder")
     suspend fun updateMainUser(@Body user: User): Response<ResponseBody>

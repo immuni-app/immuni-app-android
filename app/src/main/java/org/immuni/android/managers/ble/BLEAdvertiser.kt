@@ -17,6 +17,8 @@ import org.immuni.android.db.AscoltoDatabase
 import org.immuni.android.db.entity.BLEContactEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import okhttp3.internal.waitMillis
+import org.immuni.android.managers.BtIdsManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.ext.getScopeName
@@ -29,9 +31,9 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private var bluetoothGattServer: BluetoothGattServer? = null
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
-    private val btId = oracle.me()?.btId!!
     private lateinit var advertiser: BluetoothLeAdvertiser
     private var callback = MyAdvertiseCallback()
+    private val btIdsManager: BtIdsManager by inject()
     private val id = Random.nextInt(0, 1000)
 
     fun stop() {
@@ -46,6 +48,14 @@ class BLEAdvertiser(val context: Context): KoinComponent {
 
         advertiser = adapter.bluetoothLeAdvertiser
 
+        startServer()
+        GlobalScope.launch {
+            startAdvertising()
+        }
+    }
+
+    private suspend fun startAdvertising() {
+        val btId = btIdsManager.getOrFetchActiveBtId()
         val builder = AdvertiseSettings.Builder().apply {
             setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
             setConnectable(false)
@@ -56,18 +66,30 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         val dataBuilder = AdvertiseData.Builder().apply {
             setIncludeDeviceName(false) // if true fail = 1
             val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString) //btId
-            val bytesMan = btId.replace("-", "")//byteArrayOf(1)
+            val bytesMan = btId.id.replace("-", "")//byteArrayOf(1)
             val data = Hex.stringToBytes(bytesMan)
             addServiceData(serviceId, data)
             addServiceUuid(serviceId)
             setIncludeTxPowerLevel(true)
         }
-
-        startServer()
         advertiser.startAdvertising(
             builder.build(), dataBuilder.build(),
             callback
         )
+        // wait until the bt id expires
+        waitMillis((btId.expirationTimestamp * 1000.0).toLong() - btIdsManager.correctTime())
+
+        // wait a bit longer if the bt id is not yet expired
+        while (btIdsManager.isNotExpired(btId)) {
+            waitMillis(1000)
+        }
+
+        // stop and start again
+        advertiser.stopAdvertising(callback)
+
+        GlobalScope.launch {
+            startAdvertising()
+        }
     }
 
     inner class MyAdvertiseCallback: AdvertiseCallback() {

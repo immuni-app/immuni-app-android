@@ -8,7 +8,6 @@ import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.immuni.android.api.oracle.repository.OracleRepository
 import org.immuni.android.api.oracle.repository.OracleRepositoryImpl
 import org.immuni.android.db.AscoltoDatabase
-import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.log.LogViewModel
 import org.immuni.android.ui.onboarding.Onboarding
@@ -25,9 +24,7 @@ import com.bendingspoons.secretmenu.SecretMenu
 import com.bendingspoons.theirs.Theirs
 import de.fraunhofer.iis.Estimator
 import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.managers.AscoltoNotificationManager
-import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.SurveyManager
+import org.immuni.android.managers.*
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.ui.ble.BleDebugViewModel
 import org.immuni.android.ui.home.family.details.UserDetailsViewModel
@@ -122,6 +119,10 @@ val appModule = module {
     // single instance of AscoltoNotificationManager
     single {
         AscoltoNotificationManager(androidContext())
+    }
+
+    single {
+        BtIdsManager(androidContext())
     }
 
     // SetupViewModel
