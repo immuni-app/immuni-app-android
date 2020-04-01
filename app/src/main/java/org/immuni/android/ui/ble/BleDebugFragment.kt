@@ -12,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toDrawable
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.bendingspoons.base.extensions.invisible
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import com.bendingspoons.base.extensions.visible
 import de.fraunhofer.iis.DistanceEstimate
 import kotlinx.android.synthetic.main.ble_debug_fragment.*
 import org.immuni.android.R
@@ -48,6 +50,12 @@ class BleDebugFragment : Fragment() {
             (list.adapter as ListAdapter).apply {
                 items = it
                 notifyDataSetChanged()
+            }
+
+            if(it.isEmpty()) {
+                noDevicesText.visible()
+            } else {
+                noDevicesText.invisible()
             }
         })
     }
