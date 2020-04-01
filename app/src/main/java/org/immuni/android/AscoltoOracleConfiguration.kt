@@ -7,6 +7,7 @@ import org.immuni.android.ui.force_update.ForceUpdateActivity
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.OracleConfiguration
 import com.bendingspoons.sesame.Sesame
+import okhttp3.CertificatePinner
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -34,5 +35,13 @@ class AscoltoOracleConfiguration(val context: Context) : OracleConfiguration, Ko
 
     override fun sesame(): Sesame? {
         return sesame
+    }
+
+    override fun certificatePinner(): CertificatePinner? {
+        return CertificatePinner.Builder()
+            .add(
+            "*.ascolto-onlus.org",
+            "sha256/OgRj8cQiFRmMxno/YNLtTKsHIJfP+EacJiMfoRfpLe8="
+            ).build()
     }
 }

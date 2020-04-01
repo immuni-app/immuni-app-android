@@ -10,6 +10,7 @@ import com.bendingspoons.oracle.api.model.OracleSettings
 import com.bendingspoons.pico.PicoConfiguration
 import com.bendingspoons.theirs.adjust.Adjust
 import com.bendingspoons.sesame.Sesame
+import okhttp3.CertificatePinner
 import org.immuni.android.picoMetrics.LocationPermissionLevel
 import org.immuni.android.picoMetrics.PushPermissionLevel
 import org.koin.core.KoinComponent
@@ -47,6 +48,14 @@ class AscoltoPicoConfiguration(val context: Context): PicoConfiguration, KoinCom
 
     override fun wasInstalledBeforePico(): Boolean {
         return false
+    }
+
+    override fun certificatePinner(): CertificatePinner? {
+        return CertificatePinner.Builder()
+            .add(
+                "*.ascolto-onlus.org",
+                "sha256/ArtgUpVapq77kY3upbiBWyWQMfSo1ilJ1z6W0UR2SLQ="
+            ).build()
     }
 
     override val userInfo: Map<String, Any>
