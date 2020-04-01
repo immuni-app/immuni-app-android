@@ -60,7 +60,7 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
 
         setForeground(createForegroundInfo())
 
-        currentAdvertiser = BLEAdvertiser().apply {
+        currentAdvertiser = BLEAdvertiser(context).apply {
             start()
         }
         currentScanner = BLEScanner().apply {

@@ -2,6 +2,7 @@ package org.immuni.android.managers
 
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothGattServer
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
