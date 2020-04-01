@@ -5,7 +5,7 @@ import PushNotificationUtils
 import android.Manifest
 import com.squareup.moshi.Json
 import org.immuni.android.AscoltoApplication
-import org.immuni.android.managers.GeolocationManager
+import org.immuni.android.managers.PermissionsManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -33,13 +33,13 @@ enum class LocationPermissionLevel {
     fun userInfo() = "location_permission_level" to this
 
     companion object : KoinComponent {
-        val geolocationManager: GeolocationManager by inject()
+        val PERMISSIONS_MANAGER: PermissionsManager by inject()
 
         fun instance(): LocationPermissionLevel {
             // TODO: check logic
             val context = AscoltoApplication.appContext
-            val hasAllPermissions = GeolocationManager.hasAllPermissions(context)
-            val hasForegroundPermission = GeolocationManager.checkHasPermission(
+            val hasAllPermissions = PermissionsManager.hasAllPermissions(context)
+            val hasForegroundPermission = PermissionsManager.checkHasPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
             )

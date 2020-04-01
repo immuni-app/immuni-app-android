@@ -3,22 +3,27 @@ package org.immuni.android.managers
 import android.Manifest
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
+import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Build
+import android.os.PowerManager
+import android.provider.Settings
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.launch
+import org.immuni.android.api.oracle.model.AscoltoMe
+import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class GeolocationManager(val context: Context) : KoinComponent {
+class PermissionsManager(val context: Context) : KoinComponent {
 
     companion object {
         const val REQUEST_CODE = 620
@@ -50,6 +55,25 @@ class GeolocationManager(val context: Context) : KoinComponent {
         fun globalLocalisationEnabled(context: Context): Boolean {
             val locationManager = context.getSystemService(LOCATION_SERVICE) as LocationManager
             return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        }
+
+        fun isIgnoringBatteryOptimizations(context: Context): Boolean {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val packageName: String = context.packageName
+                val pm = context.getSystemService(Context.POWER_SERVICE) as? PowerManager
+                if (pm != null) return pm.isIgnoringBatteryOptimizations(packageName)
+            }
+            return false
+        }
+
+        fun startChangeBatteryOptimization(context: Context) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val intent = Intent()
+                intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+                val packageName: String = context.packageName
+                intent.data = Uri.parse("package:$packageName")
+                context.startActivity(intent)
+            }
         }
     }
 

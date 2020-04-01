@@ -8,7 +8,7 @@ import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.immuni.android.api.oracle.repository.OracleRepository
 import org.immuni.android.api.oracle.repository.OracleRepositoryImpl
 import org.immuni.android.db.AscoltoDatabase
-import org.immuni.android.managers.GeolocationManager
+import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.log.LogViewModel
 import org.immuni.android.ui.onboarding.Onboarding
@@ -106,7 +106,7 @@ val appModule = module {
 
     // single instance of GeolocationManager
     single {
-        GeolocationManager(androidContext())
+        PermissionsManager(androidContext())
     }
 
     // single instance of BluetoothManager

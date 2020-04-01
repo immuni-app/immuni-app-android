@@ -3,7 +3,6 @@ package org.immuni.android.ui.onboarding
 import android.content.Intent
 import androidx.lifecycle.*
 import com.bendingspoons.base.livedata.Event
-import com.bendingspoons.base.utils.ExternalLinksHelper
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
@@ -15,7 +14,7 @@ import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.AscoltoMe
 import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.immuni.android.db.AscoltoDatabase
-import org.immuni.android.managers.GeolocationManager
+import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.models.User
 import org.immuni.android.picoMetrics.OnboardingCompleted
 import org.immuni.android.ui.dialog.WebViewDialogActivity
@@ -36,7 +35,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val pico: Pico by inject()
     private val apiManager: ApiManager by inject()
-    private val geolocationManager: GeolocationManager by inject()
+    private val permissionsManager: PermissionsManager by inject()
 
     var partialUserInfo = MediatorLiveData<OnboardingUserInfo>()
 
@@ -71,7 +70,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
         }
 
         uiScope.launch {
-            geolocationManager.isActive.asFlow().drop(1).collect { active ->
+            permissionsManager.isActive.asFlow().drop(1).collect { active ->
                 _navigateToNextPage.value = Event(true)
             }
         }

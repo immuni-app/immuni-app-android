@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.bendingspoons.secretmenu.SecretMenu
-import org.immuni.android.managers.GeolocationManager
+import org.immuni.android.managers.PermissionsManager
 import org.koin.android.ext.android.inject
 
 @SuppressLint("Registered")
 open class AscoltoActivity : AppCompatActivity() {
 
-    val geolocationManager: GeolocationManager by inject()
+    val permissionsManager: PermissionsManager by inject()
     val secretMenu: SecretMenu by inject()
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
@@ -33,6 +33,6 @@ open class AscoltoActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        geolocationManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults)
+        permissionsManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults)
     }
 }

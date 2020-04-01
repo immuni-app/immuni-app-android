@@ -4,8 +4,6 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import org.immuni.android.db.AscoltoDatabase
 import org.immuni.android.util.isFlagSet
 import org.immuni.android.util.setFlag
@@ -20,7 +18,7 @@ import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.AscoltoMe
 import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.GeolocationManager
+import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.User
 import org.immuni.android.models.survey.Severity
@@ -30,7 +28,6 @@ import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.family.model.*
 import org.immuni.android.ui.home.home.model.*
 
-import org.immuni.android.workers.BLEForegroundServiceWorker
 import org.immuni.android.util.Flags
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -84,8 +81,8 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 }
 
                 // check geolocation/bluetooth disabled
-                if (!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext) ||
-                    !GeolocationManager.globalLocalisationEnabled(AscoltoApplication.appContext)) {
+                if (!PermissionsManager.hasAllPermissions(AscoltoApplication.appContext) ||
+                    !PermissionsManager.globalLocalisationEnabled(AscoltoApplication.appContext)) {
                     itemsList.add(EnableGeolocationCard())
                 }
 
