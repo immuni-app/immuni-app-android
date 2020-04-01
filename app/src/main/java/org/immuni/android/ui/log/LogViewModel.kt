@@ -7,6 +7,8 @@ import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
+import org.immuni.android.AscoltoApplication
+import org.immuni.android.R
 import org.immuni.android.api.oracle.model.AscoltoMe
 import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.immuni.android.db.AscoltoDatabase
@@ -108,7 +110,12 @@ class LogViewModel(
             formModel()?.surveyAnswers?.keys?.forEach { questionId ->
                 val answers = formModel()?.surveyAnswers?.get(questionId)!!
                 val q = survey.questions.find { it.id == questionId }!!
-                list.add(QuestionType(q.title, q.humanReadableAnswers(answers)))
+                var answersString = q.humanReadableAnswers(answers)
+                val isNoAnswer = answersString.isEmpty()
+                if (isNoAnswer) {
+                    answersString = AscoltoApplication.appContext.getString(R.string.no_choice)
+                }
+                list.add(QuestionType(q.title, answersString, isNoAnswer))
             }
             resumeModel.value = list
         }

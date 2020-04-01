@@ -189,4 +189,5 @@
     <string name="delete_profile">Elimina profilo</string>
     <string name="upload_data_explanation">Nel caso in cui ti venga richiesto dall\'autorità sanitaria, carica i tuoi dati di tracciamento Bluetooth.</string>
     <string name="ble_not_supported_by_this_device">Questo dispositivo non supporta Bluetooth Low Energy.</string>
+    <string name="no_choice">Nessuna scelta</string>
 </resources>

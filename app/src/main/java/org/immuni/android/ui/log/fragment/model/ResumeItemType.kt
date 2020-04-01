@@ -11,5 +11,6 @@ class UserType(
 
 class QuestionType(
     val question: String,
-    val answer: String
+    val answer: String,
+    val isNoAnswer: Boolean
 ): ResumeItemType()
