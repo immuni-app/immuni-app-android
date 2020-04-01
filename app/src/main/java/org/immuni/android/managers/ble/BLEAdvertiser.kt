@@ -25,6 +25,7 @@ import kotlin.random.Random
 
 class BLEAdvertiser(val context: Context): KoinComponent {
     private val gattServerTag = "GATT_SERVER"
+    private val database: AscoltoDatabase by inject()
     private val bluetoothManager: BluetoothManager by inject()
     private var bluetoothGattServer: BluetoothGattServer? = null
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
