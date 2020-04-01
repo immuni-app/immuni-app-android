@@ -149,10 +149,13 @@ class EditNicknameActivity : AscoltoActivity(), CompoundButton.OnCheckedChangeLi
     private fun buildWidget(user: User) {
         var cont = 0
         val mainUser = viewModel.mainUser()
+        val currentType = user.nickname?.type!!
+        val gender = user.gender
 
         enumValues<NicknameType>().forEach { type ->
             val ageGroup = user.ageGroup
             val gender = user.gender
+
 
             if (type == NicknameType.OTHER) {
             } // at the end
@@ -175,24 +178,20 @@ class EditNicknameActivity : AscoltoActivity(), CompoundButton.OnCheckedChangeLi
                 items.apply {
                     put(
                         Pair(type, gender),
-                        RadioButton(applicationContext).apply {
-                            id = cont++
-                            tag = cont
-                            text = Nickname(type, "").humanReadable(context, gender)
-                            val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
-                            typeface = tf
-                            textSize = 18f
-                            buttonDrawable =
-                                ContextCompat.getDrawable(context, R.drawable.radio_button)
-                            val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
-                            val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
-                            val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
-                            setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
-                            setTextColor(Color.parseColor("#495D74"))
-                            setOnCheckedChangeListener(this@EditNicknameActivity)
-                        }
+                        radioButton(cont++, Nickname(type, "").humanReadable(applicationContext, gender))
                     )
                 }
+            }
+        }
+
+        // if the current type is not in the list (maybe because the ageGroup has changed)
+        // we add it to prevent to have an empty field
+        if(items.keys.none { it.first == currentType } && currentType != NicknameType.OTHER) {
+            items.apply {
+                put(
+                    Pair(currentType, gender),
+                    radioButton(cont++, Nickname(currentType, "").humanReadable(applicationContext, gender))
+                )
             }
         }
 
@@ -200,25 +199,30 @@ class EditNicknameActivity : AscoltoActivity(), CompoundButton.OnCheckedChangeLi
         items.apply {
             put(
                 Pair(NicknameType.OTHER, Gender.FEMALE),
-                RadioButton(applicationContext).apply {
-                    id = cont++
-                    tag = cont
-                    text = context.getString(R.string.choose_a_nickname)
-                    val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
-                    typeface = tf
-                    textSize = 18f
-                    buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button)
-                    val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
-                    val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
-                    val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
-                    setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
-                    setTextColor(Color.parseColor("#495D74"))
-                    setOnCheckedChangeListener(this@EditNicknameActivity)
-                })
+                radioButton(cont++, applicationContext.getString(R.string.choose_a_nickname))
+            )
         }
 
         radioGroup.apply {
             items.values.forEach { addView(it) }
+        }
+    }
+
+    private fun radioButton(id: Int, text: String): RadioButton {
+        return RadioButton(applicationContext).apply {
+            this.id = id
+            tag = id
+            this.text = text
+            val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
+            typeface = tf
+            textSize = 18f
+            buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button)
+            val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
+            val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
+            val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
+            setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
+            setTextColor(Color.parseColor("#495D74"))
+            setOnCheckedChangeListener(this@EditNicknameActivity)
         }
     }
 }

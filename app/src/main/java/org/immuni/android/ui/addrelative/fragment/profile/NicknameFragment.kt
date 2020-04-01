@@ -75,22 +75,7 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
                 items.apply {
                     put(
                         Pair(type, gender),
-                        RadioButton(context).apply {
-                            id = cont++
-                            tag = cont
-                            text = Nickname(type, "").humanReadable(context, gender)
-                            val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
-                            typeface = tf
-                            textSize = 18f
-                            buttonDrawable =
-                                ContextCompat.getDrawable(context, R.drawable.radio_button)
-                            val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
-                            val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
-                            val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
-                            setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
-                            setTextColor(Color.parseColor("#495D74"))
-                            setOnCheckedChangeListener(this@NicknameFragment)
-                        }
+                        radioButton(cont++, Nickname(type, "").humanReadable(requireContext(), gender))
                     )
                 }
             }
@@ -100,21 +85,8 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
         items.apply {
             put(
                 Pair(NicknameType.OTHER, Gender.FEMALE),
-                RadioButton(context).apply {
-                    id = cont++
-                    tag = cont
-                    text = context.getString(R.string.choose_a_nickname)
-                    val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
-                    typeface = tf
-                    textSize = 18f
-                    buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button)
-                    val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
-                    val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
-                    val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
-                    setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
-                    setTextColor(Color.parseColor("#495D74"))
-                    setOnCheckedChangeListener(this@NicknameFragment)
-                })
+                radioButton(cont++, requireContext().getString(R.string.choose_a_nickname))
+                )
         }
 
         radioGroup.apply {
@@ -206,4 +178,21 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
         }
     }
 
+    private fun radioButton(id: Int, text: String): RadioButton {
+        return RadioButton(requireContext()).apply {
+            this.id = id
+            tag = id
+            this.text = text
+            val tf = ResourcesCompat.getFont(context, R.font.euclid_circular_bold)
+            typeface = tf
+            textSize = 18f
+            buttonDrawable = ContextCompat.getDrawable(context, R.drawable.radio_button)
+            val paddingLeft = ScreenUtils.convertDpToPixels(context, 20)
+            val paddingTop = ScreenUtils.convertDpToPixels(context, 16)
+            val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
+            setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
+            setTextColor(Color.parseColor("#495D74"))
+            setOnCheckedChangeListener(this@NicknameFragment)
+        }
+    }
 }

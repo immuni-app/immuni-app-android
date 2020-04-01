@@ -137,7 +137,7 @@
     <string name="add_relative_age_title">Quanti anni ha la persona che vuoi aggiungere?</string>
     <string name="add_relative_age_description">Questa informazione è importante per consigliarti al meglio come proteggere la persona dal coronavirus.</string>
 
-    <string name="nickname_parent_female">Madre</string>
+    <string name="nickname_parent_female">Mamma</string>
     <string name="nickname_child1_female">Prima figlia</string>
     <string name="nickname_child2_female">Seconda figlia</string>
     <string name="nickname_child3_female">Terza figlia</string>
@@ -147,7 +147,7 @@
     <string name="nickname_partner_female">Compagna</string>
     <string name="nickname_paternal_grandparent_female">Nonna paterna</string>
     <string name="nickname_maternal_grandparent_female">Nonna materna</string>
-    <string name="nickname_parent_male">Padre</string>
+    <string name="nickname_parent_male">Papà</string>
     <string name="nickname_child1_male">Primo figlio</string>
     <string name="nickname_child2_male">Secondo figlio</string>
     <string name="nickname_child3_male">Terzo figlio</string>
