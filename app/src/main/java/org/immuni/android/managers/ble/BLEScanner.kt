@@ -4,12 +4,16 @@ import android.bluetooth.le.*
 import android.os.ParcelUuid
 import android.util.Log
 import com.bendingspoons.oracle.Oracle
+import de.fraunhofer.iis.DistanceEstimate
 import de.fraunhofer.iis.Estimator
 import de.fraunhofer.iis.Measurement
 import de.fraunhofer.iis.ModelProvider
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.immuni.android.api.oracle.model.AscoltoMe
 import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.immuni.android.db.AscoltoDatabase
+import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.BluetoothManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -44,7 +48,8 @@ class BLEScanner: KoinComponent {
         bluetoothLeScanner.startScan(
             filter,
             ScanSettings.Builder().apply {
-                //setReportDelay(5000)
+                // with report delay the distance estimator doesn't work
+                //setReportDelay(3000)
                 setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
             }.build(),
             myScanCallback
@@ -56,22 +61,42 @@ class BLEScanner: KoinComponent {
         list.forEach {
             Log.d("BLEScanner", "### Distance in meters between ${it.deviceId1} and ${it.deviceId2} = ${it.distance} meters")
         }
+        val now = System.currentTimeMillis()
+        storeResults(list.filter { now - it.timestamp < 5000 })
+    }
+
+    private var lastStoreTs = 0L
+    private fun storeResults(list: List<DistanceEstimate>) {
+        // store data once every X seconds
+        // to prevent to much database inserts
+        val now = System.currentTimeMillis()
+        if(now - lastStoreTs < 5000) return
+        lastStoreTs = now
+
+        GlobalScope.launch {
+            database.bleContactDao().insert(
+                *list.map {
+                    BLEContactEntity(
+                        btId = it.deviceId2
+                    )
+                }.toTypedArray()
+            )
+        }
     }
 
     private fun processResults(results: List<ScanResult>) {
 
-        val idsRssi = mutableListOf<Pair<String, Int>>()
+        val btIds = mutableListOf<String>()
         results.forEach { result ->
 
             val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
             val bytesData = result.scanRecord?.serviceData?.get(serviceId)
             val rssi = result.rssi
-            Log.d("BLEScanner", "### rssi " + rssi.toString())
             //val txPower = result.txPower // API 26+
             bytesData?.let { bytes ->
                 val scannedBtId = byteArrayToHex(bytes)
                 scannedBtId?.let { btId ->
-                    idsRssi.add(btId to rssi)
+                    btIds.add(btId)
 
                     calculateDistance(Measurement(
                         System.currentTimeMillis(),
@@ -84,17 +109,7 @@ class BLEScanner: KoinComponent {
             }
         }
 
-        /*
         Log.d("BLEScanner", "### SCAN RESULT id=$id ${btIds.joinToString()}")
-        GlobalScope.launch {
-            database.bleContactDao().insert(
-                *btIds.map {
-                    BLEContactEntity(
-                        btId = it
-                    )
-                }.toTypedArray()
-            )
-        }*/
     }
 
     inner class MyScanCallback : ScanCallback() {
