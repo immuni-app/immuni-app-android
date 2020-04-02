@@ -13,8 +13,8 @@ android {
         applicationId "org.immuni.android"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 7
-        versionName "1.0.5"
+        versionCode 10
+        versionName "1.0.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -27,7 +27,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -38,10 +38,6 @@ android {
     }
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
-    }
-
-    repositories {
-        maven { url 'https://dl.bintray.com/geouniq/com.geouniq.android' }
     }
 }
 
@@ -105,9 +101,6 @@ dependencies {
     implementation 'org.koin:koin-androidx-scope:2.1.4'
     implementation 'org.koin:koin-androidx-viewmodel:2.1.4'
 
-    // Exo Player
-    implementation "com.google.android.exoplayer:exoplayer:2.10.3"
-
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
@@ -129,9 +122,6 @@ dependencies {
 
     // Lottie
     implementation 'com.airbnb.android:lottie:3.0.7'
-
-    // Billing
-    //implementation 'com.android.billingclient:billing:2.1.0'
 
     // Crashlytics
     implementation 'com.google.firebase:firebase-core:17.2.3'
