@@ -195,4 +195,7 @@
     <string name="no_choice">Nessuna scelta</string>
     <string name="discover_why">Scopri perché</string>
     <string name="compile_the_clinical_diary">Compila il diario clinico</string>
+    
+    <string name="clinic_diary_question_title">Che cos’è il diario clinico?</string>
+    <string name="clinic_diary_question_explanation">Compilando il diario clinico fornisci ad Immuni elementi indispensabili per consigliare te e la tua famiglia sul da farsi. Per un totale rispetto della privacy, i dati rimarranno salvati solo ed esclusivamente sul tuo smartphone.</string>
 </resources>
