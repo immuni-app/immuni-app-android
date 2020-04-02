@@ -64,17 +64,21 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW)
         }
 
+        val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString) //btId
+
         val dataBuilder = AdvertiseData.Builder().apply {
             setIncludeDeviceName(false) // if true fail = 1
-            val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString) //btId
+            addServiceUuid(serviceId)
+            setIncludeTxPowerLevel(true)
+        }
+        val scanResponseBuilder = AdvertiseData.Builder().apply {
+            setIncludeDeviceName(false) // if true fail = 1
             val bytesMan = btId.id.replace("-", "")//byteArrayOf(1)
             val data = Hex.stringToBytes(bytesMan)
             addServiceData(serviceId, data)
-            //addServiceUuid(serviceId)
-            setIncludeTxPowerLevel(true)
         }
         advertiser.startAdvertising(
-            builder.build(), dataBuilder.build(),
+            builder.build(), dataBuilder.build(), scanResponseBuilder.build(),
             callback
         )
         // wait until the bt id expires
