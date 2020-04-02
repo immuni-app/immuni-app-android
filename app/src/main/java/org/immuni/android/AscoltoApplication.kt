@@ -71,16 +71,6 @@ class AscoltoApplication : Application() {
         notificationManager = get()
 
         pico.setup()
-
-        initDB()
-    }
-
-    private fun initDB() {
-        GlobalScope.launch {
-            withContext(Dispatchers.IO) {
-                // TODO
-            }
-        }
     }
 
     companion object {
