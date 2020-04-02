@@ -8,7 +8,7 @@ import org.immuni.android.db.converter.GenderConverter
 import org.immuni.android.db.dao.BLEContactDao
 import org.immuni.android.db.entity.BLEContactEntity
 
-const val DATABASE_VERSION = 3
+const val DATABASE_VERSION = 4
 
 @Database(
     entities = [

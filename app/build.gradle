@@ -118,6 +118,10 @@ dependencies {
     kapt "androidx.room:room-compiler:2.2.4"
     androidTestImplementation "androidx.room:room-testing:2.2.4"
 
+    // SQL Cipher
+    implementation 'net.zetetic:android-database-sqlcipher:4.3.0'
+    implementation "androidx.sqlite:sqlite:2.0.1"
+
     // Koin
     implementation 'org.koin:koin-android:2.1.4'
     implementation 'org.koin:koin-androidx-scope:2.1.4'
