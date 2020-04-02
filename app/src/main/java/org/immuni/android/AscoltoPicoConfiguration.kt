@@ -43,9 +43,9 @@ class AscoltoPicoConfiguration(val context: Context): PicoConfiguration, KoinCom
         return mapOf()
     }
 
-    override fun wasInstalledBeforePico(): Boolean {
-        return false
-    }
+    override fun wasInstalledBeforePico() = false
+
+    override fun encryptStore() = true
 
     override fun certificatePinner(): CertificatePinner? {
         return CertificatePinner.Builder()

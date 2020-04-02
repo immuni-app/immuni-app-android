@@ -42,7 +42,7 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    single { KVStorage("state", androidContext()) }
+    single { KVStorage("state", androidContext(), encrypted = true) }
 
     // single instance of TDFDatabase
     single {
@@ -81,7 +81,7 @@ val appModule = module {
 
     // Concierge - Lib
     single {
-        Concierge.Manager(androidContext(), appCustomIdProvider = AscoltoConciergeCustomIdProvider())
+        Concierge.Manager(androidContext(), appCustomIdProvider = AscoltoConciergeCustomIdProvider(), encryptIds = true)
     }
 
     // Oracle - Lib

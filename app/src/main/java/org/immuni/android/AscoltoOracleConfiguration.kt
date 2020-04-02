@@ -44,4 +44,6 @@ class AscoltoOracleConfiguration(val context: Context) : OracleConfiguration, Ko
             "sha256/OgRj8cQiFRmMxno/YNLtTKsHIJfP+EacJiMfoRfpLe8="
             ).build()
     }
+
+    override fun encryptStore() = false
 }
