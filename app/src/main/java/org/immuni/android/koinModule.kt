@@ -21,6 +21,7 @@ import org.immuni.android.managers.AscoltoNotificationManager
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
+import org.immuni.android.managers.*
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.ui.ble.BleDebugViewModel
 import org.immuni.android.ui.home.HomeSharedViewModel
@@ -38,7 +39,6 @@ import org.immuni.android.ui.welcome.Welcome
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-
 
 val appModule = module {
 
@@ -129,6 +129,10 @@ val appModule = module {
     // single instance of AscoltoNotificationManager
     single {
         AscoltoNotificationManager(androidContext())
+    }
+
+    single {
+        BtIdsManager(androidContext())
     }
 
     // SetupViewModel

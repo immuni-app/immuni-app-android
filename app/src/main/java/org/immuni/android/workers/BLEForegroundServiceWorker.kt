@@ -17,10 +17,14 @@ import androidx.core.content.ContextCompat
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
+import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.delay
 import org.immuni.android.AscoltoApplication
 import org.immuni.android.R
+import org.immuni.android.api.oracle.model.AscoltoMe
+import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.immuni.android.managers.BluetoothManager
+import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.managers.ble.BLEAdvertiser
 import org.immuni.android.managers.ble.BLEScanner
 import org.immuni.android.ui.home.HomeActivity
@@ -34,6 +38,7 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
 
     val onboarding: Onboarding by inject()
     val bluetoothManager: BluetoothManager by inject()
+    val btIdsManager: BtIdsManager by inject()
 
     companion object {
         const val TAG = "BLEForegroundServiceWorker"
@@ -49,6 +54,8 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
     override suspend fun doWork(): Result {
         // if the user didn't do the onboarding yet, not run the worker
         if(!onboarding.isComplete()) return Result.success()
+
+        btIdsManager.setup()
 
         // cleanup current advertiser/scanner
         try {

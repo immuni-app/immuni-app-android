@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.AscoltoNotificationManager
+import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.ui.ble.BleDebugActivity
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.onboarding.Onboarding
@@ -34,6 +35,7 @@ class AscoltoSecretMenuConfiguration(val context: Context): SecretMenuConfigurat
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val theirs: Theirs by inject()
     private val notificationManager: AscoltoNotificationManager by inject()
+    private val btIdsManager: BtIdsManager by inject()
     private val onboarding: Onboarding by inject()
     private val setup: Setup by inject()
     private val welcome: Welcome by inject()
@@ -56,10 +58,10 @@ class AscoltoSecretMenuConfiguration(val context: Context): SecretMenuConfigurat
             object : SecretMenuItem("\uD83D\uDD14 Schedule a notification in 5 seconds", { _, _ ->
                 notificationManager.scheduleMock()
             }){},
-            object : SecretMenuItem("ℹ️ Copy bt_id", { context, config ->
-                val value = oracle.me()?.btId ?: ""
-                DeviceUtils.copyToClipBoard(context, text = value)
-                Toast.makeText(context, value, Toast.LENGTH_LONG).show()
+            object : SecretMenuItem("ℹ️ Copy current bt_id", { context, config ->
+                val value = btIdsManager.getCurrentBtId()
+                DeviceUtils.copyToClipBoard(context, text = value?.id ?: "-")
+                Toast.makeText(context, value?.id ?: "-", Toast.LENGTH_LONG).show()
             }){},
             object : SecretMenuItem("\uD83D\uDCA5 Clear Immuni", { context, config ->
                 config.concierge().resetUserIds()

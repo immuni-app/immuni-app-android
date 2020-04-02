@@ -11,7 +11,6 @@ import java.util.*
 class AscoltoMe(
     @field:Json(name = "next_survey_at") val nextSurveyDate: Double? = null,
     @field:Json(name = "householder") val mainUser: User? = null,
-    @field:Json(name = "bt_id") val btId: String? = null,
     @field:Json(name = "relatives") val familyMembers: List<User> = listOf()
 ): OracleMe(), JSonSerializable {
     override fun onDeserialize() {

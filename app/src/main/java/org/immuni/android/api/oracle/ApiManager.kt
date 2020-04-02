@@ -5,6 +5,7 @@ import com.bendingspoons.oracle.Oracle
 import okhttp3.ResponseBody
 import org.immuni.android.api.oracle.model.AscoltoMe
 import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.BtIds
 import org.immuni.android.api.oracle.model.FcmTokenRequest
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.User
@@ -43,11 +44,16 @@ class ApiManager : KoinComponent {
     suspend fun exportData(code: String, data: ExportData): Response<ResponseBody> {
         return api.exportData(code, data)
     }
+
+    suspend fun getBtIds() = api.getBtIds()
 }
 
 interface CustomOracleAPI {
     @POST("notifications/fcm")
     suspend fun fcmNotificationToken(@Body reedem: FcmTokenRequest): Response<ResponseBody>
+
+    @GET("bt")
+    suspend fun getBtIds(): Response<BtIds>
 
     @POST("householder")
     suspend fun updateMainUser(@Body user: User): Response<ResponseBody>
