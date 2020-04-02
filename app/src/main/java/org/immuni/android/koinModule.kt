@@ -2,6 +2,7 @@ package org.immuni.android
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
+import androidx.security.crypto.MasterKeys
 import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.concierge.Concierge
 import com.bendingspoons.oracle.Oracle
@@ -46,7 +47,8 @@ val appModule = module {
 
     // single instance of TDFDatabase
     single {
-        val passphrase: ByteArray = SQLiteDatabase.getBytes(charArrayOf('4', 'a', '3', '2', 'b', 'x'))
+        val key = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        val passphrase: ByteArray = SQLiteDatabase.getBytes(key.toCharArray())
         val factory = SupportFactory(passphrase)
 
         Room.databaseBuilder(
