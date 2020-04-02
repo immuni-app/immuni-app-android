@@ -16,6 +16,7 @@ import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.db.AscoltoDatabase
 import org.immuni.android.db.entity.BLEContactEntity
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.internal.waitMillis
 import org.immuni.android.managers.BtIdsManager
@@ -69,7 +70,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             val bytesMan = btId.id.replace("-", "")//byteArrayOf(1)
             val data = Hex.stringToBytes(bytesMan)
             addServiceData(serviceId, data)
-            addServiceUuid(serviceId)
+            //addServiceUuid(serviceId)
             setIncludeTxPowerLevel(true)
         }
         advertiser.startAdvertising(
@@ -77,11 +78,11 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             callback
         )
         // wait until the bt id expires
-        waitMillis((btId.expirationTimestamp * 1000.0).toLong() - btIdsManager.correctTime())
+        delay((btId.expirationTimestamp * 1000.0).toLong() - btIdsManager.correctTime())
 
         // wait a bit longer if the bt id is not yet expired
         while (btIdsManager.isNotExpired(btId)) {
-            waitMillis(1000)
+            delay(1000)
         }
 
         // stop and start again

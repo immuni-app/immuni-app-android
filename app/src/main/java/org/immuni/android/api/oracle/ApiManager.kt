@@ -48,17 +48,12 @@ class ApiManager : KoinComponent {
     suspend fun getBtIds() = api.getBtIds()
 }
 
-inline fun <reified T: Any> Response<ResponseBody>.modelFromJson() : T {
-    val ret : T? = body()?.string()?.let{ fromJson(it) }
-    return ret ?: throw RuntimeException("Unable to decode model ${T::class}")
-}
-
 interface CustomOracleAPI {
     @POST("notifications/fcm")
     suspend fun fcmNotificationToken(@Body reedem: FcmTokenRequest): Response<ResponseBody>
 
     @GET("bt")
-    suspend fun getBtIds(): Response<ResponseBody>
+    suspend fun getBtIds(): Response<BtIds>
 
     @POST("householder")
     suspend fun updateMainUser(@Body user: User): Response<ResponseBody>

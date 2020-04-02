@@ -15,6 +15,7 @@ import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.immuni.android.db.AscoltoDatabase
 import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.BluetoothManager
+import org.immuni.android.managers.BtIdsManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import kotlin.random.Random
@@ -22,6 +23,7 @@ import kotlin.random.Random
 class BLEScanner: KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private val database: AscoltoDatabase by inject()
+    private val btIdsManager: BtIdsManager by inject()
     private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
     private val id = Random.nextInt(0, 1000)
     private lateinit var bluetoothLeScanner: BluetoothLeScanner
@@ -101,7 +103,7 @@ class BLEScanner: KoinComponent {
                     calculateDistance(Measurement(
                         System.currentTimeMillis(),
                         rssi.toFloat(),
-                        oracle.me()?.btId!!,
+                        btIdsManager.getCurrentBtId()?.id ?: "",
                         btId,
                         ModelProvider.MOBILE_DEVICE.DEFAULT
                     ))

@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.BtId
 import org.immuni.android.api.oracle.model.BtIds
-import org.immuni.android.api.oracle.modelFromJson
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
@@ -21,6 +20,10 @@ class BtIdsManager(val context: Context) : KoinComponent {
     private val LOG_TAG = "BtIdsManager"
     fun correctTime() : Long {
         return Date().time + timeCorrection
+    }
+
+    fun getCurrentBtId(): BtId? {
+        return btIds?.ids?.firstOrNull()
     }
 
     fun isNotExpired(btId: BtId) : Boolean {
@@ -48,7 +51,7 @@ class BtIdsManager(val context: Context) : KoinComponent {
             try {
                 val response = apiManager.getBtIds()
                 if (response.isSuccessful) {
-                    btIds = response.modelFromJson()
+                    btIds = response.body()
                     timeCorrection = Date().time - (btIds!!.serverTimestamp.toLong() * 1000L)
                     hadSucces = true
                 }
