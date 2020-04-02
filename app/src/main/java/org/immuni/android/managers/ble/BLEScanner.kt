@@ -10,9 +10,9 @@ import de.fraunhofer.iis.Measurement
 import de.fraunhofer.iis.ModelProvider
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
-import org.immuni.android.db.AscoltoDatabase
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
@@ -22,9 +22,9 @@ import kotlin.random.Random
 
 class BLEScanner: KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
-    private val database: AscoltoDatabase by inject()
+    private val database: ImmuniDatabase by inject()
     private val btIdsManager: BtIdsManager by inject()
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val id = Random.nextInt(0, 1000)
     private lateinit var bluetoothLeScanner: BluetoothLeScanner
     private var myScanCallback = MyScanCallback()

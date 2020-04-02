@@ -1,8 +1,8 @@
 package org.immuni.android
 
 import android.content.Context
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.oracle.api.model.OracleMe
@@ -14,10 +14,10 @@ import org.immuni.android.picoMetrics.PushPermissionLevel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class AscoltoPicoConfiguration(val context: Context): PicoConfiguration, KoinComponent {
+class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComponent {
 
     val concierge: ConciergeManager by inject()
-    val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
 
     override fun endpoint(): String {
         return context.getString(R.string.pico_base_url)

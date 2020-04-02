@@ -10,7 +10,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
 import android.provider.Settings
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -18,8 +17,8 @@ import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.launch
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -78,7 +77,7 @@ class PermissionsManager(val context: Context) : KoinComponent {
     }
 
     //private val geoUniq: GeoUniq = get()
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
 
     val isActive = ConflatedBroadcastChannel<Boolean>(hasAllPermissions((context)))
 

@@ -3,12 +3,8 @@ package org.immuni.android.workers
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.Service
-import android.bluetooth.le.AdvertiseCallback
-import android.bluetooth.le.ScanCallback
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ServiceInfo
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
@@ -17,12 +13,8 @@ import androidx.core.content.ContextCompat
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
-import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.delay
-import org.immuni.android.AscoltoApplication
 import org.immuni.android.R
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.managers.ble.BLEAdvertiser

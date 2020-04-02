@@ -1,8 +1,8 @@
 package org.immuni.android.util
 
 import androidx.annotation.BoolRes
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 
 fun featureEnabled(@BoolRes feature: Int): Boolean {
-    return AscoltoApplication.appContext.resources.getBoolean(feature)
+    return ImmuniApplication.appContext.resources.getBoolean(feature)
 }

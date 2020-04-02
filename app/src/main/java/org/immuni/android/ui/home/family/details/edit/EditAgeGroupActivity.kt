@@ -4,14 +4,14 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.user_edit_age_group_activity.*
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.immuni.android.loading
 import org.immuni.android.models.AgeGroup
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class EditAgeGroupActivity : AscoltoActivity() {
+class EditAgeGroupActivity : ImmuniActivity() {
     private lateinit var viewModel: EditDetailsViewModel
     private lateinit var userId: String
 

@@ -18,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.immuni.android.db.entity.Gender
 import org.immuni.android.loading
@@ -28,7 +28,7 @@ import org.immuni.android.models.User
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class EditNicknameActivity : AscoltoActivity(), CompoundButton.OnCheckedChangeListener {
+class EditNicknameActivity : ImmuniActivity(), CompoundButton.OnCheckedChangeListener {
     private lateinit var viewModel: EditDetailsViewModel
     private lateinit var userId: String
     val items = LinkedHashMap<Pair<NicknameType, Gender>, RadioButton>()

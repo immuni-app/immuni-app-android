@@ -7,11 +7,11 @@ import androidx.annotation.StringRes
 import org.immuni.android.util.ProgressDialogFragment
 
 fun toast(message: String, length: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(AscoltoApplication.appContext, message, length).show()
+    Toast.makeText(ImmuniApplication.appContext, message, length).show()
 }
 
 fun toast(@StringRes title: Int, length: Int = Toast.LENGTH_SHORT) {
-    toast(AscoltoApplication.appContext.resources.getString(title), length)
+    toast(ImmuniApplication.appContext.resources.getString(title), length)
 }
 
 fun FragmentActivity.loading(loading: Boolean) {

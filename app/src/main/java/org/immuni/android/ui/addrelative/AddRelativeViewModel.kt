@@ -5,13 +5,12 @@ import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
-import org.immuni.android.db.AscoltoDatabase
-import org.immuni.android.models.Nickname
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.models.User
 import org.immuni.android.toast
 import org.immuni.android.ui.addrelative.fragment.profile.RelativeContentFragment
@@ -19,7 +18,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
 
-class AddRelativeViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) :
+class AddRelativeViewModel(val handle: SavedStateHandle, private val database: ImmuniDatabase) :
     ViewModel(), KoinComponent {
 
     companion object {
@@ -28,7 +27,7 @@ class AddRelativeViewModel(val handle: SavedStateHandle, private val database: A
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
     private val apiManager: ApiManager by inject()
 
@@ -94,7 +93,7 @@ class AddRelativeViewModel(val handle: SavedStateHandle, private val database: A
             if (result != null) {
                 _navigateToMainPage.value = Event(true)
             } else {
-                toast(AscoltoApplication.appContext.getString(R.string.server_generic_error))
+                toast(ImmuniApplication.appContext.getString(R.string.server_generic_error))
             }
         }
     }

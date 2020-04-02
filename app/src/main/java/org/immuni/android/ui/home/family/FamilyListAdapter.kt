@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bendingspoons.concierge.ConciergeManager
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.db.entity.iconResource
 import org.immuni.android.ui.home.family.model.*
@@ -19,7 +19,7 @@ import org.koin.core.inject
 class FamilyListAdapter(val clickListener: FamilyClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinComponent {
 
-    val context = AscoltoApplication.appContext
+    val context = ImmuniApplication.appContext
     var items = mutableListOf<FamilyItemType>()
     val concierge: ConciergeManager by inject()
 
@@ -111,7 +111,7 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
             is UserCardVH -> {
                 val item = items[position] as UserCard
                 holder.name.text = when (item.user.isMain) {
-                    true -> AscoltoApplication.appContext.resources.getString(R.string.you)
+                    true -> ImmuniApplication.appContext.resources.getString(R.string.you)
                     false -> item.user.name
                 }
                 holder.age.text = item.user.ageGroup.humanReadable(context)

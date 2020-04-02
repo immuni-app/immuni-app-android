@@ -7,11 +7,11 @@ import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
-import org.immuni.android.db.AscoltoDatabase
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.User
 import org.immuni.android.models.survey.*
@@ -25,11 +25,11 @@ import java.io.Serializable
 
 class LogViewModel(
     private val handle: SavedStateHandle,
-    private val database: AscoltoDatabase
+    private val database: ImmuniDatabase
 ) : ViewModel(), KoinComponent {
 
     private val state: KVStorage by inject()
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val concierge: ConciergeManager by inject()
     private val pico: Pico by inject()
     private val surveyManager: SurveyManager by inject()
@@ -113,7 +113,7 @@ class LogViewModel(
                 var answersString = q.humanReadableAnswers(answers)
                 val isNoAnswer = answersString.isEmpty()
                 if (isNoAnswer) {
-                    answersString = AscoltoApplication.appContext.getString(R.string.no_choice)
+                    answersString = ImmuniApplication.appContext.getString(R.string.no_choice)
                 }
                 list.add(QuestionType(q.title, answersString, isNoAnswer))
             }

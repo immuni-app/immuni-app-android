@@ -4,14 +4,14 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.user_edit_gender_activity.*
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.immuni.android.db.entity.Gender
 import org.immuni.android.loading
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class EditGenderActivity : AscoltoActivity() {
+class EditGenderActivity : ImmuniActivity() {
     private lateinit var viewModel: EditDetailsViewModel
     private lateinit var userId: String
 

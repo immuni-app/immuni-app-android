@@ -8,7 +8,7 @@ import org.immuni.android.managers.PermissionsManager
 import org.koin.android.ext.android.inject
 
 @SuppressLint("Registered")
-open class AscoltoActivity : AppCompatActivity() {
+open class ImmuniActivity : AppCompatActivity() {
 
     val permissionsManager: PermissionsManager by inject()
     val secretMenu: SecretMenu by inject()

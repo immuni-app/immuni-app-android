@@ -15,7 +15,7 @@ import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.home_fragment.*
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.models.survey.backgroundColor
 import org.immuni.android.ui.dialog.*
 import org.immuni.android.ui.home.home.model.*
@@ -76,7 +76,7 @@ class HomeFragment : Fragment(), HomeClickListener {
 
         viewModel.showSuggestionDialog.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { (url, severity) ->
-                val intent = Intent(AscoltoApplication.appContext, WebViewDialogActivity::class.java).apply {
+                val intent = Intent(ImmuniApplication.appContext, WebViewDialogActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     putExtra("url", url)
                     putExtra("color", severity.backgroundColor())
@@ -87,7 +87,7 @@ class HomeFragment : Fragment(), HomeClickListener {
 
         viewModel.navigateToSurvey.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let { url ->
-                val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java).apply {
+                val intent = Intent(ImmuniApplication.appContext, LogActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 }
                 activity?.startActivity(intent)
@@ -104,7 +104,7 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun showAddFamilyMemberDialog() {
-        val intent = Intent(AscoltoApplication.appContext, FamilyDialogActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, FamilyDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivityForResult(intent, FamilyDialogActivity.REQUEST_CODE_FAMILY_DIALOG)
@@ -142,28 +142,28 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openDiaryDialog() {
-        val intent = Intent(AscoltoApplication.appContext, HomeDiaryDialogActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, HomeDiaryDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
     }
 
     private fun openNotificationDialog() {
-        val intent = Intent(AscoltoApplication.appContext, NotificationsDialogActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, NotificationsDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
     }
 
     private fun openGeolocationDialog() {
-        val intent = Intent(AscoltoApplication.appContext, GeolocationDialogActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, GeolocationDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
     }
 
     private fun openBluetoothDialog() {
-        val intent = Intent(AscoltoApplication.appContext, BluetoothDialogActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, BluetoothDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)

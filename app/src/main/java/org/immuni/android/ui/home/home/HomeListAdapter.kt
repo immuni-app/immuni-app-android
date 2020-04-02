@@ -10,7 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.ui.home.home.model.*
 import kotlin.reflect.full.primaryConstructor
@@ -18,7 +18,7 @@ import kotlin.reflect.full.primaryConstructor
 class HomeListAdapter(val clickListener: HomeClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val context = AscoltoApplication.appContext
+    val context = ImmuniApplication.appContext
     private var items = mutableListOf<HomeItemType>()
 
     fun update(newList: List<HomeItemType>) {
@@ -164,7 +164,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
         position: Int,
         payload: List<Any>
     ) {
-        val resources = AscoltoApplication.appContext.resources
+        val resources = ImmuniApplication.appContext.resources
 
         when (holder) {
             is SuggestionsCardWhiteVH -> {

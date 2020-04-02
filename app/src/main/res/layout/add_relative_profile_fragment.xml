@@ -45,7 +45,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/progress" />
 
-    <org.immuni.android.ui.view.AscoltoProgressView
+    <org.immuni.android.ui.view.ImmuniProgressView
         android:id="@+id/progress"
         android:layout_width="0dp"
         android:layout_height="6dp"

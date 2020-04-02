@@ -5,7 +5,7 @@ import org.immuni.android.db.entity.Gender
 import org.immuni.android.models.survey.TriageProfile
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.models.NicknameType.*
 import java.io.Serializable
@@ -28,7 +28,7 @@ data class User(
     val name: String
         get() {
             if (isMain) return "-"
-            else return nickname?.humanReadable(AscoltoApplication.appContext, gender) ?: "-"
+            else return nickname?.humanReadable(ImmuniApplication.appContext, gender) ?: "-"
         }
 }
 

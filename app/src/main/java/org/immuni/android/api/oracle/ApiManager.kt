@@ -3,8 +3,8 @@ package org.immuni.android.api.oracle
 import com.bendingspoons.base.utils.fromJson
 import com.bendingspoons.oracle.Oracle
 import okhttp3.ResponseBody
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.api.oracle.model.BtIds
 import org.immuni.android.api.oracle.model.FcmTokenRequest
 import org.immuni.android.models.ExportData
@@ -15,7 +15,7 @@ import retrofit2.Response
 import retrofit2.http.*
 
 class ApiManager : KoinComponent {
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val api = oracle.customServiceAPI(CustomOracleAPI::class)
 
     private inline fun <reified T: Any> decode(response: Response<ResponseBody>): T? {
@@ -27,8 +27,8 @@ class ApiManager : KoinComponent {
         return null
     }
 
-    private suspend fun updateMe(response: Response<ResponseBody>): AscoltoMe? {
-        return decode<AscoltoMe>(response)?.also {
+    private suspend fun updateMe(response: Response<ResponseBody>): ImmuniMe? {
+        return decode<ImmuniMe>(response)?.also {
             oracle.updateMe(it)
         }
     }

@@ -5,11 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_member_add_dialog.*
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 
 
-class FamilyDialogActivity: AscoltoActivity() {
+class FamilyDialogActivity: ImmuniActivity() {
 
     companion object {
         const val REQUEST_CODE_FAMILY_DIALOG = 101

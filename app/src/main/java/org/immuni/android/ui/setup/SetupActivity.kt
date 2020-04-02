@@ -2,12 +2,11 @@ package org.immuni.android.ui.setup
 
 import android.content.Intent
 import android.os.Bundle
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.setDarkStatusBar
 import com.bendingspoons.base.extensions.setLightStatusBar
 
-class SetupActivity : AscoltoActivity() {
+class SetupActivity : ImmuniActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

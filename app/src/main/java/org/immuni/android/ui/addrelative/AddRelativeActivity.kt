@@ -3,11 +3,11 @@ package org.immuni.android.ui.addrelative
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.navigation.findNavController
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.koin.androidx.viewmodel.ext.android.getStateViewModel
 
-class AddRelativeActivity : AscoltoActivity() {
+class AddRelativeActivity : ImmuniActivity() {
 
     private lateinit var viewModel: AddRelativeViewModel
 

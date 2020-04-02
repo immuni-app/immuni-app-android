@@ -9,7 +9,7 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import org.immuni.android.R
 
-class AscoltoProgressView(context: Context, attrs: AttributeSet) : View(context, attrs) {
+class ImmuniProgressView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     private val completedPaint = Paint()
     private val inProgressPaint = Paint()
@@ -35,14 +35,14 @@ class AscoltoProgressView(context: Context, attrs: AttributeSet) : View(context,
     init {
         context.theme.obtainStyledAttributes(
             attrs,
-            R.styleable.AscoltoProgressView,
+            R.styleable.ImmuniProgressView,
             0, 0).apply {
 
             try {
-                progressBackgroundColor = getColor(R.styleable.AscoltoProgressView_progressColorBackground, 0)
-                progressCompletedColor = getColor(R.styleable.AscoltoProgressView_progressColorCompleted, 0)
-                progressPendingColor = getColor(R.styleable.AscoltoProgressView_progressColorPending, 0)
-                progressSeparatorColor = getColor(R.styleable.AscoltoProgressView_progressColorSeparator, 0)
+                progressBackgroundColor = getColor(R.styleable.ImmuniProgressView_progressColorBackground, 0)
+                progressCompletedColor = getColor(R.styleable.ImmuniProgressView_progressColorCompleted, 0)
+                progressPendingColor = getColor(R.styleable.ImmuniProgressView_progressColorPending, 0)
+                progressSeparatorColor = getColor(R.styleable.ImmuniProgressView_progressColorSeparator, 0)
 
                 completedPaint.color = progressCompletedColor
                 inProgressPaint.color = progressPendingColor

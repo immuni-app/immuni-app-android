@@ -1,23 +1,18 @@
 package org.immuni.android.ui.dialog
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
-import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.enable_geolocation_dialog.*
-import kotlinx.android.synthetic.main.family_member_add_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
-import org.immuni.android.AscoltoActivity
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BluetoothManager.Companion.REQUEST_ENABLE_BT
 import org.immuni.android.toast
 import org.koin.android.ext.android.inject
 
-class BluetoothDialogActivity: AscoltoActivity() {
+class BluetoothDialogActivity: ImmuniActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

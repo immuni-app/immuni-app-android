@@ -3,12 +3,11 @@ package org.immuni.android.ui.home
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.core.view.iterator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.immuni.android.ui.home.navigation.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -19,7 +18,7 @@ import org.immuni.android.ui.dialog.FamilyDialogActivity
 import org.immuni.android.util.Flags
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class HomeActivity : AscoltoActivity()  {
+class HomeActivity : ImmuniActivity()  {
 
     private var currentNavController: LiveData<NavController>? = null
     private lateinit var viewModel: HomeSharedViewModel

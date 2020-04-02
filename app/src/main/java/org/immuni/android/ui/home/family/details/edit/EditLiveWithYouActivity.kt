@@ -5,13 +5,13 @@ import androidx.lifecycle.Observer
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.user_edit_livewithyou_activity.*
 import kotlinx.android.synthetic.main.user_edit_livewithyou_activity.back
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.immuni.android.loading
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class EditLiveWithYouActivity : AscoltoActivity() {
+class EditLiveWithYouActivity : ImmuniActivity() {
     private lateinit var viewModel: EditDetailsViewModel
     private lateinit var userId: String
 

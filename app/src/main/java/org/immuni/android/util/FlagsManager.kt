@@ -2,7 +2,7 @@ package org.immuni.android.util
 
 import android.content.Context
 import androidx.core.content.edit
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -17,12 +17,12 @@ object Flags {
 }
 
 fun isFlagSet(flag: String): Boolean {
-    val sharedPrefs = AscoltoApplication.appContext.getSharedPreferences("SLEEP_FLAGS", Context.MODE_PRIVATE)
+    val sharedPrefs = ImmuniApplication.appContext.getSharedPreferences("SLEEP_FLAGS", Context.MODE_PRIVATE)
     return sharedPrefs.getBoolean(flag, false)
 }
 
 fun setFlag(flag: String, value: Boolean = true) {
-    val sharedPrefs = AscoltoApplication.appContext.getSharedPreferences("SLEEP_FLAGS", Context.MODE_PRIVATE)
+    val sharedPrefs = ImmuniApplication.appContext.getSharedPreferences("SLEEP_FLAGS", Context.MODE_PRIVATE)
     sharedPrefs.edit {
             putBoolean(flag, value)
         }

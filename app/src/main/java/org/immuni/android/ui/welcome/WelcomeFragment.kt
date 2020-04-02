@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.welcome_fragment.*
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeActivity
 import org.immuni.android.ui.onboarding.Onboarding
@@ -98,7 +98,7 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun navigateToOnboarding() {
-        val intent = Intent(AscoltoApplication.appContext, OnboardingActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, OnboardingActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
@@ -106,7 +106,7 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun navigateToHome() {
-        val intent = Intent(AscoltoApplication.appContext, HomeActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)

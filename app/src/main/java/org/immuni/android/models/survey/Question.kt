@@ -1,10 +1,5 @@
 package org.immuni.android.models.survey
 
-import kotlinx.android.synthetic.main.resume_question_item.view.*
-import org.immuni.android.AscoltoApplication
-import org.immuni.android.R
-import org.immuni.android.ui.log.fragment.model.QuestionType
-
 typealias QuestionId = String
 typealias AnswerIndex = Int
 

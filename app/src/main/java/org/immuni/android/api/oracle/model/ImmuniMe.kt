@@ -8,7 +8,7 @@ import com.squareup.moshi.JsonClass
 import java.util.*
 
 @JsonClass(generateAdapter = true)
-class AscoltoMe(
+class ImmuniMe(
     @field:Json(name = "next_survey_at") val nextSurveyDate: Double? = null,
     @field:Json(name = "householder") val mainUser: User? = null,
     @field:Json(name = "relatives") val familyMembers: List<User> = listOf()

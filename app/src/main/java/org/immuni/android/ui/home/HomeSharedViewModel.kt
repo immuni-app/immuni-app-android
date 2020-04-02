@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.immuni.android.db.AscoltoDatabase
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.util.isFlagSet
 import org.immuni.android.util.setFlag
 import com.bendingspoons.base.livedata.Event
@@ -12,11 +12,11 @@ import com.bendingspoons.base.utils.DeviceUtils
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
@@ -32,11 +32,11 @@ import org.immuni.android.util.Flags
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComponent {
+class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val surveyManager: SurveyManager by inject()
     private val apiManager: ApiManager by inject()
     private val bluetoothManager: BluetoothManager by inject()
@@ -71,7 +71,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     private fun refreshHomeListModel() {
         uiScope.launch {
             oracle.me()?.let {
-                val ctx = AscoltoApplication.appContext
+                val ctx = ImmuniApplication.appContext
 
                 val itemsList = mutableListOf<HomeItemType>()
 
@@ -83,14 +83,14 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
 
                 // check geolocation/bluetooth disabled
 
-                if (!PermissionsManager.hasAllPermissions(AscoltoApplication.appContext) ||
-                    !PermissionsManager.globalLocalisationEnabled(AscoltoApplication.appContext)) {
+                if (!PermissionsManager.hasAllPermissions(ImmuniApplication.appContext) ||
+                    !PermissionsManager.globalLocalisationEnabled(ImmuniApplication.appContext)) {
                     itemsList.add(EnableGeolocationCard())
                 }
 
                 // check notifications disabled
 
-                if (!PushNotificationUtils.areNotificationsEnabled(AscoltoApplication.appContext)) {
+                if (!PushNotificationUtils.areNotificationsEnabled(ImmuniApplication.appContext)) {
                     itemsList.add(EnableNotificationCard())
                 }
 
@@ -136,7 +136,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
                 if (userCardsMap.keys.isNotEmpty()) {
                     itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
                     userCardsMap.keys.forEach { severity ->
-                        val and = AscoltoApplication.appContext.getString(R.string.and)
+                        val and = ImmuniApplication.appContext.getString(R.string.and)
                         val names: String
                         val namesList = userCardsMap[severity]!!
                         if(namesList.size == 1) {
@@ -170,7 +170,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
         uiScope.launch {
             oracle.meFlow().collect { me ->
 
-                val ctx = AscoltoApplication.appContext
+                val ctx = ImmuniApplication.appContext
 
                 val itemsList = mutableListOf<FamilyItemType>()
 
@@ -236,8 +236,8 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
 
     fun onUserIdTap(user: User) {
         // copy to clipboard
-        DeviceUtils.copyToClipBoard(AscoltoApplication.appContext, text = user.id)
-        toast(AscoltoApplication.appContext.resources.getString(R.string.user_id_copied))
+        DeviceUtils.copyToClipBoard(ImmuniApplication.appContext, text = user.id)
+        toast(ImmuniApplication.appContext.resources.getString(R.string.user_id_copied))
     }
 
     fun onPrivacyPolicyClick() {
@@ -259,7 +259,7 @@ class HomeSharedViewModel(val database: AscoltoDatabase) : ViewModel(), KoinComp
     }
 
     private fun openUrlInDialog(url: String) {
-        val context = AscoltoApplication.appContext
+        val context = ImmuniApplication.appContext
         val intent = Intent(context, WebViewDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             putExtra("url", url)

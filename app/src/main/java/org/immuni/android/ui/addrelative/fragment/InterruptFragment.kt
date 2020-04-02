@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import org.immuni.android.R
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import kotlinx.android.synthetic.main.add_relative_interrupt_fragment.*
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.ui.addrelative.AddRelativeActivity
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -53,7 +53,7 @@ class InterruptFragment : Fragment() {
         }
 
         addAnotherRelative.setOnClickListener {
-            val intent = Intent(AscoltoApplication.appContext, AddRelativeActivity::class.java)
+            val intent = Intent(ImmuniApplication.appContext, AddRelativeActivity::class.java)
             activity?.startActivity(intent)
             activity?.finish()
         }

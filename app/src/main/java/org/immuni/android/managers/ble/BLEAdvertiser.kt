@@ -10,28 +10,26 @@ import android.os.ParcelUuid
 import android.util.Log
 import com.bendingspoons.oracle.Oracle
 import com.google.android.gms.common.util.Hex
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.db.AscoltoDatabase
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.BLEContactEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import okhttp3.internal.waitMillis
 import org.immuni.android.managers.BtIdsManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import org.koin.ext.getScopeName
 import java.util.*
 import kotlin.random.Random
 
 class BLEAdvertiser(val context: Context): KoinComponent {
     private val gattServerTag = "GATT_SERVER"
-    private val database: AscoltoDatabase by inject()
+    private val database: ImmuniDatabase by inject()
     private val bluetoothManager: BluetoothManager by inject()
     private var bluetoothGattServer: BluetoothGattServer? = null
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private lateinit var advertiser: BluetoothLeAdvertiser
     private var callback = MyAdvertiseCallback()
     private val btIdsManager: BtIdsManager by inject()

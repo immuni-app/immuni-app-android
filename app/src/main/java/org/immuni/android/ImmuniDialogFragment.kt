@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.MotionEvent
 import androidx.fragment.app.DialogFragment
 
-open class AscoltoDialogFragment(val ctx: Context) : DialogFragment() {
+open class ImmuniDialogFragment(val ctx: Context) : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return object : Dialog(ctx, theme) {
             override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-                (activity as? AscoltoActivity)?.dispatchDialogTouchEvent(ev)
+                (activity as? ImmuniActivity)?.dispatchDialogTouchEvent(ev)
                 return super.dispatchTouchEvent(ev)
             }
         }

@@ -1,30 +1,28 @@
 package org.immuni.android.ui.setup
 
 import android.content.Context
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.api.oracle.repository.OracleRepository
-import org.immuni.android.db.AscoltoDatabase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import org.immuni.android.api.oracle.model.AscoltoMe
+import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.api.oracle.model.ImmuniMe
 import retrofit2.Response
 
 interface SetupRepository {
-    suspend fun getOracleSetting(): Response<AscoltoSettings>
-    suspend fun getOracleMe(): Response<AscoltoMe>
+    suspend fun getOracleSetting(): Response<ImmuniSettings>
+    suspend fun getOracleMe(): Response<ImmuniMe>
 }
 
 class SetupRepositoryImpl(
     val context: Context,
-    val database: AscoltoDatabase,
+    val database: ImmuniDatabase,
     val oracleRepository: OracleRepository
 ) : SetupRepository {
 
-    override suspend fun getOracleSetting(): Response<AscoltoSettings> {
+    override suspend fun getOracleSetting(): Response<ImmuniSettings> {
         return oracleRepository.settings()
     }
 
-    override suspend fun getOracleMe(): Response<AscoltoMe> {
+    override suspend fun getOracleMe(): Response<ImmuniMe> {
         return oracleRepository.me()
     }
 }

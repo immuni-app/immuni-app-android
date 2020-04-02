@@ -4,8 +4,8 @@ import android.content.Context
 import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.models.User
 import org.immuni.android.models.HealthProfile
 import org.immuni.android.models.HealthProfileIdList
@@ -38,7 +38,7 @@ class SurveyManager(private val context: Context) : KoinComponent {
 
     private val additionalDelay: Int
     private val storage: KVStorage by inject()
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
 
     init {
@@ -160,7 +160,7 @@ class SurveyManager(private val context: Context) : KoinComponent {
     }
 
     fun allUsers(): List<User> {
-        val me: AscoltoMe = oracle.me() ?: return listOf()
+        val me: ImmuniMe = oracle.me() ?: return listOf()
         val mainUser = me.mainUser ?: return listOf()
         return listOf(mainUser) + me.familyMembers
     }

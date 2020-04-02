@@ -8,29 +8,27 @@ import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
-import org.immuni.android.db.AscoltoDatabase
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.*
 import org.immuni.android.toast
-import org.koin.android.ext.android.inject
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.io.File
 
 class UserDetailsViewModel(val userId: String) : ViewModel(),
     KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     val apiManager: ApiManager by inject()
     val surveyManager: SurveyManager by inject()
-    val database: AscoltoDatabase by inject()
+    val database: ImmuniDatabase by inject()
 
     val user = MediatorLiveData<User?>()
     val loading = MediatorLiveData<Boolean>()
@@ -60,7 +58,7 @@ class UserDetailsViewModel(val userId: String) : ViewModel(),
             delay(500)
             val result = apiManager.deleteFamilyMember(userId)
             if(result == null) {
-                toast(AscoltoApplication.appContext.getString(R.string.server_generic_error))
+                toast(ImmuniApplication.appContext.getString(R.string.server_generic_error))
             } else {
                 _navigateBack.value = Event(true)
             }

@@ -1,15 +1,14 @@
 package org.immuni.android.ui.uploadData
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class UploadDataActivity : AscoltoActivity() {
+class UploadDataActivity : ImmuniActivity() {
     private lateinit var viewModel: UploadDataViewModel
     private lateinit var userId: String
 

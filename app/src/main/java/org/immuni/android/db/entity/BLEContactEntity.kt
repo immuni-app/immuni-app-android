@@ -1,9 +1,7 @@
 package org.immuni.android.db.entity
 
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import org.immuni.android.db.AscoltoDatabase
 import java.util.*
 
 @Entity(tableName = "ble_contact_table")

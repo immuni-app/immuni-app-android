@@ -1,4 +1,4 @@
-rootProject.name='Ascolto'
+rootProject.name='Immuni'
 include ':app'
 include ':base'
 project(':base').projectDir=new File('../base-lib-kotlin/base')

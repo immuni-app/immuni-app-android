@@ -2,7 +2,6 @@ package org.immuni.android.managers
 
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothGattServer
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
@@ -14,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.toast
 import org.immuni.android.workers.BLEForegroundServiceWorker
@@ -61,7 +60,7 @@ class BluetoothManager(val context: Context) : KoinComponent {
         }
 
         GlobalScope.launch(Dispatchers.Main) {
-            val workManager = WorkManager.getInstance(AscoltoApplication.appContext)
+            val workManager = WorkManager.getInstance(ImmuniApplication.appContext)
             workManager.cancelAllWorkByTag(BLEForegroundServiceWorker.TAG)
 
             // let the previous worker stop before restarting it

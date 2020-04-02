@@ -11,7 +11,7 @@ import okhttp3.CertificatePinner
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class AscoltoOracleConfiguration(val context: Context) : OracleConfiguration, KoinComponent {
+class ImmuniOracleConfiguration(val context: Context) : OracleConfiguration, KoinComponent {
 
     val concierge: ConciergeManager by inject()
     private val sesame = Sesame(OracleSesameConfiguration())
@@ -25,7 +25,7 @@ class AscoltoOracleConfiguration(val context: Context) : OracleConfiguration, Ko
     }
 
     override fun showForceUpdate(minVersionCode: Int) {
-        val context = AscoltoApplication.appContext
+        val context = ImmuniApplication.appContext
         Log.d("ForceUpdate", "ForceUpdate! Min version is $minVersionCode")
 
         val intent = Intent(context, ForceUpdateActivity::class.java)

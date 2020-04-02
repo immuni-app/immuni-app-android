@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 import org.immuni.android.models.survey.Survey
 
 @JsonClass(generateAdapter = true)
-class AscoltoSettings(
+class ImmuniSettings(
     @field:Json(name = "development_devices") val developmentDevices: List<String> = listOf(),
     @field:Json(name = "reminder_notification_title") val reminderNotificationTitle: String = "Compila il diario",
     @field:Json(name = "reminder_notification_message") val reminderNotificationMessage: String = "Ricordati di compilare il diario clinico di oggi",

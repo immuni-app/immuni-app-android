@@ -6,7 +6,7 @@ import com.bendingspoons.concierge.ConciergeCustomIdProvider
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class AscoltoConciergeCustomIdProvider: ConciergeCustomIdProvider, KoinComponent {
+class ImmuniConciergeCustomIdProvider: ConciergeCustomIdProvider, KoinComponent {
     private val permissionsManager: PermissionsManager by inject()
 
     override val ids: Set<Concierge.Id>

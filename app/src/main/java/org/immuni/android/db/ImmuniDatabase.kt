@@ -20,6 +20,6 @@ const val DATABASE_VERSION = 4
     DateConverter::class,
     GenderConverter::class
 )
-abstract class AscoltoDatabase : RoomDatabase() {
+abstract class ImmuniDatabase : RoomDatabase() {
     abstract fun bleContactDao(): BLEContactDao
 }

@@ -4,7 +4,7 @@ import PushNotificationState
 import PushNotificationUtils
 import android.Manifest
 import com.squareup.moshi.Json
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.PermissionsManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -37,7 +37,7 @@ enum class LocationPermissionLevel {
 
         fun instance(): LocationPermissionLevel {
             // TODO: check logic
-            val context = AscoltoApplication.appContext
+            val context = ImmuniApplication.appContext
             val hasAllPermissions = PermissionsManager.hasAllPermissions(context)
             val hasForegroundPermission = PermissionsManager.checkHasPermission(
                 context,
@@ -74,7 +74,7 @@ enum class PushPermissionLevel {
     companion object {
         fun instance(): PushPermissionLevel {
             val notificationState =
-                PushNotificationUtils.getPushNotificationState(AscoltoApplication.appContext)
+                PushNotificationUtils.getPushNotificationState(ImmuniApplication.appContext)
             return when (notificationState) {
                 PushNotificationState.DENIED -> DENIED
                 PushNotificationState.AUTHORIZED -> AUTHORIZED

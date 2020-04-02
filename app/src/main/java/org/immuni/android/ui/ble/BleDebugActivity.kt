@@ -1,11 +1,10 @@
 package org.immuni.android.ui.ble
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 
-class BleDebugActivity : AscoltoActivity() {
+class BleDebugActivity : ImmuniActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

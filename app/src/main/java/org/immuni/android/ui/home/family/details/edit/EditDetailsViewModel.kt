@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
-import org.immuni.android.db.AscoltoDatabase
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.models.*
 import org.immuni.android.toast
 import org.koin.core.KoinComponent
@@ -22,9 +22,9 @@ class EditDetailsViewModel(val userId: String) : ViewModel(),
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     val apiManager: ApiManager by inject()
-    val database: AscoltoDatabase by inject()
+    val database: ImmuniDatabase by inject()
 
     val loading = MediatorLiveData<Boolean>()
     val navigateBack = MutableLiveData<Event<Boolean>>()
@@ -61,7 +61,7 @@ class EditDetailsViewModel(val userId: String) : ViewModel(),
                 else -> apiManager.updateExistingFamilyMember(userId, user)
             }
             if(result == null) {
-                toast(AscoltoApplication.appContext.getString(R.string.server_generic_error))
+                toast(ImmuniApplication.appContext.getString(R.string.server_generic_error))
             } else {
                navigateBack.value = Event(true)
             }

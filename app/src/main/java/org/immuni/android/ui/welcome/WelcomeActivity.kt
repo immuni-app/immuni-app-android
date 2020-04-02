@@ -3,12 +3,10 @@ package org.immuni.android.ui.welcome
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.navigation.findNavController
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
-import org.koin.androidx.viewmodel.ext.android.getStateViewModel
 
-class WelcomeActivity : AscoltoActivity() {
+class WelcomeActivity : ImmuniActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

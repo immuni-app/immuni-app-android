@@ -1,8 +1,8 @@
 package org.immuni.android
 
 import org.immuni.android.api.oracle.CustomOracleAPI
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.api.oracle.model.FcmTokenRequest
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
@@ -13,7 +13,7 @@ import com.google.firebase.messaging.RemoteMessage
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class AscoltoTheirsConfiguration: TheirsConfiguration, KoinComponent {
+class ImmuniTheirsConfiguration: TheirsConfiguration, KoinComponent {
     override fun firebaseFCMConfig() = object: FirebaseFCMConfiguration {
         override val concierge: ConciergeManager by inject()
 
@@ -28,7 +28,7 @@ class AscoltoTheirsConfiguration: TheirsConfiguration, KoinComponent {
         }
 
         override suspend fun onNewToken(token: String) {
-            val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+            val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
 
             // be sure to call settings before
             oracle.api.devices(DevicesRequest(

@@ -9,12 +9,10 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.toast
 import org.immuni.android.ui.home.HomeActivity
 import org.immuni.android.ui.onboarding.OnboardingViewModel
-import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -58,7 +56,7 @@ class DoneFragment : Fragment() {
     }
 
     private fun goToMainActivity() {
-        val intent = Intent(AscoltoApplication.appContext, HomeActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)

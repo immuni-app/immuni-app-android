@@ -9,9 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.family_fragment.*
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.ui.addrelative.AddRelativeActivity
 import org.immuni.android.ui.home.HomeSharedViewModel
@@ -80,7 +79,7 @@ class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
     }
 
     private fun navigateToAddRelative() {
-        val intent = Intent(AscoltoApplication.appContext, AddRelativeActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, AddRelativeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)

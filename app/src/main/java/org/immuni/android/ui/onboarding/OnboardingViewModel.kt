@@ -9,11 +9,11 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
-import org.immuni.android.db.AscoltoDatabase
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.models.User
 import org.immuni.android.picoMetrics.OnboardingCompleted
@@ -22,7 +22,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.Serializable
 
-class OnboardingViewModel(val handle: SavedStateHandle, private val database: AscoltoDatabase) :
+class OnboardingViewModel(val handle: SavedStateHandle, private val database: ImmuniDatabase) :
     ViewModel(), KoinComponent {
 
     companion object {
@@ -32,7 +32,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val onboarding: Onboarding by inject()
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
     private val apiManager: ApiManager by inject()
     private val permissionsManager: PermissionsManager by inject()
@@ -83,7 +83,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: As
     }
 
     private fun openUrlInDialog(url: String) {
-        val context = AscoltoApplication.appContext
+        val context = ImmuniApplication.appContext
         val intent = Intent(context, WebViewDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             putExtra("url", url)

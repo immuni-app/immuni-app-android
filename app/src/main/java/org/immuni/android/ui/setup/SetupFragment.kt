@@ -5,10 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeActivity
-import org.immuni.android.ui.log.LogActivity
 import org.immuni.android.ui.onboarding.OnboardingActivity
 import org.immuni.android.ui.welcome.WelcomeActivity
 import com.bendingspoons.base.extensions.invisible
@@ -78,7 +77,7 @@ class SetupFragment : Fragment(R.layout.setup_fragment) {
     }
 
     private fun goToHomeActivity() {
-        val intent = Intent(AscoltoApplication.appContext, HomeActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
@@ -86,7 +85,7 @@ class SetupFragment : Fragment(R.layout.setup_fragment) {
     }
 
     private fun goToOnboardingActivity() {
-        val intent = Intent(AscoltoApplication.appContext, OnboardingActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, OnboardingActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
@@ -94,7 +93,7 @@ class SetupFragment : Fragment(R.layout.setup_fragment) {
     }
 
     private fun goToWelcomeActivity() {
-        val intent = Intent(AscoltoApplication.appContext, WelcomeActivity::class.java).apply {
+        val intent = Intent(ImmuniApplication.appContext, WelcomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)

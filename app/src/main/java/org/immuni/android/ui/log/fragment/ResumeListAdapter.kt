@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bendingspoons.concierge.ConciergeManager
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.db.entity.iconResource
 import org.immuni.android.ui.log.fragment.model.QuestionType
@@ -18,7 +18,7 @@ import org.koin.core.inject
 
 class ResumeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinComponent {
 
-    val context = AscoltoApplication.appContext
+    val context = ImmuniApplication.appContext
     private var items = mutableListOf<ResumeItemType>()
     val concierge: ConciergeManager by inject()
 
@@ -65,10 +65,10 @@ class ResumeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinC
             is UserVH -> {
                 val item = items[position] as UserType
                 holder.name.text = when (item.user.isMain) {
-                    true -> AscoltoApplication.appContext.resources.getString(R.string.you)
+                    true -> ImmuniApplication.appContext.resources.getString(R.string.you)
                     false -> item.user.name
                 }
-                holder.age.text = item.user.ageGroup.humanReadable(AscoltoApplication.appContext)
+                holder.age.text = item.user.ageGroup.humanReadable(ImmuniApplication.appContext)
                 holder.icon.setImageResource(
                     item.user.gender.iconResource(
                         concierge.backupPersistentId.id,

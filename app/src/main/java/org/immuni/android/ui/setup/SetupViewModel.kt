@@ -9,8 +9,8 @@ import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
 import org.koin.core.KoinComponent
 import kotlinx.coroutines.*
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.util.Flags
 import org.immuni.android.util.setFlag
 import org.koin.core.inject
@@ -23,7 +23,7 @@ class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
     private val setup: Setup by inject()
     private val onboarding: Onboarding by inject()
     private val welcome: Welcome by inject()
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
 
     private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
     val navigateToMainPage: LiveData<Event<Boolean>>

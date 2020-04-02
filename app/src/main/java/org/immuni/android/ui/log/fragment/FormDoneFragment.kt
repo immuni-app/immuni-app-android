@@ -9,11 +9,9 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.ui.home.HomeActivity
 import org.immuni.android.ui.log.LogViewModel
-import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import org.immuni.android.models.survey.TriageProfile
 import org.immuni.android.models.survey.backgroundColor
@@ -70,7 +68,7 @@ class FormDoneFragment : Fragment() {
     }
 
     private fun openTriageDialog(triageProfile: TriageProfile) {
-        val context = AscoltoApplication.appContext
+        val context = ImmuniApplication.appContext
         val intent = Intent(context, WebViewDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             putExtra("url", triageProfile.url)
@@ -80,7 +78,7 @@ class FormDoneFragment : Fragment() {
     }
 
     private fun goToNextLogStart() {
-        val intent = Intent(AscoltoApplication.appContext, LogActivity::class.java)
+        val intent = Intent(ImmuniApplication.appContext, LogActivity::class.java)
         activity?.startActivity(intent)
         activity?.finish()
     }

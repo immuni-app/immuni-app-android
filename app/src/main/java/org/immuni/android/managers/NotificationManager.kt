@@ -16,10 +16,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.immuni.android.AscoltoApplication
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.ui.home.HomeActivity
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -27,7 +27,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 
-class AscoltoNotificationManager(private val context: Context) : KoinComponent {
+class ImmuniNotificationManager(private val context: Context) : KoinComponent {
     companion object {
         private const val workTag = "NotificationManager"
         const val reminderNotificationChannelId = "reminder"
@@ -37,12 +37,12 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
     private val workManager = WorkManager.getInstance(context)
     private val surveyManager: SurveyManager by inject()
     private val androidNotificationManager = NotificationManagerCompat.from(context)
-    private val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
 
     init {
         createNotificationChannel()
         GlobalScope.launch {
-            AscoltoApplication.isForeground.consumeEach {
+            ImmuniApplication.isForeground.consumeEach {
                 scheduleNext(fromActivity = true)
             }
         }
@@ -85,7 +85,7 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
         }
         val pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0)
         val builder = NotificationCompat.Builder(
-            context, AscoltoNotificationManager.reminderNotificationChannelId
+            context, ImmuniNotificationManager.reminderNotificationChannelId
         )
             .setSmallIcon(R.drawable.ic_notification_app)
             .setContentTitle(settings.reminderNotificationTitle)
@@ -123,7 +123,7 @@ class AscoltoNotificationManager(private val context: Context) : KoinComponent {
 class NotifyWorker(val context: Context, params: WorkerParameters) : CoroutineWorker(context, params),
     KoinComponent {
 
-    private val notificationManager: AscoltoNotificationManager by inject()
+    private val notificationManager: ImmuniNotificationManager by inject()
 
     override suspend fun doWork(): Result { // Method to trigger an instant notification
         notificationManager.triggerNotification()

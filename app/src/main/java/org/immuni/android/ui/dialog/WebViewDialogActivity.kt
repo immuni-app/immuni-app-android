@@ -5,16 +5,15 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.webkit.WebViewClient
 import androidx.core.graphics.blue
-import androidx.core.graphics.drawable.toDrawable
 import androidx.core.graphics.green
 import androidx.core.graphics.red
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import kotlinx.android.synthetic.main.web_view_dialog.*
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 
-class WebViewDialogActivity: AscoltoActivity() {
+class WebViewDialogActivity: ImmuniActivity() {
 
     companion object {
         const val TRIAGE_DIALOG_RESULT = 900

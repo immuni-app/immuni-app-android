@@ -13,12 +13,12 @@ import de.fraunhofer.iis.Estimator
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.api.oracle.model.AscoltoMe
-import org.immuni.android.api.oracle.model.AscoltoSettings
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.api.oracle.repository.OracleRepository
 import org.immuni.android.api.oracle.repository.OracleRepositoryImpl
-import org.immuni.android.db.AscoltoDatabase
-import org.immuni.android.managers.AscoltoNotificationManager
+import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.managers.ImmuniNotificationManager
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
@@ -45,7 +45,7 @@ val appModule = module {
 
     single { KVStorage("state", androidContext(), encrypted = true) }
 
-    // single instance of TDFDatabase
+    // single instance of ImmuniDatabase
     single {
         val key = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
         val passphrase: ByteArray = SQLiteDatabase.getBytes(key.toCharArray())
@@ -53,7 +53,7 @@ val appModule = module {
 
         Room.databaseBuilder(
             androidContext(),
-            AscoltoDatabase::class.java,
+            ImmuniDatabase::class.java,
             "immuni_database"
         )
             .fallbackToDestructiveMigration()
@@ -83,27 +83,27 @@ val appModule = module {
 
     // Concierge - Lib
     single {
-        Concierge.Manager(androidContext(), appCustomIdProvider = AscoltoConciergeCustomIdProvider(), encryptIds = true)
+        Concierge.Manager(androidContext(), appCustomIdProvider = ImmuniConciergeCustomIdProvider(), encryptIds = true)
     }
 
     // Oracle - Lib
     single {
-        Oracle<AscoltoSettings, AscoltoMe>(androidContext(), AscoltoOracleConfiguration(androidContext()))
+        Oracle<ImmuniSettings, ImmuniMe>(androidContext(), ImmuniOracleConfiguration(androidContext()))
     }
 
     // Secret Menu - Lib
     single {
-        SecretMenu(androidContext(), AscoltoSecretMenuConfiguration(androidContext()), get())
+        SecretMenu(androidContext(), ImmuniSecretMenuConfiguration(androidContext()), get())
     }
 
     // Theirs - Lib
     single {
-        Theirs(androidContext(), AscoltoTheirsConfiguration())
+        Theirs(androidContext(), ImmuniTheirsConfiguration())
     }
 
     // Pico - Lib
     single {
-        Pico(androidContext(), AscoltoPicoConfiguration(androidContext()))
+        Pico(androidContext(), ImmuniPicoConfiguration(androidContext()))
     }
 
     // single instance of OracleRepository
@@ -130,7 +130,7 @@ val appModule = module {
 
     // single instance of AscoltoNotificationManager
     single {
-        AscoltoNotificationManager(androidContext())
+        ImmuniNotificationManager(androidContext())
     }
 
     single {

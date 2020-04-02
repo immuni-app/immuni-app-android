@@ -2,11 +2,11 @@ package org.immuni.android.ui.log
 
 import android.os.Bundle
 import androidx.navigation.findNavController
-import org.immuni.android.AscoltoActivity
+import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.koin.androidx.viewmodel.ext.android.getStateViewModel
 
-class LogActivity : AscoltoActivity() {
+class LogActivity : ImmuniActivity() {
 
     private lateinit var viewModel: LogViewModel
 

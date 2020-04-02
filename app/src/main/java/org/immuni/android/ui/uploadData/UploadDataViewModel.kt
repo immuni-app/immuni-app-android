@@ -5,16 +5,15 @@ import androidx.lifecycle.ViewModel
 import com.bendingspoons.base.livedata.Event
 import kotlinx.coroutines.*
 import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.db.AscoltoDatabase
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.ExportDevice
 import org.immuni.android.models.ExportHealthProfile
-import org.immuni.android.toast
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class UploadDataViewModel(val userId:String, val database: AscoltoDatabase) : ViewModel(), KoinComponent {
+class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
