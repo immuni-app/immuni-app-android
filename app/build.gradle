@@ -5,10 +5,31 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'io.fabric'
 
+// Template keystore file
+def templateKeystorePropertiesFile = rootProject.file("keystore_template.properties")
+
+// App keystore file
+def immuniKeystorePropertiesFile = rootProject.file("immuni_keystore.properties")
+def immuniKeystoreProperties = new Properties()
+
+if (immuniKeystorePropertiesFile.exists()) {
+    immuniKeystoreProperties.load(new FileInputStream(immuniKeystorePropertiesFile))
+} else {
+    immuniKeystoreProperties.load(new FileInputStream(templateKeystorePropertiesFile))
+}
+
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
+    signingConfigs {
+        release {
+            keyAlias immuniKeystoreProperties['keyAlias']
+            keyPassword immuniKeystoreProperties['keyPassword']
+            storeFile file(immuniKeystoreProperties['storeFile'])
+            storePassword immuniKeystoreProperties['storePassword']
+        }
+    }
     defaultConfig {
         applicationId "org.immuni.android"
         minSdkVersion 21
@@ -29,6 +50,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 

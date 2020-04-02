@@ -15,5 +15,5 @@
 .externalNativeBuild
 .cxx
 keystore.properties
-30df_keystore.properties
+immuni_keystore.properties
 icon.png
