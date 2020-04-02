@@ -8,10 +8,8 @@ import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.oracle.api.model.OracleMe
 import com.bendingspoons.oracle.api.model.OracleSettings
 import com.bendingspoons.pico.PicoConfiguration
-import com.bendingspoons.theirs.adjust.Adjust
 import com.bendingspoons.sesame.Sesame
 import okhttp3.CertificatePinner
-import org.immuni.android.picoMetrics.LocationPermissionLevel
 import org.immuni.android.picoMetrics.PushPermissionLevel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -20,7 +18,6 @@ class AscoltoPicoConfiguration(val context: Context): PicoConfiguration, KoinCom
 
     val concierge: ConciergeManager by inject()
     val oracle: Oracle<AscoltoSettings, AscoltoMe> by inject()
-    val adjust: Adjust by inject()
 
     override fun endpoint(): String {
         return context.getString(R.string.pico_base_url)
