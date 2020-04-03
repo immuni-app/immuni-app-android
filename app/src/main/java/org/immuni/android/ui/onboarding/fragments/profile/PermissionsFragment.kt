@@ -41,10 +41,15 @@ class PermissionsFragment :
     override val nextButton: View
         get() = next
 
+    override fun onStart() {
+        super.onStart()
+        updateUI()
+    }
+
     override fun onResume() {
         super.onResume()
-        this.view?.hideKeyboard()
         updateUI()
+        this.view?.hideKeyboard()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
