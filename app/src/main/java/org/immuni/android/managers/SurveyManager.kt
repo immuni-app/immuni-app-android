@@ -50,6 +50,10 @@ class SurveyManager(private val context: Context) : KoinComponent {
             ?: listOf()
     }
 
+    private fun deleteHealthProfileIds(userId: String) {
+        storage.delete(HealthProfileIdList.id(userId))
+    }
+
     private fun saveHealthProfile(healthProfile: HealthProfile) {
         val healthProfileIdList = storage.load(
             HealthProfileIdList.id(healthProfile.userId),
@@ -70,6 +74,10 @@ class SurveyManager(private val context: Context) : KoinComponent {
 
     fun allHealthProfiles(userId: String): List<HealthProfile> {
         return healthProfileIds(userId).mapNotNull { storage.load<HealthProfile>(it) }
+    }
+
+    private fun deleteHealthProfile(healthProfileId: String) {
+        storage.delete(healthProfileId)
     }
 
     private fun loadLastAnsweredQuestions(userId: String): Map<QuestionId, Long> {
@@ -123,7 +131,7 @@ class SurveyManager(private val context: Context) : KoinComponent {
 
     private fun todayAtMidnight(): Date {
         return Calendar.getInstance().apply {
-            set(Calendar.HOUR, 0)
+            set(Calendar.HOUR_OF_DAY, 0)
             set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)
             set(Calendar.MILLISECOND, 0)
@@ -132,7 +140,7 @@ class SurveyManager(private val context: Context) : KoinComponent {
 
     private fun todaySurveyCalendar(): Calendar {
         return Calendar.getInstance().apply {
-            set(Calendar.HOUR, 18)
+            set(Calendar.HOUR_OF_DAY, 18)
             set(Calendar.MINUTE, 0)
             set(Calendar.SECOND, 0)
             add(Calendar.SECOND, additionalDelay)
@@ -186,5 +194,22 @@ class SurveyManager(private val context: Context) : KoinComponent {
 
     fun areAllSurveysLogged(): Boolean {
         return nextUserToLog() == null
+    }
+
+    fun deleteDataOlderThan(days: Int) {
+        val thresholdDate = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, -days)
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }.time
+        allUsers().map { user ->
+            allHealthProfiles(user.id).map { healthProfile ->
+                if (healthProfile.surveyDate < thresholdDate) {
+                    deleteHealthProfile(healthProfile.id)
+                }
+            }
+        }
     }
 }
