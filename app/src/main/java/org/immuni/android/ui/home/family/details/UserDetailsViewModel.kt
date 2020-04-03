@@ -60,6 +60,7 @@ class UserDetailsViewModel(val userId: String) : ViewModel(),
             if(result == null) {
                 toast(ImmuniApplication.appContext.getString(R.string.server_generic_error))
             } else {
+                surveyManager.deleteUserData(userId)
                 _navigateBack.value = Event(true)
             }
             loading.value = false

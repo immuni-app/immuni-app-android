@@ -196,6 +196,11 @@ class SurveyManager(private val context: Context) : KoinComponent {
         return nextUserToLog() == null
     }
 
+    fun deleteUserData(userId: String) {
+        healthProfileIds(userId).map { deleteHealthProfile(it) }
+        deleteHealthProfileIds(userId)
+    }
+
     fun deleteDataOlderThan(days: Int) {
         val thresholdDate = Calendar.getInstance().apply {
             add(Calendar.DAY_OF_YEAR, -days)
