@@ -13,23 +13,34 @@ class ProfileAdapter(fragment: Fragment) : FragmentStateAdapter(fragment), KoinC
 
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
 
-    var items: List<Class<out ProfileContentFragment>> = oracle.me()?.mainUser?.let {
+    private var items: List<Type> = oracle.me()?.mainUser?.let {
         listOf(
-            BluetoothIntroFragment::class.java,
-            PermissionsFragment::class.java
+            Type.BT_INTRO,
+            Type.PERMISSIONS
         )
     } ?: listOf(
-        AgeRangeFragment::class.java,
-        GenderFragment::class.java,
-        BluetoothIntroFragment::class.java,
-        PermissionsFragment::class.java
+        Type.AGE_RANGE,
+        Type.GENDER,
+        Type.BT_INTRO,
+        Type.PERMISSIONS
     )
 
     override fun getItemCount(): Int = items.size
 
     override fun createFragment(position: Int): Fragment {
-        return items[position].newInstance().apply {
+        val fragment =  when(items[position]) {
+            Type.BT_INTRO -> BluetoothIntroFragment()
+            Type.PERMISSIONS -> PermissionsFragment()
+            Type.AGE_RANGE -> AgeRangeFragment()
+            Type.GENDER -> GenderFragment()
+        }
+
+        return fragment.apply {
             arguments = bundleOf("position" to position)
         }
+    }
+
+    private enum class Type {
+        BT_INTRO, PERMISSIONS, AGE_RANGE, GENDER
     }
 }
