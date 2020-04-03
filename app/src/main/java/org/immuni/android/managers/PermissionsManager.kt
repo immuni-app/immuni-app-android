@@ -67,12 +67,20 @@ class PermissionsManager(val context: Context) : KoinComponent {
 
         fun startChangeBatteryOptimization(context: Context) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                val intent = Intent()
-                intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
-                val packageName: String = context.packageName
-                intent.data = Uri.parse("package:$packageName")
+                val intent = Intent().apply {
+                    action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+                    val packageName: String = context.packageName
+                    data = Uri.parse("package:$packageName")
+                }
                 context.startActivity(intent)
             }
+        }
+
+        fun startChangeGlobalGeolocalisation(context: Context) {
+            val intent = Intent().apply {
+                action = Settings.ACTION_LOCATION_SOURCE_SETTINGS
+            }
+            context.startActivity(intent)
         }
     }
 
@@ -83,6 +91,12 @@ class PermissionsManager(val context: Context) : KoinComponent {
 
     fun requestPermissions(activity: AppCompatActivity) {
         ActivityCompat.requestPermissions(activity, allPermissions.toTypedArray(), REQUEST_CODE)
+    }
+
+    fun shouldShowPermissions(activity: AppCompatActivity, vararg permissions: String): Boolean {
+        return permissions.all {
+            activity.shouldShowRequestPermissionRationale(it)
+        }
     }
 
     fun onRequestPermissionsResult(

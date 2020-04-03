@@ -15,13 +15,14 @@ class ProfileAdapter(fragment: Fragment) : FragmentStateAdapter(fragment), KoinC
 
     var items: List<Class<out ProfileContentFragment>> = oracle.me()?.mainUser?.let {
         listOf(
-            BluetoothPermissionsFragment::class.java
+            BluetoothIntroFragment::class.java,
+            PermissionsFragment::class.java
         )
     } ?: listOf(
-        //AgeFragment::class.java,
         AgeRangeFragment::class.java,
         GenderFragment::class.java,
-        BluetoothPermissionsFragment::class.java
+        BluetoothIntroFragment::class.java,
+        PermissionsFragment::class.java
     )
 
     override fun getItemCount(): Int = items.size

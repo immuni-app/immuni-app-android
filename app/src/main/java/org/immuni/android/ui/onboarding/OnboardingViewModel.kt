@@ -49,6 +49,10 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     val navigateToNextPage: LiveData<Event<Boolean>>
         get() = _navigateToNextPage
 
+    private val _permissionsChanged = MutableLiveData<Event<Boolean>>()
+    val permissionsChanged: LiveData<Event<Boolean>>
+        get() = _permissionsChanged
+
     private val _navigateToPrevPage = MutableLiveData<Event<Boolean>>()
     val navigateToPrevPage: LiveData<Event<Boolean>>
         get() = _navigateToPrevPage
@@ -71,7 +75,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
 
         uiScope.launch {
             permissionsManager.isActive.asFlow().drop(1).collect { active ->
-                _navigateToNextPage.value = Event(true)
+                _permissionsChanged.value = Event(true)
             }
         }
     }
