@@ -267,4 +267,9 @@
     <style name="CardShadowColorPrimary">
     </style>
 
+    <style name="TopScrollingMask">
+        <item name="android:elevation">@dimen/top_scroll_mask_elevation</item>
+    </style>
+
+
 </resources>

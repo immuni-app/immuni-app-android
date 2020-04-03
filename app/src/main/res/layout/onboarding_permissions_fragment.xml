@@ -4,19 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:animateLayoutChanges="false"
+    android:background="@color/home_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:background="@color/home_background"
-        android:paddingBottom="120dp"
         android:scrollbars="none"
         android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        android:fitsSystemWindows="true"
+        android:clipToPadding="false"
+        android:paddingTop="110dp"
+        android:paddingBottom="120dp"
+        android:fillViewport="true">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:animateLayoutChanges="false"
@@ -30,7 +31,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:text="Ecco cosa devi fare:"
                 android:textColor="#4F4F5B"
@@ -98,6 +98,7 @@
 
                 <TextView
                     android:id="@+id/description"
+                    style="@style/P1Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -182,6 +183,7 @@
 
                 <TextView
                     android:id="@+id/description2"
+                    style="@style/P1Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -266,6 +268,7 @@
 
                 <TextView
                     android:id="@+id/description3"
+                    style="@style/P1Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -285,7 +288,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="24dp"
-                    android:text="@string/consent"
+                    android:text="@string/open_settings"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -300,10 +303,13 @@
         android:rotation="180"
         android:background="@drawable/gradient_home_top"/>
     <View
+        android:id="@+id/topMask"
+        style="@style/TopScrollingMask"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="top"
-        android:background="@drawable/gradient_home_top"/>
+        android:layout_height="108dp"
+        android:translationY="-9dp"
+        android:backgroundTint="@color/background"
+        android:background="@drawable/rounded_corners_9dp"/>
     <Button
         android:id="@+id/next"
         style="@style/RoundedButton"

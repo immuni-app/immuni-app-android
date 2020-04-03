@@ -15,6 +15,7 @@ import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.invisible
 import com.bendingspoons.base.extensions.visible
+import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.next
 import kotlinx.android.synthetic.main.onboarding_permissions_fragment.*
@@ -52,8 +53,20 @@ class PermissionsFragment :
         this.view?.hideKeyboard()
     }
 
+    private fun updateTopMask(scrollY: Int) {
+        val dp = ScreenUtils.convertDpToPixels(requireContext(), 8).toFloat()
+        topMask.alpha = 0f + scrollY/dp
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // on scrolling the top mask hide/show
+        scrollView.setOnScrollChangeListener { v: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            updateTopMask(scrollY)
+        }
+
+        updateTopMask(scrollView.scrollY)
 
         bluetooth.setOnClickListener {
             bluetoothExecuted = true

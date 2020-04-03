@@ -8,10 +8,12 @@ import org.immuni.android.R
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.showKeyboard
+import com.bendingspoons.base.utils.ScreenUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.onboarding_age_range_fragment.*
 import org.immuni.android.models.AgeGroup
 import org.immuni.android.models.AgeGroup.*
+import kotlin.math.pow
 
 class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fragment),
     CompoundButton.OnCheckedChangeListener {
@@ -21,6 +23,12 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // on scrolling the top mask hide/show
+        scrollView.setOnScrollChangeListener { v: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            updateTopMask(scrollY)
+        }
+
+        updateTopMask(scrollView.scrollY)
 
         nextButton.setOnClickListener(null) // override the default behaviour
         nextButton.setOnClickListener {
@@ -48,6 +56,13 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
         age_range_56_65.setOnCheckedChangeListener(this)
         age_range_66_75.setOnCheckedChangeListener(this)
         age_range_75.setOnCheckedChangeListener(this)
+    }
+
+    private fun updateTopMask(scrollY: Int) {
+        val dp = ScreenUtils.convertDpToPixels(requireContext(), 8).toFloat()
+        val elevation = resources.getDimension(R.dimen.top_scroll_mask_elevation)
+        topMask.alpha = 1f//0f + scrollY/dp
+        topMask.elevation = (elevation * (0f + scrollY/dp))
     }
 
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {
