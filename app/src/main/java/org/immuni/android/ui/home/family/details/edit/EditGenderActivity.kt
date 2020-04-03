@@ -11,14 +11,13 @@ import org.immuni.android.loading
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class EditGenderActivity : ImmuniActivity() {
+class EditGenderActivity : BaseEditActivity() {
     private lateinit var viewModel: EditDetailsViewModel
     private lateinit var userId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_edit_gender_activity)
-        setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
         userId = intent?.extras?.getString("userId")!!
         viewModel = getViewModel { parametersOf(userId)}
 

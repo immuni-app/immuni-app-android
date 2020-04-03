@@ -5,12 +5,15 @@ import android.view.View
 import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import org.immuni.android.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import com.bendingspoons.base.utils.ScreenUtils
+import org.immuni.android.R
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 abstract class ProfileContentFragment(@LayoutRes val layout: Int) : Fragment(layout) {
@@ -36,6 +39,20 @@ abstract class ProfileContentFragment(@LayoutRes val layout: Int) : Fragment(lay
         nextButton.setOnClickListener {
             viewModel.onNextTap()
         }
+
+        // on scrolling the top mask hide/show
+        view.findViewById<NestedScrollView>(R.id.scrollView)?.setOnScrollChangeListener { v: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            updateTopMask(scrollY)
+        }
+
+        updateTopMask(view.findViewById<NestedScrollView>(R.id.scrollView)?.scrollY ?: 0)
+    }
+
+    fun updateTopMask(scrollY: Int) {
+        val dp = ScreenUtils.convertDpToPixels(requireContext(), 8).toFloat()
+        val elevation = resources.getDimension(R.dimen.top_scroll_mask_elevation)
+        //this.view?.findViewById<View>(R.id.topMask)?.alpha = 1f//0f + scrollY/dp
+        this.view?.findViewById<View>(R.id.topMask)?.elevation = (elevation * (0f + scrollY/dp).coerceIn(0f, 1f))
     }
 
     protected abstract val nextButton: View

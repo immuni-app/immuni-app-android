@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bendingspoons.base.extensions.animateShow
 import org.immuni.android.R
 import org.immuni.android.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
@@ -54,6 +55,7 @@ class ChoosePersonFragment : Fragment() {
                     colorResource(viewModel.deviceId, viewModel.userIndex!!)
                 )
                 backgroundLayout.setBackgroundColor(themeColor)
+                backgroundLayout.animateShow()
                 next.setTextColor(themeColor)
 
                 icon.setImageResource(

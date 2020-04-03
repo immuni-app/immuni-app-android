@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@color/colorPrimary" />
+        tools:background="#fdfdfd" />
 
     <org.immuni.android.ui.view.ImmuniProgressView
         android:id="@+id/progress"

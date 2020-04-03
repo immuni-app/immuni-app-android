@@ -308,7 +308,7 @@
         android:layout_width="match_parent"
         android:layout_height="108dp"
         android:translationY="-9dp"
-        android:backgroundTint="@color/background"
+        android:backgroundTint="@color/home_background"
         android:background="@drawable/rounded_corners_9dp"/>
     <Button
         android:id="@+id/next"

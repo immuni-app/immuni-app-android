@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.bendingspoons.base.extensions.animateHide
@@ -17,6 +18,8 @@ import org.immuni.android.ui.log.LogViewModel
 import org.immuni.android.ui.log.model.FormModel
 import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import com.bendingspoons.base.utils.ScreenUtils
+import org.immuni.android.R
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout) {
@@ -55,6 +58,22 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
         prevButton.setOnClickListener {
             viewModel.onPrevTap(questionId)
         }
+
+        // on scrolling the top mask hide/show
+        view.findViewById<NestedScrollView>(R.id.scrollView)?.setOnScrollChangeListener { v: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            updateTopMask(scrollY)
+        }
+
+        updateTopMask(view.findViewById<NestedScrollView>(R.id.scrollView)?.scrollY ?: 0)
+    }
+
+    // on scroll the top mask raise its elevation generating a shadow effect while scrolling up
+
+    fun updateTopMask(scrollY: Int) {
+        val dp = ScreenUtils.convertDpToPixels(requireContext(), 8).toFloat()
+        val elevation = resources.getDimension(R.dimen.top_scroll_mask_elevation)
+        //this.view?.findViewById<View>(R.id.topMask)?.alpha = 1f//0f + scrollY/dp
+        this.view?.findViewById<View>(R.id.topMask)?.elevation = (elevation * (0f + scrollY/dp).coerceIn(0f, 1f))
     }
 
     protected abstract val nextButton: Button

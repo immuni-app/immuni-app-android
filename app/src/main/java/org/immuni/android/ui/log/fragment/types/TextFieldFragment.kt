@@ -10,7 +10,13 @@ import org.immuni.android.R
 import org.immuni.android.ui.log.fragment.FormContentFragment
 import org.immuni.android.ui.log.model.FormModel
 import com.bendingspoons.base.extensions.showKeyboard
+import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.form_text_field.*
+import kotlinx.android.synthetic.main.form_text_field.back
+import kotlinx.android.synthetic.main.form_text_field.description
+import kotlinx.android.synthetic.main.form_text_field.next
+import kotlinx.android.synthetic.main.form_text_field.question
+import kotlinx.android.synthetic.main.form_text_field.scrollView
 
 class TextFieldFragment: FormContentFragment(R.layout.form_text_field) {
 

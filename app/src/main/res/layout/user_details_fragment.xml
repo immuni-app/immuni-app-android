@@ -389,7 +389,7 @@
     </androidx.core.widget.NestedScrollView>
     <View
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="30dp"
         android:layout_gravity="bottom"
         android:rotation="180"
         android:background="@drawable/gradient_home_top"/>

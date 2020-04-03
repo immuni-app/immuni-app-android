@@ -3,30 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        android:overScrollMode="never"
         android:clipToPadding="false"
+        android:paddingTop="90dp"
         android:paddingBottom="120dp"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:src="@drawable/ic_cross"
-                android:layout_gravity="top|left"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/pageTitle"
@@ -39,9 +33,8 @@
                 tools:text="Vive con te nonna Pina?"
                 android:textColor="#4F4F5B"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/back" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
@@ -72,9 +65,17 @@
                     android:checked="false"
                     android:text="@string/no" />
             </RadioGroup>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:id="@+id/topMask"
+        style="@style/TopScrollingMask"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:translationY="-9dp"
+        android:backgroundTint="@color/background"
+        android:background="@drawable/rounded_corners_9dp"/>
 
     <View
         android:layout_width="match_parent"
@@ -87,11 +88,22 @@
         style="@style/RoundedButton"
         android:id="@+id/update"
         android:text="@string/update"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <ImageView
+        android:id="@+id/back"
+        android:elevation="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/ic_cross"
+        android:layout_gravity="top|left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </FrameLayout>

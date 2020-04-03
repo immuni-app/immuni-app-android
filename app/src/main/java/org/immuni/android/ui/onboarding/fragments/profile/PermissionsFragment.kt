@@ -53,20 +53,8 @@ class PermissionsFragment :
         this.view?.hideKeyboard()
     }
 
-    private fun updateTopMask(scrollY: Int) {
-        val dp = ScreenUtils.convertDpToPixels(requireContext(), 8).toFloat()
-        topMask.alpha = 0f + scrollY/dp
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // on scrolling the top mask hide/show
-        scrollView.setOnScrollChangeListener { v: View?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
-            updateTopMask(scrollY)
-        }
-
-        updateTopMask(scrollView.scrollY)
 
         bluetooth.setOnClickListener {
             bluetoothExecuted = true
