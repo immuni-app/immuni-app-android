@@ -1,6 +1,5 @@
 package org.immuni.android.ui.dialog
 
-import android.app.Dialog
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Build

@@ -18,6 +18,10 @@ import com.bendingspoons.base.extensions.visible
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.next
 import kotlinx.android.synthetic.main.onboarding_permissions_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.toast
@@ -64,7 +68,12 @@ class PermissionsFragment :
             if(permissionsManager.shouldShowPermissions(activity as AppCompatActivity,
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
-                permissionsManager.requestPermissions(activity as AppCompatActivity)
+                PermissionsTutorialDialog {
+                    GlobalScope.launch(Dispatchers.Main) {
+                        delay(500)
+                        permissionsManager.requestPermissions(activity as AppCompatActivity)
+                    }
+                }.show(childFragmentManager, "tutorial")
             } else openAppSettings()
         }
 
