@@ -15,6 +15,7 @@ import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.invisible
 import com.bendingspoons.base.extensions.visible
+import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.next
 import kotlinx.android.synthetic.main.onboarding_permissions_fragment.*
@@ -54,6 +55,11 @@ class PermissionsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        nextButton.setOnClickListener(null)
+        nextButton.setOnClickListener {
+            viewModel.onOnboardingComplete()
+        }
 
         bluetooth.setOnClickListener {
             bluetoothExecuted = true

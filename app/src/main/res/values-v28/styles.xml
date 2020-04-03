@@ -24,4 +24,9 @@
         <item name="android:elevation">@dimen/home_card_elevation</item>
         <item name="android:outlineSpotShadowColor">@color/colorPrimary</item>
     </style>
+
+    <style name="TopScrollingMask">
+        <item name="android:elevation">@dimen/top_scroll_mask_elevation</item>
+        <item name="android:outlineSpotShadowColor">#08000000</item>
+    </style>
 </resources>

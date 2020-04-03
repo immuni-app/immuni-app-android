@@ -151,10 +151,10 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
         var valid = lastRadioSelected != null
 
         if (lastRadioSelected == NicknameType.OTHER) {
-            editTextGroup.visible()
+            //editTextGroup.visible()
             valid = valid && textField.text.toString().isNotEmpty() && textField.text.toString().length <= 5
         } else {
-            editTextGroup.gone()
+            //editTextGroup.gone()
         }
 
         if (valid && updateModel) saveData()

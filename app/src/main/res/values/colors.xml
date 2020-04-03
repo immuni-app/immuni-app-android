@@ -39,7 +39,7 @@
     <color name="input_label">#C6C7D2</color>
     <color name="input_field">#A5A7B7</color>
     <color name="geraldine">#F48B8B</color>
-    <color name="onboarding_progress_background">#ECECEC</color>
+    <color name="onboarding_progress_background">#1A6993FF</color>
     <color name="picker_divider_color">#33B7B7B7</color>
     <color name="home_background">#F9F9FF</color>
     <color name="dialog_status_bar_color">#66000000</color>

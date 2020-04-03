@@ -28,7 +28,7 @@ import org.immuni.android.models.User
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class EditNicknameActivity : ImmuniActivity(), CompoundButton.OnCheckedChangeListener {
+class EditNicknameActivity : BaseEditActivity(), CompoundButton.OnCheckedChangeListener {
     private lateinit var viewModel: EditDetailsViewModel
     private lateinit var userId: String
     val items = LinkedHashMap<Pair<NicknameType, Gender>, RadioButton>()
@@ -41,7 +41,6 @@ class EditNicknameActivity : ImmuniActivity(), CompoundButton.OnCheckedChangeLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_edit_nickname_activity)
-        setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
         userId = intent?.extras?.getString("userId")!!
         viewModel = getViewModel { parametersOf(userId)}
 
@@ -62,9 +61,9 @@ class EditNicknameActivity : ImmuniActivity(), CompoundButton.OnCheckedChangeLis
             if(it.nickname?.type == NicknameType.OTHER) {
                 textField.setText(it.nickname.value ?: "")
                 textField.setSelection(textField.text.length)
-                editTextGroup.visible()
+                //editTextGroup.visible()
             } else {
-                editTextGroup.gone()
+                //editTextGroup.gone()
             }
         })
 

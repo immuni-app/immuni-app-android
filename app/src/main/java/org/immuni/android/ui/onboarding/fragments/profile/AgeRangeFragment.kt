@@ -3,15 +3,13 @@ package org.immuni.android.ui.onboarding.fragments.profile
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
-import androidx.core.widget.doOnTextChanged
 import org.immuni.android.R
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
-import com.bendingspoons.base.extensions.hideKeyboard
-import com.bendingspoons.base.extensions.showKeyboard
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.onboarding_age_range_fragment.*
 import org.immuni.android.models.AgeGroup
 import org.immuni.android.models.AgeGroup.*
+import kotlin.math.pow
 
 class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fragment),
     CompoundButton.OnCheckedChangeListener {
@@ -20,7 +18,6 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         nextButton.setOnClickListener(null) // override the default behaviour
         nextButton.setOnClickListener {

@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.immuni.android.ImmuniApplication
+import org.immuni.android.R
 import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
@@ -17,6 +18,7 @@ import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.models.User
 import org.immuni.android.picoMetrics.OnboardingCompleted
+import org.immuni.android.toast
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -37,7 +39,8 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     private val apiManager: ApiManager by inject()
     private val permissionsManager: PermissionsManager by inject()
 
-    var partialUserInfo = MediatorLiveData<OnboardingUserInfo>()
+    val partialUserInfo = MediatorLiveData<OnboardingUserInfo>()
+    val loading = MutableLiveData<Boolean>()
 
     private var savedStateLiveData = handle.getLiveData<Serializable>(STATE_KEY)
 
@@ -111,7 +114,8 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     fun onOnboardingComplete() {
         val userInfo = partialUserInfo.value!!
         uiScope.launch {
-            delay(2000) // keep here to allow smooth page transition
+            loading.value = true
+            delay(250) // minimum loading time
 
             val me = oracle.me()
             val updatedMe = if (me?.mainUser != null) me else apiManager.updateMainUser(
@@ -125,8 +129,17 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
             onboarding.setCompleted(isCompleted)
             if (isCompleted) {
                 pico.trackEvent(OnboardingCompleted().userAction)
+                _navigateToNextPage.value = Event(true)
+            } else {
+                toast(ImmuniApplication.appContext.getString(R.string.server_generic_error))
             }
+            loading.value = false
+        }
+    }
 
+    fun onEnterDonePage() {
+        uiScope.launch {
+            delay(2000)
             _navigateToMainPage.value = Event(true)
         }
     }

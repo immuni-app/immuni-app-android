@@ -16,6 +16,7 @@ import org.immuni.android.ui.log.fragment.FormContentFragment
 import org.immuni.android.ui.log.model.FormModel
 import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.visible
+import com.bendingspoons.base.utils.ScreenUtils
 import com.shawnlin.numberpicker.NumberPicker
 import kotlinx.android.synthetic.main.form_picker_field.*
 import kotlinx.android.synthetic.main.form_text_field.next

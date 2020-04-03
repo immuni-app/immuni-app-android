@@ -139,11 +139,12 @@ class FormFragment : Fragment() {
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
             it?.let {
-                progressText.text = if (it.isMain) {
+                /*progressText.text = if (it.isMain) {
                     getString(R.string.your_clinic_diary_form)
                 } else {
                     String.format(getString(R.string.clinic_diary_of_form), it.name)
                 }
+                 */
             }
         })
     }

@@ -7,10 +7,14 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        android:overScrollMode="never"
+        android:fitsSystemWindows="true"
         android:clipToPadding="false"
+        android:paddingTop="110dp"
         android:paddingBottom="120dp"
         android:fillViewport="true">
 
@@ -24,7 +28,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:text="In questo momento hai uno o più tra questi sintomi?"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +70,15 @@
         android:layout_gravity="bottom"
         android:rotation="180"
         android:background="@drawable/gradient_form"/>
+
+    <View
+        android:id="@+id/topMask"
+        style="@style/TopScrollingMask"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        android:translationY="-9dp"
+        android:backgroundTint="@color/background"
+        android:background="@drawable/rounded_corners_9dp"/>
 
     <com.google.android.material.button.MaterialButton
         style="@style/RoundedButton"

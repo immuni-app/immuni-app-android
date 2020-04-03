@@ -120,7 +120,7 @@
             android:name=".ui.addrelative.AddRelativeActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.uploadData.UploadDataActivity"
             android:launchMode="standard"
@@ -135,7 +135,7 @@
             android:name=".ui.home.family.details.edit.EditNicknameActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.home.family.details.edit.EditGenderActivity"
             android:launchMode="standard"
