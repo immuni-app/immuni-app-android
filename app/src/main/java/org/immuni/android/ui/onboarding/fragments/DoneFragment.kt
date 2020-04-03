@@ -50,9 +50,7 @@ class DoneFragment : Fragment() {
             }
         })
 
-        if(savedInstanceState == null) {
-            viewModel.onOnboardingComplete()
-        }
+        viewModel.onEnterDonePage()
     }
 
     private fun goToMainActivity() {

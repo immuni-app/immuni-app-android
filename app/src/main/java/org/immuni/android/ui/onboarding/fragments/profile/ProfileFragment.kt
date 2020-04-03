@@ -18,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.immuni.android.loading
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class ProfileFragment : Fragment() {
@@ -83,6 +84,10 @@ class ProfileFragment : Fragment() {
             it.getContentIfNotHandled()?.let {
                 onBackPressed()
             }
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            (activity as? AppCompatActivity)?.loading(it)
         })
     }
 

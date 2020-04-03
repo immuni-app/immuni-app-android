@@ -56,6 +56,11 @@ class PermissionsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        nextButton.setOnClickListener(null)
+        nextButton.setOnClickListener {
+            viewModel.onOnboardingComplete()
+        }
+
         bluetooth.setOnClickListener {
             bluetoothExecuted = true
             if(!bluetoothManager.isBluetoothSupported()) {
