@@ -2,23 +2,27 @@ package org.immuni.android.ui.home.family.details.edit
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
-import com.bendingspoons.base.extensions.*
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.bendingspoons.base.extensions.gone
+import com.bendingspoons.base.extensions.hideKeyboard
+import com.bendingspoons.base.extensions.showKeyboard
+import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.user_edit_nickname_activity.*
-import kotlinx.android.synthetic.main.user_edit_nickname_activity.radioGroup
-import kotlinx.android.synthetic.main.user_edit_nickname_activity.textField
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.immuni.android.db.entity.Gender
 import org.immuni.android.loading
@@ -28,9 +32,11 @@ import org.immuni.android.models.User
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class EditNicknameActivity : BaseEditActivity(), CompoundButton.OnCheckedChangeListener {
+class EditNicknameFragment : BaseEditFragment(), CompoundButton.OnCheckedChangeListener {
+
+    val args by navArgs<EditNicknameFragmentArgs>()
+
     private lateinit var viewModel: EditDetailsViewModel
-    private lateinit var userId: String
     val items = LinkedHashMap<Pair<NicknameType, Gender>, RadioButton>()
 
     override fun onPause() {
@@ -38,19 +44,25 @@ class EditNicknameActivity : BaseEditActivity(), CompoundButton.OnCheckedChangeL
         textField?.hideKeyboard()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.user_edit_nickname_activity)
-        userId = intent?.extras?.getString("userId")!!
-        viewModel = getViewModel { parametersOf(userId)}
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.user_edit_nickname_activity, container, false)
+    }
 
-        viewModel.navigateBack.observe(this, Observer {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = getViewModel { parametersOf(args.userId)}
+
+        viewModel.navigateBack.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                finish()
+                findNavController().popBackStack()
             }
         })
 
-        viewModel.user.observe(this, Observer {
+        viewModel.user.observe(viewLifecycleOwner, Observer {
             buildWidget(it)
             items.values.forEach { it.isChecked = false}
 
@@ -67,11 +79,11 @@ class EditNicknameActivity : BaseEditActivity(), CompoundButton.OnCheckedChangeL
             }
         })
 
-        viewModel.loading.observe(this, Observer {
-            loading(it)
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            activity?.loading(it)
         })
 
-        back.setOnClickListener { finish() }
+        back.setOnClickListener { findNavController().popBackStack() }
         textField.doOnTextChanged { text, _, _, _ ->
             validate()
         }
@@ -115,11 +127,11 @@ class EditNicknameActivity : BaseEditActivity(), CompoundButton.OnCheckedChangeL
                 }
             }
             if (selectedType == NicknameType.OTHER) {
-                editTextGroup.visible()
+                //editTextGroup.visible()
                 textField.showKeyboard()
             }
             else {
-                editTextGroup.gone()
+                //editTextGroup.gone()
                 textField.hideKeyboard()
             }
         }
@@ -177,7 +189,7 @@ class EditNicknameActivity : BaseEditActivity(), CompoundButton.OnCheckedChangeL
                 items.apply {
                     put(
                         Pair(type, gender),
-                        radioButton(cont++, Nickname(type, "").humanReadable(applicationContext, gender))
+                        radioButton(cont++, Nickname(type, "").humanReadable(requireContext(), gender))
                     )
                 }
             }
@@ -189,7 +201,7 @@ class EditNicknameActivity : BaseEditActivity(), CompoundButton.OnCheckedChangeL
             items.apply {
                 put(
                     Pair(currentType, gender),
-                    radioButton(cont++, Nickname(currentType, "").humanReadable(applicationContext, gender))
+                    radioButton(cont++, Nickname(currentType, "").humanReadable(requireContext(), gender))
                 )
             }
         }
@@ -198,7 +210,7 @@ class EditNicknameActivity : BaseEditActivity(), CompoundButton.OnCheckedChangeL
         items.apply {
             put(
                 Pair(NicknameType.OTHER, Gender.FEMALE),
-                radioButton(cont++, applicationContext.getString(R.string.choose_a_nickname))
+                radioButton(cont++, requireContext().getString(R.string.choose_a_nickname))
             )
         }
 
@@ -208,7 +220,7 @@ class EditNicknameActivity : BaseEditActivity(), CompoundButton.OnCheckedChangeL
     }
 
     private fun radioButton(id: Int, text: String): RadioButton {
-        return RadioButton(applicationContext).apply {
+        return RadioButton(requireContext()).apply {
             this.id = id
             tag = id
             this.text = text
@@ -221,7 +233,7 @@ class EditNicknameActivity : BaseEditActivity(), CompoundButton.OnCheckedChangeL
             val paddingBottom = ScreenUtils.convertDpToPixels(context, 16)
             setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)
             setTextColor(Color.parseColor("#495D74"))
-            setOnCheckedChangeListener(this@EditNicknameActivity)
+            setOnCheckedChangeListener(this@EditNicknameFragment)
         }
     }
 }

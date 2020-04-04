@@ -1,7 +1,12 @@
 package org.immuni.android.ui.home.family.details.edit
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.user_edit_livewithyou_activity.*
 import kotlinx.android.synthetic.main.user_edit_livewithyou_activity.back
@@ -11,23 +16,31 @@ import org.immuni.android.loading
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class EditLiveWithYouActivity : BaseEditActivity() {
+class EditLiveWithYouFragment : BaseEditFragment() {
+
+    val args by navArgs<EditLiveWithYouFragmentArgs>()
+
     private lateinit var viewModel: EditDetailsViewModel
-    private lateinit var userId: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.user_edit_livewithyou_activity)
-        userId = intent?.extras?.getString("userId")!!
-        viewModel = getViewModel { parametersOf(userId)}
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.user_edit_livewithyou_activity, container, false)
+    }
 
-        viewModel.navigateBack.observe(this, Observer {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = getViewModel { parametersOf(args.userId)}
+
+        viewModel.navigateBack.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                finish()
+                findNavController().popBackStack()
             }
         })
 
-        viewModel.user.observe(this, Observer {
+        viewModel.user.observe(viewLifecycleOwner, Observer {
             when(it.isInSameHouse) {
                 true -> {
                     yes.isChecked = true
@@ -39,15 +52,15 @@ class EditLiveWithYouActivity : BaseEditActivity() {
                 }
             }
 
-            pageTitle.text = String.format(applicationContext.getString(R.string.user_edit_live_with_you_title),
-                it.nickname!!.humanReadable(applicationContext, it.gender))
+            pageTitle.text = String.format(requireContext().getString(R.string.user_edit_live_with_you_title),
+                it.nickname!!.humanReadable(requireContext(), it.gender))
         })
 
-        viewModel.loading.observe(this, Observer {
-            loading(it)
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            activity?.loading(it)
         })
 
-        back.setOnClickListener { finish() }
+        back.setOnClickListener { findNavController().popBackStack() }
 
         update.setOnClickListener {
             val sameHouse = when {

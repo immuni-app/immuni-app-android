@@ -1,9 +1,13 @@
 package org.immuni.android.ui.home.family.details.edit
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.user_edit_age_group_activity.*
@@ -14,23 +18,31 @@ import org.immuni.android.models.AgeGroup
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
-class EditAgeGroupActivity : BaseEditActivity() {
+class EditAgeGroupFragment : BaseEditFragment() {
+
+    val args by navArgs<EditAgeGroupFragmentArgs>()
+
     private lateinit var viewModel: EditDetailsViewModel
-    private lateinit var userId: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.user_edit_age_group_activity)
-        userId = intent?.extras?.getString("userId")!!
-        viewModel = getViewModel { parametersOf(userId)}
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.user_edit_age_group_activity, container, false)
+    }
 
-        viewModel.navigateBack.observe(this, Observer {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = getViewModel { parametersOf(args.userId)}
+
+        viewModel.navigateBack.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                finish()
+                findNavController().popBackStack()
             }
         })
 
-        viewModel.user.observe(this, Observer {
+        viewModel.user.observe(viewLifecycleOwner, Observer {
             age_range_0_17.isChecked = false
             age_range_18_35.isChecked = false
             age_range_36_45.isChecked = false
@@ -50,17 +62,17 @@ class EditAgeGroupActivity : BaseEditActivity() {
             }
 
             pageTitle.text = when(it.isMain) {
-                true -> applicationContext.getString(R.string.onboarding_age_title)
-                false -> String.format(applicationContext.getString(R.string.user_edit_age_you_title),
-                    it.nickname!!.humanReadable(applicationContext, it.gender))
+                true -> requireContext().getString(R.string.onboarding_age_title)
+                false -> String.format(requireContext().getString(R.string.user_edit_age_you_title),
+                    it.nickname!!.humanReadable(requireContext(), it.gender))
             }
         })
 
-        viewModel.loading.observe(this, Observer {
-            loading(it)
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            activity?.loading(it)
         })
 
-        back.setOnClickListener { finish() }
+        back.setOnClickListener { findNavController().popBackStack() }
 
         update.setOnClickListener {
             val ageGroup = when {

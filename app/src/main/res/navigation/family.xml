@@ -44,4 +44,55 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"/>
+    <dialog
+        android:id="@+id/editAgeGroupFragment"
+        android:name="org.immuni.android.ui.home.family.details.edit.EditAgeGroupFragment"
+        android:label="EditAgeGroupFragment"
+        tools:layout="@layout/user_edit_age_group_activity">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </dialog>
+    <action
+        android:id="@+id/action_edit_age_group"
+        app:destination="@id/editAgeGroupFragment"/>
+
+    <dialog
+        android:id="@+id/editGenderFragment"
+        android:name="org.immuni.android.ui.home.family.details.edit.EditGenderFragment"
+        android:label="editGenderFragment"
+        tools:layout="@layout/user_edit_gender_activity">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </dialog>
+    <action
+        android:id="@+id/action_edit_gender"
+        app:destination="@id/editGenderFragment"/>
+
+    <dialog
+        android:id="@+id/editNameFragment"
+        android:name="org.immuni.android.ui.home.family.details.edit.EditNicknameFragment"
+        android:label="editNameFragment"
+        tools:layout="@layout/user_edit_nickname_activity">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </dialog>
+    <action
+        android:id="@+id/action_edit_name"
+        app:destination="@id/editNameFragment"/>
+
+    <dialog
+        android:id="@+id/editLiveWithYouFragment"
+        android:name="org.immuni.android.ui.home.family.details.edit.EditLiveWithYouFragment"
+        android:label="editLiveWithYouFragment"
+        tools:layout="@layout/user_edit_livewithyou_activity">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </dialog>
+    <action
+        android:id="@+id/action_edit_live_with_you"
+        app:destination="@id/editLiveWithYouFragment"/>
 </navigation>

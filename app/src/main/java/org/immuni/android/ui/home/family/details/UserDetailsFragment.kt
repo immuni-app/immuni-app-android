@@ -133,35 +133,23 @@ class UserDetailsFragment : Fragment() {
     }
 
     private fun navigateToEditAgeGroup() {
-        val intent = Intent(requireContext(), EditAgeGroupActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra("userId", fragmentArgs.userId)
-        }
-        activity?.startActivity(intent)
+        val action = UserDetailsFragmentDirections.actionEditAgeGroup(fragmentArgs.userId)
+        findNavController().navigate(action)
     }
 
     private fun navigateToEditName() {
-        val intent = Intent(requireContext(), EditNicknameActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra("userId", fragmentArgs.userId)
-        }
-        activity?.startActivity(intent)
+        val action = UserDetailsFragmentDirections.actionEditName(fragmentArgs.userId)
+        findNavController().navigate(action)
     }
 
     private fun navigateToEditGender() {
-        val intent = Intent(requireContext(), EditGenderActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra("userId", fragmentArgs.userId)
-        }
-        activity?.startActivity(intent)
+        val action = UserDetailsFragmentDirections.actionEditGender(fragmentArgs.userId)
+        findNavController().navigate(action)
     }
 
     private fun navigateToEditLiveWithYou() {
-        val intent = Intent(requireContext(), EditLiveWithYouActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra("userId", fragmentArgs.userId)
-        }
-        activity?.startActivity(intent)
+        val action = UserDetailsFragmentDirections.actionEditLiveWithYou(fragmentArgs.userId)
+        findNavController().navigate(action)
     }
 
     private fun navigateToUploadData() {
@@ -170,15 +158,5 @@ class UserDetailsFragment : Fragment() {
             putExtra("userId", fragmentArgs.userId)
         }
         activity?.startActivity(intent)
-    }
-
-    private fun showUploadDataMessage() {
-        MaterialAlertDialogBuilder(context)
-            .setTitle("Caricare i dati?")
-            .setMessage("I tuoi dati verranno caricati sui nostri server in modo anonimo per consentirci di contattare tutte le persone che sono state a contatto con te negli ultimi giorni.")
-            .setPositiveButton(getString(R.string.upload)) { d, _ -> d.dismiss()}
-            .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss()}
-            .setOnCancelListener {  }
-            .show()
     }
 }
