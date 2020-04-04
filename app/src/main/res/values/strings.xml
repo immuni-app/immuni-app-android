@@ -85,7 +85,8 @@
     <string name="indication_for">Indicazioni su cosa fare per %s</string>
     <string name="you_as_complement">te</string>
     <string name="enable_geolocation">Attiva la localizzazione</string>
-    <string name="enable_bluetooth">Attiva il Bluetooth</string>
+    <string name="consent_geolocation">Consenti l\'utilizzo della localizzazione</string>
+    <string name="consent_bluetooth">Consenti l\'utilizzo del Bluetooth</string>
     <string name="enable_geolocation_message">Permetti il calcolo del tuo fattore di rischio</string>
     <string name="enable_notification">Attiva le notifiche</string>
     <string name="enable_notification_message">Consentici di comunicare con te in caso di necessità</string>
@@ -106,7 +107,8 @@
     <string name="authorizations">Autorizzazioni</string>
     <string name="authorizations_subtitle">Archiviazione, Attività fisica, Contatti e...</string>
     <string name="show_notifications">Mostra notifiche</string>
-    <string name="notifications_instruction_enable">1. Abilita</string>
+    <string name="notifications_instruction_1">1. Apri le impostazioni dal bottone in basso</string>
+    <string name="notifications_instruction_2">2. Abilita</string>
     <string name="enable_notification_dialog_message">Verrai notificato in caso di importanti comunicazioni e quando è il momento di aggiornare il diario clinico.</string>
     <string name="your_family_members_separator">I tuoi familiari</string>
     <string name="age_placeholder">%d anni</string>

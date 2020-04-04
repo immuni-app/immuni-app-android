@@ -81,6 +81,8 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
 
     inner class GeolocationCardVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
+        val title: TextView = v.findViewById(R.id.title)
+
         override fun onClick(v: View) {
             onItemClick(adapterPosition)
         }
@@ -209,6 +211,17 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
                 } else {
                     holder.name.text = resources.getString(R.string.clinic_diary_updated)
                     holder.bottomMessage.text = resources.getString(R.string.clinic_diary_updated_message)
+                }
+            }
+            is GeolocationCardVH -> {
+                val item = items[position] as EnableGeolocationCard
+                when(item.type) {
+                    GeolocationType.PERMISSIONS -> {
+                        holder.title.text = resources.getString(R.string.consent_geolocation)
+                    }
+                    GeolocationType.GLOBAL_GEOLOCATION -> {
+                        holder.title.text = resources.getString(R.string.enable_geolocation)
+                    }
                 }
             }
         }

@@ -75,17 +75,19 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
                 val itemsList = mutableListOf<HomeItemType>()
 
-                // check geolocation/bluetooth disabled
+                // check bluetooth disabled
 
-                if (!bluetoothManager.isBluetoothSupported() || !bluetoothManager.isBluetoothEnabled()) { //!GeolocationManager.hasAllPermissions(AscoltoApplication.appContext) ||
+                if (!bluetoothManager.isBluetoothSupported() || !bluetoothManager.isBluetoothEnabled()) {
                     itemsList.add(EnableBluetoothCard())
                 }
 
-                // check geolocation/bluetooth disabled
+                // check geolocation disabled
 
-                if (!PermissionsManager.hasAllPermissions(ImmuniApplication.appContext) ||
-                    !PermissionsManager.globalLocalisationEnabled(ImmuniApplication.appContext)) {
-                    itemsList.add(EnableGeolocationCard())
+                // only show one geolocation card at the time in order to not have too many cards
+                if (!PermissionsManager.hasAllPermissions(ImmuniApplication.appContext)) {
+                    itemsList.add(EnableGeolocationCard(GeolocationType.PERMISSIONS))
+                } else if(!PermissionsManager.globalLocalisationEnabled(ImmuniApplication.appContext)) {
+                    itemsList.add(EnableGeolocationCard(GeolocationType.GLOBAL_GEOLOCATION))
                 }
 
                 // check notifications disabled

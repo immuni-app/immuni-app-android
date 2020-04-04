@@ -1,32 +1,44 @@
-package org.immuni.android.ui.dialog
+package org.immuni.android.ui.home.home.fragments
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import kotlinx.android.synthetic.main.enable_notifications_dialog.*
-import kotlinx.android.synthetic.main.family_member_add_dialog.back
-import org.immuni.android.ImmuniActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.enable_notifications_explanations_dialog.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
+import org.immuni.android.ui.dialog.FullScreenDialogFragment
 
-class NotificationsDialogActivity: ImmuniActivity() {
+class NotificationsExplanationsFragment: FullScreenDialogFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.enable_notifications_dialog)
-        setLightStatusBarFullscreen(resources.getColor(R.color.transparent))
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.enable_notifications_explanations_dialog, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         button.setOnClickListener {
-            openNotificationSettings()
-            finish()
+            findNavController().popBackStack()
         }
 
         back.setOnClickListener {
-            finish()
+            findNavController().popBackStack()
         }
+    }
+
+    fun navigateToExplanations() {
+        val action =
+            NotificationsDialogFragmentDirections.actionGlobalNotificationsExplanations()
+        findNavController().navigate(action)
     }
 
     fun openAppSettings() {

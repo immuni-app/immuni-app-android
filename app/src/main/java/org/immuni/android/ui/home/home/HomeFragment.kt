@@ -9,6 +9,7 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeSharedViewModel
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
@@ -125,7 +126,10 @@ class HomeFragment : Fragment(), HomeClickListener {
                 openNotificationDialog()
             }
             is EnableGeolocationCard -> {
-                openGeolocationDialog()
+                when(item.type) {
+                    GeolocationType.PERMISSIONS -> openGeolocationDialog()
+                    GeolocationType.GLOBAL_GEOLOCATION -> openGeolocationDialog()
+                }
             }
             is EnableBluetoothCard -> {
                 openBluetoothDialog()
@@ -149,10 +153,13 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openNotificationDialog() {
-        val intent = Intent(ImmuniApplication.appContext, NotificationsDialogActivity::class.java).apply {
+        /*val intent = Intent(ImmuniApplication.appContext, NotificationsDialogActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)
+         */
+        val action = HomeFragmentDirections.actionNotificationsDialog()
+        findNavController().navigate(action)
     }
 
     private fun openGeolocationDialog() {

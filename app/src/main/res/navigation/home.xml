@@ -26,4 +26,28 @@
         android:name="org.immuni.android.ui.home.home.HomeFragment"
         android:label="homeFragment"
         tools:layout="@layout/home_fragment"/>
+    <dialog
+        android:id="@+id/notificationsDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.NotificationsDialogFragment"
+        android:label="NotificationsDialogFragment"
+        tools:layout="@layout/enable_notifications_dialog"/>
+    <dialog
+        android:id="@+id/notificationsExplanations"
+        android:name="org.immuni.android.ui.home.home.fragments.NotificationsExplanationsFragment"
+        android:label="notificationsExplanations" />
+    <action
+        android:id="@+id/action_notifications_dialog"
+        app:destination="@id/notificationsDialogFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    <action
+        android:id="@+id/action_global_notificationsExplanations"
+        app:destination="@id/notificationsExplanations"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
 </navigation>

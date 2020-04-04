@@ -16,7 +16,9 @@ data class SurveyCard(
 
 class SurveyCardDone(val surveysLogged: Int): HomeItemType()
 
-class EnableGeolocationCard: HomeItemType()
+class EnableGeolocationCard(
+    val type: GeolocationType
+): HomeItemType()
 
 class EnableBluetoothCard: HomeItemType()
 
@@ -40,3 +42,7 @@ data class SuggestionsCardRed(
     val title: String,
     val severity: Severity
 ): HomeItemType()
+
+enum class GeolocationType {
+    PERMISSIONS, GLOBAL_GEOLOCATION
+}
