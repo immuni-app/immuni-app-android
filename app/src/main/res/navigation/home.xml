@@ -45,8 +45,34 @@
     <dialog
         android:id="@+id/addFamilyMemberDialog"
         android:name="org.immuni.android.ui.home.home.fragments.AddFamilyMemberDialog"
-        android:label="AddFamilyMemberDialog" />
+        android:label="AddFamilyMemberDialog"
+        tools:layout="@layout/family_member_add_dialog"/>
     <action
         android:id="@+id/action_family_dialog"
         app:destination="@id/addFamilyMemberDialog"/>
+    <dialog
+        android:id="@+id/bluetoothDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.BluetoothDialogFragment"
+        android:label="BluetoothDialogFragment"
+        tools:layout="@layout/enable_bluetooth_dialog"/>
+    <action
+        android:id="@+id/action_bluetooth_dialog"
+        app:destination="@id/bluetoothDialogFragment"/>
+    <dialog
+        android:id="@+id/geolocationDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.GeolocationDialogFragment"
+        android:label="GeolocationDialogFragment"
+        tools:layout="@layout/enable_geolocation_dialog"/>
+    <action
+        android:id="@+id/action_geolocation_dialog"
+        app:destination="@id/geolocationDialogFragment"/>
+    <dialog
+        android:id="@+id/homeDiaryFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.HomeDiaryDialogFragment"
+        android:label="HomeDiaryDialog"
+        tools:layout="@layout/home_diary_dialog"/>
+    <action
+        android:id="@+id/action_diary_dialog"
+        app:destination="@id/homeDiaryFragment"/>
+
 </navigation>

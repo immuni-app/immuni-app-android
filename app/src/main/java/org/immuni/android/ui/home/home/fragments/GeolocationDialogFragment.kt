@@ -1,22 +1,33 @@
-package org.immuni.android.ui.dialog
+package org.immuni.android.ui.home.home.fragments
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.enable_geolocation_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import org.immuni.android.ImmuniActivity
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
+import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 
-class GeolocationDialogActivity: ImmuniActivity() {
+class GeolocationDialogFragment: FullScreenDialogLightFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.enable_geolocation_dialog)
-        setLightStatusBarFullscreen(resources.getColor(R.color.transparent))
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.enable_geolocation_dialog, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         button.setOnClickListener {
             openAppSettings()
@@ -27,7 +38,7 @@ class GeolocationDialogActivity: ImmuniActivity() {
         }
 
         back.setOnClickListener {
-            finish()
+            findNavController().popBackStack()
         }
     }
 
@@ -36,6 +47,6 @@ class GeolocationDialogActivity: ImmuniActivity() {
         intent.data = Uri.parse("package:" + ImmuniApplication.appContext.packageName)
         startActivity(intent)
 
-        finish()
+        findNavController().popBackStack()
     }
 }

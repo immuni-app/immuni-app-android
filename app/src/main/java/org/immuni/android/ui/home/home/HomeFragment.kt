@@ -19,6 +19,9 @@ import kotlinx.android.synthetic.main.home_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.models.survey.backgroundColor
 import org.immuni.android.ui.dialog.*
+import org.immuni.android.ui.home.home.fragments.BluetoothDialogFragment
+import org.immuni.android.ui.home.home.fragments.GeolocationDialogFragment
+import org.immuni.android.ui.home.home.fragments.HomeDiaryDialogFragment
 import org.immuni.android.ui.home.home.model.*
 import org.immuni.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -144,33 +147,22 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openDiaryDialog() {
-        val intent = Intent(ImmuniApplication.appContext, HomeDiaryDialogActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        activity?.startActivity(intent)
+        val action = HomeFragmentDirections.actionDiaryDialog()
+        findNavController().navigate(action)
     }
 
     private fun openNotificationDialog() {
-        /*val intent = Intent(ImmuniApplication.appContext, NotificationsDialogActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        activity?.startActivity(intent)
-         */
         val action = HomeFragmentDirections.actionNotificationsDialog()
         findNavController().navigate(action)
     }
 
     private fun openGeolocationDialog() {
-        val intent = Intent(ImmuniApplication.appContext, GeolocationDialogActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        activity?.startActivity(intent)
+        val action = HomeFragmentDirections.actionGeolocationDialog()
+        findNavController().navigate(action)
     }
 
     private fun openBluetoothDialog() {
-        val intent = Intent(ImmuniApplication.appContext, BluetoothDialogActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        activity?.startActivity(intent)
+        val action = HomeFragmentDirections.actionBluetoothDialog()
+        findNavController().navigate(action)
     }
 }
