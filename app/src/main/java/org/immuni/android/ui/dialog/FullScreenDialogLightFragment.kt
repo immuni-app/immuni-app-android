@@ -10,11 +10,11 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.DialogFragment
 import org.immuni.android.R
 
-abstract class FullScreenDialogFragment : DialogFragment() {
+abstract class FullScreenDialogLightFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme_FullScreenDialog)
+        setStyle(STYLE_NORMAL, R.style.AppTheme_FullScreenDialog)
     }
 
     override fun onStart() {

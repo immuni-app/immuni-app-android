@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.bendingspoons.base.extensions.gone
 import org.immuni.android.R
 import org.immuni.android.managers.PermissionsManager
@@ -15,8 +16,6 @@ import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.invisible
 import com.bendingspoons.base.extensions.visible
-import com.bendingspoons.base.utils.ScreenUtils
-import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.next
 import kotlinx.android.synthetic.main.onboarding_permissions_fragment.*
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +25,6 @@ import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.toast
-import org.immuni.android.ui.dialog.PermissionsTutorialDialog
 import org.koin.android.ext.android.inject
 
 class PermissionsFragment :
@@ -79,12 +77,8 @@ class PermissionsFragment :
             if(permissionsManager.shouldShowPermissions(activity as AppCompatActivity,
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
-                PermissionsTutorialDialog {
-                    GlobalScope.launch(Dispatchers.Main) {
-                        delay(500)
-                        permissionsManager.requestPermissions(activity as AppCompatActivity)
-                    }
-                }.show(childFragmentManager, "tutorial")
+                val action = ProfileFragmentDirections.actionGlobalPermissionsTutorial()
+                findNavController().navigate(action)
             } else openAppSettings()
         }
 
@@ -95,6 +89,15 @@ class PermissionsFragment :
 
         viewModel.permissionsChanged.observe(viewLifecycleOwner, Observer {
             updateUI()
+        })
+
+        viewModel.onFinishPermissionsTutorial.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                GlobalScope.launch(Dispatchers.Main) {
+                    delay(500)
+                    permissionsManager.requestPermissions(activity as AppCompatActivity)
+                }
+            }
         })
     }
 

@@ -13,9 +13,9 @@ import kotlinx.android.synthetic.main.enable_notifications_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.ui.dialog.FullScreenDialogFragment
+import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 
-class NotificationsDialogFragment: FullScreenDialogFragment() {
+class NotificationsDialogFragment: FullScreenDialogLightFragment() {
 
     private val NOTIFICATIONS_SETTINGS_REQUEST = 103
 

@@ -60,6 +60,10 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     val navigateToPrevPage: LiveData<Event<Boolean>>
         get() = _navigateToPrevPage
 
+    private val _onFinishPermissionsTutorial = MutableLiveData<Event<Boolean>>()
+    val onFinishPermissionsTutorial: LiveData<Event<Boolean>>
+        get() = _onFinishPermissionsTutorial
+
     init {
         // init
         if (handle.get<Serializable>(STATE_KEY) != null) {
@@ -81,6 +85,10 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
                 _permissionsChanged.value = Event(true)
             }
         }
+    }
+
+    fun onFinishPermissionsTutorial() {
+        _onFinishPermissionsTutorial.value = Event(true)
     }
 
     fun onPrivacyPolicyClick() {

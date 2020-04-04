@@ -50,4 +50,11 @@
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right" />
+    <dialog
+        android:id="@+id/permissionsTutorialDialog"
+        android:name="org.immuni.android.ui.onboarding.fragments.profile.PermissionsTutorialDialog"
+        android:label="PermissionsTutorialDialog" />
+    <action
+        android:id="@+id/action_global_permissions_tutorial"
+        app:destination="@id/permissionsTutorialDialog"/>
 </navigation>

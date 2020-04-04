@@ -12,9 +12,9 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.enable_notifications_explanations_dialog.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.ui.dialog.FullScreenDialogFragment
+import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 
-class NotificationsExplanationsFragment: FullScreenDialogFragment() {
+class NotificationsExplanationsFragment: FullScreenDialogLightFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@color/dialog_status_bar_color"
-    android:background="@color/transparent">
+    android:background="@color/onboarding_dialog_background">
 
     <TextView
         android:id="@+id/textView"
