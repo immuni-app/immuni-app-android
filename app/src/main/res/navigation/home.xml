@@ -59,13 +59,13 @@
         android:id="@+id/action_bluetooth_dialog"
         app:destination="@id/bluetoothDialogFragment"/>
     <dialog
-        android:id="@+id/geolocationDialogFragment"
-        android:name="org.immuni.android.ui.home.home.fragments.GeolocationDialogFragment"
-        android:label="GeolocationDialogFragment"
-        tools:layout="@layout/enable_geolocation_dialog"/>
+        android:id="@+id/permissionsDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.PermissionsDialogFragment"
+        android:label="permissionsDialogFragment"
+        tools:layout="@layout/enable_app_permissions_dialog"/>
     <action
-        android:id="@+id/action_geolocation_dialog"
-        app:destination="@id/geolocationDialogFragment"/>
+        android:id="@+id/action_permissions_dialog"
+        app:destination="@id/permissionsDialogFragment"/>
     <dialog
         android:id="@+id/homeDiaryFragment"
         android:name="org.immuni.android.ui.home.home.fragments.HomeDiaryDialogFragment"
@@ -74,5 +74,21 @@
     <action
         android:id="@+id/action_diary_dialog"
         app:destination="@id/homeDiaryFragment"/>
+    <dialog
+        android:id="@+id/geolocationFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.GeolocationDialogFragment"
+        android:label="geolocationFragment"
+        tools:layout="@layout/enable_geolocation_dialog"/>
+    <action
+        android:id="@+id/action_geolocation_dialog"
+        app:destination="@id/geolocationFragment"/>
 
+    <dialog
+        android:id="@+id/permissionsExplanationFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.PermissionsExplanationsFragment"
+        android:label="permissionsExplanationFragment"
+        tools:layout="@layout/enable_permissions_explanations_dialog"/>
+    <action
+        android:id="@+id/action_permission_explanation_dialog"
+        app:destination="@id/permissionsExplanationFragment"/>
 </navigation>

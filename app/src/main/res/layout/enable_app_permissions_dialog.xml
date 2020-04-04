@@ -40,7 +40,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:text="Attiva la localizzazione"
+                android:text="@string/enable_geolocation_title"
                 android:textColor="#4F4F5B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -48,34 +48,74 @@
                 app:layout_constraintTop_toBottomOf="@+id/back" />
 
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/questionText"
                 style="@style/P1Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Verrai notificato in caso di importanti comunicazioni e quando è il momento di aggiornare il diario clinico."
-                app:layout_constraintEnd_toEndOf="@+id/title"
-                app:layout_constraintHorizontal_bias="0.0"
+                android:alpha="0.7"
+                android:gravity="left"
+                android:text="@string/discover_why"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/question"
+                app:layout_constraintStart_toEndOf="@+id/question"
+                app:layout_constraintTop_toTopOf="@+id/question" />
+
+            <ImageView
+                android:id="@+id/question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="24dp"
                 app:layout_constraintStart_toStartOf="@+id/title"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                app:srcCompat="@drawable/ic_info_medium" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text">
+                app:layout_constraintTop_toBottomOf="@+id/questionText">
 
                 <TextView
                     style="@style/H5Section"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:text="@string/notifications_instruction_1" />
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/geolocation_instruction_1" />
+
+                <LinearLayout
+                    style="@style/CardShadowWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_corners_9dp"
+                    android:backgroundTint="@color/background"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/H5Section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="2dp"
+                        android:fontFamily="@font/euclid_circular_medium"
+                        android:text="@string/authorizations" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="17dp"
+                        android:text="@string/authorizations_subtitle" />
+                </LinearLayout>
 
                 <TextView
                     style="@style/H5Section"
@@ -83,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
                     android:layout_marginBottom="15dp"
-                    android:text="@string/notifications_instruction_2" />
+                    android:text="@string/geolocation_instruction_2" />
 
                 <LinearLayout
                     style="@style/CardShadowWhite"
@@ -94,32 +134,56 @@
                     android:gravity="left|center_vertical"
                     android:orientation="horizontal">
 
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/playbackButton"
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="19dp"
+                        android:layout_marginStart="19dp"
                         android:layout_marginTop="17dp"
+                        android:layout_marginEnd="19dp"
                         android:layout_marginBottom="17dp"
-                        android:scaleType="fitCenter"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="false"
-                        app:lottie_rawRes="@raw/lottie_switch_icon"
-                        tools:src="@drawable/ic_tab_home" />
+                        android:src="@drawable/ic_localization" />
 
                     <TextView
                         style="@style/H5Section"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="19dp"
                         android:fontFamily="@font/euclid_circular_medium"
-                        android:text="Usa geolocalizzazione" />
+                        android:text="@string/geolocation" />
                 </LinearLayout>
 
+                <TextView
+                    style="@style/H5Section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/geolocation_instruction_3" />
+
+                <LinearLayout
+                    style="@style/CardShadowWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_corners_9dp"
+                    android:backgroundTint="@color/background"
+                    android:gravity="left|center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="19dp"
+                        android:layout_marginTop="17dp"
+                        android:layout_marginEnd="19dp"
+                        android:layout_marginBottom="17dp"
+                        android:src="@drawable/ic_fake_radio" />
+
+                    <TextView
+                        style="@style/H5Section"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/euclid_circular_medium"
+                        android:text="@string/always_consent" />
+                </LinearLayout>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

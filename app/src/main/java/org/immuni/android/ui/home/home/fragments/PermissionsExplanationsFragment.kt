@@ -14,14 +14,14 @@ import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 
-class NotificationsExplanationsFragment: FullScreenDialogLightFragment() {
+class PermissionsExplanationsFragment: FullScreenDialogLightFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.enable_notifications_explanations_dialog, container, false)
+        return inflater.inflate(R.layout.enable_permissions_explanations_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

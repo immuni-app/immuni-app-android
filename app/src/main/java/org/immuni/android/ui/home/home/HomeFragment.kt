@@ -19,9 +19,6 @@ import kotlinx.android.synthetic.main.home_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.models.survey.backgroundColor
 import org.immuni.android.ui.dialog.*
-import org.immuni.android.ui.home.home.fragments.BluetoothDialogFragment
-import org.immuni.android.ui.home.home.fragments.GeolocationDialogFragment
-import org.immuni.android.ui.home.home.fragments.HomeDiaryDialogFragment
 import org.immuni.android.ui.home.home.model.*
 import org.immuni.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -128,7 +125,7 @@ class HomeFragment : Fragment(), HomeClickListener {
             }
             is EnableGeolocationCard -> {
                 when(item.type) {
-                    GeolocationType.PERMISSIONS -> openGeolocationDialog()
+                    GeolocationType.PERMISSIONS -> openPermissionsDialog()
                     GeolocationType.GLOBAL_GEOLOCATION -> openGeolocationDialog()
                 }
             }
@@ -158,6 +155,11 @@ class HomeFragment : Fragment(), HomeClickListener {
 
     private fun openGeolocationDialog() {
         val action = HomeFragmentDirections.actionGeolocationDialog()
+        findNavController().navigate(action)
+    }
+
+    private fun openPermissionsDialog() {
+        val action = HomeFragmentDirections.actionPermissionsDialog()
         findNavController().navigate(action)
     }
 

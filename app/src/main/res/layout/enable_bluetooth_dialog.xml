@@ -41,7 +41,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:text="Il consenso all'utilizzo del Bluetooth è importante"
+                android:text="Consenti l'utilizzo del Bluetooth"
                 android:textColor="#4F4F5B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -103,7 +103,7 @@
         android:layout_marginEnd="32dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="32dp"
-        android:text="@string/ok"
+        android:text="@string/consent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

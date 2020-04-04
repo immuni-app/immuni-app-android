@@ -34,13 +34,13 @@
 
             <TextView
                 android:id="@+id/title"
-                style="@style/H1Heading"
+                style="@style/H2SubHeading"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:text="Attiva la localizzazione"
+                android:text="La localizzazione è fondamentale per il funzionamento del Bluetooth"
                 android:textColor="#4F4F5B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -48,79 +48,28 @@
                 app:layout_constraintTop_toBottomOf="@+id/back" />
 
             <TextView
+                android:id="@+id/subtitle"
+                style="@style/H5Section"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="@+id/title"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                android:text="Il consenso alla posizione è necessario per permettere il funzionamento del Bluetooth. Non utilizzeremo questo consenso per tracciare i tuoi spostamenti in nessun momento. " />
+
+            <TextView
                 android:id="@+id/text"
                 style="@style/P1Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Verrai notificato in caso di importanti comunicazioni e quando è il momento di aggiornare il diario clinico."
-                app:layout_constraintEnd_toEndOf="@+id/title"
+                android:layout_marginTop="30dp"
+                android:text="Se decidi di negare questo consenso, l'applicazione non sarà in grado di comunicare con i dispositivi vicini a te e non riusciremo ad avvertirti in caso di pericolo."
+                app:layout_constraintEnd_toEndOf="@+id/subtitle"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/title"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text">
-
-                <TextView
-                    style="@style/H5Section"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:text="@string/notifications_instruction_1" />
-
-                <TextView
-                    style="@style/H5Section"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="15dp"
-                    android:text="@string/notifications_instruction_2" />
-
-                <LinearLayout
-                    style="@style/CardShadowWhite"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_corners_9dp"
-                    android:backgroundTint="@color/background"
-                    android:gravity="left|center_vertical"
-                    android:orientation="horizontal">
-
-                    <com.airbnb.lottie.LottieAnimationView
-                        android:id="@+id/playbackButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="19dp"
-                        android:layout_marginTop="17dp"
-                        android:layout_marginBottom="17dp"
-                        android:scaleType="fitCenter"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:lottie_autoPlay="true"
-                        app:lottie_loop="false"
-                        app:lottie_rawRes="@raw/lottie_switch_icon"
-                        tools:src="@drawable/ic_tab_home" />
-
-                    <TextView
-                        style="@style/H5Section"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="19dp"
-                        android:fontFamily="@font/euclid_circular_medium"
-                        android:text="Usa geolocalizzazione" />
-                </LinearLayout>
-
-            </LinearLayout>
+                app:layout_constraintStart_toStartOf="@+id/subtitle"
+                app:layout_constraintTop_toBottomOf="@+id/subtitle" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
     <View
@@ -143,7 +92,7 @@
         android:layout_marginEnd="32dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="32dp"
-        android:text="@string/open_settings"
+        android:text="@string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
