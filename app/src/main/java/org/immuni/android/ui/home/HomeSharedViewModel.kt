@@ -53,6 +53,10 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     val navigateToSurvey: LiveData<Event<Boolean>>
         get() = _navigateToSurvey
 
+    private val _selectFamilyTab = MutableLiveData<Event<Boolean>>()
+    val selectFamilyTab: LiveData<Event<Boolean>>
+        get() = _selectFamilyTab
+
     val homelistModel = MutableLiveData<List<HomeItemType>>()
     val familylistModel = MutableLiveData<List<FamilyItemType>>()
 
@@ -267,5 +271,9 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
             putExtra("url", url)
         }
         context.startActivity(intent)
+    }
+
+    fun selectFamilyTab() {
+        _selectFamilyTab.value = Event(true)
     }
 }

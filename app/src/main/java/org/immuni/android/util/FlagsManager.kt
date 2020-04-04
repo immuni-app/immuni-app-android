@@ -10,10 +10,6 @@ import java.util.*
 
 object Flags {
     const val ADD_FAMILY_MEMBER_DIALOG_SHOWN = "add_family_member_dialog_shown"
-
-    object transient {
-        var shouldOpenAddRelativeActivity = false
-    }
 }
 
 fun isFlagSet(flag: String): Boolean {

@@ -42,5 +42,11 @@
     <action
         android:id="@+id/action_global_notificationsExplanations"
         app:destination="@id/notificationsExplanations"/>
-
+    <dialog
+        android:id="@+id/addFamilyMemberDialog"
+        android:name="org.immuni.android.ui.home.home.fragments.AddFamilyMemberDialog"
+        android:label="AddFamilyMemberDialog" />
+    <action
+        android:id="@+id/action_family_dialog"
+        app:destination="@id/addFamilyMemberDialog"/>
 </navigation>

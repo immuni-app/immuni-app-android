@@ -105,10 +105,8 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun showAddFamilyMemberDialog() {
-        val intent = Intent(ImmuniApplication.appContext, FamilyDialogActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        activity?.startActivityForResult(intent, FamilyDialogActivity.REQUEST_CODE_FAMILY_DIALOG)
+        val action = HomeFragmentDirections.actionFamilyDialog()
+        findNavController().navigate(action)
     }
 
     override fun onClick(item: HomeItemType) {

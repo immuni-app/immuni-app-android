@@ -60,11 +60,6 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
             addButton.setOnClickListener {
                 clickListener.onClick(items[adapterPosition])
             }
-
-            if (Flags.transient.shouldOpenAddRelativeActivity) {
-                Flags.transient.shouldOpenAddRelativeActivity = false
-                clickListener.onClick(AddFamilyMemberTutorialCard())
-            }
         }
 
         override fun onClick(v: View) {
