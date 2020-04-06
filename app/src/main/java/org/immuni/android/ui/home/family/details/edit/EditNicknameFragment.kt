@@ -90,6 +90,9 @@ class EditNicknameFragment : BaseEditFragment(), CompoundButton.OnCheckedChangeL
             add(InputFilter.LengthFilter(5))
         }.toTypedArray()
         textField.doOnTextChanged { text, _, _, _ ->
+            items.keys.filter { key -> key.first == NicknameType.OTHER}.forEach {
+                items[it]?.isChecked = true
+            }
             validate()
         }
         update.setOnClickListener {
