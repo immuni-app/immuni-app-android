@@ -117,6 +117,9 @@ class EditNicknameFragment : BaseEditFragment(), CompoundButton.OnCheckedChangeL
 
         textField.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
+                items.keys.filter { key -> key.first == NicknameType.OTHER}.forEach {
+                    items[it]?.isChecked = true
+                }
                 GlobalScope.launch(Dispatchers.Main) {
                     delay(500)
                     scrollView.fullScroll(View.FOCUS_DOWN)
@@ -141,6 +144,7 @@ class EditNicknameFragment : BaseEditFragment(), CompoundButton.OnCheckedChangeL
             else {
                 //editTextGroup.gone()
                 textField.hideKeyboard()
+                textField.clearFocus()
             }
         }
 

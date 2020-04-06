@@ -109,11 +109,13 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
 
         textField.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
+                items.keys.filter { key -> key.first == NicknameType.OTHER}.forEach {
+                    items[it]?.isChecked = true
+                }
                 GlobalScope.launch(Dispatchers.Main) {
                     delay(500)
                     scrollView.fullScroll(FOCUS_DOWN)
                 }
-
             }
         }
     }
@@ -132,7 +134,10 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
         if (!disableTriggeringEvent) {
 
             if (lastRadioSelected == NicknameType.OTHER) textField.showKeyboard()
-            else view?.hideKeyboard()
+            else {
+                view?.hideKeyboard()
+                textField.clearFocus()
+            }
 
             validate()
         }
