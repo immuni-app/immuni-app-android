@@ -31,6 +31,8 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
     RelativeContentFragment(R.layout.add_relative_nickname_fragment) {
     override val nextButton: View
         get() = next
+    override val prevButton: View
+        get() = back
 
     val items = LinkedHashMap<Pair<NicknameType, Gender>, RadioButton>()
 

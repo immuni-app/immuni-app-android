@@ -11,6 +11,8 @@ import org.immuni.android.ui.addrelative.RelativeInfo
 class GenderFragment : RelativeContentFragment(R.layout.add_relative_gender_fragment) {
     override val nextButton: View
         get() = next
+    override val prevButton: View
+        get() = back
 
     override fun onResume() {
         super.onResume()

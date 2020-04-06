@@ -109,7 +109,11 @@ class RelativeProfileFragment : Fragment() {
     private fun onBackPressed() {
         val newPos = viewPager.currentItem - 1
         if(newPos >= 0) {
-            // do nothing
+            viewPager.setCurrentItem(newPos, true)
+            (viewPager.adapter as? RelativeAdapter)?.apply {
+                removeLastPage()
+                notifyDataSetChanged()
+            }
         } else {
             activity?.finish()
         }

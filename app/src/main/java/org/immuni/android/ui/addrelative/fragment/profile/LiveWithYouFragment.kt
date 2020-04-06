@@ -10,6 +10,8 @@ import org.immuni.android.ui.addrelative.RelativeInfo
 class LiveWithYouFragment : RelativeContentFragment(R.layout.add_relative_live_with_you_fragment) {
     override val nextButton: View
         get() = next
+    override val prevButton: View
+        get() = back
 
     override fun onResume() {
         super.onResume()

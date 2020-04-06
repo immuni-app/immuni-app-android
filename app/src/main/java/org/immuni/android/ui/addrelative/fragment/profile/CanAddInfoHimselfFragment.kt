@@ -11,6 +11,8 @@ import org.immuni.android.ui.addrelative.RelativeInfo
 class CanAddInfoHimselfFragment : RelativeContentFragment(R.layout.add_relative_can_add_info_fragment) {
     override val nextButton: View
         get() = next
+    override val prevButton: View
+        get() = back
 
     override fun onResume() {
         super.onResume()

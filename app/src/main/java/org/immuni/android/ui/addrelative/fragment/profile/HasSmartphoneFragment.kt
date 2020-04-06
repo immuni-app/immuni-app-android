@@ -11,6 +11,8 @@ import org.immuni.android.ui.addrelative.RelativeInfo
 class HasSmartphoneFragment : RelativeContentFragment(R.layout.add_relative_has_smartphone_fragment) {
     override val nextButton: View
         get() = next
+    override val prevButton: View
+        get() = back
 
     override fun onResume() {
         super.onResume()

@@ -23,4 +23,8 @@ class RelativeAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
             arguments = bundleOf("position" to position)
         }
     }
+
+    fun removeLastPage() {
+        items.removeAt(items.size - 1)
+    }
 }

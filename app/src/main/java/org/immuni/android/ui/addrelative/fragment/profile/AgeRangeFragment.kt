@@ -19,6 +19,8 @@ class AgeRangeFragment : RelativeContentFragment(R.layout.relative_age_range_fra
     CompoundButton.OnCheckedChangeListener {
     override val nextButton: View
         get() = next
+    override val prevButton: View
+        get() = back
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

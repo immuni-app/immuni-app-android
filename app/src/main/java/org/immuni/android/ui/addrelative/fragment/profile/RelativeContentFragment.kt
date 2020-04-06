@@ -35,6 +35,10 @@ abstract class RelativeContentFragment(@LayoutRes val layout: Int) : Fragment(la
 
         nextButton.isEnabled = false
 
+        prevButton.setOnClickListener {
+            viewModel.onPrevTap()
+        }
+
         viewModel.partialUserInfo.observe(viewLifecycleOwner, Observer { info ->
             onUserInfoUpdate(info)
         })
@@ -45,8 +49,6 @@ abstract class RelativeContentFragment(@LayoutRes val layout: Int) : Fragment(la
         }
 
         updateTopMask(view.findViewById<NestedScrollView>(R.id.scrollView)?.scrollY ?: 0)
-
-        view.findViewById<View>(R.id.back).gone()
     }
 
     fun updateTopMask(scrollY: Int) {
@@ -57,6 +59,7 @@ abstract class RelativeContentFragment(@LayoutRes val layout: Int) : Fragment(la
     }
 
     protected abstract val nextButton: View
+    protected abstract val prevButton: View
 
     abstract fun onUserInfoUpdate(userInfo: RelativeInfo)
 
