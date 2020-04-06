@@ -60,6 +60,7 @@
                 android:paddingStart="0dp"
                 android:paddingLeft="0dp"
                 tools:text="abf34"
+                android:maxLength="8"
                 android:inputType="textCapWords|textVisiblePassword|textNoSuggestions|textCapCharacters"
                 app:endIconMode="clear_text" />
         </com.google.android.material.textfield.TextInputLayout>
