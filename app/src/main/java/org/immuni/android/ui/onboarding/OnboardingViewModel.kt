@@ -136,7 +136,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
             val isCompleted = updatedMe?.mainUser != null
             onboarding.setCompleted(isCompleted)
             if (isCompleted) {
-                pico.trackEvent(OnboardingCompleted().userAction)
+                //pico.trackEvent(OnboardingCompleted().userAction)
                 _navigateToNextPage.value = Event(true)
             } else {
                 toast(ImmuniApplication.appContext.getString(R.string.server_generic_error))
