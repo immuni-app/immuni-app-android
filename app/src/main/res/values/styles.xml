@@ -46,7 +46,7 @@
     <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
         <!-- ASAP font -->
         <item name="android:fontFamily">@font/euclid_circular</item>
-        <item name="android:textSize">19dp</item>
+        <item name="android:textSize">19sp</item>
         <item name="android:textColor">@color/tabTextColor</item>
         <item name="textAllCaps">false</item>
     </style>
@@ -88,107 +88,107 @@
 
     <style name="H2SubHeading">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">26dp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:textColor">@color/h2_sub_heading</item>
     </style>
 
     <style name="LibraryCardTitle">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">35dp</item>
+        <item name="android:textSize">35sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="LibraryCardDescription">
         <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">15dp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="HeaderDetails">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="H1NavBar">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">21dp</item>
+        <item name="android:textSize">21sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/h1_nav_bar</item>
     </style>
 
     <style name="H3SectionHeading">
         <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">21dp</item>
+        <item name="android:textSize">21sp</item>
         <item name="android:textColor">@color/h3_section_heading</item>
     </style>
 
     <style name="H4Section">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/h4_section_heading</item>
     </style>
 
     <style name="H5Section">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/h5_section_heading</item>
     </style>
 
     <style name="H6Section">
         <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">24dp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:lineHeight">34dp</item>
         <item name="android:textColor">#fff</item>
     </style>
 
     <style name="P1Text">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/p1_text</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
     <style name="P2Text">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">13dp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/p2_text</item>
     </style>
 
     <style name="Label">
         <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/label</item>
     </style>
 
     <style name="ButtonLabel">
         <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">17dp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/button_label</item>
     </style>
 
     <style name="ButtonLabelSmall">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">13dp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/button_label</item>
     </style>
 
     <style name="InputLabel">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">13dp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/input_label</item>
     </style>
 
     <style name="InputField">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/input_field</item>
     </style>
 
     <style name="Toolbar">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">#495D74</item>
     </style>
 
