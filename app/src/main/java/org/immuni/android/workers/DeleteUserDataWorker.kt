@@ -37,26 +37,18 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters)
         const val WORKER_TAG = "DeleteUserDataWorker"
 
         fun scheduleWork(appContext: Context) {
-            GlobalScope.launch(Dispatchers.Main) {
-                val workManager = WorkManager.getInstance(appContext)
-                workManager.cancelAllWorkByTag(WORKER_TAG)
+            val constraints = Constraints.Builder()
+                .setRequiresDeviceIdle(true)
+                .build()
 
-                // let the previous worker stop before restarting it
-                delay(3000)
-
-                val constraints = Constraints.Builder()
-                    .setRequiresDeviceIdle(true)
+            val saveRequest =
+                PeriodicWorkRequestBuilder<DeleteUserDataWorker>(1, TimeUnit.DAYS)
+                    .setConstraints(constraints)
+                    .addTag(WORKER_TAG)
                     .build()
 
-                val saveRequest =
-                    PeriodicWorkRequestBuilder<DeleteUserDataWorker>(1, TimeUnit.DAYS)
-                        .setConstraints(constraints)
-                        .addTag(WORKER_TAG)
-                        .build()
-
-                WorkManager.getInstance(appContext)
-                    .enqueue(saveRequest)
-            }
+            WorkManager.getInstance(appContext)
+                .enqueueUniquePeriodicWork(WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, saveRequest)
         }
     }
 }
