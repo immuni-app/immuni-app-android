@@ -15,6 +15,9 @@ class SetupActivity : ImmuniActivity() {
             && intent.hasCategory(Intent.CATEGORY_LAUNCHER)
             && intent.action != null
             && intent.action == Intent.ACTION_MAIN) {
+            // TODO handle FCM push notifications data
+            // to get FCM intent data do like below
+            //val value = intent.extras?.getString("immuni_key")
             finish()
             return
         }

@@ -19,7 +19,9 @@ class ImmuniTheirsConfiguration: TheirsConfiguration, KoinComponent {
 
         override suspend fun onNewPushNotification(remoteMessage: RemoteMessage) {
             // Check if message contains a data payload.
-            //toast("DATA ${remoteMessage.data}.")
+            if(remoteMessage.data["immuni_key"] == "immuni_value") {
+                toast("C'è un messaggio importante per te!")
+            }
 
             // Check if message contains a notification payload.
             //remoteMessage.notification?.let {
