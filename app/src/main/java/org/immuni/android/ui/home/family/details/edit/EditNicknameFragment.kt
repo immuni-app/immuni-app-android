@@ -2,6 +2,7 @@ package org.immuni.android.ui.home.family.details.edit
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,6 +85,10 @@ class EditNicknameFragment : BaseEditFragment(), CompoundButton.OnCheckedChangeL
         })
 
         back.setOnClickListener { findNavController().popBackStack() }
+        textField.filters = mutableListOf<InputFilter>().apply {
+            addAll(textField.filters)
+            add(InputFilter.LengthFilter(5))
+        }.toTypedArray()
         textField.doOnTextChanged { text, _, _, _ ->
             validate()
         }

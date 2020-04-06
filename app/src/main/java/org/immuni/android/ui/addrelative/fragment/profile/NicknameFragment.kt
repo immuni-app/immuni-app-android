@@ -3,6 +3,7 @@ package org.immuni.android.ui.addrelative.fragment.profile
 import android.graphics.Color
 import android.graphics.Path
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.View
 import android.view.View.FOCUS_DOWN
 import android.widget.CompoundButton
@@ -93,6 +94,10 @@ class NicknameFragment : CompoundButton.OnCheckedChangeListener,
             items.values.forEach { addView(it) }
         }
 
+        textField.filters = mutableListOf<InputFilter>().apply {
+            addAll(textField.filters)
+            add(InputFilter.LengthFilter(5))
+        }.toTypedArray()
         textField.doOnTextChanged { text, _, _, _ ->
             validate(true)
         }

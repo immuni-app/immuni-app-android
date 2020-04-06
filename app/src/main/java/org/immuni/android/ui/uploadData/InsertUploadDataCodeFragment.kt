@@ -2,6 +2,7 @@ package org.immuni.android.ui.uploadData
 
 import android.os.Bundle
 import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.DynamicDrawableSpan
@@ -57,6 +58,10 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
             findNavController().navigate(action)
         }
 
+        codeTextField.filters = mutableListOf<InputFilter>().apply {
+            addAll(codeTextField.filters)
+            add(LengthFilter(8))
+        }.toTypedArray()
         codeTextField.doOnTextChanged { text, _, _, _ ->
             validateCode(text.toString())
             error.invisible()
