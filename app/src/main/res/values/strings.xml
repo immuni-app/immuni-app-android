@@ -146,7 +146,7 @@
     <string name="nickname_child4_female">Quarta figlia</string>
     <string name="nickname_younger_sibling_female">Sorella minore</string>
     <string name="nickname_older_sibling_female">Sorella maggiore</string>
-    <string name="nickname_partner_female">Compagna</string>
+    <string name="nickname_partner_female">Moglie</string>
     <string name="nickname_paternal_grandparent_female">Nonna paterna</string>
     <string name="nickname_maternal_grandparent_female">Nonna materna</string>
     <string name="nickname_parent_male">Papà</string>
@@ -156,7 +156,7 @@
     <string name="nickname_child4_male">Quarto figlio</string>
     <string name="nickname_younger_sibling_male">Fratello minore</string>
     <string name="nickname_older_sibling_male">Fratello maggiore</string>
-    <string name="nickname_partner_male">Compagno</string>
+    <string name="nickname_partner_male">Marito</string>
     <string name="nickname_paternalGrandparent_male">Nonno paterno</string>
     <string name="nickname_maternalGrandparent_male">Nonno materno</string>
     <string name="nickname_not_specified">Non specificato</string>

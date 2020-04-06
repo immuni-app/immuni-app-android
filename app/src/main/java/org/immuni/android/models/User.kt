@@ -97,6 +97,8 @@ data class Nickname(
 }
 
 enum class NicknameType {
+    @Json(name = "partner")
+    PARTNER,
     @Json(name = "child1")
     CHILD_1,
     @Json(name = "child2")
@@ -107,8 +109,6 @@ enum class NicknameType {
     CHILD_4,
     @Json(name = "younger_sibling")
     YOUNGER_SIBLING,
-    @Json(name = "partner")
-    PARTNER,
     @Json(name = "older_sibling")
     OLDER_SIBLING,
     @Json(name = "parent")
