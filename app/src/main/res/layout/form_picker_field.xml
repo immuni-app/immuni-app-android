@@ -22,6 +22,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <include
+                android:id="@+id/userInfoCard"
+                layout="@layout/form_top_user_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/question"
                 style="@style/H1Heading"
@@ -32,7 +39,7 @@
                 android:text="In questo momento hai uno o più tra questi sintomi?"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/userInfoCard" />
 
             <TextView
                 android:id="@+id/description"

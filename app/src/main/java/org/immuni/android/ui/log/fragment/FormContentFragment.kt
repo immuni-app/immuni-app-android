@@ -9,17 +9,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.bendingspoons.base.extensions.animateHide
-import com.bendingspoons.base.extensions.animateShow
+import com.bendingspoons.base.extensions.*
 import org.immuni.android.ui.log.LogViewModel
 import org.immuni.android.ui.log.model.FormModel
-import com.bendingspoons.base.extensions.hideKeyboard
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.bendingspoons.base.utils.ScreenUtils
+import com.bendingspoons.concierge.ConciergeManager
 import org.immuni.android.R
+import org.immuni.android.db.entity.colorResource
+import org.immuni.android.db.entity.iconResource
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout) {
@@ -48,6 +51,26 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
 
         viewModel.formModel.observe(viewLifecycleOwner, Observer { form ->
             onFormModelUpdate(form)
+        })
+
+        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
+            if(user.isMain) {
+                view.findViewById<ConstraintLayout>(R.id.userInfoCard)?.gone()
+            } else {
+                view.findViewById<ConstraintLayout>(R.id.userInfoCard)?.visible()
+                val themeColor = ContextCompat.getColor(
+                    requireContext(),
+                    colorResource(viewModel.deviceId, viewModel.userIndex!!)
+                )
+                // icon and color
+                view.findViewById<ImageView>(R.id.userIcon)?.setImageResource(
+                    user.gender.iconResource(viewModel.deviceId, viewModel.userIndex?:0)
+                )
+                view.findViewById<TextView>(R.id.questionFor)?.setTextColor(themeColor)
+                view.findViewById<TextView>(R.id.questionForLabel)?.setTextColor(themeColor)
+                // name
+                view.findViewById<TextView>(R.id.questionFor)?.text = user.nickname?.humanReadable(requireContext(), user.gender)
+            }
         })
 
         nextButton.setOnClickListener {
