@@ -16,6 +16,7 @@ import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.ImmuniNotificationManager
+import org.immuni.android.workers.DeleteUserDataWorker
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -64,6 +65,12 @@ class ImmuniApplication : Application() {
         notificationManager = get()
 
         pico.setup()
+
+        startWorkers()
+    }
+
+    private fun startWorkers() {
+        DeleteUserDataWorker.scheduleWork(appContext)
     }
 
     companion object {

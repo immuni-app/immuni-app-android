@@ -51,7 +51,7 @@ class BluetoothManager(val context: Context) : KoinComponent {
         }
     }
 
-    fun scheduleBLEWorker() {
+    fun scheduleBLEWorker(appContext: Context) {
 
         // check if the hardware support BLE
         if(!isBluetoothSupported()) {
@@ -60,7 +60,7 @@ class BluetoothManager(val context: Context) : KoinComponent {
         }
 
         GlobalScope.launch(Dispatchers.Main) {
-            val workManager = WorkManager.getInstance(ImmuniApplication.appContext)
+            val workManager = WorkManager.getInstance(appContext)
             workManager.cancelAllWorkByTag(BLEForegroundServiceWorker.TAG)
 
             // let the previous worker stop before restarting it

@@ -69,7 +69,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
         refreshHomeListModel()
         startListenToMeModel()
 
-        bluetoothManager.scheduleBLEWorker()
+        bluetoothManager.scheduleBLEWorker(ImmuniApplication.appContext)
     }
 
     private fun refreshHomeListModel() {
