@@ -38,12 +38,13 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters)
 
         fun scheduleWork(appContext: Context) {
             val constraints = Constraints.Builder()
-                .setRequiresDeviceIdle(true)
+                .setRequiresCharging(true)
                 .build()
 
             val saveRequest =
                 PeriodicWorkRequestBuilder<DeleteUserDataWorker>(1, TimeUnit.DAYS)
                     .setConstraints(constraints)
+                    .setInitialDelay(1, TimeUnit.HOURS)
                     .addTag(WORKER_TAG)
                     .build()
 
