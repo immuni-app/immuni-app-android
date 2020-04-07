@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.DialogFragment
+import org.immuni.android.ImmuniDialogFragment
 import org.immuni.android.R
 
-abstract class FullScreenDialogLightFragment : DialogFragment() {
+abstract class FullScreenDialogLightFragment : ImmuniDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
