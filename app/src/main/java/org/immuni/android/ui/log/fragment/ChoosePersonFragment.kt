@@ -15,9 +15,8 @@ import org.immuni.android.R
 import org.immuni.android.ui.log.LogViewModel
 import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import kotlinx.android.synthetic.main.log_choose_person_fragment.*
-import org.immuni.android.db.entity.Gender
-import org.immuni.android.db.entity.colorResource
-import org.immuni.android.db.entity.iconResource
+import org.immuni.android.models.Gender
+import org.immuni.android.models.colorResource
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class ChoosePersonFragment : Fragment() {
@@ -52,7 +51,10 @@ class ChoosePersonFragment : Fragment() {
 
                 val themeColor = ContextCompat.getColor(
                     requireContext(),
-                    colorResource(viewModel.deviceId, viewModel.userIndex!!)
+                    colorResource(
+                        viewModel.deviceId,
+                        viewModel.userIndex!!
+                    )
                 )
                 backgroundLayout.setBackgroundColor(themeColor)
                 backgroundLayout.animateShow()

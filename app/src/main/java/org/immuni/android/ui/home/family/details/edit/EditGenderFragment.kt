@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.user_edit_gender_activity.*
-import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
-import org.immuni.android.db.entity.Gender
+import org.immuni.android.models.Gender
 import org.immuni.android.loading
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf

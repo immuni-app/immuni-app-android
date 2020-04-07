@@ -5,7 +5,7 @@ import android.view.View
 import com.bendingspoons.base.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.add_relative_gender_fragment.*
 import org.immuni.android.R
-import org.immuni.android.db.entity.Gender
+import org.immuni.android.models.Gender
 import org.immuni.android.ui.addrelative.RelativeInfo
 
 class GenderFragment : RelativeContentFragment(R.layout.add_relative_gender_fragment) {

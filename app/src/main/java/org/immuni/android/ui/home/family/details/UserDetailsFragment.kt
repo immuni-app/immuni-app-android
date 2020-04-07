@@ -15,9 +15,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.user_details_fragment.*
 import kotlinx.android.synthetic.main.user_details_fragment.name
 import org.immuni.android.R
-import org.immuni.android.db.entity.Gender
+import org.immuni.android.models.Gender
 import org.immuni.android.loading
-import org.immuni.android.ui.home.family.details.edit.*
 import org.immuni.android.ui.uploadData.UploadDataActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf

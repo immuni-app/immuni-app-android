@@ -1,7 +1,6 @@
 package org.immuni.android.ui.addrelative.fragment.profile
 
 import android.graphics.Color
-import android.graphics.Path
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.View
@@ -11,18 +10,16 @@ import android.widget.RadioButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
-import com.bendingspoons.base.extensions.gone
 import org.immuni.android.R
 import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.showKeyboard
-import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.add_relative_nickname_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.immuni.android.db.entity.Gender
+import org.immuni.android.models.Gender
 import org.immuni.android.models.Nickname
 import org.immuni.android.models.NicknameType
 import org.immuni.android.ui.addrelative.RelativeInfo

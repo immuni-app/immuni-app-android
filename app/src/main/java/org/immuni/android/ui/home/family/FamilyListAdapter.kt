@@ -10,9 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bendingspoons.concierge.ConciergeManager
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.db.entity.iconResource
+import org.immuni.android.models.iconResource
 import org.immuni.android.ui.home.family.model.*
-import org.immuni.android.util.Flags
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

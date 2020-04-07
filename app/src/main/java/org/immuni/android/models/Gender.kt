@@ -1,4 +1,4 @@
-package org.immuni.android.db.entity
+package org.immuni.android.models
 
 import com.squareup.moshi.Json
 import org.immuni.android.R

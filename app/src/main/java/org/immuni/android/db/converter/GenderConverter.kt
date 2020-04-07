@@ -1,7 +1,7 @@
 package org.immuni.android.db.converter
 
 import androidx.room.TypeConverter
-import org.immuni.android.db.entity.Gender
+import org.immuni.android.models.Gender
 
 class GenderConverter {
     @TypeConverter

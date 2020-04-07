@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bendingspoons.concierge.ConciergeManager
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.db.entity.iconResource
+import org.immuni.android.models.iconResource
 import org.immuni.android.ui.log.fragment.model.QuestionType
 import org.immuni.android.ui.log.fragment.model.ResumeItemType
 import org.immuni.android.ui.log.fragment.model.UserType

@@ -14,10 +14,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bendingspoons.base.extensions.gone
 import com.bendingspoons.base.extensions.hideKeyboard
 import com.bendingspoons.base.extensions.showKeyboard
-import com.bendingspoons.base.extensions.visible
 import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.user_edit_nickname_activity.*
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +23,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.R
-import org.immuni.android.db.entity.Gender
+import org.immuni.android.models.Gender
 import org.immuni.android.loading
 import org.immuni.android.models.Nickname
 import org.immuni.android.models.NicknameType

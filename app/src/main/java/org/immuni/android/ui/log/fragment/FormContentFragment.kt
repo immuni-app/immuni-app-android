@@ -2,7 +2,6 @@ package org.immuni.android.ui.log.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -18,11 +17,9 @@ import com.bendingspoons.base.extensions.*
 import org.immuni.android.ui.log.LogViewModel
 import org.immuni.android.ui.log.model.FormModel
 import com.bendingspoons.base.utils.ScreenUtils
-import com.bendingspoons.concierge.ConciergeManager
 import org.immuni.android.R
-import org.immuni.android.db.entity.colorResource
-import org.immuni.android.db.entity.iconResource
-import org.koin.android.ext.android.inject
+import org.immuni.android.models.colorResource
+import org.immuni.android.models.iconResource
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout) {
@@ -60,7 +57,10 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
                 view.findViewById<ConstraintLayout>(R.id.userInfoCard)?.visible()
                 val themeColor = ContextCompat.getColor(
                     requireContext(),
-                    colorResource(viewModel.deviceId, viewModel.userIndex!!)
+                    colorResource(
+                        viewModel.deviceId,
+                        viewModel.userIndex!!
+                    )
                 )
                 // icon and color
                 view.findViewById<ImageView>(R.id.userIcon)?.setImageResource(

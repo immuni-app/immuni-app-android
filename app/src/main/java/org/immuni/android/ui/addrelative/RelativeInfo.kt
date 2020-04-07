@@ -1,9 +1,8 @@
 package org.immuni.android.ui.addrelative
 
-import org.immuni.android.db.entity.Gender
+import org.immuni.android.models.Gender
 import org.immuni.android.models.AgeGroup
 import org.immuni.android.models.Nickname
-import org.immuni.android.models.NicknameType
 import java.io.Serializable
 
 data class RelativeInfo(

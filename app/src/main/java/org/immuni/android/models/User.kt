@@ -1,7 +1,6 @@
 package org.immuni.android.models
 
 import android.content.Context
-import org.immuni.android.db.entity.Gender
 import org.immuni.android.models.survey.TriageProfile
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
