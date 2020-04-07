@@ -25,6 +25,7 @@ import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.*
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.ui.ble.BleDebugViewModel
+import org.immuni.android.ui.force_update.ForceUpdateViewModel
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.home.family.details.UserDetailsViewModel
 import org.immuni.android.ui.home.family.details.edit.EditDetailsViewModel
@@ -163,5 +164,8 @@ val appModule = module {
 
     // BleDebugViewModel
     viewModel { BleDebugViewModel() }
+
+    // ForceUpdateViewModel
+    viewModel { ForceUpdateViewModel() }
 
 }
