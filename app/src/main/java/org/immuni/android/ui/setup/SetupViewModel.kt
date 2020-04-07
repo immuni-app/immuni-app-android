@@ -3,16 +3,14 @@ package org.immuni.android.ui.setup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.bendingspoons.base.livedata.Event
+import kotlinx.coroutines.*
+import org.immuni.android.managers.UserManager
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.welcome.Welcome
-import com.bendingspoons.base.livedata.Event
-import com.bendingspoons.oracle.Oracle
-import org.koin.core.KoinComponent
-import kotlinx.coroutines.*
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.util.Flags
 import org.immuni.android.util.setFlag
+import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.io.IOException
 
@@ -23,7 +21,7 @@ class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
     private val setup: Setup by inject()
     private val onboarding: Onboarding by inject()
     private val welcome: Welcome by inject()
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val userManager: UserManager by inject()
 
     private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
     val navigateToMainPage: LiveData<Event<Boolean>>
@@ -96,10 +94,8 @@ class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
                     // check all is ok
                     setup.setCompleted(true)
 
-                    oracle.me()?.let {
-                        if (it.familyMembers.isNotEmpty()) {
-                            setAddFamilyMemberDialogShown()
-                        }
+                    if (userManager.familyMembers().isNotEmpty()) {
+                        setAddFamilyMemberDialogShown()
                     }
 
                     navigateTo()

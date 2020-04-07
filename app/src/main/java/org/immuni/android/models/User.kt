@@ -1,28 +1,23 @@
 package org.immuni.android.models
 
 import android.content.Context
-import org.immuni.android.models.survey.TriageProfile
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.models.NicknameType.*
 import java.io.Serializable
+import java.util.*
 
 @JsonClass(generateAdapter = true)
 data class User(
-    @field:Json(name = "identifier") val id: String = "",
+    @field:Json(name = "identifier") val id: String = UUID.randomUUID().toString(),
     @field:Json(name = "age_group") val ageGroup: AgeGroup = AgeGroup.ZERO_SEVENTEEN,
     @field:Json(name = "age") val age: Int = 999,
     @field:Json(name = "gender") val gender: Gender = Gender.FEMALE,
     @field:Json(name = "nickname") val nickname: Nickname? = null,
-    @field:Json(name = "last_survey_at") val lastSurveyDate: Double? = null,
-    @field:Json(name = "last_survey_version") val lastSurveyVersion: String?  = null,
-    @field:Json(name = "last_triage_status") val lastTriageProfile: TriageProfile? = null,
-    @field:Json(name = "next_survey_at") val nextSurveyDate: Double? = null,
     @field:Json(name = "same_house") val isInSameHouse: Boolean? = null,
-    // is_main doesn't arrive from the backend, but we set it later
-    @field:Json(name = "is_main") var isMain: Boolean = false
+    @field:Json(name = "is_main") val isMain: Boolean = false
 ) {
     val name: String
         get() {

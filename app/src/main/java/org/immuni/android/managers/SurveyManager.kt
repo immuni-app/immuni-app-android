@@ -2,10 +2,7 @@ package org.immuni.android.managers
 
 import android.content.Context
 import com.bendingspoons.base.storage.KVStorage
-import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.models.User
 import org.immuni.android.models.HealthProfile
 import org.immuni.android.models.HealthProfileIdList
@@ -17,7 +14,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
-class SurveyManager(private val context: Context) : KoinComponent {
+class SurveyManager : KoinComponent {
     companion object {
         private const val additionalDelayKey = "additionalDelay"
 
@@ -38,7 +35,7 @@ class SurveyManager(private val context: Context) : KoinComponent {
 
     private val additionalDelay: Int
     private val storage: KVStorage by inject()
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val userManager: UserManager by inject()
     private val pico: Pico by inject()
 
     init {
@@ -89,6 +86,10 @@ class SurveyManager(private val context: Context) : KoinComponent {
         val date = todayAtMidnight()
         lastAnsweredQuestions.putAll(questions.map { it to date.time })
         storage.save(answeredQuestionsKey(userId), lastAnsweredQuestions)
+    }
+
+    private fun deleteLastAnsweredQuestions(userId: String) {
+        storage.delete(answeredQuestionsKey(userId))
     }
 
     fun answeredQuestionsElapsedDays(userId: String): Map<QuestionId, Int> {
@@ -167,27 +168,14 @@ class SurveyManager(private val context: Context) : KoinComponent {
         return gc.time
     }
 
-    fun allUsers(): List<User> {
-        val me: ImmuniMe = oracle.me() ?: return listOf()
-        val mainUser = me.mainUser ?: return listOf()
-        return listOf(mainUser) + me.familyMembers
-    }
-
     fun nextUserToLog(): User? {
-        return allUsers().find {
+        return userManager.users().find {
             !isSurveyCompletedForUser(it.id)
         }
     }
 
-    fun indexForUser(userId: String): Int {
-        val (_, index) = allUsers().mapIndexed { index, user ->
-            Pair(user, index)
-        }.first { (user, _) -> user.id == userId }
-        return index
-    }
-
     fun usersToLogCount(): Int {
-        return allUsers().count {
+        return userManager.users().count {
             !isSurveyCompletedForUser(it.id)
         }
     }
@@ -197,6 +185,8 @@ class SurveyManager(private val context: Context) : KoinComponent {
     }
 
     fun deleteUserData(userId: String) {
+        userManager.deleteUser(userId)
+
         healthProfileIds(userId).map { deleteHealthProfile(it) }
         deleteHealthProfileIds(userId)
     }
@@ -209,12 +199,13 @@ class SurveyManager(private val context: Context) : KoinComponent {
             set(Calendar.SECOND, 0)
             set(Calendar.MILLISECOND, 0)
         }.time
-        allUsers().map { user ->
+        userManager.users().map { user ->
             allHealthProfiles(user.id).map { healthProfile ->
                 if (healthProfile.surveyDate < thresholdDate) {
                     deleteHealthProfile(healthProfile.id)
                 }
             }
+            deleteLastAnsweredQuestions(user.id)
         }
     }
 }

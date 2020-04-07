@@ -5,14 +5,11 @@ import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
-import org.immuni.android.ImmuniApplication
-import org.immuni.android.R
-import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
-import org.immuni.android.toast
 import org.immuni.android.ui.addrelative.fragment.profile.RelativeContentFragment
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -29,9 +26,9 @@ class AddRelativeViewModel(val handle: SavedStateHandle, private val database: I
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
-    private val apiManager: ApiManager by inject()
+    private val userManager: UserManager by inject()
 
-    val mainUser = oracle.me()!!.mainUser!!
+    val mainUser = userManager.mainUser()!!
 
     var partialUserInfo = MediatorLiveData<RelativeInfo>()
 
@@ -80,21 +77,16 @@ class AddRelativeViewModel(val handle: SavedStateHandle, private val database: I
         uiScope.launch {
             loading.value = true
             delay(500)
-            val result = apiManager.createFamilyMember(
+            userManager.addUser(
                 User(
-                    id = "",
                     ageGroup = userInfo.ageGroup!!,
                     gender = userInfo.gender!!,
-                    nickname = userInfo.nickname ,
+                    nickname = userInfo.nickname,
                     isInSameHouse = userInfo.sameHouse
                 )
             )
             loading.value = false
-            if (result != null) {
-                _navigateToMainPage.value = Event(true)
-            } else {
-                toast(ImmuniApplication.appContext.getString(R.string.server_generic_error))
-            }
+            _navigateToMainPage.value = Event(true)
         }
     }
 

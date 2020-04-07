@@ -11,8 +11,8 @@ import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
-import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
+import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
 import org.immuni.android.models.survey.*
 import org.immuni.android.ui.log.fragment.model.QuestionType
@@ -24,14 +24,14 @@ import org.koin.core.inject
 import java.io.Serializable
 
 class LogViewModel(
-    private val handle: SavedStateHandle,
-    private val database: ImmuniDatabase
+    private val handle: SavedStateHandle
 ) : ViewModel(), KoinComponent {
 
     private val state: KVStorage by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val concierge: ConciergeManager by inject()
     private val pico: Pico by inject()
+    private val userManager: UserManager by inject()
     private val surveyManager: SurveyManager by inject()
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -39,7 +39,7 @@ class LogViewModel(
     var user = MediatorLiveData<User>()
 
     val userIndex: Int?
-        get() = user.value?.let { surveyManager.indexForUser(it.id) }
+        get() = user.value?.let { userManager.indexForUser(it.id) }
 
     val deviceId: String
         get() = concierge.backupPersistentId.id
@@ -105,7 +105,7 @@ class LogViewModel(
         resumeModel.addSource(user) { user ->
             val survey = survey.value!!
             val list = mutableListOf<ResumeItemType>()
-            list.add(UserType(user, surveyManager.indexForUser(user.id)))
+            list.add(UserType(user, userManager.indexForUser(user.id)))
 
             formModel()?.surveyAnswers?.keys?.forEach { questionId ->
                 val answers = formModel()?.surveyAnswers?.get(questionId)!!

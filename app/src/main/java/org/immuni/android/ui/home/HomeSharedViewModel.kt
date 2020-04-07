@@ -2,6 +2,7 @@ package org.immuni.android.ui.home
 
 import android.content.Intent
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.immuni.android.db.ImmuniDatabase
@@ -11,15 +12,14 @@ import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.utils.DeviceUtils
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
+import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
 import org.immuni.android.models.survey.Severity
 import org.immuni.android.models.survey.Severity.*
@@ -37,8 +37,8 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val userManager: UserManager by inject()
     private val surveyManager: SurveyManager by inject()
-    private val apiManager: ApiManager by inject()
     private val bluetoothManager: BluetoothManager by inject()
 
     private val _showAddFamilyMemberDialog = MutableLiveData<Event<Boolean>>()
@@ -58,7 +58,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
         get() = _selectFamilyTab
 
     val homelistModel = MutableLiveData<List<HomeItemType>>()
-    val familylistModel = MutableLiveData<List<FamilyItemType>>()
+    val familylistModel = MediatorLiveData<List<FamilyItemType>>()
 
     override fun onCleared() {
         super.onCleared()
@@ -67,7 +67,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
     init {
         refreshHomeListModel()
-        startListenToMeModel()
+        startListeningToUsers()
 
         bluetoothManager.scheduleBLEWorker(ImmuniApplication.appContext)
     }
@@ -103,10 +103,10 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                 // survey card
 
                 if (surveyManager.areAllSurveysLogged()) {
-                    itemsList.add(SurveyCardDone(surveyManager.allUsers().size))
+                    itemsList.add(SurveyCardDone(userManager.users().size))
                 } else {
-                    val mainUser = it.mainUser!!
-                    val familyMembers = it.familyMembers
+                    val mainUser = userManager.mainUser()!!
+                    val familyMembers = userManager.familyMembers()
                     itemsList.add(
                         SurveyCard(
                             !surveyManager.isSurveyCompletedForUser(mainUser.id),
@@ -121,7 +121,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                 val survey = oracle.settings()?.survey
 
                 val userCardsMap = mutableMapOf<Severity, MutableList<String>>()
-                for (user in surveyManager.allUsers()) {
+                for (user in userManager.users()) {
                     val hasNeverCompletedSurveys = surveyManager.lastHealthProfile(user.id) == null
                     if (hasNeverCompletedSurveys) continue
 
@@ -172,37 +172,34 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
         }
     }
 
-    private fun startListenToMeModel() {
-        uiScope.launch {
-            oracle.meFlow().collect { me ->
+    private fun startListeningToUsers() {
+        familylistModel.addSource(userManager.usersLiveData()) { users ->
+            val ctx = ImmuniApplication.appContext
 
-                val ctx = ImmuniApplication.appContext
+            val itemsList = mutableListOf<FamilyItemType>()
 
-                val itemsList = mutableListOf<FamilyItemType>()
+            val mainUser = users.find { it.isMain }
+            val familyMembers = users.filter { !it.isMain }
 
-                val mainUser = me.mainUser
-                val familyMembers = me.familyMembers
-
-                // add first main users
-                mainUser?.let {
-                    itemsList.add(UserCard(it, 0))
-                }
-
-                // if there are family members, add header and all the members and a add button
-                if (familyMembers.isNotEmpty()) {
-                    itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
-                    familyMembers.forEachIndexed { index, user ->
-                        itemsList.add(UserCard(user, index + 1))
-                    }
-                    itemsList.add(AddFamilyMemberButtonCard())
-                }
-                // otherwise add only the add member tutorial button
-                else {
-                    itemsList.add(AddFamilyMemberTutorialCard())
-                }
-
-                familylistModel.value = itemsList.toList()
+            // add first main users
+            mainUser?.let {
+                itemsList.add(UserCard(it, 0))
             }
+
+            // if there are family members, add header and all the members and a add button
+            if (familyMembers.isNotEmpty()) {
+                itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
+                familyMembers.forEachIndexed { index, user ->
+                    itemsList.add(UserCard(user, index + 1))
+                }
+                itemsList.add(AddFamilyMemberButtonCard())
+            }
+            // otherwise add only the add member tutorial button
+            else {
+                itemsList.add(AddFamilyMemberTutorialCard())
+            }
+
+            familylistModel.postValue(itemsList)
         }
     }
 
