@@ -1,12 +1,10 @@
-package org.immuni.android
+package org.immuni.android.db
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.runBlocking
-import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.dao.BLEContactDao
 import org.immuni.android.db.entity.BLEContactEntity
 import org.junit.After
@@ -64,10 +62,10 @@ class RoomBLEContactsTest {
             val MAX_DAYS = 28
 
             val validDate = Calendar.getInstance().apply {
-                add(Calendar.DATE, -26)
+                add(Calendar.DAY_OF_YEAR, -26)
             }
             val removableDate = Calendar.getInstance().apply {
-                add(Calendar.DATE, -28)
+                add(Calendar.DAY_OF_YEAR, -28)
             }
 
             bleDao.insert(
