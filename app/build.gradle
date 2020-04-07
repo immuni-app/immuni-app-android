@@ -106,9 +106,6 @@ dependencies {
     // Number Picker
     implementation 'com.shawnlin:number-picker:2.4.8'
 
-    // Transparent Text
-    implementation 'it.gilvegliach.android:transparent-text-textview:1.0.3'
-
     // Room components
     implementation "androidx.room:room-runtime:2.2.4"
     implementation "androidx.room:room-ktx:2.2.4"
