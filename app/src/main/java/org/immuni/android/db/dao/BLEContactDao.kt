@@ -14,4 +14,7 @@ interface BLEContactDao: BaseDao<BLEContactEntity> {
 
     @Query("SELECT DISTINCT btId FROM ble_contact_table")
     suspend fun getAllDistinctBtIds(): List<String>
+
+    @Query("DELETE FROM ble_contact_table WHERE timestamp < :timestamp")
+    suspend fun removeOlderThan(timestamp: Long)
 }

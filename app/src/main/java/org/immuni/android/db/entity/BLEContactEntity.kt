@@ -8,7 +8,7 @@ import java.util.*
 data class BLEContactEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
-    var timestamp: Double = Date().time / 1000.0,
+    var timestamp: Date = Date(),
     var signalStrength: Int = 0,
     var distanceInMeters: Double = 0.0,
     var btId: String

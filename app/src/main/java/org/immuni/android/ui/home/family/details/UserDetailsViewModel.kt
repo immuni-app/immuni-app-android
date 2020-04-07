@@ -66,32 +66,4 @@ class UserDetailsViewModel(val userId: String) : ViewModel(),
             loading.value = false
         }
     }
-
-    fun exportData(code: String) {
-        uiScope.launch {
-            val devices = database.bleContactDao().getAll().map {
-                ExportDevice(
-                    timestamp = it.timestamp,
-                    btId = it.btId,
-                    signalStrength = it.signalStrength
-                )
-            }
-            val surveys = surveyManager.allHealthProfiles(userId)
-                .map { ExportHealthProfile.fromHealthProfile(it) }
-
-
-            val exportData = ExportData(
-                profileId = userId,
-                surveys = surveys,
-                devices = devices
-            )
-
-            val result = apiManager.exportData(code, exportData)
-            if(result.isSuccessful) {
-                toast("Dati caricati con successo!")
-            } else {
-                toast("Il codice inserito non è corretto. Riprova.")
-            }
-        }
-    }
 }

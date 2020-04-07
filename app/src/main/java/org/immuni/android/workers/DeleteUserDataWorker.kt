@@ -4,33 +4,50 @@ import android.content.Context
 import android.util.Log
 import androidx.work.*
 import com.bendingspoons.oracle.Oracle
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters)
     : CoroutineWorker(appContext, workerParams), KoinComponent {
 
+    val database: ImmuniDatabase by inject()
     val surveyManager: SurveyManager by inject()
     val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
 
-    override suspend fun doWork(): Result {
-        // Do the work here--in this case, upload the images.
-        oracle.settings()?.userDataRetentionDays?.let { days ->
-            surveyManager.deleteDataOlderThan(days)
+    override suspend fun doWork(): Result = coroutineScope {
+
+        val deleteSettings = async {
+            oracle.settings()?.userDataRetentionDays?.let { days ->
+                surveyManager.deleteDataOlderThan(days)
+            }
         }
+
+        val deleteDatabase = async {
+            oracle.settings()?.userDataRetentionDays?.let { days ->
+                database.bleContactDao().removeOlderThan(
+                    timestamp = Calendar.getInstance().apply {
+                        add(Calendar.DATE, -days)
+                    }.timeInMillis
+                )
+            }
+        }
+
+        deleteSettings.await()
+        deleteDatabase.await()
 
         Log.d("DeleteUserDataWorker", "### running DeleteUserDataWorker!")
 
         // Indicate whether the task finished successfully with the Result
-        return Result.success()
+        Result.success()
     }
 
     companion object {

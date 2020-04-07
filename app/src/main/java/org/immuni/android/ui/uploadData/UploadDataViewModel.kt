@@ -31,7 +31,7 @@ class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : Vie
             delay(500) // min loader time to avoid flickering
             val devices = database.bleContactDao().getAll().map {
                 ExportDevice(
-                    timestamp = it.timestamp,
+                    timestamp = it.timestamp.time / 1000.0,
                     btId = it.btId,
                     signalStrength = it.signalStrength
                 )
