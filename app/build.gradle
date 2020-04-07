@@ -34,8 +34,8 @@ android {
         applicationId "org.immuni.android"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 13
-        versionName "1.0.11"
+        versionCode 14
+        versionName "1.0.12"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
