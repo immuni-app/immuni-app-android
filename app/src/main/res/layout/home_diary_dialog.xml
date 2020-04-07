@@ -7,7 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:fillViewport="true"
+        android:paddingBottom="120dp"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +26,7 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="48dp"
                 android:scaleType="fitCenter"
+                android:translationX="2dp"
                 app:layout_constraintDimensionRatio="2:1.4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -55,9 +61,6 @@
                 android:gravity="left"
                 android:text="@string/clinic_diary_question_explanation"
                 android:textColor="#fff"
-                android:maxLines="5"
-                app:autoSizeMinTextSize="8sp"
-                app:autoSizeTextType="uniform"
                 app:layout_constraintEnd_toEndOf="@+id/textView"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView"
@@ -82,12 +85,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:rotation="180"
-        android:background="@drawable/gradient_color_primary_top"/>
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:rotation="180"
+            android:background="@drawable/gradient_color_primary_top"/>
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_height="90dp"/>
+    </LinearLayout>
+
     <Button
         android:id="@+id/button"
         style="@style/WhiteRoundedButton"
