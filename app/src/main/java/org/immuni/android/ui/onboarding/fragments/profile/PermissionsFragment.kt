@@ -51,12 +51,22 @@ class PermissionsFragment :
         this.view?.hideKeyboard()
     }
 
+    private fun checkBatteryOptimization() {
+        activity?.let {
+            PermissionsManager.startChangeBatteryOptimization(requireContext())
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         nextButton.setOnClickListener(null)
         nextButton.setOnClickListener {
-            viewModel.onOnboardingComplete()
+            if(!PermissionsManager.isIgnoringBatteryOptimizations(requireContext())) {
+                checkBatteryOptimization()
+            } else {
+                viewModel.onOnboardingComplete()
+            }
         }
 
         bluetooth.setOnClickListener {

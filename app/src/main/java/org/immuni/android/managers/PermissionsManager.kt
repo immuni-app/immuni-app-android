@@ -67,12 +67,16 @@ class PermissionsManager(val context: Context) : KoinComponent {
 
         fun startChangeBatteryOptimization(context: Context) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val intent = Intent(android.provider.Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+                context.startActivity(intent)
+
+                /*
                 val intent = Intent().apply {
                     action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
                     val packageName: String = context.packageName
                     data = Uri.parse("package:$packageName")
                 }
-                context.startActivity(intent)
+                context.startActivity(intent)*/
             }
         }
 
