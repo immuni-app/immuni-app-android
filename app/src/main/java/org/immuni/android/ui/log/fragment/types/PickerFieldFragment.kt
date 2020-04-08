@@ -46,7 +46,7 @@ class PickerFieldFragment : FormContentFragment(R.layout.form_picker_field) {
 
     private fun buildWidget(it: Survey) {
         items.clear()
-        val question = it.questions.first { it.id == questionId }
+        val question = it.question(questionId)
 
         questionText.text = question.title
         descriptionText.text = question.description

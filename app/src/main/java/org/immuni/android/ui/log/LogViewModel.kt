@@ -109,7 +109,7 @@ class LogViewModel(
 
             formModel()?.surveyAnswers?.keys?.forEach { questionId ->
                 val answers = formModel()?.surveyAnswers?.get(questionId)!!
-                val q = survey.questions.find { it.id == questionId }!!
+                val q = survey.question(questionId)
                 var answersString = q.humanReadableAnswers(answers)
                 val isNoAnswer = answersString.isEmpty()
                 if (isNoAnswer) {
@@ -132,18 +132,16 @@ class LogViewModel(
             val lastProfile = surveyManager.lastHealthProfile(_user.id)
             val answeredQuestionsElapsedDays = surveyManager.answeredQuestionsElapsedDays(_user.id)
 
-            val currentQuestion = _survey.questions.first {
-                it.shouldBeShown(
-                    daysSinceItWasLastAnswered = answeredQuestionsElapsedDays[it.id],
+            val currentQuestion = _survey.firstQuestionToShow(
+                    answeredQuestionsElapsedDays = answeredQuestionsElapsedDays,
                     healthState = lastProfile?.healthState ?: setOf(),
-                    triageProfile = lastProfile?.triageProfileId,
-                    surveyAnswers = linkedMapOf()
-                )
-            }.id
+                    triageProfile = lastProfile?.triageProfileId
+
+            )
 
             if (formModel.value == null || reset) {
                 formModel.value = FormModel(
-                    initialQuestion = currentQuestion,
+                    initialQuestion = currentQuestion.id,
                     initialHealthState = lastProfile?.healthState ?: setOf(),
                     triageProfile = lastProfile?.triageProfileId,
                     surveyAnswers = linkedMapOf(),
@@ -267,12 +265,11 @@ class LogViewModel(
     fun getProgressPercentage(pos: Int): Float {
         val form = formModel.value!!
         val survey = survey.value!!
-        val totalQuestions = survey.questions.size
+        val totalQuestions = survey.questionCount
         if (pos == 0) return 1f / totalQuestions
         if (totalQuestions == 0) return 0f
         val currentQuestion = form.currentQuestion
-        val index =
-            survey.questions.map { it.id }.indexOf(currentQuestion).coerceAtLeast(0)
+        val index = survey.indexOfQuestion(currentQuestion).coerceAtLeast(0)
         return ((index + 2).toFloat() / totalQuestions.toFloat()).coerceIn(0f, 1f)
     }
 

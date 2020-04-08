@@ -23,20 +23,20 @@ class FormAdapter(
     // fragment instance
 
     override fun getItemId(position: Int): Long {
-        return survey.questions.indexOfFirst { it.id == questionIds[position] }.toLong()
+        return survey.indexOfQuestion(questionIds[position]).toLong()
     }
 
     // IMPORTANT: this is critically important in combination with getItemId to restore
     // the adapter after activity restoration
     override fun containsItem(itemId: Long): Boolean {
-        val surveyQuestion = survey.questions[itemId.toInt()]
+        val surveyQuestion = survey.questionAtIndex(itemId.toInt())
         return questionIds.contains(surveyQuestion.id)
     }
 
     override fun getItemCount(): Int = questionIds.size
 
     override fun createFragment(position: Int): Fragment {
-        val question = survey.questions.first { it.id == questionIds[position] }
+        val question = survey.question(questionIds[position])
 
         return when (question.widget) {
             is PickerWidget -> PickerFieldFragment()
