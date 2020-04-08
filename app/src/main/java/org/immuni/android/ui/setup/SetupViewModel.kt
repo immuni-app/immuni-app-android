@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.welcome.Welcome
 import com.bendingspoons.base.livedata.Event
+import com.bendingspoons.base.utils.retry
 import com.bendingspoons.oracle.Oracle
 import org.koin.core.KoinComponent
 import kotlinx.coroutines.*
@@ -39,18 +40,6 @@ class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
 
     val errorDuringSetup = MutableLiveData<Boolean>()
 
-    init {
-        // auto retry when connection is available
-        uiScope.launch {
-            repeat(Int.MAX_VALUE) {
-                delay(10000)
-                if (errorDuringSetup.value == true) {
-                    initializeApp()
-                }
-            }
-        }
-    }
-
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
@@ -83,9 +72,16 @@ class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
                     setup.setCompleted(false)
 
                     // the first time the call to settings and me is blocking, you cannot proceed without
-                    val settings = repo.getOracleSetting()
+                    val settings = retry(
+                        times = 3,
+                        block = { repo.getOracleSetting() },
+                        exitWhen = { result -> result.isSuccessful },
+                        onIntermediateFailure = { errorDuringSetup.value = true }
+                    )
                     if (!settings.isSuccessful) {
                         throw IOException()
+                    } else {
+                        errorDuringSetup.value = false
                     }
 
                     val me = repo.getOracleMe()
