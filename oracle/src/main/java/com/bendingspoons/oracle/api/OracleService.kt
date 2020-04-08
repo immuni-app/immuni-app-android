@@ -7,25 +7,25 @@ import retrofit2.http.*
 
 interface OracleService {
 
-    @GET("settings")
+    @GET("v2/settings")
     suspend fun settings(): Response<ResponseBody>
 
-    @GET("devices/me")
+    @GET("v2/devices/me")
     suspend fun me(): Response<ResponseBody>
 
-    @POST("devices")
+    @POST("v2/devices")
     suspend fun devices(@Body request: DevicesRequest): Response<ResponseBody>
 
-    @POST("settings/force_experiment")
+    @POST("v2/settings/force_experiment")
     suspend fun forceExperiment(@Body request: ForceExperimentRequest): Response<ResponseBody>
 
-    @POST("/users/privacy_notice")
+    @POST("v2/users/privacy_notice")
     suspend fun privacyNotice(@Body request: PrivacyNoticeRequest): Response<ResponseBody>
 
-    @POST("users/gift_code/redeem")
+    @POST("v2/users/gift_code/redeem")
     suspend fun redeemGiftCode(@Body request: RedeemGiftCodeRequest): Response<ResponseBody>
 
-    @POST("/transactions/google/bulk")
+    @POST("v2/transactions/google/bulk")
     suspend fun verifyPurchase(@Body request: VerifyPurchaseRequest): Response<VerifyPurchaseResponse>
 }
 

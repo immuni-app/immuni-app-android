@@ -27,12 +27,12 @@ class ApiManager : KoinComponent {
 }
 
 interface CustomOracleAPI {
-    @POST("notifications/fcm")
+    @POST("v2/notifications/fcm")
     suspend fun fcmNotificationToken(@Body reedem: FcmTokenRequest): Response<ResponseBody>
 
-    @GET("bt")
+    @GET("v2/bt")
     suspend fun getBtIds(): Response<BtIds>
 
-    @POST("data/{code}")
+    @POST("v2/data/{code}")
     suspend fun exportData(@Path("code") code: String, @Body data: ExportData): Response<ResponseBody>
 }
