@@ -1,16 +1,16 @@
 rootProject.name='Immuni'
 include ':app'
 include ':base'
-project(':base').projectDir=new File('../base-lib-kotlin/base')
+//project(':base').projectDir=new File('../base-lib-kotlin/base')
 include ':concierge'
-project(':concierge').projectDir=new File('../concierge-lib-kotlin/concierge')
+//project(':concierge').projectDir=new File('../concierge-lib-kotlin/concierge')
 include ':secretmenu'
-project(':secretmenu').projectDir=new File('../secretmenu-lib-kotlin/secretmenu')
+//project(':secretmenu').projectDir=new File('../secretmenu-lib-kotlin/secretmenu')
 include ':oracle'
-project(':oracle').projectDir=new File('../oracle-lib-kotlin/oracle')
+//project(':oracle').projectDir=new File('../oracle-lib-kotlin/oracle')
 include ':pico'
-project(':pico').projectDir=new File('../pico-lib-kotlin/pico')
+//project(':pico').projectDir=new File('../pico-lib-kotlin/pico')
 include ':sesame'
-project(':sesame').projectDir=new File('../sesame-lib-kotlin/sesame')
+//project(':sesame').projectDir=new File('../sesame-lib-kotlin/sesame')
 include ':theirs'
-project(':theirs').projectDir=new File('../theirs-lib-kotlin/theirs')
+//project(':theirs').projectDir=new File('../theirs-lib-kotlin/theirs')
