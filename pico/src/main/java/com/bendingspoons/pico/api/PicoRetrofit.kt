@@ -1,5 +1,6 @@
 package com.bendingspoons.pico.api
 
+import com.bendingspoons.base.http.GzipRequestInterceptor
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.pico.Pico
 import com.bendingspoons.pico.PicoConfiguration
@@ -61,10 +62,13 @@ class PicoRetrofit(config: PicoConfiguration) {
     val sesame = config.sesame()
     var certificatePinner = config.certificatePinner()
 
+    val gzipInterceptor = GzipRequestInterceptor()
+
     val client by lazy {
         val builder = OkHttpClient.Builder()
             .hostnameVerifier(HostnameVerifier { hostname, session -> true })
             .addInterceptor(exceptionsInterceptor)
+            .addInterceptor(gzipInterceptor)
             .addInterceptor(sesame.interceptor)
             .addInterceptor(headersInterceptor)
             .addInterceptor(loggingInterceptor)

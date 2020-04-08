@@ -1,6 +1,7 @@
 package com.bendingspoons.oracle.api
 
 import android.content.Context
+import com.bendingspoons.base.http.GzipRequestInterceptor
 import com.bendingspoons.base.utils.DeviceInfoProviderImpl
 import com.bendingspoons.base.utils.DeviceUtils
 import com.bendingspoons.oracle.OracleConfiguration
@@ -82,19 +83,23 @@ class OracleRetrofit(
     val sesame = config.sesame()
     var certificatePinner = config.certificatePinner()
 
+    val gzipInterceptor = GzipRequestInterceptor()
+
     val client by lazy {
         val builder = OkHttpClient.Builder()
             .hostnameVerifier(HostnameVerifier { hostname, session -> true })
-            .addInterceptor(exceptionsInterceptor)
-            .addInterceptor(headersInterceptor)
-            .addInterceptor(loggingInterceptor)
 
-        certificatePinner?.let {
-            builder.certificatePinner(it)
-        }
+        builder.addInterceptor(exceptionsInterceptor)
+        builder.addInterceptor(headersInterceptor)
+        builder.addInterceptor(gzipInterceptor)
 
         sesame?.let {
             builder.addInterceptor(sesame.interceptor)
+        }
+        builder.addInterceptor(loggingInterceptor)
+
+        certificatePinner?.let {
+            builder.certificatePinner(it)
         }
 
         builder.build()

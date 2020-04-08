@@ -16,10 +16,16 @@ class Sesame(private val config: SesameConfiguration) {
         timestamp: Long,
         requestId: UUID
     ): String {
+
+        val requestBody = when(config.useGzip) {
+            true -> request.toHex().toLowerCase(Locale.ROOT)
+            false -> request.bodyString()
+        }
+
         val messageString = String.format(
             "%s:%s:%s:%s",
             request.url.toString().replace("https://", "http://"),
-            request.bodyString(),
+            requestBody,
             timestamp.toString(),
             requestId.toString()
         )
@@ -56,6 +62,17 @@ fun Request.bodyString(): String {
         val buffer = Buffer()
         copy.body?.writeTo(buffer)
         buffer.readUtf8()
+    } catch (e: IOException) {
+        ""
+    }
+}
+
+fun Request.toHex(): String {
+    return try {
+        val copy = this.newBuilder().build()
+        val buffer = Buffer()
+        copy.body?.writeTo(buffer)
+        buffer.readByteArray().toHex()
     } catch (e: IOException) {
         ""
     }
