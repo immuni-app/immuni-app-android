@@ -124,9 +124,14 @@ val appModule = module {
         BluetoothManager(androidContext())
     }
 
+    // single instance of UserManager
+    single {
+        UserManager()
+    }
+
     // single instance of SurveyManager
     single {
-        SurveyManager(androidContext())
+        SurveyManager()
     }
 
     // single instance of AscoltoNotificationManager
@@ -151,7 +156,7 @@ val appModule = module {
     viewModel { (handle: SavedStateHandle) -> AddRelativeViewModel(handle, get()) }
 
     // LogViewModel
-    viewModel { (handle: SavedStateHandle) -> LogViewModel(handle, get()) }
+    viewModel { (handle: SavedStateHandle) -> LogViewModel(handle) }
 
     // UserDetailsViewModel
     viewModel { (userId: String) -> UserDetailsViewModel(userId) }

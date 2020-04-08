@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.*
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.oracle.Oracle
+import com.bendingspoons.oracle.api.model.OracleMe
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.asFlow
@@ -16,6 +17,7 @@ import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.PermissionsManager
+import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
 import org.immuni.android.picoMetrics.OnboardingCompleted
 import org.immuni.android.toast
@@ -36,6 +38,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     private val onboarding: Onboarding by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
+    private val userManager: UserManager by inject()
     private val apiManager: ApiManager by inject()
     private val permissionsManager: PermissionsManager by inject()
 
@@ -69,7 +72,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
         if (handle.get<Serializable>(STATE_KEY) != null) {
             partialUserInfo.value = handle.get<Serializable>(STATE_KEY) as OnboardingUserInfo
         } else {
-            val mainUser = oracle.me()?.mainUser
+            val mainUser = userManager.mainUser()
             partialUserInfo.value = OnboardingUserInfo(
                 gender = mainUser?.gender,
                 ageGroup = mainUser?.ageGroup
@@ -125,23 +128,16 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
             loading.value = true
             delay(250) // minimum loading time
 
-            val me = oracle.me()
-            val updatedMe = if (me?.mainUser != null) me else apiManager.updateMainUser(
-                User(
-                    id = "",
-                    ageGroup = userInfo.ageGroup!!,
-                    gender = userInfo.gender!!
-                )
+            val mainUser = User(
+                ageGroup = userInfo.ageGroup!!,
+                gender = userInfo.gender!!,
+                isMain = true
             )
-            val isCompleted = updatedMe?.mainUser != null
-            onboarding.setCompleted(isCompleted)
-            if (isCompleted) {
-                //pico.trackEvent(OnboardingCompleted().userAction)
-                _navigateToNextPage.value = Event(true)
-            } else {
-                toast(ImmuniApplication.appContext.getString(R.string.server_generic_error))
-            }
+            userManager.addUser(mainUser)
+
             loading.value = false
+            onboarding.setCompleted(true)
+            _navigateToNextPage.value = Event(true)
         }
     }
 
