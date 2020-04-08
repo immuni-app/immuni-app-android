@@ -1,10 +1,10 @@
 package org.immuni.android.models.survey
 
 sealed class JumpDestination
-class QuestionJumpDestination(val questionId: QuestionId) : JumpDestination()
-class EndOfSurveyJumpDestination() : JumpDestination()
+data class QuestionJumpDestination(val questionId: QuestionId) : JumpDestination()
+object EndOfSurveyJumpDestination : JumpDestination()
 
-class JumpItem(val destination: JumpDestination, private val condition: Condition) {
+data class JumpItem(val destination: JumpDestination, private val condition: Condition) {
     fun shouldJump(
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,
@@ -16,7 +16,7 @@ class JumpItem(val destination: JumpDestination, private val condition: Conditio
     )
 }
 
-class Jump(private val jumps: List<JumpItem>) {
+data class Jump(private val jumps: List<JumpItem>) {
     fun jump(
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,

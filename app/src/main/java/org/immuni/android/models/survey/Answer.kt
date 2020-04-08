@@ -4,6 +4,6 @@ import java.io.Serializable
 
 sealed class Answer: Serializable
 
-class SimpleAnswer(val index: AnswerIndex) : Answer()
+data class SimpleAnswer(val index: AnswerIndex) : Answer()
 
-class CompositeAnswer(val componentIndexes: List<AnswerIndex>) : Answer()
+data class CompositeAnswer(val componentIndexes: List<AnswerIndex>) : Answer()

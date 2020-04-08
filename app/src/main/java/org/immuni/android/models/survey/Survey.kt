@@ -44,7 +44,7 @@ data class Survey(
                 SurveyQuestionDestination(questions.first { it.id == jumpDestination.questionId })
             }
             is EndOfSurveyJumpDestination -> {
-                SurveyEndDestination()
+                SurveyEndDestination
             }
             null -> {
                 nextQuestions.find {
@@ -56,7 +56,7 @@ data class Survey(
                     )
                 }?.let {
                     SurveyQuestionDestination(it)
-                } ?: SurveyEndDestination()
+                } ?: SurveyEndDestination
             }
         }
     }
@@ -68,4 +68,4 @@ sealed class SurveyNextDestination
 
 class SurveyQuestionDestination(val question: Question) : SurveyNextDestination()
 
-class SurveyEndDestination : SurveyNextDestination()
+object SurveyEndDestination : SurveyNextDestination()
