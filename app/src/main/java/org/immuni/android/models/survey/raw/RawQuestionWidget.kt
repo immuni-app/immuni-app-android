@@ -6,7 +6,7 @@ import org.immuni.android.models.survey.RadioWidget
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-enum class RawWidgetType {
+enum class RawQuestionWidgetType {
     @Json(name = "picker")
     PICKER,
 
@@ -18,27 +18,27 @@ enum class RawWidgetType {
 }
 
 @JsonClass(generateAdapter = true)
-data class RawWidget(
-    @field:Json(name = "type") val type: RawWidgetType,
+data class RawQuestionWidget(
+    @field:Json(name = "type") val type: RawQuestionWidgetType,
     @field:Json(name = "components") val components: List<List<String>>? = null,
     @field:Json(name = "min_answers") val minNumberOfAnswers: Int? = null,
     @field:Json(name = "max_answers") val maxNumberOfAnswers: Int? = null,
     @field:Json(name = "answers") val answers: List<String>? = null
 ) {
     fun widget() = when (type) {
-        RawWidgetType.PICKER -> {
+        RawQuestionWidgetType.PICKER -> {
             PickerWidget(
                 components = components!!
             )
         }
-        RawWidgetType.MULTIPLE_CHOICES -> {
+        RawQuestionWidgetType.MULTIPLE_CHOICES -> {
             MultipleChoicesWidget(
                 minNumberOfAnswers = minNumberOfAnswers ?: 0,
                 maxNumberOfAnswers = maxNumberOfAnswers ?: 9999,
                 answers = answers!!
             )
         }
-        RawWidgetType.RADIO -> {
+        RawQuestionWidgetType.RADIO -> {
             RadioWidget(
                 answers = answers!!
             )

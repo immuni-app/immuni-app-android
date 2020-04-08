@@ -9,7 +9,7 @@ data class RawQuestion(
     @field:Json(name = "id") val id: QuestionId,
     @field:Json(name = "title") val title: String,
     @field:Json(name = "description") val description: String,
-    @field:Json(name = "widget") val widget: RawWidget,
+    @field:Json(name = "widget") val widget: RawQuestionWidget,
     @field:Json(name = "frequency") val periodicity: Int,
     @field:Json(name = "only_when") val showCondition: RawCondition,
     @field:Json(name = "state_updater") val healthStateUpdaters: List<RawHealthStateUpdaterItem>,
