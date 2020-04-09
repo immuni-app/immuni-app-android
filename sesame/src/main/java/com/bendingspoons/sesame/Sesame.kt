@@ -17,7 +17,7 @@ class Sesame(private val config: SesameConfiguration) {
         requestId: UUID
     ): String {
 
-        val requestBody = when(config.useGzip) {
+        val requestBody = when(request.isGzipped()) {
             true -> request.toHex().toLowerCase(Locale.ROOT)
             false -> request.bodyString()
         }
@@ -62,7 +62,7 @@ fun Request.bodyString(): String {
         val buffer = Buffer()
         copy.body?.writeTo(buffer)
         buffer.readUtf8()
-    } catch (e: IOException) {
+    } catch (e: Exception) {
         ""
     }
 }
@@ -73,7 +73,23 @@ fun Request.toHex(): String {
         val buffer = Buffer()
         copy.body?.writeTo(buffer)
         buffer.readByteArray().toHex()
-    } catch (e: IOException) {
+    } catch (e: Exception) {
         ""
+    }
+}
+
+
+// Check if the receiver is already gzipped.
+// returns: Whether the data is compressed.
+
+fun Request.isGzipped(): Boolean {
+    return try {
+        val copy = this.newBuilder().build()
+        val buffer = Buffer()
+        copy.body?.writeTo(buffer)
+        val array = buffer.readByteArray()
+        array[0] == 0x1f.toByte() &&  array[1] == 0x8b.toByte() // check magic number
+    } catch (e: Exception) {
+        false
     }
 }
