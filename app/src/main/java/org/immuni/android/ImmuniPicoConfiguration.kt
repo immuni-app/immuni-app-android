@@ -36,7 +36,7 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
     }
 
     override fun sesame(): Sesame {
-        return Sesame(PicoSesameConfiguration(context))
+        return Sesame(PicoSesameConfiguration())
     }
 
     override fun additionalMonetizationInfo(): Map<String, Any> {

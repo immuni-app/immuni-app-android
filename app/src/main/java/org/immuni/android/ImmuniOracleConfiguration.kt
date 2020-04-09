@@ -14,7 +14,7 @@ import org.koin.core.inject
 class ImmuniOracleConfiguration(val context: Context) : OracleConfiguration, KoinComponent {
 
     val concierge: ConciergeManager by inject()
-    private val sesame = Sesame(OracleSesameConfiguration(context))
+    private val sesame = Sesame(OracleSesameConfiguration())
 
     override fun endpoint(): String {
         return context.getString(R.string.oracle_base_url)

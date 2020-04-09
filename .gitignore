@@ -17,5 +17,5 @@
 keystore.properties
 immuni_keystore.properties
 icon.png
-/app/src/main/res/values/keys.xml
 /app/google-services.json
+/app.properties

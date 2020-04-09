@@ -6,16 +6,16 @@ apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'io.fabric'
 
 // Template keystore file
-def templateKeystorePropertiesFile = rootProject.file("keystore_template.properties")
+def mockPropertiesFile = rootProject.file("template.properties")
 
 // App keystore file
-def immuniKeystorePropertiesFile = rootProject.file("immuni_keystore.properties")
-def immuniKeystoreProperties = new Properties()
+def appPropertiesFile = rootProject.file("app.properties")
+def appProperties = new Properties()
 
-if (immuniKeystorePropertiesFile.exists()) {
-    immuniKeystoreProperties.load(new FileInputStream(immuniKeystorePropertiesFile))
+if (appPropertiesFile.exists()) {
+    appProperties.load(new FileInputStream(appPropertiesFile))
 } else {
-    immuniKeystoreProperties.load(new FileInputStream(templateKeystorePropertiesFile))
+    appProperties.load(new FileInputStream(mockPropertiesFile))
 }
 
 android {
@@ -24,10 +24,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias immuniKeystoreProperties['keyAlias']
-            keyPassword immuniKeystoreProperties['keyPassword']
-            storeFile file(immuniKeystoreProperties['storeFile'])
-            storePassword immuniKeystoreProperties['storePassword']
+            keyAlias appProperties['keyAlias']
+            keyPassword appProperties['keyPassword']
+            storeFile file(appProperties['storeFile'])
+            storePassword appProperties['storePassword']
         }
     }
     defaultConfig {
@@ -44,6 +44,8 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+        buildConfigField("String", "sesameOracleKey", appProperties['sesameOracleKey'])
+        buildConfigField("String", "sesamePicoKey", appProperties['sesamePicoKey'])
     }
 
     buildTypes {
