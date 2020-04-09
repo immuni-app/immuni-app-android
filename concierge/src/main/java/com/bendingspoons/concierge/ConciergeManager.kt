@@ -88,11 +88,6 @@ internal class ConciergeManagerImpl(
 
     override fun allIds(): Set<Id> {
         return mutableSetOf<Id>().apply {
-            add(aaid)
-            add(Concierge.Id.Custom("idfa", aaid.id)) // Temporary, we should use only "aaid"
-            androidId?.let {
-                add(it)
-            }
             add(backupPersistentId)
             add(nonBackupPersistentId)
 

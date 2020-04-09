@@ -69,25 +69,6 @@ class ConciergeManagerImplUnitTest {
     }
 
     @Test
-    fun `test fun allIds() should return all the ids`() {
-
-        val storage = mockk<ConciergeStorage>(relaxed = true)
-        val provider = mockk<ConciergeProvider>(relaxed = true)
-        every { provider.provideAndroidId() } returns Concierge.Id.Internal(Concierge.InternalId.ANDROID_ID, "123", Concierge.CreationType.justGenerated)
-        every { storage.get(Concierge.InternalId.AAID) } returns Concierge.Id.Internal(Concierge.InternalId.AAID,"123", Concierge.CreationType.justGenerated)
-        every { storage.get(Concierge.InternalId.BACKUP_PERSISTENT_ID) } returns Concierge.Id.Internal(Concierge.InternalId.BACKUP_PERSISTENT_ID, "123", Concierge.CreationType.justGenerated)
-        every { storage.get(Concierge.InternalId.NON_BACKUP_PERSISTENT_ID) } returns Concierge.Id.Internal(Concierge.InternalId.NON_BACKUP_PERSISTENT_ID,"123", Concierge.CreationType.justGenerated)
-
-        customIds = setOf(Concierge.Id.Custom("custom_name", "value"))
-
-        val manager: ConciergeManager = ConciergeManagerImpl(storage, storage, provider, appCustomIdProvider)
-
-        // 4 internal ids + 1 non backup persistent id + 1 custom id + 1 legacy IDFA
-        val ids = manager.allIds()
-        assertEquals(6, manager.allIds().size)
-    }
-
-    @Test
     fun `test storage values are read during init`() {
 
         val storage = mockk<ConciergeStorage>(relaxed = true)

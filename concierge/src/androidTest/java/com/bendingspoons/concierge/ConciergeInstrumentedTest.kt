@@ -16,11 +16,11 @@ class ConciergeInstrumentedTest {
         override val ids: Set<Concierge.Id>
             get() = setOf()
     }
-    /*
+
     @Test
     fun testIdSerializationSavingAndRestore() {
         val ctx: Context = ApplicationProvider.getApplicationContext()
-        val storage = ConciergeStorageImpl(ctx) as ConciergeStorage
+        val storage = ConciergeStorageImpl(ctx, false) as ConciergeStorage
         val saved = Concierge.Id.Internal(Concierge.InternalId.AAID, "123456", Concierge.CreationType.justGenerated)
         storage.save(saved)
 
@@ -37,7 +37,7 @@ class ConciergeInstrumentedTest {
             clear()
         }
 
-        val manager: ConciergeManager = Concierge.Manager(ctx, appCustomIdProvider = appCustomIdProvider)
+        val manager: ConciergeManager = Concierge.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
 
         assertEquals(manager.backupPersistentId.creation, Concierge.CreationType.justGenerated)
     }
@@ -58,7 +58,7 @@ class ConciergeInstrumentedTest {
             save(id)
         }
 
-        val manager: ConciergeManager = Concierge.Manager(ctx, appCustomIdProvider = appCustomIdProvider)
+        val manager: ConciergeManager = Concierge.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
 
         assertEquals(manager.backupPersistentId.creation, Concierge.CreationType.readFromFile)
     }
@@ -66,7 +66,7 @@ class ConciergeInstrumentedTest {
     @Test
     fun testConciergeInitCreateACorrectInstance() {
         val ctx: Context = ApplicationProvider.getApplicationContext()
-        val manager: ConciergeManager = Concierge.Manager(ctx, appCustomIdProvider = appCustomIdProvider)
+        val manager: ConciergeManager = Concierge.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
 
         assertTrue(manager is ConciergeManagerImpl)
     }
@@ -74,21 +74,17 @@ class ConciergeInstrumentedTest {
     @Test
     fun testAcceptACustomStorageAndProvider() {
         val ctx: Context = ApplicationProvider.getApplicationContext()
-        val customStorage = ConciergeStorageImpl(ctx)
-        val customNonBackupStorage = ConciergeStorageImpl(ctx)
+        val customNonBackupStorage = ConciergeStorageImpl(ctx, false)
         val customProvider = ConciergeProviderImpl(ctx)
 
         val manager: ConciergeManager = Concierge.Manager(ctx,
-            storage = customStorage,
             nonBackupStorage = customNonBackupStorage,
             provider = customProvider,
-            appCustomIdProvider = appCustomIdProvider)
+            appCustomIdProvider = appCustomIdProvider,
+            encryptIds = false)
 
-        assertSame(customStorage, manager.storage)
         assertSame(customNonBackupStorage, manager.nonBackupStorage)
         assertSame(customProvider, manager.provider)
     }
-
-     */
 }
 

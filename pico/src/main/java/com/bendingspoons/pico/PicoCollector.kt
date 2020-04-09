@@ -21,11 +21,6 @@ class PicoCollector(
             val events = list.map {
                 it.apply {
                     requestTimestamp = System.currentTimeMillis() / 1000.0
-
-                    // update the AAID in case it was not yet available during the event creation
-                    // because the AAID retrieval is async
-                    this.user.ids[Concierge.InternalId.AAID.keyName] = config.concierge().aaid.id
-                    this.user.ids["idfa"] = config.concierge().aaid.id // legacy
                 }
             }
 

@@ -53,8 +53,5 @@ internal class FirebaseFCM(
 
     override val ids: Set<Concierge.Id>
         get() =
-            mutableSetOf<Concierge.Id>().apply {
-                token?.let { add(Concierge.Id.Custom("push_token", it)) }
-                FirebaseInstanceId.getInstance().id?.let { add(Concierge.Id.Custom("firebase_instance_id", it)) }
-            }
+            mutableSetOf<Concierge.Id>()
 }
