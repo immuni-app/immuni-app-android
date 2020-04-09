@@ -31,11 +31,11 @@ data class RawCondition(
     @field:Json(name = "type")
     val type: RawConditionType,
     @field:Json(name = "question_id")
-    val questionId: QuestionId?,
+    val questionId: QuestionId? = null,
     @field:Json(name = "matching_indexes")
     val matchingIndexes: List<AnswerIndex>? = null,
     @field:Json(name = "matching_component_indexes")
-    val matchingComponentIndexes: List<List<AnswerIndex>>? = null,
+    val matchingComponentIndexes: List<List<AnswerIndex?>>? = null,
     @field:Json(name = "matching_profiles")
     val matchingProfiles: List<TriageProfileId?>? = null,
     @field:Json(name = "states")

@@ -237,7 +237,7 @@ class LogViewModel(
             val updatedUserHealthProfile =
                 surveyManager.completeSurvey(userId = userId, form = form, survey = survey)
 
-            // Show the DONE page for 2 seconds before proceed
+            // Show the DONE page for 2 seconds before proceeding
             delay(2000)
 
             val triageProfile = updatedUserHealthProfile.triageProfileId?.let { profileId ->
@@ -247,7 +247,6 @@ class LogViewModel(
                 }
             }
 
-            // TODO if triage profile is null let's log this event to Pico
             if(triageProfile == null) {
                 navigateToNextStep()
             }
