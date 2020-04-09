@@ -74,12 +74,12 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
 dependencies {
     implementation project(":base")
-    implementation project(":concierge") // VERSION 1.0.0
-    implementation project(":secretmenu") // VERSION 1.1.0
+    implementation project(":concierge")
+    implementation project(":secretmenu")
     implementation project(':sesame')
-    implementation project(":oracle") // VERSION 0.5.0
+    implementation project(":oracle")
     implementation project(":theirs")
-    implementation project(":pico") // VERSION 0.0.0
+    implementation project(":pico")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
@@ -87,7 +87,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.2.0'
-    //implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.google.android.material:material:1.2.0-alpha04'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
