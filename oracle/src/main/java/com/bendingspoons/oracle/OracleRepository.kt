@@ -25,10 +25,6 @@ class OracleRepository<Settings : OracleSettings, Me : OracleMe>(
         return api.settings()
     }
 
-    suspend fun forceSegment(request: ForceExperimentRequest): Response<ResponseBody> {
-        return api.forceExperiment(request)
-    }
-
     suspend fun me(): Response<ResponseBody> {
         return api.me()
     }
@@ -39,14 +35,6 @@ class OracleRepository<Settings : OracleSettings, Me : OracleMe>(
 
     suspend fun privacyNotice(request: PrivacyNoticeRequest): Response<ResponseBody> {
         return api.privacyNotice(request)
-    }
-
-    suspend fun redeemGiftCode(request: RedeemGiftCodeRequest): Response<ResponseBody> {
-        return api.redeemGiftCode((request))
-    }
-
-    suspend fun verifyPurchase(request: VerifyPurchaseRequest): Response<VerifyPurchaseResponse> {
-        return api.verifyPurchase(request)
     }
 
     // fetch the /me from the server

@@ -16,16 +16,7 @@ interface OracleService {
     @POST("v2/devices")
     suspend fun devices(@Body request: DevicesRequest): Response<ResponseBody>
 
-    @POST("v2/settings/force_experiment")
-    suspend fun forceExperiment(@Body request: ForceExperimentRequest): Response<ResponseBody>
-
     @POST("v2/users/privacy_notice")
     suspend fun privacyNotice(@Body request: PrivacyNoticeRequest): Response<ResponseBody>
-
-    @POST("v2/users/gift_code/redeem")
-    suspend fun redeemGiftCode(@Body request: RedeemGiftCodeRequest): Response<ResponseBody>
-
-    @POST("v2/transactions/google/bulk")
-    suspend fun verifyPurchase(@Body request: VerifyPurchaseRequest): Response<VerifyPurchaseResponse>
 }
 
