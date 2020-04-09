@@ -22,8 +22,6 @@ class SecretMenuActivity : AppCompatActivity() {
         setContentView(R.layout.secret_menu_activity)
 
         val items = mutableListOf(
-            AAIDItem(),
-            RedeemGiftCodeItem(),
             AppVersionItem(),
             DeviceInfoItem()
         ).apply {
@@ -33,9 +31,6 @@ class SecretMenuActivity : AppCompatActivity() {
             if (secretMenuConfig.isDevelopmentDevice()) {
                 add(AllIdsItem())
                 addAll(secretMenuConfig.spoonerItems())
-                add(SkipPaywallItem())
-                add(ExperimentsItem())
-                add(SetSegmentItem())
                 add(ClearUserIdentityItem())
                 add(ClearAppDataItem())
                 add(ForceQuitDataItem())
