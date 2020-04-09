@@ -24,7 +24,8 @@ import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.*
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
-import org.immuni.android.ui.ble.BleDebugViewModel
+import org.immuni.android.ui.ble.distance.BleDistanceDebugViewModel
+import org.immuni.android.ui.ble.encounters.BleEncountersDebugViewModel
 import org.immuni.android.ui.force_update.ForceUpdateViewModel
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.home.family.details.UserDetailsViewModel
@@ -168,7 +169,10 @@ val appModule = module {
     viewModel { (userId: String) -> EditDetailsViewModel(userId) }
 
     // BleDebugViewModel
-    viewModel { BleDebugViewModel() }
+    viewModel { BleDistanceDebugViewModel() }
+
+    // BleEncountersDebugViewModel
+    viewModel { BleEncountersDebugViewModel() }
 
     // ForceUpdateViewModel
     viewModel { ForceUpdateViewModel() }

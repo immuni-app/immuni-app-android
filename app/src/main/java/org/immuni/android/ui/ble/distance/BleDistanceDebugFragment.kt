@@ -1,7 +1,6 @@
-package org.immuni.android.ui.ble
+package org.immuni.android.ui.ble.distance
 
 import android.graphics.Color
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,17 +15,18 @@ import com.bendingspoons.base.extensions.invisible
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.bendingspoons.base.extensions.visible
 import de.fraunhofer.iis.DistanceEstimate
-import kotlinx.android.synthetic.main.ble_debug_fragment.*
+import kotlinx.android.synthetic.main.ble_distance_debug_fragment.*
 import org.immuni.android.R
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class BleDebugFragment : Fragment() {
+class BleDistanceDebugFragment : Fragment() {
 
     companion object {
-        fun newInstance() = BleDebugFragment()
+        fun newInstance() =
+            BleDistanceDebugFragment()
     }
 
-    private lateinit var viewModel: BleDebugViewModel
+    private lateinit var viewModel: BleDistanceDebugViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +34,7 @@ class BleDebugFragment : Fragment() {
     ): View {
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        return inflater.inflate(R.layout.ble_debug_fragment, container, false)
+        return inflater.inflate(R.layout.ble_distance_debug_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -71,7 +71,7 @@ class BleDebugFragment : Fragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            val v = LayoutInflater.from(parent.context).inflate(R.layout.ble_debug_item, parent, false)
+            val v = LayoutInflater.from(parent.context).inflate(R.layout.ble_distance_debug_item, parent, false)
             return ItemVH(v)
         }
 

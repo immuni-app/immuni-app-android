@@ -63,12 +63,13 @@ class BLEScanner: KoinComponent {
         list.forEach {
             Log.d("BLEScanner", "### Distance in meters between ${it.deviceId1} and ${it.deviceId2} = ${it.distance} meters")
         }
-        val now = System.currentTimeMillis()
-        storeResults(list.filter { now - it.timestamp < 5000 })
+        /*val now = System.currentTimeMillis()
+        storeResults(list.filter { now - it.timestamp < 60*1000 })
+         */
     }
 
     private var lastStoreTs = 0L
-    private fun storeResults(list: List<DistanceEstimate>) {
+    private fun storeResults(list: List<String>) {
         // store data once every X seconds
         // to prevent to much database inserts
         val now = System.currentTimeMillis()
@@ -79,7 +80,7 @@ class BLEScanner: KoinComponent {
             database.bleContactDao().insert(
                 *list.map {
                     BLEContactEntity(
-                        btId = it.deviceId2
+                        btId = it
                     )
                 }.toTypedArray()
             )
@@ -112,6 +113,7 @@ class BLEScanner: KoinComponent {
         }
 
         Log.d("BLEScanner", "### SCAN RESULT id=$id ${btIds.joinToString()}")
+        storeResults(btIds)
     }
 
     inner class MyScanCallback : ScanCallback() {

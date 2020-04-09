@@ -1,4 +1,4 @@
-package org.immuni.android.ui.ble
+package org.immuni.android.ui.ble.distance
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,7 @@ import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class BleDebugViewModel : ViewModel(), KoinComponent {
+class BleDistanceDebugViewModel : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)

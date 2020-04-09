@@ -18,7 +18,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.ImmuniNotificationManager
 import org.immuni.android.managers.BtIdsManager
-import org.immuni.android.ui.ble.BleDebugActivity
+import org.immuni.android.ui.ble.distance.BleDistanceDebugActivity
+import org.immuni.android.ui.ble.encounters.BleEncountersDebugActivity
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.setup.Setup
 import org.immuni.android.ui.welcome.Welcome
@@ -84,7 +85,14 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
             }){},
             object : SecretMenuItem("ℹ️ BLE distance debug", { context, config ->
                 val context = ImmuniApplication.appContext
-                val intent = Intent(context, BleDebugActivity::class.java).apply {
+                val intent = Intent(context, BleDistanceDebugActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+                context.startActivity(intent)
+            }){},
+            object : SecretMenuItem("ℹ️ BLE encounters debug", { context, config ->
+                val context = ImmuniApplication.appContext
+                val intent = Intent(context, BleEncountersDebugActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                 }
                 context.startActivity(intent)
