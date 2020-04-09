@@ -16,7 +16,7 @@ class ImmuniSettings(
     @field:Json(name = "faq_url") val faqUrl: String? = null,
     @field:Json(name = "survey_json") val rawSurvey: RawSurvey? = null,
     @field:Json(name = "disable_survey_back") val disableSurveyBack: Boolean = false,
-    @field:Json(name = "user_data_retention_days") val userDataRetentionDays: Int? = null // TODO: check actual json field name
+    @field:Json(name = "user_data_retention_days") val userDataRetentionDays: Int? = null
 ) : OracleSettings() {
     @Transient private var _survey: Survey? = null
     val survey: Survey?

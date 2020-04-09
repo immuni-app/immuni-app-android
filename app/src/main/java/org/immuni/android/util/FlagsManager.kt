@@ -13,12 +13,12 @@ object Flags {
 }
 
 fun isFlagSet(flag: String): Boolean {
-    val sharedPrefs = ImmuniApplication.appContext.getSharedPreferences("SLEEP_FLAGS", Context.MODE_PRIVATE)
+    val sharedPrefs = ImmuniApplication.appContext.getSharedPreferences("IMMUNI_FLAGS", Context.MODE_PRIVATE)
     return sharedPrefs.getBoolean(flag, false)
 }
 
 fun setFlag(flag: String, value: Boolean = true) {
-    val sharedPrefs = ImmuniApplication.appContext.getSharedPreferences("SLEEP_FLAGS", Context.MODE_PRIVATE)
+    val sharedPrefs = ImmuniApplication.appContext.getSharedPreferences("IMMUNI_FLAGS", Context.MODE_PRIVATE)
     sharedPrefs.edit {
             putBoolean(flag, value)
         }
