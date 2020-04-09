@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-class RawJumpItem(
+data class RawJumpItem(
     @field:Json(name = "to") val destination: String,
     @field:Json(name = "condition") val condition: RawCondition
 ) {
@@ -15,7 +15,7 @@ class RawJumpItem(
 
     fun jumpItem(): JumpItem {
         val destination =
-            if (destination == END_OF_SURVEY) EndOfSurveyJumpDestination()
+            if (destination == END_OF_SURVEY) EndOfSurveyJumpDestination
             else QuestionJumpDestination(destination)
 
         return JumpItem(

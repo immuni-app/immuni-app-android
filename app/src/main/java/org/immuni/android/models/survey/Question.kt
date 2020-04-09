@@ -54,27 +54,31 @@ fun Question.humanReadableAnswers(qa: QuestionAnswers): String {
         when (answer) {
             is SimpleAnswer -> {
                 val index = answer.index
-                val str = when(widget) {
+                val str = when (widget) {
                     is MultipleChoicesWidget -> {
                         widget.answers[index]
                     }
                     is RadioWidget -> {
                         widget.answers[index]
                     }
-                    else -> {}
+                    is PickerWidget -> {
+                        error("SimpleAnswer can't have a widget of type PickerWidget")
+                    }
                 }
-                if(builder.isNotEmpty()) builder.append(", ")
+                if (builder.isNotEmpty()) builder.append(", ")
                 builder.append(str)
             }
             is CompositeAnswer -> {
                 val indices = answer.componentIndexes
-                when(widget) {
+                when (widget) {
                     is PickerWidget -> {
-                        for(i in 0 until widget.components.size) {
+                        for (i in widget.components.indices) {
                             builder.append(widget.components[i][indices[i]])
                         }
                     }
-                    else -> {}
+                    else -> {
+                        error("CompositeAnswer can't have a widget of a type other than PickerWidget")
+                    }
                 }
             }
         }

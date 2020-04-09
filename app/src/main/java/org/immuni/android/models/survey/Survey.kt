@@ -2,9 +2,56 @@ package org.immuni.android.models.survey
 
 data class Survey(
     val version: String,
-    val questions: List<Question>,
+    private val questions: List<Question>,
     val triage: Triage
 ) {
+    val questionCount: Int = questions.count()
+
+    fun indexOfQuestion(id: QuestionId) = questions.indexOfFirst { it.id == id }
+
+    fun question(id: QuestionId) = questions.first { it.id == id }
+
+    fun questionAtIndex(index: Int) = questions[index]
+
+    private fun _next(
+        questionId: String?,
+        healthState: UserHealthState,
+        triageProfile: TriageProfileId?,
+        answers: SurveyAnswers,
+        answeredQuestionsElapsedDays: Map<QuestionId, Int>
+    ): SurveyNextDestination {
+        val currentQuestion = questionId?.let { id -> questions.first { it.id == id } }
+        val currentPosition = currentQuestion?.let { questions.indexOf(currentQuestion) } ?: -1
+        val nextQuestions = questions.takeLast(questionCount - currentPosition - 1)
+
+        val jumpDestination = currentQuestion?.jump(
+            healthState = healthState,
+            triageProfile = triageProfile,
+            surveyAnswers = answers
+        )
+
+        return when (jumpDestination) {
+            is QuestionJumpDestination -> {
+                SurveyQuestionDestination(questions.first { it.id == jumpDestination.questionId })
+            }
+            is EndOfSurveyJumpDestination -> {
+                SurveyEndDestination
+            }
+            null -> {
+                nextQuestions.find {
+                    it.shouldBeShown(
+                        answeredQuestionsElapsedDays[it.id],
+                        healthState,
+                        triageProfile,
+                        answers
+                    )
+                }?.let {
+                    SurveyQuestionDestination(it)
+                } ?: SurveyEndDestination
+            }
+        }
+    }
+
     fun triage(
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,
@@ -28,44 +75,32 @@ data class Survey(
         triageProfile: TriageProfileId?,
         answers: SurveyAnswers,
         answeredQuestionsElapsedDays: Map<QuestionId, Int>
-    ): SurveyNextDestination {
-        val currentQuestion = questions.first { it.id == questionId }
-        val currentPosition = questions.indexOf(currentQuestion)
-        val nextQuestions = questions.takeLast(questions.size - currentPosition - 1)
+    ) = _next(
+        questionId = questionId,
+        healthState = healthState,
+        triageProfile = triageProfile,
+        answers = answers,
+        answeredQuestionsElapsedDays = answeredQuestionsElapsedDays
+    )
 
-        val jumpDestination = currentQuestion.jump(
+    fun firstQuestionToShow(
+        healthState: UserHealthState,
+        triageProfile: TriageProfileId?,
+        answeredQuestionsElapsedDays: Map<QuestionId, Int>
+    ): Question {
+        val nextDestination = _next(
+            questionId = null,
             healthState = healthState,
             triageProfile = triageProfile,
-            surveyAnswers = answers
+            answers = mapOf(),
+            answeredQuestionsElapsedDays = answeredQuestionsElapsedDays
         )
-
-        return when (jumpDestination) {
-            is QuestionJumpDestination -> {
-                SurveyQuestionDestination(questions.first { it.id == jumpDestination.questionId })
-            }
-            is EndOfSurveyJumpDestination -> {
-                SurveyEndDestination()
-            }
-            null -> {
-                nextQuestions.find {
-                    it.shouldBeShown(
-                        answeredQuestionsElapsedDays[it.id],
-                        healthState,
-                        triageProfile,
-                        answers
-                    )
-                }?.let {
-                    SurveyQuestionDestination(it)
-                } ?: SurveyEndDestination()
-            }
-        }
+        return (nextDestination as SurveyQuestionDestination).question
     }
-
-    fun question(id: QuestionId) = questions.first { it.id == id }
 }
 
 sealed class SurveyNextDestination
 
 class SurveyQuestionDestination(val question: Question) : SurveyNextDestination()
 
-class SurveyEndDestination : SurveyNextDestination()
+object SurveyEndDestination : SurveyNextDestination()

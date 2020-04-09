@@ -62,22 +62,22 @@ object TrueCondition : Condition()
 
 object FalseCondition : Condition()
 
-class OrCondition(val conditions: List<Condition>) : Condition()
+data class OrCondition(val conditions: List<Condition>) : Condition()
 
-class AndCondition(val conditions: List<Condition>) : Condition()
+data class AndCondition(val conditions: List<Condition>) : Condition()
 
-class NotCondition(val condition: Condition) : Condition()
+data class NotCondition(val condition: Condition) : Condition()
 
-class SimpleCondition(
+data class SimpleCondition(
     val questionId: QuestionId,
     val matchingIndexes: List<AnswerIndex>
 ) : Condition()
 
-class CompositeCondition(
+data class CompositeCondition(
     val questionId: QuestionId,
     val matchingComponentIndexes: List<List<AnswerIndex?>>
 ) : Condition()
 
-class TriageProfileCondition(val matchingProfiles: List<TriageProfileId?>) : Condition()
+data class TriageProfileCondition(val matchingProfiles: List<TriageProfileId?>) : Condition()
 
-class StatesContainCondition(val matchingStates: Set<HealthState>) : Condition()
+data class StatesContainCondition(val matchingStates: Set<HealthState>) : Condition()

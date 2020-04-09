@@ -45,7 +45,7 @@ class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_c
 
     private fun buildWidget(it: Survey) {
         items.clear()
-        val question = it.questions.first { it.id == questionId }
+        val question = it.question(questionId)
         val widget = question.widget as MultipleChoicesWidget
 
         questionText.text = question.title
