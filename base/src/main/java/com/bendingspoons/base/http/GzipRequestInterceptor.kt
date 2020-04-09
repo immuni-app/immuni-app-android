@@ -11,6 +11,7 @@ import okio.buffer
 import java.io.IOException
 
 class GzipRequestInterceptor : Interceptor {
+
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()

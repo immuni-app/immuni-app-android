@@ -19,5 +19,4 @@ interface EditTextDialogInterface {
          */
         fun onClick(dialog: DialogInterface, which: Int, text: String)
     }
-
 }

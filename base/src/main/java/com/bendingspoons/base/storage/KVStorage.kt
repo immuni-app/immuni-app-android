@@ -94,7 +94,6 @@ class KVStorage(
         return load(flag) ?: defValue
     }
 
-    // TODO: to be tested
     inline fun <reified T : Any> liveData(flag: String): LiveData<T> {
         val value = load<T>(flag)
 
