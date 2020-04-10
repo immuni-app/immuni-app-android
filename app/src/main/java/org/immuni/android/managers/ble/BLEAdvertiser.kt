@@ -129,15 +129,14 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         }
     }
 
-    private fun processResult(uuids: List<String>) {
-        Log.d("SCAN RESULT", "### GATT SCAN RESULT id=$id ${uuids.joinToString()}")
+    private fun processResult(txPower: Int, rssi: Int, uuid: String) {
         GlobalScope.launch {
             database.bleContactDao().insert(
-                *uuids.map {
                     BLEContactEntity(
-                        btId = it
+                        btId = uuid,
+                        txPower = txPower,
+                        rssi = rssi
                     )
-                }.toTypedArray()
             )
         }
     }
@@ -166,13 +165,11 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             offset: Int,
             value: ByteArray?
         ) {
-            value.let {
-                val uuid = byteArrayToHex(it!!)
-                if (uuid != null) {
-                    Log.d(gattServerTag, "### RECEIVED UUID FROM GATT: $uuid")
-                    processResult(listOf(uuid))
-                } else {
-                    Log.d(gattServerTag, "### RECEIVED INVALID UUID")
+            value?.let { array ->
+                getPacketData(array)?.let {
+                    val (txPower, rssi, uuid) = it
+                    Log.d(gattServerTag, "### RECEIVED FROM GATT: txPower=$txPower rssi=$rssi uuid=$uuid")
+                    processResult(txPower, rssi, uuid)
                 }
             }
 
@@ -183,5 +180,35 @@ class BLEAdvertiser(val context: Context): KoinComponent {
                     0, null)
             }
         }
+
+        override fun onCharacteristicReadRequest(
+            device: BluetoothDevice?,
+            requestId: Int,
+            offset: Int,
+            characteristic: BluetoothGattCharacteristic?
+        ) {
+
+            val bytesString = btIdsManager.getCurrentBtId()?.id?.replace("-", "") ?: ""
+            val data = Hex.stringToBytes(bytesString)
+
+            bluetoothGattServer?.sendResponse(device,
+                requestId,
+                BluetoothGatt.GATT_SUCCESS,
+                0, data)
+        }
+    }
+
+    fun getPacketData(array: ByteArray): Triple<Int, Int, String>? {
+        array.asList().let {
+            if(it.size < 3) {
+                Log.d(gattServerTag, "### RECEIVED INVALID GATT SERVER WRITE REQUEST")
+                return null
+            }
+            return Triple(
+                it.subList(0, 1)[0].toInt(),
+                it.subList(1, 2)[0].toInt(),
+                byteArrayToHex(it.subList(2, it.size).toByteArray()) ?: "")
+        }
     }
 }
+

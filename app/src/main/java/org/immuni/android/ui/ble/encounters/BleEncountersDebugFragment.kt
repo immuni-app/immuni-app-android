@@ -63,6 +63,11 @@ class BleEncountersDebugFragment : Fragment() {
                 noDevicesText.invisible()
             }
         })
+
+        viewModel.lastEncounter.observe(viewLifecycleOwner, Observer {
+            lastEncounter.text = "Last encounter data: txPower=${it.txPower} rssi=${it.rssi} btId=${it.btId}"
+        })
+
         val btIdsManager: BtIdsManager by inject()
         GlobalScope.launch(Dispatchers.Main) {
             val btid = btIdsManager.getOrFetchActiveBtId()

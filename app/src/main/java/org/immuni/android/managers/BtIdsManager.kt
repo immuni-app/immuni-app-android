@@ -44,7 +44,7 @@ class BtIdsManager(val context: Context) : KoinComponent {
         refresh()
     }
 
-    private suspend fun refresh() = coroutineScope {
+    private suspend fun refresh() {
         var hadSucces = false
         while (!hadSucces) {
             try {
@@ -61,15 +61,10 @@ class BtIdsManager(val context: Context) : KoinComponent {
                 delay(5 * 1000)
             }
         }
-
-        async {
-            scheduleRefresh()
-        }
-        Unit
     }
 
     var isRefreshScheduled = false
-    private suspend fun scheduleRefresh() {
+    suspend fun scheduleRefresh() {
         if(isRefreshScheduled) return
         isRefreshScheduled = true
 

@@ -9,7 +9,7 @@ data class BLEContactEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
     var timestamp: Date = Date(),
-    var signalStrength: Int = 0,
-    var distanceInMeters: Double = 0.0,
+    var txPower: Int = 0,
+    val rssi: Int = 0,
     var btId: String
 )

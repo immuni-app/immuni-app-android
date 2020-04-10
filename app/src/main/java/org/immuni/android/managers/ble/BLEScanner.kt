@@ -69,7 +69,7 @@ class BLEScanner: KoinComponent {
     }
 
     private var lastStoreTs = 0L
-    private fun storeResults(list: List<String>) {
+    private fun storeResults(list: List<BLEContactEntity>) {
         // store data once every X seconds
         // to prevent to much database inserts
         val now = System.currentTimeMillis()
@@ -77,30 +77,30 @@ class BLEScanner: KoinComponent {
         lastStoreTs = now
 
         GlobalScope.launch {
-            database.bleContactDao().insert(
-                *list.map {
-                    BLEContactEntity(
-                        btId = it
-                    )
-                }.toTypedArray()
-            )
+            database.bleContactDao().insert(*list.toTypedArray())
         }
     }
 
     private fun processResults(results: List<ScanResult>) {
 
-        val btIds = mutableListOf<String>()
+        val encounters = mutableListOf<BLEContactEntity>()
         results.forEach { result ->
 
             val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
             val bytesData = result.scanRecord?.serviceData?.get(serviceId)
             val rssi = result.rssi
-            val txPower = result.scanRecord?.txPowerLevel
+            val txPower = result.scanRecord?.txPowerLevel ?: 0
             //val txPower = result.txPower // API 26+
             bytesData?.let { bytes ->
                 val scannedBtId = byteArrayToHex(bytes)
                 scannedBtId?.let { btId ->
-                    btIds.add(btId)
+                    encounters.add(
+                        BLEContactEntity(
+                            btId = btId,
+                            txPower = txPower,
+                            rssi = rssi
+                        )
+                    )
 
                     calculateDistance(Measurement(
                         System.currentTimeMillis(),
@@ -113,8 +113,8 @@ class BLEScanner: KoinComponent {
             }
         }
 
-        Log.d("BLEScanner", "### SCAN RESULT id=$id ${btIds.joinToString()}")
-        storeResults(btIds)
+        Log.d("BLEScanner", "### SCAN RESULT id=$id ${encounters.map { it.btId }.joinToString()}")
+        storeResults(encounters)
     }
 
     inner class MyScanCallback : ScanCallback() {

@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.db.entity.BLEContactEntity
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
@@ -23,11 +24,16 @@ class BleEncountersDebugViewModel : ViewModel(), KoinComponent {
 
     private val encounters = database.bleContactDao().getAllFlow()
     val listModel = MutableLiveData<List<EncountersItem>>()
+    val lastEncounter = MutableLiveData<BLEContactEntity>()
 
     init {
         uiScope.launch {
             encounters
                 .collect {
+                    it.lastOrNull()?.let {
+                        lastEncounter.value = it
+                    }
+
                     val list = withContext(Dispatchers.Default) {
                         it.asSequence().groupingBy { encounter ->
                             val calendar = Calendar.getInstance().apply {

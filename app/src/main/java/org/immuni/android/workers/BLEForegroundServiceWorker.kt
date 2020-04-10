@@ -43,33 +43,40 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
     private val notificationManager =
         context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    override suspend fun doWork(): Result {
+    override suspend fun doWork(): Result = coroutineScope {
         // if the user didn't do the onboarding yet, not run the worker
-        if(!onboarding.isComplete()) return Result.success()
+        if(!onboarding.isComplete()) Result.success()
 
         btIdsManager.setup()
 
-        // cleanup current advertiser/scanner
-        try {
-            currentAdvertiser?.stop()
-        } catch (e: Exception) { e.printStackTrace() }
-        try {
-            currentScanner?.stop()
-        } catch (e: Exception) { e.printStackTrace() }
-
-        setForeground(createForegroundInfo())
-
-        currentAdvertiser = BLEAdvertiser(context).apply {
-            start()
+        async {
+            btIdsManager.scheduleRefresh()
         }
-        currentScanner = BLEScanner().apply {
-            start()
+
+        async {
+            // cleanup current advertiser/scanner
+            try {
+                currentAdvertiser?.stop()
+            } catch (e: Exception) { e.printStackTrace() }
+            try {
+                currentScanner?.stop()
+            } catch (e: Exception) { e.printStackTrace() }
+
+            setForeground(createForegroundInfo())
+
+            currentAdvertiser = BLEAdvertiser(context).apply {
+                start()
+            }
+            currentScanner = BLEScanner().apply {
+                start()
+            }
         }
+
         while(true) {
             delay(5000)
         }
 
-        return Result.success()
+        Result.success()
     }
 
     // Creates an instance of ForegroundInfo which can be used to update the
