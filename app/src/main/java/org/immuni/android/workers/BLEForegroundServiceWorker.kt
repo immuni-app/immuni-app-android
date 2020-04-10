@@ -47,7 +47,7 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
         // if the user didn't do the onboarding yet, not run the worker
         if(!onboarding.isComplete()) Result.success()
 
-        btIdsManager.setup()
+        btIdsManager.setup() // blocking we need the bt_ids
 
         async {
             btIdsManager.scheduleRefresh()
