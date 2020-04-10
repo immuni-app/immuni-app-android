@@ -29,7 +29,7 @@ class BleEncountersDebugViewModel : ViewModel(), KoinComponent {
             encounters
                 .collect {
                     val list = withContext(Dispatchers.Default) {
-                        it.groupingBy { encounter ->
+                        it.asSequence().groupingBy { encounter ->
                             val calendar = Calendar.getInstance().apply {
                                 time = encounter.timestamp
                             }
