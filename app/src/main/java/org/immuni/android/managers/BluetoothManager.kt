@@ -6,13 +6,12 @@ import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkInfo
 import androidx.work.WorkManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.toast
@@ -59,8 +58,26 @@ class BluetoothManager(val context: Context) : KoinComponent {
             return
         }
 
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch (Dispatchers.Default) {
             val workManager = WorkManager.getInstance(appContext)
+
+            // first check if it is already running
+            var restart = true
+            try {
+                withTimeout(5000) {
+                    val infoList = workManager.getWorkInfosByTag(BLEForegroundServiceWorker.TAG)
+                    val infos = infoList.get()
+                    if(infos.any { it.state == WorkInfo.State.RUNNING }) {
+                        Log.d(TAG, "### Skip BLEForegroundServiceWorker restarter, since it is already running.")
+                        restart = false
+                    }
+                }
+            } catch (e: Exception) { }
+
+            if(!restart) return@launch
+
+            Log.d(TAG, "### Restarting BLEForegroundServiceWorker.")
+
             workManager.cancelAllWorkByTag(BLEForegroundServiceWorker.TAG)
 
             // let the previous worker stop before restarting it
@@ -72,6 +89,7 @@ class BluetoothManager(val context: Context) : KoinComponent {
     }
 
     companion object {
+        const val TAG = "BluetoothManager"
         const val REQUEST_ENABLE_BT = 978
     }
 

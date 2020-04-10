@@ -2,10 +2,9 @@ package org.immuni.android.managers
 
 import android.content.Context
 import android.util.Log
-import kotlinx.coroutines.GlobalScope
+import com.bendingspoons.base.utils.retry
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.BtId
 import org.immuni.android.api.oracle.model.BtIds
@@ -45,7 +44,7 @@ class BtIdsManager(val context: Context) : KoinComponent {
         refresh()
     }
 
-    private suspend fun refresh() {
+    private suspend fun refresh() = coroutineScope {
         var hadSucces = false
         while (!hadSucces) {
             try {
@@ -63,10 +62,19 @@ class BtIdsManager(val context: Context) : KoinComponent {
             }
         }
 
-        // schedule a new fetch in 30 minutes (non blocking)
-        GlobalScope.launch {
-            delay(30 * 60 * 1000)
-            refresh()
+        async {
+            scheduleRefresh()
         }
+        Unit
+    }
+
+    var isRefreshScheduled = false
+    private suspend fun scheduleRefresh() {
+        if(isRefreshScheduled) return
+        isRefreshScheduled = true
+
+        delay(30 * 60 * 1000)
+        isRefreshScheduled = false
+        refresh()
     }
 }

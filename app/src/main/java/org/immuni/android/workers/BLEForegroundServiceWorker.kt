@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import org.immuni.android.R
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
@@ -68,6 +68,7 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
         while(true) {
             delay(5000)
         }
+
         return Result.success()
     }
 

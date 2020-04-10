@@ -95,6 +95,7 @@ class BLEScanner: KoinComponent {
             val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
             val bytesData = result.scanRecord?.serviceData?.get(serviceId)
             val rssi = result.rssi
+            val txPower = result.scanRecord?.txPowerLevel
             //val txPower = result.txPower // API 26+
             bytesData?.let { bytes ->
                 val scannedBtId = byteArrayToHex(bytes)
