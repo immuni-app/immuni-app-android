@@ -41,16 +41,15 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         bluetoothGattServer = null
     }
 
-    fun start() {
+    suspend fun start() {
         val adapter = bluetoothManager.adapter()
         if (!adapter.isEnabled) adapter.enable()
 
         advertiser = adapter.bluetoothLeAdvertiser
 
         startServer()
-        GlobalScope.launch {
-            startAdvertising()
-        }
+
+        startAdvertising()
     }
 
     private suspend fun startAdvertising() {
@@ -90,9 +89,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         // stop and start again
         advertiser.stopAdvertising(callback)
 
-        GlobalScope.launch {
-            startAdvertising()
-        }
+        startAdvertising()
     }
 
     inner class MyAdvertiseCallback: AdvertiseCallback() {

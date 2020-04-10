@@ -54,23 +54,27 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
         }
 
         async {
-            // cleanup current advertiser/scanner
-            try {
-                currentAdvertiser?.stop()
-            } catch (e: Exception) { e.printStackTrace() }
+            // cleanup current scanner
             try {
                 currentScanner?.stop()
             } catch (e: Exception) { e.printStackTrace() }
 
-            setForeground(createForegroundInfo())
-
-            currentAdvertiser = BLEAdvertiser(context).apply {
-                start()
-            }
             currentScanner = BLEScanner().apply {
                 start()
             }
         }
+
+        async {
+            // cleanup current advertiser
+            try {
+                currentAdvertiser?.stop()
+            } catch (e: Exception) { e.printStackTrace() }
+            currentAdvertiser = BLEAdvertiser(context).apply {
+                start()
+            }
+        }
+
+        setForeground(createForegroundInfo())
 
         while(true) {
             delay(5000)
