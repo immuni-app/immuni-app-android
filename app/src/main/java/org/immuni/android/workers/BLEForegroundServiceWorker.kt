@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -33,15 +34,12 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
     val btIdsManager: BtIdsManager by inject()
 
     companion object {
-        const val TAG = "BLEForegroundServiceWorker"
+        const val TAG = "BLEForegroundService"
         const val BLE_CHANNLE = "Immuni Servizio Attivo"
         const val notificationId = 121
         var currentAdvertiser: BLEAdvertiser? = null
         var currentScanner: BLEScanner? = null
     }
-
-    private val notificationManager =
-        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     override suspend fun doWork(): Result = coroutineScope {
         // if the user didn't do the onboarding yet, not run the worker
@@ -76,7 +74,8 @@ class BLEForegroundServiceWorker(val context: Context, parameters: WorkerParamet
 
         setForeground(createForegroundInfo())
 
-        while(true) {
+        repeat(Int.MAX_VALUE) {
+            Log.d(TAG, "### foreground service ping $this@BLEForegroundServiceWorker")
             delay(5000)
         }
 

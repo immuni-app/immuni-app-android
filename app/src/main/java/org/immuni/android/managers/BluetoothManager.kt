@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
@@ -58,34 +59,9 @@ class BluetoothManager(val context: Context) : KoinComponent {
             return
         }
 
-        GlobalScope.launch (Dispatchers.Default) {
-            val workManager = WorkManager.getInstance(appContext)
-
-            // first check if it is already running
-            var restart = true
-            try {
-                withTimeout(5000) {
-                    val infoList = workManager.getWorkInfosByTag(BLEForegroundServiceWorker.TAG)
-                    val infos = infoList.get()
-                    if(infos.any { it.state == WorkInfo.State.RUNNING }) {
-                        Log.d(TAG, "### Skip BLEForegroundServiceWorker restarter, since it is already running.")
-                        restart = false
-                    }
-                }
-            } catch (e: Exception) { }
-
-            if(!restart) return@launch
-
-            Log.d(TAG, "### Restarting BLEForegroundServiceWorker.")
-
-            workManager.cancelAllWorkByTag(BLEForegroundServiceWorker.TAG)
-
-            // let the previous worker stop before restarting it
-            delay(2000)
-
-            val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>().addTag(BLEForegroundServiceWorker.TAG)
-            workManager.enqueue(notificationWork.build())
-        }
+        val workManager = WorkManager.getInstance(appContext)
+        val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>()
+        workManager.beginUniqueWork(BLEForegroundServiceWorker.TAG, ExistingWorkPolicy.REPLACE, notificationWork.build()).enqueue()
     }
 
     companion object {
