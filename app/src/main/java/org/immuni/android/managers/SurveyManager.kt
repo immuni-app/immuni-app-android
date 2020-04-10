@@ -101,12 +101,12 @@ class SurveyManager : KoinComponent {
         }
     }
 
-    fun completeSurvey(userId: String, form: FormModel, survey: Survey): HealthProfile {
+    fun completeSurvey(userId: String, form: FormModel, surveyVersion: String): HealthProfile {
         val updatedHealthProfile = HealthProfile(
             userId = userId,
             healthState = form.healthState,
             triageProfileId = form.triageProfile,
-            surveyVersion = survey.version,
+            surveyVersion = surveyVersion,
             surveyDate = form.startDate,
             surveyAnswers = form.surveyAnswers.mapValues {
                 it.value.map { answer ->

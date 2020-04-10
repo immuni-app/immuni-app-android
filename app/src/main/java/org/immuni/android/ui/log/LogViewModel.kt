@@ -133,9 +133,9 @@ class LogViewModel(
             val answeredQuestionsElapsedDays = surveyManager.answeredQuestionsElapsedDays(_user.id)
 
             val currentQuestion = _survey.firstQuestionToShow(
-                    answeredQuestionsElapsedDays = answeredQuestionsElapsedDays,
-                    healthState = lastProfile?.healthState ?: setOf(),
-                    triageProfile = lastProfile?.triageProfileId
+                answeredQuestionsElapsedDays = answeredQuestionsElapsedDays,
+                healthState = lastProfile?.healthState ?: setOf(),
+                triageProfile = lastProfile?.triageProfileId
 
             )
 
@@ -181,7 +181,7 @@ class LogViewModel(
         when (nextDestination) {
             is SurveyQuestionDestination -> {
                 // avoid fast tapping and inconsistent viewpager states
-                if(form.answeredQuestions.last() != nextDestination.question.id) {
+                if (form.answeredQuestions.last() != nextDestination.question.id) {
                     form.advanceTo(nextDestination.question.id)
                     _navigateToQuestion.value = Event(nextDestination.question.id)
                 }
@@ -234,8 +234,11 @@ class LogViewModel(
 
             updateFormModel(form)
 
-            val updatedUserHealthProfile =
-                surveyManager.completeSurvey(userId = userId, form = form, survey = survey)
+            val updatedUserHealthProfile = surveyManager.completeSurvey(
+                userId = userId,
+                form = form,
+                surveyVersion = survey.version
+            )
 
             // Show the DONE page for 2 seconds before proceeding
             delay(2000)
@@ -247,7 +250,7 @@ class LogViewModel(
                 }
             }
 
-            if(triageProfile == null) {
+            if (triageProfile == null) {
                 navigateToNextStep()
             }
         }
