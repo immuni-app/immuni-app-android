@@ -9,6 +9,7 @@ import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
+import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.time.LocalDate
@@ -44,7 +45,7 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters)
         deleteSettings.await()
         deleteDatabase.await()
 
-        Log.d("DeleteUserDataWorker", "### running DeleteUserDataWorker!")
+        log("running DeleteUserDataWorker!")
 
         // Indicate whether the task finished successfully with the Result
         Result.success()

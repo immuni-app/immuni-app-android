@@ -8,6 +8,7 @@ import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.BtId
 import org.immuni.android.api.oracle.model.BtIds
+import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
@@ -55,7 +56,7 @@ class BtIdsManager(val context: Context) : KoinComponent {
                     hadSucces = true
                 }
             } catch (e: Exception) {
-                Log.d(LOG_TAG, "### error fetching ids, trying againg")
+                log("error fetching ids, trying again")
             }
             if (!hadSucces) {
                 delay(5 * 1000)

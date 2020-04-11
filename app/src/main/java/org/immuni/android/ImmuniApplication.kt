@@ -16,7 +16,7 @@ import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.ImmuniNotificationManager
-import org.immuni.android.workers.CheckAppStateWorker
+import org.immuni.android.workers.RestarterWorker
 import org.immuni.android.workers.DeleteUserDataWorker
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
@@ -72,7 +72,7 @@ class ImmuniApplication : Application() {
 
     private fun startWorkers() {
         DeleteUserDataWorker.scheduleWork(appContext)
-        CheckAppStateWorker.scheduleWork(appContext)
+        RestarterWorker.scheduleWork(appContext)
     }
 
     companion object {

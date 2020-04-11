@@ -6,17 +6,13 @@ import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.util.Log
+import android.os.Build
 import androidx.fragment.app.Fragment
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkInfo
-import androidx.work.WorkManager
-import kotlinx.coroutines.*
-import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.toast
-import org.immuni.android.workers.BLEForegroundServiceWorker
+import org.immuni.android.util.log
+import org.immuni.android.workers.Actions
+import org.immuni.android.workers.ImmuniForegroundService
 import org.koin.core.KoinComponent
 
 class BluetoothManager(val context: Context) : KoinComponent {
@@ -59,9 +55,22 @@ class BluetoothManager(val context: Context) : KoinComponent {
             return
         }
 
+        /*
         val workManager = WorkManager.getInstance(appContext)
         val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>()
         workManager.beginUniqueWork(BLEForegroundServiceWorker.TAG, ExistingWorkPolicy.REPLACE, notificationWork.build()).enqueue()
+         */
+
+        Intent(appContext, ImmuniForegroundService::class.java).also {
+            it.action = Actions.START.name
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                log("Starting the service in >=26 Mode")
+                appContext.startForegroundService(it)
+                return
+            }
+            log("Starting the service in < 26 Mode")
+            appContext.startService(it)
+        }
     }
 
     companion object {

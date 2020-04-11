@@ -16,6 +16,7 @@ import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
+import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import kotlin.random.Random
@@ -61,7 +62,7 @@ class BLEScanner: KoinComponent {
     private fun calculateDistance(measurement: Measurement) {
         val list = distanceEstimator.push(measurement)
         list.forEach {
-            Log.d("BLEScanner", "### Distance in meters between ${it.deviceId1} and ${it.deviceId2} = ${it.distance} meters")
+            log("Distance in meters between ${it.deviceId1} and ${it.deviceId2} = ${it.distance} meters")
         }
         /*val now = System.currentTimeMillis()
         storeResults(list.filter { now - it.timestamp < 60*1000 })
@@ -113,7 +114,7 @@ class BLEScanner: KoinComponent {
             }
         }
 
-        Log.d("BLEScanner", "### SCAN RESULT id=$id ${encounters.map { it.btId }.joinToString()}")
+        log("SCAN RESULT id=$id ${encounters.map { it.btId }.joinToString()}")
         storeResults(encounters)
     }
 
@@ -130,7 +131,7 @@ class BLEScanner: KoinComponent {
 
         override fun onScanFailed(errorCode: Int) {
             super.onScanFailed(errorCode)
-            Log.d("BLEScanner", "### onScanFailed id=$id $errorCode")
+            log("onScanFailed id=$id $errorCode")
         }
     }
 }

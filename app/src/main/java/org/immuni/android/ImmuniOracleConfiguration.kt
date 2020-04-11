@@ -8,6 +8,7 @@ import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.OracleConfiguration
 import com.bendingspoons.sesame.Sesame
 import okhttp3.CertificatePinner
+import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -26,7 +27,7 @@ class ImmuniOracleConfiguration(val context: Context) : OracleConfiguration, Koi
 
     override fun showForceUpdate(minVersionCode: Int) {
         val context = ImmuniApplication.appContext
-        Log.d("ForceUpdate", "ForceUpdate! Min version is $minVersionCode")
+        log("ForceUpdate! Min version is $minVersionCode")
 
         val intent = Intent(context, ForceUpdateActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK

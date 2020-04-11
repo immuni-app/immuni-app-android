@@ -19,6 +19,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.BtIdsManager
+import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
@@ -95,12 +96,12 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     inner class MyAdvertiseCallback: AdvertiseCallback() {
         override fun onStartFailure(errorCode: Int) {
             super.onStartFailure(errorCode)
-            Log.d("BLEAdvertiser", "### FAILURE START BLEAdvertiser id=$id error = $errorCode")
+            log("Failure starting BLEAdvertiser id=$id error = $errorCode")
         }
 
         override fun onStartSuccess(settingsInEffect: AdvertiseSettings?) {
             super.onStartSuccess(settingsInEffect)
-            Log.d("BLEAdvertiser", "### SUCCESS START BLEAdvertiser id=$id")
+            log("### Success starting BLEAdvertiser id=$id")
         }
     }
 
@@ -120,9 +121,9 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         val result = bluetoothGattServer?.addService(service)
 
         if (result == null || result == false) {
-            Log.d(gattServerTag, "### Unable to create GATT server")
+            log("Unable to create GATT server")
         } else {
-            Log.d(gattServerTag, "### GATT service added")
+            log("GATT service added")
         }
     }
 
@@ -142,15 +143,15 @@ class BLEAdvertiser(val context: Context): KoinComponent {
 
         override fun onConnectionStateChange(device: BluetoothDevice, status: Int, newState: Int) {
             if (newState == BluetoothProfile.STATE_CONNECTED) {
-                Log.d(gattServerTag, "### BluetoothDevice CONNECTED: $device")
+                log("BluetoothDevice CONNECTED: $device")
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                Log.d(gattServerTag, "### BluetoothDevice DISCONNECTED: $device")
+                log("BluetoothDevice DISCONNECTED: $device")
             }
         }
 
         override fun onServiceAdded(status: Int, service: BluetoothGattService?) {
             super.onServiceAdded(status, service)
-            Log.d(gattServerTag, "### Service added ${service?.uuid}, ${service?.characteristics?.first()?.uuid}")
+            log("Service added ${service?.uuid}, ${service?.characteristics?.first()?.uuid}")
         }
 
         override fun onCharacteristicWriteRequest(
@@ -165,7 +166,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             value?.let { array ->
                 getPacketData(array)?.let {
                     val (txPower, rssi, uuid) = it
-                    Log.d(gattServerTag, "### RECEIVED FROM GATT: txPower=$txPower rssi=$rssi uuid=$uuid")
+                    log("RECEIVED FROM GATT: txPower=$txPower rssi=$rssi uuid=$uuid")
                     processResult(txPower, rssi, uuid)
                 }
             }
@@ -198,7 +199,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     fun getPacketData(array: ByteArray): Triple<Int, Int, String>? {
         array.asList().let {
             if(it.size < 3) {
-                Log.d(gattServerTag, "### RECEIVED INVALID GATT SERVER WRITE REQUEST")
+                log("RECEIVED INVALID GATT SERVER WRITE REQUEST")
                 return null
             }
             return Triple(
