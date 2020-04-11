@@ -12,9 +12,13 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.*
 import org.immuni.android.R
+import org.immuni.android.managers.AppNotificationManager
+import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
+import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.ble.BLEAdvertiser
 import org.immuni.android.managers.ble.BLEScanner
+import org.immuni.android.toast
 import org.immuni.android.ui.home.HomeActivity
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
@@ -28,7 +32,6 @@ enum class Actions {
 class ImmuniForegroundService : Service(), KoinComponent {
 
     companion object {
-        const val BLE_CHANNLE = "Immuni Servizio Attivo"
         const val FOREGROUND_NOTIFICATION_ID = 21032020
         var currentAdvertiser: BLEAdvertiser? = null
         var currentScanner: BLEScanner? = null
@@ -36,6 +39,9 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     val serviceScope = CoroutineScope(SupervisorJob())
     val btIdsManager: BtIdsManager by inject()
+    val permissionsManager: PermissionsManager by inject()
+    val bluetoothManager: BluetoothManager by inject()
+    val appNotificationManager: AppNotificationManager by inject()
 
     private var wakeLock: PowerManager.WakeLock? = null
     private var isServiceStarted = false
@@ -68,7 +74,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
     override fun onCreate() {
         super.onCreate()
         log("The Immuni service has been created")
-        val notification = createNotification()
+        val notification = appNotificationManager.createForegroundServiceNotification()
         startForeground(FOREGROUND_NOTIFICATION_ID, notification)
     }
 
@@ -100,7 +106,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
         wakeLock =
             (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
                 newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ImmuniForegroundService::lock").apply {
-                    acquire()
+                    acquire(Long.MAX_VALUE)
                 }
             }
 
@@ -161,63 +167,17 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
         repeat(Int.MAX_VALUE) {
             //log("foreground service ping $this@BLEForegroundServiceWorker")
-            delay(5000)
-        }
-    }
 
-    private fun createNotification():  Notification{
-        val title = "Immuni"
-        val message = "Protezione di Immuni attiva!"
+            if(!PermissionsManager.hasAllPermissions(applicationContext) ||
+                !PermissionsManager.isIgnoringBatteryOptimizations(applicationContext) ||
+                !PermissionsManager.globalLocalisationEnabled(applicationContext) ||
+                !bluetoothManager.isBluetoothEnabled()) {
+                withContext(Dispatchers.Main) {
+                    appNotificationManager.triggerWarningNotification()
+                }
+            }
 
-        // This PendingIntent can be used to cancel the worker
-        // val intent = WorkManager.getInstance(applicationContext)
-        //.createCancelPendingIntent(getId())
-
-        // Create a Notification channel if necessary
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            createChannel()
-        }
-
-        val notificationIntent = Intent(applicationContext, HomeActivity::class.java).apply {
-            action = Intent.ACTION_MAIN
-            addCategory(Intent.CATEGORY_LAUNCHER)
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        }
-
-        val pendingIntent = PendingIntent.getActivity(
-            applicationContext,
-            0, notificationIntent, 0
-        )
-
-        val notification = NotificationCompat.Builder(applicationContext, BLE_CHANNLE)
-            .setContentTitle(title)
-            .setContentIntent(pendingIntent)
-            .setTicker(title)
-            .setContentText(message)
-            .setSmallIcon(R.drawable.ic_notification_app)
-            .setColor(ContextCompat.getColor(applicationContext, R.color.colorPrimary))
-            .setOngoing(true)
-            // Add the cancel action to the notification which can
-            // be used to cancel the worker
-            //.addAction(android.R.drawable.ic_delete, cancel, intent)
-            .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
-            .build()
-
-        return notification
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(
-                BLE_CHANNLE,
-                BLE_CHANNLE, importance)
-            channel.setSound(null, null)
-            channel.setShowBadge(false)
-            val androidNotificationManager = NotificationManagerCompat.from(applicationContext)
-            androidNotificationManager.createNotificationChannel(channel)
+            delay(30 * 1000)
         }
     }
 }

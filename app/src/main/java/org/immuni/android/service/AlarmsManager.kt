@@ -26,15 +26,6 @@ class AlarmsManager {
                 PendingIntent.getBroadcast(appContext, 2010020, intent, 0)
             }
 
-            // start in 20 seconds and every 5 minutes afterward
-            /*
-            alarmManager?.setRepeating(
-                AlarmManager.RTC_WAKEUP,
-                SystemClock.elapsedRealtime() + START_DELAY * 1000,
-                1000 * 60 * INTERVAL,
-                alarmIntent
-            )*/
-
             // cancel existing alarms
 
             if (alarmIntent != null && alarmManager != null) {

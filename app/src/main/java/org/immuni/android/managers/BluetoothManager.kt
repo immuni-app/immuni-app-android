@@ -57,12 +57,6 @@ class BluetoothManager(val context: Context) : KoinComponent {
             return
         }
 
-        /*
-        val workManager = WorkManager.getInstance(appContext)
-        val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>()
-        workManager.beginUniqueWork(BLEForegroundServiceWorker.TAG, ExistingWorkPolicy.REPLACE, notificationWork.build()).enqueue()
-         */
-
         val onboarding: Onboarding by inject()
         if(!onboarding.isComplete()) return
 

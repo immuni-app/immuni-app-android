@@ -16,7 +16,7 @@ import com.bendingspoons.theirs.Theirs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.immuni.android.managers.ImmuniNotificationManager
+import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.ui.ble.distance.BleDistanceDebugActivity
 import org.immuni.android.ui.ble.encounters.BleEncountersDebugActivity
@@ -33,7 +33,7 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
     private val database: ImmuniDatabase by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val theirs: Theirs by inject()
-    private val notificationManager: ImmuniNotificationManager by inject()
+    private val notificationManager: SurveyNotificationManager by inject()
     private val btIdsManager: BtIdsManager by inject()
     private val onboarding: Onboarding by inject()
     private val setup: Setup by inject()

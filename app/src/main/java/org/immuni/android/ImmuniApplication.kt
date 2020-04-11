@@ -16,8 +16,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
-import org.immuni.android.managers.ImmuniNotificationManager
-import org.immuni.android.service.AlarmsManager
+import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.service.RestarterReceiver
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
@@ -30,7 +29,7 @@ class ImmuniApplication : Application() {
     private lateinit var oracle: Oracle<ImmuniSettings, ImmuniMe>
     private lateinit var pico: Pico
     private lateinit var theirs: Theirs
-    private lateinit var notificationManager: ImmuniNotificationManager
+    private lateinit var surveyNotificationManager: SurveyNotificationManager
 
     override fun onCreate() {
         super.onCreate()
@@ -64,7 +63,7 @@ class ImmuniApplication : Application() {
         oracle = get()
         pico = get()
         theirs = get()
-        notificationManager = get()
+        surveyNotificationManager = get()
 
         pico.setup()
 

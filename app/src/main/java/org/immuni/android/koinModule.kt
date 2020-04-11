@@ -18,7 +18,7 @@ import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.api.oracle.repository.OracleRepository
 import org.immuni.android.api.oracle.repository.OracleRepositoryImpl
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.managers.ImmuniNotificationManager
+import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
@@ -137,7 +137,12 @@ val appModule = module {
 
     // single instance of AscoltoNotificationManager
     single {
-        ImmuniNotificationManager(androidContext())
+        SurveyNotificationManager(androidContext())
+    }
+
+    // single instance of NotificationManager
+    single {
+        AppNotificationManager(androidContext())
     }
 
     single {
