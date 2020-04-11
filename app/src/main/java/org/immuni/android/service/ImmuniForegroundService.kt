@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import kotlinx.coroutines.*
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.managers.AppNotificationManager
 import org.immuni.android.managers.BluetoothManager
@@ -136,54 +137,62 @@ class ImmuniForegroundService : Service(), KoinComponent {
         isServiceStarted = false
     }
 
-    private suspend fun doWork() = coroutineScope {
-
-        btIdsManager.setup() // blocking we need the bt_ids
-
-        async {
-            btIdsManager.scheduleRefresh()
-        }
-
-        async {
+    private suspend fun startBleLoop() = coroutineScope {
+        val scanner = async {
             // cleanup current scanner
             try {
                 currentScanner?.stop()
             } catch (e: java.lang.Exception) { e.printStackTrace() }
 
             currentScanner = BLEScanner().apply {
-                while(!start()) {
-                    delay(5000)
-                }
+                start()
             }
         }
 
-        async {
+        val advertiser = async {
             // cleanup current advertiser
             try {
                 currentAdvertiser?.stop()
             } catch (e: java.lang.Exception) { e.printStackTrace() }
             currentAdvertiser = BLEAdvertiser(applicationContext).apply {
-                while(!start()) {
-                    delay(5000)
-                }
+                start()
+            }
+        }
+    }
+
+    private suspend fun doWork() = coroutineScope {
+
+        btIdsManager.setup() // blocking we need the bt_ids
+
+        val refreshBtIds = async {
+            btIdsManager.scheduleRefresh()
+        }
+
+        val ble = async {
+            repeat(Int.MAX_VALUE) {
+                async { startBleLoop() }
+                delay(5 * 1000)
             }
         }
 
-        repeat(Int.MAX_VALUE) {
-            //log("foreground service ping $this@BLEForegroundServiceWorker")
+        val polling = async {
+            repeat(Int.MAX_VALUE) {
+                //log("foreground service ping $this@BLEForegroundServiceWorker")
 
-            if(!PermissionsManager.hasAllPermissions(applicationContext) ||
-                !PermissionsManager.isIgnoringBatteryOptimizations(applicationContext) ||
-                !PermissionsManager.globalLocalisationEnabled(applicationContext) ||
-                !bluetoothManager.isBluetoothEnabled()) {
-                withContext(Dispatchers.Main) {
-                    appNotificationManager.triggerWarningNotification()
+                if(!PermissionsManager.hasAllPermissions(applicationContext) ||
+                    !PermissionsManager.isIgnoringBatteryOptimizations(applicationContext) ||
+                    !PermissionsManager.globalLocalisationEnabled(applicationContext) ||
+                    !bluetoothManager.isBluetoothEnabled() ||
+                    !PushNotificationUtils.areNotificationsEnabled(ImmuniApplication.appContext)) {
+                    withContext(Dispatchers.Main) {
+                        appNotificationManager.triggerWarningNotification()
+                    }
+                } else {
+                    appNotificationManager.removeWarningNotification()
                 }
-            } else {
-                appNotificationManager.removeWarningNotification()
-            }
 
-            delay(5 * 1000)
+                delay(5 * 1000)
+            }
         }
     }
 }
