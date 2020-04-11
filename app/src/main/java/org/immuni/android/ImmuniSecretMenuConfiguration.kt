@@ -83,6 +83,7 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
                     Toast.makeText(context, "# Devices found: ${list.joinToString(separator = ", ")}", Toast.LENGTH_LONG).show()
                 }
             }){},
+            /*
             object : SecretMenuItem("ℹ️ BLE distance debug", { context, config ->
                 val context = ImmuniApplication.appContext
                 val intent = Intent(context, BleDistanceDebugActivity::class.java).apply {
@@ -90,6 +91,7 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
                 }
                 context.startActivity(intent)
             }){},
+             */
             object : SecretMenuItem("ℹ️ BLE encounters debug", { context, config ->
                 val context = ImmuniApplication.appContext
                 val intent = Intent(context, BleEncountersDebugActivity::class.java).apply {

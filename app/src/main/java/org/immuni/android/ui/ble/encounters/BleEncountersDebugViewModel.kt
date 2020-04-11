@@ -54,6 +54,8 @@ class BleEncountersDebugViewModel : ViewModel(), KoinComponent {
                         }
                         .eachCount().map { item ->
                             EncountersItem(item.key, item.value)
+                        }.sortedBy {
+                            it.timeWindows
                         }
                     }
                     listModel.value = list

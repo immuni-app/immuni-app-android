@@ -1,8 +1,11 @@
 package org.immuni.android.service
 
 import android.app.*
+import android.bluetooth.BluetoothAdapter
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
@@ -47,6 +50,29 @@ class ImmuniForegroundService : Service(), KoinComponent {
     private var wakeLock: PowerManager.WakeLock? = null
     private var isServiceStarted = false
 
+    private var bleJob: Job? = null
+
+    private val mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent) {
+            val action = intent.action
+            if (action == BluetoothAdapter.ACTION_STATE_CHANGED) {
+                val state = intent.getIntExtra(
+                    BluetoothAdapter.EXTRA_STATE,
+                    BluetoothAdapter.ERROR
+                )
+                if(bluetoothManager.isBluetoothEnabled()) {
+                    serviceScope.launch {
+                        bleJob?.cancel()
+                        delay(2000)
+                        bleJob = launch {
+                            startBleLoop()
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     override fun onBind(intent: Intent): IBinder? {
         log("Some component want to bind with the service")
         // We don't provide binding, so return null
@@ -77,6 +103,9 @@ class ImmuniForegroundService : Service(), KoinComponent {
         log("The Immuni service has been created")
         val notification = appNotificationManager.createForegroundServiceNotification()
         startForeground(FOREGROUND_NOTIFICATION_ID, notification)
+
+        val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
+        applicationContext.registerReceiver(mReceiver, filter)
     }
 
     override fun onDestroy() {
@@ -141,7 +170,10 @@ class ImmuniForegroundService : Service(), KoinComponent {
         val scanner = async {
             // cleanup current scanner
             try {
-                currentScanner?.stop()
+                currentScanner?.let {
+                    it.stop()
+                    delay(3000)
+                }
             } catch (e: java.lang.Exception) { e.printStackTrace() }
 
             currentScanner = BLEScanner().apply {
@@ -152,7 +184,10 @@ class ImmuniForegroundService : Service(), KoinComponent {
         val advertiser = async {
             // cleanup current advertiser
             try {
-                currentAdvertiser?.stop()
+                currentAdvertiser?.let {
+                    it.stop()
+                    delay(3000)
+                }
             } catch (e: java.lang.Exception) { e.printStackTrace() }
             currentAdvertiser = BLEAdvertiser(applicationContext).apply {
                 start()
@@ -169,11 +204,21 @@ class ImmuniForegroundService : Service(), KoinComponent {
         }
 
         val ble = async {
-            repeat(Int.MAX_VALUE) {
-                async { startBleLoop() }
-                delay(5 * 1000)
+            bleJob = launch {
+                startBleLoop()
             }
         }
+
+        /*
+        val bleLoop = async {
+            repeat(Int.MAX_VALUE) {
+                val ble = async { startBleLoop() }
+                delay(30 * 1000)
+                ble.cancel()
+                delay(2000)
+            }
+        }
+         */
 
         val polling = async {
             repeat(Int.MAX_VALUE) {

@@ -53,7 +53,7 @@ class BLEScanner: KoinComponent {
             filter,
             ScanSettings.Builder().apply {
                 // with report delay the distance estimator doesn't work
-                //setReportDelay(3000)
+                setReportDelay(5*1000) // 5 sec
                 setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
             }.build(),
             myScanCallback
@@ -62,6 +62,7 @@ class BLEScanner: KoinComponent {
         return true
     }
 
+    /*
     private fun calculateDistance(measurement: Measurement) {
         val list = distanceEstimator.push(measurement)
         list.forEach {
@@ -72,16 +73,22 @@ class BLEScanner: KoinComponent {
          */
     }
 
-    private var lastStoreTs = 0L
+     */
+
     private fun storeResults(list: List<BLEContactEntity>) {
-        // store data once every X seconds
-        // to prevent to much database inserts
-        val now = System.currentTimeMillis()
-        if(now - lastStoreTs < 5000) return
-        lastStoreTs = now
+
+        // if in the same scan result we have the same ids, compute the avarage rssi
+        val distinctAvaragedIds = list.groupingBy { it.btId }.reduce { id, avarage, contact ->
+            BLEContactEntity(
+                btId = contact.btId,
+                txPower = contact.txPower,
+                timestamp = contact.timestamp,
+                rssi = (contact.rssi + avarage.rssi) / 2
+            )
+        }
 
         GlobalScope.launch {
-            database.bleContactDao().insert(*list.toTypedArray())
+            database.bleContactDao().insert(*distinctAvaragedIds.values.toTypedArray())
         }
     }
 
@@ -106,6 +113,7 @@ class BLEScanner: KoinComponent {
                         )
                     )
 
+                    /*
                     calculateDistance(Measurement(
                         System.currentTimeMillis(),
                         rssi.toFloat(),
@@ -113,6 +121,7 @@ class BLEScanner: KoinComponent {
                         btId,
                         ModelProvider.MOBILE_DEVICE.DEFAULT
                     ))
+                     */
                 }
             }
         }
