@@ -27,17 +27,18 @@ class BLEScanner: KoinComponent {
     private val btIdsManager: BtIdsManager by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val id = Random.nextInt(0, 1000)
-    private lateinit var bluetoothLeScanner: BluetoothLeScanner
+    private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var myScanCallback = MyScanCallback()
 
     // Distance estimator
     private val distanceEstimator: Estimator by inject()
 
     fun stop() {
-        bluetoothLeScanner.stopScan(myScanCallback)
+        bluetoothLeScanner?.stopScan(myScanCallback)
     }
 
-    fun start() {
+    fun start(): Boolean {
+        if(!bluetoothManager.isBluetoothEnabled()) return false
         bluetoothLeScanner = bluetoothManager.adapter().bluetoothLeScanner
         val filter = listOf(
             ScanFilter.Builder().apply {
@@ -48,7 +49,7 @@ class BLEScanner: KoinComponent {
                 setServiceUuid(parcelUuid, parcelUuidMask)
             }.build()
         )
-        bluetoothLeScanner.startScan(
+        bluetoothLeScanner?.startScan(
             filter,
             ScanSettings.Builder().apply {
                 // with report delay the distance estimator doesn't work
@@ -57,6 +58,8 @@ class BLEScanner: KoinComponent {
             }.build(),
             myScanCallback
         )
+
+        return true
     }
 
     private fun calculateDistance(measurement: Measurement) {

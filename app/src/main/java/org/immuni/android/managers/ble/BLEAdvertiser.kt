@@ -42,15 +42,18 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         bluetoothGattServer = null
     }
 
-    suspend fun start() {
+    suspend fun start(): Boolean {
         val adapter = bluetoothManager.adapter()
         if (!adapter.isEnabled) adapter.enable()
 
+        if(!bluetoothManager.isBluetoothEnabled()) return false
         advertiser = adapter.bluetoothLeAdvertiser
 
         startServer()
 
         startAdvertising()
+
+        return true
     }
 
     private suspend fun startAdvertising() {

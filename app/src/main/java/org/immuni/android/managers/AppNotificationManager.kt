@@ -23,6 +23,8 @@ class AppNotificationManager(val context: Context): KoinComponent {
 
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
 
+    val WARNING_NOTIFICATION_ID = 200001
+
     // Create the NotificationChannel, but only on API 26+ because
     // the NotificationChannel class is new and not in the support library
 
@@ -40,6 +42,11 @@ class AppNotificationManager(val context: Context): KoinComponent {
             val androidNotificationManager = NotificationManagerCompat.from(context)
             androidNotificationManager.createNotificationChannel(channel)
         }
+    }
+
+    fun removeWarningNotification() {
+        val androidNotificationManager = NotificationManagerCompat.from(context)
+        androidNotificationManager.cancel(WARNING_NOTIFICATION_ID)
     }
 
     fun triggerWarningNotification() {
@@ -68,7 +75,7 @@ class AppNotificationManager(val context: Context): KoinComponent {
             .setContentIntent(pendingIntent)
 
         val androidNotificationManager = NotificationManagerCompat.from(context)
-        androidNotificationManager.notify(4546, builder.build())
+        androidNotificationManager.notify(WARNING_NOTIFICATION_ID, builder.build())
     }
 
     fun createForegroundServiceNotification(): Notification {

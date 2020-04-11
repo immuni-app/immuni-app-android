@@ -151,7 +151,9 @@ class ImmuniForegroundService : Service(), KoinComponent {
             } catch (e: java.lang.Exception) { e.printStackTrace() }
 
             currentScanner = BLEScanner().apply {
-                start()
+                while(!start()) {
+                    delay(5000)
+                }
             }
         }
 
@@ -161,7 +163,9 @@ class ImmuniForegroundService : Service(), KoinComponent {
                 currentAdvertiser?.stop()
             } catch (e: java.lang.Exception) { e.printStackTrace() }
             currentAdvertiser = BLEAdvertiser(applicationContext).apply {
-                start()
+                while(!start()) {
+                    delay(5000)
+                }
             }
         }
 
@@ -175,9 +179,11 @@ class ImmuniForegroundService : Service(), KoinComponent {
                 withContext(Dispatchers.Main) {
                     appNotificationManager.triggerWarningNotification()
                 }
+            } else {
+                appNotificationManager.removeWarningNotification()
             }
 
-            delay(30 * 1000)
+            delay(5 * 1000)
         }
     }
 }
