@@ -1,7 +1,6 @@
-package org.immuni.android.workers
+package org.immuni.android.service
 
 import android.content.Context
-import android.util.Log
 import androidx.work.*
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
@@ -12,8 +11,6 @@ import org.immuni.android.managers.SurveyManager
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -67,7 +64,7 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters)
                     .build()
 
             WorkManager.getInstance(appContext)
-                .enqueueUniquePeriodicWork(WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, saveRequest)
+                .enqueueUniquePeriodicWork(WORKER_TAG, ExistingPeriodicWorkPolicy.KEEP, saveRequest)
         }
     }
 }

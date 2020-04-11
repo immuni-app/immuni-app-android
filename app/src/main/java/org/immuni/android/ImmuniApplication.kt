@@ -2,6 +2,7 @@ package org.immuni.android
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -16,8 +17,8 @@ import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.ImmuniNotificationManager
-import org.immuni.android.workers.RestarterWorker
-import org.immuni.android.workers.DeleteUserDataWorker
+import org.immuni.android.service.AlarmsManager
+import org.immuni.android.service.RestarterReceiver
 import org.koin.android.ext.android.get
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -71,8 +72,8 @@ class ImmuniApplication : Application() {
     }
 
     private fun startWorkers() {
-        DeleteUserDataWorker.scheduleWork(appContext)
-        RestarterWorker.scheduleWork(appContext)
+        val alarmIntent = Intent(appContext, RestarterReceiver::class.java)
+        applicationContext.sendBroadcast(alarmIntent)
     }
 
     companion object {

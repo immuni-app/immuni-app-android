@@ -10,10 +10,12 @@ import android.os.Build
 import androidx.fragment.app.Fragment
 import org.immuni.android.R
 import org.immuni.android.toast
+import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.util.log
-import org.immuni.android.workers.Actions
-import org.immuni.android.workers.ImmuniForegroundService
+import org.immuni.android.service.Actions
+import org.immuni.android.service.ImmuniForegroundService
 import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 class BluetoothManager(val context: Context) : KoinComponent {
     private val bluetoothAdapter: BluetoothAdapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -60,6 +62,9 @@ class BluetoothManager(val context: Context) : KoinComponent {
         val notificationWork = OneTimeWorkRequestBuilder<BLEForegroundServiceWorker>()
         workManager.beginUniqueWork(BLEForegroundServiceWorker.TAG, ExistingWorkPolicy.REPLACE, notificationWork.build()).enqueue()
          */
+
+        val onboarding: Onboarding by inject()
+        if(!onboarding.isComplete()) return
 
         Intent(appContext, ImmuniForegroundService::class.java).also {
             it.action = Actions.START.name

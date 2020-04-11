@@ -1,4 +1,4 @@
-package org.immuni.android.workers
+package org.immuni.android.service
 
 import android.app.*
 import android.content.Context
@@ -6,20 +6,16 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import androidx.work.ListenableWorker
 import kotlinx.coroutines.*
 import org.immuni.android.R
-import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.managers.ble.BLEAdvertiser
 import org.immuni.android.managers.ble.BLEScanner
 import org.immuni.android.ui.home.HomeActivity
-import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -32,7 +28,6 @@ enum class Actions {
 class ImmuniForegroundService : Service(), KoinComponent {
 
     companion object {
-        const val TAG = "ImmuniForegroundService"
         const val BLE_CHANNLE = "Immuni Servizio Attivo"
         const val FOREGROUND_NOTIFICATION_ID = 21032020
         var currentAdvertiser: BLEAdvertiser? = null
@@ -40,9 +35,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
     }
 
     val serviceScope = CoroutineScope(SupervisorJob())
-
-    val onboarding: Onboarding by inject()
-    val bluetoothManager: BluetoothManager by inject()
     val btIdsManager: BtIdsManager by inject()
 
     private var wakeLock: PowerManager.WakeLock? = null
@@ -88,6 +80,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
+        //stopService()
     }
 
     override fun onTrimMemory(level: Int) {
@@ -139,9 +132,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     private suspend fun doWork() = coroutineScope {
 
-        // if the user didn't do the onboarding yet, not run the worker
-        if(!onboarding.isComplete()) ListenableWorker.Result.success()
-
         btIdsManager.setup() // blocking we need the bt_ids
 
         async {
@@ -170,7 +160,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
         }
 
         repeat(Int.MAX_VALUE) {
-            log("foreground service ping $this@BLEForegroundServiceWorker")
+            //log("foreground service ping $this@BLEForegroundServiceWorker")
             delay(5000)
         }
     }

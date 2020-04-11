@@ -43,13 +43,19 @@
             android:resource="@color/colorAccent" />
 
         <service
-            android:name=".workers.ImmuniForegroundService"
+            android:name=".service.ImmuniForegroundService"
             android:enabled="true"
             android:exported="false">
         </service>
 
         <receiver
-            android:name=".receivers.BootReceiver"
+            android:name=".service.RestarterReceiver"
+            android:enabled="true"
+            android:exported="false">
+        </receiver>
+
+        <receiver
+            android:name=".service.RebootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
