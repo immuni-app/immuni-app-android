@@ -17,6 +17,7 @@ import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.api.oracle.repository.OracleRepository
 import org.immuni.android.api.oracle.repository.OracleRepositoryImpl
+import org.immuni.android.db.DATABASE_NAME
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.managers.BluetoothManager
@@ -56,7 +57,7 @@ val appModule = module {
         Room.databaseBuilder(
             androidContext(),
             ImmuniDatabase::class.java,
-            "immuni_database"
+            DATABASE_NAME
         )
             .fallbackToDestructiveMigration()
             .openHelperFactory(factory)

@@ -34,6 +34,11 @@ class Pico(
     private val userConsent = UserConsent(context, config)
 
     init {
+        // TODO remove
+        GlobalScope.launch {
+            saveUserConsent(UserConsentLevel.ACCEPTED)
+        }
+
         store = PicoStoreImpl(picoDatabase(context), userConsent)
         dispatcher = PicoDispatcher(api)
         eventFlow = PicoFlow(store, userConsent)

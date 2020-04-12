@@ -1,8 +1,6 @@
 package org.immuni.android
 
 import android.content.Context
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.oracle.api.model.OracleMe
@@ -10,14 +8,19 @@ import com.bendingspoons.oracle.api.model.OracleSettings
 import com.bendingspoons.pico.PicoConfiguration
 import com.bendingspoons.sesame.Sesame
 import okhttp3.CertificatePinner
-import org.immuni.android.picoMetrics.PushPermissionLevel
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.picoMetrics.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+
 
 class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComponent {
 
     val concierge: ConciergeManager by inject()
     val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    val database: ImmuniDatabase by inject()
 
     override fun endpoint(): String {
         return context.getString(R.string.pico_base_url)
@@ -57,6 +60,13 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
 
     override val userInfo: Map<String, Any>
         get() = mapOf(
-            PushPermissionLevel.instance().userInfo()
+            PicoUserInfos.getPushPermissionLevel(),
+            //BluetoothManager.activeUserInfo(),
+            //PermissionsManager.geolocationPermissionsUserInfo(),
+            //PermissionsManager.geolocationActiveUserInfo(),
+            //PermissionsManager.batteryOptimizationUserInfo(),
+            PicoUserInfos.getLastKnownLocation(context),
+            PicoUserInfos.getBatteryLevel(context),
+            PicoUserInfos.getDatabaseSize(context)
         )
 }

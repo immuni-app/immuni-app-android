@@ -68,7 +68,7 @@ class PicoRetrofit(config: PicoConfiguration) {
         val builder = OkHttpClient.Builder()
             .hostnameVerifier(HostnameVerifier { hostname, session -> true })
             .addInterceptor(exceptionsInterceptor)
-            .addInterceptor(gzipInterceptor)
+            //.addInterceptor(gzipInterceptor)
             .addInterceptor(sesame.interceptor)
             .addInterceptor(headersInterceptor)
             .addInterceptor(loggingInterceptor)

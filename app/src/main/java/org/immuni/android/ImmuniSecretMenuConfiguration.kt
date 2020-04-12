@@ -73,6 +73,12 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
             }){},
             object : SecretMenuItem("ℹ️ Distinct bt_id count", { context, config ->
                 GlobalScope.launch(Dispatchers.Main) {
+                    val value = database.bleContactDao().getAllDistinctBtIdsCount()
+                    Toast.makeText(context, "# Devices found: $value", Toast.LENGTH_LONG).show()
+                }
+            }){},
+            object : SecretMenuItem("ℹ️ All bt_id count", { context, config ->
+                GlobalScope.launch(Dispatchers.Main) {
                     val value = database.bleContactDao().getAllBtIdsCount()
                     Toast.makeText(context, "# Devices found: $value", Toast.LENGTH_LONG).show()
                 }

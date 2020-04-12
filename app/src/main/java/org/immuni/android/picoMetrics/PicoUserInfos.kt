@@ -3,9 +3,17 @@ package org.immuni.android.picoMetrics
 import PushNotificationState
 import PushNotificationUtils
 import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
+import android.os.BatteryManager
 import android.os.Build
+import androidx.core.app.ActivityCompat
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import org.immuni.android.ImmuniApplication
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.PermissionsManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -91,3 +99,54 @@ enum class PushPermissionLevel {
         }
     }
 }
+
+class PicoUserInfos {
+    companion object {
+        fun getDatabaseSize(context: Context): Pair<String, Any> {
+            return "bluetooth_database_size" to ImmuniDatabase.databaseSize(context)
+        }
+
+        fun getBatteryLevel(context: Context): Pair<String, Any> {
+            val bm = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+            return "battery_level" to bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
+        }
+
+        fun getLastKnownLocation(context: Context): Pair<String, Any> {
+            var value: CurrentLocation = CurrentLocation(0.0, 0.0, 0.0)
+
+            val locationManager =
+                context.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
+
+            if (locationManager == null || ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                value = CurrentLocation(0.0, 0.0, 0.0)
+            } else {
+                val location: Location? = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                if(location != null) {
+                    value = CurrentLocation(
+                        location.latitude,
+                        location.longitude,
+                        location.accuracy.toDouble())
+                }
+            }
+            return "geolocation_position" to value
+        }
+
+        fun getPushPermissionLevel(): Pair<String, Any> {
+            return PushPermissionLevel.instance().userInfo()
+        }
+    }
+}
+
+@JsonClass(generateAdapter = true)
+private data class CurrentLocation(
+    @field:Json(name = "lat") val lat: Double,
+    @field:Json(name = "lon") val lon: Double,
+    @field:Json(name = "accuracy") val accuracy: Double
+)

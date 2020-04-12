@@ -14,6 +14,9 @@ interface BLEContactDao: BaseDao<BLEContactEntity> {
     fun getAllFlow(): Flow<List<BLEContactEntity>>
 
     @Query("SELECT COUNT(DISTINCT btId) FROM ble_contact_table")
+    suspend fun getAllDistinctBtIdsCount(): Int
+
+    @Query("SELECT COUNT() FROM ble_contact_table")
     suspend fun getAllBtIdsCount(): Int
 
     @Query("SELECT DISTINCT btId FROM ble_contact_table")
