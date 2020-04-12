@@ -14,9 +14,86 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+
+/**
+ * Utility class to obtain app specific user info.
+ */
+
+class PicoUserInfos {
+
+    companion object: KoinComponent {
+
+        fun databaseSize(context: Context): Pair<String, Any> {
+            return "bluetooth_database_size" to ImmuniDatabase.databaseSize(context)
+        }
+
+        fun batteryLevel(context: Context): Pair<String, Any> {
+            val bm = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+            return "battery_level" to bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
+        }
+
+        fun bluetoothActive(): Pair<String, Any> {
+            val btManager: BluetoothManager by inject()
+            return "bluetooth_active" to when(btManager.isBluetoothEnabled()) {
+                true -> "on"
+                false -> "off"
+            }
+        }
+
+        fun locationActive(context: Context): Pair<String, Any> {
+            return "localization_active" to when(PermissionsManager.globalLocalisationEnabled(context)) {
+                true -> "on"
+                false -> "off"
+            }
+        }
+
+        fun batteryOptimization(context: Context): Pair<String, Any> {
+            return "battery_optimization_app_level" to when(PermissionsManager.isIgnoringBatteryOptimizations(context)) {
+                true -> "whitelisted"
+                false -> "non_whitelisted"
+            }
+        }
+
+        fun locationPermissionsLevel(): Pair<String, Any> {
+            return "location_permission_level" to LocationPermissionLevel.instance()
+        }
+
+        fun location(context: Context): Pair<String, Any> {
+            var value: CurrentLocation = CurrentLocation(0.0, 0.0, 0.0)
+
+            val locationManager =
+                context.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
+
+            if (locationManager == null || ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                value = CurrentLocation(0.0, 0.0, 0.0)
+            } else {
+                val location: Location? = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                if(location != null) {
+                    value = CurrentLocation(
+                        location.latitude,
+                        location.longitude,
+                        location.accuracy.toDouble())
+                }
+            }
+            return "geolocation_position" to value
+        }
+
+        fun pushPermissionLevel(): Pair<String, Any> {
+            return "push_permission_level" to PushPermissionLevel.instance()
+        }
+    }
+}
 
 enum class LocationPermissionLevel {
     // the level is not known yet (e.g., before the onboarding)
@@ -39,10 +116,7 @@ enum class LocationPermissionLevel {
     @Json(name = "foregroundAuthorized")
     FOREGROUND_AUTHORIZED;
 
-    fun userInfo() = "location_permission_level" to this
-
     companion object : KoinComponent {
-        val PERMISSIONS_MANAGER: PermissionsManager by inject()
 
         fun instance(): LocationPermissionLevel {
             val context = ImmuniApplication.appContext
@@ -85,8 +159,6 @@ enum class PushPermissionLevel {
     @Json(name = "partial")
     PARTIAL;
 
-    fun userInfo() = "push_permission_level" to this
-
     companion object {
         fun instance(): PushPermissionLevel {
             val notificationState =
@@ -100,52 +172,8 @@ enum class PushPermissionLevel {
     }
 }
 
-class PicoUserInfos {
-    companion object {
-        fun getDatabaseSize(context: Context): Pair<String, Any> {
-            return "bluetooth_database_size" to ImmuniDatabase.databaseSize(context)
-        }
-
-        fun getBatteryLevel(context: Context): Pair<String, Any> {
-            val bm = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
-            return "battery_level" to bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
-        }
-
-        fun getLastKnownLocation(context: Context): Pair<String, Any> {
-            var value: CurrentLocation = CurrentLocation(0.0, 0.0, 0.0)
-
-            val locationManager =
-                context.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
-
-            if (locationManager == null || ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                value = CurrentLocation(0.0, 0.0, 0.0)
-            } else {
-                val location: Location? = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                if(location != null) {
-                    value = CurrentLocation(
-                        location.latitude,
-                        location.longitude,
-                        location.accuracy.toDouble())
-                }
-            }
-            return "geolocation_position" to value
-        }
-
-        fun getPushPermissionLevel(): Pair<String, Any> {
-            return PushPermissionLevel.instance().userInfo()
-        }
-    }
-}
-
 @JsonClass(generateAdapter = true)
-private data class CurrentLocation(
+data class CurrentLocation(
     @field:Json(name = "lat") val lat: Double,
     @field:Json(name = "lon") val lon: Double,
     @field:Json(name = "accuracy") val accuracy: Double

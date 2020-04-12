@@ -60,13 +60,13 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
 
     override val userInfo: Map<String, Any>
         get() = mapOf(
-            PicoUserInfos.getPushPermissionLevel(),
-            //BluetoothManager.activeUserInfo(),
-            //PermissionsManager.geolocationPermissionsUserInfo(),
-            //PermissionsManager.geolocationActiveUserInfo(),
-            //PermissionsManager.batteryOptimizationUserInfo(),
-            PicoUserInfos.getLastKnownLocation(context),
-            PicoUserInfos.getBatteryLevel(context),
-            PicoUserInfos.getDatabaseSize(context)
+            PicoUserInfos.pushPermissionLevel(),
+            PicoUserInfos.bluetoothActive(),
+            PicoUserInfos.locationPermissionsLevel(),
+            PicoUserInfos.locationActive(context),
+            PicoUserInfos.batteryOptimization(context),
+            PicoUserInfos.location(context),
+            PicoUserInfos.batteryLevel(context),
+            PicoUserInfos.databaseSize(context)
         )
 }
