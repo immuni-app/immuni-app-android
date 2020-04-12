@@ -3,6 +3,7 @@ package org.immuni.android.picoMetrics
 import PushNotificationState
 import PushNotificationUtils
 import android.Manifest
+import android.os.Build
 import com.squareup.moshi.Json
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.PermissionsManager
@@ -36,17 +37,24 @@ enum class LocationPermissionLevel {
         val PERMISSIONS_MANAGER: PermissionsManager by inject()
 
         fun instance(): LocationPermissionLevel {
-            // TODO: check logic
             val context = ImmuniApplication.appContext
             val hasAllPermissions = PermissionsManager.hasAllPermissions(context)
             val hasForegroundPermission = PermissionsManager.checkHasPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
+            val hasBackgroundPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                PermissionsManager.checkHasPermission(
+                    context,
+                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                )
+            } else {
+                true
+            }
             return when {
                 hasAllPermissions -> ALWAYS_AUTHORIZED
-                hasForegroundPermission -> FOREGROUND_AUTHORIZED
-                else -> UNKNOWN
+                hasForegroundPermission && !hasBackgroundPermission-> FOREGROUND_AUTHORIZED
+                else -> DENIED
             }
         }
     }
