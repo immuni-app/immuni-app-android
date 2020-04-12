@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.concurrent.timer
 
-class PicoSessionManager(
+internal class PicoSessionManager(
     context: Context,
     private val eventManager: CompletableDeferred<PicoEventManager>,
     private val picoFlow: PicoFlow

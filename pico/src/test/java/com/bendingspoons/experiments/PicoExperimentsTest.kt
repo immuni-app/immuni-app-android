@@ -28,7 +28,7 @@ class PicoExperimentsTest {
     lateinit var oracle: Oracle<OracleSettings, OracleMe>
 
     @MockK(relaxed = true)
-    lateinit var eventsManager: PicoEventManager
+    internal lateinit var eventsManager: PicoEventManager
 
     @Before
     fun setUp() {

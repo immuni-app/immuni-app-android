@@ -6,6 +6,8 @@ import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.pico.api.model.PicoEventResponse
 import com.bendingspoons.pico.model.PicoEvent
 import com.bendingspoons.pico.model.PicoUser
+import com.bendingspoons.pico.userconsent.UserConsent
+import com.bendingspoons.pico.userconsent.UserConsentLevel
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.test.runBlockingTest
@@ -38,8 +40,11 @@ class PicoCollectorTest {
     @MockK(relaxed = true)
     lateinit var event: PicoEvent
 
-    lateinit var flow: PicoFlow
-    lateinit var collector: PicoCollector
+    @MockK(relaxed = true)
+    internal lateinit var userConsent: UserConsent
+
+    private lateinit var flow: PicoFlow
+    private lateinit var collector: PicoCollector
 
     lateinit var successResponse: Response<PicoEventResponse>
     lateinit var networkingFailure: Response<PicoEventResponse>
@@ -55,8 +60,9 @@ class PicoCollectorTest {
         every { mockConcierge.aaid?.id } returns "not_empty_idfa"
         every { picoUser.ids[Concierge.InternalId.AAID.keyName] } returns ""
         every { event.user } returns picoUser
+        every { userConsent.level } returns UserConsentLevel.ACCEPTED
 
-        flow = PicoFlow(store, 1)
+        flow = PicoFlow(store, userConsent, REPEAT = 1)
         collector = PicoCollector(flow, dispatcher, store, config)
 
         successResponse = Response.success(
@@ -68,32 +74,6 @@ class PicoCollectorTest {
 
         networkingFailure = Response.error(403, "{}".toResponseBody())
         invalidFormatFailure = Response.error(422, "{}".toResponseBody())
-    }
-
-    @Test
-    fun `collector update IDFA if not set already`() = runBlockingTest {
-
-        every { mockConcierge.aaid.id } returns "not_empty_idfa"
-        every { picoUser.ids[Concierge.InternalId.AAID.keyName]  } returns NULL_AAID.id
-        coEvery { dispatcher.dispatchEvents(any()) } returns successResponse
-
-        collector.start()
-        
-        val ids = picoUser.ids
-        verify { ids[Concierge.InternalId.AAID.keyName] = "not_empty_idfa" }
-    }
-
-    @Test
-    fun `collector does update IDFA even if already set`() = runBlockingTest {
-
-        every { mockConcierge.aaid?.id } returns "not_empty_idfa"
-        every { picoUser.ids[Concierge.InternalId.AAID.keyName] } returns "valid_idfa"
-        coEvery { dispatcher.dispatchEvents(any()) } returns successResponse
-
-        collector.start()
-
-        val ids = picoUser.ids
-        verify(exactly = 1) { ids[Concierge.InternalId.AAID.keyName] = any() }
     }
 
     @Test

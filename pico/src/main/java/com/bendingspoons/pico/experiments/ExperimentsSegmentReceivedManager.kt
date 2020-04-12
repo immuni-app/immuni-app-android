@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 
-class ExperimentsSegmentReceivedManager(
+internal class ExperimentsSegmentReceivedManager(
     private val store: ExperimentsStore,
     private val settingsFlow: Flow<OracleSettings>,
     private val eventManager: PicoEventManager

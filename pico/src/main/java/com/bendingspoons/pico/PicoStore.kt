@@ -3,8 +3,10 @@ package com.bendingspoons.pico
 import com.bendingspoons.pico.model.PicoEvent
 import com.bendingspoons.pico.db.PicoDatabase
 import com.bendingspoons.pico.db.entity.PicoEventEntity
+import com.bendingspoons.pico.userconsent.UserConsent
+import com.bendingspoons.pico.userconsent.UserConsentLevel
 
-// PicoStore store and load events from the underlying Room database.
+// PicoStore stores and loads events from the underlying Room database.
 
 interface PicoStore {
     suspend fun store(event: PicoEvent)
@@ -12,13 +14,21 @@ interface PicoStore {
     suspend fun deleteEvents(events: List<PicoEvent>)
 }
 
-class PicoStoreImpl(val database: PicoDatabase) : PicoStore {
+internal class PicoStoreImpl(val database: PicoDatabase, val userConsent: UserConsent) : PicoStore {
 
     private val MAX_EVENTS_BATCH_SIZE = 10
     private val eventDao = database.picoEventDao()
 
     override suspend fun store(event: PicoEvent) {
-        eventDao.insert(PicoEventEntity(event.id, event))
+
+        // user consent:
+        // if denied do not store events,
+        // if accepted store events,
+        // if unkwnown store events.
+
+        if(userConsent.level != UserConsentLevel.DENIED) {
+            eventDao.insert(PicoEventEntity(event.id, event))
+        }
     }
 
     override suspend fun nextEventsBatch(): List<PicoEvent> {

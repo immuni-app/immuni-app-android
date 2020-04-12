@@ -11,6 +11,8 @@ import com.bendingspoons.pico.install.PicoInstallManager
 import com.bendingspoons.pico.model.TrackEvent
 import com.bendingspoons.pico.model.UserAction
 import com.bendingspoons.pico.session.PicoSessionManager
+import com.bendingspoons.pico.userconsent.UserConsent
+import com.bendingspoons.pico.userconsent.UserConsentLevel
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -29,11 +31,12 @@ class Pico(
     private lateinit var collector: PicoCollector
     private lateinit var experimentsManager: ExperimentsSegmentReceivedManager
     private val userInfoProviders = mutableSetOf<PicoUserInfoProvider>()
+    private val userConsent = UserConsent(context, config)
 
     init {
-        store = PicoStoreImpl(picoDatabase(context))
+        store = PicoStoreImpl(picoDatabase(context), userConsent)
         dispatcher = PicoDispatcher(api)
-        eventFlow = PicoFlow(store)
+        eventFlow = PicoFlow(store, userConsent)
         installManager = PicoInstallManager(context, config, eventManagerCompletable)
 
         config.oracle().setWasInstalledBeforePico(installManager.info.wasInstalledBeforePico)
@@ -80,6 +83,10 @@ class Pico(
 
     suspend fun trackUserAction(id: String, vararg info: Pair<String, Any?>) {
         trackEvent(UserAction(id, info.toMap()))
+    }
+
+    suspend fun saveUserConsent(level: UserConsentLevel) {
+        userConsent.level = level
     }
 
     fun registerUserInfoProvider(provider: PicoUserInfoProvider) {

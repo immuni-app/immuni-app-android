@@ -1,8 +1,11 @@
 package com.bendingspoons.pico
 
 import com.bendingspoons.pico.model.PicoEvent
+import com.bendingspoons.pico.userconsent.UserConsent
+import com.bendingspoons.pico.userconsent.UserConsentLevel
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
@@ -25,14 +28,20 @@ class PicoFlowTest {
     @MockK
     lateinit var event: PicoEvent
 
+    @MockK(relaxed = true)
+    internal lateinit var userConsent: UserConsent
+
     @Before
-    fun setUp() = MockKAnnotations.init(this, relaxUnitFun = true) // turn relaxUnitFun on for all mocks
+    fun setUp() {
+        MockKAnnotations.init(this, relaxUnitFun = true) // turn relaxUnitFun on for all mocks
+        every { userConsent.level } returns UserConsentLevel.ACCEPTED
+    }
 
     @Test
     fun `if store is not empty flow emits next events batch`() = runBlockingTest {
 
         coEvery { store.nextEventsBatch() } returns listOf(event)
-        val flow = PicoFlow(store, 1)
+        val flow = PicoFlow(store, userConsent, REPEAT = 1)
         val emittedEvents = flow.flow().toList()
         assertTrue(emittedEvents[0].size == 1)
     }
@@ -41,7 +50,7 @@ class PicoFlowTest {
     fun `flow emits all events available in the store`() = runBlockingTest {
 
         coEvery { store.nextEventsBatch() } returns listOf(event, event, event, event)
-        val flow = PicoFlow(store, 1)
+        val flow = PicoFlow(store, userConsent, REPEAT = 1)
         val emittedEvents = flow.flow().toList()
         assertTrue(emittedEvents[0].size == 4)
     }
@@ -50,7 +59,7 @@ class PicoFlowTest {
     fun `if store is empty flow emits nothing`() = runBlockingTest {
 
         coEvery { store.nextEventsBatch() } returns listOf()
-        val flow = PicoFlow(store, 1)
+        val flow = PicoFlow(store, userConsent, REPEAT = 1)
         val emittedEvents = flow.flow().toList()
         assertTrue(emittedEvents.isEmpty())
     }
@@ -61,7 +70,7 @@ class PicoFlowTest {
     fun `we can flush immediately the flow emission`() = runBlocking {
 
         coEvery { store.nextEventsBatch() } returns listOf(event)
-        val flow = PicoFlow(store, 1)
+        val flow = PicoFlow(store, userConsent, REPEAT = 1)
 
         var emittedEvents = listOf<List<PicoEvent>>()
 
@@ -80,7 +89,7 @@ class PicoFlowTest {
     fun `after the flush the completable deferred is reset`() = runBlocking {
 
         coEvery { store.nextEventsBatch() } returns listOf(event)
-        val flow = PicoFlow(store, 1)
+        val flow = PicoFlow(store, userConsent, REPEAT = 1)
 
         val deferredHash = flow.future.hashCode()
 

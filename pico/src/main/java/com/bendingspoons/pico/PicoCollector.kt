@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.collect
 // PicoCollector receive the flow of events, set the request_timestamp to each events,
 // try to dispatch the events to Pico server and if succeed delete them from the store.
 
-class PicoCollector(
+internal class PicoCollector(
     private val flow: PicoFlow,
     private val dispatcher: PicoDispatcher,
     private val store: PicoStore,

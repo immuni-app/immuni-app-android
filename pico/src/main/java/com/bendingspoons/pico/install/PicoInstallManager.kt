@@ -13,7 +13,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-class PicoInstallManager(
+internal class PicoInstallManager(
     context: Context,
     config: PicoConfiguration,
     private val eventManager: CompletableDeferred<PicoEventManager>

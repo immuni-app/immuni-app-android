@@ -9,7 +9,7 @@ import kotlinx.coroutines.CompletableDeferred
 
 // PicoStore store and load events from the underlying Room database.
 
-class PicoEventManager(
+internal class PicoEventManager(
     private val context: Context,
     private val config: PicoConfiguration,
     private val deviceInfoProvider: DeviceInfoProvider,
