@@ -133,7 +133,7 @@ class PermissionsFragment :
     }
 
     private fun geolocationON(): Boolean {
-        return PermissionsManager.globalLocalisationEnabled(requireContext())
+        return true // PermissionsManager.globalLocalisationEnabled(requireContext())
     }
 
     private fun updateUI() {
@@ -198,7 +198,7 @@ class PermissionsFragment :
             }
         }
 
-        if(PermissionsManager.globalLocalisationEnabled(requireContext())) {
+        if(true || PermissionsManager.globalLocalisationEnabled(requireContext())) {
             // SUCCESS
             description3.gone()
             number3.gone()

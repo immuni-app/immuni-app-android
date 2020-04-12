@@ -52,14 +52,12 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     private var bleJob: Job? = null
 
+    // Register to Bluetooth state change
+
     private val mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
             val action = intent.action
             if (action == BluetoothAdapter.ACTION_STATE_CHANGED) {
-                val state = intent.getIntExtra(
-                    BluetoothAdapter.EXTRA_STATE,
-                    BluetoothAdapter.ERROR
-                )
                 if(bluetoothManager.isBluetoothEnabled()) {
                     serviceScope.launch {
                         bleJob?.cancel()
@@ -158,6 +156,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
                     it.release()
                 }
             }
+            applicationContext.unregisterReceiver(mReceiver)
             stopForeground(true)
             stopSelf()
         } catch (e: Exception) {
@@ -209,24 +208,13 @@ class ImmuniForegroundService : Service(), KoinComponent {
             }
         }
 
-        /*
-        val bleLoop = async {
-            repeat(Int.MAX_VALUE) {
-                val ble = async { startBleLoop() }
-                delay(30 * 1000)
-                ble.cancel()
-                delay(2000)
-            }
-        }
-         */
-
         val polling = async {
             repeat(Int.MAX_VALUE) {
                 //log("foreground service ping $this@BLEForegroundServiceWorker")
 
                 if(!PermissionsManager.hasAllPermissions(applicationContext) ||
                     !PermissionsManager.isIgnoringBatteryOptimizations(applicationContext) ||
-                    !PermissionsManager.globalLocalisationEnabled(applicationContext) ||
+                    //!PermissionsManager.globalLocalisationEnabled(applicationContext) ||
                     !bluetoothManager.isBluetoothEnabled() ||
                     !PushNotificationUtils.areNotificationsEnabled(ImmuniApplication.appContext)) {
                     withContext(Dispatchers.Main) {
