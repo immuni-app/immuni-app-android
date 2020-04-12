@@ -1,6 +1,8 @@
 package org.immuni.android.picoMetrics
 
 import com.bendingspoons.pico.model.UserAction
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import org.immuni.android.models.survey.*
 
 class OnboardingCompleted {
@@ -9,6 +11,67 @@ class OnboardingCompleted {
 
 class FamilyMemberAdded {
     val userAction = UserAction("family_member_added")
+}
+
+class DataUploaded(code: String) {
+    val userAction = UserAction(
+        "data_uploaded",
+        mapOf("code" to code)
+    )
+}
+
+class DataDeleted(days: Int) {
+    val userAction = UserAction(
+        "data_deleted",
+        mapOf("days" to days)
+    )
+}
+
+class EnterBackground {
+    val userAction = UserAction("enter_background")
+}
+
+class EnterForeground {
+    val userAction = UserAction("enter_foreground")
+}
+
+class RebootEventReceived {
+    val userAction = UserAction("reboot_event_received")
+}
+
+class ForegroundServiceRunning {
+    val userAction = UserAction("foreground_service_running")
+}
+
+class ForegroundServiceStarted {
+    val userAction = UserAction("foreground_service_started")
+}
+
+class ForegroundServiceDestroyed {
+    val userAction = UserAction("foreground_service_destroyed")
+}
+
+class BluetoothFoundPeripheralsSnapshot(contacts: List<Contact>) {
+    val userAction = UserAction(
+        "bluetooth_found_peripherals_snapshot",
+        mapOf("contacts" to contacts)
+    )
+
+    @JsonClass(generateAdapter = true)
+    data class Contact(
+        @field:Json(name = "bt_id") val btId: String,
+        @field:Json(name = "rssi") val rssi: Int,
+        @field:Json(name = "tx_power") val txPower: Int,
+        @field:Json(name = "timestamp") val timestamp: Double
+    )
+}
+
+class BluetoothAdvertisingFailed {
+    val userAction = UserAction("bluetooth_advertising_failed")
+}
+
+class BluetoothScanFailed {
+    val userAction = UserAction("bluetooth_scan_failed")
 }
 
 /**
