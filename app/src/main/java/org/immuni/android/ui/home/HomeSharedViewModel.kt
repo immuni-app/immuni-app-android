@@ -146,7 +146,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                         val and = ImmuniApplication.appContext.getString(R.string.and)
                         val names: String
                         val namesList = userCardsMap[severity]!!
-                        if(namesList.size == 1) {
+                        if (namesList.size == 1) {
                             names = namesList.first()
                         } else {
                             // remove last
@@ -160,11 +160,13 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                             "<b>$names</b>"
                         )
 
-                        itemsList.add(when (severity) {
-                            LOW -> SuggestionsCardWhite(suggestionTitle, severity)
-                            MID -> SuggestionsCardYellow(suggestionTitle, severity)
-                            HIGH -> SuggestionsCardRed(suggestionTitle, severity)
-                        })
+                        itemsList.add(
+                            when (severity) {
+                                LOW -> SuggestionsCardWhite(suggestionTitle, severity)
+                                MID -> SuggestionsCardYellow(suggestionTitle, severity)
+                                HIGH -> SuggestionsCardRed(suggestionTitle, severity)
+                            }
+                        )
                     }
                 }
 
@@ -205,12 +207,14 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     }
 
     fun onSurveyCardTap() {
-        if (surveyManager.areAllSurveysLogged()) {
-            // All users already took the survey for today!
-            return
-        }
+        uiScope.launch {
+            if (surveyManager.areAllSurveysLogged()) {
+                // All users already took the survey for today!
+                return@launch
+            }
 
-        _navigateToSurvey.value = Event(true)
+            _navigateToSurvey.value = Event(true)
+        }
     }
 
     fun onHomeResumed() {

@@ -257,10 +257,12 @@ class LogViewModel(
     }
 
     fun navigateToNextStep() {
-        if (surveyManager.areAllSurveysLogged()) {
-            _navigateToMainPage.value = Event(true)
-        } else {
-            _navigateToNextLogStartPage.value = Event(true)
+        uiScope.launch {
+            if (surveyManager.areAllSurveysLogged()) {
+                _navigateToMainPage.value = Event(true)
+            } else {
+                _navigateToNextLogStartPage.value = Event(true)
+            }
         }
     }
 

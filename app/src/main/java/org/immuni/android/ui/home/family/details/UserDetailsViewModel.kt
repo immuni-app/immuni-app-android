@@ -27,7 +27,6 @@ class UserDetailsViewModel(val userId: String) : ViewModel(),
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-    val apiManager: ApiManager by inject()
     val userManager: UserManager by inject()
     val surveyManager: SurveyManager by inject()
     val database: ImmuniDatabase by inject()
@@ -51,8 +50,10 @@ class UserDetailsViewModel(val userId: String) : ViewModel(),
     }
 
     fun deleteUser() {
-        userManager.deleteUser(userId)
-        surveyManager.deleteUserData(userId)
-        _navigateBack.value = Event(true)
+        uiScope.launch {
+            userManager.deleteUser(userId)
+            surveyManager.deleteUserData(userId)
+            _navigateBack.value = Event(true)
+        }
     }
 }

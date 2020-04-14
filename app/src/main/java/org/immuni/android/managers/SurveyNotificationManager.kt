@@ -40,7 +40,7 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
         }
     }
 
-    fun scheduleNext(fromActivity: Boolean) {
+    suspend fun scheduleNext(fromActivity: Boolean) {
         // avoid scheduling notifications if onboarding is not completed
         if (userManager.mainUser() == null) {
             return
