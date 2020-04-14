@@ -22,7 +22,7 @@
         android:gravity="left"
         android:text="3/3/2020 18:45/60"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/distance"
+        app:layout_constraintEnd_toStartOf="@+id/counter"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
