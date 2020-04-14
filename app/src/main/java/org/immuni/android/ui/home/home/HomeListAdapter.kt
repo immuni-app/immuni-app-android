@@ -238,6 +238,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
             is SuggestionsCardRed -> 6
             is SurveyCardDone -> 7
             is EnableBluetoothCard -> 8
+            is AddToWhiteListCard -> 9
         }
     }
 

@@ -81,6 +81,7 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
@@ -90,4 +91,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/progress" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/blockingCard"
+        android:clickable="true"
+        android:background="@color/home_blocking_card_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:focusable="true">
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            layout="@layout/home_blocking_card"/>
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

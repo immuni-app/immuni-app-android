@@ -3,6 +3,7 @@ package org.immuni.android.ui.home.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
@@ -10,11 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bendingspoons.base.extensions.*
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeSharedViewModel
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.android.synthetic.main.home_blocking_card.*
+import kotlinx.android.synthetic.main.home_blocking_card.view.*
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.models.survey.backgroundColor
@@ -22,6 +25,7 @@ import org.immuni.android.ui.dialog.*
 import org.immuni.android.ui.home.home.model.*
 import org.immuni.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
+import kotlin.reflect.KClass
 
 class HomeFragment : Fragment(), HomeClickListener {
 
@@ -99,9 +103,79 @@ class HomeFragment : Fragment(), HomeClickListener {
             (homeList.adapter as? HomeListAdapter)?.apply {
                 update(newList)
             }
-
-            //homeList.adapter?.notifyDataSetChanged()
         })
+
+        viewModel.blockingItemsListModel.observe(viewLifecycleOwner, Observer { newList ->
+            // blocking cards
+            val blockingItems = newList.filter {
+                it is EnableGeolocationCard ||
+                        it is EnableBluetoothCard ||
+                        it is EnableNotificationCard ||
+                        it is AddToWhiteListCard
+            }
+            if(blockingItems.isNotEmpty()) {
+                showBlockingCard(blockingItems.first()!!)
+            } else {
+                hideBlockingCard()
+            }
+        })
+
+        blockingCard.setOnTouchListener { v, event -> true }
+    }
+
+    private fun showBlockingCard(item: HomeItemType) {
+
+        blockingIcon.setImageResource(when(item) {
+            is EnableGeolocationCard -> {
+                if(item.type == GeolocationType.PERMISSIONS) R.drawable.ic_localization
+                else R.drawable.ic_localization
+            }
+            is EnableBluetoothCard -> R.drawable.ic_bluetooth
+            is EnableNotificationCard -> R.drawable.ic_bell
+            is AddToWhiteListCard -> R.drawable.ic_settings
+            else -> R.drawable.ic_localization
+        })
+
+        blockingTitle.text = when(item) {
+            is EnableGeolocationCard -> {
+                if(item.type == GeolocationType.PERMISSIONS) getString(R.string.home_block_permissions_title)
+                else getString(R.string.home_block_geo_title)
+            }
+            is EnableBluetoothCard -> getString(R.string.home_block_bt_title)
+            is EnableNotificationCard -> getString(R.string.home_block_notifications_title)
+            is AddToWhiteListCard -> getString(R.string.home_block_whitelist_title)
+            else -> ""
+        }
+
+        blockingMessage.text = when(item) {
+            is EnableGeolocationCard -> {
+                if(item.type == GeolocationType.PERMISSIONS) getString(R.string.home_block_permissions_message)
+                else getString(R.string.home_block_geo_message)
+            }
+            is EnableBluetoothCard -> getString(R.string.home_block_bt_message)
+            is EnableNotificationCard -> getString(R.string.home_block_notifications_message)
+            is AddToWhiteListCard -> getString(R.string.home_block_whitelist_message)
+            else -> ""
+        }
+
+        blockingButton.text = when(item) {
+            is EnableGeolocationCard -> {
+                if(item.type == GeolocationType.PERMISSIONS) getString(R.string.home_block_permissions_button)
+                else getString(R.string.home_block_geo_button)
+            }
+            is EnableBluetoothCard -> getString(R.string.home_block_bluetooth_button)
+            is EnableNotificationCard -> getString(R.string.home_block_notifications_button)
+            is AddToWhiteListCard -> getString(R.string.home_block_whitelist_button)
+            else -> ""
+        }
+
+        (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(resources.getColor(android.R.color.transparent))
+        blockingCard.visible()
+    }
+
+    private fun hideBlockingCard() {
+        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
+        blockingCard.gone()
     }
 
     private fun showAddFamilyMemberDialog() {

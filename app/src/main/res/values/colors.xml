@@ -57,4 +57,5 @@
     <color name="profile_yellow">#FFC48D</color>
     <color name="profile_blue">@color/colorPrimary</color>
     <color name="profile_pink">#F790AF</color>
+    <color name="home_blocking_card_mask">#F2495D74</color>
 </resources>

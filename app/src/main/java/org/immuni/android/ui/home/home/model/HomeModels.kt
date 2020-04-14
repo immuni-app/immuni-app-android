@@ -24,6 +24,8 @@ class EnableBluetoothCard: HomeItemType()
 
 class EnableNotificationCard: HomeItemType()
 
+class AddToWhiteListCard: HomeItemType()
+
 data class HeaderCard(
     val title: String
 ): HomeItemType()

@@ -201,4 +201,20 @@
     <string name="clinic_diary_question_title">Che cos’è il diario clinico?</string>
     <string name="clinic_diary_question_explanation">Compilando il diario clinico fornisci ad Immuni elementi indispensabili per consigliare te e la tua famiglia sul da farsi. Per un totale rispetto della privacy, i dati rimarranno salvati solo ed esclusivamente sul tuo smartphone.</string>
     <string name="onboarding_permission_tutorial_title">Seleziona \"Consenti sempre\" nel popup che apparirà qui sotto</string>
+
+    <string name="home_block_notifications_title">Immuni ha bisogno\ndi inviarti delle notifiche</string>
+    <string name="home_block_notifications_message">Verrai notificato in caso di importanti comunicazioni e quando è il momento di aggiornare il diario clinico.</string>
+    <string name="home_block_permissions_title">Immuni ha bisogno di accedere alla posizione</string>
+    <string name="home_block_permissions_message">L’app non legge i tuoi dati di localizzazione, ma questo permesso è comunque necessario per accedere al Bluetooth quando l’app è chiusa.</string>
+    <string name="home_block_bt_title">Immuni ha bisogno\ndel Bluetooth</string>
+    <string name="home_block_bt_message">Consenti di utilizzare il Bluetooth per permettere alle autorità competenti di stimare la tua esposizione al virus e rispondere all’epidemia al meglio.</string>
+    <string name="home_block_geo_title">Immuni ha bisogno che attivi alla posizione</string>
+    <string name="home_block_geo_message">L’app non legge i tuoi dati di localizzazione, ma questo permesso è comunque necessario per accedere al Bluetooth quando l’app è chiusa. A causa di un limite del sistema operativo, senza il consenso alla posizione, l’app non può rilevare dispositivi vicini.</string>
+    <string name="home_block_whitelist_title">Immuni ha bisogno di funzionare in background</string>
+    <string name="home_block_whitelist_message">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. </string>
+    <string name="home_block_notifications_button">Consenti notifiche</string>
+    <string name="home_block_bluetooth_button">Attiva Bluetooth</string>
+    <string name="home_block_permissions_button">Consenti localizzazione</string>
+    <string name="home_block_geo_button">Attiva localizzazione</string>
+    <string name="home_block_whitelist_button">Consenti funzionamento</string>
 </resources>
