@@ -33,16 +33,19 @@ class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : Vie
                 ExportDevice(
                     timestamp = it.timestamp.time / 1000.0,
                     btId = it.btId,
-                    signalStrength = it.rssi
+                    rssi = it.rssi,
+                    txPower = it.txPower
                 )
             }
+            /*
             val surveys = surveyManager.allHealthProfiles(userId).map {
                 ExportHealthProfile.fromHealthProfile(it)
             }
+             */
 
             val exportData = ExportData(
                 profileId = userId,
-                surveys = surveys,
+                //surveys = surveys,
                 devices = devices
             )
 

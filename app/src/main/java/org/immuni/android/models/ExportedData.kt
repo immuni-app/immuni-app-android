@@ -9,15 +9,16 @@ import java.util.*
 @JsonClass(generateAdapter = true)
 data class ExportData(
     @field:Json(name = "profile_id") val profileId: String,
-    @field:Json(name = "devices") val devices: List<ExportDevice>,
-    @field:Json(name = "surveys") val surveys: List<ExportHealthProfile>
+    @field:Json(name = "devices") val devices: List<ExportDevice>
+    //@field:Json(name = "surveys") val surveys: List<ExportHealthProfile>
 )
 
 @JsonClass(generateAdapter = true)
 data class ExportDevice(
     @field:Json(name = "timestamp") val timestamp: Double,
     @field:Json(name = "bt_id") val btId: String,
-    @field:Json(name = "signal_strength") val signalStrength: Int
+    @field:Json(name = "rssi") val rssi: Int,
+    @field:Json(name = "tx_power") val txPower: Int
 )
 
 @JsonClass(generateAdapter = true)

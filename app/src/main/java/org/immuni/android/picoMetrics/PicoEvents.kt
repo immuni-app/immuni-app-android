@@ -9,10 +9,6 @@ class OnboardingCompleted {
     val userAction = UserAction("onboarding_completed")
 }
 
-class FamilyMemberAdded {
-    val userAction = UserAction("family_member_added")
-}
-
 class DataUploaded(code: String) {
     val userAction = UserAction(
         "data_uploaded",
@@ -49,6 +45,10 @@ class ForegroundServiceStarted {
 
 class ForegroundServiceDestroyed {
     val userAction = UserAction("foreground_service_destroyed")
+}
+
+class ForegroundServiceRestartedByAlarmManager {
+    val userAction = UserAction("foreground_service_restarted_by_alarm_manager")
 }
 
 class BluetoothFoundPeripheralsSnapshot(contacts: List<Contact>) {
