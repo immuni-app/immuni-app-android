@@ -3,30 +3,31 @@ package org.immuni.android.ui.home.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.bendingspoons.base.extensions.*
-import org.immuni.android.R
-import org.immuni.android.ui.home.HomeSharedViewModel
+import com.bendingspoons.base.extensions.gone
+import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
+import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import com.bendingspoons.base.extensions.visible
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.home_blocking_card.*
-import kotlinx.android.synthetic.main.home_blocking_card.view.*
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.immuni.android.ImmuniApplication
+import org.immuni.android.R
+import org.immuni.android.disableDragging
 import org.immuni.android.models.survey.backgroundColor
-import org.immuni.android.ui.dialog.*
+import org.immuni.android.ui.dialog.WebViewDialogActivity
+import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.home.home.model.*
 import org.immuni.android.ui.log.LogActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
-import kotlin.reflect.KClass
 
 class HomeFragment : Fragment(), HomeClickListener {
 
@@ -62,6 +63,8 @@ class HomeFragment : Fragment(), HomeClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
+
+        appBar.disableDragging()
 
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -120,6 +123,8 @@ class HomeFragment : Fragment(), HomeClickListener {
                 hideBlockingCard()
             }
         })
+
+        blockingCard.setOnClickListener {  }
     }
 
     private fun showBlockingCard(item: HomeItemType) {

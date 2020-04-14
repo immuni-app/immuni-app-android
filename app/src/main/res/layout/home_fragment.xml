@@ -1,102 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<FrameLayout
     android:id="@+id/libraryFragment"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/home_background"
     android:layout_width="match_parent"
+    android:clickable="true"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homeList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/activity_vertical_margin"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:background="@color/home_background"
-        android:paddingBottom="100dp"
-        android:scrollbars="none"
-        android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:background="@android:color/transparent"
-        app:background="@android:color/transparent"
-        android:backgroundTint="@android:color/transparent"
-        app:backgroundTint="@android:color/transparent"
-        android:stateListAnimator="@null"
-        app:elevation="0dp">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentScrim="@android:color/transparent"
             android:clipChildren="false"
             android:clipToPadding="false"
-            app:expandedTitleGravity="bottom"
-            app:expandedTitleMarginStart="32dp"
-            app:expandedTitleMarginTop="32dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:background="@color/home_background"
+            android:paddingBottom="100dp"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="@android:color/transparent"
+            app:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
+            app:backgroundTint="@android:color/transparent"
+            android:stateListAnimator="@null"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
+                app:contentScrim="@android:color/transparent"
                 android:clipChildren="false"
-                app:layout_collapseMode="pin"
-                app:layout_collapseParallaxMultiplier="0.5">
+                android:clipToPadding="false"
+                app:expandedTitleGravity="bottom"
+                app:expandedTitleMarginStart="32dp"
+                app:expandedTitleMarginTop="32dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-                <TextView
-                    android:id="@+id/pageTitle"
-                    style="@style/H1Heading"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/app_name"
-                    android:textColor="#4F4F5B"
-                    android:textSize="36sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:clipChildren="false"
+                    app:layout_collapseMode="pin"
+                    app:layout_collapseParallaxMultiplier="0.5">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/pageTitle"
+                        style="@style/H1Heading"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/app_name"
+                        android:textColor="#4F4F5B"
+                        android:textSize="36sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                app:layout_collapseMode="parallax"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    app:layout_collapseMode="parallax"/>
 
-    </com.google.android.material.appbar.AppBarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_gravity="top"
-        android:background="@drawable/gradient_home_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/progress" />
+        </com.google.android.material.appbar.AppBarLayout>
 
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="top"
+            android:background="@drawable/gradient_home_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/progress" />
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <include
         android:id="@+id/blockingCard"
         android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         layout="@layout/home_blocking_card"/>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>
