@@ -1,20 +1,23 @@
 package org.immuni.android.managers
 
-import android.content.Context
 import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.pico.Pico
-import org.immuni.android.models.User
+import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.db.entity.HealthProfileEntity
 import org.immuni.android.models.HealthProfile
-import org.immuni.android.models.HealthProfileIdList
-import org.immuni.android.models.survey.*
+import org.immuni.android.models.User
+import org.immuni.android.models.survey.CompositeAnswer
+import org.immuni.android.models.survey.QuestionId
+import org.immuni.android.models.survey.SimpleAnswer
 import org.immuni.android.ui.log.model.FormModel
+import org.immuni.android.util.toJson
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
-class SurveyManager : KoinComponent {
+class SurveyManager(db: ImmuniDatabase) : KoinComponent {
     companion object {
         private const val additionalDelayKey = "additionalDelay"
 
@@ -37,44 +40,28 @@ class SurveyManager : KoinComponent {
     private val storage: KVStorage by inject()
     private val userManager: UserManager by inject()
     private val pico: Pico by inject()
+    private val healthProfileDao = db.healthProfileDao()
 
     init {
         additionalDelay = getOrSetAdditionalDelay(storage)
     }
 
-    fun healthProfileIds(userId: String): List<String> {
-        return storage.load<HealthProfileIdList>(HealthProfileIdList.id(userId))?.profileIds
-            ?: listOf()
-    }
-
-    private fun deleteHealthProfileIds(userId: String) {
-        storage.delete(HealthProfileIdList.id(userId))
-    }
-
-    private fun saveHealthProfile(healthProfile: HealthProfile) {
-        val healthProfileIdList = storage.load(
-            HealthProfileIdList.id(healthProfile.userId),
-            defValue = HealthProfileIdList(userId = healthProfile.userId, profileIds = listOf())
+    private suspend fun saveHealthProfile(healthProfile: HealthProfile) {
+        healthProfileDao.insert(
+            HealthProfileEntity(
+                userId = healthProfile.userId,
+                surveyTimeMillis = healthProfile.surveyTimeMillis,
+                healthProfileJson = toJson(healthProfile)
+            )
         )
-        storage.save(healthProfileIdList.id, healthProfileIdList.copy(
-            profileIds = healthProfileIdList.profileIds.toMutableList().apply {
-                add(healthProfile.id)
-            }
-        ))
-        storage.save(healthProfile.id, healthProfile)
     }
 
-    fun lastHealthProfile(userId: String): HealthProfile? {
-        val profileIds = healthProfileIds(userId)
-        return if (profileIds.isNotEmpty()) storage.load(profileIds.last()) else null
+    suspend fun lastHealthProfile(userId: String): HealthProfile? {
+        return healthProfileDao.lastHealthProfileForUser(userId)?.healthProfile
     }
 
-    fun allHealthProfiles(userId: String): List<HealthProfile> {
-        return healthProfileIds(userId).mapNotNull { storage.load<HealthProfile>(it) }
-    }
-
-    private fun deleteHealthProfile(healthProfileId: String) {
-        storage.delete(healthProfileId)
+    suspend fun allHealthProfiles(userId: String): List<HealthProfile> {
+        return healthProfileDao.allHealthProfilesForUser(userId).map { it.healthProfile }
     }
 
     private fun loadLastAnsweredQuestions(userId: String): Map<QuestionId, Long> {
@@ -101,13 +88,13 @@ class SurveyManager : KoinComponent {
         }
     }
 
-    fun completeSurvey(userId: String, form: FormModel, survey: Survey): HealthProfile {
+    suspend fun completeSurvey(userId: String, form: FormModel, surveyVersion: String): HealthProfile {
         val updatedHealthProfile = HealthProfile(
             userId = userId,
             healthState = form.healthState,
             triageProfileId = form.triageProfile,
-            surveyVersion = survey.version,
-            surveyDate = form.startDate,
+            surveyVersion = surveyVersion,
+            surveyTimeMillis = form.startDate.time,
             surveyAnswers = form.surveyAnswers.mapValues {
                 it.value.map { answer ->
                     when (answer) {
@@ -123,7 +110,7 @@ class SurveyManager : KoinComponent {
         return updatedHealthProfile
     }
 
-    fun isSurveyCompletedForUser(userId: String): Boolean {
+    suspend fun isSurveyCompletedForUser(userId: String): Boolean {
         val lastHealthProfile = lastHealthProfile(userId)
         val lastSurveyDate = lastHealthProfile?.surveyDate ?: return false
 
@@ -168,30 +155,28 @@ class SurveyManager : KoinComponent {
         return gc.time
     }
 
-    fun nextUserToLog(): User? {
+    suspend fun nextUserToLog(): User? {
         return userManager.users().find {
             !isSurveyCompletedForUser(it.id)
         }
     }
 
-    fun usersToLogCount(): Int {
+    suspend fun usersToLogCount(): Int {
         return userManager.users().count {
             !isSurveyCompletedForUser(it.id)
         }
     }
 
-    fun areAllSurveysLogged(): Boolean {
+    suspend fun areAllSurveysLogged(): Boolean {
         return nextUserToLog() == null
     }
 
-    fun deleteUserData(userId: String) {
+    suspend fun deleteUserData(userId: String) {
         userManager.deleteUser(userId)
-
-        healthProfileIds(userId).map { deleteHealthProfile(it) }
-        deleteHealthProfileIds(userId)
+        healthProfileDao.deleteAllForUser(userId)
     }
 
-    fun deleteDataOlderThan(days: Int) {
+    suspend fun deleteDataOlderThan(days: Int) {
         val thresholdDate = Calendar.getInstance().apply {
             add(Calendar.DAY_OF_YEAR, -days)
             set(Calendar.HOUR_OF_DAY, 0)
@@ -199,12 +184,9 @@ class SurveyManager : KoinComponent {
             set(Calendar.SECOND, 0)
             set(Calendar.MILLISECOND, 0)
         }.time
+
+        healthProfileDao.deleteAllOlderThan(thresholdDate.time)
         userManager.users().map { user ->
-            allHealthProfiles(user.id).map { healthProfile ->
-                if (healthProfile.surveyDate < thresholdDate) {
-                    deleteHealthProfile(healthProfile.id)
-                }
-            }
             deleteLastAnsweredQuestions(user.id)
         }
     }

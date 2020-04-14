@@ -133,7 +133,7 @@ val appModule = module {
 
     // single instance of SurveyManager
     single {
-        SurveyManager()
+        SurveyManager(get())
     }
 
     // single instance of AscoltoNotificationManager
