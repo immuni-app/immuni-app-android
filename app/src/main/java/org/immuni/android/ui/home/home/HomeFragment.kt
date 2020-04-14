@@ -120,8 +120,6 @@ class HomeFragment : Fragment(), HomeClickListener {
                 hideBlockingCard()
             }
         })
-
-        blockingCard.setOnTouchListener { v, event -> true }
     }
 
     private fun showBlockingCard(item: HomeItemType) {
@@ -151,7 +149,7 @@ class HomeFragment : Fragment(), HomeClickListener {
             else -> ""
         }
 
-        blockingMessage.text = when(item) {
+        blockingMessageText.text = when(item) {
             is EnableGeolocationCard -> {
                 if(item.type == GeolocationType.PERMISSIONS) getString(R.string.home_block_permissions_message)
                 else getString(R.string.home_block_geo_message)

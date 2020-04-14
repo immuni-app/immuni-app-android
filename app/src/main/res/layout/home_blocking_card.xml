@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/transparent"
-    android:clipChildren="false"
-    android:clipToPadding="false"
+    android:gravity="bottom"
+    android:paddingTop="48dp"
+    android:clickable="true"
+    android:background="@color/home_blocking_card_mask"
     android:layout_height="match_parent">
 
-        <LinearLayout
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_bottom_sheet_rounded"
+        android:backgroundTint="@color/background"
+        android:clipToPadding="false">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout3"
+            android:paddingTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="48dp"
-            android:background="@color/background"
-            android:clipChildren="false"
-            android:clipToPadding="false"
+            android:background="@color/transparent"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,18 +31,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="-20dp"
-                android:background="@drawable/rounded_corners_20dp"
-                android:backgroundTint="@color/background" />
-
             <ImageView
                 android:id="@+id/blockingIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_female_blue" />
+                android:src="@drawable/ic_female_blue"
+                app:layout_constraintBottom_toTopOf="@+id/blockingTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/blockingTitle"
@@ -46,30 +50,44 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="40dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:gravity="center"
-                android:text="TITOLO" />
+                android:text="TITOLO"
+                app:layout_constraintBottom_toTopOf="@+id/blockingMessageText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/blockingIcon" />
+
 
             <TextView
-                android:id="@+id/blockingMessage"
+                android:id="@+id/blockingMessageText"
                 style="@style/P1Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"
+                app:layout_constraintHeight_percent="0.5"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
                 android:gravity="center"
-                android:text="DESCRIZIONE" />
+                app:layout_constraintBottom_toTopOf="@+id/blockingButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/blockingTitle" />
 
             <Button
                 android:id="@+id/blockingButton"
                 style="@style/RoundedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="40dp"
-                android:text="@string/next" />
+                android:layout_marginBottom="32dp"
+                android:text="@string/next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
