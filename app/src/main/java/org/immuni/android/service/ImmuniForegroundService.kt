@@ -214,7 +214,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
                 if(!PermissionsManager.hasAllPermissions(applicationContext) ||
                     !PermissionsManager.isIgnoringBatteryOptimizations(applicationContext) ||
-                    //!PermissionsManager.globalLocalisationEnabled(applicationContext) ||
+                    !PermissionsManager.globalLocalisationEnabled(applicationContext) ||
                     !bluetoothManager.isBluetoothEnabled() ||
                     !PushNotificationUtils.areNotificationsEnabled(ImmuniApplication.appContext)) {
                     withContext(Dispatchers.Main) {

@@ -90,10 +90,9 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                 // only show one geolocation card at the time in order to not have too many cards
                 if (!PermissionsManager.hasAllPermissions(ImmuniApplication.appContext)) {
                     itemsList.add(EnableGeolocationCard(GeolocationType.PERMISSIONS))
-                }
-                /*else if(!PermissionsManager.globalLocalisationEnabled(ImmuniApplication.appContext)) {
+                }else if(!PermissionsManager.globalLocalisationEnabled(ImmuniApplication.appContext)) {
                     itemsList.add(EnableGeolocationCard(GeolocationType.GLOBAL_GEOLOCATION))
-                }*/
+                }
 
                 // check notifications disabled
 

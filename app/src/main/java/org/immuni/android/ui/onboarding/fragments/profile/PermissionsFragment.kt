@@ -133,7 +133,7 @@ class PermissionsFragment :
     }
 
     private fun geolocationON(): Boolean {
-        return true // PermissionsManager.globalLocalisationEnabled(requireContext())
+        return PermissionsManager.globalLocalisationEnabled(requireContext())
     }
 
     private fun updateUI() {
@@ -198,7 +198,7 @@ class PermissionsFragment :
             }
         }
 
-        if(true || PermissionsManager.globalLocalisationEnabled(requireContext())) {
+        if(PermissionsManager.globalLocalisationEnabled(requireContext())) {
             // SUCCESS
             description3.gone()
             number3.gone()
@@ -243,14 +243,6 @@ class PermissionsFragment :
             nextButton.isEnabled = false
         }
     }
-
-    /*
-    private fun openPermissionsTutorialDialog() {
-        PermissionsTutorialDialog {
-            permissionsManager.requestPermissions(activity as AppCompatActivity)
-        }.show(childFragmentManager, "permissions_tutorial")
-    }
-     */
 
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {
         //updateUI(userInfo.gender)
