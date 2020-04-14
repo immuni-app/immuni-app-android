@@ -13,10 +13,12 @@ class ProfileAdapter(fragment: Fragment) : FragmentStateAdapter(fragment), KoinC
 
     private var items: List<Type> = userManager.mainUser()?.let {
         listOf(
+            Type.PRIVACY,
             Type.BT_INTRO,
             Type.PERMISSIONS
         )
     } ?: listOf(
+        Type.PRIVACY,
         Type.AGE_RANGE,
         Type.GENDER,
         Type.BT_INTRO,
@@ -31,6 +33,7 @@ class ProfileAdapter(fragment: Fragment) : FragmentStateAdapter(fragment), KoinC
             Type.PERMISSIONS -> PermissionsFragment()
             Type.AGE_RANGE -> AgeRangeFragment()
             Type.GENDER -> GenderFragment()
+            Type.PRIVACY -> PrivacyFragment()
         }
 
         return fragment.apply {
@@ -39,6 +42,6 @@ class ProfileAdapter(fragment: Fragment) : FragmentStateAdapter(fragment), KoinC
     }
 
     private enum class Type {
-        BT_INTRO, PERMISSIONS, AGE_RANGE, GENDER
+        PRIVACY, BT_INTRO, PERMISSIONS, AGE_RANGE, GENDER
     }
 }

@@ -20,12 +20,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/onboarding"
-    app:startDestination="@id/privacyFragment">
-    <fragment
-        android:id="@+id/privacyFragment"
-        android:name="org.immuni.android.ui.onboarding.fragments.PrivacyFragment"
-        android:label="WelcomeFragment"
-        tools:layout="@layout/onboarding_privacy_fragment"/>
+    app:startDestination="@id/profileFragment">
     <fragment
         android:id="@+id/profileFragment"
         android:name="org.immuni.android.ui.onboarding.fragments.profile.ProfileFragment"

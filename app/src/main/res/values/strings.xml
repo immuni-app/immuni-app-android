@@ -32,7 +32,7 @@
     <string name="welcome_4_description">Le informazioni raccolte sono preziosissime per aiutare la ricerca contro le epidemie ed evitare che questa crisi si ripeta.</string>
 
     <string name="privacy_checkbox">Ho letto e accetto la {privacy policy}</string>
-    <string name="privacy_title">Tuteliamo la tua privacy</string>
+    <string name="privacy_title">Immuni tutela la tua privacy</string>
     <string name="privacy_message">Raccoglieremo e proteggeremo i tuoi dati responsabilmente.</string>
 
     <string name="profile_completed">Profilo completato</string>
@@ -220,4 +220,5 @@
 
     <string name="diary_disabled_title">Il diario clinico non è abilitato</string>
     <string name="diary_disabled_message">In questa versione dell’app non è possibile compilare il diario clinico.</string>
+    <string name="privacy_page_tos">Proseguendo, dichiaro di aver letto e accettato i {tos}</string>
 </resources>
