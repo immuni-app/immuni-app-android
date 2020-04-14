@@ -10,6 +10,7 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.bendingspoons.base.extensions.*
 import org.immuni.android.R
@@ -124,6 +125,9 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun showBlockingCard(item: HomeItemType) {
+
+        blockingButton.setOnClickListener(null)
+        blockingButton.setOnClickListener { onClick(item) }
 
         blockingIcon.setImageResource(when(item) {
             is EnableGeolocationCard -> {

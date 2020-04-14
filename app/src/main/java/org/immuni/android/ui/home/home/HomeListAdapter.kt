@@ -205,6 +205,9 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
             }
             is SurveyCardDoneVH -> {
                 val item = items[position] as SurveyCardDone
+                holder.name.text = resources.getString(R.string.diary_disabled_title)
+                holder.bottomMessage.text = resources.getString(R.string.diary_disabled_message)
+                /*
                 if (item.surveysLogged > 1) {
                     holder.name.text = resources.getString(R.string.clinic_diaries_updated)
                     holder.bottomMessage.text = resources.getString(R.string.clinic_diaries_updated_message)
@@ -212,6 +215,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
                     holder.name.text = resources.getString(R.string.clinic_diary_updated)
                     holder.bottomMessage.text = resources.getString(R.string.clinic_diary_updated_message)
                 }
+                 */
             }
             is GeolocationCardVH -> {
                 val item = items[position] as EnableGeolocationCard

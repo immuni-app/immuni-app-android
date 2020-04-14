@@ -113,7 +113,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
                 // survey card
 
-                if (surveyManager.areAllSurveysLogged()) {
+                if (true || surveyManager.areAllSurveysLogged()) {
                     itemsList.add(SurveyCardDone(userManager.users().size))
                 } else {
                     val mainUser = userManager.mainUser()!!
@@ -199,6 +199,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                 itemsList.add(UserCard(it, 0))
             }
 
+            /*
             // if there are family members, add header and all the members and a add button
             if (familyMembers.isNotEmpty()) {
                 itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
@@ -211,6 +212,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
             else {
                 itemsList.add(AddFamilyMemberTutorialCard())
             }
+             */
 
             familylistModel.postValue(itemsList)
         }

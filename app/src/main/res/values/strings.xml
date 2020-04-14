@@ -217,4 +217,7 @@
     <string name="home_block_permissions_button">Consenti localizzazione</string>
     <string name="home_block_geo_button">Attiva localizzazione</string>
     <string name="home_block_whitelist_button">Consenti funzionamento</string>
+
+    <string name="diary_disabled_title">Il diario clinico non è abilitato</string>
+    <string name="diary_disabled_message">In questa versione dell’app non è possibile compilare il diario clinico.</string>
 </resources>
