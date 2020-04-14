@@ -100,6 +100,12 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
         }
     }
 
+    fun onTosClick() {
+        oracle.settings()?.termsOfServiceUrl?.let { url ->
+            openUrlInDialog(url)
+        }
+    }
+
     private fun openUrlInDialog(url: String) {
         val context = ImmuniApplication.appContext
         val intent = Intent(context, WebViewDialogActivity::class.java).apply {

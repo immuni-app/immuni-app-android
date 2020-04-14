@@ -31,7 +31,7 @@
     <string name="welcome_4_title">Ricerca scientifica</string>
     <string name="welcome_4_description">Le informazioni raccolte sono preziosissime per aiutare la ricerca contro le epidemie ed evitare che questa crisi si ripeta.</string>
 
-    <string name="privacy_checkbox">Ho letto e accetto la {privacy policy}</string>
+    <string name="privacy_checkbox">Ho letto e accetto l\'{informativa sulla privacy}</string>
     <string name="privacy_title">Immuni tutela la tua privacy</string>
     <string name="privacy_message">Raccoglieremo e proteggeremo i tuoi dati responsabilmente.</string>
 
@@ -220,5 +220,10 @@
 
     <string name="diary_disabled_title">Il diario clinico non è abilitato</string>
     <string name="diary_disabled_message">In questa versione dell’app non è possibile compilare il diario clinico.</string>
-    <string name="privacy_page_tos">Proseguendo, dichiaro di aver letto e accettato i {tos}</string>
+    <string name="privacy_page_tos">Proseguendo, dichiaro di aver letto e accettato i {termini di utilizzo}</string>
+
+    <string name="privacy_page_notification">Immuni <b>ti avvisa in caso di contatto</b> con una persona risultata positiva al test del Covid-19.</string>
+    <string name="privacy_page_location">Immuni <b>non traccia la tua posizione</b>, né quali sono i tuoi movimenti.</string>
+    <string name="privacy_page_bluetooth">Immuni <b>utilizza solo il segnale Bluetooth</b> del tuo dispositivo.</string>
+    <string name="privacy_page_health">Immuni <b>monitora il tuo stato di salute</b>, e ti invia consigli personalizzati su come comportarti, compilando un diario clinico che resta salvato solo sul tuo dispositivo.</string>
 </resources>

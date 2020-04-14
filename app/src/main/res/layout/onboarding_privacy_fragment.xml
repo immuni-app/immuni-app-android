@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background"
+    android:background="@drawable/gradient_privacy"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,7 +16,7 @@
         android:fitsSystemWindows="true"
         android:overScrollMode="never"
         android:paddingTop="110dp"
-        android:paddingBottom="120dp"
+        android:paddingBottom="24dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,17 +34,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
-                android:text="@string/onboarding_gender_title"
+                android:text="@string/privacy_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioGroup
-                android:id="@+id/radioGroup"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="32dp"
                 android:checkedButton="@+id/first"
                 android:orientation="vertical"
@@ -52,22 +51,83 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/question">
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/female"
-                    style="@style/RadioButton"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/onboarding_female" />
+                    android:gravity="center"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_bell"/>
+                    <TextView
+                        style="@style/P1Text"
+                        android:layout_marginStart="16dp"
+                        android:textColor="#657587"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/privacy_page_notification"/>
+                </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/male"
-                    style="@style/RadioButton"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/onboarding_male" />
-            </RadioGroup>
+                    android:gravity="center"
+
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_avoidlocation"/>
+                    <TextView
+                        style="@style/P1Text"
+                        android:layout_marginStart="16dp"
+                        android:textColor="#657587"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/privacy_page_location"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_bluetooth"/>
+                    <TextView
+                        style="@style/P1Text"
+                        android:layout_marginStart="16dp"
+                        android:textColor="#657587"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/privacy_page_bluetooth"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_health"/>
+                    <TextView
+                        style="@style/P1Text"
+                        android:layout_marginStart="16dp"
+                        android:textColor="#657587"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/privacy_page_health"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
@@ -88,9 +148,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:elevation="5dp"
         android:background="@drawable/home_bottom_sheet_rounded"
-        android:backgroundTint="@color/home_background"
+        android:backgroundTint="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -106,7 +165,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tos"
+            android:id="@+id/privacyPolicy"
             android:layout_width="0dp"
             android:translationX="-8dp"
             android:layout_height="wrap_content"
@@ -124,7 +183,7 @@
             app:layout_constraintTop_toTopOf="@+id/checkBox" />
 
         <TextView
-            android:id="@+id/tosBelow"
+            android:id="@+id/tos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -140,7 +199,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/checkBox"
             app:layout_constraintStart_toStartOf="@+id/checkBox"
-            app:layout_constraintTop_toBottomOf="@+id/tos" />
+            app:layout_constraintTop_toBottomOf="@+id/privacyPolicy" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/next"

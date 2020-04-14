@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.onboarding_privacy_fragment.*
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.back
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.next
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
+import org.immuni.android.util.color
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class PrivacyFragment : ProfileContentFragment(R.layout.onboarding_privacy_fragment) {
@@ -37,20 +38,18 @@ class PrivacyFragment : ProfileContentFragment(R.layout.onboarding_privacy_fragm
             viewModel.onPrivacyPolicyAccepted()
         }
 
-        val text = getString(R.string.privacy_checkbox)
-        val textWithoutPlaceholders = text.replace("{", "").replace("}", "")
-        val start = text.indexOf("{")
-        val end = text.indexOf("}")
-        val spannable = SpannableString(textWithoutPlaceholders)
-        spannable.setSpan(ForegroundColorSpan(
-            resources.getColor(R.color.colorPrimary)),
-            start,
-            end - 1,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        tos.text = spannable;
+        val privacyRawText = getString(R.string.privacy_checkbox)
+        privacyPolicy.text = privacyRawText.color("{", "}", resources.getColor(R.color.colorPrimary))
+
+        val tosRawText = getString(R.string.privacy_page_tos)
+        tos.text = tosRawText.color("{", "}", resources.getColor(R.color.colorPrimary))
+
+        privacyPolicy.setOnClickListener {
+            viewModel.onPrivacyPolicyClick()
+        }
 
         tos.setOnClickListener {
-            viewModel.onPrivacyPolicyClick()
+            viewModel.onTosClick()
         }
 
         checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
