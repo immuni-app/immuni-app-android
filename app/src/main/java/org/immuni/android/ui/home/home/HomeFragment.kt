@@ -213,6 +213,9 @@ class HomeFragment : Fragment(), HomeClickListener {
             is EnableBluetoothCard -> {
                 openBluetoothDialog()
             }
+            is AddToWhiteListCard -> {
+                openWhiteListDialog()
+            }
             is SurveyCard -> {
                 if(item.tapQuestion) {
                     openDiaryDialog()
@@ -226,6 +229,11 @@ class HomeFragment : Fragment(), HomeClickListener {
 
     private fun openDiaryDialog() {
         val action = HomeFragmentDirections.actionDiaryDialog()
+        findNavController().navigate(action)
+    }
+
+    private fun openWhiteListDialog() {
+        val action = HomeFragmentDirections.actionWhitelistDialog()
         findNavController().navigate(action)
     }
 

@@ -226,4 +226,7 @@
     <string name="privacy_page_location">Immuni <b>non traccia la tua posizione</b>, né quali sono i tuoi movimenti.</string>
     <string name="privacy_page_bluetooth">Immuni <b>utilizza solo il segnale Bluetooth</b> del tuo dispositivo.</string>
     <string name="privacy_page_health">Immuni <b>monitora il tuo stato di salute</b>, e ti invia consigli personalizzati su come comportarti, compilando un diario clinico che resta salvato solo sul tuo dispositivo.</string>
+    <string name="whitelist_message">Per riuscire a proteggerti abbiamo bisogno che Immuni funzioni in background. <b>Controlla che Immuni non sia tra le app che ottimizzano la batteria</b>. In caso contrario <b>imposta l\'app su \"non ottimizzata\"</b>.</string>
+    <string name="open_list">Apri elenco</string>
+    <string name="i_have_controlled">&#10004; Ho controllato</string>
 </resources>
