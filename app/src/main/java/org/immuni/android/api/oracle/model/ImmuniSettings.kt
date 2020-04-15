@@ -18,7 +18,8 @@ class ImmuniSettings(
     @field:Json(name = "disable_survey_back") val disableSurveyBack: Boolean = false,
     @field:Json(name = "user_data_retention_days") val userDataRetentionDays: Int? = null,
     @field:Json(name = "pico_ping_periodicity") val picoPingPeriodicity: Int? = null,
-    @field:Json(name = "pico_contacts_upload_periodicity") val picoContactsUploadPeriodicity: Int? = null
+    @field:Json(name = "pico_contacts_upload_periodicity") val picoContactsUploadPeriodicity: Int? = null,
+    @field:Json(name = "app_update_url") val appUpdateUrl: String? = null
 ) : OracleSettings() {
     @Transient private var _survey: Survey? = null
     val survey: Survey?
