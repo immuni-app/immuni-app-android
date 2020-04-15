@@ -21,8 +21,8 @@ import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
-import org.immuni.android.models.survey.Severity
 import org.immuni.android.models.survey.Severity.*
+import org.immuni.android.models.survey.TriageProfile
 import org.immuni.android.toast
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.family.model.*
@@ -45,8 +45,8 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     val showAddFamilyMemberDialog: LiveData<Event<Boolean>>
         get() = _showAddFamilyMemberDialog
 
-    private val _showSuggestionDialog = MutableLiveData<Event<Pair<String, Severity>>>()
-    val showSuggestionDialog: LiveData<Event<Pair<String, Severity>>>
+    private val _showSuggestionDialog = MutableLiveData<Event<TriageProfile>>()
+    val showSuggestionDialog: LiveData<Event<TriageProfile>>
         get() = _showSuggestionDialog
 
     private val _navigateToSurvey = MutableLiveData<Event<Boolean>>()
@@ -93,7 +93,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                 // only show one geolocation card at the time in order to not have too many cards
                 if (!PermissionsManager.hasAllPermissions(ImmuniApplication.appContext)) {
                     blockingList.add(EnableGeolocationCard(GeolocationType.PERMISSIONS))
-                }else if(!PermissionsManager.globalLocalisationEnabled(ImmuniApplication.appContext)) {
+                } else if (!PermissionsManager.globalLocalisationEnabled(ImmuniApplication.appContext)) {
                     blockingList.add(EnableGeolocationCard(GeolocationType.GLOBAL_GEOLOCATION))
                 }
 
@@ -113,6 +113,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
                 // survey card
 
+                // TODO: remove the "true ||" after Ferrari experiment
                 if (true || surveyManager.areAllSurveysLogged()) {
                     itemsList.add(SurveyCardDone(userManager.users().size))
                 } else {
@@ -131,7 +132,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                 // suggestion cards
                 val survey = oracle.settings()?.survey
 
-                val userCardsMap = mutableMapOf<Severity, MutableList<String>>()
+                val userCardsMap = mutableMapOf<TriageProfile, MutableList<String>>()
                 for (user in userManager.users()) {
                     val hasNeverCompletedSurveys = surveyManager.lastHealthProfile(user.id) == null
                     if (hasNeverCompletedSurveys) continue
@@ -139,23 +140,28 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                     val name =
                         if (user.isMain) ctx.resources.getString(R.string.you_as_complement) else user.name
 
-                    val triageProfileId = surveyManager.lastHealthProfile(user.id)?.triageProfileId
+                    val surveyTriageProfileId =
+                        surveyManager.lastHealthProfile(user.id)?.triageProfileId
+                    val triageProfileId = if (user.isMain) oracle.me()?.serverTriageProfileId
+                        ?: surveyTriageProfileId else surveyTriageProfileId
                     val triageProfile = triageProfileId?.let {
                         survey?.triage?.profile(it)
                     }
-                    val severity = triageProfile?.severity ?: LOW
 
-                    userCardsMap[severity] = (userCardsMap[severity] ?: mutableListOf()).apply {
-                        add(name)
+                    if (triageProfile != null) {
+                        userCardsMap[triageProfile] =
+                            (userCardsMap[triageProfile] ?: mutableListOf()).apply {
+                                add(name)
+                            }
                     }
                 }
 
                 if (userCardsMap.keys.isNotEmpty()) {
                     itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
-                    userCardsMap.keys.forEach { severity ->
+                    userCardsMap.keys.forEach { triageProfile ->
                         val and = ImmuniApplication.appContext.getString(R.string.and)
                         val names: String
-                        val namesList = userCardsMap[severity]!!
+                        val namesList = userCardsMap[triageProfile]!!
                         if (namesList.size == 1) {
                             names = namesList.first()
                         } else {
@@ -171,10 +177,10 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                         )
 
                         itemsList.add(
-                            when (severity) {
-                                LOW -> SuggestionsCardWhite(suggestionTitle, severity)
-                                MID -> SuggestionsCardYellow(suggestionTitle, severity)
-                                HIGH -> SuggestionsCardRed(suggestionTitle, severity)
+                            when (triageProfile.severity) {
+                                LOW -> SuggestionsCardWhite(suggestionTitle, triageProfile)
+                                MID -> SuggestionsCardYellow(suggestionTitle, triageProfile)
+                                HIGH -> SuggestionsCardRed(suggestionTitle, triageProfile)
                             }
                         )
                     }
@@ -246,12 +252,8 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
         }
     }
 
-    fun openSuggestions(severity: Severity) {
-        val survey = oracle.settings()?.survey
-        survey?.let { s ->
-            val url = s.triage.profiles.firstOrNull { it.severity == severity }?.url
-            url?.let { _showSuggestionDialog.value = Event(Pair(it, severity)) }
-        }
+    fun openSuggestions(triageProfile: TriageProfile) {
+        _showSuggestionDialog.value = Event(triageProfile)
     }
 
     fun onUserIdTap(user: User) {

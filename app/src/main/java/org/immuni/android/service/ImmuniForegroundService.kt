@@ -20,7 +20,7 @@ import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.ble.BLEAdvertiser
 import org.immuni.android.managers.ble.BLEScanner
 import org.immuni.android.picoMetrics.*
-import org.immuni.android.picoMetrics.BluetoothFoundPeripheralsSnapshot.*
+import org.immuni.android.picoMetrics.BluetoothFoundPeripheralsSnapshot.Contact
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -233,29 +233,33 @@ class ImmuniForegroundService : Service(), KoinComponent {
                     appNotificationManager.removeWarningNotification()
                 }
 
-                logEventsToPico()
-
-                delay(PERIODICITY.toLong() * 1000)
-
                 if(previousPermissionsState == PermissionsState.MISSING &&
-                    currentPermissionState == PermissionsState.OK) {
+                        currentPermissionState == PermissionsState.OK) {
                     restartBlee()
                 }
 
                 previousPermissionsState = currentPermissionState
-                delay(5 * 1000)
+
+
+                logEventsToPico()
+
+                delay(PERIODICITY.toLong() * 1000)
             }
         }
     }
 
+    enum class PermissionsState {
+        MISSING,
+        OK
+    }
+
     private var picoCounter = 0
     private suspend fun logEventsToPico() {
-
-        val picoPingPeriodicity = 30
-        val picoContactsUploadPeriodicity = 60
-
         val count = picoCounter
         picoCounter += 1
+
+        val picoPingPeriodicity = oracle.settings()?.picoPingPeriodicity ?: 30
+        val picoContactsUploadPeriodicity = oracle.settings()?.picoContactsUploadPeriodicity ?: 60
 
         if (count % picoPingPeriodicity.div(PERIODICITY) == 0) {
             pico.trackEvent(ForegroundServiceRunning().userAction)
@@ -283,10 +287,4 @@ class ImmuniForegroundService : Service(), KoinComponent {
             )
         }
     }
-
-    enum class PermissionsState {
-        MISSING,
-        OK
-    }
 }
-

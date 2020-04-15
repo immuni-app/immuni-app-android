@@ -102,26 +102,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
         }
     }
 
-    inner class SuggestionsCardWhiteVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
-        var container = v as ConstraintLayout
-        var title: TextView = v.findViewById(R.id.title)
-        var icon: ImageView = v.findViewById(R.id.icon)
-        override fun onClick(v: View) {
-            onItemClick(adapterPosition)
-        }
-    }
-
-    inner class SuggestionsCardYellowVH(v: View) : RecyclerView.ViewHolder(v),
-        View.OnClickListener {
-        var container = v as ConstraintLayout
-        var title: TextView = v.findViewById(R.id.title)
-        var icon: ImageView = v.findViewById(R.id.icon)
-        override fun onClick(v: View) {
-            onItemClick(adapterPosition)
-        }
-    }
-
-    inner class SuggestionsCardRedVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    inner class SuggestionsCardVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var container = v as ConstraintLayout
         var title: TextView = v.findViewById(R.id.title)
         var icon: ImageView = v.findViewById(R.id.icon)
@@ -147,11 +128,13 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
             1 -> Pair(R.layout.home_geolocation_card_item, GeolocationCardVH::class)
             2 -> Pair(R.layout.home_notifications_card_item, NotificationsCardVH::class)
             3 -> Pair(R.layout.home_header_card_item, HeaderCardVH::class)
-            4 -> Pair(R.layout.home_suggestions_card_white_item, SuggestionsCardWhiteVH::class)
-            5 -> Pair(R.layout.home_suggestions_card_yellow_item, SuggestionsCardYellowVH::class)
+            4 -> Pair(R.layout.home_suggestions_card_white_item, SuggestionsCardVH::class)
+            5 -> Pair(R.layout.home_suggestions_card_yellow_item, SuggestionsCardVH::class)
+            6 -> Pair(R.layout.home_suggestions_card_red_item, SuggestionsCardVH::class)
             7 -> Pair(R.layout.home_survey_card_done_item, SurveyCardDoneVH::class)
             8 -> Pair(R.layout.home_bluetooth_card_item, BluetoothCardVH::class)
-            else -> Pair(R.layout.home_suggestions_card_red_item, SuggestionsCardRedVH::class)
+            9 -> error("This should never happen")
+            else -> error("Unhandled viewType $viewType")
         }
 
         val v = LayoutInflater.from(parent.context).inflate(layout, parent, false)
@@ -169,18 +152,8 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
         val resources = ImmuniApplication.appContext.resources
 
         when (holder) {
-            is SuggestionsCardWhiteVH -> {
-                val item = items[position] as SuggestionsCardWhite
-                holder.title.text =
-                    HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
-            }
-            is SuggestionsCardYellowVH -> {
-                val item = items[position] as SuggestionsCardYellow
-                holder.title.text =
-                    HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
-            }
-            is SuggestionsCardRedVH -> {
-                val item = items[position] as SuggestionsCardRed
+            is SuggestionsCardVH -> {
+                val item = items[position] as SuggestionsCard
                 holder.title.text =
                     HtmlCompat.fromHtml(item.title, HtmlCompat.FROM_HTML_MODE_LEGACY)
             }

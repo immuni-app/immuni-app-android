@@ -1,6 +1,7 @@
 package org.immuni.android.ui.home.home.model
 
 import org.immuni.android.models.survey.Severity
+import org.immuni.android.models.survey.TriageProfile
 
 // this represent an item in the home list
 
@@ -30,20 +31,25 @@ data class HeaderCard(
     val title: String
 ): HomeItemType()
 
-data class SuggestionsCardWhite(
+sealed class SuggestionsCard(
     val title: String,
-    val severity: Severity
+    val triageProfile: TriageProfile
 ): HomeItemType()
 
-data class SuggestionsCardYellow(
-    val title: String,
-    val severity: Severity
-): HomeItemType()
+class SuggestionsCardWhite(
+    title: String,
+    triageProfile: TriageProfile
+): SuggestionsCard(title, triageProfile)
 
-data class SuggestionsCardRed(
-    val title: String,
-    val severity: Severity
-): HomeItemType()
+class SuggestionsCardYellow(
+    title: String,
+    triageProfile: TriageProfile
+): SuggestionsCard(title, triageProfile)
+
+class SuggestionsCardRed(
+    title: String,
+    triageProfile: TriageProfile
+): SuggestionsCard(title, triageProfile)
 
 enum class GeolocationType {
     PERMISSIONS, GLOBAL_GEOLOCATION
