@@ -38,21 +38,6 @@ class NotificationsDialogFragment: FullScreenDialogDarkFragment() {
         back.setOnClickListener {
             findNavController().popBackStack()
         }
-
-        //question.setOnClickListener { navigateToExplanations() }
-        //questionText.setOnClickListener { navigateToExplanations() }
-    }
-
-    fun navigateToExplanations() {
-        val action =
-            NotificationsDialogFragmentDirections.actionGlobalNotificationsExplanations()
-        findNavController().navigate(action)
-    }
-
-    fun openAppSettings() {
-        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        intent.data = Uri.parse("package:" + ImmuniApplication.appContext.packageName)
-        startActivity(intent)
     }
 
     private fun openNotificationSettings() {

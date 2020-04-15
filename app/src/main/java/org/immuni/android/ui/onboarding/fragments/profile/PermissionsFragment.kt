@@ -24,7 +24,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
+import org.immuni.android.managers.BluetoothListenerLifecycle
 import org.immuni.android.managers.BluetoothManager
+import org.immuni.android.managers.GeolocalisationListenerLifecycle
 import org.immuni.android.toast
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.onboarding.OnboardingViewModel
@@ -36,6 +38,23 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
     private lateinit var viewModel: OnboardingViewModel
     val permissionsManager: PermissionsManager by inject()
     val bluetoothManager: BluetoothManager by inject()
+
+    private lateinit var lifecycleBluetooth: BluetoothListenerLifecycle
+    private lateinit var lifecycleGeolocation: GeolocalisationListenerLifecycle
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleBluetooth = BluetoothListenerLifecycle(requireContext(), this.lifecycle) { bluetoothState ->
+            updateUI()
+            checkAllGood()
+        }
+        lifecycleGeolocation = GeolocalisationListenerLifecycle(requireContext(), this.lifecycle) { active ->
+            updateUI()
+            checkAllGood()
+        }
+        lifecycle.addObserver(lifecycleBluetooth)
+        lifecycle.addObserver(lifecycleGeolocation)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,7 +73,14 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
     override fun onResume() {
         super.onResume()
         updateUI()
+        checkAllGood()
         this.view?.hideKeyboard()
+    }
+
+    private fun checkAllGood() {
+        if(btON() && permissionsON() && geolocationON() && whiteListON()) {
+            viewModel.onOnboardingComplete()
+        }
     }
 
     private fun checkBatteryOptimization() {
@@ -77,7 +103,9 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 return@setOnClickListener
             }
             if(!bluetoothManager.isBluetoothEnabled()) {
-                bluetoothManager.openBluetoothSettings(this)
+                val action = ProfileFragmentDirections.actionBluetoothDialog()
+                findNavController().navigate(action)
+                //bluetoothManager.openBluetoothSettings(this)
             } else updateUI()
         }
 
@@ -87,7 +115,10 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                     Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
                 val action = ProfileFragmentDirections.actionGlobalPermissionsTutorial()
                 findNavController().navigate(action)
-            } else openAppSettings()
+            } else {
+                val action = ProfileFragmentDirections.actionGeoPermissionsDialog()
+                findNavController().navigate(action)
+            }
         }
 
         geolocation.setOnClickListener {

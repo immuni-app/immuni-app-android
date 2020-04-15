@@ -39,15 +39,6 @@ class PermissionsDialogFragment: FullScreenDialogDarkFragment() {
         back.setOnClickListener {
             findNavController().popBackStack()
         }
-
-        //question.setOnClickListener { navigateToExplanations() }
-        //questionText.setOnClickListener { navigateToExplanations() }
-    }
-
-    fun navigateToExplanations() {
-        val action =
-            PermissionsDialogFragmentDirections.actionPermissionExplanationDialog()
-        findNavController().navigate(action)
     }
 
     fun openAppSettings() {

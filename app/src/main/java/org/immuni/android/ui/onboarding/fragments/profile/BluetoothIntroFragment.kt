@@ -39,10 +39,9 @@ class BluetoothIntroFragment :
         next.setOnClickListener {
 
             if(canProceed()) {
-                viewModel.onNextTap()
                 viewModel.onOnboardingComplete()
             } else {
-                val action = ProfileFragmentDirections.actionPermissionsDialog()
+                val action = ProfileFragmentDirections.actionPermissionsBottomSheetDialog()
                 findNavController().navigate(action)
             }
         }

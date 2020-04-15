@@ -48,7 +48,8 @@
     <dialog
         android:id="@+id/permissionsTutorialDialog"
         android:name="org.immuni.android.ui.onboarding.fragments.profile.PermissionsTutorialDialog"
-        android:label="PermissionsTutorialDialog" />
+        android:label="PermissionsTutorialDialog"
+        tools:layout="@layout/onboarding_permissions_tutorial_dialog"/>
     <action
         android:id="@+id/action_global_permissions_tutorial"
         app:destination="@id/permissionsTutorialDialog"/>
@@ -66,7 +67,7 @@
         android:label="PermissionsFragment"
         tools:layout="@layout/onboarding_permissions_dialog"/>
     <action
-        android:id="@+id/action_permissions_dialog"
+        android:id="@+id/action_permissions_bottom_sheet_dialog"
         app:destination="@id/permissionsFragment"/>
     <dialog
         android:id="@+id/geolocationDialogFragment"
@@ -76,4 +77,20 @@
     <action
         android:id="@+id/action_geolocation_dialog"
         app:destination="@id/geolocationDialogFragment"/>
+    <dialog
+        android:id="@+id/bluetoothDialog"
+        android:name="org.immuni.android.ui.home.home.fragments.BluetoothDialogFragment"
+        android:label="BluetoothDialogFragment"
+        tools:layout="@layout/enable_bluetooth_dialog"/>
+    <action
+        android:id="@+id/action_bluetooth_dialog"
+        app:destination="@id/bluetoothDialog"/>
+    <dialog
+        android:id="@+id/geoPermissionsDialog"
+        android:name="org.immuni.android.ui.home.home.fragments.PermissionsDialogFragment"
+        android:label="PermissionsDialogFragment"
+        tools:layout="@layout/enable_app_permissions_dialog"/>
+    <action
+        android:id="@+id/action_geo_permissions_dialog"
+        app:destination="@id/geoPermissionsDialog"/>
 </navigation>
