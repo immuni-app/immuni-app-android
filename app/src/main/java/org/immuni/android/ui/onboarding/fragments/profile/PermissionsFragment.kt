@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -93,6 +94,11 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             PermissionsManager.startChangeGlobalGeolocalisation(requireContext())
         }
 
+        knowMore.setOnClickListener { updateKnowMore(it as TextView) }
+        knowMore2.setOnClickListener { updateKnowMore(it as TextView) }
+        knowMore3.setOnClickListener { updateKnowMore(it as TextView) }
+        knowMore4.setOnClickListener { updateKnowMore(it as TextView) }
+
         viewModel.permissionsChanged.observe(viewLifecycleOwner, Observer {
             updateUI()
         })
@@ -105,6 +111,47 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 }
             }
         })
+    }
+
+    private fun updateKnowMore(textView: TextView) {
+        var more = false
+        // update button text
+        if(textView.text == getString(R.string.know_more)) {
+            textView.text = getString(R.string.hide)
+            more = true
+        }
+        else {
+            textView.text = getString(R.string.know_more)
+            more = false
+        }
+
+        // update content text
+        when(textView.id) {
+            R.id.knowMore -> {
+                when(more) {
+                    true -> description.text = getString(R.string.onboarding_permission_bt_long)
+                    false -> description.text = getString(R.string.onboarding_permission_bt_short)
+                }
+            }
+            R.id.knowMore2 -> {
+                when(more) {
+                    true -> description2.text = getString(R.string.onboarding_permission_permissions_long)
+                    false -> description2.text = getString(R.string.onboarding_permission_permissions_short)
+                }
+            }
+            R.id.knowMore3 -> {
+                when(more) {
+                    true -> description3.text = getString(R.string.onboarding_permission_geo_long)
+                    false -> description3.text = getString(R.string.onboarding_permission_geo_short)
+                }
+            }
+            R.id.knowMore4 -> {
+                when(more) {
+                    true -> description4.text = getString(R.string.onboarding_permission_whitelist_long)
+                    false -> description4.text = getString(R.string.onboarding_permission_whitelist_short)
+                }
+            }
+        }
     }
 
     fun openAppSettings() {
@@ -145,12 +192,16 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             circle.setImageResource(R.drawable.ic_check_permissions)
             bluetooth.gone()
             bluetoothBox.alpha = 0.4f
+            separator.visible()
+            knowMore.gone()
         } else {
             // SHOW OPEN ALWAYS
             description.visible()
             bluetooth.visible()
             circle.setImageResource(R.drawable.ic_bluetooth)
             bluetoothBox.alpha = 1f
+            separator.gone()
+            knowMore.visible()
         }
 
         // PERMISSIONS
@@ -160,6 +211,8 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             circle2.setImageResource(R.drawable.ic_check_permissions)
             geoPermissions.gone()
             bluetoothBox2.alpha = 0.4f
+            separator2.visible()
+            knowMore2.gone()
         } else {
             // DISABLED
             if(!btON()) {
@@ -167,12 +220,16 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 geoPermissions.gone()
                 circle2.setImageResource(R.drawable.ic_localization)
                 bluetoothBox2.alpha = 0.4f
+                separator2.gone()
+                knowMore2.visible()
             } else {
                 // ACTIVE
                 description2.visible()
                 geoPermissions.visible()
                 circle2.setImageResource(R.drawable.ic_localization)
                 bluetoothBox2.alpha = 1f
+                separator2.gone()
+                knowMore2.visible()
             }
         }
 
@@ -183,6 +240,8 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             circle3.setImageResource(R.drawable.ic_check_permissions)
             geolocation.gone()
             bluetoothBox3.alpha = 0.4f
+            separator3.visible()
+            knowMore3.gone()
         } else {
             // DISABLED
             if(!permissionsON() || !btON()) {
@@ -190,12 +249,16 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 geolocation.gone()
                 circle3.setImageResource(R.drawable.ic_localization)
                 bluetoothBox3.alpha = 0.4f
+                separator3.gone()
+                knowMore3.visible()
             } else {
                 // ACTIVE
                 description3.visible()
                 geolocation.visible()
                 circle3.setImageResource(R.drawable.ic_localization)
                 bluetoothBox3.alpha = 1f
+                separator3.gone()
+                knowMore3.visible()
             }
         }
 
@@ -206,6 +269,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             circle4.setImageResource(R.drawable.ic_check_permissions)
             whitelist.gone()
             bluetoothBox4.alpha = 0.4f
+            knowMore4.gone()
         } else {
             // DISABLED
             if(!geolocationON() || !btON() || !permissionsON()) {
@@ -213,12 +277,14 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 whitelist.gone()
                 circle4.setImageResource(R.drawable.ic_localization)
                 bluetoothBox4.alpha = 0.4f
+                knowMore4.visible()
             } else {
                 // ACTIVE
                 description4.visible()
                 whitelist.visible()
                 circle4.setImageResource(R.drawable.ic_localization)
                 bluetoothBox4.alpha = 1f
+                knowMore4.visible()
             }
         }
     }

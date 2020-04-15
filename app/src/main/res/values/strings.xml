@@ -230,4 +230,18 @@
     <string name="whitelist_message">Per riuscire a proteggerti abbiamo bisogno che Immuni funzioni in background. <b>Controlla che Immuni non sia tra le app che ottimizzano la batteria</b>. In caso contrario <b>imposta l\'app su \"non ottimizzata\"</b>.</string>
     <string name="open_list">Apri elenco</string>
     <string name="i_have_controlled">&#10004; Ho controllato</string>
+    <string name="know_more">Scopri di più</string>
+    <string name="hide">Nascondi</string>
+
+    <string name="onboarding_permission_bt_short">Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
+    <string name="onboarding_permission_bt_long">Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio. Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio. Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
+
+    <string name="onboarding_permission_permissions_short">Il consenso alla posizione è necessario per permettere il funzionamento del Bluetooth. Non utilizzeremo questo consenso per tracciare i tuoi spostamenti in nessun momento. Se decidi di negare questo consenso, l\'applicazione non sarà in grado di comunicare con i dispositivi vicini a te e non riusciremo ad avvertirti in caso di pericolo.</string>
+    <string name="onboarding_permission_permissions_long">Il consenso alla posizione è necessario per permettere il funzionamento del Bluetooth. Non utilizzeremo questo consenso per tracciare i tuoi spostamenti in nessun momento. Se decidi di negare questo consenso, l\'applicazione non sarà in grado di comunicare con i dispositivi vicini a te e non riusciremo ad avvertirti in caso di pericolo. Il consenso alla posizione è necessario per permettere il funzionamento del Bluetooth. Non utilizzeremo questo consenso per tracciare i tuoi spostamenti in nessun momento. Se decidi di negare questo consenso, l\'applicazione non sarà in grado di comunicare con i dispositivi vicini a te e non riusciremo ad avvertirti in caso di pericolo.</string>
+
+    <string name="onboarding_permission_geo_short">Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione.</string>
+    <string name="onboarding_permission_geo_long">Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione. Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione. Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione.</string>
+
+    <string name="onboarding_permission_whitelist_short">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.</string>
+    <string name="onboarding_permission_whitelist_long">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.</string>
 </resources>

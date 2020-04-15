@@ -42,6 +42,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title">
 
+                <View
+                    android:id="@+id/separator"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#E9EFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description"
+                    app:layout_constraintVertical_bias="1.0" />
+
                 <ImageView
                     android:id="@+id/circle"
                     android:layout_width="40dp"
@@ -79,6 +91,20 @@
                     app:layout_constraintStart_toStartOf="@+id/circle"
                     app:layout_constraintTop_toBottomOf="@+id/circle" />
 
+                <TextView
+                    android:id="@+id/knowMore"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView12"
+                    app:layout_constraintStart_toStartOf="@+id/circle"
+                    app:layout_constraintTop_toBottomOf="@+id/description" />
+
                 <Button
                     style="@style/RoundedButton"
                     android:id="@+id/bluetooth"
@@ -90,7 +116,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/description" />
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,6 +130,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bluetoothBox">
+
+                <View
+                    android:id="@+id/separator2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#E9EFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description2"
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <ImageView
                     android:id="@+id/circle2"
@@ -142,6 +180,20 @@
                     app:layout_constraintStart_toStartOf="@+id/circle2"
                     app:layout_constraintTop_toBottomOf="@+id/circle2" />
 
+                <TextView
+                    android:id="@+id/knowMore2"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView122"
+                    app:layout_constraintStart_toStartOf="@+id/circle2"
+                    app:layout_constraintTop_toBottomOf="@+id/description2" />
+
                 <Button
                     style="@style/RoundedButton"
                     android:id="@+id/geoPermissions"
@@ -153,7 +205,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/description2" />
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -168,6 +220,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bluetoothBox2">
 
+                <View
+                    android:id="@+id/separator3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#E9EFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description3"
+                    app:layout_constraintVertical_bias="1.0" />
+
                 <ImageView
                     android:id="@+id/circle3"
                     android:layout_width="40dp"
@@ -176,6 +240,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_check_permissions" />
+
+                <TextView
+                    android:id="@+id/knowMore3"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView123"
+                    app:layout_constraintStart_toStartOf="@+id/circle3"
+                    app:layout_constraintTop_toBottomOf="@+id/description3" />
 
                 <TextView
                     android:id="@+id/textView123"
@@ -216,7 +294,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/description3" />
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore3" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -255,13 +333,27 @@
                     app:layout_constraintTop_toTopOf="@+id/circle4" />
 
                 <TextView
+                    android:id="@+id/knowMore4"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView1234"
+                    app:layout_constraintStart_toStartOf="@+id/circle4"
+                    app:layout_constraintTop_toBottomOf="@+id/description4" />
+
+                <TextView
                     android:id="@+id/description4"
                     style="@style/P1Text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/euclid_circular_semi_bold"
-                    android:text="Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. "
+                    android:text="Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria."
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView1234"
                     app:layout_constraintStart_toStartOf="@+id/circle4"
@@ -278,7 +370,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/description4" />
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore4" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
