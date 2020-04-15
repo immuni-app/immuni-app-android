@@ -12,13 +12,17 @@ class HomeDiffCallback(private val oldList: List<HomeItemType>, private val newL
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         val old = oldList[oldItemPosition]
-        var new = newList[newItemPosition]
+        val new = newList[newItemPosition]
         if(old::class != new::class) return false
         if(old is SurveyCardDone) return true
         if(old is EnableNotificationCard) return true
         if(old is EnableGeolocationCard) return true
         if(old is EnableBluetoothCard) return true
         if(old is SurveyCard) return true
+        if(old is SuggestionsCard && new is SuggestionsCard) {
+            return old.title == new.title &&
+                    old.triageProfile.id == new.triageProfile.id
+        }
         else return old == new
     }
 
