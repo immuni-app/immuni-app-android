@@ -46,6 +46,7 @@
             android:name=".service.ImmuniForegroundService"
             android:enabled="true"
             android:exported="false"
+            android:stopWithTask="false"
             android:foregroundServiceType="connectedDevice">
         </service>
 
