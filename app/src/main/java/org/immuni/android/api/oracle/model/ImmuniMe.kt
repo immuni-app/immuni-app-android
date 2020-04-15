@@ -9,5 +9,5 @@ import org.immuni.android.models.survey.raw.RawTriageProfile
 
 @JsonClass(generateAdapter = true)
 class ImmuniMe(
-    @field:Json(name = "server_triage") val serverTriageProfileId: TriageProfileId?
+    @field:Json(name = "server_triage") val serverTriageProfileId: TriageProfileId? = null
 ): OracleMe(), JSonSerializable
