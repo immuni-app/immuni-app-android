@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -39,9 +38,9 @@ class HomeFragment : Fragment(), HomeClickListener {
             MaterialAlertDialogBuilder(context)
                 .setTitle(getString(R.string.app_exit_title))
                 .setMessage(getString(R.string.app_exit_message))
-                .setPositiveButton(getString(R.string.exit)) { d, _ -> activity?.finish()}
-                .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss()}
-                .setOnCancelListener {  }
+                .setPositiveButton(getString(R.string.exit)) { d, _ -> activity?.finish() }
+                .setNegativeButton(getString(R.string.cancel)) { d, _ -> d.dismiss() }
+                .setOnCancelListener { }
                 .show()
         }
     }
@@ -84,12 +83,13 @@ class HomeFragment : Fragment(), HomeClickListener {
         })
 
         viewModel.showSuggestionDialog.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let { (url, severity) ->
-                val intent = Intent(ImmuniApplication.appContext, WebViewDialogActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    putExtra("url", url)
-                    putExtra("color", severity.backgroundColor())
-                }
+            it.getContentIfNotHandled()?.let { triageProfile ->
+                val intent =
+                    Intent(ImmuniApplication.appContext, WebViewDialogActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        putExtra("url", triageProfile.url)
+                        putExtra("color", triageProfile.severity.backgroundColor())
+                    }
                 activity?.startActivity(intent)
             }
         })
@@ -117,14 +117,14 @@ class HomeFragment : Fragment(), HomeClickListener {
                         it is EnableNotificationCard ||
                         it is AddToWhiteListCard
             }
-            if(blockingItems.isNotEmpty()) {
+            if (blockingItems.isNotEmpty()) {
                 showBlockingCard(blockingItems.first()!!)
             } else {
                 hideBlockingCard()
             }
         })
 
-        blockingCard.setOnClickListener {  }
+        blockingCard.setOnClickListener { }
     }
 
     private fun showBlockingCard(item: HomeItemType) {
@@ -132,20 +132,22 @@ class HomeFragment : Fragment(), HomeClickListener {
         blockingButton.setOnClickListener(null)
         blockingButton.setOnClickListener { onClick(item) }
 
-        blockingIcon.setImageResource(when(item) {
-            is EnableGeolocationCard -> {
-                if(item.type == GeolocationType.PERMISSIONS) R.drawable.ic_localization
-                else R.drawable.ic_localization
+        blockingIcon.setImageResource(
+            when (item) {
+                is EnableGeolocationCard -> {
+                    if (item.type == GeolocationType.PERMISSIONS) R.drawable.ic_localization
+                    else R.drawable.ic_localization
+                }
+                is EnableBluetoothCard -> R.drawable.ic_bluetooth
+                is EnableNotificationCard -> R.drawable.ic_bell
+                is AddToWhiteListCard -> R.drawable.ic_settings
+                else -> R.drawable.ic_localization
             }
-            is EnableBluetoothCard -> R.drawable.ic_bluetooth
-            is EnableNotificationCard -> R.drawable.ic_bell
-            is AddToWhiteListCard -> R.drawable.ic_settings
-            else -> R.drawable.ic_localization
-        })
+        )
 
-        blockingTitle.text = when(item) {
+        blockingTitle.text = when (item) {
             is EnableGeolocationCard -> {
-                if(item.type == GeolocationType.PERMISSIONS) getString(R.string.home_block_permissions_title)
+                if (item.type == GeolocationType.PERMISSIONS) getString(R.string.home_block_permissions_title)
                 else getString(R.string.home_block_geo_title)
             }
             is EnableBluetoothCard -> getString(R.string.home_block_bt_title)
@@ -154,9 +156,9 @@ class HomeFragment : Fragment(), HomeClickListener {
             else -> ""
         }
 
-        blockingMessageText.text = when(item) {
+        blockingMessageText.text = when (item) {
             is EnableGeolocationCard -> {
-                if(item.type == GeolocationType.PERMISSIONS) getString(R.string.home_block_permissions_message)
+                if (item.type == GeolocationType.PERMISSIONS) getString(R.string.home_block_permissions_message)
                 else getString(R.string.home_block_geo_message)
             }
             is EnableBluetoothCard -> getString(R.string.home_block_bt_message)
@@ -165,9 +167,9 @@ class HomeFragment : Fragment(), HomeClickListener {
             else -> ""
         }
 
-        blockingButton.text = when(item) {
+        blockingButton.text = when (item) {
             is EnableGeolocationCard -> {
-                if(item.type == GeolocationType.PERMISSIONS) getString(R.string.home_block_permissions_button)
+                if (item.type == GeolocationType.PERMISSIONS) getString(R.string.home_block_permissions_button)
                 else getString(R.string.home_block_geo_button)
             }
             is EnableBluetoothCard -> getString(R.string.home_block_bluetooth_button)
@@ -191,21 +193,15 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     override fun onClick(item: HomeItemType) {
-        when(item) {
-            is SuggestionsCardWhite -> {
-                viewModel.openSuggestions(item.severity)
-            }
-            is SuggestionsCardYellow -> {
-                viewModel.openSuggestions(item.severity)
-            }
-            is SuggestionsCardRed -> {
-                viewModel.openSuggestions(item.severity)
+        when (item) {
+            is SuggestionsCard -> {
+                viewModel.openSuggestions(item.triageProfile)
             }
             is EnableNotificationCard -> {
                 openNotificationDialog()
             }
             is EnableGeolocationCard -> {
-                when(item.type) {
+                when (item.type) {
                     GeolocationType.PERMISSIONS -> openPermissionsDialog()
                     GeolocationType.GLOBAL_GEOLOCATION -> openGeolocationDialog()
                 }
@@ -217,13 +213,14 @@ class HomeFragment : Fragment(), HomeClickListener {
                 openWhiteListDialog()
             }
             is SurveyCard -> {
-                if(item.tapQuestion) {
+                if (item.tapQuestion) {
                     openDiaryDialog()
                 } else {
                     viewModel.onSurveyCardTap()
                 }
             }
-            is SurveyCardDone -> { }
+            is SurveyCardDone -> {
+            }
         }
     }
 
