@@ -131,18 +131,20 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
                 // suggestion cards
                 val survey = oracle.settings()?.survey
+                val me = oracle.me()
 
                 val userCardsMap = mutableMapOf<TriageProfile, MutableList<String>>()
                 for (user in userManager.users()) {
                     val hasNeverCompletedSurveys = surveyManager.lastHealthProfile(user.id) == null
-                    if (hasNeverCompletedSurveys) continue
+                    val hasServerTriageProfile = user.isMain && me?.serverTriageProfileId != null
+                    if (hasNeverCompletedSurveys && !hasServerTriageProfile) continue
 
                     val name =
                         if (user.isMain) ctx.resources.getString(R.string.you_as_complement) else user.name
 
                     val surveyTriageProfileId =
                         surveyManager.lastHealthProfile(user.id)?.triageProfileId
-                    val triageProfileId = if (user.isMain) oracle.me()?.serverTriageProfileId
+                    val triageProfileId = if (user.isMain) me?.serverTriageProfileId
                         ?: surveyTriageProfileId else surveyTriageProfileId
                     val triageProfile = triageProfileId?.let {
                         survey?.triage?.profile(it)
