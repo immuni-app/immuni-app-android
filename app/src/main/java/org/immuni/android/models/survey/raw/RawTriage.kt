@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class RawTriage(
-    @field:Json(name = "profiles") val profiles: List<RawTriageStatus>,
+    @field:Json(name = "profiles") val profiles: List<RawTriageProfile>,
     @field:Json(name = "logic") val logic: List<RawTriageCondition>
 ) {
     fun triage() = Triage(
@@ -28,7 +28,7 @@ data class RawTriageCondition(
 }
 
 @JsonClass(generateAdapter = true)
-data class RawTriageStatus(
+data class RawTriageProfile(
     @field:Json(name = "id") val id: String,
     @field:Json(name = "url") val url: String,
     @field:Json(name = "severity") val severity: RawSeverity
