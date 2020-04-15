@@ -18,17 +18,17 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class BluetoothManager(val context: Context) : KoinComponent {
-    private val bluetoothAdapter: BluetoothAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    private val bluetoothAdapter: BluetoothAdapter? by lazy(LazyThreadSafetyMode.NONE) {
         val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothManager.adapter
     }
 
-    fun adapter(): BluetoothAdapter {
+    fun adapter(): BluetoothAdapter? {
         return bluetoothAdapter
     }
 
     fun isBluetoothEnabled(): Boolean {
-        return bluetoothAdapter.isEnabled ?: false
+        return bluetoothAdapter?.isEnabled ?: false
     }
 
     fun isBluetoothSupported(): Boolean {
@@ -36,14 +36,14 @@ class BluetoothManager(val context: Context) : KoinComponent {
     }
 
     fun openBluetoothSettings(fragment: Fragment, requestCode: Int = REQUEST_ENABLE_BT) {
-        bluetoothAdapter.takeIf { !it.isEnabled }?.apply {
+        bluetoothAdapter.takeIf { !(it?.isEnabled == true) }?.apply {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             fragment.startActivityForResult(enableBtIntent, requestCode)
         }
     }
 
     fun openBluetoothSettings(activity: Activity, requestCode: Int = REQUEST_ENABLE_BT) {
-        bluetoothAdapter.takeIf { !it.isEnabled }?.apply {
+        bluetoothAdapter.takeIf { !(it?.isEnabled == true) }?.apply {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             activity.startActivityForResult(enableBtIntent, requestCode)
         }

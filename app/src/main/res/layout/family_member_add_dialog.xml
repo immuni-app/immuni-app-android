@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:src="@drawable/ic_cross"
+        app:srcCompat="@drawable/ic_cross"
         android:layout_gravity="top|left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

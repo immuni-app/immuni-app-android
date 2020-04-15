@@ -60,4 +60,13 @@
     <action
         android:id="@+id/action_whitelist_dialog"
         app:destination="@id/whiteListDialogFragment"/>
+    <dialog
+        android:id="@+id/permissionsFragment"
+        android:name="org.immuni.android.ui.onboarding.fragments.profile.PermissionsFragment"
+        android:label="PermissionsFragment"
+        tools:layout="@layout/onboarding_permissions_dialog"/>
+    <action
+        android:id="@+id/action_permissions_dialog"
+        app:destination="@id/permissionsFragment"/>
+
 </navigation>

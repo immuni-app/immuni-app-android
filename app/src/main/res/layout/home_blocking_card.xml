@@ -34,7 +34,7 @@
                 android:id="@+id/blockingIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_female_blue"
+                app:srcCompat="@drawable/ic_female_blue"
                 app:layout_constraintBottom_toTopOf="@+id/blockingTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

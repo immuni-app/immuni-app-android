@@ -135,7 +135,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="32dp"
         android:layout_gravity="bottom|left"
-        android:src="@drawable/ic_back_form"
+        app:srcCompat="@drawable/ic_back_form"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </FrameLayout>

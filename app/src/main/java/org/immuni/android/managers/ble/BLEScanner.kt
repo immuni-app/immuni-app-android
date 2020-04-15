@@ -39,7 +39,7 @@ class BLEScanner: KoinComponent {
 
     fun start(): Boolean {
         if(!bluetoothManager.isBluetoothEnabled()) return false
-        bluetoothLeScanner = bluetoothManager.adapter().bluetoothLeScanner
+        bluetoothLeScanner = bluetoothManager.adapter()!!.bluetoothLeScanner
         val filter = listOf(
             ScanFilter.Builder().apply {
                 val serviceUuidString = CGAIdentifiers.ServiceDataUUIDString

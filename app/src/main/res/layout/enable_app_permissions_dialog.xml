@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="48dp"
-                android:src="@drawable/ic_cross"
+                app:srcCompat="@drawable/ic_cross"
                 android:layout_gravity="top|left"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -141,7 +141,7 @@
                         android:layout_marginTop="17dp"
                         android:layout_marginEnd="19dp"
                         android:layout_marginBottom="17dp"
-                        android:src="@drawable/ic_localization" />
+                        app:srcCompat="@drawable/ic_localization" />
 
                     <TextView
                         style="@style/H5Section"
@@ -175,7 +175,7 @@
                         android:layout_marginTop="17dp"
                         android:layout_marginEnd="19dp"
                         android:layout_marginBottom="17dp"
-                        android:src="@drawable/ic_fake_radio" />
+                        app:srcCompat="@drawable/ic_fake_radio" />
 
                     <TextView
                         style="@style/H5Section"

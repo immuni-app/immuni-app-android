@@ -22,7 +22,7 @@
         android:layout_marginBottom="24dp"
         android:layout_weight="1"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_illustration_survey_gray"
+        app:srcCompat="@drawable/ic_illustration_survey_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

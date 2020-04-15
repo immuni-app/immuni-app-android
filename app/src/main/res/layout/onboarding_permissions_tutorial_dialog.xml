@@ -34,7 +34,7 @@
         android:layout_marginEnd="32dp"
         android:maxWidth="320dp"
         android:maxHeight="320dp"
-        android:src="@drawable/ic_permissions_sample"
+        app:srcCompat="@drawable/ic_permissions_sample"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

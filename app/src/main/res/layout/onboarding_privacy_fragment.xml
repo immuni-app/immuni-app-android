@@ -60,7 +60,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_bell"/>
+                        app:srcCompat="@drawable/ic_bell"/>
                     <TextView
                         style="@style/P1Text"
                         android:layout_marginStart="16dp"
@@ -80,7 +80,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_avoidlocation"/>
+                        app:srcCompat="@drawable/ic_avoidlocation"/>
                     <TextView
                         style="@style/P1Text"
                         android:layout_marginStart="16dp"
@@ -99,7 +99,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_bluetooth"/>
+                        app:srcCompat="@drawable/ic_bluetooth"/>
                     <TextView
                         style="@style/P1Text"
                         android:layout_marginStart="16dp"
@@ -117,7 +117,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_health"/>
+                        app:srcCompat="@drawable/ic_health"/>
                     <TextView
                         style="@style/P1Text"
                         android:layout_marginStart="16dp"
@@ -218,7 +218,7 @@
             android:layout_gravity="bottom|left"
             android:layout_marginStart="32dp"
             android:layout_marginBottom="32dp"
-            android:src="@drawable/ic_back_form"
+            app:srcCompat="@drawable/ic_back_form"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
