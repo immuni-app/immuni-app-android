@@ -34,13 +34,13 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     private var bluetoothGattServer: BluetoothGattServer? = null
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
-    private lateinit var advertiser: BluetoothLeAdvertiser
+    private var advertiser: BluetoothLeAdvertiser? = null
     private var callback = MyAdvertiseCallback()
     private val btIdsManager: BtIdsManager by inject()
     private val id = Random.nextInt(0, 1000)
 
     fun stop() {
-        advertiser.stopAdvertising(callback)
+        advertiser?.stopAdvertising(callback)
         bluetoothGattServer?.close()
         bluetoothGattServer = null
     }
@@ -81,7 +81,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             val data = Hex.stringToBytes(bytesMan)
             addServiceData(serviceId, data)
         }
-        advertiser.startAdvertising(
+        advertiser?.startAdvertising(
             builder.build(), dataBuilder.build(), scanResponseBuilder.build(),
             callback
         )
@@ -94,7 +94,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         }
 
         // stop and start again
-        advertiser.stopAdvertising(callback)
+        advertiser?.stopAdvertising(callback)
 
         startAdvertising()
     }

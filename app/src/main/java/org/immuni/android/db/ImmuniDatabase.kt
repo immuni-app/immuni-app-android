@@ -13,7 +13,7 @@ import org.immuni.android.db.entity.HealthProfileEntity
 import java.io.File
 
 
-const val DATABASE_VERSION = 6
+const val DATABASE_VERSION = 7
 const val DATABASE_NAME = "immuni_database"
 
 @Database(
