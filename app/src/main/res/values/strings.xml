@@ -244,4 +244,7 @@
 
     <string name="onboarding_permission_whitelist_short">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.</string>
     <string name="onboarding_permission_whitelist_long">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.</string>
+    <string name="delete_data">Elimina dati</string>
+    <string name="choose_an_app_to_contact_us">Seleziona un\'app</string>
+    <string name="delete_data_email_message">TODO corpo del messaggio</string>
 </resources>
