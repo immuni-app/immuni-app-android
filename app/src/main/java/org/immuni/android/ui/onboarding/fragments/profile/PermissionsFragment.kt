@@ -52,9 +52,8 @@ class PermissionsFragment :
     }
 
     private fun checkBatteryOptimization() {
-        activity?.let {
-            PermissionsManager.startChangeBatteryOptimization(requireContext())
-        }
+        val action = ProfileFragmentDirections.actionWhitelistDialog()
+        findNavController().navigate(action)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -94,7 +94,8 @@
     <dialog
         android:id="@+id/whiteListDialogFragment"
         android:name="org.immuni.android.ui.home.home.fragments.WhiteListDialogFragment"
-        android:label="WhiteListDialogFragment" />
+        android:label="WhiteListDialogFragment"
+        tools:layout="@layout/whitelist_dialog"/>
     <action
         android:id="@+id/action_whitelist_dialog"
         app:destination="@id/whiteListDialogFragment"/>
