@@ -116,14 +116,10 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         bluetoothGattServer = bluetoothManager.openGattServer(context, gattServerCallback)
         val uuid = UUID.fromString(CGAIdentifiers.ServiceDataUUIDString)
         val service = BluetoothGattService(uuid, BluetoothGattService.SERVICE_TYPE_PRIMARY)
-        val writeCharacteristic = BluetoothGattCharacteristic(uuid,
-            BluetoothGattCharacteristic.PROPERTY_WRITE,
-            BluetoothGattCharacteristic.PERMISSION_WRITE)
-        val readCharacteristic = BluetoothGattCharacteristic(uuid,
-            BluetoothGattCharacteristic.PROPERTY_READ,
-            BluetoothGattCharacteristic.PERMISSION_READ)
-        service.addCharacteristic(writeCharacteristic)
-        service.addCharacteristic(readCharacteristic)
+        val property = BluetoothGattCharacteristic.PROPERTY_READ or BluetoothGattCharacteristic.PROPERTY_WRITE
+        val permission = BluetoothGattCharacteristic.PERMISSION_READ or BluetoothGattCharacteristic.PERMISSION_WRITE
+        val characteristic = BluetoothGattCharacteristic(uuid, property, permission)
+        service.addCharacteristic(characteristic)
 
         val result = bluetoothGattServer?.addService(service)
 
