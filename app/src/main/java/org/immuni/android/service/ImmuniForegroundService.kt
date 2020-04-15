@@ -2,10 +2,8 @@ package org.immuni.android.service
 
 import PushNotificationUtils
 import android.app.Service
-import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.IBinder
 import android.os.PowerManager
 import com.bendingspoons.oracle.Oracle
@@ -22,7 +20,7 @@ import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.ble.BLEAdvertiser
 import org.immuni.android.managers.ble.BLEScanner
 import org.immuni.android.picoMetrics.*
-import org.immuni.android.picoMetrics.BluetoothFoundPeripheralsSnapshot.*
+import org.immuni.android.picoMetrics.BluetoothFoundPeripheralsSnapshot.Contact
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -255,12 +253,11 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     private var picoCounter = 0
     private suspend fun logEventsToPico() {
-
-        val picoPingPeriodicity = 30
-        val picoContactsUploadPeriodicity = 60
-
         val count = picoCounter
         picoCounter += 1
+
+        val picoPingPeriodicity = oracle.settings()?.picoPingPeriodicity ?: 30
+        val picoContactsUploadPeriodicity = oracle.settings()?.picoContactsUploadPeriodicity ?: 60
 
         if (count % picoPingPeriodicity.div(PERIODICITY) == 0) {
             pico.trackEvent(ForegroundServiceRunning().userAction)
