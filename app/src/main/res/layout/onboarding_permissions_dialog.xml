@@ -32,7 +32,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bluetoothBox"
-                android:animateLayoutChanges="false"
+                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="24dp"
@@ -121,7 +121,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bluetoothBox2"
-                android:animateLayoutChanges="false"
+                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="24dp"
@@ -210,7 +210,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bluetoothBox3"
-                android:animateLayoutChanges="false"
+                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="24dp"
@@ -299,10 +299,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bluetoothBox4"
-                android:animateLayoutChanges="false"
+                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="24dp"
                 android:gravity="left|center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"

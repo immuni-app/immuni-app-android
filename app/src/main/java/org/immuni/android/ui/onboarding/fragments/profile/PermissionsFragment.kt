@@ -1,6 +1,7 @@
 package org.immuni.android.ui.onboarding.fragments.profile
 
 import android.Manifest
+import android.animation.LayoutTransition
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -98,6 +99,13 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         knowMore2.setOnClickListener { updateKnowMore(it as TextView) }
         knowMore3.setOnClickListener { updateKnowMore(it as TextView) }
         knowMore4.setOnClickListener { updateKnowMore(it as TextView) }
+
+        /*
+        bluetoothBox.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+        bluetoothBox2.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+        bluetoothBox3.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+        bluetoothBox4.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+         */
 
         viewModel.permissionsChanged.observe(viewLifecycleOwner, Observer {
             updateUI()
@@ -221,7 +229,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 circle2.setImageResource(R.drawable.ic_localization)
                 bluetoothBox2.alpha = 0.4f
                 separator2.gone()
-                knowMore2.visible()
+                knowMore2.gone()
             } else {
                 // ACTIVE
                 description2.visible()
@@ -250,7 +258,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 circle3.setImageResource(R.drawable.ic_localization)
                 bluetoothBox3.alpha = 0.4f
                 separator3.gone()
-                knowMore3.visible()
+                knowMore3.gone()
             } else {
                 // ACTIVE
                 description3.visible()
@@ -277,7 +285,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 whitelist.gone()
                 circle4.setImageResource(R.drawable.ic_localization)
                 bluetoothBox4.alpha = 0.4f
-                knowMore4.visible()
+                knowMore4.gone()
             } else {
                 // ACTIVE
                 description4.visible()
