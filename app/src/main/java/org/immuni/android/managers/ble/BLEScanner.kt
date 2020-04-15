@@ -2,12 +2,9 @@ package org.immuni.android.managers.ble
 
 import android.bluetooth.le.*
 import android.os.ParcelUuid
-import android.util.Log
 import com.bendingspoons.oracle.Oracle
-import de.fraunhofer.iis.DistanceEstimate
+import com.bendingspoons.pico.Pico
 import de.fraunhofer.iis.Estimator
-import de.fraunhofer.iis.Measurement
-import de.fraunhofer.iis.ModelProvider
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.api.oracle.model.ImmuniMe
@@ -16,6 +13,7 @@ import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
+import org.immuni.android.picoMetrics.BluetoothScanFailed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -26,6 +24,7 @@ class BLEScanner: KoinComponent {
     private val database: ImmuniDatabase by inject()
     private val btIdsManager: BtIdsManager by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val pico: Pico by inject()
     private val id = Random.nextInt(0, 1000)
     private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var myScanCallback = MyScanCallback()
@@ -144,6 +143,9 @@ class BLEScanner: KoinComponent {
         override fun onScanFailed(errorCode: Int) {
             super.onScanFailed(errorCode)
             log("onScanFailed id=$id $errorCode")
+            GlobalScope.launch {
+                pico.trackEvent(BluetoothScanFailed().userAction)
+            }
         }
     }
 }

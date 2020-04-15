@@ -1,23 +1,32 @@
 package org.immuni.android.service
 
-import android.app.*
+import PushNotificationUtils
+import android.app.Service
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
 import android.os.PowerManager
+import com.bendingspoons.oracle.Oracle
+import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.AppNotificationManager
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.ble.BLEAdvertiser
 import org.immuni.android.managers.ble.BLEScanner
+import org.immuni.android.picoMetrics.*
+import org.immuni.android.picoMetrics.BluetoothFoundPeripheralsSnapshot.*
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.util.*
 
 enum class Actions {
     START,
@@ -30,12 +39,17 @@ class ImmuniForegroundService : Service(), KoinComponent {
         const val FOREGROUND_NOTIFICATION_ID = 21032020
         var currentAdvertiser: BLEAdvertiser? = null
         var currentScanner: BLEScanner? = null
+
+        private const val PERIODICITY = 5
     }
 
     val serviceScope = CoroutineScope(SupervisorJob())
     val btIdsManager: BtIdsManager by inject()
     val bluetoothManager: BluetoothManager by inject()
     val appNotificationManager: AppNotificationManager by inject()
+    private val pico: Pico by inject()
+    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val database: ImmuniDatabase by inject()
 
     private var wakeLock: PowerManager.WakeLock? = null
     private var isServiceStarted = false
@@ -78,9 +92,12 @@ class ImmuniForegroundService : Service(), KoinComponent {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-        serviceScope.cancel("The Immuni service has been destroyed")
+        serviceScope.launch {
+            pico.trackEvent(ForegroundServiceDestroyed().userAction)
+            cancel("The Immuni service has been destroyed")
+        }
         log("The Immuni service has been destroyed")
+        super.onDestroy()
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
@@ -111,6 +128,8 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
         // we're starting a loop in a coroutine
         serviceScope.launch(Dispatchers.IO) {
+            pico.trackEvent(ForegroundServiceStarted().userAction)
+
             doWork()
             while (isServiceStarted) {
                 delay(1 * 30 * 1000)
@@ -154,7 +173,9 @@ class ImmuniForegroundService : Service(), KoinComponent {
                     it.stop()
                     delay(3000)
                 }
-            } catch (e: java.lang.Exception) { e.printStackTrace() }
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
 
             currentScanner = BLEScanner().apply {
                 start()
@@ -168,7 +189,9 @@ class ImmuniForegroundService : Service(), KoinComponent {
                     it.stop()
                     delay(3000)
                 }
-            } catch (e: java.lang.Exception) { e.printStackTrace() }
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
             currentAdvertiser = BLEAdvertiser(applicationContext).apply {
                 start()
             }
@@ -211,12 +234,16 @@ class ImmuniForegroundService : Service(), KoinComponent {
                 }
 
                 if(previousPermissionsState == PermissionsState.MISSING &&
-                    currentPermissionState == PermissionsState.OK) {
+                        currentPermissionState == PermissionsState.OK) {
                     restartBlee()
                 }
 
                 previousPermissionsState = currentPermissionState
-                delay(5 * 1000)
+
+
+                logEventsToPico()
+
+                delay(PERIODICITY.toLong() * 1000)
             }
         }
     }
@@ -224,5 +251,41 @@ class ImmuniForegroundService : Service(), KoinComponent {
     enum class PermissionsState {
         MISSING,
         OK
+    }
+
+    private var picoCounter = 0
+    private suspend fun logEventsToPico() {
+
+        val picoPingPeriodicity = 30
+        val picoContactsUploadPeriodicity = 60
+
+        val count = picoCounter
+        picoCounter += 1
+
+        if (count % picoPingPeriodicity.div(PERIODICITY) == 0) {
+            pico.trackEvent(ForegroundServiceRunning().userAction)
+
+            if (!ImmuniApplication.isForeground.value) {
+                pico.trackEvent(BackgroundPing().userAction)
+            }
+        }
+
+        if (count % picoContactsUploadPeriodicity.div(PERIODICITY) == 0) {
+            val thresholdTimestamp = Date().time - picoContactsUploadPeriodicity * 1000
+            val newContacts =
+                database.bleContactDao().getAllSinceTimestamp(thresholdTimestamp).map {
+                    Contact(
+                        btId = it.btId,
+                        rssi = it.rssi,
+                        txPower = it.txPower,
+                        timestamp = it.timestamp.time / 1000.0
+                    )
+                }
+            pico.trackEvent(
+                BluetoothFoundPeripheralsSnapshot(
+                    contacts = newContacts
+                ).userAction
+            )
+        }
     }
 }
