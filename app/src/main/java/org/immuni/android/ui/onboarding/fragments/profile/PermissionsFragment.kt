@@ -77,9 +77,8 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 return@setOnClickListener
             }
             if(!bluetoothManager.isBluetoothEnabled()) {
-
                 bluetoothManager.openBluetoothSettings(this)
-            }
+            } else updateUI()
         }
 
         geoPermissions.setOnClickListener {
@@ -92,7 +91,9 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         }
 
         geolocation.setOnClickListener {
-            PermissionsManager.startChangeGlobalGeolocalisation(requireContext())
+            //PermissionsManager.startChangeGlobalGeolocalisation(requireContext())
+            val action = ProfileFragmentDirections.actionGeolocationDialog()
+            findNavController().navigate(action)
         }
 
         knowMore.setOnClickListener { updateKnowMore(it as TextView) }

@@ -12,9 +12,10 @@ import kotlinx.android.synthetic.main.enable_app_permissions_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
+import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 
-class PermissionsDialogFragment: FullScreenDialogLightFragment() {
+class PermissionsDialogFragment: FullScreenDialogDarkFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,8 +40,8 @@ class PermissionsDialogFragment: FullScreenDialogLightFragment() {
             findNavController().popBackStack()
         }
 
-        question.setOnClickListener { navigateToExplanations() }
-        questionText.setOnClickListener { navigateToExplanations() }
+        //question.setOnClickListener { navigateToExplanations() }
+        //questionText.setOnClickListener { navigateToExplanations() }
     }
 
     fun navigateToExplanations() {

@@ -68,5 +68,12 @@
     <action
         android:id="@+id/action_permissions_dialog"
         app:destination="@id/permissionsFragment"/>
-
+    <dialog
+        android:id="@+id/geolocationDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.GeolocationDialogFragment"
+        android:label="GeolocationDialogFragment"
+        tools:layout="@layout/enable_geolocation_dialog"/>
+    <action
+        android:id="@+id/action_geolocation_dialog"
+        app:destination="@id/geolocationDialogFragment"/>
 </navigation>
