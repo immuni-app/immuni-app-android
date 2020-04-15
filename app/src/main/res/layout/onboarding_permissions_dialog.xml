@@ -1,84 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:animateLayoutChanges="false"
-    android:background="@color/home_background"
+    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:gravity="bottom"
+    android:paddingTop="48dp"
+    android:background="@color/home_blocking_card_mask"
     android:layout_height="match_parent">
+
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:overScrollMode="never"
-        android:fitsSystemWindows="true"
-        android:clipToPadding="false"
-        android:paddingTop="110dp"
-        android:paddingBottom="120dp"
-        android:fillViewport="true">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_bottom_sheet_rounded"
+        android:backgroundTint="@color/background"
+        android:clipToPadding="false">
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:padding="32dp"
             android:layout_width="match_parent"
-            android:animateLayoutChanges="false"
-            android:layout_height="match_parent"
-            android:clipChildren="false"
-            app:layout_collapseMode="pin">
-
-            <TextView
-                android:id="@+id/title"
-                style="@style/H1Heading"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:text="Ecco cosa devi fare:"
-                android:textColor="#4F4F5B"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bluetoothBox"
-                style="@style/CardShadowWhite"
-                android:animateLayoutChanges="false"
+                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
                 android:paddingBottom="24dp"
-                android:background="@drawable/onboarding_permissions_card_selector"
                 android:gravity="left|center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title">
 
+                <View
+                    android:id="@+id/separator"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#E9EFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description"
+                    app:layout_constraintVertical_bias="1.0" />
+
                 <ImageView
                     android:id="@+id/circle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/ic_permissins_bg" />
-
-                <TextView
-                    android:id="@+id/number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:duplicateParentState="true"
-                    android:textColor="@color/onboarding_permissions_number"
-                    app:layout_constraintBottom_toBottomOf="@+id/circle"
-                    app:layout_constraintEnd_toEndOf="@+id/circle"
-                    app:layout_constraintStart_toStartOf="@+id/circle"
-                    app:layout_constraintTop_toTopOf="@+id/circle" />
+                    app:srcCompat="@drawable/ic_check_permissions" />
 
                 <TextView
                     android:id="@+id/textView12"
@@ -86,7 +69,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="24dp"
                     android:textColor="@color/onboarding_permissions_title"
                     android:duplicateParentState="true"
                     android:fontFamily="@font/euclid_circular_semi_bold"
@@ -109,61 +91,66 @@
                     app:layout_constraintStart_toStartOf="@+id/circle"
                     app:layout_constraintTop_toBottomOf="@+id/circle" />
 
+                <TextView
+                    android:id="@+id/knowMore"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView12"
+                    app:layout_constraintStart_toStartOf="@+id/circle"
+                    app:layout_constraintTop_toBottomOf="@+id/description" />
+
                 <Button
                     style="@style/RoundedButton"
                     android:id="@+id/bluetooth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
                     android:text="@string/consent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/description" />
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bluetoothBox2"
-                style="@style/CardShadowWhite"
-                android:animateLayoutChanges="false"
+                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="24dp"
                 android:paddingBottom="24dp"
-                android:background="@drawable/onboarding_permissions_card_selector"
                 android:gravity="left|center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bluetoothBox">
 
+                <View
+                    android:id="@+id/separator2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#E9EFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description2"
+                    app:layout_constraintVertical_bias="1.0" />
+
                 <ImageView
                     android:id="@+id/circle2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/ic_permissins_bg" />
-
-                <TextView
-                    android:id="@+id/number2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:duplicateParentState="true"
-                    android:text="2"
-                    android:textColor="@color/onboarding_permissions_number"
-                    app:layout_constraintBottom_toBottomOf="@+id/circle2"
-                    app:layout_constraintEnd_toEndOf="@+id/circle2"
-                    app:layout_constraintStart_toStartOf="@+id/circle2"
-                    app:layout_constraintTop_toTopOf="@+id/circle2" />
+                    app:srcCompat="@drawable/ic_check_permissions" />
 
                 <TextView
                     android:id="@+id/textView122"
@@ -171,7 +158,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="24dp"
                     android:textColor="@color/onboarding_permissions_title"
                     android:duplicateParentState="true"
                     android:fontFamily="@font/euclid_circular_semi_bold"
@@ -194,61 +180,80 @@
                     app:layout_constraintStart_toStartOf="@+id/circle2"
                     app:layout_constraintTop_toBottomOf="@+id/circle2" />
 
+                <TextView
+                    android:id="@+id/knowMore2"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView122"
+                    app:layout_constraintStart_toStartOf="@+id/circle2"
+                    app:layout_constraintTop_toBottomOf="@+id/description2" />
+
                 <Button
                     style="@style/RoundedButton"
                     android:id="@+id/geoPermissions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
                     android:text="@string/always_consent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/description2" />
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/bluetoothBox3"
-                style="@style/CardShadowWhite"
-                android:animateLayoutChanges="false"
+                android:animateLayoutChanges="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="24dp"
                 android:paddingBottom="24dp"
-                android:background="@drawable/onboarding_permissions_card_selector"
                 android:gravity="left|center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bluetoothBox2">
 
+                <View
+                    android:id="@+id/separator3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#E9EFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description3"
+                    app:layout_constraintVertical_bias="1.0" />
+
                 <ImageView
                     android:id="@+id/circle3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/ic_permissins_bg" />
+                    app:srcCompat="@drawable/ic_check_permissions" />
 
                 <TextView
-                    android:id="@+id/number3"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/knowMore3"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="3"
-                    android:textColor="@color/onboarding_permissions_number"
-                    android:duplicateParentState="true"
-                    app:layout_constraintBottom_toBottomOf="@+id/circle3"
-                    app:layout_constraintEnd_toEndOf="@+id/circle3"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView123"
                     app:layout_constraintStart_toStartOf="@+id/circle3"
-                    app:layout_constraintTop_toTopOf="@+id/circle3" />
+                    app:layout_constraintTop_toBottomOf="@+id/description3" />
 
                 <TextView
                     android:id="@+id/textView123"
@@ -256,7 +261,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginEnd="24dp"
                     android:textColor="@color/onboarding_permissions_title"
                     android:duplicateParentState="true"
                     android:fontFamily="@font/euclid_circular_semi_bold"
@@ -285,45 +289,89 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:text="@string/open_settings"
+                    android:text="Attiva localizzazione"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/description3" />
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore3" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bluetoothBox4"
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/circle4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_check_permissions" />
+
+                <TextView
+                    android:id="@+id/textView1234"
+                    style="@style/H5Section"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/onboarding_permissions_title"
+                    android:duplicateParentState="true"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="Consenti uso in background"
+                    app:layout_constraintBottom_toBottomOf="@+id/circle4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/circle4"
+                    app:layout_constraintTop_toTopOf="@+id/circle4" />
+
+                <TextView
+                    android:id="@+id/knowMore4"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView1234"
+                    app:layout_constraintStart_toStartOf="@+id/circle4"
+                    app:layout_constraintTop_toBottomOf="@+id/description4" />
+
+                <TextView
+                    android:id="@+id/description4"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria."
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView1234"
+                    app:layout_constraintStart_toStartOf="@+id/circle4"
+                    app:layout_constraintTop_toBottomOf="@+id/circle4" />
+
+                <Button
+                    style="@style/RoundedButton"
+                    android:id="@+id/whitelist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/consent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore4" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_gravity="bottom"
-        android:rotation="180"
-        android:background="@drawable/gradient_home_top"/>
-    <View
-        android:id="@+id/topMask"
-        style="@style/TopScrollingMask"
-        android:layout_width="match_parent"
-        android:layout_height="108dp"
-        android:translationY="-9dp"
-        android:backgroundTint="@color/home_background"
-        android:background="@drawable/rounded_corners_9dp"/>
-    <Button
-        android:id="@+id/next"
-        style="@style/RoundedButton"
-        android:visibility="invisible"
-        android:enabled="false"
-        tools:visibility="visible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_gravity="bottom|right"
-        android:layout_marginBottom="32dp"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</FrameLayout>
+
+</LinearLayout>

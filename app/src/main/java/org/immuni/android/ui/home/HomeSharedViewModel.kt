@@ -59,6 +59,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
     val homelistModel = MutableLiveData<List<HomeItemType>>()
     val familylistModel = MediatorLiveData<List<FamilyItemType>>()
+    val blockingItemsListModel = MutableLiveData<List<HomeItemType>>()
 
     override fun onCleared() {
         super.onCleared()
@@ -79,31 +80,40 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
                 val itemsList = mutableListOf<HomeItemType>()
 
+                val blockingList = mutableListOf<HomeItemType>()
+
                 // check bluetooth disabled
 
                 if (!bluetoothManager.isBluetoothSupported() || !bluetoothManager.isBluetoothEnabled()) {
-                    itemsList.add(EnableBluetoothCard())
+                    blockingList.add(EnableBluetoothCard())
                 }
 
                 // check geolocation disabled
 
                 // only show one geolocation card at the time in order to not have too many cards
                 if (!PermissionsManager.hasAllPermissions(ImmuniApplication.appContext)) {
-                    itemsList.add(EnableGeolocationCard(GeolocationType.PERMISSIONS))
+                    blockingList.add(EnableGeolocationCard(GeolocationType.PERMISSIONS))
+                }else if(!PermissionsManager.globalLocalisationEnabled(ImmuniApplication.appContext)) {
+                    blockingList.add(EnableGeolocationCard(GeolocationType.GLOBAL_GEOLOCATION))
                 }
-                /*else if(!PermissionsManager.globalLocalisationEnabled(ImmuniApplication.appContext)) {
-                    itemsList.add(EnableGeolocationCard(GeolocationType.GLOBAL_GEOLOCATION))
-                }*/
 
                 // check notifications disabled
 
                 if (!PushNotificationUtils.areNotificationsEnabled(ImmuniApplication.appContext)) {
-                    itemsList.add(EnableNotificationCard())
+                    blockingList.add(EnableNotificationCard())
                 }
+
+                // check whitelisted from battery optimization
+
+                if (!PermissionsManager.isIgnoringBatteryOptimizations(ImmuniApplication.appContext)) {
+                    blockingList.add(AddToWhiteListCard())
+                }
+
+                blockingItemsListModel.value = blockingList
 
                 // survey card
 
-                if (surveyManager.areAllSurveysLogged()) {
+                if (true || surveyManager.areAllSurveysLogged()) {
                     itemsList.add(SurveyCardDone(userManager.users().size))
                 } else {
                     val mainUser = userManager.mainUser()!!
@@ -189,6 +199,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                 itemsList.add(UserCard(it, 0))
             }
 
+            /*
             // if there are family members, add header and all the members and a add button
             if (familyMembers.isNotEmpty()) {
                 itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
@@ -201,6 +212,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
             else {
                 itemsList.add(AddFamilyMemberTutorialCard())
             }
+             */
 
             familylistModel.postValue(itemsList)
         }

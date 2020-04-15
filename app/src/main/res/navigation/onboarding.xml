@@ -20,12 +20,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/onboarding"
-    app:startDestination="@id/privacyFragment">
-    <fragment
-        android:id="@+id/privacyFragment"
-        android:name="org.immuni.android.ui.onboarding.fragments.PrivacyFragment"
-        android:label="WelcomeFragment"
-        tools:layout="@layout/onboarding_privacy_fragment"/>
+    app:startDestination="@id/profileFragment">
     <fragment
         android:id="@+id/profileFragment"
         android:name="org.immuni.android.ui.onboarding.fragments.profile.ProfileFragment"
@@ -53,8 +48,49 @@
     <dialog
         android:id="@+id/permissionsTutorialDialog"
         android:name="org.immuni.android.ui.onboarding.fragments.profile.PermissionsTutorialDialog"
-        android:label="PermissionsTutorialDialog" />
+        android:label="PermissionsTutorialDialog"
+        tools:layout="@layout/onboarding_permissions_tutorial_dialog"/>
     <action
         android:id="@+id/action_global_permissions_tutorial"
         app:destination="@id/permissionsTutorialDialog"/>
+    <dialog
+        android:id="@+id/whiteListDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.WhiteListDialogFragment"
+        android:label="WhiteListDialogFragment"
+        tools:layout="@layout/whitelist_dialog"/>
+    <action
+        android:id="@+id/action_whitelist_dialog"
+        app:destination="@id/whiteListDialogFragment"/>
+    <dialog
+        android:id="@+id/permissionsFragment"
+        android:name="org.immuni.android.ui.onboarding.fragments.profile.PermissionsFragment"
+        android:label="PermissionsFragment"
+        tools:layout="@layout/onboarding_permissions_dialog"/>
+    <action
+        android:id="@+id/action_permissions_bottom_sheet_dialog"
+        app:destination="@id/permissionsFragment"/>
+    <dialog
+        android:id="@+id/geolocationDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.GeolocationDialogFragment"
+        android:label="GeolocationDialogFragment"
+        tools:layout="@layout/enable_geolocation_dialog"/>
+    <action
+        android:id="@+id/action_geolocation_dialog"
+        app:destination="@id/geolocationDialogFragment"/>
+    <dialog
+        android:id="@+id/bluetoothDialog"
+        android:name="org.immuni.android.ui.home.home.fragments.BluetoothDialogFragment"
+        android:label="BluetoothDialogFragment"
+        tools:layout="@layout/enable_bluetooth_dialog"/>
+    <action
+        android:id="@+id/action_bluetooth_dialog"
+        app:destination="@id/bluetoothDialog"/>
+    <dialog
+        android:id="@+id/geoPermissionsDialog"
+        android:name="org.immuni.android.ui.home.home.fragments.PermissionsDialogFragment"
+        android:label="PermissionsDialogFragment"
+        tools:layout="@layout/enable_app_permissions_dialog"/>
+    <action
+        android:id="@+id/action_geo_permissions_dialog"
+        app:destination="@id/geoPermissionsDialog"/>
 </navigation>

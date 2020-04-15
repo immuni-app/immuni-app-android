@@ -31,8 +31,8 @@
     <string name="welcome_4_title">Ricerca scientifica</string>
     <string name="welcome_4_description">Le informazioni raccolte sono preziosissime per aiutare la ricerca contro le epidemie ed evitare che questa crisi si ripeta.</string>
 
-    <string name="privacy_checkbox">Ho letto e accetto la {privacy policy}</string>
-    <string name="privacy_title">Tuteliamo la tua privacy</string>
+    <string name="privacy_checkbox">Ho letto e accetto l\'{informativa sulla privacy}</string>
+    <string name="privacy_title">Immuni tutela la tua privacy</string>
     <string name="privacy_message">Raccoglieremo e proteggeremo i tuoi dati responsabilmente.</string>
 
     <string name="profile_completed">Profilo completato</string>
@@ -201,4 +201,50 @@
     <string name="clinic_diary_question_title">Che cos’è il diario clinico?</string>
     <string name="clinic_diary_question_explanation">Compilando il diario clinico fornisci ad Immuni elementi indispensabili per consigliare te e la tua famiglia sul da farsi. Per un totale rispetto della privacy, i dati rimarranno salvati solo ed esclusivamente sul tuo smartphone.</string>
     <string name="onboarding_permission_tutorial_title">Seleziona \"Consenti sempre\" nel popup che apparirà qui sotto</string>
+    <string name="onboarding_permission_tutorial_title_older">Seleziona \"Consenti\" nel popup che apparirà qui sotto</string>
+
+    <string name="home_block_notifications_title">Immuni ha bisogno\ndi inviarti delle notifiche</string>
+    <string name="home_block_notifications_message">Verrai notificato in caso di importanti comunicazioni e quando è il momento di aggiornare il diario clinico.</string>
+    <string name="home_block_permissions_title">Immuni ha bisogno di accedere alla posizione</string>
+    <string name="home_block_permissions_message">L’app non legge i tuoi dati di localizzazione, ma questo permesso è comunque necessario per accedere al Bluetooth quando l’app è chiusa. A causa di un limite del sistema operativo, senza il consenso alla posizione, l’app non può rilevare dispositivi vicini.</string>
+    <string name="home_block_bt_title">Immuni ha bisogno\ndel Bluetooth</string>
+    <string name="home_block_bt_message">Immuni ha bisogno di accedere al Bluetooth per individuare utenti che ti sono stati vicini, senza identificarli. Se uno di questi risulterà positivo al virus, riusciremo ad avvisarti rapidamente. Il Bluetooth viene usato per scambiarsi codici casuali con altri dispositivi vicini, così da poter risalire alle persone con cui si è stati vicini. La tecnologia Bluetooth LE minimizza l’impatto di questa operazione sulla batteria.</string>
+    <string name="home_block_geo_title">Immuni ha bisogno che attivi la posizione</string>
+    <string name="home_block_geo_message">L’app non legge i tuoi dati di localizzazione, ma questo permesso è comunque necessario per accedere al Bluetooth quando l’app è chiusa. A causa di un limite del sistema operativo, senza il consenso alla posizione, l’app non può rilevare dispositivi vicini.</string>
+    <string name="home_block_whitelist_title">Immuni ha bisogno di funzionare in background</string>
+    <string name="home_block_whitelist_message">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Se non viene esclusa dalla lista, il sistema operativo chiuderà l’app quando opera nel background, impedendole di individuare la prossimità con altri utenti.</string>
+    <string name="home_block_notifications_button">Consenti notifiche</string>
+    <string name="home_block_bluetooth_button">Attiva Bluetooth</string>
+    <string name="home_block_permissions_button">Consenti localizzazione</string>
+    <string name="home_block_geo_button">Attiva localizzazione</string>
+    <string name="home_block_whitelist_button">Consenti funzionamento</string>
+
+    <string name="diary_disabled_title">Il diario clinico non è abilitato</string>
+    <string name="diary_disabled_message">In questa versione dell’app non è possibile compilare il diario clinico.</string>
+    <string name="privacy_page_tos">Proseguendo, dichiaro di aver letto e accettato i {termini di utilizzo}</string>
+
+    <string name="privacy_page_notification">Immuni <b>ti avvisa in caso di contatto</b> con una persona risultata positiva al test del Covid-19.</string>
+    <string name="privacy_page_location">Immuni <b>non traccia la tua posizione</b>, né quali sono i tuoi movimenti.</string>
+    <string name="privacy_page_bluetooth">Immuni <b>utilizza solo il segnale Bluetooth</b> del tuo dispositivo.</string>
+    <string name="privacy_page_health">Immuni <b>monitora il tuo stato di salute</b>, e ti invia consigli personalizzati su come comportarti, compilando un diario clinico che resta salvato solo sul tuo dispositivo.</string>
+    <string name="whitelist_message">Per riuscire a proteggerti abbiamo bisogno che Immuni funzioni in background. <b>Controlla che Immuni non sia tra le app che ottimizzano la batteria</b>. In caso contrario <b>imposta l\'app su \"non ottimizzata\"</b>.</string>
+    <string name="open_list">Apri elenco</string>
+    <string name="i_have_controlled">&#10004; Ho controllato</string>
+    <string name="know_more">Scopri di più</string>
+    <string name="hide">Nascondi</string>
+
+    <string name="onboarding_permission_bt_short">Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
+    <string name="onboarding_permission_bt_long">Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio. Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio. Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
+
+    <string name="onboarding_permission_permissions_short">Il consenso alla posizione è necessario per permettere il funzionamento del Bluetooth. Non utilizzeremo questo consenso per tracciare i tuoi spostamenti in nessun momento. Se decidi di negare questo consenso, l\'applicazione non sarà in grado di comunicare con i dispositivi vicini a te e non riusciremo ad avvertirti in caso di pericolo.</string>
+    <string name="onboarding_permission_permissions_long">Il consenso alla posizione è necessario per permettere il funzionamento del Bluetooth. Non utilizzeremo questo consenso per tracciare i tuoi spostamenti in nessun momento. Se decidi di negare questo consenso, l\'applicazione non sarà in grado di comunicare con i dispositivi vicini a te e non riusciremo ad avvertirti in caso di pericolo. Il consenso alla posizione è necessario per permettere il funzionamento del Bluetooth. Non utilizzeremo questo consenso per tracciare i tuoi spostamenti in nessun momento. Se decidi di negare questo consenso, l\'applicazione non sarà in grado di comunicare con i dispositivi vicini a te e non riusciremo ad avvertirti in caso di pericolo.</string>
+
+    <string name="onboarding_permission_geo_short">Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione.</string>
+    <string name="onboarding_permission_geo_long">Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione. Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione. Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione.</string>
+
+    <string name="onboarding_permission_whitelist_short">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.</string>
+    <string name="onboarding_permission_whitelist_long">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.</string>
+    <string name="delete_data">Elimina dati</string>
+    <string name="choose_an_app_to_contact_us">Seleziona un\'app</string>
+    <string name="delete_data_email_message">TODO corpo del messaggio</string>
 </resources>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import kotlinx.android.synthetic.main.onboarding_permissions_tutorial_dialog.*
 import org.immuni.android.R
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
@@ -38,6 +39,14 @@ open class PermissionsTutorialDialog : FullScreenDialogDarkFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q){
+            popupImage.setImageResource(R.drawable.ic_permissions_sample)
+            title.text = getString(R.string.onboarding_permission_tutorial_title)
+        } else{
+            popupImage.setImageResource(R.drawable.ic_permissions_sample_older)
+            title.text = getString(R.string.onboarding_permission_tutorial_title_older)
+        }
 
         view?.setOnClickListener {
             dismiss()

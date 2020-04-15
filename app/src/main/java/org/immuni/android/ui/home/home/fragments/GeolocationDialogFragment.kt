@@ -9,9 +9,10 @@ import kotlinx.android.synthetic.main.enable_notifications_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import org.immuni.android.R
 import org.immuni.android.managers.PermissionsManager
+import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 
-class GeolocationDialogFragment: FullScreenDialogLightFragment() {
+class GeolocationDialogFragment: FullScreenDialogDarkFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

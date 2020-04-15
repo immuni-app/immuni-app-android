@@ -12,6 +12,7 @@ import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.family_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
+import org.immuni.android.disableDragging
 import org.immuni.android.ui.addrelative.AddRelativeActivity
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.home.family.model.AddFamilyMemberButtonCard
@@ -29,6 +30,8 @@ class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {
         super.onViewCreated(view, savedInstanceState)
         viewModel = getSharedViewModel()
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
+
+        appBar.disableDragging()
 
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->

@@ -72,7 +72,9 @@ dependencies {
     //Okhttp3
     implementation "com.squareup.okhttp3:okhttp:4.2.1"
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
-    implementation 'org.conscrypt:conscrypt-android:2.2.1' // For certificate pinning
+
+    //Conscrypt
+    implementation 'org.conscrypt:conscrypt-android:2.4.0' // For certificate pinning
 
     testImplementation 'junit:junit:4.12'
     testImplementation "io.mockk:mockk:1.9.3"

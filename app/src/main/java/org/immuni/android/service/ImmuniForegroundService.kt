@@ -2,11 +2,8 @@ package org.immuni.android.service
 
 import PushNotificationUtils
 import android.app.Service
-import android.bluetooth.BluetoothAdapter
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.IBinder
 import android.os.PowerManager
 import com.bendingspoons.oracle.Oracle
@@ -46,7 +43,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     val serviceScope = CoroutineScope(SupervisorJob())
     val btIdsManager: BtIdsManager by inject()
-    val permissionsManager: PermissionsManager by inject()
     val bluetoothManager: BluetoothManager by inject()
     val appNotificationManager: AppNotificationManager by inject()
     private val pico: Pico by inject()
@@ -57,25 +53,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
     private var isServiceStarted = false
 
     private var bleJob: Job? = null
-
-    // Register to Bluetooth state change
-
-    private val mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent) {
-            val action = intent.action
-            if (action == BluetoothAdapter.ACTION_STATE_CHANGED) {
-                if (bluetoothManager.isBluetoothEnabled()) {
-                    serviceScope.launch {
-                        bleJob?.cancel()
-                        delay(2000)
-                        bleJob = launch {
-                            startBleLoop()
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     override fun onBind(intent: Intent): IBinder? {
         log("Some component want to bind with the service")
@@ -108,8 +85,8 @@ class ImmuniForegroundService : Service(), KoinComponent {
         val notification = appNotificationManager.createForegroundServiceNotification()
         startForeground(FOREGROUND_NOTIFICATION_ID, notification)
 
-        val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
-        applicationContext.registerReceiver(mReceiver, filter)
+        //val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
+        //applicationContext.registerReceiver(mReceiver, filter)
     }
 
     override fun onDestroy() {
@@ -167,13 +144,23 @@ class ImmuniForegroundService : Service(), KoinComponent {
                     it.release()
                 }
             }
-            applicationContext.unregisterReceiver(mReceiver)
+            //applicationContext.unregisterReceiver(mReceiver)
             stopForeground(true)
             stopSelf()
         } catch (e: Exception) {
             log("Service stopped without being started: ${e.message}")
         }
         isServiceStarted = false
+    }
+
+    private fun restartBlee() {
+        serviceScope.launch {
+            bleJob?.cancel()
+            delay(2000)
+            bleJob = launch {
+                startBleLoop()
+            }
+        }
     }
 
     private suspend fun startBleLoop() = coroutineScope {
@@ -224,25 +211,39 @@ class ImmuniForegroundService : Service(), KoinComponent {
         }
 
         val polling = async {
+            var previousPermissionsState = PermissionsState.OK
             repeat(Int.MAX_VALUE) {
                 //log("foreground service ping $this@BLEForegroundServiceWorker")
 
-                if (!PermissionsManager.hasAllPermissions(applicationContext) ||
+
+                val currentPermissionState: PermissionsState
+
+                if(!PermissionsManager.hasAllPermissions(applicationContext) ||
                     !PermissionsManager.isIgnoringBatteryOptimizations(applicationContext) ||
-                    //!PermissionsManager.globalLocalisationEnabled(applicationContext) ||
+                    !PermissionsManager.globalLocalisationEnabled(applicationContext) ||
                     !bluetoothManager.isBluetoothEnabled() ||
-                    !PushNotificationUtils.areNotificationsEnabled(ImmuniApplication.appContext)
-                ) {
+                    !PushNotificationUtils.areNotificationsEnabled(ImmuniApplication.appContext)) {
+                    currentPermissionState = PermissionsState.MISSING
+
                     withContext(Dispatchers.Main) {
                         appNotificationManager.triggerWarningNotification()
                     }
                 } else {
+                    currentPermissionState = PermissionsState.OK
                     appNotificationManager.removeWarningNotification()
                 }
 
                 logEventsToPico()
 
                 delay(PERIODICITY.toLong() * 1000)
+
+                if(previousPermissionsState == PermissionsState.MISSING &&
+                    currentPermissionState == PermissionsState.OK) {
+                    restartBlee()
+                }
+
+                previousPermissionsState = currentPermissionState
+                delay(5 * 1000)
             }
         }
     }
@@ -282,4 +283,10 @@ class ImmuniForegroundService : Service(), KoinComponent {
             )
         }
     }
+
+    enum class PermissionsState {
+        MISSING,
+        OK
+    }
 }
+

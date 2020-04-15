@@ -62,6 +62,7 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
                 DeviceUtils.copyToClipBoard(context, text = value?.id ?: "-")
                 Toast.makeText(context, value?.id ?: "-", Toast.LENGTH_LONG).show()
             }){},
+            /*
             object : SecretMenuItem("\uD83D\uDCA5 Clear Immuni", { context, config ->
                 config.concierge().resetUserIds()
                 onboarding.setCompleted(false)
@@ -71,6 +72,7 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
                 setFlag(flag, false)
                 ExitActivity.exitApplication(context)
             }){},
+             */
             object : SecretMenuItem("ℹ️ Distinct bt_id count", { context, config ->
                 GlobalScope.launch(Dispatchers.Main) {
                     val value = database.bleContactDao().getAllDistinctBtIdsCount()

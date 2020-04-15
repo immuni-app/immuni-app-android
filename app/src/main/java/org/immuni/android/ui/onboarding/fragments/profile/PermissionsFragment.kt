@@ -1,44 +1,69 @@
 package org.immuni.android.ui.onboarding.fragments.profile
 
 import android.Manifest
+import android.animation.LayoutTransition
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bendingspoons.base.extensions.gone
 import org.immuni.android.R
 import org.immuni.android.managers.PermissionsManager
-import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import com.bendingspoons.base.extensions.hideKeyboard
-import com.bendingspoons.base.extensions.invisible
 import com.bendingspoons.base.extensions.visible
-import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.next
-import kotlinx.android.synthetic.main.onboarding_permissions_fragment.*
+import kotlinx.android.synthetic.main.onboarding_permissions_dialog.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
+import org.immuni.android.managers.BluetoothListenerLifecycle
 import org.immuni.android.managers.BluetoothManager
+import org.immuni.android.managers.GeolocalisationListenerLifecycle
 import org.immuni.android.toast
+import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
+import org.immuni.android.ui.onboarding.OnboardingViewModel
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
-class PermissionsFragment :
-    ProfileContentFragment(R.layout.onboarding_permissions_fragment) {
+class PermissionsFragment : FullScreenDialogDarkFragment() {
 
+    private lateinit var viewModel: OnboardingViewModel
     val permissionsManager: PermissionsManager by inject()
     val bluetoothManager: BluetoothManager by inject()
 
-    var bluetoothExecuted = false
-    var permissionsExecuted = false
-    var geolocationExecuted = false
+    private lateinit var lifecycleBluetooth: BluetoothListenerLifecycle
+    private lateinit var lifecycleGeolocation: GeolocalisationListenerLifecycle
 
-    override val nextButton: View
-        get() = next
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleBluetooth = BluetoothListenerLifecycle(requireContext(), this.lifecycle) { bluetoothState ->
+            updateUI()
+            checkAllGood()
+        }
+        lifecycleGeolocation = GeolocalisationListenerLifecycle(requireContext(), this.lifecycle) { active ->
+            updateUI()
+            checkAllGood()
+        }
+        lifecycle.addObserver(lifecycleBluetooth)
+        lifecycle.addObserver(lifecycleGeolocation)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        viewModel = getSharedViewModel()
+        return inflater.inflate(R.layout.onboarding_permissions_dialog, container, false)
+    }
 
     override fun onStart() {
         super.onStart()
@@ -48,54 +73,71 @@ class PermissionsFragment :
     override fun onResume() {
         super.onResume()
         updateUI()
+        checkAllGood()
         this.view?.hideKeyboard()
     }
 
-    private fun checkBatteryOptimization() {
-        activity?.let {
-            PermissionsManager.startChangeBatteryOptimization(requireContext())
+    private fun checkAllGood() {
+        if(btON() && permissionsON() && geolocationON() && whiteListON()) {
+            viewModel.onOnboardingComplete()
         }
+    }
+
+    private fun checkBatteryOptimization() {
+        val action = ProfileFragmentDirections.actionWhitelistDialog()
+        findNavController().navigate(action)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        nextButton.setOnClickListener(null)
-        nextButton.setOnClickListener {
-            if(!PermissionsManager.isIgnoringBatteryOptimizations(requireContext())) {
-                checkBatteryOptimization()
-            } else {
-                viewModel.onOnboardingComplete()
-            }
+        whitelist.setOnClickListener {
+            val action = ProfileFragmentDirections.actionWhitelistDialog()
+            findNavController().navigate(action)
         }
 
         bluetooth.setOnClickListener {
-            bluetoothExecuted = true
             if(!bluetoothManager.isBluetoothSupported()) {
                 toast(requireContext().getString(R.string.ble_not_supported_by_this_device))
-                viewModel.onNextTap()
+                //viewModel.onNextTap()
                 return@setOnClickListener
             }
             if(!bluetoothManager.isBluetoothEnabled()) {
-
-                bluetoothManager.openBluetoothSettings(this)
-            }
+                val action = ProfileFragmentDirections.actionBluetoothDialog()
+                findNavController().navigate(action)
+                //bluetoothManager.openBluetoothSettings(this)
+            } else updateUI()
         }
 
         geoPermissions.setOnClickListener {
-            permissionsExecuted = true
             if(permissionsManager.shouldShowPermissions(activity as AppCompatActivity,
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
                 val action = ProfileFragmentDirections.actionGlobalPermissionsTutorial()
                 findNavController().navigate(action)
-            } else openAppSettings()
+            } else {
+                val action = ProfileFragmentDirections.actionGeoPermissionsDialog()
+                findNavController().navigate(action)
+            }
         }
 
         geolocation.setOnClickListener {
-            geolocationExecuted = true
-            PermissionsManager.startChangeGlobalGeolocalisation(requireContext())
+            //PermissionsManager.startChangeGlobalGeolocalisation(requireContext())
+            val action = ProfileFragmentDirections.actionGeolocationDialog()
+            findNavController().navigate(action)
         }
+
+        knowMore.setOnClickListener { updateKnowMore(it as TextView) }
+        knowMore2.setOnClickListener { updateKnowMore(it as TextView) }
+        knowMore3.setOnClickListener { updateKnowMore(it as TextView) }
+        knowMore4.setOnClickListener { updateKnowMore(it as TextView) }
+
+        /*
+        bluetoothBox.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+        bluetoothBox2.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+        bluetoothBox3.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+        bluetoothBox4.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+         */
 
         viewModel.permissionsChanged.observe(viewLifecycleOwner, Observer {
             updateUI()
@@ -109,6 +151,47 @@ class PermissionsFragment :
                 }
             }
         })
+    }
+
+    private fun updateKnowMore(textView: TextView) {
+        var more = false
+        // update button text
+        if(textView.text == getString(R.string.know_more)) {
+            textView.text = getString(R.string.hide)
+            more = true
+        }
+        else {
+            textView.text = getString(R.string.know_more)
+            more = false
+        }
+
+        // update content text
+        when(textView.id) {
+            R.id.knowMore -> {
+                when(more) {
+                    true -> description.text = getString(R.string.onboarding_permission_bt_long)
+                    false -> description.text = getString(R.string.onboarding_permission_bt_short)
+                }
+            }
+            R.id.knowMore2 -> {
+                when(more) {
+                    true -> description2.text = getString(R.string.onboarding_permission_permissions_long)
+                    false -> description2.text = getString(R.string.onboarding_permission_permissions_short)
+                }
+            }
+            R.id.knowMore3 -> {
+                when(more) {
+                    true -> description3.text = getString(R.string.onboarding_permission_geo_long)
+                    false -> description3.text = getString(R.string.onboarding_permission_geo_short)
+                }
+            }
+            R.id.knowMore4 -> {
+                when(more) {
+                    true -> description4.text = getString(R.string.onboarding_permission_whitelist_long)
+                    false -> description4.text = getString(R.string.onboarding_permission_whitelist_short)
+                }
+            }
+        }
     }
 
     fun openAppSettings() {
@@ -133,7 +216,11 @@ class PermissionsFragment :
     }
 
     private fun geolocationON(): Boolean {
-        return true // PermissionsManager.globalLocalisationEnabled(requireContext())
+        return PermissionsManager.globalLocalisationEnabled(requireContext())
+    }
+
+    private fun whiteListON(): Boolean {
+        return PermissionsManager.isIgnoringBatteryOptimizations(requireContext())
     }
 
     private fun updateUI() {
@@ -142,117 +229,103 @@ class PermissionsFragment :
         if(btON()) {
             // SUCCESS
             description.gone()
-            number.gone()
-            circle.setImageResource(R.drawable.ic_permissions_success)
+            circle.setImageResource(R.drawable.ic_check_permissions)
             bluetooth.gone()
-            bluetooth.setBackgroundColor(requireContext().resources.getColor(R.color.colorPrimary))
-        } else if(bluetoothExecuted && !btON()) {
-            // FAIL
-            description.gone()
-            number.gone()
-            circle.setImageResource(R.drawable.ic_permissions_error)
-            bluetooth.setBackgroundColor(requireContext().resources.getColor(R.color.danger))
-            bluetooth.visible()
+            bluetoothBox.alpha = 0.4f
+            separator.visible()
+            knowMore.gone()
         } else {
             // SHOW OPEN ALWAYS
             description.visible()
-            number.visible()
             bluetooth.visible()
-            circle.setImageResource(R.drawable.ic_permissins_bg)
-            bluetooth.setBackgroundColor(requireContext().resources.getColor(R.color.colorPrimary))
+            circle.setImageResource(R.drawable.ic_bluetooth)
+            bluetoothBox.alpha = 1f
+            separator.gone()
+            knowMore.visible()
         }
 
         // PERMISSIONS
         if(permissionsON()) {
             // SUCCESS
             description2.gone()
-            number2.gone()
-            circle2.setImageResource(R.drawable.ic_permissions_success)
-            geoPermissions.setBackgroundColor(requireContext().resources.getColor(R.color.colorPrimary))
+            circle2.setImageResource(R.drawable.ic_check_permissions)
             geoPermissions.gone()
-            bluetoothBox2.isEnabled = true
-        } else if(permissionsExecuted && !permissionsON()) {
-            // FAIL
-            description2.gone()
-            number2.gone()
-            circle2.setImageResource(R.drawable.ic_permissions_error)
-            geoPermissions.visible()
-            geoPermissions.setBackgroundColor(requireContext().resources.getColor(R.color.danger))
-            bluetoothBox2.isEnabled = true
+            bluetoothBox2.alpha = 0.4f
+            separator2.visible()
+            knowMore2.gone()
         } else {
             // DISABLED
-            if(!bluetoothExecuted && !btON()) {
+            if(!btON()) {
                 description2.gone()
-                number2.visible()
                 geoPermissions.gone()
-                circle2.setImageResource(R.drawable.ic_permissions_bg_disabled)
-                bluetoothBox2.isEnabled = false
+                circle2.setImageResource(R.drawable.ic_localization)
+                bluetoothBox2.alpha = 0.4f
+                separator2.gone()
+                knowMore2.gone()
             } else {
                 // ACTIVE
                 description2.visible()
-                number2.visible()
                 geoPermissions.visible()
-                circle2.setImageResource(R.drawable.ic_permissins_bg)
-                geoPermissions.setBackgroundColor(requireContext().resources.getColor(R.color.colorPrimary))
-                bluetoothBox2.isEnabled = true
+                circle2.setImageResource(R.drawable.ic_localization)
+                bluetoothBox2.alpha = 1f
+                separator2.gone()
+                knowMore2.visible()
             }
         }
 
-        if(true || PermissionsManager.globalLocalisationEnabled(requireContext())) {
+        // LOCALIZATION
+        if(geolocationON()) {
             // SUCCESS
             description3.gone()
-            number3.gone()
-            circle3.setImageResource(R.drawable.ic_permissions_success)
+            circle3.setImageResource(R.drawable.ic_check_permissions)
             geolocation.gone()
-            geolocation.setBackgroundColor(requireContext().resources.getColor(R.color.colorPrimary))
-            bluetoothBox3.isEnabled = true
-        } else if(geolocationExecuted && !geolocationON()){
-            // FAIL
-            description3.gone()
-            number3.gone()
-            circle3.setImageResource(R.drawable.ic_permissions_error)
-            geolocation.setBackgroundColor(requireContext().resources.getColor(R.color.danger))
-            geolocation.visible()
-            bluetoothBox3.isEnabled = true
-        }else {
+            bluetoothBox3.alpha = 0.4f
+            separator3.visible()
+            knowMore3.gone()
+        } else {
             // DISABLED
-            if((!permissionsExecuted && !permissionsON()) || (!bluetoothExecuted && !btON())) {
+            if(!permissionsON() || !btON()) {
                 description3.gone()
-                number3.visible()
                 geolocation.gone()
-                circle3.setImageResource(R.drawable.ic_permissions_bg_disabled)
-                bluetoothBox3.isEnabled = false
+                circle3.setImageResource(R.drawable.ic_localization)
+                bluetoothBox3.alpha = 0.4f
+                separator3.gone()
+                knowMore3.gone()
             } else {
                 // ACTIVE
                 description3.visible()
-                number3.visible()
                 geolocation.visible()
-                circle3.setImageResource(R.drawable.ic_permissins_bg)
-                geolocation.setBackgroundColor(requireContext().resources.getColor(R.color.colorPrimary))
-                bluetoothBox3.isEnabled = true
+                circle3.setImageResource(R.drawable.ic_localization)
+                bluetoothBox3.alpha = 1f
+                separator3.gone()
+                knowMore3.visible()
             }
         }
 
-        if((bluetoothExecuted || btON())
-            && (permissionsExecuted || permissionsON())
-            && (geolocationExecuted || geolocationON())) {
-            nextButton.visible()
-            nextButton.isEnabled = true
+        // WHITELIST
+        if(whiteListON()) {
+            // SUCCESS
+            description4.gone()
+            circle4.setImageResource(R.drawable.ic_check_permissions)
+            whitelist.gone()
+            bluetoothBox4.alpha = 0.4f
+            knowMore4.gone()
         } else {
-            nextButton.invisible()
-            nextButton.isEnabled = false
+            // DISABLED
+            if(!geolocationON() || !btON() || !permissionsON()) {
+                description4.gone()
+                whitelist.gone()
+                circle4.setImageResource(R.drawable.ic_localization)
+                bluetoothBox4.alpha = 0.4f
+                knowMore4.gone()
+            } else {
+                // ACTIVE
+                description4.visible()
+                whitelist.visible()
+                circle4.setImageResource(R.drawable.ic_localization)
+                bluetoothBox4.alpha = 1f
+                knowMore4.visible()
+            }
         }
-    }
-
-    /*
-    private fun openPermissionsTutorialDialog() {
-        PermissionsTutorialDialog {
-            permissionsManager.requestPermissions(activity as AppCompatActivity)
-        }.show(childFragmentManager, "permissions_tutorial")
-    }
-     */
-
-    override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {
-        //updateUI(userInfo.gender)
     }
 }

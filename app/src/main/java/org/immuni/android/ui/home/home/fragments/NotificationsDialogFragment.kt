@@ -13,9 +13,10 @@ import kotlinx.android.synthetic.main.enable_notifications_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
+import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 
-class NotificationsDialogFragment: FullScreenDialogLightFragment() {
+class NotificationsDialogFragment: FullScreenDialogDarkFragment() {
 
     private val NOTIFICATIONS_SETTINGS_REQUEST = 103
 
@@ -37,21 +38,6 @@ class NotificationsDialogFragment: FullScreenDialogLightFragment() {
         back.setOnClickListener {
             findNavController().popBackStack()
         }
-
-        question.setOnClickListener { navigateToExplanations() }
-        questionText.setOnClickListener { navigateToExplanations() }
-    }
-
-    fun navigateToExplanations() {
-        val action =
-            NotificationsDialogFragmentDirections.actionGlobalNotificationsExplanations()
-        findNavController().navigate(action)
-    }
-
-    fun openAppSettings() {
-        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        intent.data = Uri.parse("package:" + ImmuniApplication.appContext.packageName)
-        startActivity(intent)
     }
 
     private fun openNotificationSettings() {

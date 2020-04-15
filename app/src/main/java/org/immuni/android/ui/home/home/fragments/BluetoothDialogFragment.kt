@@ -14,10 +14,11 @@ import org.immuni.android.R
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BluetoothManager.Companion.REQUEST_ENABLE_BT
 import org.immuni.android.toast
+import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 import org.koin.android.ext.android.inject
 
-class BluetoothDialogFragment: FullScreenDialogLightFragment() {
+class BluetoothDialogFragment: FullScreenDialogDarkFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

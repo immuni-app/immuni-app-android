@@ -1,52 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/onboarding_dialog_background">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/rounded_corners_20dp"
+        android:backgroundTint="@color/background"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:background="@color/home_background"
-        android:paddingBottom="120dp"
-        android:scrollbars="none"
-        android:overScrollMode="never"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+        android:overScrollMode="never"
+        android:padding="30dp"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipChildren="false"
             app:layout_collapseMode="pin">
+
             <ImageView
                 android:id="@+id/back"
+                android:alpha="0.7"
+                android:paddingLeft="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="48dp"
-                android:src="@drawable/ic_cross"
                 android:layout_gravity="top|left"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_cross" />
 
             <TextView
                 android:id="@+id/title"
-                style="@style/H1Heading"
+                style="@style/H3SectionHeading"
+                android:fontFamily="@font/euclid_circular_bold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
                 android:text="Ecco cosa devi fare per attivare le notifiche"
                 android:textColor="#4F4F5B"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/back"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/back" />
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <!--
             <TextView
                 android:id="@+id/questionText"
                 style="@style/P1Text"
@@ -70,17 +84,17 @@
                 app:layout_constraintStart_toStartOf="@+id/title"
                 app:layout_constraintTop_toBottomOf="@+id/title"
                 app:srcCompat="@drawable/ic_info_medium" />
+                -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
                 android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/questionText">
+                app:layout_constraintTop_toBottomOf="@+id/title">
 
                 <TextView
                     style="@style/H5Section"
@@ -129,33 +143,22 @@
                         android:layout_marginLeft="19dp"
                         android:fontFamily="@font/euclid_circular_medium"
                         android:text="@string/show_notifications" />
+
                 </LinearLayout>
 
+                <Button
+                    android:id="@+id/button"
+                    style="@style/RoundedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/open_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_gravity="bottom"
-        android:rotation="180"
-        android:background="@drawable/gradient_center_home_color"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="top"
-        android:background="@drawable/gradient_home_top"/>
-    <Button
-        android:id="@+id/button"
-        style="@style/RoundedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="32dp"
-        android:text="@string/open_settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</FrameLayout>
+
+</LinearLayout>
