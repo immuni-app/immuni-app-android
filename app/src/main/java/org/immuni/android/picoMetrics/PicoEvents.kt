@@ -31,6 +31,10 @@ class EnterForeground {
     val userAction = UserAction("enter_foreground")
 }
 
+class BackgroundPing {
+    val userAction = UserAction("background_ping")
+}
+
 class RebootEventReceived {
     val userAction = UserAction("reboot_event_received")
 }

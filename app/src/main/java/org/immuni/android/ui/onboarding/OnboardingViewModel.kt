@@ -135,6 +135,8 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
             )
             userManager.addUser(mainUser)
 
+            pico.trackEvent(OnboardingCompleted().userAction)
+
             loading.value = false
             onboarding.setCompleted(true)
             _navigateToNextPage.value = Event(true)

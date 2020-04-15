@@ -3,16 +3,20 @@ package org.immuni.android.service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import com.bendingspoons.pico.Pico
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.BluetoothManager
+import org.immuni.android.picoMetrics.ForegroundServiceRestartedByAlarmManager
 import org.immuni.android.util.log
-import org.immuni.android.service.DeleteUserDataWorker
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class RestarterReceiver : BroadcastReceiver(), KoinComponent {
 
-    val btManager: BluetoothManager by inject()
+    private val btManager: BluetoothManager by inject()
+    private val pico: Pico by inject()
 
     override fun onReceive(context: Context, intent: Intent) {
 
@@ -24,5 +28,9 @@ class RestarterReceiver : BroadcastReceiver(), KoinComponent {
         // re-schedule next alarm
 
         AlarmsManager.scheduleWorks(ImmuniApplication.appContext)
+
+        GlobalScope.launch {
+            pico.trackEvent(ForegroundServiceRestartedByAlarmManager().userAction)
+        }
     }
 }
