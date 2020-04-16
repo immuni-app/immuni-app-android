@@ -14,6 +14,7 @@ import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.picoMetrics.BluetoothScanFailed
+import org.immuni.android.picoMetrics.BluetoothScanSucceded
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -133,15 +134,26 @@ class BLEScanner: KoinComponent {
         override fun onBatchScanResults(results: MutableList<ScanResult>) {
             super.onBatchScanResults(results)
             processResults(results)
+
+            log("onScanResult count=${results.size}")
+            GlobalScope.launch {
+                pico.trackEvent(BluetoothScanSucceded(results.size).userAction)
+            }
         }
 
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             super.onScanResult(callbackType, result)
             processResults(listOf(result))
+
+            log("onScanResult count=1")
+            GlobalScope.launch {
+                pico.trackEvent(BluetoothScanSucceded(1).userAction)
+            }
         }
 
         override fun onScanFailed(errorCode: Int) {
             super.onScanFailed(errorCode)
+
             log("onScanFailed id=$id $errorCode")
             GlobalScope.launch {
                 pico.trackEvent(BluetoothScanFailed().userAction)
