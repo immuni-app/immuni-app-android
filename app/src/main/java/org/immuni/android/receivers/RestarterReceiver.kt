@@ -1,4 +1,4 @@
-package org.immuni.android.service
+package org.immuni.android.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -9,6 +9,8 @@ import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.picoMetrics.ForegroundServiceRestartedByAlarmManager
+import org.immuni.android.service.AlarmsManager
+import org.immuni.android.service.DeleteUserDataWorker
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -23,7 +25,9 @@ class RestarterReceiver : BroadcastReceiver(), KoinComponent {
         log("Restarter event received, restarting workers if needed...")
 
         btManager.scheduleBLEWorker(context)
-        DeleteUserDataWorker.scheduleWork(context)
+        DeleteUserDataWorker.scheduleWork(
+            context
+        )
 
         // re-schedule next alarm
 

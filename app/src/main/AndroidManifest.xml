@@ -51,13 +51,13 @@
         </service>
 
         <receiver
-            android:name=".service.RestarterReceiver"
+            android:name=".receivers.RestarterReceiver"
             android:enabled="true"
             android:exported="false">
         </receiver>
 
         <receiver
-            android:name=".service.RebootReceiver"
+            android:name=".receivers.RebootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

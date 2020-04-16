@@ -82,6 +82,10 @@ class Pico(
         this.sessionManagerCompletable.complete(sessionManager)
     }
 
+    fun flush() {
+        eventFlow.flush()
+    }
+
     suspend fun trackEvent(trackEvent: TrackEvent) {
         eventManagerCompletable.await().trackEvent(trackEvent)
     }

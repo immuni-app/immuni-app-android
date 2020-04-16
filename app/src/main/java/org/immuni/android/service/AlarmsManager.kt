@@ -4,10 +4,8 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.SystemClock
+import org.immuni.android.receivers.RestarterReceiver
 import org.immuni.android.util.log
-import java.lang.Math.random
-import kotlin.random.Random
 
 object AlarmsManager {
     // AlarmManager's events survive even if the app is not active,

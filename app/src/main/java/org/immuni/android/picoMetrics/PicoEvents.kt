@@ -39,6 +39,10 @@ class RebootEventReceived {
     val userAction = UserAction("reboot_event_received")
 }
 
+class ShutdownEventReceived {
+    val userAction = UserAction("shutdown_event_received")
+}
+
 class ForegroundServiceRunning {
     val userAction = UserAction("foreground_service_running")
 }
