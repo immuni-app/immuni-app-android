@@ -19,7 +19,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import kotlin.random.Random
 
-class BLEScanner: KoinComponent {
+class BLEScanner : KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private val database: ImmuniDatabase by inject()
     private val btIdsManager: BtIdsManager by inject()
@@ -37,7 +37,7 @@ class BLEScanner: KoinComponent {
     }
 
     fun start(): Boolean {
-        if(!bluetoothManager.isBluetoothEnabled()) return false
+        if (!bluetoothManager.isBluetoothEnabled()) return false
         bluetoothLeScanner = bluetoothManager.adapter()!!.bluetoothLeScanner
         val filter = listOf(
             ScanFilter.Builder().apply {
@@ -52,7 +52,7 @@ class BLEScanner: KoinComponent {
             filter,
             ScanSettings.Builder().apply {
                 // with report delay the distance estimator doesn't work
-                setReportDelay(5*1000) // 5 sec
+                setReportDelay(5 * 1000) // 5 sec
                 setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
             }.build(),
             myScanCallback
@@ -74,20 +74,36 @@ class BLEScanner: KoinComponent {
 
      */
 
-    private fun storeResults(list: List<BLEContactEntity>) {
+    data class RssiRollingAverage(
+        val countSoFar: Int = 0,
+        val averageRssi: Int = 0
+    ) {
+        lateinit var contact: BLEContactEntity
 
-        // if in the same scan result we have the same ids, compute the avarage rssi
-        val distinctAvaragedIds = list.groupingBy { it.btId }.reduce { id, avarage, contact ->
-            BLEContactEntity(
-                btId = contact.btId,
-                txPower = contact.txPower,
-                timestamp = contact.timestamp,
-                rssi = (contact.rssi + avarage.rssi) / 2
+        fun newAverage(newContact: BLEContactEntity): RssiRollingAverage {
+            val newAverage = RssiRollingAverage(
+                countSoFar + 1,
+                (averageRssi * countSoFar + newContact.rssi) / (countSoFar + 1)
             )
+            newAverage.contact = newContact.copy(rssi = newAverage.averageRssi)
+            return newAverage
+        }
+    }
+
+    private fun storeResults(list: List<BLEContactEntity>) {
+        // if in the same scan result we have the same ids, compute the average rssi
+        val rssisGroupedById = list.groupingBy { it.btId }
+        val averagedRssisGroupedById =
+            rssisGroupedById.fold(RssiRollingAverage()) { rollingAverage, contact ->
+                rollingAverage.newAverage(contact)
+            }
+
+        val averagedRssiContactsGroupedById = averagedRssisGroupedById.mapValues {
+            it.value.contact
         }
 
         GlobalScope.launch {
-            database.bleContactDao().insert(*distinctAvaragedIds.values.toTypedArray())
+            database.bleContactDao().insert(*averagedRssiContactsGroupedById.values.toTypedArray())
         }
     }
 
