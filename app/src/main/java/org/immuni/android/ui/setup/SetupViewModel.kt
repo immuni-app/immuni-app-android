@@ -106,9 +106,11 @@ class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
     }
 
     private fun navigateTo() {
-        if (!welcome.isComplete()) _navigateToWelcome.value = Event(true)
-        else if (!onboarding.isComplete()) _navigateToOnboarding.value = Event(true)
-        else _navigateToMainPage.value = Event(true)
+        if (!welcome.isComplete() || !onboarding.isComplete()) {
+            _navigateToWelcome.value = Event(true)
+        } else {
+            _navigateToMainPage.value = Event(true)
+        }
     }
 
     private fun setAddFamilyMemberDialogShown() {

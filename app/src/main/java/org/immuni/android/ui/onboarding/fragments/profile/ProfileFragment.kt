@@ -102,7 +102,7 @@ class ProfileFragment : Fragment() {
         if(newPos >= 0) {
             viewPager.setCurrentItem(newPos, true)
         } else {
-            findNavController().popBackStack()
+            activity?.finish()
         }
     }
 }
