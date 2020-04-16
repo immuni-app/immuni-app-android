@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.bendingspoons.base.extensions.animateTranslationY
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import org.immuni.android.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.base.extensions.hideKeyboard
@@ -48,11 +49,26 @@ abstract class ProfileContentFragment(@LayoutRes val layout: Int) : Fragment(lay
         updateTopMask(view.findViewById<NestedScrollView>(R.id.scrollView)?.scrollY ?: 0)
     }
 
-    fun updateTopMask(scrollY: Int) {
+    override fun onResume() {
+        super.onResume()
+        updateTopMask(this.view?.findViewById<NestedScrollView>(R.id.scrollView)?.scrollY ?: 0, true)
+    }
+
+    fun updateTopMask(scrollY: Int, animate: Boolean = false) {
         val dp = ScreenUtils.convertDpToPixels(requireContext(), 8).toFloat()
         val elevation = resources.getDimension(R.dimen.top_scroll_mask_elevation)
         //this.view?.findViewById<View>(R.id.topMask)?.alpha = 1f//0f + scrollY/dp
         this.view?.findViewById<View>(R.id.topMask)?.elevation = (elevation * (0f + scrollY/dp).coerceIn(0f, 1f))
+
+        val maxScrollUpCard = ScreenUtils.convertDpToPixels(requireContext(), 32).toFloat()
+        val maxScrollUpProgressBar = ScreenUtils.convertDpToPixels(requireContext(), 20).toFloat()
+        if(animate) {
+            this.view?.findViewById<View>(R.id.topMask)?.animateTranslationY(-(scrollY.toFloat().coerceAtMost(maxScrollUpCard)), 250)
+            activity?.findViewById<View>(R.id.progress)?.animateTranslationY(-(scrollY.toFloat().coerceAtMost(maxScrollUpProgressBar)), 250)
+        } else {
+            this.view?.findViewById<View>(R.id.topMask)?.translationY = -(scrollY.toFloat().coerceAtMost(maxScrollUpCard))
+            activity?.findViewById<View>(R.id.progress)?.translationY = -(scrollY.toFloat().coerceAtMost(maxScrollUpProgressBar))
+        }
     }
 
     protected abstract val nextButton: View

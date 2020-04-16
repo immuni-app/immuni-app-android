@@ -136,7 +136,7 @@
         android:id="@+id/topMask"
         android:layout_width="match_parent"
         android:layout_height="108dp"
-        android:background="@drawable/rounded_corners_9dp"
+        android:background="@drawable/rounded_corners_20dp"
         android:backgroundTint="@color/background"
         android:translationY="-9dp"
         app:layout_constraintTop_toTopOf="parent"
