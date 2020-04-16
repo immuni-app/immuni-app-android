@@ -133,6 +133,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <View
+        style="@style/TopScrollingMask"
         android:id="@+id/topMask"
         android:layout_width="match_parent"
         android:layout_height="108dp"

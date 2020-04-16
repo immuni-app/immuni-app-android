@@ -40,7 +40,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
                 android:checkedButton="@+id/first"
                 android:orientation="vertical"
@@ -55,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/age_range_1" />
+
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/age_range_18_35"
                     style="@style/RadioButton"
@@ -62,6 +63,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/age_range_2" />
+
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/age_range_36_45"
                     style="@style/RadioButton"
@@ -69,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/age_range_3" />
+
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/age_range_46_55"
                     style="@style/RadioButton"
@@ -76,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/age_range_4" />
+
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/age_range_56_65"
                     style="@style/RadioButton"
@@ -83,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/age_range_5" />
+
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/age_range_66_75"
                     style="@style/RadioButton"
@@ -90,6 +95,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/age_range_6" />
+
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/age_range_75"
                     style="@style/RadioButton"
