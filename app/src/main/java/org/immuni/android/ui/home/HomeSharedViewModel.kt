@@ -239,7 +239,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
     fun onHomeResumed() {
         refreshHomeListModel()
-        checkAddFamilyMembersDialog()
+        //checkAddFamilyMembersDialog()
     }
 
     // check if this one shot dialog has been alredy triggered before
