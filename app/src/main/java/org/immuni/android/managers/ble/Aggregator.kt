@@ -28,7 +28,7 @@ class Aggregator: KoinComponent {
         val firstTs = proximityEvents.first().timestamp
         val lastTs = proximityEvents.last().timestamp
 
-        if(lastTs.time - firstTs.time >= TIME_WINDOW) {
+        if(lastTs.time - firstTs.time > TIME_WINDOW) {
             store(aggregate())
             clear()
         }
@@ -47,7 +47,7 @@ class Aggregator: KoinComponent {
         }
 
         averagedRssiContactsGroupedById.values.forEach {
-            log("Aggregate scan: ${it.btId} - ${it.rssi} - distance: ${distance(it.rssi)} meters")
+            log("Aggregate scan: ${it.btId} - ${it.rssi} - distance: ${distance(it.rssi, it.txPower)} meters")
         }
 
         return averagedRssiContactsGroupedById.values
@@ -63,8 +63,8 @@ class Aggregator: KoinComponent {
         }
     }
 
-    fun distance(rssi: Int): Float {
-        val p0 = -90F
+    fun distance(rssi: Int, txPower: Int): Float {
+        val p0 = -89f
         val gamma = 2f
         return 10.0.pow((p0 - rssi) / (10.0 * gamma)).toFloat()
     }
