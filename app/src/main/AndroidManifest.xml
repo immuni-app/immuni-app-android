@@ -122,9 +122,6 @@
         <activity android:name=".ui.ble.encounters.BleEncountersDebugActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ble.distance.BleDistanceDebugActivity"
-            android:launchMode="standard"
-            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

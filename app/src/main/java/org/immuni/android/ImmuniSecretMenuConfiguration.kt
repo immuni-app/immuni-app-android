@@ -11,20 +11,16 @@ import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.secretmenu.SecretMenuConfiguration
 import com.bendingspoons.secretmenu.SecretMenuItem
-import com.bendingspoons.secretmenu.ui.ExitActivity
 import com.bendingspoons.theirs.Theirs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.managers.BtIdsManager
-import org.immuni.android.ui.ble.distance.BleDistanceDebugActivity
 import org.immuni.android.ui.ble.encounters.BleEncountersDebugActivity
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.setup.Setup
 import org.immuni.android.ui.welcome.Welcome
-import org.immuni.android.util.Flags
-import org.immuni.android.util.setFlag
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -62,17 +58,6 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
                 DeviceUtils.copyToClipBoard(context, text = value?.id ?: "-")
                 Toast.makeText(context, value?.id ?: "-", Toast.LENGTH_LONG).show()
             }){},
-            /*
-            object : SecretMenuItem("\uD83D\uDCA5 Clear Immuni", { context, config ->
-                config.concierge().resetUserIds()
-                onboarding.setCompleted(false)
-                setup.setCompleted(false)
-                welcome.setCompleted(false)
-                val flag = Flags.ADD_FAMILY_MEMBER_DIALOG_SHOWN
-                setFlag(flag, false)
-                ExitActivity.exitApplication(context)
-            }){},
-             */
             object : SecretMenuItem("ℹ️ Distinct bt_id count", { context, config ->
                 GlobalScope.launch(Dispatchers.Main) {
                     val value = database.bleContactDao().getAllDistinctBtIdsCount()
@@ -91,15 +76,6 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
                     Toast.makeText(context, "# Devices found: ${list.joinToString(separator = ", ")}", Toast.LENGTH_LONG).show()
                 }
             }){},
-            /*
-            object : SecretMenuItem("ℹ️ BLE distance debug", { context, config ->
-                val context = ImmuniApplication.appContext
-                val intent = Intent(context, BleDistanceDebugActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                }
-                context.startActivity(intent)
-            }){},
-             */
             object : SecretMenuItem("ℹ️ BLE encounters debug", { context, config ->
                 val context = ImmuniApplication.appContext
                 val intent = Intent(context, BleEncountersDebugActivity::class.java).apply {

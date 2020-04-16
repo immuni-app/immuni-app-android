@@ -9,7 +9,6 @@ import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import com.bendingspoons.secretmenu.SecretMenu
 import com.bendingspoons.theirs.Theirs
-import de.fraunhofer.iis.Estimator
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import org.immuni.android.api.oracle.ApiManager
@@ -25,7 +24,6 @@ import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.*
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
-import org.immuni.android.ui.ble.distance.BleDistanceDebugViewModel
 import org.immuni.android.ui.ble.encounters.BleEncountersDebugViewModel
 import org.immuni.android.ui.force_update.ForceUpdateViewModel
 import org.immuni.android.ui.home.HomeSharedViewModel
@@ -63,9 +61,6 @@ val appModule = module {
             .openHelperFactory(factory)
             .build()
     }
-
-    // single distance Estimator
-    single { Estimator(2L*1000, -90F, 2f) }
 
     // single instance of Setup
     single { Setup() }
@@ -173,9 +168,6 @@ val appModule = module {
 
     // EditDetailsViewModel
     viewModel { (userId: String) -> EditDetailsViewModel(userId) }
-
-    // BleDebugViewModel
-    viewModel { BleDistanceDebugViewModel() }
 
     // BleEncountersDebugViewModel
     viewModel { BleEncountersDebugViewModel() }

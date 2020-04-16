@@ -2,14 +2,8 @@ package org.immuni.android.ui.ble.encounters
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import de.fraunhofer.iis.DistanceEstimate
-import de.fraunhofer.iis.Estimator
-import de.fraunhofer.iis.Measurement
-import de.fraunhofer.iis.ModelProvider
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.BLEContactEntity
 import org.koin.core.KoinComponent
@@ -50,7 +44,9 @@ class BleEncountersDebugViewModel : ViewModel(), KoinComponent {
                                 else -> "45/60"
                             }
 
-                            "${day}/${month}/${year} ${hour}:${minutes}"
+                            // 01/03/2020 16:00/15
+                            "${String.format("%02d", day)}/${String.format("%02d", month)}/" +
+                                    "${year} ${String.format("%02d", hour)}:${minutes}"
                         }
                         .eachCount().map { item ->
                             EncountersItem(item.key, item.value)

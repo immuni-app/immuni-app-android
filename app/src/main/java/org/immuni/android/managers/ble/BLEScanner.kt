@@ -4,7 +4,6 @@ import android.bluetooth.le.*
 import android.os.ParcelUuid
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
-import de.fraunhofer.iis.Estimator
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.api.oracle.model.ImmuniMe
@@ -29,9 +28,6 @@ class BLEScanner: KoinComponent {
     private val id = Random.nextInt(0, 1000)
     private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var myScanCallback = MyScanCallback()
-
-    // Distance estimator
-    private val distanceEstimator: Estimator by inject()
 
     fun stop() {
         bluetoothLeScanner?.stopScan(myScanCallback)
@@ -61,19 +57,6 @@ class BLEScanner: KoinComponent {
 
         return true
     }
-
-    /*
-    private fun calculateDistance(measurement: Measurement) {
-        val list = distanceEstimator.push(measurement)
-        list.forEach {
-            log("Distance in meters between ${it.deviceId1} and ${it.deviceId2} = ${it.distance} meters")
-        }
-        /*val now = System.currentTimeMillis()
-        storeResults(list.filter { now - it.timestamp < 60*1000 })
-         */
-    }
-
-     */
 
     private fun storeResults(list: List<BLEContactEntity>) {
 
@@ -112,16 +95,6 @@ class BLEScanner: KoinComponent {
                             rssi = rssi
                         )
                     )
-
-                    /*
-                    calculateDistance(Measurement(
-                        System.currentTimeMillis(),
-                        rssi.toFloat(),
-                        btIdsManager.getCurrentBtId()?.id ?: "",
-                        btId,
-                        ModelProvider.MOBILE_DEVICE.DEFAULT
-                    ))
-                     */
                 }
             }
         }
