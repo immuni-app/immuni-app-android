@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bendingspoons.base.extensions.gone
 import kotlinx.android.synthetic.main.user_edit_age_group_activity.*
 import org.immuni.android.R
 import org.immuni.android.loading
@@ -39,6 +40,12 @@ class EditAgeGroupFragment : BaseEditFragment() {
         })
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
+
+            if(it.isMain) {
+                age_range_0_13.gone()
+                age_range_14_17.gone()
+            }
+
             age_range_0_13.isChecked = false
             age_range_14_17.isChecked = false
             age_range_18_35.isChecked = false
