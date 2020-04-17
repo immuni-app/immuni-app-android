@@ -12,7 +12,7 @@ import java.util.*
 @JsonClass(generateAdapter = true)
 data class User(
     @field:Json(name = "identifier") val id: String = UUID.randomUUID().toString(),
-    @field:Json(name = "age_group") val ageGroup: AgeGroup = AgeGroup.ZERO_SEVENTEEN,
+    @field:Json(name = "age_group") val ageGroup: AgeGroup = AgeGroup.ZERO_THIRTEEN,
     @field:Json(name = "age") val age: Int = 999,
     @field:Json(name = "gender") val gender: Gender = Gender.FEMALE,
     @field:Json(name = "nickname") val nickname: Nickname? = null,
@@ -27,8 +27,10 @@ data class User(
 }
 
 enum class AgeGroup {
-    @Json(name = "0-17")
-    ZERO_SEVENTEEN,
+    @Json(name = "0-13")
+    ZERO_THIRTEEN,
+    @Json(name = "14-17")
+    FOURTEEN_SEVENTEEN,
     @Json(name = "18-35")
     EIGHTEEN_THIRTYFIVE,
     @Json(name = "36-45")
@@ -44,7 +46,8 @@ enum class AgeGroup {
 
     fun humanReadable(context: Context): String {
         return when (this) {
-            ZERO_SEVENTEEN -> context.getString(R.string.age_range_1)
+            ZERO_THIRTEEN -> context.getString(R.string.age_range_1)
+            FOURTEEN_SEVENTEEN -> context.getString(R.string.age_range_1b)
             EIGHTEEN_THIRTYFIVE -> context.getString(R.string.age_range_2)
             THRITYSIX_FORTYFIVE -> context.getString(R.string.age_range_3)
             FORTYSIX_FIFTYFIVE -> context.getString(R.string.age_range_4)
@@ -55,7 +58,7 @@ enum class AgeGroup {
     }
 
     val isAdult
-        get() = this != ZERO_SEVENTEEN
+        get() = (this != ZERO_THIRTEEN && this != FOURTEEN_SEVENTEEN)
 }
 
 @JsonClass(generateAdapter = true)

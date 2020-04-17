@@ -60,12 +60,20 @@
                 app:layout_constraintTop_toBottomOf="@+id/description">
 
                 <androidx.appcompat.widget.AppCompatRadioButton
-                    android:id="@+id/age_range_0_17"
+                    android:id="@+id/age_range_0_13"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/age_range_1" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/age_range_14_17"
+                    style="@style/RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/age_range_1b" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/age_range_18_35"

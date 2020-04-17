@@ -120,7 +120,8 @@
     <string name="sex">Sesso</string>
     <string name="live_with_you">Vive con te</string>
 
-    <string name="age_range_1">Meno di 18 anni</string>
+    <string name="age_range_1">Meno di 14 anni</string>
+    <string name="age_range_1b">14 - 17 anni</string>
     <string name="age_range_2">18 - 35 anni</string>
     <string name="age_range_3">36 - 45 anni</string>
     <string name="age_range_4">46 - 55 anni</string>

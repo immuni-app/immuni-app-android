@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import com.bendingspoons.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.user_edit_age_group_activity.*
-import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.immuni.android.loading
 import org.immuni.android.models.AgeGroup
@@ -43,7 +39,8 @@ class EditAgeGroupFragment : BaseEditFragment() {
         })
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            age_range_0_17.isChecked = false
+            age_range_0_13.isChecked = false
+            age_range_14_17.isChecked = false
             age_range_18_35.isChecked = false
             age_range_36_45.isChecked = false
             age_range_46_55.isChecked = false
@@ -52,7 +49,8 @@ class EditAgeGroupFragment : BaseEditFragment() {
             age_range_75.isChecked = false
 
             when(it.ageGroup) {
-                AgeGroup.ZERO_SEVENTEEN -> age_range_0_17.isChecked = true
+                AgeGroup.ZERO_THIRTEEN -> age_range_0_13.isChecked = true
+                AgeGroup.FOURTEEN_SEVENTEEN -> age_range_14_17.isChecked = true
                 AgeGroup.EIGHTEEN_THIRTYFIVE -> age_range_18_35.isChecked = true
                 AgeGroup.THRITYSIX_FORTYFIVE -> age_range_36_45.isChecked = true
                 AgeGroup.FORTYSIX_FIFTYFIVE -> age_range_46_55.isChecked = true
@@ -76,7 +74,8 @@ class EditAgeGroupFragment : BaseEditFragment() {
 
         update.setOnClickListener {
             val ageGroup = when {
-                age_range_0_17.isChecked -> AgeGroup.ZERO_SEVENTEEN
+                age_range_0_13.isChecked -> AgeGroup.ZERO_THIRTEEN
+                age_range_14_17.isChecked -> AgeGroup.FOURTEEN_SEVENTEEN
                 age_range_18_35.isChecked -> AgeGroup.EIGHTEEN_THIRTYFIVE
                 age_range_36_45.isChecked -> AgeGroup.THRITYSIX_FORTYFIVE
                 age_range_46_55.isChecked -> AgeGroup.FORTYSIX_FIFTYFIVE

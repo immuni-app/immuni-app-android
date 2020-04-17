@@ -3,14 +3,8 @@ package org.immuni.android.ui.addrelative.fragment.profile
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
-import androidx.core.widget.doOnTextChanged
-import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
-import org.immuni.android.ui.onboarding.OnboardingUserInfo
-import com.bendingspoons.base.extensions.hideKeyboard
-import com.bendingspoons.base.extensions.showKeyboard
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.onboarding_age_range_fragment.*
+import kotlinx.android.synthetic.main.relative_age_range_fragment.*
 import org.immuni.android.models.AgeGroup
 import org.immuni.android.models.AgeGroup.*
 import org.immuni.android.ui.addrelative.RelativeInfo
@@ -27,7 +21,8 @@ class AgeRangeFragment : RelativeContentFragment(R.layout.relative_age_range_fra
 
         nextButton.setOnClickListener {
 
-            if (lastRadioSelected == R.id.age_range_0_17) {
+            if (lastRadioSelected == R.id.age_range_0_13 ||
+                lastRadioSelected == R.id.age_range_14_17) {
                 viewModel.onNextTap(AlreadyRegisteredFragment::class.java)
             } else {
                 viewModel.onNextTap(HasSmartphoneFragment::class.java)
@@ -38,7 +33,8 @@ class AgeRangeFragment : RelativeContentFragment(R.layout.relative_age_range_fra
             viewModel.onPrevTap()
         }
 
-        age_range_0_17.setOnCheckedChangeListener(this)
+        age_range_0_13.setOnCheckedChangeListener(this)
+        age_range_14_17.setOnCheckedChangeListener(this)
         age_range_18_35.setOnCheckedChangeListener(this)
         age_range_36_45.setOnCheckedChangeListener(this)
         age_range_46_55.setOnCheckedChangeListener(this)
@@ -66,7 +62,8 @@ class AgeRangeFragment : RelativeContentFragment(R.layout.relative_age_range_fra
             viewModel.updateUserInfo(
                 it.copy(
                     ageGroup = when (id) {
-                        R.id.age_range_0_17 -> ZERO_SEVENTEEN
+                        R.id.age_range_0_13 -> ZERO_THIRTEEN
+                        R.id.age_range_14_17 -> FOURTEEN_SEVENTEEN
                         R.id.age_range_18_35 -> EIGHTEEN_THIRTYFIVE
                         R.id.age_range_36_45 -> THRITYSIX_FORTYFIVE
                         R.id.age_range_46_55 -> FORTYSIX_FIFTYFIVE
@@ -82,7 +79,8 @@ class AgeRangeFragment : RelativeContentFragment(R.layout.relative_age_range_fra
     private fun updateUI(ageGroup: AgeGroup?) {
         radioGroup.clearCheck()
 
-        age_range_0_17.isChecked = false
+        age_range_0_13.isChecked = false
+        age_range_14_17.isChecked = false
         age_range_18_35.isChecked = false
         age_range_36_45.isChecked = false
         age_range_46_55.isChecked = false
@@ -91,9 +89,13 @@ class AgeRangeFragment : RelativeContentFragment(R.layout.relative_age_range_fra
         age_range_75.isChecked = false
 
         when (ageGroup) {
-            ZERO_SEVENTEEN -> {
-                age_range_0_17.isChecked = true
-                lastRadioSelected = R.id.age_range_0_17
+            ZERO_THIRTEEN -> {
+                age_range_0_13.isChecked = true
+                lastRadioSelected = R.id.age_range_0_13
+            }
+            FOURTEEN_SEVENTEEN -> {
+                age_range_14_17.isChecked = true
+                lastRadioSelected = R.id.age_range_14_17
             }
             EIGHTEEN_THIRTYFIVE -> {
                 age_range_18_35.isChecked = true
