@@ -74,15 +74,16 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             setIncludeDeviceName(false) // if true fail = 1
             addServiceUuid(serviceId)
             setIncludeTxPowerLevel(true)
-        }
-        val scanResponseBuilder = AdvertiseData.Builder().apply {
-            setIncludeDeviceName(false) // if true fail = 1
             val bytesMan = btId.id.replace("-", "")//byteArrayOf(1)
             val data = Hex.stringToBytes(bytesMan)
             addServiceData(serviceId, data)
         }
+        /*val scanResponseBuilder = AdvertiseData.Builder().apply {
+            setIncludeDeviceName(false) // if true fail = 1
+        }
+         */
         advertiser?.startAdvertising(
-            builder.build(), dataBuilder.build(), scanResponseBuilder.build(),
+            builder.build(), dataBuilder.build(),// scanResponseBuilder.build(),
             callback
         )
         // wait until the bt id expires
