@@ -86,7 +86,7 @@
         android:textColor="#fff"
         android:textSize="24sp"
         android:maxLines="4"
-        android:autoSizeTextType="uniform"
+        app:autoSizeTextType="uniform"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.45" />
