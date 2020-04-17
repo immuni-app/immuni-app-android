@@ -205,16 +205,16 @@
     <string name="onboarding_permission_tutorial_title">Seleziona \"Consenti sempre\" nel popup che apparirà qui sotto</string>
     <string name="onboarding_permission_tutorial_title_older">Seleziona \"Consenti\" nel popup che apparirà qui sotto</string>
 
-    <string name="home_block_notifications_title">Immuni ha bisogno\ndi inviarti delle notifiche</string>
-    <string name="home_block_notifications_message">Verrai notificato in caso di importanti comunicazioni e quando è il momento di aggiornare il diario clinico.</string>
-    <string name="home_block_permissions_title">Immuni ha bisogno di accedere alla posizione</string>
-    <string name="home_block_permissions_message">L’app non legge i tuoi dati di localizzazione, ma questo permesso è comunque necessario per accedere al Bluetooth quando l’app è chiusa. A causa di un limite del sistema operativo, senza il consenso alla posizione, l’app non può rilevare dispositivi vicini.</string>
-    <string name="home_block_bt_title">Immuni ha bisogno\ndel Bluetooth</string>
-    <string name="home_block_bt_message">Immuni ha bisogno di accedere al Bluetooth per individuare utenti che ti sono stati vicini, senza identificarli. Se uno di questi risulterà positivo al virus, riusciremo ad avvisarti rapidamente. Il Bluetooth viene usato per scambiarsi codici casuali con altri dispositivi vicini, così da poter risalire alle persone con cui si è stati vicini. La tecnologia Bluetooth LE minimizza l’impatto di questa operazione sulla batteria.</string>
-    <string name="home_block_geo_title">Immuni ha bisogno che attivi la posizione</string>
-    <string name="home_block_geo_message">L’app non legge i tuoi dati di localizzazione, ma questo permesso è comunque necessario per accedere al Bluetooth quando l’app è chiusa. A causa di un limite del sistema operativo, senza il consenso alla posizione, l’app non può rilevare dispositivi vicini.</string>
-    <string name="home_block_whitelist_title">Immuni ha bisogno di funzionare in background</string>
-    <string name="home_block_whitelist_message">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Se non viene esclusa dalla lista, il sistema operativo chiuderà l’app quando opera nel background, impedendole di individuare la prossimità con altri utenti.</string>
+    <string name="home_block_notifications_title">Consentici di comunicare con te in caso di necessità</string>
+    <string name="home_block_notifications_message">Verrai notificato in caso di importanti comunicazioni tra cui il possibile contatto con un soggetto diagnosticato positivo a Covid-19 e quando è il momento di aggiornare il diario clinico.</string>
+    <string name="home_block_permissions_title">Autorizza la localizzazione</string>
+    <string name="home_block_permissions_message">Immuni non accede ai tuoi dati di localizzazione, ma il permesso è comunque necessario per usare il Bluetooth quando l’app è chiusa. Se non autorizzi la localizzazione, l’app non può rilevare dispositivi vicini e avvertirti in caso di rischio.</string>
+    <string name="home_block_bt_title">Attiva il Bluetooth</string>
+    <string name="home_block_bt_message">Immuni ha bisogno di accedere al Bluetooth per individuare utenti che ti sono stati vicini, senza identificarli. Se uno di questi risulterà positivo al virus, riusciremo ad avvisarti rapidamente. Questa funzionalità è resa possibile dallo scambio di codici identificativi casuali tra dispositivi vicini, con consumo minimo di batteria grazie alla tecnologia Bluetooth Low Energy.</string>
+    <string name="home_block_geo_title">Attiva la localizzazione</string>
+    <string name="home_block_geo_message">Immuni non accede ai tuoi dati di localizzazione, ma è comunque necessario avere la localizzazione attiva sul tuo smartphone per usare il Bluetooth quando l’app è chiusa. Se non attivi la localizzazione, l’app non può rilevare dispositivi vicini e avvertirti in caso di rischio.</string>
+    <string name="home_block_whitelist_title">Consenti l\'uso in background</string>
+    <string name="home_block_whitelist_message">Permetti all’app di funzionare anche quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Se non escludi Immuni dalla lista, il sistema operativo terminerà l’app quando è attiva nel background, impedendole di rilevare dispositivi vicini e di avvertirti in caso di rischio.</string>
     <string name="home_block_notifications_button">Consenti notifiche</string>
     <string name="home_block_bluetooth_button">Attiva Bluetooth</string>
     <string name="home_block_permissions_button">Consenti localizzazione</string>
