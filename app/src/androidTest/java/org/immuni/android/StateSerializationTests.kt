@@ -52,33 +52,31 @@ class StateSerializationTests {
 
             val originalProfiles: MutableList<HealthProfile> = mutableListOf()
 
-            runBlocking {
-                for (i in 1..1) {
-                    val answers = linkedMapOf<QuestionId, QuestionAnswers>()
-                    for (j in 1..1) {
-                        answers[j.toString()] = when (j % 3) {
-                            0 -> listOf(SimpleAnswer(index = 0))
-                            1 -> listOf(CompositeAnswer(componentIndexes = listOf(1, 2, 3)))
-                            else -> listOf(
-                                SimpleAnswer(index = 0),
-                                SimpleAnswer(index = 1)
-                            )
-                        }
+            for (i in 1..1) {
+                val answers = linkedMapOf<QuestionId, QuestionAnswers>()
+                for (j in 1..1) {
+                    answers[j.toString()] = when (j % 3) {
+                        0 -> listOf(SimpleAnswer(index = 0))
+                        1 -> listOf(CompositeAnswer(componentIndexes = listOf(1, 2, 3)))
+                        else -> listOf(
+                            SimpleAnswer(index = 0),
+                            SimpleAnswer(index = 1)
+                        )
                     }
-
-                    val form = FormModel(
-                        initialQuestion = "questionId",
-                        initialHealthState = setOf(),
-                        triageProfile = "triageProfile",
-                        surveyAnswers = answers,
-                        startDate = Date(),
-                        answeredQuestionsElapsedDays = mapOf()
-                    )
-                    val newProfile = surveyManager.completeSurvey("userId", form, "$i")
-                    originalProfiles.add(newProfile)
-
-                    delay(100)
                 }
+
+                val form = FormModel(
+                    initialQuestion = "questionId",
+                    initialHealthState = setOf(),
+                    triageProfile = "triageProfile",
+                    surveyAnswers = answers,
+                    startDate = Date(),
+                    answeredQuestionsElapsedDays = mapOf()
+                )
+                val newProfile = surveyManager.completeSurvey("userId", form, "$i")
+                originalProfiles.add(newProfile)
+
+                delay(100)
             }
 
             val decodedProfiles = surveyManager.allHealthProfiles("userId")

@@ -7,6 +7,7 @@ import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.ExportDevice
@@ -32,14 +33,15 @@ class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : Vie
         uiScope.launch {
             loading.value = Event(true)
             delay(500) // min loader time to avoid flickering
-            val devices = database.bleContactDao().getAll().map {
-                ExportDevice(
-                    timestamp = it.timestamp.time / 1000.0,
-                    btId = it.btId,
-                    rssi = it.rssi,
-                    txPower = it.txPower
-                )
-            }
+//            val devices = database.bleContactDao().getAll().map { // FIXME
+//                ExportDevice(
+//                    timestamp = it.timestamp.time / 1000.0,
+//                    btId = it.btId,
+//                    rssi = it.rssi,
+//                    txPower = it.txPower
+//                )
+//            }
+            val devices = listOf<ExportDevice>()
             /*
             val surveys = surveyManager.allHealthProfiles(userId).map {
                 ExportHealthProfile.fromHealthProfile(it)

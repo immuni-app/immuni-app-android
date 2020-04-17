@@ -65,7 +65,7 @@ class BleEncountersDebugFragment : Fragment() {
         })
 
         viewModel.lastEncounter.observe(viewLifecycleOwner, Observer {
-            lastEncounter.text = "Last encounter data: txPower=${it.txPower} rssi=${it.rssi} btId=${it.btId}"
+            // lastEncounter.text = "Last encounter data: txPower=${it.txPower} rssi=${it.rssi} btId=${it.btId}" // FIXME
         })
 
         val btIdsManager: BtIdsManager by inject()

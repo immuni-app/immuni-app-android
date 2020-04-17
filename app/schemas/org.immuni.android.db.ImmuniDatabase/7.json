@@ -2,33 +2,15 @@
   "formatVersion": 1,
   "database": {
     "version": 7,
-    "identityHash": "09a277ea322d1ff683f447b0ae4ae716",
+    "identityHash": "b349c4087cc5a9f0c33eac6dd0a6e308",
     "entities": [
       {
         "tableName": "ble_contact_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `timestamp` INTEGER NOT NULL, `txPower` INTEGER NOT NULL, `rssi` INTEGER NOT NULL, `btId` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`timestamp` INTEGER NOT NULL, `btId` TEXT NOT NULL, `events` BLOB NOT NULL, PRIMARY KEY(`timestamp`, `btId`))",
         "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
           {
             "fieldPath": "timestamp",
             "columnName": "timestamp",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "txPower",
-            "columnName": "txPower",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "rssi",
-            "columnName": "rssi",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -37,13 +19,20 @@
             "columnName": "btId",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "events",
+            "columnName": "events",
+            "affinity": "BLOB",
+            "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "timestamp",
+            "btId"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -90,7 +79,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '09a277ea322d1ff683f447b0ae4ae716')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b349c4087cc5a9f0c33eac6dd0a6e308')"
     ]
   }
 }

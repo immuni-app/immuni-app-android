@@ -271,6 +271,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
             }
         }
 
+        // FIXME
         if (count % picoContactsUploadPeriodicity.div(PERIODICITY) == 0) {
             val thresholdTimestamp = Date().time - picoContactsUploadPeriodicity * 1000
             val newContacts =
