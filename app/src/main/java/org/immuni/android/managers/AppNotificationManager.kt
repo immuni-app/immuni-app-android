@@ -64,13 +64,13 @@ class AppNotificationManager(val context: Context): KoinComponent {
         val pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         val builder = NotificationCompat.Builder(context, channelName)
             .setSmallIcon(R.drawable.ic_notification_app)
-            .setContentTitle("Attenzione")
-            .setContentText("E' necessario il tuo intervento per permettere ad Immuni di funzionare al meglio ed essere protetto.")
+            .setContentTitle("Immuni ha bisogno del tuo aiuto per funzionare")
+            .setContentText("Apri Immuni e segui le istruzioni per permettere all’app di funzionare al meglio.")
             .setColor(ContextCompat.getColor(context, R.color.danger))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setStyle(
                 NotificationCompat.BigTextStyle()
-                    .bigText("E' necessario il tuo intervento per permettere ad Immuni di funzionare al meglio ed essere protetto."))
+                    .bigText("Apri Immuni e segui le istruzioni per permettere all’app di funzionare al meglio."))
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
 
