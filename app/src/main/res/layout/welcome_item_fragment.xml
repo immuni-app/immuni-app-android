@@ -6,16 +6,27 @@
     android:layout_height="match_parent"
     android:background="@color/transparent">
 
-    <ImageView
-        android:id="@+id/image"
+    <FrameLayout
+        android:id="@+id/imageContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/welcome_1" />
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/welcome_1" />
+    </FrameLayout>
+
 
     <TextView
         android:id="@+id/title"
@@ -33,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image"
+        app:layout_constraintTop_toBottomOf="@+id/imageContainer"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
