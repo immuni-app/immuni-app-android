@@ -41,6 +41,8 @@ class ImmuniForegroundService : Service(), KoinComponent {
         const val PICO_LAST_SENT_EVENT_TIME = "PICO_LAST_SENT_EVENT_TIME"
         var currentAdvertiser: BLEAdvertiser? = null
         var currentScanner: BLEScanner? = null
+        var isServiceStarted = false
+            private set
 
         private const val PERIODICITY = 5
     }
@@ -55,7 +57,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
     private val database: ImmuniDatabase by inject()
 
     private var wakeLock: PowerManager.WakeLock? = null
-    private var isServiceStarted = false
 
     private var bleJob: Job? = null
 

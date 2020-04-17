@@ -11,6 +11,8 @@ import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.picoMetrics.ForegroundServiceRestartedByAlarmManager
 import org.immuni.android.service.AlarmsManager
 import org.immuni.android.service.DeleteUserDataWorker
+import org.immuni.android.service.ImmuniForegroundService
+import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -18,6 +20,7 @@ import org.koin.core.inject
 class RestarterReceiver : BroadcastReceiver(), KoinComponent {
 
     private val btManager: BluetoothManager by inject()
+    private val onboarding: Onboarding by inject()
     private val pico: Pico by inject()
 
     override fun onReceive(context: Context, intent: Intent) {
@@ -33,8 +36,12 @@ class RestarterReceiver : BroadcastReceiver(), KoinComponent {
 
         AlarmsManager.scheduleWorks(ImmuniApplication.appContext)
 
-        GlobalScope.launch {
-            pico.trackEvent(ForegroundServiceRestartedByAlarmManager().userAction)
+        // if service is stopped send event to Pico
+        if(!ImmuniForegroundService.isServiceStarted && intent.extras?.containsKey("alarmManager") == true) {
+            log("Foreground service down, restarting it...")
+            GlobalScope.launch {
+                pico.trackEvent(ForegroundServiceRestartedByAlarmManager().userAction)
+            }
         }
     }
 }
