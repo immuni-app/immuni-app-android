@@ -26,4 +26,16 @@
         android:name="org.immuni.android.ui.home.settings.SettingsFragment"
         android:label="homeFragment"
         tools:layout="@layout/settings_fragment"/>
+    <fragment
+        android:id="@+id/dataHandlingFragment"
+        android:name="org.immuni.android.ui.home.settings.DataHandlingFragment"
+        android:label="DataHandlingFragment"
+        tools:layout="@layout/data_handling_fragment"/>
+    <action
+        android:id="@+id/action_global_data_handling"
+        app:destination="@id/dataHandlingFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 </navigation>

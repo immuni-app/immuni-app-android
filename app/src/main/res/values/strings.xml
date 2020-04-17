@@ -131,7 +131,7 @@
 
     <string name="settings_faq">Domande frequenti</string>
     <string name="settings_tos">Termini di utilizzo</string>
-    <string name="settings_privacy_policy">Privacy policy</string>
+    <string name="settings_privacy_policy">Informativa privacy</string>
     <string name="settings_download_data">Scarica dati</string>
     <string name="settings_erase_data">Elimina dati</string>
 
@@ -248,4 +248,6 @@
     <string name="delete_data">Elimina dati</string>
     <string name="choose_an_app_to_contact_us">Seleziona un\'app</string>
     <string name="delete_data_email_message">TODO corpo del messaggio</string>
+    <string name="data_handling_title">Gestione dati</string>
+    <string name="restore_data">Recupera dati</string>
 </resources>
