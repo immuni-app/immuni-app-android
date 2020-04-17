@@ -48,11 +48,11 @@ class EditDetailsViewModel(val userId: String) : ViewModel(),
 
     fun updateUser(user: User) {
         uiScope.launch {
-            loading.value = true
-            delay(500)
+            //loading.value = true
+            //delay(500)
             userManager.updateUser(user)
             navigateBack.value = Event(true)
-            loading.value = false
+            //loading.value = false
         }
     }
 }

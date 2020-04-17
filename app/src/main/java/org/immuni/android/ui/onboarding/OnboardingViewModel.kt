@@ -131,8 +131,8 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     fun onOnboardingComplete() {
         val userInfo = partialUserInfo.value!!
         uiScope.launch {
-            loading.value = true
-            delay(250) // minimum loading time
+            //loading.value = true
+            //delay(250)
 
             val mainUser = User(
                 ageGroup = userInfo.ageGroup!!,
@@ -143,7 +143,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
 
             pico.trackEvent(OnboardingCompleted().userAction)
 
-            loading.value = false
+            //loading.value = false
             onboarding.setCompleted(true)
             _navigateToNextPage.value = Event(true)
         }

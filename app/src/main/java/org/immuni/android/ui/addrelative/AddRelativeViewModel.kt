@@ -75,8 +75,8 @@ class AddRelativeViewModel(val handle: SavedStateHandle, private val database: I
     fun onAddRelativeComplete() {
         val userInfo = partialUserInfo.value!!
         uiScope.launch {
-            loading.value = true
-            delay(500)
+            //loading.value = true
+            //delay(500)
             userManager.addUser(
                 User(
                     ageGroup = userInfo.ageGroup!!,
@@ -85,7 +85,7 @@ class AddRelativeViewModel(val handle: SavedStateHandle, private val database: I
                     isInSameHouse = userInfo.sameHouse
                 )
             )
-            loading.value = false
+            //loading.value = false
             _navigateToMainPage.value = Event(true)
         }
     }
