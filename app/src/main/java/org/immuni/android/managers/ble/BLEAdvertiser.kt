@@ -7,19 +7,17 @@ import android.bluetooth.le.AdvertiseSettings
 import android.bluetooth.le.BluetoothLeAdvertiser
 import android.content.Context
 import android.os.ParcelUuid
-import android.util.Log
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import com.google.android.gms.common.util.Hex
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.db.entity.BLEContactEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.BtIdsManager
+import org.immuni.android.models.ProximityEvent
 import org.immuni.android.picoMetrics.BluetoothAdvertisingFailed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
@@ -28,8 +26,6 @@ import java.util.*
 import kotlin.random.Random
 
 class BLEAdvertiser(val context: Context): KoinComponent {
-    private val gattServerTag = "GATT_SERVER"
-    private val database: ImmuniDatabase by inject()
     private val bluetoothManager: BluetoothManager by inject()
     private var bluetoothGattServer: BluetoothGattServer? = null
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
@@ -37,6 +33,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     private var advertiser: BluetoothLeAdvertiser? = null
     private var callback = MyAdvertiseCallback()
     private val btIdsManager: BtIdsManager by inject()
+    private val aggregator: ProximityEventsAggregator by inject()
     private val id = Random.nextInt(0, 1000)
 
     fun stop() {
@@ -49,7 +46,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         val adapter = bluetoothManager.adapter()
         //if (!(adapter?.isEnabled == true)) adapter?.enable()
 
-        if(!bluetoothManager.isBluetoothEnabled()) return false
+        if (!bluetoothManager.isBluetoothEnabled()) return false
         advertiser = adapter!!.bluetoothLeAdvertiser
 
         startServer()
@@ -100,7 +97,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         startAdvertising()
     }
 
-    inner class MyAdvertiseCallback: AdvertiseCallback() {
+    inner class MyAdvertiseCallback : AdvertiseCallback() {
         override fun onStartFailure(errorCode: Int) {
             super.onStartFailure(errorCode)
             log("Failure starting BLEAdvertiser id=$id error = $errorCode")
@@ -119,12 +116,15 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         if (bluetoothGattServer != null) {
             return
         }
-        val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as android.bluetooth.BluetoothManager
+        val bluetoothManager =
+            context.getSystemService(Context.BLUETOOTH_SERVICE) as android.bluetooth.BluetoothManager
         bluetoothGattServer = bluetoothManager.openGattServer(context, gattServerCallback)
         val uuid = UUID.fromString(CGAIdentifiers.ServiceDataUUIDString)
         val service = BluetoothGattService(uuid, BluetoothGattService.SERVICE_TYPE_PRIMARY)
-        val property = BluetoothGattCharacteristic.PROPERTY_READ or BluetoothGattCharacteristic.PROPERTY_WRITE
-        val permission = BluetoothGattCharacteristic.PERMISSION_READ or BluetoothGattCharacteristic.PERMISSION_WRITE
+        val property =
+            BluetoothGattCharacteristic.PROPERTY_READ or BluetoothGattCharacteristic.PROPERTY_WRITE
+        val permission =
+            BluetoothGattCharacteristic.PERMISSION_READ or BluetoothGattCharacteristic.PERMISSION_WRITE
         val characteristic = BluetoothGattCharacteristic(uuid, property, permission)
         service.addCharacteristic(characteristic)
 
@@ -138,15 +138,15 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     }
 
     private fun processResult(txPower: Int, rssi: Int, uuid: String) {
-        GlobalScope.launch {
-            database.bleContactDao().insert(
-                    BLEContactEntity(
-                        btId = uuid,
-                        txPower = txPower,
-                        rssi = rssi
-                    )
+        aggregator.addProximityEvents(
+            listOf(
+                ProximityEvent(
+                    txPower = txPower,
+                    rssi = rssi,
+                    btId = uuid
+                )
             )
-        }
+        )
     }
 
     private val gattServerCallback = object : BluetoothGattServerCallback() {
@@ -182,10 +182,12 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             }
 
             if (responseNeeded) {
-                bluetoothGattServer?.sendResponse(device,
+                bluetoothGattServer?.sendResponse(
+                    device,
                     requestId,
                     BluetoothGatt.GATT_SUCCESS,
-                    0, null)
+                    0, null
+                )
             }
         }
 
@@ -199,23 +201,26 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             val bytesString = btIdsManager.getCurrentBtId()?.id?.replace("-", "") ?: ""
             val data = Hex.stringToBytes(bytesString)
 
-            bluetoothGattServer?.sendResponse(device,
+            bluetoothGattServer?.sendResponse(
+                device,
                 requestId,
                 BluetoothGatt.GATT_SUCCESS,
-                0, data)
+                0, data
+            )
         }
     }
 
     fun getPacketData(array: ByteArray): Triple<Int, Int, String>? {
         array.asList().let {
-            if(it.size < 3) {
+            if (it.size < 3) {
                 log("RECEIVED INVALID GATT SERVER WRITE REQUEST")
                 return null
             }
             return Triple(
                 it.subList(0, 1)[0].toInt(),
                 it.subList(1, 2)[0].toInt(),
-                byteArrayToHex(it.subList(2, it.size).toByteArray()) ?: "")
+                byteArrayToHex(it.subList(2, it.size).toByteArray()) ?: ""
+            )
         }
     }
 }

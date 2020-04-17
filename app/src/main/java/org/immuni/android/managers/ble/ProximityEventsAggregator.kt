@@ -4,6 +4,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.BLEContactEntity
+import org.immuni.android.models.ProximityEvent
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -11,7 +12,7 @@ import kotlin.concurrent.timer
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
-class Aggregator: KoinComponent {
+class ProximityEventsAggregator: KoinComponent {
 
     private val database: ImmuniDatabase by inject()
 
@@ -19,9 +20,9 @@ class Aggregator: KoinComponent {
     private val timer = timer(name ="aggregator-timer", initialDelay = TIME_WINDOW, period = TIME_WINDOW) {
         tick()
     }
-    private val proximityEvents = mutableListOf<BLEContactEntity>()
+    private val proximityEvents = mutableListOf<ProximityEvent>()
 
-    fun addProximityEvents(events: List<BLEContactEntity>) {
+    fun addProximityEvents(events: List<ProximityEvent>) {
         log("Raw scan: ${events.map { "${it.btId} - ${it.rssi}" }.joinToString(", ")}")
 
         proximityEvents.addAll(events)
@@ -33,7 +34,7 @@ class Aggregator: KoinComponent {
         clear()
     }
 
-    private fun aggregate(): Collection<BLEContactEntity> {
+    private fun aggregate(): Collection<ProximityEvent> {
         // if in the same scan result we have the same ids, compute the average rssi
         val rssisGroupedById = proximityEvents.groupingBy { it.btId }
         val averagedRssisGroupedById =
@@ -56,9 +57,16 @@ class Aggregator: KoinComponent {
         proximityEvents.clear()
     }
 
-    private fun store(events: Collection<BLEContactEntity>) {
+    private fun store(events: Collection<ProximityEvent>) {
         GlobalScope.launch {
-            database.bleContactDao().insert(*events.toTypedArray())
+            events.forEach {
+                database.addContact(
+                    btId = it.btId,
+                    txPower = it.txPower,
+                    rssi = it.rssi,
+                    date = it.date
+                )
+            }
         }
     }
 
@@ -73,9 +81,9 @@ internal data class RssiRollingAverage(
     val countSoFar: Int = 0,
     val averageRssi: Double = 0.0
 ) {
-    lateinit var contact: BLEContactEntity
+    lateinit var contact: ProximityEvent
 
-    fun newAverage(newContact: BLEContactEntity): RssiRollingAverage {
+    fun newAverage(newContact: ProximityEvent): RssiRollingAverage {
         val newAverage = RssiRollingAverage(
             countSoFar + 1,
             (averageRssi * countSoFar + newContact.rssi) / (countSoFar + 1).toDouble()

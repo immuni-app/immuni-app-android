@@ -23,6 +23,7 @@ import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.*
+import org.immuni.android.managers.ble.ProximityEventsAggregator
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.ui.ble.encounters.BleEncountersDebugViewModel
 import org.immuni.android.ui.force_update.ForceUpdateViewModel
@@ -109,6 +110,10 @@ val appModule = module {
 
     single {
         ApiManager()
+    }
+
+    single {
+        ProximityEventsAggregator()
     }
 
     // single instance of GeolocationManager

@@ -8,15 +8,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
-import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.BtIdsManager
+import org.immuni.android.models.ProximityEvent
 import org.immuni.android.picoMetrics.BluetoothScanFailed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import kotlin.math.pow
 import kotlin.random.Random
 
 class BLEScanner : KoinComponent {
@@ -26,7 +23,7 @@ class BLEScanner : KoinComponent {
     private val id = Random.nextInt(0, 1000)
     private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var myScanCallback = MyScanCallback()
-    private val aggregator = Aggregator()
+    private val aggregator: ProximityEventsAggregator by inject()
 
     fun stop() {
         bluetoothLeScanner?.stopScan(myScanCallback)
@@ -59,7 +56,7 @@ class BLEScanner : KoinComponent {
 
     private fun processResults(results: List<ScanResult>) {
 
-        val encounters = mutableListOf<BLEContactEntity>()
+        val encounters = mutableListOf<ProximityEvent>()
         results.forEach { result ->
 
             val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString)
@@ -71,7 +68,7 @@ class BLEScanner : KoinComponent {
                 val scannedBtId = byteArrayToHex(bytes)
                 scannedBtId?.let { btId ->
                     encounters.add(
-                        BLEContactEntity(
+                        ProximityEvent(
                             btId = btId,
                             txPower = txPower,
                             rssi = rssi

@@ -17,8 +17,7 @@ data class ExportData(
 data class ExportDevice(
     @field:Json(name = "timestamp") val timestamp: Double,
     @field:Json(name = "bt_id") val btId: String,
-    @field:Json(name = "rssi") val rssi: Int,
-    @field:Json(name = "tx_power") val txPower: Int
+    @field:Json(name = "events") val events: String
 )
 
 @JsonClass(generateAdapter = true)

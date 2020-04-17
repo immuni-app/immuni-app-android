@@ -1,5 +1,6 @@
 package org.immuni.android.ui.uploadData
 
+import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bendingspoons.base.livedata.Event
@@ -7,6 +8,7 @@ import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.ExportDevice
@@ -36,8 +38,7 @@ class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : Vie
                 ExportDevice(
                     timestamp = it.timestamp.time / 1000.0,
                     btId = it.btId,
-                    rssi = it.rssi,
-                    txPower = it.txPower
+                    events = Base64.encodeToString(it.events, Base64.DEFAULT)
                 )
             }
             /*
