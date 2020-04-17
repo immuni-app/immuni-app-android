@@ -24,6 +24,8 @@ import org.koin.core.inject
 
 class PermissionsManager(val context: Context) : KoinComponent {
 
+    val isActive = ConflatedBroadcastChannel<Boolean>(hasAllPermissions((context)))
+
     companion object {
         const val REQUEST_CODE = 620
         val allPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -88,10 +90,7 @@ class PermissionsManager(val context: Context) : KoinComponent {
         }
     }
 
-    //private val geoUniq: GeoUniq = get()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-
-    val isActive = ConflatedBroadcastChannel<Boolean>(hasAllPermissions((context)))
 
     fun requestPermissions(activity: AppCompatActivity) {
         ActivityCompat.requestPermissions(activity, allPermissions.toTypedArray(), REQUEST_CODE)
@@ -112,13 +111,25 @@ class PermissionsManager(val context: Context) : KoinComponent {
         if (requestCode != REQUEST_CODE) {
             return
         }
-
         updateIsActive()
     }
 
     private fun updateIsActive() {
         GlobalScope.launch {
             isActive.send(hasAllPermissions(context))
+        }
+    }
+
+    fun geolocationPermissions(): Array<String> {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+            )
+        } else {
+            arrayOf(
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
         }
     }
 }

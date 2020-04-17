@@ -111,8 +111,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
 
         geoPermissions.setOnClickListener {
             if(permissionsManager.shouldShowPermissions(activity as AppCompatActivity,
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                    *permissionsManager.geolocationPermissions())) {
                 val action = ProfileFragmentDirections.actionGlobalPermissionsTutorial()
                 findNavController().navigate(action)
             } else {
