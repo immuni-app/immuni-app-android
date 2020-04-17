@@ -16,24 +16,24 @@ import org.immuni.android.picoMetrics.BluetoothScanFailed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import kotlin.math.pow
 import kotlin.random.Random
 
-class BLEScanner: KoinComponent {
+class BLEScanner : KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
-    private val database: ImmuniDatabase by inject()
-    private val btIdsManager: BtIdsManager by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
     private val id = Random.nextInt(0, 1000)
     private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var myScanCallback = MyScanCallback()
+    private val aggregator = Aggregator()
 
     fun stop() {
         bluetoothLeScanner?.stopScan(myScanCallback)
     }
 
     fun start(): Boolean {
-        if(!bluetoothManager.isBluetoothEnabled()) return false
+        if (!bluetoothManager.isBluetoothEnabled()) return false
         bluetoothLeScanner = bluetoothManager.adapter()!!.bluetoothLeScanner
         val filter = listOf(
             ScanFilter.Builder().apply {
@@ -48,30 +48,13 @@ class BLEScanner: KoinComponent {
             filter,
             ScanSettings.Builder().apply {
                 // with report delay the distance estimator doesn't work
-                setReportDelay(5*1000) // 5 sec
-                setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+                setReportDelay(0) // X sec
+                setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
             }.build(),
             myScanCallback
         )
 
         return true
-    }
-
-    private fun storeResults(list: List<BLEContactEntity>) {
-
-        // if in the same scan result we have the same ids, compute the avarage rssi
-        val distinctAvaragedIds = list.groupingBy { it.btId }.reduce { id, avarage, contact ->
-            BLEContactEntity(
-                btId = contact.btId,
-                txPower = contact.txPower,
-                timestamp = contact.timestamp,
-                rssi = (contact.rssi + avarage.rssi) / 2
-            )
-        }
-
-        GlobalScope.launch {
-            database.bleContactDao().insert(*distinctAvaragedIds.values.toTypedArray())
-        }
     }
 
     private fun processResults(results: List<ScanResult>) {
@@ -98,8 +81,7 @@ class BLEScanner: KoinComponent {
             }
         }
 
-        log("SCAN RESULT id=$id ${encounters.map { it.btId }.joinToString()}")
-        storeResults(encounters)
+        aggregator.addProximityEvents(encounters)
     }
 
     inner class MyScanCallback : ScanCallback() {
