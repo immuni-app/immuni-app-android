@@ -175,7 +175,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
                 e.printStackTrace()
             }
 
-            currentScanner = BLEScanner().apply {
+            currentScanner = (currentScanner ?: BLEScanner()).apply {
                 start()
             }
         }
@@ -190,7 +190,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
             } catch (e: java.lang.Exception) {
                 e.printStackTrace()
             }
-            currentAdvertiser = BLEAdvertiser(applicationContext).apply {
+            currentAdvertiser = (currentAdvertiser ?: BLEAdvertiser(applicationContext)).apply {
                 start()
             }
         }
@@ -235,6 +235,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
                 if(previousPermissionsState == PermissionsState.MISSING &&
                         currentPermissionState == PermissionsState.OK) {
+                    log("Restarting BLE ads/scan/server.")
                     restartBlee()
                 }
 
