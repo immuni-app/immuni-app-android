@@ -3,7 +3,6 @@ package org.immuni.android.managers.ble
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.models.ProximityEvent
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
@@ -13,10 +12,12 @@ import kotlin.math.pow
 import kotlin.math.roundToInt
 
 class ProximityEventsAggregator: KoinComponent {
+    companion object {
+        private const val TIME_WINDOW: Long = 10 * 1000
+    }
 
     private val database: ImmuniDatabase by inject()
 
-    private val TIME_WINDOW: Long = 10 * 1000
     private val timer = timer(name ="aggregator-timer", initialDelay = TIME_WINDOW, period = TIME_WINDOW) {
         tick()
     }
@@ -24,8 +25,9 @@ class ProximityEventsAggregator: KoinComponent {
 
     fun addProximityEvents(events: List<ProximityEvent>) {
         log("Raw scan: ${events.map { "${it.btId} - ${it.rssi}" }.joinToString(", ")}")
-
-        proximityEvents.addAll(events)
+        synchronized(this) {
+            proximityEvents.addAll(events)
+        }
     }
 
     private fun tick() {
