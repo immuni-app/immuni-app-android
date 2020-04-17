@@ -163,6 +163,53 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/support_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="#1A495D74"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        style="@style/P1Text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="@font/euclid_circular_semi_bold"
+                        android:text="@string/request_support"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />\ />
+
+                    <TextView
+                        android:id="@+id/supportButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginBottom="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

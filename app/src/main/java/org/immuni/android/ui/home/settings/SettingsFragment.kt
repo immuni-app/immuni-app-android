@@ -1,5 +1,8 @@
 package org.immuni.android.ui.home.settings
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +11,12 @@ import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeSharedViewModel
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import com.bendingspoons.concierge.ConciergeManager
+import com.bendingspoons.oracle.Oracle
 import kotlinx.android.synthetic.main.settings_fragment.*
+import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class SettingsFragment : Fragment(R.layout.settings_fragment) {
@@ -28,5 +36,32 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
             val action = SettingsFragmentDirections.actionGlobalDataHandling()
             findNavController().navigate(action)
         }
+
+        supportButton.setOnClickListener {
+            activity?.let {
+                contactUs(it)
+            }
+        }
+    }
+
+    fun contactUs(activity: Activity) {
+
+        val concierge: ConciergeManager by inject()
+        val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+        val email = oracle.settings()?.supportEmail
+
+        val ctx = activity.applicationContext
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:") // only email apps should handle this
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+            putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
+            putExtra(
+                Intent.EXTRA_TEXT, "${ctx.getString(R.string.delete_data_email_message)}\n" +
+                        "\n---------------------\n" +
+                        concierge.backupPersistentId.id + "\n" +
+                        "---------------------")
+        }
+
+        activity.startActivity(Intent.createChooser(intent, ctx.getString(R.string.choose_an_app_to_contact_us)))
     }
 }
