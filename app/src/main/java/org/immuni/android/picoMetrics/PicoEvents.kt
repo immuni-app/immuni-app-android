@@ -82,12 +82,13 @@ class BluetoothScanFailed {
     val userAction = UserAction("bluetooth_scan_failed")
 }
 
+/*
 class BluetoothScanSucceded(val count: Int) {
     val userAction = UserAction(
         "bluetooth_scan_succeded",
         mapOf("count" to count)
     )
-}
+}*/
 
 /**
  * surveyVersion: The version of the survey that has been completed

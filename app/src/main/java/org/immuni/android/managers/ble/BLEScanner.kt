@@ -109,9 +109,6 @@ class BLEScanner: KoinComponent {
             processResults(results)
 
             log("onScanResult count=${results.size}")
-            GlobalScope.launch {
-                pico.trackEvent(BluetoothScanSucceded(results.size).userAction)
-            }
         }
 
         override fun onScanResult(callbackType: Int, result: ScanResult) {
@@ -119,9 +116,6 @@ class BLEScanner: KoinComponent {
             processResults(listOf(result))
 
             log("onScanResult count=1")
-            GlobalScope.launch {
-                pico.trackEvent(BluetoothScanSucceded(1).userAction)
-            }
         }
 
         override fun onScanFailed(errorCode: Int) {
