@@ -4,7 +4,7 @@
     <string name="app_setup_check_connection">Ci dispiace, è stato impossibile connettersi. Riprova più tardi.</string>
     <string name="no_app_can_open_the_link">Nessuna app può aprire questo link.</string>
     <string name="home_tab">Home</string>
-    <string name="family_tab">Famiglia</string>
+    <string name="family_tab">Profilo</string>
     <string name="next">Avanti</string>
     <string name="settings_tab">Informazioni</string>
     <string name="and">e</string>
