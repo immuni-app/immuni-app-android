@@ -68,9 +68,8 @@ class BluetoothFoundPeripheralsSnapshot(contacts: List<Contact>) {
     @JsonClass(generateAdapter = true)
     data class Contact(
         @field:Json(name = "bt_id") val btId: String,
-        @field:Json(name = "rssi") val rssi: Int,
-        @field:Json(name = "tx_power") val txPower: Int,
-        @field:Json(name = "timestamp") val timestamp: Double
+        @field:Json(name = "timestamp") val timestamp: Double,
+        @field:Json(name = "events") val events: String
     )
 }
 

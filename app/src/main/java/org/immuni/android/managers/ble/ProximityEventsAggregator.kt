@@ -12,7 +12,7 @@ import kotlin.concurrent.timer
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
-class Aggregator: KoinComponent {
+class ProximityEventsAggregator: KoinComponent {
 
     private val database: ImmuniDatabase by inject()
 
@@ -64,7 +64,7 @@ class Aggregator: KoinComponent {
                     btId = it.btId,
                     txPower = it.txPower,
                     rssi = it.rssi,
-                    date = it.timestamp
+                    date = it.date
                 )
             }
         }

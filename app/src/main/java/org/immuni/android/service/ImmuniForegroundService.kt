@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.IBinder
 import android.os.PowerManager
+import android.util.Base64
+import com.bendingspoons.base.storage.KVStorage
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
@@ -13,6 +15,7 @@ import org.immuni.android.ImmuniApplication
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.db.entity.RELATIVE_TIMESTAMP_SECONDS
 import org.immuni.android.managers.AppNotificationManager
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
@@ -35,6 +38,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     companion object {
         const val FOREGROUND_NOTIFICATION_ID = 21032020
+        const val PICO_LAST_SENT_EVENT_TIME = "PICO_LAST_SENT_EVENT_TIME"
         var currentAdvertiser: BLEAdvertiser? = null
         var currentScanner: BLEScanner? = null
 
@@ -45,6 +49,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
     val btIdsManager: BtIdsManager by inject()
     val bluetoothManager: BluetoothManager by inject()
     val appNotificationManager: AppNotificationManager by inject()
+    private val storage: KVStorage by inject()
     private val pico: Pico by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val database: ImmuniDatabase by inject()
@@ -273,21 +278,31 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
         // FIXME
         if (count % picoContactsUploadPeriodicity.div(PERIODICITY) == 0) {
-            val thresholdTimestamp = Date().time - picoContactsUploadPeriodicity * 1000
+            val lastSentEventTime = storage.load(PICO_LAST_SENT_EVENT_TIME, 0L)
+            val currentTime =  Date().time
+            var endTime = lastSentEventTime
+            val timeWindow = RELATIVE_TIMESTAMP_SECONDS * 256 * 1000
+            while ((endTime + timeWindow) < currentTime) {
+                endTime += timeWindow
+            }
+            if (endTime == lastSentEventTime) {
+                return
+            }
             val newContacts =
-                database.bleContactDao().getAllSinceTimestamp(thresholdTimestamp).map {
-                    Contact(
+                database.bleContactDao().getAllBetweenTimestamps(start = lastSentEventTime, end = endTime).map {
+                    val contact = Contact(
                         btId = it.btId,
-                        rssi = it.rssi,
-                        txPower = it.txPower,
-                        timestamp = it.timestamp.time / 1000.0
+                        timestamp = it.timestamp.time / 1000.0,
+                        events = Base64.encodeToString(it.events, Base64.DEFAULT)
                     )
+                    contact
                 }
             pico.trackEvent(
                 BluetoothFoundPeripheralsSnapshot(
                     contacts = newContacts
                 ).userAction
             )
+            storage.save(PICO_LAST_SENT_EVENT_TIME, endTime)
         }
     }
 }
