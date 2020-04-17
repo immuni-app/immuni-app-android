@@ -92,8 +92,9 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         whitelist.setOnClickListener {
-            val action = ProfileFragmentDirections.actionWhitelistDialog()
-            findNavController().navigate(action)
+            //val action = ProfileFragmentDirections.actionWhitelistDialog()
+            //findNavController().navigate(action)
+            PermissionsManager.startChangeBatteryOptimization(requireContext())
         }
 
         bluetooth.setOnClickListener {
@@ -103,9 +104,9 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 return@setOnClickListener
             }
             if(!bluetoothManager.isBluetoothEnabled()) {
-                val action = ProfileFragmentDirections.actionBluetoothDialog()
-                findNavController().navigate(action)
-                //bluetoothManager.openBluetoothSettings(this)
+                //val action = ProfileFragmentDirections.actionBluetoothDialog()
+                //findNavController().navigate(action)
+                bluetoothManager.openBluetoothSettings(this)
             } else updateUI()
         }
 

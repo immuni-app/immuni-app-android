@@ -24,13 +24,15 @@
         android:orientation="vertical">
         <TextView
             style="@style/H3SectionHeading"
-            android:fontFamily="@font/euclid_circular_semi_bold"
+            android:textSize="23sp"
+            android:fontFamily="@font/euclid_circular_bold"
             android:text="Controlla che Immuni sia sempre attiva in background"
             android:layout_width="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_height="wrap_content"/>
         <TextView
-            style="@style/P1Text"
+            style="@style/H5Section"
+            android:textColor="#495D74"
             android:text="@string/whitelist_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,18 +45,6 @@
             android:layout_height="wrap_content"
             android:text="@string/open_list"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/okChecked"
-            style="@style/RoundedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/i_have_controlled"
-            android:backgroundTint="#E9EFFF"
-            android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

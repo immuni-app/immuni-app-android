@@ -72,18 +72,21 @@ class PermissionsManager(val context: Context) : KoinComponent {
             return false
         }
 
-        fun startChangeBatteryOptimization(context: Context) {
+        fun startChangeBatteryOptimizationSettings(context: Context) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 val intent = Intent(android.provider.Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
                 context.startActivity(intent)
+            }
+        }
 
-                /*
+        fun startChangeBatteryOptimization(context: Context) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 val intent = Intent().apply {
                     action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
                     val packageName: String = context.packageName
                     data = Uri.parse("package:$packageName")
                 }
-                context.startActivity(intent)*/
+                context.startActivity(intent)
             }
         }
 
@@ -107,16 +110,10 @@ class PermissionsManager(val context: Context) : KoinComponent {
             builder.setAlwaysShow(true)
             val client: SettingsClient = LocationServices.getSettingsClient(activity)
             val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
-                .addOnSuccessListener { _ ->
-                    // All location settings are satisfied. The client can initialize
-                    // location requests here.
-                }.addOnFailureListener { exception ->
+                .addOnSuccessListener {}
+                .addOnFailureListener { exception ->
                 if (exception is ResolvableApiException){
-                    // Location settings are not satisfied, but this can be fixed
-                    // by showing the user a dialog.
                     try {
-                        // Show the dialog by calling startResolutionForResult(),
-                        // and check the result in onActivityResult().
                         exception.startResolutionForResult(activity, requestCode)
                     } catch (sendEx: IntentSender.SendIntentException) {
                         // Ignore the error.

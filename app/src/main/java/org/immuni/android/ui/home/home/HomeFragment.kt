@@ -21,12 +21,14 @@ import kotlinx.android.synthetic.main.home_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.disableDragging
+import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.models.survey.backgroundColor
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.home.home.model.*
 import org.immuni.android.ui.log.LogActivity
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class HomeFragment : Fragment(), HomeClickListener {
@@ -231,8 +233,9 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openWhiteListDialog() {
-        val action = HomeFragmentDirections.actionWhitelistDialog()
-        findNavController().navigate(action)
+        //val action = HomeFragmentDirections.actionWhitelistDialog()
+        //findNavController().navigate(action)
+        PermissionsManager.startChangeBatteryOptimization(requireContext())
     }
 
     private fun openNotificationDialog() {
@@ -253,7 +256,9 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openBluetoothDialog() {
-        val action = HomeFragmentDirections.actionBluetoothDialog()
-        findNavController().navigate(action)
+        //val action = HomeFragmentDirections.actionBluetoothDialog()
+        //findNavController().navigate(action)
+        val bluetoothManager: BluetoothManager by inject()
+        bluetoothManager.openBluetoothSettings(this)
     }
 }

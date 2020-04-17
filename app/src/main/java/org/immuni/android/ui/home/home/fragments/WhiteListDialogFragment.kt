@@ -26,9 +26,5 @@ class WhiteListDialogFragment: FullScreenDialogDarkFragment() {
         openList.setOnClickListener {
             PermissionsManager.startChangeBatteryOptimization(requireContext())
         }
-
-        okChecked.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 }
