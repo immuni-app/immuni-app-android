@@ -13,8 +13,6 @@ import com.google.android.gms.common.util.Hex
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.db.entity.BLEContactEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -28,8 +26,6 @@ import java.util.*
 import kotlin.random.Random
 
 class BLEAdvertiser(val context: Context): KoinComponent {
-    private val gattServerTag = "GATT_SERVER"
-    private val database: ImmuniDatabase by inject()
     private val bluetoothManager: BluetoothManager by inject()
     private var bluetoothGattServer: BluetoothGattServer? = null
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
