@@ -252,4 +252,6 @@
     <string name="data_handling_title">Gestione dati</string>
     <string name="restore_data">Recupera dati</string>
     <string name="consent_background">Consenti background</string>
+    <string name="insert_code_explanation">Il codice ti viene fornito dall\'autorità sanitaria se ti sei sottoposto ad un test per il COVID-19 e i risultati sono disponibili.</string>
+    <string name="insert_code_explanation_sub">Il codice permette il caricamento dei dati di tracciamento Bluetooth al fine di notificare eventuali utenti a rischio di contagio.</string>
 </resources>
