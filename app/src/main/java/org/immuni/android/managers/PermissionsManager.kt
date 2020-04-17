@@ -1,9 +1,11 @@
 package org.immuni.android.managers
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
+import android.content.IntentSender
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.LocationManager
 import android.net.Uri
@@ -14,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bendingspoons.oracle.Oracle
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
+import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.launch
@@ -82,11 +87,43 @@ class PermissionsManager(val context: Context) : KoinComponent {
             }
         }
 
-        fun startChangeGlobalGeolocalisation(context: Context) {
+        fun startChangeGlobalGeolocalisationSettings(activity: Activity) {
             val intent = Intent().apply {
                 action = Settings.ACTION_LOCATION_SOURCE_SETTINGS
             }
-            context.startActivity(intent)
+            activity.startActivity(intent)
+        }
+
+        var alreadyShownSystemGeolocationDialog = false
+        fun startChangeGlobalGeolocalisation(activity: Activity, requestCode: Int): Boolean {
+
+            if(alreadyShownSystemGeolocationDialog) {
+                return false
+            }
+
+            alreadyShownSystemGeolocationDialog = true
+            val builder = LocationSettingsRequest.Builder()
+            builder.addLocationRequest(LocationRequest.create())
+            builder.setAlwaysShow(true)
+            val client: SettingsClient = LocationServices.getSettingsClient(activity)
+            val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
+                .addOnSuccessListener { _ ->
+                    // All location settings are satisfied. The client can initialize
+                    // location requests here.
+                }.addOnFailureListener { exception ->
+                if (exception is ResolvableApiException){
+                    // Location settings are not satisfied, but this can be fixed
+                    // by showing the user a dialog.
+                    try {
+                        // Show the dialog by calling startResolutionForResult(),
+                        // and check the result in onActivityResult().
+                        exception.startResolutionForResult(activity, requestCode)
+                    } catch (sendEx: IntentSender.SendIntentException) {
+                        // Ignore the error.
+                    }
+                }
+            }
+            return true
         }
     }
 

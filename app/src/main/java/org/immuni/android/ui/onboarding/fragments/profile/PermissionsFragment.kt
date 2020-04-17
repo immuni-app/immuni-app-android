@@ -121,9 +121,10 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         }
 
         geolocation.setOnClickListener {
-            //PermissionsManager.startChangeGlobalGeolocalisation(requireContext())
-            val action = ProfileFragmentDirections.actionGeolocationDialog()
-            findNavController().navigate(action)
+            if(!PermissionsManager.startChangeGlobalGeolocalisation(requireActivity(), 20100)) {
+                val action = ProfileFragmentDirections.actionGeolocationDialog()
+                findNavController().navigate(action)
+            }
         }
 
         knowMore.setOnClickListener { updateKnowMore(it as TextView) }

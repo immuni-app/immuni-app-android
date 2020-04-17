@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.home_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.disableDragging
+import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.models.survey.backgroundColor
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.HomeSharedViewModel
@@ -240,8 +241,10 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openGeolocationDialog() {
-        val action = HomeFragmentDirections.actionGeolocationDialog()
-        findNavController().navigate(action)
+        if(!PermissionsManager.startChangeGlobalGeolocalisation(requireActivity(), 20100)) {
+            val action = HomeFragmentDirections.actionGeolocationDialog()
+            findNavController().navigate(action)
+        }
     }
 
     private fun openPermissionsDialog() {

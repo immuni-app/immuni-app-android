@@ -35,7 +35,10 @@ class GeolocationDialogFragment: FullScreenDialogDarkFragment() {
     }
 
     private fun openGeolocationSettings() {
-        PermissionsManager.startChangeGlobalGeolocalisation(requireContext())
+        activity?.let {
+            PermissionsManager.startChangeGlobalGeolocalisationSettings(it)
+        }
+
         findNavController().popBackStack()
     }
 }
