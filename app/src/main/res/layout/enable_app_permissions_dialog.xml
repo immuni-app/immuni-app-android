@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:text="Apri le impostazioni dal bottone in basso" />
+                    android:text="@string/geolocation_instruction_0" />
 
                 <TextView
                     style="@style/H5Section"

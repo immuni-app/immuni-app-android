@@ -170,25 +170,25 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         when(textView.id) {
             R.id.knowMore -> {
                 when(more) {
-                    true -> description.text = getString(R.string.onboarding_permission_bt_long)
+                    true -> description.text = getString(R.string.onboarding_permission_bt_short) + "\n\n" + getString(R.string.onboarding_permission_bt_long)
                     false -> description.text = getString(R.string.onboarding_permission_bt_short)
                 }
             }
             R.id.knowMore2 -> {
                 when(more) {
-                    true -> description2.text = getString(R.string.onboarding_permission_permissions_long)
+                    true -> description2.text =  getString(R.string.onboarding_permission_permissions_short) + "\n\n" + getString(R.string.onboarding_permission_permissions_long)
                     false -> description2.text = getString(R.string.onboarding_permission_permissions_short)
                 }
             }
             R.id.knowMore3 -> {
                 when(more) {
-                    true -> description3.text = getString(R.string.onboarding_permission_geo_long)
+                    true -> description3.text =  getString(R.string.onboarding_permission_geo_short) + "\n\n" + getString(R.string.onboarding_permission_geo_long)
                     false -> description3.text = getString(R.string.onboarding_permission_geo_short)
                 }
             }
             R.id.knowMore4 -> {
                 when(more) {
-                    true -> description4.text = getString(R.string.onboarding_permission_whitelist_long)
+                    true -> description4.text =  getString(R.string.onboarding_permission_whitelist_short) + "\n\n" + getString(R.string.onboarding_permission_whitelist_long)
                     false -> description4.text = getString(R.string.onboarding_permission_whitelist_short)
                 }
             }

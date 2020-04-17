@@ -31,7 +31,7 @@
     <string name="welcome_4_title">Ricerca scientifica</string>
     <string name="welcome_4_description">Le informazioni raccolte sono preziosissime per aiutare la ricerca contro le epidemie ed evitare che questa crisi si ripeta.</string>
 
-    <string name="privacy_checkbox">Ho letto e accetto l\'{informativa sulla privacy}</string>
+    <string name="privacy_checkbox">Ho letto e accetto l\'{Informativa privacy}</string>
     <string name="privacy_title">Immuni tutela la tua privacy</string>
     <string name="privacy_message">Raccoglieremo e proteggeremo i tuoi dati responsabilmente.</string>
 
@@ -71,16 +71,17 @@
     <string name="app_update_title">È disponibile una nuova versione</string>
     <string name="app_update_message">Aggiorna l\'app per continuare</string>
     <string name="compile_for_message">Stai per effettuare la compilazione per conto di</string>
-    <string name="open_settings">Apri le impostazioni</string>
+    <string name="open_settings">Apri Impostazioni</string>
 
-    <string name="geolocation_instruction_1">1. Seleziona</string>
-    <string name="geolocation_instruction_2">2. Seleziona "Geolocalizzazione"</string>
-    <string name="geolocation_instruction_3">3. Imposta</string>
+    <string name="geolocation_instruction_0">1. Apri le impostazioni dal bottone qui sotto</string>
+    <string name="geolocation_instruction_1">2. Seleziona \"Autorizzazioni\"</string>
+    <string name="geolocation_instruction_2">3. Seleziona \"Geolocalizzazione\"</string>
+    <string name="geolocation_instruction_3">4. Imposta \"Consenti sempre\"</string>
 
     <string name="app_exit_title">Uscire</string>
     <string name="app_exit_message">Sei sicuro di voler uscire?</string>
-    <string name="onboarding_bluetooth_title">Permetti il calcolo del tuo fattore di rischio</string>
-    <string name="onboarding_bluetooth_message">Consenti di utilizzare il Bluetooth durante tutto l\'arco della giornata per permettere alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
+    <string name="onboarding_bluetooth_title">Consenti di rilevare il rischio d\'infezione</string>
+    <string name="onboarding_bluetooth_message">Usando la tecnologia Bluetooth l\'app individua utenti che ti sono stati vicini, senza identificarli. Se uno di questi risulterà positivo al virus, riusciremo ad avvisarti prontamente.</string>
     <string name="onboarding_permissions_sample">Seleziona \"Consenti sempre\" nel popup che ti apparirà qui sotto</string>
     <string name="indication_for">Indicazioni su cosa fare per %s</string>
     <string name="you_as_complement">te</string>
@@ -222,32 +223,33 @@
 
     <string name="diary_disabled_title">Il diario clinico non è abilitato</string>
     <string name="diary_disabled_message">In questa versione dell’app non è possibile compilare il diario clinico.</string>
-    <string name="privacy_page_tos">Proseguendo, dichiaro di aver letto e accettato i {termini di utilizzo}</string>
+    <string name="privacy_page_tos">Proseguendo, dichiaro di aver letto e accettato i {Termini di utilizzo}</string>
 
-    <string name="privacy_page_notification">Immuni <b>ti avvisa in caso di contatto</b> con una persona risultata positiva al test del Covid-19.</string>
-    <string name="privacy_page_location">Immuni <b>non traccia la tua posizione</b>, né quali sono i tuoi movimenti.</string>
-    <string name="privacy_page_bluetooth">Immuni <b>utilizza solo il segnale Bluetooth</b> del tuo dispositivo.</string>
-    <string name="privacy_page_health">Immuni <b>monitora il tuo stato di salute</b>, e ti invia consigli personalizzati su come comportarti, compilando un diario clinico che resta salvato solo sul tuo dispositivo.</string>
-    <string name="whitelist_message">1. <b>Apri l\'elenco delle app non ottimizzate</b> dal bottone qui sotto\n\n2. Controlla che <b>Immuni sia impostata su "non ottimizzata"</b>\n\n3. In caso contrario, <b>imposta l\'app su "non ottimizzata"</b>.</string>
+    <string name="privacy_page_notification">Immuni ti notifica se sei entrato in contatto con un altro utente dell\'app risultato positivo al Covid-19, se l\'utente ci mette in condizione di farlo.</string>
+    <string name="privacy_page_location">Per farlo, Immuni non traccia la tua posizione, né sa quali sono i tuoi movimenti, o l\'identità delle persone che incontri.</string>
+    <string name="privacy_page_bluetooth">Immuni utilizza solamente il segnale Bluetooth del tuo dispositivo e di quello degli altri utenti che usano l\'app.</string>
+    <string name="privacy_page_health">Puoi anche ricevere consigli personalizzati su come comportarti, compilando un diario clinico che rimane solamente sul tuo dispositivo.</string>
+    <string name="whitelist_message">1. <b>Apri elenco delle app non ottimizzate</b> dal bottone qui sotto\n\n2. Cerca e seleziona l’app <b>Immuni</b></string>
     <string name="open_list">Apri elenco</string>
     <string name="i_have_controlled">Ho controllato</string>
     <string name="know_more">Scopri di più</string>
     <string name="hide">Nascondi</string>
 
-    <string name="onboarding_permission_bt_short">Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
-    <string name="onboarding_permission_bt_long">Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio. Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio. Permetterai alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
+    <string name="onboarding_permission_bt_short">Immuni ha bisogno di accedere al Bluetooth per individuare utenti che ti sono stati vicini, senza identificarli. Se uno di questi risulterà positivo al virus, riusciremo ad avvisarti rapidamente.</string>
+    <string name="onboarding_permission_bt_long">Questa funzionalità è resa possibile dallo scambio di codici identificativi casuali tra dispositivi vicini, con consumo minimo di batteria grazie alla tecnologia Bluetooth Low Energy.</string>
 
-    <string name="onboarding_permission_permissions_short">Il consenso alla posizione è necessario per permettere il funzionamento del Bluetooth. Non utilizzeremo questo consenso per tracciare i tuoi spostamenti in nessun momento. Se decidi di negare questo consenso, l\'applicazione non sarà in grado di comunicare con i dispositivi vicini a te e non riusciremo ad avvertirti in caso di pericolo.</string>
-    <string name="onboarding_permission_permissions_long">Il consenso alla posizione è necessario per permettere il funzionamento del Bluetooth. Non utilizzeremo questo consenso per tracciare i tuoi spostamenti in nessun momento. Se decidi di negare questo consenso, l\'applicazione non sarà in grado di comunicare con i dispositivi vicini a te e non riusciremo ad avvertirti in caso di pericolo. Il consenso alla posizione è necessario per permettere il funzionamento del Bluetooth. Non utilizzeremo questo consenso per tracciare i tuoi spostamenti in nessun momento. Se decidi di negare questo consenso, l\'applicazione non sarà in grado di comunicare con i dispositivi vicini a te e non riusciremo ad avvertirti in caso di pericolo.</string>
+    <string name="onboarding_permission_permissions_short">Immuni non accede ai tuoi dati di localizzazione, ma il permesso è comunque necessario per usare il Bluetooth quando l’app è chiusa.</string>
+    <string name="onboarding_permission_permissions_long">Se non autorizzi la localizzazione, l’app non può rilevare dispositivi vicini e avvertirti in caso di rischio.</string>
 
-    <string name="onboarding_permission_geo_short">Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione.</string>
-    <string name="onboarding_permission_geo_long">Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione. Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione. Per utilizzare il Bluetooth e calcolare il tuo fattore di rischio, devi attivare la geolocalizzazione.</string>
+    <string name="onboarding_permission_geo_short">Immuni non accede ai tuoi dati di localizzazione, ma è comunque necessario avere la localizzazione attiva sul tuo smartphone per usare il Bluetooth quando l’app è chiusa.</string>
+    <string name="onboarding_permission_geo_long">Se non attivi la localizzazione, l’app non può rilevare dispositivi vicini e avvertirti in caso di rischio.</string>
 
-    <string name="onboarding_permission_whitelist_short">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.</string>
-    <string name="onboarding_permission_whitelist_long">Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria. Impedisci che la funzionalità dell’app venga limitata quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.</string>
+    <string name="onboarding_permission_whitelist_short">Permetti all’app di funzionare anche quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.</string>
+    <string name="onboarding_permission_whitelist_long">Se non escludi Immuni dalla lista, il sistema operativo terminerà l’app quando è attiva nel background, impedendole di rilevare dispositivi vicini e di avvertirti in caso di rischio.</string>
     <string name="delete_data">Elimina dati</string>
     <string name="choose_an_app_to_contact_us">Seleziona un\'app</string>
     <string name="delete_data_email_message">TODO corpo del messaggio</string>
     <string name="data_handling_title">Gestione dati</string>
     <string name="restore_data">Recupera dati</string>
+    <string name="consent_background">Consenti background</string>
 </resources>

@@ -26,7 +26,7 @@
             style="@style/H3SectionHeading"
             android:textSize="23sp"
             android:fontFamily="@font/euclid_circular_bold"
-            android:text="Controlla che Immuni sia sempre attiva in background"
+            android:text="Escludi da ottimizzazione batteria"
             android:layout_width="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_height="wrap_content"/>

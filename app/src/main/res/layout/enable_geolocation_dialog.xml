@@ -52,7 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/euclid_circular_bold"
-                android:text="Per attivare la localizzazione"
+                android:text="Attiva la localizzazione"
                 android:textColor="#4F4F5B"
                 app:layout_constraintEnd_toStartOf="@+id/back"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:text="1. Apri le impostazioni dal bottone in basso" />
+                    android:text="1. Apri le impostazioni dal bottone qui sotto" />
 
                 <TextView
                     style="@style/H5Section"
