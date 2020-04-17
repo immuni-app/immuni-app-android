@@ -7,6 +7,7 @@ import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import kotlin.concurrent.timer
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -14,24 +15,22 @@ class Aggregator: KoinComponent {
 
     private val database: ImmuniDatabase by inject()
 
-    private val TIME_WINDOW = 10 * 1000
+    private val TIME_WINDOW: Long = 10 * 1000
+    private val timer = timer(name ="aggregator-timer", initialDelay = TIME_WINDOW, period = TIME_WINDOW) {
+        tick()
+    }
     private val proximityEvents = mutableListOf<BLEContactEntity>()
 
     fun addProximityEvents(events: List<BLEContactEntity>) {
-
         log("Raw scan: ${events.map { "${it.btId} - ${it.rssi}" }.joinToString(", ")}")
 
         proximityEvents.addAll(events)
+    }
 
-        if(proximityEvents.isEmpty()) return
-
-        val firstTs = proximityEvents.first().timestamp
-        val lastTs = proximityEvents.last().timestamp
-
-        if(lastTs.time - firstTs.time > TIME_WINDOW) {
-            store(aggregate())
-            clear()
-        }
+    private fun tick() {
+        if (proximityEvents.isEmpty()) return
+        store(aggregate())
+        clear()
     }
 
     private fun aggregate(): Collection<BLEContactEntity> {
