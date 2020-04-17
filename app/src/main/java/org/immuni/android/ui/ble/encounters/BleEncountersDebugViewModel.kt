@@ -6,8 +6,10 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.BLEContactEntity
+import org.immuni.android.db.entity.relativeTimestampToDate
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.text.DateFormat
 import java.util.*
 
 class BleEncountersDebugViewModel : ViewModel(), KoinComponent {
@@ -23,38 +25,53 @@ class BleEncountersDebugViewModel : ViewModel(), KoinComponent {
     init {
         uiScope.launch {
             encounters
-                .collect {
-                    it.lastOrNull()?.let {
-                        lastEncounter.value = it
+                .collect { list ->
+                    list.lastOrNull()?.let { last ->
+                        lastEncounter.value = last
                     }
 
-                    val list = withContext(Dispatchers.Default) {
-                        it.asSequence().groupingBy { encounter ->
-                            val calendar = Calendar.getInstance().apply {
-                                time = encounter.timestamp
-                            }
-                            val year = calendar.get(Calendar.YEAR)
-                            val month = calendar.get(Calendar.MONTH)
-                            val day = calendar.get(Calendar.DAY_OF_MONTH)
-                            val hour = calendar.get(Calendar.HOUR_OF_DAY)
-                            val minutes = when (calendar.get(Calendar.MINUTE)) {
-                                in 1..15 -> "00/15"
-                                in 16..30 -> "15/30"
-                                in 31..45 -> "30/45"
-                                else -> "45/60"
-                            }
-
-                            // 01/03/2020 16:00/15
-                            "${String.format("%02d", day)}/${String.format("%02d", month)}/" +
-                                    "${year} ${String.format("%02d", hour)}:${minutes}"
-                        }
-                        .eachCount().map { item ->
-                            EncountersItem(item.key, item.value)
-                        }.sortedBy {
-                            it.timeWindows
+                    // unroll all the events
+                    val expandedList = mutableListOf<BLEContactEntity>()
+                    list.forEach { bce ->
+                        val ts = bce.timestamp
+                        val btId = bce.btId
+                        bce.enumeratedEvents.forEach { event ->
+                            expandedList.add(
+                                BLEContactEntity(
+                                    btId = btId,
+                                    timestamp = relativeTimestampToDate(ts, event.relativeTimestamp)
+                                )
+                            )
                         }
                     }
-                    listModel.value = list
+
+                    if(expandedList.isEmpty()) return@collect
+
+                    val firstTs = expandedList.first().timestamp
+                    val lastTs = expandedList.last().timestamp
+
+                    // let's start counting from the straight hour before the first event
+                    val startTs = Calendar.getInstance().apply {
+                        time = firstTs
+                        set(Calendar.MINUTE, 0)
+                        set(Calendar.SECOND, 0)
+                        set(Calendar.MILLISECOND, 0)
+                    }
+
+                    val outputList = mutableListOf<EncountersItem>()
+                    while(startTs.timeInMillis < lastTs.time) {
+
+                        val time = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.US).format(
+                            startTs.time)
+                        val count = expandedList.count {
+                            it.timestamp.time >= startTs.time.time &&
+                            it.timestamp.time < (startTs.time.time + 15 * 60 * 1000)
+                        }
+                        outputList.add(EncountersItem(time, count))
+                        // add 15 minutes
+                        startTs.add(Calendar.MINUTE, 15)
+                    }
+                    listModel.value = outputList
                 }
         }
     }

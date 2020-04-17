@@ -45,8 +45,8 @@ class BLEScanner : KoinComponent {
             filter,
             ScanSettings.Builder().apply {
                 // with report delay the distance estimator doesn't work
-                setReportDelay(0) // X sec
-                setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
+                setReportDelay(0)
+                setScanMode(ScanSettings.SCAN_MODE_BALANCED)
             }.build(),
             myScanCallback
         )
