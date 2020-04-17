@@ -13,7 +13,6 @@ import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.picoMetrics.BluetoothScanFailed
-import org.immuni.android.picoMetrics.BluetoothScanSucceded
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
