@@ -1,5 +1,6 @@
 package org.immuni.android.ui.uploadData
 
+import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bendingspoons.base.livedata.Event
@@ -33,15 +34,13 @@ class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : Vie
         uiScope.launch {
             loading.value = Event(true)
             delay(500) // min loader time to avoid flickering
-//            val devices = database.bleContactDao().getAll().map { // FIXME
-//                ExportDevice(
-//                    timestamp = it.timestamp.time / 1000.0,
-//                    btId = it.btId,
-//                    rssi = it.rssi,
-//                    txPower = it.txPower
-//                )
-//            }
-            val devices = listOf<ExportDevice>()
+            val devices = database.bleContactDao().getAll().map {
+                ExportDevice(
+                    timestamp = it.timestamp.time / 1000.0,
+                    btId = it.btId,
+                    events = Base64.encodeToString(it.events, Base64.DEFAULT)
+                )
+            }
             /*
             val surveys = surveyManager.allHealthProfiles(userId).map {
                 ExportHealthProfile.fromHealthProfile(it)

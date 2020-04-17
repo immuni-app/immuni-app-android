@@ -17,7 +17,7 @@ interface BLEContactDao: BaseDao<BLEContactEntity> {
     suspend fun getAllDistinctBtIdsCount(): Int
 
     @Query("SELECT * FROM ble_contact_table WHERE btId=:btId ORDER BY timestamp DESC LIMIT 1")
-    suspend fun getFirstByBtId(btId: String): BLEContactEntity?
+    suspend fun getLatestByBtId(btId: String): BLEContactEntity?
 
     @Query("SELECT * FROM ble_contact_table WHERE timestamp > :start AND timestamp <= :end")
     suspend fun getAllBetweenTimestamps(start: Long, end: Long): List<BLEContactEntity>

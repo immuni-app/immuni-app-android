@@ -276,7 +276,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
             }
         }
 
-        // FIXME
         if (count % picoContactsUploadPeriodicity.div(PERIODICITY) == 0) {
             val lastSentEventTime = storage.load(PICO_LAST_SENT_EVENT_TIME, 0L)
             val currentTime =  Date().time

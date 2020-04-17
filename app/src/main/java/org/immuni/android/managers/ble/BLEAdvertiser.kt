@@ -27,7 +27,7 @@ import org.koin.core.inject
 import java.util.*
 import kotlin.random.Random
 
-class BLEAdvertiser(val context: Context) : KoinComponent {
+class BLEAdvertiser(val context: Context): KoinComponent {
     private val gattServerTag = "GATT_SERVER"
     private val database: ImmuniDatabase by inject()
     private val bluetoothManager: BluetoothManager by inject()
