@@ -2,7 +2,7 @@ package org.immuni.android.ui.forceupdate
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.bendingspoons.base.playStore.PlayStoreActions
+import com.bendingspoons.base.playstore.PlayStoreActions
 import com.bendingspoons.base.utils.ExternalLinksHelper
 import com.bendingspoons.oracle.Oracle
 import org.immuni.android.api.oracle.model.ImmuniMe

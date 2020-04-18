@@ -1,4 +1,4 @@
-package com.bendingspoons.base.playStore
+package com.bendingspoons.base.playstore
 
 import android.content.ActivityNotFoundException
 import android.content.Context

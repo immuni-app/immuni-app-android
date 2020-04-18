@@ -4,7 +4,7 @@ import android.content.Context
 import com.bendingspoons.base.R
 import java.util.*
 
-// PicoInfoProvider retrieve device and user specific info
+// PicoInfoProvider retrieve device specific info
 
 interface DeviceInfoProvider {
     fun country(): String
