@@ -225,10 +225,10 @@
     <string name="diary_disabled_message">In questa versione dell’app non è possibile compilare il diario clinico.</string>
     <string name="privacy_page_tos">Proseguendo, dichiaro di aver letto e accettato i {Termini di utilizzo}</string>
 
-    <string name="privacy_page_notification">Immuni ti notifica se sei entrato in contatto con un altro utente dell\'app risultato positivo al Covid-19, se l\'utente ci mette in condizione di farlo.</string>
-    <string name="privacy_page_location">Per farlo, Immuni non traccia la tua posizione, né sa quali sono i tuoi movimenti, o l\'identità delle persone che incontri.</string>
-    <string name="privacy_page_bluetooth">Immuni utilizza solamente il segnale Bluetooth del tuo dispositivo e di quello degli altri utenti che usano l\'app.</string>
-    <string name="privacy_page_health">Puoi anche ricevere consigli personalizzati su come comportarti, compilando un diario clinico che rimane solamente sul tuo dispositivo.</string>
+    <string name="privacy_page_notification">Immuni <b>ti notifica se sei entrato in contatto</b> con un altro utente dell\'app risultato positivo al Covid-19, se l\'utente ci mette in condizione di farlo.</string>
+    <string name="privacy_page_location">Per farlo, Immuni <b>non traccia la tua posizione</b>, né sa quali sono i tuoi movimenti, o l\'identità delle persone che incontri.</string>
+    <string name="privacy_page_bluetooth">Immuni <b>utilizza solamente il segnale Bluetooth</b> del tuo dispositivo e di quello degli altri utenti che usano l\'app.</string>
+    <string name="privacy_page_health"><b>Puoi anche ricevere consigli personalizzati</b> su come comportarti, compilando un diario clinico che rimane solamente sul tuo dispositivo.</string>
     <string name="whitelist_message">1. <b>Apri elenco delle app non ottimizzate</b> dal bottone qui sotto\n\n2. Cerca e seleziona l’app <b>Immuni</b></string>
     <string name="open_list">Apri elenco</string>
     <string name="i_have_controlled">Ho controllato</string>
