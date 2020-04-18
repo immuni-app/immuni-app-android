@@ -19,7 +19,7 @@ import org.immuni.android.ui.home.family.model.AddFamilyMemberButtonCard
 import org.immuni.android.ui.home.family.model.AddFamilyMemberTutorialCard
 import org.immuni.android.ui.home.family.model.FamilyItemType
 import org.immuni.android.ui.home.family.model.UserCard
-import org.immuni.android.ui.uploadData.UploadDataActivity
+import org.immuni.android.ui.uploaddata.UploadDataActivity
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class FamilyFragment : Fragment(R.layout.family_fragment), FamilyClickListener {

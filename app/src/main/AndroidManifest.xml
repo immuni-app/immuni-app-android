@@ -100,7 +100,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.force_update.ForceUpdateActivity"
+            android:name=".ui.forceupdate.ForceUpdateActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
@@ -115,7 +115,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ui.uploadData.UploadDataActivity"
+            android:name=".ui.uploaddata.UploadDataActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />

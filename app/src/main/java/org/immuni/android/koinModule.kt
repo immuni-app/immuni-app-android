@@ -24,7 +24,7 @@ import org.immuni.android.managers.*
 import org.immuni.android.managers.ble.ProximityEventsAggregator
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.ui.ble.encounters.BleEncountersDebugViewModel
-import org.immuni.android.ui.force_update.ForceUpdateViewModel
+import org.immuni.android.ui.forceupdate.ForceUpdateViewModel
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.home.family.details.UserDetailsViewModel
 import org.immuni.android.ui.home.family.details.edit.EditDetailsViewModel
@@ -35,7 +35,7 @@ import org.immuni.android.ui.setup.Setup
 import org.immuni.android.ui.setup.SetupRepository
 import org.immuni.android.ui.setup.SetupRepositoryImpl
 import org.immuni.android.ui.setup.SetupViewModel
-import org.immuni.android.ui.uploadData.UploadDataViewModel
+import org.immuni.android.ui.uploaddata.UploadDataViewModel
 import org.immuni.android.ui.welcome.Welcome
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel

@@ -1,4 +1,4 @@
-package org.immuni.android.ui.uploadData
+package org.immuni.android.ui.uploaddata
 
 import android.util.Base64
 import androidx.lifecycle.MutableLiveData
@@ -8,11 +8,9 @@ import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.ExportDevice
-import org.immuni.android.models.ExportHealthProfile
 import org.immuni.android.picoMetrics.DataUploaded
 import org.koin.core.KoinComponent
 import org.koin.core.inject

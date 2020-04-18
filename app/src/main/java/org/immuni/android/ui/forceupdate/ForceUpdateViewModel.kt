@@ -1,4 +1,4 @@
-package org.immuni.android.ui.force_update
+package org.immuni.android.ui.forceupdate
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

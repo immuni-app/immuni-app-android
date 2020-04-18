@@ -1,4 +1,4 @@
-package org.immuni.android.ui.force_update
+package org.immuni.android.ui.forceupdate
 
 import android.os.Bundle
 import android.view.View

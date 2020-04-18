@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.user_details_fragment.name
 import org.immuni.android.R
 import org.immuni.android.models.Gender
 import org.immuni.android.loading
-import org.immuni.android.ui.uploadData.UploadDataActivity
+import org.immuni.android.ui.uploaddata.UploadDataActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 

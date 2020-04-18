@@ -1,4 +1,4 @@
-package org.immuni.android.ui.force_update
+package org.immuni.android.ui.forceupdate
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

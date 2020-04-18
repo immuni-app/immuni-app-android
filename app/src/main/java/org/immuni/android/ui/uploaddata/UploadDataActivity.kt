@@ -1,4 +1,4 @@
-package org.immuni.android.ui.uploadData
+package org.immuni.android.ui.uploaddata
 
 import android.os.Bundle
 import androidx.navigation.findNavController

@@ -2,8 +2,7 @@ package org.immuni.android
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
-import org.immuni.android.ui.force_update.ForceUpdateActivity
+import org.immuni.android.ui.forceupdate.ForceUpdateActivity
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.OracleConfiguration
 import com.bendingspoons.sesame.Sesame
