@@ -51,8 +51,20 @@ class ForegroundServiceStarted {
     val userAction = UserAction("foreground_service_started")
 }
 
+class ForegroundServiceStopped {
+    val userAction = UserAction("foreground_service_stopped")
+}
+
 class ForegroundServiceDestroyed {
     val userAction = UserAction("foreground_service_destroyed")
+}
+
+class RefreshBtIdsSuccedeed {
+    val userAction = UserAction("refresh_bt_ids_succedeed")
+}
+
+class RefreshBtIdsFailed {
+    val userAction = UserAction("refresh_bt_ids_failed")
 }
 
 class ForegroundServiceRestartedByAlarmManager {
@@ -80,14 +92,6 @@ class BluetoothAdvertisingFailed {
 class BluetoothScanFailed {
     val userAction = UserAction("bluetooth_scan_failed")
 }
-
-/*
-class BluetoothScanSucceded(val count: Int) {
-    val userAction = UserAction(
-        "bluetooth_scan_succeded",
-        mapOf("count" to count)
-    )
-}*/
 
 /**
  * surveyVersion: The version of the survey that has been completed

@@ -36,6 +36,8 @@ enum class Actions {
 
 class ImmuniForegroundService : Service(), KoinComponent {
 
+    private val serviceScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+
     companion object {
         const val FOREGROUND_NOTIFICATION_ID = 21032020
         const val PICO_LAST_SENT_EVENT_TIME = "PICO_LAST_SENT_EVENT_TIME"
@@ -47,10 +49,9 @@ class ImmuniForegroundService : Service(), KoinComponent {
         private const val PERIODICITY = 5
     }
 
-    val serviceScope = CoroutineScope(SupervisorJob())
-    val btIdsManager: BtIdsManager by inject()
-    val bluetoothManager: BluetoothManager by inject()
-    val appNotificationManager: AppNotificationManager by inject()
+    private val btIdsManager: BtIdsManager by inject()
+    private val bluetoothManager: BluetoothManager by inject()
+    private val appNotificationManager: AppNotificationManager by inject()
     private val storage: KVStorage by inject()
     private val pico: Pico by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
@@ -61,7 +62,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
     private var bleJob: Job? = null
 
     override fun onBind(intent: Intent): IBinder? {
-        log("Some component want to bind with the service")
         // We don't provide binding, so return null
         return null
     }
@@ -90,9 +90,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
         log("The Immuni service has been created")
         val notification = appNotificationManager.createForegroundServiceNotification()
         startForeground(FOREGROUND_NOTIFICATION_ID, notification)
-
-        //val filter = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
-        //applicationContext.registerReceiver(mReceiver, filter)
     }
 
     override fun onDestroy() {
@@ -119,7 +116,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     private fun startService() {
         if (isServiceStarted) return
-        log("Starting the Immuni foreground service task")
+        log("Starting the foreground service task")
         isServiceStarted = true
 
         // we need this lock so our service gets not affected by Doze Mode
@@ -131,7 +128,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
                 }
             }
 
-        // we're starting a loop in a coroutine
+        // keep the service running
         serviceScope.launch(Dispatchers.IO) {
             pico.trackEvent(ForegroundServiceStarted().userAction)
 
@@ -139,7 +136,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
             while (isServiceStarted) {
                 delay(1 * 30 * 1000)
             }
-            log("End of the loop for the Immuni service")
         }
     }
 
@@ -157,6 +153,12 @@ class ImmuniForegroundService : Service(), KoinComponent {
         } catch (e: Exception) {
             log("Service stopped without being started: ${e.message}")
         }
+
+        serviceScope.launch {
+            pico.trackEvent(ForegroundServiceStopped().userAction)
+            cancel("The Immuni service has been stopped")
+        }
+
         isServiceStarted = false
     }
 
@@ -217,11 +219,9 @@ class ImmuniForegroundService : Service(), KoinComponent {
             }
         }
 
-        val polling = async {
+        val periodicCheck = async {
             var previousPermissionsState = PermissionsState.OK
             repeat(Int.MAX_VALUE) {
-                //log("foreground service ping $this@BLEForegroundServiceWorker")
-
 
                 val currentPermissionState: PermissionsState
 

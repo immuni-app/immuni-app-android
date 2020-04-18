@@ -3,11 +3,14 @@ package org.immuni.android.managers
 import android.content.Context
 import android.util.Log
 import com.bendingspoons.base.utils.retry
+import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.BtId
 import org.immuni.android.api.oracle.model.BtIds
+import org.immuni.android.picoMetrics.RefreshBtIdsFailed
+import org.immuni.android.picoMetrics.RefreshBtIdsSuccedeed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -15,9 +18,10 @@ import java.util.*
 
 class BtIdsManager(val context: Context) : KoinComponent {
     private val apiManager: ApiManager by inject()
+    private val pico: Pico by inject()
     private var btIds: BtIds? = null
     private var timeCorrection = 0L
-    private val LOG_TAG = "BtIdsManager"
+
     fun correctTime() : Long {
         return Date().time + timeCorrection
     }
@@ -31,7 +35,6 @@ class BtIdsManager(val context: Context) : KoinComponent {
     }
 
     suspend fun getOrFetchActiveBtId(): BtId {
-
         val activeBtId = btIds?.ids?.firstOrNull { isNotExpired(it) }
         if (activeBtId == null) {
             refresh()
@@ -54,11 +57,13 @@ class BtIdsManager(val context: Context) : KoinComponent {
                     btIds = response.body()
                     timeCorrection = Date().time - (btIds!!.serverTimestamp.toLong() * 1000L)
                     hadSucces = true
+                    pico.trackEvent(RefreshBtIdsSuccedeed().userAction)
                 }
             } catch (e: Exception) {
                 log("error fetching ids, trying again")
             }
             if (!hadSucces) {
+                pico.trackEvent(RefreshBtIdsFailed().userAction)
                 delay(5 * 1000)
             }
         }

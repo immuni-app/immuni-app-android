@@ -27,6 +27,8 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters) 
     private val pico: Pico by inject()
 
     override suspend fun doWork(): Result = coroutineScope {
+        log("running DeleteUserDataWorker!")
+
         withContext(Dispatchers.Default) {
             oracle.settings()?.userDataRetentionDays?.let { days ->
                 surveyManager.deleteDataOlderThan(days)
@@ -40,8 +42,6 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters) 
                 pico.trackEvent(DataDeleted(days).userAction)
             }
         }
-
-        log("running DeleteUserDataWorker!")
 
         // Indicate whether the task finished successfully with the Result
         Result.success()

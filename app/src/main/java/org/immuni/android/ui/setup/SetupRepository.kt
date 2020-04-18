@@ -1,8 +1,8 @@
 package org.immuni.android.ui.setup
 
 import android.content.Context
+import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.ImmuniSettings
-import org.immuni.android.api.oracle.repository.OracleRepository
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.api.oracle.model.ImmuniMe
 import retrofit2.Response
@@ -15,14 +15,14 @@ interface SetupRepository {
 class SetupRepositoryImpl(
     val context: Context,
     val database: ImmuniDatabase,
-    val oracleRepository: OracleRepository
+    val apiManager: ApiManager
 ) : SetupRepository {
 
     override suspend fun getOracleSetting(): Response<ImmuniSettings> {
-        return oracleRepository.settings()
+        return apiManager.settings()
     }
 
     override suspend fun getOracleMe(): Response<ImmuniMe> {
-        return oracleRepository.me()
+        return apiManager.me()
     }
 }

@@ -14,8 +14,6 @@ import net.sqlcipher.database.SupportFactory
 import org.immuni.android.api.oracle.ApiManager
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
-import org.immuni.android.api.oracle.repository.OracleRepository
-import org.immuni.android.api.oracle.repository.OracleRepositoryImpl
 import org.immuni.android.db.DATABASE_NAME
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyNotificationManager
@@ -105,13 +103,12 @@ val appModule = module {
         Pico(androidContext(), ImmuniPicoConfiguration(androidContext()))
     }
 
-    // single instance of OracleRepository
-    single<OracleRepository> { OracleRepositoryImpl(androidContext(), get(), get()) }
-
+    // single instance of ApiManager
     single {
-        ApiManager()
+        ApiManager(get())
     }
 
+    // single instance of ProximityEventsAggregator
     single {
         ProximityEventsAggregator()
     }

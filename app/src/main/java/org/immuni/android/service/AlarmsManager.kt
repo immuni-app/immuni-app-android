@@ -9,6 +9,7 @@ import org.immuni.android.receivers.RestarterReceiver
 import org.immuni.android.util.log
 
 object AlarmsManager {
+
     // AlarmManager's events survive even if the app is not active,
     // but they are cancelled when the device reboots.
 
@@ -26,7 +27,6 @@ object AlarmsManager {
         }
 
         // cancel existing alarms
-
         if (alarmIntent != null && alarmManager != null) {
             alarmManager.cancel(alarmIntent)
         }

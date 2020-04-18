@@ -47,7 +47,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         //if (!(adapter?.isEnabled == true)) adapter?.enable()
 
         if (!bluetoothManager.isBluetoothEnabled()) return false
-        advertiser = adapter!!.bluetoothLeAdvertiser
+        advertiser = adapter?.bluetoothLeAdvertiser
 
         startServer()
 
@@ -68,10 +68,10 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString) //btId
 
         val dataBuilder = AdvertiseData.Builder().apply {
-            setIncludeDeviceName(false) // if true fail = 1
+            setIncludeDeviceName(false) // if true -> results in fail error = 1
             addServiceUuid(serviceId)
             setIncludeTxPowerLevel(true)
-            val bytesMan = btId.id.replace("-", "")//byteArrayOf(1)
+            val bytesMan = btId.id.replace("-", "")
             val data = Hex.stringToBytes(bytesMan)
             addServiceData(serviceId, data)
         }
@@ -83,6 +83,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             builder.build(), dataBuilder.build(),// scanResponseBuilder.build(),
             callback
         )
+
         // wait until the bt id expires
         delay((btId.expirationTimestamp * 1000.0).toLong() - btIdsManager.correctTime())
 
