@@ -69,6 +69,7 @@ class ProximityEventsAggregator: KoinComponent {
                     date = it.date
                 )
             }
+            database.rawDao().checkpoint()
         }
     }
 

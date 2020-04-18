@@ -18,6 +18,7 @@ internal class PicoStoreImpl(val database: PicoDatabase, val userConsent: UserCo
 
     private val MAX_EVENTS_BATCH_SIZE = 10
     private val eventDao = database.picoEventDao()
+    private val rawDao = database.rawDao()
 
     override suspend fun store(event: PicoEvent) {
 
@@ -37,5 +38,6 @@ internal class PicoStoreImpl(val database: PicoDatabase, val userConsent: UserCo
 
     override suspend fun deleteEvents(events: List<PicoEvent>) {
         eventDao.delete(*events.map { PicoEventEntity(it.id, it) }.toTypedArray())
+        rawDao.checkpoint()
     }
 }

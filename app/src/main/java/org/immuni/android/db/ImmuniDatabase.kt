@@ -8,6 +8,7 @@ import org.immuni.android.db.converter.DateConverter
 import org.immuni.android.db.converter.GenderConverter
 import org.immuni.android.db.dao.BLEContactDao
 import org.immuni.android.db.dao.HealthProfileDao
+import org.immuni.android.db.dao.RawDao
 import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.db.entity.BLEEvent
 import org.immuni.android.db.entity.HealthProfileEntity
@@ -34,6 +35,8 @@ const val DATABASE_NAME = "immuni_database"
 abstract class ImmuniDatabase : RoomDatabase() {
     abstract fun bleContactDao(): BLEContactDao
     abstract fun healthProfileDao(): HealthProfileDao
+    abstract fun rawDao(): RawDao
+
     suspend fun addContact(btId: String, txPower: Int, rssi: Int, date: Date) {
         var entry = bleContactDao().getLatestByBtId(btId)
         if (entry == null) {

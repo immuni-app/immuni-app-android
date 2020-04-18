@@ -8,6 +8,7 @@ import androidx.room.TypeConverters
 import androidx.security.crypto.MasterKeys
 import com.bendingspoons.pico.db.converter.PicoEventConverter
 import com.bendingspoons.pico.db.dao.PicoEventDao
+import com.bendingspoons.pico.db.dao.RawDao
 import com.bendingspoons.pico.db.entity.PicoEventEntity
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
@@ -21,8 +22,9 @@ const val DATABASE_VERSION = 1
 @TypeConverters(
     PicoEventConverter::class
 )
-abstract class PicoDatabase : RoomDatabase() {
+internal abstract class PicoDatabase : RoomDatabase() {
     abstract fun picoEventDao(): PicoEventDao
+    abstract fun rawDao(): RawDao
 }
 
 internal fun picoDatabase(context: Context): PicoDatabase {
@@ -32,7 +34,7 @@ internal fun picoDatabase(context: Context): PicoDatabase {
     return Room.databaseBuilder(
         context,
         PicoDatabase::class.java,
-        "pico_database_crypted"
+        "pico_database"
     )
     .fallbackToDestructiveMigration()
     .openHelperFactory(factory)
