@@ -56,10 +56,8 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
             putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
             putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
             putExtra(
-                Intent.EXTRA_TEXT, "${ctx.getString(R.string.delete_data_email_message)}\n" +
-                        "\n---------------------\n" +
-                        concierge.backupPersistentId.id + "\n" +
-                        "---------------------")
+                Intent.EXTRA_TEXT, ctx.getString(R.string.contact_us_email_message)
+            )
         }
 
         activity.startActivity(Intent.createChooser(intent, ctx.getString(R.string.choose_an_app_to_contact_us)))

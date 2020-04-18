@@ -59,10 +59,9 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
             putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
             putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
             putExtra(
-                Intent.EXTRA_TEXT, "${ctx.getString(R.string.delete_data_email_message)}\n" +
-                        "\n---------------------\n" +
-                        concierge.backupPersistentId.id + "\n" +
-                        "---------------------")
+                Intent.EXTRA_TEXT,
+                String.format("${ctx.getString(R.string.recover_data_email_message)}", concierge.backupPersistentId.id)
+            )
         }
 
         activity.startActivity(Intent.createChooser(intent, ctx.getString(R.string.choose_an_app_to_contact_us)))
@@ -79,10 +78,9 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
             putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
             putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
             putExtra(
-                Intent.EXTRA_TEXT, "${ctx.getString(R.string.delete_data_email_message)}\n" +
-                        "\n---------------------\n" +
-                        concierge.backupPersistentId.id + "\n" +
-                        "---------------------")
+                Intent.EXTRA_TEXT,
+                String.format("${ctx.getString(R.string.delete_data_email_message)}", concierge.backupPersistentId.id)
+            )
         }
 
         activity.startActivity(Intent.createChooser(intent, ctx.getString(R.string.choose_an_app_to_contact_us)))

@@ -248,7 +248,9 @@
     <string name="onboarding_permission_whitelist_long">Se non escludi Immuni dalla lista, il sistema operativo terminerà l’app quando è attiva nel background, impedendole di rilevare dispositivi vicini e di avvertirti in caso di rischio.</string>
     <string name="delete_data">Elimina dati</string>
     <string name="choose_an_app_to_contact_us">Seleziona un\'app</string>
-    <string name="delete_data_email_message">TODO corpo del messaggio</string>
+    <string name="delete_data_email_message">Ciao Bending Spoons,\n\nVi chiedo di inoltrarmi copia dei miei dati dal server. Il mio ID è %s.</string>
+    <string name="recover_data_email_message">Ciao Bending Spoons,\n\nVi chiedo di effettuare la cancellazione dei miei dati dal server. Il mio ID è %s.</string>
+    <string name="contact_us_email_message"></string>
     <string name="data_handling_title">Gestione dati</string>
     <string name="restore_data">Recupera dati</string>
     <string name="consent_background">Consenti background</string>
