@@ -42,6 +42,6 @@ interface CustomOracleAPI {
     @GET("v2/bt")
     suspend fun getBtIds(): Response<BtIds>
 
-    @POST("v2/data/{code}")
+    @POST("v3/data/{code}")
     suspend fun exportData(@Path("code") code: String, @Body data: ExportData): Response<ResponseBody>
 }
