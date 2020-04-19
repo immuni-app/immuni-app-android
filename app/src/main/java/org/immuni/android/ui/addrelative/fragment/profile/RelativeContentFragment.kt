@@ -54,26 +54,14 @@ abstract class RelativeContentFragment(@LayoutRes val layout: Int) : Fragment(la
 
     override fun onResume() {
         super.onResume()
-        updateTopMask(this.view?.findViewById<NestedScrollView>(R.id.scrollView)?.scrollY ?: 0, true)
+        updateTopMask(this.view?.findViewById<NestedScrollView>(R.id.scrollView)?.scrollY ?: 0)
     }
 
-    fun updateTopMask(scrollY: Int, animate: Boolean = false) {
+    fun updateTopMask(scrollY: Int) {
         val dp = ScreenUtils.convertDpToPixels(requireContext(), 8).toFloat()
-        //val elevation = resources.getDimension(R.dimen.top_scroll_mask_elevation)
-        //this.view?.findViewById<View>(R.id.topMask)?.alpha = 1f//0f + scrollY/dp
-        //this.view?.findViewById<View>(R.id.topMask)?.elevation = (elevation * (0f + scrollY/dp).coerceIn(0f, 1f))
-
         this.view?.findViewById<View>(R.id.gradientTop)?.alpha = (0f + scrollY/dp).coerceIn(0f, 1f)
-
         val maxScrollUpCard = ScreenUtils.convertDpToPixels(requireContext(), 32).toFloat()
-        val maxScrollUpProgressBar = ScreenUtils.convertDpToPixels(requireContext(), 20).toFloat()
-        if(animate) {
-            this.view?.findViewById<View>(R.id.topMask)?.animateTranslationY(-(scrollY.toFloat().coerceAtMost(maxScrollUpCard)), 250)
-            activity?.findViewById<View>(R.id.progress)?.animateTranslationY(-(scrollY.toFloat().coerceAtMost(maxScrollUpProgressBar)), 250)
-        } else {
-            this.view?.findViewById<View>(R.id.topMask)?.translationY = -(scrollY.toFloat().coerceAtMost(maxScrollUpCard))
-            activity?.findViewById<View>(R.id.progress)?.translationY = -(scrollY.toFloat().coerceAtMost(maxScrollUpProgressBar))
-        }
+        this.view?.findViewById<View>(R.id.topMask)?.translationY = -(scrollY.toFloat().coerceAtMost(maxScrollUpCard))
     }
 
     protected abstract val nextButton: View
