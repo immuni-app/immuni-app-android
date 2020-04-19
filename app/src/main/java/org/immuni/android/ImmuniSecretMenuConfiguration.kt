@@ -36,8 +36,7 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
     private val welcome: Welcome by inject()
 
     override val isDevelopmentDevice = {
-        true
-        //oracle.settings()?.developmentDevices?.contains(concierge.aaid.id) == true
+        oracle.settings()?.developmentDevices?.contains(concierge.backupPersistentId.id) == true
     }
 
     override fun concierge(): ConciergeManager {
