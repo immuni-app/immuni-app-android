@@ -43,7 +43,7 @@ abstract class ImmuniDatabase : RoomDatabase() {
             entry = BLEContactEntity(btId = btId, timestamp = date)
         } else {
             val relativeTimestamp = dateToRelativeTimestamp(referenceDate = entry.timestamp, now = date)
-            if (relativeTimestamp > 255) {
+            if (relativeTimestamp > SLOTS_PER_CONTACT_RECORD - 1) {
                 log("creating a new entry because relativeTimestamp is: $relativeTimestamp")
                 entry = BLEContactEntity(btId = btId, timestamp = date)
             }
@@ -59,6 +59,7 @@ abstract class ImmuniDatabase : RoomDatabase() {
     }
 
     companion object {
+        val SLOTS_PER_CONTACT_RECORD = 256
         fun databaseSize(context: Context): Long {
             val file: File = context.getDatabasePath(DATABASE_NAME)
             return file.length()

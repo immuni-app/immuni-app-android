@@ -284,7 +284,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
             val lastSentEventTime = storage.load(PICO_LAST_SENT_EVENT_TIME, 0L)
             val currentTime =  Date().time
             var endTime = lastSentEventTime
-            val timeWindow = RELATIVE_TIMESTAMP_SECONDS * 256 * 1000
+            val timeWindow = RELATIVE_TIMESTAMP_SECONDS * ImmuniDatabase.SLOTS_PER_CONTACT_RECORD * 1000
             while ((endTime + timeWindow) < currentTime) {
                 endTime += timeWindow
             }
@@ -300,11 +300,15 @@ class ImmuniForegroundService : Service(), KoinComponent {
                     )
                     contact
                 }
-            pico.trackEvent(
-                BluetoothFoundPeripheralsSnapshot(
-                    contacts = newContacts
-                ).userAction
-            )
+
+            if(newContacts.isNotEmpty()) {
+                pico.trackEvent(
+                    BluetoothFoundPeripheralsSnapshot(
+                        contacts = newContacts
+                    ).userAction
+                )
+            }
+
             storage.save(PICO_LAST_SENT_EVENT_TIME, endTime)
         }
     }
