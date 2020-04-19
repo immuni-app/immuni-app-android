@@ -25,12 +25,15 @@ class ImmuniOracleConfiguration(val context: Context) : OracleConfiguration, Koi
     }
 
     override fun showForceUpdate(minVersionCode: Int) {
-        val context = ImmuniApplication.appContext
-        log("ForceUpdate! Min version is $minVersionCode")
+        // avoid to open the activity while the app is in background
+        if(ImmuniApplication.isForeground.value) {
+            val context = ImmuniApplication.appContext
+            log("ForceUpdate! Min version is $minVersionCode")
 
-        val intent = Intent(context, ForceUpdateActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        context.startActivity(intent)
+            val intent = Intent(context, ForceUpdateActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(intent)
+        }
     }
 
     override fun sesame(): Sesame? {
