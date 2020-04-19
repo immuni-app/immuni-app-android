@@ -115,6 +115,7 @@ class AppNotificationManager(val context: Context): KoinComponent {
     }
 
     fun triggerSurveyNotification() {
+        /*
         val channelId = "notificaton_channel_survey"
         val name = context.getString(R.string.reminder_notification_channel_name)
         createChannel(channelId, name)
@@ -142,5 +143,6 @@ class AppNotificationManager(val context: Context): KoinComponent {
 
         val androidNotificationManager = NotificationManagerCompat.from(context)
         androidNotificationManager.notify(SurveyNotificationManager.notificationId, builder.build())
+         */
     }
 }
