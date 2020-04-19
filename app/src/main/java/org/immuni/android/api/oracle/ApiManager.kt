@@ -21,7 +21,11 @@ class ApiManager(
     private val api = oracle.customServiceAPI(CustomOracleAPI::class)
 
     suspend fun exportData(code: String, data: ExportData): Response<ResponseBody> {
-        return api.exportData(code, data)
+        val result = api.exportData(code, data)
+        if(result.isSuccessful) {
+            me() // update me model
+        }
+        return result
     }
 
     suspend fun getBtIds() = api.getBtIds()
