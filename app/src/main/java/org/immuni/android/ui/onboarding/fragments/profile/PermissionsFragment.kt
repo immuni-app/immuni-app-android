@@ -261,7 +261,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 geoPermissions.gone()
                 circle2.setImageResource(R.drawable.ic_localization)
                 bluetoothBox2.alpha = 0.4f
-                separator2.gone()
+                separator2.visible()
                 knowMore2.gone()
             } else {
                 // ACTIVE
@@ -290,7 +290,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 geolocation.gone()
                 circle3.setImageResource(R.drawable.ic_localization)
                 bluetoothBox3.alpha = 0.4f
-                separator3.gone()
+                separator3.visible()
                 knowMore3.gone()
             } else {
                 // ACTIVE
