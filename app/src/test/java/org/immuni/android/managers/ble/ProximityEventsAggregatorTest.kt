@@ -43,7 +43,11 @@ class ProximityEventsAggregatorTest {
         runBlocking {
             val result = runCatching {
                 // the aggregator start automatically aggregate every 1ms
-                val aggregator = ProximityEventsAggregator(database, 1L, this)
+                val aggregator = ProximityEventsAggregator(database, 1L)
+
+                val tick = async {
+                    aggregator.start()
+                }
 
                 val insert = async(Dispatchers.Default) {
                     for (i in 0..10000) {
