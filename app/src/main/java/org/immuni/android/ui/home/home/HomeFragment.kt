@@ -251,8 +251,14 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openPermissionsDialog() {
-        val action = HomeFragmentDirections.actionPermissionsDialog()
-        findNavController().navigate(action)
+        val permissionsManager: PermissionsManager by inject()
+        if(permissionsManager.shouldShowPermissions(activity as AppCompatActivity,
+                *permissionsManager.geolocationPermissions())) {
+            permissionsManager.requestPermissions(activity as AppCompatActivity)
+        } else {
+            val action = HomeFragmentDirections.actionPermissionsDialog()
+            findNavController().navigate(action)
+        }
     }
 
     private fun openBluetoothDialog() {

@@ -131,7 +131,7 @@ class PermissionsManager(val context: Context) : KoinComponent {
     }
 
     fun shouldShowPermissions(activity: AppCompatActivity, vararg permissions: String): Boolean {
-        return permissions.all {
+        return permissions.any {
             activity.shouldShowRequestPermissionRationale(it)
         }
     }
