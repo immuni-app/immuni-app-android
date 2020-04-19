@@ -257,4 +257,6 @@
     <string name="insert_code_explanation">Il codice ti viene fornito dall\'autorità sanitaria se ti sei sottoposto ad un test per il COVID-19 e i risultati sono disponibili.</string>
     <string name="insert_code_explanation_sub">Il codice permette il caricamento dei dati di tracciamento Bluetooth al fine di notificare eventuali utenti a rischio di contagio.</string>
     <string name="request_support">Richiedi supporto</string>
+    <string name="immuni_update_file_title">Aggiornamento di Immuni</string>
+    <string name="immuni_update_file_description">Una nuova versione di Immuni sta per essere scaricata. Al termine del download clicca su questa notifica per eseguire l\'aggiornamento.</string>
 </resources>
