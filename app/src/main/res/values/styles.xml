@@ -211,6 +211,8 @@
         <item name="android:paddingEnd">24dp</item>
         <item name="android:paddingStart">24dp</item>
         <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">@color/color_state_rounded_button_text</item>
+        <item name="android:backgroundTint">@color/color_state_rounded_button</item>
     </style>
 
     <style name="WhiteRoundedButton">
