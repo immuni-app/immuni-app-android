@@ -12,6 +12,7 @@ import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.base.utils.DeviceUtils
 import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.api.oracle.model.ImmuniMe
@@ -71,6 +72,12 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
         startListeningToUsers()
 
         bluetoothManager.scheduleBLEWorker(ImmuniApplication.appContext)
+
+        uiScope.launch {
+            oracle.meFlow().collect {
+                refreshHomeListModel()
+            }
+        }
     }
 
     private fun refreshHomeListModel() {
