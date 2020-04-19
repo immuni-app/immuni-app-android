@@ -66,6 +66,7 @@
                 <TextView
                     android:id="@+id/textView12"
                     style="@style/H5Section"
+                    android:textSize="21sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -84,9 +85,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/euclid_circular_semi_bold"
                     android:text="@string/onboarding_permission_bt_short"
-                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView12"
                     app:layout_constraintStart_toStartOf="@+id/circle"
                     app:layout_constraintTop_toBottomOf="@+id/circle" />
@@ -155,6 +154,7 @@
                 <TextView
                     android:id="@+id/textView122"
                     style="@style/H5Section"
+                    android:textSize="21sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -173,9 +173,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/euclid_circular_semi_bold"
                     android:text="@string/onboarding_permission_permissions_short"
-                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView122"
                     app:layout_constraintStart_toStartOf="@+id/circle2"
                     app:layout_constraintTop_toBottomOf="@+id/circle2" />
@@ -258,6 +256,7 @@
                 <TextView
                     android:id="@+id/textView123"
                     style="@style/H5Section"
+                    android:textSize="21sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -276,9 +275,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/euclid_circular_semi_bold"
                     android:text="@string/onboarding_permission_geo_short"
-                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView123"
                     app:layout_constraintStart_toStartOf="@+id/circle3"
                     app:layout_constraintTop_toBottomOf="@+id/circle3" />
@@ -319,6 +316,7 @@
                 <TextView
                     android:id="@+id/textView1234"
                     style="@style/H5Section"
+                    android:textSize="21sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -340,7 +338,6 @@
                     android:text="@string/know_more"
                     android:paddingTop="10dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView1234"
                     app:layout_constraintStart_toStartOf="@+id/circle4"
                     app:layout_constraintTop_toBottomOf="@+id/description4" />
@@ -351,7 +348,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="@font/euclid_circular_semi_bold"
                     android:text="@string/onboarding_permission_whitelist_short"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="@+id/textView1234"

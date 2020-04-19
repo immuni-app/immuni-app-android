@@ -64,7 +64,7 @@
                     <TextView
                         style="@style/P1Text"
                         android:layout_marginStart="16dp"
-                        android:textColor="#657587"
+                        android:textColor="#597493"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/privacy_page_notification"/>
@@ -84,7 +84,7 @@
                     <TextView
                         style="@style/P1Text"
                         android:layout_marginStart="16dp"
-                        android:textColor="#657587"
+                        android:textColor="#597493"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/privacy_page_location"/>
@@ -103,7 +103,7 @@
                     <TextView
                         style="@style/P1Text"
                         android:layout_marginStart="16dp"
-                        android:textColor="#657587"
+                        android:textColor="#597493"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/privacy_page_bluetooth"/>
@@ -121,7 +121,7 @@
                     <TextView
                         style="@style/P1Text"
                         android:layout_marginStart="16dp"
-                        android:textColor="#657587"
+                        android:textColor="#597493"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/privacy_page_health"/>
@@ -185,6 +185,7 @@
 
         <TextView
             android:id="@+id/tos"
+            style="@style/P1Text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -192,7 +193,6 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/euclid_circular_medium"
-            android:lineSpacingMultiplier="1.1"
             android:text="@string/privacy_page_tos"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/next"
@@ -214,6 +214,7 @@
 
         <ImageView
             android:id="@+id/back"
+            android:visibility="gone"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_gravity="bottom|left"

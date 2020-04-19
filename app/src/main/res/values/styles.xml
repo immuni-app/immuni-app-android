@@ -79,7 +79,7 @@
     <!-- Figma styles -->
 
     <style name="H1Heading">
-        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:fontFamily">@font/euclid_circular_bold</item>
         <item name="android:textSize">32sp</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
         <item name="android:textColor">@color/h1_heading</item>
@@ -144,7 +144,7 @@
     </style>
 
     <style name="P1Text">
-        <item name="android:fontFamily">@font/euclid_circular_regular</item>
+        <item name="android:fontFamily">@font/euclid_circular_medium</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/p1_text</item>
         <item name="android:lineSpacingMultiplier">1.2</item>

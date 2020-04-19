@@ -42,7 +42,7 @@ class PrivacyFragment : ProfileContentFragment(R.layout.onboarding_privacy_fragm
         privacyPolicy.text = privacyRawText.color("{", "}", resources.getColor(R.color.colorPrimary))
 
         val tosRawText = getString(R.string.privacy_page_tos)
-        tos.text = tosRawText.color("{", "}", resources.getColor(R.color.colorPrimary))
+        tos.text = tosRawText.color("{", "}", resources.getColor(R.color.colorPrimary), bold = true)
 
         privacyPolicy.setOnClickListener {
             viewModel.onPrivacyPolicyClick()
