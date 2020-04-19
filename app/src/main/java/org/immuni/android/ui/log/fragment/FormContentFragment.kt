@@ -93,9 +93,11 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
 
     fun updateTopMask(scrollY: Int, animate: Boolean = false) {
         val dp = ScreenUtils.convertDpToPixels(requireContext(), 8).toFloat()
-        val elevation = resources.getDimension(R.dimen.top_scroll_mask_elevation)
+        //val elevation = resources.getDimension(R.dimen.top_scroll_mask_elevation)
         //this.view?.findViewById<View>(R.id.topMask)?.alpha = 1f//0f + scrollY/dp
-        this.view?.findViewById<View>(R.id.topMask)?.elevation = (elevation * (0f + scrollY/dp).coerceIn(0f, 1f))
+        //this.view?.findViewById<View>(R.id.topMask)?.elevation = (elevation * (0f + scrollY/dp).coerceIn(0f, 1f))
+
+        this.view?.findViewById<View>(R.id.gradientTop)?.alpha = (0f + scrollY/dp).coerceIn(0f, 1f)
 
         val maxScrollUpCard = ScreenUtils.convertDpToPixels(requireContext(), 32).toFloat()
         val maxScrollUpProgressBar = ScreenUtils.convertDpToPixels(requireContext(), 20).toFloat()
