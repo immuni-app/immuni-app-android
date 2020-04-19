@@ -62,7 +62,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="64dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/rounded_corners_9dp"
+                android:background="@drawable/rounded_corners_20dp"
                 android:backgroundTint="@color/background"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +92,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        style="@style/P1Text"
                         android:id="@+id/name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -152,6 +153,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        style="@style/P1Text"
                         android:id="@+id/age"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -207,6 +209,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        style="@style/P1Text"
                         android:id="@+id/sex"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -263,6 +266,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        style="@style/P1Text"
                         android:id="@+id/liveWithYou"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -319,6 +323,7 @@
                         app:layout_constraintWidth_percent="0.35" />
 
                     <TextView
+                        style="@style/P1Text"
                         android:id="@+id/uploadText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -355,6 +360,8 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        style="@style/P1Text"
+                        android:textSize="14sp"
                         android:id="@+id/textView8"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
