@@ -8,6 +8,21 @@
     android:background="@color/colorPrimary"
     tools:context=".ui.setup.SetupActivity">
 
+    <TextView
+        android:id="@+id/retry"
+        style="@style/ButtonLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="Riprova"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:textColor="@color/background"
+        app:layout_constraintBottom_toBottomOf="@+id/update"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/update" />
 
     <Button
         android:id="@+id/update"

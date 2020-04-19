@@ -14,6 +14,7 @@ import android.os.Environment
 import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,13 +46,15 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
     val loading = MutableLiveData<Boolean>()
     val downloading = MutableLiveData<Boolean>()
 
-    fun goToPlayStoreAppDetails(activity: Activity) {
+    fun goToPlayStoreAppDetails(fragment: Fragment) {
+
+        val activity = fragment.requireActivity()
 
         // if we have a custon url
         oracle.settings()?.appUpdateUrl?.let { url->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !activity.applicationContext.packageManager.canRequestPackageInstalls()) {
                 val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + activity.applicationContext.packageName))
-                activity.startActivityForResult(intent, 20999)
+                fragment.startActivityForResult(intent, 20999)
                 return
             }
 
@@ -70,7 +73,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
                     openAppSettings(activity)
                 } else {
                     // No explanation needed, we can request the permission.
-                    ActivityCompat.requestPermissions(activity,
+                    fragment.requestPermissions(
                         arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                         20999)
 
