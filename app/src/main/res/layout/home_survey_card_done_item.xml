@@ -84,7 +84,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5" />
+        app:layout_constraintWidth_percent="0.45" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
