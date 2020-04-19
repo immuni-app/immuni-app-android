@@ -57,7 +57,7 @@
                 android:alpha="0.6"
                 android:fontFamily="@font/euclid_circular_semi_bold"
                 android:text="@string/insert_code_explanation"
-                android:textColor="#4F4F5B"
+                android:textColor="#495D74"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
