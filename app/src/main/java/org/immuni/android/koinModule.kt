@@ -9,6 +9,10 @@ import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import com.bendingspoons.secretmenu.SecretMenu
 import com.bendingspoons.theirs.Theirs
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import org.immuni.android.api.oracle.ApiManager
@@ -110,7 +114,7 @@ val appModule = module {
 
     // single instance of ProximityEventsAggregator
     single {
-        ProximityEventsAggregator()
+        ProximityEventsAggregator(get(), 10 * 1000L, CoroutineScope(Dispatchers.Default + Job()))
     }
 
     // single instance of GeolocationManager

@@ -1,7 +1,6 @@
 package com.bendingspoons.pico
 
 import com.bendingspoons.concierge.Concierge
-import com.bendingspoons.concierge.Concierge.Companion.NULL_AAID
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.pico.api.model.PicoEventResponse
 import com.bendingspoons.pico.model.PicoEvent

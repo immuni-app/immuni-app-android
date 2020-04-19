@@ -1,39 +1,56 @@
 package org.immuni.android.managers.ble
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.models.ProximityEvent
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.util.*
 import kotlin.concurrent.timer
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
-class ProximityEventsAggregator: KoinComponent {
-    companion object {
-        private const val TIME_WINDOW: Long = 10 * 1000
+class ProximityEventsAggregator(
+    val database: ImmuniDatabase,
+    TIME_WINDOW: Long,
+    val scope: CoroutineScope
+    ): KoinComponent {
+
+    private val mutex = Mutex()
+    private val timerJob: Job
+
+    init {
+        timerJob = scope.launch {
+            repeat(Int.MAX_VALUE) {
+                delay(TIME_WINDOW)
+                tick()
+            }
+        }
     }
 
-    private val database: ImmuniDatabase by inject()
-
-    private val timer = timer(name ="aggregator-timer", initialDelay = TIME_WINDOW, period = TIME_WINDOW) {
-        tick()
-    }
     private val proximityEvents = mutableListOf<ProximityEvent>()
 
-    fun addProximityEvents(events: List<ProximityEvent>) {
+    fun stop() {
+        timerJob.cancel()
+    }
+
+    fun addProximityEvents(events: List<ProximityEvent>) = runBlocking {
         log("Raw scan: ${events.map { "${it.btId} - ${it.rssi}" }.joinToString(", ")}")
-        synchronized(this) {
+        mutex.withLock {
             proximityEvents.addAll(events)
         }
     }
 
-    private fun tick() {
-        if (proximityEvents.isEmpty()) return
-        store(aggregate())
-        clear()
+    private fun tick() = runBlocking{
+        if (proximityEvents.isEmpty()) return@runBlocking
+        mutex.withLock {
+            store(aggregate())
+            clear()
+        }
+
     }
 
     private fun aggregate(): Collection<ProximityEvent> {
@@ -60,7 +77,7 @@ class ProximityEventsAggregator: KoinComponent {
     }
 
     private fun store(events: Collection<ProximityEvent>) {
-        GlobalScope.launch {
+        scope.launch {
             events.forEach {
                 database.addContact(
                     btId = it.btId,

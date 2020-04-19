@@ -34,8 +34,8 @@ android {
         applicationId "org.immuni.android"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 26
-        versionName "1.0.24"
+        versionCode 27
+        versionName "1.0.25"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -60,8 +60,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -159,6 +164,8 @@ dependencies {
 
     // Koin testing tools
     testImplementation 'org.koin:koin-test:2.0.1'
+    testImplementation "io.mockk:mockk:1.9.3"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test:runner:1.2.0'
