@@ -46,6 +46,10 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
                 deleteDataEmail(it)
             }
         }
+
+        back.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     fun recoverDataEmail(activity: Activity) {
