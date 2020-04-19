@@ -22,7 +22,8 @@ class ImmuniSettings(
     @field:Json(name = "app_update_url") val appUpdateUrl: String? = null,
     @field:Json(name = "support_email") val supportEmail: String? = null,
     @field:Json(name = "delete_data_email") val deleteDataEmail: String? = null,
-    @field:Json(name = "recover_data_email") val recoverDataEmail: String? = null
+    @field:Json(name = "recover_data_email") val recoverDataEmail: String? = null,
+    @field:Json(name = "ble_disable_all") val bleDisableAll: Boolean = false
 ) : OracleSettings() {
     @Transient private var _survey: Survey? = null
     val survey: Survey?

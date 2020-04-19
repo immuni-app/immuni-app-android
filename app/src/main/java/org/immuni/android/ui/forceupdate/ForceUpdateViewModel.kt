@@ -76,10 +76,6 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
                     fragment.requestPermissions(
                         arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                         20999)
-
-                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                    // app-defined int constant. The callback method gets the
-                    // result of the request.
                 }
             } else {
                 // Permission has already been granted

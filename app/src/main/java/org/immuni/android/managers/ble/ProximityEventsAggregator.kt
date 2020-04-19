@@ -15,23 +15,22 @@ import kotlin.math.roundToInt
 
 class ProximityEventsAggregator(
     val database: ImmuniDatabase,
-    TIME_WINDOW: Long,
-    val scope: CoroutineScope
+    val TIME_WINDOW: Long
     ): KoinComponent {
 
     private val mutex = Mutex()
-    private val timerJob: Job
+    private lateinit var timerJob: Job
 
-    init {
-        timerJob = scope.launch {
+    private val proximityEvents = mutableListOf<ProximityEvent>()
+
+    suspend fun start() = coroutineScope {
+        timerJob = launch {
             repeat(Int.MAX_VALUE) {
                 delay(TIME_WINDOW)
                 tick()
             }
         }
     }
-
-    private val proximityEvents = mutableListOf<ProximityEvent>()
 
     fun stop() {
         timerJob.cancel()
@@ -44,13 +43,12 @@ class ProximityEventsAggregator(
         }
     }
 
-    private fun tick() = runBlocking{
-        if (proximityEvents.isEmpty()) return@runBlocking
+    private suspend fun tick() {
+        if (proximityEvents.isEmpty()) return
         mutex.withLock {
             store(aggregate())
             clear()
         }
-
     }
 
     private fun aggregate(): Collection<ProximityEvent> {
@@ -76,8 +74,8 @@ class ProximityEventsAggregator(
         proximityEvents.clear()
     }
 
-    private fun store(events: Collection<ProximityEvent>) {
-        scope.launch {
+    private suspend fun store(events: Collection<ProximityEvent>) = coroutineScope {
+        launch {
             events.forEach {
                 database.addContact(
                     btId = it.btId,

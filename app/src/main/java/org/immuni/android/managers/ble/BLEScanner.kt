@@ -4,10 +4,10 @@ import android.bluetooth.le.*
 import android.os.ParcelUuid
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.immuni.android.api.oracle.model.ImmuniMe
 import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.models.ProximityEvent
 import org.immuni.android.picoMetrics.BluetoothScanFailed
@@ -18,6 +18,7 @@ import kotlin.random.Random
 
 class BLEScanner : KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
+    private val database: ImmuniDatabase by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
     private val id = Random.nextInt(0, 1000)
@@ -29,7 +30,7 @@ class BLEScanner : KoinComponent {
         bluetoothLeScanner?.stopScan(myScanCallback)
     }
 
-    fun start(): Boolean {
+    suspend fun start(): Boolean {
         if (!bluetoothManager.isBluetoothEnabled()) return false
         bluetoothLeScanner = bluetoothManager.adapter()?.bluetoothLeScanner
         val filter = listOf(
@@ -50,7 +51,7 @@ class BLEScanner : KoinComponent {
             }.build(),
             myScanCallback
         )
-
+        aggregator.start()
         return true
     }
 
@@ -85,14 +86,14 @@ class BLEScanner : KoinComponent {
             super.onBatchScanResults(results)
             processResults(results)
 
-            log("onScanResult count=${results.size}")
+            log("onScanResult id=${id} count=${results.size}")
         }
 
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             super.onScanResult(callbackType, result)
             processResults(listOf(result))
 
-            log("onScanResult count=1")
+            log("onScanResult id=${id} count=1")
         }
 
         override fun onScanFailed(errorCode: Int) {

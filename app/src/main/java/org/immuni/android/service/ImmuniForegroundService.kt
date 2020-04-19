@@ -36,13 +36,14 @@ enum class Actions {
 
 class ImmuniForegroundService : Service(), KoinComponent {
 
-    private val serviceScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+    private val serviceJob = SupervisorJob()
+    private val serviceScope = CoroutineScope(Dispatchers.Default + serviceJob)
 
     companion object {
         const val FOREGROUND_NOTIFICATION_ID = 21032020
         const val PICO_LAST_SENT_EVENT_TIME = "PICO_LAST_SENT_EVENT_TIME"
-        var currentAdvertiser: BLEAdvertiser? = null
-        var currentScanner: BLEScanner? = null
+        val advertiser: BLEAdvertiser = BLEAdvertiser(ImmuniApplication.appContext)
+        val scanner: BLEScanner = BLEScanner()
         var isServiceStarted = false
             private set
 
@@ -97,6 +98,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
             pico.trackEvent(ForegroundServiceDestroyed().userAction)
             cancel("The Immuni service has been destroyed")
         }
+
         log("The Immuni service has been destroyed")
         super.onDestroy()
     }
@@ -141,6 +143,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     private fun stopService() {
         log("Stopping the foreground service")
+
         try {
             wakeLock?.let {
                 if (it.isHeld) {
@@ -162,7 +165,19 @@ class ImmuniForegroundService : Service(), KoinComponent {
         isServiceStarted = false
     }
 
+    private fun stopBle() {
+        log("Stopping BLE")
+        // stop current scanner
+        scanner.stop()
+        log("Stopped scanner")
+
+        // stop current advertiser
+        advertiser.stop()
+        log("Stopped advertiser")
+    }
+
     private fun restartBlee() {
+        log("Starting BLE")
         serviceScope.launch {
             bleJob?.cancel()
             delay(2000)
@@ -172,56 +187,44 @@ class ImmuniForegroundService : Service(), KoinComponent {
         }
     }
 
-    private suspend fun startBleLoop() = coroutineScope {
-        val scanner = async {
-            // cleanup current scanner
-            try {
-                currentScanner?.let {
-                    it.stop()
-                    delay(3000)
-                }
-            } catch (e: java.lang.Exception) {
-                e.printStackTrace()
-            }
-
-            currentScanner = (currentScanner ?: BLEScanner()).apply {
-                start()
-            }
+    private suspend fun startBleLoop()  {
+        stopBle()
+        delay(3000)
+        val scanner = serviceScope.async {
+            scanner.start()
         }
 
-        val advertiser = async {
-            // cleanup current advertiser
-            try {
-                currentAdvertiser?.let {
-                    it.stop()
-                    delay(3000)
-                }
-            } catch (e: java.lang.Exception) {
-                e.printStackTrace()
-            }
-            currentAdvertiser = (currentAdvertiser ?: BLEAdvertiser(applicationContext)).apply {
-                start()
-            }
+        val advertiser = serviceScope.async {
+            advertiser.start()
         }
     }
 
-    private suspend fun doWork() = coroutineScope {
+    private suspend fun doWork() {
 
         btIdsManager.setup() // blocking we need the bt_ids
 
-        val refreshBtIds = async {
+        val refreshBtIds = serviceScope.async {
             btIdsManager.scheduleRefresh()
         }
 
-        val ble = async {
+        val ble = serviceScope.async {
             bleJob = launch {
                 startBleLoop()
             }
         }
 
-        val periodicCheck = async {
+        val periodicCheck = serviceScope.async {
+            log("Periodick check....")
             var previousPermissionsState = PermissionsState.OK
             repeat(Int.MAX_VALUE) {
+
+                // disable BLE from settings if needed
+                if(oracle.settings()?.bleDisableAll == true) {
+                    stopBle()
+                    delay(3000)
+                    stopService()
+                    return@async
+                }
 
                 val currentPermissionState: PermissionsState
 

@@ -114,7 +114,7 @@ val appModule = module {
 
     // single instance of ProximityEventsAggregator
     single {
-        ProximityEventsAggregator(get(), 10 * 1000L, CoroutineScope(Dispatchers.Default + Job()))
+        ProximityEventsAggregator(get(), 10 * 1000L)
     }
 
     // single instance of GeolocationManager
