@@ -44,6 +44,7 @@ class ProximityEventsAggregator(
     }
 
     private suspend fun tick() {
+        log("Aggregator tick...")
         if (proximityEvents.isEmpty()) return
         mutex.withLock {
             store(aggregate())
@@ -74,18 +75,16 @@ class ProximityEventsAggregator(
         proximityEvents.clear()
     }
 
-    private suspend fun store(events: Collection<ProximityEvent>) = coroutineScope {
-        launch {
-            events.forEach {
-                database.addContact(
-                    btId = it.btId,
-                    txPower = it.txPower,
-                    rssi = it.rssi,
-                    date = it.date
-                )
-            }
-            database.rawDao().checkpoint()
+    private suspend fun store(events: Collection<ProximityEvent>) {
+        events.forEach {
+            database.addContact(
+                btId = it.btId,
+                txPower = it.txPower,
+                rssi = it.rssi,
+                date = it.date
+            )
         }
+        database.rawDao().checkpoint()
     }
 
     fun distance(rssi: Int, txPower: Int): Float {

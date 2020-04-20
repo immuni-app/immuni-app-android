@@ -2,6 +2,7 @@ package org.immuni.android
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.widget.Toast
 import com.bendingspoons.base.utils.DeviceUtils
 import org.immuni.android.api.oracle.model.ImmuniMe
@@ -17,10 +18,13 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.managers.BtIdsManager
+import org.immuni.android.service.Actions
+import org.immuni.android.service.ImmuniForegroundService
 import org.immuni.android.ui.ble.encounters.BleEncountersDebugActivity
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.setup.Setup
 import org.immuni.android.ui.welcome.Welcome
+import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -81,6 +85,16 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                 }
                 context.startActivity(intent)
+            }){},
+            object : SecretMenuItem("❌ Stop foreground service", { context, config ->
+                Intent(context, ImmuniForegroundService::class.java).also {
+                    it.action = Actions.STOP.name
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        context.startForegroundService(it)
+                        return@also
+                    }
+                    context.startService(it)
+                }
             }){}
         )
     }

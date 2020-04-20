@@ -60,8 +60,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     private var wakeLock: PowerManager.WakeLock? = null
 
-    private var bleJob: Job? = null
-
     override fun onBind(intent: Intent): IBinder? {
         // We don't provide binding, so return null
         return null
@@ -94,12 +92,15 @@ class ImmuniForegroundService : Service(), KoinComponent {
     }
 
     override fun onDestroy() {
+        stopBle()
         serviceScope.launch {
             pico.trackEvent(ForegroundServiceDestroyed().userAction)
-            cancel("The Immuni service has been destroyed")
+            serviceScope.cancel("Service scope cancelling...")
+            log("Service scope has been cancelled.")
         }
 
         log("The Immuni service has been destroyed")
+        isServiceStarted = false
         super.onDestroy()
     }
 
@@ -159,7 +160,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
         serviceScope.launch {
             pico.trackEvent(ForegroundServiceStopped().userAction)
-            cancel("The Immuni service has been stopped")
         }
 
         isServiceStarted = false
@@ -174,17 +174,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
         // stop current advertiser
         advertiser.stop()
         log("Stopped advertiser")
-    }
-
-    private fun restartBlee() {
-        log("Starting BLE")
-        serviceScope.launch {
-            bleJob?.cancel()
-            delay(2000)
-            bleJob = launch {
-                startBleLoop()
-            }
-        }
     }
 
     private suspend fun startBleLoop()  {
@@ -208,9 +197,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
         }
 
         val ble = serviceScope.async {
-            bleJob = launch {
                 startBleLoop()
-            }
         }
 
         val periodicCheck = serviceScope.async {
@@ -220,8 +207,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
                 // disable BLE from settings if needed
                 if(oracle.settings()?.bleDisableAll == true) {
-                    stopBle()
-                    delay(3000)
                     stopService()
                     return@async
                 }
@@ -246,7 +231,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
                 if(previousPermissionsState == PermissionsState.MISSING &&
                         currentPermissionState == PermissionsState.OK) {
                     log("Restarting BLE ads/scan/server.")
-                    restartBlee()
+                    startBleLoop()
                 }
 
                 previousPermissionsState = currentPermissionState
