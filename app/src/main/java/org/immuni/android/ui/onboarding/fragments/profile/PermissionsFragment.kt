@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bendingspoons.base.extensions.gone
@@ -235,6 +236,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             bluetoothBox.alpha = 0.4f
             separator.visible()
             knowMore.gone()
+            TextViewCompat.setTextAppearance(btTitle, R.style.H4Section)
         } else {
             // SHOW OPEN ALWAYS
             description.visible()
@@ -243,6 +245,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             bluetoothBox.alpha = 1f
             separator.gone()
             knowMore.visible()
+            TextViewCompat.setTextAppearance(btTitle, R.style.H3SectionHeading)
         }
 
         // PERMISSIONS
@@ -254,6 +257,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             bluetoothBox2.alpha = 0.4f
             separator2.visible()
             knowMore2.gone()
+            TextViewCompat.setTextAppearance(permissionsTitle, R.style.H4Section)
         } else {
             // DISABLED
             if(!btON()) {
@@ -263,6 +267,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 bluetoothBox2.alpha = 0.4f
                 separator2.visible()
                 knowMore2.gone()
+                TextViewCompat.setTextAppearance(permissionsTitle, R.style.H4Section)
             } else {
                 // ACTIVE
                 description2.visible()
@@ -271,6 +276,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 bluetoothBox2.alpha = 1f
                 separator2.gone()
                 knowMore2.visible()
+                TextViewCompat.setTextAppearance(permissionsTitle, R.style.H3SectionHeading)
             }
         }
 
@@ -283,6 +289,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             bluetoothBox3.alpha = 0.4f
             separator3.visible()
             knowMore3.gone()
+            TextViewCompat.setTextAppearance(geoTitle, R.style.H4Section)
         } else {
             // DISABLED
             if(!permissionsON() || !btON()) {
@@ -292,6 +299,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 bluetoothBox3.alpha = 0.4f
                 separator3.visible()
                 knowMore3.gone()
+                TextViewCompat.setTextAppearance(geoTitle, R.style.H4Section)
             } else {
                 // ACTIVE
                 description3.visible()
@@ -300,6 +308,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 bluetoothBox3.alpha = 1f
                 separator3.gone()
                 knowMore3.visible()
+                TextViewCompat.setTextAppearance(geoTitle, R.style.H3SectionHeading)
             }
         }
 
@@ -311,6 +320,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             whitelist.gone()
             bluetoothBox4.alpha = 0.4f
             knowMore4.gone()
+            TextViewCompat.setTextAppearance(whitelistTitle, R.style.H4Section)
         } else {
             // DISABLED
             if(!geolocationON() || !btON() || !permissionsON()) {
@@ -319,6 +329,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 circle4.setImageResource(R.drawable.ic_localization)
                 bluetoothBox4.alpha = 0.4f
                 knowMore4.gone()
+                TextViewCompat.setTextAppearance(whitelistTitle, R.style.H4Section)
             } else {
                 // ACTIVE
                 description4.visible()
@@ -326,6 +337,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
                 circle4.setImageResource(R.drawable.ic_localization)
                 bluetoothBox4.alpha = 1f
                 knowMore4.visible()
+                TextViewCompat.setTextAppearance(whitelistTitle, R.style.H3SectionHeading)
             }
         }
     }

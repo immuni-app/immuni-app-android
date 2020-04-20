@@ -64,7 +64,7 @@
                     app:srcCompat="@drawable/ic_check_permissions" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/btTitle"
                     style="@style/H5Section"
                     android:textSize="21sp"
                     android:layout_width="0dp"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/onboarding_permission_bt_short"
-                    app:layout_constraintEnd_toEndOf="@+id/textView12"
+                    app:layout_constraintEnd_toEndOf="@+id/btTitle"
                     app:layout_constraintStart_toStartOf="@+id/circle"
                     app:layout_constraintTop_toBottomOf="@+id/circle" />
 
@@ -100,7 +100,7 @@
                     android:paddingTop="10dp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView12"
+                    app:layout_constraintEnd_toEndOf="@+id/btTitle"
                     app:layout_constraintStart_toStartOf="@+id/circle"
                     app:layout_constraintTop_toBottomOf="@+id/description" />
 
@@ -152,7 +152,7 @@
                     app:srcCompat="@drawable/ic_check_permissions" />
 
                 <TextView
-                    android:id="@+id/textView122"
+                    android:id="@+id/permissionsTitle"
                     style="@style/H5Section"
                     android:textSize="21sp"
                     android:layout_width="0dp"
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/onboarding_permission_permissions_short"
-                    app:layout_constraintEnd_toEndOf="@+id/textView122"
+                    app:layout_constraintEnd_toEndOf="@+id/permissionsTitle"
                     app:layout_constraintStart_toStartOf="@+id/circle2"
                     app:layout_constraintTop_toBottomOf="@+id/circle2" />
 
@@ -188,7 +188,7 @@
                     android:paddingTop="10dp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView122"
+                    app:layout_constraintEnd_toEndOf="@+id/permissionsTitle"
                     app:layout_constraintStart_toStartOf="@+id/circle2"
                     app:layout_constraintTop_toBottomOf="@+id/description2" />
 
@@ -249,12 +249,12 @@
                     android:paddingTop="10dp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView123"
+                    app:layout_constraintEnd_toEndOf="@+id/geoTitle"
                     app:layout_constraintStart_toStartOf="@+id/circle3"
                     app:layout_constraintTop_toBottomOf="@+id/description3" />
 
                 <TextView
-                    android:id="@+id/textView123"
+                    android:id="@+id/geoTitle"
                     style="@style/H5Section"
                     android:textSize="21sp"
                     android:layout_width="0dp"
@@ -276,7 +276,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/onboarding_permission_geo_short"
-                    app:layout_constraintEnd_toEndOf="@+id/textView123"
+                    app:layout_constraintEnd_toEndOf="@+id/geoTitle"
                     app:layout_constraintStart_toStartOf="@+id/circle3"
                     app:layout_constraintTop_toBottomOf="@+id/circle3" />
 
@@ -314,7 +314,7 @@
                     app:srcCompat="@drawable/ic_check_permissions" />
 
                 <TextView
-                    android:id="@+id/textView1234"
+                    android:id="@+id/whitelistTitle"
                     style="@style/H5Section"
                     android:textSize="21sp"
                     android:layout_width="0dp"
@@ -338,7 +338,7 @@
                     android:text="@string/know_more"
                     android:paddingTop="10dp"
                     android:textColor="@color/colorPrimary"
-                    app:layout_constraintEnd_toEndOf="@+id/textView1234"
+                    app:layout_constraintEnd_toEndOf="@+id/whitelistTitle"
                     app:layout_constraintStart_toStartOf="@+id/circle4"
                     app:layout_constraintTop_toBottomOf="@+id/description4" />
 
@@ -350,7 +350,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/onboarding_permission_whitelist_short"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView1234"
+                    app:layout_constraintEnd_toEndOf="@+id/whitelistTitle"
                     app:layout_constraintStart_toStartOf="@+id/circle4"
                     app:layout_constraintTop_toBottomOf="@+id/circle4" />
 
