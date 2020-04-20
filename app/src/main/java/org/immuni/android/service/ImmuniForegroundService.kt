@@ -58,7 +58,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val database: ImmuniDatabase by inject()
 
-    private var wakeLock: PowerManager.WakeLock? = null
+    //private var wakeLock: PowerManager.WakeLock? = null
 
     override fun onBind(intent: Intent): IBinder? {
         // We don't provide binding, so return null
@@ -123,6 +123,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
         isServiceStarted = true
 
         // we need this lock so our service gets not affected by Doze Mode
+        /*
         wakeLock =
             (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
                 newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
@@ -130,6 +131,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
                     acquire(Long.MAX_VALUE)
                 }
             }
+         */
 
         // keep the service running
         serviceScope.launch(Dispatchers.IO) {
@@ -146,11 +148,14 @@ class ImmuniForegroundService : Service(), KoinComponent {
         log("Stopping the foreground service")
 
         try {
+            /*
             wakeLock?.let {
                 if (it.isHeld) {
                     it.release()
                 }
             }
+            */
+            
             //applicationContext.unregisterReceiver(mReceiver)
             stopForeground(true)
             stopSelf()
