@@ -56,13 +56,18 @@ data class BLEEvent (
     }
 }
 
+// Value used to discretize the timestamps
 const val RELATIVE_TIMESTAMP_SECONDS = 5
+// Compensate for potential timer ticks delays with respect to the real timestamp
 const val RELATIVE_TIMESTAMP_TOLERANCE_MS = 500
 
+// Returns a relativetimestamp of `self` with respect to the given reference date
 fun dateToRelativeTimestamp(referenceDate: Date, now: Date = Date()) : Int {
     return (ceil((now.time + RELATIVE_TIMESTAMP_TOLERANCE_MS) / 1000.0) - (referenceDate.time / 1000)).toInt() / RELATIVE_TIMESTAMP_SECONDS
 }
 
+// Creates a timestamp given the relative timestamp and a reference date.
+// Note that the relativetimestamp should be created using `relativeTimestamp`
 fun relativeTimestampToDate(referenceDate: Date, relativeTimestamp: Int) : Date {
     val ms = (RELATIVE_TIMESTAMP_SECONDS * relativeTimestamp * 1000) + referenceDate.time
     return Date(ms)
