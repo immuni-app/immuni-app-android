@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/rounded_corners_20dp"
                 android:backgroundTint="@color/background"
@@ -113,7 +113,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="24dp"
                         app:srcCompat="@drawable/ic_edit"
-                        android:alpha="0.6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -174,7 +173,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="24dp"
                         app:srcCompat="@drawable/ic_edit"
-                        android:alpha="0.6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -230,7 +228,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="24dp"
                         app:srcCompat="@drawable/ic_edit"
-                        android:alpha="0.6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -287,7 +284,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="24dp"
                         app:srcCompat="@drawable/ic_edit"
-                        android:alpha="0.6"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
