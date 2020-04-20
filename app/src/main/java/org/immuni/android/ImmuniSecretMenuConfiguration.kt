@@ -95,6 +95,16 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
                     }
                     context.startService(it)
                 }
+            }){},
+            object : SecretMenuItem("\uD83C\uDF00 Start foreground service", { context, config ->
+                Intent(context, ImmuniForegroundService::class.java).also {
+                    it.action = Actions.START.name
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        context.startForegroundService(it)
+                        return@also
+                    }
+                    context.startService(it)
+                }
             }){}
         )
     }

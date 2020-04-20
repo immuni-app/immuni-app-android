@@ -155,7 +155,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
                 }
             }
             */
-            
+
             //applicationContext.unregisterReceiver(mReceiver)
             stopForeground(true)
             stopSelf()
