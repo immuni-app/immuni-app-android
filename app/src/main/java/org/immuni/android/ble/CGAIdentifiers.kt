@@ -1,4 +1,4 @@
-package org.immuni.android.managers.ble
+package org.immuni.android.ble
 
 class CGAIdentifiers {
     companion object {

@@ -8,22 +8,15 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import org.immuni.android.R
-import org.immuni.android.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.add_relative_profile_fragment.*
-import kotlinx.android.synthetic.main.onboarding_profile_fragment.*
 import kotlinx.android.synthetic.main.onboarding_profile_fragment.progress
 import kotlinx.android.synthetic.main.onboarding_profile_fragment.viewPager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import org.immuni.android.loading
-import org.immuni.android.toast
+import com.bendingspoons.base.extensions.loading
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
+import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class RelativeProfileFragment : Fragment() {
@@ -98,7 +91,7 @@ class RelativeProfileFragment : Fragment() {
         })
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
-            activity?.loading(it)
+            activity?.loading(it, ProgressDialogFragment())
         })
 
         close.setOnClickListener {

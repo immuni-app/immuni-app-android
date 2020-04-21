@@ -9,13 +9,11 @@ import androidx.navigation.fragment.findNavController
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.enable_app_permissions_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
-import org.immuni.android.ImmuniActivity
 import org.immuni.android.R
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BluetoothManager.Companion.REQUEST_ENABLE_BT
-import org.immuni.android.toast
+import com.bendingspoons.base.extensions.toast
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
-import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 import org.koin.android.ext.android.inject
 
 class BluetoothDialogFragment: FullScreenDialogDarkFragment() {
@@ -34,7 +32,12 @@ class BluetoothDialogFragment: FullScreenDialogDarkFragment() {
         button.setOnClickListener {
             val btManager: BluetoothManager by inject()
             if(!btManager.isBluetoothSupported()) {
-                toast(requireContext().getString(R.string.ble_not_supported_by_this_device))
+                toast(
+                    requireContext(),
+                    requireContext().getString(
+                        R.string.ble_not_supported_by_this_device
+                    )
+                )
                 return@setOnClickListener
             }
 

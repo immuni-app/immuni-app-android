@@ -7,11 +7,11 @@ import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
-import org.immuni.android.picoMetrics.DataDeleted
+import org.immuni.android.metrics.DataDeleted
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject

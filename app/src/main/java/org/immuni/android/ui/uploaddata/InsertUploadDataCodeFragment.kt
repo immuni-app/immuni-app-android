@@ -21,7 +21,8 @@ import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.close
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.okButton
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.title
 import org.immuni.android.R
-import org.immuni.android.loading
+import com.bendingspoons.base.extensions.loading
+import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_fragment) {
@@ -77,7 +78,7 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                activity?.loading(it)
+                activity?.loading(it, ProgressDialogFragment())
             }
         })
 

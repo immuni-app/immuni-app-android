@@ -1,7 +1,7 @@
 package org.immuni.android.ui.ble.encounters
 
 import android.os.Bundle
-import org.immuni.android.ImmuniActivity
+import org.immuni.android.ui.ImmuniActivity
 import org.immuni.android.R
 
 class BleEncountersDebugActivity : ImmuniActivity() {

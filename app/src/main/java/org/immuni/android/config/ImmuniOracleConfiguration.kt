@@ -1,4 +1,4 @@
-package org.immuni.android
+package org.immuni.android.config
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,8 @@ import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.OracleConfiguration
 import com.bendingspoons.sesame.Sesame
 import okhttp3.CertificatePinner
+import org.immuni.android.ImmuniApplication
+import org.immuni.android.R
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -29,7 +31,8 @@ class ImmuniOracleConfiguration(val context: Context) : OracleConfiguration, Koi
         // avoid to open the activity while the app is in background
         if(ImmuniApplication.isForeground.value &&
             !ForceUpdateActivity.isOpen) {
-            val context = ImmuniApplication.appContext
+            val context =
+                ImmuniApplication.appContext
             val intent = Intent(context, ForceUpdateActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
             }

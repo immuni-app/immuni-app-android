@@ -12,9 +12,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.bendingspoons.oracle.Oracle
 import org.immuni.android.R
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
-import org.immuni.android.service.ImmuniForegroundService
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.ui.home.HomeActivity
 import org.koin.core.KoinComponent
 import org.koin.core.inject

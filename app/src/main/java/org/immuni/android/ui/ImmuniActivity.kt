@@ -1,17 +1,23 @@
-package org.immuni.android
+package org.immuni.android.ui
 
-import android.annotation.SuppressLint
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.bendingspoons.secretmenu.SecretMenu
+import com.bendingspoons.secretmenu.SecretMenuDialogTouchListener
 import org.immuni.android.managers.PermissionsManager
 import org.koin.android.ext.android.inject
 
-@SuppressLint("Registered")
-open class ImmuniActivity : AppCompatActivity() {
+/**
+ * This is the base class of all the activities.
+ * Intercepts every user touch event and dispatch it to the [SecretMenu].
+ *
+ * @see SecretMenu
+ * @see ImmuniDialogFragment
+ */
+open class ImmuniActivity : AppCompatActivity(), SecretMenuDialogTouchListener {
 
-    val permissionsManager: PermissionsManager by inject()
-    val secretMenu: SecretMenu by inject()
+    private val permissionsManager: PermissionsManager by inject()
+    private val secretMenu: SecretMenu by inject()
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         ev?.let {
@@ -20,7 +26,7 @@ open class ImmuniActivity : AppCompatActivity() {
         return super.dispatchTouchEvent(ev)
     }
 
-    fun dispatchDialogTouchEvent(ev: MotionEvent?) {
+    override fun dispatchDialogTouchEvent(ev: MotionEvent?) {
         ev?.let {
             secretMenu.onTouchEvent(it)
         }

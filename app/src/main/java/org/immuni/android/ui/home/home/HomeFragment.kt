@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.home_blocking_card.*
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.disableDragging
+import com.bendingspoons.base.extensions.disableDragging
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.models.survey.backgroundColor

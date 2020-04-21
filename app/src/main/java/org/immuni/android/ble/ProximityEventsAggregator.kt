@@ -1,4 +1,4 @@
-package org.immuni.android.managers.ble
+package org.immuni.android.ble
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
@@ -7,9 +7,6 @@ import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.models.ProximityEvent
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
-import org.koin.core.inject
-import java.util.*
-import kotlin.concurrent.timer
 import kotlin.math.pow
 import kotlin.math.roundToInt
 

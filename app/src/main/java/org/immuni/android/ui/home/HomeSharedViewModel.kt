@@ -15,8 +15,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
@@ -24,7 +24,7 @@ import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
 import org.immuni.android.models.survey.Severity.*
 import org.immuni.android.models.survey.TriageProfile
-import org.immuni.android.toast
+import com.bendingspoons.base.extensions.toast
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.family.model.*
 import org.immuni.android.ui.home.home.model.*
@@ -268,7 +268,12 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     fun onUserIdTap(user: User) {
         // copy to clipboard
         DeviceUtils.copyToClipBoard(ImmuniApplication.appContext, text = user.id)
-        toast(ImmuniApplication.appContext.resources.getString(R.string.user_id_copied))
+        toast(
+            ImmuniApplication.appContext,
+            ImmuniApplication.appContext.resources.getString(
+                R.string.user_id_copied
+            )
+        )
     }
 
     fun onPrivacyPolicyClick() {

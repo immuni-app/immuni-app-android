@@ -14,8 +14,8 @@ import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import kotlinx.android.synthetic.main.settings_fragment.*
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 

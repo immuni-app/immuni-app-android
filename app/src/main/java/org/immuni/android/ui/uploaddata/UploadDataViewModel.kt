@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.bendingspoons.base.livedata.Event
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
-import org.immuni.android.api.oracle.ApiManager
+import org.immuni.android.api.ApiManager
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.ExportDevice
-import org.immuni.android.picoMetrics.DataUploaded
+import org.immuni.android.metrics.DataUploaded
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

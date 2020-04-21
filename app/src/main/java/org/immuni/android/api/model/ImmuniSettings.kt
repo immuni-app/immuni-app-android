@@ -1,4 +1,4 @@
-package org.immuni.android.api.oracle.model
+package org.immuni.android.api.model
 
 import org.immuni.android.models.survey.raw.RawSurvey
 import com.bendingspoons.oracle.api.model.OracleSettings

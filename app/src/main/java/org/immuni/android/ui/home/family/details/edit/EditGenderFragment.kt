@@ -10,7 +10,8 @@ import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.user_edit_gender_activity.*
 import org.immuni.android.R
 import org.immuni.android.models.Gender
-import org.immuni.android.loading
+import com.bendingspoons.base.extensions.loading
+import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -57,7 +58,7 @@ class EditGenderFragment : BaseEditFragment() {
         })
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
-            activity?.loading(it)
+            activity?.loading(it, ProgressDialogFragment())
         })
 
         back.setOnClickListener { findNavController().popBackStack() }

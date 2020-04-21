@@ -3,7 +3,7 @@ package org.immuni.android.ui.welcome
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.navigation.findNavController
-import org.immuni.android.ImmuniActivity
+import org.immuni.android.ui.ImmuniActivity
 import org.immuni.android.R
 
 class WelcomeActivity : ImmuniActivity() {

@@ -1,10 +1,10 @@
 package org.immuni.android.ui.setup
 
 import android.content.Context
-import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.api.ApiManager
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.api.oracle.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniMe
 import retrofit2.Response
 
 interface SetupRepository {

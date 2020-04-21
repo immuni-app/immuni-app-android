@@ -8,6 +8,18 @@ import com.bendingspoons.oracle.api.model.OracleMe
 import com.bendingspoons.oracle.api.model.OracleSettings
 import com.bendingspoons.secretmenu.ui.SecretMenuActivity
 
+/**
+ * Secret Menu.
+ *
+ * This is the secret menu lib main class. It receives the user touch events
+ * and decide if trigger or not the secret menu. The [SecretMenuTouchManager] is
+ * responsible for this decision.
+ *
+ * @constructor create an instance of [SecretMenu] using its [SecretMenuConfiguration].
+ * @param context
+ * @param config the [SecretMenuConfiguration]
+ * @param oracle an instance of [Oracle]
+ */
 class SecretMenu(
     val context: Context,
     val config: SecretMenuConfiguration,

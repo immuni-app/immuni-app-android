@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.graphics.drawable.toDrawable
-import androidx.fragment.app.DialogFragment
-import org.immuni.android.ImmuniDialogFragment
+import org.immuni.android.ui.ImmuniDialogFragment
 import org.immuni.android.R
 
 abstract class FullScreenDialogLightFragment : ImmuniDialogFragment() {

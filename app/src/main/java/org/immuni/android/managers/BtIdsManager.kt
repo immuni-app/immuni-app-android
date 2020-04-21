@@ -1,16 +1,13 @@
 package org.immuni.android.managers
 
 import android.content.Context
-import android.util.Log
-import com.bendingspoons.base.utils.retry
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.api.oracle.model.BtId
-import org.immuni.android.api.oracle.model.BtIds
-import org.immuni.android.picoMetrics.RefreshBtIdsFailed
-import org.immuni.android.picoMetrics.RefreshBtIdsSuccedeed
+import org.immuni.android.api.ApiManager
+import org.immuni.android.api.model.BtId
+import org.immuni.android.api.model.BtIds
+import org.immuni.android.metrics.RefreshBtIdsFailed
+import org.immuni.android.metrics.RefreshBtIdsSuccedeed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject

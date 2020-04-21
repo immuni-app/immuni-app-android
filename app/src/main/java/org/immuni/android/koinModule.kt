@@ -9,15 +9,11 @@ import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import com.bendingspoons.secretmenu.SecretMenu
 import com.bendingspoons.theirs.Theirs
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
-import org.immuni.android.api.oracle.ApiManager
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.api.ApiManager
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.DATABASE_NAME
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyNotificationManager
@@ -25,7 +21,8 @@ import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.*
-import org.immuni.android.managers.ble.ProximityEventsAggregator
+import org.immuni.android.ble.ProximityEventsAggregator
+import org.immuni.android.config.*
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.ui.ble.encounters.BleEncountersDebugViewModel
 import org.immuni.android.ui.forceupdate.ForceUpdateViewModel
@@ -89,22 +86,31 @@ val appModule = module {
 
     // Oracle - Lib
     single {
-        Oracle<ImmuniSettings, ImmuniMe>(androidContext(), ImmuniOracleConfiguration(androidContext()))
+        Oracle<ImmuniSettings, ImmuniMe>(androidContext(),
+            ImmuniOracleConfiguration(androidContext())
+        )
     }
 
     // Secret Menu - Lib
     single {
-        SecretMenu(androidContext(), ImmuniSecretMenuConfiguration(androidContext()), get())
+        SecretMenu(androidContext(),
+            ImmuniSecretMenuConfiguration(
+                androidContext()
+            ), get())
     }
 
     // Theirs - Lib
     single {
-        Theirs(androidContext(), ImmuniTheirsConfiguration())
+        Theirs(androidContext(),
+            ImmuniTheirsConfiguration()
+        )
     }
 
     // Pico - Lib
     single {
-        Pico(androidContext(), ImmuniPicoConfiguration(androidContext()))
+        Pico(androidContext(),
+            ImmuniPicoConfiguration(androidContext())
+        )
     }
 
     // single instance of ApiManager

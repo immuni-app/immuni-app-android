@@ -1,7 +1,5 @@
 package org.immuni.android.ui.onboarding.fragments.profile
 
-import android.Manifest
-import android.animation.LayoutTransition
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -28,7 +26,7 @@ import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.BluetoothListenerLifecycle
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.GeolocalisationListenerLifecycle
-import org.immuni.android.toast
+import com.bendingspoons.base.extensions.toast
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.onboarding.OnboardingViewModel
 import org.koin.android.ext.android.inject
@@ -100,7 +98,12 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
 
         bluetooth.setOnClickListener {
             if(!bluetoothManager.isBluetoothSupported()) {
-                toast(requireContext().getString(R.string.ble_not_supported_by_this_device))
+                toast(
+                    requireContext(),
+                    requireContext().getString(
+                        R.string.ble_not_supported_by_this_device
+                    )
+                )
                 //viewModel.onNextTap()
                 return@setOnClickListener
             }

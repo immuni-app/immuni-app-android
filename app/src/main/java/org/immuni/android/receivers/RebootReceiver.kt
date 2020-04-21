@@ -7,7 +7,7 @@ import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.picoMetrics.RebootEventReceived
+import org.immuni.android.metrics.RebootEventReceived
 import org.immuni.android.service.AlarmsManager
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent

@@ -24,10 +24,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.R
 import org.immuni.android.models.Gender
-import org.immuni.android.loading
+import com.bendingspoons.base.extensions.loading
 import org.immuni.android.models.Nickname
 import org.immuni.android.models.NicknameType
 import org.immuni.android.models.User
+import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -79,7 +80,7 @@ class EditNicknameFragment : BaseEditFragment(), CompoundButton.OnCheckedChangeL
         })
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
-            activity?.loading(it)
+            activity?.loading(it, ProgressDialogFragment())
         })
 
         back.setOnClickListener { findNavController().popBackStack() }

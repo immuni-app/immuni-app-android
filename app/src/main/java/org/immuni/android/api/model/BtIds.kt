@@ -1,4 +1,4 @@
-package org.immuni.android.api.oracle.model
+package org.immuni.android.api.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

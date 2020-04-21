@@ -16,8 +16,9 @@ import kotlinx.android.synthetic.main.user_details_fragment.*
 import kotlinx.android.synthetic.main.user_details_fragment.name
 import org.immuni.android.R
 import org.immuni.android.models.Gender
-import org.immuni.android.loading
+import com.bendingspoons.base.extensions.loading
 import org.immuni.android.ui.uploaddata.UploadDataActivity
+import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -47,7 +48,7 @@ class UserDetailsFragment : Fragment() {
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
-            activity?.loading(it)
+            activity?.loading(it, ProgressDialogFragment())
         })
 
         viewModel.navigateBack.observe(viewLifecycleOwner, Observer {

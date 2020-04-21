@@ -1,4 +1,4 @@
-package org.immuni.android.picoMetrics
+package org.immuni.android.metrics
 
 import PushNotificationState
 import PushNotificationUtils

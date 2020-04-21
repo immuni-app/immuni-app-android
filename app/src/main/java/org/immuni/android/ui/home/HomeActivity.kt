@@ -5,7 +5,7 @@ import androidx.core.view.iterator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import org.immuni.android.ImmuniActivity
+import org.immuni.android.ui.ImmuniActivity
 import org.immuni.android.R
 import org.immuni.android.ui.home.navigation.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView

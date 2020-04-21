@@ -1,14 +1,13 @@
-package org.immuni.android.api.oracle
+package org.immuni.android.api
 
 import com.bendingspoons.oracle.Oracle
 import okhttp3.ResponseBody
-import org.immuni.android.api.oracle.model.BtIds
-import org.immuni.android.api.oracle.model.FcmTokenRequest
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.api.model.BtIds
+import org.immuni.android.api.model.FcmTokenRequest
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.models.ExportData
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

@@ -14,11 +14,8 @@ import org.immuni.android.R
 import org.immuni.android.ui.onboarding.OnboardingViewModel
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.onboarding_profile_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import org.immuni.android.loading
+import com.bendingspoons.base.extensions.loading
+import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class ProfileFragment : Fragment() {
@@ -87,7 +84,7 @@ class ProfileFragment : Fragment() {
         })
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
-            (activity as? AppCompatActivity)?.loading(it)
+            (activity as? AppCompatActivity)?.loading(it, ProgressDialogFragment())
         })
     }
 

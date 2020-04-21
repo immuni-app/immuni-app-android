@@ -1,22 +1,23 @@
-package org.immuni.android
+package org.immuni.android.config
 
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.widget.Toast
+import com.bendingspoons.base.extensions.toast
 import com.bendingspoons.base.utils.DeviceUtils
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.secretmenu.SecretMenuConfiguration
 import com.bendingspoons.secretmenu.SecretMenuItem
 import com.bendingspoons.theirs.Theirs
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.service.Actions
@@ -25,7 +26,6 @@ import org.immuni.android.ui.ble.encounters.BleEncountersDebugActivity
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.setup.Setup
 import org.immuni.android.ui.welcome.Welcome
-import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -52,7 +52,11 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
         return listOf(
             object : SecretMenuItem("\uD83D\uDC68 User ID", { _, _ ->
                 DeviceUtils.copyToClipBoard(context, text = concierge.backupPersistentId.id ?: "-")
-                toast(concierge.backupPersistentId.id, Toast.LENGTH_LONG)
+                toast(
+                    context,
+                    concierge.backupPersistentId.id,
+                    Toast.LENGTH_LONG
+                )
             }){}
         )
     }
@@ -86,7 +90,8 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
                 }
             }){},
             object : SecretMenuItem("ℹ️ BLE encounters debug", { context, config ->
-                val context = ImmuniApplication.appContext
+                val context =
+                    ImmuniApplication.appContext
                 val intent = Intent(context, BleEncountersDebugActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                 }

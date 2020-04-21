@@ -2,7 +2,7 @@ package org.immuni.android.ui.setup
 
 import android.content.Intent
 import android.os.Bundle
-import org.immuni.android.ImmuniActivity
+import org.immuni.android.ui.ImmuniActivity
 import org.immuni.android.R
 import com.bendingspoons.base.extensions.setLightStatusBar
 

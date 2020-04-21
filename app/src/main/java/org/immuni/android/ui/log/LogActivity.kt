@@ -2,7 +2,7 @@ package org.immuni.android.ui.log
 
 import android.os.Bundle
 import androidx.navigation.findNavController
-import org.immuni.android.ImmuniActivity
+import org.immuni.android.ui.ImmuniActivity
 import org.immuni.android.R
 import org.koin.androidx.viewmodel.ext.android.getStateViewModel
 

@@ -14,7 +14,7 @@ import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.log_form_fragment.*
 import org.immuni.android.R
-import org.immuni.android.toast
+import com.bendingspoons.base.extensions.toast
 import org.immuni.android.ui.log.LogViewModel
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -88,7 +88,7 @@ class FormFragment : Fragment() {
 
         viewModel.navigateToNextPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                toast("ON NEXT PAGE GO")
+                toast(requireContext(), "ON NEXT PAGE GO")
                 val newPos = viewPager.currentItem + 1
 
                 if (newPos == (viewPager.adapter?.itemCount ?: 0)) {

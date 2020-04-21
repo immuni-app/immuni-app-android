@@ -1,4 +1,4 @@
-package org.immuni.android.managers.ble
+package org.immuni.android.ble
 
 import android.bluetooth.*
 import android.bluetooth.le.AdvertiseCallback
@@ -10,15 +10,15 @@ import android.os.ParcelUuid
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import com.google.android.gms.common.util.Hex
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.managers.BluetoothManager
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.models.ProximityEvent
-import org.immuni.android.picoMetrics.BluetoothAdvertisingFailed
+import org.immuni.android.metrics.BluetoothAdvertisingFailed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject

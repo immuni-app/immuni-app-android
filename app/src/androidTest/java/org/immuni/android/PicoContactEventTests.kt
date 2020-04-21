@@ -2,14 +2,12 @@ package org.immuni.android
 
 import android.util.Base64
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.db.entity.BLEEvent
-import org.immuni.android.picoMetrics.BluetoothFoundPeripheralsSnapshot
+import org.immuni.android.metrics.BluetoothFoundPeripheralsSnapshot
 import org.immuni.android.util.toJson
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.*
 
 @RunWith(AndroidJUnit4::class)
 class PicoContactEventTests {

@@ -13,11 +13,11 @@ import com.bendingspoons.base.extensions.invisible
 import com.bendingspoons.base.extensions.visible
 import org.immuni.android.R
 import kotlinx.android.synthetic.main.force_update_fragment.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.immuni.android.loading
+import com.bendingspoons.base.extensions.loading
+import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class ForceUpdateFragment : Fragment(R.layout.force_update_fragment) {
@@ -35,7 +35,7 @@ class ForceUpdateFragment : Fragment(R.layout.force_update_fragment) {
         viewModel = getViewModel()
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
-            activity?.loading(it)
+            activity?.loading(it, ProgressDialogFragment())
         })
 
         viewModel.downloading.observe(viewLifecycleOwner, Observer {

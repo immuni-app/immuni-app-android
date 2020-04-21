@@ -1,4 +1,4 @@
-package org.immuni.android
+package org.immuni.android.config
 
 import android.content.Context
 import com.bendingspoons.concierge.ConciergeManager
@@ -8,10 +8,11 @@ import com.bendingspoons.oracle.api.model.OracleSettings
 import com.bendingspoons.pico.PicoConfiguration
 import com.bendingspoons.sesame.Sesame
 import okhttp3.CertificatePinner
-import org.immuni.android.api.oracle.model.ImmuniMe
-import org.immuni.android.api.oracle.model.ImmuniSettings
+import org.immuni.android.R
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.picoMetrics.*
+import org.immuni.android.metrics.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

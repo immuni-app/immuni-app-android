@@ -8,7 +8,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.picoMetrics.ForegroundServiceRestartedByAlarmManager
+import org.immuni.android.metrics.ForegroundServiceRestartedByAlarmManager
 import org.immuni.android.service.AlarmsManager
 import org.immuni.android.service.DeleteUserDataWorker
 import org.immuni.android.service.ImmuniForegroundService

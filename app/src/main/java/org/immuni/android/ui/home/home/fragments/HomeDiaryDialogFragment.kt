@@ -6,14 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import kotlinx.android.synthetic.main.home_diary_dialog.*
-import org.immuni.android.ImmuniActivity
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
-import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 import org.immuni.android.ui.log.LogActivity
 
 class HomeDiaryDialogFragment: FullScreenDialogDarkFragment() {

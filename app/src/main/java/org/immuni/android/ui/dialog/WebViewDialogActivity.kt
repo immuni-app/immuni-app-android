@@ -10,7 +10,7 @@ import androidx.core.graphics.red
 import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import kotlinx.android.synthetic.main.web_view_dialog.*
-import org.immuni.android.ImmuniActivity
+import org.immuni.android.ui.ImmuniActivity
 import org.immuni.android.R
 
 class WebViewDialogActivity: ImmuniActivity() {

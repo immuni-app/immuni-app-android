@@ -1,4 +1,4 @@
-package org.immuni.android.managers.ble
+package org.immuni.android.ble
 
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
