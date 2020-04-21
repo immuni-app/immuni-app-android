@@ -13,6 +13,7 @@ import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.secretmenu.SecretMenuConfiguration
 import com.bendingspoons.secretmenu.SecretMenuItem
 import com.bendingspoons.theirs.Theirs
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -48,7 +49,12 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
     }
 
     override fun publicItems(): List<SecretMenuItem> {
-        return listOf()
+        return listOf(
+            object : SecretMenuItem("\uD83D\uDC68 User ID", { _, _ ->
+                DeviceUtils.copyToClipBoard(context, text = concierge.backupPersistentId.id ?: "-")
+                toast(concierge.backupPersistentId.id, Toast.LENGTH_LONG)
+            }){}
+        )
     }
 
     override fun spoonerItems(): List<SecretMenuItem> {
