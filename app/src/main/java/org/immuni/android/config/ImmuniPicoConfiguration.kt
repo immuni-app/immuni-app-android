@@ -54,6 +54,10 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
     override fun certificatePinner(): CertificatePinner? {
         return CertificatePinner.Builder()
             .add(
+                "*.pilot1.immuni.org",
+                "sha256/0LuJrVCJTXlR2mn2sLP0p23hNIaVcxdAr62LYNvnsaY="
+            )
+            .add(
                 "*.ascolto-onlus.org",
                 "sha256/ArtgUpVapq77kY3upbiBWyWQMfSo1ilJ1z6W0UR2SLQ="
             ).build()
