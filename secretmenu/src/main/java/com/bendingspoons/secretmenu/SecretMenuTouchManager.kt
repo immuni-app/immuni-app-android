@@ -3,20 +3,34 @@ package com.bendingspoons.secretmenu
 import android.view.MotionEvent
 import kotlinx.coroutines.*
 
+/**
+ * The class responsible to handle the user touch events and decide if
+ * the secret menu should be opened or not.
+ *
+ * @param listener a listener to call when the secret menu should be opened.
+ * @param config the secret menu configuration.
+ */
 class SecretMenuTouchManager(
-    val listener: SecretMenuTouchManagerListener,
-    val config: SecretMenuConfiguration) {
+    private val listener: SecretMenuTouchManagerListener,
+    private val config: SecretMenuConfiguration) {
 
-    val FINGERS_COUNT = 4
-    val FINGERS_COUNT_DEVELOPMENT = 2
+    companion object {
+        private const val FINGERS_COUNT = 4
+        private const val FINGERS_COUNT_DEVELOPMENT = 2
 
-    val DELAY = 2000L
-    val DELAY_DEVELOPMENT = 1000L
+        private const val DELAY = 2000L
+        private const val DELAY_DEVELOPMENT = 1000L
+    }
 
-    var job: Job? = null
+    private var timerJob: Job? = null
 
+    /**
+     * When the user hold the fingers down a timer starts
+     * and when it finishes the secret menu opens.
+     * If the user releases the fingers before the timer ends
+     * the timer is cancelled and nothing happens.
+     */
     fun onTouchEvent(ev: MotionEvent) {
-
         val fingers = when(config.isDevelopmentDevice()) {
             true -> FINGERS_COUNT_DEVELOPMENT
             false -> FINGERS_COUNT
@@ -29,7 +43,7 @@ class SecretMenuTouchManager(
     }
 
     private fun cancelTimer() {
-        job?.cancel()
+        timerJob?.cancel()
     }
 
     private fun startTimer() {
@@ -39,8 +53,8 @@ class SecretMenuTouchManager(
             false -> DELAY
         }
 
-        job?.cancel()
-        job = GlobalScope.launch(Dispatchers.Main) {
+        timerJob?.cancel()
+        timerJob = GlobalScope.launch(Dispatchers.Main) {
             delay(delay)
             onTimerEnd()
         }
