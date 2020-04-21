@@ -29,7 +29,7 @@ class ImmuniOracleConfiguration(val context: Context) : OracleConfiguration, Koi
     override fun showForceUpdate(minVersionCode: Int) {
         log("ForceUpdate! Min version is $minVersionCode")
         // avoid to open the activity while the app is in background
-        if(ImmuniApplication.isForeground.value &&
+        if(ImmuniApplication.lifecycleObserver.isInForeground &&
             !ForceUpdateActivity.isOpen) {
             val context =
                 ImmuniApplication.appContext

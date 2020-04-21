@@ -38,24 +38,11 @@ class ImmuniApplication : Application() {
         super.onCreate()
         appContext = applicationContext
 
-        val lifecycleObserver = AppLifecycleObserver()
-        GlobalScope.launch {
-            lifecycleObserver.consumeEach { event ->
-                when (event) {
-                    AppLifecycleEvent.ON_START -> {
-                        isForeground.send(true)
-                    }
-                    AppLifecycleEvent.ON_STOP -> {
-                        isForeground.send(false)
-                    }
-                    else -> {
-                    }
-                }
-            }
-        }
+        // register lifecycle observer
+        lifecycleObserver = AppLifecycleObserver()
         ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
 
-        // Start Koin
+        // start Koin DI module
         startKoin {
             androidLogger()
             androidContext(this@ImmuniApplication)
@@ -87,6 +74,6 @@ class ImmuniApplication : Application() {
 
     companion object {
         lateinit var appContext: Context
-        val isForeground = ConflatedBroadcastChannel(false)
+        lateinit var lifecycleObserver: AppLifecycleObserver
     }
 }

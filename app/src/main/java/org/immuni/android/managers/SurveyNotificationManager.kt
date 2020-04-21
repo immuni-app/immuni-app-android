@@ -34,7 +34,7 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
 
     init {
         GlobalScope.launch {
-            ImmuniApplication.isForeground.consumeEach {
+            ImmuniApplication.lifecycleObserver.consumeEach {
                 scheduleNext(fromActivity = true)
             }
         }

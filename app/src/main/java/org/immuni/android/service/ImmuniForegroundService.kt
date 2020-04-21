@@ -263,7 +263,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
         if (count % picoPingPeriodicity.div(PERIODICITY) == 0) {
             pico.trackEvent(ForegroundServiceRunning().userAction)
 
-            if (!ImmuniApplication.isForeground.value) {
+            if (!ImmuniApplication.lifecycleObserver.isInForeground) {
                 pico.trackEvent(BackgroundPing().userAction)
             }
         }
