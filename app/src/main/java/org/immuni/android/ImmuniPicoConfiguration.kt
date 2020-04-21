@@ -27,7 +27,7 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
     }
 
     override fun isDevelopmentDevice(): Boolean {
-        return oracle.settings()?.developmentDevices?.contains(concierge.aaid.id) == true
+        return oracle.settings()?.developmentDevices?.contains(concierge.backupPersistentId.id) == true
     }
 
     override fun concierge(): ConciergeManager {

@@ -52,8 +52,6 @@ class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
         initializeJob?.cancel()
         initializeJob = uiScope.launch {
 
-            delay(1000) // allow concierge to retrieve the async AAID
-
             // refresh oracle settings
             // set timeout here to allow the user to use the app offline
             // (this is not the very first startup that must to be blocking)

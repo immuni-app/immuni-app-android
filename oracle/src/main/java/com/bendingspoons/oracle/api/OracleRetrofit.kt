@@ -57,7 +57,6 @@ class OracleRetrofit(
         chain.run {
             val requestBuilder = request()
                 .newBuilder()
-                .addHeader("IDFA", concierge.aaid.id)
                 .addHeader("Locale", Locale.getDefault().country)
                 .addHeader("Language", Locale.getDefault().language)
                 .addHeader("Device-Type", "android")

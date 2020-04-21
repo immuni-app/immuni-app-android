@@ -16,8 +16,7 @@ class PicoUserTest {
         val value = PicoUser(
             ids = mutableMapOf(
                 "backup_persistent_id" to "",
-                "non_backup_persistent_id" to "",
-                "idfa" to ""
+                "non_backup_persistent_id" to ""
             ),
             info = PicoBaseUserInfo(
                 country = "",
@@ -111,8 +110,7 @@ class PicoUserTest {
         val user = PicoUser(
             ids = mutableMapOf(
                 "backup_persistent_id" to "123",
-                "non_backup_persistent_id" to "456",
-                "idfa" to "789"
+                "non_backup_persistent_id" to "456"
             ),
             info = PicoBaseUserInfo(
                 country = "US",

@@ -1,10 +1,7 @@
 package com.bendingspoons.concierge
 
 import android.content.Context
-import com.bendingspoons.concierge.Concierge.Companion.NULL_AAID
 import io.mockk.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -59,11 +56,9 @@ class ConciergeManagerImplUnitTest {
 
         val manager: ConciergeManager = ConciergeManagerImpl(storage, storage, provider, appCustomIdProvider)
 
-        manager.aaid = Concierge.Id.Internal(Concierge.InternalId.AAID, "", Concierge.CreationType.justGenerated)
         manager.backupPersistentId = Concierge.Id.Internal(Concierge.InternalId.BACKUP_PERSISTENT_ID, "", Concierge.CreationType.justGenerated)
         manager.nonBackupPersistentId = Concierge.Id.Internal(Concierge.InternalId.NON_BACKUP_PERSISTENT_ID, "", Concierge.CreationType.justGenerated)
 
-        assertEquals("aaid", manager.internalId(Concierge.InternalId.AAID)?.name)
         assertEquals("backup_persistent_id", manager.internalId(Concierge.InternalId.BACKUP_PERSISTENT_ID)?.name)
         assertEquals("non_backup_persistent_id", manager.internalId(Concierge.InternalId.NON_BACKUP_PERSISTENT_ID)?.name)
     }
@@ -78,7 +73,6 @@ class ConciergeManagerImplUnitTest {
 
         verify { storage.get(Concierge.InternalId.BACKUP_PERSISTENT_ID) }
         verify { storage.get(Concierge.InternalId.NON_BACKUP_PERSISTENT_ID) }
-        verify { storage.get(Concierge.InternalId.AAID) }
     }
 
     @Test
@@ -88,14 +82,13 @@ class ConciergeManagerImplUnitTest {
         val provider = mockk<ConciergeProvider>(relaxed = true)
 
         every { storage.get(any()) } returns null
-        coEvery { provider.provideAAID() } returns Concierge.Id.Custom("test","test")
         coEvery { provider.provideBackupPersistentId() } returns Concierge.Id.Custom("test","test")
         coEvery { provider.provideNonBackupPersistentId() } returns Concierge.Id.Custom("test","test")
 
         val manager: ConciergeManager = ConciergeManagerImpl(storage, storage, provider, appCustomIdProvider)
 
         val slot = slot<Concierge.Id>()
-        verify(atLeast = 3) { storage.save(id = capture(slot)) }
+        verify(atLeast = 2) { storage.save(id = capture(slot)) }
         assertEquals(slot.captured.name, "test")
     }
 
@@ -108,14 +101,13 @@ class ConciergeManagerImplUnitTest {
 
         every { storage.get(any()) } returns null
         every { nonBackupStorage.get(any()) } returns null
-        coEvery { provider.provideAAID() } returns null
         coEvery { provider.provideBackupPersistentId() } returns Concierge.Id.Custom("test","test")
         coEvery { provider.provideNonBackupPersistentId() } returns Concierge.Id.Custom("test","test")
 
         val manager: ConciergeManager = ConciergeManagerImpl(storage, nonBackupStorage, provider, appCustomIdProvider)
 
         verify(exactly = 1) { storage.save(any()) }
-        verify(exactly = 1) { nonBackupStorage.save(any()) } // idfa not stored
+        verify(exactly = 1) { nonBackupStorage.save(any()) }
     }
 
     @Test
@@ -128,13 +120,12 @@ class ConciergeManagerImplUnitTest {
 
         val manager: ConciergeManager = ConciergeManagerImpl(storage, storage, provider, appCustomIdProvider)
 
-        coEvery { provider.provideAAID() }
         coEvery { provider.provideNonBackupPersistentId() }
         coEvery { provider.provideBackupPersistentId()  }
     }
 
     @Test
-    fun `test provider is not called if storage has values during init, exept for AAID`() {
+    fun `test provider is not called if storage has values during init`() {
 
         val storage = mockk<ConciergeStorage>(relaxed = true)
         val provider = mockk<ConciergeProvider>(relaxed = true)
@@ -144,26 +135,10 @@ class ConciergeManagerImplUnitTest {
 
         val manager: ConciergeManager = ConciergeManagerImpl(storage, storage, provider, appCustomIdProvider)
 
-        coVerify(exactly = 1) {provider.provideAAID() }
         coVerify(exactly = 0) {provider.provideNonBackupPersistentId() }
         coVerify(exactly = 0) {provider.provideBackupPersistentId() }
     }
 
-    @Test
-    fun `test aaid is refreshed during init even if already stored`() = runBlocking {
-
-        val storage = mockk<ConciergeStorage>(relaxed = true)
-        val provider = mockk<ConciergeProvider>(relaxed = true)
-        val id = Concierge.Id.Internal(Concierge.InternalId.AAID, "my_aaid_id", Concierge.CreationType.justGenerated)
-        val newId = Concierge.Id.Internal(Concierge.InternalId.AAID, "my_aaid_id", Concierge.CreationType.justGenerated)
-
-        every { storage.get(Concierge.InternalId.AAID) } returns id
-        every { provider.provideAAID() } returns newId
-
-        val manager: ConciergeManager = ConciergeManagerImpl(storage, storage, provider, appCustomIdProvider)
-
-        assertEquals(manager.aaid, newId)
-    }
 
     @Test
     fun `test backupPersistentId is set during init even if already stored`() {
@@ -194,21 +169,6 @@ class ConciergeManagerImplUnitTest {
     }
 
     @Test
-    fun `test aaid is set during init when it is not stored yet`() = runBlocking {
-
-        val storage = mockk<ConciergeStorage>(relaxed = true)
-        val provider = mockk<ConciergeProvider>(relaxed = true)
-        val id = Concierge.Id.Internal(Concierge.InternalId.AAID, "my_aaid_id", Concierge.CreationType.justGenerated)
-
-        every { storage.get(Concierge.InternalId.AAID) } returns null
-        every { provider.provideAAID() } returns id
-
-        val manager: ConciergeManager = ConciergeManagerImpl(storage, storage, provider, appCustomIdProvider)
-
-        assertEquals(id, manager.aaid)
-    }
-
-    @Test
     fun `test backupPersistentId is set during init when it is not stored yet`() {
 
         val storage = mockk<ConciergeStorage>(relaxed = true)
@@ -236,19 +196,5 @@ class ConciergeManagerImplUnitTest {
         val manager: ConciergeManager = ConciergeManagerImpl(storage, storage, provider, appCustomIdProvider)
 
         assertEquals(manager.nonBackupPersistentId, id)
-    }
-
-    @Test
-    fun `test IDFA is set to default value if not present`() = runBlocking {
-
-        val storage = mockk<ConciergeStorage>(relaxed = true)
-        val provider = mockk<ConciergeProvider>(relaxed = true)
-
-        every { storage.get(Concierge.InternalId.AAID) } returns null
-        every { provider.provideAAID() } returns null
-
-        val manager: ConciergeManager = ConciergeManagerImpl(storage, storage, provider, appCustomIdProvider)
-
-        assertEquals(manager.aaid, NULL_AAID)
     }
 }

@@ -10,9 +10,9 @@ class ConciergeIdUnitTest {
     @Test
     fun `test correct fields are injected`() {
 
-        val id = Concierge.Id.Internal(Concierge.InternalId.AAID, "1234", Concierge.CreationType.justGenerated)
+        val id = Concierge.Id.Internal(Concierge.InternalId.BACKUP_PERSISTENT_ID, "1234", Concierge.CreationType.justGenerated)
 
-        assertEquals(Concierge.InternalId.AAID.keyName, id.name)
+        assertEquals(Concierge.InternalId.BACKUP_PERSISTENT_ID.keyName, id.name)
         assertEquals("1234", id.id)
         assertEquals(Concierge.CreationType.justGenerated, id.creation)
     }
@@ -20,9 +20,9 @@ class ConciergeIdUnitTest {
     @Test
     fun `test id can be serialized`() {
 
-        val id = Concierge.Id.Internal(Concierge.InternalId.AAID,  "1234", Concierge.CreationType.justGenerated)
+        val id = Concierge.Id.Internal(Concierge.InternalId.BACKUP_PERSISTENT_ID,  "1234", Concierge.CreationType.justGenerated)
 
-        assertEquals("""{"name":"aaid","id":"1234","creation":"just_generated"}""", toJson(id))
+        assertEquals("""{"name":"backup_persistent_id","id":"1234","creation":"just_generated"}""", toJson(id))
     }
 
     @Test

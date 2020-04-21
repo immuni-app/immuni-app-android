@@ -57,7 +57,7 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
         )
     }
 
-    override fun spoonerItems(): List<SecretMenuItem> {
+    override fun debuggingItems(): List<SecretMenuItem> {
         return listOf(
             object : SecretMenuItem("\uD83D\uDD14 Schedule a notification in 5 seconds", { _, _ ->
                 notificationManager.scheduleMock()

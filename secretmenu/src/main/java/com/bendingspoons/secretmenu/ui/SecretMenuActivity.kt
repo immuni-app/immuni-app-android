@@ -30,7 +30,7 @@ class SecretMenuActivity : AppCompatActivity() {
             // spooner's items
             if (secretMenuConfig.isDevelopmentDevice()) {
                 add(AllIdsItem())
-                addAll(secretMenuConfig.spoonerItems())
+                addAll(secretMenuConfig.debuggingItems())
                 add(ClearUserIdentityItem())
                 add(ClearAppDataItem())
                 add(ForceQuitDataItem())

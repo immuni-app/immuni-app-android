@@ -1,10 +1,6 @@
 package com.bendingspoons.concierge
 
 import com.bendingspoons.concierge.Concierge.*
-import com.bendingspoons.concierge.Concierge.Companion.NULL_AAID
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.*
 
 abstract class ConciergeManager(
@@ -38,11 +34,8 @@ abstract class ConciergeManager(
 
     abstract fun registerCustomIdProvider(provider: ConciergeCustomIdProvider)
 
-    abstract var aaid: Id
     abstract var backupPersistentId: Id
     abstract var nonBackupPersistentId: Id
-    // this id is not stored, but always get from the system
-    abstract var androidId: Id?
 
     protected abstract val customIds: Set<Id>
 }
@@ -55,8 +48,6 @@ internal class ConciergeManagerImpl(
 ) : ConciergeManager(storage, nonBackupStorage, provider, appCustomIdProvider) {
 
     private val customIdProviders = mutableSetOf<ConciergeCustomIdProvider>()
-    override var aaid: Id = NULL_AAID
-    override var androidId: Id? = provider.provideAndroidId()
     override lateinit var backupPersistentId: Id
     override lateinit var nonBackupPersistentId: Id
 
@@ -66,9 +57,7 @@ internal class ConciergeManagerImpl(
     }
 
     override fun internalId(internalId: InternalId): Id? {
-        return if (internalId == InternalId.AAID) aaid
-        else if (internalId == InternalId.ANDROID_ID) androidId
-        else when (internalId.type) {
+        return when (internalId.type) {
             InternalId.Type.BACKUP -> backupPersistentId
             InternalId.Type.NON_BACKUP -> nonBackupPersistentId
         }
@@ -128,13 +117,6 @@ internal class ConciergeManagerImpl(
     }
 
     private fun computeInternalIds() {
-        // Immediately get previously stored AAID, but retrieve and store the updated one
-        computeStoredAAIDSync()
-        // AAID must be retrieved not from the Main thread, async
-        GlobalScope.launch(Dispatchers.IO) {
-            computeAAID()
-        }
-
         computeBackupPersistentID()
         computeNonBackupPersistentId()
     }
@@ -145,28 +127,8 @@ internal class ConciergeManagerImpl(
         storeBackupPersistentID()
     }
 
-    // AAID cannot be retrieved synchronously, so when we already have it, set it immediately
-    private fun computeStoredAAIDSync() {
-        val aaid = storage.get(InternalId.AAID)
-        if (aaid != null) {
-            this.aaid = aaid
-        }
-    }
-
-    private fun computeAAID() {
-        val aaid = provider.provideAAID()
-        this.aaid = aaid ?: NULL_AAID
-        storeAAID()
-    }
-
     private fun storeBackupPersistentID() {
         storage.save(this.backupPersistentId)
-    }
-
-    private fun storeAAID() {
-        if (aaid != NULL_AAID) {
-            storage.save(aaid)
-        }
     }
 
     private fun storeNonBackupPersistentId() {

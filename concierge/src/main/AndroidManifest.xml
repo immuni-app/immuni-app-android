@@ -1,9 +1,3 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bendingspoons.concierge" >
-    <!-- Required by Google Play Services Ads (AAID) -->
-    <application>
-        <meta-data
-            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
-            android:value="true"/>
-    </application>
 </manifest>

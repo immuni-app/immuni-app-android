@@ -8,9 +8,9 @@ interface SecretMenuConfiguration {
 
     fun concierge(): ConciergeManager
 
-    // available to anyone, without password (use these for support kind of tasks)
+    // available to anyone
     fun publicItems(): List<SecretMenuItem>
 
-    // available only on spooner devices
-    fun spoonerItems(): List<SecretMenuItem>
+    // available only during debug
+    fun debuggingItems(): List<SecretMenuItem>
 }

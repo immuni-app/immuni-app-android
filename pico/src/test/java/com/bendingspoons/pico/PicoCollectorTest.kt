@@ -1,6 +1,5 @@
 package com.bendingspoons.pico
 
-import com.bendingspoons.concierge.Concierge
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.pico.api.model.PicoEventResponse
 import com.bendingspoons.pico.model.PicoEvent
@@ -54,10 +53,8 @@ class PicoCollectorTest {
         MockKAnnotations.init(this, relaxUnitFun = true) // turn relaxUnitFun on for all mocks
 
         coEvery { store.nextEventsBatch() } returns listOf(event)
-        //every { mockConcierge.aaid } returns null
         every { config.concierge() } returns mockConcierge
-        every { mockConcierge.aaid?.id } returns "not_empty_idfa"
-        every { picoUser.ids[Concierge.InternalId.AAID.keyName] } returns ""
+
         every { event.user } returns picoUser
         every { userConsent.level } returns UserConsentLevel.ACCEPTED
 

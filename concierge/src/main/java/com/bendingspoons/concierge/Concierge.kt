@@ -42,10 +42,6 @@ class Concierge {
 
     @JsonClass(generateAdapter = false)
     enum class InternalId(val keyName: String, val type: Type) {
-        @Json(name = "aaid")
-        AAID("aaid", Type.BACKUP),
-        @Json(name = "android_id")
-        ANDROID_ID("android_id", Type.BACKUP),
         @Json(name = "backup_persistent_id")
         BACKUP_PERSISTENT_ID("backup_persistent_id", Type.BACKUP),
         @Json(name = "non_backup_persistent_id")
@@ -57,12 +53,6 @@ class Concierge {
     }
 
     companion object {
-        val NULL_AAID = Id.Internal(
-            InternalId.AAID,
-            "00000000-0000-0000-0000-000000000000",
-            CreationType.justGenerated
-        )
-
         fun Manager(
             context: Context,
             nonBackupStorage: ConciergeStorage = ConciergeNonBackupStorageImpl(context),

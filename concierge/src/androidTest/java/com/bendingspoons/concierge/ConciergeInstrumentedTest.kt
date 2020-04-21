@@ -21,10 +21,10 @@ class ConciergeInstrumentedTest {
     fun testIdSerializationSavingAndRestore() {
         val ctx: Context = ApplicationProvider.getApplicationContext()
         val storage = ConciergeStorageImpl(ctx, false) as ConciergeStorage
-        val saved = Concierge.Id.Internal(Concierge.InternalId.AAID, "123456", Concierge.CreationType.justGenerated)
+        val saved = Concierge.Id.Internal(Concierge.InternalId.BACKUP_PERSISTENT_ID, "123456", Concierge.CreationType.justGenerated)
         storage.save(saved)
 
-        val loaded = storage.get(Concierge.InternalId.AAID)
+        val loaded = storage.get(Concierge.InternalId.BACKUP_PERSISTENT_ID)
         assertEquals(saved.copy(creation = Concierge.CreationType.readFromFile), loaded)
     }
 
