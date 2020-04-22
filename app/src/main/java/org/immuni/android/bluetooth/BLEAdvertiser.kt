@@ -8,14 +8,13 @@ import android.bluetooth.le.BluetoothLeAdvertiser
 import android.content.Context
 import android.os.ParcelUuid
 import com.bendingspoons.oracle.Oracle
+import com.bendingspoons.pico.BuildConfig
 import com.bendingspoons.pico.Pico
 import com.google.android.gms.common.util.Hex
+import kotlinx.coroutines.*
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.managers.BluetoothManager
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.models.ProximityEvent
 import org.immuni.android.metrics.BluetoothAdvertisingFailed
@@ -36,23 +35,25 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     private val btIdsManager: BtIdsManager by inject()
     private val aggregator: ProximityEventsAggregator by inject()
 
+    private var advertisingJob: Job? = null
+
     fun stop() {
         stopAdvertise()
         bluetoothGattServer?.close()
         bluetoothGattServer = null
     }
 
-    suspend fun start(): Boolean {
+    suspend fun start() = coroutineScope {
         val adapter = bluetoothManager.adapter()
 
-        if (!bluetoothManager.isBluetoothEnabled()) return false
+        if (!bluetoothManager.isBluetoothEnabled()) return@coroutineScope
         advertiser = adapter?.bluetoothLeAdvertiser
 
         startServer()
 
-        startAdvertising()
-
-        return true
+        advertisingJob = launch {
+            startAdvertising()
+        }
     }
 
     private suspend fun startAdvertising() {
@@ -80,6 +81,18 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             callback
         )
 
+        // lod waiting for btId expiration
+        if(BuildConfig.DEBUG) {
+            val log = coroutineScope {
+                async {
+                    repeat(Int.MAX_VALUE) {
+                        delay(5000)
+                        log("Advertiser waiting for btId expiration...")
+                    }
+                }
+            }
+        }
+
         // wait until the bt id expires
         delay((btId.expirationTimestamp * 1000.0).toLong() - btIdsManager.correctTime())
 
@@ -98,6 +111,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         try {
             advertiser?.stopAdvertising(callback)
         } catch (e: Exception) {}
+        advertisingJob?.cancel()
     }
 
     inner class MyAdvertiseCallback : AdvertiseCallback() {

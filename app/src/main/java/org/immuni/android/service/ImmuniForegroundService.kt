@@ -56,8 +56,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val database: ImmuniDatabase by inject()
 
-    //private var wakeLock: PowerManager.WakeLock? = null
-
     override fun onBind(intent: Intent): IBinder? {
         // We don't provide binding, so return null
         return null
@@ -120,17 +118,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
         log("Starting the foreground service task")
         isServiceStarted = true
 
-        // we need this lock so our service gets not affected by Doze Mode
-        /*
-        wakeLock =
-            (getSystemService(Context.POWER_SERVICE) as PowerManager).run {
-                newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                    "ImmuniForegroundService::lock").apply {
-                    acquire(Long.MAX_VALUE)
-                }
-            }
-         */
-
         // keep the service running
         serviceScope.launch(Dispatchers.IO) {
             pico.trackEvent(ForegroundServiceStarted().userAction)
@@ -146,15 +133,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
         log("Stopping the foreground service")
 
         try {
-            /*
-            wakeLock?.let {
-                if (it.isHeld) {
-                    it.release()
-                }
-            }
-            */
-
-            //applicationContext.unregisterReceiver(mReceiver)
             stopForeground(true)
             stopSelf()
         } catch (e: Exception) {
@@ -182,12 +160,15 @@ class ImmuniForegroundService : Service(), KoinComponent {
     private suspend fun startBleLoop()  {
         stopBle()
         delay(3000)
+        log("Starting BLE")
         val scanner = serviceScope.async {
             scanner.start()
+            log("Started scanner")
         }
 
         val advertiser = serviceScope.async {
             advertiser.start()
+            log("Started advertiser")
         }
     }
 
@@ -199,15 +180,17 @@ class ImmuniForegroundService : Service(), KoinComponent {
             btIdsManager.scheduleRefresh()
         }
 
-        val ble = serviceScope.async {
+        val bluetooth = serviceScope.async {
+            while(isServiceStarted) {
                 startBleLoop()
+                delay((oracle.settings()?.bleTimeoutSeconds?.toLong() ?: 180L) * 1000L)
+            }
         }
 
         val periodicCheck = serviceScope.async {
-            log("Periodick check....")
             var previousPermissionsState = PermissionsState.OK
-            repeat(Int.MAX_VALUE) {
-
+            while(isServiceStarted) {
+                log("Periodic check....")
                 // disable BLE from settings if needed
                 if(oracle.settings()?.bleDisableAll == true) {
                     stopService()
@@ -238,7 +221,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
                 }
 
                 previousPermissionsState = currentPermissionState
-
 
                 logEventsToPico()
 
