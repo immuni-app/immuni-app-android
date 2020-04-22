@@ -20,11 +20,13 @@ import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.bluetooth.BLEAdvertiser
 import org.immuni.android.bluetooth.BLEScanner
+import org.immuni.android.db.entity.SLOTS_PER_CONTACT_RECORD
 import org.immuni.android.metrics.*
 import org.immuni.android.metrics.BluetoothFoundPeripheralsSnapshot.Contact
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import org.koin.java.KoinJavaComponent.inject
 import java.util.*
 
 class ImmuniForegroundService : Service(), KoinComponent {
@@ -37,17 +39,17 @@ class ImmuniForegroundService : Service(), KoinComponent {
         STOP
     }
 
-    companion object {
+    companion object: KoinComponent {
         const val FOREGROUND_NOTIFICATION_ID = 21032020
         const val PICO_LAST_SENT_EVENT_TIME = "PICO_LAST_SENT_EVENT_TIME"
-        val advertiser: BLEAdvertiser = BLEAdvertiser(ImmuniApplication.appContext)
-        val scanner: BLEScanner = BLEScanner()
         var isServiceStarted = false
             private set
 
         private const val PERIODICITY = 5
     }
 
+    private val advertiser: BLEAdvertiser by inject()
+    private val scanner: BLEScanner by inject()
     private val btIdsManager: BtIdsManager by inject()
     private val bluetoothManager: BluetoothManager by inject()
     private val appNotificationManager: AppNotificationManager by inject()
@@ -254,7 +256,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
             val lastSentEventTime = storage.load(PICO_LAST_SENT_EVENT_TIME, 0L)
             val currentTime =  Date().time
             var endTime = lastSentEventTime
-            val timeWindow = RELATIVE_TIMESTAMP_SECONDS * ImmuniDatabase.SLOTS_PER_CONTACT_RECORD * 1000
+            val timeWindow = RELATIVE_TIMESTAMP_SECONDS * SLOTS_PER_CONTACT_RECORD * 1000
             while ((endTime + timeWindow) < currentTime) {
                 endTime += timeWindow
             }

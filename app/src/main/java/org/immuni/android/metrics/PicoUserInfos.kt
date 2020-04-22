@@ -10,9 +10,13 @@ import android.location.LocationManager
 import android.os.BatteryManager
 import android.os.Build
 import androidx.core.app.ActivityCompat
+import com.bendingspoons.oracle.Oracle
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.ImmuniApplication
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.bluetooth.BLEAdvertiser
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
@@ -91,6 +95,26 @@ class PicoUserInfos {
 
         fun pushPermissionLevel(): Pair<String, Any> {
             return "push_permission_level" to PushPermissionLevel.instance()
+        }
+
+        fun bleIsAdvertising(): Pair<String, Any> {
+            val advertiser: BLEAdvertiser by inject()
+            return "ble_is_advertising" to advertiser.isAdvertising
+        }
+
+        fun bleAdvertiseMode(): Pair<String, Any> {
+            val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+            return "ble_advertise_mode" to (oracle.settings()?.bleAdvertiseMode ?: "")
+        }
+
+        fun bleTxPowerLevel(): Pair<String, Any> {
+            val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+            return "ble_tx_power_level" to (oracle.settings()?.bleTxPowerLevel ?: "")
+        }
+
+        fun bleScanMode(): Pair<String, Any> {
+            val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+            return "ble_scan_mode" to (oracle.settings()?.bleScanMode ?: "")
         }
     }
 }

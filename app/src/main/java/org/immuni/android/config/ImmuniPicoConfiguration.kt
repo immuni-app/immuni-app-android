@@ -65,6 +65,10 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
             PicoUserInfos.locationActive(context),
             PicoUserInfos.batteryOptimization(context),
             PicoUserInfos.batteryLevel(context),
-            PicoUserInfos.databaseSize(context)
+            PicoUserInfos.databaseSize(context),
+            PicoUserInfos.bleIsAdvertising(),
+            PicoUserInfos.bleAdvertiseMode(),
+            PicoUserInfos.bleTxPowerLevel(),
+            PicoUserInfos.bleScanMode()
         )
 }

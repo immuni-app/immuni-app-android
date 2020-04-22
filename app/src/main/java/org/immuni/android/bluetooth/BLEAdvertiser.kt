@@ -12,8 +12,7 @@ import com.bendingspoons.pico.BuildConfig
 import com.bendingspoons.pico.Pico
 import com.google.android.gms.common.util.Hex
 import kotlinx.coroutines.*
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.api.model.*
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.models.ProximityEvent
@@ -34,6 +33,9 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     private var callback = MyAdvertiseCallback()
     private val btIdsManager: BtIdsManager by inject()
     private val aggregator: ProximityEventsAggregator by inject()
+
+    var isAdvertising: Boolean = false
+        private set
 
     private var advertisingJob: Job? = null
 
@@ -57,12 +59,21 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     }
 
     private suspend fun startAdvertising() {
+
+        val advertiseMode = oracle.settings()?.bleAdvertiseMode?.advertiseMode()
+            ?: AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY
+        log("Advertise mode: ${oracle.settings()?.bleAdvertiseMode}")
+
+        val txPowerLevel = oracle.settings()?.bleTxPowerLevel?.txPowerLevel()
+            ?: AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW
+        log("Tx Power Level mode: ${oracle.settings()?.bleTxPowerLevel}")
+
         val btId = btIdsManager.getOrFetchActiveBtId()
         val builder = AdvertiseSettings.Builder().apply {
-            setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
+            setAdvertiseMode(advertiseMode)
             setConnectable(true)
             setTimeout(0) // timeout max 180000 milliseconds
-            setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW)
+            setTxPowerLevel(txPowerLevel)
         }
 
         val serviceId = ParcelUuid.fromString(CGAIdentifiers.ServiceDataUUIDString) //btId
@@ -112,14 +123,19 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             advertiser?.stopAdvertising(callback)
         } catch (e: Exception) {}
         advertisingJob?.cancel()
+        isAdvertising = false
     }
 
     inner class MyAdvertiseCallback : AdvertiseCallback() {
         override fun onStartFailure(errorCode: Int) {
             super.onStartFailure(errorCode)
+            isAdvertising = false
 
             val reason = when (errorCode) {
-                ADVERTISE_FAILED_ALREADY_STARTED -> "advertise_failed_already_started"
+                ADVERTISE_FAILED_ALREADY_STARTED -> {
+                    isAdvertising = true
+                    "advertise_failed_already_started"
+                }
                 ADVERTISE_FAILED_FEATURE_UNSUPPORTED -> "advertise_failed_feature_unsupported"
                 ADVERTISE_FAILED_INTERNAL_ERROR -> "advertise_failed_internal_error"
                 ADVERTISE_FAILED_TOO_MANY_ADVERTISERS -> "advertise_failed_too_many_advertisers"
@@ -136,6 +152,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         override fun onStartSuccess(settingsInEffect: AdvertiseSettings?) {
             super.onStartSuccess(settingsInEffect)
             log("### Success starting BLEAdvertiser")
+            isAdvertising = true
         }
     }
 

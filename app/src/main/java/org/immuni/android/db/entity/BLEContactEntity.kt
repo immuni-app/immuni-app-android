@@ -56,6 +56,8 @@ data class BLEEvent (
     }
 }
 
+// number of slot available in each record blob
+const val SLOTS_PER_CONTACT_RECORD = 256
 // Value used to discretize the timestamps
 const val RELATIVE_TIMESTAMP_SECONDS = 5
 // Compensate for potential timer ticks delays with respect to the real timestamp

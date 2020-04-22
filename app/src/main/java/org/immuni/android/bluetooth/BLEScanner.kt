@@ -5,8 +5,7 @@ import android.os.ParcelUuid
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.api.model.*
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.models.ProximityEvent
@@ -33,6 +32,10 @@ class BLEScanner : KoinComponent {
     }
 
     suspend fun start(): Boolean {
+        val scanMode = oracle.settings()?.bleScanMode?.scanMode()
+            ?: ScanSettings.SCAN_MODE_BALANCED
+        log("Scan mode: ${oracle.settings()?.bleScanMode}")
+
         if (!bluetoothManager.isBluetoothEnabled()) return false
         bluetoothLeScanner = bluetoothManager.adapter()?.bluetoothLeScanner
         val filter = listOf(
@@ -47,9 +50,8 @@ class BLEScanner : KoinComponent {
         bluetoothLeScanner?.startScan(
             filter,
             ScanSettings.Builder().apply {
-                // with report delay the distance estimator doesn't work
                 setReportDelay(0)
-                setScanMode(ScanSettings.SCAN_MODE_BALANCED)
+                setScanMode(scanMode)
             }.build(),
             myScanCallback
         )

@@ -14,6 +14,8 @@ import net.sqlcipher.database.SupportFactory
 import org.immuni.android.api.ApiManager
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.bluetooth.BLEAdvertiser
+import org.immuni.android.bluetooth.BLEScanner
 import org.immuni.android.db.DATABASE_NAME
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyNotificationManager
@@ -116,6 +118,16 @@ val appModule = module {
     // single instance of ApiManager
     single {
         ApiManager(get())
+    }
+
+    // single instance of BleAdvertiser
+    single {
+        BLEAdvertiser(androidContext())
+    }
+
+    // single instance of BleScanner
+    single {
+        BLEScanner()
     }
 
     // single instance of ProximityEventsAggregator
