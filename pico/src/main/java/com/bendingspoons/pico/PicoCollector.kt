@@ -12,8 +12,7 @@ import kotlinx.coroutines.flow.collect
 internal class PicoCollector(
     private val flow: PicoFlow,
     private val dispatcher: PicoDispatcher,
-    private val store: PicoStore,
-    private val config: PicoConfiguration
+    private val store: PicoStore
 ) {
     suspend fun start() {
         flow.flow().collect { list ->
@@ -28,7 +27,7 @@ internal class PicoCollector(
             if (response.isSuccessful) {
                 store.deleteEvents(events)
             } else {
-                // if the events are malformed delete it to avoid blocking the future ones
+                // if the events are malformed delete it to avoid blocking future ones
                 if(response.code() == 400 || response.code() == 422) {
                     store.deleteEvents(events)
                     Log.w("PICO", "Events deleted because malformed or invalid, error code ${response.code()}")

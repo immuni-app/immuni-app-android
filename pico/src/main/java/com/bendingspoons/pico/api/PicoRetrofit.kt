@@ -21,11 +21,10 @@ import java.util.*
 import javax.net.ssl.HostnameVerifier
 
 class PicoRetrofit(config: PicoConfiguration) {
-
     private val concierge: ConciergeManager = config.concierge()
 
     // catch here all network or unexpected exceptions
-    // in order to don't have to explicitly try/catch all the retrofit calls
+    // in order not to have to explicitly try/catch all retrofit calls
     private val exceptionsInterceptor: ((Interceptor.Chain) -> Response) = { chain ->
         val request = chain.request()
         try {
@@ -59,10 +58,9 @@ class PicoRetrofit(config: PicoConfiguration) {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
 
-    val sesame = config.sesame()
-    var certificatePinner = config.certificatePinner()
-
-    val gzipInterceptor = GzipRequestInterceptor()
+    private val sesame = config.sesame()
+    private val certificatePinner = config.certificatePinner()
+    private val gzipInterceptor = GzipRequestInterceptor()
 
     val client by lazy {
         val builder = OkHttpClient.Builder()
@@ -95,4 +93,3 @@ class PicoRetrofit(config: PicoConfiguration) {
         )
         .build()
 }
-

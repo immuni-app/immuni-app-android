@@ -5,8 +5,6 @@ import com.bendingspoons.base.utils.DeviceInfoProviderImpl
 import com.bendingspoons.pico.api.PicoRetrofit
 import com.bendingspoons.pico.api.PicoService
 import com.bendingspoons.pico.db.picoDatabase
-import com.bendingspoons.pico.experiments.ExperimentsSegmentReceivedManager
-import com.bendingspoons.pico.experiments.ExperimentsStore
 import com.bendingspoons.pico.install.PicoInstallManager
 import com.bendingspoons.pico.model.TrackEvent
 import com.bendingspoons.pico.model.UserAction
@@ -29,7 +27,6 @@ class Pico(
     private val eventManagerCompletable = CompletableDeferred<PicoEventManager>()
     private val sessionManagerCompletable = CompletableDeferred<PicoSessionManager>()
     private lateinit var collector: PicoCollector
-    private lateinit var experimentsManager: ExperimentsSegmentReceivedManager
     private val userInfoProviders = mutableSetOf<PicoUserInfoProvider>()
     private val userConsent = UserConsent(context, config)
 
@@ -53,7 +50,6 @@ class Pico(
     // in this way the eventManager can use the info provider safely.
 
     fun setup() {
-
         val sessionManager = PicoSessionManager(context, eventManagerCompletable, eventFlow)
 
         val eventManager = PicoEventManager(
@@ -66,15 +62,7 @@ class Pico(
             sessionManagerCompletable
         )
 
-        experimentsManager = ExperimentsSegmentReceivedManager(
-            ExperimentsStore(context, encrypted = config.encryptStore()),
-            config.oracle().settingsFlow(),
-            eventManager
-        ).apply {
-            GlobalScope.launch { start() }
-        }
-
-        collector = PicoCollector(eventFlow, dispatcher, store, config).apply {
+        collector = PicoCollector(eventFlow, dispatcher, store).apply {
             GlobalScope.launch { start() }
         }
 
@@ -94,7 +82,7 @@ class Pico(
         trackEvent(UserAction(id, info.toMap()))
     }
 
-    suspend fun saveUserConsent(level: UserConsentLevel) {
+    private fun saveUserConsent(level: UserConsentLevel) {
         userConsent.level = level
     }
 

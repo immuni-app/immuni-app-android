@@ -40,8 +40,6 @@ internal class PicoEventManager(
     }
 
     private fun picoEvent(event: TrackEvent): PicoEvent {
-        val settings = config.oracle().settings()
-
         return PicoEvent(
             id = event.id,
             timestamp = System.currentTimeMillis() / 1000.0,
@@ -60,20 +58,11 @@ internal class PicoEventManager(
                     bundleVersion = DeviceUtils.appVersionCode(context).toString(),
                     firstInstallTime = installInfo.firstInstallDate.let { it.time / 1000.0 } ?: 0.0,
                     lastInstallTime = installInfo.lastInstallDate.let { it.time / 1000.0 } ?: 0.0,
-                    installedBeforePico = installInfo.wasInstalledBeforePico,
-                    isBaseline = settings?.isBaseline ?: false,
-                    isFree = settings?.isFree ?: false,
                     timezone = TimezoneInfo(
                         seconds = deviceInfoProvider.timeZoneSecons(),
                         name = deviceInfoProvider.timeZoneName(),
                         daylightSaving = deviceInfoProvider.isDayLightSaving()
                     ),
-                    monetization = MonetizationInfo(
-                        isSubscribed = config.oracle().me()?.isSubscribed ?: false,
-                        customFields = config.additionalMonetizationInfo(),
-                        availableProductIds = settings?.availableProductsId() ?: listOf()
-                    ),
-                    experiment = settings?.experimentsSegments ?: mapOf(),
                     device = DeviceInfo(
                         androidVersion = deviceInfoProvider.androidVersion(),
                         screenSize = deviceInfoProvider.screenSize(context),

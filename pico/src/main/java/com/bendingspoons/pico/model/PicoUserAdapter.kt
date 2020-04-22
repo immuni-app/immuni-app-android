@@ -10,7 +10,7 @@ import com.squareup.moshi.ToJson
  */
 class PicoUserAdapter {
     companion object {
-        private val moshi = Moshi.Builder().add(MonetizationInfoAdapter()).build()
+        private val moshi = Moshi.Builder().build()
         private val adapter = moshi.adapter(PicoUser::class.java)
 
         const val INFO_FIELD = "info"
