@@ -45,16 +45,13 @@ class Oracle<Settings : OracleSettings, Me : OracleMe>(
 
     private val lifecycleObserver: AppLifecycleObserver
 
-    private val wasInstalledBeforePico = CompletableDeferred<Boolean>()
-
     init {
         settingsChannel = loadSettings()
         meChannel = loadMe()
 
         val serverApi = OracleRetrofit(
             context,
-            config,
-            wasInstalledBeforePico
+            config
         ).oracleRetrofit.create(OracleService::class.java)
 
         api = OracleRepository(
@@ -144,15 +141,8 @@ class Oracle<Settings : OracleSettings, Me : OracleMe>(
     // use this method to create an app specific layer of API above the Oracle generic one.
 
     fun <T : Any> customServiceAPI(apiClass: KClass<T>): T {
-        return OracleRetrofit(context, config, wasInstalledBeforePico).oracleRetrofit.create(
+        return OracleRetrofit(context, config).oracleRetrofit.create(
             apiClass.java
         )
-    }
-
-    fun setWasInstalledBeforePico(value: Boolean) {
-        assert(wasInstalledBeforePico.isActive) {
-            "Can't set wasInstalledBeforePico more than once"
-        }
-        wasInstalledBeforePico.complete(value)
     }
 }

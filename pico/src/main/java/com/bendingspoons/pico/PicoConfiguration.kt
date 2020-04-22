@@ -8,6 +8,10 @@ import com.bendingspoons.sesame.Sesame
 import okhttp3.CertificatePinner
 import java.util.*
 
+/**
+ * This is the lib configuration
+ * the app injects into [Pico].
+ */
 interface PicoConfiguration: PicoUserInfoProvider {
     fun endpoint(): String
     fun isDevelopmentDevice(): Boolean
@@ -15,7 +19,5 @@ interface PicoConfiguration: PicoUserInfoProvider {
     fun oracle(): Oracle<out OracleSettings, out OracleMe>
     fun sesame(): Sesame
     fun certificatePinner(): CertificatePinner?
-    fun additionalMonetizationInfo(): Map<String, Any>
-    fun wasInstalledBeforePico(): Boolean
     fun encryptStore(): Boolean
 }

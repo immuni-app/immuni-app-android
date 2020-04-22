@@ -17,7 +17,7 @@ import com.bendingspoons.secretmenu.ui.SecretMenuActivity
  *
  * @constructor create an instance of [SecretMenu] using its [SecretMenuConfiguration].
  * @param context
- * @param config the [SecretMenuConfiguration]
+ * @param config the [SecretMenuConfiguration] injected by the app.
  * @param oracle an instance of [Oracle]
  */
 class SecretMenu(

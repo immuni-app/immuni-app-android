@@ -27,9 +27,6 @@ class PicoUserTest {
                 bundleVersion = "",
                 firstInstallTime = 0.0,
                 lastInstallTime = 0.0,
-                installedBeforePico = false,
-                isBaseline = false,
-                isFree = false,
                 timezone = TimezoneInfo(
                     seconds = 0,
                     name = "",
@@ -39,15 +36,7 @@ class PicoUserTest {
                     androidVersion = "",
                     screenSize = 5.5,
                     platform = ""
-                ),
-                monetization = MonetizationInfo(
-                    isSubscribed = false,
-                    availableProductIds = listOf(),
-                    customFields = mapOf(
-                        "custom_monetization_1" to "CustomMonetizationValue"
-                    )
-                ),
-                experiment = mapOf()
+                )
             ),
             additionalInfo = mapOf(
                 "field_1" to "Hello",
@@ -71,41 +60,9 @@ class PicoUserTest {
     }
 
     @Test
-    fun `MonetizationInfo's customFields field gets flattened into its parent`() {
-        val value = MonetizationInfo(
-            isSubscribed = false,
-            availableProductIds = listOf(),
-            customFields = mapOf(
-                "custom_monetization_1" to "CustomMonetizationValue"
-            )
-        )
-
-        val moshi = Moshi.Builder()
-            .add(MonetizationInfoAdapter())
-            .build()
-        val adapter = moshi.adapter(MonetizationInfo::class.java)
-        val json = adapter.toJson(value)
-
-        assertFalse(json.contains("custom_fields"))
-        assertTrue(json.contains("custom_monetization_1"))
-        assertTrue(json.contains("CustomMonetizationValue"))
-
-        val recreatedValue = adapter.fromJson(json)
-        assertEquals(value, recreatedValue)
-    }
-
-    @Test
     fun testPicoUserFromEventRequestSerialization() {
         val moshi = Moshi.Builder().add(PicoUserAdapter()).build()
         val jsonAdapter = moshi.adapter(PicoEventRequest::class.java)
-
-        val monetizationInfo = MonetizationInfo(
-            isSubscribed = true,
-            availableProductIds = listOf(),
-            customFields = mapOf(
-                "CUSTOM_MONETIZATION_FIELD" to "CUSTOM_MONETIZATION_VALUE"
-            )
-        )
 
         val user = PicoUser(
             ids = mutableMapOf(
@@ -121,16 +78,11 @@ class PicoUserTest {
                 locale = "en",
                 firstInstallTime = 0.0,
                 lastInstallTime = 0.0,
-                installedBeforePico = false,
-                isFree = true,
-                isBaseline = false,
-                experiment = mapOf(),
                 timezone = TimezoneInfo(
                     seconds = 123,
                     name = "Rome",
                     daylightSaving = true
                 ),
-                monetization = monetizationInfo,
                 device = DeviceInfo(
                     androidVersion = "32",
                     screenSize = 5.5,
@@ -163,7 +115,6 @@ class PicoUserTest {
         val userMap = (jsonMap["events"] as List<Map<String, Any>>).firstOrNull()?.get("user")
         val deserializedUser = moshi.adapter<PicoUser>(PicoUser::class.java).fromJsonValue(userMap)
 
-        assertEquals(user.info.monetization, deserializedUser!!.info.monetization)
         assertEquals(user, deserializedUser)
 
         val deserializedEvent = jsonAdapter.fromJson(json)

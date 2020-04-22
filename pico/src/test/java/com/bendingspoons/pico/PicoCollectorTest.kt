@@ -59,7 +59,7 @@ class PicoCollectorTest {
         every { userConsent.level } returns UserConsentLevel.ACCEPTED
 
         flow = PicoFlow(store, userConsent, REPEAT = 1)
-        collector = PicoCollector(flow, dispatcher, store, config)
+        collector = PicoCollector(flow, dispatcher, store)
 
         successResponse = Response.success(
             PicoEventResponse(

@@ -22,17 +22,9 @@ import javax.net.ssl.HostnameVerifier
 
 class OracleRetrofit(
     context: Context,
-    config: OracleConfiguration,
-    wasInstalledBeforePicoDeferred: CompletableDeferred<Boolean>
+    config: OracleConfiguration
 ) {
     private val concierge = config.concierge()
-    private var wasInstalledBeforePico: Boolean? = null
-
-    init {
-        GlobalScope.launch {
-            wasInstalledBeforePico = wasInstalledBeforePicoDeferred.await()
-        }
-    }
 
     // catch here all network or unexpected exceptions
     // in order to don't have to explicitly try/catch all the retrofit calls
@@ -67,9 +59,6 @@ class OracleRetrofit(
                 .addHeader("Build", DeviceUtils.appVersionCode(context).toString())
                 .addHeader("Pico-Unique-Id", concierge.backupPersistentId.id)
                 .addHeader("Pico-Client-Id", concierge.nonBackupPersistentId.id)
-            if (wasInstalledBeforePico != null) {
-                requestBuilder.addHeader("Installed-Before-Pico", wasInstalledBeforePico.toString())
-            }
 
             proceed(requestBuilder.build())
         }

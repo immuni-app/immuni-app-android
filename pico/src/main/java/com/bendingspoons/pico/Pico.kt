@@ -15,6 +15,13 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+/**
+ * Pico, metrics library.
+ *
+ * This is the Pico lib main class.
+ * @param context
+ * @param config the [PicoConfiguration] injected by the app.
+ */
 class Pico(
     private val context: Context,
     private val config: PicoConfiguration) {
@@ -40,8 +47,6 @@ class Pico(
         dispatcher = PicoDispatcher(api)
         eventFlow = PicoFlow(store, userConsent)
         installManager = PicoInstallManager(context, config, eventManagerCompletable)
-
-        config.oracle().setWasInstalledBeforePico(installManager.info.wasInstalledBeforePico)
 
         registerUserInfoProvider(config)
     }

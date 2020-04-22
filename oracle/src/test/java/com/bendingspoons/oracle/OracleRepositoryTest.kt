@@ -42,16 +42,18 @@ class OracleRepositoryTest {
     fun setup() {
         MockKAnnotations.init(this, relaxUnitFun = true)
 
-        coEvery { oracleService.me() } returns Response.success(200, "{\"is_subscribed\":true}".toResponseBody())
-        coEvery { oracleService.settings() } returns Response.success(200, "{\"skip_paywall\":true,\"my_custom_field\":\"customValue\", \"__privacy_notice_url__\":\"myPp\", \"__tos_url__\":\"myTos\"}".toResponseBody())
+        coEvery { oracleService.me() } returns Response.success(200, "{\"device_id\":\"525\"}".toResponseBody())
+        coEvery { oracleService.settings() } returns Response.success(
+            200,
+            "{\"min_build_version\":25,\"__privacy_notice_version__\":\"3\",\"__tos_version__\":\"4\",\"my_custom_field\":\"customValue\"}".toResponseBody())
     }
 
     @Test
     fun `settings populate base settings fields`() = runBlocking {
         val response = OracleRepository(oracleService, store, MyCustomSetting::class, OracleMe::class, settingsChannel, meChannel).fetchSettings()
-        assertEquals("myTos", response.body()?.tosUrl)
-        assertEquals("myPp", response.body()?.privacyUrl)
-        assertEquals(true, response.body()?.skipPaywall)
+        assertEquals(25, response.body()?.minBuildVersion)
+        assertEquals("4", response.body()?.tosVersion)
+        assertEquals("3", response.body()?.privacyVersion)
     }
 
     @Test

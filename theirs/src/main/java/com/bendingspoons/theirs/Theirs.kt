@@ -7,7 +7,7 @@ import com.bendingspoons.theirs.fcm.FirebaseFCM
  * Theirs lib contains third party libraries.
  *
  * @param context
- * @param config the lib configuration.
+ * @param config the lib configuration injected by the app.
  *
  */
 class Theirs(context: Context, config: TheirsConfiguration) {

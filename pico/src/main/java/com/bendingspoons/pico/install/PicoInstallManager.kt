@@ -23,7 +23,6 @@ internal class PicoInstallManager(
         const val bundleVersionKey = "bundleVersionKey"
         const val firstInstallTimeMillisKey = "firstInstallTimeMillisKey"
         const val lastInstallTimeMillisKey = "lastInstallTimeMillisKey"
-        const val wasInstalledBeforePicoKey = "wasInstalledBeforePicoKey"
     }
 
     private val storage = KVStorage(
@@ -45,19 +44,14 @@ internal class PicoInstallManager(
         val oldAppVersion = storage.load<String>(appVersionKey)
         val oldBundleVersion = storage.load<String>(bundleVersionKey)
 
-        val wasInstalledBeforePico = storage.load(wasInstalledBeforePicoKey)
-            ?: config.wasInstalledBeforePico()
-
         info = PicoInstallInfo(
             firstInstallDate = firstInstallDate,
-            lastInstallDate = lastInstallDate,
-            wasInstalledBeforePico = wasInstalledBeforePico
+            lastInstallDate = lastInstallDate
         )
 
         val installEvent = computeInstallEvent(
             backupPersistentId = concierge.backupPersistentId,
             nonBackupPersistentId = concierge.nonBackupPersistentId,
-            wasInstalledBeforePico = wasInstalledBeforePico,
             currentAppVersion = DeviceUtils.appVersionName(context),
             oldAppVersion = oldAppVersion,
             oldBundleVersion = oldBundleVersion
@@ -65,9 +59,6 @@ internal class PicoInstallManager(
 
         if (!storage.contains(firstInstallTimeMillisKey)) {
             storage.save(firstInstallTimeMillisKey, firstInstallDate.time)
-        }
-        if (!storage.contains(wasInstalledBeforePicoKey)) {
-            storage.save(wasInstalledBeforePicoKey, wasInstalledBeforePico)
         }
         storage.save(appVersionKey, DeviceUtils.appVersionName(context))
         storage.save(bundleVersionKey, DeviceUtils.appVersionCode(context).toString())
@@ -84,7 +75,6 @@ internal class PicoInstallManager(
     private fun computeInstallEvent(
         backupPersistentId: Concierge.Id,
         nonBackupPersistentId: Concierge.Id,
-        wasInstalledBeforePico: Boolean,
         currentAppVersion: String,
         oldAppVersion: String?,
         oldBundleVersion: String?
@@ -99,7 +89,6 @@ internal class PicoInstallManager(
         return PicoInstallEventData(
             backupPersistentIdStatus = backupPersistentId.creation,
             nonBackupPersistentIdStatus = nonBackupPersistentId.creation,
-            installedBeforePico = wasInstalledBeforePico,
             newAppVersion = currentAppVersion,
             oldAppVersion = oldAppVersion,
             oldBundleVersion = oldBundleVersion

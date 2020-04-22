@@ -43,12 +43,6 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
         return Sesame(PicoSesameConfiguration())
     }
 
-    override fun additionalMonetizationInfo(): Map<String, Any> {
-        return mapOf()
-    }
-
-    override fun wasInstalledBeforePico() = false
-
     override fun encryptStore() = true
 
     override fun certificatePinner(): CertificatePinner? {
