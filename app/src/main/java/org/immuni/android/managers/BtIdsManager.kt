@@ -1,6 +1,7 @@
 package org.immuni.android.managers
 
 import android.content.Context
+import com.bendingspoons.base.utils.retry
 import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.api.ApiManager
@@ -46,24 +47,28 @@ class BtIdsManager(val context: Context) : KoinComponent {
     }
 
     private suspend fun refresh() {
-        var hadSucces = false
-        while (!hadSucces) {
-            try {
-                val response = apiManager.getBtIds()
+        val block = suspend {
+            val response = apiManager.getBtIds()
+            val result = runCatching {
                 if (response.isSuccessful) {
                     btIds = response.body()
                     timeCorrection = Date().time - (btIds!!.serverTimestamp.toLong() * 1000L)
-                    hadSucces = true
                     pico.trackEvent(RefreshBtIdsSuccedeed().userAction)
+                } else {
+                    pico.trackEvent(RefreshBtIdsFailed().userAction)
                 }
-            } catch (e: Exception) {
-                log("error fetching ids, trying again")
+                response.isSuccessful
             }
-            if (!hadSucces) {
-                pico.trackEvent(RefreshBtIdsFailed().userAction)
-                delay(5 * 1000)
-            }
+            result.getOrNull() ?: false
         }
+
+        // exponential backoff
+        retry(times = Int.MAX_VALUE,
+            initialDelay = 3000,
+            maxDelay = 120000,
+            block = block,
+            exitWhen = {success -> success },
+            onIntermediateFailure = {})
     }
 
     var isRefreshScheduled = false
