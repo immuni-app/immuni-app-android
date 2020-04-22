@@ -9,10 +9,10 @@ import com.bendingspoons.oracle.api.model.OracleSettings
 import com.bendingspoons.secretmenu.ui.SecretMenuActivity
 
 /**
- * Secret Menu.
+ * A secret menu used to show to the user some debugging features.
  *
  * This is the secret menu lib main class. It receives the user touch events
- * and decide if trigger or not the secret menu. The [SecretMenuTouchManager] is
+ * and decide if trigger or not a secret menu. The [SecretMenuTouchManager] is
  * responsible for this decision.
  *
  * @constructor create an instance of [SecretMenu] using its [SecretMenuConfiguration].

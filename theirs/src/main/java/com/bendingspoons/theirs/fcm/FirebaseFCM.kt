@@ -11,6 +11,14 @@ import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 
+/**
+ * This class manages the push notification tokens.
+ * It exposes a [ConflatedBroadcastChannel] containing the last token.
+ * It implements [ConciergeCustomIdProvider] to be able to set the token into [Concierge].
+ *
+ * @param context
+ * @param config the FCM configuration
+ */
 internal class FirebaseFCM(
     context: Context,
     config: FirebaseFCMConfiguration
