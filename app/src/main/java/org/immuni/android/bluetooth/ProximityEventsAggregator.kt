@@ -16,7 +16,7 @@ class ProximityEventsAggregator(
     ): KoinComponent {
 
     private val mutex = Mutex()
-    private lateinit var timerJob: Job
+    private var timerJob: Job? = null
 
     private val proximityEvents = mutableListOf<ProximityEvent>()
 
@@ -30,7 +30,7 @@ class ProximityEventsAggregator(
     }
 
     fun stop() {
-        timerJob.cancel()
+        timerJob?.cancel()
     }
 
     fun addProximityEvents(events: List<ProximityEvent>) = runBlocking {

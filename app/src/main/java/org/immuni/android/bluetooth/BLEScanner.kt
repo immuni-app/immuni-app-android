@@ -29,6 +29,7 @@ class BLEScanner : KoinComponent {
         if (bluetoothManager.isBluetoothEnabled()) { // if not enabled, stopScan crashes
             bluetoothLeScanner?.stopScan(myScanCallback)
         }
+        aggregator.stop()
     }
 
     suspend fun start(): Boolean {
