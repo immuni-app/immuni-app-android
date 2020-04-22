@@ -36,7 +36,6 @@ class PermissionsManager(val context: Context) : KoinComponent {
         val allPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             listOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                 Manifest.permission.BLUETOOTH,
                 Manifest.permission.BLUETOOTH_ADMIN
             )
@@ -157,8 +156,7 @@ class PermissionsManager(val context: Context) : KoinComponent {
     fun geolocationPermissions(): Array<String> {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                Manifest.permission.ACCESS_FINE_LOCATION
             )
         } else {
             arrayOf(

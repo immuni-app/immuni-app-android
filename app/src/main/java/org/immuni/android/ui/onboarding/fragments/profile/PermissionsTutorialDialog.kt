@@ -42,10 +42,8 @@ open class PermissionsTutorialDialog : FullScreenDialogDarkFragment() {
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q){
             popupImage.setImageResource(R.drawable.ic_permissions_sample)
-            title.text = getString(R.string.onboarding_permission_tutorial_title)
         } else{
             popupImage.setImageResource(R.drawable.ic_permissions_sample_older)
-            title.text = getString(R.string.onboarding_permission_tutorial_title_older)
         }
 
         view?.setOnClickListener {
