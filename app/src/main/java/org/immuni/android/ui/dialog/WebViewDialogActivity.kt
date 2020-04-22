@@ -33,7 +33,7 @@ class WebViewDialogActivity: ImmuniActivity() {
         }
 
         // top gradient color
-        val colorRes = applicationContext.resources.getColor(intent.extras!!.getInt("color", R.color.home_background))
+        val colorRes = applicationContext.resources.getColor(intent.extras!!.getInt("color", R.color.background))
         val colorAplhaZero = Color.argb(0, colorRes.red, colorRes.green, colorRes.blue)
         webView.setBackgroundColor(colorRes)
         val drawableTop = GradientDrawable(
