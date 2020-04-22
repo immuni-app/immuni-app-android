@@ -25,6 +25,7 @@ class ImmuniSettings(
     @field:Json(name = "recover_data_email") val recoverDataEmail: String? = null,
     @field:Json(name = "ble_disable_all") val bleDisableAll: Boolean = false,
     @field:Json(name = "ble_timeout_seconds") val bleTimeoutSeconds: Int = 180,
+    @field:Json(name = "ble_slots_per_contact_record") val bleSlotsPerContactRecord: Int = 256,
     @field:Json(name = "ble_advertise_mode") val bleAdvertiseMode: AdvertiseMode = AdvertiseMode.ADVERTISE_MODE_LOW_POWER,
     @field:Json(name = "ble_scan_mode") val bleScanMode: ScanMode = ScanMode.SCAN_MODE_BALANCED,
     @field:Json(name = "ble_tx_power_level") val bleTxPowerLevel: TxPowerLevel = TxPowerLevel.ADVERTISE_TX_POWER_ULTRA_LOW
