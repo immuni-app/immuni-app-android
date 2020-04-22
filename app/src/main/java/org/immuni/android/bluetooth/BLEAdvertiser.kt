@@ -22,6 +22,7 @@ import org.immuni.android.metrics.BluetoothAdvertisingFailed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.lang.Exception
 import java.util.*
 import kotlin.random.Random
 
@@ -34,10 +35,9 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     private var callback = MyAdvertiseCallback()
     private val btIdsManager: BtIdsManager by inject()
     private val aggregator: ProximityEventsAggregator by inject()
-    private val id = Random.nextInt(0, 1000)
 
     fun stop() {
-        advertiser?.stopAdvertising(callback)
+        stopAdvertise()
         bluetoothGattServer?.close()
         bluetoothGattServer = null
     }
@@ -89,16 +89,22 @@ class BLEAdvertiser(val context: Context): KoinComponent {
         }
 
         // stop and start again
-        advertiser?.stopAdvertising(callback)
+        stopAdvertise()
 
         startAdvertising()
+    }
+
+    private fun stopAdvertise() {
+        try {
+            advertiser?.stopAdvertising(callback)
+        } catch (e: Exception) {}
     }
 
     inner class MyAdvertiseCallback : AdvertiseCallback() {
         override fun onStartFailure(errorCode: Int) {
             super.onStartFailure(errorCode)
 
-            var reason = when (errorCode) {
+            val reason = when (errorCode) {
                 ADVERTISE_FAILED_ALREADY_STARTED -> "advertise_failed_already_started"
                 ADVERTISE_FAILED_FEATURE_UNSUPPORTED -> "advertise_failed_feature_unsupported"
                 ADVERTISE_FAILED_INTERNAL_ERROR -> "advertise_failed_internal_error"
@@ -107,7 +113,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
                 else -> "unknown"
             }
 
-            log("Failure starting BLEAdvertiser id=$id error = $errorCode reason=$reason")
+            log("Failure starting BLEAdvertiser error = $errorCode reason=$reason")
             GlobalScope.launch {
                 pico.trackEvent(BluetoothAdvertisingFailed(reason).userAction)
             }
@@ -115,7 +121,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
 
         override fun onStartSuccess(settingsInEffect: AdvertiseSettings?) {
             super.onStartSuccess(settingsInEffect)
-            log("### Success starting BLEAdvertiser id=$id")
+            log("### Success starting BLEAdvertiser")
         }
     }
 

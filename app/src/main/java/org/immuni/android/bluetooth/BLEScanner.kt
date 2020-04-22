@@ -21,13 +21,14 @@ class BLEScanner : KoinComponent {
     private val database: ImmuniDatabase by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
-    private val id = Random.nextInt(0, 1000)
     private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var myScanCallback = MyScanCallback()
     private val aggregator: ProximityEventsAggregator by inject()
 
     fun stop() {
-        bluetoothLeScanner?.stopScan(myScanCallback)
+        if (bluetoothManager.isBluetoothEnabled()) { // if not enabled, stopScan crashes
+            bluetoothLeScanner?.stopScan(myScanCallback)
+        }
     }
 
     suspend fun start(): Boolean {
@@ -86,20 +87,20 @@ class BLEScanner : KoinComponent {
             super.onBatchScanResults(results)
             processResults(results)
 
-            log("onScanResult id=${id} count=${results.size}")
+            log("onScanResult count=${results.size}")
         }
 
         override fun onScanResult(callbackType: Int, result: ScanResult) {
             super.onScanResult(callbackType, result)
             processResults(listOf(result))
 
-            log("onScanResult id=${id} count=1")
+            log("onScanResult count=1")
         }
 
         override fun onScanFailed(errorCode: Int) {
             super.onScanFailed(errorCode)
 
-            log("onScanFailed id=$id $errorCode")
+            log("onScanFailed $errorCode")
             GlobalScope.launch {
                 pico.trackEvent(BluetoothScanFailed().userAction)
             }
