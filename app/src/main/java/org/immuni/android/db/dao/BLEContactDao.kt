@@ -4,6 +4,11 @@ import androidx.room.Dao
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import org.immuni.android.db.entity.BLEContactEntity
+import org.immuni.android.db.entity.BLEEvent
+import org.immuni.android.db.entity.SLOTS_PER_CONTACT_RECORD
+import org.immuni.android.db.entity.dateToRelativeTimestamp
+import org.immuni.android.util.log
+import java.util.*
 
 @Dao
 interface BLEContactDao: BaseDao<BLEContactEntity> {
@@ -30,4 +35,28 @@ interface BLEContactDao: BaseDao<BLEContactEntity> {
 
     @Query("DELETE FROM ble_contact_table WHERE timestamp < :timestamp")
     suspend fun removeOlderThan(timestamp: Long)
+}
+
+/**
+ * Insert a new contact into the record blob.
+ */
+suspend fun BLEContactDao.addContact(btId: String, txPower: Int, rssi: Int, date: Date) {
+    var entry = this.getLatestByBtId(btId)
+    if (entry == null) {
+        entry = BLEContactEntity(btId = btId, timestamp = date)
+    } else {
+        val relativeTimestamp = dateToRelativeTimestamp(referenceDate = entry.timestamp, now = date)
+        if (relativeTimestamp > SLOTS_PER_CONTACT_RECORD - 1) {
+            log("creating a new entry because relativeTimestamp is: $relativeTimestamp")
+            entry = BLEContactEntity(btId = btId, timestamp = date)
+        }
+    }
+
+    entry.events += BLEEvent(
+        relativeTimestamp = dateToRelativeTimestamp(referenceDate = entry.timestamp, now = date),
+        txPower = txPower,
+        rssi = rssi
+    ).toByteArray()
+
+    this.insert(entry)
 }

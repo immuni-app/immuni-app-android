@@ -4,6 +4,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.db.dao.addContact
 import org.immuni.android.models.ProximityEvent
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
@@ -74,7 +75,7 @@ class ProximityEventsAggregator(
 
     private suspend fun store(events: Collection<ProximityEvent>) {
         events.forEach {
-            database.addContact(
+            database.bleContactDao().addContact(
                 btId = it.btId,
                 txPower = it.txPower,
                 rssi = it.rssi,
