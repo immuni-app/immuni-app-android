@@ -27,15 +27,15 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
 
-enum class Actions {
-    START,
-    STOP
-}
-
 class ImmuniForegroundService : Service(), KoinComponent {
 
     private val serviceJob = SupervisorJob()
     private val serviceScope = CoroutineScope(Dispatchers.Default + serviceJob)
+
+    enum class Actions {
+        START,
+        STOP
+    }
 
     companion object {
         const val FOREGROUND_NOTIFICATION_ID = 21032020

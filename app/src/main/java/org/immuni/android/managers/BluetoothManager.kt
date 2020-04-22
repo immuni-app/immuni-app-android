@@ -12,7 +12,6 @@ import org.immuni.android.R
 import com.bendingspoons.base.extensions.toast
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.util.log
-import org.immuni.android.service.Actions
 import org.immuni.android.service.ImmuniForegroundService
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -61,7 +60,7 @@ class BluetoothManager(val context: Context) : KoinComponent {
         if(!onboarding.isComplete()) return
 
         Intent(appContext, ImmuniForegroundService::class.java).also {
-            it.action = Actions.START.name
+            it.action = ImmuniForegroundService.Actions.START.name
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 log("Starting the service in >=26 Mode")
                 appContext.startForegroundService(it)
