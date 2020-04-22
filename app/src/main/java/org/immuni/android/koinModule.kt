@@ -21,7 +21,7 @@ import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.*
-import org.immuni.android.ble.ProximityEventsAggregator
+import org.immuni.android.bluetooth.ProximityEventsAggregator
 import org.immuni.android.config.*
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.ui.ble.encounters.BleEncountersDebugViewModel

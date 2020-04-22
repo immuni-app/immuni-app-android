@@ -1,4 +1,4 @@
-package org.immuni.android.ble
+package org.immuni.android.bluetooth
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex

@@ -1,4 +1,4 @@
-package org.immuni.android.ble
+package org.immuni.android.bluetooth
 
 import android.bluetooth.*
 import android.bluetooth.le.AdvertiseCallback
@@ -44,7 +44,6 @@ class BLEAdvertiser(val context: Context): KoinComponent {
 
     suspend fun start(): Boolean {
         val adapter = bluetoothManager.adapter()
-        //if (!(adapter?.isEnabled == true)) adapter?.enable()
 
         if (!bluetoothManager.isBluetoothEnabled()) return false
         advertiser = adapter?.bluetoothLeAdvertiser
@@ -75,10 +74,7 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             val data = Hex.stringToBytes(bytesMan)
             addServiceData(serviceId, data)
         }
-        /*val scanResponseBuilder = AdvertiseData.Builder().apply {
-            setIncludeDeviceName(false) // if true fail = 1
-        }
-         */
+
         advertiser?.startAdvertising(
             builder.build(), dataBuilder.build(),// scanResponseBuilder.build(),
             callback
@@ -101,9 +97,19 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     inner class MyAdvertiseCallback : AdvertiseCallback() {
         override fun onStartFailure(errorCode: Int) {
             super.onStartFailure(errorCode)
-            log("Failure starting BLEAdvertiser id=$id error = $errorCode")
+
+            var reason = when (errorCode) {
+                ADVERTISE_FAILED_ALREADY_STARTED -> "advertise_failed_already_started"
+                ADVERTISE_FAILED_FEATURE_UNSUPPORTED -> "advertise_failed_feature_unsupported"
+                ADVERTISE_FAILED_INTERNAL_ERROR -> "advertise_failed_internal_error"
+                ADVERTISE_FAILED_TOO_MANY_ADVERTISERS -> "advertise_failed_too_many_advertisers"
+                ADVERTISE_FAILED_DATA_TOO_LARGE -> "advertise_failed_data_too_large"
+                else -> "unknown"
+            }
+
+            log("Failure starting BLEAdvertiser id=$id error = $errorCode reason=$reason")
             GlobalScope.launch {
-                pico.trackEvent(BluetoothAdvertisingFailed().userAction)
+                pico.trackEvent(BluetoothAdvertisingFailed(reason).userAction)
             }
         }
 

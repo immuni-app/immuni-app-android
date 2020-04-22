@@ -18,8 +18,8 @@ import org.immuni.android.managers.AppNotificationManager
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.managers.PermissionsManager
-import org.immuni.android.ble.BLEAdvertiser
-import org.immuni.android.ble.BLEScanner
+import org.immuni.android.bluetooth.BLEAdvertiser
+import org.immuni.android.bluetooth.BLEScanner
 import org.immuni.android.metrics.*
 import org.immuni.android.metrics.BluetoothFoundPeripheralsSnapshot.Contact
 import org.immuni.android.util.log

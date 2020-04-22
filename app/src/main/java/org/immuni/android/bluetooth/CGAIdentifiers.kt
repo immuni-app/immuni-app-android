@@ -1,4 +1,4 @@
-package org.immuni.android.ble
+package org.immuni.android.bluetooth
 
 class CGAIdentifiers {
     companion object {

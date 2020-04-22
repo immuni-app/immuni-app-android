@@ -85,8 +85,11 @@ class BluetoothFoundPeripheralsSnapshot(contacts: List<Contact>) {
     )
 }
 
-class BluetoothAdvertisingFailed {
-    val userAction = UserAction("bluetooth_advertising_failed")
+class BluetoothAdvertisingFailed(errorCode: String) {
+    val userAction = UserAction(
+        "bluetooth_advertising_failed",
+        mapOf("error" to errorCode)
+    )
 }
 
 class BluetoothScanFailed {

@@ -1,4 +1,4 @@
-package org.immuni.android.ble
+package org.immuni.android.bluetooth
 
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
