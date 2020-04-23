@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.runBlocking
 import org.immuni.android.db.dao.BLEContactDao
+import org.immuni.android.db.dao.addContact
 import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.db.entity.RELATIVE_TIMESTAMP_SECONDS
 import org.immuni.android.db.entity.RELATIVE_TIMESTAMP_TOLERANCE_MS
@@ -45,8 +46,8 @@ class RoomBLEContactsTest {
         runBlocking {
             val currentDate = Date()
             val fiveSecondsMore = Date(currentDate.time + 4800)
-            db.addContact(btId = "123", txPower = -60, rssi = 23, date = currentDate)
-            db.addContact(btId = "123", txPower = -58, rssi = 22, date = fiveSecondsMore)
+            bleDao.addContact(btId = "123", txPower = -60, rssi = 23, date = currentDate)
+            bleDao.addContact(btId = "123", txPower = -58, rssi = 22, date = fiveSecondsMore)
 
             val contacts = bleDao.getAll()
             assertEquals(1, contacts.size)
@@ -72,8 +73,8 @@ class RoomBLEContactsTest {
         runBlocking {
             val currentDate = Date()
             val twentyMinutesMore = Date(currentDate.time + RELATIVE_TIMESTAMP_SECONDS * 256 * 1000)
-            db.addContact(btId = "123", txPower = -60, rssi = 23, date = currentDate)
-            db.addContact(btId = "123", txPower = -58, rssi = 22, date = twentyMinutesMore)
+            bleDao.addContact(btId = "123", txPower = -60, rssi = 23, date = currentDate)
+            bleDao.addContact(btId = "123", txPower = -58, rssi = 22, date = twentyMinutesMore)
 
             val contacts = bleDao.getAll()
             assertEquals(2, contacts.size)
