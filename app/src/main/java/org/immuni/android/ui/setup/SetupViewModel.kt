@@ -12,17 +12,18 @@ import org.immuni.android.ui.welcome.Welcome
 import org.immuni.android.util.Flags
 import org.immuni.android.util.setFlag
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 import java.io.IOException
 
-class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
+class SetupViewModel(
+    val setup: Setup,
+    val onboarding: Onboarding,
+    val welcome: Welcome,
+    val userManager: UserManager,
+    val repository: SetupRepository
+) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val setup: Setup by inject()
-    private val onboarding: Onboarding by inject()
-    private val welcome: Welcome by inject()
-    private val userManager: UserManager by inject()
 
     private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
     val navigateToMainPage: LiveData<Event<Boolean>>
@@ -56,7 +57,7 @@ class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
             // set timeout here to allow the user to use the app offline
             // (this is not the very first startup that must to be blocking)
             withTimeoutOrNull(5000) {
-                repo.getOracleSetting()
+                repository.getOracleSetting()
             }
 
             if (setup.isComplete()) {
@@ -70,7 +71,7 @@ class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
                     // the first time the call to settings and me is blocking, you cannot proceed without
                     val settings = retry(
                         times = 6,
-                        block = { repo.getOracleSetting() },
+                        block = { repository.getOracleSetting() },
                         exitWhen = { result -> result.isSuccessful },
                         onIntermediateFailure = { errorDuringSetup.value = true }
                     )
@@ -80,7 +81,7 @@ class SetupViewModel(val repo: SetupRepository) : ViewModel(), KoinComponent {
                         errorDuringSetup.value = false
                     }
 
-                    val me = repo.getOracleMe()
+                    val me = repository.getOracleMe()
                     if (!me.isSuccessful) {
                         throw IOException()
                     }

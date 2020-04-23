@@ -1,4 +1,4 @@
-package org.immuni.android
+package org.immuni.android.survey
 
 import com.bendingspoons.base.utils.fromJson
 import com.bendingspoons.base.utils.toJson

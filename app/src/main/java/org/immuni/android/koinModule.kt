@@ -170,7 +170,7 @@ val appModule = module {
     }
 
     // SetupViewModel
-    viewModel { SetupViewModel(get()) }
+    viewModel { SetupViewModel(get(), get(), get(), get(), get()) }
 
     // HomeSharedViewModel
     viewModel { HomeSharedViewModel(get()) }

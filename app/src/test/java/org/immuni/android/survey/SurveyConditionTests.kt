@@ -1,4 +1,4 @@
-package org.immuni.android
+package org.immuni.android.survey
 
 import org.immuni.android.models.survey.*
 import org.junit.Test

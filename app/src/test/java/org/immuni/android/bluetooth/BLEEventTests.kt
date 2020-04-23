@@ -1,4 +1,4 @@
-package org.immuni.android
+package org.immuni.android.bluetooth
 
 import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.db.entity.BLEEvent
