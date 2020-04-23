@@ -1,11 +1,11 @@
 package org.immuni.android.ui.forceupdate
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import org.immuni.android.R
 import com.bendingspoons.base.extensions.setDarkStatusBar
+import org.immuni.android.ui.ImmuniActivity
 
-class ForceUpdateActivity : AppCompatActivity() {
+class ForceUpdateActivity : ImmuniActivity() {
 
     companion object {
         var isOpen = false
