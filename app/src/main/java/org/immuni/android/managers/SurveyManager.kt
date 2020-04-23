@@ -70,7 +70,7 @@ class SurveyManager(db: ImmuniDatabase) : KoinComponent {
         }
     }
 
-    private suspend fun saveAnseredQuestions(userId: String, questions: Set<QuestionId>) {
+    private suspend fun saveAnsweredQuestions(userId: String, questions: Set<QuestionId>) {
         val date = todayAtMidnight()
         val entities = questions.map {
             QuestionLastAnswerTimeEntity(
@@ -116,7 +116,7 @@ class SurveyManager(db: ImmuniDatabase) : KoinComponent {
             }
         )
         saveHealthProfile(updatedHealthProfile)
-        saveAnseredQuestions(userId, form.answeredQuestions.toSet())
+        saveAnsweredQuestions(userId, form.answeredQuestions.toSet())
 
         return updatedHealthProfile
     }
