@@ -1,9 +1,9 @@
 package org.immuni.android.managers
 
 import com.bendingspoons.base.storage.KVStorage
-import com.bendingspoons.pico.Pico
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.HealthProfileEntity
+import org.immuni.android.db.entity.QuestionLastAnswerTimeEntity
 import org.immuni.android.models.HealthProfile
 import org.immuni.android.models.User
 import org.immuni.android.models.survey.CompositeAnswer
@@ -21,8 +21,6 @@ class SurveyManager(db: ImmuniDatabase) : KoinComponent {
     companion object {
         private const val additionalDelayKey = "additionalDelay"
 
-        private fun answeredQuestionsKey(userId: String) = "answeredQuestions-$userId"
-
         fun getOrSetAdditionalDelay(storage: KVStorage): Int {
             val storedValue = storage.load<Int>(additionalDelayKey)
             if (storedValue != null) {
@@ -39,8 +37,8 @@ class SurveyManager(db: ImmuniDatabase) : KoinComponent {
     private val additionalDelay: Int
     private val storage: KVStorage by inject()
     private val userManager: UserManager by inject()
-    private val pico: Pico by inject()
     private val healthProfileDao = db.healthProfileDao()
+    private val questionLastAnswerTimeDao = db.questionLastAnswerTimeDao()
 
     init {
         additionalDelay = getOrSetAdditionalDelay(storage)
@@ -64,22 +62,31 @@ class SurveyManager(db: ImmuniDatabase) : KoinComponent {
         return healthProfileDao.allHealthProfilesForUser(userId).map { it.healthProfile }
     }
 
-    private fun loadLastAnsweredQuestions(userId: String): Map<QuestionId, Long> {
-        return storage.load(answeredQuestionsKey(userId), defValue = mapOf())
+    private suspend fun loadLastAnsweredQuestions(userId: String): Map<QuestionId, Long> {
+        val entities = questionLastAnswerTimeDao.allQuestionLastAnswerTimesForUser(userId)
+        return entities.fold(mutableMapOf()) { map, entry ->
+            map[entry.questionId] = entry.timestamp
+            map
+        }
     }
 
-    private fun saveAnseredQuestions(userId: String, questions: Set<QuestionId>) {
-        val lastAnsweredQuestions = loadLastAnsweredQuestions(userId).toMutableMap()
+    private suspend fun saveAnsweredQuestions(userId: String, questions: Set<QuestionId>) {
         val date = todayAtMidnight()
-        lastAnsweredQuestions.putAll(questions.map { it to date.time })
-        storage.save(answeredQuestionsKey(userId), lastAnsweredQuestions)
+        val entities = questions.map {
+            QuestionLastAnswerTimeEntity(
+                userId = userId,
+                questionId = it,
+                timestamp = date.time
+            )
+        }.toTypedArray()
+        questionLastAnswerTimeDao.insert(*entities)
     }
 
-    private fun deleteLastAnsweredQuestions(userId: String) {
-        storage.delete(answeredQuestionsKey(userId))
+    private suspend fun deleteLastAnsweredQuestions(userId: String) {
+        questionLastAnswerTimeDao.deleteAllForUser(userId)
     }
 
-    fun answeredQuestionsElapsedDays(userId: String): Map<QuestionId, Int> {
+    suspend fun answeredQuestionsElapsedDays(userId: String): Map<QuestionId, Int> {
         val lastAnsweredQuestions = loadLastAnsweredQuestions(userId)
         val date = todayAtMidnight()
         return lastAnsweredQuestions.mapValues {
@@ -88,7 +95,11 @@ class SurveyManager(db: ImmuniDatabase) : KoinComponent {
         }
     }
 
-    suspend fun completeSurvey(userId: String, form: FormModel, surveyVersion: String): HealthProfile {
+    suspend fun completeSurvey(
+        userId: String,
+        form: FormModel,
+        surveyVersion: String
+    ): HealthProfile {
         val updatedHealthProfile = HealthProfile(
             userId = userId,
             healthState = form.healthState,
@@ -105,7 +116,7 @@ class SurveyManager(db: ImmuniDatabase) : KoinComponent {
             }
         )
         saveHealthProfile(updatedHealthProfile)
-        saveAnseredQuestions(userId, form.answeredQuestions.toSet())
+        saveAnsweredQuestions(userId, form.answeredQuestions.toSet())
 
         return updatedHealthProfile
     }
@@ -174,6 +185,7 @@ class SurveyManager(db: ImmuniDatabase) : KoinComponent {
     suspend fun deleteUserData(userId: String) {
         userManager.deleteUser(userId)
         healthProfileDao.deleteAllForUser(userId)
+        questionLastAnswerTimeDao.deleteAllForUser(userId)
     }
 
     suspend fun deleteDataOlderThan(days: Int) {
@@ -186,8 +198,6 @@ class SurveyManager(db: ImmuniDatabase) : KoinComponent {
         }.time
 
         healthProfileDao.deleteAllOlderThan(thresholdDate.time)
-        userManager.users().map { user ->
-            deleteLastAnsweredQuestions(user.id)
-        }
+        questionLastAnswerTimeDao.deleteAllOlderThan(thresholdDate.time)
     }
 }

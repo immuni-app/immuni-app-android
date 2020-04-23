@@ -8,20 +8,22 @@ import org.immuni.android.db.converter.DateConverter
 import org.immuni.android.db.converter.GenderConverter
 import org.immuni.android.db.dao.BLEContactDao
 import org.immuni.android.db.dao.HealthProfileDao
+import org.immuni.android.db.dao.QuestionLastAnswerTimeDao
 import org.immuni.android.db.dao.RawDao
-import org.immuni.android.db.entity.*
-import org.immuni.android.util.log
+import org.immuni.android.db.entity.BLEContactEntity
+import org.immuni.android.db.entity.HealthProfileEntity
+import org.immuni.android.db.entity.QuestionLastAnswerTimeEntity
 import java.io.File
-import java.util.*
 
 
-const val DATABASE_VERSION = 8
+const val DATABASE_VERSION = 9
 const val DATABASE_NAME = "immuni_database"
 
 @Database(
     entities = [
         BLEContactEntity::class,
-        HealthProfileEntity::class
+        HealthProfileEntity::class,
+        QuestionLastAnswerTimeEntity::class
     ],
     version = DATABASE_VERSION
 )
@@ -32,6 +34,7 @@ const val DATABASE_NAME = "immuni_database"
 abstract class ImmuniDatabase : RoomDatabase() {
     abstract fun bleContactDao(): BLEContactDao
     abstract fun healthProfileDao(): HealthProfileDao
+    abstract fun questionLastAnswerTimeDao(): QuestionLastAnswerTimeDao
     abstract fun rawDao(): RawDao
 
     companion object {

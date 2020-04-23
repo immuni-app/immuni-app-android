@@ -46,8 +46,8 @@ class RoomBLEContactsTest {
         runBlocking {
             val currentDate = Date()
             val fiveSecondsMore = Date(currentDate.time + 4800)
-            db.bleContactDao().addContact(btId = "123", txPower = -60, rssi = 23, date = currentDate)
-            db.bleContactDao().addContact(btId = "123", txPower = -58, rssi = 22, date = fiveSecondsMore)
+            bleDao.addContact(btId = "123", txPower = -60, rssi = 23, date = currentDate)
+            bleDao.addContact(btId = "123", txPower = -58, rssi = 22, date = fiveSecondsMore)
 
             val contacts = bleDao.getAll()
             assertEquals(1, contacts.size)
@@ -73,8 +73,8 @@ class RoomBLEContactsTest {
         runBlocking {
             val currentDate = Date()
             val twentyMinutesMore = Date(currentDate.time + RELATIVE_TIMESTAMP_SECONDS * 256 * 1000)
-            db.bleContactDao().addContact(btId = "123", txPower = -60, rssi = 23, date = currentDate)
-            db.bleContactDao().addContact(btId = "123", txPower = -58, rssi = 22, date = twentyMinutesMore)
+            bleDao.addContact(btId = "123", txPower = -60, rssi = 23, date = currentDate)
+            bleDao.addContact(btId = "123", txPower = -58, rssi = 22, date = twentyMinutesMore)
 
             val contacts = bleDao.getAll()
             assertEquals(2, contacts.size)
