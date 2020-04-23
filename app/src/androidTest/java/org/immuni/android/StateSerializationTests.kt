@@ -52,9 +52,9 @@ class StateSerializationTests {
 
             val originalProfiles: MutableList<HealthProfile> = mutableListOf()
 
-            for (i in 1..1) {
+            for (i in 1..100) {
                 val answers = linkedMapOf<QuestionId, QuestionAnswers>()
-                for (j in 1..1) {
+                for (j in 1..100) {
                     answers[j.toString()] = when (j % 3) {
                         0 -> listOf(SimpleAnswer(index = 0))
                         1 -> listOf(CompositeAnswer(componentIndexes = listOf(1, 2, 3)))
@@ -75,8 +75,6 @@ class StateSerializationTests {
                 )
                 val newProfile = surveyManager.completeSurvey("userId", form, "$i")
                 originalProfiles.add(newProfile)
-
-                delay(100)
             }
 
             val decodedProfiles = surveyManager.allHealthProfiles("userId")
