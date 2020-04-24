@@ -27,7 +27,7 @@ class SecretMenuActivity : AppCompatActivity() {
         ).apply {
             // public items
             addAll(secretMenuConfig.publicItems())
-            // spooner's items
+            // debugging items
             if (secretMenuConfig.isDevelopmentDevice()) {
                 add(AllIdsItem())
                 addAll(secretMenuConfig.debuggingItems())

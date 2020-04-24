@@ -10,14 +10,6 @@
 
         <activity android:name=".ui.SecretMenuActivity"
             android:theme="@style/SecretMenuTransparent"/>
-
-        <activity android:name=".ui.redeemgiftcode.RedeemGiftCodeActivity"
-            android:theme="@style/SecretMenuTransparent"
-            android:windowSoftInputMode="adjustResize"/>
-
-        <activity android:name=".ui.setsegment.SetSegmentActivity"
-            android:theme="@style/SecretMenuTransparent"
-            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>
