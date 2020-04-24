@@ -2,7 +2,6 @@ package org.immuni.android.setup
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.*
-import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.immuni.android.managers.UserManager
 import org.immuni.android.testutils.CoroutineTestRule
@@ -18,9 +17,9 @@ import org.junit.Test
 import io.mockk.impl.annotations.MockK
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.testutils.getOrAwaitValue
 import retrofit2.Response
 import kotlin.test.assertTrue
-import kotlin.test.fail
 
 class SetupViewModelTest {
 
@@ -49,12 +48,12 @@ class SetupViewModelTest {
     @Before
     fun before() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-
+        every { userManager.familyMembers() } returns listOf()
         viewModel = SetupViewModel(setup, onboarding, welcome, userManager, repository)
     }
 
     @Test
-    fun `test setup fails if settings fails`() = runBlockingTest {
+    fun `test setup fails if settings fails`() = coroutineTestRule.runBlockingTest {
 
         every { setup.isComplete() } returns false
         coEvery { repository.getOracleSetting() } returns Response.error(500, "".toResponseBody())
@@ -62,41 +61,71 @@ class SetupViewModelTest {
 
         viewModel.initializeApp()
 
-        viewModel.errorDuringSetup.observeForever { error ->
-            assertTrue(error)
-        }
+        assertTrue(viewModel.errorDuringSetup.getOrAwaitValue())
     }
 
     @Test
-    fun `test setup fails if me fails`() = runBlockingTest {
+    fun `test setup fails if me fails`() = coroutineTestRule.runBlockingTest {
         every { setup.isComplete() } returns false
         coEvery { repository.getOracleSetting() } returns Response.success(ImmuniSettings())
         coEvery { repository.getOracleMe() } returns Response.error(500, "".toResponseBody())
 
         viewModel.initializeApp()
 
-        viewModel.errorDuringSetup.observeForever { error ->
-            assertTrue(error)
-        }
+        assertTrue(viewModel.errorDuringSetup.getOrAwaitValue())
     }
 
     @Test
-    fun `test navigate to welcome if first opening`() = runBlockingTest {
-        fail("TODO")
+    fun `test navigate to welcome if first opening`() = coroutineTestRule.runBlockingTest {
+        every { setup.isComplete() } returns false
+        every { onboarding.isComplete() } returns false
+        every { welcome.isComplete() } returns false
+        coEvery { repository.getOracleSetting() } returns Response.success(ImmuniSettings())
+        coEvery { repository.getOracleMe() } returns Response.success(ImmuniMe())
+
+        viewModel.initializeApp()
+
+        assertTrue(viewModel.navigateToWelcome.getOrAwaitValue().peekContent())
     }
 
     @Test
-    fun `test navigate to home if not first opening`() = runBlockingTest {
-        fail("TODO")
+    fun `test navigate to home if not first opening`() = coroutineTestRule.runBlockingTest {
+        every { setup.isComplete() } returns false
+        every { onboarding.isComplete() } returns true
+        every { welcome.isComplete() } returns true
+        coEvery { repository.getOracleSetting() } returns Response.success(ImmuniSettings())
+        coEvery { repository.getOracleMe() } returns Response.success(ImmuniMe())
+
+        viewModel.initializeApp()
+
+        assertTrue(viewModel.navigateToMainPage.getOrAwaitValue().peekContent())
     }
 
     @Test
-    fun `test if not first setup but never did welcome navigate to welcome`() = runBlockingTest {
-        fail("TODO")
+    fun `test if not first setup but never did welcome navigate to welcome`() = coroutineTestRule.runBlockingTest {
+        every { setup.isComplete() } returns true
+        every { onboarding.isComplete() } returns false
+        every { welcome.isComplete() } returns false
+        coEvery { repository.getOracleSetting() } returns Response.success(ImmuniSettings())
+        coEvery { repository.getOracleMe() } returns Response.success(ImmuniMe())
+
+        viewModel.initializeApp()
+        advanceTimeBy(2000)
+
+        assertTrue(viewModel.navigateToWelcome.getOrAwaitValue().peekContent())
     }
 
     @Test
-    fun `test if not first setup and did welcome navigate to home`() = runBlockingTest {
-        fail("TODO")
+    fun `test if not first setup and did welcome navigate to home`() = coroutineTestRule.runBlockingTest {
+        every { setup.isComplete() } returns true
+        every { onboarding.isComplete() } returns true
+        every { welcome.isComplete() } returns true
+        coEvery { repository.getOracleSetting() } returns Response.success(ImmuniSettings())
+        coEvery { repository.getOracleMe() } returns Response.success(ImmuniMe())
+
+        viewModel.initializeApp()
+        advanceTimeBy(2000)
+
+        assertTrue(viewModel.navigateToMainPage.getOrAwaitValue().peekContent())
     }
 }

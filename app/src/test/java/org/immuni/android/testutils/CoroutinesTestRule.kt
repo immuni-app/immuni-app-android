@@ -3,13 +3,11 @@ package org.immuni.android.testutils
 import org.junit.rules.TestWatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
+import kotlinx.coroutines.test.*
 import org.junit.runner.Description
 
 @ExperimentalCoroutinesApi
-class CoroutineTestRule(private val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()) : TestWatcher() {
+class CoroutineTestRule(val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()) : TestWatcher() {
 
     override fun starting(description: Description?) {
         super.starting(description)
@@ -19,6 +17,9 @@ class CoroutineTestRule(private val dispatcher: TestCoroutineDispatcher = TestCo
     override fun finished(description: Description?) {
         super.finished(description)
         Dispatchers.resetMain()
+        dispatcher.cleanupTestCoroutines()
     }
 
+    fun runBlockingTest(block: suspend TestCoroutineScope.() -> Unit) =
+        dispatcher.runBlockingTest { block() }
 }

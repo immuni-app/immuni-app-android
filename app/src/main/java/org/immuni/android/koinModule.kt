@@ -40,6 +40,7 @@ import org.immuni.android.ui.setup.SetupRepositoryImpl
 import org.immuni.android.ui.setup.SetupViewModel
 import org.immuni.android.ui.uploaddata.UploadDataViewModel
 import org.immuni.android.ui.welcome.Welcome
+import org.immuni.android.util.CoroutineContextProvider
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -63,6 +64,9 @@ val appModule = module {
             .openHelperFactory(factory)
             .build()
     }
+
+    // single CoroutineContextProvider
+    single { CoroutineContextProvider() }
 
     // single instance of Setup
     single { Setup() }
