@@ -1,11 +1,13 @@
 package com.bendingspoons.secretmenu
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.view.MotionEvent
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.oracle.api.model.OracleMe
 import com.bendingspoons.oracle.api.model.OracleSettings
+import com.bendingspoons.secretmenu.overlay.SecretMenuGlobalTouchListener
 import com.bendingspoons.secretmenu.ui.SecretMenuActivity
 
 /**
@@ -21,21 +23,18 @@ import com.bendingspoons.secretmenu.ui.SecretMenuActivity
  * @param oracle an instance of [Oracle]
  */
 class SecretMenu(
-    val context: Context,
+    val context: Application,
     val config: SecretMenuConfiguration,
     val oracle: Oracle<OracleSettings, OracleMe>
 ) : SecretMenuTouchManagerListener {
 
     private val touchManager = SecretMenuTouchManager(this, config)
+    private val globalTouchListener = SecretMenuGlobalTouchListener(context, touchManager)
 
     override fun onActivateSecretMenu() {
         val intent = Intent(context, SecretMenuActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         context.startActivity(intent)
-    }
-
-    override fun onTouchEvent(ev: MotionEvent) {
-        touchManager.onTouchEvent(ev)
     }
 
     // This instance reference allows the UI

@@ -10,6 +10,7 @@
 
         <activity android:name=".ui.SecretMenuActivity"
             android:theme="@style/SecretMenuTransparent"/>
+      
     </application>
 
 </manifest>

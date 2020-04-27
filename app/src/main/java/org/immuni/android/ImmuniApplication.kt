@@ -11,6 +11,7 @@ import com.bendingspoons.base.lifecycle.AppLifecycleObserver
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.pico.Pico
+import com.bendingspoons.secretmenu.SecretMenu
 import com.bendingspoons.theirs.Theirs
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -32,6 +33,7 @@ class ImmuniApplication : Application() {
     private lateinit var oracle: Oracle<ImmuniSettings, ImmuniMe>
     private lateinit var pico: Pico
     private lateinit var theirs: Theirs
+    private lateinit var secretMenu: SecretMenu
     private lateinit var surveyNotificationManager: SurveyNotificationManager
 
     override fun onCreate() {
@@ -53,6 +55,7 @@ class ImmuniApplication : Application() {
         oracle = get()
         pico = get()
         theirs = get()
+        secretMenu = get()
         surveyNotificationManager = get()
 
         pico.setup()

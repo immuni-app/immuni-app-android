@@ -1,5 +1,6 @@
 package org.immuni.android
 
+import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import androidx.security.crypto.MasterKeys
@@ -99,7 +100,7 @@ val appModule = module {
 
     // Secret Menu - Lib
     single {
-        SecretMenu(androidContext(),
+        SecretMenu(androidContext() as Application,
             ImmuniSecretMenuConfiguration(
                 androidContext()
             ), get())
