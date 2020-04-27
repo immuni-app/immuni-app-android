@@ -137,7 +137,7 @@ val appModule = module {
 
     // single instance of ProximityEventsAggregator
     single {
-        ProximityEventsAggregator(get(), 10 * 1000L)
+        ProximityEventsAggregator(get(), get(), 10 * 1000L)
     }
 
     // single instance of GeolocationManager

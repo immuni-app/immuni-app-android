@@ -45,10 +45,7 @@ interface BLEContactDao: BaseDao<BLEContactEntity>, KoinComponent {
 /**
  * Insert a new contact into the record blob.
  */
-suspend fun BLEContactDao.addContact(btId: String, txPower: Int, rssi: Int, date: Date) {
-
-    val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-    val slots = (oracle.settings()?.bleSlotsPerContactRecord ?: SLOTS_PER_CONTACT_RECORD)
+suspend fun BLEContactDao.addContact(btId: String, txPower: Int, rssi: Int, date: Date, slots: Int = SLOTS_PER_CONTACT_RECORD) {
 
     var entry = this.getLatestByBtId(btId)
     if (entry == null) {

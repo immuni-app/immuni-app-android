@@ -18,6 +18,7 @@ import kotlin.math.roundToInt
 
 class ProximityEventsAggregator(
     val database: ImmuniDatabase,
+    val oracle: Oracle<ImmuniSettings, ImmuniMe>,
     val TIME_WINDOW: Long
     ): KoinComponent {
 
@@ -79,12 +80,14 @@ class ProximityEventsAggregator(
     }
 
     private suspend fun store(events: Collection<ProximityEvent>) {
+        val slots = (oracle.settings()?.bleSlotsPerContactRecord ?: SLOTS_PER_CONTACT_RECORD)
         events.forEach {
             database.bleContactDao().addContact(
                 btId = it.btId,
                 txPower = it.txPower,
                 rssi = it.rssi,
-                date = it.date
+                date = it.date,
+                slots = slots
             )
         }
         database.rawDao().checkpoint()

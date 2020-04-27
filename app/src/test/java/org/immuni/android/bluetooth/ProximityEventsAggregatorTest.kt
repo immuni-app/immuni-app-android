@@ -1,9 +1,17 @@
 package org.immuni.android.bluetooth
 
+import com.bendingspoons.oracle.Oracle
 import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
+import io.mockk.mockkStatic
 import kotlinx.coroutines.*
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.db.dao.BLEContactDao
+import org.immuni.android.db.dao.addContact
 import org.immuni.android.models.ProximityEvent
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -19,9 +27,20 @@ class ProximityEventsAggregatorTest {
     @MockK(relaxed = true)
     lateinit var database: ImmuniDatabase
 
+    @MockK(relaxed = true)
+    lateinit var daoMock: BLEContactDao
+
+    @MockK(relaxed = true)
+    lateinit var oracle: Oracle<ImmuniSettings, ImmuniMe>
+
     @Before
     fun setUp() {
         MockKAnnotations.init(this, relaxUnitFun = true) // turn relaxUnitFun on for all mocks
+
+        mockkStatic("org.immuni.android.db.dao.BLEContactDaoKt")
+        coEvery { daoMock.addContact(any(), any(), any(), any(), any()) } returns Unit
+        every { oracle.settings() } returns ImmuniSettings()
+        every { database.bleContactDao() } returns daoMock
     }
 
     @Test
@@ -43,7 +62,7 @@ class ProximityEventsAggregatorTest {
         runBlocking {
             val result = runCatching {
                 // the aggregator start automatically aggregate every 1ms
-                val aggregator = ProximityEventsAggregator(database, 1L)
+                val aggregator = ProximityEventsAggregator(database, oracle, 1L)
 
                 val tick = async {
                     aggregator.start()
