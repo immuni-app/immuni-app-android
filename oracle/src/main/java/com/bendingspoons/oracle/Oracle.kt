@@ -119,12 +119,6 @@ class Oracle<Settings : OracleSettings, Me : OracleMe>(
     // other libs and the app can explicitly ask for the latest me received
     fun me() = meChannel.valueOrNull
 
-    suspend fun forceIsSubscribed(subscribed: Boolean = true) {
-        me()?.let {
-            api.forceIsSubscribed(it, subscribed)
-        }
-    }
-
     fun settingsFlow(): Flow<Settings> {
         return settingsChannel.asFlow()
     }

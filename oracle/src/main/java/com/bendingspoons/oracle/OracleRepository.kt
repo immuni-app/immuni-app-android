@@ -1,7 +1,6 @@
 package com.bendingspoons.oracle
 
 import com.bendingspoons.base.utils.fromJson
-import com.bendingspoons.base.utils.toJson
 import com.bendingspoons.oracle.api.OracleService
 import com.bendingspoons.oracle.api.model.*
 import kotlinx.coroutines.Dispatchers
@@ -93,16 +92,4 @@ class OracleRepository<Settings : OracleSettings, Me : OracleMe>(
                 Response.error<Settings>(httpCode, baseResult.errorBody() ?: "".toResponseBody())
             }
         }
-
-    suspend fun forceIsSubscribed(currentMe: Me, subscribed: Boolean = true) {
-        withContext(Dispatchers.IO) {
-            val meJson = toJson(meType, currentMe)
-                .replace("is_subscribed:false", "is_subscribed:$subscribed")
-                .replace("is_subscribed:true", "is_subscribed:$subscribed")
-            val newMe = fromJson(meType, meJson)
-            assert(newMe != null) { "Error deserializing me" }
-            meChannel.send(newMe!!)
-            store.saveMe(meJson)
-        }
-    }
 }

@@ -1,6 +1,5 @@
 package org.immuni.android.config
 
-import com.bendingspoons.base.extensions.toast
 import org.immuni.android.api.CustomOracleAPI
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
@@ -11,7 +10,6 @@ import com.bendingspoons.oracle.api.model.DevicesRequest
 import com.bendingspoons.theirs.TheirsConfiguration
 import com.bendingspoons.theirs.fcm.FirebaseFCMConfiguration
 import com.google.firebase.messaging.RemoteMessage
-import org.immuni.android.ImmuniApplication
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -34,7 +32,7 @@ class ImmuniTheirsConfiguration: TheirsConfiguration, KoinComponent {
         override suspend fun onNewToken(token: String) {
             val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
 
-            // be sure to call settings before
+            // be sure to call devices before
             oracle.api.devices(DevicesRequest(
                 uniqueId = concierge.backupPersistentId.id
             ))
