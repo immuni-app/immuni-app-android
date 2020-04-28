@@ -5,13 +5,20 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 
+/**
+ * Play Store utilities.
+ */
 object PlayStoreActions {
 
+    /**
+     * Open the Google Play app and navigate to the app page.
+     * If the Google Play app is not available, it uses the browser.
+     */
     fun goToPlayStoreAppDetails(context: Context) {
         val uri: Uri = Uri.parse("market://details?id=" + context.packageName)
         val goToPlayStore = Intent(Intent.ACTION_VIEW, uri)
 
-        // To take into account Play Store's backstack, after pressing back button,
+        // To take into account Play Store's back stack, after pressing back button,
         // to be taken back to our application, we need to add following flags to the intent
         goToPlayStore.addFlags(
             Intent.FLAG_ACTIVITY_NEW_TASK or

@@ -25,6 +25,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * Toast utility methods.
+ */
 fun toast(context: Context, message: String, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, message, length).show()
 }
@@ -37,6 +40,12 @@ fun toast(context: Context, @StringRes title: Int, length: Int = Toast.LENGTH_SH
     )
 }
 
+/**
+ * Show a loading [DialogFragment].
+ *
+ * @param loading true if the dialog fragment should be shown, false otherwise.
+ * @param dialog the dialog fragment we want to show during loading.
+ */
 fun FragmentActivity.loading(loading: Boolean, dialog: DialogFragment?) {
     val tag = "loading_dialog"
     if(loading) {
@@ -60,9 +69,12 @@ fun FragmentActivity.loading(loading: Boolean, dialog: DialogFragment?) {
     }
 }
 
+/**
+ * Disable "Drag" for AppBarLayout
+ * (i.e. User can't scroll appBarLayout by directly
+ * touching appBarLayout - User can only scroll appBarLayout by only using scrollContent).
+ */
 fun AppBarLayout.disableDragging() {
-    // Disable "Drag" for AppBarLayout (i.e. User can't scroll appBarLayout by directly
-    // touching appBarLayout - User can only scroll appBarLayout by only using scrollContent)
     if (this.layoutParams != null) {
         val layoutParams = this.layoutParams as CoordinatorLayout.LayoutParams
         val appBarLayoutBehaviour = AppBarLayout.Behavior()
@@ -166,7 +178,6 @@ fun AppCompatActivity.setStatusBarColor(color: Int) {
     }
 }
 
-
 fun FragmentActivity.showAlert(title: String,
                                message: String,
                                positiveButton: String,
@@ -197,7 +208,6 @@ fun FragmentActivity.showAlert(title: String,
     return dialog
 }
 
-
 fun FragmentActivity.showEditAlert(title: String,
                                    message: String,
                                    hint: String? = "",
@@ -208,8 +218,6 @@ fun FragmentActivity.showEditAlert(title: String,
                                    neutralButton: String? = null,
                                    neutralButtonListener: DialogInterface.OnClickListener? = null,
                                    cancelable: Boolean = true): Dialog {
-
-
 
     val editText: TextInputEditText
 

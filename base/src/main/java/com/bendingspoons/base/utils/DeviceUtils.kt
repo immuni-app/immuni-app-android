@@ -7,6 +7,9 @@ import android.os.Build
 import android.util.Log
 import androidx.core.content.pm.PackageInfoCompat
 
+/**
+ * Device utility methods and info.
+ */
 object DeviceUtils {
 
     private const val TAG = "DeviceUtils"

@@ -8,10 +8,10 @@ import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.selects.SelectClause2
 
-enum class AppLifecycleEvent {
-    ON_START, ON_STOP, ON_PAUSE, ON_RESUME
-}
-
+/**
+ * An application [LifecycleObserver] that implements
+ */
+@ExperimentalCoroutinesApi
 class AppLifecycleObserver(private val coroutineScope: CoroutineScope = GlobalScope) :
     LifecycleObserver, BroadcastChannel<AppLifecycleEvent> {
 
@@ -102,4 +102,8 @@ class AppLifecycleObserver(private val coroutineScope: CoroutineScope = GlobalSc
     override suspend fun send(element: AppLifecycleEvent) {
         channel.send(element)
     }
+}
+
+enum class AppLifecycleEvent {
+    ON_START, ON_STOP, ON_PAUSE, ON_RESUME
 }

@@ -2,8 +2,21 @@ package com.bendingspoons.base.utils
 
 import kotlinx.coroutines.delay
 
-// Retry with exponential backoff
-
+/**
+ * Retry with exponential backoff.
+ *
+ * Try [times] times to execute the [block] until the [exitWhen] block is satisfied using
+ * exponential back off.
+ * When fails invoke the [onIntermediateFailure] block.
+ *
+ * @param times max times of attempt.
+ * @param initialDelay the first initial delay after the first attempt.
+ * @param maxDelay the maximum delay between subsequent retries.
+ * @param factor the exponential back off factor.
+ * @param block the desired action.
+ * @param exitWhen the exit block that indicates when we can return.
+ * @param onIntermediateFailure a block to invoke on intermediate failures.
+ */
 suspend fun <T> retry(
         times: Int = Int.MAX_VALUE,
         initialDelay: Long = 1000,

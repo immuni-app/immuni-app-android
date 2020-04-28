@@ -3,12 +3,24 @@ import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationManagerCompat
 
+/**
+ * Push notifications utility methods.
+ */
 object PushNotificationUtils {
 
+    /**
+     * Returns true is push notifications are enabled for this app.
+     */
     fun areNotificationsEnabled(context: Context): Boolean {
         return getPushNotificationState(context) == PushNotificationState.AUTHORIZED
     }
 
+    /**
+     * Returns the state of push notifications for this app.
+     * If [PushNotificationState.PARTIAL] it means that some notification channel is disabled.
+     *
+     * @return [PushNotificationState]
+     */
     fun getPushNotificationState(context: Context): PushNotificationState {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val manager =

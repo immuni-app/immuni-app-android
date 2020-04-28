@@ -2,6 +2,9 @@ package com.bendingspoons.base.extensions
 
 import java.math.BigInteger
 
+/**
+ * Convert a byte array to hexadecimal format.
+ */
 fun ByteArray.toHex(): String {
     if (this.isEmpty()) return ""
     val bi = BigInteger(1, this)

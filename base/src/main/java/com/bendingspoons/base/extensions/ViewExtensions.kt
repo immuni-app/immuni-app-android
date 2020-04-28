@@ -16,67 +16,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-fun View.stopAnimation() {
-    clearAnimation()
-    this.animate().cancel()
-}
-
-fun View.setTint(color: Int, selectedColor: Int = color) {
-    val originalEnabled = this.isEnabled
-    val originalActivated = this.isActivated
-
-    val states = arrayOf(
-        intArrayOf(android.R.attr.state_selected), // selected
-        intArrayOf(-android.R.attr.state_enabled), // not enabled
-        intArrayOf(android.R.attr.state_enabled) // enabled
-    )
-
-    val colors = intArrayOf(selectedColor, color, color)
-
-    val myList = ColorStateList(states, colors)
-    this.backgroundTintList = myList
-    // do this to force button layout(bug?)
-    this.isActivated = !originalActivated
-    this.isActivated = originalActivated
-    this.isEnabled = !originalEnabled
-    this.isEnabled = originalEnabled
-}
-
-fun TabLayout.setTint(color: Int, selectedColor: Int = color) {
-    val states = arrayOf(
-        intArrayOf(android.R.attr.state_selected), // selected
-        intArrayOf(-android.R.attr.state_enabled), // not enabled
-        intArrayOf(android.R.attr.state_enabled) // enabled
-    )
-
-    val colors = intArrayOf(selectedColor, color, color)
-
-    val myList = ColorStateList(states, colors)
-    this.tabIconTint = myList
-
-    setTabTextColors(color, selectedColor)
-}
-
-fun SwitchCompat.setTint(checked: Int, unchecked: Int) {
-    val states = arrayOf(
-        intArrayOf(-android.R.attr.state_checked),
-        intArrayOf(android.R.attr.state_checked))
-
-    val alphaBlack50 = Color.argb(125, 0, 0, 0)
-    val checkedAlpha = Color.argb(125, Color.red(checked), Color.green(checked), Color.blue(checked))
-
-    val thumbColors = intArrayOf(unchecked, checked)
-    val trackColors = intArrayOf(alphaBlack50, checkedAlpha)
-
-    DrawableCompat.setTintList(
-        DrawableCompat.wrap(this.thumbDrawable),
-        ColorStateList(states, thumbColors)
-    )
-    DrawableCompat.setTintList(
-        DrawableCompat.wrap(this.trackDrawable),
-        ColorStateList(states, trackColors)
-    )
-}
+/**
+ * View utility extensions.
+ */
 
 fun View.visible() {
     this.visibility = View.VISIBLE

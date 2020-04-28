@@ -3,7 +3,8 @@ package com.bendingspoons.base.extensions
 import kotlinx.coroutines.channels.ReceiveChannel
 
 /**
- * Receive all available elements up to [max]. Suspends for the first element if the channel is empty
+ * Receive all available elements up to [max].
+ * Suspends for the first element if the channel is empty.
  */
 internal suspend fun <E> ReceiveChannel<E>.receiveAvailable(max: Int): List<E> {
     if (max <= 0) {

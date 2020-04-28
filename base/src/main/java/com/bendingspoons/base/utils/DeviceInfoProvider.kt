@@ -4,7 +4,9 @@ import android.content.Context
 import com.bendingspoons.base.R
 import java.util.*
 
-// PicoInfoProvider retrieve device specific info
+/**
+ * Provides device specific info.
+ */
 
 interface DeviceInfoProvider {
     fun country(): String
@@ -28,7 +30,6 @@ class DeviceInfoProviderImpl: DeviceInfoProvider {
         return Locale.getDefault().language
     }
 
-    // so far on Android you cannot set app specific language like on iOS 13+
     override fun appLanguage(): String {
         return language()
     }
