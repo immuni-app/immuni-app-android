@@ -19,7 +19,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.*
 import javax.net.ssl.HostnameVerifier
 
-
 class OracleRetrofit(
     context: Context,
     config: OracleConfiguration
@@ -38,7 +37,7 @@ class OracleRetrofit(
                 .code(403)
                 .body("{}".toResponseBody())
                 .protocol(Protocol.HTTP_2)
-                .message("Oracle lib IO Exception")
+                .message("Networking IO Exception")
                 .headers(request.headers)
                 .build()
         }

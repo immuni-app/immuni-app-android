@@ -15,6 +15,9 @@ data class ErrorResponse(
     var httpCode: Int? = null
 }
 
+/**
+ * Convert a Retrofit [Response] in a [ErrorResponse] the app can easily handle.
+ */
 fun Response<*>.toErrorResponse(): ErrorResponse? {
     val error = try {
         val str = this.errorBody()?.string()
@@ -33,6 +36,9 @@ fun Response<*>.toErrorResponse(): ErrorResponse? {
     return error
 }
 
+/**
+ * Convert an [ErrorResponse] in JSON.
+ */
 fun ErrorResponse.toJson(): String {
     val moshi = Moshi.Builder().build()
     val jsonAdapter = moshi.adapter(ErrorResponse::class.java)
