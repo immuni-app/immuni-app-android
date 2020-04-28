@@ -6,7 +6,11 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 
-object VibrationManager {
+/**
+ * Vibration utility methods.
+ */
+object VibrationUtils {
+
     @SuppressLint("MissingPermission")
     fun vibrate(context: Context) {
         val v = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?

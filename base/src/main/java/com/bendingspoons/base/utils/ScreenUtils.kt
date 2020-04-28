@@ -11,26 +11,45 @@ import com.bendingspoons.base.extensions.round
 import java.lang.Math.pow
 import java.lang.Math.sqrt
 
-
+/**
+ * Screen utility methods.
+ */
 object ScreenUtils {
 
     private var SW = -1
     private var SH = -1
 
+    /**
+     * Get screen width in pixels.
+     */
     fun getScreenWidth(context: Context): Int {
-
         if (SW != -1) return SW
-
         val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
         val size = Point()
         display.getSize(size)
         val width = size.x
-        val height = size.y
         SW = width
         return width
     }
 
+    /**
+     * Get screen height in pixels.
+     */
+    fun getScreenHeight(context: Context): Int {
+        if (SH != -1) return SH
+        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display = wm.defaultDisplay
+        val size = Point()
+        display.getSize(size)
+        val height = size.y
+        SH = height
+        return height
+    }
+
+    /**
+     * Get screen diagonal size in inches.
+     */
     fun getScreenSizeInInches(context: Context): Double {
         val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val d = wm.defaultDisplay
@@ -56,25 +75,17 @@ object ScreenUtils {
         return convertPixelsToInches(context, diagonalInPixels.toInt()).round(1)
     }
 
-    fun getScreenHeight(context: Context): Int {
-
-        if (SH != -1) return SH
-
-        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val display = wm.defaultDisplay
-        val size = Point()
-        display.getSize(size)
-        val width = size.x
-        val height = size.y
-        SH = height
-        return height
-    }
-
+    /**
+     * Convert density independent unit to pixels.
+     */
     fun convertDpToPixels(context: Context, dp: Int): Int {
         val r = context.resources
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), r.displayMetrics).toInt()
     }
 
+    /**
+     * Convert pixels to inches.
+     */
     fun convertPixelsToInches(context: Context, pixels: Int): Double {
         val r = context.resources
         return pixels.toDouble() / r.displayMetrics.xdpi
