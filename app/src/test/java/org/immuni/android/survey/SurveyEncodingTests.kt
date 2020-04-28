@@ -2,6 +2,7 @@ package org.immuni.android.survey
 
 import com.bendingspoons.base.utils.fromJson
 import com.bendingspoons.base.utils.toJson
+import org.immuni.android.db.entity.fixSerializationAliasingOfIntsToDoubles
 import org.immuni.android.models.survey.*
 import org.immuni.android.models.survey.raw.*
 import org.junit.Assert.*
@@ -106,7 +107,7 @@ class SurveyEncodingTests {
                 val encoded = toJson(condition)
                 val decoded: RawCondition = fromJson(encoded)!!
 
-                assertEquals(conditions, decoded)
+                assertEquals(condition, decoded)
             }
         } catch (error: java.lang.Exception) {
             fail("ERROR $error")
@@ -136,7 +137,9 @@ class SurveyEncodingTests {
 
         try {
             val encoded = toJson(rawAnswers)
-            val decoded: Map<QuestionId, Any> = fromJson(encoded)!!
+            val decoded: Map<QuestionId, Any> = fixSerializationAliasingOfIntsToDoubles(
+                fromJson(encoded)!!
+            )
 
             assertEquals(rawAnswers, decoded)
         } catch (error: Exception) {

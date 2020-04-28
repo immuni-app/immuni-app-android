@@ -68,7 +68,6 @@ class OracleRetrofit(
         this.level = HttpLoggingInterceptor.Level.BODY
     }
 
-    val sesame = config.sesame()
     var certificatePinner = config.certificatePinner()
 
     val gzipInterceptor = GzipRequestInterceptor()
@@ -81,9 +80,6 @@ class OracleRetrofit(
         builder.addInterceptor(headersInterceptor)
         builder.addInterceptor(gzipInterceptor)
 
-        sesame?.let {
-            builder.addInterceptor(sesame.interceptor)
-        }
         builder.addInterceptor(loggingInterceptor)
 
         certificatePinner?.let {

@@ -31,7 +31,7 @@ class HealthProfileEntity(
 
 // If you serialize a Map<Something, Any> to json, where Any only contains Ints, it gets
 // deserialized as Map<Something, Any>, where Any contains Doubles. Let's fix that
-private fun fixSerializationAliasingOfIntsToDoubles(surveyAnswers: Map<String, Any>): Map<String, Any> {
+fun fixSerializationAliasingOfIntsToDoubles(surveyAnswers: Map<String, Any>): Map<String, Any> {
     return surveyAnswers.mapValues {
         (it.value as List<Any>).map { answerIndexes ->
             when (answerIndexes) {

@@ -58,7 +58,6 @@ class PicoRetrofit(config: PicoConfiguration) {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
 
-    private val sesame = config.sesame()
     private val certificatePinner = config.certificatePinner()
     private val gzipInterceptor = GzipRequestInterceptor()
 
@@ -67,7 +66,6 @@ class PicoRetrofit(config: PicoConfiguration) {
             .hostnameVerifier(HostnameVerifier { hostname, session -> true })
             .addInterceptor(exceptionsInterceptor)
             //.addInterceptor(gzipInterceptor)
-            .addInterceptor(sesame.interceptor)
             .addInterceptor(headersInterceptor)
             .addInterceptor(loggingInterceptor)
 

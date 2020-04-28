@@ -83,7 +83,6 @@ dependencies {
     implementation project(":base")
     implementation project(":concierge")
     implementation project(":secretmenu")
-    implementation project(':sesame')
     implementation project(":oracle")
     implementation project(":theirs")
     implementation project(":pico")

@@ -5,6 +5,4 @@ include ':concierge'
 include ':secretmenu'
 include ':oracle'
 include ':pico'
-include ':sesame'
-project(':sesame').projectDir=new File('../sesame-lib-kotlin/sesame')
 include ':theirs'

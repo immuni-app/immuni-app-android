@@ -6,7 +6,6 @@ import com.bendingspoons.oracle.Oracle
 import com.bendingspoons.oracle.api.model.OracleMe
 import com.bendingspoons.oracle.api.model.OracleSettings
 import com.bendingspoons.pico.PicoConfiguration
-import com.bendingspoons.sesame.Sesame
 import okhttp3.CertificatePinner
 import org.immuni.android.R
 import org.immuni.android.api.model.ImmuniMe
@@ -37,10 +36,6 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
 
     override fun oracle(): Oracle<out OracleSettings, out OracleMe> {
         return oracle
-    }
-
-    override fun sesame(): Sesame {
-        return Sesame(PicoSesameConfiguration())
     }
 
     override fun encryptStore() = true

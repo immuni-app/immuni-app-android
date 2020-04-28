@@ -5,7 +5,6 @@ import android.content.Intent
 import org.immuni.android.ui.forceupdate.ForceUpdateActivity
 import com.bendingspoons.concierge.ConciergeManager
 import com.bendingspoons.oracle.OracleConfiguration
-import com.bendingspoons.sesame.Sesame
 import okhttp3.CertificatePinner
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
@@ -16,7 +15,6 @@ import org.koin.core.inject
 class ImmuniOracleConfiguration(val context: Context) : OracleConfiguration, KoinComponent {
 
     val concierge: ConciergeManager by inject()
-    private val sesame = Sesame(OracleSesameConfiguration())
 
     override fun endpoint(): String {
         return context.getString(R.string.oracle_base_url)
@@ -38,10 +36,6 @@ class ImmuniOracleConfiguration(val context: Context) : OracleConfiguration, Koi
             }
             context.startActivity(intent)
         }
-    }
-
-    override fun sesame(): Sesame? {
-        return sesame
     }
 
     override fun certificatePinner(): CertificatePinner? {
