@@ -10,9 +10,9 @@ jobs:
       - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-#      - run:
-#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-#         command: sudo chmod +x ./gradlew
+      - run:
+          name: Setup custom environment variables
+          command: echo $GOOGLE_SERVICES_JSON | base64 --decode > app/google-services.json
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
@@ -20,12 +20,39 @@ jobs:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      # Unit tests for all modules
       - run:
-          name: Run Unit Tests
-          command: ./gradlew test
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+          name: Run App Module Unit Tests
+          command: ./gradlew :app:testDebugUnitTest
+      - store_artifacts:
           path: app/build/reports
-          destination: reports
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      - store_test_results:
           path: app/build/test-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+      - run:
+          name: Run Concierge Module Unit Tests
+          command: ./gradlew :concierge:testDebugUnitTest
+      - store_artifacts:
+          path: concierge/build/reports
+      - store_test_results:
+          path: concierge/build/test-results
+      - run:
+          name: Run Oracle Module Unit Tests
+          command: ./gradlew :oracle:testDebugUnitTest
+      - store_artifacts:
+          path: oracle/build/reports
+      - store_test_results:
+          path: oracle/build/test-results
+      - run:
+          name: Run Pico Module Unit Tests
+          command: ./gradlew :pico:testDebugUnitTest
+      - store_artifacts:
+          path: pico/build/reports
+      - store_test_results:
+          path: pico/build/test-results
+      - run:
+          name: Run Base Module Unit Tests
+          command: ./gradlew :base:testDebugUnitTest
+      - store_artifacts:
+          path: base/build/reports
+      - store_test_results:
+          path: base/build/test-results
