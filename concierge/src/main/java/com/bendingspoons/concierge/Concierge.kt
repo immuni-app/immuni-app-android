@@ -4,6 +4,11 @@ import android.content.Context
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+/**
+ * Concierge lib.
+ *
+ * Manage the user ids.
+ */
 class Concierge {
 
     @JsonClass(generateAdapter = true)

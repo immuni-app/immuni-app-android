@@ -3,6 +3,14 @@ package com.bendingspoons.concierge
 import com.bendingspoons.concierge.Concierge.*
 import java.util.*
 
+/**
+ * Manage all the [Concierge.Id].
+ *
+ * @param storage used to store backuppable ids.
+ * @param nonBackupStorage used to store non backuppable ids.
+ * @param provider used to retrieve the ids.
+ * @param appCustomIdProvider an app specific provider used to inject app specific ids.
+ */
 abstract class ConciergeManager(
     internal val storage: ConciergeStorage,
     internal val nonBackupStorage: ConciergeStorage,
@@ -10,28 +18,38 @@ abstract class ConciergeManager(
     internal val appCustomIdProvider: ConciergeCustomIdProvider
 ) {
 
-    /// Getter for a specific internal id.
-    ///
-    /// - parameters internalId: the type of the identifier
-    /// - returns: the id
+    /**
+     * Getter for a specific internal id.
+     *
+     * @param internalId: the type of the identifier
+     * @return the id.
+     */
     abstract fun internalId(internalId: InternalId): Id?
 
-    /// Getter for a specific custom id.
-    ///
-    /// - parameters name: the name of the identifier
-    /// - returns: the id
+    /**
+     * Getter for a specific custom id.
+     *
+     * @param internalId: the type of the identifier
+     * @return the id.
+     */
     abstract fun customId(name: String): Id?
 
-    /// Getter for all the ids
-    ///
-    /// - returns: a list of id
+    /**
+     * Getter for all the ids.
+     *
+     * @return a set of ids.
+     */
     abstract fun allIds(): Set<Id>
 
-    /// Internal utility method to forget the user
-    /// and allow Oracle to segment the user from scratch.
-    ///
+    /**
+     * Internal utility method to forget the user.
+     */
     abstract fun resetUserIds()
 
+    /**
+     * Register a custom id provider, that can be different from the app itself,
+     * maybe another module or library.
+     */
     abstract fun registerCustomIdProvider(provider: ConciergeCustomIdProvider)
 
     abstract var backupPersistentId: Id
@@ -104,9 +122,7 @@ internal class ConciergeManagerImpl(
             return customIds
         }
 
-    // function that initialize the ids and store them to the disk
     private fun initializeInternalIds() {
-        // Compute the ids and store them
         computeInternalIds()
     }
 

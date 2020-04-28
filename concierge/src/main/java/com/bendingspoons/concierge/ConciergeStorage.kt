@@ -5,15 +5,19 @@ import android.content.Context
 import com.bendingspoons.base.storage.KVStorage
 import java.io.File
 
+/**
+ * A store for user ids.
+ */
 interface ConciergeStorage {
     fun get(name: InternalId): Id?
     fun save(id: Id)
     fun clear()
 }
 
-// ConciergeStorage implementation that saves ids in the user shared preferences.
-// Shared preferences are backed-up if auto backup is active.
-
+/**
+ * ConciergeStorage implementation that saves ids in the user shared preferences.
+ * Shared preferences are backed-up if auto backup is active.
+ */
 internal class ConciergeStorageImpl(context: Context, encrypted: Boolean) : ConciergeStorage {
 
     val storage: KVStorage = KVStorage("ConciergeStorageImpl",context, encrypted = encrypted)
@@ -32,8 +36,9 @@ internal class ConciergeStorageImpl(context: Context, encrypted: Boolean) : Conc
     }
 }
 
-// ConciergeStorage implementation that saves ids in the noBackupFilesDir.
-
+/**
+ * ConciergeStorage implementation that saves ids in the noBackupFilesDir.
+ */
 internal class ConciergeNonBackupStorageImpl(context: Context) : ConciergeStorage {
 
     private val nonBackupDir: File = context.noBackupFilesDir
