@@ -8,6 +8,21 @@
     android:background="@color/colorPrimary"
     tools:context=".ui.setup.SetupActivity">
 
+    <TextView
+        android:id="@+id/retry"
+        style="@style/ButtonLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="Riprova"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:textColor="@color/background"
+        app:layout_constraintBottom_toBottomOf="@+id/update"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/update" />
 
     <Button
         android:id="@+id/update"
@@ -19,6 +34,7 @@
         android:layout_marginBottom="30dp"
         android:text="@string/update"
         android:textStyle="bold"
+        app:rippleColor="@color/colorPrimary"
         android:textColor="@color/colorPrimary"
         android:backgroundTint="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/title"
         style="@style/H1Heading"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -41,6 +57,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/message"
         style="@style/P1Text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -52,7 +69,7 @@
         android:textColor="@color/background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -60,7 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintBottom_toTopOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

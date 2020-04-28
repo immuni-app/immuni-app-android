@@ -20,12 +20,13 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#E9EFFF"
         android:drawableLeft="@drawable/ic_plus_add_member"
-        app:rippleColor="@color/colorPrimary"
-        android:textColor="@color/colorPrimary"
-        android:fontFamily="@font/euclid_circular_semi_bold"
+        android:fontFamily="@font/euclid_circular_bold"
         android:text="@string/add_family_member"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/colorPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

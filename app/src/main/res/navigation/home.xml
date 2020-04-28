@@ -23,7 +23,80 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.home.home.HomeFragment"
+        android:name="org.immuni.android.ui.home.home.HomeFragment"
         android:label="homeFragment"
         tools:layout="@layout/home_fragment"/>
+    <dialog
+        android:id="@+id/notificationsDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.NotificationsDialogFragment"
+        android:label="NotificationsDialogFragment"
+        tools:layout="@layout/enable_notifications_dialog"/>
+    <dialog
+        android:id="@+id/notificationsExplanations"
+        android:name="org.immuni.android.ui.home.home.fragments.NotificationsExplanationsFragment"
+        android:label="notificationsExplanations"
+        tools:layout="@layout/enable_notifications_explanations_dialog"/>
+    <action
+        android:id="@+id/action_notifications_dialog"
+        app:destination="@id/notificationsDialogFragment"/>
+    <action
+        android:id="@+id/action_global_notificationsExplanations"
+        app:destination="@id/notificationsExplanations"/>
+    <dialog
+        android:id="@+id/addFamilyMemberDialog"
+        android:name="org.immuni.android.ui.home.home.fragments.AddFamilyMemberDialog"
+        android:label="AddFamilyMemberDialog"
+        tools:layout="@layout/family_member_add_dialog"/>
+    <action
+        android:id="@+id/action_family_dialog"
+        app:destination="@id/addFamilyMemberDialog"/>
+    <dialog
+        android:id="@+id/bluetoothDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.BluetoothDialogFragment"
+        android:label="BluetoothDialogFragment"
+        tools:layout="@layout/enable_bluetooth_dialog"/>
+    <action
+        android:id="@+id/action_bluetooth_dialog"
+        app:destination="@id/bluetoothDialogFragment"/>
+    <dialog
+        android:id="@+id/permissionsDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.PermissionsDialogFragment"
+        android:label="permissionsDialogFragment"
+        tools:layout="@layout/enable_app_permissions_dialog"/>
+    <action
+        android:id="@+id/action_permissions_dialog"
+        app:destination="@id/permissionsDialogFragment"/>
+    <dialog
+        android:id="@+id/homeDiaryFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.HomeDiaryDialogFragment"
+        android:label="HomeDiaryDialog"
+        tools:layout="@layout/home_diary_dialog"/>
+    <action
+        android:id="@+id/action_diary_dialog"
+        app:destination="@id/homeDiaryFragment"/>
+    <dialog
+        android:id="@+id/geolocationFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.GeolocationDialogFragment"
+        android:label="geolocationFragment"
+        tools:layout="@layout/enable_geolocation_dialog"/>
+    <action
+        android:id="@+id/action_geolocation_dialog"
+        app:destination="@id/geolocationFragment"/>
+
+    <dialog
+        android:id="@+id/permissionsExplanationFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.PermissionsExplanationsFragment"
+        android:label="permissionsExplanationFragment"
+        tools:layout="@layout/enable_permissions_explanations_dialog"/>
+    <action
+        android:id="@+id/action_permission_explanation_dialog"
+        app:destination="@id/permissionsExplanationFragment"/>
+    <dialog
+        android:id="@+id/whiteListDialogFragment"
+        android:name="org.immuni.android.ui.home.home.fragments.WhiteListDialogFragment"
+        android:label="WhiteListDialogFragment"
+        tools:layout="@layout/whitelist_dialog"/>
+    <action
+        android:id="@+id/action_whitelist_dialog"
+        app:destination="@id/whiteListDialogFragment"/>
 </navigation>

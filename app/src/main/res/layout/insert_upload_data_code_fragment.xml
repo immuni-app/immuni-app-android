@@ -10,15 +10,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.uploadData.InsertUploadDataCodeFragment">
+        tools:context=".ui.uploaddata.InsertUploadDataCodeFragment">
 
         <ImageView
             android:id="@+id/close"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/ic_cross"
+            android:layout_marginTop="24dp"
+            app:srcCompat="@drawable/ic_cross"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,14 +29,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="82dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="64dp"
-            android:autoSizeTextType="uniform"
+            app:autoSizeTextType="uniform"
             android:maxLines="3"
             android:text="@string/insert_upload_data_code"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/close" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -57,8 +57,11 @@
                 style="@style/EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:capitalize="characters"
-                android:inputType="textVisiblePassword|textNoSuggestions|textCapCharacters"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                tools:text="abf34"
+                android:maxLength="8"
+                android:inputType="textCapWords|textVisiblePassword|textNoSuggestions|textCapCharacters"
                 app:endIconMode="clear_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,26 +100,5 @@
             app:layout_constraintTop_toBottomOf="@+id/error"
             app:layout_constraintVertical_bias="1.0" />
 
-        <ImageView
-            android:id="@+id/info"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_info"
-            app:layout_constraintStart_toStartOf="@+id/title"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
-
-        <TextView
-            android:id="@+id/infoText"
-            style="@style/P1Text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="3dp"
-            android:text="Dove trovo il codice?"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@+id/info"
-            app:layout_constraintStart_toEndOf="@+id/info"
-            app:layout_constraintTop_toTopOf="@+id/info" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bendingspoons.secretmenu">
+
+    <application>
+        <activity
+            android:name=".ui.ExitActivity"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:autoRemoveFromRecents="true"/>
+
+        <activity android:name=".ui.SecretMenuActivity"
+            android:theme="@style/SecretMenuTransparent"/>
+      
+    </application>
+
+</manifest>

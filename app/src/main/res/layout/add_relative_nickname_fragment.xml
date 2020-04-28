@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,7 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        android:overScrollMode="never"
+        android:fitsSystemWindows="true"
         android:clipToPadding="false"
+        android:paddingTop="110dp"
         android:paddingBottom="120dp"
         android:fillViewport="true">
 
@@ -25,9 +29,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
-                android:text="Segli un grado di parentela o un nickname"
+                android:text="@string/user_edit_nickname_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
                 android:checkedButton="@+id/first"
                 android:gravity="left"
@@ -79,7 +82,7 @@
                 style="@style/EditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="textNoSuggestions|textVisiblePassword"
+                android:inputType="textNoSuggestions|textCapWords"
                 app:endIconMode="clear_text"
                 android:hint="Zio"
                 android:maxLength="5"
@@ -95,8 +98,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:constraint_referenced_ids="textField,textView4" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+    <!-- gradient top scrolling -->
+    <View
+        android:id="@+id/gradientTop"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:translationY="40dp"
+        android:background="@drawable/gradient_privacy_top"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:id="@+id/topMask"
+        style="@style/TopScrollingMask"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        android:translationY="-9dp"
+        android:backgroundTint="@color/background"
+        android:background="@drawable/rounded_corners_20dp"/>
 
     <View
         android:layout_width="match_parent"
@@ -115,4 +136,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:layout_gravity="bottom|left"
+        app:srcCompat="@drawable/ic_back_form"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </FrameLayout>

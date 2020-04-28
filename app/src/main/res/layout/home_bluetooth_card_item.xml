@@ -23,7 +23,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:layout_weight="1"
-        android:src="@drawable/ic_danger"
+        app:srcCompat="@drawable/ic_danger"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +36,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="30dp"
         android:layout_weight="1"
-        android:src="@drawable/ic_next"
+        app:srcCompat="@drawable/ic_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -72,7 +72,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/euclid_circular_bold"
         android:gravity="center_vertical|left"
-        android:text="@string/enable_bluetooth"
+        android:text="@string/consent_bluetooth"
         android:textColor="@color/background"
         app:layout_constraintBottom_toTopOf="@+id/title"
         app:layout_constraintEnd_toStartOf="@+id/next"

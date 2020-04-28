@@ -46,18 +46,23 @@
     <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
         <!-- ASAP font -->
         <item name="android:fontFamily">@font/euclid_circular</item>
-        <item name="android:textSize">19dp</item>
+        <item name="android:textSize">19sp</item>
         <item name="android:textColor">@color/tabTextColor</item>
         <item name="textAllCaps">false</item>
     </style>
 
-    <style name="DialogFragmentTheme" parent="AppTheme">
-        <item name="android:windowAnimationStyle">@style/DialogFragmentTheme.Window</item>
+    <style name="AppTheme.FullScreenDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="actionMenuTextColor">@color/colorAccent</item>
     </style>
 
-    <style name="DialogFragmentTheme.Window" parent="@android:style/Animation.Activity">
-        <item name="android:windowEnterAnimation">@anim/fragment_fade_enter</item>
-        <item name="android:windowExitAnimation">@anim/fragment_fade_exit</item>
+    <style name="AppTheme.DialogSlide">
+        <item name="android:windowEnterAnimation">@anim/nav_default_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/nav_default_exit_anim</item>
     </style>
 
     <style name="BSNumberPicker">
@@ -74,7 +79,7 @@
     <!-- Figma styles -->
 
     <style name="H1Heading">
-        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:fontFamily">@font/euclid_circular_bold</item>
         <item name="android:textSize">32sp</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
         <item name="android:textColor">@color/h1_heading</item>
@@ -83,107 +88,106 @@
 
     <style name="H2SubHeading">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">26dp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:textColor">@color/h2_sub_heading</item>
     </style>
 
     <style name="LibraryCardTitle">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">35dp</item>
+        <item name="android:textSize">35sp</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="LibraryCardDescription">
         <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">15dp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="HeaderDetails">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="H1NavBar">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">21dp</item>
+        <item name="android:textSize">21sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/h1_nav_bar</item>
     </style>
 
     <style name="H3SectionHeading">
-        <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">21dp</item>
+        <item name="android:fontFamily">@font/euclid_circular_bold</item>
+        <item name="android:textSize">21sp</item>
         <item name="android:textColor">@color/h3_section_heading</item>
     </style>
 
     <style name="H4Section">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/h4_section_heading</item>
     </style>
 
     <style name="H5Section">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/h5_section_heading</item>
     </style>
 
     <style name="H6Section">
         <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">24dp</item>
-        <item name="android:lineHeight">34dp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textColor">#fff</item>
     </style>
 
     <style name="P1Text">
-        <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/euclid_circular_medium</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/p1_text</item>
-        <item name="android:lineSpacingMultiplier">1.3</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
     <style name="P2Text">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">13dp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/p2_text</item>
     </style>
 
     <style name="Label">
         <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/label</item>
     </style>
 
     <style name="ButtonLabel">
         <item name="android:fontFamily">@font/euclid_circular_medium</item>
-        <item name="android:textSize">17dp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/button_label</item>
     </style>
 
     <style name="ButtonLabelSmall">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">13dp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/button_label</item>
     </style>
 
     <style name="InputLabel">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">13dp</item>
+        <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/input_label</item>
     </style>
 
     <style name="InputField">
         <item name="android:fontFamily">@font/euclid_circular_regular</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/input_field</item>
     </style>
 
     <style name="Toolbar">
         <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">#495D74</item>
     </style>
 
@@ -193,29 +197,39 @@
 
     <style name="RoundedButton">
         <item name="cornerRadius">27dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="textAllCaps">false</item>
+        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:minHeight">55dp</item>
+        <item name="android:minWidth">150dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
-        <item name="android:paddingEnd">50dp</item>
-        <item name="android:paddingStart">50dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">@color/color_state_rounded_button_text</item>
+        <item name="android:backgroundTint">@color/color_state_rounded_button</item>
     </style>
 
     <style name="WhiteRoundedButton">
         <item name="cornerRadius">27dp</item>
+        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
         <item name="textAllCaps">false</item>
+        <item name="android:minWidth">150dp</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:minHeight">55dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
-        <item name="android:paddingEnd">50dp</item>
-        <item name="android:paddingStart">50dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingStart">24dp</item>
         <item name="color">@android:color/white</item>
+        <item name="android:letterSpacing">-0.01</item>
     </style>
 
     <style name="RadioButton">
@@ -257,5 +271,15 @@
 
     <style name="CardShadowBlue">
     </style>
+
+    <style name="CardShadowColorPrimary">
+    </style>
+
+    <style name="TopScrollingMask">
+        <!--
+        <item name="android:elevation">@dimen/top_scroll_mask_elevation</item>
+        -->
+    </style>
+
 
 </resources>

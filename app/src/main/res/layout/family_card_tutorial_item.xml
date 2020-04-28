@@ -4,14 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
-    style="@style/CardShadowWhite"
+    style="@style/CardShadowColorPrimary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="32dp"
     android:layout_marginEnd="32dp"
     android:layout_marginTop="8dp"
     android:background="@drawable/rounded_corners_20dp"
-    android:backgroundTint="#E9EFFF"
+    android:backgroundTint="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:src="@drawable/ic_illustration_grandma_side"
+        app:srcCompat="@drawable/ic_illustration_grandma_side"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +35,7 @@
         android:fontFamily="@font/euclid_circular_semi_bold"
         android:gravity="left"
         android:text="@string/old_people_in_family_title"
-        android:textColor="#5181FD"
+        android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,17 +47,18 @@
         style="@style/RoundedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/background"
-        app:rippleColor="@color/colorPrimary"
-        android:textColor="@color/colorPrimary"
         android:fontFamily="@font/euclid_circular_semi_bold"
         android:text="@string/add_family_member"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/bottomMessage"
@@ -71,7 +72,7 @@
         android:text="@string/old_people_in_family_description"
         android:textSize="14sp"
         android:fontFamily="@font/euclid_circular_medium"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#fff"
         app:layout_constraintBottom_toTopOf="@+id/addButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -1,0 +1,21 @@
+<!-- res/drawable/myrect.xml -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="#FFF">
+<item>
+    <selector>
+        <item android:state_enabled="false">
+            <shape
+                android:shape="rectangle">
+                <solid android:color="#0D495D74" />
+                <corners android:radius="9dp" />
+            </shape>
+        </item>
+        <item>
+            <shape
+                android:shape="rectangle">
+                <solid android:color="#fff" />
+                <corners android:radius="9dp" />
+            </shape>
+        </item>
+    </selector>
+</item>
+</ripple>

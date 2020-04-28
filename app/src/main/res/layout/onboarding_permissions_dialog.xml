@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="bottom"
+    android:paddingTop="48dp"
+    android:background="@color/home_blocking_card_mask"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_bottom_sheet_rounded"
+        android:backgroundTint="@color/background"
+        android:clipToPadding="false">
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:padding="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bluetoothBox"
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="24dp"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title">
+
+                <View
+                    android:id="@+id/separator"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#E9EFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <ImageView
+                    android:id="@+id/circle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_check_permissions" />
+
+                <TextView
+                    android:id="@+id/btTitle"
+                    style="@style/H5Section"
+                    android:textSize="21sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/onboarding_permissions_title"
+                    android:duplicateParentState="true"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="Attiva il Bluetooth"
+                    app:layout_constraintBottom_toBottomOf="@+id/circle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/circle"
+                    app:layout_constraintTop_toTopOf="@+id/circle" />
+
+                <TextView
+                    android:id="@+id/description"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onboarding_permission_bt_short"
+                    app:layout_constraintEnd_toEndOf="@+id/btTitle"
+                    app:layout_constraintStart_toStartOf="@+id/circle"
+                    app:layout_constraintTop_toBottomOf="@+id/circle" />
+
+                <TextView
+                    android:id="@+id/knowMore"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/btTitle"
+                    app:layout_constraintStart_toStartOf="@+id/circle"
+                    app:layout_constraintTop_toBottomOf="@+id/description" />
+
+                <Button
+                    style="@style/RoundedButton"
+                    android:id="@+id/bluetooth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="16dp"
+                    android:text="Attiva Bluetooth"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bluetoothBox2"
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="24dp"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bluetoothBox">
+
+                <View
+                    android:id="@+id/separator2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#E9EFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description2"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <ImageView
+                    android:id="@+id/circle2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_check_permissions" />
+
+                <TextView
+                    android:id="@+id/permissionsTitle"
+                    style="@style/H5Section"
+                    android:textSize="21sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/onboarding_permissions_title"
+                    android:duplicateParentState="true"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="Autorizza la localizzazione"
+                    app:layout_constraintBottom_toBottomOf="@+id/circle2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/circle2"
+                    app:layout_constraintTop_toTopOf="@+id/circle2" />
+
+                <TextView
+                    android:id="@+id/description2"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onboarding_permission_permissions_short"
+                    app:layout_constraintEnd_toEndOf="@+id/permissionsTitle"
+                    app:layout_constraintStart_toStartOf="@+id/circle2"
+                    app:layout_constraintTop_toBottomOf="@+id/circle2" />
+
+                <TextView
+                    android:id="@+id/knowMore2"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/permissionsTitle"
+                    app:layout_constraintStart_toStartOf="@+id/circle2"
+                    app:layout_constraintTop_toBottomOf="@+id/description2" />
+
+                <Button
+                    style="@style/RoundedButton"
+                    android:id="@+id/geoPermissions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="16dp"
+                    android:text="Autorizza localizzazione"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bluetoothBox3"
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="24dp"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bluetoothBox2">
+
+                <View
+                    android:id="@+id/separator3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#E9EFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/description3"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <ImageView
+                    android:id="@+id/circle3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_check_permissions" />
+
+                <TextView
+                    android:id="@+id/knowMore3"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/geoTitle"
+                    app:layout_constraintStart_toStartOf="@+id/circle3"
+                    app:layout_constraintTop_toBottomOf="@+id/description3" />
+
+                <TextView
+                    android:id="@+id/geoTitle"
+                    style="@style/H5Section"
+                    android:textSize="21sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/onboarding_permissions_title"
+                    android:duplicateParentState="true"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="Attiva la localizzazione"
+                    app:layout_constraintBottom_toBottomOf="@+id/circle3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/circle3"
+                    app:layout_constraintTop_toTopOf="@+id/circle3" />
+
+                <TextView
+                    android:id="@+id/description3"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onboarding_permission_geo_short"
+                    app:layout_constraintEnd_toEndOf="@+id/geoTitle"
+                    app:layout_constraintStart_toStartOf="@+id/circle3"
+                    app:layout_constraintTop_toBottomOf="@+id/circle3" />
+
+                <Button
+                    style="@style/RoundedButton"
+                    android:id="@+id/geolocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="16dp"
+                    android:text="Attiva localizzazione"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore3" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bluetoothBox4"
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/circle4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_check_permissions" />
+
+                <TextView
+                    android:id="@+id/whitelistTitle"
+                    style="@style/H5Section"
+                    android:textSize="21sp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:textColor="@color/onboarding_permissions_title"
+                    android:duplicateParentState="true"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="Consenti uso in background"
+                    app:layout_constraintBottom_toBottomOf="@+id/circle4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/circle4"
+                    app:layout_constraintTop_toTopOf="@+id/circle4" />
+
+                <TextView
+                    android:id="@+id/knowMore4"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/euclid_circular_semi_bold"
+                    android:text="@string/know_more"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="@+id/whitelistTitle"
+                    app:layout_constraintStart_toStartOf="@+id/circle4"
+                    app:layout_constraintTop_toBottomOf="@+id/description4" />
+
+                <TextView
+                    android:id="@+id/description4"
+                    style="@style/P1Text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/onboarding_permission_whitelist_short"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@+id/whitelistTitle"
+                    app:layout_constraintStart_toStartOf="@+id/circle4"
+                    app:layout_constraintTop_toBottomOf="@+id/circle4" />
+
+                <Button
+                    style="@style/RoundedButton"
+                    android:id="@+id/whitelist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/consent_background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/knowMore4" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

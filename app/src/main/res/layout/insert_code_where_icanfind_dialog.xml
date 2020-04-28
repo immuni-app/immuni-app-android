@@ -10,7 +10,6 @@
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:paddingTop="@dimen/activity_vertical_margin"
         android:background="@color/background"
         android:paddingBottom="120dp"
         android:scrollbars="none"
@@ -27,8 +26,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:src="@drawable/ic_cross"
+                android:layout_marginTop="48dp"
+                app:srcCompat="@drawable/ic_cross"
                 android:layout_gravity="top|left"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,10 +38,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
                 android:text="Dove posso trovare questo codice?"
-                android:textColor="#4F4F5B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,12 +55,29 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
                 android:alpha="0.6"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
-                android:textColor="#4F4F5B"
+                android:fontFamily="@font/euclid_circular_semi_bold"
+                android:text="@string/insert_code_explanation"
+                android:textColor="#495D74"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <TextView
+                android:id="@+id/message2"
+                style="@style/P1Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:alpha="0.6"
+                android:text="@string/insert_code_explanation_sub"
+                android:textColor="#4F4F5B"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/message" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

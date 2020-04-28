@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Secret Menu</string>
+    <string name="secret_menu_how_can_i_help_you">How can I help you?</string>
+    <string name="redeem_gift_code">Redeem Gift Code</string>
+    <string name="redeem_gift_code_message">Insert your code here:</string>
+    <string name="gift_code">Gift Code</string>
+    <string name="redeem">Redeem</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="redeem_gift_code_error_820">Incorrect gift code</string>
+    <string name="redeem_gift_code_error_821">Already used gift code</string>
+    <string name="redeem_gift_code_error_822">Expired gift code</string>
+    <string name="redeem_gift_code_error_823">Cannot redeem again gift code</string>
+    <string name="generic_error">Something went wrong</string>
+</resources>

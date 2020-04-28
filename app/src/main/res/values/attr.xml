@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="AscoltoProgressView">
+    <declare-styleable name="ImmuniProgressView">
         <attr name="progressColorBackground" format="color" />
         <attr name="progressColorCompleted" format="color" />
         <attr name="progressColorPending" format="color" />

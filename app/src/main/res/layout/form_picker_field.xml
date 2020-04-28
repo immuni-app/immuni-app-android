@@ -7,10 +7,14 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        android:overScrollMode="never"
+        android:fitsSystemWindows="true"
         android:clipToPadding="false"
+        android:paddingTop="110dp"
         android:paddingBottom="120dp"
         android:fillViewport="true">
 
@@ -18,18 +22,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <include
+                android:id="@+id/userInfoCard"
+                layout="@layout/form_top_user_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/question"
                 style="@style/H1Heading"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:text="In questo momento hai uno o più tra questi sintomi?"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/userInfoCard" />
 
             <TextView
                 android:id="@+id/description"
@@ -64,16 +74,31 @@
         android:layout_gravity="bottom"
         android:rotation="180"
         android:background="@drawable/gradient_form"/>
+    <!-- gradient top scrolling -->
+    <View
+        android:id="@+id/gradientTop"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:translationY="40dp"
+        android:background="@drawable/gradient_privacy_top"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:id="@+id/topMask"
+        style="@style/TopScrollingMask"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        android:translationY="-9dp"
+        android:backgroundTint="@color/background"
+        android:background="@drawable/rounded_corners_20dp"/>
 
     <com.google.android.material.button.MaterialButton
         style="@style/RoundedButton"
         android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:layout_gravity="bottom|right"
         android:text="@string/next"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="32dp"
+        android:layout_marginRight="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -84,7 +109,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="32dp"
         android:layout_gravity="bottom|left"
-        android:src="@drawable/ic_back_form"
+        app:srcCompat="@drawable/ic_back_form"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </FrameLayout>

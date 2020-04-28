@@ -39,7 +39,7 @@
     <color name="input_label">#C6C7D2</color>
     <color name="input_field">#A5A7B7</color>
     <color name="geraldine">#F48B8B</color>
-    <color name="onboarding_progress_background">#ECECEC</color>
+    <color name="onboarding_progress_background">#1A6993FF</color>
     <color name="picker_divider_color">#33B7B7B7</color>
     <color name="home_background">#F9F9FF</color>
     <color name="dialog_status_bar_color">#66000000</color>
@@ -50,5 +50,12 @@
     <color name="card_red_bg">#FFCFC9</color>
     <color name="card_yellow_bg">#FFE9AF</color>
     <color name="danger">#FE7D6C</color>
-    <color name="onboarding_dialog_background">#E65181FD</color>
+    <color name="onboarding_dialog_background">#F2495D74</color>
+
+    <color name="profile_purple">#917FFD</color>
+    <color name="profile_violet">#C993F3</color>
+    <color name="profile_yellow">#FFC48D</color>
+    <color name="profile_blue">@color/colorPrimary</color>
+    <color name="profile_pink">#F790AF</color>
+    <color name="home_blocking_card_mask">#F2495D74</color>
 </resources>

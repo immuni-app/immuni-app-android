@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">Immuni</string>
 
-    <string name="app_setup_check_connection">Ci dispiace, è stato impossibile connettersi. Riprova più tardi...</string>
-    <string name="no_app_can_open_the_link">Nessuna app può aprire questo link...</string>
+    <string name="app_setup_check_connection">Ci dispiace, è stato impossibile connettersi. Riprova più tardi.</string>
+    <string name="no_app_can_open_the_link">Nessuna app può aprire questo link.</string>
     <string name="home_tab">Home</string>
-    <string name="family_tab">Famiglia</string>
+    <string name="family_tab">Profilo</string>
     <string name="next">Avanti</string>
     <string name="settings_tab">Informazioni</string>
+    <string name="and">e</string>
 
     <string name="survey_exit_title">Sei sicuro?</string>
     <string name="survey_exit_message">Se decidi di abbandonare ora la compilazione, le risposte date fino a qui andranno perse.</string>
@@ -15,8 +16,10 @@
     <string name="exit">Esci</string>
     <string name="confirm">Conferma</string>
     <string name="cancel">Annulla</string>
-    <string name="survey_progress_text">Diario clinico di %s</string>
-    <string name="your_clinic_diary">Il tuo diario clinico</string>
+    <string name="clinic_diary_of"><![CDATA[Diario clinico di<br/><b>%s</b>]]></string>
+    <string name="your_clinic_diary"><![CDATA[<b>Il tuo</b><br/>diario clinico]]></string>
+    <string name="clinic_diary_of_form">Diario clinico di %s</string>
+    <string name="your_clinic_diary_form">Il tuo diario clinico</string>
     <string name="welcome_lets_start">Iniziamo</string>
 
     <string name="welcome_1_title">Benvenuto</string>
@@ -28,8 +31,8 @@
     <string name="welcome_4_title">Ricerca scientifica</string>
     <string name="welcome_4_description">Le informazioni raccolte sono preziosissime per aiutare la ricerca contro le epidemie ed evitare che questa crisi si ripeta.</string>
 
-    <string name="privacy_checkbox">Ho letto e accetto la {privacy policy}</string>
-    <string name="privacy_title">Tuteliamo la tua privacy</string>
+    <string name="privacy_checkbox">Ho letto e accetto l\'{Informativa privacy}</string>
+    <string name="privacy_title">Immuni tutela la tua privacy</string>
     <string name="privacy_message">Raccoglieremo e proteggeremo i tuoi dati responsabilmente.</string>
 
     <string name="profile_completed">Profilo completato</string>
@@ -37,7 +40,7 @@
     <string name="onboarding_name_title">Come ti chiami?</string>
     <string name="onboarding_name_description">Inserire il cognome non è necessario. Il tuo nome o anche un soprannome sarà sufficiente.</string>
     <string name="onboarding_gender_title">Di che sesso sei?</string>
-    <string name="onboarding_gender_description">La probabilità di contagio e il rischio di sviluppare sintomi più severi dipendono da questa informazione.</string>
+    <string name="onboarding_gender_description">Seleziona il sesso che ti è stato assegnato alla nascita. Il rischio di sviluppare sintomi più severi dipende da questa informazione.</string>
 
     <string name="onboarding_age_title">Quanti anni hai?</string>
     <string name="onboarding_age_description">Questa informazione è importante per consigliarti al meglio come proteggerti dal coronavirus.</string>
@@ -51,10 +54,10 @@
     <string name="choose_person_bottom_message">Ti chiederemo di effettuare la compilazione per tutti i tuoi familiari in successione</string>
     <string name="choose_person_bottom_message_members">Ti chiederemo di effettuare la compilazione in sucessione per tutti i profili che hai registrato</string>
 
-    <string name="compile_your_clinical_diary">Compila il diario clinico</string>
+    <string name="compile_your_clinical_diary">Inizia la compilazione</string>
     <string name="choose_person_button_start">Inizia</string>
 
-    <string name="log_completed">Diario clinico inviato!</string>
+    <string name="log_completed">Diario clinico salvato!</string>
     <string name="log_completed_message">Tutti i tuoi dati sono al sicuro.</string>
     <string name="old_people_in_family_title">Hai anziani o minorenni in famiglia?</string>
     <string name="old_people_in_family_description">Registra i dati dei familiari che non possono farlo autonomamente (per esempio: minorenni, anziani e familiari che non possiedono uno smartphone).</string>
@@ -68,39 +71,45 @@
     <string name="app_update_title">È disponibile una nuova versione</string>
     <string name="app_update_message">Aggiorna l\'app per continuare</string>
     <string name="compile_for_message">Stai per effettuare la compilazione per conto di</string>
-    <string name="open_settings">Apri le impostazioni</string>
+    <string name="open_settings">Apri Impostazioni</string>
 
-    <string name="geolocation_instruction_1">1. Seleziona</string>
-    <string name="geolocation_instruction_2">2. Seleziona "Geolocalizzazione"</string>
-    <string name="geolocation_instruction_3">3. Imposta</string>
+    <string name="geolocation_instruction_0">1. Apri le impostazioni dal bottone qui sotto</string>
+    <string name="geolocation_instruction_1">2. Seleziona \"Autorizzazioni\"</string>
+    <string name="geolocation_instruction_2">3. Seleziona \"Geolocalizzazione\"</string>
+    <string name="geolocation_instruction_3">4. Imposta \"Consenti sempre\"</string>
 
     <string name="app_exit_title">Uscire</string>
     <string name="app_exit_message">Sei sicuro di voler uscire?</string>
-    <string name="onboarding_bluetooth_title">Permetti il calcolo del tuo fattore di rischio</string>
-    <string name="onboarding_bluetooth_message">Consenti di utilizzare il Bluetooth durante tutto l\'arco della giornata per permettere alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
+    <string name="onboarding_bluetooth_title">Consenti di rilevare il rischio d\'infezione</string>
+    <string name="onboarding_bluetooth_message">Usando la tecnologia Bluetooth l\'app individua utenti che ti sono stati vicini, senza identificarli. Se uno di questi risulterà positivo al virus, riusciremo ad avvisarti prontamente.</string>
     <string name="onboarding_permissions_sample">Seleziona \"Consenti sempre\" nel popup che ti apparirà qui sotto</string>
     <string name="indication_for">Indicazioni su cosa fare per %s</string>
     <string name="you_as_complement">te</string>
     <string name="enable_geolocation">Attiva la localizzazione</string>
-    <string name="enable_bluetooth">Attiva il Bluetooth</string>
+    <string name="consent_geolocation">Consenti l\'utilizzo della localizzazione</string>
+    <string name="consent_bluetooth">Consenti l\'utilizzo del Bluetooth</string>
     <string name="enable_geolocation_message">Permetti il calcolo del tuo fattore di rischio</string>
     <string name="enable_notification">Attiva le notifiche</string>
     <string name="enable_notification_message">Consentici di comunicare con te in caso di necessità</string>
-    <string name="update_your_clinic_diary">Aggiorna il tuo diario clinico</string>
-    <string name="update_your_family_diary">Aggiorna i diari clinici per la tua famiglia</string>
+    <string name="update_your_clinic_diary">Compila il tuo diario clinico</string>
+    <string name="update_your_family_diary">Compila i diari clinici per la tua famiglia</string>
     <string name="you_have_clinic_diaries_to_update"><![CDATA[Hai <font color="#6993FF"><b>%d diari clinici</b></font> da aggiornare]]></string>
+    <string name="you_have_one_clinic_diary_to_update"><![CDATA[Hai <font color="#6993FF"><b>un diario clinico</b></font> da aggiornare]]></string>
     <string name="start_survey_filling">Inizia compilazione</string>
     <string name="reminder_notification_channel_name">Compila il questionario</string>
     <string name="home_separator_suggestions">Come comportarsi</string>
-    <string name="clinic_diary_updated">Diario clinico aggiornato</string>
+    <string name="clinic_diary_updated">Il tuo diario clinico è aggiornato</string>
+    <string name="clinic_diaries_updated">Il tuoi diari clinici sono aggiornati</string>
     <string name="clinic_diary_updated_message">Riceverai una notifica quando dovrai aggiornare il diario nuovamente</string>
+    <string name="clinic_diaries_updated_message">Riceverai una notifica quando dovrai aggiornare i diari nuovamente</string>
     <string name="enable_geolocation_title">Attiva la localizzazione</string>
     <string name="enable_geolocation_dialog_message">Consenti l\'accesso alla posizione durante tutto l\'arco della giornata per permettere alle autorità competenti di stimare la tua esposizione al virus e rispondere all\'epidemia al meglio.</string>
     <string name="geolocation">Geolocalizzazione</string>
     <string name="authorizations">Autorizzazioni</string>
     <string name="authorizations_subtitle">Archiviazione, Attività fisica, Contatti e...</string>
     <string name="show_notifications">Mostra notifiche</string>
-    <string name="notifications_instruction_enable">1. Abilita</string>
+    <string name="notifications_instruction_1">1. Apri le impostazioni dal bottone in basso</string>
+    <string name="notifications_instruction_2">2. Abilita</string>
     <string name="enable_notification_dialog_message">Verrai notificato in caso di importanti comunicazioni e quando è il momento di aggiornare il diario clinico.</string>
     <string name="your_family_members_separator">I tuoi familiari</string>
     <string name="age_placeholder">%d anni</string>
@@ -112,7 +121,8 @@
     <string name="sex">Sesso</string>
     <string name="live_with_you">Vive con te</string>
 
-    <string name="age_range_1">Meno di 18 anni</string>
+    <string name="age_range_1">Meno di 14 anni</string>
+    <string name="age_range_1b">14 - 17 anni</string>
     <string name="age_range_2">18 - 35 anni</string>
     <string name="age_range_3">36 - 45 anni</string>
     <string name="age_range_4">46 - 55 anni</string>
@@ -122,7 +132,7 @@
 
     <string name="settings_faq">Domande frequenti</string>
     <string name="settings_tos">Termini di utilizzo</string>
-    <string name="settings_privacy_policy">Privacy policy</string>
+    <string name="settings_privacy_policy">Informativa privacy</string>
     <string name="settings_download_data">Scarica dati</string>
     <string name="settings_erase_data">Elimina dati</string>
 
@@ -131,23 +141,29 @@
     <string name="add_relative_age_title">Quanti anni ha la persona che vuoi aggiungere?</string>
     <string name="add_relative_age_description">Questa informazione è importante per consigliarti al meglio come proteggere la persona dal coronavirus.</string>
 
-    <string name="nickname_parent_female">Madre</string>
+    <string name="nickname_parent_female">Mamma</string>
     <string name="nickname_child1_female">Prima figlia</string>
     <string name="nickname_child2_female">Seconda figlia</string>
     <string name="nickname_child3_female">Terza figlia</string>
     <string name="nickname_child4_female">Quarta figlia</string>
+    <string name="nickname_younger_sibling_female">Sorella minore</string>
+    <string name="nickname_older_sibling_female">Sorella maggiore</string>
+    <string name="nickname_partner_female">Moglie</string>
     <string name="nickname_paternal_grandparent_female">Nonna paterna</string>
     <string name="nickname_maternal_grandparent_female">Nonna materna</string>
-    <string name="nickname_parent_male">Padre</string>
+    <string name="nickname_parent_male">Papà</string>
     <string name="nickname_child1_male">Primo figlio</string>
     <string name="nickname_child2_male">Secondo figlio</string>
     <string name="nickname_child3_male">Terzo figlio</string>
     <string name="nickname_child4_male">Quarto figlio</string>
+    <string name="nickname_younger_sibling_male">Fratello minore</string>
+    <string name="nickname_older_sibling_male">Fratello maggiore</string>
+    <string name="nickname_partner_male">Marito</string>
     <string name="nickname_paternalGrandparent_male">Nonno paterno</string>
     <string name="nickname_maternalGrandparent_male">Nonno materno</string>
     <string name="nickname_not_specified">Non specificato</string>
 
-    <string name="choose_a_nickname">Scegli un nickname</string>
+    <string name="choose_a_nickname">Altro</string>
 
     <string name="server_generic_error">Si è verificato un errore. Riprova più tardi.</string>
     <string name="delete_user_alert_title">Sei sicuro?</string>
@@ -170,8 +186,76 @@
     <string name="where_to_find_the_code">Dove posso trovare il codice?</string>
     <string name="invalid_code">Il codice che hai inserito non è valido.</string>
     <string name="ok">OK</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="diary_resume_title">Riepilogo</string>
     <string name="upload_data_success">I tuoi dati sono stati caricati correttamente!</string>
+    <string name="nickname">Soprannome</string>
+    <string name="user_edit_live_with_you_title">%s vive con te?</string>
+    <string name="user_edit_age_you_title">Quanti anni ha %s?</string>
+    <string name="user_edit_gender_you_title">Di che sesso è questa persona?</string>
+    <string name="user_edit_nickname_title">Il tuo familiare è:</string>
+    <string name="delete_profile">Elimina profilo</string>
+    <string name="upload_data_explanation">Nel caso in cui ti venga richiesto dall\'autorità sanitaria, carica i tuoi dati di tracciamento Bluetooth.</string>
+    <string name="ble_not_supported_by_this_device">Questo dispositivo non supporta Bluetooth Low Energy.</string>
+    <string name="no_choice">Nessuna scelta</string>
+    <string name="discover_why">Scopri perché</string>
+    <string name="compile_the_clinical_diary">Compila il diario clinico</string>
+    
+    <string name="clinic_diary_question_title">Che cos’è il diario clinico?</string>
+    <string name="clinic_diary_question_explanation">Compilando il diario clinico fornisci ad Immuni elementi indispensabili per consigliare te e la tua famiglia sul da farsi. Per un totale rispetto della privacy, i dati rimarranno salvati solo ed esclusivamente sul tuo smartphone.</string>
+    <string name="onboarding_permission_tutorial_title">Seleziona \"Consenti\" nel popup che apparirà qui sotto</string>
+
+    <string name="home_block_notifications_title">Consentici di comunicare con te in caso di necessità</string>
+    <string name="home_block_notifications_message">Verrai notificato in caso di importanti comunicazioni tra cui il possibile contatto con un soggetto diagnosticato positivo a Covid-19 e quando è il momento di aggiornare il diario clinico.</string>
+    <string name="home_block_permissions_title">Autorizza la localizzazione</string>
+    <string name="home_block_permissions_message">Immuni non accede ai tuoi dati di localizzazione, ma il permesso è comunque necessario per usare il Bluetooth quando l’app è chiusa.\n\nSe non autorizzi la localizzazione, l’app non può rilevare dispositivi vicini e avvertirti in caso di rischio.</string>
+    <string name="home_block_bt_title">Attiva il Bluetooth</string>
+    <string name="home_block_bt_message">Immuni ha bisogno di accedere al Bluetooth per individuare utenti che ti sono stati vicini, senza identificarli. Se uno di questi risulterà positivo al virus, riusciremo ad avvisarti rapidamente.\n\n Questa funzionalità è resa possibile dallo scambio di codici identificativi casuali tra dispositivi vicini, con consumo minimo di batteria grazie alla tecnologia Bluetooth Low Energy.</string>
+    <string name="home_block_geo_title">Attiva la localizzazione</string>
+    <string name="home_block_geo_message">Immuni non accede ai tuoi dati di localizzazione, ma è comunque necessario avere la localizzazione attiva sul tuo smartphone per usare il Bluetooth quando l’app è chiusa.\n\nSe non attivi la localizzazione, l’app non può rilevare dispositivi vicini e avvertirti in caso di rischio.</string>
+    <string name="home_block_whitelist_title">Consenti l\'uso in background</string>
+    <string name="home_block_whitelist_message">Permetti all’app di funzionare anche quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.\n\nSe non escludi Immuni dalla lista, il sistema operativo terminerà l’app quando è attiva nel background, impedendole di rilevare dispositivi vicini e di avvertirti in caso di rischio.</string>
+    <string name="home_block_notifications_button">Consenti notifiche</string>
+    <string name="home_block_bluetooth_button">Attiva Bluetooth</string>
+    <string name="home_block_permissions_button">Consenti localizzazione</string>
+    <string name="home_block_geo_button">Attiva localizzazione</string>
+    <string name="home_block_whitelist_button">Consenti funzionamento</string>
+
+    <string name="diary_disabled_title">Il diario clinico non è abilitato</string>
+    <string name="diary_disabled_message">In questa versione dell’app non è possibile compilare il diario clinico.</string>
+    <string name="privacy_page_tos">Proseguendo, dichiaro di aver letto e accettato i {Termini di utilizzo}</string>
+
+    <string name="privacy_page_notification">Immuni <b>ti notifica se sei entrato in contatto</b> con un altro utente dell\'app risultato positivo al Covid-19, se l\'utente ci mette in condizione di farlo.</string>
+    <string name="privacy_page_location">Per farlo, Immuni <b>non traccia la tua posizione</b>, né sa quali sono i tuoi movimenti, o l\'identità delle persone che incontri.</string>
+    <string name="privacy_page_bluetooth">Immuni <b>utilizza solamente il segnale Bluetooth</b> del tuo dispositivo e di quello degli altri utenti che usano l\'app.</string>
+    <string name="privacy_page_health"><b>Puoi anche ricevere consigli personalizzati</b> su come comportarti, compilando un diario clinico che rimane solamente sul tuo dispositivo.</string>
+    <string name="whitelist_message">1. <b>Apri elenco delle app non ottimizzate</b> dal bottone qui sotto\n\n2. Cerca e seleziona l’app <b>Immuni</b></string>
+    <string name="open_list">Apri elenco</string>
+    <string name="i_have_controlled">Ho controllato</string>
+    <string name="know_more">Scopri di più</string>
+    <string name="hide">Nascondi</string>
+
+    <string name="onboarding_permission_bt_short">Immuni ha bisogno di accedere al Bluetooth per individuare utenti che ti sono stati vicini, senza identificarli. Se uno di questi risulterà positivo al virus, riusciremo ad avvisarti rapidamente.</string>
+    <string name="onboarding_permission_bt_long">Questa funzionalità è resa possibile dallo scambio di codici identificativi casuali tra dispositivi vicini, con consumo minimo di batteria grazie alla tecnologia Bluetooth Low Energy.</string>
+
+    <string name="onboarding_permission_permissions_short">Immuni non accede ai tuoi dati di localizzazione, ma il permesso è comunque necessario per usare il Bluetooth quando l’app è chiusa.</string>
+    <string name="onboarding_permission_permissions_long">Se non autorizzi la localizzazione, l’app non può rilevare dispositivi vicini e avvertirti in caso di rischio.</string>
+
+    <string name="onboarding_permission_geo_short">Immuni non accede ai tuoi dati di localizzazione, ma è comunque necessario avere la localizzazione attiva sul tuo smartphone per usare il Bluetooth quando l’app è chiusa.</string>
+    <string name="onboarding_permission_geo_long">Se non attivi la localizzazione, l’app non può rilevare dispositivi vicini e avvertirti in caso di rischio.</string>
+
+    <string name="onboarding_permission_whitelist_short">Permetti all’app di funzionare anche quando è chiusa, escludendola dalle app ottimizzate per il consumo di batteria.</string>
+    <string name="onboarding_permission_whitelist_long">Se non escludi Immuni dalla lista, il sistema operativo terminerà l’app quando è attiva nel background, impedendole di rilevare dispositivi vicini e di avvertirti in caso di rischio.</string>
+    <string name="delete_data">Elimina dati</string>
+    <string name="choose_an_app_to_contact_us">Seleziona un\'app</string>
+    <string name="recover_data_email_message">Ciao Bending Spoons,\n\nVi chiedo di inoltrarmi copia dei miei dati dal server. Il mio ID è %s.</string>
+    <string name="delete_data_email_message">Ciao Bending Spoons,\n\nVi chiedo di effettuare la cancellazione dei miei dati dal server. Il mio ID è %s.</string>
+    <string name="contact_us_email_message"></string>
+    <string name="data_handling_title">Gestione dati</string>
+    <string name="restore_data">Recupera dati</string>
+    <string name="consent_background">Consenti background</string>
+    <string name="insert_code_explanation">Il codice ti viene fornito dall\'autorità sanitaria se ti sei sottoposto ad un test per il COVID-19 e i risultati sono disponibili.</string>
+    <string name="insert_code_explanation_sub">Il codice permette il caricamento dei dati di tracciamento Bluetooth al fine di notificare eventuali utenti a rischio di contagio.</string>
+    <string name="request_support">Richiedi supporto</string>
+    <string name="immuni_update_file_title">Aggiornamento di Immuni</string>
+    <string name="immuni_update_file_description">Una nuova versione di Immuni sta per essere scaricata. Al termine del download clicca su questa notifica per eseguire l\'aggiornamento.</string>
 </resources>

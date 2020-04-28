@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.force_update.ForceUpdateActivity">
+    tools:context=".ui.forceupdate.ForceUpdateActivity">
 
     <fragment
         android:id="@+id/force_update_fragment"
-        android:name="org.ascolto.onlus.geocrowd19.android.ui.force_update.ForceUpdateFragment"
+        android:name="org.immuni.android.ui.forceupdate.ForceUpdateFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"

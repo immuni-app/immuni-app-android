@@ -5,16 +5,37 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'io.fabric'
 
+// Template keystore file
+def mockPropertiesFile = rootProject.file("template.properties")
+
+// App keystore file
+def appPropertiesFile = rootProject.file("app.properties")
+def appProperties = new Properties()
+
+if (appPropertiesFile.exists()) {
+    appProperties.load(new FileInputStream(appPropertiesFile))
+} else {
+    appProperties.load(new FileInputStream(mockPropertiesFile))
+}
+
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
+    signingConfigs {
+        release {
+            keyAlias appProperties['keyAlias']
+            keyPassword appProperties['keyPassword']
+            storeFile file(appProperties['storeFile'])
+            storePassword appProperties['storePassword']
+        }
+    }
     defaultConfig {
-        applicationId "org.ascolto.onlus.geocrowd19.android"
-        minSdkVersion 21
+        applicationId "org.immuni.android"
+        minSdkVersion 23
         targetSdkVersion 29
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 34
+        versionName "1.0.32"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -23,12 +44,15 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+        buildConfigField("String", "sesameOracleKey", appProperties['sesameOracleKey'])
+        buildConfigField("String", "sesamePicoKey", appProperties['sesamePicoKey'])
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -36,12 +60,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
 
-    repositories {
-        maven { url 'https://dl.bintray.com/geouniq/com.geouniq.android' }
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 }
 
@@ -56,19 +81,18 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
 dependencies {
     implementation project(":base")
-    implementation project(":concierge") // VERSION 1.0.0
-    implementation project(":secretmenu") // VERSION 1.1.0
-    implementation project(':sesame')
-    implementation project(":oracle") // VERSION 0.5.0
+    implementation project(":concierge")
+    implementation project(":secretmenu")
+    implementation project(":oracle")
     implementation project(":theirs")
-    implementation project(":pico") // VERSION 0.0.0
+    implementation project(":pico")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.2.0'
-    //implementation 'com.google.android.material:material:1.1.0'
     implementation 'com.google.android.material:material:1.2.0-alpha04'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
@@ -82,12 +106,10 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "androidx.work:work-runtime-ktx:2.3.4"
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation "androidx.security:security-crypto:1.0.0-beta01"
 
     // Number Picker
     implementation 'com.shawnlin:number-picker:2.4.8'
-
-    // Transparent Text
-    implementation 'it.gilvegliach.android:transparent-text-textview:1.0.3'
 
     // Room components
     implementation "androidx.room:room-runtime:2.2.4"
@@ -99,13 +121,14 @@ dependencies {
     kapt "androidx.room:room-compiler:2.2.4"
     androidTestImplementation "androidx.room:room-testing:2.2.4"
 
+    // SQL Cipher
+    implementation 'net.zetetic:android-database-sqlcipher:4.3.0'
+    implementation "androidx.sqlite:sqlite:2.0.1"
+
     // Koin
     implementation 'org.koin:koin-android:2.1.4'
     implementation 'org.koin:koin-androidx-scope:2.1.4'
     implementation 'org.koin:koin-androidx-viewmodel:2.1.4'
-
-    // Exo Player
-    implementation "com.google.android.exoplayer:exoplayer:2.10.3"
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
@@ -129,12 +152,7 @@ dependencies {
     // Lottie
     implementation 'com.airbnb.android:lottie:3.0.7'
 
-    // Billing
-    //implementation 'com.android.billingclient:billing:2.1.0'
-
     // Crashlytics
-    implementation 'com.google.firebase:firebase-core:17.2.3'
-    implementation 'com.google.firebase:firebase-analytics:17.2.3'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 
     // Firebase FCM
@@ -144,7 +162,14 @@ dependencies {
     testImplementation 'org.json:json:20140107'
 
     // Koin testing tools
-    testImplementation 'org.koin:koin-test:2.0.1'
+    testImplementation 'org.koin:koin-test:2.1.4'
+
+    // MockK
+    testImplementation "io.mockk:mockk:1.9.3"
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.2")
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test:runner:1.2.0'

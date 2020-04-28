@@ -17,7 +17,7 @@
         android:fillViewport="true"
         android:overScrollMode="never"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="120dp"
+        android:paddingBottom="16dp"
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -34,7 +34,7 @@
                 android:layout_gravity="top|left"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/ic_back"
+                app:srcCompat="@drawable/ic_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,9 +60,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/rounded_corners_9dp"
+                android:background="@drawable/rounded_corners_20dp"
                 android:backgroundTint="@color/background"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -70,6 +70,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pageTitle">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/nicknameGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -85,12 +86,13 @@
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="24dp"
                         android:fontFamily="@font/euclid_circular_semi_bold"
-                        android:text="@string/name"
+                        android:text="@string/nickname"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        style="@style/P1Text"
                         android:id="@+id/name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -110,20 +112,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="24dp"
-                        android:src="@drawable/ic_edit"
-                        android:alpha="0.6"
-                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_edit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#1A495D74"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginEnd="32dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="#1A495D74" />
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -147,6 +152,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        style="@style/P1Text"
                         android:id="@+id/age"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -166,9 +172,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="24dp"
-                        android:src="@drawable/ic_edit"
-                        android:alpha="0.6"
-                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_edit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -203,6 +207,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        style="@style/P1Text"
                         android:id="@+id/sex"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -222,9 +227,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="24dp"
-                        android:src="@drawable/ic_edit"
-                        android:alpha="0.6"
-                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_edit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -260,6 +263,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        style="@style/P1Text"
                         android:id="@+id/liveWithYou"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -279,9 +283,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="24dp"
-                        android:src="@drawable/ic_edit"
-                        android:alpha="0.6"
-                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_edit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -306,77 +308,83 @@
                     <TextView
                         android:id="@+id/textView7e"
                         style="@style/P1Text"
-                        app:layout_constraintWidth_percent="0.35"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="24dp"
-                        android:layout_marginBottom="24dp"
                         android:fontFamily="@font/euclid_circular_semi_bold"
                         android:text="@string/user_data"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.35" />
 
                     <TextView
+                        style="@style/P1Text"
                         android:id="@+id/uploadText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="15dp"
                         android:layout_weight="1"
+                        android:fontFamily="@font/euclid_circular_semi_bold"
                         android:gravity="right"
                         android:text="@string/upload"
-                        android:fontFamily="@font/euclid_circular_semi_bold"
                         android:textColor="@color/colorPrimary"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView7e"
                         app:layout_constraintEnd_toStartOf="@+id/okButton"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toEndOf="@+id/textView7e"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/textView7e" />
 
                     <ImageView
                         android:id="@+id/okButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="24dp"
-                        android:src="@drawable/ic_upload"
+                        app:srcCompat="@drawable/ic_upload"
                         android:tint="@color/colorPrimary"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/uploadText"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/uploadText" />
 
                     <TextView
                         android:id="@+id/uploadButton"
-                        android:layout_height="0dp"
                         android:layout_width="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_height="60dp"
                         app:layout_constraintEnd_toEndOf="@+id/okButton"
                         app:layout_constraintStart_toStartOf="@+id/uploadText"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        style="@style/P1Text"
+                        android:textSize="14sp"
+                        android:id="@+id/textView8"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="24dp"
+                        android:text="@string/upload_data_explanation"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/okButton"
+                        app:layout_constraintStart_toStartOf="@+id/textView7e"
+                        app:layout_constraintTop_toBottomOf="@+id/textView7e" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:background="#1A495D74" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/delete"
                 style="@style/P1Text"
-                android:fontFamily="@font/euclid_circular_semi_bold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
-                android:textColor="@color/danger"
-                android:text="Elimina"
+                android:fontFamily="@font/euclid_circular_semi_bold"
                 android:gravity="center"
                 android:padding="16dp"
+                android:text="@string/delete_profile"
+                android:textColor="@color/danger"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
@@ -384,7 +392,7 @@
     </androidx.core.widget.NestedScrollView>
     <View
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="30dp"
         android:layout_gravity="bottom"
         android:rotation="180"
         android:background="@drawable/gradient_home_top"/>
@@ -392,5 +400,5 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="top"
-        android:background="@drawable/gradient_home_top"/>
+        android:background="@drawable/gradient_center_home_color"/>
 </FrameLayout>
