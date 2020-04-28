@@ -1,6 +1,6 @@
 # Immuni
 
-[![BendingSpoons](https://circleci.com/gh/BendingSpoons/immuni-android-kotlin/tree/development.svg?style=shield)](https://app.circleci.com/pipelines/github/BendingSpoons/immuni-android-kotlin)
+[![BendingSpoons](https://circleci.com/gh/BendingSpoons/immuni-android-kotlin/tree/development.svg?style=shield&circle-token=0b0aa06338169222b8c4ad28a0aa1026052521c3)](https://app.circleci.com/pipelines/github/BendingSpoons/immuni-android-kotlin)
 
 The Immuni Android app is a native app written in **Kotlin**.
 
