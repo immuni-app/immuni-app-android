@@ -44,11 +44,11 @@ jobs:
           path: networking/build/test-results
       - run:
           name: Run Analytics Module Unit Tests
-          command: ./gradlew :pico:testDebugUnitTest
+          command: ./gradlew :analytics:testDebugUnitTest
       - store_artifacts:
-          path: pico/build/reports
+          path: analytics/build/reports
       - store_test_results:
-          path: pico/build/test-results
+          path: analytics/build/test-results
       - run:
           name: Run Base Module Unit Tests
           command: ./gradlew :base:testDebugUnitTest
