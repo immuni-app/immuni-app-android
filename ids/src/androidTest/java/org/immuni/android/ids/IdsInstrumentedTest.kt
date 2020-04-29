@@ -12,12 +12,6 @@ import org.junit.Assert.*
 @RunWith(AndroidJUnit4::class)
 class IdsInstrumentedTest {
 
-    val appCustomIdProvider = object :
-        CustomIdProvider {
-        override val ids: Set<Ids.Id>
-            get() = setOf()
-    }
-
     @Test
     fun testIdSerializationSavingAndRestore() {
         val ctx: Context = ApplicationProvider.getApplicationContext()
@@ -25,11 +19,11 @@ class IdsInstrumentedTest {
             ctx,
             false
         ) as IdsStorage
-        val saved = Ids.Id.Internal(
-            Ids.InternalId.BACKUP_PERSISTENT_ID, "123456", Ids.CreationType.justGenerated)
+        val saved = Ids.Id(
+            ID_NAME, "123456", Ids.CreationType.justGenerated)
         storage.save(saved)
 
-        val loaded = storage.get(Ids.InternalId.BACKUP_PERSISTENT_ID)
+        val loaded = storage.get(ID_NAME)
         assertEquals(saved.copy(creation = Ids.CreationType.readFromFile), loaded)
     }
 
@@ -42,9 +36,9 @@ class IdsInstrumentedTest {
             clear()
         }
 
-        val manager: IdsManager = Ids.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
+        val manager: IdsManager = Ids(ctx, encryptIds = false).manager
 
-        assertEquals(manager.backupPersistentId.creation, Ids.CreationType.justGenerated)
+        assertEquals(manager.id.creation, Ids.CreationType.justGenerated)
     }
 
     @Test
@@ -58,40 +52,15 @@ class IdsInstrumentedTest {
 
         // add id in storage
         storage.apply {
-            val id = Ids.Id.Internal(
-                Ids.InternalId.BACKUP_PERSISTENT_ID,
+            val id = Ids.Id(
+                ID_NAME,
                 "123", Ids.CreationType.justGenerated)
             save(id)
         }
 
-        val manager: IdsManager = Ids.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
+        val manager: IdsManager = Ids(ctx, encryptIds = false).manager
 
-        assertEquals(manager.backupPersistentId.creation, Ids.CreationType.readFromFile)
-    }
-
-    @Test
-    fun testConciergeInitCreateACorrectInstance() {
-        val ctx: Context = ApplicationProvider.getApplicationContext()
-        val manager: IdsManager = Ids.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
-
-        assertTrue(manager is IdsManagerImpl)
-    }
-
-    @Test
-    fun testAcceptACustomStorageAndProvider() {
-        val ctx: Context = ApplicationProvider.getApplicationContext()
-        val customNonBackupStorage =
-            IdsStorageImpl(ctx, false)
-        val customProvider = IdsProviderImpl(ctx)
-
-        val manager: IdsManager = Ids.Manager(ctx,
-            nonBackupStorage = customNonBackupStorage,
-            provider = customProvider,
-            appCustomIdProvider = appCustomIdProvider,
-            encryptIds = false)
-
-        assertSame(customNonBackupStorage, manager.nonBackupStorage)
-        assertSame(customProvider, manager.provider)
+        assertEquals(manager.id.creation, Ids.CreationType.readFromFile)
     }
 }
 
