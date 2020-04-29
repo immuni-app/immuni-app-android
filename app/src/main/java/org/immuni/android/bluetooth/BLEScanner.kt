@@ -3,13 +3,10 @@ package org.immuni.android.bluetooth
 import android.bluetooth.le.*
 import android.os.ParcelUuid
 import org.immuni.android.networking.Networking
-import org.immuni.android.analytics.Pico
-import kotlinx.coroutines.*
 import org.immuni.android.api.model.*
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.models.ProximityEvent
-import org.immuni.android.metrics.BluetoothScanFailed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -18,7 +15,6 @@ class BLEScanner : KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private val database: ImmuniDatabase by inject()
     private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
-    private val pico: Pico by inject()
     private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var myScanCallback = MyScanCallback()
     private val aggregator: ProximityEventsAggregator by inject()
@@ -103,9 +99,6 @@ class BLEScanner : KoinComponent {
             super.onScanFailed(errorCode)
 
             log("onScanFailed $errorCode")
-            GlobalScope.launch {
-                pico.trackEvent(BluetoothScanFailed().userAction)
-            }
         }
     }
 }

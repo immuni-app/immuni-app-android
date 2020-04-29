@@ -3,9 +3,7 @@ package org.immuni.android.ui.log
 import androidx.lifecycle.*
 import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.extensions.storage.KVStorage
-import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
-import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
@@ -31,7 +29,6 @@ class LogViewModel(
     private val state: KVStorage by inject()
     private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val ids: Ids by inject()
-    private val pico: Pico by inject()
     private val userManager: UserManager by inject()
     private val surveyManager: SurveyManager by inject()
     private val viewModelJob = SupervisorJob()

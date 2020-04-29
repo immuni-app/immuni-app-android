@@ -2,13 +2,10 @@ package org.immuni.android.managers
 
 import android.content.Context
 import org.immuni.android.extensions.utils.retry
-import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.api.ImmuniAPIRepository
 import org.immuni.android.api.model.BtId
 import org.immuni.android.api.model.BtIds
-import org.immuni.android.metrics.RefreshBtIdsFailed
-import org.immuni.android.metrics.RefreshBtIdsSuccedeed
 import org.immuni.android.networking.api.NetworkResource
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -16,7 +13,6 @@ import java.util.*
 
 class BtIdsManager(val context: Context) : KoinComponent {
     private val immuniAPIRepository: ImmuniAPIRepository by inject()
-    private val pico: Pico by inject()
     private var btIds: BtIds? = null
     private var timeCorrection = 0L
 
@@ -54,10 +50,9 @@ class BtIdsManager(val context: Context) : KoinComponent {
                     is NetworkResource.Success -> {
                         btIds = response.data
                         timeCorrection = Date().time - (btIds!!.serverTimestamp.toLong() * 1000L)
-                        pico.trackEvent(RefreshBtIdsSuccedeed().userAction)
                     }
                     else -> {
-                        pico.trackEvent(RefreshBtIdsFailed().userAction)
+                        // nothing to do
                     }
                 }
                 response is NetworkResource.Success

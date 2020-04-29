@@ -8,7 +8,6 @@ import android.bluetooth.le.BluetoothLeAdvertiser
 import android.content.Context
 import android.os.ParcelUuid
 import org.immuni.android.networking.Networking
-import org.immuni.android.analytics.Pico
 import com.google.android.gms.common.util.Hex
 import kotlinx.coroutines.*
 import org.immuni.android.BuildConfig
@@ -16,7 +15,6 @@ import org.immuni.android.api.model.*
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.models.ProximityEvent
-import org.immuni.android.metrics.BluetoothAdvertisingFailed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -27,7 +25,6 @@ class BLEAdvertiser(val context: Context): KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private var bluetoothGattServer: BluetoothGattServer? = null
     private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
-    private val pico: Pico by inject()
     private var advertiser: BluetoothLeAdvertiser? = null
     private var callback = MyAdvertiseCallback()
     private val btIdsManager: BtIdsManager by inject()
@@ -143,9 +140,6 @@ class BLEAdvertiser(val context: Context): KoinComponent {
             }
 
             log("Failure starting BLEAdvertiser error = $errorCode reason=$reason")
-            GlobalScope.launch {
-                pico.trackEvent(BluetoothAdvertisingFailed(reason).userAction)
-            }
         }
 
         override fun onStartSuccess(settingsInEffect: AdvertiseSettings?) {

@@ -7,7 +7,6 @@ import androidx.security.crypto.MasterKeys
 import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.ids.Ids
 import org.immuni.android.networking.Networking
-import org.immuni.android.analytics.Pico
 import org.immuni.android.debugmenu.DebugMenu
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
@@ -104,14 +103,6 @@ val appModule = module {
         FirebaseFCM(
             androidContext(),
             ImmuniFirebaseFCMConfiguration()
-        )
-    }
-
-    // Analytics
-    single {
-        Pico(
-            androidContext(),
-            ImmuniPicoConfiguration(androidContext())
         )
     }
 

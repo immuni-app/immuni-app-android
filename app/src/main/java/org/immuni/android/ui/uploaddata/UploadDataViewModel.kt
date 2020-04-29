@@ -4,14 +4,12 @@ import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.immuni.android.extensions.livedata.Event
-import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.api.ImmuniAPIRepository
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.ExportDevice
-import org.immuni.android.metrics.DataUploaded
 import org.immuni.android.networking.api.NetworkResource
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -23,7 +21,6 @@ class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : Vie
 
     private val surveyManager: SurveyManager by inject()
     private val immuniAPIRepository: ImmuniAPIRepository by inject()
-    private val pico: Pico by inject()
 
     val loading = MutableLiveData<Event<Boolean>>()
     val error = MutableLiveData<Event<Boolean>>()
@@ -56,7 +53,6 @@ class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : Vie
             loading.value = Event(false)
             if (result is NetworkResource.Success) {
                 success.value = Event(true)
-                pico.trackEvent(DataUploaded(code).userAction)
             } else {
                 error.value = Event(true)
             }

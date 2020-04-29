@@ -7,9 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.lifecycle.ProcessLifecycleOwner
 import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
-import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
-import org.immuni.android.analytics.Pico
 import org.immuni.android.fcm.FirebaseFCM
 import org.immuni.android.debugmenu.DebugMenu
 import org.immuni.android.api.model.ImmuniMe
@@ -27,7 +25,6 @@ class ImmuniApplication : Application() {
 
     private lateinit var ids: Ids
     private lateinit var networking: Networking<ImmuniSettings, ImmuniMe>
-    private lateinit var pico: Pico
     private lateinit var fcm: FirebaseFCM
     private lateinit var debugMenu: DebugMenu
     private lateinit var surveyNotificationManager: SurveyNotificationManager
@@ -49,12 +46,9 @@ class ImmuniApplication : Application() {
 
         ids = get()
         networking = get()
-        pico = get()
         fcm = get()
         debugMenu = get()
         surveyNotificationManager = get()
-
-        pico.setup()
 
         startWorkers()
         registerReceivers()

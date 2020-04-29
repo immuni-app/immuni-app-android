@@ -82,7 +82,6 @@ dependencies {
     implementation project(':ids')
     implementation project(':debugmenu')
     implementation project(':networking')
-    implementation project(':analytics')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"

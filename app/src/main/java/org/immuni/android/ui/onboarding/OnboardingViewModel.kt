@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.lifecycle.*
 import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.networking.Networking
-import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
@@ -17,7 +16,6 @@ import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
-import org.immuni.android.metrics.OnboardingCompleted
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -34,7 +32,6 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val onboarding: Onboarding by inject()
     private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
-    private val pico: Pico by inject()
     private val userManager: UserManager by inject()
     private val immuniAPIRepository: ImmuniAPIRepository by inject()
     private val permissionsManager: PermissionsManager by inject()
@@ -137,8 +134,6 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
                 isMain = true
             )
             userManager.addUser(mainUser)
-
-            pico.trackEvent(OnboardingCompleted().userAction)
 
             //loading.value = false
             onboarding.setCompleted(true)

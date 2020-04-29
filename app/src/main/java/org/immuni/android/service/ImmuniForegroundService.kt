@@ -4,29 +4,22 @@ import PushNotificationUtils
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.util.Base64
 import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.networking.Networking
-import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.db.entity.RELATIVE_TIMESTAMP_SECONDS
 import org.immuni.android.managers.AppNotificationManager
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.bluetooth.BLEAdvertiser
 import org.immuni.android.bluetooth.BLEScanner
-import org.immuni.android.db.entity.SLOTS_PER_CONTACT_RECORD
-import org.immuni.android.metrics.*
-import org.immuni.android.metrics.BluetoothFoundPeripheralsSnapshot.Contact
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.util.*
 
 class ImmuniForegroundService : Service(), KoinComponent {
 
@@ -40,7 +33,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
     companion object: KoinComponent {
         const val FOREGROUND_NOTIFICATION_ID = 21032020
-        const val PICO_LAST_SENT_EVENT_TIME = "PICO_LAST_SENT_EVENT_TIME"
         var isServiceStarted = false
             private set
 
@@ -53,7 +45,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private val appNotificationManager: AppNotificationManager by inject()
     private val storage: KVStorage by inject()
-    private val pico: Pico by inject()
     private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val database: ImmuniDatabase by inject()
 
@@ -91,7 +82,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
     override fun onDestroy() {
         stopBle()
         serviceScope.launch {
-            pico.trackEvent(ForegroundServiceDestroyed().userAction)
             serviceScope.cancel("Service scope cancelling...")
             log("Service scope has been cancelled.")
         }
@@ -121,7 +111,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
         // keep the service running
         serviceScope.launch(Dispatchers.IO) {
-            pico.trackEvent(ForegroundServiceStarted().userAction)
 
             doWork()
             while (isServiceStarted) {
@@ -138,10 +127,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
             stopSelf()
         } catch (e: Exception) {
             log("Service stopped without being started: ${e.message}")
-        }
-
-        serviceScope.launch {
-            pico.trackEvent(ForegroundServiceStopped().userAction)
         }
 
         isServiceStarted = false
@@ -223,8 +208,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
                 previousPermissionsState = currentPermissionState
 
-                logEventsToPico()
-
                 delay(PERIODICITY.toLong() * 1000)
             }
         }
@@ -233,54 +216,5 @@ class ImmuniForegroundService : Service(), KoinComponent {
     enum class PermissionsState {
         MISSING,
         OK
-    }
-
-    private var picoCounter = 0
-    private suspend fun logEventsToPico() {
-        val count = picoCounter
-        picoCounter += 1
-
-        val picoPingPeriodicity = networking.settings()?.picoPingPeriodicity ?: 30
-        val picoContactsUploadPeriodicity = networking.settings()?.picoContactsUploadPeriodicity ?: 60
-
-        if (count % picoPingPeriodicity.div(PERIODICITY) == 0) {
-            pico.trackEvent(ForegroundServiceRunning().userAction)
-
-            if (!ImmuniApplication.lifecycleObserver.isInForeground) {
-                pico.trackEvent(BackgroundPing().userAction)
-            }
-        }
-
-        if (count % picoContactsUploadPeriodicity.div(PERIODICITY) == 0) {
-            val lastSentEventTime = storage.load(PICO_LAST_SENT_EVENT_TIME, 0L)
-            val currentTime =  Date().time
-            var endTime = lastSentEventTime
-            val timeWindow = RELATIVE_TIMESTAMP_SECONDS * (networking.settings()?.bleSlotsPerContactRecord ?: SLOTS_PER_CONTACT_RECORD) * 1000
-            while ((endTime + timeWindow) < currentTime) {
-                endTime += timeWindow
-            }
-            if (endTime == lastSentEventTime) {
-                return
-            }
-            val newContacts =
-                database.bleContactDao().getAllBetweenTimestamps(start = lastSentEventTime, end = endTime).map {
-                    val contact = Contact(
-                        btId = it.btId,
-                        timestamp = it.timestamp.time / 1000.0,
-                        events = Base64.encodeToString(it.events, Base64.DEFAULT)
-                    )
-                    contact
-                }
-
-            if(newContacts.isNotEmpty()) {
-                pico.trackEvent(
-                    BluetoothFoundPeripheralsSnapshot(
-                        contacts = newContacts
-                    ).userAction
-                )
-            }
-
-            storage.save(PICO_LAST_SENT_EVENT_TIME, endTime)
-        }
     }
 }

@@ -3,7 +3,6 @@ package org.immuni.android.service
 import android.content.Context
 import androidx.work.*
 import org.immuni.android.networking.Networking
-import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
@@ -11,7 +10,6 @@ import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
-import org.immuni.android.metrics.DataDeleted
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -24,7 +22,6 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters) 
     private val database: ImmuniDatabase by inject()
     private val surveyManager: SurveyManager by inject()
     private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
-    private val pico: Pico by inject()
 
     override suspend fun doWork(): Result = coroutineScope {
         log("running DeleteUserDataWorker!")
@@ -38,8 +35,6 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters) 
                         add(Calendar.DATE, -days)
                     }.timeInMillis
                 )
-
-                pico.trackEvent(DataDeleted(days).userAction)
             }
         }
 

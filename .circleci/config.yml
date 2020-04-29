@@ -43,13 +43,6 @@ jobs:
       - store_test_results:
           path: networking/build/test-results
       - run:
-          name: Run Analytics Module Unit Tests
-          command: ./gradlew :analytics:testDebugUnitTest
-      - store_artifacts:
-          path: analytics/build/reports
-      - store_test_results:
-          path: analytics/build/test-results
-      - run:
           name: Run Extensions Module Unit Tests
           command: ./gradlew :extensions:testDebugUnitTest
       - store_artifacts:
