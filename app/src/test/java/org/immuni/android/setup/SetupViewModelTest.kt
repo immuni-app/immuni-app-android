@@ -19,7 +19,6 @@ import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.networking.api.NetworkError
 import org.immuni.android.networking.api.NetworkResource
 import org.immuni.android.testutils.getOrAwaitValue
-import retrofit2.Response
 import kotlin.test.assertTrue
 
 class SetupViewModelTest {

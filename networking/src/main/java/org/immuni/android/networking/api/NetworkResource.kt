@@ -21,7 +21,7 @@ sealed class NetworkResource<T, E>(
 sealed class NetworkError<E>(
     val data: E? = null
 ) {
-    class HttpError<E>(httpCode: Int, data: E?) : NetworkError<E>(data)
+    class HttpError<E>(val httpCode: Int, data: E?) : NetworkError<E>(data)
     class IOError<E> : NetworkError<E>()
     class Timeout<E> : NetworkError<E>()
     class Unknown<E> : NetworkError<E>()
@@ -46,8 +46,8 @@ suspend inline fun <T, reified E : Any> safeApiCall(block: () -> Response<T>): N
         }
     } else {
         when (result.exceptionOrNull()) {
-            is IOException -> NetworkResource.Error(NetworkError.IOError())
             is SocketTimeoutException -> NetworkResource.Error(NetworkError.Timeout())
+            is IOException -> NetworkResource.Error(NetworkError.IOError())
             else -> NetworkResource.Error(NetworkError.Unknown())
         }
     }
