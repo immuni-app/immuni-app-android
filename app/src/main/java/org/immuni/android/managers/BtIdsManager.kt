@@ -9,6 +9,7 @@ import org.immuni.android.api.model.BtId
 import org.immuni.android.api.model.BtIds
 import org.immuni.android.metrics.RefreshBtIdsFailed
 import org.immuni.android.metrics.RefreshBtIdsSuccedeed
+import org.immuni.android.networking.api.NetworkResource
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
@@ -49,14 +50,17 @@ class BtIdsManager(val context: Context) : KoinComponent {
         val block = suspend {
             val response = immuniAPIRepository.getBtIds()
             val result = runCatching {
-                if (response.isSuccessful) {
-                    btIds = response.body()
-                    timeCorrection = Date().time - (btIds!!.serverTimestamp.toLong() * 1000L)
-                    pico.trackEvent(RefreshBtIdsSuccedeed().userAction)
-                } else {
-                    pico.trackEvent(RefreshBtIdsFailed().userAction)
+                when(response) {
+                    is NetworkResource.Success -> {
+                        btIds = response.data
+                        timeCorrection = Date().time - (btIds!!.serverTimestamp.toLong() * 1000L)
+                        pico.trackEvent(RefreshBtIdsSuccedeed().userAction)
+                    }
+                    else -> {
+                        pico.trackEvent(RefreshBtIdsFailed().userAction)
+                    }
                 }
-                response.isSuccessful
+                response is NetworkResource.Success
             }
             result.getOrNull() ?: false
         }

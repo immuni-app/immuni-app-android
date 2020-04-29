@@ -7,6 +7,9 @@ import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.models.ExportData
 import org.immuni.android.networking.Networking
+import org.immuni.android.networking.api.ErrorResponse
+import org.immuni.android.networking.api.NetworkResource
+import org.immuni.android.networking.api.safeApiCall
 import org.koin.core.KoinComponent
 import retrofit2.Response
 import retrofit2.http.Body
@@ -19,21 +22,23 @@ class ImmuniAPIRepository(
 ) : KoinComponent {
     private val api = networking.customServiceAPI(ImmuniAPI::class)
 
-    suspend fun exportData(code: String, data: ExportData): Response<ResponseBody> {
-        val result = api.exportData(code, data)
-        if(result.isSuccessful) {
+    suspend fun exportData(code: String, data: ExportData): NetworkResource<ResponseBody, ErrorResponse> {
+        val result = safeApiCall<ResponseBody, ErrorResponse> { api.exportData(code, data) }
+        if(result is NetworkResource.Success) {
             me() // update me model
         }
         return result
     }
 
-    suspend fun getBtIds() = api.getBtIds()
+    suspend fun getBtIds(): NetworkResource<BtIds, ErrorResponse> {
+        return safeApiCall{ api.getBtIds() }
+    }
 
-    suspend fun settings(): Response<ImmuniSettings> {
+    suspend fun settings(): NetworkResource<ImmuniSettings, ErrorResponse> {
         return networking.api.fetchSettings()
     }
 
-    suspend fun me(): Response<ImmuniMe> {
+    suspend fun me(): NetworkResource<ImmuniMe, ErrorResponse> {
         return networking.api.fetchMe()
     }
 }

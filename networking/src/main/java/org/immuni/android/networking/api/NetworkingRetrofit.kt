@@ -22,24 +22,6 @@ class NetworkingRetrofit(
 ) {
     private val idsManager = config.idsManager()
 
-    // catch here all network or unexpected exceptions
-    // in order to don't have to explicitly try/catch all the retrofit calls
-    val exceptionsInterceptor: ((Interceptor.Chain) -> Response) = { chain ->
-        val request = chain.request()
-        try {
-            chain.proceed(request)
-        } catch (e: Exception) {
-            Response.Builder()
-                .request(request)
-                .code(403)
-                .body("{}".toResponseBody())
-                .protocol(Protocol.HTTP_2)
-                .message("Networking IO Exception")
-                .headers(request.headers)
-                .build()
-        }
-    }
-
     val headersInterceptor: ((Interceptor.Chain) -> Response) = { chain ->
         val infoProvider = DeviceInfoProviderImpl()
         chain.run {
@@ -72,7 +54,6 @@ class NetworkingRetrofit(
         val builder = OkHttpClient.Builder()
             .hostnameVerifier(HostnameVerifier { hostname, session -> true })
 
-        builder.addInterceptor(exceptionsInterceptor)
         builder.addInterceptor(headersInterceptor)
         builder.addInterceptor(gzipInterceptor)
 

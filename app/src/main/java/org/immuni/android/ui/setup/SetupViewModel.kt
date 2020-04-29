@@ -7,6 +7,7 @@ import org.immuni.android.base.livedata.Event
 import org.immuni.android.base.utils.retry
 import kotlinx.coroutines.*
 import org.immuni.android.managers.UserManager
+import org.immuni.android.networking.api.NetworkResource
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.welcome.Welcome
 import org.immuni.android.util.Flags
@@ -72,19 +73,26 @@ class SetupViewModel(
                     val settings = retry(
                         times = 6,
                         block = { repository.getOracleSetting() },
-                        exitWhen = { result -> result.isSuccessful },
+                        exitWhen = { result -> result is NetworkResource.Success },
                         onIntermediateFailure = { errorDuringSetup.value = true }
                     )
-                    if (!settings.isSuccessful) {
-                        throw IOException()
-                    } else {
-                        errorDuringSetup.value = false
+
+                    when(settings) {
+                        is NetworkResource.Error -> throw IOException()
                     }
 
-                    val me = repository.getOracleMe()
-                    if (!me.isSuccessful) {
-                        throw IOException()
+                    val me = retry(
+                        times = 6,
+                        block = { repository.getOracleMe() },
+                        exitWhen = { result -> result is NetworkResource.Success },
+                        onIntermediateFailure = { errorDuringSetup.value = true }
+                    )
+
+                    when(me) {
+                        is NetworkResource.Error -> throw IOException()
                     }
+
+                    errorDuringSetup.value = false
 
                     // check all is ok
                     setup.setCompleted(true)
@@ -114,9 +122,5 @@ class SetupViewModel(
 
     private fun setAddFamilyMemberDialogShown() {
         setFlag(Flags.ADD_FAMILY_MEMBER_DIALOG_SHOWN, true)
-    }
-
-    companion object {
-        const val TAG = "SetupViewModel"
     }
 }
