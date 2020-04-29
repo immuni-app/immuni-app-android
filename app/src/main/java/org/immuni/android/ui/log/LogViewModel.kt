@@ -42,7 +42,7 @@ class LogViewModel(
         get() = user.value?.let { userManager.indexForUser(it.id) }
 
     val deviceId: String
-        get() = ids.backupPersistentId.id
+        get() = ids.id.id
 
     var survey = MutableLiveData<Survey>()
 

@@ -11,7 +11,7 @@ import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import org.immuni.android.fcm.FirebaseFCM
-import org.immuni.android.secretmenu.SecretMenu
+import org.immuni.android.debugmenu.DebugMenu
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.managers.SurveyNotificationManager
@@ -28,7 +28,7 @@ class ImmuniApplication : Application() {
     private lateinit var networking: Networking<ImmuniSettings, ImmuniMe>
     private lateinit var pico: Pico
     private lateinit var fcm: FirebaseFCM
-    private lateinit var secretMenu: SecretMenu
+    private lateinit var debugMenu: DebugMenu
     private lateinit var surveyNotificationManager: SurveyNotificationManager
 
     override fun onCreate() {
@@ -50,7 +50,7 @@ class ImmuniApplication : Application() {
         networking = get()
         pico = get()
         fcm = get()
-        secretMenu = get()
+        debugMenu = get()
         surveyNotificationManager = get()
 
         pico.setup()

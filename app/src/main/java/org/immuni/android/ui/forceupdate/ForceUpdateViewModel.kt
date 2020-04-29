@@ -97,7 +97,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
             setDescription(context.getString(R.string.immuni_update_file_description))
             setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "immuni.apk")
-            addRequestHeader("device-id", ids.backupPersistentId.id)
+            addRequestHeader("device-id", ids.id.id)
         }
 
         val downloadId = downloadManager.enqueue(request)

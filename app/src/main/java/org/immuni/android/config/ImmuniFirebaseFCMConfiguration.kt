@@ -33,7 +33,7 @@ class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
         // be sure to call devices before
         networking.api.devices(
             DevicesRequest(
-                uniqueId = ids.backupPersistentId.id
+                uniqueId = ids.id.id
             )
         )
 

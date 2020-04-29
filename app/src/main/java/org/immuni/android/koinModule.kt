@@ -8,7 +8,7 @@ import org.immuni.android.base.storage.KVStorage
 import org.immuni.android.ids.Ids
 import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
-import org.immuni.android.secretmenu.SecretMenu
+import org.immuni.android.debugmenu.DebugMenu
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import org.immuni.android.api.ImmuniAPIRepository
@@ -76,12 +76,12 @@ val appModule = module {
     // single instance of Welcome
     single { Welcome() }
 
-    // Ids - Lib
+    // Ids
     single {
-        Ids.Manager(androidContext(), appCustomIdProvider = ImmuniCustomIdProvider(), encryptIds = true)
+        Ids(androidContext(), encryptIds = true)
     }
 
-    // Networking - Lib
+    // Networking
     single {
         Networking<ImmuniSettings, ImmuniMe>(
             androidContext(),
@@ -89,11 +89,11 @@ val appModule = module {
         )
     }
 
-    // Secret Menu - Lib
+    // Debug Menu
     single {
-        SecretMenu(
+        DebugMenu(
             androidContext() as Application,
-            ImmuniSecretMenuConfiguration(
+            ImmuniDebugMenuConfiguration(
                 androidContext()
             ), get()
         )
@@ -107,7 +107,7 @@ val appModule = module {
         )
     }
 
-    // Analytics - Lib
+    // Analytics
     single {
         Pico(
             androidContext(),

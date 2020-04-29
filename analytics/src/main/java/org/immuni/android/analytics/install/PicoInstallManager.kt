@@ -50,8 +50,8 @@ internal class PicoInstallManager(
         )
 
         val installEvent = computeInstallEvent(
-            backupPersistentId = concierge.backupPersistentId,
-            nonBackupPersistentId = concierge.nonBackupPersistentId,
+            backupPersistentId = concierge.id,
+            nonBackupPersistentId = concierge.id,
             currentAppVersion = DeviceUtils.appVersionName(context),
             oldAppVersion = oldAppVersion,
             oldBundleVersion = oldBundleVersion

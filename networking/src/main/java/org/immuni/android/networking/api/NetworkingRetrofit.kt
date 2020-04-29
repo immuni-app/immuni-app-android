@@ -35,8 +35,8 @@ class NetworkingRetrofit(
                 .addHeader("Android-Platform", infoProvider.devicePlatform())
                 .addHeader("Android-Version", infoProvider.androidVersion())
                 .addHeader("Build", DeviceUtils.appVersionCode(context).toString())
-                .addHeader("Pico-Unique-Id", idsManager.backupPersistentId.id)
-                .addHeader("Pico-Client-Id", idsManager.nonBackupPersistentId.id)
+                .addHeader("Pico-Unique-Id", idsManager.id.id)
+                .addHeader("Pico-Client-Id", idsManager.id.id)
 
             proceed(requestBuilder.build())
         }

@@ -71,7 +71,7 @@ class ResumeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinC
                 holder.age.text = item.user.ageGroup.humanReadable(ImmuniApplication.appContext)
                 holder.icon.setImageResource(
                     item.user.gender.iconResource(
-                        ids.backupPersistentId.id,
+                        ids.id.id,
                         item.userIndex
                     )
                 )

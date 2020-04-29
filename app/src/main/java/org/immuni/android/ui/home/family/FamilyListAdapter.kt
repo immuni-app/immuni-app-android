@@ -111,7 +111,7 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
                 holder.age.text = item.user.ageGroup.humanReadable(context)
                 holder.icon.setImageResource(
                     item.user.gender.iconResource(
-                        ids.backupPersistentId.id,
+                        ids.id.id,
                         item.userIndex
                     )
                 )

@@ -27,7 +27,7 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
     }
 
     override fun isDevelopmentDevice(): Boolean {
-        return networking.settings()?.developmentDevices?.contains(ids.backupPersistentId.id) == true
+        return networking.settings()?.developmentDevices?.contains(ids.id.id) == true
     }
 
     override fun idsManager(): IdsManager {

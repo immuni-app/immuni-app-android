@@ -4,35 +4,30 @@ import android.content.Context
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+typealias IdName = String
+
+internal const val ID_NAME = "unique_id"
+
 /**
  * Ids lib.
  *
  * Manage the app ids.
  */
-class Ids {
+class Ids(
+    context: Context,
+    encryptIds: Boolean,
+    storage: IdsStorage = IdsStorageImpl(context, encryptIds),
+    provider: IdsProvider = IdsProviderImpl(context)
+) {
+
+    val manager: IdsManager = IdsManagerImpl(storage, provider)
 
     @JsonClass(generateAdapter = true)
-    data class Id internal constructor(
-        val name: String,
+    data class Id (
+        val name: IdName = ID_NAME,
         val id: String,
         val creation: CreationType
-    ) {
-        companion object {
-            fun Internal(internalId: InternalId, id: String, creation: CreationType): Id =
-                Id(
-                    name = internalId.keyName,
-                    id = id,
-                    creation = creation
-                )
-
-            fun Custom(name: String, id: String): Id =
-                Id(
-                    name = name,
-                    id = id,
-                    creation = CreationType.notApplicable
-                )
-        }
-    }
+    )
 
     @JsonClass(generateAdapter = false)
     enum class CreationType {
@@ -45,45 +40,5 @@ class Ids {
         // If the id has been read from file this session
         @Json(name = "read_from_file")
         readFromFile
-    }
-
-    @JsonClass(generateAdapter = false)
-    enum class InternalId(val keyName: String, val type: Type) {
-        @Json(name = "backup_persistent_id")
-        BACKUP_PERSISTENT_ID("backup_persistent_id",
-            Type.BACKUP
-        ),
-        @Json(name = "non_backup_persistent_id")
-        NON_BACKUP_PERSISTENT_ID("non_backup_persistent_id",
-            Type.NON_BACKUP
-        );
-
-        enum class Type {
-            BACKUP, NON_BACKUP
-        }
-    }
-
-    companion object {
-        fun Manager(
-            context: Context,
-            nonBackupStorage: IdsStorage = IdsNonBackupStorageImpl(
-                context
-            ),
-            provider: IdsProvider = IdsProviderImpl(
-                context
-            ),
-            appCustomIdProvider: CustomIdProvider,
-            encryptIds: Boolean
-        ): IdsManager {
-            return IdsManagerImpl(
-                IdsStorageImpl(
-                    context,
-                    encryptIds
-                ),
-                nonBackupStorage,
-                provider,
-                appCustomIdProvider
-            )
-        }
     }
 }

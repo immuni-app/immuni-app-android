@@ -62,7 +62,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
             putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
             putExtra(
                 Intent.EXTRA_TEXT,
-                String.format("${ctx.getString(R.string.recover_data_email_message)}", ids.backupPersistentId.id)
+                String.format("${ctx.getString(R.string.recover_data_email_message)}", ids.id.id)
             )
         }
 
@@ -81,7 +81,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
             putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
             putExtra(
                 Intent.EXTRA_TEXT,
-                String.format("${ctx.getString(R.string.delete_data_email_message)}", ids.backupPersistentId.id)
+                String.format("${ctx.getString(R.string.delete_data_email_message)}", ids.id.id)
             )
         }
 

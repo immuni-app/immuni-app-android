@@ -47,7 +47,7 @@ class PicoRetrofit(config: PicoConfiguration) {
                 request()
                     .newBuilder()
                     .addHeader("Pico-Version", Pico.VERSION)
-                    .addHeader("Pico-Client-ID", ids.nonBackupPersistentId.id)
+                    .addHeader("Pico-Client-ID", ids.id.id)
                     .addHeader("Pico-Tester", config.isDevelopmentDevice().toString())
                     .build()
             )

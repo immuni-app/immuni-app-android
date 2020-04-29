@@ -82,7 +82,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 dependencies {
     implementation project(":base")
     implementation project(':ids')
-    implementation project(":secretmenu")
+    implementation project(':debugmenu')
     implementation project(':networking')
     implementation project(':analytics')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
