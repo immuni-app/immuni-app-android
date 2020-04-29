@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import org.immuni.android.base.livedata.Event
 import org.immuni.android.base.utils.retry
 import kotlinx.coroutines.*
+import org.immuni.android.api.ImmuniAPIRepository
 import org.immuni.android.managers.UserManager
 import org.immuni.android.networking.api.NetworkResource
 import org.immuni.android.ui.onboarding.Onboarding
@@ -20,7 +21,7 @@ class SetupViewModel(
     val onboarding: Onboarding,
     val welcome: Welcome,
     val userManager: UserManager,
-    val repository: SetupRepository
+    val repository: ImmuniAPIRepository
 ) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
@@ -58,7 +59,7 @@ class SetupViewModel(
             // set timeout here to allow the user to use the app offline
             // (this is not the very first startup that must to be blocking)
             withTimeoutOrNull(5000) {
-                repository.getOracleSetting()
+                repository.settings()
             }
 
             if (setup.isComplete()) {
@@ -72,7 +73,7 @@ class SetupViewModel(
                     // the first time the call to settings and me is blocking, you cannot proceed without
                     val settings = retry(
                         times = 6,
-                        block = { repository.getOracleSetting() },
+                        block = { repository.settings() },
                         exitWhen = { result -> result is NetworkResource.Success },
                         onIntermediateFailure = { errorDuringSetup.value = true }
                     )
@@ -83,7 +84,7 @@ class SetupViewModel(
 
                     val me = retry(
                         times = 6,
-                        block = { repository.getOracleMe() },
+                        block = { repository.me() },
                         exitWhen = { result -> result is NetworkResource.Success },
                         onIntermediateFailure = { errorDuringSetup.value = true }
                     )

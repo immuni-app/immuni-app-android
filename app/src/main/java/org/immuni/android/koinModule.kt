@@ -36,8 +36,6 @@ import org.immuni.android.ui.log.LogViewModel
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.onboarding.OnboardingViewModel
 import org.immuni.android.ui.setup.Setup
-import org.immuni.android.ui.setup.SetupRepository
-import org.immuni.android.ui.setup.SetupRepositoryImpl
 import org.immuni.android.ui.setup.SetupViewModel
 import org.immuni.android.ui.uploaddata.UploadDataViewModel
 import org.immuni.android.ui.welcome.Welcome
@@ -77,14 +75,6 @@ val appModule = module {
 
     // single instance of Welcome
     single { Welcome() }
-
-    // single instance of SetupRepository
-    single<SetupRepository> {
-        SetupRepositoryImpl(
-            androidContext(),
-            get(), get()
-        )
-    }
 
     // Ids - Lib
     single {
