@@ -2,7 +2,7 @@ package org.immuni.android.bluetooth
 
 import android.bluetooth.le.*
 import android.os.ParcelUuid
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.networking.model.*
@@ -17,7 +17,7 @@ import org.koin.core.inject
 class BLEScanner : KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private val database: ImmuniDatabase by inject()
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
     private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var myScanCallback = MyScanCallback()
@@ -31,9 +31,9 @@ class BLEScanner : KoinComponent {
     }
 
     suspend fun start(): Boolean {
-        val scanMode = oracle.settings()?.bleScanMode?.scanMode()
+        val scanMode = networking.settings()?.bleScanMode?.scanMode()
             ?: ScanSettings.SCAN_MODE_BALANCED
-        log("Scan mode: ${oracle.settings()?.bleScanMode}")
+        log("Scan mode: ${networking.settings()?.bleScanMode}")
 
         if (!bluetoothManager.isBluetoothEnabled()) return false
         bluetoothLeScanner = bluetoothManager.adapter()?.bluetoothLeScanner

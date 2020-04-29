@@ -1,7 +1,7 @@
 package org.immuni.android.analytics.install
 
 import android.content.Context
-import org.immuni.android.ids.Concierge
+import org.immuni.android.ids.Ids
 import org.immuni.android.base.utils.DeviceUtils
 import org.immuni.android.base.storage.KVStorage
 import org.immuni.android.analytics.PicoConfiguration
@@ -34,7 +34,7 @@ internal class PicoInstallManager(
     val info: PicoInstallInfo
 
     init {
-        val concierge = config.concierge()
+        val concierge = config.idsManager()
 
         val firstInstallDate =
             storage.load<Long>(firstInstallTimeMillisKey)?.let { Date(it) } ?: Date()
@@ -73,14 +73,14 @@ internal class PicoInstallManager(
     }
 
     private fun computeInstallEvent(
-        backupPersistentId: Concierge.Id,
-        nonBackupPersistentId: Concierge.Id,
+        backupPersistentId: Ids.Id,
+        nonBackupPersistentId: Ids.Id,
         currentAppVersion: String,
         oldAppVersion: String?,
         oldBundleVersion: String?
     ): PicoInstallEventData? {
-        if (backupPersistentId.creation == Concierge.CreationType.readFromFile &&
-            nonBackupPersistentId.creation == Concierge.CreationType.readFromFile &&
+        if (backupPersistentId.creation == Ids.CreationType.readFromFile &&
+            nonBackupPersistentId.creation == Ids.CreationType.readFromFile &&
             oldAppVersion == currentAppVersion
         ) {
             return null

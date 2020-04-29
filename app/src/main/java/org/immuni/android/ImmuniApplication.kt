@@ -7,8 +7,8 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.lifecycle.ProcessLifecycleOwner
 import org.immuni.android.base.lifecycle.AppLifecycleObserver
-import org.immuni.android.ids.ConciergeManager
-import org.immuni.android.networking.Oracle
+import org.immuni.android.ids.IdsManager
+import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import org.immuni.android.fcm.FirebaseFCM
 import org.immuni.android.secretmenu.SecretMenu
@@ -24,8 +24,8 @@ import org.koin.core.context.startKoin
 
 class ImmuniApplication : Application() {
 
-    private lateinit var concierge: ConciergeManager
-    private lateinit var oracle: Oracle<ImmuniSettings, ImmuniMe>
+    private lateinit var ids: IdsManager
+    private lateinit var networking: Networking<ImmuniSettings, ImmuniMe>
     private lateinit var pico: Pico
     private lateinit var fcm: FirebaseFCM
     private lateinit var secretMenu: SecretMenu
@@ -46,8 +46,8 @@ class ImmuniApplication : Application() {
             modules(appModule)
         }
 
-        concierge = get()
-        oracle = get()
+        ids = get()
+        networking = get()
         pico = get()
         fcm = get()
         secretMenu = get()

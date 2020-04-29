@@ -3,7 +3,7 @@ package org.immuni.android.ui.onboarding
 import android.content.Intent
 import androidx.lifecycle.*
 import org.immuni.android.base.livedata.Event
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.asFlow
@@ -33,7 +33,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val onboarding: Onboarding by inject()
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
     private val userManager: UserManager by inject()
     private val apiManager: ApiManager by inject()
@@ -92,13 +92,13 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     }
 
     fun onPrivacyPolicyClick() {
-        oracle.settings()?.privacyPolicyUrl?.let { url ->
+        networking.settings()?.privacyPolicyUrl?.let { url ->
             openUrlInDialog(url)
         }
     }
 
     fun onTosClick() {
-        oracle.settings()?.termsOfServiceUrl?.let { url ->
+        networking.settings()?.termsOfServiceUrl?.let { url ->
             openUrlInDialog(url)
         }
     }

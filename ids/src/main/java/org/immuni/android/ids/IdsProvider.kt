@@ -1,19 +1,19 @@
 package org.immuni.android.ids
 
-import org.immuni.android.ids.Concierge.*
+import org.immuni.android.ids.Ids.*
 import android.content.Context
 import java.util.*
 
 /**
  * A provider of user ids.
  */
-interface ConciergeProvider {
+interface IdsProvider {
     fun provideBackupPersistentId(): Id
     fun provideNonBackupPersistentId(): Id
 }
 
-internal class ConciergeProviderImpl(val context: Context) :
-    ConciergeProvider {
+internal class IdsProviderImpl(val context: Context) :
+    IdsProvider {
 
     /**
      * Provide a backup persistent id as [UUID].

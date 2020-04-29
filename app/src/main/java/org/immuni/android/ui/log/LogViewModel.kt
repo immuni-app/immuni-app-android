@@ -3,8 +3,8 @@ package org.immuni.android.ui.log
 import androidx.lifecycle.*
 import org.immuni.android.base.livedata.Event
 import org.immuni.android.base.storage.KVStorage
-import org.immuni.android.ids.ConciergeManager
-import org.immuni.android.networking.Oracle
+import org.immuni.android.ids.IdsManager
+import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
@@ -28,8 +28,8 @@ class LogViewModel(
 ) : ViewModel(), KoinComponent {
 
     private val state: KVStorage by inject()
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-    private val concierge: ConciergeManager by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val ids: IdsManager by inject()
     private val pico: Pico by inject()
     private val userManager: UserManager by inject()
     private val surveyManager: SurveyManager by inject()
@@ -42,7 +42,7 @@ class LogViewModel(
         get() = user.value?.let { userManager.indexForUser(it.id) }
 
     val deviceId: String
-        get() = concierge.backupPersistentId.id
+        get() = ids.backupPersistentId.id
 
     var survey = MutableLiveData<Survey>()
 
@@ -122,7 +122,7 @@ class LogViewModel(
     }
 
     private fun setup(reset: Boolean = false) {
-        val settings = oracle.settings()!!
+        val settings = networking.settings()!!
         val _survey = settings.survey!!
         survey.value = _survey
 
@@ -277,7 +277,7 @@ class LogViewModel(
         return ((index + 2).toFloat() / totalQuestions.toFloat()).coerceIn(0f, 1f)
     }
 
-    fun canGoBack() = oracle.settings()?.let { !it.disableSurveyBack } ?: true
+    fun canGoBack() = networking.settings()?.let { !it.disableSurveyBack } ?: true
 
     companion object {
         const val STATE_KEY = "STATE_KEY"

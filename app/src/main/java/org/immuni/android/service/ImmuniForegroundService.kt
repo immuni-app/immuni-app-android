@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Base64
 import org.immuni.android.base.storage.KVStorage
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
@@ -54,7 +54,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
     private val appNotificationManager: AppNotificationManager by inject()
     private val storage: KVStorage by inject()
     private val pico: Pico by inject()
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val database: ImmuniDatabase by inject()
 
     override fun onBind(intent: Intent): IBinder? {
@@ -184,7 +184,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
         val bluetooth = serviceScope.async {
             while(isServiceStarted) {
                 startBleLoop()
-                delay((oracle.settings()?.bleTimeoutSeconds?.toLong() ?: 180L) * 1000L)
+                delay((networking.settings()?.bleTimeoutSeconds?.toLong() ?: 180L) * 1000L)
             }
         }
 
@@ -193,7 +193,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
             while(isServiceStarted) {
                 log("Periodic check....")
                 // disable BLE from settings if needed
-                if(oracle.settings()?.bleDisableAll == true) {
+                if(networking.settings()?.bleDisableAll == true) {
                     stopService()
                     return@async
                 }
@@ -240,8 +240,8 @@ class ImmuniForegroundService : Service(), KoinComponent {
         val count = picoCounter
         picoCounter += 1
 
-        val picoPingPeriodicity = oracle.settings()?.picoPingPeriodicity ?: 30
-        val picoContactsUploadPeriodicity = oracle.settings()?.picoContactsUploadPeriodicity ?: 60
+        val picoPingPeriodicity = networking.settings()?.picoPingPeriodicity ?: 30
+        val picoContactsUploadPeriodicity = networking.settings()?.picoContactsUploadPeriodicity ?: 60
 
         if (count % picoPingPeriodicity.div(PERIODICITY) == 0) {
             pico.trackEvent(ForegroundServiceRunning().userAction)
@@ -255,7 +255,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
             val lastSentEventTime = storage.load(PICO_LAST_SENT_EVENT_TIME, 0L)
             val currentTime =  Date().time
             var endTime = lastSentEventTime
-            val timeWindow = RELATIVE_TIMESTAMP_SECONDS * (oracle.settings()?.bleSlotsPerContactRecord ?: SLOTS_PER_CONTACT_RECORD) * 1000
+            val timeWindow = RELATIVE_TIMESTAMP_SECONDS * (networking.settings()?.bleSlotsPerContactRecord ?: SLOTS_PER_CONTACT_RECORD) * 1000
             while ((endTime + timeWindow) < currentTime) {
                 endTime += timeWindow
             }

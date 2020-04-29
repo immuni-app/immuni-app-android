@@ -3,7 +3,7 @@ package org.immuni.android.networking
 import android.content.Context
 import org.immuni.android.base.storage.KVStorage
 
-class OracleStore(val context: Context, encrypted: Boolean) {
+class NetworkingStore(val context: Context, encrypted: Boolean) {
     companion object {
         const val NAME = "Oracle"
         const val SETTINGS_KEY = "Settings"

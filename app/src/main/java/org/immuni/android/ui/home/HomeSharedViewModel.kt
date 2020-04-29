@@ -10,7 +10,7 @@ import org.immuni.android.util.isFlagSet
 import org.immuni.android.util.setFlag
 import org.immuni.android.base.livedata.Event
 import org.immuni.android.base.utils.DeviceUtils
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import org.immuni.android.ImmuniApplication
@@ -37,7 +37,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val userManager: UserManager by inject()
     private val surveyManager: SurveyManager by inject()
     private val bluetoothManager: BluetoothManager by inject()
@@ -74,7 +74,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
         bluetoothManager.scheduleBLEWorker(ImmuniApplication.appContext)
 
         uiScope.launch {
-            oracle.meFlow().collect {
+            networking.meFlow().collect {
                 refreshHomeListModel()
             }
         }
@@ -82,7 +82,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
     private fun refreshHomeListModel() {
         uiScope.launch {
-            oracle.me()?.let {
+            networking.me()?.let {
                 val ctx = ImmuniApplication.appContext
 
                 val itemsList = mutableListOf<HomeItemType>()
@@ -137,8 +137,8 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
                 }
 
                 // suggestion cards
-                val survey = oracle.settings()?.survey
-                val me = oracle.me()
+                val survey = networking.settings()?.survey
+                val me = networking.me()
 
                 val userCardsMap = mutableMapOf<TriageProfile, MutableList<String>>()
                 for (user in userManager.users()) {
@@ -277,19 +277,19 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     }
 
     fun onPrivacyPolicyClick() {
-        oracle.settings()?.privacyPolicyUrl?.let {
+        networking.settings()?.privacyPolicyUrl?.let {
             openUrlInDialog(it)
         }
     }
 
     fun onFaqClick() {
-        oracle.settings()?.faqUrl?.let {
+        networking.settings()?.faqUrl?.let {
             openUrlInDialog(it)
         }
     }
 
     fun onTosClick() {
-        oracle.settings()?.termsOfServiceUrl?.let {
+        networking.settings()?.termsOfServiceUrl?.let {
             openUrlInDialog(it)
         }
     }

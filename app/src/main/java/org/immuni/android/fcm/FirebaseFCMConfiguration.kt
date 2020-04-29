@@ -1,6 +1,6 @@
 package org.immuni.android.fcm
 
-import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.ids.IdsManager
 import com.google.firebase.messaging.RemoteMessage
 
 /**
@@ -8,7 +8,7 @@ import com.google.firebase.messaging.RemoteMessage
  * the app injects into [TheirsConfiguration].
  */
 interface FirebaseFCMConfiguration {
-    val concierge: ConciergeManager
+    val ids: IdsManager
 
     /**
      * The app here has the change to show a custom notification or do an action.

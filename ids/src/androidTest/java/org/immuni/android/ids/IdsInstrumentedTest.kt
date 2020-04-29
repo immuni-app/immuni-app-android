@@ -10,27 +10,27 @@ import org.junit.runner.RunWith
 import org.junit.Assert.*
 
 @RunWith(AndroidJUnit4::class)
-class ConciergeInstrumentedTest {
+class IdsInstrumentedTest {
 
     val appCustomIdProvider = object :
-        ConciergeCustomIdProvider {
-        override val ids: Set<Concierge.Id>
+        CustomIdProvider {
+        override val ids: Set<Ids.Id>
             get() = setOf()
     }
 
     @Test
     fun testIdSerializationSavingAndRestore() {
         val ctx: Context = ApplicationProvider.getApplicationContext()
-        val storage = ConciergeStorageImpl(
+        val storage = IdsStorageImpl(
             ctx,
             false
-        ) as ConciergeStorage
-        val saved = Concierge.Id.Internal(
-            Concierge.InternalId.BACKUP_PERSISTENT_ID, "123456", Concierge.CreationType.justGenerated)
+        ) as IdsStorage
+        val saved = Ids.Id.Internal(
+            Ids.InternalId.BACKUP_PERSISTENT_ID, "123456", Ids.CreationType.justGenerated)
         storage.save(saved)
 
-        val loaded = storage.get(Concierge.InternalId.BACKUP_PERSISTENT_ID)
-        assertEquals(saved.copy(creation = Concierge.CreationType.readFromFile), loaded)
+        val loaded = storage.get(Ids.InternalId.BACKUP_PERSISTENT_ID)
+        assertEquals(saved.copy(creation = Ids.CreationType.readFromFile), loaded)
     }
 
     @Test
@@ -38,19 +38,19 @@ class ConciergeInstrumentedTest {
         val ctx: Context = ApplicationProvider.getApplicationContext()
 
         // clear storage
-        ConciergeStorageImpl(ctx, false).apply {
+        IdsStorageImpl(ctx, false).apply {
             clear()
         }
 
-        val manager: ConciergeManager = Concierge.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
+        val manager: IdsManager = Ids.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
 
-        assertEquals(manager.backupPersistentId.creation, Concierge.CreationType.justGenerated)
+        assertEquals(manager.backupPersistentId.creation, Ids.CreationType.justGenerated)
     }
 
     @Test
     fun testLoadedIdHasReadFromFileCreationType() {
         val ctx: Context = ApplicationProvider.getApplicationContext()
-        val storage = ConciergeStorageImpl(ctx, false)
+        val storage = IdsStorageImpl(ctx, false)
         // clear storage
         storage.apply {
             clear()
@@ -58,33 +58,33 @@ class ConciergeInstrumentedTest {
 
         // add id in storage
         storage.apply {
-            val id = Concierge.Id.Internal(
-                Concierge.InternalId.BACKUP_PERSISTENT_ID,
-                "123", Concierge.CreationType.justGenerated)
+            val id = Ids.Id.Internal(
+                Ids.InternalId.BACKUP_PERSISTENT_ID,
+                "123", Ids.CreationType.justGenerated)
             save(id)
         }
 
-        val manager: ConciergeManager = Concierge.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
+        val manager: IdsManager = Ids.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
 
-        assertEquals(manager.backupPersistentId.creation, Concierge.CreationType.readFromFile)
+        assertEquals(manager.backupPersistentId.creation, Ids.CreationType.readFromFile)
     }
 
     @Test
     fun testConciergeInitCreateACorrectInstance() {
         val ctx: Context = ApplicationProvider.getApplicationContext()
-        val manager: ConciergeManager = Concierge.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
+        val manager: IdsManager = Ids.Manager(ctx, appCustomIdProvider = appCustomIdProvider, encryptIds = false)
 
-        assertTrue(manager is ConciergeManagerImpl)
+        assertTrue(manager is IdsManagerImpl)
     }
 
     @Test
     fun testAcceptACustomStorageAndProvider() {
         val ctx: Context = ApplicationProvider.getApplicationContext()
         val customNonBackupStorage =
-            ConciergeStorageImpl(ctx, false)
-        val customProvider = ConciergeProviderImpl(ctx)
+            IdsStorageImpl(ctx, false)
+        val customProvider = IdsProviderImpl(ctx)
 
-        val manager: ConciergeManager = Concierge.Manager(ctx,
+        val manager: IdsManager = Ids.Manager(ctx,
             nonBackupStorage = customNonBackupStorage,
             provider = customProvider,
             appCustomIdProvider = appCustomIdProvider,

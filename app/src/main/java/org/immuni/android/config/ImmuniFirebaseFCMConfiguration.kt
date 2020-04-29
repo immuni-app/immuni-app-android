@@ -4,8 +4,8 @@ import org.immuni.android.networking.CustomOracleAPI
 import org.immuni.android.networking.model.ImmuniMe
 import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.networking.model.FcmTokenRequest
-import org.immuni.android.ids.ConciergeManager
-import org.immuni.android.networking.Oracle
+import org.immuni.android.ids.IdsManager
+import org.immuni.android.networking.Networking
 import org.immuni.android.networking.api.model.DevicesRequest
 import org.immuni.android.fcm.FirebaseFCMConfiguration
 import com.google.firebase.messaging.RemoteMessage
@@ -13,7 +13,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
-    override val concierge: ConciergeManager by inject()
+    override val ids: IdsManager by inject()
 
     override suspend fun onNewPushNotification(remoteMessage: RemoteMessage) {
         // Check if message contains a data payload.
@@ -28,14 +28,14 @@ class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
     }
 
     override suspend fun onNewToken(token: String) {
-        val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+        val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
 
         // be sure to call devices before
-        oracle.api.devices(DevicesRequest(
-            uniqueId = concierge.backupPersistentId.id
+        networking.api.devices(DevicesRequest(
+            uniqueId = ids.backupPersistentId.id
         ))
 
-        oracle.customServiceAPI(CustomOracleAPI::class).fcmNotificationToken(FcmTokenRequest(
+        networking.customServiceAPI(CustomOracleAPI::class).fcmNotificationToken(FcmTokenRequest(
             token = token
         ))
     }

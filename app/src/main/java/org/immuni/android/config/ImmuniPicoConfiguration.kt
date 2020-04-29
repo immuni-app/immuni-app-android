@@ -1,10 +1,10 @@
 package org.immuni.android.config
 
 import android.content.Context
-import org.immuni.android.ids.ConciergeManager
-import org.immuni.android.networking.Oracle
-import org.immuni.android.networking.api.model.OracleMe
-import org.immuni.android.networking.api.model.OracleSettings
+import org.immuni.android.ids.IdsManager
+import org.immuni.android.networking.Networking
+import org.immuni.android.networking.api.model.NetworkingMe
+import org.immuni.android.networking.api.model.NetworkingSettings
 import org.immuni.android.analytics.PicoConfiguration
 import okhttp3.CertificatePinner
 import org.immuni.android.R
@@ -18,8 +18,8 @@ import org.koin.core.inject
 
 class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComponent {
 
-    val concierge: ConciergeManager by inject()
-    val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    val ids: IdsManager by inject()
+    val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     val database: ImmuniDatabase by inject()
 
     override fun endpoint(): String {
@@ -27,15 +27,15 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
     }
 
     override fun isDevelopmentDevice(): Boolean {
-        return oracle.settings()?.developmentDevices?.contains(concierge.backupPersistentId.id) == true
+        return networking.settings()?.developmentDevices?.contains(ids.backupPersistentId.id) == true
     }
 
-    override fun concierge(): ConciergeManager {
-        return concierge
+    override fun idsManager(): IdsManager {
+        return ids
     }
 
-    override fun oracle(): Oracle<out OracleSettings, out OracleMe> {
-        return oracle
+    override fun oracle(): Networking<out NetworkingSettings, out NetworkingMe> {
+        return networking
     }
 
     override fun encryptStore() = true

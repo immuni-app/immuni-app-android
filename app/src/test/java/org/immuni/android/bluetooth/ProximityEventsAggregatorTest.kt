@@ -1,6 +1,6 @@
 package org.immuni.android.bluetooth
 
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.every
@@ -31,7 +31,7 @@ class ProximityEventsAggregatorTest {
     lateinit var daoMock: BLEContactDao
 
     @MockK(relaxed = true)
-    lateinit var oracle: Oracle<ImmuniSettings, ImmuniMe>
+    lateinit var networking: Networking<ImmuniSettings, ImmuniMe>
 
     @Before
     fun setUp() {
@@ -39,7 +39,7 @@ class ProximityEventsAggregatorTest {
 
         mockkStatic("org.immuni.android.db.dao.BLEContactDaoKt")
         coEvery { daoMock.addContact(any(), any(), any(), any(), any()) } returns Unit
-        every { oracle.settings() } returns ImmuniSettings()
+        every { networking.settings() } returns ImmuniSettings()
         every { database.bleContactDao() } returns daoMock
     }
 
@@ -62,7 +62,7 @@ class ProximityEventsAggregatorTest {
         runBlocking {
             val result = runCatching {
                 // the aggregator start automatically aggregate every 1ms
-                val aggregator = ProximityEventsAggregator(database, oracle, 1L)
+                val aggregator = ProximityEventsAggregator(database, networking, 1L)
 
                 val tick = async {
                     aggregator.start()

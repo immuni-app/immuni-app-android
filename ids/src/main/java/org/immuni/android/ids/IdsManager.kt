@@ -1,21 +1,21 @@
 package org.immuni.android.ids
 
-import org.immuni.android.ids.Concierge.*
+import org.immuni.android.ids.Ids.*
 import java.util.*
 
 /**
- * Manage all the [Concierge.Id].
+ * Manage all the [Ids.Id].
  *
  * @param storage used to store backuppable ids.
  * @param nonBackupStorage used to store non backuppable ids.
  * @param provider used to retrieve the ids.
  * @param appCustomIdProvider an app specific provider used to inject app specific ids.
  */
-abstract class ConciergeManager(
-    internal val storage: ConciergeStorage,
-    internal val nonBackupStorage: ConciergeStorage,
-    internal val provider: ConciergeProvider,
-    internal val appCustomIdProvider: ConciergeCustomIdProvider
+abstract class IdsManager(
+    internal val storage: IdsStorage,
+    internal val nonBackupStorage: IdsStorage,
+    internal val provider: IdsProvider,
+    internal val appCustomIdProvider: CustomIdProvider
 ) {
 
     /**
@@ -50,7 +50,7 @@ abstract class ConciergeManager(
      * Register a custom id provider, that can be different from the app itself,
      * maybe another module or library.
      */
-    abstract fun registerCustomIdProvider(provider: ConciergeCustomIdProvider)
+    abstract fun registerCustomIdProvider(provider: CustomIdProvider)
 
     abstract var backupPersistentId: Id
     abstract var nonBackupPersistentId: Id
@@ -58,14 +58,14 @@ abstract class ConciergeManager(
     protected abstract val customIds: Set<Id>
 }
 
-internal class ConciergeManagerImpl(
-    storage: ConciergeStorage,
-    nonBackupStorage: ConciergeStorage,
-    provider: ConciergeProvider,
-    appCustomIdProvider: ConciergeCustomIdProvider
-) : ConciergeManager(storage, nonBackupStorage, provider, appCustomIdProvider) {
+internal class IdsManagerImpl(
+    storage: IdsStorage,
+    nonBackupStorage: IdsStorage,
+    provider: IdsProvider,
+    appCustomIdProvider: CustomIdProvider
+) : IdsManager(storage, nonBackupStorage, provider, appCustomIdProvider) {
 
-    private val customIdProviders = mutableSetOf<ConciergeCustomIdProvider>()
+    private val customIdProviders = mutableSetOf<CustomIdProvider>()
     override lateinit var backupPersistentId: Id
     override lateinit var nonBackupPersistentId: Id
 
@@ -86,10 +86,10 @@ internal class ConciergeManagerImpl(
     }
 
     override fun resetUserIds() {
-        backupPersistentId = Concierge.Id.Internal(
-            Concierge.InternalId.BACKUP_PERSISTENT_ID, UUID.randomUUID().toString(), CreationType.readFromFile)
-        nonBackupPersistentId = Concierge.Id.Internal(
-            Concierge.InternalId.NON_BACKUP_PERSISTENT_ID, UUID.randomUUID().toString(), CreationType.readFromFile)
+        backupPersistentId = Ids.Id.Internal(
+            Ids.InternalId.BACKUP_PERSISTENT_ID, UUID.randomUUID().toString(), CreationType.readFromFile)
+        nonBackupPersistentId = Ids.Id.Internal(
+            Ids.InternalId.NON_BACKUP_PERSISTENT_ID, UUID.randomUUID().toString(), CreationType.readFromFile)
 
         storeBackupPersistentID()
         storeNonBackupPersistentId()
@@ -104,7 +104,7 @@ internal class ConciergeManagerImpl(
         }
     }
 
-    override fun registerCustomIdProvider(provider: ConciergeCustomIdProvider) {
+    override fun registerCustomIdProvider(provider: CustomIdProvider) {
         customIdProviders.add(provider)
     }
 

@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.ids.IdsManager
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.models.iconResource
@@ -20,7 +20,7 @@ class ResumeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinC
 
     val context = ImmuniApplication.appContext
     private var items = mutableListOf<ResumeItemType>()
-    val concierge: ConciergeManager by inject()
+    val ids: IdsManager by inject()
 
     fun update(newList: List<ResumeItemType>) {
         items.clear()
@@ -71,7 +71,7 @@ class ResumeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinC
                 holder.age.text = item.user.ageGroup.humanReadable(ImmuniApplication.appContext)
                 holder.icon.setImageResource(
                     item.user.gender.iconResource(
-                        concierge.backupPersistentId.id,
+                        ids.backupPersistentId.id,
                         item.userIndex
                     )
                 )

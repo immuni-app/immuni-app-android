@@ -1,6 +1,6 @@
 package org.immuni.android.analytics
 
-import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.ids.IdsManager
 import org.immuni.android.analytics.api.model.PicoEventResponse
 import org.immuni.android.analytics.model.PicoEvent
 import org.immuni.android.analytics.model.PicoUser
@@ -10,7 +10,6 @@ import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.ResponseBody.Companion.toResponseBody
-import org.immuni.android.analytics.*
 import org.junit.Test
 
 import org.junit.Before
@@ -34,7 +33,7 @@ class PicoCollectorTest {
     lateinit var config: PicoConfiguration
 
     @MockK(relaxed = true)
-    lateinit var mockConcierge: ConciergeManager
+    lateinit var mockIds: IdsManager
 
     @MockK(relaxed = true)
     lateinit var event: PicoEvent
@@ -54,7 +53,7 @@ class PicoCollectorTest {
         MockKAnnotations.init(this, relaxUnitFun = true) // turn relaxUnitFun on for all mocks
 
         coEvery { store.nextEventsBatch() } returns listOf(event)
-        every { config.concierge() } returns mockConcierge
+        every { config.idsManager() } returns mockIds
 
         every { event.user } returns picoUser
         every { userConsent.level } returns UserConsentLevel.ACCEPTED

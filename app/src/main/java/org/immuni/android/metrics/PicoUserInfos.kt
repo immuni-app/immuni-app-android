@@ -10,7 +10,7 @@ import android.location.LocationManager
 import android.os.BatteryManager
 import android.os.Build
 import androidx.core.app.ActivityCompat
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.ImmuniApplication
@@ -103,18 +103,18 @@ class PicoUserInfos {
         }
 
         fun bleAdvertiseMode(): Pair<String, Any> {
-            val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-            return "ble_advertise_mode" to (oracle.settings()?.bleAdvertiseMode ?: "")
+            val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+            return "ble_advertise_mode" to (networking.settings()?.bleAdvertiseMode ?: "")
         }
 
         fun bleTxPowerLevel(): Pair<String, Any> {
-            val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-            return "ble_tx_power_level" to (oracle.settings()?.bleTxPowerLevel ?: "")
+            val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+            return "ble_tx_power_level" to (networking.settings()?.bleTxPowerLevel ?: "")
         }
 
         fun bleScanMode(): Pair<String, Any> {
-            val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-            return "ble_scan_mode" to (oracle.settings()?.bleScanMode ?: "")
+            val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+            return "ble_scan_mode" to (networking.settings()?.bleScanMode ?: "")
         }
     }
 }

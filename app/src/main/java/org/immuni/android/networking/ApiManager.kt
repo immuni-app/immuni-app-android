@@ -14,9 +14,9 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 class ApiManager(
-    val oracle: Oracle<ImmuniSettings, ImmuniMe>
+    val networking: Networking<ImmuniSettings, ImmuniMe>
 ) : KoinComponent {
-    private val api = oracle.customServiceAPI(CustomOracleAPI::class)
+    private val api = networking.customServiceAPI(CustomOracleAPI::class)
 
     suspend fun exportData(code: String, data: ExportData): Response<ResponseBody> {
         val result = api.exportData(code, data)
@@ -29,11 +29,11 @@ class ApiManager(
     suspend fun getBtIds() = api.getBtIds()
 
     suspend fun settings(): Response<ImmuniSettings> {
-        return oracle.api.fetchSettings()
+        return networking.api.fetchSettings()
     }
 
     suspend fun me(): Response<ImmuniMe> {
-        return oracle.api.fetchMe()
+        return networking.api.fetchMe()
     }
 }
 

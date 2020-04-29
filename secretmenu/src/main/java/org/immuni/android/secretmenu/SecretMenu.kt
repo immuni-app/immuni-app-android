@@ -2,9 +2,9 @@ package org.immuni.android.secretmenu
 
 import android.app.Application
 import android.content.Intent
-import org.immuni.android.networking.Oracle
-import org.immuni.android.networking.api.model.OracleMe
-import org.immuni.android.networking.api.model.OracleSettings
+import org.immuni.android.networking.Networking
+import org.immuni.android.networking.api.model.NetworkingMe
+import org.immuni.android.networking.api.model.NetworkingSettings
 import org.immuni.android.secretmenu.overlay.SecretMenuGlobalTouchListener
 import org.immuni.android.secretmenu.ui.SecretMenuActivity
 
@@ -18,12 +18,12 @@ import org.immuni.android.secretmenu.ui.SecretMenuActivity
  * @constructor create an instance of [SecretMenu] using its [SecretMenuConfiguration].
  * @param context
  * @param config the [SecretMenuConfiguration] injected by the app.
- * @param oracle an instance of [Oracle]
+ * @param networking an instance of [Networking]
  */
 class SecretMenu(
     val context: Application,
     val config: SecretMenuConfiguration,
-    val oracle: Oracle<OracleSettings, OracleMe>
+    val networking: Networking<NetworkingSettings, NetworkingMe>
 ) : SecretMenuTouchManagerListener {
 
     private val touchManager =

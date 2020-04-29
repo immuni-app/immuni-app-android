@@ -15,45 +15,45 @@ import org.junit.Assert.*
 import org.junit.Before
 import retrofit2.Response
 
-class OracleRepositoryTest {
+class NetworkingRepositoryTest {
 
     @MockK(relaxed = true)
-    lateinit var store: OracleStore
+    lateinit var store: NetworkingStore
 
     @MockK(relaxed = true)
-    lateinit var config: OracleConfiguration
+    lateinit var config: NetworkingConfiguration
 
     @MockK(relaxed = true)
-    lateinit var oracleService: OracleService
+    lateinit var networkingService: NetworkingService
 
     @MockK(relaxed = true)
     lateinit var settingsChannel: ConflatedBroadcastChannel<MyCustomSetting>
 
     @MockK(relaxed = true)
-    lateinit var meChannel: ConflatedBroadcastChannel<OracleMe>
+    lateinit var meChannel: ConflatedBroadcastChannel<NetworkingMe>
 
     @JsonClass(generateAdapter = true)
     class MyCustomSetting(
         @field:Json(name = "my_custom_field") val myCustomField: String? = null
-    ): OracleSettings()
+    ): NetworkingSettings()
 
     @Before
     fun setup() {
         MockKAnnotations.init(this, relaxUnitFun = true)
 
-        coEvery { oracleService.me() } returns Response.success(200, "{\"device_id\":\"525\"}".toResponseBody())
-        coEvery { oracleService.settings() } returns Response.success(
+        coEvery { networkingService.me() } returns Response.success(200, "{\"device_id\":\"525\"}".toResponseBody())
+        coEvery { networkingService.settings() } returns Response.success(
             200,
             "{\"min_build_version\":25,\"__privacy_notice_version__\":\"3\",\"__tos_version__\":\"4\",\"my_custom_field\":\"customValue\"}".toResponseBody())
     }
 
     @Test
     fun `settings populate base settings fields`() = runBlocking {
-        val response = OracleRepository(
-            oracleService,
+        val response = NetworkingRepository(
+            networkingService,
             store,
             MyCustomSetting::class,
-            OracleMe::class,
+            NetworkingMe::class,
             settingsChannel,
             meChannel
         ).fetchSettings()
@@ -64,11 +64,11 @@ class OracleRepositoryTest {
 
     @Test
     fun `settings populate custom settings field`() = runBlocking {
-        val response = OracleRepository(
-            oracleService,
+        val response = NetworkingRepository(
+            networkingService,
             store,
             MyCustomSetting::class,
-            OracleMe::class,
+            NetworkingMe::class,
             settingsChannel,
             meChannel
         ).fetchSettings()
@@ -79,11 +79,11 @@ class OracleRepositoryTest {
 
     @Test
     fun `settings are stored`() = runBlocking {
-        val response = OracleRepository(
-            oracleService,
+        val response = NetworkingRepository(
+            networkingService,
             store,
             MyCustomSetting::class,
-            OracleMe::class,
+            NetworkingMe::class,
             settingsChannel,
             meChannel
         ).fetchSettings()
@@ -93,11 +93,11 @@ class OracleRepositoryTest {
 
     @Test
     fun `settings are sent to the broadcast channel`() = runBlocking {
-        val response = OracleRepository(
-            oracleService,
+        val response = NetworkingRepository(
+            networkingService,
             store,
             MyCustomSetting::class,
-            OracleMe::class,
+            NetworkingMe::class,
             settingsChannel,
             meChannel
         ).fetchSettings()
@@ -107,11 +107,11 @@ class OracleRepositoryTest {
 
     @Test
     fun `me are stored`() = runBlocking {
-        val response = OracleRepository(
-            oracleService,
+        val response = NetworkingRepository(
+            networkingService,
             store,
             MyCustomSetting::class,
-            OracleMe::class,
+            NetworkingMe::class,
             settingsChannel,
             meChannel
         ).fetchMe()
@@ -121,11 +121,11 @@ class OracleRepositoryTest {
 
     @Test
     fun `me are sent to the broadcast channel`() = runBlocking {
-        val response = OracleRepository(
-            oracleService,
+        val response = NetworkingRepository(
+            networkingService,
             store,
             MyCustomSetting::class,
-            OracleMe::class,
+            NetworkingMe::class,
             settingsChannel,
             meChannel
         ).fetchMe()

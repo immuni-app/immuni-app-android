@@ -5,11 +5,11 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * Concierge lib.
+ * Ids lib.
  *
- * Manage the user ids.
+ * Manage the app ids.
  */
-class Concierge {
+class Ids {
 
     @JsonClass(generateAdapter = true)
     data class Id internal constructor(
@@ -66,17 +66,17 @@ class Concierge {
     companion object {
         fun Manager(
             context: Context,
-            nonBackupStorage: ConciergeStorage = ConciergeNonBackupStorageImpl(
+            nonBackupStorage: IdsStorage = IdsNonBackupStorageImpl(
                 context
             ),
-            provider: ConciergeProvider = ConciergeProviderImpl(
+            provider: IdsProvider = IdsProviderImpl(
                 context
             ),
-            appCustomIdProvider: ConciergeCustomIdProvider,
+            appCustomIdProvider: CustomIdProvider,
             encryptIds: Boolean
-        ): ConciergeManager {
-            return ConciergeManagerImpl(
-                ConciergeStorageImpl(
+        ): IdsManager {
+            return IdsManagerImpl(
+                IdsStorageImpl(
                     context,
                     encryptIds
                 ),

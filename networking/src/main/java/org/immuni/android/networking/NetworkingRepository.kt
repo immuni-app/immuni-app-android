@@ -1,7 +1,7 @@
 package org.immuni.android.networking
 
 import org.immuni.android.base.utils.fromJson
-import org.immuni.android.networking.api.OracleService
+import org.immuni.android.networking.api.NetworkingService
 import org.immuni.android.networking.api.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -12,9 +12,9 @@ import retrofit2.Response
 import java.lang.Exception
 import kotlin.reflect.KClass
 
-class OracleRepository<Settings : OracleSettings, Me : OracleMe>(
-    val api: OracleService,
-    val store: OracleStore,
+class NetworkingRepository<Settings : NetworkingSettings, Me : NetworkingMe>(
+    val api: NetworkingService,
+    val store: NetworkingStore,
     private val settingsType: KClass<Settings>,
     private val meType: KClass<Me>,
     private val settingsChannel: ConflatedBroadcastChannel<Settings>,
@@ -41,7 +41,7 @@ class OracleRepository<Settings : OracleSettings, Me : OracleMe>(
     // send it to all the listeners through the broadcast channel
 
     suspend fun fetchMe(): Response<Me> = withContext(Dispatchers.IO) {
-        val baseResult: Response<ResponseBody> = this@OracleRepository.me()
+        val baseResult: Response<ResponseBody> = this@NetworkingRepository.me()
         val httpCode = baseResult.code()
 
         try {
@@ -70,7 +70,7 @@ class OracleRepository<Settings : OracleSettings, Me : OracleMe>(
 
     suspend fun fetchSettings(): Response<Settings> =
         withContext(Dispatchers.IO) {
-            val baseResult: Response<ResponseBody> = this@OracleRepository.settings()
+            val baseResult: Response<ResponseBody> = this@NetworkingRepository.settings()
             val httpCode = baseResult.code()
 
             try {

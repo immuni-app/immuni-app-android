@@ -1,7 +1,7 @@
 package org.immuni.android.analytics.api
 
 import org.immuni.android.base.http.GzipRequestInterceptor
-import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.ids.IdsManager
 import org.immuni.android.analytics.Pico
 import org.immuni.android.analytics.PicoConfiguration
 import org.immuni.android.analytics.util.BS_NUMBER_JSON_SERIALIZATION_ADAPTER
@@ -21,7 +21,7 @@ import java.util.*
 import javax.net.ssl.HostnameVerifier
 
 class PicoRetrofit(config: PicoConfiguration) {
-    private val concierge: ConciergeManager = config.concierge()
+    private val ids: IdsManager = config.idsManager()
 
     // catch here all network or unexpected exceptions
     // in order not to have to explicitly try/catch all retrofit calls
@@ -47,7 +47,7 @@ class PicoRetrofit(config: PicoConfiguration) {
                 request()
                     .newBuilder()
                     .addHeader("Pico-Version", Pico.VERSION)
-                    .addHeader("Pico-Client-ID", concierge.nonBackupPersistentId.id)
+                    .addHeader("Pico-Client-ID", ids.nonBackupPersistentId.id)
                     .addHeader("Pico-Tester", config.isDevelopmentDevice().toString())
                     .build()
             )

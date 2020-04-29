@@ -11,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.base.extensions.setLightStatusBarFullscreen
-import org.immuni.android.ids.ConciergeManager
-import org.immuni.android.networking.Oracle
+import org.immuni.android.ids.IdsManager
+import org.immuni.android.networking.Networking
 import kotlinx.android.synthetic.main.settings_fragment.*
 import org.immuni.android.networking.model.ImmuniMe
 import org.immuni.android.networking.model.ImmuniSettings
@@ -46,9 +46,9 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     fun contactUs(activity: Activity) {
 
-        val concierge: ConciergeManager by inject()
-        val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-        val email = oracle.settings()?.supportEmail
+        val ids: IdsManager by inject()
+        val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+        val email = networking.settings()?.supportEmail
 
         val ctx = activity.applicationContext
         val intent = Intent(Intent.ACTION_SENDTO).apply {

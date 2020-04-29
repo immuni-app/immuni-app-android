@@ -7,7 +7,7 @@ import android.bluetooth.le.AdvertiseSettings
 import android.bluetooth.le.BluetoothLeAdvertiser
 import android.content.Context
 import android.os.ParcelUuid
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import com.google.android.gms.common.util.Hex
 import kotlinx.coroutines.*
@@ -26,7 +26,7 @@ import java.util.*
 class BLEAdvertiser(val context: Context): KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private var bluetoothGattServer: BluetoothGattServer? = null
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
     private var advertiser: BluetoothLeAdvertiser? = null
     private var callback = MyAdvertiseCallback()
@@ -59,13 +59,13 @@ class BLEAdvertiser(val context: Context): KoinComponent {
 
     private suspend fun startAdvertising() {
 
-        val advertiseMode = oracle.settings()?.bleAdvertiseMode?.advertiseMode()
+        val advertiseMode = networking.settings()?.bleAdvertiseMode?.advertiseMode()
             ?: AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY
-        log("Advertise mode: ${oracle.settings()?.bleAdvertiseMode}")
+        log("Advertise mode: ${networking.settings()?.bleAdvertiseMode}")
 
-        val txPowerLevel = oracle.settings()?.bleTxPowerLevel?.txPowerLevel()
+        val txPowerLevel = networking.settings()?.bleTxPowerLevel?.txPowerLevel()
             ?: AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW
-        log("Tx Power Level mode: ${oracle.settings()?.bleTxPowerLevel}")
+        log("Tx Power Level mode: ${networking.settings()?.bleTxPowerLevel}")
 
         val btId = btIdsManager.getOrFetchActiveBtId()
         val builder = AdvertiseSettings.Builder().apply {

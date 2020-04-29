@@ -4,7 +4,7 @@ import android.content.Context
 import org.immuni.android.base.http.GzipRequestInterceptor
 import org.immuni.android.base.utils.DeviceInfoProviderImpl
 import org.immuni.android.base.utils.DeviceUtils
-import org.immuni.android.networking.OracleConfiguration
+import org.immuni.android.networking.NetworkingConfiguration
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -16,11 +16,11 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.*
 import javax.net.ssl.HostnameVerifier
 
-class OracleRetrofit(
+class NetworkingRetrofit(
     context: Context,
-    config: OracleConfiguration
+    config: NetworkingConfiguration
 ) {
-    private val concierge = config.concierge()
+    private val idsManager = config.idsManager()
 
     // catch here all network or unexpected exceptions
     // in order to don't have to explicitly try/catch all the retrofit calls
@@ -53,8 +53,8 @@ class OracleRetrofit(
                 .addHeader("Android-Platform", infoProvider.devicePlatform())
                 .addHeader("Android-Version", infoProvider.androidVersion())
                 .addHeader("Build", DeviceUtils.appVersionCode(context).toString())
-                .addHeader("Pico-Unique-Id", concierge.backupPersistentId.id)
-                .addHeader("Pico-Client-Id", concierge.nonBackupPersistentId.id)
+                .addHeader("Pico-Unique-Id", idsManager.backupPersistentId.id)
+                .addHeader("Pico-Client-Id", idsManager.nonBackupPersistentId.id)
 
             proceed(requestBuilder.build())
         }
@@ -85,7 +85,7 @@ class OracleRetrofit(
         builder.build()
     }
 
-    val oracleRetrofit = Retrofit.Builder()
+    val retrofit = Retrofit.Builder()
         .baseUrl(config.endpoint())
         .client(client)
         .addConverterFactory(

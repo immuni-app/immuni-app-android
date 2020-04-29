@@ -1,6 +1,6 @@
 package org.immuni.android.secretmenu
 
-import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.ids.IdsManager
 
 /**
  * This is the secret menu configuration
@@ -10,7 +10,7 @@ interface SecretMenuConfiguration {
 
     val isDevelopmentDevice: () -> Boolean
 
-    fun concierge(): ConciergeManager
+    fun concierge(): IdsManager
 
     // available to anyone
     fun publicItems(): List<SecretMenuItem>

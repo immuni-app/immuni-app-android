@@ -3,7 +3,7 @@ package org.immuni.android.managers
 import android.content.Context
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.*
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach
@@ -30,7 +30,7 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
     private val surveyManager: SurveyManager by inject()
     private val appNotificationManager: AppNotificationManager by inject()
     private val androidNotificationManager = NotificationManagerCompat.from(context)
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
 
     init {
         GlobalScope.launch {

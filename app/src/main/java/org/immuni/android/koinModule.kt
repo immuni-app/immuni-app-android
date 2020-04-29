@@ -5,8 +5,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import androidx.security.crypto.MasterKeys
 import org.immuni.android.base.storage.KVStorage
-import org.immuni.android.ids.Concierge
-import org.immuni.android.networking.Oracle
+import org.immuni.android.ids.Ids
+import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import org.immuni.android.secretmenu.SecretMenu
 import net.sqlcipher.database.SQLiteDatabase
@@ -86,16 +86,16 @@ val appModule = module {
         )
     }
 
-    // Concierge - Lib
+    // Ids - Lib
     single {
-        Concierge.Manager(androidContext(), appCustomIdProvider = ImmuniConciergeCustomIdProvider(), encryptIds = true)
+        Ids.Manager(androidContext(), appCustomIdProvider = ImmuniCustomIdProvider(), encryptIds = true)
     }
 
-    // Oracle - Lib
+    // Networking - Lib
     single {
-        Oracle<ImmuniSettings, ImmuniMe>(
+        Networking<ImmuniSettings, ImmuniMe>(
             androidContext(),
-            ImmuniOracleConfiguration(androidContext())
+            ImmuniNetworkingConfiguration(androidContext())
         )
     }
 
@@ -117,7 +117,7 @@ val appModule = module {
         )
     }
 
-    // Pico - Lib
+    // Analytics - Lib
     single {
         Pico(
             androidContext(),

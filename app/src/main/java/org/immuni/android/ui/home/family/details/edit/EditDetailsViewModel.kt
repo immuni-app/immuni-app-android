@@ -4,7 +4,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.immuni.android.base.livedata.Event
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import org.immuni.android.networking.model.ImmuniMe
 import org.immuni.android.networking.model.ImmuniSettings
@@ -19,7 +19,7 @@ class EditDetailsViewModel(val userId: String) : ViewModel(),
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     val userManager: UserManager by inject()
     val database: ImmuniDatabase by inject()
 

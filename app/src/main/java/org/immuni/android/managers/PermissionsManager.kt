@@ -15,7 +15,7 @@ import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
@@ -123,7 +123,7 @@ class PermissionsManager(val context: Context) : KoinComponent {
         }
     }
 
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
 
     fun requestPermissions(activity: AppCompatActivity) {
         ActivityCompat.requestPermissions(activity, allPermissions.toTypedArray(), REQUEST_CODE)

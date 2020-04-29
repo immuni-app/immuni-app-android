@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.ids.IdsManager
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.models.iconResource
@@ -20,7 +20,7 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
 
     val context = ImmuniApplication.appContext
     var items = mutableListOf<FamilyItemType>()
-    val concierge: ConciergeManager by inject()
+    val ids: IdsManager by inject()
 
     inner class UserCardVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         var name: TextView = v.findViewById(R.id.name)
@@ -111,7 +111,7 @@ class FamilyListAdapter(val clickListener: FamilyClickListener) :
                 holder.age.text = item.user.ageGroup.humanReadable(context)
                 holder.icon.setImageResource(
                     item.user.gender.iconResource(
-                        concierge.backupPersistentId.id,
+                        ids.backupPersistentId.id,
                         item.userIndex
                     )
                 )

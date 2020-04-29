@@ -1,7 +1,7 @@
 package org.immuni.android.networking.model
 
 import org.immuni.android.models.survey.raw.RawSurvey
-import org.immuni.android.networking.api.model.OracleSettings
+import org.immuni.android.networking.api.model.NetworkingSettings
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.models.survey.Survey
@@ -29,7 +29,7 @@ class ImmuniSettings(
     @field:Json(name = "ble_advertise_mode") val bleAdvertiseMode: AdvertiseMode = AdvertiseMode.ADVERTISE_MODE_LOW_POWER,
     @field:Json(name = "ble_scan_mode") val bleScanMode: ScanMode = ScanMode.SCAN_MODE_BALANCED,
     @field:Json(name = "ble_tx_power_level") val bleTxPowerLevel: TxPowerLevel = TxPowerLevel.ADVERTISE_TX_POWER_ULTRA_LOW
-) : OracleSettings() {
+) : NetworkingSettings() {
     @Transient private var _survey: Survey? = null
     val survey: Survey?
         get() {

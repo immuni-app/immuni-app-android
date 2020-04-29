@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.immuni.android.base.playstore.PlayStoreActions
-import org.immuni.android.ids.ConciergeManager
-import org.immuni.android.networking.Oracle
+import org.immuni.android.ids.IdsManager
+import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
@@ -31,8 +31,8 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-    val concierge: ConciergeManager by inject()
+    val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    val ids: IdsManager by inject()
 
     val loading = MutableLiveData<Boolean>()
     val downloading = MutableLiveData<Boolean>()
@@ -42,7 +42,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
         val activity = fragment.requireActivity()
 
         // if we have a custon url
-        oracle.settings()?.appUpdateUrl?.let { url->
+        networking.settings()?.appUpdateUrl?.let { url->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !activity.applicationContext.packageManager.canRequestPackageInstalls()) {
                 val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + activity.applicationContext.packageName))
                 fragment.startActivityForResult(intent, 20999)
@@ -97,7 +97,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
             setDescription(context.getString(R.string.immuni_update_file_description))
             setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "immuni.apk")
-            addRequestHeader("device-id", concierge.backupPersistentId.id)
+            addRequestHeader("device-id", ids.backupPersistentId.id)
         }
 
         val downloadId = downloadManager.enqueue(request)

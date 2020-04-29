@@ -11,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.base.extensions.setLightStatusBarFullscreen
-import org.immuni.android.ids.ConciergeManager
-import org.immuni.android.networking.Oracle
+import org.immuni.android.ids.IdsManager
+import org.immuni.android.networking.Networking
 import kotlinx.android.synthetic.main.data_handling_fragment.*
 import org.immuni.android.networking.model.ImmuniMe
 import org.immuni.android.networking.model.ImmuniSettings
@@ -22,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
 
     private lateinit var viewModel: HomeSharedViewModel
-    val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,9 +52,9 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
 
     fun recoverDataEmail(activity: Activity) {
         val ctx = activity.applicationContext
-        val email = oracle.settings()?.recoverDataEmail
+        val email = networking.settings()?.recoverDataEmail
 
-        val concierge: ConciergeManager by inject()
+        val ids: IdsManager by inject()
 
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("mailto:") // only email apps should handle this
@@ -62,7 +62,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
             putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
             putExtra(
                 Intent.EXTRA_TEXT,
-                String.format("${ctx.getString(R.string.recover_data_email_message)}", concierge.backupPersistentId.id)
+                String.format("${ctx.getString(R.string.recover_data_email_message)}", ids.backupPersistentId.id)
             )
         }
 
@@ -71,9 +71,9 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
 
     fun deleteDataEmail(activity: Activity) {
         val ctx = activity.applicationContext
-        val email = oracle.settings()?.deleteDataEmail
+        val email = networking.settings()?.deleteDataEmail
 
-        val concierge: ConciergeManager by inject()
+        val ids: IdsManager by inject()
 
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("mailto:") // only email apps should handle this
@@ -81,7 +81,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
             putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
             putExtra(
                 Intent.EXTRA_TEXT,
-                String.format("${ctx.getString(R.string.delete_data_email_message)}", concierge.backupPersistentId.id)
+                String.format("${ctx.getString(R.string.delete_data_email_message)}", ids.backupPersistentId.id)
             )
         }
 

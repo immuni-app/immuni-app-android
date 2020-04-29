@@ -10,7 +10,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import org.immuni.android.R
 import org.immuni.android.networking.model.ImmuniMe
 import org.immuni.android.networking.model.ImmuniSettings
@@ -20,7 +20,7 @@ import org.koin.core.inject
 
 class AppNotificationManager(val context: Context): KoinComponent {
 
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
 
     val WARNING_NOTIFICATION_ID = 200001
 

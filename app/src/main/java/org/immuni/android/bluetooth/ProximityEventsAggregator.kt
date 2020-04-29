@@ -1,6 +1,6 @@
 package org.immuni.android.bluetooth
 
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -17,7 +17,7 @@ import kotlin.math.roundToInt
 
 class ProximityEventsAggregator(
     val database: ImmuniDatabase,
-    val oracle: Oracle<ImmuniSettings, ImmuniMe>,
+    val networking: Networking<ImmuniSettings, ImmuniMe>,
     val TIME_WINDOW: Long
     ): KoinComponent {
 
@@ -79,7 +79,7 @@ class ProximityEventsAggregator(
     }
 
     private suspend fun store(events: Collection<ProximityEvent>) {
-        val slots = (oracle.settings()?.bleSlotsPerContactRecord ?: SLOTS_PER_CONTACT_RECORD)
+        val slots = (networking.settings()?.bleSlotsPerContactRecord ?: SLOTS_PER_CONTACT_RECORD)
         events.forEach {
             database.bleContactDao().addContact(
                 btId = it.btId,

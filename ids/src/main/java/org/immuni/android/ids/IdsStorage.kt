@@ -1,6 +1,6 @@
 package org.immuni.android.ids
 
-import org.immuni.android.ids.Concierge.*
+import org.immuni.android.ids.Ids.*
 import android.content.Context
 import org.immuni.android.base.storage.KVStorage
 import java.io.File
@@ -8,18 +8,18 @@ import java.io.File
 /**
  * A store for user ids.
  */
-interface ConciergeStorage {
+interface IdsStorage {
     fun get(name: InternalId): Id?
     fun save(id: Id)
     fun clear()
 }
 
 /**
- * ConciergeStorage implementation that saves ids in the user shared preferences.
+ * [IdsStorage] implementation that saves ids in the user shared preferences.
  * Shared preferences are backed-up if auto backup is active.
  */
-internal class ConciergeStorageImpl(context: Context, encrypted: Boolean) :
-    ConciergeStorage {
+internal class IdsStorageImpl(context: Context, encrypted: Boolean) :
+    IdsStorage {
 
     val storage: KVStorage = KVStorage("ConciergeStorageImpl",context, encrypted = encrypted)
 
@@ -38,10 +38,10 @@ internal class ConciergeStorageImpl(context: Context, encrypted: Boolean) :
 }
 
 /**
- * ConciergeStorage implementation that saves ids in the noBackupFilesDir.
+ * [IdsStorage] implementation that saves ids in the noBackupFilesDir.
  */
-internal class ConciergeNonBackupStorageImpl(context: Context) :
-    ConciergeStorage {
+internal class IdsNonBackupStorageImpl(context: Context) :
+    IdsStorage {
 
     private val nonBackupDir: File = context.noBackupFilesDir
 

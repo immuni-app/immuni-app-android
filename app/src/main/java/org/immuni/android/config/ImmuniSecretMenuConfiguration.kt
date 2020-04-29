@@ -9,8 +9,8 @@ import org.immuni.android.base.utils.DeviceUtils
 import org.immuni.android.networking.model.ImmuniMe
 import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.ids.ConciergeManager
-import org.immuni.android.networking.Oracle
+import org.immuni.android.ids.IdsManager
+import org.immuni.android.networking.Networking
 import org.immuni.android.secretmenu.SecretMenuConfiguration
 import org.immuni.android.secretmenu.SecretMenuItem
 import kotlinx.coroutines.Dispatchers
@@ -28,9 +28,9 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfiguration, KoinComponent {
-    private val concierge: ConciergeManager by inject()
+    private val ids: IdsManager by inject()
     private val database: ImmuniDatabase by inject()
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val notificationManager: SurveyNotificationManager by inject()
     private val btIdsManager: BtIdsManager by inject()
     private val onboarding: Onboarding by inject()
@@ -38,20 +38,20 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
     private val welcome: Welcome by inject()
 
     override val isDevelopmentDevice = {
-        oracle.settings()?.developmentDevices?.contains(concierge.backupPersistentId.id) == true
+        networking.settings()?.developmentDevices?.contains(ids.backupPersistentId.id) == true
     }
 
-    override fun concierge(): ConciergeManager {
-        return concierge
+    override fun concierge(): IdsManager {
+        return ids
     }
 
     override fun publicItems(): List<SecretMenuItem> {
         return listOf(
             object : SecretMenuItem("\uD83D\uDC68 User ID", { _, _ ->
-                DeviceUtils.copyToClipBoard(context, text = concierge.backupPersistentId.id ?: "-")
+                DeviceUtils.copyToClipBoard(context, text = ids.backupPersistentId.id ?: "-")
                 toast(
                     context,
-                    concierge.backupPersistentId.id,
+                    ids.backupPersistentId.id,
                     Toast.LENGTH_LONG
                 )
             }){}

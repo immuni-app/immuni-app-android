@@ -5,7 +5,7 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
-interface OracleService {
+interface NetworkingService {
 
     @GET("v2/settings")
     suspend fun settings(): Response<ResponseBody>

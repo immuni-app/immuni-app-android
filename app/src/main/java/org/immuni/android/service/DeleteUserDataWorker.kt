@@ -2,7 +2,7 @@ package org.immuni.android.service
 
 import android.content.Context
 import androidx.work.*
-import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -23,14 +23,14 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters) 
 
     private val database: ImmuniDatabase by inject()
     private val surveyManager: SurveyManager by inject()
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
 
     override suspend fun doWork(): Result = coroutineScope {
         log("running DeleteUserDataWorker!")
 
         withContext(Dispatchers.Default) {
-            oracle.settings()?.userDataRetentionDays?.let { days ->
+            networking.settings()?.userDataRetentionDays?.let { days ->
                 surveyManager.deleteDataOlderThan(days)
 
                 database.bleContactDao().removeOlderThan(

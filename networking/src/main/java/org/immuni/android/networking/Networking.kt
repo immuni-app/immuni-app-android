@@ -7,10 +7,10 @@ import org.immuni.android.base.lifecycle.AppLifecycleObserver
 import org.immuni.android.base.utils.DeviceUtils
 import org.immuni.android.base.utils.fromJson
 import org.immuni.android.base.utils.toJson
-import org.immuni.android.networking.api.OracleRetrofit
-import org.immuni.android.networking.api.OracleService
-import org.immuni.android.networking.api.model.OracleMe
-import org.immuni.android.networking.api.model.OracleSettings
+import org.immuni.android.networking.api.NetworkingRetrofit
+import org.immuni.android.networking.api.NetworkingService
+import org.immuni.android.networking.api.model.NetworkingMe
+import org.immuni.android.networking.api.model.NetworkingSettings
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
@@ -18,19 +18,19 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlin.reflect.KClass
 
-inline fun <reified Settings : OracleSettings, reified Me : OracleMe> Oracle(
+inline fun <reified Settings : NetworkingSettings, reified Me : NetworkingMe> Networking(
     context: Context,
-    config: OracleConfiguration
-) = Oracle(
+    config: NetworkingConfiguration
+) = Networking(
     context,
     config,
     Settings::class,
     Me::class
 )
 
-class Oracle<Settings : OracleSettings, Me : OracleMe>(
+class Networking<Settings : NetworkingSettings, Me : NetworkingMe>(
     private val context: Context,
-    private val config: OracleConfiguration,
+    private val config: NetworkingConfiguration,
     private val settingsType: KClass<Settings>,
     private val meType: KClass<Me>
 ) {
@@ -39,14 +39,14 @@ class Oracle<Settings : OracleSettings, Me : OracleMe>(
     // If your app need to use a legacy API, use the customServiceAPI() method to
     // create your custom API above the Oracle layer.
 
-    private val store = OracleStore(
+    private val store = NetworkingStore(
         context,
         encrypted = config.encryptStore()
     )
     private val settingsChannel: ConflatedBroadcastChannel<Settings>
     private val meChannel: ConflatedBroadcastChannel<Me>
 
-    val api: OracleRepository<Settings, Me>
+    val api: NetworkingRepository<Settings, Me>
 
     private val lifecycleObserver: AppLifecycleObserver
 
@@ -54,12 +54,12 @@ class Oracle<Settings : OracleSettings, Me : OracleMe>(
         settingsChannel = loadSettings()
         meChannel = loadMe()
 
-        val serverApi = OracleRetrofit(
+        val serverApi = NetworkingRetrofit(
             context,
             config
-        ).oracleRetrofit.create(OracleService::class.java)
+        ).retrofit.create(NetworkingService::class.java)
 
-        api = OracleRepository(
+        api = NetworkingRepository(
             serverApi,
             store,
             settingsType,
@@ -140,7 +140,7 @@ class Oracle<Settings : OracleSettings, Me : OracleMe>(
     // use this method to create an app specific layer of API above the Oracle generic one.
 
     fun <T : Any> customServiceAPI(apiClass: KClass<T>): T {
-        return OracleRetrofit(context, config).oracleRetrofit.create(
+        return NetworkingRetrofit(context, config).retrofit.create(
             apiClass.java
         )
     }

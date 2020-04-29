@@ -2,8 +2,8 @@ package org.immuni.android.fcm
 
 import android.content.Context
 import android.util.Log
-import org.immuni.android.ids.Concierge
-import org.immuni.android.ids.ConciergeCustomIdProvider
+import org.immuni.android.ids.Ids
+import org.immuni.android.ids.CustomIdProvider
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.coroutines.GlobalScope
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 /**
  * This class manages the push notification tokens.
  * It exposes a [ConflatedBroadcastChannel] containing the last token.
- * It implements [ConciergeCustomIdProvider] to be able to set the token into [Concierge].
+ * It implements [CustomIdProvider] to be able to set the token into [Ids].
  *
  * @param context
  * @param config the FCM configuration
@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 internal class FirebaseFCM(
     context: Context,
     config: FirebaseFCMConfiguration
-) : ConciergeCustomIdProvider {
+) : CustomIdProvider {
 
     companion object {
         val tokenChannel = ConflatedBroadcastChannel<String>()
@@ -53,7 +53,7 @@ internal class FirebaseFCM(
             })
 
         FirebaseFCM.config = config
-        config.concierge.registerCustomIdProvider(this)
+        config.ids.registerCustomIdProvider(this)
 
         GlobalScope.launch {
             tokenChannel.consumeEach {
@@ -62,7 +62,7 @@ internal class FirebaseFCM(
         }
     }
 
-    override val ids: Set<Concierge.Id>
+    override val ids: Set<Ids.Id>
         get() =
-            mutableSetOf<Concierge.Id>()
+            mutableSetOf<Ids.Id>()
 }
