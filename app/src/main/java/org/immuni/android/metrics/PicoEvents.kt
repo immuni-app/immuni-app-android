@@ -1,6 +1,6 @@
 package org.immuni.android.metrics
 
-import com.bendingspoons.pico.model.UserAction
+import org.immuni.android.analytics.model.UserAction
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.models.survey.*

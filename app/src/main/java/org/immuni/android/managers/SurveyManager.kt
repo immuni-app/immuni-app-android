@@ -1,6 +1,6 @@
 package org.immuni.android.managers
 
-import com.bendingspoons.base.storage.KVStorage
+import org.immuni.android.base.storage.KVStorage
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.HealthProfileEntity
 import org.immuni.android.db.entity.QuestionLastAnswerTimeEntity

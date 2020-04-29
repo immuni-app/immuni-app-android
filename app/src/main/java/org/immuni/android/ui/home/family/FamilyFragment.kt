@@ -7,12 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.family_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.disableDragging
+import org.immuni.android.base.extensions.disableDragging
 import org.immuni.android.ui.addrelative.AddRelativeActivity
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.home.family.model.AddFamilyMemberButtonCard

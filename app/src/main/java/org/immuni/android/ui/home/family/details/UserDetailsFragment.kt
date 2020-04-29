@@ -10,13 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bendingspoons.base.extensions.*
+import org.immuni.android.base.extensions.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.user_details_fragment.*
 import kotlinx.android.synthetic.main.user_details_fragment.name
 import org.immuni.android.R
 import org.immuni.android.models.Gender
-import com.bendingspoons.base.extensions.loading
+import org.immuni.android.base.extensions.loading
 import org.immuni.android.ui.uploaddata.UploadDataActivity
 import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel

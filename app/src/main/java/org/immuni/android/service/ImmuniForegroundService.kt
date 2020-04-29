@@ -5,13 +5,13 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Base64
-import com.bendingspoons.base.storage.KVStorage
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.pico.Pico
+import org.immuni.android.base.storage.KVStorage
+import org.immuni.android.networking.Oracle
+import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.RELATIVE_TIMESTAMP_SECONDS
 import org.immuni.android.managers.AppNotificationManager
@@ -26,7 +26,6 @@ import org.immuni.android.metrics.BluetoothFoundPeripheralsSnapshot.Contact
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import org.koin.java.KoinJavaComponent.inject
 import java.util.*
 
 class ImmuniForegroundService : Service(), KoinComponent {

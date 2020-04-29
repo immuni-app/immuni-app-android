@@ -10,12 +10,12 @@ import android.location.LocationManager
 import android.os.BatteryManager
 import android.os.Build
 import androidx.core.app.ActivityCompat
-import com.bendingspoons.oracle.Oracle
+import org.immuni.android.networking.Oracle
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.bluetooth.BLEAdvertiser
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.BluetoothManager

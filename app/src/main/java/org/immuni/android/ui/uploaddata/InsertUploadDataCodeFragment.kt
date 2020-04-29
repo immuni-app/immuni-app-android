@@ -12,16 +12,16 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.bendingspoons.base.extensions.hideKeyboard
-import com.bendingspoons.base.extensions.invisible
-import com.bendingspoons.base.extensions.showKeyboard
-import com.bendingspoons.base.extensions.visible
+import org.immuni.android.base.extensions.hideKeyboard
+import org.immuni.android.base.extensions.invisible
+import org.immuni.android.base.extensions.showKeyboard
+import org.immuni.android.base.extensions.visible
 import kotlinx.android.synthetic.main.insert_upload_data_code_fragment.*
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.close
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.okButton
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.title
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.loading
+import org.immuni.android.base.extensions.loading
 import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 

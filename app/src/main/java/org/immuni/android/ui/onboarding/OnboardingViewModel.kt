@@ -2,17 +2,17 @@ package org.immuni.android.ui.onboarding
 
 import android.content.Intent
 import androidx.lifecycle.*
-import com.bendingspoons.base.livedata.Event
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.pico.Pico
+import org.immuni.android.base.livedata.Event
+import org.immuni.android.networking.Oracle
+import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.ApiManager
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.ApiManager
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.UserManager

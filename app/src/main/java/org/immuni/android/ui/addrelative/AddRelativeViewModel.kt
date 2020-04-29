@@ -1,12 +1,12 @@
 package org.immuni.android.ui.addrelative
 
 import androidx.lifecycle.*
-import com.bendingspoons.base.livedata.Event
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.pico.Pico
+import org.immuni.android.base.livedata.Event
+import org.immuni.android.networking.Oracle
+import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User

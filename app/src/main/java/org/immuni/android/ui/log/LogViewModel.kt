@@ -1,16 +1,16 @@
 package org.immuni.android.ui.log
 
 import androidx.lifecycle.*
-import com.bendingspoons.base.livedata.Event
-import com.bendingspoons.base.storage.KVStorage
-import com.bendingspoons.concierge.ConciergeManager
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.pico.Pico
+import org.immuni.android.base.livedata.Event
+import org.immuni.android.base.storage.KVStorage
+import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.networking.Oracle
+import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User

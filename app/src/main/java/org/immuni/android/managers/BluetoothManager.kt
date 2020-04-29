@@ -9,7 +9,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.fragment.app.Fragment
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.toast
+import org.immuni.android.base.extensions.toast
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.util.log
 import org.immuni.android.service.ImmuniForegroundService

@@ -3,8 +3,8 @@ package org.immuni.android.config
 import android.content.Context
 import android.content.Intent
 import org.immuni.android.ui.forceupdate.ForceUpdateActivity
-import com.bendingspoons.concierge.ConciergeManager
-import com.bendingspoons.oracle.OracleConfiguration
+import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.networking.OracleConfiguration
 import okhttp3.CertificatePinner
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R

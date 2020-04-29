@@ -2,30 +2,25 @@ package org.immuni.android.ui.log.fragment.types
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import android.widget.CompoundButton.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.children
 import androidx.lifecycle.Observer
 import org.immuni.android.R
-import org.immuni.android.models.survey.CompositeAnswer
 import org.immuni.android.models.survey.RadioWidget
 import org.immuni.android.models.survey.SimpleAnswer
 import org.immuni.android.models.survey.Survey
 import org.immuni.android.ui.log.fragment.FormContentFragment
 import org.immuni.android.ui.log.model.FormModel
-import com.bendingspoons.base.extensions.gone
-import com.bendingspoons.base.extensions.visible
-import com.bendingspoons.base.utils.ScreenUtils
+import org.immuni.android.base.extensions.gone
+import org.immuni.android.base.extensions.visible
+import org.immuni.android.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.form_radio_field.*
 import kotlinx.android.synthetic.main.form_radio_field.back
 import kotlinx.android.synthetic.main.form_radio_field.description
 import kotlinx.android.synthetic.main.form_radio_field.question
-import kotlinx.android.synthetic.main.form_radio_field.view.*
 import kotlinx.android.synthetic.main.form_text_field.next
 
 class RadioFieldFragment : FormContentFragment(R.layout.form_radio_field), OnCheckedChangeListener {

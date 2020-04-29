@@ -15,14 +15,14 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bendingspoons.base.playstore.PlayStoreActions
-import com.bendingspoons.concierge.ConciergeManager
-import com.bendingspoons.oracle.Oracle
+import org.immuni.android.base.playstore.PlayStoreActions
+import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.networking.Oracle
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

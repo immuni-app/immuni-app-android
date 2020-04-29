@@ -1,15 +1,15 @@
 package org.immuni.android.config
 
 import android.content.Context
-import com.bendingspoons.concierge.ConciergeManager
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.oracle.api.model.OracleMe
-import com.bendingspoons.oracle.api.model.OracleSettings
-import com.bendingspoons.pico.PicoConfiguration
+import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.networking.Oracle
+import org.immuni.android.networking.api.model.OracleMe
+import org.immuni.android.networking.api.model.OracleSettings
+import org.immuni.android.analytics.PicoConfiguration
 import okhttp3.CertificatePinner
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.metrics.*
 import org.koin.core.KoinComponent

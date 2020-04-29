@@ -13,10 +13,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.bendingspoons.base.extensions.*
+import org.immuni.android.base.extensions.*
 import org.immuni.android.ui.log.LogViewModel
 import org.immuni.android.ui.log.model.FormModel
-import com.bendingspoons.base.utils.ScreenUtils
+import org.immuni.android.base.utils.ScreenUtils
 import org.immuni.android.R
 import org.immuni.android.models.colorResource
 import org.immuni.android.models.iconResource

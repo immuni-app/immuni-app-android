@@ -3,7 +3,6 @@ package org.immuni.android.ui.log.fragment.types
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,9 +13,8 @@ import org.immuni.android.models.survey.PickerWidget
 import org.immuni.android.models.survey.Survey
 import org.immuni.android.ui.log.fragment.FormContentFragment
 import org.immuni.android.ui.log.model.FormModel
-import com.bendingspoons.base.extensions.gone
-import com.bendingspoons.base.extensions.visible
-import com.bendingspoons.base.utils.ScreenUtils
+import org.immuni.android.base.extensions.gone
+import org.immuni.android.base.extensions.visible
 import com.shawnlin.numberpicker.NumberPicker
 import kotlinx.android.synthetic.main.form_picker_field.*
 import kotlinx.android.synthetic.main.form_text_field.next

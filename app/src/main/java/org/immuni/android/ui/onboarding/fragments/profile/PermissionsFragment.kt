@@ -12,11 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.bendingspoons.base.extensions.gone
+import org.immuni.android.base.extensions.gone
 import org.immuni.android.R
 import org.immuni.android.managers.PermissionsManager
-import com.bendingspoons.base.extensions.hideKeyboard
-import com.bendingspoons.base.extensions.visible
+import org.immuni.android.base.extensions.hideKeyboard
+import org.immuni.android.base.extensions.visible
 import kotlinx.android.synthetic.main.onboarding_permissions_dialog.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -26,7 +26,7 @@ import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.BluetoothListenerLifecycle
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.GeolocalisationListenerLifecycle
-import com.bendingspoons.base.extensions.toast
+import org.immuni.android.base.extensions.toast
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.onboarding.OnboardingViewModel
 import org.koin.android.ext.android.inject

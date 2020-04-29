@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bendingspoons.secretmenu">
+    package="org.immuni.android.secretmenu">
 
     <application>
         <activity
-            android:name=".ui.ExitActivity"
+            android:name="org.immuni.android.secretmenu.ui.ExitActivity"
             android:theme="@android:style/Theme.NoDisplay"
             android:autoRemoveFromRecents="true"/>
 
-        <activity android:name=".ui.SecretMenuActivity"
+        <activity android:name="org.immuni.android.secretmenu.ui.SecretMenuActivity"
             android:theme="@style/SecretMenuTransparent"/>
       
     </application>

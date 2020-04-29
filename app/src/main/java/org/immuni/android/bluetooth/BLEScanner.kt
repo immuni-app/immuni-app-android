@@ -2,10 +2,10 @@ package org.immuni.android.bluetooth
 
 import android.bluetooth.le.*
 import android.os.ParcelUuid
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.pico.Pico
+import org.immuni.android.networking.Oracle
+import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
-import org.immuni.android.api.model.*
+import org.immuni.android.networking.model.*
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.models.ProximityEvent
@@ -13,7 +13,6 @@ import org.immuni.android.metrics.BluetoothScanFailed
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import kotlin.random.Random
 
 class BLEScanner : KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()

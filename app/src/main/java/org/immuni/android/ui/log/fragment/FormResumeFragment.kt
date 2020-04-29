@@ -10,8 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
 import org.immuni.android.ui.log.LogViewModel
-import com.bendingspoons.base.extensions.setDarkStatusBarFullscreen
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.log_resume_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel

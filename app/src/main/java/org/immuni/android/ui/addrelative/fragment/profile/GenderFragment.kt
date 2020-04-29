@@ -2,7 +2,7 @@ package org.immuni.android.ui.addrelative.fragment.profile
 
 import android.os.Bundle
 import android.view.View
-import com.bendingspoons.base.extensions.hideKeyboard
+import org.immuni.android.base.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.add_relative_gender_fragment.*
 import org.immuni.android.R
 import org.immuni.android.models.Gender

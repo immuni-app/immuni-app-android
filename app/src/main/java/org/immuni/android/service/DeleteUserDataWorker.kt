@@ -2,13 +2,13 @@ package org.immuni.android.service
 
 import android.content.Context
 import androidx.work.*
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.pico.Pico
+import org.immuni.android.networking.Oracle
+import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.metrics.DataDeleted

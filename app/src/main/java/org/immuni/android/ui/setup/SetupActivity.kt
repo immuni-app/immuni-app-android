@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import org.immuni.android.ui.ImmuniActivity
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.setLightStatusBar
+import org.immuni.android.base.extensions.setLightStatusBar
 
 class SetupActivity : ImmuniActivity() {
 

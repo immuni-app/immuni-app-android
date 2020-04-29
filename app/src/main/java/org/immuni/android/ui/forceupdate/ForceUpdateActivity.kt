@@ -2,7 +2,7 @@ package org.immuni.android.ui.forceupdate
 
 import android.os.Bundle
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.setDarkStatusBar
+import org.immuni.android.base.extensions.setDarkStatusBar
 import org.immuni.android.ui.ImmuniActivity
 
 class ForceUpdateActivity : ImmuniActivity() {

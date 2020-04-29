@@ -1,7 +1,7 @@
 package org.immuni.android.config
 
-import com.bendingspoons.concierge.Concierge
-import com.bendingspoons.concierge.ConciergeCustomIdProvider
+import org.immuni.android.ids.Concierge
+import org.immuni.android.ids.ConciergeCustomIdProvider
 import org.koin.core.KoinComponent
 
 class ImmuniConciergeCustomIdProvider: ConciergeCustomIdProvider, KoinComponent {

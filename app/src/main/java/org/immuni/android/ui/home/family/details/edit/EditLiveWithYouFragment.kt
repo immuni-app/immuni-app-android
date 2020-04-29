@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.user_edit_livewithyou_activity.*
 import kotlinx.android.synthetic.main.user_edit_livewithyou_activity.back
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.loading
+import org.immuni.android.base.extensions.loading
 import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf

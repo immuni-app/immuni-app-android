@@ -81,11 +81,10 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
 dependencies {
     implementation project(":base")
-    implementation project(":concierge")
+    implementation project(':ids')
     implementation project(":secretmenu")
-    implementation project(":oracle")
-    implementation project(":theirs")
-    implementation project(":pico")
+    implementation project(':networking')
+    implementation project(':analytics')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"

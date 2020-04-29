@@ -49,6 +49,14 @@
             android:foregroundServiceType="location">
         </service>
 
+        <service
+            android:name=".fcm.ImmuniFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <receiver
             android:name=".receivers.RestarterReceiver"
             android:enabled="true"

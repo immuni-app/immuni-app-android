@@ -1,18 +1,17 @@
 package org.immuni.android.bluetooth
 
-import com.bendingspoons.oracle.Oracle
+import org.immuni.android.networking.Oracle
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.dao.addContact
 import org.immuni.android.db.entity.SLOTS_PER_CONTACT_RECORD
 import org.immuni.android.models.ProximityEvent
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 import kotlin.math.pow
 import kotlin.math.roundToInt
 

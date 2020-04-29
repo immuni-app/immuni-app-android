@@ -6,19 +6,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.lifecycle.ProcessLifecycleOwner
-import com.bendingspoons.base.lifecycle.AppLifecycleEvent
-import com.bendingspoons.base.lifecycle.AppLifecycleObserver
-import com.bendingspoons.concierge.ConciergeManager
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.pico.Pico
-import com.bendingspoons.secretmenu.SecretMenu
-import com.bendingspoons.theirs.Theirs
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.launch
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.base.lifecycle.AppLifecycleObserver
+import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.networking.Oracle
+import org.immuni.android.analytics.Pico
+import org.immuni.android.fcm.FirebaseFCM
+import org.immuni.android.secretmenu.SecretMenu
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.receivers.RestarterReceiver
 import org.immuni.android.receivers.ShutdownReceiver
@@ -32,7 +27,7 @@ class ImmuniApplication : Application() {
     private lateinit var concierge: ConciergeManager
     private lateinit var oracle: Oracle<ImmuniSettings, ImmuniMe>
     private lateinit var pico: Pico
-    private lateinit var theirs: Theirs
+    private lateinit var fcm: FirebaseFCM
     private lateinit var secretMenu: SecretMenu
     private lateinit var surveyNotificationManager: SurveyNotificationManager
 
@@ -54,7 +49,7 @@ class ImmuniApplication : Application() {
         concierge = get()
         oracle = get()
         pico = get()
-        theirs = get()
+        fcm = get()
         secretMenu = get()
         surveyNotificationManager = get()
 

@@ -10,12 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeSharedViewModel
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import com.bendingspoons.concierge.ConciergeManager
-import com.bendingspoons.oracle.Oracle
+import org.immuni.android.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.networking.Oracle
 import kotlinx.android.synthetic.main.data_handling_fragment.*
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 

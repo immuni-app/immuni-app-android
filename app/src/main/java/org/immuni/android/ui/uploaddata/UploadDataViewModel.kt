@@ -3,10 +3,10 @@ package org.immuni.android.ui.uploaddata
 import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bendingspoons.base.livedata.Event
-import com.bendingspoons.pico.Pico
+import org.immuni.android.base.livedata.Event
+import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
-import org.immuni.android.api.ApiManager
+import org.immuni.android.networking.ApiManager
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.ExportData

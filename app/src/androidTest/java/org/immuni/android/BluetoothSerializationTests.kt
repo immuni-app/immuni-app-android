@@ -2,8 +2,8 @@ package org.immuni.android
 
 import android.util.Base64
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.bendingspoons.base.utils.fromJson
-import com.bendingspoons.base.utils.toJson
+import org.immuni.android.base.utils.fromJson
+import org.immuni.android.base.utils.toJson
 import junit.framework.Assert.assertEquals
 import org.immuni.android.db.entity.BLEEvent
 import org.immuni.android.models.ExportDevice

@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.base.extensions.setLightStatusBarFullscreen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.log_form_fragment.*
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.toast
+import org.immuni.android.base.extensions.toast
 import org.immuni.android.ui.log.LogViewModel
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 

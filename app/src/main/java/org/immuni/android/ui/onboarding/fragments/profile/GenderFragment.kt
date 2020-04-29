@@ -5,7 +5,7 @@ import android.view.View
 import org.immuni.android.R
 import org.immuni.android.models.Gender
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
-import com.bendingspoons.base.extensions.hideKeyboard
+import org.immuni.android.base.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.onboarding_gender_fragment.*
 import kotlinx.android.synthetic.main.onboarding_gender_fragment.back
 import kotlinx.android.synthetic.main.onboarding_gender_fragment.next

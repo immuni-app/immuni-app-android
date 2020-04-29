@@ -4,16 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.widget.Toast
-import com.bendingspoons.base.extensions.toast
-import com.bendingspoons.base.utils.DeviceUtils
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.base.extensions.toast
+import org.immuni.android.base.utils.DeviceUtils
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
-import com.bendingspoons.concierge.ConciergeManager
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.secretmenu.SecretMenuConfiguration
-import com.bendingspoons.secretmenu.SecretMenuItem
-import com.bendingspoons.theirs.Theirs
+import org.immuni.android.ids.ConciergeManager
+import org.immuni.android.networking.Oracle
+import org.immuni.android.secretmenu.SecretMenuConfiguration
+import org.immuni.android.secretmenu.SecretMenuItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -32,7 +31,6 @@ class ImmuniSecretMenuConfiguration(val context: Context): SecretMenuConfigurati
     private val concierge: ConciergeManager by inject()
     private val database: ImmuniDatabase by inject()
     private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-    private val theirs: Theirs by inject()
     private val notificationManager: SurveyNotificationManager by inject()
     private val btIdsManager: BtIdsManager by inject()
     private val onboarding: Onboarding by inject()

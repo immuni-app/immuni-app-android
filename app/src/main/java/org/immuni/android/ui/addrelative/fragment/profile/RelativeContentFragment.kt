@@ -8,13 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.bendingspoons.base.extensions.animateTranslationY
-import com.bendingspoons.base.extensions.gone
-import org.immuni.android.ui.onboarding.OnboardingUserInfo
-import org.immuni.android.ui.onboarding.OnboardingViewModel
-import com.bendingspoons.base.extensions.hideKeyboard
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import com.bendingspoons.base.utils.ScreenUtils
+import org.immuni.android.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.base.utils.ScreenUtils
 import org.immuni.android.R
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.ui.addrelative.RelativeInfo

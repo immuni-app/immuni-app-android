@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bendingspoons.base.livedata.Event
-import com.bendingspoons.oracle.Oracle
+import org.immuni.android.base.livedata.Event
+import org.immuni.android.networking.Oracle
 import kotlinx.coroutines.*
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.UserManager

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.hideKeyboard
+import org.immuni.android.base.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.add_relative_already_registered_fragment.*
 import org.immuni.android.ui.addrelative.RelativeInfo
 

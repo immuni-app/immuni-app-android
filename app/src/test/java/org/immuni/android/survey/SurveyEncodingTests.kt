@@ -1,7 +1,7 @@
 package org.immuni.android.survey
 
-import com.bendingspoons.base.utils.fromJson
-import com.bendingspoons.base.utils.toJson
+import org.immuni.android.base.utils.fromJson
+import org.immuni.android.base.utils.toJson
 import org.immuni.android.db.entity.fixSerializationAliasingOfIntsToDoubles
 import org.immuni.android.models.survey.*
 import org.immuni.android.models.survey.raw.*

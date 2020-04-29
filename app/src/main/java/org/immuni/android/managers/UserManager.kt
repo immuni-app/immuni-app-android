@@ -2,7 +2,7 @@ package org.immuni.android.managers
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.bendingspoons.base.storage.KVStorage
+import org.immuni.android.base.storage.KVStorage
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.models.User

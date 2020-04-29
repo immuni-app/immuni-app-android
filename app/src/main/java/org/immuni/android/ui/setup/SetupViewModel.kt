@@ -3,13 +3,12 @@ package org.immuni.android.ui.setup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bendingspoons.base.livedata.Event
-import com.bendingspoons.base.utils.retry
+import org.immuni.android.base.livedata.Event
+import org.immuni.android.base.utils.retry
 import kotlinx.coroutines.*
 import org.immuni.android.managers.UserManager
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.welcome.Welcome
-import org.immuni.android.util.CoroutineContextProvider
 import org.immuni.android.util.Flags
 import org.immuni.android.util.setFlag
 import org.koin.core.KoinComponent

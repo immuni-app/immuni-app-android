@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bendingspoons.base.extensions.gone
+import org.immuni.android.base.extensions.gone
 import kotlinx.android.synthetic.main.user_edit_age_group_activity.*
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.loading
+import org.immuni.android.base.extensions.loading
 import org.immuni.android.models.AgeGroup
 import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel

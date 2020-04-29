@@ -4,17 +4,16 @@ import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import androidx.security.crypto.MasterKeys
-import com.bendingspoons.base.storage.KVStorage
-import com.bendingspoons.concierge.Concierge
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.pico.Pico
-import com.bendingspoons.secretmenu.SecretMenu
-import com.bendingspoons.theirs.Theirs
+import org.immuni.android.base.storage.KVStorage
+import org.immuni.android.ids.Concierge
+import org.immuni.android.networking.Oracle
+import org.immuni.android.analytics.Pico
+import org.immuni.android.secretmenu.SecretMenu
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
-import org.immuni.android.api.ApiManager
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.ApiManager
+import org.immuni.android.networking.model.ImmuniMe
+import org.immuni.android.networking.model.ImmuniSettings
 import org.immuni.android.bluetooth.BLEAdvertiser
 import org.immuni.android.bluetooth.BLEScanner
 import org.immuni.android.db.DATABASE_NAME
@@ -26,6 +25,7 @@ import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.*
 import org.immuni.android.bluetooth.ProximityEventsAggregator
 import org.immuni.android.config.*
+import org.immuni.android.fcm.FirebaseFCM
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.ui.ble.encounters.BleEncountersDebugViewModel
 import org.immuni.android.ui.forceupdate.ForceUpdateViewModel
@@ -93,29 +93,34 @@ val appModule = module {
 
     // Oracle - Lib
     single {
-        Oracle<ImmuniSettings, ImmuniMe>(androidContext(),
+        Oracle<ImmuniSettings, ImmuniMe>(
+            androidContext(),
             ImmuniOracleConfiguration(androidContext())
         )
     }
 
     // Secret Menu - Lib
     single {
-        SecretMenu(androidContext() as Application,
+        SecretMenu(
+            androidContext() as Application,
             ImmuniSecretMenuConfiguration(
                 androidContext()
-            ), get())
+            ), get()
+        )
     }
 
-    // Theirs - Lib
+    // Firebase FCM
     single {
-        Theirs(androidContext(),
-            ImmuniTheirsConfiguration()
+        FirebaseFCM(
+            androidContext(),
+            ImmuniFirebaseFCMConfiguration()
         )
     }
 
     // Pico - Lib
     single {
-        Pico(androidContext(),
+        Pico(
+            androidContext(),
             ImmuniPicoConfiguration(androidContext())
         )
     }

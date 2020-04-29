@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bendingspoons.concierge.ConciergeManager
+import org.immuni.android.ids.ConciergeManager
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.models.iconResource

@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.ui.log.LogViewModel
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.base.extensions.setLightStatusBarFullscreen
 import org.immuni.android.models.survey.TriageProfile
 import org.immuni.android.models.survey.backgroundColor
 import org.immuni.android.ui.dialog.WebViewDialogActivity

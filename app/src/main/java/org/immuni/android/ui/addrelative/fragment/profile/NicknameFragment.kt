@@ -11,9 +11,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
 import org.immuni.android.R
-import com.bendingspoons.base.extensions.hideKeyboard
-import com.bendingspoons.base.extensions.showKeyboard
-import com.bendingspoons.base.utils.ScreenUtils
+import org.immuni.android.base.extensions.hideKeyboard
+import org.immuni.android.base.extensions.showKeyboard
+import org.immuni.android.base.utils.ScreenUtils
 import kotlinx.android.synthetic.main.add_relative_nickname_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
