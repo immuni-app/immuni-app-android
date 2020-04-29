@@ -10,6 +10,7 @@ import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.ResponseBody.Companion.toResponseBody
+import org.immuni.android.ids.Ids
 import org.junit.Test
 
 import org.junit.Before
@@ -33,7 +34,7 @@ class PicoCollectorTest {
     lateinit var config: PicoConfiguration
 
     @MockK(relaxed = true)
-    lateinit var mockIds: IdsManager
+    lateinit var mockIds: Ids
 
     @MockK(relaxed = true)
     lateinit var event: PicoEvent
@@ -53,7 +54,7 @@ class PicoCollectorTest {
         MockKAnnotations.init(this, relaxUnitFun = true) // turn relaxUnitFun on for all mocks
 
         coEvery { store.nextEventsBatch() } returns listOf(event)
-        every { config.idsManager() } returns mockIds
+        every { config.ids() } returns mockIds
 
         every { event.user } returns picoUser
         every { userConsent.level } returns UserConsentLevel.ACCEPTED
