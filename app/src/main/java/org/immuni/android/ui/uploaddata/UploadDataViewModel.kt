@@ -3,7 +3,7 @@ package org.immuni.android.ui.uploaddata
 import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.immuni.android.base.livedata.Event
+import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.api.ImmuniAPIRepository

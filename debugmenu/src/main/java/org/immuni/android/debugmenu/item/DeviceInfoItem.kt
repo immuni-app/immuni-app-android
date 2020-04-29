@@ -1,7 +1,7 @@
 package org.immuni.android.debugmenu.item
 
 import android.widget.Toast
-import org.immuni.android.base.utils.DeviceUtils
+import org.immuni.android.extensions.utils.DeviceUtils
 import org.immuni.android.debugmenu.DebugMenuItem
 
 class DeviceInfoItem: DebugMenuItem(

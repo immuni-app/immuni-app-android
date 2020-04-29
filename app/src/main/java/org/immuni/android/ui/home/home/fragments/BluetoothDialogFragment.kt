@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import org.immuni.android.R
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BluetoothManager.Companion.REQUEST_ENABLE_BT
-import org.immuni.android.base.extensions.toast
+import org.immuni.android.extensions.activity.toast
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.koin.android.ext.android.inject
 

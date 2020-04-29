@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.user_edit_livewithyou_activity.*
 import kotlinx.android.synthetic.main.user_edit_livewithyou_activity.back
 import org.immuni.android.R
-import org.immuni.android.base.extensions.loading
+import org.immuni.android.extensions.activity.loading
 import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf

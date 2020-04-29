@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import org.immuni.android.base.extensions.setLightStatusBarFullscreen
-import org.immuni.android.base.utils.ScreenUtils
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
+import org.immuni.android.extensions.utils.ScreenUtils
 import org.immuni.android.R
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.ui.addrelative.RelativeInfo

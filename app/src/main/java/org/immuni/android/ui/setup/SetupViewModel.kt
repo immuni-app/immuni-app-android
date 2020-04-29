@@ -3,8 +3,8 @@ package org.immuni.android.ui.setup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.immuni.android.base.livedata.Event
-import org.immuni.android.base.utils.retry
+import org.immuni.android.extensions.livedata.Event
+import org.immuni.android.extensions.utils.retry
 import kotlinx.coroutines.*
 import org.immuni.android.api.ImmuniAPIRepository
 import org.immuni.android.managers.UserManager

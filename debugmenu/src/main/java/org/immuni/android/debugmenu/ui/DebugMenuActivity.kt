@@ -2,7 +2,7 @@ package org.immuni.android.debugmenu.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import org.immuni.android.base.utils.DeviceUtils
+import org.immuni.android.extensions.utils.DeviceUtils
 import org.immuni.android.debugmenu.DebugMenu
 import org.immuni.android.debugmenu.item.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder

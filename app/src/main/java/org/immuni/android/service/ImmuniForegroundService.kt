@@ -5,7 +5,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Base64
-import org.immuni.android.base.storage.KVStorage
+import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*

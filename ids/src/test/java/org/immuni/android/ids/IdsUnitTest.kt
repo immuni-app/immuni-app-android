@@ -1,7 +1,7 @@
 package org.immuni.android.ids
 
-import org.immuni.android.base.utils.fromJson
-import org.immuni.android.base.utils.toJson
+import org.immuni.android.extensions.utils.fromJson
+import org.immuni.android.extensions.utils.toJson
 import org.junit.Test
 
 import org.junit.Assert.*

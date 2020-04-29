@@ -13,11 +13,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import org.immuni.android.base.extensions.*
 import org.immuni.android.ui.log.LogViewModel
 import org.immuni.android.ui.log.model.FormModel
-import org.immuni.android.base.utils.ScreenUtils
+import org.immuni.android.extensions.utils.ScreenUtils
 import org.immuni.android.R
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
+import org.immuni.android.extensions.view.gone
+import org.immuni.android.extensions.view.hideKeyboard
+import org.immuni.android.extensions.view.visible
 import org.immuni.android.models.colorResource
 import org.immuni.android.models.iconResource
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel

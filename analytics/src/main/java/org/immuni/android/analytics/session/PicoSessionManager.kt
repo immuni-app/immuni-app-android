@@ -2,9 +2,9 @@ package org.immuni.android.analytics.session
 
 import android.content.Context
 import androidx.lifecycle.ProcessLifecycleOwner
-import org.immuni.android.base.storage.KVStorage
-import org.immuni.android.base.lifecycle.AppLifecycleEvent.*
-import org.immuni.android.base.lifecycle.AppLifecycleObserver
+import org.immuni.android.extensions.storage.KVStorage
+import org.immuni.android.extensions.lifecycle.AppLifecycleEvent.*
+import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
 import org.immuni.android.analytics.PicoEventManager
 import org.immuni.android.analytics.PicoFlow
 import org.immuni.android.analytics.model.Session

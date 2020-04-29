@@ -2,7 +2,7 @@ package org.immuni.android.ui.onboarding
 
 import android.content.Intent
 import androidx.lifecycle.*
-import org.immuni.android.base.livedata.Event
+import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*

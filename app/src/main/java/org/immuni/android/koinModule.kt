@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import androidx.security.crypto.MasterKeys
-import org.immuni.android.base.storage.KVStorage
+import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.ids.Ids
 import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico

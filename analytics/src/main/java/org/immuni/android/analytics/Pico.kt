@@ -1,7 +1,7 @@
 package org.immuni.android.analytics
 
 import android.content.Context
-import org.immuni.android.base.utils.DeviceInfoProviderImpl
+import org.immuni.android.extensions.utils.DeviceInfoProviderImpl
 import org.immuni.android.analytics.api.PicoRetrofit
 import org.immuni.android.analytics.api.PicoService
 import org.immuni.android.analytics.db.picoDatabase

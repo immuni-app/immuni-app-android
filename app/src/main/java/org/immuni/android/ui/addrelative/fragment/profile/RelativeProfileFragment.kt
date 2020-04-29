@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import org.immuni.android.R
-import org.immuni.android.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.add_relative_profile_fragment.*
 import kotlinx.android.synthetic.main.onboarding_profile_fragment.progress
 import kotlinx.android.synthetic.main.onboarding_profile_fragment.viewPager
-import org.immuni.android.base.extensions.loading
+import org.immuni.android.extensions.activity.loading
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
 import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel

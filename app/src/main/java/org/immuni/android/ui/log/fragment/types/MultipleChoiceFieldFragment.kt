@@ -13,9 +13,9 @@ import org.immuni.android.models.survey.SimpleAnswer
 import org.immuni.android.models.survey.Survey
 import org.immuni.android.ui.log.fragment.FormContentFragment
 import org.immuni.android.ui.log.model.FormModel
-import org.immuni.android.base.extensions.gone
-import org.immuni.android.base.extensions.visible
-import org.immuni.android.base.utils.ScreenUtils
+import org.immuni.android.extensions.view.gone
+import org.immuni.android.extensions.view.visible
+import org.immuni.android.extensions.utils.ScreenUtils
 import kotlinx.android.synthetic.main.form_multiple_choice_field.*
 
 class MultipleChoiceFieldFragment : FormContentFragment(R.layout.form_multiple_choice_field),

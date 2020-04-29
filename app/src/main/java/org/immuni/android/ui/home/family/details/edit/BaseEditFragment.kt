@@ -2,7 +2,7 @@ package org.immuni.android.ui.home.family.details.edit
 
 import android.view.View
 import androidx.core.widget.NestedScrollView
-import org.immuni.android.base.utils.ScreenUtils
+import org.immuni.android.extensions.utils.ScreenUtils
 import org.immuni.android.R
 import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 

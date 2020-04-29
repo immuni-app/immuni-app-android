@@ -1,15 +1,14 @@
 package org.immuni.android.networking.api
 
 import android.content.Context
-import org.immuni.android.base.http.GzipRequestInterceptor
-import org.immuni.android.base.utils.DeviceInfoProviderImpl
-import org.immuni.android.base.utils.DeviceUtils
+import org.immuni.android.extensions.http.GzipRequestInterceptor
+import org.immuni.android.extensions.utils.DeviceInfoProviderImpl
+import org.immuni.android.extensions.utils.DeviceUtils
 import org.immuni.android.networking.NetworkingConfiguration
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.*
-import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

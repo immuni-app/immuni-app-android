@@ -1,14 +1,12 @@
 package org.immuni.android.networking
 
-import org.immuni.android.base.utils.fromJson
+import org.immuni.android.extensions.utils.fromJson
 import org.immuni.android.networking.api.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
-import okhttp3.ResponseBody.Companion.toResponseBody
 import org.immuni.android.networking.api.*
-import retrofit2.Response
 import java.lang.Exception
 import kotlin.reflect.KClass
 

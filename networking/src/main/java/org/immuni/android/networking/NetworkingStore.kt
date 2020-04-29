@@ -1,7 +1,7 @@
 package org.immuni.android.networking
 
 import android.content.Context
-import org.immuni.android.base.storage.KVStorage
+import org.immuni.android.extensions.storage.KVStorage
 
 class NetworkingStore(val context: Context, encrypted: Boolean) {
     companion object {

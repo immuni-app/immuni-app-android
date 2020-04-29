@@ -5,7 +5,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
-import org.immuni.android.base.extensions.hideKeyboard
+import org.immuni.android.extensions.view.hideKeyboard
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager

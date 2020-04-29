@@ -9,14 +9,14 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import org.immuni.android.base.extensions.invisible
-import org.immuni.android.base.extensions.visible
+import org.immuni.android.extensions.view.invisible
+import org.immuni.android.extensions.view.visible
 import org.immuni.android.R
 import kotlinx.android.synthetic.main.force_update_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.immuni.android.base.extensions.loading
+import org.immuni.android.extensions.activity.loading
 import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 

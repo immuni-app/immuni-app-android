@@ -9,9 +9,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import org.immuni.android.base.extensions.invisible
-import org.immuni.android.base.extensions.setLightStatusBarFullscreen
-import org.immuni.android.base.extensions.visible
+import org.immuni.android.extensions.view.invisible
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
+import org.immuni.android.extensions.view.visible
 import kotlinx.android.synthetic.main.ble_distance_debug_fragment.list
 import kotlinx.android.synthetic.main.ble_distance_debug_fragment.noDevicesText
 import kotlinx.android.synthetic.main.ble_encounters_debug_fragment.*

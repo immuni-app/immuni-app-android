@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.immuni.android.base.livedata.Event
+import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import org.immuni.android.api.model.ImmuniMe

@@ -1,7 +1,7 @@
 package org.immuni.android.networking.api
 
 import okhttp3.ResponseBody
-import org.immuni.android.base.utils.fromJson
+import org.immuni.android.extensions.utils.fromJson
 import retrofit2.Response
 import java.io.IOException
 import java.net.SocketTimeoutException

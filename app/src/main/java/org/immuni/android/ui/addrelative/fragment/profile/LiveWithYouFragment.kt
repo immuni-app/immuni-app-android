@@ -3,7 +3,7 @@ package org.immuni.android.ui.addrelative.fragment.profile
 import android.os.Bundle
 import android.view.View
 import org.immuni.android.R
-import org.immuni.android.base.extensions.hideKeyboard
+import org.immuni.android.extensions.view.hideKeyboard
 import kotlinx.android.synthetic.main.add_relative_live_with_you_fragment.*
 import org.immuni.android.ui.addrelative.RelativeInfo
 

@@ -8,8 +8,8 @@ import androidx.lifecycle.ViewModel
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.util.isFlagSet
 import org.immuni.android.util.setFlag
-import org.immuni.android.base.livedata.Event
-import org.immuni.android.base.utils.DeviceUtils
+import org.immuni.android.extensions.livedata.Event
+import org.immuni.android.extensions.utils.DeviceUtils
 import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
@@ -24,7 +24,7 @@ import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
 import org.immuni.android.models.survey.Severity.*
 import org.immuni.android.models.survey.TriageProfile
-import org.immuni.android.base.extensions.toast
+import org.immuni.android.extensions.activity.toast
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.family.model.*
 import org.immuni.android.ui.home.home.model.*

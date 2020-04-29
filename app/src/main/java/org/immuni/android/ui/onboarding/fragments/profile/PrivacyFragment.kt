@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import org.immuni.android.R
-import org.immuni.android.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.*
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.back
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.next

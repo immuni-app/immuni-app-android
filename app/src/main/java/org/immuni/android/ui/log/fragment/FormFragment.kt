@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import org.immuni.android.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.log_form_fragment.*
 import org.immuni.android.R
-import org.immuni.android.base.extensions.toast
+import org.immuni.android.extensions.activity.toast
 import org.immuni.android.ui.log.LogViewModel
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -88,7 +88,10 @@ class FormFragment : Fragment() {
 
         viewModel.navigateToNextPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                toast(requireContext(), "ON NEXT PAGE GO")
+                toast(
+                    requireContext(),
+                    "ON NEXT PAGE GO"
+                )
                 val newPos = viewPager.currentItem + 1
 
                 if (newPos == (viewPager.adapter?.itemCount ?: 0)) {

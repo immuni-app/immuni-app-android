@@ -1,6 +1,6 @@
 rootProject.name='Immuni'
 include ':app'
-include ':base'
+include ':extensions'
 include ':ids'
 include ':debugmenu'
 include ':networking'

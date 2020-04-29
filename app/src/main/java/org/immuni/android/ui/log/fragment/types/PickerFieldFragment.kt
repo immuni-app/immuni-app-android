@@ -13,8 +13,8 @@ import org.immuni.android.models.survey.PickerWidget
 import org.immuni.android.models.survey.Survey
 import org.immuni.android.ui.log.fragment.FormContentFragment
 import org.immuni.android.ui.log.model.FormModel
-import org.immuni.android.base.extensions.gone
-import org.immuni.android.base.extensions.visible
+import org.immuni.android.extensions.view.gone
+import org.immuni.android.extensions.view.visible
 import com.shawnlin.numberpicker.NumberPicker
 import kotlinx.android.synthetic.main.form_picker_field.*
 import kotlinx.android.synthetic.main.form_text_field.next

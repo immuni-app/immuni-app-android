@@ -13,7 +13,7 @@ import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeActivity
 import org.immuni.android.ui.onboarding.OnboardingViewModel
-import org.immuni.android.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class DoneFragment : Fragment() {

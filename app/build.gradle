@@ -80,7 +80,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 
 dependencies {
-    implementation project(":base")
+    implementation project(':extensions')
     implementation project(':ids')
     implementation project(':debugmenu')
     implementation project(':networking')

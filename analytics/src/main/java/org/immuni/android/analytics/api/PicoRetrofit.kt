@@ -1,6 +1,6 @@
 package org.immuni.android.analytics.api
 
-import org.immuni.android.base.http.GzipRequestInterceptor
+import org.immuni.android.extensions.http.GzipRequestInterceptor
 import org.immuni.android.ids.IdsManager
 import org.immuni.android.analytics.Pico
 import org.immuni.android.analytics.PicoConfiguration

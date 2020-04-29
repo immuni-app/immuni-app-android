@@ -9,7 +9,7 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import org.immuni.android.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.welcome_fragment.*
 import org.immuni.android.ImmuniApplication

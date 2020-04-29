@@ -2,11 +2,11 @@ package org.immuni.android.networking
 
 import android.content.Context
 import androidx.lifecycle.ProcessLifecycleOwner
-import org.immuni.android.base.lifecycle.AppLifecycleEvent.*
-import org.immuni.android.base.lifecycle.AppLifecycleObserver
-import org.immuni.android.base.utils.DeviceUtils
-import org.immuni.android.base.utils.fromJson
-import org.immuni.android.base.utils.toJson
+import org.immuni.android.extensions.lifecycle.AppLifecycleEvent.*
+import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
+import org.immuni.android.extensions.utils.DeviceUtils
+import org.immuni.android.extensions.utils.fromJson
+import org.immuni.android.extensions.utils.toJson
 import org.immuni.android.networking.api.NetworkingRetrofit
 import org.immuni.android.networking.api.NetworkingService
 import org.immuni.android.networking.api.model.NetworkingMe

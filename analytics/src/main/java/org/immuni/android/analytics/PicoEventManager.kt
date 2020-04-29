@@ -1,8 +1,8 @@
 package org.immuni.android.analytics
 
 import android.content.Context
-import org.immuni.android.base.utils.DeviceInfoProvider
-import org.immuni.android.base.utils.DeviceUtils
+import org.immuni.android.extensions.utils.DeviceInfoProvider
+import org.immuni.android.extensions.utils.DeviceUtils
 import org.immuni.android.analytics.model.*
 import org.immuni.android.analytics.session.PicoSessionManager
 import kotlinx.coroutines.CompletableDeferred

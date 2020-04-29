@@ -2,7 +2,7 @@ package org.immuni.android.ui.uploaddata
 
 import android.os.Bundle
 import androidx.navigation.findNavController
-import org.immuni.android.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import org.immuni.android.ui.ImmuniActivity
 import org.immuni.android.R
 import org.koin.androidx.viewmodel.ext.android.getViewModel

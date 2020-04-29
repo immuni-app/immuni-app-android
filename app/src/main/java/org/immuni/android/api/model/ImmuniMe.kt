@@ -1,6 +1,6 @@
 package org.immuni.android.api.model
 
-import org.immuni.android.base.utils.JSonSerializable
+import org.immuni.android.extensions.utils.JSonSerializable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.models.survey.TriageProfileId

@@ -2,8 +2,7 @@ package org.immuni.android.ids
 
 import org.immuni.android.ids.Ids.*
 import android.content.Context
-import org.immuni.android.base.storage.KVStorage
-import java.io.File
+import org.immuni.android.extensions.storage.KVStorage
 
 /**
  * A store for user ids.

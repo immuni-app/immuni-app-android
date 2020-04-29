@@ -10,8 +10,8 @@ import org.immuni.android.R
 import org.immuni.android.ui.home.HomeActivity
 import org.immuni.android.ui.onboarding.OnboardingActivity
 import org.immuni.android.ui.welcome.WelcomeActivity
-import org.immuni.android.base.extensions.invisible
-import org.immuni.android.base.extensions.visible
+import org.immuni.android.extensions.view.invisible
+import org.immuni.android.extensions.view.visible
 import kotlinx.android.synthetic.main.setup_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

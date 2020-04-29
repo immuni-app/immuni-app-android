@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.widget.Toast
-import org.immuni.android.base.extensions.toast
-import org.immuni.android.base.utils.DeviceUtils
+import org.immuni.android.extensions.activity.toast
+import org.immuni.android.extensions.utils.DeviceUtils
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase

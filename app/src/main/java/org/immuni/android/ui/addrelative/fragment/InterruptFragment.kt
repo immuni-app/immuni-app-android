@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import org.immuni.android.R
-import org.immuni.android.base.extensions.setDarkStatusBarFullscreen
+import org.immuni.android.extensions.activity.setDarkStatusBarFullscreen
 import kotlinx.android.synthetic.main.add_relative_interrupt_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.ui.addrelative.AddRelativeActivity

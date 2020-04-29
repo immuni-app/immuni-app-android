@@ -1,6 +1,6 @@
 package org.immuni.android.survey
 
-import org.immuni.android.base.utils.fromJson
+import org.immuni.android.extensions.utils.fromJson
 import com.squareup.moshi.Moshi
 import org.immuni.android.models.survey.*
 import org.immuni.android.models.survey.raw.*

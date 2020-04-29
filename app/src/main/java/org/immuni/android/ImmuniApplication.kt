@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.lifecycle.ProcessLifecycleOwner
-import org.immuni.android.base.lifecycle.AppLifecycleObserver
+import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
 import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico

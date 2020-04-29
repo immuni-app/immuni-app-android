@@ -2,8 +2,8 @@ package org.immuni.android.analytics.install
 
 import android.content.Context
 import org.immuni.android.ids.Ids
-import org.immuni.android.base.utils.DeviceUtils
-import org.immuni.android.base.storage.KVStorage
+import org.immuni.android.extensions.utils.DeviceUtils
+import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.analytics.PicoConfiguration
 import org.immuni.android.analytics.PicoEventManager
 import org.immuni.android.analytics.PicoInstallInfo

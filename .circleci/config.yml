@@ -50,9 +50,9 @@ jobs:
       - store_test_results:
           path: analytics/build/test-results
       - run:
-          name: Run Base Module Unit Tests
-          command: ./gradlew :base:testDebugUnitTest
+          name: Run Extensions Module Unit Tests
+          command: ./gradlew :extensions:testDebugUnitTest
       - store_artifacts:
-          path: base/build/reports
+          path: extensions/build/reports
       - store_test_results:
-          path: base/build/test-results
+          path: extensions/build/test-results

@@ -1,8 +1,8 @@
 package org.immuni.android.ui.log
 
 import androidx.lifecycle.*
-import org.immuni.android.base.livedata.Event
-import org.immuni.android.base.storage.KVStorage
+import org.immuni.android.extensions.livedata.Event
+import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico

@@ -1,7 +1,7 @@
 package org.immuni.android.analytics.userconsent
 
 import android.content.Context
-import org.immuni.android.base.storage.KVStorage
+import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.analytics.PicoConfiguration
 
 // Users can opt-in or out from sending analytics events

@@ -10,10 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import org.immuni.android.base.extensions.animateShow
+import org.immuni.android.extensions.view.animateShow
 import org.immuni.android.R
 import org.immuni.android.ui.log.LogViewModel
-import org.immuni.android.base.extensions.setDarkStatusBarFullscreen
+import org.immuni.android.extensions.activity.setDarkStatusBarFullscreen
 import kotlinx.android.synthetic.main.log_choose_person_fragment.*
 import org.immuni.android.models.Gender
 import org.immuni.android.models.colorResource

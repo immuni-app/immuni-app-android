@@ -1,8 +1,8 @@
 package org.immuni.android.analytics.userconsent
 
 import android.content.Context
-import org.immuni.android.base.utils.fromJson
-import org.immuni.android.base.utils.toJson
+import org.immuni.android.extensions.utils.fromJson
+import org.immuni.android.extensions.utils.toJson
 import org.immuni.android.analytics.PicoConfiguration
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK

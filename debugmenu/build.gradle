@@ -36,7 +36,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(":base")
+    implementation project(':extensions')
     implementation project(':ids')
     implementation project(':networking')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

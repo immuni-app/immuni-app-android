@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.immuni.android.base.playstore.PlayStoreActions
+import org.immuni.android.extensions.playstore.PlayStoreActions
 import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*

@@ -1,7 +1,7 @@
 package org.immuni.android.managers
 
 import android.content.Context
-import org.immuni.android.base.utils.retry
+import org.immuni.android.extensions.utils.retry
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
 import org.immuni.android.api.ImmuniAPIRepository

@@ -9,7 +9,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.fragment.app.Fragment
 import org.immuni.android.R
-import org.immuni.android.base.extensions.toast
+import org.immuni.android.extensions.activity.toast
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.util.log
 import org.immuni.android.service.ImmuniForegroundService
@@ -52,7 +52,10 @@ class BluetoothManager(val context: Context) : KoinComponent {
 
         // check if the hardware support BLE
         if(!isBluetoothSupported()) {
-            toast(context, context.getString(R.string.ble_not_supported_by_this_device))
+            toast(
+                context,
+                context.getString(R.string.ble_not_supported_by_this_device)
+            )
             return
         }
 
