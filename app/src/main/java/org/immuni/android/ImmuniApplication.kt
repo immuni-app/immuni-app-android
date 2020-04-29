@@ -12,8 +12,8 @@ import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import org.immuni.android.fcm.FirebaseFCM
 import org.immuni.android.secretmenu.SecretMenu
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.receivers.RestarterReceiver
 import org.immuni.android.receivers.ShutdownReceiver

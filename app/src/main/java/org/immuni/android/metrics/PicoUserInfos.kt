@@ -14,8 +14,8 @@ import org.immuni.android.networking.Networking
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.bluetooth.BLEAdvertiser
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.BluetoothManager

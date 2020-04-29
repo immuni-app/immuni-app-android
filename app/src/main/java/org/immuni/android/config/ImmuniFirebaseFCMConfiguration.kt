@@ -1,14 +1,14 @@
 package org.immuni.android.config
 
-import org.immuni.android.networking.CustomOracleAPI
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
-import org.immuni.android.networking.model.FcmTokenRequest
+import org.immuni.android.api.ImmuniAPI
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.api.model.FcmTokenRequest
 import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
-import org.immuni.android.networking.api.model.DevicesRequest
 import org.immuni.android.fcm.FirebaseFCMConfiguration
 import com.google.firebase.messaging.RemoteMessage
+import org.immuni.android.networking.api.model.DevicesRequest
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -31,11 +31,13 @@ class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
         val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
 
         // be sure to call devices before
-        networking.api.devices(DevicesRequest(
-            uniqueId = ids.backupPersistentId.id
-        ))
+        networking.api.devices(
+            DevicesRequest(
+                uniqueId = ids.backupPersistentId.id
+            )
+        )
 
-        networking.customServiceAPI(CustomOracleAPI::class).fcmNotificationToken(FcmTokenRequest(
+        networking.customServiceAPI(ImmuniAPI::class).fcmNotificationToken(FcmTokenRequest(
             token = token
         ))
     }

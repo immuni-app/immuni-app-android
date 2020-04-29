@@ -5,7 +5,7 @@ import android.os.ParcelUuid
 import org.immuni.android.networking.Networking
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
-import org.immuni.android.networking.model.*
+import org.immuni.android.api.model.*
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.models.ProximityEvent

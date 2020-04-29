@@ -1,4 +1,4 @@
-package org.immuni.android.networking.model
+package org.immuni.android.api.model
 
 import android.bluetooth.le.AdvertiseSettings
 import android.bluetooth.le.ScanSettings

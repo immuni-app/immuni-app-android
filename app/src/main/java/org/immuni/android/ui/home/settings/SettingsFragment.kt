@@ -14,8 +14,8 @@ import org.immuni.android.base.extensions.setLightStatusBarFullscreen
 import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
 import kotlinx.android.synthetic.main.settings_fragment.*
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 

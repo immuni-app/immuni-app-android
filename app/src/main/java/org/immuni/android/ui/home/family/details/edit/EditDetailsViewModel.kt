@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import org.immuni.android.base.livedata.Event
 import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User

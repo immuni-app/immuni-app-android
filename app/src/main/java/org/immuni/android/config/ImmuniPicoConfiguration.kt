@@ -3,15 +3,15 @@ package org.immuni.android.config
 import android.content.Context
 import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
-import org.immuni.android.networking.api.model.NetworkingMe
-import org.immuni.android.networking.api.model.NetworkingSettings
 import org.immuni.android.analytics.PicoConfiguration
 import okhttp3.CertificatePinner
 import org.immuni.android.R
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.metrics.*
+import org.immuni.android.networking.api.model.NetworkingMe
+import org.immuni.android.networking.api.model.NetworkingSettings
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

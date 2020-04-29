@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import org.immuni.android.base.livedata.Event
 import org.immuni.android.analytics.Pico
 import kotlinx.coroutines.*
-import org.immuni.android.networking.ApiManager
+import org.immuni.android.api.ImmuniAPIRepository
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.ExportData
@@ -21,7 +21,7 @@ class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : Vie
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val surveyManager: SurveyManager by inject()
-    private val apiManager: ApiManager by inject()
+    private val immuniAPIRepository: ImmuniAPIRepository by inject()
     private val pico: Pico by inject()
 
     val loading = MutableLiveData<Event<Boolean>>()
@@ -51,7 +51,7 @@ class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : Vie
                 devices = devices
             )
 
-            val result = apiManager.exportData(code, exportData)
+            val result = immuniAPIRepository.exportData(code, exportData)
             loading.value = Event(false)
             if (result.isSuccessful) {
                 success.value = Event(true)

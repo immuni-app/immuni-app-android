@@ -11,9 +11,9 @@ import org.immuni.android.analytics.Pico
 import org.immuni.android.secretmenu.SecretMenu
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
-import org.immuni.android.networking.ApiManager
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
+import org.immuni.android.api.ImmuniAPIRepository
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.bluetooth.BLEAdvertiser
 import org.immuni.android.bluetooth.BLEScanner
 import org.immuni.android.db.DATABASE_NAME
@@ -127,7 +127,7 @@ val appModule = module {
 
     // single instance of ApiManager
     single {
-        ApiManager(get())
+        ImmuniAPIRepository(get())
     }
 
     // single instance of BleAdvertiser

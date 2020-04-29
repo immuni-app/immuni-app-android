@@ -15,8 +15,8 @@ import org.junit.Rule
 import org.junit.Test
 
 import io.mockk.impl.annotations.MockK
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.testutils.getOrAwaitValue
 import retrofit2.Response
 import kotlin.test.assertTrue

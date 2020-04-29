@@ -1,10 +1,10 @@
-package org.immuni.android.networking.model
+package org.immuni.android.api.model
 
 import org.immuni.android.models.survey.raw.RawSurvey
-import org.immuni.android.networking.api.model.NetworkingSettings
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.models.survey.Survey
+import org.immuni.android.networking.api.model.NetworkingSettings
 
 @JsonClass(generateAdapter = true)
 class ImmuniSettings(

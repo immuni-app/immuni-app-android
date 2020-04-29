@@ -6,8 +6,8 @@ import android.os.Build
 import android.widget.Toast
 import org.immuni.android.base.extensions.toast
 import org.immuni.android.base.utils.DeviceUtils
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking

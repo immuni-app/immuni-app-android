@@ -10,9 +10,9 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.networking.ApiManager
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
+import org.immuni.android.api.ImmuniAPIRepository
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.UserManager
@@ -36,7 +36,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val pico: Pico by inject()
     private val userManager: UserManager by inject()
-    private val apiManager: ApiManager by inject()
+    private val immuniAPIRepository: ImmuniAPIRepository by inject()
     private val permissionsManager: PermissionsManager by inject()
 
     val partialUserInfo = MediatorLiveData<OnboardingUserInfo>()

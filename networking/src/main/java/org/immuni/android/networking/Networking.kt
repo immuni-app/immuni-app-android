@@ -35,10 +35,6 @@ class Networking<Settings : NetworkingSettings, Me : NetworkingMe>(
     private val meType: KClass<Me>
 ) {
 
-    // OracleService contains the generic API all app can use.
-    // If your app need to use a legacy API, use the customServiceAPI() method to
-    // create your custom API above the Oracle layer.
-
     private val store = NetworkingStore(
         context,
         encrypted = config.encryptStore()

@@ -15,8 +15,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.networking.model.ImmuniMe
-import org.immuni.android.networking.model.ImmuniSettings
+import org.immuni.android.api.model.ImmuniMe
+import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager

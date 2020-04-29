@@ -12,7 +12,7 @@ import org.immuni.android.analytics.Pico
 import com.google.android.gms.common.util.Hex
 import kotlinx.coroutines.*
 import org.immuni.android.BuildConfig
-import org.immuni.android.networking.model.*
+import org.immuni.android.api.model.*
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.models.ProximityEvent
