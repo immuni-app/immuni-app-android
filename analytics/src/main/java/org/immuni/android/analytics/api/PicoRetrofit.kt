@@ -21,7 +21,7 @@ import java.util.*
 import javax.net.ssl.HostnameVerifier
 
 class PicoRetrofit(config: PicoConfiguration) {
-    private val ids: IdsManager = config.idsManager()
+    private val ids: IdsManager = config.ids().manager
 
     // catch here all network or unexpected exceptions
     // in order not to have to explicitly try/catch all retrofit calls

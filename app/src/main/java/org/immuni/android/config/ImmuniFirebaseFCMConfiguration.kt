@@ -8,12 +8,13 @@ import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
 import org.immuni.android.fcm.FirebaseFCMConfiguration
 import com.google.firebase.messaging.RemoteMessage
+import org.immuni.android.ids.Ids
 import org.immuni.android.networking.api.model.DevicesRequest
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
-    override val ids: IdsManager by inject()
+    override val ids: Ids by inject()
 
     override suspend fun onNewPushNotification(remoteMessage: RemoteMessage) {
         // Check if message contains a data payload.
@@ -33,7 +34,7 @@ class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
         // be sure to call devices before
         networking.api.devices(
             DevicesRequest(
-                uniqueId = ids.id.id
+                uniqueId = ids.manager.id.id
             )
         )
 

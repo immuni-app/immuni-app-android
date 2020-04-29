@@ -19,7 +19,7 @@ class NetworkingRetrofit(
     context: Context,
     config: NetworkingConfiguration
 ) {
-    private val idsManager = config.idsManager()
+    private val idsManager = config.ids().manager
 
     val headersInterceptor: ((Interceptor.Chain) -> Response) = { chain ->
         val infoProvider = DeviceInfoProviderImpl()

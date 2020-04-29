@@ -1,6 +1,6 @@
 package org.immuni.android.debugmenu
 
-import org.immuni.android.ids.IdsManager
+import org.immuni.android.ids.Ids
 
 /**
  * This is the debug menu configuration
@@ -10,7 +10,7 @@ interface DebugMenuConfiguration {
 
     val isDevelopmentDevice: () -> Boolean
 
-    fun idsManager(): IdsManager
+    fun ids(): Ids
 
     // available to anyone
     fun publicItems(): List<DebugMenuItem>

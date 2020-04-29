@@ -16,6 +16,7 @@ import org.immuni.android.networking.Networking
 import kotlinx.android.synthetic.main.data_handling_fragment.*
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.ids.Ids
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -54,7 +55,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
         val ctx = activity.applicationContext
         val email = networking.settings()?.recoverDataEmail
 
-        val ids: IdsManager by inject()
+        val ids: Ids by inject()
 
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("mailto:") // only email apps should handle this
@@ -62,7 +63,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
             putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
             putExtra(
                 Intent.EXTRA_TEXT,
-                String.format("${ctx.getString(R.string.recover_data_email_message)}", ids.id.id)
+                String.format("${ctx.getString(R.string.recover_data_email_message)}", ids.manager.id.id)
             )
         }
 
@@ -73,7 +74,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
         val ctx = activity.applicationContext
         val email = networking.settings()?.deleteDataEmail
 
-        val ids: IdsManager by inject()
+        val ids: Ids by inject()
 
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("mailto:") // only email apps should handle this
@@ -81,7 +82,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
             putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
             putExtra(
                 Intent.EXTRA_TEXT,
-                String.format("${ctx.getString(R.string.delete_data_email_message)}", ids.id.id)
+                String.format("${ctx.getString(R.string.delete_data_email_message)}", ids.manager.id.id)
             )
         }
 

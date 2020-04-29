@@ -23,6 +23,7 @@ import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.ids.Ids
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -32,7 +33,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
-    val ids: IdsManager by inject()
+    val ids: Ids by inject()
 
     val loading = MutableLiveData<Boolean>()
     val downloading = MutableLiveData<Boolean>()
@@ -97,7 +98,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
             setDescription(context.getString(R.string.immuni_update_file_description))
             setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "immuni.apk")
-            addRequestHeader("device-id", ids.id.id)
+            addRequestHeader("device-id", ids.manager.id.id)
         }
 
         val downloadId = downloadManager.enqueue(request)

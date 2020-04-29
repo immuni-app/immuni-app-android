@@ -7,7 +7,7 @@ import org.immuni.android.debugmenu.ui.ExitActivity
 class ClearUserIdentityItem : DebugMenuItem(
     "\uD83D\uDC7D Delete user ids",
     { context, config ->
-        config.idsManager().resetUserIds()
+        config.ids().manager.resetUserIds()
         Toast.makeText(context, "User identity changed.", Toast.LENGTH_SHORT).show()
         ExitActivity.exitApplication(context)
     }

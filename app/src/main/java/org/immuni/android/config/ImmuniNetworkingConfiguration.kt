@@ -8,19 +8,20 @@ import org.immuni.android.networking.NetworkingConfiguration
 import okhttp3.CertificatePinner
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
+import org.immuni.android.ids.Ids
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class ImmuniNetworkingConfiguration(val context: Context) : NetworkingConfiguration, KoinComponent {
 
-    val ids: IdsManager by inject()
+    val ids: Ids by inject()
 
     override fun endpoint(): String {
         return context.getString(R.string.oracle_base_url)
     }
 
-    override fun idsManager(): IdsManager {
+    override fun ids(): Ids {
         return ids
     }
 

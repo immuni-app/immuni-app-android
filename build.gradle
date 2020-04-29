@@ -23,6 +23,8 @@ allprojects {
         google()
         jcenter()
     }
+
+    ext.room_version = "2.2.5"
 }
 
 task clean(type: Delete) {

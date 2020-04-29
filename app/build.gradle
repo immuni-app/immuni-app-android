@@ -44,8 +44,6 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
-        buildConfigField("String", "sesameOracleKey", appProperties['sesameOracleKey'])
-        buildConfigField("String", "sesamePicoKey", appProperties['sesamePicoKey'])
     }
 
     buildTypes {
@@ -111,14 +109,16 @@ dependencies {
     implementation 'com.shawnlin:number-picker:2.4.8'
 
     // Room components
-    implementation "androidx.room:room-runtime:2.2.4"
-    implementation "androidx.room:room-ktx:2.2.4"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    androidTestImplementation "androidx.room:room-testing:$room_version"
+
+    // Navigation
     implementation 'androidx.navigation:navigation-fragment:2.2.1'
     implementation 'androidx.navigation:navigation-ui:2.2.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
-    kapt "androidx.room:room-compiler:2.2.4"
-    androidTestImplementation "androidx.room:room-testing:2.2.4"
 
     // SQL Cipher
     implementation 'net.zetetic:android-database-sqlcipher:4.3.0'

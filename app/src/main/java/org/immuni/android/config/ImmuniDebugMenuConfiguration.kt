@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
+import org.immuni.android.ids.Ids
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.service.ImmuniForegroundService
@@ -28,7 +29,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class ImmuniDebugMenuConfiguration(val context: Context): DebugMenuConfiguration, KoinComponent {
-    private val ids: IdsManager by inject()
+    private val ids: Ids by inject()
     private val database: ImmuniDatabase by inject()
     private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     private val notificationManager: SurveyNotificationManager by inject()
@@ -38,20 +39,20 @@ class ImmuniDebugMenuConfiguration(val context: Context): DebugMenuConfiguration
     private val welcome: Welcome by inject()
 
     override val isDevelopmentDevice = {
-        networking.settings()?.developmentDevices?.contains(ids.id.id) == true
+        networking.settings()?.developmentDevices?.contains(ids.manager.id.id) == true
     }
 
-    override fun idsManager(): IdsManager {
+    override fun ids(): Ids {
         return ids
     }
 
     override fun publicItems(): List<DebugMenuItem> {
         return listOf(
             object : DebugMenuItem("\uD83D\uDC68 User ID", { _, _ ->
-                DeviceUtils.copyToClipBoard(context, text = ids.id.id ?: "-")
+                DeviceUtils.copyToClipBoard(context, text = ids.manager.id.id ?: "-")
                 toast(
                     context,
-                    ids.id.id,
+                    ids.manager.id.id,
                     Toast.LENGTH_LONG
                 )
             }){}

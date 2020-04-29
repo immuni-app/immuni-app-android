@@ -34,7 +34,7 @@ internal class PicoInstallManager(
     val info: PicoInstallInfo
 
     init {
-        val concierge = config.idsManager()
+        val concierge = config.ids().manager
 
         val firstInstallDate =
             storage.load<Long>(firstInstallTimeMillisKey)?.let { Date(it) } ?: Date()

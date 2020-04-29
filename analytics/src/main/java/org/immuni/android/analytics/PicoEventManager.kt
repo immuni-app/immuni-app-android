@@ -48,7 +48,7 @@ internal class PicoEventManager(
             type = event.type.name,
             data = event.data,
             user = PicoUser(
-                ids = config.idsManager().id.let { mutableMapOf(it.name to it.id) },
+                ids = config.ids().manager.id.let { mutableMapOf(it.name to it.id) },
                 info = PicoBaseUserInfo(
                     country = deviceInfoProvider.country(),
                     language = deviceInfoProvider.language(),

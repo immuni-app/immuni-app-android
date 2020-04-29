@@ -16,6 +16,7 @@ import org.immuni.android.networking.Networking
 import kotlinx.android.synthetic.main.settings_fragment.*
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.ids.Ids
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -46,7 +47,6 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     fun contactUs(activity: Activity) {
 
-        val ids: IdsManager by inject()
         val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
         val email = networking.settings()?.supportEmail
 

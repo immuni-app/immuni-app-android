@@ -9,6 +9,7 @@ import org.immuni.android.R
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.ids.Ids
 import org.immuni.android.metrics.*
 import org.immuni.android.networking.api.model.NetworkingMe
 import org.immuni.android.networking.api.model.NetworkingSettings
@@ -18,7 +19,7 @@ import org.koin.core.inject
 
 class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComponent {
 
-    val ids: IdsManager by inject()
+    val ids: Ids by inject()
     val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
     val database: ImmuniDatabase by inject()
 
@@ -27,10 +28,10 @@ class ImmuniPicoConfiguration(val context: Context): PicoConfiguration, KoinComp
     }
 
     override fun isDevelopmentDevice(): Boolean {
-        return networking.settings()?.developmentDevices?.contains(ids.id.id) == true
+        return networking.settings()?.developmentDevices?.contains(ids.manager.id.id) == true
     }
 
-    override fun idsManager(): IdsManager {
+    override fun ids(): Ids {
         return ids
     }
 

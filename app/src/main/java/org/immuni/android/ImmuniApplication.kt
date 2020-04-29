@@ -14,6 +14,7 @@ import org.immuni.android.fcm.FirebaseFCM
 import org.immuni.android.debugmenu.DebugMenu
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.ids.Ids
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.receivers.RestarterReceiver
 import org.immuni.android.receivers.ShutdownReceiver
@@ -24,7 +25,7 @@ import org.koin.core.context.startKoin
 
 class ImmuniApplication : Application() {
 
-    private lateinit var ids: IdsManager
+    private lateinit var ids: Ids
     private lateinit var networking: Networking<ImmuniSettings, ImmuniMe>
     private lateinit var pico: Pico
     private lateinit var fcm: FirebaseFCM
