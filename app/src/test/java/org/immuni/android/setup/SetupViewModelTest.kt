@@ -17,6 +17,8 @@ import org.junit.Test
 import io.mockk.impl.annotations.MockK
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.networking.api.NetworkError
+import org.immuni.android.networking.api.NetworkResource
 import org.immuni.android.testutils.getOrAwaitValue
 import retrofit2.Response
 import kotlin.test.assertTrue
@@ -56,8 +58,8 @@ class SetupViewModelTest {
     fun `test setup fails if settings fails`() = coroutineTestRule.runBlockingTest {
 
         every { setup.isComplete() } returns false
-        coEvery { repository.getOracleSetting() } returns Response.error(500, "".toResponseBody())
-        coEvery { repository.getOracleMe() } returns Response.success(ImmuniMe())
+        coEvery { repository.getOracleSetting() } returns NetworkResource.Error(NetworkError.IOError())
+        coEvery { repository.getOracleMe() } returns NetworkResource.Success(ImmuniMe())
 
         viewModel.initializeApp()
 
@@ -67,8 +69,8 @@ class SetupViewModelTest {
     @Test
     fun `test setup fails if me fails`() = coroutineTestRule.runBlockingTest {
         every { setup.isComplete() } returns false
-        coEvery { repository.getOracleSetting() } returns Response.success(ImmuniSettings())
-        coEvery { repository.getOracleMe() } returns Response.error(500, "".toResponseBody())
+        coEvery { repository.getOracleSetting() } returns NetworkResource.Success(ImmuniSettings())
+        coEvery { repository.getOracleMe() } returns NetworkResource.Error(NetworkError.IOError())
 
         viewModel.initializeApp()
 
@@ -80,8 +82,8 @@ class SetupViewModelTest {
         every { setup.isComplete() } returns false
         every { onboarding.isComplete() } returns false
         every { welcome.isComplete() } returns false
-        coEvery { repository.getOracleSetting() } returns Response.success(ImmuniSettings())
-        coEvery { repository.getOracleMe() } returns Response.success(ImmuniMe())
+        coEvery { repository.getOracleSetting() } returns NetworkResource.Success(ImmuniSettings())
+        coEvery { repository.getOracleMe() } returns NetworkResource.Success(ImmuniMe())
 
         viewModel.initializeApp()
 
@@ -93,8 +95,8 @@ class SetupViewModelTest {
         every { setup.isComplete() } returns false
         every { onboarding.isComplete() } returns true
         every { welcome.isComplete() } returns true
-        coEvery { repository.getOracleSetting() } returns Response.success(ImmuniSettings())
-        coEvery { repository.getOracleMe() } returns Response.success(ImmuniMe())
+        coEvery { repository.getOracleSetting() } returns NetworkResource.Success(ImmuniSettings())
+        coEvery { repository.getOracleMe() } returns NetworkResource.Success(ImmuniMe())
 
         viewModel.initializeApp()
 
@@ -106,8 +108,8 @@ class SetupViewModelTest {
         every { setup.isComplete() } returns true
         every { onboarding.isComplete() } returns false
         every { welcome.isComplete() } returns false
-        coEvery { repository.getOracleSetting() } returns Response.success(ImmuniSettings())
-        coEvery { repository.getOracleMe() } returns Response.success(ImmuniMe())
+        coEvery { repository.getOracleSetting() } returns NetworkResource.Success(ImmuniSettings())
+        coEvery { repository.getOracleMe() } returns NetworkResource.Success(ImmuniMe())
 
         viewModel.initializeApp()
         advanceTimeBy(2000)
@@ -120,8 +122,8 @@ class SetupViewModelTest {
         every { setup.isComplete() } returns true
         every { onboarding.isComplete() } returns true
         every { welcome.isComplete() } returns true
-        coEvery { repository.getOracleSetting() } returns Response.success(ImmuniSettings())
-        coEvery { repository.getOracleMe() } returns Response.success(ImmuniMe())
+        coEvery { repository.getOracleSetting() } returns NetworkResource.Success(ImmuniSettings())
+        coEvery { repository.getOracleMe() } returns NetworkResource.Success(ImmuniMe())
 
         viewModel.initializeApp()
         advanceTimeBy(2000)

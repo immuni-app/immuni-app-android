@@ -57,9 +57,9 @@ class NetworkingRepositoryTest {
             settingsChannel,
             meChannel
         ).fetchSettings()
-        assertEquals(25, response.body()?.minBuildVersion)
-        assertEquals("4", response.body()?.tosVersion)
-        assertEquals("3", response.body()?.privacyVersion)
+        assertEquals(25, response.data?.minBuildVersion)
+        assertEquals("4", response.data?.tosVersion)
+        assertEquals("3", response.data?.privacyVersion)
     }
 
     @Test
@@ -74,7 +74,7 @@ class NetworkingRepositoryTest {
         ).fetchSettings()
 
         // custom ones
-        assertEquals("customValue", response.body()?.myCustomField)
+        assertEquals("customValue", response.data?.myCustomField)
     }
 
     @Test
