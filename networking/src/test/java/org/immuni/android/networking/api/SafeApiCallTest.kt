@@ -15,7 +15,7 @@ import java.io.IOException
 import java.lang.Exception
 import java.net.SocketTimeoutException
 
-class NetworkResourceTest {
+class SafeApiCallTest {
 
     @MockK(relaxed = true)
     lateinit var networkingService: NetworkingService
