@@ -9,7 +9,6 @@ import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
-import org.immuni.android.ids.Ids
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
@@ -28,7 +27,6 @@ class LogViewModel(
 
     private val state: KVStorage by inject()
     private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
-    private val ids: Ids by inject()
     private val userManager: UserManager by inject()
     private val surveyManager: SurveyManager by inject()
     private val viewModelJob = SupervisorJob()
@@ -38,9 +36,6 @@ class LogViewModel(
 
     val userIndex: Int?
         get() = user.value?.let { userManager.indexForUser(it.id) }
-
-    val deviceId: String
-        get() = ids.manager.id.id
 
     var survey = MutableLiveData<Survey>()
 

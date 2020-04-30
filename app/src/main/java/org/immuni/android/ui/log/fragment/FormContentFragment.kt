@@ -56,13 +56,13 @@ abstract class FormContentFragment(@LayoutRes val layout: Int) : Fragment(layout
                 val themeColor = ContextCompat.getColor(
                     requireContext(),
                     colorResource(
-                        viewModel.deviceId,
+                        "", //FIXME
                         viewModel.userIndex!!
                     )
                 )
                 // icon and color
                 view.findViewById<ImageView>(R.id.userIcon)?.setImageResource(
-                    user.gender.iconResource(viewModel.deviceId, viewModel.userIndex?:0)
+                    user.gender.iconResource("", viewModel.userIndex?:0)//FIXME
                 )
                 view.findViewById<TextView>(R.id.questionFor)?.setTextColor(themeColor)
                 view.findViewById<TextView>(R.id.questionForLabel)?.setTextColor(themeColor)

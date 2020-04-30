@@ -11,12 +11,10 @@ import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
-import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.Networking
 import kotlinx.android.synthetic.main.settings_fragment.*
 import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
-import org.immuni.android.ids.Ids
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 

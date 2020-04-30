@@ -29,14 +29,7 @@ jobs:
       - store_test_results:
           path: app/build/test-results
       - run:
-          name: Run Ids Module Unit Tests
-          command: ./gradlew :ids:testDebugUnitTest
-      - store_artifacts:
-          path: ids/build/reports
-      - store_test_results:
-          path: ids/build/test-results
-      - run:
-          name: Run Oracle Module Unit Tests
+          name: Run Network Module Unit Tests
           command: ./gradlew :networking:testDebugUnitTest
       - store_artifacts:
           path: networking/build/reports

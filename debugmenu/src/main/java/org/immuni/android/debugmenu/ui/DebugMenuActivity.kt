@@ -35,7 +35,6 @@ class DebugMenuActivity : AppCompatActivity() {
             // debugging items
             if (secretMenuConfig.isDevelopmentDevice()) {
                 addAll(secretMenuConfig.debuggingItems())
-                add(ClearUserIdentityItem())
                 add(ClearAppDataItem())
                 add(ForceQuitDataItem())
                 add(CrashItem())

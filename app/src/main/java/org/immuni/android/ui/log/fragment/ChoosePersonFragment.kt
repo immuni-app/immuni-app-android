@@ -52,7 +52,7 @@ class ChoosePersonFragment : Fragment() {
                 val themeColor = ContextCompat.getColor(
                     requireContext(),
                     colorResource(
-                        viewModel.deviceId,
+                        "", //FIXME
                         viewModel.userIndex!!
                     )
                 )

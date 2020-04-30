@@ -6,22 +6,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import org.immuni.android.ids.IdsManager
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.ids.Ids
 import org.immuni.android.models.iconResource
 import org.immuni.android.ui.log.fragment.model.QuestionType
 import org.immuni.android.ui.log.fragment.model.ResumeItemType
 import org.immuni.android.ui.log.fragment.model.UserType
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class ResumeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinComponent {
 
     val context = ImmuniApplication.appContext
     private var items = mutableListOf<ResumeItemType>()
-    val ids: Ids by inject()
 
     fun update(newList: List<ResumeItemType>) {
         items.clear()
@@ -72,7 +68,7 @@ class ResumeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), KoinC
                 holder.age.text = item.user.ageGroup.humanReadable(ImmuniApplication.appContext)
                 holder.icon.setImageResource(
                     item.user.gender.iconResource(
-                        ids.manager.id.id,
+                        "", //FIXME
                         item.userIndex
                     )
                 )

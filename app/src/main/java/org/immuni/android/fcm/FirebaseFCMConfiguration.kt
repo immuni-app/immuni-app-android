@@ -1,15 +1,12 @@
 package org.immuni.android.fcm
 
-import org.immuni.android.ids.IdsManager
 import com.google.firebase.messaging.RemoteMessage
-import org.immuni.android.ids.Ids
 
 /**
  * This is the FCM configuration
  * the app injects into [TheirsConfiguration].
  */
 interface FirebaseFCMConfiguration {
-    val ids: Ids
 
     /**
      * The app here has the change to show a custom notification or do an action.

@@ -2,7 +2,6 @@ package org.immuni.android.fcm
 
 import android.content.Context
 import android.util.Log
-import org.immuni.android.ids.Ids
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.coroutines.GlobalScope

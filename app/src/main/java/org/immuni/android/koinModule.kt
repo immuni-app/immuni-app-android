@@ -5,7 +5,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import androidx.security.crypto.MasterKeys
 import org.immuni.android.extensions.storage.KVStorage
-import org.immuni.android.ids.Ids
 import org.immuni.android.networking.Networking
 import org.immuni.android.debugmenu.DebugMenu
 import net.sqlcipher.database.SQLiteDatabase
@@ -74,11 +73,6 @@ val appModule = module {
 
     // single instance of Welcome
     single { Welcome() }
-
-    // Ids
-    single {
-        Ids(androidContext(), encryptIds = true)
-    }
 
     // Networking
     single {

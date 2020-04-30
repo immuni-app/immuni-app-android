@@ -3,26 +3,17 @@ package org.immuni.android.config
 import android.content.Context
 import android.content.Intent
 import org.immuni.android.ui.forceupdate.ForceUpdateActivity
-import org.immuni.android.ids.IdsManager
 import org.immuni.android.networking.NetworkingConfiguration
 import okhttp3.CertificatePinner
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.ids.Ids
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class ImmuniNetworkingConfiguration(val context: Context) : NetworkingConfiguration, KoinComponent {
 
-    val ids: Ids by inject()
-
     override fun endpoint(): String {
         return context.getString(R.string.oracle_base_url)
-    }
-
-    override fun ids(): Ids {
-        return ids
     }
 
     override fun showForceUpdate(minVersionCode: Int) {
