@@ -126,7 +126,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         }
 
         geolocation.setOnClickListener {
-           
+
         }
 
         knowMore.setOnClickListener { updateKnowMore(it as TextView) }

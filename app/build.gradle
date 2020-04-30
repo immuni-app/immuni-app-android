@@ -92,11 +92,9 @@ dependencies {
 
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.vectordrawable:vectordrawable:$vectordrawableVersion"
-    implementation "androidx.media:media:$androidxMediaVersion"
     implementation "androidx.fragment:fragment:$fragmentVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-    implementation "androidx.legacy:legacy-support-v4:$legacyVersion"
     implementation "androidx.recyclerview:recyclerview:$recyclerviewVersion"
     implementation "androidx.work:work-runtime-ktx:$workVersion"
     implementation "androidx.viewpager2:viewpager2:$viewPager2Version"

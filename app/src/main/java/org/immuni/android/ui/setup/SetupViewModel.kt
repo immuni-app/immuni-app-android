@@ -62,7 +62,7 @@ class SetupViewModel(
                 repository.settings()
             }
 
-            if (setup.isComplete()) {
+            if (true || setup.isComplete()) {
                 delay(2000)
                 navigateTo()
             } else {
