@@ -17,7 +17,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import org.immuni.android.networking.Networking
 import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -94,32 +93,6 @@ class PermissionsManager(val context: Context) : KoinComponent {
                 action = Settings.ACTION_LOCATION_SOURCE_SETTINGS
             }
             activity.startActivity(intent)
-        }
-
-        var alreadyShownSystemGeolocationDialog = false
-        fun startChangeGlobalGeolocalisation(activity: Activity, requestCode: Int): Boolean {
-
-            if(alreadyShownSystemGeolocationDialog) {
-                return false
-            }
-
-            alreadyShownSystemGeolocationDialog = true
-            val builder = LocationSettingsRequest.Builder()
-            builder.addLocationRequest(LocationRequest.create())
-            builder.setAlwaysShow(true)
-            val client: SettingsClient = LocationServices.getSettingsClient(activity)
-            val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
-                .addOnSuccessListener {}
-                .addOnFailureListener { exception ->
-                if (exception is ResolvableApiException){
-                    try {
-                        exception.startResolutionForResult(activity, requestCode)
-                    } catch (sendEx: IntentSender.SendIntentException) {
-                        // Ignore the error.
-                    }
-                }
-            }
-            return true
         }
     }
 

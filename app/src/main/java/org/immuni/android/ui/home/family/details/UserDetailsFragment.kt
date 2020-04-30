@@ -124,7 +124,7 @@ class UserDetailsFragment : Fragment() {
         }
 
         delete.setOnClickListener {
-            MaterialAlertDialogBuilder(context)
+            MaterialAlertDialogBuilder(requireContext())
                 .setTitle(getString(R.string.delete_user_alert_title))
                 .setMessage(getString(R.string.delete_user_alert_message))
                 .setPositiveButton(getString(R.string.delete)) { d, _ -> viewModel.deleteUser() }

@@ -38,7 +38,7 @@ class HomeFragment : Fragment(), HomeClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            MaterialAlertDialogBuilder(context)
+            MaterialAlertDialogBuilder(requireContext())
                 .setTitle(getString(R.string.app_exit_title))
                 .setMessage(getString(R.string.app_exit_message))
                 .setPositiveButton(getString(R.string.exit)) { d, _ -> activity?.finish() }
@@ -244,10 +244,7 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openGeolocationDialog() {
-        if(!PermissionsManager.startChangeGlobalGeolocalisation(requireActivity(), 20100)) {
-            val action = HomeFragmentDirections.actionGeolocationDialog()
-            findNavController().navigate(action)
-        }
+
     }
 
     private fun openPermissionsDialog() {
