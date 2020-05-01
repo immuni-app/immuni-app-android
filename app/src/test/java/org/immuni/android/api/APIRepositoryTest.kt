@@ -43,10 +43,7 @@ class APIRepositoryTest {
     fun `settings are stored when after fetching`() = runBlocking {
         coEvery { apiService.settings() } returns Response.success(200, settings)
 
-        APIRepository(
-            network,
-            store
-        ).settings()
+        APIRepository(network, store).settings()
 
         verify { store.saveSettings(settings) }
     }
@@ -55,10 +52,7 @@ class APIRepositoryTest {
     fun `settings are not stored when fetching fails`() = runBlocking {
         coEvery { apiService.settings() } returns Response.error(500, "".toResponseBody())
 
-        APIRepository(
-            network,
-            store
-        ).settings()
+        APIRepository(network, store).settings()
 
         verify(exactly = 0) { store.saveSettings(settings) }
     }
@@ -67,10 +61,7 @@ class APIRepositoryTest {
     fun `settings are delivered to API listener after fetching`() = runBlocking {
         coEvery { apiService.settings() } returns Response.success(200, settings)
 
-        val repository = APIRepository(
-            network,
-            store
-        )
+        val repository = APIRepository(network, store)
 
         repository.addAPIListener(apiListener)
         repository.settings()
@@ -82,10 +73,7 @@ class APIRepositoryTest {
     fun `settings are not delivered to API listener when fetching fails`() = runBlocking {
         coEvery { apiService.settings() } returns Response.error(500, "".toResponseBody())
 
-        val repository = APIRepository(
-            network,
-            store
-        )
+        val repository = APIRepository(network, store)
 
         repository.addAPIListener(apiListener)
         repository.settings()

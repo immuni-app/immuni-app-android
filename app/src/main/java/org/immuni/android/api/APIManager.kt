@@ -1,23 +1,15 @@
 package org.immuni.android.api
 
-import android.content.Context
-import android.content.Intent
 import androidx.lifecycle.ProcessLifecycleOwner
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.immuni.android.ImmuniApplication
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.extensions.lifecycle.AppLifecycleEvent
 import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
-import org.immuni.android.extensions.utils.DeviceUtils
-import org.immuni.android.ui.forceupdate.ForceUpdateActivity
-import org.immuni.android.util.log
 
 /**
  * Manages calls and data regarding the backend [API]
@@ -25,7 +17,6 @@ import org.immuni.android.util.log
  * @param repository responsible to interact with the [API] and API storage.
  */
 class APIManager(
-    val context: Context,
     val repository: APIRepository,
     val store: APIStore
 ): APIListener {
@@ -64,6 +55,10 @@ class APIManager(
 
     // other libs and the app can explicitly ask for the latest settings received
     fun latestSettings() = settingsChannel.valueOrNull
+
+    fun closeSettingsChannel() {
+        settingsChannel.cancel()
+    }
 
     fun settingsFlow(): Flow<ImmuniSettings> {
         return settingsChannel.asFlow()

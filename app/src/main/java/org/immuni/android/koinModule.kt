@@ -110,7 +110,7 @@ val appModule = module {
     single { Welcome(get()) }
 
     single {
-        APIStore(androidContext(), get())
+        APIStore(get())
     }
 
     single {
@@ -118,7 +118,7 @@ val appModule = module {
     }
 
     single {
-        APIManager(androidContext(), get(), get())
+        APIManager( get(), get())
     }
 
     single {

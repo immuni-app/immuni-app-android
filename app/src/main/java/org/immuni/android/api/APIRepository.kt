@@ -17,7 +17,7 @@ import org.koin.core.KoinComponent
 class APIRepository(
     val network: Network,
     private val store: APIStore
-) : KoinComponent {
+) {
     private val api = network.createServiceAPI(API::class)
 
     private val listeners = mutableListOf<APIListener>()

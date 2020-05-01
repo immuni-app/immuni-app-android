@@ -1,6 +1,5 @@
 package org.immuni.android.api
 
-import android.content.Context
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.extensions.storage.KVStorage
 
@@ -8,7 +7,6 @@ import org.immuni.android.extensions.storage.KVStorage
  * Stores and loads the settings.
  */
 class APIStore(
-    val context: Context,
     private val kvStorage: KVStorage
 ) {
     companion object {
