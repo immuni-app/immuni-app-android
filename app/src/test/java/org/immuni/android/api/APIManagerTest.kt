@@ -5,10 +5,8 @@ import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.count
-import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.internal.wait
@@ -42,13 +40,14 @@ class APIManagerTest {
     }
 
     @Test
-    fun `settings channel is initialized with value when settings are present at startup`() = runBlockingTest {
+    fun `settings channel is initialized with value when settings are present at startup`() =
+        runBlockingTest {
 
-        coEvery { store.loadSettings() } returns settings
+            coEvery { store.loadSettings() } returns settings
 
-        val manager = APIManager(repository, store)
-        assertEquals(settings, manager.latestSettings())
-    }
+            val manager = APIManager(repository, store)
+            assertEquals(settings, manager.latestSettings())
+        }
 
     @Test
     fun `settings channel is empty when settings are not present at startup`() = runBlockingTest {
@@ -69,7 +68,7 @@ class APIManagerTest {
 
         var counter = 0
         async {
-            flow.collect{
+            flow.collect {
                 counter++
                 manager.closeSettingsChannel()
             }
@@ -89,17 +88,17 @@ class APIManagerTest {
 
         var counter = 0
         async {
-            flow.collect{
+            flow.collect {
                 counter++
             }
         }
 
         async {
-            for(i in 0 until 5) {
+            for (i in 0 until 5) {
                 manager.onSettingsUpdate(settings)
                 delay(100)
             }
-            assertEquals(5,counter)
+            assertEquals(5, counter)
             manager.closeSettingsChannel()
         }
         Unit
