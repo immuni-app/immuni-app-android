@@ -6,7 +6,6 @@ import org.immuni.android.api.model.FcmTokenRequest
 import org.immuni.android.networking.Networking
 import org.immuni.android.fcm.FirebaseFCMConfiguration
 import com.google.firebase.messaging.RemoteMessage
-import org.immuni.android.networking.api.model.DevicesRequest
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

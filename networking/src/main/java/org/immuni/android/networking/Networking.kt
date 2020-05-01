@@ -57,12 +57,12 @@ class Networking<Settings : NetworkingSettings>(
             settingsChannel
         )
 
-        lifecycleObserver = fetchSettingsAndMeOnStartEvent()
+        lifecycleObserver = fetchSettingsOnStartEvent()
 
         checkMinBuildVersion()
     }
 
-    private fun fetchSettingsAndMeOnStartEvent(): AppLifecycleObserver {
+    private fun fetchSettingsOnStartEvent(): AppLifecycleObserver {
         val lifecycleObserver = AppLifecycleObserver()
         GlobalScope.launch {
             lifecycleObserver.consumeEach { event ->

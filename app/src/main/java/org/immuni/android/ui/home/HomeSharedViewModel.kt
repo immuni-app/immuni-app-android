@@ -73,8 +73,45 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     }
 
     private fun refreshHomeListModel() {
+        uiScope.launch {
+            val ctx = ImmuniApplication.appContext
 
+            val itemsList = mutableListOf<HomeItemType>()
+
+            val blockingList = mutableListOf<HomeItemType>()
+
+            // check bluetooth disabled
+
+            if (!bluetoothManager.isBluetoothSupported() || !bluetoothManager.isBluetoothEnabled()) {
+                blockingList.add(EnableBluetoothCard())
+            }
+
+            // check notifications disabled
+
+            if (!PushNotificationUtils.areNotificationsEnabled(ImmuniApplication.appContext)) {
+                blockingList.add(EnableNotificationCard())
+            }
+
+            blockingItemsListModel.value = blockingList
+
+            // survey card
+
+            // suggestion cards
+            /*
+            itemsList.add(
+                when (triageProfile.severity) {
+                    LOW -> SuggestionsCardWhite(suggestionTitle, triageProfile)
+                    MID -> SuggestionsCardYellow(suggestionTitle, triageProfile)
+                    HIGH -> SuggestionsCardRed(suggestionTitle, triageProfile)
+                }
+            )
+             */
+
+
+            homelistModel.value = itemsList.toList()
+        }
     }
+
 
     private fun startListeningToUsers() {
         familylistModel.addSource(userManager.usersLiveData()) { users ->
