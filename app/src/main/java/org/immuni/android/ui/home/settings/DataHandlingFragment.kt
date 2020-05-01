@@ -11,16 +11,15 @@ import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
-import org.immuni.android.networking.Networking
 import kotlinx.android.synthetic.main.data_handling_fragment.*
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.api.APIManager
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
 
     private lateinit var viewModel: HomeSharedViewModel
-    val networking: Networking<ImmuniSettings> by inject()
+    private val api: APIManager by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,7 +49,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
 
     fun recoverDataEmail(activity: Activity) {
         val ctx = activity.applicationContext
-        val email = networking.settings()?.recoverDataEmail
+        val email = api.latestSettings()?.recoverDataEmail
 
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("mailto:") // only email apps should handle this
@@ -67,7 +66,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
 
     fun deleteDataEmail(activity: Activity) {
         val ctx = activity.applicationContext
-        val email = networking.settings()?.deleteDataEmail
+        val email = api.latestSettings()?.deleteDataEmail
 
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             data = Uri.parse("mailto:") // only email apps should handle this

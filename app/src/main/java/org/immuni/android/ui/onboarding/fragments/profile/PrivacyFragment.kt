@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.onboarding_privacy_fragment.*
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.back
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.next
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
-import org.immuni.android.util.color
+import org.immuni.android.extensions.utils.color
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class PrivacyFragment : ProfileContentFragment(R.layout.onboarding_privacy_fragment) {

@@ -13,10 +13,10 @@ import org.junit.Rule
 import org.junit.Test
 
 import io.mockk.impl.annotations.MockK
-import org.immuni.android.api.ImmuniAPIRepository
+import org.immuni.android.api.APIManager
 import org.immuni.android.api.model.ImmuniSettings
-import org.immuni.android.networking.api.NetworkError
-import org.immuni.android.networking.api.NetworkResource
+import org.immuni.android.network.api.NetworkError
+import org.immuni.android.network.api.NetworkResource
 import org.immuni.android.testutils.getOrAwaitValue
 import kotlin.test.assertTrue
 
@@ -42,32 +42,20 @@ class SetupViewModelTest {
     @MockK(relaxed = true)
     lateinit var userManager : UserManager
     @MockK(relaxed = true)
-    lateinit var repository : ImmuniAPIRepository
+    lateinit var apiManager : APIManager
 
     @Before
     fun before() {
         MockKAnnotations.init(this, relaxUnitFun = true)
         every { userManager.familyMembers() } returns listOf()
-        viewModel = SetupViewModel(setup, onboarding, welcome, userManager, repository)
+        viewModel = SetupViewModel(setup, onboarding, welcome, userManager, apiManager)
     }
 
     @Test
     fun `test setup fails if settings fails`() = coroutineTestRule.runBlockingTest {
 
         every { setup.isComplete() } returns false
-        coEvery { repository.settings() } returns NetworkResource.Error(NetworkError.IOError())
-        coEvery { repository.me() } returns NetworkResource.Success(ImmuniMe())
-
-        viewModel.initializeApp()
-
-        assertTrue(viewModel.errorDuringSetup.getOrAwaitValue())
-    }
-
-    @Test
-    fun `test setup fails if me fails`() = coroutineTestRule.runBlockingTest {
-        every { setup.isComplete() } returns false
-        coEvery { repository.settings() } returns NetworkResource.Success(ImmuniSettings())
-        coEvery { repository.me() } returns NetworkResource.Error(NetworkError.IOError())
+        coEvery { apiManager.repository.settings() } returns NetworkResource.Error(NetworkError.IOError())
 
         viewModel.initializeApp()
 
@@ -79,8 +67,7 @@ class SetupViewModelTest {
         every { setup.isComplete() } returns false
         every { onboarding.isComplete() } returns false
         every { welcome.isComplete() } returns false
-        coEvery { repository.settings() } returns NetworkResource.Success(ImmuniSettings())
-        coEvery { repository.me() } returns NetworkResource.Success(ImmuniMe())
+        coEvery { apiManager.repository.settings() } returns NetworkResource.Success(ImmuniSettings())
 
         viewModel.initializeApp()
 
@@ -92,8 +79,7 @@ class SetupViewModelTest {
         every { setup.isComplete() } returns false
         every { onboarding.isComplete() } returns true
         every { welcome.isComplete() } returns true
-        coEvery { repository.settings() } returns NetworkResource.Success(ImmuniSettings())
-        coEvery { repository.me() } returns NetworkResource.Success(ImmuniMe())
+        coEvery { apiManager.repository.settings() } returns NetworkResource.Success(ImmuniSettings())
 
         viewModel.initializeApp()
 
@@ -105,8 +91,7 @@ class SetupViewModelTest {
         every { setup.isComplete() } returns true
         every { onboarding.isComplete() } returns false
         every { welcome.isComplete() } returns false
-        coEvery { repository.settings() } returns NetworkResource.Success(ImmuniSettings())
-        coEvery { repository.me() } returns NetworkResource.Success(ImmuniMe())
+        coEvery { apiManager.repository.settings() } returns NetworkResource.Success(ImmuniSettings())
 
         viewModel.initializeApp()
         advanceTimeBy(2000)
@@ -119,8 +104,7 @@ class SetupViewModelTest {
         every { setup.isComplete() } returns true
         every { onboarding.isComplete() } returns true
         every { welcome.isComplete() } returns true
-        coEvery { repository.settings() } returns NetworkResource.Success(ImmuniSettings())
-        coEvery { repository.me() } returns NetworkResource.Success(ImmuniMe())
+        coEvery { apiManager.repository.settings() } returns NetworkResource.Success(ImmuniSettings())
 
         viewModel.initializeApp()
         advanceTimeBy(2000)

@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModel
 import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.extensions.utils.retry
 import kotlinx.coroutines.*
-import org.immuni.android.api.ImmuniAPIRepository
+import org.immuni.android.api.APIManager
 import org.immuni.android.managers.UserManager
-import org.immuni.android.networking.api.NetworkResource
+import org.immuni.android.network.api.NetworkResource
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.welcome.Welcome
-import org.immuni.android.util.Flags
-import org.immuni.android.util.setFlag
 import org.koin.core.KoinComponent
 import java.io.IOException
 
@@ -21,7 +19,7 @@ class SetupViewModel(
     val onboarding: Onboarding,
     val welcome: Welcome,
     val userManager: UserManager,
-    val repository: ImmuniAPIRepository
+    val apiManager: APIManager
 ) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
@@ -59,7 +57,7 @@ class SetupViewModel(
             // set timeout here to allow the user to use the app offline
             // (this is not the very first startup that must to be blocking)
             withTimeoutOrNull(5000) {
-                repository.settings()
+                apiManager.repository.settings()
             }
 
             if (true || setup.isComplete()) {
@@ -73,7 +71,7 @@ class SetupViewModel(
                     // the first time the call to settings and me is blocking, you cannot proceed without
                     val settings = retry(
                         times = 6,
-                        block = { repository.settings() },
+                        block = { apiManager.repository.settings() },
                         exitWhen = { result -> result is NetworkResource.Success },
                         onIntermediateFailure = { errorDuringSetup.value = true }
                     )
@@ -111,6 +109,6 @@ class SetupViewModel(
     }
 
     private fun setAddFamilyMemberDialogShown() {
-        setFlag(Flags.ADD_FAMILY_MEMBER_DIALOG_SHOWN, true)
+        onboarding.setFamilyDialogShown(true)
     }
 }

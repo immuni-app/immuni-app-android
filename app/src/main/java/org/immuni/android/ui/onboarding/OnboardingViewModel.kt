@@ -3,14 +3,12 @@ package org.immuni.android.ui.onboarding
 import android.content.Intent
 import androidx.lifecycle.*
 import org.immuni.android.extensions.livedata.Event
-import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.ImmuniAPIRepository
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.api.APIManager
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.UserManager
@@ -30,7 +28,7 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val onboarding: Onboarding by inject()
-    private val networking: Networking<ImmuniSettings> by inject()
+    private val api: APIManager by inject()
     private val userManager: UserManager by inject()
     private val permissionsManager: PermissionsManager by inject()
 
@@ -87,13 +85,13 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     }
 
     fun onPrivacyPolicyClick() {
-        networking.settings()?.privacyPolicyUrl?.let { url ->
+        api.latestSettings()?.privacyPolicyUrl?.let { url ->
             openUrlInDialog(url)
         }
     }
 
     fun onTosClick() {
-        networking.settings()?.termsOfServiceUrl?.let { url ->
+        api.latestSettings()?.termsOfServiceUrl?.let { url ->
             openUrlInDialog(url)
         }
     }

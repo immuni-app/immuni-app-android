@@ -16,11 +16,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.immuni.android.extensions.playstore.PlayStoreActions
-import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.api.APIManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -29,7 +28,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val networking: Networking<ImmuniSettings> by inject()
+    private val api: APIManager by inject()
 
     val loading = MutableLiveData<Boolean>()
     val downloading = MutableLiveData<Boolean>()
@@ -39,7 +38,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
         val activity = fragment.requireActivity()
 
         // if we have a custon url
-        networking.settings()?.appUpdateUrl?.let { url->
+        api.latestSettings()?.appUpdateUrl?.let { url->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !activity.applicationContext.packageManager.canRequestPackageInstalls()) {
                 val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + activity.applicationContext.packageName))
                 fragment.startActivityForResult(intent, 20999)

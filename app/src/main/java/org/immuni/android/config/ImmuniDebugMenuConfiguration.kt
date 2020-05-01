@@ -5,9 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.widget.Toast
 import org.immuni.android.extensions.utils.DeviceUtils
-import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.networking.Networking
 import org.immuni.android.debugmenu.DebugMenuConfiguration
 import org.immuni.android.debugmenu.DebugMenuItem
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +24,6 @@ import org.koin.core.inject
 
 class ImmuniDebugMenuConfiguration(val context: Context): DebugMenuConfiguration, KoinComponent {
     private val database: ImmuniDatabase by inject()
-    private val networking: Networking<ImmuniSettings> by inject()
     private val notificationManager: SurveyNotificationManager by inject()
     private val btIdsManager: BtIdsManager by inject()
     private val onboarding: Onboarding by inject()

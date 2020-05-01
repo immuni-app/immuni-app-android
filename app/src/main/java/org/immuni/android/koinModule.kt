@@ -5,14 +5,13 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import androidx.security.crypto.MasterKeys
 import org.immuni.android.extensions.storage.KVStorage
-import org.immuni.android.networking.Networking
+import org.immuni.android.network.Network
 import org.immuni.android.debugmenu.DebugMenu
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
-import org.immuni.android.api.ImmuniAPIRepository
-import org.immuni.android.api.model.ImmuniSettings
-import org.immuni.android.bluetooth.BLEAdvertiser
-import org.immuni.android.bluetooth.BLEScanner
+import org.immuni.android.api.APIManager
+import org.immuni.android.api.APIRepository
+import org.immuni.android.api.APIStore
 import org.immuni.android.db.DATABASE_NAME
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyNotificationManager
@@ -20,7 +19,6 @@ import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.*
-import org.immuni.android.bluetooth.ProximityEventsAggregator
 import org.immuni.android.config.*
 import org.immuni.android.fcm.FirebaseFCM
 import org.immuni.android.ui.addrelative.AddRelativeViewModel
@@ -41,11 +39,19 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+/**
+ * Dependency Injection Koin module.
+ */
 val appModule = module {
 
+    /**
+     * KVStorage to store generic non-database data encrypted using AES256.
+     */
     single { KVStorage("state", androidContext(), encrypted = true) }
 
-    // single instance of ImmuniDatabase
+    /**
+     * Room database encrypted using AES256.
+     */
     single {
         val key = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
         val passphrase: ByteArray = SQLiteDatabase.getBytes(key.toCharArray())
@@ -61,37 +67,30 @@ val appModule = module {
             .build()
     }
 
-    // single CoroutineContextProvider
-    single { CoroutineContextProvider() }
-
-    // single instance of Setup
-    single { Setup() }
-
-    // single instance of Onboarding
-    single { Onboarding() }
-
-    // single instance of Welcome
-    single { Welcome() }
-
-    // Networking
+    /**
+     * Network module.
+     */
     single {
-        Networking<ImmuniSettings>(
-            androidContext(),
-            ImmuniNetworkingConfiguration(androidContext())
+        Network(
+            ImmuniNetworkConfiguration(androidContext())
         )
     }
 
-    // Debug Menu
+    /**
+     * Debug Menu module.
+     */
     single {
         DebugMenu(
             androidContext() as Application,
             ImmuniDebugMenuConfiguration(
                 androidContext()
-            ), get()
+            )
         )
     }
 
-    // Firebase FCM
+    /**
+     * Firebase FCM.
+     */
     single {
         FirebaseFCM(
             androidContext(),
@@ -99,52 +98,49 @@ val appModule = module {
         )
     }
 
-    // single instance of ApiManager
+    /**
+     * Coroutines contexts provider.
+     */
+    single { CoroutineContextProvider() }
+
+    single { Setup(get()) }
+
+    single { Onboarding(get()) }
+
+    single { Welcome(get()) }
+
     single {
-        ImmuniAPIRepository(get())
+        APIStore(androidContext(), get())
     }
 
-    // single instance of BleAdvertiser
     single {
-        BLEAdvertiser(androidContext())
+        APIRepository(get(), get())
     }
 
-    // single instance of BleScanner
     single {
-        BLEScanner()
+        APIManager(androidContext(), get(), get())
     }
 
-    // single instance of ProximityEventsAggregator
-    single {
-        ProximityEventsAggregator(get(), get(), 10 * 1000L)
-    }
-
-    // single instance of GeolocationManager
     single {
         PermissionsManager(androidContext())
     }
 
-    // single instance of BluetoothManager
     single {
         BluetoothManager(androidContext())
     }
 
-    // single instance of UserManager
     single {
         UserManager()
     }
 
-    // single instance of SurveyManager
     single {
         SurveyManager(get())
     }
 
-    // single instance of AscoltoNotificationManager
     single {
         SurveyNotificationManager(androidContext())
     }
 
-    // single instance of NotificationManager
     single {
         AppNotificationManager(androidContext())
     }
@@ -153,34 +149,20 @@ val appModule = module {
         BtIdsManager(androidContext())
     }
 
-    // SetupViewModel
+    single {
+        ForceUpdateManager(get(), get())
+    }
+
+    // Android ViewModels
+
     viewModel { SetupViewModel(get(), get(), get(), get(), get()) }
-
-    // HomeSharedViewModel
     viewModel { HomeSharedViewModel(get()) }
-
-    // OnboardingViewModel
     viewModel { (handle: SavedStateHandle) -> OnboardingViewModel(handle, get()) }
-
-    // AddRelativeViewModel
     viewModel { (handle: SavedStateHandle) -> AddRelativeViewModel(handle, get()) }
-
-    // LogViewModel
     viewModel { (handle: SavedStateHandle) -> LogViewModel(handle) }
-
-    // UserDetailsViewModel
     viewModel { (userId: String) -> UserDetailsViewModel(userId) }
-
-    // UploadDataViewModel
     viewModel { (userId: String) -> UploadDataViewModel(userId, get()) }
-
-    // EditDetailsViewModel
     viewModel { (userId: String) -> EditDetailsViewModel(userId) }
-
-    // BleEncountersDebugViewModel
     viewModel { BleEncountersDebugViewModel() }
-
-    // ForceUpdateViewModel
     viewModel { ForceUpdateViewModel() }
-
 }

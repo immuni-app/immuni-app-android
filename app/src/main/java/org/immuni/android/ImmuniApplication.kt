@@ -7,10 +7,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.lifecycle.ProcessLifecycleOwner
 import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
-import org.immuni.android.networking.Networking
+import org.immuni.android.network.Network
 import org.immuni.android.fcm.FirebaseFCM
 import org.immuni.android.debugmenu.DebugMenu
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.managers.ForceUpdateManager
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.receivers.RestarterReceiver
 import org.immuni.android.receivers.ShutdownReceiver
@@ -21,8 +21,9 @@ import org.koin.core.context.startKoin
 
 class ImmuniApplication : Application() {
 
-    private lateinit var networking: Networking<ImmuniSettings>
+    private lateinit var network: Network
     private lateinit var fcm: FirebaseFCM
+    private lateinit var forceUpdateManager: ForceUpdateManager
     private lateinit var debugMenu: DebugMenu
     private lateinit var surveyNotificationManager: SurveyNotificationManager
 
@@ -41,10 +42,11 @@ class ImmuniApplication : Application() {
             modules(appModule)
         }
 
-        networking = get()
+        network = get()
         fcm = get()
         debugMenu = get()
         surveyNotificationManager = get()
+        forceUpdateManager = get()
 
         startWorkers()
         registerReceivers()

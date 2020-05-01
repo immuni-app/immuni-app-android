@@ -2,8 +2,7 @@ package org.immuni.android.debugmenu
 
 import android.app.Application
 import android.content.Intent
-import org.immuni.android.networking.Networking
-import org.immuni.android.networking.api.model.NetworkingSettings
+import org.immuni.android.network.Network
 import org.immuni.android.debugmenu.overlay.DebugMenuGlobalTouchListener
 import org.immuni.android.debugmenu.ui.DebugMenuActivity
 
@@ -17,12 +16,11 @@ import org.immuni.android.debugmenu.ui.DebugMenuActivity
  * @constructor create an instance of [DebugMenu] using its [DebugMenuConfiguration].
  * @param context
  * @param config the [DebugMenuConfiguration] injected by the app.
- * @param networking an instance of [Networking]
+ * @param networking an instance of [Network]
  */
 class DebugMenu(
     val context: Application,
-    val config: DebugMenuConfiguration,
-    val networking: Networking<NetworkingSettings>
+    val config: DebugMenuConfiguration
 ) : DebugMenuTouchManagerListener {
 
     private val touchManager =

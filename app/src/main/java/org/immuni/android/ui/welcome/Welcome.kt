@@ -1,17 +1,16 @@
 package org.immuni.android.ui.welcome
 
-import org.immuni.android.util.isFlagSet
-import org.immuni.android.util.setFlag
+import org.immuni.android.extensions.storage.KVStorage
 import org.koin.core.KoinComponent
 
-class Welcome: KoinComponent {
+class Welcome(private val kvStorage: KVStorage): KoinComponent {
 
     fun isComplete(): Boolean {
-        return isFlagSet(WELCOME_COMPLETE)
+        return kvStorage.load<Boolean>(WELCOME_COMPLETE) == true
     }
 
     fun setCompleted(complete: Boolean) {
-        setFlag(WELCOME_COMPLETE, complete)
+        kvStorage.save(WELCOME_COMPLETE, complete)
     }
 
     companion object {

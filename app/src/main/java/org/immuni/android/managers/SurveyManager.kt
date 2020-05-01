@@ -4,13 +4,13 @@ import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.entity.HealthProfileEntity
 import org.immuni.android.db.entity.QuestionLastAnswerTimeEntity
+import org.immuni.android.extensions.utils.toJson
 import org.immuni.android.models.HealthProfile
 import org.immuni.android.models.User
 import org.immuni.android.models.survey.CompositeAnswer
 import org.immuni.android.models.survey.QuestionId
 import org.immuni.android.models.survey.SimpleAnswer
 import org.immuni.android.ui.log.model.FormModel
-import org.immuni.android.util.toJson
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*

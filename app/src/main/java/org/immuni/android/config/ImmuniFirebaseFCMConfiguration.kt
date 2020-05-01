@@ -1,11 +1,9 @@
 package org.immuni.android.config
 
-import org.immuni.android.api.ImmuniAPI
-import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.api.model.FcmTokenRequest
-import org.immuni.android.networking.Networking
 import org.immuni.android.fcm.FirebaseFCMConfiguration
 import com.google.firebase.messaging.RemoteMessage
+import org.immuni.android.api.APIManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -24,12 +22,12 @@ class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
     }
 
     override suspend fun onNewToken(token: String) {
-        val networking: Networking<ImmuniSettings> by inject()
+        val api: APIManager by inject()
 
         // be sure to call settings before
-        networking.api.settings()
+        api.repository.settings()
 
-        networking.customServiceAPI(ImmuniAPI::class).fcmNotificationToken(FcmTokenRequest(
+        api.repository.fcmNotificationToken(FcmTokenRequest(
             token = token
         ))
     }

@@ -30,11 +30,11 @@ jobs:
           path: app/build/test-results
       - run:
           name: Run Network Module Unit Tests
-          command: ./gradlew :networking:testDebugUnitTest
+          command: ./gradlew :network:testDebugUnitTest
       - store_artifacts:
-          path: networking/build/reports
+          path: network/build/reports
       - store_test_results:
-          path: networking/build/test-results
+          path: network/build/test-results
       - run:
           name: Run Extensions Module Unit Tests
           command: ./gradlew :extensions:testDebugUnitTest

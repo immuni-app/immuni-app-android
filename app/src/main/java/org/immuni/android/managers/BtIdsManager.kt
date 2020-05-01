@@ -3,16 +3,16 @@ package org.immuni.android.managers
 import android.content.Context
 import org.immuni.android.extensions.utils.retry
 import kotlinx.coroutines.*
-import org.immuni.android.api.ImmuniAPIRepository
+import org.immuni.android.api.APIManager
 import org.immuni.android.api.model.BtId
 import org.immuni.android.api.model.BtIds
-import org.immuni.android.networking.api.NetworkResource
+import org.immuni.android.network.api.NetworkResource
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
 
 class BtIdsManager(val context: Context) : KoinComponent {
-    private val immuniAPIRepository: ImmuniAPIRepository by inject()
+    private val apiManager: APIManager by inject()
     private var btIds: BtIds? = null
     private var timeCorrection = 0L
 
@@ -44,7 +44,7 @@ class BtIdsManager(val context: Context) : KoinComponent {
 
     private suspend fun refresh() {
         val block = suspend {
-            val response = immuniAPIRepository.getBtIds()
+            val response = apiManager.repository.getBtIds()
             val result = runCatching {
                 when(response) {
                     is NetworkResource.Success -> {

@@ -82,7 +82,7 @@ tasks.withType(KotlinCompile).all {
 dependencies {
     implementation project(':extensions')
     implementation project(':debugmenu')
-    implementation project(':networking')
+    implementation project(':network')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"

@@ -14,13 +14,10 @@ import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import org.immuni.android.networking.Networking
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.launch
-import org.immuni.android.api.model.ImmuniSettings
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class PermissionsManager(val context: Context) : KoinComponent {
 
@@ -91,8 +88,6 @@ class PermissionsManager(val context: Context) : KoinComponent {
             activity.startActivity(intent)
         }
     }
-
-    private val networking: Networking<ImmuniSettings> by inject()
 
     fun requestPermissions(activity: AppCompatActivity) {
         ActivityCompat.requestPermissions(activity, allPermissions.toTypedArray(), REQUEST_CODE)

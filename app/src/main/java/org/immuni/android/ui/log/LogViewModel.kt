@@ -3,11 +3,10 @@ package org.immuni.android.ui.log
 import androidx.lifecycle.*
 import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.extensions.storage.KVStorage
-import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.api.APIManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
@@ -25,7 +24,7 @@ class LogViewModel(
 ) : ViewModel(), KoinComponent {
 
     private val state: KVStorage by inject()
-    private val networking: Networking<ImmuniSettings> by inject()
+    private val api: APIManager by inject()
     private val userManager: UserManager by inject()
     private val surveyManager: SurveyManager by inject()
     private val viewModelJob = SupervisorJob()
@@ -114,7 +113,7 @@ class LogViewModel(
     }
 
     private fun setup(reset: Boolean = false) {
-        val settings = networking.settings()!!
+        val settings = api.latestSettings()!!
         val _survey = settings.survey!!
         survey.value = _survey
 
@@ -269,7 +268,7 @@ class LogViewModel(
         return ((index + 2).toFloat() / totalQuestions.toFloat()).coerceIn(0f, 1f)
     }
 
-    fun canGoBack() = networking.settings()?.let { !it.disableSurveyBack } ?: true
+    fun canGoBack() = api.latestSettings()?.let { !it.disableSurveyBack } ?: true
 
     companion object {
         const val STATE_KEY = "STATE_KEY"

@@ -4,18 +4,14 @@ import PushNotificationUtils
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import org.immuni.android.extensions.storage.KVStorage
-import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.api.APIManager
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.AppNotificationManager
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BtIdsManager
 import org.immuni.android.managers.PermissionsManager
-import org.immuni.android.bluetooth.BLEAdvertiser
-import org.immuni.android.bluetooth.BLEScanner
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -38,13 +34,10 @@ class ImmuniForegroundService : Service(), KoinComponent {
         private const val PERIODICITY = 5
     }
 
-    private val advertiser: BLEAdvertiser by inject()
-    private val scanner: BLEScanner by inject()
     private val btIdsManager: BtIdsManager by inject()
     private val bluetoothManager: BluetoothManager by inject()
     private val appNotificationManager: AppNotificationManager by inject()
-    private val storage: KVStorage by inject()
-    private val networking: Networking<ImmuniSettings> by inject()
+    private val api: APIManager by inject()
     private val database: ImmuniDatabase by inject()
 
     override fun onBind(intent: Intent): IBinder? {
@@ -79,7 +72,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
     }
 
     override fun onDestroy() {
-        stopBle()
         serviceScope.launch {
             serviceScope.cancel("Service scope cancelling...")
             log("Service scope has been cancelled.")
@@ -131,32 +123,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
         isServiceStarted = false
     }
 
-    private fun stopBle() {
-        log("Stopping BLE")
-        // stop current scanner
-        scanner.stop()
-        log("Stopped scanner")
-
-        // stop current advertiser
-        advertiser.stop()
-        log("Stopped advertiser")
-    }
-
-    private suspend fun startBleLoop()  {
-        stopBle()
-        delay(3000)
-        log("Starting BLE")
-        val scanner = serviceScope.async {
-            scanner.start()
-            log("Started scanner")
-        }
-
-        val advertiser = serviceScope.async {
-            advertiser.start()
-            log("Started advertiser")
-        }
-    }
-
     private suspend fun doWork() {
 
         btIdsManager.setup() // blocking we need the bt_ids
@@ -167,8 +133,8 @@ class ImmuniForegroundService : Service(), KoinComponent {
 
         val bluetooth = serviceScope.async {
             while(isServiceStarted) {
-                startBleLoop()
-                delay((networking.settings()?.bleTimeoutSeconds?.toLong() ?: 180L) * 1000L)
+                // TODO
+                delay((api.latestSettings()?.bleTimeoutSeconds?.toLong() ?: 180L) * 1000L)
             }
         }
 
@@ -177,7 +143,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
             while(isServiceStarted) {
                 log("Periodic check....")
                 // disable BLE from settings if needed
-                if(networking.settings()?.bleDisableAll == true) {
+                if(api.latestSettings()?.bleDisableAll == true) {
                     stopService()
                     return@async
                 }
@@ -202,7 +168,6 @@ class ImmuniForegroundService : Service(), KoinComponent {
                 if(previousPermissionsState == PermissionsState.MISSING &&
                         currentPermissionState == PermissionsState.OK) {
                     log("Restarting BLE ads/scan/server.")
-                    startBleLoop()
                 }
 
                 previousPermissionsState = currentPermissionState

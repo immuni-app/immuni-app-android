@@ -6,28 +6,23 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.util.isFlagSet
-import org.immuni.android.util.setFlag
 import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.extensions.utils.DeviceUtils
-import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.api.APIManager
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
-import org.immuni.android.models.survey.Severity.*
 import org.immuni.android.models.survey.TriageProfile
 import org.immuni.android.extensions.activity.toast
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.family.model.*
 import org.immuni.android.ui.home.home.model.*
+import org.immuni.android.ui.onboarding.Onboarding
 
-import org.immuni.android.util.Flags
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -35,10 +30,11 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val networking: Networking<ImmuniSettings> by inject()
+    private val api: APIManager by inject()
     private val userManager: UserManager by inject()
     private val surveyManager: SurveyManager by inject()
     private val bluetoothManager: BluetoothManager by inject()
+    private val onboarding: Onboarding by inject()
 
     private val _showAddFamilyMemberDialog = MutableLiveData<Event<Boolean>>()
     val showAddFamilyMemberDialog: LiveData<Event<Boolean>>
@@ -165,11 +161,10 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     // check if this one shot dialog has been alredy triggered before
     // if not show it
     private fun checkAddFamilyMembersDialog() {
-        val flag = Flags.ADD_FAMILY_MEMBER_DIALOG_SHOWN
-        if (!isFlagSet(flag)) {
+        if (!onboarding.familyDialogShown()) {
             uiScope.launch {
                 _showAddFamilyMemberDialog.value = Event(true)
-                setFlag(flag, true)
+                onboarding.setFamilyDialogShown(true)
             }
         }
     }
@@ -190,19 +185,19 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     }
 
     fun onPrivacyPolicyClick() {
-        networking.settings()?.privacyPolicyUrl?.let {
+        api.latestSettings()?.privacyPolicyUrl?.let {
             openUrlInDialog(it)
         }
     }
 
     fun onFaqClick() {
-        networking.settings()?.faqUrl?.let {
+        api.latestSettings()?.faqUrl?.let {
             openUrlInDialog(it)
         }
     }
 
     fun onTosClick() {
-        networking.settings()?.termsOfServiceUrl?.let {
+        api.latestSettings()?.termsOfServiceUrl?.let {
             openUrlInDialog(it)
         }
     }
