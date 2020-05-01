@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
-import android.content.IntentSender
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.LocationManager
 import android.net.Uri
@@ -16,12 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import org.immuni.android.networking.Networking
-import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.launch
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -96,7 +92,7 @@ class PermissionsManager(val context: Context) : KoinComponent {
         }
     }
 
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
 
     fun requestPermissions(activity: AppCompatActivity) {
         ActivityCompat.requestPermissions(activity, allPermissions.toTypedArray(), REQUEST_CODE)

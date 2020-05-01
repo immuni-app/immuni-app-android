@@ -13,7 +13,6 @@ import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import org.immuni.android.networking.Networking
 import kotlinx.android.synthetic.main.settings_fragment.*
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -45,7 +44,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     fun contactUs(activity: Activity) {
 
-        val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+        val networking: Networking<ImmuniSettings> by inject()
         val email = networking.settings()?.supportEmail
 
         val ctx = activity.applicationContext

@@ -6,7 +6,6 @@ import org.immuni.android.networking.Networking
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyManager
@@ -21,7 +20,7 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters) 
 
     private val database: ImmuniDatabase by inject()
     private val surveyManager: SurveyManager by inject()
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
 
     override suspend fun doWork(): Result = coroutineScope {
         log("running DeleteUserDataWorker!")

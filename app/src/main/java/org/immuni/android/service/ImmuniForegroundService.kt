@@ -8,7 +8,6 @@ import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.AppNotificationManager
@@ -45,7 +44,7 @@ class ImmuniForegroundService : Service(), KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private val appNotificationManager: AppNotificationManager by inject()
     private val storage: KVStorage by inject()
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
     private val database: ImmuniDatabase by inject()
 
     override fun onBind(intent: Intent): IBinder? {

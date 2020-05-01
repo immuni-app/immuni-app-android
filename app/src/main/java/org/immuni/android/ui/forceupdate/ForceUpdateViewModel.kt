@@ -20,7 +20,6 @@ import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -30,7 +29,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    val networking: Networking<ImmuniSettings> by inject()
 
     val loading = MutableLiveData<Boolean>()
     val downloading = MutableLiveData<Boolean>()

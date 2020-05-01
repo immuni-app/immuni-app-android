@@ -20,39 +20,17 @@ class NetworkingRetrofit(
     config: NetworkingConfiguration
 ) {
 
-    val headersInterceptor: ((Interceptor.Chain) -> Response) = { chain ->
-        val infoProvider = DeviceInfoProviderImpl()
-        chain.run {
-            val requestBuilder = request()
-                .newBuilder()
-                .addHeader("Locale", Locale.getDefault().country)
-                .addHeader("Language", Locale.getDefault().language)
-                .addHeader("Device-Type", "android")
-                .addHeader("iOS-Platform", infoProvider.devicePlatform())
-                .addHeader("iOS-Version", infoProvider.androidVersion())
-                .addHeader("Android-Platform", infoProvider.devicePlatform())
-                .addHeader("Android-Version", infoProvider.androidVersion())
-                .addHeader("Build", DeviceUtils.appVersionCode(context).toString())
-
-            proceed(requestBuilder.build())
-        }
-    }
-
     val loggingInterceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
-
     var certificatePinner = config.certificatePinner()
-
     val gzipInterceptor = GzipRequestInterceptor()
 
     val client by lazy {
         val builder = OkHttpClient.Builder()
-            .hostnameVerifier(HostnameVerifier { hostname, session -> true })
+        //.hostnameVerifier(HostnameVerifier { hostname, session -> true })
 
-        builder.addInterceptor(headersInterceptor)
         builder.addInterceptor(gzipInterceptor)
-
         builder.addInterceptor(loggingInterceptor)
 
         certificatePinner?.let {

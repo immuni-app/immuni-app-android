@@ -3,7 +3,6 @@ package org.immuni.android.debugmenu
 import android.app.Application
 import android.content.Intent
 import org.immuni.android.networking.Networking
-import org.immuni.android.networking.api.model.NetworkingMe
 import org.immuni.android.networking.api.model.NetworkingSettings
 import org.immuni.android.debugmenu.overlay.DebugMenuGlobalTouchListener
 import org.immuni.android.debugmenu.ui.DebugMenuActivity
@@ -23,7 +22,7 @@ import org.immuni.android.debugmenu.ui.DebugMenuActivity
 class DebugMenu(
     val context: Application,
     val config: DebugMenuConfiguration,
-    val networking: Networking<NetworkingSettings, NetworkingMe>
+    val networking: Networking<NetworkingSettings>
 ) : DebugMenuTouchManagerListener {
 
     private val touchManager =

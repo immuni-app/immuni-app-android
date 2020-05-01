@@ -14,7 +14,7 @@ import org.koin.core.inject
 class BLEScanner : KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private val database: ImmuniDatabase by inject()
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
     private var bluetoothLeScanner: BluetoothLeScanner? = null
     private var myScanCallback = MyScanCallback()
     private val aggregator: ProximityEventsAggregator by inject()

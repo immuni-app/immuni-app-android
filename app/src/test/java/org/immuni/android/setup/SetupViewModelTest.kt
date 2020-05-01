@@ -14,7 +14,6 @@ import org.junit.Test
 
 import io.mockk.impl.annotations.MockK
 import org.immuni.android.api.ImmuniAPIRepository
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.networking.api.NetworkError
 import org.immuni.android.networking.api.NetworkResource

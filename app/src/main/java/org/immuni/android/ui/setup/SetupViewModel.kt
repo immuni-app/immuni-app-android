@@ -82,17 +82,6 @@ class SetupViewModel(
                         is NetworkResource.Error -> throw IOException()
                     }
 
-                    val me = retry(
-                        times = 6,
-                        block = { repository.me() },
-                        exitWhen = { result -> result is NetworkResource.Success },
-                        onIntermediateFailure = { errorDuringSetup.value = true }
-                    )
-
-                    when(me) {
-                        is NetworkResource.Error -> throw IOException()
-                    }
-
                     errorDuringSetup.value = false
 
                     // check all is ok

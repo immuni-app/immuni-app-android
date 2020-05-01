@@ -12,7 +12,6 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import org.immuni.android.networking.Networking
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.ui.home.HomeActivity
 import org.koin.core.KoinComponent
@@ -20,7 +19,7 @@ import org.koin.core.inject
 
 class AppNotificationManager(val context: Context): KoinComponent {
 
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
 
     val WARNING_NOTIFICATION_ID = 200001
 

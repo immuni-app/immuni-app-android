@@ -10,7 +10,6 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -30,7 +29,7 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
     private val surveyManager: SurveyManager by inject()
     private val appNotificationManager: AppNotificationManager by inject()
     private val androidNotificationManager = NotificationManagerCompat.from(context)
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
 
     init {
         GlobalScope.launch {

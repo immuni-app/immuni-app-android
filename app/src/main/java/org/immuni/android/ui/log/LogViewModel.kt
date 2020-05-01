@@ -7,7 +7,6 @@ import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.UserManager
@@ -26,7 +25,7 @@ class LogViewModel(
 ) : ViewModel(), KoinComponent {
 
     private val state: KVStorage by inject()
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
     private val userManager: UserManager by inject()
     private val surveyManager: SurveyManager by inject()
     private val viewModelJob = SupervisorJob()

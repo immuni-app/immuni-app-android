@@ -7,7 +7,6 @@ class NetworkingStore(val context: Context, encrypted: Boolean) {
     companion object {
         const val NAME = "Oracle"
         const val SETTINGS_KEY = "Settings"
-        const val ME_KEY = "Me"
     }
 
     private val kvStorage = KVStorage(NAME, context, encrypted = encrypted)
@@ -18,13 +17,5 @@ class NetworkingStore(val context: Context, encrypted: Boolean) {
 
     fun loadSettings(): String? {
         return kvStorage.load(SETTINGS_KEY)
-    }
-
-    fun loadMe(): String? {
-        return kvStorage.load(ME_KEY)
-    }
-
-    fun saveMe(me: String) {
-        kvStorage.save(ME_KEY, me)
     }
 }

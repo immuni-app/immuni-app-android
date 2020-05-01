@@ -4,7 +4,6 @@ import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.db.dao.addContact
@@ -17,7 +16,7 @@ import kotlin.math.roundToInt
 
 class ProximityEventsAggregator(
     val database: ImmuniDatabase,
-    val networking: Networking<ImmuniSettings, ImmuniMe>,
+    val networking: Networking<ImmuniSettings>,
     val TIME_WINDOW: Long
     ): KoinComponent {
 

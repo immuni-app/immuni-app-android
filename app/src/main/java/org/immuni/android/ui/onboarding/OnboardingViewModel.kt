@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.api.ImmuniAPIRepository
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.PermissionsManager
@@ -31,9 +30,8 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val onboarding: Onboarding by inject()
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
     private val userManager: UserManager by inject()
-    private val immuniAPIRepository: ImmuniAPIRepository by inject()
     private val permissionsManager: PermissionsManager by inject()
 
     val partialUserInfo = MediatorLiveData<OnboardingUserInfo>()

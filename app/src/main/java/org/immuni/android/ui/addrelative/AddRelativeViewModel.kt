@@ -4,7 +4,6 @@ import androidx.lifecycle.*
 import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.UserManager
@@ -23,7 +22,7 @@ class AddRelativeViewModel(val handle: SavedStateHandle, private val database: I
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
     private val userManager: UserManager by inject()
 
     val mainUser = userManager.mainUser()!!

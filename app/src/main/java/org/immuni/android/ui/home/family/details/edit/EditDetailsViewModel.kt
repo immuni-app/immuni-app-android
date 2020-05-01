@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.UserManager
@@ -19,7 +18,7 @@ class EditDetailsViewModel(val userId: String) : ViewModel(),
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    val networking: Networking<ImmuniSettings> by inject()
     val userManager: UserManager by inject()
     val database: ImmuniDatabase by inject()
 

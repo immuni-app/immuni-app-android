@@ -10,7 +10,6 @@ import org.immuni.android.debugmenu.DebugMenu
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import org.immuni.android.api.ImmuniAPIRepository
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.bluetooth.BLEAdvertiser
 import org.immuni.android.bluetooth.BLEScanner
@@ -76,7 +75,7 @@ val appModule = module {
 
     // Networking
     single {
-        Networking<ImmuniSettings, ImmuniMe>(
+        Networking<ImmuniSettings>(
             androidContext(),
             ImmuniNetworkingConfiguration(androidContext())
         )

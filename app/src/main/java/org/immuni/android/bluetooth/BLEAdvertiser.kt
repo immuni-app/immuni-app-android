@@ -24,7 +24,7 @@ import java.util.*
 class BLEAdvertiser(val context: Context): KoinComponent {
     private val bluetoothManager: BluetoothManager by inject()
     private var bluetoothGattServer: BluetoothGattServer? = null
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
     private var advertiser: BluetoothLeAdvertiser? = null
     private var callback = MyAdvertiseCallback()
     private val btIdsManager: BtIdsManager by inject()

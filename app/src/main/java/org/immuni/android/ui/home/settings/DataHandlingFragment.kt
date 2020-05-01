@@ -13,7 +13,6 @@ import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import org.immuni.android.networking.Networking
 import kotlinx.android.synthetic.main.data_handling_fragment.*
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -21,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
 
     private lateinit var viewModel: HomeSharedViewModel
-    val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    val networking: Networking<ImmuniSettings> by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

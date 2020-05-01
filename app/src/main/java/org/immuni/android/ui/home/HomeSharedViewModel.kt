@@ -12,10 +12,8 @@ import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.extensions.utils.DeviceUtils
 import org.immuni.android.networking.Networking
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
@@ -37,7 +35,7 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+    private val networking: Networking<ImmuniSettings> by inject()
     private val userManager: UserManager by inject()
     private val surveyManager: SurveyManager by inject()
     private val bluetoothManager: BluetoothManager by inject()
@@ -72,132 +70,10 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
         startListeningToUsers()
 
         bluetoothManager.scheduleBLEWorker(ImmuniApplication.appContext)
-
-        uiScope.launch {
-            networking.meFlow().collect {
-                refreshHomeListModel()
-            }
-        }
     }
 
     private fun refreshHomeListModel() {
-        uiScope.launch {
-            networking.me()?.let {
-                val ctx = ImmuniApplication.appContext
 
-                val itemsList = mutableListOf<HomeItemType>()
-
-                val blockingList = mutableListOf<HomeItemType>()
-
-                // check bluetooth disabled
-
-                if (!bluetoothManager.isBluetoothSupported() || !bluetoothManager.isBluetoothEnabled()) {
-                    blockingList.add(EnableBluetoothCard())
-                }
-
-                // check geolocation disabled
-
-                // only show one geolocation card at the time in order to not have too many cards
-                if (!PermissionsManager.hasAllPermissions(ImmuniApplication.appContext)) {
-                    blockingList.add(EnableGeolocationCard(GeolocationType.PERMISSIONS))
-                } else if (!PermissionsManager.globalLocalisationEnabled(ImmuniApplication.appContext)) {
-                    blockingList.add(EnableGeolocationCard(GeolocationType.GLOBAL_GEOLOCATION))
-                }
-
-                // check notifications disabled
-
-                if (!PushNotificationUtils.areNotificationsEnabled(ImmuniApplication.appContext)) {
-                    blockingList.add(EnableNotificationCard())
-                }
-
-                // check whitelisted from battery optimization
-
-                if (!PermissionsManager.isIgnoringBatteryOptimizations(ImmuniApplication.appContext)) {
-                    blockingList.add(AddToWhiteListCard())
-                }
-
-                blockingItemsListModel.value = blockingList
-
-                // survey card
-
-                // TODO: remove the "true ||" after Ferrari experiment
-                if (true || surveyManager.areAllSurveysLogged()) {
-                    itemsList.add(SurveyCardDone(userManager.users().size))
-                } else {
-                    val mainUser = userManager.mainUser()!!
-                    val familyMembers = userManager.familyMembers()
-                    itemsList.add(
-                        SurveyCard(
-                            !surveyManager.isSurveyCompletedForUser(mainUser.id),
-                            familyMembers.filter {
-                                !surveyManager.isSurveyCompletedForUser(it.id)
-                            }.count()
-                        )
-                    )
-                }
-
-                // suggestion cards
-                val survey = networking.settings()?.survey
-                val me = networking.me()
-
-                val userCardsMap = mutableMapOf<TriageProfile, MutableList<String>>()
-                for (user in userManager.users()) {
-                    val hasNeverCompletedSurveys = surveyManager.lastHealthProfile(user.id) == null
-                    val hasServerTriageProfile = user.isMain && me?.serverTriageProfileId != null
-                    if (hasNeverCompletedSurveys && !hasServerTriageProfile) continue
-
-                    val name =
-                        if (user.isMain) ctx.resources.getString(R.string.you_as_complement) else user.name
-
-                    val surveyTriageProfileId =
-                        surveyManager.lastHealthProfile(user.id)?.triageProfileId
-                    val triageProfileId = if (user.isMain) me?.serverTriageProfileId
-                        ?: surveyTriageProfileId else surveyTriageProfileId
-                    val triageProfile = triageProfileId?.let {
-                        survey?.triage?.profile(it)
-                    }
-
-                    if (triageProfile != null) {
-                        userCardsMap[triageProfile] =
-                            (userCardsMap[triageProfile] ?: mutableListOf()).apply {
-                                add(name)
-                            }
-                    }
-                }
-
-                if (userCardsMap.keys.isNotEmpty()) {
-                    itemsList.add(HeaderCard(ctx.resources.getString(R.string.home_separator_suggestions)))
-                    userCardsMap.keys.forEach { triageProfile ->
-                        val and = ImmuniApplication.appContext.getString(R.string.and)
-                        val names: String
-                        val namesList = userCardsMap[triageProfile]!!
-                        if (namesList.size == 1) {
-                            names = namesList.first()
-                        } else {
-                            // remove last
-                            val lastItem = namesList.removeAt(namesList.size - 1)
-                            names = "${namesList.joinToString(separator = ", ")} $and $lastItem"
-                        }
-
-
-                        val suggestionTitle = String.format(
-                            ctx.resources.getString(R.string.indication_for),
-                            "<b>$names</b>"
-                        )
-
-                        itemsList.add(
-                            when (triageProfile.severity) {
-                                LOW -> SuggestionsCardWhite(suggestionTitle, triageProfile)
-                                MID -> SuggestionsCardYellow(suggestionTitle, triageProfile)
-                                HIGH -> SuggestionsCardRed(suggestionTitle, triageProfile)
-                            }
-                        )
-                    }
-                }
-
-                homelistModel.value = itemsList.toList()
-            }
-        }
     }
 
     private fun startListeningToUsers() {

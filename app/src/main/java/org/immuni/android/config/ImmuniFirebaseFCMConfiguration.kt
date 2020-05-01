@@ -1,7 +1,6 @@
 package org.immuni.android.config
 
 import org.immuni.android.api.ImmuniAPI
-import org.immuni.android.api.model.ImmuniMe
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.api.model.FcmTokenRequest
 import org.immuni.android.networking.Networking
@@ -26,14 +25,10 @@ class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
     }
 
     override suspend fun onNewToken(token: String) {
-        val networking: Networking<ImmuniSettings, ImmuniMe> by inject()
+        val networking: Networking<ImmuniSettings> by inject()
 
-        // be sure to call devices before
-        networking.api.devices(
-            DevicesRequest(
-                uniqueId = "" // FIXME
-            )
-        )
+        // be sure to call settings before
+        networking.api.settings()
 
         networking.customServiceAPI(ImmuniAPI::class).fcmNotificationToken(FcmTokenRequest(
             token = token
