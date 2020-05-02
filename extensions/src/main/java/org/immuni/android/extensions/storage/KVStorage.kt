@@ -17,6 +17,7 @@ import java.io.IOException
  * It serializes and deserializes primitive types as well as Moshi-serializable objects.
  * It optionally holds an in-memory cache to avoid the deserialization cost upon each [load].
  * It supports storing encrypted key-value pairs through [EncryptedSharedPreferences].
+ * It exposes data also as [LiveData].
  *
  * @property name the name of the desired preferences file.
  * @property context the context.
@@ -31,21 +32,22 @@ class KVStorage(
     val name: String,
     private val context: Context,
     val cacheInMemory: Boolean = true,
-    val encrypted: Boolean
+    val encrypted: Boolean,
+    val _sharedPrefs: SharedPreferences = getSharedPreferences(context, name, encrypted),
+    val _cache: MutableMap<String, Any> = mutableMapOf()
 ) {
     // The following two properties should be private but are not, because they're used in public
     // inline methods, thus the underscore prefix.
-    val _cache: MutableMap<String, Any> = mutableMapOf()
     val _liveData: MutableMap<String, MutableLiveData<out Any>> = mutableMapOf()
 
     /**
      * Checks if the storage contains the given key.
      */
-    fun contains(key: String): Boolean = _cache.contains(key) || sharedPrefs.contains(key)
+    fun contains(key: String): Boolean = _cache.contains(key) || _sharedPrefs.contains(key)
 
     fun delete(key: String) {
         _cache.remove(key)
-        sharedPrefs.edit {
+        _sharedPrefs.edit {
             remove(key)
         }
     }
@@ -60,7 +62,7 @@ class KVStorage(
             _cache[key] = value
         }
 
-        sharedPrefs.edit {
+        _sharedPrefs.edit {
             when (value) {
                 is Boolean -> putBoolean(key, value as Boolean)
                 is Int -> putInt(key, value as Int)
@@ -96,7 +98,7 @@ class KVStorage(
 
         val getObject: () -> T? = {
             try {
-                sharedPrefs.getString(key, "")?.let {
+                _sharedPrefs.getString(key, "")?.let {
                     fromJson(it)
                 }
             } catch (e: IOException) {
@@ -105,11 +107,11 @@ class KVStorage(
         }
 
         val value = when (T::class) {
-            Boolean::class -> sharedPrefs.getBoolean(key, false) as T
-            Int::class -> sharedPrefs.getInt(key, 0) as T
-            Long::class -> sharedPrefs.getLong(key, 0) as T
-            Float::class -> sharedPrefs.getFloat(key, 0f) as T
-            String::class -> sharedPrefs.getString(key, "") as T
+            Boolean::class -> _sharedPrefs.getBoolean(key, false) as T
+            Int::class -> _sharedPrefs.getInt(key, 0) as T
+            Long::class -> _sharedPrefs.getLong(key, 0) as T
+            Float::class -> _sharedPrefs.getFloat(key, 0f) as T
+            String::class -> _sharedPrefs.getString(key, "") as T
             else -> getObject()
         }
 
@@ -157,21 +159,22 @@ class KVStorage(
     fun clear() {
         _cache.clear()
         _liveData.clear()
-        sharedPrefs.edit {
+        _sharedPrefs.edit {
             clear()
         }
     }
 
-    // This should be private but is not, because it's used in public inline methods.
-    val sharedPrefs: SharedPreferences
-        get() = if (encrypted)
-            EncryptedSharedPreferences.create(
-                name,
-                MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC),
-                context,
-                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-            )
-        else
-            context.getSharedPreferences(name, Context.MODE_PRIVATE)
+}
+
+internal fun getSharedPreferences(context: Context, name: String, encrypted: Boolean): SharedPreferences {
+    return if (encrypted)
+        EncryptedSharedPreferences.create(
+            name,
+            MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC),
+            context,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    else
+        context.getSharedPreferences(name, Context.MODE_PRIVATE)
 }
