@@ -90,6 +90,9 @@ class KVStorageTest {
         kvStorage.save("myString", "abcdefgh")
         val liveData = kvStorage.liveData<String>("myString")
         assertEquals("abcdefgh", liveData.getOrAwaitValue())
+
+        kvStorage.save("myString", "xyz")
+        assertEquals("xyz", liveData.getOrAwaitValue())
     }
 
 }
