@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.immuni.android.testutils
+package org.immuni.android.extensions.test
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

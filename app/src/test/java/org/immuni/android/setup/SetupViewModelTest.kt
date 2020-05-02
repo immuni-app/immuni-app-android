@@ -17,7 +17,7 @@ import org.immuni.android.api.APIManager
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.network.api.NetworkError
 import org.immuni.android.network.api.NetworkResource
-import org.immuni.android.testutils.getOrAwaitValue
+import org.immuni.android.extensions.test.getOrAwaitValue
 import kotlin.test.assertTrue
 
 class SetupViewModelTest {
