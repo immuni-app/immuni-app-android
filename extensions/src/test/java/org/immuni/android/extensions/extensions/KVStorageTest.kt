@@ -2,18 +2,21 @@ package org.immuni.android.extensions.extensions
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.core.content.edit
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.verify
 import junit.framework.Assert.assertEquals
+import org.immuni.android.extensions.extensions.test.utils.getOrAwaitValue
 import org.immuni.android.extensions.storage.KVStorage
-import org.immuni.android.extensions.utils.round
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 
 class KVStorageTest {
+
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @MockK(relaxed = true)
     lateinit var context: Context
@@ -81,6 +84,14 @@ class KVStorageTest {
         kvStorage.save("myString", "ilmopqrst")
         assertEquals("ilmopqrst", cache["myString"])
     }
+
+    @Test
+    fun `kvStorage exposes data as LiveData`() {
+        kvStorage.save("myString", "abcdefgh")
+        val liveData = kvStorage.liveData<String>("myString")
+        assertEquals("abcdefgh", liveData.getOrAwaitValue())
+    }
+
 }
 
 private data class FakeObject(
