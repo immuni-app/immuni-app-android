@@ -1,49 +1,56 @@
-package org.immuni.android.api
+package org.immuni.android.data
 
-import androidx.lifecycle.ProcessLifecycleOwner
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.launch
+import org.immuni.android.api.API
+import org.immuni.android.api.model.ErrorResponse
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.extensions.lifecycle.AppLifecycleEvent
 import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
+import org.immuni.android.network.api.NetworkResource
+import org.immuni.android.network.api.safeApiCall
 
 /**
- * Manages calls and data regarding the backend [API]
+ * Settings data source.
+ *
+ * It exposes the settings through a reactive Flow or sync methods.
  *
  * @param repository responsible to interact with the [API] and API storage.
  */
-class APIManager(
-    val repository: APIRepository,
-    val store: APIStore
-): APIListener {
+class SettingsDataSource(
+    val api: API,
+    val store: SettingsStore,
+    val lifecycleObserver: AppLifecycleObserver
+) {
     private val settingsChannel: ConflatedBroadcastChannel<ImmuniSettings>
-    private val lifecycleObserver: AppLifecycleObserver
 
     init {
         settingsChannel = loadSettings()
-        lifecycleObserver = fetchSettingsOnStartEvent()
-        repository.addAPIListener(this)
+        fetchSettingsOnStartEvent()
     }
 
-    private fun fetchSettingsOnStartEvent(): AppLifecycleObserver {
-        val lifecycleObserver = AppLifecycleObserver()
+    private fun fetchSettingsOnStartEvent() {
         GlobalScope.launch {
             lifecycleObserver.consumeEach { event ->
                 when (event) {
                     AppLifecycleEvent.ON_START -> {
-                        repository.settings()
+                        val resource = safeApiCall<ImmuniSettings, ErrorResponse> { api.settings() }
+                        if(resource is NetworkResource.Success) {
+                            resource.data?.let { settings ->
+                                onSettingsUpdate(settings)
+                            }
+                        }
                     }
                     else -> {
+                        // nothing to do here
                     }
                 }
             }
         }
-        ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
-        return lifecycleObserver
     }
 
     private fun loadSettings(): ConflatedBroadcastChannel<ImmuniSettings> {
@@ -64,7 +71,8 @@ class APIManager(
         return settingsChannel.asFlow()
     }
 
-    override suspend fun onSettingsUpdate(settings: ImmuniSettings) {
+    suspend fun onSettingsUpdate(settings: ImmuniSettings) {
+        store.saveSettings(settings)
         settingsChannel.send(settings)
     }
 }

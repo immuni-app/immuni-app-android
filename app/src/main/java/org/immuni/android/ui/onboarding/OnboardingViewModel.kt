@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.APIManager
+import org.immuni.android.data.SettingsDataSource
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
@@ -18,10 +18,9 @@ import java.io.Serializable
 
 class OnboardingViewModel(
     val handle: SavedStateHandle,
-    val api: APIManager,
+    val settings: SettingsDataSource,
     val userManager: UserManager,
-    val permissionsManager: PermissionsManager,
-    val onboarding: Onboarding
+    val permissionsManager: PermissionsManager
 ) :
     ViewModel(), KoinComponent {
 
@@ -71,13 +70,13 @@ class OnboardingViewModel(
     }
 
     fun onPrivacyPolicyClick() {
-        api.latestSettings()?.privacyPolicyUrl?.let { url ->
+        settings.latestSettings()?.privacyPolicyUrl?.let { url ->
             openUrlInDialog(url)
         }
     }
 
     fun onTosClick() {
-        api.latestSettings()?.termsOfServiceUrl?.let { url ->
+        settings.latestSettings()?.termsOfServiceUrl?.let { url ->
             openUrlInDialog(url)
         }
     }
@@ -118,7 +117,7 @@ class OnboardingViewModel(
             userManager.addUser(mainUser)
 
             //loading.value = false
-            onboarding.setCompleted(true)
+            userManager.setOnboardingCompleted(true)
             navigateToNextPage.value = Event(true)
         }
     }

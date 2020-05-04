@@ -12,7 +12,7 @@ import org.immuni.android.R
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.settings_fragment.*
-import org.immuni.android.api.APIManager
+import org.immuni.android.data.SettingsDataSource
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -43,8 +43,8 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     fun contactUs(activity: Activity) {
 
-        val api: APIManager by inject()
-        val email = api.latestSettings()?.supportEmail
+        val settings: SettingsDataSource by inject()
+        val email = settings.latestSettings()?.supportEmail
 
         val ctx = activity.applicationContext
         val intent = Intent(Intent.ACTION_SENDTO).apply {

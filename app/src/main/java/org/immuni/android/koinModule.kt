@@ -9,9 +9,10 @@ import org.immuni.android.network.Network
 import org.immuni.android.debugmenu.DebugMenu
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
-import org.immuni.android.api.APIManager
-import org.immuni.android.api.APIRepository
-import org.immuni.android.api.APIStore
+import org.immuni.android.api.API
+import org.immuni.android.data.SettingsDataSource
+import org.immuni.android.api.TODOAPIRepository
+import org.immuni.android.data.SettingsStore
 import org.immuni.android.db.DATABASE_NAME
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyNotificationManager
@@ -19,15 +20,14 @@ import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.*
 import org.immuni.android.config.*
+import org.immuni.android.data.SettingsRepository
+import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
 import org.immuni.android.fcm.FirebaseFCM
 import org.immuni.android.ui.forceupdate.ForceUpdateViewModel
 import org.immuni.android.ui.home.HomeSharedViewModel
-import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.onboarding.OnboardingViewModel
-import org.immuni.android.ui.setup.Setup
 import org.immuni.android.ui.setup.SetupViewModel
 import org.immuni.android.ui.uploaddata.UploadDataViewModel
-import org.immuni.android.ui.welcome.Welcome
 import org.immuni.android.util.CoroutineContextProvider
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -59,6 +59,14 @@ val appModule = module {
             .fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()
+    }
+
+    /**
+     * Backend Retrofit APIs
+     */
+    single<API> {
+        val network: Network by inject()
+        network.createServiceAPI(API::class)
     }
 
     /**
@@ -97,22 +105,30 @@ val appModule = module {
      */
     single { CoroutineContextProvider() }
 
-    single { Setup(get()) }
-
-    single { Onboarding(get()) }
-
-    single { Welcome(get()) }
-
+    /**
+     * App lifecycle observer.
+     */
     single {
-        APIStore(get())
+        AppLifecycleObserver()
     }
 
     single {
-        APIRepository(get(), get())
+        SettingsStore(get())
     }
 
     single {
-        APIManager( get(), get())
+        TODOAPIRepository(get())
+    }
+
+    single {
+        SettingsRepository(get(), get())
+    }
+
+    /**
+     * Settings Data Source.
+     */
+    single {
+        SettingsDataSource(get(), get(), get())
     }
 
     single {
@@ -124,7 +140,7 @@ val appModule = module {
     }
 
     single {
-        UserManager()
+        UserManager(get())
     }
 
     single {
@@ -136,14 +152,14 @@ val appModule = module {
     }
 
     single {
-        ForceUpdateManager(get(), get())
+        ForceUpdateManager(get(), get(), get())
     }
 
     // Android ViewModels
 
-    viewModel { SetupViewModel(get(), get(), get(), get(), get()) }
-    viewModel { HomeSharedViewModel(get(), get(), get()) }
-    viewModel { (handle: SavedStateHandle) -> OnboardingViewModel(handle, get(), get(), get(), get()) }
+    viewModel { SetupViewModel(get(), get()) }
+    viewModel { HomeSharedViewModel(get(), get()) }
+    viewModel { (handle: SavedStateHandle) -> OnboardingViewModel(handle, get(), get(), get()) }
     viewModel { (userId: String) -> UploadDataViewModel(userId, get(), get()) }
     viewModel { ForceUpdateViewModel(get()) }
 }

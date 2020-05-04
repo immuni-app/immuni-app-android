@@ -5,20 +5,15 @@ import androidx.lifecycle.ViewModel
 import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.extensions.utils.retry
 import kotlinx.coroutines.*
-import org.immuni.android.api.APIManager
+import org.immuni.android.data.SettingsRepository
 import org.immuni.android.managers.UserManager
 import org.immuni.android.network.api.NetworkResource
-import org.immuni.android.ui.onboarding.Onboarding
-import org.immuni.android.ui.welcome.Welcome
 import org.koin.core.KoinComponent
 import java.io.IOException
 
 class SetupViewModel(
-    val setup: Setup,
-    val onboarding: Onboarding,
-    val welcome: Welcome,
     val userManager: UserManager,
-    val apiManager: APIManager
+    val repository: SettingsRepository
 ) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
@@ -47,21 +42,21 @@ class SetupViewModel(
             // set timeout here to allow the user to use the app offline
             // (this is not the very first startup that must to be blocking)
             withTimeoutOrNull(5000) {
-                apiManager.repository.settings()
+                repository.fetchSettings()
             }
 
-            if (setup.isComplete()) {
+            if (userManager.isSetupComplete()) {
                 delay(2000)
                 navigateTo()
             } else {
                 try {
                     // cleanup db
-                    setup.setCompleted(false)
+                    userManager.setSetupCompleted(false)
 
                     // the first time the call to settings and me is blocking, you cannot proceed without
                     val settings = retry(
                         times = 6,
-                        block = { apiManager.repository.settings() },
+                        block = { repository.fetchSettings() },
                         exitWhen = { result -> result is NetworkResource.Success },
                         onIntermediateFailure = { errorDuringSetup.value = true }
                     )
@@ -73,17 +68,13 @@ class SetupViewModel(
                     errorDuringSetup.value = false
 
                     // check all is ok
-                    setup.setCompleted(true)
-
-                    if (userManager.familyMembers().isNotEmpty()) {
-                        setAddFamilyMemberDialogShown()
-                    }
+                    userManager.setSetupCompleted(true)
 
                     navigateTo()
 
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    setup.setCompleted(false)
+                    userManager.setSetupCompleted(false)
                     errorDuringSetup.value = true
                 }
             }
@@ -91,14 +82,10 @@ class SetupViewModel(
     }
 
     private fun navigateTo() {
-        if (!welcome.isComplete() || !onboarding.isComplete()) {
+        if (!userManager.isWelcomeComplete() || !userManager.isOnboardingComplete()) {
             navigateToWelcome.value = Event(true)
         } else {
             navigateToMainPage.value = Event(true)
         }
-    }
-
-    private fun setAddFamilyMemberDialogShown() {
-        onboarding.setFamilyDialogShown(true)
     }
 }

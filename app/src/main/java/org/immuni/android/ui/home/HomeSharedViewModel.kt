@@ -3,24 +3,21 @@ package org.immuni.android.ui.home
 import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.extensions.livedata.Event
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.APIManager
+import org.immuni.android.data.SettingsDataSource
 import org.immuni.android.managers.BluetoothManager
+import org.immuni.android.managers.UserManager
 import org.immuni.android.models.survey.TriageProfile
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.home.model.*
-import org.immuni.android.ui.onboarding.Onboarding
 
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class HomeSharedViewModel(
-    val api: APIManager,
-    val bluetoothManager: BluetoothManager,
-    val onboarding: Onboarding
+    val settings: SettingsDataSource,
+    val bluetoothManager: BluetoothManager
 ) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
@@ -86,29 +83,18 @@ class HomeSharedViewModel(
         //checkAddFamilyMembersDialog()
     }
 
-    // check if this one shot dialog has been alredy triggered before
-    // if not show it
-    private fun checkAddFamilyMembersDialog() {
-        if (!onboarding.familyDialogShown()) {
-            uiScope.launch {
-                showAddFamilyMemberDialog.value = Event(true)
-                onboarding.setFamilyDialogShown(true)
-            }
-        }
-    }
-
     fun openSuggestions(triageProfile: TriageProfile) {
         showSuggestionDialog.value = Event(triageProfile)
     }
 
     fun onPrivacyPolicyClick() {
-        api.latestSettings()?.privacyPolicyUrl?.let {
+        settings.latestSettings()?.privacyPolicyUrl?.let {
             openUrlInDialog(it)
         }
     }
 
     fun onTosClick() {
-        api.latestSettings()?.termsOfServiceUrl?.let {
+        settings.latestSettings()?.termsOfServiceUrl?.let {
             openUrlInDialog(it)
         }
     }

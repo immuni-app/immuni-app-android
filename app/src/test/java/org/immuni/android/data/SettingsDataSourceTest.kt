@@ -1,18 +1,15 @@
-package org.immuni.android.api
+package org.immuni.android.data
 
 import android.content.Context
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.test.runBlockingTest
-import okhttp3.ResponseBody.Companion.toResponseBody
-import okhttp3.internal.wait
+import org.immuni.android.api.API
+import org.immuni.android.api.TODOAPIRepository
 import org.immuni.android.api.model.ImmuniSettings
-import org.immuni.android.network.Network
-import org.immuni.android.network.NetworkConfiguration
+import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
 import org.junit.Assert.assertNull
 import org.junit.Test
 
@@ -20,16 +17,19 @@ import org.junit.Before
 import retrofit2.Response
 import kotlin.test.assertEquals
 
-class APIManagerTest {
+class SettingsDataSourceTest {
 
     @MockK(relaxed = true)
     lateinit var context: Context
 
     @MockK(relaxed = true)
-    lateinit var store: APIStore
+    lateinit var store: SettingsStore
 
     @MockK(relaxed = true)
-    lateinit var repository: APIRepository
+    lateinit var api: API
+
+    @MockK(relaxed = true)
+    lateinit var lifecycle: AppLifecycleObserver
 
     @MockK(relaxed = true)
     lateinit var settings: ImmuniSettings
@@ -45,8 +45,9 @@ class APIManagerTest {
 
             coEvery { store.loadSettings() } returns settings
 
-            val manager = APIManager(repository, store)
-            assertEquals(settings, manager.latestSettings())
+            val dataSource =
+                SettingsDataSource(api, store, lifecycle)
+            assertEquals(settings, dataSource.latestSettings())
         }
 
     @Test
@@ -54,8 +55,8 @@ class APIManagerTest {
 
         coEvery { store.loadSettings() } returns null
 
-        val manager = APIManager(repository, store)
-        assertNull(manager.latestSettings())
+        val dataSource = SettingsDataSource(api, store, lifecycle)
+        assertNull(dataSource.latestSettings())
     }
 
     @Test
@@ -63,14 +64,14 @@ class APIManagerTest {
 
         coEvery { store.loadSettings() } returns settings
 
-        val manager = APIManager(repository, store)
-        val flow = manager.settingsFlow()
+        val dataSource = SettingsDataSource(api, store, lifecycle)
+        val flow = dataSource.settingsFlow()
 
         var counter = 0
         async {
             flow.collect {
                 counter++
-                manager.closeSettingsChannel()
+                dataSource.closeSettingsChannel()
             }
         }.await()
 
@@ -83,8 +84,8 @@ class APIManagerTest {
 
         coEvery { store.loadSettings() } returns null
 
-        val manager = APIManager(repository, store)
-        val flow = manager.settingsFlow()
+        val dataSource = SettingsDataSource(api, store, lifecycle)
+        val flow = dataSource.settingsFlow()
 
         var counter = 0
         async {
@@ -95,12 +96,19 @@ class APIManagerTest {
 
         async {
             for (i in 0 until 5) {
-                manager.onSettingsUpdate(settings)
+                dataSource.onSettingsUpdate(settings)
                 delay(100)
             }
             assertEquals(5, counter)
-            manager.closeSettingsChannel()
+            dataSource.closeSettingsChannel()
         }
         Unit
+    }
+
+    @Test
+    fun `settings are stored when after fetching`() = runBlocking {
+        val dataSource = SettingsDataSource(api, store, lifecycle)
+        dataSource.onSettingsUpdate(settings)
+        verify { store.saveSettings(settings) }
     }
 }

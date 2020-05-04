@@ -5,18 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.immuni.android.extensions.livedata.Event
 import kotlinx.coroutines.*
-import org.immuni.android.api.APIManager
+import org.immuni.android.api.TODOAPIRepository
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.ExportDevice
 import org.immuni.android.network.api.NetworkResource
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class UploadDataViewModel(
     val userId:String,
     val database: ImmuniDatabase,
-    val apiManager: APIManager
+    val repository: TODOAPIRepository
 ) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
@@ -49,7 +48,7 @@ class UploadDataViewModel(
                 devices = devices
             )
 
-            val result = apiManager.repository.exportData(code, exportData)
+            val result = repository.exportData(code, exportData)
             loading.value = Event(false)
             if (result is NetworkResource.Success) {
                 success.value = Event(true)

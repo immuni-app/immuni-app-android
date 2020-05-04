@@ -4,23 +4,24 @@ import android.content.Context
 import android.content.Intent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.APIManager
+import org.immuni.android.data.SettingsDataSource
 import org.immuni.android.extensions.utils.DeviceUtils
 import org.immuni.android.ui.forceupdate.ForceUpdateActivity
 import org.immuni.android.util.log
 import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
 
 /**
  * Listens to changes in [ImmuniSettings] Flow and trigger a force update UI.
  */
 class ForceUpdateManager(
     val context: Context,
-    val apiManager: APIManager
+    val settingsDataSource: SettingsDataSource,
+    val lifecycleObserver: AppLifecycleObserver
 ) {
     init {
         registerToMinBuildVersionChanges()
@@ -28,7 +29,7 @@ class ForceUpdateManager(
 
     private fun registerToMinBuildVersionChanges() {
         GlobalScope.launch {
-            apiManager.settingsFlow().collect { settings ->
+            settingsDataSource.settingsFlow().collect { settings ->
                 if (settings.minBuildVersion > DeviceUtils.appVersionCode(context)) {
                     withContext(Dispatchers.Main) {
                         showForceUpdate(settings.minBuildVersion)
@@ -41,7 +42,7 @@ class ForceUpdateManager(
     private fun showForceUpdate(minVersionCode: Int) {
         log("ForceUpdate! Min version is $minVersionCode")
         // avoid to open the activity while the app is in background
-        if(ImmuniApplication.lifecycleObserver.isInForeground &&
+        if(lifecycleObserver.isInForeground &&
             !ForceUpdateActivity.isOpen) {
             val context =
                 ImmuniApplication.appContext
