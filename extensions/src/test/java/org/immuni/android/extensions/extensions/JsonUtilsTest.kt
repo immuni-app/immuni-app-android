@@ -4,6 +4,7 @@ import junit.framework.Assert.assertEquals
 import org.immuni.android.extensions.utils.fromJson
 import org.immuni.android.extensions.utils.round
 import org.immuni.android.extensions.utils.toJson
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
@@ -31,7 +32,7 @@ class JsonUtilsTest {
     }
 
     @Test
-    fun `fromson deserialize an json correctly`() {
+    fun `fromJson deserialize an json correctly`() {
         val json = "{\"name\":\"Marco\",\"age\":36,\"surname\":\"Rossi\",\"pets\":[{\"name\":\"Lucky\",\"age\":4},{\"name\":\"Lilly\",\"age\":12}]}"
         val person = Person(
             name = "Marco",
@@ -49,18 +50,18 @@ class JsonUtilsTest {
             )
         )
         val obj = fromJson<Person>(json)
-        assertEquals(person, obj)
+        assertTrue(person == obj)
     }
 }
 
-private class Person(
+private data class Person(
     val name: String,
     val age: Int,
     val surname: String,
     val pets: MutableList<Pet>
 )
 
-private class Pet(
+private data class Pet(
     val name: String,
     val age: Int
 )
