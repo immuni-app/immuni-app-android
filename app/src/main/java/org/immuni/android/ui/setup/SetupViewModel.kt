@@ -1,6 +1,5 @@
 package org.immuni.android.ui.setup
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.immuni.android.extensions.livedata.Event
@@ -25,18 +24,9 @@ class SetupViewModel(
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
-    val navigateToMainPage: LiveData<Event<Boolean>>
-        get() = _navigateToMainPage
-
-    private val _navigateToOnboarding = MutableLiveData<Event<Boolean>>()
-    val navigateToOnboarding: LiveData<Event<Boolean>>
-        get() = _navigateToOnboarding
-
-    private val _navigateToWelcome = MutableLiveData<Event<Boolean>>()
-    val navigateToWelcome: LiveData<Event<Boolean>>
-        get() = _navigateToWelcome
-
+    val navigateToMainPage = MutableLiveData<Event<Boolean>>()
+    val navigateToOnboarding = MutableLiveData<Event<Boolean>>()
+    val navigateToWelcome = MutableLiveData<Event<Boolean>>()
     val errorDuringSetup = MutableLiveData<Boolean>()
 
     override fun onCleared() {
@@ -60,7 +50,7 @@ class SetupViewModel(
                 apiManager.repository.settings()
             }
 
-            if (true || setup.isComplete()) {
+            if (setup.isComplete()) {
                 delay(2000)
                 navigateTo()
             } else {
@@ -102,9 +92,9 @@ class SetupViewModel(
 
     private fun navigateTo() {
         if (!welcome.isComplete() || !onboarding.isComplete()) {
-            _navigateToWelcome.value = Event(true)
+            navigateToWelcome.value = Event(true)
         } else {
-            _navigateToMainPage.value = Event(true)
+            navigateToMainPage.value = Event(true)
         }
     }
 

@@ -9,16 +9,20 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.api.APIManager
-import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.PermissionsManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 import java.io.Serializable
 
-class OnboardingViewModel(val handle: SavedStateHandle, private val database: ImmuniDatabase) :
+class OnboardingViewModel(
+    val handle: SavedStateHandle,
+    val api: APIManager,
+    val userManager: UserManager,
+    val permissionsManager: PermissionsManager,
+    val onboarding: Onboarding
+) :
     ViewModel(), KoinComponent {
 
     companion object {
@@ -27,35 +31,17 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val onboarding: Onboarding by inject()
-    private val api: APIManager by inject()
-    private val userManager: UserManager by inject()
-    private val permissionsManager: PermissionsManager by inject()
 
     val partialUserInfo = MediatorLiveData<OnboardingUserInfo>()
     val loading = MutableLiveData<Boolean>()
 
     private var savedStateLiveData = handle.getLiveData<Serializable>(STATE_KEY)
 
-    private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
-    val navigateToMainPage: LiveData<Event<Boolean>>
-        get() = _navigateToMainPage
-
-    private val _navigateToNextPage = MutableLiveData<Event<Boolean>>()
-    val navigateToNextPage: LiveData<Event<Boolean>>
-        get() = _navigateToNextPage
-
-    private val _permissionsChanged = MutableLiveData<Event<Boolean>>()
-    val permissionsChanged: LiveData<Event<Boolean>>
-        get() = _permissionsChanged
-
-    private val _navigateToPrevPage = MutableLiveData<Event<Boolean>>()
-    val navigateToPrevPage: LiveData<Event<Boolean>>
-        get() = _navigateToPrevPage
-
-    private val _onFinishPermissionsTutorial = MutableLiveData<Event<Boolean>>()
-    val onFinishPermissionsTutorial: LiveData<Event<Boolean>>
-        get() = _onFinishPermissionsTutorial
+    val navigateToMainPage = MutableLiveData<Event<Boolean>>()
+    val navigateToNextPage = MutableLiveData<Event<Boolean>>()
+    val permissionsChanged = MutableLiveData<Event<Boolean>>()
+    val navigateToPrevPage = MutableLiveData<Event<Boolean>>()
+    val onFinishPermissionsTutorial = MutableLiveData<Event<Boolean>>()
 
     init {
         // init
@@ -75,13 +61,13 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
 
         uiScope.launch {
             permissionsManager.isActive.asFlow().drop(1).collect { active ->
-                _permissionsChanged.value = Event(true)
+                permissionsChanged.value = Event(true)
             }
         }
     }
 
     fun onFinishPermissionsTutorial() {
-        _onFinishPermissionsTutorial.value = Event(true)
+        onFinishPermissionsTutorial.value = Event(true)
     }
 
     fun onPrivacyPolicyClick() {
@@ -133,34 +119,26 @@ class OnboardingViewModel(val handle: SavedStateHandle, private val database: Im
 
             //loading.value = false
             onboarding.setCompleted(true)
-            _navigateToNextPage.value = Event(true)
+            navigateToNextPage.value = Event(true)
         }
     }
 
     fun onEnterDonePage() {
         uiScope.launch {
             delay(2000)
-            _navigateToMainPage.value = Event(true)
+            navigateToMainPage.value = Event(true)
         }
     }
 
     fun onNextTap() {
-        _navigateToNextPage.value = Event(true)
+        navigateToNextPage.value = Event(true)
     }
 
     fun onPrevTap() {
-        _navigateToPrevPage.value = Event(true)
+        navigateToPrevPage.value = Event(true)
     }
 
     fun onPrivacyPolicyAccepted() {
-        // TODO agreed no privacy policy API for now
-        /*uiScope.launch {
-            oracle.api.privacyNotice(PrivacyNoticeRequest(
-                oracle.settings()?.privacyVersion ?: "",
-                hashMapOf(),
-                "unknown"
-            ))
-        }*/
-        _navigateToNextPage.value = Event(true)
+        navigateToNextPage.value = Event(true)
     }
 }

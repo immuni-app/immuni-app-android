@@ -1,21 +1,15 @@
 package org.immuni.android.ui.home
 
 import android.content.Intent
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.extensions.livedata.Event
-import org.immuni.android.extensions.utils.DeviceUtils
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.R
 import org.immuni.android.api.APIManager
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.UserManager
-import org.immuni.android.models.User
 import org.immuni.android.models.survey.TriageProfile
-import org.immuni.android.extensions.activity.toast
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.home.model.*
 import org.immuni.android.ui.onboarding.Onboarding
@@ -23,27 +17,18 @@ import org.immuni.android.ui.onboarding.Onboarding
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinComponent {
+class HomeSharedViewModel(
+    val api: APIManager,
+    val bluetoothManager: BluetoothManager,
+    val onboarding: Onboarding
+) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private val api: APIManager by inject()
-    private val userManager: UserManager by inject()
-    private val bluetoothManager: BluetoothManager by inject()
-    private val onboarding: Onboarding by inject()
 
-    private val _showAddFamilyMemberDialog = MutableLiveData<Event<Boolean>>()
-    val showAddFamilyMemberDialog: LiveData<Event<Boolean>>
-        get() = _showAddFamilyMemberDialog
-
-    private val _showSuggestionDialog = MutableLiveData<Event<TriageProfile>>()
-    val showSuggestionDialog: LiveData<Event<TriageProfile>>
-        get() = _showSuggestionDialog
-
-    private val _selectFamilyTab = MutableLiveData<Event<Boolean>>()
-    val selectFamilyTab: LiveData<Event<Boolean>>
-        get() = _selectFamilyTab
-
+    val showAddFamilyMemberDialog = MutableLiveData<Event<Boolean>>()
+    val showSuggestionDialog = MutableLiveData<Event<TriageProfile>>()
+    val selectFamilyTab = MutableLiveData<Event<Boolean>>()
     val homelistModel = MutableLiveData<List<HomeItemType>>()
     val blockingItemsListModel = MutableLiveData<List<HomeItemType>>()
 
@@ -106,35 +91,18 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     private fun checkAddFamilyMembersDialog() {
         if (!onboarding.familyDialogShown()) {
             uiScope.launch {
-                _showAddFamilyMemberDialog.value = Event(true)
+                showAddFamilyMemberDialog.value = Event(true)
                 onboarding.setFamilyDialogShown(true)
             }
         }
     }
 
     fun openSuggestions(triageProfile: TriageProfile) {
-        _showSuggestionDialog.value = Event(triageProfile)
-    }
-
-    fun onUserIdTap(user: User) {
-        // copy to clipboard
-        DeviceUtils.copyToClipBoard(ImmuniApplication.appContext, text = user.id)
-        toast(
-            ImmuniApplication.appContext,
-            ImmuniApplication.appContext.resources.getString(
-                R.string.user_id_copied
-            )
-        )
+        showSuggestionDialog.value = Event(triageProfile)
     }
 
     fun onPrivacyPolicyClick() {
         api.latestSettings()?.privacyPolicyUrl?.let {
-            openUrlInDialog(it)
-        }
-    }
-
-    fun onFaqClick() {
-        api.latestSettings()?.faqUrl?.let {
             openUrlInDialog(it)
         }
     }
@@ -152,9 +120,5 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
             putExtra("url", url)
         }
         context.startActivity(intent)
-    }
-
-    fun selectFamilyTab() {
-        _selectFamilyTab.value = Event(true)
     }
 }

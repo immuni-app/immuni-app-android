@@ -23,12 +23,12 @@ import org.immuni.android.api.APIManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class ForceUpdateViewModel : ViewModel(), KoinComponent {
+class ForceUpdateViewModel(
+    val api: APIManager
+) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    private val api: APIManager by inject()
 
     val loading = MutableLiveData<Boolean>()
     val downloading = MutableLiveData<Boolean>()

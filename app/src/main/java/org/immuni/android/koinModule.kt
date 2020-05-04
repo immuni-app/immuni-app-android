@@ -142,8 +142,8 @@ val appModule = module {
     // Android ViewModels
 
     viewModel { SetupViewModel(get(), get(), get(), get(), get()) }
-    viewModel { HomeSharedViewModel(get()) }
-    viewModel { (handle: SavedStateHandle) -> OnboardingViewModel(handle, get()) }
-    viewModel { (userId: String) -> UploadDataViewModel(userId, get()) }
-    viewModel { ForceUpdateViewModel() }
+    viewModel { HomeSharedViewModel(get(), get(), get()) }
+    viewModel { (handle: SavedStateHandle) -> OnboardingViewModel(handle, get(), get(), get(), get()) }
+    viewModel { (userId: String) -> UploadDataViewModel(userId, get(), get()) }
+    viewModel { ForceUpdateViewModel(get()) }
 }

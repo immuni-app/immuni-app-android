@@ -13,12 +13,14 @@ import org.immuni.android.network.api.NetworkResource
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : ViewModel(), KoinComponent {
+class UploadDataViewModel(
+    val userId:String,
+    val database: ImmuniDatabase,
+    val apiManager: APIManager
+) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    private val apiManager: APIManager by inject()
 
     val loading = MutableLiveData<Event<Boolean>>()
     val error = MutableLiveData<Event<Boolean>>()
