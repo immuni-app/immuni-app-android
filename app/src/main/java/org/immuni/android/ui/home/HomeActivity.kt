@@ -11,7 +11,6 @@ import org.immuni.android.ui.home.navigation.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.home_activity.*
 import org.immuni.android.managers.BluetoothListenerLifecycle
-import org.immuni.android.managers.GeolocalisationListenerLifecycle
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class HomeActivity : ImmuniActivity()  {
@@ -20,7 +19,6 @@ class HomeActivity : ImmuniActivity()  {
     private lateinit var viewModel: HomeSharedViewModel
 
     private lateinit var lifecycleBluetooth: BluetoothListenerLifecycle
-    private lateinit var lifecycleGeolocation: GeolocalisationListenerLifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +28,7 @@ class HomeActivity : ImmuniActivity()  {
         lifecycleBluetooth = BluetoothListenerLifecycle(this, this.lifecycle) { bluetoothState ->
             viewModel.onHomeResumed()
         }
-        lifecycleGeolocation = GeolocalisationListenerLifecycle(this, this.lifecycle) { active ->
-            viewModel.onHomeResumed()
-        }
         lifecycle.addObserver(lifecycleBluetooth)
-        lifecycle.addObserver(lifecycleGeolocation)
 
         viewModel = getViewModel()
 
@@ -63,7 +57,7 @@ class HomeActivity : ImmuniActivity()  {
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
-        val navGraphIds = listOf(R.navigation.home, R.navigation.family, R.navigation.settings)
+        val navGraphIds = listOf(R.navigation.home, R.navigation.settings, R.navigation.settings)
         val menuItemsIds = listOf(R.id.home, R.id.family, R.id.settings)
         val defaultIconsIds = listOf(R.drawable.ic_tab_home, R.drawable.ic_tab_family, R.drawable.ic_tab_settings)
         val selectedIconsIds = listOf(R.drawable.ic_tab_home_selected, R.drawable.ic_tab_family_selected, R.drawable.ic_tab_settings_selected)

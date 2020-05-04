@@ -27,7 +27,6 @@ import org.immuni.android.models.survey.backgroundColor
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.home.home.model.*
-import org.immuni.android.ui.log.LogActivity
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -93,15 +92,6 @@ class HomeFragment : Fragment(), HomeClickListener {
                         putExtra("url", triageProfile.url)
                         putExtra("color", triageProfile.severity.backgroundColor())
                     }
-                activity?.startActivity(intent)
-            }
-        })
-
-        viewModel.navigateToSurvey.observe(viewLifecycleOwner, Observer {
-            it.getContentIfNotHandled()?.let { url ->
-                val intent = Intent(ImmuniApplication.appContext, LogActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                }
                 activity?.startActivity(intent)
             }
         })
@@ -219,7 +209,7 @@ class HomeFragment : Fragment(), HomeClickListener {
                 if (item.tapQuestion) {
                     openDiaryDialog()
                 } else {
-                    viewModel.onSurveyCardTap()
+
                 }
             }
             is SurveyCardDone -> {

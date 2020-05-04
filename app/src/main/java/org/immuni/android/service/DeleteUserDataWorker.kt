@@ -7,7 +7,6 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import org.immuni.android.api.APIManager
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.managers.SurveyManager
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -18,7 +17,6 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters) 
     CoroutineWorker(appContext, workerParams), KoinComponent {
 
     private val database: ImmuniDatabase by inject()
-    private val surveyManager: SurveyManager by inject()
     private val api: APIManager by inject()
 
     override suspend fun doWork(): Result = coroutineScope {
@@ -26,8 +24,6 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters) 
 
         withContext(Dispatchers.Default) {
             api.latestSettings()?.userDataRetentionDays?.let { days ->
-                surveyManager.deleteDataOlderThan(days)
-
                 database.bleContactDao().removeOlderThan(
                     timestamp = Calendar.getInstance().apply {
                         add(Calendar.DATE, -days)

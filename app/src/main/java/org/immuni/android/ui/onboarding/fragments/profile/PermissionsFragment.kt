@@ -25,7 +25,6 @@ import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.BluetoothListenerLifecycle
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.GeolocalisationListenerLifecycle
 import org.immuni.android.extensions.activity.toast
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.onboarding.OnboardingViewModel
@@ -39,7 +38,6 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
     val bluetoothManager: BluetoothManager by inject()
 
     private lateinit var lifecycleBluetooth: BluetoothListenerLifecycle
-    private lateinit var lifecycleGeolocation: GeolocalisationListenerLifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +45,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             updateUI()
             checkAllGood()
         }
-        lifecycleGeolocation = GeolocalisationListenerLifecycle(requireContext(), this.lifecycle) { active ->
-            updateUI()
-            checkAllGood()
-        }
         lifecycle.addObserver(lifecycleBluetooth)
-        lifecycle.addObserver(lifecycleGeolocation)
     }
 
     override fun onCreateView(

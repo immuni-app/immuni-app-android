@@ -24,7 +24,6 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
 
     private val workManager = WorkManager.getInstance(context)
     private val userManager: UserManager by inject()
-    private val surveyManager: SurveyManager by inject()
     private val appNotificationManager: AppNotificationManager by inject()
     private val androidNotificationManager = NotificationManagerCompat.from(context)
 
@@ -41,7 +40,7 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
         if (userManager.mainUser() == null) {
             return
         }
-        if (fromActivity && surveyManager.areAllSurveysLogged()) {
+        if (false) {
             androidNotificationManager.cancel(notificationId)
         }
         schedule(initialDelay())
@@ -67,7 +66,7 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
     }
 
     private fun initialDelay(): Long {
-        return surveyManager.nextSurveyDate().time - Date().time
+        return 0
     }
 
     fun triggerNotification() {

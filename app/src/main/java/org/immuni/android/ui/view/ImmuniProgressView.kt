@@ -54,11 +54,6 @@ class ImmuniProgressView(context: Context, attrs: AttributeSet) : View(context, 
         }
     }
 
-    fun init() {
-
-
-    }
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         canvas.drawColor(progressBackgroundColor)

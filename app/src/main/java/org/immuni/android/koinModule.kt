@@ -17,17 +17,11 @@ import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.PermissionsManager
-import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.*
 import org.immuni.android.config.*
 import org.immuni.android.fcm.FirebaseFCM
-import org.immuni.android.ui.addrelative.AddRelativeViewModel
-import org.immuni.android.ui.ble.encounters.BleEncountersDebugViewModel
 import org.immuni.android.ui.forceupdate.ForceUpdateViewModel
 import org.immuni.android.ui.home.HomeSharedViewModel
-import org.immuni.android.ui.home.family.details.UserDetailsViewModel
-import org.immuni.android.ui.home.family.details.edit.EditDetailsViewModel
-import org.immuni.android.ui.log.LogViewModel
 import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.onboarding.OnboardingViewModel
 import org.immuni.android.ui.setup.Setup
@@ -134,19 +128,11 @@ val appModule = module {
     }
 
     single {
-        SurveyManager(get())
-    }
-
-    single {
         SurveyNotificationManager(androidContext())
     }
 
     single {
         AppNotificationManager(androidContext())
-    }
-
-    single {
-        BtIdsManager(androidContext())
     }
 
     single {
@@ -158,11 +144,6 @@ val appModule = module {
     viewModel { SetupViewModel(get(), get(), get(), get(), get()) }
     viewModel { HomeSharedViewModel(get()) }
     viewModel { (handle: SavedStateHandle) -> OnboardingViewModel(handle, get()) }
-    viewModel { (handle: SavedStateHandle) -> AddRelativeViewModel(handle, get()) }
-    viewModel { (handle: SavedStateHandle) -> LogViewModel(handle) }
-    viewModel { (userId: String) -> UserDetailsViewModel(userId) }
     viewModel { (userId: String) -> UploadDataViewModel(userId, get()) }
-    viewModel { (userId: String) -> EditDetailsViewModel(userId) }
-    viewModel { BleEncountersDebugViewModel() }
     viewModel { ForceUpdateViewModel() }
 }

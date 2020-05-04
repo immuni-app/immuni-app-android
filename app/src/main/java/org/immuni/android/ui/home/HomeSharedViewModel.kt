@@ -2,7 +2,6 @@ package org.immuni.android.ui.home
 
 import android.content.Intent
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.immuni.android.db.ImmuniDatabase
@@ -13,13 +12,11 @@ import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.api.APIManager
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.SurveyManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
 import org.immuni.android.models.survey.TriageProfile
 import org.immuni.android.extensions.activity.toast
 import org.immuni.android.ui.dialog.WebViewDialogActivity
-import org.immuni.android.ui.home.family.model.*
 import org.immuni.android.ui.home.home.model.*
 import org.immuni.android.ui.onboarding.Onboarding
 
@@ -32,7 +29,6 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val api: APIManager by inject()
     private val userManager: UserManager by inject()
-    private val surveyManager: SurveyManager by inject()
     private val bluetoothManager: BluetoothManager by inject()
     private val onboarding: Onboarding by inject()
 
@@ -44,16 +40,11 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
     val showSuggestionDialog: LiveData<Event<TriageProfile>>
         get() = _showSuggestionDialog
 
-    private val _navigateToSurvey = MutableLiveData<Event<Boolean>>()
-    val navigateToSurvey: LiveData<Event<Boolean>>
-        get() = _navigateToSurvey
-
     private val _selectFamilyTab = MutableLiveData<Event<Boolean>>()
     val selectFamilyTab: LiveData<Event<Boolean>>
         get() = _selectFamilyTab
 
     val homelistModel = MutableLiveData<List<HomeItemType>>()
-    val familylistModel = MediatorLiveData<List<FamilyItemType>>()
     val blockingItemsListModel = MutableLiveData<List<HomeItemType>>()
 
     override fun onCleared() {
@@ -63,9 +54,6 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
     init {
         refreshHomeListModel()
-        startListeningToUsers()
-
-        bluetoothManager.scheduleBLEWorker(ImmuniApplication.appContext)
     }
 
     private fun refreshHomeListModel() {
@@ -105,51 +93,6 @@ class HomeSharedViewModel(val database: ImmuniDatabase) : ViewModel(), KoinCompo
 
 
             homelistModel.value = itemsList.toList()
-        }
-    }
-
-
-    private fun startListeningToUsers() {
-        familylistModel.addSource(userManager.usersLiveData()) { users ->
-            val ctx = ImmuniApplication.appContext
-
-            val itemsList = mutableListOf<FamilyItemType>()
-
-            val mainUser = users.find { it.isMain }
-            val familyMembers = users.filter { !it.isMain }
-
-            // add first main users
-            mainUser?.let {
-                itemsList.add(UserCard(it, 0))
-            }
-
-            /*
-            // if there are family members, add header and all the members and a add button
-            if (familyMembers.isNotEmpty()) {
-                itemsList.add(FamilyHeaderCard(ctx.resources.getString(R.string.your_family_members_separator)))
-                familyMembers.forEachIndexed { index, user ->
-                    itemsList.add(UserCard(user, index + 1))
-                }
-                itemsList.add(AddFamilyMemberButtonCard())
-            }
-            // otherwise add only the add member tutorial button
-            else {
-                itemsList.add(AddFamilyMemberTutorialCard())
-            }
-             */
-
-            familylistModel.postValue(itemsList)
-        }
-    }
-
-    fun onSurveyCardTap() {
-        uiScope.launch {
-            if (surveyManager.areAllSurveysLogged()) {
-                // All users already took the survey for today!
-                return@launch
-            }
-
-            _navigateToSurvey.value = Event(true)
         }
     }
 
