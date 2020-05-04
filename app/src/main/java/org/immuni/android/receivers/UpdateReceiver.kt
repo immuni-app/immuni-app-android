@@ -8,11 +8,11 @@ import org.immuni.android.service.AlarmsManager
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 
-class RebootReceiver : BroadcastReceiver() {
+class UpdateReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
 
-        log("Reboot event received, restarting workers...")
+        log("Update event received, restarting workers...")
 
         // start workers
 
