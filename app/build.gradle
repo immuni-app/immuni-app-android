@@ -81,11 +81,12 @@ dependencies {
     implementation project(':extensions')
     implementation project(':debugmenu')
     implementation project(':network')
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesAndroidVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutinesAndroidVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.core:core-ktx:$ktxCoreVersion"
     implementation "com.google.android.material:material:$materialVersion"
@@ -151,6 +152,11 @@ dependencies {
 
     // Firebase FCM
     implementation "com.google.firebase:firebase-messaging:$fcmVersion" // 20.1.1 has known issues
+
+    // Google GMS
+    api 'com.google.android.gms:play-services-tasks:17.0.2'
+    api 'com.google.android.gms:play-services-base:17.2.1'
+    api 'com.google.android.gms:play-services-basement:17.2.1'
 
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "org.json:json:$jsonVersion"

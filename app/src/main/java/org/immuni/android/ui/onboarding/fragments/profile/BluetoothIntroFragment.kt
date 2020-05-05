@@ -8,7 +8,7 @@ import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import org.immuni.android.extensions.view.hideKeyboard
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.PermissionsManager
+import org.immuni.android.managers.ExposureNotificationManager
 import org.koin.android.ext.android.inject
 
 class BluetoothIntroFragment :
@@ -47,9 +47,9 @@ class BluetoothIntroFragment :
 
         val bluetoothManager: BluetoothManager by inject()
 
-        return !(!PermissionsManager.hasAllPermissions(requireContext()) ||
-                !PermissionsManager.isIgnoringBatteryOptimizations(requireContext()) ||
-                !PermissionsManager.globalLocalisationEnabled(requireContext()) ||
+        return !(!ExposureNotificationManager.hasAllPermissions(requireContext()) ||
+                !ExposureNotificationManager.isIgnoringBatteryOptimizations(requireContext()) ||
+                !ExposureNotificationManager.globalLocalisationEnabled(requireContext()) ||
                 !bluetoothManager.isBluetoothEnabled())
     }
 
