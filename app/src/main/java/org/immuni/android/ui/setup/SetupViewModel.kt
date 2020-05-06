@@ -45,7 +45,7 @@ class SetupViewModel(
                 repository.fetchSettings()
             }
 
-            if (userManager.isSetupComplete()) {
+            if (true || userManager.isSetupComplete()) {
                 delay(2000)
                 navigateTo()
             } else {

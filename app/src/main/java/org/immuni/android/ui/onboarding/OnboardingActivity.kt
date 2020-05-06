@@ -18,6 +18,12 @@ class OnboardingActivity : ImmuniActivity() {
 
         setContentView(R.layout.onboarding_activity)
         findNavController(R.id.nav_host_fragment).setGraph(R.navigation.onboarding)
+
+        startExposureNotification()
+    }
+
+    fun startExposureNotification() {
+        viewModel.startExposureNotification(this)
     }
 
     override fun onRestoreInstanceState(

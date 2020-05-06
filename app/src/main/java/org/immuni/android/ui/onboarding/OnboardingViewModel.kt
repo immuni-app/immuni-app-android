@@ -1,5 +1,6 @@
 package org.immuni.android.ui.onboarding
 
+import android.app.Activity
 import android.content.Intent
 import androidx.lifecycle.*
 import org.immuni.android.extensions.livedata.Event
@@ -139,5 +140,12 @@ class OnboardingViewModel(
 
     fun onPrivacyPolicyAccepted() {
         navigateToNextPage.value = Event(true)
+    }
+
+    fun startExposureNotification(activity: Activity) {
+        uiScope.launch {
+            exposureNotificationManager.optInAndStartExposureTracing(activity)
+        }
+
     }
 }
