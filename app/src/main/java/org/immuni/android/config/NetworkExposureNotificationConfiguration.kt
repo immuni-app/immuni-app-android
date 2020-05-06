@@ -6,7 +6,7 @@ import okhttp3.CertificatePinner
 import org.immuni.android.R
 import org.koin.core.KoinComponent
 
-class ImmuniNetworkConfiguration(val context: Context) : NetworkConfiguration, KoinComponent {
+class NetworkExposureNotificationConfiguration(val context: Context) : NetworkConfiguration, KoinComponent {
 
     override fun endpoint(): String {
         return context.getString(R.string.oracle_base_url)

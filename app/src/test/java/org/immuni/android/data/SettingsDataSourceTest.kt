@@ -6,15 +6,13 @@ import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.test.runBlockingTest
-import org.immuni.android.api.API
-import org.immuni.android.api.TODOAPIRepository
+import org.immuni.android.api.AppConfigurationService
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
 import org.junit.Assert.assertNull
 import org.junit.Test
 
 import org.junit.Before
-import retrofit2.Response
 import kotlin.test.assertEquals
 
 class SettingsDataSourceTest {
@@ -26,7 +24,7 @@ class SettingsDataSourceTest {
     lateinit var store: SettingsStore
 
     @MockK(relaxed = true)
-    lateinit var api: API
+    lateinit var appConfigurationService: AppConfigurationService
 
     @MockK(relaxed = true)
     lateinit var lifecycle: AppLifecycleObserver
@@ -46,7 +44,7 @@ class SettingsDataSourceTest {
             coEvery { store.loadSettings() } returns settings
 
             val dataSource =
-                SettingsDataSource(api, store, lifecycle)
+                SettingsDataSource(appConfigurationService, store, lifecycle)
             assertEquals(settings, dataSource.latestSettings())
         }
 
@@ -55,7 +53,7 @@ class SettingsDataSourceTest {
 
         coEvery { store.loadSettings() } returns null
 
-        val dataSource = SettingsDataSource(api, store, lifecycle)
+        val dataSource = SettingsDataSource(appConfigurationService, store, lifecycle)
         assertNull(dataSource.latestSettings())
     }
 
@@ -64,7 +62,7 @@ class SettingsDataSourceTest {
 
         coEvery { store.loadSettings() } returns settings
 
-        val dataSource = SettingsDataSource(api, store, lifecycle)
+        val dataSource = SettingsDataSource(appConfigurationService, store, lifecycle)
         val flow = dataSource.settingsFlow()
 
         var counter = 0
@@ -84,7 +82,7 @@ class SettingsDataSourceTest {
 
         coEvery { store.loadSettings() } returns null
 
-        val dataSource = SettingsDataSource(api, store, lifecycle)
+        val dataSource = SettingsDataSource(appConfigurationService, store, lifecycle)
         val flow = dataSource.settingsFlow()
 
         var counter = 0
@@ -107,7 +105,7 @@ class SettingsDataSourceTest {
 
     @Test
     fun `settings are stored when after fetching`() = runBlocking {
-        val dataSource = SettingsDataSource(api, store, lifecycle)
+        val dataSource = SettingsDataSource(appConfigurationService, store, lifecycle)
         dataSource.onSettingsUpdate(settings)
         verify { store.saveSettings(settings) }
     }

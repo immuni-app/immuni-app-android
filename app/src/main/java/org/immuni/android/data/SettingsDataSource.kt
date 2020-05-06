@@ -6,7 +6,7 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.launch
-import org.immuni.android.api.API
+import org.immuni.android.api.AppConfigurationService
 import org.immuni.android.api.model.ErrorResponse
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.extensions.lifecycle.AppLifecycleEvent
@@ -19,10 +19,10 @@ import org.immuni.android.network.api.safeApiCall
  *
  * It exposes the settings through a reactive Flow or sync methods.
  *
- * @param repository responsible to interact with the [API] and API storage.
+ * @param repository responsible to interact with the [AppConfigurationService] and API storage.
  */
 class SettingsDataSource(
-    val api: API,
+    val appConfigurationService: AppConfigurationService,
     val store: SettingsStore,
     val lifecycleObserver: AppLifecycleObserver
 ) {
@@ -38,7 +38,7 @@ class SettingsDataSource(
             lifecycleObserver.consumeEach { event ->
                 when (event) {
                     AppLifecycleEvent.ON_START -> {
-                        val resource = safeApiCall<ImmuniSettings, ErrorResponse> { api.settings() }
+                        val resource = safeApiCall<ImmuniSettings, ErrorResponse> { appConfigurationService.settings() }
                         if(resource is NetworkResource.Success) {
                             resource.data?.let { settings ->
                                 onSettingsUpdate(settings)

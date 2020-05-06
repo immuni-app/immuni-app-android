@@ -10,9 +10,12 @@ import org.immuni.android.network.Network
 import org.immuni.android.debugmenu.DebugMenu
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
-import org.immuni.android.api.API
+import org.immuni.android.api.AppConfigurationService
+import org.immuni.android.api.ExposureInjestionService
+import org.immuni.android.api.ExposureNotificationService
+import org.immuni.android.api.ExposureReportingService
 import org.immuni.android.data.SettingsDataSource
-import org.immuni.android.api.TODOAPIRepository
+import org.immuni.android.data.FcmRepository
 import org.immuni.android.data.SettingsStore
 import org.immuni.android.db.DATABASE_NAME
 import org.immuni.android.db.ImmuniDatabase
@@ -69,20 +72,35 @@ val appModule = module {
     single { ExposureNotificationClientWrapper(Nearby.getExposureNotificationClient(androidContext())) }
 
     /**
-     * Backend Retrofit APIs
+     * App Configuration Service APIs
      */
-    single<API> {
-        val network: Network by inject()
-        network.createServiceAPI(API::class)
+    single<AppConfigurationService> {
+        val network = Network(NetworkAppConfigurationConfiguration(androidContext()))
+        network.createServiceAPI(AppConfigurationService::class)
     }
 
     /**
-     * Network module.
+     * Exposure Notification Service APIs
      */
-    single {
-        Network(
-            ImmuniNetworkConfiguration(androidContext())
-        )
+    single<ExposureNotificationService> {
+        val network = Network(NetworkExposureNotificationConfiguration(androidContext()))
+        network.createServiceAPI(ExposureNotificationService::class)
+    }
+
+    /**
+     * Exposure Reporting Service APIs
+     */
+    single<ExposureReportingService> {
+        val network = Network(NetworkExposureReportingConfiguration(androidContext()))
+        network.createServiceAPI(ExposureReportingService::class)
+    }
+
+    /**
+     * Exposure Injestion Service APIs
+     */
+    single<ExposureInjestionService> {
+        val network = Network(NetworkExposureInjestionConfiguration(androidContext()))
+        network.createServiceAPI(ExposureInjestionService::class)
     }
 
     /**
@@ -124,7 +142,7 @@ val appModule = module {
     }
 
     single {
-        TODOAPIRepository(get())
+        FcmRepository(get())
     }
 
     single {

@@ -3,7 +3,7 @@ package org.immuni.android.config
 import org.immuni.android.api.model.FcmTokenRequest
 import org.immuni.android.fcm.FirebaseFCMConfiguration
 import com.google.firebase.messaging.RemoteMessage
-import org.immuni.android.api.TODOAPIRepository
+import org.immuni.android.data.FcmRepository
 import org.immuni.android.data.SettingsRepository
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -24,13 +24,13 @@ class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
 
     override suspend fun onNewToken(token: String) {
         val repository: SettingsRepository by inject()
-        val TODOAPIRepository: TODOAPIRepository by inject()
+        val FcmRepository: FcmRepository by inject()
 
         // be sure to call settings before
         repository.fetchSettings()
 
         // notify new token to backend
-        TODOAPIRepository.fcmNotificationToken(FcmTokenRequest(
+        FcmRepository.fcmNotificationToken(FcmTokenRequest(
             token = token
         ))
     }
