@@ -34,6 +34,9 @@ class NetworkRetrofit(
 
         builder.addInterceptor(gzipInterceptor)
         builder.addInterceptor(loggingInterceptor)
+        // use this to verify cache
+        // network interceptor is not called when using cache
+        //builder.addNetworkInterceptor(loggingInterceptor)
 
         certificatePinner?.let {
             builder.certificatePinner(it)
