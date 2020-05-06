@@ -99,7 +99,7 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun navigateTo() {
-        if (!userManager.isOnboardingComplete()) navigateToOnboarding()
+        if (false && !userManager.isOnboardingComplete()) navigateToOnboarding()
         else navigateToHome()
     }
 

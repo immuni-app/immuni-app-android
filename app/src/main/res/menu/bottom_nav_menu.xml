@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--
-    <item
-        android:id="@+id/library"
-        android:icon="@drawable/ic_tab_library"
-        android:title="@string/library" />
-        -->
-
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_tab_home"
         android:title="@string/home_tab" />
-
-    <item
-        android:id="@+id/family"
-        android:icon="@drawable/ic_tab_family"
-        android:title="@string/family_tab" />
 
     <item
         android:id="@+id/settings"

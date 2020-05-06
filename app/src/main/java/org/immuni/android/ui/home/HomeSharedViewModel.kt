@@ -23,11 +23,7 @@ class HomeSharedViewModel(
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val showAddFamilyMemberDialog = MutableLiveData<Event<Boolean>>()
-    val showSuggestionDialog = MutableLiveData<Event<TriageProfile>>()
-    val selectFamilyTab = MutableLiveData<Event<Boolean>>()
     val homelistModel = MutableLiveData<List<HomeItemType>>()
-    val blockingItemsListModel = MutableLiveData<List<HomeItemType>>()
 
     override fun onCleared() {
         super.onCleared()
@@ -58,8 +54,6 @@ class HomeSharedViewModel(
                 blockingList.add(EnableNotificationCard())
             }
 
-            blockingItemsListModel.value = blockingList
-
             // survey card
 
             // suggestion cards
@@ -81,10 +75,6 @@ class HomeSharedViewModel(
     fun onHomeResumed() {
         refreshHomeListModel()
         //checkAddFamilyMembersDialog()
-    }
-
-    fun openSuggestions(triageProfile: TriageProfile) {
-        showSuggestionDialog.value = Event(triageProfile)
     }
 
     fun onPrivacyPolicyClick() {

@@ -22,7 +22,6 @@ import org.koin.core.context.startKoin
 
 class ImmuniApplication : Application() {
 
-    private lateinit var network: Network
     private lateinit var fcm: FirebaseFCM
     private lateinit var settingsDataSource: SettingsDataSource
     private lateinit var forceUpdateManager: ForceUpdateManager
@@ -41,7 +40,6 @@ class ImmuniApplication : Application() {
             modules(appModule)
         }
 
-        network = get()
         fcm = get()
         debugMenu = get()
         surveyNotificationManager = get()

@@ -97,15 +97,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/progress" />
 
-
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    <include
-        android:id="@+id/blockingCard"
-        android:clickable="true"
-        tools:visibility="visible"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        layout="@layout/home_blocking_card"/>
 </FrameLayout>

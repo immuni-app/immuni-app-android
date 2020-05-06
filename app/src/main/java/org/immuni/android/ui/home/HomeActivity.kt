@@ -32,10 +32,6 @@ class HomeActivity : ImmuniActivity()  {
 
         viewModel = getViewModel()
 
-        viewModel.selectFamilyTab.observe(this, Observer {
-            bottom_nav.selectedItemId = R.id.family
-        })
-
         bottom_nav.itemIconTintList = null
 
         if (savedInstanceState == null) {
@@ -57,10 +53,10 @@ class HomeActivity : ImmuniActivity()  {
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
-        val navGraphIds = listOf(R.navigation.home, R.navigation.settings, R.navigation.settings)
-        val menuItemsIds = listOf(R.id.home, R.id.family, R.id.settings)
-        val defaultIconsIds = listOf(R.drawable.ic_tab_home, R.drawable.ic_tab_family, R.drawable.ic_tab_settings)
-        val selectedIconsIds = listOf(R.drawable.ic_tab_home_selected, R.drawable.ic_tab_family_selected, R.drawable.ic_tab_settings_selected)
+        val navGraphIds = listOf(R.navigation.home, R.navigation.settings)
+        val menuItemsIds = listOf(R.id.home, R.id.settings)
+        val defaultIconsIds = listOf(R.drawable.ic_tab_home, R.drawable.ic_tab_settings)
+        val selectedIconsIds = listOf(R.drawable.ic_tab_home_selected, R.drawable.ic_tab_settings_selected)
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(
