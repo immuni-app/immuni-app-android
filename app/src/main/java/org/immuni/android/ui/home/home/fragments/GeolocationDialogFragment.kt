@@ -35,7 +35,7 @@ class GeolocationDialogFragment: FullScreenDialogDarkFragment() {
 
     private fun openGeolocationSettings() {
         activity?.let {
-            ExposureNotificationManager.startChangeGlobalGeolocalisationSettings(it)
+            //ExposureNotificationManager.startChangeGlobalGeolocalisationSettings(it)
         }
 
         findNavController().popBackStack()

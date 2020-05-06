@@ -23,7 +23,7 @@ class WhiteListDialogFragment: FullScreenDialogDarkFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         openList.setOnClickListener {
-            ExposureNotificationManager.startChangeBatteryOptimization(requireContext())
+            //ExposureNotificationManager.startChangeBatteryOptimization(requireContext())
         }
     }
 }

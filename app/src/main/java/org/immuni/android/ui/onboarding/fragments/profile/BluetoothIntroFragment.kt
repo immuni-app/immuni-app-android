@@ -14,6 +14,9 @@ import org.koin.android.ext.android.inject
 class BluetoothIntroFragment :
     ProfileContentFragment(R.layout.onboarding_bluetooth_fragment) {
 
+    val exposureNotificationManager: ExposureNotificationManager by inject()
+    val bluetoothManager: BluetoothManager by inject()
+
     override val nextButton: View
         get() = next
 
@@ -44,13 +47,7 @@ class BluetoothIntroFragment :
     }
 
     private fun canProceed(): Boolean {
-
-        val bluetoothManager: BluetoothManager by inject()
-
-        return !(!ExposureNotificationManager.hasAllPermissions(requireContext()) ||
-                !ExposureNotificationManager.isIgnoringBatteryOptimizations(requireContext()) ||
-                !ExposureNotificationManager.globalLocalisationEnabled(requireContext()) ||
-                !bluetoothManager.isBluetoothEnabled())
+        return bluetoothManager.isBluetoothEnabled() && exposureNotificationManager.areExposureNotificationsEnabled.value
     }
 
 
