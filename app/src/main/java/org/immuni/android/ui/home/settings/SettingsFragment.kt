@@ -8,11 +8,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import org.immuni.android.R
-import org.immuni.android.ui.home.HomeSharedViewModel
-import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.settings_fragment.*
+import org.immuni.android.R
 import org.immuni.android.data.SettingsDataSource
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
+import org.immuni.android.ui.home.HomeSharedViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -25,19 +25,17 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
         viewModel = getSharedViewModel()
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        tosButton.setOnClickListener {
-            viewModel.onTosClick()
+        dataLoadButton.setOnClickListener {
+            //viewModel.onTosClick()
         }
 
-        dataHandlingButton.setOnClickListener {
-            val action = SettingsFragmentDirections.actionGlobalDataHandling()
-            findNavController().navigate(action)
+        dataRecoveryButton.setOnClickListener {
+//            val action = SettingsFragmentDirections.actionGlobalDataHandling()
+//            findNavController().navigate(action)
         }
 
-        supportButton.setOnClickListener {
-            activity?.let {
-                contactUs(it)
-            }
+        dataDeleteButton.setOnClickListener {
+
         }
     }
 
@@ -56,6 +54,11 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
             )
         }
 
-        activity.startActivity(Intent.createChooser(intent, ctx.getString(R.string.choose_an_app_to_contact_us)))
+        activity.startActivity(
+            Intent.createChooser(
+                intent,
+                ctx.getString(R.string.choose_an_app_to_contact_us)
+            )
+        )
     }
 }

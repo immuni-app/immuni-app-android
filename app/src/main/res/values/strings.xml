@@ -132,6 +132,11 @@
 
     <string name="settings_faq">Domande frequenti</string>
     <string name="settings_tos">Termini di utilizzo</string>
+    <string name="settings_data_management">Gestione dati</string>
+    <string name="settings_data_load">Caricamento dati</string>
+    <string name="settings_data_recovery">Recupero dati</string>
+    <string name="settings_data_deletion">Elimizione dati</string>
+
     <string name="settings_privacy_policy">Informativa privacy</string>
     <string name="settings_download_data">Scarica dati</string>
     <string name="settings_erase_data">Elimina dati</string>
