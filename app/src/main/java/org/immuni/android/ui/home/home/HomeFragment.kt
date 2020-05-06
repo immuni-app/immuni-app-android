@@ -22,7 +22,7 @@ import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.extensions.activity.disableDragging
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.PermissionsManager
+import org.immuni.android.managers.ExposureNotificationManager
 import org.immuni.android.models.survey.backgroundColor
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.HomeSharedViewModel
@@ -223,9 +223,10 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openWhiteListDialog() {
+        // fixme
         //val action = HomeFragmentDirections.actionWhitelistDialog()
         //findNavController().navigate(action)
-        PermissionsManager.startChangeBatteryOptimization(requireContext())
+        // ExposureNotificationManager.startChangeBatteryOptimization(requireContext())
     }
 
     private fun openNotificationDialog() {
@@ -238,14 +239,15 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openPermissionsDialog() {
-        val permissionsManager: PermissionsManager by inject()
-        if(permissionsManager.shouldShowPermissions(activity as AppCompatActivity,
-                *permissionsManager.geolocationPermissions())) {
-            permissionsManager.requestPermissions(activity as AppCompatActivity)
-        } else {
-            val action = HomeFragmentDirections.actionPermissionsDialog()
-            findNavController().navigate(action)
-        }
+        // fixme
+//        val permissionsManager: ExposureNotificationManager by inject()
+//        if(permissionsManager.shouldShowPermissions(activity as AppCompatActivity,
+//                *permissionsManager.geolocationPermissions())) {
+//            permissionsManager.requestPermissions(activity as AppCompatActivity)
+//        } else {
+//            val action = HomeFragmentDirections.actionPermissionsDialog()
+//            findNavController().navigate(action)
+//        }
     }
 
     private fun openBluetoothDialog() {

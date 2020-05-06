@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import androidx.room.Room
 import androidx.security.crypto.MasterKeys
+import com.google.android.gms.nearby.Nearby
 import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.network.Network
 import org.immuni.android.debugmenu.DebugMenu
@@ -17,12 +18,13 @@ import org.immuni.android.db.DATABASE_NAME
 import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.PermissionsManager
+import org.immuni.android.managers.ExposureNotificationManager
 import org.immuni.android.managers.*
 import org.immuni.android.config.*
 import org.immuni.android.data.SettingsRepository
 import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
 import org.immuni.android.fcm.FirebaseFCM
+import org.immuni.android.nearby.ExposureNotificationClientWrapper
 import org.immuni.android.ui.forceupdate.ForceUpdateViewModel
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.onboarding.OnboardingViewModel
@@ -60,6 +62,11 @@ val appModule = module {
             .openHelperFactory(factory)
             .build()
     }
+
+    /**
+     * ExposureNotificationWrapper
+     */
+    single { ExposureNotificationClientWrapper(Nearby.getExposureNotificationClient(androidContext())) }
 
     /**
      * Backend Retrofit APIs
@@ -132,7 +139,7 @@ val appModule = module {
     }
 
     single {
-        PermissionsManager(androidContext())
+        ExposureNotificationManager(androidContext())
     }
 
     single {

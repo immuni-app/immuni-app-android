@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.data.SettingsDataSource
-import org.immuni.android.managers.PermissionsManager
+import org.immuni.android.managers.ExposureNotificationManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
 import org.immuni.android.ui.dialog.WebViewDialogActivity
@@ -20,7 +20,7 @@ class OnboardingViewModel(
     val handle: SavedStateHandle,
     val settings: SettingsDataSource,
     val userManager: UserManager,
-    val permissionsManager: PermissionsManager
+    val exposureNotificationManager: ExposureNotificationManager
 ) :
     ViewModel(), KoinComponent {
 
@@ -59,7 +59,7 @@ class OnboardingViewModel(
         }
 
         uiScope.launch {
-            permissionsManager.isActive.asFlow().drop(1).collect { active ->
+            exposureNotificationManager.areExposureNotificationsEnabled.asFlow().drop(1).collect { active ->
                 permissionsChanged.value = Event(true)
             }
         }

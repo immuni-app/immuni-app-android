@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.whitelist_dialog.*
 import org.immuni.android.R
-import org.immuni.android.managers.PermissionsManager
+import org.immuni.android.managers.ExposureNotificationManager
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 
 class WhiteListDialogFragment: FullScreenDialogDarkFragment() {
@@ -24,7 +23,7 @@ class WhiteListDialogFragment: FullScreenDialogDarkFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         openList.setOnClickListener {
-            PermissionsManager.startChangeBatteryOptimization(requireContext())
+            ExposureNotificationManager.startChangeBatteryOptimization(requireContext())
         }
     }
 }
