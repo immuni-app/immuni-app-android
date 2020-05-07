@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.settings_fragment.*
+import org.immuni.android.BuildConfig
 import org.immuni.android.R
 import org.immuni.android.data.SettingsDataSource
 import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
@@ -25,22 +25,27 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
         viewModel = getSharedViewModel()
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        dataLoadButton.setOnClickListener {
-            //viewModel.onTosClick()
-        }
+        // data management
+        dataLoadButton.setOnClickListener { }
+        dataRecoveryButton.setOnClickListener { }
+        dataDeleteButton.setOnClickListener { }
+        // information
+        faqButton.setOnClickListener { }
+        termsOfServiceButton.setOnClickListener { }
+        privacyPolicyButton.setOnClickListener { }
+        // general
+        changeProvinceButton.setOnClickListener { }
+        sendFeedbackButton.setOnClickListener { }
+        contactSupportButton.setOnClickListener { }
 
-        dataRecoveryButton.setOnClickListener {
-//            val action = SettingsFragmentDirections.actionGlobalDataHandling()
-//            findNavController().navigate(action)
-        }
-
-        dataDeleteButton.setOnClickListener {
-
-        }
+        applicationVersion.text = getString(
+            R.string.settings_app_version,
+            BuildConfig.VERSION_NAME,
+            BuildConfig.VERSION_CODE
+        )
     }
 
     fun contactUs(activity: Activity) {
-
         val settings: SettingsDataSource by inject()
         val email = settings.latestSettings()?.supportEmail
 
