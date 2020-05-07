@@ -1,43 +1,27 @@
 package org.immuni.android.ui.setup
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bendingspoons.base.livedata.Event
-import com.bendingspoons.base.utils.retry
+import org.immuni.android.extensions.livedata.Event
+import org.immuni.android.extensions.utils.retry
 import kotlinx.coroutines.*
+import org.immuni.android.data.SettingsRepository
 import org.immuni.android.managers.UserManager
-import org.immuni.android.ui.onboarding.Onboarding
-import org.immuni.android.ui.welcome.Welcome
-import org.immuni.android.util.CoroutineContextProvider
-import org.immuni.android.util.Flags
-import org.immuni.android.util.setFlag
+import org.immuni.android.network.api.NetworkResource
 import org.koin.core.KoinComponent
 import java.io.IOException
 
 class SetupViewModel(
-    val setup: Setup,
-    val onboarding: Onboarding,
-    val welcome: Welcome,
     val userManager: UserManager,
-    val repository: SetupRepository
+    val repository: SettingsRepository
 ) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private val _navigateToMainPage = MutableLiveData<Event<Boolean>>()
-    val navigateToMainPage: LiveData<Event<Boolean>>
-        get() = _navigateToMainPage
-
-    private val _navigateToOnboarding = MutableLiveData<Event<Boolean>>()
-    val navigateToOnboarding: LiveData<Event<Boolean>>
-        get() = _navigateToOnboarding
-
-    private val _navigateToWelcome = MutableLiveData<Event<Boolean>>()
-    val navigateToWelcome: LiveData<Event<Boolean>>
-        get() = _navigateToWelcome
-
+    val navigateToMainPage = MutableLiveData<Event<Boolean>>()
+    val navigateToOnboarding = MutableLiveData<Event<Boolean>>()
+    val navigateToWelcome = MutableLiveData<Event<Boolean>>()
     val errorDuringSetup = MutableLiveData<Boolean>()
 
     override fun onCleared() {
@@ -58,47 +42,39 @@ class SetupViewModel(
             // set timeout here to allow the user to use the app offline
             // (this is not the very first startup that must to be blocking)
             withTimeoutOrNull(5000) {
-                repository.getOracleSetting()
+                repository.fetchSettings()
             }
 
-            if (setup.isComplete()) {
+            if (true || userManager.isSetupComplete()) {
                 delay(2000)
                 navigateTo()
             } else {
                 try {
                     // cleanup db
-                    setup.setCompleted(false)
+                    userManager.setSetupCompleted(false)
 
                     // the first time the call to settings and me is blocking, you cannot proceed without
                     val settings = retry(
                         times = 6,
-                        block = { repository.getOracleSetting() },
-                        exitWhen = { result -> result.isSuccessful },
+                        block = { repository.fetchSettings() },
+                        exitWhen = { result -> result is NetworkResource.Success },
                         onIntermediateFailure = { errorDuringSetup.value = true }
                     )
-                    if (!settings.isSuccessful) {
-                        throw IOException()
-                    } else {
-                        errorDuringSetup.value = false
+
+                    when(settings) {
+                        is NetworkResource.Error -> throw IOException()
                     }
 
-                    val me = repository.getOracleMe()
-                    if (!me.isSuccessful) {
-                        throw IOException()
-                    }
+                    errorDuringSetup.value = false
 
                     // check all is ok
-                    setup.setCompleted(true)
-
-                    if (userManager.familyMembers().isNotEmpty()) {
-                        setAddFamilyMemberDialogShown()
-                    }
+                    userManager.setSetupCompleted(true)
 
                     navigateTo()
 
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    setup.setCompleted(false)
+                    userManager.setSetupCompleted(false)
                     errorDuringSetup.value = true
                 }
             }
@@ -106,18 +82,10 @@ class SetupViewModel(
     }
 
     private fun navigateTo() {
-        if (!welcome.isComplete() || !onboarding.isComplete()) {
-            _navigateToWelcome.value = Event(true)
+        if (!userManager.isWelcomeComplete() || !userManager.isOnboardingComplete()) {
+            navigateToWelcome.value = Event(true)
         } else {
-            _navigateToMainPage.value = Event(true)
+            navigateToMainPage.value = Event(true)
         }
-    }
-
-    private fun setAddFamilyMemberDialogShown() {
-        setFlag(Flags.ADD_FAMILY_MEMBER_DIALOG_SHOWN, true)
-    }
-
-    companion object {
-        const val TAG = "SetupViewModel"
     }
 }

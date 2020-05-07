@@ -10,10 +10,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
@@ -42,11 +39,11 @@
             android:resource="@color/colorAccent" />
 
         <service
-            android:name=".service.ImmuniForegroundService"
-            android:enabled="true"
-            android:exported="false"
-            android:stopWithTask="false"
-            android:foregroundServiceType="location">
+            android:name=".fcm.ImmuniFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
         </service>
 
         <receiver
@@ -69,6 +66,16 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".receivers.UpdateReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+               <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+               <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".ui.setup.SetupActivity"
             android:screenOrientation="portrait">
@@ -78,11 +85,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.log.LogActivity"
-            android:launchMode="standard"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.onboarding.OnboardingActivity"
             android:launchMode="singleTop"
@@ -109,18 +111,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.addrelative.AddRelativeActivity"
-            android:launchMode="standard"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".ui.uploaddata.UploadDataActivity"
             android:launchMode="standard"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.ble.encounters.BleEncountersDebugActivity"
-            android:launchMode="standard"
-            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

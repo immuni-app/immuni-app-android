@@ -3,15 +3,13 @@ package org.immuni.android.managers
 import android.content.Context
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.*
-import com.bendingspoons.oracle.Oracle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
@@ -27,14 +25,13 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
 
     private val workManager = WorkManager.getInstance(context)
     private val userManager: UserManager by inject()
-    private val surveyManager: SurveyManager by inject()
+    private val lifecycleObserver: AppLifecycleObserver by inject()
     private val appNotificationManager: AppNotificationManager by inject()
     private val androidNotificationManager = NotificationManagerCompat.from(context)
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
 
     init {
         GlobalScope.launch {
-            ImmuniApplication.lifecycleObserver.consumeEach {
+            lifecycleObserver.consumeEach {
                 scheduleNext(fromActivity = true)
             }
         }
@@ -45,7 +42,7 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
         if (userManager.mainUser() == null) {
             return
         }
-        if (fromActivity && surveyManager.areAllSurveysLogged()) {
+        if (false) {
             androidNotificationManager.cancel(notificationId)
         }
         schedule(initialDelay())
@@ -71,7 +68,7 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
     }
 
     private fun initialDelay(): Long {
-        return surveyManager.nextSurveyDate().time - Date().time
+        return 0
     }
 
     fun triggerNotification() {

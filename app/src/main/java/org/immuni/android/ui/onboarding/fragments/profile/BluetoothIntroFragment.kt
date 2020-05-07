@@ -5,18 +5,17 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
-import com.bendingspoons.base.extensions.hideKeyboard
+import org.immuni.android.extensions.view.hideKeyboard
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.PermissionsManager
-import org.immuni.android.service.ImmuniForegroundService
+import org.immuni.android.managers.ExposureNotificationManager
 import org.koin.android.ext.android.inject
 
 class BluetoothIntroFragment :
     ProfileContentFragment(R.layout.onboarding_bluetooth_fragment) {
+
+    val exposureNotificationManager: ExposureNotificationManager by inject()
+    val bluetoothManager: BluetoothManager by inject()
 
     override val nextButton: View
         get() = next
@@ -48,13 +47,7 @@ class BluetoothIntroFragment :
     }
 
     private fun canProceed(): Boolean {
-
-        val bluetoothManager: BluetoothManager by inject()
-
-        return !(!PermissionsManager.hasAllPermissions(requireContext()) ||
-                !PermissionsManager.isIgnoringBatteryOptimizations(requireContext()) ||
-                !PermissionsManager.globalLocalisationEnabled(requireContext()) ||
-                !bluetoothManager.isBluetoothEnabled())
+        return bluetoothManager.isBluetoothEnabled() && exposureNotificationManager.areExposureNotificationsEnabled.value
     }
 
 

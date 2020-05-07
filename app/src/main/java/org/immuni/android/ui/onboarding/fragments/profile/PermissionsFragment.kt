@@ -12,11 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.bendingspoons.base.extensions.gone
+import org.immuni.android.extensions.view.gone
 import org.immuni.android.R
-import org.immuni.android.managers.PermissionsManager
-import com.bendingspoons.base.extensions.hideKeyboard
-import com.bendingspoons.base.extensions.visible
+import org.immuni.android.managers.ExposureNotificationManager
+import org.immuni.android.extensions.view.hideKeyboard
+import org.immuni.android.extensions.view.visible
 import kotlinx.android.synthetic.main.onboarding_permissions_dialog.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -25,8 +25,7 @@ import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.managers.BluetoothListenerLifecycle
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.GeolocalisationListenerLifecycle
-import com.bendingspoons.base.extensions.toast
+import org.immuni.android.extensions.activity.toast
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.onboarding.OnboardingViewModel
 import org.koin.android.ext.android.inject
@@ -35,11 +34,10 @@ import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 class PermissionsFragment : FullScreenDialogDarkFragment() {
 
     private lateinit var viewModel: OnboardingViewModel
-    val permissionsManager: PermissionsManager by inject()
+    val permissionsManager: ExposureNotificationManager by inject()
     val bluetoothManager: BluetoothManager by inject()
 
     private lateinit var lifecycleBluetooth: BluetoothListenerLifecycle
-    private lateinit var lifecycleGeolocation: GeolocalisationListenerLifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +45,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             updateUI()
             checkAllGood()
         }
-        lifecycleGeolocation = GeolocalisationListenerLifecycle(requireContext(), this.lifecycle) { active ->
-            updateUI()
-            checkAllGood()
-        }
         lifecycle.addObserver(lifecycleBluetooth)
-        lifecycle.addObserver(lifecycleGeolocation)
     }
 
     override fun onCreateView(
@@ -91,9 +84,10 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         whitelist.setOnClickListener {
+            // fixme
             //val action = ProfileFragmentDirections.actionWhitelistDialog()
             //findNavController().navigate(action)
-            PermissionsManager.startChangeBatteryOptimization(requireContext())
+            // ExposureNotificationManager.startChangeBatteryOptimization(requireContext())
         }
 
         bluetooth.setOnClickListener {
@@ -115,21 +109,19 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         }
 
         geoPermissions.setOnClickListener {
-            if(permissionsManager.shouldShowPermissions(activity as AppCompatActivity,
-                    *permissionsManager.geolocationPermissions())) {
-                val action = ProfileFragmentDirections.actionGlobalPermissionsTutorial()
-                findNavController().navigate(action)
-            } else {
-                val action = ProfileFragmentDirections.actionGeoPermissionsDialog()
-                findNavController().navigate(action)
-            }
+            // fixme
+//            if(permissionsManager.shouldShowPermissions(activity as AppCompatActivity,
+//                    *permissionsManager.geolocationPermissions())) {
+//                val action = ProfileFragmentDirections.actionGlobalPermissionsTutorial()
+//                findNavController().navigate(action)
+//            } else {
+//                val action = ProfileFragmentDirections.actionGeoPermissionsDialog()
+//                findNavController().navigate(action)
+//            }
         }
 
         geolocation.setOnClickListener {
-            if(!PermissionsManager.startChangeGlobalGeolocalisation(requireActivity(), 20100)) {
-                val action = ProfileFragmentDirections.actionGeolocationDialog()
-                findNavController().navigate(action)
-            }
+
         }
 
         knowMore.setOnClickListener { updateKnowMore(it as TextView) }
@@ -152,7 +144,8 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             it.getContentIfNotHandled()?.let {
                 GlobalScope.launch(Dispatchers.Main) {
                     delay(500)
-                    permissionsManager.requestPermissions(activity as AppCompatActivity)
+                    // fixme
+                    // permissionsManager.requestPermissions(activity as AppCompatActivity)
                 }
             }
         })
@@ -217,15 +210,21 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
     }
 
     private fun permissionsON(): Boolean {
-        return PermissionsManager.hasAllPermissions(requireContext())
+        // fixme
+        return true
+        //return ExposureNotificationManager.hasAllPermissions(requireContext())
     }
 
     private fun geolocationON(): Boolean {
-        return PermissionsManager.globalLocalisationEnabled(requireContext())
+        // fixme
+        return true
+        //return ExposureNotificationManager.globalLocalisationEnabled(requireContext())
     }
 
     private fun whiteListON(): Boolean {
-        return PermissionsManager.isIgnoringBatteryOptimizations(requireContext())
+        // fixme
+        return true
+        //return ExposureNotificationManager.isIgnoringBatteryOptimizations(requireContext())
     }
 
     private fun updateUI() {

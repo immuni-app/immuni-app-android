@@ -1,24 +1,16 @@
 package org.immuni.android.ui.onboarding.fragments.profile
 
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import org.immuni.android.R
-import org.immuni.android.ui.onboarding.OnboardingViewModel
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.*
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.back
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.next
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
-import org.immuni.android.util.color
+import org.immuni.android.extensions.utils.color
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class PrivacyFragment : ProfileContentFragment(R.layout.onboarding_privacy_fragment) {

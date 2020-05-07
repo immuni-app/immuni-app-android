@@ -3,7 +3,6 @@ package org.immuni.android.api.model
 import android.bluetooth.le.AdvertiseSettings
 import android.bluetooth.le.ScanSettings
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 enum class AdvertiseMode(val id: String) {
     @Json(name = "low_latency")

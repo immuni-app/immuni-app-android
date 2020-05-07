@@ -2,16 +2,11 @@ package org.immuni.android.service
 
 import android.content.Context
 import androidx.work.*
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.pico.Pico
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.data.SettingsDataSource
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.managers.SurveyManager
-import org.immuni.android.metrics.DataDeleted
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -22,24 +17,18 @@ class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters) 
     CoroutineWorker(appContext, workerParams), KoinComponent {
 
     private val database: ImmuniDatabase by inject()
-    private val surveyManager: SurveyManager by inject()
-    private val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-    private val pico: Pico by inject()
+    private val settings: SettingsDataSource by inject()
 
     override suspend fun doWork(): Result = coroutineScope {
         log("running DeleteUserDataWorker!")
 
         withContext(Dispatchers.Default) {
-            oracle.settings()?.userDataRetentionDays?.let { days ->
-                surveyManager.deleteDataOlderThan(days)
-
+            settings.latestSettings()?.userDataRetentionDays?.let { days ->
                 database.bleContactDao().removeOlderThan(
                     timestamp = Calendar.getInstance().apply {
                         add(Calendar.DATE, -days)
                     }.timeInMillis
                 )
-
-                pico.trackEvent(DataDeleted(days).userAction)
             }
         }
 

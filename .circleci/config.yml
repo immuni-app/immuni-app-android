@@ -29,30 +29,16 @@ jobs:
       - store_test_results:
           path: app/build/test-results
       - run:
-          name: Run Concierge Module Unit Tests
-          command: ./gradlew :concierge:testDebugUnitTest
+          name: Run Network Module Unit Tests
+          command: ./gradlew :network:testDebugUnitTest
       - store_artifacts:
-          path: concierge/build/reports
+          path: network/build/reports
       - store_test_results:
-          path: concierge/build/test-results
+          path: network/build/test-results
       - run:
-          name: Run Oracle Module Unit Tests
-          command: ./gradlew :oracle:testDebugUnitTest
+          name: Run Extensions Module Unit Tests
+          command: ./gradlew :extensions:testDebugUnitTest
       - store_artifacts:
-          path: oracle/build/reports
+          path: extensions/build/reports
       - store_test_results:
-          path: oracle/build/test-results
-      - run:
-          name: Run Pico Module Unit Tests
-          command: ./gradlew :pico:testDebugUnitTest
-      - store_artifacts:
-          path: pico/build/reports
-      - store_test_results:
-          path: pico/build/test-results
-      - run:
-          name: Run Base Module Unit Tests
-          command: ./gradlew :base:testDebugUnitTest
-      - store_artifacts:
-          path: base/build/reports
-      - store_test_results:
-          path: base/build/test-results
+          path: extensions/build/test-results

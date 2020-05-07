@@ -9,21 +9,20 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.add_relative_interrupt_fragment.*
 import kotlinx.android.synthetic.main.welcome_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
+import org.immuni.android.managers.UserManager
 import org.immuni.android.ui.home.HomeActivity
-import org.immuni.android.ui.onboarding.Onboarding
 import org.immuni.android.ui.onboarding.OnboardingActivity
 import org.koin.android.ext.android.inject
 
 class WelcomeFragment : Fragment() {
 
     private lateinit var pageChangeCallback: ViewPager2.OnPageChangeCallback
-    private val onboarding: Onboarding by inject()
+    private val userManager: UserManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +33,7 @@ class WelcomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if(onboarding.isComplete()) {
+        if(userManager.isOnboardingComplete()) {
             activity?.finish()
         }
     }
@@ -83,8 +82,7 @@ class WelcomeFragment : Fragment() {
             val newPos = viewPager.currentItem + 1
             if (newPos == (viewPager.adapter?.itemCount ?: 0)) {
                 navigateTo()
-                val welcome: Welcome by inject()
-                welcome.setCompleted(true)
+                userManager.setWelcomeCompleted(true)
             } else {
                 viewPager.setCurrentItem(newPos, true)
             }
@@ -101,7 +99,7 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun navigateTo() {
-        if (!onboarding.isComplete()) navigateToOnboarding()
+        if (false && !userManager.isOnboardingComplete()) navigateToOnboarding()
         else navigateToHome()
     }
 

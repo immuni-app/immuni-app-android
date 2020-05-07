@@ -3,26 +3,23 @@ package org.immuni.android.ui.uploaddata
 import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bendingspoons.base.livedata.Event
-import com.bendingspoons.pico.Pico
+import org.immuni.android.extensions.livedata.Event
 import kotlinx.coroutines.*
-import org.immuni.android.api.ApiManager
+import org.immuni.android.data.FcmRepository
 import org.immuni.android.db.ImmuniDatabase
-import org.immuni.android.managers.SurveyManager
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.ExportDevice
-import org.immuni.android.metrics.DataUploaded
+import org.immuni.android.network.api.NetworkResource
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : ViewModel(), KoinComponent {
+class UploadDataViewModel(
+    val userId:String,
+    val database: ImmuniDatabase,
+    val repository: FcmRepository
+) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    private val surveyManager: SurveyManager by inject()
-    private val apiManager: ApiManager by inject()
-    private val pico: Pico by inject()
 
     val loading = MutableLiveData<Event<Boolean>>()
     val error = MutableLiveData<Event<Boolean>>()
@@ -50,15 +47,16 @@ class UploadDataViewModel(val userId:String, val database: ImmuniDatabase) : Vie
                 //surveys = surveys,
                 devices = devices
             )
-
-            val result = apiManager.exportData(code, exportData)
+/*
+            val result = repository.exportData(code, exportData)
             loading.value = Event(false)
-            if (result.isSuccessful) {
+            if (result is NetworkResource.Success) {
                 success.value = Event(true)
-                pico.trackEvent(DataUploaded(code).userAction)
             } else {
                 error.value = Event(true)
             }
+
+ */
         }
     }
 }

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/home_background"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/home_background">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
@@ -17,7 +16,7 @@
         android:fillViewport="true"
         android:overScrollMode="never"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="120dp"
+        android:paddingBottom="16dp"
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -34,182 +33,126 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="48dp"
                 android:layout_marginEnd="32dp"
-                android:gravity="left"
+                android:gravity="start"
+                android:text="@string/settings_tab"
                 android:textColor="#4F4F5B"
                 android:textSize="36dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="@string/settings_tab" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:id="@+id/linearLayout2"
-                style="@style/CardShadowWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/rounded_corners_20dp"
-                android:backgroundTint="@color/background"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pageTitle">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/tos_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                <TextView
+                    style="@style/SettingsMenuItem.Header"
+                    android:text="@string/settings_data_management" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:visibility="invisible"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:background="#1A495D74"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <LinearLayout
+                    android:id="@+id/dataManagementMenuLayout"
+                    style="@style/SettingsMenuLayout">
 
-                    <TextView
-                        android:id="@+id/tosTextView"
-                        style="@style/P1Text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:fontFamily="@font/euclid_circular_semi_bold"
-                        android:text="@string/settings_tos"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <LinearLayout
+                        android:id="@+id/dataLoadButton"
+                        style="@style/SettingsMenuItemArrowLayout">
+
+                        <TextView
+                            style="@style/SettingsMenuItem.WithArrow"
+                            android:text="@string/settings_data_load" />
+
+                        <include layout="@layout/settings_menu_item_arrow" />
+                    </LinearLayout>
+
+                    <include layout="@layout/settings_menu_item_divider" />
 
                     <TextView
-                        android:id="@+id/tosButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:id="@+id/dataRecoveryButton"
+                        style="@style/SettingsMenuItem"
+                        android:text="@string/settings_data_recovery" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/erase_data_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:background="#1A495D74"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <include layout="@layout/settings_menu_item_divider" />
 
                     <TextView
-                        android:id="@+id/textView7e"
-                        style="@style/P1Text"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="16dp"
-                        android:fontFamily="@font/euclid_circular_semi_bold"
-                        android:text="@string/data_handling_title"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/imageView7"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />\ />
+                        android:id="@+id/dataDeleteButton"
+                        style="@style/SettingsMenuItem"
+                        android:text="@string/settings_data_deletion" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/SettingsMenuItem.Header"
+                    android:text="@string/settings_information" />
+
+                <LinearLayout
+                    android:id="@+id/informationMenuLayout"
+                    style="@style/SettingsMenuLayout">
+
+                    <LinearLayout
+                        android:id="@+id/faqButton"
+                        style="@style/SettingsMenuItemArrowLayout">
+
+                        <TextView
+                            style="@style/SettingsMenuItem.WithArrow"
+                            android:text="@string/settings_faq" />
+
+                        <include layout="@layout/settings_menu_item_arrow" />
+                    </LinearLayout>
+
+                    <include layout="@layout/settings_menu_item_divider" />
 
                     <TextView
-                        android:id="@+id/dataHandlingButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:id="@+id/termsOfServiceButton"
+                        style="@style/SettingsMenuItem"
+                        android:text="@string/settings_tos" />
 
-                    <ImageView
-                        android:id="@+id/imageView7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_next" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/support_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:background="#1A495D74"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <include layout="@layout/settings_menu_item_divider" />
 
                     <TextView
-                        android:id="@+id/textView8"
-                        style="@style/P1Text"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="24dp"
-                        android:fontFamily="@font/euclid_circular_semi_bold"
-                        android:text="@string/request_support"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />\ />
+                        android:id="@+id/privacyPolicyButton"
+                        style="@style/SettingsMenuItem"
+                        android:text="@string/settings_privacy_policy" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/SettingsMenuItem.Header"
+                    android:text="@string/settings_general" />
+
+                <LinearLayout
+                    android:id="@+id/generalMenuLayout"
+                    style="@style/SettingsMenuLayout">
 
                     <TextView
-                        android:id="@+id/supportButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginBottom="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:id="@+id/changeProvinceButton"
+                        style="@style/SettingsMenuItem"
+                        android:text="@string/settings_change_province" />
 
+                    <include layout="@layout/settings_menu_item_divider" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/sendFeedbackButton"
+                        style="@style/SettingsMenuItem"
+                        android:text="@string/settings_leave_review" />
+
+                    <include layout="@layout/settings_menu_item_divider" />
+
+                    <TextView
+                        android:id="@+id/contactSupportButton"
+                        style="@style/SettingsMenuItem"
+                        android:text="@string/settings_contact_support" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/applicationVersion"
+                    style="@style/SettingsMenuItem.Header"
+                    android:layout_margin="0dp"
+                    android:gravity="center"
+                    android:padding="36dp"
+                    tools:text="Immuni v1.0.0(23)" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -219,5 +162,5 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="top"
-        android:background="@drawable/gradient_home_top"/>
+        android:background="@drawable/gradient_home_top" />
 </FrameLayout>

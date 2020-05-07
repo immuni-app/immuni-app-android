@@ -7,15 +7,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import org.immuni.android.R
-import org.immuni.android.ui.home.HomeSharedViewModel
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
-import com.bendingspoons.concierge.ConciergeManager
-import com.bendingspoons.oracle.Oracle
 import kotlinx.android.synthetic.main.settings_fragment.*
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.BuildConfig
+import org.immuni.android.R
+import org.immuni.android.data.SettingsDataSource
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
+import org.immuni.android.ui.home.HomeSharedViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -28,27 +25,29 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
         viewModel = getSharedViewModel()
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(android.R.color.transparent))
 
-        tosButton.setOnClickListener {
-            viewModel.onTosClick()
-        }
+        // data management
+        dataLoadButton.setOnClickListener { }
+        dataRecoveryButton.setOnClickListener { }
+        dataDeleteButton.setOnClickListener { }
+        // information
+        faqButton.setOnClickListener { }
+        termsOfServiceButton.setOnClickListener { }
+        privacyPolicyButton.setOnClickListener { }
+        // general
+        changeProvinceButton.setOnClickListener { }
+        sendFeedbackButton.setOnClickListener { }
+        contactSupportButton.setOnClickListener { }
 
-        dataHandlingButton.setOnClickListener {
-            val action = SettingsFragmentDirections.actionGlobalDataHandling()
-            findNavController().navigate(action)
-        }
-
-        supportButton.setOnClickListener {
-            activity?.let {
-                contactUs(it)
-            }
-        }
+        applicationVersion.text = getString(
+            R.string.settings_app_version,
+            BuildConfig.VERSION_NAME,
+            BuildConfig.VERSION_CODE
+        )
     }
 
     fun contactUs(activity: Activity) {
-
-        val concierge: ConciergeManager by inject()
-        val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-        val email = oracle.settings()?.supportEmail
+        val settings: SettingsDataSource by inject()
+        val email = settings.latestSettings()?.supportEmail
 
         val ctx = activity.applicationContext
         val intent = Intent(Intent.ACTION_SENDTO).apply {
@@ -60,6 +59,11 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
             )
         }
 
-        activity.startActivity(Intent.createChooser(intent, ctx.getString(R.string.choose_an_app_to_contact_us)))
+        activity.startActivity(
+            Intent.createChooser(
+                intent,
+                ctx.getString(R.string.choose_an_app_to_contact_us)
+            )
+        )
     }
 }

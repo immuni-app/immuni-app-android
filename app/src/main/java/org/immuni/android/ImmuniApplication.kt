@@ -6,19 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.lifecycle.ProcessLifecycleOwner
-import com.bendingspoons.base.lifecycle.AppLifecycleEvent
-import com.bendingspoons.base.lifecycle.AppLifecycleObserver
-import com.bendingspoons.concierge.ConciergeManager
-import com.bendingspoons.oracle.Oracle
-import com.bendingspoons.pico.Pico
-import com.bendingspoons.secretmenu.SecretMenu
-import com.bendingspoons.theirs.Theirs
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.launch
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.data.SettingsDataSource
+import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
+import org.immuni.android.network.Network
+import org.immuni.android.fcm.FirebaseFCM
+import org.immuni.android.debugmenu.DebugMenu
+import org.immuni.android.managers.ForceUpdateManager
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.receivers.RestarterReceiver
 import org.immuni.android.receivers.ShutdownReceiver
@@ -29,20 +22,16 @@ import org.koin.core.context.startKoin
 
 class ImmuniApplication : Application() {
 
-    private lateinit var concierge: ConciergeManager
-    private lateinit var oracle: Oracle<ImmuniSettings, ImmuniMe>
-    private lateinit var pico: Pico
-    private lateinit var theirs: Theirs
-    private lateinit var secretMenu: SecretMenu
+    private lateinit var fcm: FirebaseFCM
+    private lateinit var settingsDataSource: SettingsDataSource
+    private lateinit var forceUpdateManager: ForceUpdateManager
+    private lateinit var debugMenu: DebugMenu
     private lateinit var surveyNotificationManager: SurveyNotificationManager
+    private lateinit var lifecycleObserver: AppLifecycleObserver
 
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext
-
-        // register lifecycle observer
-        lifecycleObserver = AppLifecycleObserver()
-        ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
 
         // start Koin DI module
         startKoin {
@@ -51,14 +40,15 @@ class ImmuniApplication : Application() {
             modules(appModule)
         }
 
-        concierge = get()
-        oracle = get()
-        pico = get()
-        theirs = get()
-        secretMenu = get()
+        fcm = get()
+        debugMenu = get()
         surveyNotificationManager = get()
+        settingsDataSource = get()
+        forceUpdateManager = get()
 
-        pico.setup()
+        // register lifecycle observer
+        lifecycleObserver = get()
+        ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
 
         startWorkers()
         registerReceivers()
@@ -77,6 +67,5 @@ class ImmuniApplication : Application() {
 
     companion object {
         lateinit var appContext: Context
-        lateinit var lifecycleObserver: AppLifecycleObserver
     }
 }

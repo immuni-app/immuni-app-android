@@ -2,24 +2,52 @@ package org.immuni.android.managers
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.bendingspoons.base.storage.KVStorage
+import org.immuni.android.extensions.storage.KVStorage
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import org.immuni.android.db.DATABASE_VERSION
 import org.immuni.android.models.User
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 @JsonClass(generateAdapter = true)
 data class UserList(
     @field:Json(name = "users") val users: List<User> = listOf()
 )
 
-class UserManager : KoinComponent {
+class UserManager(
+    val storage: KVStorage
+) : KoinComponent {
+
     companion object {
         private const val usersKey = "users"
+        private const val SETUP_COMPLETE = "SETUP_COMPLETE_$DATABASE_VERSION"
+        private const val WELCOME_COMPLETE = "WELCOME_COMPLETE"
+        private const val ONBOARDING_COMPLETE = "ONBOARDING_COMPLETE"
     }
 
-    private val storage: KVStorage by inject()
+    fun isSetupComplete(): Boolean {
+        return storage.load<Boolean>(SETUP_COMPLETE) == true
+    }
+
+    fun setSetupCompleted(complete: Boolean) {
+        storage.save(SETUP_COMPLETE, complete)
+    }
+
+    fun isWelcomeComplete(): Boolean {
+        return storage.load<Boolean>(WELCOME_COMPLETE) == true
+    }
+
+    fun setWelcomeCompleted(complete: Boolean) {
+        storage.save(WELCOME_COMPLETE, complete)
+    }
+
+    fun isOnboardingComplete(): Boolean {
+        return storage.load<Boolean>(ONBOARDING_COMPLETE) == true
+    }
+
+    fun setOnboardingCompleted(complete: Boolean) {
+        storage.save(ONBOARDING_COMPLETE, complete)
+    }
 
     fun users(): List<User> {
         val foo = storage.load(usersKey, UserList())

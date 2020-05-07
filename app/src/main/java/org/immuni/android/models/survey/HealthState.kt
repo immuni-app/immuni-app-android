@@ -6,11 +6,20 @@ enum class HealthStateUpdaterItemType {
     ADD, REMOVE
 }
 
+/**
+ * Updates the user's current [HealthState] by adding or removing [state] to it, according to
+ * [type], if the [condition] is satisfied.
+ */
 data class HealthStateUpdaterItem(
     val state: HealthState,
     val type: HealthStateUpdaterItemType,
     val condition: Condition
 ) {
+    /**
+     * Updates the user's current [HealthState] by adding or removing [state] to it, according to
+     * [type], if the [condition] is satisfied based on the user's health state, triage profile, and
+     * answers given so far.
+     */
     fun updatedState(
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,
@@ -29,7 +38,14 @@ data class HealthStateUpdaterItem(
     }
 }
 
+/**
+ * Executes the [updaters] in order and folds their results in an updated [UserHealthState].
+ */
 data class HealthStateUpdater(val updaters: List<HealthStateUpdaterItem>) {
+    /**
+     * Executes the [updaters] in order and returns the updated [UserHealthState] created by folding
+     * together their results.
+     */
     fun updatedState(
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,

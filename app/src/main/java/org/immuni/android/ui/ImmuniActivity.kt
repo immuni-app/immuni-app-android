@@ -1,7 +1,8 @@
 package org.immuni.android.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import org.immuni.android.managers.PermissionsManager
+import org.immuni.android.managers.ExposureNotificationManager
 import org.koin.android.ext.android.inject
 
 /**
@@ -10,15 +11,11 @@ import org.koin.android.ext.android.inject
  */
 open class ImmuniActivity : AppCompatActivity() {
 
-    private val permissionsManager: PermissionsManager by inject()
+    private val exposureNotificationManager: ExposureNotificationManager by inject()
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        permissionsManager.onRequestPermissionsResult(this, requestCode, permissions, grantResults)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        exposureNotificationManager.onRequestPermissionsResult(this, requestCode, resultCode, data)
     }
+
 }

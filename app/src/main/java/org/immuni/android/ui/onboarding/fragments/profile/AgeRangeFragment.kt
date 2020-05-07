@@ -24,7 +24,7 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
 
             if (lastRadioSelected == R.id.age_range_0_13 ||
                 lastRadioSelected == R.id.age_range_14_17) {
-                MaterialAlertDialogBuilder(context)
+                MaterialAlertDialogBuilder(requireContext())
                     .setTitle(getString(R.string.onboarding_age_more_than_18_title))
                     //.setMessage(getString(R.string.onboarding_age_more_than_18_message))
                     .setPositiveButton(getString(R.string.ok)) { d, _ -> d.dismiss() }

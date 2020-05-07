@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.immuni.android.debugmenu">
+
+    <application>
+        <activity
+            android:name="org.immuni.android.debugmenu.ui.ExitActivity"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:autoRemoveFromRecents="true"/>
+
+        <activity android:name="org.immuni.android.debugmenu.ui.DebugMenuActivity"
+            android:theme="@style/SecretMenuTransparent"/>
+      
+    </application>
+
+</manifest>

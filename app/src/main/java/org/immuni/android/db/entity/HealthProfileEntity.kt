@@ -2,8 +2,8 @@ package org.immuni.android.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import org.immuni.android.extensions.utils.fromJson
 import org.immuni.android.models.HealthProfile
-import org.immuni.android.util.fromJson
 
 @Entity(tableName = "health_profile_table")
 class HealthProfileEntity(

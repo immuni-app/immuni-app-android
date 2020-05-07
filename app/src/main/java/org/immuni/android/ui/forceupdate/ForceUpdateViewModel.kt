@@ -15,24 +15,19 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bendingspoons.base.playstore.PlayStoreActions
-import com.bendingspoons.concierge.ConciergeManager
-import com.bendingspoons.oracle.Oracle
+import org.immuni.android.extensions.playstore.PlayStoreActions
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
-import org.immuni.android.api.model.ImmuniMe
-import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.data.SettingsDataSource
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class ForceUpdateViewModel : ViewModel(), KoinComponent {
+class ForceUpdateViewModel(
+    val settings: SettingsDataSource
+) : ViewModel(), KoinComponent {
 
     private val viewModelJob = SupervisorJob()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    val oracle: Oracle<ImmuniSettings, ImmuniMe> by inject()
-    val concierge: ConciergeManager by inject()
 
     val loading = MutableLiveData<Boolean>()
     val downloading = MutableLiveData<Boolean>()
@@ -42,7 +37,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
         val activity = fragment.requireActivity()
 
         // if we have a custon url
-        oracle.settings()?.appUpdateUrl?.let { url->
+        settings.latestSettings()?.appUpdateUrl?.let { url->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !activity.applicationContext.packageManager.canRequestPackageInstalls()) {
                 val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + activity.applicationContext.packageName))
                 fragment.startActivityForResult(intent, 20999)
@@ -97,7 +92,7 @@ class ForceUpdateViewModel : ViewModel(), KoinComponent {
             setDescription(context.getString(R.string.immuni_update_file_description))
             setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "immuni.apk")
-            addRequestHeader("device-id", concierge.backupPersistentId.id)
+            addRequestHeader("device-id", "") // FIXME
         }
 
         val downloadId = downloadManager.enqueue(request)

@@ -3,6 +3,19 @@ package org.immuni.android.models.survey
 typealias QuestionId = String
 typealias AnswerIndex = Int
 
+/**
+ * Survey question shown to the user, and to which the user can answer.
+ *
+ * @param id the identifier of the question.
+ * @param title the title of the question.
+ * @param description the description of the question.
+ * @param widget the kind of answer the user can give.
+ * @param periodicity min number of days that need to pass between two showings of this question.
+ * @param showCondition the condition that determines whether to show this question.
+ * @param healthStateUpdater the object which updates the user's health state in response to their
+ * answers to this question.
+ * @param jump the eventual jump to do based on the user's health state, triage profile and answers.
+ */
 data class Question(
     val id: QuestionId,
     val title: String,
@@ -13,6 +26,11 @@ data class Question(
     val healthStateUpdater: HealthStateUpdater,
     val jump: Jump
 ) {
+    /**
+     * Checks whether this question should be shown based on how many days have elapsed since the
+     * last time the user answered this question, and on whether the user's health state,
+     * triage profile and answers given satisfy [showCondition].
+     */
     fun shouldBeShown(
         daysSinceItWasLastAnswered: Int?,
         healthState: UserHealthState,
@@ -27,6 +45,10 @@ data class Question(
         )
     }
 
+    /**
+     * Returns the updated health state after applying the [healthStateUpdater] to the user's
+     * current health state, triage profile and survey answers given so far.
+     */
     fun updatedHealthState(
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,
@@ -37,6 +59,10 @@ data class Question(
         surveyAnswers = surveyAnswers
     )
 
+    /**
+     * Returns the [JumpDestination] to go to after the user answers this question, based on the
+     * user's current health state, triage profile and survey answers given so far.
+     */
     fun jump(
         healthState: UserHealthState,
         triageProfile: TriageProfileId?,
@@ -48,6 +74,9 @@ data class Question(
     )
 }
 
+/**
+ * Produces a String concatenating all the answers given to this question with ", " as separator.
+ */
 fun Question.humanReadableAnswers(qa: QuestionAnswers): String {
     val builder = StringBuilder()
     qa.forEach { answer ->

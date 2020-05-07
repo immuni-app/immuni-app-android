@@ -7,7 +7,7 @@ import android.webkit.WebViewClient
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
-import com.bendingspoons.base.extensions.setLightStatusBarFullscreen
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import kotlinx.android.synthetic.main.web_view_dialog.*
 import org.immuni.android.ui.ImmuniActivity
