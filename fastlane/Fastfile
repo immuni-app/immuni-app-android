@@ -37,7 +37,13 @@ platform :android do
   lane :build_release do
     gradle(
       task: "bundle",
-      build_type: "Release"
+      build_type: "Release",
+      properties: {
+        "android.injected.signing.store.file" => "#{Dir.home}/code/immuni-android.keystore",
+        "android.injected.signing.store.password" => ENV["KEYSTORE_PASSWORD"],
+        "android.injected.signing.key.alias" => ENV["UPLOAD_KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["UPLOAD_KEY_PASSWORD"],
+      }
     )
   end
 
@@ -46,7 +52,7 @@ platform :android do
     if options[:target] == "development"
       build_debug
     elsif options[:target] == "release"
-      build release
+      build_release
     else
       puts "Unrecognized build target: #{options[:target]}. Valid ones are: release, development."
     end

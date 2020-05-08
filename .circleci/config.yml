@@ -43,7 +43,9 @@ commands:
     steps:
       - run:
           name: "[fetch_config] Setup custom environment variables"
-          command: echo $GOOGLE_SERVICES_JSON | base64 --decode > app/google-services.json
+          command: |
+            echo $GOOGLE_SERVICES_JSON | base64 --decode > app/google-services.json
+            echo $KEYSTORE | base64 --decode > immuni-android.keystore
 
   install_android_dependencies:
     description: Install Android dependencies.
