@@ -1,44 +1,114 @@
-version: 1
-jobs:
-  build:
-    working_directory: ~/code
+# Immuni CircleCI continuous integration configuration.
+version: 2.1
+
+# Custom commands
+commands:
+  fetch_config:
+    description: Fetch configuration files necessary to perform builds.
+    steps:
+      - run:
+          name: "[fetch_config] Setup custom environment variables"
+          command: echo $GOOGLE_SERVICES_JSON | base64 --decode > app/google-services.json
+
+  install_android_dependencies:
+    description: Install Android dependencies.
+    steps:
+      - restore_cache:
+          name: "[dependencies] Restore the cache"
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: "[dependencies] Installing dependencies"
+          command: ./gradlew androidDependencies
+      - save_cache:
+          name: "[dependencies] Save the cache"
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          paths:
+            - ~/.gradle
+
+  setup_pr_tools:
+    description: Configure the pull requests environment.
+    steps:
+      - run:
+          name: "[PR setup] Install ktlint"
+          command: |
+            # Get binaries from official repository
+            curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.36.0/ktlint && chmod a+x ktlint
+
+            # Verify PGP signature
+            curl -sS https://keybase.io/pinterestandroid/pgp_keys.asc | sudo gpg --import
+            curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.36.0/ktlint.asc
+            sudo gpg --verify ktlint.asc
+      - run:
+          name: "[PR setup] Install danger"
+          command: yarn add --dev danger typescript
+
+executors:
+  default:
     docker:
-      - image: circleci/android:api-29
+      - image: circleci/android:api-29-node
+
+jobs:
+  pr_check:
+    working_directory: ~/code
+    executor: default
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
-      - checkout
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Setup custom environment variables
-          command: echo $GOOGLE_SERVICES_JSON | base64 --decode > app/google-services.json
+          name: "[pr_check] Stop job if no PR open"
+          command: |
+            if [[ -z "${CIRCLE_PULL_REQUEST}" ]]; then
+                circleci-agent step halt
+            fi
+      - checkout:
+          name: "[pr_check] Checkout the code"
+      - setup_pr_tools
+      - fetch_config
+      - install_android_dependencies
       - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      # Unit tests for all modules
+          name: "[pr_check] Run danger"
+          command: |
+            # Use the same GitHub token that is used to publish releases
+
+            export DANGER_GITHUB_API_TOKEN=$GITHUB_TOKEN
+            [ -z "${DANGER_GITHUB_API_TOKEN}" ] || yarn danger ci
+  unit_tests:
+    working_directory: ~/code
+    executor: default
+    environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout:
+          name: "[unit_tests] Checkout the code"
+      - fetch_config
+      - install_android_dependencies
       - run:
-          name: Run App Module Unit Tests
+          name: "[unit_tests] Run App Module Unit Tests"
           command: ./gradlew :app:testDebugUnitTest
       - store_artifacts:
           path: app/build/reports
       - store_test_results:
           path: app/build/test-results
       - run:
-          name: Run Network Module Unit Tests
+          name: "[unit_tests] Run Network Module Unit Tests"
           command: ./gradlew :network:testDebugUnitTest
       - store_artifacts:
           path: network/build/reports
       - store_test_results:
           path: network/build/test-results
       - run:
-          name: Run Extensions Module Unit Tests
+          name: "[unit_tests] Run Extensions Module Unit Tests"
           command: ./gradlew :extensions:testDebugUnitTest
       - store_artifacts:
           path: extensions/build/reports
       - store_test_results:
           path: extensions/build/test-results
+
+workflows:
+  version: 2
+  pr_check:
+    jobs:
+      - pr_check
+  tests:
+    jobs:
+      - unit_tests
