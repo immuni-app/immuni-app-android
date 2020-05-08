@@ -29,7 +29,7 @@ commands:
     description: Configure the pull requests environment.
     steps:
       - run:
-          name: "[PR setup] Install ktlint"
+          name: "[pr_setup] Install ktlint"
           command: |
             # Get binaries from official repository
             curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.36.0/ktlint && chmod a+x ktlint
@@ -38,9 +38,15 @@ commands:
             curl -sS https://keybase.io/pinterestandroid/pgp_keys.asc | sudo gpg --import
             curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.36.0/ktlint.asc
             sudo gpg --verify ktlint.asc
+
+            # Install globally
+            sudo mv ktlint /usr/local/bin/
       - run:
-          name: "[PR setup] Install danger"
+          name: "[pr_setup] Install danger"
           command: yarn add --dev danger typescript
+      - run:
+          name: "[pr_setup] Configure Java"
+          command: sudo apt-get update && sudo apt-get install openjdk-11-jre
 
 executors:
   default:

@@ -14,18 +14,22 @@ export default async () => {
 
 const checkLinting = async () => {
   let reports: ktlintReport[];
+  let toolVersion: string;
 
   try {
+    toolVersion = (
+      await exec("ktlint --version")
+    ).stdout.replace(/\s+/g, ' ').trim();
+
     const { stdout } = await exec(
-      `./ktlint --reporter=json`,
+      `ktlint --reporter=json || true`,
       { encoding: "utf8" }
     );
 
     reports = JSON.parse(stdout) as ktlintReport[];
-    lintReportToDanger(reports);
+    lintReportToDanger(reports, toolVersion);
   } catch (error) {
-    // if there are errors, the exit code is not 0 and the exec
-    // fn throws
+    // if there are errors, the exit code is not 0 and the exec fn throws
     const { killed, code } = error;
 
     if (killed || code != 2) {
@@ -34,12 +38,12 @@ const checkLinting = async () => {
       );
     } else {
       reports = JSON.parse(error.stdout) as ktlintReport[];
-      lintReportToDanger(reports);
+      lintReportToDanger(reports, toolVersion);
     }
   }
 };
 
-const lintReportToDanger = (reports: ktlintReport[]) => {
+const lintReportToDanger = (reports: ktlintReport[], toolVersion: string) => {
   if (reports.length == 0) {
     message(`:white_check_mark: ktlint passed`);
     return;
@@ -49,11 +53,11 @@ const lintReportToDanger = (reports: ktlintReport[]) => {
 
   // ktlint only supports errors, not warnings
   for (const report of reports) {
-    for (const error in report.errors) {
-      const reportMessage = `${error.message} (${error.rule})`;
+    report.errors.forEach(function (error) {
+      const reportMessage = `<br>ktlint (${toolVersion}): rule ${error.rule}<br>${error.message}`;
       const file = relative(cwd, report.file);
       fail(reportMessage, file, error.line);
-    }
+    });
   }
 };
 
