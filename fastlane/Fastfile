@@ -1,0 +1,66 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  before_all do
+    clean
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Build in debug mode"
+  lane :build_debug do
+    gradle(
+      task: "assemble",
+      build_type: "Debug"
+    )
+  end
+
+  desc "Build in release mode"
+  lane :build_release do
+    gradle(
+      task: "bundle",
+      build_type: "Release"
+    )
+  end
+
+  desc "Clean the build directory"
+  lane :clean do
+    gradle(
+      task: "clean"
+    )
+  end
+
+  desc "Build in release mode and deploy a new alpha version to the Google Play Store"
+  lane :alpha do
+    build_release
+
+    # Generate the changelog from the last commit message
+    changelog_from_git_commits(
+      commits_count: 1
+    )
+
+    upload_to_play_store(
+      track: "alpha",
+      skip_upload_screenshots: true,
+      skip_upload_images: true
+    )
+  end
+end

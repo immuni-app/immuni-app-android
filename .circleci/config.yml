@@ -3,6 +3,15 @@ version: 2.1
 
 # Custom commands
 commands:
+  build:
+    description: Perform a build of the Immuni Android application.
+    steps:
+      - run:
+          name: "[build] Build for debug"
+          command: fastlane build_debug
+      - store_artifacts:
+          path: app/build/outputs/
+
   fetch_config:
     description: Fetch configuration files necessary to perform builds.
     steps:
@@ -45,15 +54,45 @@ commands:
           name: "[pr_setup] Install danger"
           command: yarn install --dev
 
+  setup_ci:
+    description: Configure the CI environment.
+    steps:
+      - run:
+          name: "[ci_setup] Configure ruby"
+          command: |
+            echo "export PATH=${HOME}/.rubies/ruby-2.6.1/bin:${PATH}" >> $BASH_ENV
+            ruby -v
+      - restore_cache:
+          name: "[ci_setup] Restore the ruby dependencies cache"
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: "[ci_setup] Install ruby dependencies"
+          command: bundle install
+      - save_cache:
+          name: "[ci_setup] Save the ruby dependencies cache"
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/.gem
+
 executors:
   default:
     docker:
       - image: circleci/android:api-29-node
     environment:
       JVM_OPTS: -Xmx3200m
-      RUBY_VERSION: ruby-2.6
 
 jobs:
+  build:
+    working_directory: ~/code
+    executor: default
+    resource_class: large
+    steps:
+      - checkout:
+          name: "[build] Checkout the code"
+      - setup_ci
+      - fetch_config
+      - install_android_dependencies
+      - build
   pr_check:
     working_directory: ~/code
     executor: default
@@ -108,6 +147,9 @@ jobs:
 
 workflows:
   version: 2
+  build:
+    jobs:
+      - build
   pr_check:
     jobs:
       - pr_check
