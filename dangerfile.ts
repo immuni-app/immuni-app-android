@@ -54,7 +54,7 @@ const lintReportToDanger = (path: string, reports: ktlintReport[], toolVersion: 
   // ktlint only supports errors, not warnings
   for (const report of reports) {
     report.errors.forEach(function (error) {
-      const reportMessage = `<br>**ktlint (${toolVersion}): path ${path}**<br>rule ${error.rule}<br>${error.message}`;
+      const reportMessage = `ktlint (${toolVersion})<br>parent path: ${path}<br><br>Issue: ${error.message} (rule: ${error.rule})`;
       const file = relative(path, report.file);
       fail(reportMessage, file, error.line);
     });
