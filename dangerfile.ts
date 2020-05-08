@@ -9,10 +9,12 @@ export default async () => {
     "Thank you for submitting a pull request! The team will review your submission as soon as possible."
   );
 
-  await checkLinting();
+  await checkLinting("app/src/main/java/org/immuni/android/");
+  await checkLinting("debugmenu/src/main/java/org/immuni/android");
+  await checkLinting("extensions/src/main/java/org/immuni/android");
 };
 
-const checkLinting = async () => {
+const checkLinting = async (path: string) => {
   let reports: ktlintReport[];
   let toolVersion: string;
 
@@ -23,11 +25,11 @@ const checkLinting = async () => {
 
     const { stdout } = await exec(
       `ktlint --reporter=json || true`,
-      { encoding: "utf8" }
+      { cwd: path, encoding: "utf8" }
     );
 
     reports = JSON.parse(stdout) as ktlintReport[];
-    lintReportToDanger(reports, toolVersion);
+    lintReportToDanger(path, reports, toolVersion);
   } catch (error) {
     // if there are errors, the exit code is not 0 and the exec fn throws
     const { killed, code } = error;
@@ -38,24 +40,22 @@ const checkLinting = async () => {
       );
     } else {
       reports = JSON.parse(error.stdout) as ktlintReport[];
-      lintReportToDanger(reports, toolVersion);
+      lintReportToDanger(path, reports, toolVersion);
     }
   }
 };
 
-const lintReportToDanger = (reports: ktlintReport[], toolVersion: string) => {
+const lintReportToDanger = (path: string, reports: ktlintReport[], toolVersion: string) => {
   if (reports.length == 0) {
     message(`:white_check_mark: ktlint passed`);
     return;
   }
 
-  const cwd = process.cwd();
-
   // ktlint only supports errors, not warnings
   for (const report of reports) {
     report.errors.forEach(function (error) {
-      const reportMessage = `<br>ktlint (${toolVersion}): rule ${error.rule}<br>${error.message}`;
-      const file = relative(cwd, report.file);
+      const reportMessage = `<br>**ktlint (${toolVersion}): path ${path}**<br>rule ${error.rule}<br>${error.message}`;
+      const file = relative(path, report.file);
       fail(reportMessage, file, error.line);
     });
   }
