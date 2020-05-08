@@ -44,21 +44,19 @@ commands:
       - run:
           name: "[pr_setup] Install danger"
           command: yarn install --dev
-      - run:
-          name: "[pr_setup] Configure Java"
-          command: sudo apt-get update && sudo apt-get install openjdk-11-jre
 
 executors:
   default:
     docker:
       - image: circleci/android:api-29-node
+    environment:
+      JVM_OPTS: -Xmx3200m
+      RUBY_VERSION: ruby-2.6
 
 jobs:
   pr_check:
     working_directory: ~/code
     executor: default
-    environment:
-      JVM_OPTS: -Xmx3200m
     steps:
       - run:
           name: "[pr_check] Stop job if no PR open"
@@ -81,8 +79,6 @@ jobs:
   unit_tests:
     working_directory: ~/code
     executor: default
-    environment:
-      JVM_OPTS: -Xmx3200m
     steps:
       - checkout:
           name: "[unit_tests] Checkout the code"
