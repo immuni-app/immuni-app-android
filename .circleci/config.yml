@@ -7,10 +7,36 @@ commands:
     description: Perform a build of the Immuni Android application.
     steps:
       - run:
-          name: "[build] Build for debug"
-          command: fastlane build_debug
+          name: "[build] Compile and archive"
+          command: fastlane build target:$BUILD_KIND
       - store_artifacts:
           path: app/build/outputs/
+
+  check_release:
+    description: Check whether the commit should trigger a build or not.
+    steps:
+      - run:
+          name: "[check] Identify release kind"
+          command: |
+            # Verify if it's a release commit
+            GIT_MESSAGE=$(git log --pretty=%s | head -1 || true)
+
+            if [[ ! $GIT_MESSAGE == *"#build"* ]]; then
+              echo "Not a release commit. Stopping the execution of the build job."
+              circleci-agent step halt
+            fi
+
+            # Check the build kind from the git message. The git message must contain either:
+            # "#build-release" or "#build-development", depending on the kind of release.
+            BUILD_KIND="$(echo $GIT_MESSAGE | sed -E 's/^.*#build-(release|development).*$/\1/')"
+
+            if [[ -z "${BUILD_KIND}" ]]; then
+                echo "Unrecognized build kind; valid types are: release, development."
+                circleci-agent step halt
+            fi
+
+            # Make it available for the rest of the pipeline
+            echo "export BUILD_KIND=$BUILD_KIND" >> $BASH_ENV
 
   fetch_config:
     description: Fetch configuration files necessary to perform builds.
@@ -89,6 +115,7 @@ jobs:
     steps:
       - checkout:
           name: "[build] Checkout the code"
+      - check_release
       - setup_ci
       - fetch_config
       - install_android_dependencies

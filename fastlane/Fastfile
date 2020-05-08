@@ -41,6 +41,17 @@ platform :android do
     )
   end
 
+  desc 'Build the app'
+  lane :build do |options|
+    if options[:target] == "development"
+      build_debug
+    elsif options[:target] == "release"
+      build release
+    else
+      puts "Unrecognized build target: #{options[:target]}. Valid ones are: release, development."
+    end
+  end
+
   desc "Clean the build directory"
   lane :clean do
     gradle(
