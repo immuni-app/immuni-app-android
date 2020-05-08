@@ -3,18 +3,16 @@ package org.immuni.android.managers
 import android.content.Context
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.*
+import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.immuni.android.ImmuniApplication
 import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.util.*
-import java.util.concurrent.TimeUnit
-
 
 class SurveyNotificationManager(private val context: Context) : KoinComponent {
     companion object {
@@ -76,7 +74,6 @@ class SurveyNotificationManager(private val context: Context) : KoinComponent {
     }
 }
 
-
 class NotifyWorker(val context: Context, params: WorkerParameters) : CoroutineWorker(context, params),
     KoinComponent {
 
@@ -88,5 +85,4 @@ class NotifyWorker(val context: Context, params: WorkerParameters) : CoroutineWo
         notificationManager.scheduleNext(fromActivity = false)
         return Result.success()
     }
-
 }

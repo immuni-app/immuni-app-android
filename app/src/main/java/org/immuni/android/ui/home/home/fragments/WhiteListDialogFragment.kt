@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.whitelist_dialog.*
 import org.immuni.android.R
-import org.immuni.android.managers.ExposureNotificationManager
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 
-class WhiteListDialogFragment: FullScreenDialogDarkFragment() {
+class WhiteListDialogFragment : FullScreenDialogDarkFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +22,7 @@ class WhiteListDialogFragment: FullScreenDialogDarkFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         openList.setOnClickListener {
-            //ExposureNotificationManager.startChangeBatteryOptimization(requireContext())
+            // ExposureNotificationManager.startChangeBatteryOptimization(requireContext())
         }
     }
 }

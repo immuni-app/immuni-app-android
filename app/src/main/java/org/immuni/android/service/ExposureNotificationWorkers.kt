@@ -17,7 +17,6 @@ class StateUpdatedWorker(
         TODO("Not yet implemented")
         // 1) check if the user has to be notified
     }
-
 }
 
 class RequestDiagnosisKeysWorker(

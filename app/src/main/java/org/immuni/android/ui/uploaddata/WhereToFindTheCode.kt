@@ -27,5 +27,4 @@ class WhereToFindTheCodeFragment : Fragment(R.layout.insert_code_where_icanfind_
     private fun close() {
         findNavController().popBackStack()
     }
-
 }

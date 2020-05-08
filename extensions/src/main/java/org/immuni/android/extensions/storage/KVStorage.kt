@@ -7,9 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
+import java.io.IOException
 import org.immuni.android.extensions.utils.fromJson
 import org.immuni.android.extensions.utils.toJson
-import java.io.IOException
 
 /**
  * A Key-Value storage, backed by [SharedPreferences].
@@ -163,7 +163,6 @@ class KVStorage(
             clear()
         }
     }
-
 }
 
 internal fun getSharedPreferences(context: Context, name: String, encrypted: Boolean): SharedPreferences {

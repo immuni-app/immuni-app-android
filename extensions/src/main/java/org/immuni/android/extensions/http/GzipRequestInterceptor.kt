@@ -1,15 +1,15 @@
 package org.immuni.android.extensions.http
 
+import java.io.IOException
 import okhttp3.Interceptor
 import okhttp3.MediaType
+import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.Response
-import okhttp3.OkHttpClient
 import okio.Buffer
 import okio.BufferedSink
 import okio.GzipSink
 import okio.buffer
-import java.io.IOException
 
 /**
  * GzipRequestInterceptor is a [OkHttpClient] interceptor that

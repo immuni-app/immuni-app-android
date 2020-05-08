@@ -8,11 +8,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import org.immuni.android.R
-import org.immuni.android.ui.home.HomeSharedViewModel
-import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.data_handling_fragment.*
+import org.immuni.android.R
 import org.immuni.android.data.SettingsDataSource
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
+import org.immuni.android.ui.home.HomeSharedViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -74,7 +74,7 @@ class DataHandlingFragment : Fragment(R.layout.data_handling_fragment) {
             putExtra(Intent.EXTRA_SUBJECT, ctx.getString(R.string.app_name))
             putExtra(
                 Intent.EXTRA_TEXT,
-                String.format("${ctx.getString(R.string.delete_data_email_message)}", "") //FIXME
+                String.format("${ctx.getString(R.string.delete_data_email_message)}", "") // FIXME
             )
         }
 

@@ -1,6 +1,5 @@
 package org.immuni.android.ui.home.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,16 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.home_fragment.*
-import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.extensions.activity.disableDragging
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.models.survey.backgroundColor
-import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.HomeSharedViewModel
 import org.immuni.android.ui.home.home.model.*
 import org.koin.android.ext.android.inject
@@ -78,7 +74,6 @@ class HomeFragment : Fragment(), HomeClickListener {
                 update(newList)
             }
         })
-
     }
 
     private fun showAddFamilyMemberDialog() {
@@ -89,7 +84,6 @@ class HomeFragment : Fragment(), HomeClickListener {
     override fun onClick(item: HomeItemType) {
         when (item) {
             is SuggestionsCard -> {
-                
             }
             is EnableNotificationCard -> {
                 openNotificationDialog()
@@ -110,7 +104,6 @@ class HomeFragment : Fragment(), HomeClickListener {
                 if (item.tapQuestion) {
                     openDiaryDialog()
                 } else {
-
                 }
             }
             is SurveyCardDone -> {
@@ -125,8 +118,8 @@ class HomeFragment : Fragment(), HomeClickListener {
 
     private fun openWhiteListDialog() {
         // fixme
-        //val action = HomeFragmentDirections.actionWhitelistDialog()
-        //findNavController().navigate(action)
+        // val action = HomeFragmentDirections.actionWhitelistDialog()
+        // findNavController().navigate(action)
         // ExposureNotificationManager.startChangeBatteryOptimization(requireContext())
     }
 
@@ -136,7 +129,6 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openGeolocationDialog() {
-
     }
 
     private fun openPermissionsDialog() {
@@ -152,8 +144,8 @@ class HomeFragment : Fragment(), HomeClickListener {
     }
 
     private fun openBluetoothDialog() {
-        //val action = HomeFragmentDirections.actionBluetoothDialog()
-        //findNavController().navigate(action)
+        // val action = HomeFragmentDirections.actionBluetoothDialog()
+        // findNavController().navigate(action)
         val bluetoothManager: BluetoothManager by inject()
         bluetoothManager.openBluetoothSettings(this)
     }

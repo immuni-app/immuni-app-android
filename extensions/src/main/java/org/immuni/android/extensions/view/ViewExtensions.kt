@@ -46,7 +46,7 @@ fun View.onLongPress(block: () -> Unit) {
 }
 
 fun View.animateShow(duration: Long = 500L) {
-    if(this.alpha == 1f) return
+    if (this.alpha == 1f) return
     this.clearAnimation()
     this.animate()
         .alpha(1.0f)
@@ -55,7 +55,7 @@ fun View.animateShow(duration: Long = 500L) {
 }
 
 fun View.animateHide(duration: Long = 500L) {
-    if(this.alpha == 0f) return
+    if (this.alpha == 0f) return
     this.clearAnimation()
     this.animate()
         .alpha(0.0f)
@@ -64,7 +64,7 @@ fun View.animateHide(duration: Long = 500L) {
 }
 
 fun View.animateScale(scale: Float, duration: Long = 500L) {
-    if(this.scaleX == scale && this.scaleY == scale) return
+    if (this.scaleX == scale && this.scaleY == scale) return
     this.clearAnimation()
     this.animate()
         .scaleX(scale)
@@ -74,7 +74,7 @@ fun View.animateScale(scale: Float, duration: Long = 500L) {
 }
 
 fun View.animateTranslationY(translation: Float, duration: Long = 500L) {
-    if(this.translationY == translation) return
+    if (this.translationY == translation) return
     this.clearAnimation()
     this.animate()
         .translationY(translation)

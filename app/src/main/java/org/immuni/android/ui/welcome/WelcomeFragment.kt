@@ -9,11 +9,11 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.welcome_fragment.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import org.immuni.android.managers.UserManager
 import org.immuni.android.ui.home.HomeActivity
 import org.immuni.android.ui.onboarding.OnboardingActivity
@@ -33,7 +33,7 @@ class WelcomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if(userManager.isOnboardingComplete()) {
+        if (userManager.isOnboardingComplete()) {
             activity?.finish()
         }
     }
@@ -69,13 +69,13 @@ class WelcomeFragment : Fragment() {
             adapter = WelcomeAdapter(this@WelcomeFragment)
             clipToPadding = false
             clipChildren = false
-            //isUserInputEnabled = false
+            // isUserInputEnabled = false
             offscreenPageLimit = 3
             registerOnPageChangeCallback(pageChangeCallback)
         }
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            //Some implementation
+            // Some implementation
         }.attach()
 
         next.setOnClickListener {

@@ -8,7 +8,7 @@ import org.immuni.android.managers.SurveyNotificationManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class ImmuniDebugMenuConfiguration(val context: Context): DebugMenuConfiguration, KoinComponent {
+class ImmuniDebugMenuConfiguration(val context: Context) : DebugMenuConfiguration, KoinComponent {
     private val database: ImmuniDatabase by inject()
     private val notificationManager: SurveyNotificationManager by inject()
 
@@ -24,7 +24,7 @@ class ImmuniDebugMenuConfiguration(val context: Context): DebugMenuConfiguration
         return listOf(
             object : DebugMenuItem("\uD83D\uDD14 Schedule a notification in 5 seconds", { _, _ ->
                 notificationManager.scheduleMock()
-            }){}
+            }) {}
         )
     }
 }

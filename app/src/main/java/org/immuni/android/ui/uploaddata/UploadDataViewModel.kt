@@ -3,17 +3,16 @@ package org.immuni.android.ui.uploaddata
 import android.util.Base64
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.immuni.android.extensions.livedata.Event
 import kotlinx.coroutines.*
 import org.immuni.android.data.FcmRepository
 import org.immuni.android.db.ImmuniDatabase
+import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.models.ExportData
 import org.immuni.android.models.ExportDevice
-import org.immuni.android.network.api.NetworkResource
 import org.koin.core.KoinComponent
 
 class UploadDataViewModel(
-    val userId:String,
+    val userId: String,
     val database: ImmuniDatabase,
     val repository: FcmRepository
 ) : ViewModel(), KoinComponent {
@@ -44,7 +43,7 @@ class UploadDataViewModel(
 
             val exportData = ExportData(
                 profileId = userId,
-                //surveys = surveys,
+                // surveys = surveys,
                 devices = devices
             )
 /*

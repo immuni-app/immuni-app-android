@@ -3,8 +3,8 @@ package org.immuni.android.api.model
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
-import retrofit2.Response
 import java.lang.Exception
+import retrofit2.Response
 
 @JsonClass(generateAdapter = true)
 data class ErrorResponse(
@@ -21,7 +21,7 @@ data class ErrorResponse(
 fun Response<*>.toErrorResponse(): ErrorResponse? {
     val error = try {
         val str = this.errorBody()?.string()
-        if(str != null) {
+        if (str != null) {
             val moshi = Moshi.Builder().build()
             val jsonAdapter = moshi.adapter(ErrorResponse::class.java)
             jsonAdapter.fromJson(str)

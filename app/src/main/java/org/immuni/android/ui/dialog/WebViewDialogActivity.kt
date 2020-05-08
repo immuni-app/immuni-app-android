@@ -7,13 +7,13 @@ import android.webkit.WebViewClient
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
-import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import kotlinx.android.synthetic.main.web_view_dialog.*
-import org.immuni.android.ui.ImmuniActivity
 import org.immuni.android.R
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
+import org.immuni.android.ui.ImmuniActivity
 
-class WebViewDialogActivity: ImmuniActivity() {
+class WebViewDialogActivity : ImmuniActivity() {
 
     companion object {
         const val TRIAGE_DIALOG_RESULT = 900

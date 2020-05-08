@@ -3,6 +3,7 @@ package org.immuni.android.data
 import android.content.Context
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
+import kotlin.test.assertEquals
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.test.runBlockingTest
@@ -10,10 +11,8 @@ import org.immuni.android.api.AppConfigurationService
 import org.immuni.android.api.model.ImmuniSettings
 import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
 import org.junit.Assert.assertNull
-import org.junit.Test
-
 import org.junit.Before
-import kotlin.test.assertEquals
+import org.junit.Test
 
 class SettingsDataSourceTest {
 

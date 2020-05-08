@@ -1,9 +1,9 @@
 package org.immuni.android.config
 
 import android.content.Context
-import org.immuni.android.network.NetworkConfiguration
 import okhttp3.CertificatePinner
 import org.immuni.android.R
+import org.immuni.android.network.NetworkConfiguration
 import org.koin.core.KoinComponent
 
 class NetworkExposureInjestionConfiguration(val context: Context) : NetworkConfiguration, KoinComponent {

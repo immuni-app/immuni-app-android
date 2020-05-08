@@ -5,15 +5,15 @@ import androidx.core.view.iterator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import org.immuni.android.ui.ImmuniActivity
-import org.immuni.android.R
-import org.immuni.android.ui.home.navigation.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.home_activity.*
+import org.immuni.android.R
 import org.immuni.android.managers.BluetoothListenerLifecycle
+import org.immuni.android.ui.ImmuniActivity
+import org.immuni.android.ui.home.navigation.setupWithNavController
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class HomeActivity : ImmuniActivity()  {
+class HomeActivity : ImmuniActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
     private lateinit var viewModel: HomeSharedViewModel
@@ -71,13 +71,13 @@ class HomeActivity : ImmuniActivity()  {
 
         // Whenever the selected controller changes, setup the action bar.
         controller.observe(this, Observer { navController ->
-            //setupActionBarWithNavController(navController)
+            // setupActionBarWithNavController(navController)
         })
         currentNavController = controller
 
         // update icons
         bottom_nav.menu.iterator().forEach {
-            if(it.isChecked) {
+            if (it.isChecked) {
                 it.setIcon(selectedIconsIds[menuItemsIds.indexOf(it.itemId)])
             } else {
                 it.setIcon(defaultIconsIds[menuItemsIds.indexOf(it.itemId)])

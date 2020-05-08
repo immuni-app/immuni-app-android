@@ -40,7 +40,7 @@ internal class FirebaseFCM(
                 // Get new Instance ID token
                 val token = task.result?.token
 
-                Log.w(TAG, "### Firebase FCM token: ${token}", task.exception)
+                Log.w(TAG, "### Firebase FCM token: $token", task.exception)
                 token?.let {
                     GlobalScope.launch {
                         tokenChannel.send(it)

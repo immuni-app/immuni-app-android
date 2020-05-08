@@ -2,10 +2,10 @@ package org.immuni.android.managers
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import org.immuni.android.extensions.storage.KVStorage
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.db.DATABASE_VERSION
+import org.immuni.android.extensions.storage.KVStorage
 import org.immuni.android.models.User
 import org.koin.core.KoinComponent
 

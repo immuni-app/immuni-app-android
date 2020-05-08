@@ -3,12 +3,12 @@ package org.immuni.android.ui.onboarding.fragments.profile
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import org.immuni.android.R
-import org.immuni.android.ui.onboarding.OnboardingUserInfo
-import org.immuni.android.extensions.view.hideKeyboard
 import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
+import org.immuni.android.R
+import org.immuni.android.extensions.view.hideKeyboard
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.ExposureNotificationManager
+import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import org.koin.android.ext.android.inject
 
 class BluetoothIntroFragment :
@@ -37,7 +37,7 @@ class BluetoothIntroFragment :
         next.setOnClickListener(null)
         next.setOnClickListener {
 
-            if(canProceed()) {
+            if (canProceed()) {
                 viewModel.onOnboardingComplete()
             } else {
                 val action = ProfileFragmentDirections.actionPermissionsBottomSheetDialog()
@@ -50,8 +50,7 @@ class BluetoothIntroFragment :
         return bluetoothManager.isBluetoothEnabled() && exposureNotificationManager.areExposureNotificationsEnabled.value
     }
 
-
     override fun onUserInfoUpdate(userInfo: OnboardingUserInfo) {
-        //updateUI(userInfo.gender)
+        // updateUI(userInfo.gender)
     }
 }

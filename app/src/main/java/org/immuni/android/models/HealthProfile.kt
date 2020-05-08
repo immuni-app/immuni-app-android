@@ -2,11 +2,10 @@ package org.immuni.android.models
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.util.*
 import org.immuni.android.models.survey.QuestionId
 import org.immuni.android.models.survey.TriageProfileId
 import org.immuni.android.models.survey.UserHealthState
-import java.text.SimpleDateFormat
-import java.util.*
 
 @JsonClass(generateAdapter = true)
 data class HealthProfile(

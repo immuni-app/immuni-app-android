@@ -4,7 +4,7 @@ import androidx.room.*
 import org.immuni.android.db.entity.HealthProfileEntity
 
 @Dao
-interface HealthProfileDao: BaseDao<HealthProfileEntity> {
+interface HealthProfileDao : BaseDao<HealthProfileEntity> {
     @Query("SELECT * FROM health_profile_table WHERE userId = :userId")
     suspend fun allHealthProfilesForUser(userId: String): List<HealthProfileEntity>
 

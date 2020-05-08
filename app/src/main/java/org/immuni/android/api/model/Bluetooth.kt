@@ -36,7 +36,7 @@ enum class ScanMode(val id: String) {
 }
 
 fun ScanMode.scanMode(): Int {
-    return when(this) {
+    return when (this) {
         ScanMode.SCAN_MODE_OPPORTUNISTIC -> ScanSettings.SCAN_MODE_OPPORTUNISTIC
         ScanMode.SCAN_MODE_LOW_POWER -> ScanSettings.SCAN_MODE_LOW_POWER
         ScanMode.SCAN_MODE_BALANCED -> ScanSettings.SCAN_MODE_BALANCED
@@ -45,7 +45,7 @@ fun ScanMode.scanMode(): Int {
 }
 
 fun AdvertiseMode.advertiseMode(): Int {
-    return when(this) {
+    return when (this) {
         AdvertiseMode.ADVERTISE_MODE_LOW_LATENCY -> AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY
         AdvertiseMode.ADVERTISE_MODE_BALANCED -> AdvertiseSettings.ADVERTISE_MODE_BALANCED
         AdvertiseMode.ADVERTISE_MODE_LOW_POWER -> AdvertiseSettings.ADVERTISE_MODE_LOW_POWER
@@ -53,7 +53,7 @@ fun AdvertiseMode.advertiseMode(): Int {
 }
 
 fun TxPowerLevel.txPowerLevel(): Int {
-    return when(this) {
+    return when (this) {
         TxPowerLevel.ADVERTISE_TX_POWER_ULTRA_LOW -> AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW
         TxPowerLevel.ADVERTISE_TX_POWER_LOW -> AdvertiseSettings.ADVERTISE_TX_POWER_LOW
         TxPowerLevel.ADVERTISE_TX_POWER_MEDIUM -> AdvertiseSettings.ADVERTISE_TX_POWER_MEDIUM

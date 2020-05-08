@@ -1,7 +1,7 @@
 package org.immuni.android.network
 
-import org.immuni.android.network.api.NetworkRetrofit
 import kotlin.reflect.KClass
+import org.immuni.android.network.api.NetworkRetrofit
 
 /**
  * Network module entry point.

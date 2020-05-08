@@ -55,7 +55,7 @@ class ExposureNotificationManager(val context: Context) : KoinComponent {
                 details = exposureNotificationClient.exposureInformation.await()
             }
         } catch (e: Exception) {
-            //FIXME
+            // FIXME
         }
         areExposureNotificationsEnabled.send(isEnabled)
         exposureDetails.send(details)

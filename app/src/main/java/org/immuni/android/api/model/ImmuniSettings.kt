@@ -1,9 +1,9 @@
 package org.immuni.android.api.model
 
-import org.immuni.android.models.survey.raw.RawSurvey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.immuni.android.models.survey.Survey
+import org.immuni.android.models.survey.raw.RawSurvey
 
 @JsonClass(generateAdapter = true)
 class ImmuniSettings(

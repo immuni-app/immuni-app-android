@@ -3,13 +3,12 @@ package org.immuni.android.ui.onboarding.fragments.profile
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
-import org.immuni.android.R
-import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.onboarding_age_range_fragment.*
+import org.immuni.android.R
 import org.immuni.android.models.AgeGroup
 import org.immuni.android.models.AgeGroup.*
-import kotlin.math.pow
+import org.immuni.android.ui.onboarding.OnboardingUserInfo
 
 class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fragment),
     CompoundButton.OnCheckedChangeListener {
@@ -26,7 +25,7 @@ class AgeRangeFragment : ProfileContentFragment(R.layout.onboarding_age_range_fr
                 lastRadioSelected == R.id.age_range_14_17) {
                 MaterialAlertDialogBuilder(requireContext())
                     .setTitle(getString(R.string.onboarding_age_more_than_18_title))
-                    //.setMessage(getString(R.string.onboarding_age_more_than_18_message))
+                    // .setMessage(getString(R.string.onboarding_age_more_than_18_message))
                     .setPositiveButton(getString(R.string.ok)) { d, _ -> d.dismiss() }
                     .setOnCancelListener { }
                     .show()

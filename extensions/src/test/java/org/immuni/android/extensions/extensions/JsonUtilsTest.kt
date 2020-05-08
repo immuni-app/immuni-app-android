@@ -2,10 +2,8 @@ package org.immuni.android.extensions.extensions
 
 import junit.framework.Assert.assertEquals
 import org.immuni.android.extensions.utils.fromJson
-import org.immuni.android.extensions.utils.round
 import org.immuni.android.extensions.utils.toJson
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Test
 
 class JsonUtilsTest {

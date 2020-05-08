@@ -2,14 +2,14 @@ package org.immuni.android.ui.setup
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.immuni.android.extensions.livedata.Event
-import org.immuni.android.extensions.utils.retry
+import java.io.IOException
 import kotlinx.coroutines.*
 import org.immuni.android.data.SettingsRepository
+import org.immuni.android.extensions.livedata.Event
+import org.immuni.android.extensions.utils.retry
 import org.immuni.android.managers.UserManager
 import org.immuni.android.network.api.NetworkResource
 import org.koin.core.KoinComponent
-import java.io.IOException
 
 class SetupViewModel(
     val userManager: UserManager,
@@ -61,7 +61,7 @@ class SetupViewModel(
                         onIntermediateFailure = { errorDuringSetup.value = true }
                     )
 
-                    when(settings) {
+                    when (settings) {
                         is NetworkResource.Error -> throw IOException()
                     }
 
@@ -71,7 +71,6 @@ class SetupViewModel(
                     userManager.setSetupCompleted(true)
 
                     navigateTo()
-
                 } catch (e: Exception) {
                     e.printStackTrace()
                     userManager.setSetupCompleted(false)

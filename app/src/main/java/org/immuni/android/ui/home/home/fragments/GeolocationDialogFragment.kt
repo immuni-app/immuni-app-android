@@ -8,10 +8,9 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.enable_notifications_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import org.immuni.android.R
-import org.immuni.android.managers.ExposureNotificationManager
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 
-class GeolocationDialogFragment: FullScreenDialogDarkFragment() {
+class GeolocationDialogFragment : FullScreenDialogDarkFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +34,7 @@ class GeolocationDialogFragment: FullScreenDialogDarkFragment() {
 
     private fun openGeolocationSettings() {
         activity?.let {
-            //ExposureNotificationManager.startChangeGlobalGeolocalisationSettings(it)
+            // ExposureNotificationManager.startChangeGlobalGeolocalisationSettings(it)
         }
 
         findNavController().popBackStack()

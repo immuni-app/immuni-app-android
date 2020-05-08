@@ -2,21 +2,19 @@ package org.immuni.android.setup
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.*
+import io.mockk.impl.annotations.MockK
+import kotlin.test.assertTrue
+import org.immuni.android.api.model.ImmuniSettings
+import org.immuni.android.data.SettingsRepository
+import org.immuni.android.extensions.test.getOrAwaitValue
 import org.immuni.android.managers.UserManager
+import org.immuni.android.network.api.NetworkError
+import org.immuni.android.network.api.NetworkResource
 import org.immuni.android.testutils.CoroutineTestRule
 import org.immuni.android.ui.setup.SetupViewModel
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-
-import io.mockk.impl.annotations.MockK
-import org.immuni.android.data.SettingsDataSource
-import org.immuni.android.api.model.ImmuniSettings
-import org.immuni.android.data.SettingsRepository
-import org.immuni.android.network.api.NetworkError
-import org.immuni.android.network.api.NetworkResource
-import org.immuni.android.extensions.test.getOrAwaitValue
-import kotlin.test.assertTrue
 
 class SetupViewModelTest {
 
@@ -32,9 +30,9 @@ class SetupViewModelTest {
     lateinit var viewModel: SetupViewModel
 
     @MockK(relaxed = true)
-    lateinit var userManager : UserManager
+    lateinit var userManager: UserManager
     @MockK(relaxed = true)
-    lateinit var repository : SettingsRepository
+    lateinit var repository: SettingsRepository
 
     @Before
     fun before() {

@@ -5,7 +5,7 @@ import androidx.room.Query
 import org.immuni.android.db.entity.QuestionLastAnswerTimeEntity
 
 @Dao
-interface QuestionLastAnswerTimeDao: BaseDao<QuestionLastAnswerTimeEntity> {
+interface QuestionLastAnswerTimeDao : BaseDao<QuestionLastAnswerTimeEntity> {
     @Query("SELECT * FROM question_last_answer_time_table WHERE userId = :userId")
     suspend fun allQuestionLastAnswerTimesForUser(userId: String): List<QuestionLastAnswerTimeEntity>
 

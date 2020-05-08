@@ -10,10 +10,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.reflect.full.primaryConstructor
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.ui.home.home.model.*
-import kotlin.reflect.full.primaryConstructor
 
 class HomeListAdapter(val clickListener: HomeClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -75,9 +75,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
         val bottomMessage: TextView = v.findViewById(R.id.bottomMessage)
     }
 
-    inner class HeaderCardVH(v: View) : RecyclerView.ViewHolder(v) {
-
-    }
+    inner class HeaderCardVH(v: View) : RecyclerView.ViewHolder(v)
 
     inner class GeolocationCardVH(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
@@ -110,7 +108,6 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
             onItemClick(adapterPosition)
         }
     }
-
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
@@ -192,7 +189,7 @@ class HomeListAdapter(val clickListener: HomeClickListener) :
             }
             is GeolocationCardVH -> {
                 val item = items[position] as EnableGeolocationCard
-                when(item.type) {
+                when (item.type) {
                     GeolocationType.PERMISSIONS -> {
                         holder.title.text = resources.getString(R.string.consent_geolocation)
                     }

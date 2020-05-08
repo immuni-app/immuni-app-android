@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.R
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class UploadDataSuccessFragment : Fragment(R.layout.upload_data_success_fragment) {

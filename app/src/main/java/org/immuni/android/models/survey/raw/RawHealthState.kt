@@ -1,9 +1,9 @@
 package org.immuni.android.models.survey.raw
 
-import org.immuni.android.models.survey.*
-import org.immuni.android.models.survey.raw.RawHealthStateUpdaterItemType.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import org.immuni.android.models.survey.*
+import org.immuni.android.models.survey.raw.RawHealthStateUpdaterItemType.*
 
 enum class RawHealthStateUpdaterItemType {
     @Json(name = "add")

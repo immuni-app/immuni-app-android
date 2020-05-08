@@ -18,18 +18,18 @@ import kotlinx.coroutines.delay
  * @param onIntermediateFailure a block to invoke on intermediate failures.
  */
 suspend fun <T> retry(
-        times: Int = Int.MAX_VALUE,
-        initialDelay: Long = 1000,
-        maxDelay: Long = 30*1000,
-        factor: Double = 2.0,
-        block: suspend () -> T,
-        exitWhen: (T) -> Boolean,
-        onIntermediateFailure: (T) -> Unit): T
-{
+    times: Int = Int.MAX_VALUE,
+    initialDelay: Long = 1000,
+    maxDelay: Long = 30 * 1000,
+    factor: Double = 2.0,
+    block: suspend () -> T,
+    exitWhen: (T) -> Boolean,
+    onIntermediateFailure: (T) -> Unit
+): T {
     var currentDelay = initialDelay
     repeat(times) {
         val result = block()
-        if(exitWhen(result)) return result
+        if (exitWhen(result)) return result
         else onIntermediateFailure(result)
 
         delay(currentDelay)

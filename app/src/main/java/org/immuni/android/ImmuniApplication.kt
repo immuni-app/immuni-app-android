@@ -7,10 +7,9 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.lifecycle.ProcessLifecycleOwner
 import org.immuni.android.data.SettingsDataSource
-import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
-import org.immuni.android.network.Network
-import org.immuni.android.fcm.FirebaseFCM
 import org.immuni.android.debugmenu.DebugMenu
+import org.immuni.android.extensions.lifecycle.AppLifecycleObserver
+import org.immuni.android.fcm.FirebaseFCM
 import org.immuni.android.managers.ForceUpdateManager
 import org.immuni.android.managers.SurveyNotificationManager
 import org.immuni.android.receivers.RestarterReceiver

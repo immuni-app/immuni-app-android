@@ -6,7 +6,6 @@ import android.content.Intent
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.service.AlarmsManager
 import org.immuni.android.util.log
-import org.koin.core.KoinComponent
 
 class UpdateReceiver : BroadcastReceiver() {
 

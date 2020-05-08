@@ -3,8 +3,8 @@ package org.immuni.android.ui.onboarding
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.navigation.findNavController
-import org.immuni.android.ui.ImmuniActivity
 import org.immuni.android.R
+import org.immuni.android.ui.ImmuniActivity
 import org.koin.androidx.viewmodel.ext.android.getStateViewModel
 
 class OnboardingActivity : ImmuniActivity() {

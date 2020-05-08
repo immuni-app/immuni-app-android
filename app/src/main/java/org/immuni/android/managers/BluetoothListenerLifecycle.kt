@@ -13,7 +13,7 @@ class BluetoothListenerLifecycle(
     private val context: Context,
     private val lifecycle: Lifecycle,
     private val callback: (Int) -> Unit // BluetoothAdapter.STATE_OFF etc
-): LifecycleObserver {
+) : LifecycleObserver {
 
     private val mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent) {
@@ -40,4 +40,3 @@ class BluetoothListenerLifecycle(
         context.unregisterReceiver(mReceiver)
     }
 }
-

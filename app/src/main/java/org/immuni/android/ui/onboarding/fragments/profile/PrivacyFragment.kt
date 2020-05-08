@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import org.immuni.android.R
-import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.*
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.back
 import kotlinx.android.synthetic.main.onboarding_privacy_fragment.next
-import org.immuni.android.ui.onboarding.OnboardingUserInfo
+import org.immuni.android.R
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import org.immuni.android.extensions.utils.color
+import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class PrivacyFragment : ProfileContentFragment(R.layout.onboarding_privacy_fragment) {
@@ -54,7 +54,6 @@ class PrivacyFragment : ProfileContentFragment(R.layout.onboarding_privacy_fragm
 
         viewModel.navigateToNextPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-
             }
         })
     }

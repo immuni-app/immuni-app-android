@@ -1,9 +1,9 @@
 package org.immuni.android.models.survey.raw
 
-import org.immuni.android.models.survey.*
-import org.immuni.android.models.survey.raw.RawConditionType.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import org.immuni.android.models.survey.*
+import org.immuni.android.models.survey.raw.RawConditionType.*
 
 enum class RawConditionType {
     @Json(name = "true")

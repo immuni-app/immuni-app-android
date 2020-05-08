@@ -47,7 +47,6 @@ class ImmuniProgressView(context: Context, attrs: AttributeSet) : View(context, 
                 completedPaint.color = progressCompletedColor
                 inProgressPaint.color = progressPendingColor
                 separatorPaint.color = progressSeparatorColor
-
             } finally {
                 recycle()
             }
@@ -61,36 +60,36 @@ class ImmuniProgressView(context: Context, attrs: AttributeSet) : View(context, 
         W = width.toFloat()
         H = height.toFloat()
 
-        when(type) {
+        when (type) {
             Type.STEPS -> {
                 STEP_W = W / steps
 
                 canvas.save()
                 val target = -W + (STEP_W * (currentStep))
-                val translation = target - (target - lastTranslation)*animatedProgress
+                val translation = target - (target - lastTranslation) * animatedProgress
                 lastTranslation = translation
                 canvas.translate(translation, 0f)
                 canvas.drawRoundRect(-STEP_W, 0f, W, H, 0f, 0f, completedPaint)
-                canvas.drawRoundRect(STEP_W * (steps-1), 0f, W, H, 0f, 0f, inProgressPaint)
-                if(currentStep > 1) canvas.drawRect(STEP_W * (steps-1), 0f, STEP_W * (steps-1) + H/2, H, separatorPaint)
+                canvas.drawRoundRect(STEP_W * (steps - 1), 0f, W, H, 0f, 0f, inProgressPaint)
+                if (currentStep > 1) canvas.drawRect(STEP_W * (steps - 1), 0f, STEP_W * (steps - 1) + H / 2, H, separatorPaint)
                 canvas.restore()
             }
             Type.TIMER -> {
                 canvas.save()
-                val target = -W * (1-percentage)
-                val translation = target - (target - lastTranslation)*animatedProgress
+                val target = -W * (1 - percentage)
+                val translation = target - (target - lastTranslation) * animatedProgress
                 lastTranslation = translation
                 canvas.translate(translation, 0f)
-                //canvas.drawRoundRect(-STEP_W, 0f, W, H, H/2, H/2, completedPaint)
+                // canvas.drawRoundRect(-STEP_W, 0f, W, H, H/2, H/2, completedPaint)
                 canvas.drawRoundRect(-STEP_W, 0f, W, H, 0f, 0f, completedPaint)
                 canvas.restore()
             }
         }
     }
 
-    fun setStep(step: Int , totalSteps: Int) {
+    fun setStep(step: Int, totalSteps: Int) {
 
-        if(type == Type.STEPS && currentStep == step && steps == totalSteps) return
+        if (type == Type.STEPS && currentStep == step && steps == totalSteps) return
 
         type = Type.STEPS
         currentStep = step
@@ -105,7 +104,7 @@ class ImmuniProgressView(context: Context, attrs: AttributeSet) : View(context, 
     }
 
     fun animateProgress() {
-        if(animator?.isRunning == true) animator?.cancel()
+        if (animator?.isRunning == true) animator?.cancel()
         animator = ValueAnimator.ofFloat(1f, 0f)
         animator?.apply {
             interpolator = AccelerateInterpolator()

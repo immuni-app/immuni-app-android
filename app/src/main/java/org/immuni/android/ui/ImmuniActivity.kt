@@ -17,5 +17,4 @@ open class ImmuniActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         exposureNotificationManager.onRequestPermissionsResult(this, requestCode, resultCode, data)
     }
-
 }

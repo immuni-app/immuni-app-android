@@ -1,10 +1,10 @@
 package org.immuni.android.debugmenu.item
 
 import android.widget.Toast
-import org.immuni.android.extensions.utils.DeviceUtils
 import org.immuni.android.debugmenu.DebugMenuItem
+import org.immuni.android.extensions.utils.DeviceUtils
 
-class DeviceInfoItem: DebugMenuItem(
+class DeviceInfoItem : DebugMenuItem(
     "\uD83D\uDCF1 Device/OS Info",
     { context, config ->
         val value = "${DeviceUtils.manufacturer} ${DeviceUtils.model} Android API ${DeviceUtils.androidVersionAPI}"

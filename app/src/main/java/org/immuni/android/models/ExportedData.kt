@@ -2,15 +2,14 @@ package org.immuni.android.models
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import org.immuni.android.models.survey.QuestionId
-import org.immuni.android.models.survey.SurveyAnswers
 import java.util.*
+import org.immuni.android.models.survey.QuestionId
 
 @JsonClass(generateAdapter = true)
 data class ExportData(
     @field:Json(name = "profile_id") val profileId: String,
     @field:Json(name = "devices") val devices: List<ExportDevice>
-    //@field:Json(name = "surveys") val surveys: List<ExportHealthProfile>
+    // @field:Json(name = "surveys") val surveys: List<ExportHealthProfile>
 )
 
 @JsonClass(generateAdapter = true)

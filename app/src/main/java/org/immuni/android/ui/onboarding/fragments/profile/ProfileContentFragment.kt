@@ -8,12 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import org.immuni.android.R
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
+import org.immuni.android.extensions.utils.ScreenUtils
 import org.immuni.android.extensions.view.animateTranslationY
 import org.immuni.android.ui.onboarding.OnboardingUserInfo
 import org.immuni.android.ui.onboarding.OnboardingViewModel
-import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
-import org.immuni.android.extensions.utils.ScreenUtils
-import org.immuni.android.R
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 abstract class ProfileContentFragment(@LayoutRes val layout: Int) : Fragment(layout) {
@@ -56,11 +56,11 @@ abstract class ProfileContentFragment(@LayoutRes val layout: Int) : Fragment(lay
     fun updateTopMask(scrollY: Int, animate: Boolean = false) {
         val dp = ScreenUtils.convertDpToPixels(requireContext(), 8).toFloat()
 
-        this.view?.findViewById<View>(R.id.gradientTop)?.alpha = (0f + scrollY/dp).coerceIn(0f, 1f)
+        this.view?.findViewById<View>(R.id.gradientTop)?.alpha = (0f + scrollY / dp).coerceIn(0f, 1f)
 
         val maxScrollUpCard = ScreenUtils.convertDpToPixels(requireContext(), 32).toFloat()
         val maxScrollUpProgressBar = ScreenUtils.convertDpToPixels(requireContext(), 20).toFloat()
-        if(animate) {
+        if (animate) {
             this.view?.findViewById<View>(R.id.topMask)?.animateTranslationY(-(scrollY.toFloat().coerceAtMost(maxScrollUpCard)), 250)
             activity?.findViewById<View>(R.id.progress)?.animateTranslationY(-(scrollY.toFloat().coerceAtMost(maxScrollUpProgressBar)), 250)
         } else {
@@ -82,7 +82,7 @@ abstract class ProfileContentFragment(@LayoutRes val layout: Int) : Fragment(lay
     }
 
     fun updateEditText(editText: EditText, text: String) {
-        if(editText.text.toString() != text) editText.setText(text)
+        if (editText.text.toString() != text) editText.setText(text)
         editText.setSelection((editText.length()).coerceAtLeast(0))
     }
 }

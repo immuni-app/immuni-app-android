@@ -8,24 +8,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import org.immuni.android.extensions.view.gone
-import org.immuni.android.R
-import org.immuni.android.managers.ExposureNotificationManager
-import org.immuni.android.extensions.view.hideKeyboard
-import org.immuni.android.extensions.view.visible
 import kotlinx.android.synthetic.main.onboarding_permissions_dialog.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.immuni.android.ImmuniApplication
+import org.immuni.android.R
+import org.immuni.android.extensions.activity.toast
+import org.immuni.android.extensions.view.gone
+import org.immuni.android.extensions.view.hideKeyboard
+import org.immuni.android.extensions.view.visible
 import org.immuni.android.managers.BluetoothListenerLifecycle
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.extensions.activity.toast
+import org.immuni.android.managers.ExposureNotificationManager
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.immuni.android.ui.onboarding.OnboardingViewModel
 import org.koin.android.ext.android.inject
@@ -70,7 +69,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
     }
 
     private fun checkAllGood() {
-        if(btON() && permissionsON() && geolocationON() && whiteListON()) {
+        if (btON() && permissionsON() && geolocationON() && whiteListON()) {
             viewModel.onOnboardingComplete()
         }
     }
@@ -85,25 +84,25 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
 
         whitelist.setOnClickListener {
             // fixme
-            //val action = ProfileFragmentDirections.actionWhitelistDialog()
-            //findNavController().navigate(action)
+            // val action = ProfileFragmentDirections.actionWhitelistDialog()
+            // findNavController().navigate(action)
             // ExposureNotificationManager.startChangeBatteryOptimization(requireContext())
         }
 
         bluetooth.setOnClickListener {
-            if(!bluetoothManager.isBluetoothSupported()) {
+            if (!bluetoothManager.isBluetoothSupported()) {
                 toast(
                     requireContext(),
                     requireContext().getString(
                         R.string.ble_not_supported_by_this_device
                     )
                 )
-                //viewModel.onNextTap()
+                // viewModel.onNextTap()
                 return@setOnClickListener
             }
-            if(!bluetoothManager.isBluetoothEnabled()) {
-                //val action = ProfileFragmentDirections.actionBluetoothDialog()
-                //findNavController().navigate(action)
+            if (!bluetoothManager.isBluetoothEnabled()) {
+                // val action = ProfileFragmentDirections.actionBluetoothDialog()
+                // findNavController().navigate(action)
                 bluetoothManager.openBluetoothSettings(this)
             } else updateUI()
         }
@@ -121,7 +120,6 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         }
 
         geolocation.setOnClickListener {
-
         }
 
         knowMore.setOnClickListener { updateKnowMore(it as TextView) }
@@ -154,38 +152,37 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
     private fun updateKnowMore(textView: TextView) {
         var more = false
         // update button text
-        if(textView.text == getString(R.string.know_more)) {
+        if (textView.text == getString(R.string.know_more)) {
             textView.text = getString(R.string.hide)
             more = true
-        }
-        else {
+        } else {
             textView.text = getString(R.string.know_more)
             more = false
         }
 
         // update content text
-        when(textView.id) {
+        when (textView.id) {
             R.id.knowMore -> {
-                when(more) {
+                when (more) {
                     true -> description.text = getString(R.string.onboarding_permission_bt_short) + "\n\n" + getString(R.string.onboarding_permission_bt_long)
                     false -> description.text = getString(R.string.onboarding_permission_bt_short)
                 }
             }
             R.id.knowMore2 -> {
-                when(more) {
-                    true -> description2.text =  getString(R.string.onboarding_permission_permissions_short) + "\n\n" + getString(R.string.onboarding_permission_permissions_long)
+                when (more) {
+                    true -> description2.text = getString(R.string.onboarding_permission_permissions_short) + "\n\n" + getString(R.string.onboarding_permission_permissions_long)
                     false -> description2.text = getString(R.string.onboarding_permission_permissions_short)
                 }
             }
             R.id.knowMore3 -> {
-                when(more) {
-                    true -> description3.text =  getString(R.string.onboarding_permission_geo_short) + "\n\n" + getString(R.string.onboarding_permission_geo_long)
+                when (more) {
+                    true -> description3.text = getString(R.string.onboarding_permission_geo_short) + "\n\n" + getString(R.string.onboarding_permission_geo_long)
                     false -> description3.text = getString(R.string.onboarding_permission_geo_short)
                 }
             }
             R.id.knowMore4 -> {
-                when(more) {
-                    true -> description4.text =  getString(R.string.onboarding_permission_whitelist_short) + "\n\n" + getString(R.string.onboarding_permission_whitelist_long)
+                when (more) {
+                    true -> description4.text = getString(R.string.onboarding_permission_whitelist_short) + "\n\n" + getString(R.string.onboarding_permission_whitelist_long)
                     false -> description4.text = getString(R.string.onboarding_permission_whitelist_short)
                 }
             }
@@ -200,7 +197,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == BluetoothManager.REQUEST_ENABLE_BT) {
+        if (requestCode == BluetoothManager.REQUEST_ENABLE_BT) {
             updateUI()
         }
     }
@@ -212,25 +209,25 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
     private fun permissionsON(): Boolean {
         // fixme
         return true
-        //return ExposureNotificationManager.hasAllPermissions(requireContext())
+        // return ExposureNotificationManager.hasAllPermissions(requireContext())
     }
 
     private fun geolocationON(): Boolean {
         // fixme
         return true
-        //return ExposureNotificationManager.globalLocalisationEnabled(requireContext())
+        // return ExposureNotificationManager.globalLocalisationEnabled(requireContext())
     }
 
     private fun whiteListON(): Boolean {
         // fixme
         return true
-        //return ExposureNotificationManager.isIgnoringBatteryOptimizations(requireContext())
+        // return ExposureNotificationManager.isIgnoringBatteryOptimizations(requireContext())
     }
 
     private fun updateUI() {
 
         // BLUETOOTH
-        if(btON()) {
+        if (btON()) {
             // SUCCESS
             description.gone()
             circle.setImageResource(R.drawable.ic_check_permissions)
@@ -251,7 +248,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         }
 
         // PERMISSIONS
-        if(permissionsON()) {
+        if (permissionsON()) {
             // SUCCESS
             description2.gone()
             circle2.setImageResource(R.drawable.ic_check_permissions)
@@ -262,7 +259,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             TextViewCompat.setTextAppearance(permissionsTitle, R.style.H4Section)
         } else {
             // DISABLED
-            if(!btON()) {
+            if (!btON()) {
                 description2.gone()
                 geoPermissions.gone()
                 circle2.setImageResource(R.drawable.ic_localization)
@@ -283,7 +280,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         }
 
         // LOCALIZATION
-        if(geolocationON()) {
+        if (geolocationON()) {
             // SUCCESS
             description3.gone()
             circle3.setImageResource(R.drawable.ic_check_permissions)
@@ -294,7 +291,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             TextViewCompat.setTextAppearance(geoTitle, R.style.H4Section)
         } else {
             // DISABLED
-            if(!permissionsON() || !btON()) {
+            if (!permissionsON() || !btON()) {
                 description3.gone()
                 geolocation.gone()
                 circle3.setImageResource(R.drawable.ic_localization)
@@ -315,7 +312,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
         }
 
         // WHITELIST
-        if(whiteListON()) {
+        if (whiteListON()) {
             // SUCCESS
             description4.gone()
             circle4.setImageResource(R.drawable.ic_check_permissions)
@@ -325,7 +322,7 @@ class PermissionsFragment : FullScreenDialogDarkFragment() {
             TextViewCompat.setTextAppearance(whitelistTitle, R.style.H4Section)
         } else {
             // DISABLED
-            if(!geolocationON() || !btON() || !permissionsON()) {
+            if (!geolocationON() || !btON() || !permissionsON()) {
                 description4.gone()
                 whitelist.gone()
                 circle4.setImageResource(R.drawable.ic_localization)

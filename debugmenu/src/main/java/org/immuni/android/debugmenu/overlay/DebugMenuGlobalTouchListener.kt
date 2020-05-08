@@ -5,8 +5,8 @@ import android.app.Application
 import android.os.Bundle
 import android.view.*
 import android.widget.FrameLayout
-import org.immuni.android.debugmenu.R
 import org.immuni.android.debugmenu.DebugMenuTouchManager
+import org.immuni.android.debugmenu.R
 
 /**
  * This class is register to the [Application] activity lifecycle and
@@ -17,7 +17,7 @@ import org.immuni.android.debugmenu.DebugMenuTouchManager
 class DebugMenuGlobalTouchListener(
     application: Application,
     private val touchManager: DebugMenuTouchManager
-): InvisibleOverlayView.TouchListener {
+) : InvisibleOverlayView.TouchListener {
 
     init {
         application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {

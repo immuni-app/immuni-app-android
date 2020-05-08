@@ -2,9 +2,9 @@ package org.immuni.android.debugmenu
 
 import android.app.Application
 import android.content.Intent
-import org.immuni.android.network.Network
 import org.immuni.android.debugmenu.overlay.DebugMenuGlobalTouchListener
 import org.immuni.android.debugmenu.ui.DebugMenuActivity
+import org.immuni.android.network.Network
 
 /**
  * A debug menu used to show to the user some debugging features.

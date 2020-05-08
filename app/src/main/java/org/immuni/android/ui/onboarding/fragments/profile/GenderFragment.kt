@@ -2,13 +2,13 @@ package org.immuni.android.ui.onboarding.fragments.profile
 
 import android.os.Bundle
 import android.view.View
-import org.immuni.android.R
-import org.immuni.android.models.Gender
-import org.immuni.android.ui.onboarding.OnboardingUserInfo
-import org.immuni.android.extensions.view.hideKeyboard
 import kotlinx.android.synthetic.main.onboarding_gender_fragment.*
 import kotlinx.android.synthetic.main.onboarding_gender_fragment.back
 import kotlinx.android.synthetic.main.onboarding_gender_fragment.next
+import org.immuni.android.R
+import org.immuni.android.extensions.view.hideKeyboard
+import org.immuni.android.models.Gender
+import org.immuni.android.ui.onboarding.OnboardingUserInfo
 
 class GenderFragment : ProfileContentFragment(R.layout.onboarding_gender_fragment) {
     override val nextButton: View

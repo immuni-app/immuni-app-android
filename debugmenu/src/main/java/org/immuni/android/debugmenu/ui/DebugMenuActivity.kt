@@ -2,12 +2,12 @@ package org.immuni.android.debugmenu.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import org.immuni.android.extensions.utils.DeviceUtils
-import org.immuni.android.debugmenu.DebugMenu
-import org.immuni.android.debugmenu.item.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.immuni.android.debugmenu.R
+import org.immuni.android.debugmenu.DebugMenu
 import org.immuni.android.debugmenu.DebugMenuItem
+import org.immuni.android.debugmenu.R
+import org.immuni.android.debugmenu.item.*
+import org.immuni.android.extensions.utils.DeviceUtils
 
 /**
  * This activity show all the [DebugMenuItem] in a list and
@@ -43,7 +43,7 @@ class DebugMenuActivity : AppCompatActivity() {
 
         MaterialAlertDialogBuilder(this)
             .setTitle("How can I help you? ${DeviceUtils.appVersionName(applicationContext)} (${DeviceUtils.appVersionCode(applicationContext)})")
-            .setNegativeButton("Cancel") { _, _ -> close()}
+            .setNegativeButton("Cancel") { _, _ -> close() }
             .setOnCancelListener { close() }
             .setItems(
                 items.map { it.title }.toTypedArray()
@@ -57,6 +57,6 @@ class DebugMenuActivity : AppCompatActivity() {
     private fun close() {
         try {
             this.finish()
-        } catch (e: Exception) {e.printStackTrace()}
+        } catch (e: Exception) { e.printStackTrace() }
     }
 }

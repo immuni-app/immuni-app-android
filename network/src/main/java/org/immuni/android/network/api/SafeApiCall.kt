@@ -1,10 +1,10 @@
 package org.immuni.android.network.api
 
+import java.io.IOException
+import java.net.SocketTimeoutException
 import okhttp3.ResponseBody
 import org.immuni.android.extensions.utils.fromJson
 import retrofit2.Response
-import java.io.IOException
-import java.net.SocketTimeoutException
 
 /**
  * This method wrap a Retrofit [Response] and handles properly all types of errors.
@@ -48,6 +48,6 @@ inline fun <reified E : Any> deserializeError(responseBody: ResponseBody): E? {
     val result = runCatching {
         fromJson<E>(str)
     }
-    return if(result.isSuccess) result.getOrNull()!!
+    return if (result.isSuccess) result.getOrNull()!!
     else null
 }

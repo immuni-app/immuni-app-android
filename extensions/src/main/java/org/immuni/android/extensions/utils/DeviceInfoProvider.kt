@@ -20,7 +20,7 @@ interface DeviceInfoProvider {
     fun devicePlatform(): String
 }
 
-class DeviceInfoProviderImpl: DeviceInfoProvider {
+class DeviceInfoProviderImpl : DeviceInfoProvider {
     override fun country(): String {
         return Locale.getDefault().country
     }
@@ -36,7 +36,7 @@ class DeviceInfoProviderImpl: DeviceInfoProvider {
     override fun locale(): String {
         val l = Locale.getDefault()
 
-        return if(l.script.isNullOrEmpty()) "${l.language}_${l.country}"
+        return if (l.script.isNullOrEmpty()) "${l.language}_${l.country}"
         else "${l.language}-${l.script}_${l.country}"
     }
 

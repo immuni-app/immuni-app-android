@@ -6,7 +6,7 @@ import java.io.Serializable
  * Answer to a [Survey] [Question] by the user.
  * Its concrete subclasses are [SimpleAnswer] and [CompositeAnswer].
  */
-sealed class Answer: Serializable
+sealed class Answer : Serializable
 
 /**
  * [Answer] with a single component, identified by its [index].

@@ -7,8 +7,8 @@ import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import junit.framework.Assert.assertEquals
-import org.immuni.android.extensions.test.getOrAwaitValue
 import org.immuni.android.extensions.storage.KVStorage
+import org.immuni.android.extensions.test.getOrAwaitValue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -68,7 +68,6 @@ class KVStorageTest {
 
         cache.clear()
         assertEquals("myValue", kvStorage.load("myString")!!)
-
     }
 
     @Test
@@ -94,7 +93,6 @@ class KVStorageTest {
         kvStorage.save("myString", "xyz")
         assertEquals("xyz", liveData.getOrAwaitValue())
     }
-
 }
 
 private data class FakeObject(

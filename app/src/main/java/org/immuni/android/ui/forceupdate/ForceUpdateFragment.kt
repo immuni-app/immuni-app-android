@@ -9,14 +9,14 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import org.immuni.android.extensions.view.invisible
-import org.immuni.android.extensions.view.visible
-import org.immuni.android.R
 import kotlinx.android.synthetic.main.force_update_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.immuni.android.R
 import org.immuni.android.extensions.activity.loading
+import org.immuni.android.extensions.view.invisible
+import org.immuni.android.extensions.view.visible
 import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -41,8 +41,8 @@ class ForceUpdateFragment : Fragment(R.layout.force_update_fragment) {
         viewModel.downloading.observe(viewLifecycleOwner, Observer {
             title.text = "Download in corso..."
             message.text = "Controlla l'avanzamento del download nella barra delle notifiche."
-            //update.isEnabled = false
-            //update.alpha = 0.3f
+            // update.isEnabled = false
+            // update.alpha = 0.3f
             retry.visible()
             retry.isEnabled = true
             update.invisible()
@@ -78,22 +78,21 @@ class ForceUpdateFragment : Fragment(R.layout.force_update_fragment) {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        if (permissions.isNotEmpty() && permissions[0] == Manifest.permission.WRITE_EXTERNAL_STORAGE
-            && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (permissions.isNotEmpty() && permissions[0] == Manifest.permission.WRITE_EXTERNAL_STORAGE &&
+            grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             startUpdate()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 20999 && resultCode == Activity.RESULT_OK) {
+        if (requestCode == 20999 && resultCode == Activity.RESULT_OK) {
             GlobalScope.launch {
                 runCatching {
                     delay(500)
                     startUpdate()
                 }
             }
-
         }
     }
 }

@@ -12,7 +12,9 @@ import android.widget.FrameLayout
  * all the multitouch events.
  */
 class InvisibleOverlayView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     var activity: Activity? = null
@@ -27,9 +29,9 @@ class InvisibleOverlayView @JvmOverloads constructor(
         val parentViewGroup = this.parent as? ViewGroup
         parentViewGroup?.let { parent ->
             val childCount = parent.childCount
-            for(i in 0..childCount) {
+            for (i in 0..childCount) {
                 val view = parent.getChildAt(i)
-                if(view != this) {
+                if (view != this) {
                     view?.dispatchTouchEvent(event)
                 } else {
                     // skip myself
@@ -41,7 +43,6 @@ class InvisibleOverlayView @JvmOverloads constructor(
         // multi touch events will not be intercepted, but only ACTION_DOWN
         return true
     }
-
 
     fun setTouchListener(listener: TouchListener) {
         this.listener = listener

@@ -13,9 +13,8 @@ import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
-import org.immuni.android.ui.dialog.FullScreenDialogLightFragment
 
-class PermissionsDialogFragment: FullScreenDialogDarkFragment() {
+class PermissionsDialogFragment : FullScreenDialogDarkFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,9 +30,8 @@ class PermissionsDialogFragment: FullScreenDialogDarkFragment() {
         button.setOnClickListener {
             openAppSettings()
 
-            //val geolocationManager: GeolocationManager by inject()
-            //geolocationManager.requestPermissions(activity = activity as AppCompatActivity)
-
+            // val geolocationManager: GeolocationManager by inject()
+            // geolocationManager.requestPermissions(activity = activity as AppCompatActivity)
         }
 
         back.setOnClickListener {

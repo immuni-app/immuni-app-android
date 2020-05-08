@@ -12,16 +12,16 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import org.immuni.android.extensions.view.hideKeyboard
-import org.immuni.android.extensions.view.invisible
-import org.immuni.android.extensions.view.showKeyboard
-import org.immuni.android.extensions.view.visible
 import kotlinx.android.synthetic.main.insert_upload_data_code_fragment.*
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.close
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.okButton
 import kotlinx.android.synthetic.main.where_to_find_the_code_fragment.title
 import org.immuni.android.R
 import org.immuni.android.extensions.activity.loading
+import org.immuni.android.extensions.view.hideKeyboard
+import org.immuni.android.extensions.view.invisible
+import org.immuni.android.extensions.view.showKeyboard
+import org.immuni.android.extensions.view.visible
 import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -73,7 +73,7 @@ class InsertUploadDataCodeFragment : Fragment(R.layout.insert_upload_data_code_f
         val spannable = SpannableString(text)
         spannable.setSpan(
             ImageSpan(requireContext(), R.drawable.ic_info_medium, DynamicDrawableSpan.ALIGN_BASELINE),
-            text.length-1, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            text.length - 1, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         title.text = spannable
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {

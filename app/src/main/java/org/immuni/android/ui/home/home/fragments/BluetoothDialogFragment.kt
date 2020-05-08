@@ -9,13 +9,13 @@ import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.enable_app_permissions_dialog.*
 import kotlinx.android.synthetic.main.family_member_add_dialog.back
 import org.immuni.android.R
+import org.immuni.android.extensions.activity.toast
 import org.immuni.android.managers.BluetoothManager
 import org.immuni.android.managers.BluetoothManager.Companion.REQUEST_ENABLE_BT
-import org.immuni.android.extensions.activity.toast
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 import org.koin.android.ext.android.inject
 
-class BluetoothDialogFragment: FullScreenDialogDarkFragment() {
+class BluetoothDialogFragment : FullScreenDialogDarkFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +30,7 @@ class BluetoothDialogFragment: FullScreenDialogDarkFragment() {
 
         button.setOnClickListener {
             val btManager: BluetoothManager by inject()
-            if(!btManager.isBluetoothSupported()) {
+            if (!btManager.isBluetoothSupported()) {
                 toast(
                     requireContext(),
                     requireContext().getString(
@@ -50,7 +50,7 @@ class BluetoothDialogFragment: FullScreenDialogDarkFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == REQUEST_ENABLE_BT) {
+        if (requestCode == REQUEST_ENABLE_BT) {
             findNavController().popBackStack()
         }
     }

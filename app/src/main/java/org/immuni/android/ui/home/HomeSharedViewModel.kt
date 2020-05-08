@@ -3,16 +3,12 @@ package org.immuni.android.ui.home
 import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.immuni.android.extensions.livedata.Event
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.data.SettingsDataSource
 import org.immuni.android.managers.BluetoothManager
-import org.immuni.android.managers.UserManager
-import org.immuni.android.models.survey.TriageProfile
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.immuni.android.ui.home.home.model.*
-
 import org.koin.core.KoinComponent
 
 class HomeSharedViewModel(
@@ -67,14 +63,13 @@ class HomeSharedViewModel(
             )
              */
 
-
             homelistModel.value = itemsList.toList()
         }
     }
 
     fun onHomeResumed() {
         refreshHomeListModel()
-        //checkAddFamilyMembersDialog()
+        // checkAddFamilyMembersDialog()
     }
 
     fun onPrivacyPolicyClick() {

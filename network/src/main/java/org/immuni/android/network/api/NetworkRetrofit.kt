@@ -1,15 +1,15 @@
 package org.immuni.android.network.api
 
-import org.immuni.android.extensions.http.GzipRequestInterceptor
-import org.immuni.android.network.NetworkConfiguration
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.util.*
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
+import org.immuni.android.extensions.http.GzipRequestInterceptor
+import org.immuni.android.network.NetworkConfiguration
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.*
 
 /**
  * Initialize Retrofit type-safe HTTP API client.
@@ -30,13 +30,13 @@ class NetworkRetrofit(
 
     val client by lazy {
         val builder = OkHttpClient.Builder()
-        //.hostnameVerifier(HostnameVerifier { hostname, session -> true })
+        // .hostnameVerifier(HostnameVerifier { hostname, session -> true })
 
         builder.addInterceptor(gzipInterceptor)
         builder.addInterceptor(loggingInterceptor)
         // use this to verify cache
         // network interceptor is not called when using cache
-        //builder.addNetworkInterceptor(loggingInterceptor)
+        // builder.addNetworkInterceptor(loggingInterceptor)
 
         certificatePinner?.let {
             builder.certificatePinner(it)

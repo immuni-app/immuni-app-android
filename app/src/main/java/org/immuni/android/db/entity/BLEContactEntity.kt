@@ -9,7 +9,7 @@ import kotlin.math.ceil
 data class BLEContactEntity(
     var btId: String,
     var timestamp: Date = Date(),
-    @ColumnInfo(name="events", typeAffinity = ColumnInfo.BLOB)
+    @ColumnInfo(name = "events", typeAffinity = ColumnInfo.BLOB)
     var events: ByteArray = ByteArray(0)
 ) {
     val enumeratedEvents: List<BLEEvent>
@@ -36,7 +36,7 @@ data class BLEContactEntity(
     }
 }
 
-data class BLEEvent (
+data class BLEEvent(
     val relativeTimestamp: Int,
     val txPower: Int,
     val rssi: Int
@@ -64,13 +64,13 @@ const val RELATIVE_TIMESTAMP_SECONDS = 5
 const val RELATIVE_TIMESTAMP_TOLERANCE_MS = 500
 
 // Returns a relativetimestamp of `self` with respect to the given reference date
-fun dateToRelativeTimestamp(referenceDate: Date, now: Date = Date()) : Int {
+fun dateToRelativeTimestamp(referenceDate: Date, now: Date = Date()): Int {
     return (ceil((now.time + RELATIVE_TIMESTAMP_TOLERANCE_MS) / 1000.0) - (referenceDate.time / 1000)).toInt() / RELATIVE_TIMESTAMP_SECONDS
 }
 
 // Creates a timestamp given the relative timestamp and a reference date.
 // Note that the relativetimestamp should be created using `relativeTimestamp`
-fun relativeTimestampToDate(referenceDate: Date, relativeTimestamp: Int) : Date {
+fun relativeTimestampToDate(referenceDate: Date, relativeTimestamp: Int): Date {
     val ms = (RELATIVE_TIMESTAMP_SECONDS * relativeTimestamp * 1000) + referenceDate.time
     return Date(ms)
 }

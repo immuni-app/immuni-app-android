@@ -5,9 +5,7 @@ import com.google.android.gms.nearby.exposurenotification.ExposureInformation.Ex
 import com.google.android.gms.nearby.exposurenotification.ExposureSummary.ExposureSummaryBuilder
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
-import kotlinx.coroutines.tasks.await
 import org.koin.core.KoinComponent
-
 
 /**
  * Wrapper around [com.google.android.gms.nearby.Nearby] APIs.

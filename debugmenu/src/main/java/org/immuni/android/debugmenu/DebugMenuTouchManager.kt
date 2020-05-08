@@ -32,13 +32,13 @@ class DebugMenuTouchManager(
      * the timer is cancelled and nothing happens.
      */
     fun onTouchEvent(ev: MotionEvent) {
-        val fingers = when(config.isDevelopmentDevice()) {
+        val fingers = when (config.isDevelopmentDevice()) {
             true -> FINGERS_COUNT_DEVELOPMENT
             false -> FINGERS_COUNT
         }
-        if(ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_POINTER_DOWN && ev.pointerCount == fingers) {
+        if (ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_POINTER_DOWN && ev.pointerCount == fingers) {
             startTimer()
-        } else if(ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_POINTER_UP || ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_UP) {
+        } else if (ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_POINTER_UP || ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_UP) {
             cancelTimer()
         }
     }
@@ -49,7 +49,7 @@ class DebugMenuTouchManager(
 
     private fun startTimer() {
 
-        val delay = when(config.isDevelopmentDevice()) {
+        val delay = when (config.isDevelopmentDevice()) {
             true -> DELAY_DEVELOPMENT
             false -> DELAY
         }

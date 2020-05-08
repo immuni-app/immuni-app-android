@@ -9,14 +9,14 @@ import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentActivity
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -48,7 +48,7 @@ fun toast(context: Context, @StringRes title: Int, length: Int = Toast.LENGTH_SH
  */
 fun FragmentActivity.loading(loading: Boolean, dialog: DialogFragment?) {
     val tag = "loading_dialog"
-    if(loading) {
+    if (loading) {
         val ft = supportFragmentManager.beginTransaction()
 
         val prev = supportFragmentManager.findFragmentByTag(tag)
@@ -164,7 +164,6 @@ fun AppCompatActivity.removeNavigationBar() {
     decorView.systemUiVisibility = uiOptions
 }
 
-
 fun AppCompatActivity.setNavigationBarColor(color: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         window.navigationBarColor = color
@@ -178,29 +177,31 @@ fun AppCompatActivity.setStatusBarColor(color: Int) {
     }
 }
 
-fun FragmentActivity.showAlert(title: String,
-                               message: String,
-                               positiveButton: String,
-                               positiveButtonListener: DialogInterface.OnClickListener? = null,
-                               negativeButton: String? = null,
-                               negativeButtonListener: DialogInterface.OnClickListener? = null,
-                               neutralButton: String? = null,
-                               neutralButtonListener: DialogInterface.OnClickListener? = null): AlertDialog {
+fun FragmentActivity.showAlert(
+    title: String,
+    message: String,
+    positiveButton: String,
+    positiveButtonListener: DialogInterface.OnClickListener? = null,
+    negativeButton: String? = null,
+    negativeButtonListener: DialogInterface.OnClickListener? = null,
+    neutralButton: String? = null,
+    neutralButtonListener: DialogInterface.OnClickListener? = null
+): AlertDialog {
     val builder = MaterialAlertDialogBuilder(this).apply {
         setMessage(message)
         setTitle(title)
 
         // positive action
-        if(positiveButtonListener != null) setPositiveButton(positiveButton, positiveButtonListener)
-        else setPositiveButton(positiveButton) { dialog, id -> dialog.dismiss()}
+        if (positiveButtonListener != null) setPositiveButton(positiveButton, positiveButtonListener)
+        else setPositiveButton(positiveButton) { dialog, id -> dialog.dismiss() }
 
         // negative action
-        if(negativeButton != null && negativeButtonListener != null) setNegativeButton(negativeButton, negativeButtonListener)
-        else if(negativeButton != null) setNegativeButton(negativeButton) { dialog, id -> dialog.dismiss()}
+        if (negativeButton != null && negativeButtonListener != null) setNegativeButton(negativeButton, negativeButtonListener)
+        else if (negativeButton != null) setNegativeButton(negativeButton) { dialog, id -> dialog.dismiss() }
 
         // neutral action
-        if(neutralButton != null && neutralButtonListener != null) setNeutralButton(neutralButton, neutralButtonListener)
-        else if(neutralButton != null) setNeutralButton(neutralButton) { dialog, id -> dialog.dismiss()}
+        if (neutralButton != null && neutralButtonListener != null) setNeutralButton(neutralButton, neutralButtonListener)
+        else if (neutralButton != null) setNeutralButton(neutralButton) { dialog, id -> dialog.dismiss() }
     }
 
     val dialog: AlertDialog = builder.create()
@@ -208,16 +209,18 @@ fun FragmentActivity.showAlert(title: String,
     return dialog
 }
 
-fun FragmentActivity.showEditAlert(title: String,
-                                   message: String,
-                                   hint: String? = "",
-                                   positiveButton: String,
-                                   positiveButtonListener: EditTextDialogInterface.OnClickListener? = null,
-                                   negativeButton: String? = null,
-                                   negativeButtonListener: DialogInterface.OnClickListener? = null,
-                                   neutralButton: String? = null,
-                                   neutralButtonListener: DialogInterface.OnClickListener? = null,
-                                   cancelable: Boolean = true): Dialog {
+fun FragmentActivity.showEditAlert(
+    title: String,
+    message: String,
+    hint: String? = "",
+    positiveButton: String,
+    positiveButtonListener: EditTextDialogInterface.OnClickListener? = null,
+    negativeButton: String? = null,
+    negativeButtonListener: DialogInterface.OnClickListener? = null,
+    neutralButton: String? = null,
+    neutralButtonListener: DialogInterface.OnClickListener? = null,
+    cancelable: Boolean = true
+): Dialog {
 
     val editText: TextInputEditText
 
@@ -242,21 +245,21 @@ fun FragmentActivity.showEditAlert(title: String,
         editText.requestFocus()
 
         // positive action
-        if(positiveButtonListener != null) setPositiveButton(positiveButton) { dialog, id ->
+        if (positiveButtonListener != null) setPositiveButton(positiveButton) { dialog, id ->
             hideKeyboard()
             positiveButtonListener.onClick(dialog, id, editText.text.toString())
         }
         else setPositiveButton(positiveButton) { dialog, id ->
             hideKeyboard()
-            dialog.dismiss()}
+            dialog.dismiss() }
 
         // negative action
-        if(negativeButton != null && negativeButtonListener != null) setNegativeButton(negativeButton, negativeButtonListener)
-        else if(negativeButton != null) setNegativeButton(negativeButton) { dialog, id -> dialog.dismiss()}
+        if (negativeButton != null && negativeButtonListener != null) setNegativeButton(negativeButton, negativeButtonListener)
+        else if (negativeButton != null) setNegativeButton(negativeButton) { dialog, id -> dialog.dismiss() }
 
         // neutral action
-        if(neutralButton != null && neutralButtonListener != null) setNeutralButton(neutralButton, neutralButtonListener)
-        else if(neutralButton != null) setNeutralButton(neutralButton) { dialog, id -> dialog.dismiss()}
+        if (neutralButton != null && neutralButtonListener != null) setNeutralButton(neutralButton, neutralButtonListener)
+        else if (neutralButton != null) setNeutralButton(neutralButton) { dialog, id -> dialog.dismiss() }
     }
 
     val dialog: AlertDialog = builder.create()

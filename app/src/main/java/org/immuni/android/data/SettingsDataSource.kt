@@ -39,7 +39,7 @@ class SettingsDataSource(
                 when (event) {
                     AppLifecycleEvent.ON_START -> {
                         val resource = safeApiCall<ImmuniSettings, ErrorResponse> { appConfigurationService.settings() }
-                        if(resource is NetworkResource.Success) {
+                        if (resource is NetworkResource.Success) {
                             resource.data?.let { settings ->
                                 onSettingsUpdate(settings)
                             }

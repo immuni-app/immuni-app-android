@@ -16,7 +16,7 @@ class ChannelExtensionsTest {
     fun `test broadcast channel receive available`() = runBlocking {
         val channel = Channel<Int>(capacity = Channel.UNLIMITED)
 
-        for(i in 0 until 13) {
+        for (i in 0 until 13) {
             channel.send(i)
         }
 

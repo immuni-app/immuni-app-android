@@ -2,6 +2,7 @@ package org.immuni.android.db.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import java.util.*
 import kotlinx.coroutines.flow.Flow
 import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.db.entity.BLEEvent
@@ -9,10 +10,9 @@ import org.immuni.android.db.entity.SLOTS_PER_CONTACT_RECORD
 import org.immuni.android.db.entity.dateToRelativeTimestamp
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
-import java.util.*
 
 @Dao
-interface BLEContactDao: BaseDao<BLEContactEntity>, KoinComponent {
+interface BLEContactDao : BaseDao<BLEContactEntity>, KoinComponent {
     @Query("SELECT * FROM ble_contact_table")
     suspend fun getAll(): List<BLEContactEntity>
 

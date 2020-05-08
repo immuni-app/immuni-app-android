@@ -1,14 +1,14 @@
 package org.immuni.android.config
 
-import org.immuni.android.api.model.FcmTokenRequest
-import org.immuni.android.fcm.FirebaseFCMConfiguration
 import com.google.firebase.messaging.RemoteMessage
+import org.immuni.android.api.model.FcmTokenRequest
 import org.immuni.android.data.FcmRepository
 import org.immuni.android.data.SettingsRepository
+import org.immuni.android.fcm.FirebaseFCMConfiguration
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
+class ImmuniFirebaseFCMConfiguration : FirebaseFCMConfiguration, KoinComponent {
 
     override suspend fun onNewPushNotification(remoteMessage: RemoteMessage) {
         // Check if message contains a data payload.
@@ -17,9 +17,9 @@ class ImmuniFirebaseFCMConfiguration: FirebaseFCMConfiguration, KoinComponent {
         }*/
 
         // Check if message contains a notification payload.
-        //remoteMessage.notification?.let {
+        // remoteMessage.notification?.let {
         //    toast("NOTIFICATION ${it.body}")
-        //}
+        // }
     }
 
     override suspend fun onNewToken(token: String) {

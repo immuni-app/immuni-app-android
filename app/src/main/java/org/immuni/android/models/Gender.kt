@@ -1,8 +1,8 @@
 package org.immuni.android.models
 
 import com.squareup.moshi.Json
-import org.immuni.android.R
 import kotlin.random.Random
+import org.immuni.android.R
 
 enum class Gender(val id: String) {
     @Json(name = "M") MALE("M"),
@@ -16,8 +16,8 @@ enum class Gender(val id: String) {
 fun Gender.iconResource(deviceId: String, userIndex: Int): Int {
 
     // main user always blue
-    if(userIndex == 0) {
-        return when(this) {
+    if (userIndex == 0) {
+        return when (this) {
             Gender.MALE -> R.drawable.ic_male_blue
             Gender.FEMALE -> R.drawable.ic_female_blue
         }
@@ -44,7 +44,7 @@ fun Gender.iconResource(deviceId: String, userIndex: Int): Int {
 fun colorResource(deviceId: String, userIndex: Int): Int {
 
     // main user always blue
-    if(userIndex == 0) return R.color.profile_blue
+    if (userIndex == 0) return R.color.profile_blue
 
     val random = Random(deviceId.hashCode())
     val list = listOf(

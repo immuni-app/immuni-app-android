@@ -1,8 +1,8 @@
 package org.immuni.android.models.survey.raw
 
-import org.immuni.android.models.survey.*
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import org.immuni.android.models.survey.*
 
 @JsonClass(generateAdapter = true)
 data class RawJumpItem(

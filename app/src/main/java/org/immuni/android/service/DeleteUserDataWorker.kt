@@ -2,6 +2,8 @@ package org.immuni.android.service
 
 import android.content.Context
 import androidx.work.*
+import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
@@ -10,8 +12,6 @@ import org.immuni.android.db.ImmuniDatabase
 import org.immuni.android.util.log
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 class DeleteUserDataWorker(appContext: Context, workerParams: WorkerParameters) :
     CoroutineWorker(appContext, workerParams), KoinComponent {

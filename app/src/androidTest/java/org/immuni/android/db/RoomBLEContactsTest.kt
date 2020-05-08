@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import java.io.IOException
+import java.util.*
 import kotlinx.coroutines.runBlocking
 import org.immuni.android.db.dao.BLEContactDao
 import org.immuni.android.db.dao.addContact
@@ -12,14 +14,10 @@ import org.immuni.android.db.entity.RELATIVE_TIMESTAMP_SECONDS
 import org.immuni.android.db.entity.RELATIVE_TIMESTAMP_TOLERANCE_MS
 import org.immuni.android.db.entity.relativeTimestampToDate
 import org.junit.After
-
-import org.junit.Test
-import org.junit.runner.RunWith
-
 import org.junit.Assert.*
 import org.junit.Before
-import java.io.IOException
-import java.util.*
+import org.junit.Test
+import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class RoomBLEContactsTest {
@@ -64,7 +62,6 @@ class RoomBLEContactsTest {
                 relativeTimestampToDate(currentDate, entries[1].relativeTimestamp).time / 1000.0,
                 RELATIVE_TIMESTAMP_TOLERANCE_MS / 1000.0
             )
-
         }
     }
 
@@ -101,7 +98,6 @@ class RoomBLEContactsTest {
                 relativeTimestampToDate(twentyMinutesMore, record1.relativeTimestamp).time / 1000.0,
                 RELATIVE_TIMESTAMP_TOLERANCE_MS / 1000.0
             )
-
         }
     }
 

@@ -1,8 +1,8 @@
 package org.immuni.android.models.survey.raw
 
-import org.immuni.android.models.survey.Survey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import org.immuni.android.models.survey.Survey
 
 /**
  * RawSurvey and all other Raw* types in this package, are intermediate models generated from the

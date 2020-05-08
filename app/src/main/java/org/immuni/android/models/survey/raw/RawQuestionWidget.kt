@@ -1,10 +1,10 @@
 package org.immuni.android.models.survey.raw
 
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import org.immuni.android.models.survey.MultipleChoicesWidget
 import org.immuni.android.models.survey.PickerWidget
 import org.immuni.android.models.survey.RadioWidget
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 enum class RawQuestionWidgetType {
     @Json(name = "picker")

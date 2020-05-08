@@ -15,11 +15,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.immuni.android.extensions.playstore.PlayStoreActions
 import kotlinx.coroutines.*
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
 import org.immuni.android.data.SettingsDataSource
+import org.immuni.android.extensions.playstore.PlayStoreActions
 import org.koin.core.KoinComponent
 
 class ForceUpdateViewModel(
@@ -37,7 +37,7 @@ class ForceUpdateViewModel(
         val activity = fragment.requireActivity()
 
         // if we have a custon url
-        settings.latestSettings()?.appUpdateUrl?.let { url->
+        settings.latestSettings()?.appUpdateUrl?.let { url ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && !activity.applicationContext.packageManager.canRequestPackageInstalls()) {
                 val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:" + activity.applicationContext.packageName))
                 fragment.startActivityForResult(intent, 20999)

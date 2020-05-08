@@ -3,6 +3,9 @@ package org.immuni.android.network.api
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
+import java.io.IOException
+import java.lang.Exception
+import java.net.SocketTimeoutException
 import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -11,13 +14,10 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Response
-import java.io.IOException
-import java.lang.Exception
-import java.net.SocketTimeoutException
 
 class SafeApiCallTest {
 
-    class MockError {}
+    class MockError
 
     interface MockService {
         fun settings(): Response<ResponseBody>
@@ -36,7 +36,7 @@ class SafeApiCallTest {
 
         val responseBody = "{}".toResponseBody()
 
-        coEvery{ mockService.settings() } returns Response.success(responseBody)
+        coEvery { mockService.settings() } returns Response.success(responseBody)
 
         val result = safeApiCall<ResponseBody, MockError> { mockService.settings() }
 
@@ -48,7 +48,7 @@ class SafeApiCallTest {
     fun `test when retrofit call http fails returns proper error`() = runBlockingTest {
         val responseBody = "{}".toResponseBody()
 
-        coEvery{ mockService.settings() } returns Response.error(404, responseBody)
+        coEvery { mockService.settings() } returns Response.error(404, responseBody)
 
         val result = safeApiCall<ResponseBody, MockError> { mockService.settings() }
 

@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import org.immuni.android.R
-import org.immuni.android.ui.onboarding.OnboardingViewModel
-import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import kotlinx.android.synthetic.main.onboarding_profile_fragment.*
+import org.immuni.android.R
 import org.immuni.android.extensions.activity.loading
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
+import org.immuni.android.ui.onboarding.OnboardingViewModel
 import org.immuni.android.util.ProgressDialogFragment
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -47,7 +47,7 @@ class ProfileFragment : Fragment() {
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                progress.setStep(position + 1, viewPager.adapter?.itemCount?:1)
+                progress.setStep(position + 1, viewPager.adapter?.itemCount ?: 1)
             }
 
             override fun onPageScrolled(
@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
         viewModel.navigateToNextPage.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
                 val newPos = viewPager.currentItem + 1
-                if(newPos ==  (viewPager.adapter?.itemCount ?: 0)) {
+                if (newPos == (viewPager.adapter?.itemCount ?: 0)) {
                     navigateToDone()
                 } else {
                     viewPager.setCurrentItem(newPos, true)
@@ -96,7 +96,7 @@ class ProfileFragment : Fragment() {
 
     private fun onBackPressed() {
         val newPos = viewPager.currentItem - 1
-        if(newPos >= 0) {
+        if (newPos >= 0) {
             viewPager.setCurrentItem(newPos, true)
         } else {
             activity?.finish()

@@ -1,7 +1,7 @@
 package org.immuni.android.util
 
-import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.Dispatchers
 
 /**
  * Coroutines contexts provider.

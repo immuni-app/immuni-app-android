@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.R
+import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import org.immuni.android.ui.home.HomeActivity
 import org.immuni.android.ui.onboarding.OnboardingViewModel
-import org.immuni.android.extensions.activity.setLightStatusBarFullscreen
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class DoneFragment : Fragment() {
@@ -24,7 +24,7 @@ class DoneFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         // prevent crashes for invalid state
-        if(savedInstanceState != null) activity?.finish()
+        if (savedInstanceState != null) activity?.finish()
 
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             // users must select a choice
@@ -60,5 +60,4 @@ class DoneFragment : Fragment() {
         activity?.startActivity(intent)
         activity?.finish()
     }
-
 }

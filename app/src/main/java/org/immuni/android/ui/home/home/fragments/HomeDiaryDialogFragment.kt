@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.home_diary_dialog.*
 import org.immuni.android.R
 import org.immuni.android.ui.dialog.FullScreenDialogDarkFragment
 
-class HomeDiaryDialogFragment: FullScreenDialogDarkFragment() {
+class HomeDiaryDialogFragment : FullScreenDialogDarkFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,8 +28,6 @@ class HomeDiaryDialogFragment: FullScreenDialogDarkFragment() {
         }
 
         button.setOnClickListener {
-
         }
     }
-
 }

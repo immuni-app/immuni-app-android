@@ -1,11 +1,10 @@
 package org.immuni.android.api
 
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.immuni.android.api.model.toErrorResponse
 import org.immuni.android.api.model.toJson
-import okhttp3.ResponseBody.Companion.toResponseBody
-import org.junit.Test
-
 import org.junit.Assert.*
+import org.junit.Test
 import retrofit2.Response
 
 class ErrorResponseTest {

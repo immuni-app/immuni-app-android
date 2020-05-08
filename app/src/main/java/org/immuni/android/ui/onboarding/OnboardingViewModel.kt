@@ -3,19 +3,19 @@ package org.immuni.android.ui.onboarding
 import android.app.Activity
 import android.content.Intent
 import androidx.lifecycle.*
-import org.immuni.android.extensions.livedata.Event
+import java.io.Serializable
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.drop
 import org.immuni.android.ImmuniApplication
 import org.immuni.android.data.SettingsDataSource
+import org.immuni.android.extensions.livedata.Event
 import org.immuni.android.managers.ExposureNotificationManager
 import org.immuni.android.managers.UserManager
 import org.immuni.android.models.User
 import org.immuni.android.ui.dialog.WebViewDialogActivity
 import org.koin.core.KoinComponent
-import java.io.Serializable
 
 class OnboardingViewModel(
     val handle: SavedStateHandle,
@@ -107,8 +107,8 @@ class OnboardingViewModel(
     fun onOnboardingComplete() {
         val userInfo = partialUserInfo.value!!
         uiScope.launch {
-            //loading.value = true
-            //delay(250)
+            // loading.value = true
+            // delay(250)
 
             val mainUser = User(
                 ageGroup = userInfo.ageGroup!!,
@@ -117,7 +117,7 @@ class OnboardingViewModel(
             )
             userManager.addUser(mainUser)
 
-            //loading.value = false
+            // loading.value = false
             userManager.setOnboardingCompleted(true)
             navigateToNextPage.value = Event(true)
         }
@@ -146,6 +146,5 @@ class OnboardingViewModel(
         uiScope.launch {
             exposureNotificationManager.optInAndStartExposureTracing(activity)
         }
-
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import java.io.File
 import org.immuni.android.db.converter.DateConverter
 import org.immuni.android.db.converter.GenderConverter
 import org.immuni.android.db.dao.BLEContactDao
@@ -13,8 +14,6 @@ import org.immuni.android.db.dao.RawDao
 import org.immuni.android.db.entity.BLEContactEntity
 import org.immuni.android.db.entity.HealthProfileEntity
 import org.immuni.android.db.entity.QuestionLastAnswerTimeEntity
-import java.io.File
-
 
 const val DATABASE_VERSION = 9
 const val DATABASE_NAME = "immuni_database"
@@ -44,5 +43,3 @@ abstract class ImmuniDatabase : RoomDatabase() {
         }
     }
 }
-
-
