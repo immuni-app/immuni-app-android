@@ -8,7 +8,16 @@ commands:
     steps:
       - run:
           name: "[build] Compile and archive"
-          command: fastlane build target:$BUILD_KIND
+          command: |
+            ASSIGNED_VERSION_NAME=$(./gradlew -q printVersionName)
+            ASSIGNED_VERSION_CODE=$(./gradlew -q printVersionCode)
+
+            echo "⚙️ Preparing to build Immuni!"
+            echo "Release version (versionName): $ASSIGNED_VERSION_NAME"
+            echo "Build number (versionCode): $ASSIGNED_VERSION_CODE"
+            echo "Commit: $CIRCLE_SHA1"
+
+            fastlane build target:$BUILD_KIND
       - store_artifacts:
           path: app/build/outputs/
 
