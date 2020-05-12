@@ -38,6 +38,7 @@ platform :android do
     gradle(
       task: "bundle",
       build_type: "Release",
+      print_command: false,
       properties: {
         "android.injected.signing.store.file" =>  ENV["KEYSTORE_PATH"],
         "android.injected.signing.store.password" => ENV["KEYSTORE_PASSWORD"],
@@ -49,12 +50,12 @@ platform :android do
 
   desc 'Build the app'
   lane :build do |options|
-    if options[:target] == "development"
+    if options[:target] == "dev"
       build_debug
     elsif options[:target] == "release"
       build_release
     else
-      puts "Unrecognized build target: #{options[:target]}. Valid ones are: release, development."
+      puts "Unrecognized build target: #{options[:target]}. Valid ones are: dev, release."
     end
   end
 

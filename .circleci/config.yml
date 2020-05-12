@@ -36,11 +36,11 @@ commands:
             fi
 
             # Check the build kind from the git message. The git message must contain either:
-            # "#build-release" or "#build-development", depending on the kind of release.
-            BUILD_KIND="$(echo $GIT_MESSAGE | sed -E 's/^.*#build-(release|development).*$/\1/')"
+            # "#build-release" or "#build-dev", depending on the kind of release.
+            BUILD_KIND="$(echo $GIT_MESSAGE | sed -E 's/^.*#build-(release|dev).*$/\1/')"
 
             if [[ -z "${BUILD_KIND}" ]]; then
-                echo "Unrecognized build kind; valid types are: release, development."
+                echo "Unrecognized build kind; valid types are: dev, release."
                 circleci-agent step halt
             fi
 
