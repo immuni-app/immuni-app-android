@@ -37,6 +37,8 @@ android {
         versionCode rootProject.versionCode
         versionName rootProject.versionName
 
+        setProperty("archivesBaseName", "Immuni" + "-" + versionName + "build" + versionCode)
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         javaCompileOptions {
