@@ -39,7 +39,7 @@ platform :android do
       task: "bundle",
       build_type: "Release",
       properties: {
-        "android.injected.signing.store.file" => "#{Dir.home}/code/immuni-android.keystore",
+        "android.injected.signing.store.file" =>  ENV["KEYSTORE_PATH"],
         "android.injected.signing.store.password" => ENV["KEYSTORE_PASSWORD"],
         "android.injected.signing.key.alias" => ENV["UPLOAD_KEY_ALIAS"],
         "android.injected.signing.key.password" => ENV["UPLOAD_KEY_PASSWORD"],

@@ -44,8 +44,13 @@ commands:
       - run:
           name: "[fetch_config] Setup custom environment variables"
           command: |
+            # Create necessary files
             echo $GOOGLE_SERVICES_JSON | base64 --decode > app/google-services.json
-            echo $KEYSTORE | base64 --decode > immuni-android.keystore
+            echo $KEYSTORE | base64 --decode > app/immuni-android.keystore
+
+            # Setup environment variables
+            echo "export BUILD_NUMBER=$CIRCLE_BUILD_NUM" >> $BASH_ENV
+            echo "export KEYSTORE_PATH='$(pwd)/app/immuni-android.keystore'" >> $BASH_ENV
 
   install_android_dependencies:
     description: Install Android dependencies.

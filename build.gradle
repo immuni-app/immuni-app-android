@@ -2,9 +2,24 @@
 
 buildscript {
     ext {
+        // App version digits
+        versionMajor = 1
+        versionMinor = 0
+        versionPatch = 0
+
+        // Version name follows the <major>.<minor>.<patch> convention
+        computeVersionName = { ->
+            return String.format('%d.%d.%d', versionMajor, versionMinor, versionPatch)
+        }
+
+        // Version code is computed as: major + minor + patch + build number (where available)
+        computeVersionCode = { ->
+            return (versionMajor * 1000000) + (versionMinor * 100000) + (versionPatch * 10000) + Integer.valueOf(System.env.BUILD_NUMBER ?: 0)
+        }
+
         // App version
-        versionName = '1.0.32' // X.Y.Z; X = Major, Y = minor, Z = Patch level
-        versionCode = 34
+        versionName = computeVersionName()
+        versionCode = computeVersionCode()
 
         // SDK and tools
         compileSdkVersion = 29
