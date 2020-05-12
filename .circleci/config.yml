@@ -17,7 +17,7 @@ commands:
             echo "Build number (versionCode): $ASSIGNED_VERSION_CODE"
             echo "Commit: $CIRCLE_SHA1"
 
-            fastlane build target:$BUILD_KIND
+            bundle exec fastlane build target:$BUILD_KIND
       - store_artifacts:
           path: app/build/outputs/
 
