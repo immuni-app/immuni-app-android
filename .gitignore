@@ -19,3 +19,5 @@ immuni_keystore.properties
 icon.png
 /app/google-services.json
 /app.properties
+# Fastlane
+fastlane/report.xml

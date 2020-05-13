@@ -17,7 +17,33 @@ commands:
             echo "Build number (versionCode): $ASSIGNED_VERSION_CODE"
             echo "Commit: $CIRCLE_SHA1"
 
+            echo "export ASSIGNED_VERSION_NAME=$ASSIGNED_VERSION_NAME" >> $BASH_ENV
+            echo "export ASSIGNED_VERSION_CODE=$ASSIGNED_VERSION_CODE" >> $BASH_ENV
+
             bundle exec fastlane build target:$BUILD_KIND
+      - run:
+          name: "[build] Create GitHub release"
+          command: |
+            RELEASE_NAME="Immuni-${ASSIGNED_VERSION_NAME}build${ASSIGNED_VERSION_CODE}"
+
+            ARTIFACTS_PATH=$([ "$BUILD_KIND" == "dev" ] && echo "apk/debug" || echo "bundle/release")
+            ARTIFACTS_PATH="app/build/outputs/${ARTIFACTS_PATH}"
+
+            # Use -soft to prevent release from being re-created if it already exists
+            # This takes care of concurrency issues (the build would fail)
+            ghr \
+            -t $GITHUB_TOKEN \
+            -u $CIRCLE_PROJECT_USERNAME \
+            -r $CIRCLE_PROJECT_REPONAME \
+            -c $CIRCLE_SHA1 \
+            -n $RELEASE_NAME \
+            -soft \
+            $RELEASE_NAME $ARTIFACTS_PATH | tee release_result
+
+            if grep -q aborted release_result; then
+              echo "A release with version $ASSIGNED_VERSION_NAME and build number $ASSIGNED_VERSION_CODE already exists. Aborting."
+              exit 1
+            fi
       - store_artifacts:
           path: app/build/outputs/
 
@@ -115,6 +141,22 @@ commands:
           key: 1-gems-{{ checksum "Gemfile.lock" }}
           paths:
             - ~/.gem
+      - run:
+          name: "[ci_setup] Configure tools"
+          command: |
+            curl -L https://github.com/tcnksm/ghr/releases/download/v0.13.0/ghr_v0.13.0_linux_amd64.tar.gz -o ghr.tar.gz
+            curl -L https://github.com/tcnksm/ghr/releases/download/v0.13.0/v0.13.0_SHASUMS -o v0.13.0_SHASUMS
+
+            TRUSTED_GHR_SHA="$(cat v0.13.0_SHASUMS | grep 'ghr_v0.13.0_linux_amd64.tar.gz' | sed -E 's/(\S+)\s+.*/\1/')"
+            LOCAL_GHR_SHA="$(sha256sum ghr.tar.gz | sed -E 's/(\S+)\s+.*/\1/')"
+
+            if [[ ! $LOCAL_GHR_SHA == $TRUSTED_GHR_SHA ]]; then
+              echo "Untrusted release of ghr, stopping execution."
+              circleci-agent step halt
+            fi
+
+            tar xzf ghr.tar.gz
+            sudo mv ghr_v0.13.0_linux_amd64/ghr /usr/local/bin/
 
 executors:
   default:
