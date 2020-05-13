@@ -20,7 +20,7 @@ commands:
             echo "export ASSIGNED_VERSION_NAME=$ASSIGNED_VERSION_NAME" >> $BASH_ENV
             echo "export ASSIGNED_VERSION_CODE=$ASSIGNED_VERSION_CODE" >> $BASH_ENV
 
-            bundle exec fastlane build target:$BUILD_KIND
+            bundle exec fastlane build target:$BUILD_KIND 
       - run:
           name: "[build] Create GitHub release"
           command: |
