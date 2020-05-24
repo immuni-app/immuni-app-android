@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/privacyLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_rounded"
+    android:backgroundTint="@color/background_light"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- Collapsing toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:elevation="@dimen/cards_elevation"
+        android:outlineSpotShadowColor="@color/colorPrimary"
+        android:stateListAnimator="@null"
+        app:background="@android:color/transparent"
+        app:backgroundTint="@android:color/transparent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/suggestions_default_card_outline"
+            app:contentScrim="@android:color/transparent"
+            app:expandedTitleGravity="bottom"
+            app:expandedTitleMarginStart="32dp"
+            app:expandedTitleMarginTop="32dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/statusCardLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="pin"
+                app:layout_collapseParallaxMultiplier="0.5">
+
+                <it.ministerodellasalute.immuni.ui.view.ImageScaleView
+                    android:id="@+id/illustration"
+                    android:layout_width="0dp"
+                    android:layout_height="206dp"
+                    android:layout_weight="1"
+                    android:scaleType="matrix"
+                    app:matrixType="bottom_left"
+                    android:contentDescription="@string/home_information_self_care"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.4"
+                    android:src="@drawable/illustration_doctor" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/SuggestionTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="32dp"
+                    android:text="@string/info_card_default_title"
+                    android:textColor="@color/background"
+                    android:textSize="26sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/illustration"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="30dp"
+                app:layout_collapseMode="pin">
+
+                <ImageView
+                    android:id="@+id/navigationIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/exit"
+                    android:src="@drawable/ic_cross_white" />
+
+                <TextView
+                    android:id="@+id/toolbarTitle"
+                    style="@style/H1NavBar.Light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:paddingStart="@dimen/activity_vertical_margin"
+                    android:paddingEnd="32dp"
+                    android:singleLine="true"
+                    android:text="@string/info_card_default_title_short"
+                    android:textAllCaps="false" />
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Scrollable content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:elevation="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
+            android:orientation="vertical">
+            <TextView
+                style="@style/P1Text"
+                android:layout_margin="30dp"
+                android:fontFamily="@font/euclid_circular_medium"
+                android:background="@drawable/rounded_corners_30dp"
+                android:backgroundTint="#675AFF"
+                android:padding="24dp"
+                android:textColor="#FFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/info_card_subtitle"/>
+            <TextView
+                style="@style/P1Text.Generic"
+                android:textColor="@color/grey_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="30dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:text="@string/info_card_default_respect" />
+            <TextView
+                style="@style/ParagraphCard"
+                android:drawableStart="@drawable/ic_ministry"
+                android:text="@string/info_card_default_norms" />
+            <TextView
+                style="@style/ParagraphCard"
+                android:drawableStart="@drawable/ic_wash_hands"
+                android:text="@string/asl_instruction_wash_hands" />
+
+            <TextView
+                style="@style/ParagraphCard"
+                android:drawableStart="@drawable/ic_sneeze"
+                android:text="@string/asl_instruction_cough_sneeze" />
+            <TextView
+                style="@style/ParagraphCard"
+                android:drawableStart="@drawable/ic_social_distancing"
+                android:text="@string/asl_instruction_social_distancing" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

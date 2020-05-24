@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <!-- Generic -->
+    <color name="transparent">#00000000</color>
+    <color name="colorPrimary">#5751FF</color>
+    <color name="colorPrimaryDark">#0026cb</color>
+    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="statusBarLight">#00FFFFFF</color>
+
+    <!-- Figma colors -->
+    <color name="background">#FFFFFF</color>
+    <color name="background_light">#F9FBFF</color>
+    <color name="background_darker">#F6F9FF</color>
+    <color name="danger">#F22959</color>
+    <color name="warning">#FF4F28</color>
+    <color name="warning_active">#FB927A</color>
+    <color name="text_error_red">@color/danger</color>
+    <color name="button_label">@color/colorPrimary</color>
+    <color name="card_light">#FFFFFF</color>
+    <color name="card_dark">#675AFF</color>
+    <color name="popup_mask">#333F4A73</color>
+    <color name="data_upload_vertical_divider">#995751FF</color>
+    <color name="grey_normal">#627890</color>
+    <color name="grey_dark">#2F4F75</color>
+    <color name="light_blue">#E9EFFF</color>
+    <color name="toolbarSeparator">#E3E3EB</color>
+    <color name="text_light">#FFFFFF</color>
+</resources>

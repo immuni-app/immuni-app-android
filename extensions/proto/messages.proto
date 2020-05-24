@@ -1,0 +1,19 @@
+message File {
+    optional Header header = 1;
+    repeated Key key = 2;
+}
+
+message Header {
+    optional int64 startTimestamp = 1; // Time window of keys in this file based on arrival to server, in UTC.
+    optional int64 endTimestamp = 2;
+    optional string region = 3; // Region for which these keys came from (e.g., country)
+    optional int32 batchNum = 4; // E.g., Batch 2 of 10
+    optional int32 batchSize = 5;
+}
+
+message Key {
+    optional bytes keyData = 1; // Key of infected user
+    optional uint32 rollingStartNumber = 2; // Interval number when the key's EKRollingPeriod started.
+    optional uint32 rollingPeriod = 3; // Number of 10-minute windows between key rolling.
+    optional int32 transmissionRiskLevel = 4; // Risk of transmission associated with the person this key came from.
+}

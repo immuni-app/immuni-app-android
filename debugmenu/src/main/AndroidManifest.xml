@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="it.ministerodellasalute.immuni.debugmenu">
+
+    <application>
+        <activity
+            android:name="it.ministerodellasalute.immuni.debugmenu.ui.ExitActivity"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:autoRemoveFromRecents="true"/>
+
+        <activity android:name="it.ministerodellasalute.immuni.debugmenu.ui.DebugMenuActivity"
+            android:theme="@style/SecretMenuTransparent"/>
+      
+    </application>
+
+</manifest>

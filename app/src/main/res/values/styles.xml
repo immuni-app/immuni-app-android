@@ -1,0 +1,369 @@
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- ASAP font -->
+        <item name="android:fontFamily">@font/euclid_circular</item>
+
+        <!-- Full screen -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">#ffffff</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- Default background and text colors -->
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">@color/grey_normal</item>
+
+        <!-- Ripple effect default color -->
+        <item name="colorControlHighlight">#42DDDDDD</item>
+
+        <!-- Bottom sheet rounded background -->
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+
+        <!-- Corner shape -->
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.AppTheme.MediumComponent
+        </item>
+
+        <!-- Alert dialog theme -->
+        <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.FullScreenDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="actionMenuTextColor">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.DialogSlide">
+        <item name="android:windowEnterAnimation">@anim/nav_default_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/nav_default_exit_anim</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_rounded</item>
+    </style>
+
+    <style name="ShapeAppearance.AppTheme.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="materialAlertDialogTitleTextStyle">@style/AlertTitleTextStyle</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/AlertBodyTextStyle</item>
+    </style>
+
+    <style name="AlertTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/grey_dark</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="AlertBodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/grey_normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Figma styles -->
+
+    <style name="H1Heading">
+        <item name="android:fontFamily">@font/euclid_circular_bold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+        <item name="android:textColor">@color/grey_dark</item>
+    </style>
+
+
+    <style name="H2SubHeading">
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">@color/grey_dark</item>
+    </style>
+
+    <style name="H1NavBar">
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/grey_dark</item>
+    </style>
+
+    <style name="H1NavBar.Light">
+        <item name="android:textColor">@color/text_light</item>
+    </style>
+
+    <style name="H3SectionHeading">
+        <item name="android:fontFamily">@font/euclid_circular_bold</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:textColor">@color/grey_dark</item>
+    </style>
+
+    <style name="H4Section">
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+        <item name="android:textColor">@color/grey_dark</item>
+    </style>
+
+    <style name="H5Section">
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/grey_dark</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="SText">
+        <item name="android:fontFamily">@font/euclid_circular_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grey_normal</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="P1Text">
+        <item name="android:fontFamily">@font/euclid_circular_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/grey_normal</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="P1Text.SemiBold">
+        <item name="fontWeight">400</item>
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
+    </style>
+
+    <style name="P1Text.Bold">
+        <item name="android:fontFamily">@font/euclid_circular_bold</item>
+    </style>
+
+    <style name="P1Text.Generic">
+        <item name="android:fontFamily">@font/euclid_circular</item>
+    </style>
+
+    <style name="ButtonLabel">
+        <item name="android:fontFamily">@font/euclid_circular_medium</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/button_label</item>
+    </style>
+
+    <style name="RoundedButton">
+        <item name="cornerRadius">27dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:elevation">@dimen/cards_elevation</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/colorPrimary</item>
+        <item name="android:minHeight">55dp</item>
+        <item name="android:minWidth">150dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">@color/color_state_rounded_button_text</item>
+        <item name="android:backgroundTint">@color/color_state_rounded_button</item>
+    </style>
+
+    <style name="RoundedButton.GreyDark">
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/grey_dark
+        </item>
+        <item name="android:backgroundTint">@color/grey_dark</item>
+    </style>
+
+    <style name="RoundedButtonDanger" parent="RoundedButton">
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/danger</item>
+        <item name="android:backgroundTint">@color/color_state_rounded_button_danger</item>
+    </style>
+
+    <style name="WhiteRoundedButton">
+        <item name="cornerRadius">27dp</item>
+        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:minWidth">150dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:minHeight">55dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingEnd">24dp</item>
+        <item name="android:paddingStart">24dp</item>
+        <item name="color">@android:color/white</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <style name="RadioButton" parent="H4Section">
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textColor">#495D74</item>
+        <item name="android:fontFamily">@font/euclid_circular_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:button">@drawable/radio_button</item>
+    </style>
+
+    <style name="CheckboxButton">
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textColor">#495D74</item>
+        <item name="android:fontFamily">@font/euclid_circular_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:button">@drawable/checkbox</item>
+    </style>
+
+    <!-- From API 28 we support colored shadows for cards -->
+    <style name="CardShadowRed">
+        <item name="android:elevation">@dimen/cards_elevation</item>
+    </style>
+
+    <style name="CardShadowWhite">
+        <item name="android:elevation">@dimen/cards_elevation</item>
+    </style>
+
+    <style name="CardShadowColorPrimary">
+        <item name="android:elevation">@dimen/cards_elevation</item>
+    </style>
+
+    <style name="PrivacyCards">
+        <item name="cardElevation">@dimen/cards_elevation</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+    </style>
+
+    <style name="FAQCards">
+        <item name="cardElevation">@dimen/cards_elevation</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+    </style>
+
+    <style name="ParagraphCard" parent="CardShadowWhite">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">25dp</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:background">@drawable/rounded_corners_30dp</item>
+        <item name="android:backgroundTint">@color/background</item>
+        <item name="cardElevation">@dimen/cards_elevation</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:textColor">@color/grey_dark</item>
+        <item name="android:drawablePadding">20dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="UploadCard" parent="ParagraphCard">
+        <item name="android:padding">16dp</item>
+        <item name="android:paddingStart">25dp</item>
+        <item name="android:paddingEnd">25dp</item>
+    </style>
+
+    <style name="SettingsMenuLayout" parent="CardShadowWhite">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="SettingsMenuCard" parent="CardShadowWhite">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">25dp</item>
+        <item name="android:layout_marginEnd">25dp</item>
+        <item name="android:background">@drawable/rounded_corners_30dp</item>
+        <item name="android:backgroundTint">@color/background</item>
+        <item name="cardElevation">@dimen/cards_elevation</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+        <!--
+        <item name="strokeColor">@color/danger</item>
+        <item name="strokeWidth">2dp</item>
+        -->
+    </style>
+
+    <style name="SettingsMenuItem" parent="P1Text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">24dp</item>
+        <item name="android:textColor">@color/grey_dark</item>
+        <item name="fontFamily">@font/euclid_circular_bold</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="SettingsMenuItem.Header" parent="P1Text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">30dp</item>
+        <item name="android:layout_marginEnd">30dp</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="SettingsMenuItem.WithArrow">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="SettingsMenuItemArrowLayout">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="OnboardingKnowMore" parent="H5Section">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="ProtectionCardTitle" parent="H2SubHeading">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="InfoCardTitle" parent="H2SubHeading">
+        <item name="android:textSize">19sp</item>
+    </style>
+
+    <style name="SuggestionTitle" parent="H2SubHeading">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="PrivacyContentItem" parent="P1Text.Generic">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+
+    </style>
+</resources>

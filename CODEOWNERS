@@ -1,0 +1,13 @@
+# This file specifies the people currently responsible for code reviews in the repository.
+# For information about the owners of the code, please refer to the LICENSE and README files.
+
+@marcouberti
+
+/.circleci @valerio-castelli
+/CI @valerio-castelli
+
+/app/src/main/java/it/ministerodellasalute/immuni/logic/exposure/ @sroddy
+/app/src/main/java/it/ministerodellasalute/immuni/ui/ @marcouberti
+/debugmenu/ @marcouberti
+/extensions/ @madbat
+/network/ @madbat

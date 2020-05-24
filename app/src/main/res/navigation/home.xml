@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    app:startDestination="@id/homeFragment">
+
+    <include app:graph="@navigation/webview" />
+    <include app:graph="@navigation/howitworks" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="it.ministerodellasalute.immuni.ui.home.HomeFragment"
+        android:label="homeFragment"
+        tools:layout="@layout/home_fragment" />
+    <dialog
+        android:id="@+id/howItWorksDialogFragment"
+        android:name="it.ministerodellasalute.immuni.ui.howitworks.HowItWorksDialogFragment"
+        android:label="HowItWorksDialogFragment"
+        tools:layout="@layout/how_it_works_dialog" />
+    <action
+        android:id="@+id/action_how_it_works_dialog"
+        app:destination="@id/howItWorksDialogFragment" />
+    <activity
+        android:id="@+id/faqActivity"
+        android:name="it.ministerodellasalute.immuni.ui.faq.FaqActivity"
+        android:label="FaqActivity"
+        tools:layout="@layout/faq_fragment" />
+    <action
+        android:id="@+id/action_faq_activity"
+        app:destination="@id/faqActivity" />
+
+    <action
+        android:id="@+id/action_webview"
+        app:destination="@id/webview">
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="false" />
+    </action>
+
+    <action
+        android:id="@+id/action_howitworks"
+        app:destination="@id/howitworks">
+        <argument
+            android:name="showFaq"
+            app:argType="boolean"
+            app:nullable="false" />
+    </action>
+
+    <activity
+        android:id="@+id/onboardingActivity"
+        android:name="it.ministerodellasalute.immuni.ui.onboarding.OnboardingActivity"
+        android:label="OnboardingActivity"
+        tools:layout="@layout/onboarding_view_pager_fragment">
+        <argument
+            android:name="isEditingProvince"
+            app:argType="boolean"/>
+    </activity>
+
+    <action
+        android:id="@+id/action_onboarding_activity"
+        app:destination="@id/onboardingActivity"/>
+
+    <!-- Default -->
+    <dialog
+        android:id="@+id/stateDefaultDialog"
+        android:name="it.ministerodellasalute.immuni.ui.suggestions.StateDefaultDialogFragment"
+        tools:layout="@layout/state_default_dialog" />
+    <action
+        android:id="@+id/action_state_default"
+        app:destination="@id/stateDefaultDialog" />
+    <!-- Close -->
+    <dialog
+        android:id="@+id/stateCloseDialog"
+        android:name="it.ministerodellasalute.immuni.ui.suggestions.StateCloseDialogFragment"
+        tools:layout="@layout/state_close_dialog" />
+    <action
+        android:id="@+id/action_state_close"
+        app:destination="@id/stateCloseDialog" />
+    <!-- Positive -->
+    <dialog
+        android:id="@+id/statePositiveDialog"
+        android:name="it.ministerodellasalute.immuni.ui.suggestions.StatePositiveDialogFragment"
+        tools:layout="@layout/state_positive_dialog" />
+    <action
+        android:id="@+id/action_state_positive"
+        app:destination="@id/statePositiveDialog" />
+</navigation>

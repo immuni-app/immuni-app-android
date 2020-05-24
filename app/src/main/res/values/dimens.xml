@@ -1,0 +1,32 @@
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Override default bottom nav bar dimens -->
+    <dimen name="design_bottom_navigation_height" tools:override="true">70dp</dimen>
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">12dp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12dp</dimen>
+    <dimen name="design_bottom_navigation_shadow_height" tools:override="true">0dp</dimen>
+    <dimen name="toolbar_separator_height">0.5dp</dimen>
+
+    <dimen name="cards_elevation">1dp</dimen>
+    <dimen name="bottom_sheet_top_radius">10dp</dimen>
+    <dimen name="card_radius">30dp</dimen>
+
+</resources>

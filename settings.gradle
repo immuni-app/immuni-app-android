@@ -1,0 +1,5 @@
+rootProject.name='Immuni'
+include ':app'
+include ':extensions'
+include ':debugmenu'
+include ':network'

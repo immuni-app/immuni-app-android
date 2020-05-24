@@ -1,0 +1,168 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+
+// Template properties file
+def mockPropertiesFile = rootProject.file("template.properties")
+
+// App properties file
+def appPropertiesFile = rootProject.file("app.properties")
+def appProperties = new Properties()
+
+if (appPropertiesFile.exists()) {
+    appProperties.load(new FileInputStream(appPropertiesFile))
+} else {
+    appProperties.load(new FileInputStream(mockPropertiesFile))
+}
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    signingConfigs {
+        release {
+            keyAlias appProperties['keyAlias']
+            keyPassword appProperties['keyPassword']
+            storeFile file(appProperties['storeFile'])
+            storePassword appProperties['storePassword']
+        }
+    }
+    defaultConfig {
+        applicationId "it.ministerodellasalute.immuni"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        setProperty("archivesBaseName", "Immuni" + "-" + versionName + "build" + versionCode)
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        freeCompilerArgs += ["-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"]
+    }
+
+    sourceSets {
+        androidTest.assets {
+            srcDirs += files("$projectDir/schemas".toString())
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+task printVersionName {
+    doLast {
+        println android.defaultConfig.versionName
+    }
+}
+
+task printVersionCode {
+    doLast {
+        println android.defaultConfig.versionCode
+    }
+}
+
+dependencies {
+    implementation project(':extensions')
+    implementation project(':debugmenu')
+    implementation project(':network')
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesAndroidVersion"
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.core:core-ktx:$ktxCoreVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "androidx.vectordrawable:vectordrawable:$vectordrawableVersion"
+    implementation "androidx.fragment:fragment:$fragmentVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerviewVersion"
+    implementation "androidx.work:work-runtime-ktx:$workVersion"
+    implementation "androidx.viewpager2:viewpager2:$viewPager2Version"
+    implementation "androidx.security:security-crypto:$securityVersion"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui:$navigationVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    // Koin
+    implementation "org.koin:koin-android:$koinVersion"
+    implementation "org.koin:koin-androidx-scope:$koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+    implementation "com.github.bumptech.glide:annotations:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    //Moshi
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+    implementation "com.squareup.moshi:moshi-adapters:$moshiVersion"
+
+    //Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+
+    //Okhttp3
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+
+    // Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    testImplementation "junit:junit:$jUnitVersion"
+    testImplementation "org.json:json:$jsonVersion"
+
+    // Koin testing tools
+    testImplementation "org.koin:koin-test:$koinVersion"
+
+    // MockK
+    testImplementation "io.mockk:mockk:$mockkVersion"
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesCoreVersion")
+    testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+
+    androidTestImplementation "androidx.test.ext:junit:$androidxTestVersion"
+    androidTestImplementation "androidx.test:runner:$testRunnerVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test:core-ktx:$testCoreKtxVersion"
+    debugImplementation "androidx.fragment:fragment-testing:$testFragmentVersion"
+}

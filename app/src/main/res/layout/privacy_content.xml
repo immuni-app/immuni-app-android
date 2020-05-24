@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/privacyLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:checkedButton="@+id/first"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingTop="40dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/PrivacyContentItem"
+            android:text="@string/privacy_item_data"
+            app:drawableStartCompat="@drawable/ic_identity_none" />
+
+        <TextView
+            style="@style/PrivacyContentItem"
+            android:text="@string/privacy_item_identity"
+            app:drawableStartCompat="@drawable/ic_people_none" />
+
+        <TextView
+            style="@style/PrivacyContentItem"
+            android:text="@string/privacy_item_location"
+            app:drawableStartCompat="@drawable/ic_location_none" />
+
+        <TextView
+            style="@style/PrivacyContentItem"
+            android:text="@string/privacy_item_crypto"
+            app:drawableStartCompat="@drawable/ic_secure" />
+
+        <TextView
+            style="@style/PrivacyContentItem"
+            android:text="@string/privacy_item_data_sent"
+            app:drawableStartCompat="@drawable/ic_epid_data" />
+
+        <TextView
+            style="@style/PrivacyContentItem"
+            android:text="@string/privacy_item_italy"
+            app:drawableStartCompat="@drawable/italy" />
+
+        <TextView
+            style="@style/PrivacyContentItem"
+            android:text="@string/privacy_item_data_deletion"
+            app:drawableStartCompat="@drawable/ic_data_deletion" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardAge"
+            style="@style/PrivacyCards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/background"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:cardElevation="@dimen/cards_elevation">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/CardShadowColorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:duplicateParentState="true">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/checkBoxAge"
+                    style="@style/CheckboxButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/euclid_circular_bold"
+                    android:lineSpacingMultiplier="1.1"
+                    android:text="@string/privacy_14_years"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="16sp"
+                    android:translationX="-8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/checkBoxAge"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPrivacy"
+            style="@style/PrivacyCards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/background"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:cardCornerRadius="@dimen/card_radius"
+            app:cardElevation="@dimen/cards_elevation">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/CardShadowColorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/background"
+                android:clipChildren="false"
+                android:duplicateParentState="true">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/checkBoxPrivacy"
+                    style="@style/CheckboxButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBottom_toBottomOf="@+id/privacyPolicy"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/privacyPolicy" />
+
+                <TextView
+                    android:id="@+id/privacyPolicy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/euclid_circular_bold"
+                    android:lineSpacingMultiplier="1.1"
+                    android:text="@string/privacy_checkbox"
+                    android:textColor="@color/grey_dark"
+                    android:textSize="16sp"
+                    android:translationX="-8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/checkBoxPrivacy"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tos"
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/euclid_circular_medium"
+            android:text="@string/privacy_page_tos"
+            android:textColor="@color/grey_normal"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

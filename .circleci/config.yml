@@ -1,0 +1,428 @@
+# Immuni CircleCI configuration.
+# Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+# Please refer to the AUTHORS file for more information.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+# You should have received a copy of the GNU Affero General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+version: 2.1
+
+# Custom commands
+commands:
+  build:
+    description: Perform a build of the Immuni Android application.
+    steps:
+      - run:
+          name: "[build] Compile and archive"
+          command: |
+            ASSIGNED_VERSION_NAME=$(./gradlew -q printVersionName)
+            ASSIGNED_VERSION_CODE=$(./gradlew -q printVersionCode)
+
+            echo "⚙️ Preparing to build Immuni!"
+            echo "Release version (versionName): $ASSIGNED_VERSION_NAME"
+            echo "Build number (versionCode): $ASSIGNED_VERSION_CODE"
+            echo "Commit: $CIRCLE_SHA1"
+
+            echo "export ASSIGNED_VERSION_NAME=$ASSIGNED_VERSION_NAME" >> $BASH_ENV
+            echo "export ASSIGNED_VERSION_CODE=$ASSIGNED_VERSION_CODE" >> $BASH_ENV
+
+            bundle exec fastlane build target:$BUILD_KIND
+      - run:
+          name: "[build] Create GitHub release"
+          command: |
+            RELEASE_NAME="Immuni-${ASSIGNED_VERSION_NAME}build${ASSIGNED_VERSION_CODE}"
+
+            ARTIFACTS_PATH=$([ "$BUILD_KIND" == "dev" ] && echo "apk/debug" || echo "bundle/release")
+            ARTIFACTS_PATH="app/build/outputs/${ARTIFACTS_PATH}"
+
+            # Use -soft to prevent release from being re-created if it already exists
+            # This takes care of concurrency issues (the build would fail)
+            ghr \
+            -t $RELEASE_GITHUB_TOKEN \
+            -u $CIRCLE_PROJECT_USERNAME \
+            -r $CIRCLE_PROJECT_REPONAME \
+            -c $CIRCLE_SHA1 \
+            -n $RELEASE_NAME \
+            -soft \
+            $RELEASE_NAME $ARTIFACTS_PATH | tee release_result
+
+            if grep -q aborted release_result; then
+              echo "A release with version $ASSIGNED_VERSION_NAME and build number $ASSIGNED_VERSION_CODE already exists. Aborting."
+              exit 1
+            fi
+      - store_artifacts:
+          path: app/build/outputs/
+      - run:
+          name: "[build] Upload to Google Play Store"
+          no_output_timeout: 30m
+          command: |
+            if [[ "${BUILD_KIND}" == "release" ]]; then
+                fastlane supply \
+                --aab "$(find app/build/outputs -name '*.aab')" \
+                --json_key $UPLOAD_PATH \
+                --track alpha \
+                --skip_upload_screenshots \
+                --skip_upload_images
+            else
+                echo "This is not a production build, skipping the Google Play Store upload phase."
+            fi
+
+  check_build_kind:
+    description: Check whether the commit should trigger a build or not.
+    steps:
+      - run:
+          name: "[check] Identify build kind"
+          command: |
+            # Verify if it's a build commit
+            GIT_MESSAGE=$(git log --pretty=%s | head -1 || true)
+
+            if [[ ! $GIT_MESSAGE == *"#build"* ]]; then
+              echo "Not a build commit. Stopping the execution of the build job."
+              circleci-agent step halt
+            fi
+
+            # Check the build kind from the git message. The git message must contain either:
+            # "#build-release" or "#build-dev", depending on the kind of build.
+            BUILD_KIND="$(echo $GIT_MESSAGE | sed -n -E 's/^.*#build-(release|dev).*$/\1/p')"
+
+            if [[ -z "${BUILD_KIND}" ]]; then
+                echo "Unrecognized build kind; valid types are: dev, release."
+                circleci-agent step halt
+            fi
+
+            # Make it available for the rest of the pipeline
+            echo "export BUILD_KIND=$BUILD_KIND" >> $BASH_ENV
+
+  check_release_branch:
+    description: Verify if the commit of the build being released is on master. 
+    steps:
+      - run:
+          name: "[release] Stop if not executed on master"
+          command: |
+            # Verify if the commit belongs to master
+            ON_MASTER=$(git branch --contains tags/$CIRCLE_TAG | grep '^* master$' || true)
+
+            if [[ -z "${ON_MASTER}" ]]; then
+              echo "Releases can only be tagged on master. Stopping the execution of the job."
+              exit 1
+            fi
+
+  compute_release_changelog:
+    description: Compute the release changelog based on conventional commits.
+    steps:
+      - run:
+          name: "[release] Compute changelog"
+          command: |
+            # Uses conventional-changelog-cli to compute a semantic changelog
+
+            # Configuration
+            CHANGELOG_HEADER_LINES=8
+            VERSION_REGEX='^v\([0-9]\+\.\?\)\+$'
+
+            # Retrieve the tags associated with the previous release and the newly tagged release
+            CURRENT_RELEASE_TAG=$CIRCLE_TAG
+            PREVIOUS_RELEASE_TAG=$(git tag -l | grep $VERSION_REGEX | sort -nr | head -2 | tail -1)
+
+            if [[ "${CURRENT_RELEASE_TAG}" == "${PREVIOUS_RELEASE_TAG}" ]]; then
+                echo "This is the first release of the project; its changelog must be set manually."
+                exit 1
+            fi
+
+            # Configure conventional-changelog
+            sed "s/PREVIOUS_RELEASE_TAG/$PREVIOUS_RELEASE_TAG/g" ci/changelog_config.tpl > ci/changelog_config.js
+
+            # Compute the changelog
+            conventional-changelog -p angular -n ci/changelog_config.js > FULL_CHANGELOG.md
+
+            # Skip the changelog header
+            awk 'NF {p=1} p' \<<< "$(< FULL_CHANGELOG.md)" | tail -n +$CHANGELOG_HEADER_LINES > CHANGELOG.md
+
+  fetch_config:
+    description: Fetch configuration files necessary to perform builds.
+    steps:
+      - run:
+          name: "[fetch_config] Setup custom environment variables"
+          command: |
+            # Create necessary files
+            echo $KEYSTORE | base64 --decode > app/immuni-android.keystore
+            echo $UPLOAD_SERVICE_ACCOUNT_JSON | base64 --decode > app/immuni-upload.json
+
+            # Setup environment variables
+            echo "export BUILD_NUMBER=$CIRCLE_BUILD_NUM" >> $BASH_ENV
+            echo "export KEYSTORE_PATH='$(pwd)/app/immuni-android.keystore'" >> $BASH_ENV
+            echo "export UPLOAD_PATH='$(pwd)/app/immuni-upload.json'" >> $BASH_ENV
+
+  install_android_dependencies:
+    description: Install Android dependencies.
+    steps:
+      - restore_cache:
+          name: "[dependencies] Restore the cache"
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+      - run:
+          name: "[dependencies] Install dependencies"
+          command: ./gradlew androidDependencies
+      - save_cache:
+          name: "[dependencies] Save the cache"
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
+          paths:
+            - ~/.gradle
+
+  post_release_changelog:
+    description: Update the changelog of the GitHub released that has been published on the store.
+    steps:
+      - run:
+          name: "[release] Post changelog"
+          command: |
+            # Configuration
+            FULL_REPO_NAME="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
+            RELEASE_API="https://api.github.com/repos/$FULL_REPO_NAME/releases"
+            RELEASE_REGEX='^Immuni-\([0-9]\+\.\?\)\+build[0-9]\+$'
+
+            # Retrieve the existing release. Note: if multiple exist for the same commit,
+            # we take the latest.
+            MATCHING_TAG=$(git tag --points-at tags/$CIRCLE_TAG | grep $RELEASE_REGEX | sort -nr | head -1 || true)
+
+            if [[ -z "${MATCHING_TAG}" ]]; then
+                echo "No GitHub release associated with this version, halting."
+                exit 1
+            fi
+
+            RELEASE_ID=$(curl -H "Authorization: token $RELEASE_GITHUB_TOKEN" $RELEASE_API/tags/$MATCHING_TAG -s | jq -r '.id')
+
+            # Edit changelog
+            curl \
+            --request PATCH \
+            --header "Authorization: token $RELEASE_GITHUB_TOKEN" \
+            --data "`jq -n --arg msg "$(cat CHANGELOG.md)" '{body: $msg}'`" \
+            $RELEASE_API/$RELEASE_ID
+
+  setup_ci:
+    description: Configure the CI environment.
+    steps:
+      - run:
+          name: "[ci_setup] Configure ruby"
+          command: |
+            echo "export PATH=${HOME}/.rubies/ruby-2.6.1/bin:${PATH}" >> $BASH_ENV
+            ruby -v
+      - restore_cache:
+          name: "[ci_setup] Restore the ruby dependencies cache"
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: "[ci_setup] Install ruby dependencies"
+          command: bundle install
+      - save_cache:
+          name: "[ci_setup] Save the ruby dependencies cache"
+          key: 1-gems-{{ checksum "Gemfile.lock" }}
+          paths:
+            - ~/.gem
+      - run:
+          name: "[ci_setup] Configure tools"
+          command: |
+            curl -L https://github.com/tcnksm/ghr/releases/download/v0.13.0/ghr_v0.13.0_linux_amd64.tar.gz -o ghr.tar.gz
+            curl -L https://github.com/tcnksm/ghr/releases/download/v0.13.0/v0.13.0_SHASUMS -o v0.13.0_SHASUMS
+
+            TRUSTED_GHR_SHA="$(cat v0.13.0_SHASUMS | grep 'ghr_v0.13.0_linux_amd64.tar.gz' | sed -E 's/(\S+)\s+.*/\1/')"
+            LOCAL_GHR_SHA="$(sha256sum ghr.tar.gz | sed -E 's/(\S+)\s+.*/\1/')"
+
+            if [[ ! $LOCAL_GHR_SHA == $TRUSTED_GHR_SHA ]]; then
+              echo "Untrusted release of ghr, stopping execution."
+              circleci-agent step halt
+            fi
+
+            tar xzf ghr.tar.gz
+            sudo mv ghr_v0.13.0_linux_amd64/ghr /usr/local/bin/
+
+  setup_pr_tools:
+    description: Configure the pull requests environment.
+    steps:
+      - run:
+          name: "[pr_setup] Install ktlint"
+          command: |
+            # Get binaries from official repository
+            curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.36.0/ktlint && chmod a+x ktlint
+
+            # Verify PGP signature
+            curl -sS https://keybase.io/pinterestandroid/pgp_keys.asc | sudo gpg --import
+            curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.36.0/ktlint.asc
+            sudo gpg --verify ktlint.asc
+
+            # Install globally
+            sudo mv ktlint /usr/local/bin/
+      - run:
+          name: "[pr_setup] Install danger"
+          command: yarn install --dev
+
+  setup_release_tools:
+    description: Configure the release environment.
+    steps:
+      - run:
+          name: "[release_setup] Install dependencies"
+          command: sudo npm install -g conventional-changelog-cli
+
+executors:
+  default:
+    docker:
+      - image: circleci/android:api-29-node
+    environment:
+      GRADLE_OPTS: '-Dorg.gradle.daemon=false'
+      JVM_OPTS: -Xmx3200m
+
+jobs:
+  build:
+    working_directory: ~/code
+    executor: default
+    resource_class: medium
+    steps:
+      - checkout:
+          name: "[build] Checkout the code"
+      - check_build_kind
+      - setup_ci
+      - fetch_config
+      - install_android_dependencies
+      - build
+
+  pr_check:
+    working_directory: ~/code
+    executor: default
+    resource_class: small
+    steps:
+      - run:
+          name: "[pr_check] Stop job if not running in PR"
+          command: |
+            if [[ -z "${CIRCLE_PULL_REQUEST}" ]]; then
+                circleci-agent step halt
+            fi
+      - checkout:
+          name: "[pr_check] Checkout the code"
+      - setup_pr_tools
+      - fetch_config
+      - install_android_dependencies
+      - run:
+          name: "[pr_check] Run danger"
+          command: |
+            [ -z "${DANGER_GITHUB_API_TOKEN}" ] || yarn danger ci
+
+  release:
+    working_directory: ~/code
+    executor: default
+    resource_class: small
+    steps:
+      - checkout:
+          name: "[release] Checkout the code"
+      - check_release_branch
+      - setup_release_tools
+      - compute_release_changelog
+      - post_release_changelog
+
+  scheduler:
+    docker:
+      - image: cimg/python:3.7.7
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: "[scheduler] Initialize scheduler submodule"
+          command: git submodule update --init
+      - restore_cache:
+          name: "[scheduler] Restore Python Cache"
+          keys:
+            - pip-packages-v1-{{ .Branch }}-{{ checksum "scheduler/Pipfile.lock" }}
+            - pip-packages-v1-{{ .Branch }}-
+            - pip-packages-v1-
+      - run:
+          name: "[scheduler] Install dependencies"
+          working_directory: scheduler
+          environment:
+            PIPENV_NOSPIN: 1
+            PIPENV_VENV_IN_PROJECT: 1
+          command: |
+            pip install pipenv
+            pipenv install
+      - save_cache:
+          name: "[scheduler] Save Python Cache"
+          paths:
+            - ~/.cache/pip
+            - scheduler/.venv
+          key: pip-packages-v1-{{ .Branch }}-{{ checksum "scheduler/Pipfile.lock" }}
+      - run:
+          name: "[scheduler] Configure scheduler"
+          command: |
+            mv scheduler_config.json scheduler/config.json
+      - run:
+          name: "[scheduler] Run scheduler"
+          working_directory: scheduler
+          command: |
+            export REPOSITORY="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+            pipenv run python scheduler.py
+
+  unit_tests:
+    working_directory: ~/code
+    executor: default
+    resource_class: medium
+    steps:
+      - checkout:
+          name: "[unit_tests] Checkout the code"
+      - fetch_config
+      - install_android_dependencies
+      - run:
+          name: "[unit_tests] Run App Module Unit Tests"
+          command: ./gradlew :app:testDebugUnitTest
+      - store_artifacts:
+          path: app/build/reports
+      - store_test_results:
+          path: app/build/test-results
+      - run:
+          name: "[unit_tests] Run Network Module Unit Tests"
+          command: ./gradlew :network:testDebugUnitTest
+      - store_artifacts:
+          path: network/build/reports
+      - store_test_results:
+          path: network/build/test-results
+      - run:
+          name: "[unit_tests] Run Extensions Module Unit Tests"
+          command: ./gradlew :extensions:testDebugUnitTest
+      - store_artifacts:
+          path: extensions/build/reports
+      - store_test_results:
+          path: extensions/build/test-results
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          context: android
+  pr_check:
+    jobs:
+      - pr_check:
+          context: danger
+  release:
+    jobs:
+      - release:
+          context: android
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v(?:[0-9]+\.?)+$/
+  scheduler:
+    triggers:
+      - schedule:
+          cron: "0,15,30,45 * * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - scheduler:
+          context: scheduler
+  tests:
+    jobs:
+      - unit_tests

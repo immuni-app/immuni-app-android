@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/infoCardBackground"
+        style="@style/CardShadowRed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_danger_card_outline"
+        android:gravity="center"
+        android:elevation="30dp"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/infoCardAnimation"
+            app:lottie_renderMode="hardware"
+            android:layout_width="82dp"
+            android:layout_height="76dp"
+            android:layout_marginEnd="20dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@+id/infoSubtitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/infoTitle"
+            app:layout_constraintVertical_bias="0.13"
+            app:layout_constraintWidth_percent="0.33"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_close_contact_warning"
+            tools:src="@drawable/ic_warning_home" />
+
+
+        <TextView
+            android:id="@+id/infoTitle"
+            style="@style/InfoCardTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/activity_vertical_margin"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/euclid_circular_bold"
+            android:gravity="left"
+            android:lineSpacingMultiplier="1.2"
+            android:textColor="#fff"
+            android:text="@string/home_warning_title"
+            app:layout_constraintEnd_toStartOf="@+id/infoCardAnimation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/infoSubtitle"
+        style="@style/P1Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="28dp"
+        android:gravity="left"
+        android:text="@string/home_warning_subtitle"
+        android:textColor="#fff"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/infoCardAnimation"
+        app:layout_constraintStart_toStartOf="@+id/infoTitle"
+        app:layout_constraintTop_toBottomOf="@+id/infoTitle" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settings"
+    app:startDestination="@id/settingsFragment">
+
+    <include app:graph="@navigation/webview" />
+
+    <include app:graph="@navigation/faq" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="it.ministerodellasalute.immuni.ui.settings.SettingsFragment"
+        android:label="homeFragment"
+        tools:layout="@layout/settings_fragment" />
+
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="it.ministerodellasalute.immuni.ui.otp.OtpFragment"
+        android:label="UploadVerification"
+        tools:layout="@layout/otp_fragment" />
+
+    <action
+        android:id="@+id/action_upload_data"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:destination="@id/otpFragment" />
+
+    <action
+        android:id="@+id/action_faq"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:destination="@id/faq" />
+
+    <activity
+        android:id="@+id/uploadActivity"
+        android:name="it.ministerodellasalute.immuni.ui.upload.UploadDataActivity"
+        android:label="UploadDataActivity"
+        tools:layout="@layout/upload_data_fragment">
+        <argument
+            android:name="token"
+            app:argType="it.ministerodellasalute.immuni.ui.otp.OtpToken"
+            app:nullable="false" />
+    </activity>
+
+    <action
+        android:id="@+id/action_upload_activity"
+        app:destination="@id/uploadActivity"/>
+
+    <activity
+        android:id="@+id/onboardingActivity"
+        android:name="it.ministerodellasalute.immuni.ui.onboarding.OnboardingActivity"
+        android:label="OnboardingActivity"
+        tools:layout="@layout/onboarding_view_pager_fragment">
+        <argument
+            android:name="isEditingProvince"
+            app:argType="boolean"/>
+    </activity>
+
+    <action
+        android:id="@+id/action_onboarding_activity"
+        app:destination="@id/onboardingActivity"/>
+
+    <action
+        android:id="@+id/action_webview"
+        app:destination="@id/webview">
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="false" />
+    </action>
+
+    <dialog
+        android:id="@+id/privacy"
+        android:name="it.ministerodellasalute.immuni.ui.privacy.PrivacyDialogFragment"
+        tools:layout="@layout/privacy_dialog" />
+    <action
+        android:id="@+id/action_privacy"
+        app:destination="@id/privacy" />
+</navigation>

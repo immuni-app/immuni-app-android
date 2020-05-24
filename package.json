@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@commitlint/lint": "^8.3.5",
+    "danger": "^10.2.0",
+    "typescript": "^3.8.3"
+  }
+}

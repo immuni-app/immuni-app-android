@@ -1,0 +1,3 @@
+[submodule "scheduler"]
+	path = scheduler
+	url = git@github.com:immuni-app/immuni-ci-scheduler.git

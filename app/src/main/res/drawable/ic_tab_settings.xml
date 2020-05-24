@@ -1,0 +1,32 @@
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="40dp"
+    android:height="40dp"
+    android:viewportWidth="40"
+    android:viewportHeight="40">
+  <path
+      android:pathData="M20,19.5m-12.5,0a12.5,12.5 0,1 1,25 0a12.5,12.5 0,1 1,-25 0"
+      android:fillColor="#D5DEE8"/>
+  <path
+      android:pathData="M20,18.7187C20.8284,18.7187 21.5,19.3903 21.5,20.2188L21.5,23.4688C21.5,24.2972 20.8284,24.9687 20,24.9687C19.1716,24.9687 18.5,24.2972 18.5,23.4687L18.5,20.2187C18.5,19.3903 19.1716,18.7187 20,18.7187Z"
+      android:fillColor="#A7B8CC"
+      android:fillType="evenOdd"/>
+  <path
+      android:pathData="M20,14.1562C20.8284,14.1562 21.5,14.8278 21.5,15.6562C21.5,16.4847 20.8284,17.1562 20,17.1562C19.1716,17.1562 18.5,16.4847 18.5,15.6562C18.5,14.8278 19.1716,14.1562 20,14.1562Z"
+      android:fillColor="#A7B8CC"
+      android:fillType="evenOdd"/>
+</vector>

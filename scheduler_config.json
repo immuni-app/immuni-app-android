@@ -1,0 +1,28 @@
+{
+   "protected_files": [
+      ".gitmodules",
+      "scheduler_config.json",
+      "package.json",
+      "yarn.lock",
+      "dangerfile.ts",
+      "ci/danger/danger.ts",
+      "ci/danger/ktlint.ts",
+      "ci/danger/commitlint/index.ts",
+      "ci/danger/commitlint/rules.ts",
+      "ci/changelog_config.tpl",
+      "Gemfile",
+      "Gemfile.lock",
+      "fastlane/Appfile",
+      "fastlane/Fastfile",
+      "publiccode.yml",
+      "build.gradle",
+      "app/build.gradle",
+      "app/proguard-rules.pro",
+      "gradle.properties",
+      "gradlew",
+      "gradlew.bat",
+      "settings.gradle",
+      "template.properties",
+      ".editorconfig"
+   ]
+}
