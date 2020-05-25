@@ -63,8 +63,8 @@ abstract class ViewPagerBaseFragment(@LayoutRes val layout: Int) : Fragment(layo
                 oldBottom: Int
             ) {
                 view?.findViewById<TextView>(R.id.title)?.removeOnLayoutChangeListener(this)
-                val W = ScreenUtils.getScreenWidth(requireContext())
-                val aspectRatio = W.toFloat() / top.toFloat()
+                val w = ScreenUtils.getScreenWidth(requireContext())
+                val aspectRatio = w.toFloat() / top.toFloat()
                 log("aspectRatio $aspectRatio")
                 if (aspectRatio > 2) {
                     view?.findViewById<View>(R.id.image)?.gone()
