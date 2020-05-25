@@ -38,4 +38,7 @@
     <string name="suggestions_alert_covid_negative_negative_answer">No</string>
     <string name="suggestions_alert_covid_negative_positive_answer">Confermo</string>
     <string name="suggestions_alert_covid_negative_title">Confermi di essere COVID-19 negativo?</string>
+    <string name="suggestions_header_short_title_neutral">Indicazioni per te</string>
+    <string name="suggestions_instruction_check_symptoms_message">In particolare febbre o almeno uno dei seguenti: mal di gola, tosse, raffreddore o naso chiuso, difficoltà respiratoria, dolori muscolari, perdita o alterazioni di olfatto o gusto, diarrea</string>
+    <string name="suggestions_instruction_check_symptoms_title"><b>Misura la temperatura corporea almeno due volte al giorno e valuta la comparsa di sintomi,</b> anche lievi.</string>
 </resources>

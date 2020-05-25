@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
   ~ Please refer to the AUTHORS file for more information.
   ~ This program is free software: you can redistribute it and/or modify
@@ -100,8 +99,8 @@
                     android:id="@+id/navigationIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/exit"
                     android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/exit"
                     android:src="@drawable/ic_cross_white" />
 
                 <TextView
@@ -142,37 +141,37 @@
 
             <TextView
                 style="@style/P1Text.Generic"
-                android:textColor="@color/grey_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:paddingStart="30dp"
                 android:paddingTop="40dp"
                 android:paddingEnd="30dp"
-                android:text="@string/close_contact_suggested_action" />
+                android:text="@string/close_contact_suggested_action"
+                android:textColor="@color/grey_dark" />
 
             <TextView
                 android:id="@+id/imInContactWithASL"
                 style="@style/P1Text.Generic"
-                android:textColor="@color/grey_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:paddingStart="30dp"
                 android:paddingTop="16dp"
                 android:paddingEnd="30dp"
                 android:paddingBottom="35dp"
-                android:gravity="left"
-                android:text="@string/asl_already_in_contact" />
+                android:text="@string/asl_already_in_contact"
+                android:textColor="@color/grey_dark" />
 
             <include layout="@layout/content_divider" />
 
             <TextView
                 style="@style/P1Text.Generic"
-                android:textColor="@color/grey_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="30dp"
-                android:text="@string/asl_instruction_title" />
+                android:text="@string/asl_instruction_title"
+                android:textColor="@color/grey_dark" />
 
             <TextView
                 style="@style/ParagraphCard"
@@ -189,10 +188,17 @@
                 android:drawableStart="@drawable/ic_sneeze"
                 android:text="@string/asl_instruction_cough_sneeze" />
 
-            <TextView
-                style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_symptoms"
-                android:text="@string/asl_instruction_check_symptoms" />
+            <LinearLayout style="@style/ParagraphCard.Layout">
+
+                <TextView
+                    style="@style/ParagraphCard.Title"
+                    android:drawableStart="@drawable/ic_symptoms"
+                    android:text="@string/suggestions_instruction_check_symptoms_title" />
+
+                <TextView
+                    style="@style/ParagraphCard.Message"
+                    android:text="@string/suggestions_instruction_check_symptoms_message" />
+            </LinearLayout>
 
             <TextView
                 style="@style/ParagraphCard"
@@ -204,15 +210,15 @@
 
             <TextView
                 style="@style/P1Text"
-                android:textColor="@color/grey_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="30dp"
-                android:text="@string/close_contact_hide_warning" />
+                android:text="@string/close_contact_hide_warning"
+                android:textColor="@color/grey_dark" />
 
             <Button
-                style="@style/RoundedButton.GreyDark"
                 android:id="@+id/hideNotice"
+                style="@style/RoundedButton.GreyDark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

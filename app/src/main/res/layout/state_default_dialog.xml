@@ -113,7 +113,7 @@
                     android:paddingStart="@dimen/activity_vertical_margin"
                     android:paddingEnd="32dp"
                     android:singleLine="true"
-                    android:text="@string/info_card_default_title_short"
+                    android:text="@string/suggestions_header_short_title_neutral"
                     android:textAllCaps="false" />
             </androidx.appcompat.widget.Toolbar>
 

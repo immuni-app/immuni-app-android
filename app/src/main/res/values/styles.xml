@@ -283,6 +283,22 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="ParagraphCard.Layout">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ParagraphCard.Title" parent="P1Text">
+        <item name="android:drawablePadding">20dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ParagraphCard.Message" parent="P1Text">
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="UploadCard" parent="ParagraphCard">
         <item name="android:padding">16dp</item>
         <item name="android:paddingStart">25dp</item>

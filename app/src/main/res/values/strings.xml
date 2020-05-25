@@ -150,7 +150,6 @@
     <string name="asl_instruction_social_distancing"><b>Resta in casa e rispetta le misure di distanziamento fisico</b> (almeno 1 metro)</string>
     <string name="asl_instruction_wash_hands"><b>Lavati frequentemente le mani</b></string>
     <string name="asl_instruction_cough_sneeze"><b>Tossisci e starnutisci direttamente su un fazzoletto di carta o nella piega del gomito</b></string>
-    <string name="asl_instruction_check_symptoms"><b>Valuta due volte al giorno la comparsa dei sintomi compatibili con il COVID-19:</b> febbre di qualsiasi grado, tosse, affaticamento, difficoltà respiratoria e perdita di gusto o di olfatto</string>
     <string name="asl_instruction_isolate"><b>In caso di comparsa dei sintomi, isolati immediatamente</b> dal resto dei conviventi e indossa una mascherina protettiva</string>
 
 
@@ -179,7 +178,6 @@
     <string name="wanna_know_more">Vuoi saperne di più?</string>
 
     <string name="info_card_default_title">Indicazioni\nper te</string>
-    <string name="info_card_default_title_short">Indicazioni per te</string>
 
     <string name="generic_error_message">Si è verificato un errore, riprova più tardi.</string>
     <string name="error_loading_data_title">Connessione non riuscita.</string>
