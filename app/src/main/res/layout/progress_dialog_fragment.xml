@@ -14,38 +14,33 @@
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
 
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/rounded_corners_9dp"
+    android:backgroundTint="@color/background"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="32dp">
 
-    <LinearLayout
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/background"
-        android:background="@drawable/rounded_corners_9dp"
-        android:padding="32dp"
+        android:indeterminateTint="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/message"
+        style="@style/P1Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:fontFamily="@font/euclid_circular_semi_bold"
         android:gravity="center"
-        android:orientation="vertical"
-        >
-        <ProgressBar
-            android:indeterminateTint="@color/colorAccent"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            style="@style/P1Text"
-            android:visibility="gone"
-            android:fontFamily="@font/euclid_circular_semi_bold"
-            android:textColor="@color/colorPrimary"
-            android:id="@+id/message"
-            android:maxWidth="150dp"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Caricamento in corso"/>
-    </LinearLayout>
+        android:maxWidth="150dp"
+        android:textColor="@color/colorPrimary"
+        android:visibility="gone"
+        tools:text="Caricamento in corso" />
 </LinearLayout>
