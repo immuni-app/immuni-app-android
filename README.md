@@ -202,4 +202,4 @@ Here is a list of Immuni's contributors. Thank you to everyone involved for impr
 
 ## License details
 
-The licence for this repository is a [GNU Affero General Public Licence version 3](https://www.gnu.org/licenses/agpl-3.0.html) (SPDX: AGPL-3.0). Please see the [LICENCE](LICENSE) file for full reference.
+The licence for this repository is a [GNU Affero General Public Licence version 3](https://www.gnu.org/licenses/agpl-3.0.html) (SPDX: AGPL-3.0). Please see the [LICENSE](LICENSE) file for full reference.
