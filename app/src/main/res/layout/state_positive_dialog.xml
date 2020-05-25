@@ -69,7 +69,7 @@
                     android:layout_marginEnd="30dp"
                     android:fontFamily="@font/euclid_circular_bold"
                     android:lineSpacingMultiplier="1.2"
-                    android:text="@string/positive_warning_title"
+                    android:text="@string/suggestions_positive_title"
                     android:textColor="#fff"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="28dp"
-                    android:text="@string/positive_warning_subtitle"
+                    android:text="@string/suggestions_positive_subtitle"
                     android:textColor="#fff"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/pageTitle"
@@ -113,7 +113,7 @@
                     android:paddingStart="@dimen/activity_vertical_margin"
                     android:paddingEnd="32dp"
                     android:singleLine="true"
-                    android:text="@string/positive_warning_title"
+                    android:text="@string/suggestions_positive_title"
                     android:textAllCaps="false" />
             </androidx.appcompat.widget.Toolbar>
 
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:drawablePadding="15dp"
-                    android:text="@string/positive_immuni_continues_working_title"
+                    android:text="@string/suggestions_positive_info_title"
                     android:textStyle="bold"
                     app:drawableStartCompat="@drawable/ic_info" />
 
@@ -160,7 +160,7 @@
                     style="@style/SText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/positive_immuni_continues_working_message" />
+                    android:text="@string/suggestions_positive_info_subtitle" />
             </LinearLayout>
 
             <include layout="@layout/content_divider" />
@@ -170,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="30dp"
-                android:text="@string/positive_recovery_action_description" />
+                android:text="@string/suggestions_positive_covid_negative_message" />
 
             <Button
                 android:id="@+id/recovered"
@@ -181,7 +181,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
-                android:text="@string/positive_recovery_action" />
+                android:text="@string/suggestions_positive_covid_negative_action" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

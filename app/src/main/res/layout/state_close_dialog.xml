@@ -66,7 +66,7 @@
                     android:layout_marginEnd="30dp"
                     android:fontFamily="@font/euclid_circular_bold"
                     android:lineSpacingMultiplier="1.2"
-                    android:text="@string/close_contact_warning_title"
+                    android:text="@string/suggestions_risk_title"
                     android:textColor="#fff"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -81,7 +81,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="28dp"
-                    android:text="@string/close_contact_warning_subtitle"
+                    android:text="@string/suggestions_risk_subtitle"
                     android:textColor="#fff"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +112,7 @@
                     android:paddingStart="@dimen/activity_vertical_margin"
                     android:paddingEnd="32dp"
                     android:singleLine="true"
-                    android:text="@string/close_contact_warning_title_short"
+                    android:text="@string/suggestions_risk_title"
                     android:textAllCaps="false" />
             </androidx.appcompat.widget.Toolbar>
 
@@ -176,17 +176,17 @@
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_social_distancing"
-                android:text="@string/asl_instruction_social_distancing" />
+                android:text="@string/suggestions_instruction_social_distance" />
 
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_wash_hands"
-                android:text="@string/asl_instruction_wash_hands" />
+                android:text="@string/suggestions_instruction_wash_hands" />
 
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_sneeze"
-                android:text="@string/asl_instruction_cough_sneeze" />
+                android:text="@string/suggestions_instruction_use_napkins" />
 
             <LinearLayout style="@style/ParagraphCard.Layout">
 
@@ -213,7 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="30dp"
-                android:text="@string/close_contact_hide_warning"
+                android:text="@string/suggestions_instruction_hide_alert_message"
                 android:textColor="@color/grey_dark" />
 
             <Button
@@ -225,7 +225,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
-                android:text="@string/hide_warning" />
+                android:text="@string/suggestions_instruction_hide_alert_action" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

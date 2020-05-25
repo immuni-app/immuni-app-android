@@ -150,7 +150,7 @@
                 android:textColor="#FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/info_card_subtitle"/>
+                android:text="@string/suggestions_neutral_alert"/>
             <TextView
                 style="@style/P1Text.Generic"
                 android:textColor="@color/grey_dark"
@@ -159,24 +159,24 @@
                 android:paddingBottom="30dp"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
-                android:text="@string/info_card_default_respect" />
+                android:text="@string/suggestions_neutral_message" />
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_ministry"
-                android:text="@string/info_card_default_norms" />
+                android:text="@string/suggestions_instruction_ministerial_decree" />
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_wash_hands"
-                android:text="@string/asl_instruction_wash_hands" />
+                android:text="@string/suggestions_instruction_wash_hands" />
 
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_sneeze"
-                android:text="@string/asl_instruction_cough_sneeze" />
+                android:text="@string/suggestions_instruction_use_napkins" />
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_social_distancing"
-                android:text="@string/asl_instruction_social_distancing" />
+                android:text="@string/suggestions_instruction_social_distance" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -201,7 +201,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="30dp"
                     android:gravity="start"
-                    android:text="@string/settings_tab"
+                    android:text="@string/tabbar_title_settings"
                     android:textSize="27dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -232,7 +232,7 @@
                     android:paddingStart="@dimen/activity_vertical_margin"
                     android:paddingEnd="32dp"
                     android:singleLine="true"
-                    android:text="@string/settings_tab"
+                    android:text="@string/tabbar_title_settings"
                     android:textAllCaps="false" />
             </androidx.appcompat.widget.Toolbar>
 

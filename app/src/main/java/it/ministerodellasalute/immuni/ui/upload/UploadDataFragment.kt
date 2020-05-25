@@ -81,7 +81,7 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             (activity as? AppCompatActivity)?.loading(it, ProgressDialogFragment(), Bundle().apply {
-                putString(ProgressDialogFragment.MESSAGE, getString(R.string.settings_setting_load_data))
+                putString(ProgressDialogFragment.MESSAGE, getString(R.string.upload_data_send_data_loading))
             })
         })
 
@@ -95,8 +95,8 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
                 openConfirmationDialog(
                     positiveButton = getString(R.string.retry),
                     negativeButton = getString(R.string.cancel),
-                    message = getString(R.string.upload_data_error_confirmation_message),
-                    title = getString(R.string.upload_data_error_confirmation_title),
+                    message = getString(R.string.upload_data_connection_error_message),
+                    title = getString(R.string.upload_data_connection_error_title),
                     cancelable = true,
                     requestCode = ALERT_REQUEST_ERROR
                 )
