@@ -33,7 +33,6 @@ import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.ui.otp.OtpToken
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
-import java.util.*
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.upload_data_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel

@@ -19,7 +19,6 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.ui.view.ImageScaleView.MatrixCropType
 
 /**
  * Allow ImageView cropping with different alignments.
