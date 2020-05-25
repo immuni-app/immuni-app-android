@@ -17,13 +17,12 @@ package it.ministerodellasalute.immuni.extensions.utils
 
 import android.content.Context
 import android.graphics.Point
-import android.os.Build
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.Display
 import android.view.WindowManager
-import java.lang.Math.pow
-import java.lang.Math.sqrt
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 /**
  * Screen utility methods.
@@ -72,12 +71,13 @@ object ScreenUtils {
         var widthPixels = metrics.widthPixels
         var heightPixels = metrics.heightPixels
         // includes window decorations (statusbar bar/menu bar)
-        if (Build.VERSION.SDK_INT >= 14 && Build.VERSION.SDK_INT < 17) try {
+        try {
             widthPixels = Display::class.java.getMethod("getRawWidth").invoke(d) as Int
             heightPixels = Display::class.java.getMethod("getRawHeight").invoke(d) as Int
-        } catch (ignored: Exception) { }
+        } catch (ignored: Exception) {
+        }
         // includes window decorations (statusbar bar/menu bar)
-        if (Build.VERSION.SDK_INT >= 17) try {
+        try {
             val realSize = Point()
             Display::class.java.getMethod("getRealSize", Point::class.java)
                 .invoke(d, realSize)
@@ -85,7 +85,8 @@ object ScreenUtils {
             heightPixels = realSize.y
         } catch (ignored: Exception) { }
 
-        val diagonalInPixels = sqrt(pow(widthPixels.toDouble(), 2.0) + pow(heightPixels.toDouble(), 2.0))
+        val diagonalInPixels =
+            sqrt(widthPixels.toDouble().pow(2.0) + heightPixels.toDouble().pow(2.0))
         return convertPixelsToInches(context, diagonalInPixels.toInt()).round(1)
     }
 
@@ -100,7 +101,7 @@ object ScreenUtils {
     /**
      * Convert pixels to inches.
      */
-    fun convertPixelsToInches(context: Context, pixels: Int): Double {
+    private fun convertPixelsToInches(context: Context, pixels: Int): Double {
         val r = context.resources
         return pixels.toDouble() / r.displayMetrics.xdpi
     }

@@ -143,10 +143,8 @@ fun AppCompatActivity.setDarkStatusBarFullscreen(color: Int) {
 }
 
 fun AppCompatActivity.setStatusBarColor(color: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.statusBarColor = color
-    }
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window.statusBarColor = color
 }
 
 fun FragmentActivity.showAlert(
