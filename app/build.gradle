@@ -129,7 +129,6 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
     implementation "com.github.bumptech.glide:annotations:$glideVersion"
-    kapt "com.github.bumptech.glide:compiler:$glideVersion"
 
     //Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
