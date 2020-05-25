@@ -18,4 +18,4 @@ package it.ministerodellasalute.immuni.api
 import it.ministerodellasalute.immuni.network.api.safeApiCall
 import retrofit2.Response
 
-suspend inline fun <T> immuniApiCall(block: () -> Response<T>) = safeApiCall<T, ErrorResponse>(block)
+inline fun <T> immuniApiCall(block: () -> Response<T>) = safeApiCall<T, ErrorResponse>(block)

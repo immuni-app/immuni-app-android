@@ -31,7 +31,7 @@ import retrofit2.Response
  * @param block a suspend Retrofit call that returns a [Response]
  * @return a [NetworkResource] response.
  */
-suspend inline fun <T, reified E : Any> safeApiCall(block: () -> Response<T>): NetworkResource<T, E> {
+inline fun <T, reified E : Any> safeApiCall(block: () -> Response<T>): NetworkResource<T, E> {
     val result = runCatching(block)
     return if (result.isSuccess) {
         val response = result.getOrNull()!!
