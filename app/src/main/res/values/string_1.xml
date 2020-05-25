@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="privacy_checkbox_above14">Dichiaro di avere almeno 14 anni</string>
+    <string name="privacy_checkbox_privacyPolicyRead">Ho letto l\'{informativa privacy}</string>
+    <string name="privacy_item_data_deletion"><b>Tutti i dati sono eliminati quando non più necessari</b> e in ogni caso non più tardi del 31 dicembre 2020.</string>
+    <string name="privacy_item_identity"><b>Immuni non raccoglie il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o email.</b></string>
+    <string name="privacy_item_italy">I tuoi dati sono salvati su server in Italia, <b>sono gestiti da soggetti pubblici e controllati dal Ministero della Salute</b>.</string>
+    <string name="privacy_item_location"><b>Immuni non raccoglie alcun dato di geolocalizzazione</b>, inclusi i dati del GPS. I tuoi spostamenti non sono tracciati in alcun modo.</string>
+    <string name="privacy_item_ministry"><b>Per aiutare il Servizio Sanitario Nazionale,</b> a prendersi cura di te, Immuni invia al server del Ministero della Salute:\n
+        • La tua provincia di domicilio\n
+        • Se l\'app funziona correttamente\n
+        • Se sei stato avvertito di un contatto a rischio
+    </string>
+    <string name="privacy_item_people"><b>Immuni non può risalire alla tua identità</b> o quella delle persone con cui entri in contatto.</string>
+    <string name="privacy_item_secure"><b>I dati salvati sul tuo smartphone e le connessioni al server sono cifrati.</b></string>
+    <!-- TODO: unused, instead we use R.string.next-->
+    <string name="privacy_next">Avanti</string>
+    <string name="privacy_settings_show_full">Informativa completa</string>
+    <string name="privacy_title">La tua privacy al sicuro</string>
+    <string name="privacy_tos">Proseguendo, dichiaro di aver letto e accettato i {termini di utilizzo}</string>
+    <string name="settings_setting_chage_province">Cambia la provincia</string>
+    <string name="settings_setting_contact_support">Contatta il supporto</string>
+    <string name="settings_setting_faq">Domande frequenti</string>
+    <string name="settings_setting_leave_review">Lascia una recensione</string>
+    <string name="settings_setting_load_data">Caricamento dati</string>
+    <string name="settings_setting_privacy">Informativa privacy</string>
+    <string name="settings_setting_section_data">Gestione dati</string>
+    <string name="settings_setting_section_general">Generale</string>
+    <string name="settings_setting_section_info">Informazioni</string>
+    <string name="settings_setting_tos">Termini di utilizzo</string>
+    <!-- TODO: Unused -->
+    <string name="settings_update_province_update_province">Aggiorna</string>
+    <string name="suggestions_alert_asl_contact_confirmation_description">Immuni nasconderà l’avviso di contatto. Dovrai comunque seguire tutte le indicazione che hai ricevuto dalla tua ASL.</string>
+    <string name="suggestions_alert_asl_contact_confirmation_negative_answer">No</string>
+    <string name="suggestions_alert_asl_contact_confirmation_positive_answer">Sì</string>
+    <string name="suggestions_alert_asl_contact_confirmation_title">Confermi di essere in contatto con la tua ASL?</string>
+    <string name="suggestions_alert_covid_negative_description">La tua ASL deve aver confermato che sei negativo al virus e che puoi tornare a uscire di casa.</string>
+    <string name="suggestions_alert_covid_negative_negative_answer">No</string>
+    <string name="suggestions_alert_covid_negative_positive_answer">Confermo</string>
+    <string name="suggestions_alert_covid_negative_title">Confermi di essere COVID-19 negativo?</string>
+</resources>

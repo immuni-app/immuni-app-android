@@ -36,10 +36,6 @@
     <string name="welcome_4_title">La tua privacy è tutelata</string>
     <string name="welcome_4_description">L\'app funziona senza seguire i tuoi spostamenti e senza conoscere la tua identità o quella delle persone con cui entri in contatto.</string>
 
-    <string name="privacy_checkbox">Ho letto l\'{informativa privacy}</string>
-    <string name="privacy_title">La tua privacy al sicuro</string>
-
-
     <string name="update">Aggiorna</string>
 
     <string name="open_settings">Apri Impostazioni</string>
@@ -47,18 +43,6 @@
     <string name="app_exit_title">Uscire</string>
     <string name="app_exit_message">Sei sicuro di voler uscire?</string>
 
-    <string name="settings_data_management">Gestione dati</string>
-    <string name="settings_data_load">Caricamento dati</string>
-
-    <string name="settings_information">Informazioni</string>
-    <string name="settings_faq">Domande frequenti</string>
-    <string name="settings_tos">Termini di utilizzo</string>
-    <string name="settings_privacy_policy">Informativa privacy</string>
-
-    <string name="settings_general">Generale</string>
-    <string name="settings_change_province">Cambia la provincia</string>
-    <string name="settings_leave_review">Lascia una recensione</string>
-    <string name="settings_contact_support">Contatta il supporto</string>
 
     <string name="settings_app_version">Immuni v%s (%d)</string>
 
@@ -89,7 +73,6 @@
     <string name="home_information_self_care">Cosa puoi fare per proteggerti</string>
     <string name="home_information_how_app_works">Come funziona l\'app?</string>
 
-    <string name="privacy_page_tos">Proseguendo, dichiaro di aver letto e accettato i {termini di utilizzo}</string>
 
     <string name="contact_us_email_message"></string>
 
@@ -170,19 +153,8 @@
     <string name="asl_instruction_check_symptoms"><b>Valuta due volte al giorno la comparsa dei sintomi compatibili con il COVID-19:</b> febbre di qualsiasi grado, tosse, affaticamento, difficoltà respiratoria e perdita di gusto o di olfatto</string>
     <string name="asl_instruction_isolate"><b>In caso di comparsa dei sintomi, isolati immediatamente</b> dal resto dei conviventi e indossa una mascherina protettiva</string>
 
-    <string name="privacy_14_years">Dichiaro di avere almeno 14 anni</string>
-    <string name="privacy_item_data"><b>Immuni non raccoglie il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o email.</b></string>
-    <string name="privacy_item_identity"><b>Immuni non può risalire alla tua identità</b> o quella delle persone con cui entri in contatto.</string>
-    <string name="privacy_item_location"><b>Immuni non raccoglie alcun dato di geolocalizzazione</b>, inclusi i dati del GPS. I tuoi spostamenti non sono tracciati in alcun modo.</string>
-    <string name="privacy_item_crypto"><b>I dati salvati sul tuo smartphone e le connessioni al server sono cifrati.</b></string>
-    <string name="privacy_item_italy">I tuoi dati sono salvati su server in Italia, <b>sono gestiti da soggetti pubblici e controllati dal Ministero della Salute</b>.</string>
-    <string name="privacy_item_data_sent"><b>Per aiutare il Servizio Sanitario Nazionale,</b> a prendersi cura di te, Immuni invia al server del Ministero della Salute:\n
-        • La tua provincia di domicilio\n
-        • Se l\'app funziona correttamente\n
-        • Se sei stato avvertito di un contatto a rischio
-    </string>
+
     <string name="privacy_item_data_usage"><b>I dati aiutano il Servizio Sanitario Nazionale a prendersi cura degli utenti,</b> ad esempio predisponendo le risorse necessarie in base a una stima del numero di utenti avvertiti dall’app.</string>
-    <string name="privacy_item_data_deletion"><b>Tutti i dati sono eliminati quando non più necessari</b> e in ogni caso non più tardi del 31 dicembre 2020.</string>
 
     <string name="onboarding_exposure_api_not_activated">Notifiche di esposizione non attivate</string>
     <string name="onboarding_region_title">Qual è la tua regione?</string>
@@ -222,15 +194,9 @@
         <item quantity="one">Attendi %d minuto</item>
         <item quantity="other">Attendi %d minuti</item>
     </plurals>
-    <string name="privacy_complete">Informativa completa</string>
     <string name="info_card_default_respect">In ogni caso, <b>cerca sempre di rispettare queste indicazioni generali</b>:</string>
     <string name="info_card_default_norms"><b>Rispetta la normativa vigente</b> in funzione nella tua area</string>
     <string name="info_card_subtitle">Se sei in contatto con il tuo medico o con il Dipartimento di prevenzione della tua ASL, segui tutte le indicazioni che hai ricevuto.</string>
 
-    <string name="positive_recovered_confirm_alert_title">Confermi di essere COVID-19 negativo?</string>
-    <string name="positive_recovered_confirm_alert_message">Confermi di essere COVID-19 negativo?</string>
     <string name="i_confirm">Confermo</string>
-
-    <string name="contact_hide_confirm_alert_title">Confermi di essere in contatto con la tua ASL?</string>
-    <string name="contact_hide_confirm_alert_message">Immuni nasconderà l’avviso di contatto. Dovrai comunque seguire tutte le indicazione che hai ricevuto dalla tua ASL.</string>
 </resources>

@@ -78,7 +78,7 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
 
         viewModel.loading.observe(viewLifecycleOwner) {
             activity?.loading(it, ProgressDialogFragment(), Bundle().apply {
-                putString(ProgressDialogFragment.MESSAGE, getString(R.string.settings_data_load))
+                putString(ProgressDialogFragment.MESSAGE, getString(R.string.settings_setting_load_data))
             })
         }
 

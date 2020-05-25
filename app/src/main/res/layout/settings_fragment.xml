@@ -53,7 +53,7 @@
 
                 <TextView
                     style="@style/SettingsMenuItem.Header"
-                    android:text="@string/settings_data_management" />
+                    android:text="@string/settings_setting_section_data" />
 
                 <com.google.android.material.card.MaterialCardView
                     style="@style/SettingsMenuCard"
@@ -68,7 +68,7 @@
 
                             <TextView
                                 style="@style/SettingsMenuItem.WithArrow"
-                                android:text="@string/settings_data_load" />
+                                android:text="@string/settings_setting_load_data" />
 
                             <include layout="@layout/settings_menu_item_arrow" />
                         </LinearLayout>
@@ -81,7 +81,7 @@
 
                 <TextView
                     style="@style/SettingsMenuItem.Header"
-                    android:text="@string/settings_information" />
+                    android:text="@string/settings_setting_section_info" />
 
                 <com.google.android.material.card.MaterialCardView
                     style="@style/SettingsMenuCard"
@@ -96,7 +96,7 @@
 
                             <TextView
                                 style="@style/SettingsMenuItem.WithArrow"
-                                android:text="@string/settings_faq" />
+                                android:text="@string/settings_setting_faq" />
 
                             <include layout="@layout/settings_menu_item_arrow" />
                         </LinearLayout>
@@ -106,20 +106,20 @@
                         <TextView
                             android:id="@+id/termsOfServiceButton"
                             style="@style/SettingsMenuItem"
-                            android:text="@string/settings_tos" />
+                            android:text="@string/settings_setting_tos" />
 
                         <include layout="@layout/content_divider" />
 
                         <TextView
                             android:id="@+id/privacyPolicyButton"
                             style="@style/SettingsMenuItem"
-                            android:text="@string/settings_privacy_policy" />
+                            android:text="@string/settings_setting_privacy" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView
                     style="@style/SettingsMenuItem.Header"
-                    android:text="@string/settings_general" />
+                    android:text="@string/settings_setting_section_general" />
 
                 <com.google.android.material.card.MaterialCardView
                     style="@style/SettingsMenuCard"
@@ -131,21 +131,21 @@
                         <TextView
                             android:id="@+id/changeProvinceButton"
                             style="@style/SettingsMenuItem"
-                            android:text="@string/settings_change_province" />
+                            android:text="@string/settings_setting_chage_province" />
 
                         <include layout="@layout/content_divider" />
 
                         <TextView
                             android:id="@+id/sendFeedbackButton"
                             style="@style/SettingsMenuItem"
-                            android:text="@string/settings_leave_review" />
+                            android:text="@string/settings_setting_leave_review" />
 
                         <include layout="@layout/content_divider" />
 
                         <TextView
                             android:id="@+id/contactSupportButton"
                             style="@style/SettingsMenuItem"
-                            android:text="@string/settings_contact_support" />
+                            android:text="@string/settings_setting_contact_support" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
