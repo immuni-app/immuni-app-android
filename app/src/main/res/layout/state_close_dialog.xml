@@ -147,7 +147,7 @@
                 android:paddingStart="30dp"
                 android:paddingTop="40dp"
                 android:paddingEnd="30dp"
-                android:text="@string/close_contact_suggested_action"
+                android:text="@string/suggestions_instruction_hide_alert_action"
                 android:textColor="@color/grey_dark" />
 
             <TextView
@@ -160,7 +160,7 @@
                 android:paddingTop="16dp"
                 android:paddingEnd="30dp"
                 android:paddingBottom="35dp"
-                android:text="@string/asl_already_in_contact"
+                android:text="@string/suggestions_instruction_hide_alert_action"
                 android:textColor="@color/grey_dark" />
 
             <include layout="@layout/content_divider" />
@@ -170,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="30dp"
-                android:text="@string/asl_instruction_title"
+                android:text="@string/suggestions_instruction_hide_alert_action"
                 android:textColor="@color/grey_dark" />
 
             <TextView
@@ -204,7 +204,7 @@
                 style="@style/ParagraphCard"
                 android:layout_marginBottom="30dp"
                 android:drawableStart="@drawable/ic_isolate"
-                android:text="@string/asl_instruction_isolate" />
+                android:text="@string/suggestions_instruction_hide_alert_action" />
 
             <include layout="@layout/content_divider" />
 

@@ -333,7 +333,7 @@
                     android:paddingStart="@dimen/activity_vertical_margin"
                     android:paddingEnd="32dp"
                     android:singleLine="true"
-                    android:text="@string/upload_data_title"
+                    android:text="@string/settings_setting_load_data"
                     android:textAllCaps="false" />
             </androidx.appcompat.widget.Toolbar>
 

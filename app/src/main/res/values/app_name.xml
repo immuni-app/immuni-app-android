@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
   ~ Please refer to the AUTHORS file for more information.
@@ -14,17 +13,6 @@
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/text"
-    style="@style/P1Text"
-    android:textColor="@color/grey_dark"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clipToPadding="false"
-    android:paddingBottom="30dp"
-    android:paddingStart="30dp"
-    android:paddingEnd="30dp"
-    android:paddingTop="10dp"
-    android:text="@string/permission_tutorial_how_immuni_works_title"/>
+<resources>
+    <string name="app_name">Immuni</string>
+</resources>

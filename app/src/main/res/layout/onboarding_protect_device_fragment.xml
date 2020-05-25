@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:text="@string/i_get_it"
+            android:text="@string/onboarding_communication_advice_action"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -57,7 +57,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="24dp"
-            android:text="@string/onboarding_protect_device_title"
+            android:text="@string/onboarding_pin_advice_title"
             app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:maxLines="5"
-            android:text="@string/onboarding_protect_device_message"
+            android:text="@string/onboarding_pin_advice_description"
             app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toTopOf="@+id/next"
             app:layout_constraintEnd_toEndOf="@+id/title"

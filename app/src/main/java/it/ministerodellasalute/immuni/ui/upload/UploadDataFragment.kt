@@ -110,10 +110,10 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
 
     private fun onDismiss() {
         openConfirmationDialog(
-            positiveButton = getString(R.string.upload_data_exit_confirmation_yes),
+            positiveButton = getString(R.string.confirm_data_close_verify_alert_affermative_answer),
             negativeButton = getString(R.string.cancel),
-            message = getString(R.string.upload_data_exit_confirmation_message),
-            title = getString(R.string.upload_data_exit_confirmation_title),
+            message = getString(R.string.confirm_data_close_verify_alert_message),
+            title = getString(R.string.confirm_data_close_verify_alert_title),
             cancelable = false,
             requestCode = ALERT_CONFIRM_EXIT
         )

@@ -63,8 +63,8 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener, Confirmat
                 openConfirmationDialog(
                     positiveButton = getString(R.string.retry),
                     negativeButton = getString(R.string.cancel),
-                    message = getString(R.string.error_loading_data_message),
-                    title = getString(R.string.error_loading_data_title),
+                    message = getString(R.string.app_setup_view_network_error),
+                    title = getString(R.string.app_setup_view_generic_error),
                     cancelable = false,
                     requestCode = 101
                 )

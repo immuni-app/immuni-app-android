@@ -77,11 +77,11 @@ class OtpViewModel(
                 }
                 is OtpValidationResult.ServerError -> {
                     _verificationError.value =
-                        Event(context.getString(R.string.generic_error_message))
+                        Event(context.getString(R.string.upload_data_api_error_title))
                 }
                 is OtpValidationResult.ConnectionError -> {
                     _verificationError.value =
-                        Event(context.getString(R.string.error_loading_data_message))
+                        Event(context.getString(R.string.app_setup_view_network_error))
                 }
             }
 
