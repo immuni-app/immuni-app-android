@@ -178,6 +178,6 @@ sealed class HowItWorksItem {
     class Image(@RawRes val animation: Int, @DrawableRes val image: Int, val ratio: String) : HowItWorksItem()
     class ParagraphTitle(val text: String) : HowItWorksItem()
     class Paragraph(val text: String) : HowItWorksItem()
-    class Separator : HowItWorksItem()
-    class Footer : HowItWorksItem()
+    object Separator : HowItWorksItem()
+    object Footer : HowItWorksItem()
 }

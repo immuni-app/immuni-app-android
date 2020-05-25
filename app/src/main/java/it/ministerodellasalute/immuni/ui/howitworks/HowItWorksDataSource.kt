@@ -27,23 +27,23 @@ class HowItWorksDataSource(
         HowItWorksItem.Image(R.raw.lottie_hiw_1, R.drawable.how_it_works_1, "2:1.2"),
         HowItWorksItem.ParagraphTitle(context.getString(R.string.how_it_works_tile_1)),
         HowItWorksItem.Paragraph(context.getString(R.string.how_it_works_1)),
-        HowItWorksItem.Separator(),
+        HowItWorksItem.Separator,
         HowItWorksItem.Image(R.raw.lottie_hiw_2, R.drawable.how_it_works_2, "2:1.4"),
         HowItWorksItem.ParagraphTitle(context.getString(R.string.how_it_works_tile_2)),
         HowItWorksItem.Paragraph(context.getString(R.string.how_it_works_2)),
-        HowItWorksItem.Separator(),
+        HowItWorksItem.Separator,
         HowItWorksItem.Image(R.raw.lottie_hiw_3, R.drawable.how_it_works_3, "2:1"),
         HowItWorksItem.ParagraphTitle(context.getString(R.string.how_it_works_tile_3)),
         HowItWorksItem.Paragraph(context.getString(R.string.how_it_works_3)),
-        HowItWorksItem.Separator(),
+        HowItWorksItem.Separator,
         HowItWorksItem.Image(R.raw.lottie_hiw_4, R.drawable.how_it_works_4, "2:0.9"),
         HowItWorksItem.ParagraphTitle(context.getString(R.string.how_it_works_tile_4)),
         HowItWorksItem.Paragraph(context.getString(R.string.how_it_works_4)),
-        HowItWorksItem.Separator(),
+        HowItWorksItem.Separator,
         HowItWorksItem.Image(R.raw.lottie_hiw_5, R.drawable.how_it_works_5, "2:1.2"),
         HowItWorksItem.ParagraphTitle(context.getString(R.string.how_it_works_tile_5)),
         HowItWorksItem.Paragraph(context.getString(R.string.how_it_works_5))
     ).apply {
-        if (showFaq) add(HowItWorksItem.Footer())
+        if (showFaq) add(HowItWorksItem.Footer)
     }
 }
