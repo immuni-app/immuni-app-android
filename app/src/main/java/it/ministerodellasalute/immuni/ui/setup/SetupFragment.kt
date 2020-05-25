@@ -53,20 +53,22 @@ class SetupFragment : Fragment(R.layout.setup_fragment) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer { it ->
-            it.getContentIfNotHandled()?.let { navigate -> // Only proceed if the event has never been handled
-                if (navigate) {
-                    goToHomeActivity()
+        viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()
+                ?.let { navigate -> // Only proceed if the event has never been handled
+                    if (navigate) {
+                        goToHomeActivity()
+                    }
                 }
-            }
         })
 
-        viewModel.navigateToWelcome.observe(viewLifecycleOwner, Observer { it ->
-            it.getContentIfNotHandled()?.let { navigate -> // Only proceed if the event has never been handled
-                if (navigate) {
-                    goToWelcomeActivity()
+        viewModel.navigateToWelcome.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()
+                ?.let { navigate -> // Only proceed if the event has never been handled
+                    if (navigate) {
+                        goToWelcomeActivity()
+                    }
                 }
-            }
         })
     }
 

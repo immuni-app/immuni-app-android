@@ -89,7 +89,7 @@ fun BottomNavigationView.setupWithNavController(
     // When a navigation item is selected
     setOnNavigationItemSelectedListener { item ->
 
-        this.menu.iterator().forEach { it ->
+        this.menu.iterator().forEach {
             it.setIcon(defaultIconsIds[menuItemsIds.indexOf(it.itemId)])
         }
 
@@ -204,7 +204,7 @@ private fun BottomNavigationView.setupItemReselected(
 ) {
     setOnNavigationItemReselectedListener { item ->
 
-        this.menu.iterator().forEach { it ->
+        this.menu.iterator().forEach {
             it.setIcon(defaultIconsIds[menuItemsIds.indexOf(it.itemId)])
         }
 
