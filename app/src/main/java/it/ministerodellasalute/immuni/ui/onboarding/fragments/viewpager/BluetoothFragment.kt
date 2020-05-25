@@ -20,10 +20,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.bluetooth.BluetoothUtils
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
 
@@ -32,7 +32,7 @@ class BluetoothFragment :
 
     override fun onResume() {
         super.onResume()
-        (activity as? AppCompatActivity)?.setLightStatusBar(ContextCompat.getColor(requireContext(), R.color.background))
+        (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

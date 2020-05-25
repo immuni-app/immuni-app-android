@@ -25,8 +25,8 @@ import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.ui.main.MainActivity
 import it.ministerodellasalute.immuni.ui.setup.SetupActivity
 import org.koin.core.KoinComponent
@@ -68,7 +68,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         builder.apply {
             setContentTitle(title)
             setContentText(message)
-            color = ContextCompat.getColor(context, R.color.danger)
+            color = context.getColorCompat(R.color.danger)
             priority = NotificationCompat.PRIORITY_HIGH
             setStyle(NotificationCompat.BigTextStyle().bigText(message))
         }
@@ -80,7 +80,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         builder.apply {
             setContentTitle(title)
             setContentText(message)
-            color = ContextCompat.getColor(context, R.color.colorPrimary)
+            color = context.getColorCompat(R.color.colorPrimary)
             priority = NotificationCompat.PRIORITY_HIGH
             setStyle(NotificationCompat.BigTextStyle().bigText(message))
             setContentIntent(createPendingOnboardingIntent())
@@ -106,7 +106,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         builder.apply {
             setContentTitle(title)
             setContentText(message)
-            color = ContextCompat.getColor(context, R.color.colorPrimary)
+            color = context.getColorCompat(R.color.colorPrimary)
             priority = NotificationCompat.PRIORITY_HIGH
             setStyle(NotificationCompat.BigTextStyle().bigText(message))
             setContentIntent(pendingIntent)
@@ -120,7 +120,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         builder.apply {
             setContentTitle(title)
             setContentText(message)
-            color = ContextCompat.getColor(context, R.color.colorPrimary)
+            color = context.getColorCompat(R.color.colorPrimary)
             priority = NotificationCompat.PRIORITY_HIGH
             setStyle(NotificationCompat.BigTextStyle().bigText(message))
         }

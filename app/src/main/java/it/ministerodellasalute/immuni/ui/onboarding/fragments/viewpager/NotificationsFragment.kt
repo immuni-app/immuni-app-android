@@ -18,11 +18,11 @@ package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.OnboardingDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
 
@@ -47,7 +47,7 @@ class NotificationsFragment :
 
     override fun onResume() {
         super.onResume()
-        (activity as? AppCompatActivity)?.setLightStatusBar(ContextCompat.getColor(requireContext(), R.color.background))
+        (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background))
         // Auto-Skip if enabled
         if (canProceed()) {
             viewModel.onNextTap()

@@ -18,8 +18,8 @@ package it.ministerodellasalute.immuni.ui.dialog
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 
 abstract class FullScreenDialogDarkFragment : FullScreenDialogLightFragment() {
 
@@ -27,10 +27,10 @@ abstract class FullScreenDialogDarkFragment : FullScreenDialogLightFragment() {
         super.onActivityCreated(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             dialog?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            dialog?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.transparent)
+            dialog?.window?.statusBarColor = requireContext().getColorCompat(R.color.transparent)
         } else {
             dialog?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            dialog?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.transparent)
+            dialog?.window?.statusBarColor = requireContext().getColorCompat(R.color.transparent)
         }
     }
 }

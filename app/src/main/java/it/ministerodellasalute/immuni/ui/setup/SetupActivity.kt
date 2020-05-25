@@ -17,9 +17,9 @@ package it.ministerodellasalute.immuni.ui.setup
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.ui.ImmuniActivity
 
 class SetupActivity : ImmuniActivity() {
@@ -42,6 +42,6 @@ class SetupActivity : ImmuniActivity() {
                 .commitNow()
         }
 
-        setLightStatusBar(ContextCompat.getColor(this, R.color.transparent))
+        setLightStatusBar(this.getColorCompat(R.color.transparent))
     }
 }

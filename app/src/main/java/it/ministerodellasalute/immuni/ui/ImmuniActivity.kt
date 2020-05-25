@@ -19,11 +19,11 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
@@ -63,7 +63,7 @@ abstract class ImmuniActivity : AppCompatActivity() {
         super.onStart()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             window.navigationBarColor =
-                ContextCompat.getColor(applicationContext, R.color.background)
+                this.getColorCompat(R.color.background)
         }
     }
 

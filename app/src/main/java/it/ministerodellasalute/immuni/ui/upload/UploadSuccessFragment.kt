@@ -18,11 +18,11 @@ package it.ministerodellasalute.immuni.ui.upload
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.ui.otp.OtpFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -31,7 +31,7 @@ class UploadSuccessFragment : Fragment(R.layout.upload_data_success_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.setLightStatusBar(ContextCompat.getColor(requireContext(), R.color.background))
+        (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background))
 
         lifecycleScope.launch {
             delay(2000)

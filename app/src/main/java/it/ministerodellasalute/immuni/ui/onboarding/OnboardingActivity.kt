@@ -16,10 +16,10 @@
 package it.ministerodellasalute.immuni.ui.onboarding
 
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.ui.ImmuniActivity
 import org.koin.androidx.viewmodel.ext.android.getStateViewModel
 
@@ -29,7 +29,7 @@ class OnboardingActivity : ImmuniActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setLightStatusBar(ContextCompat.getColor(this, R.color.background))
+        setLightStatusBar(this.getColorCompat(R.color.background))
         viewModel = getStateViewModel()
 
         setContentView(R.layout.nav_host_activity)

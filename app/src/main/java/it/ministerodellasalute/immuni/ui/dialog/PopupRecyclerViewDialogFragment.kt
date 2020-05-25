@@ -22,15 +22,11 @@ import android.view.ViewGroup
 import android.view.ViewStub
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.view.animateHide
-import it.ministerodellasalute.immuni.extensions.view.animateShow
-import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import it.ministerodellasalute.immuni.extensions.view.setTint
+import it.ministerodellasalute.immuni.extensions.view.*
 import kotlinx.android.synthetic.main.how_it_works_dialog.*
 import kotlinx.android.synthetic.main.popup_recycler_view_dialog.*
 
@@ -50,7 +46,7 @@ open class PopupRecyclerViewDialogFragment : BottomSheetDialogDarkFragment() {
      * Set the collapsing toolbar background color.
      */
     fun setToolbarColor(@ColorRes color: Int) {
-        toolbar.setTint(ContextCompat.getColor(requireContext(), color))
+        toolbar.setTint(requireContext().getColorCompat(color))
     }
 
     /**

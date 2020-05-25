@@ -22,10 +22,10 @@ import android.view.ViewGroup
 import android.view.ViewStub
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.ScreenUtils
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.setTint
 import kotlinx.android.synthetic.main.popup_dialog.*
@@ -46,7 +46,7 @@ open class PopupDialogFragment : BottomSheetDialogDarkFragment() {
      * Set the collapsing toolbar background color.
      */
     fun setToolbarColor(@ColorRes color: Int) {
-        toolbar.setTint(ContextCompat.getColor(requireContext(), color))
+        toolbar.setTint(requireContext().getColorCompat(color))
     }
 
     /**

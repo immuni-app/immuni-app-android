@@ -19,7 +19,6 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.text.color
 import androidx.lifecycle.Observer
 import com.google.android.material.appbar.AppBarLayout
@@ -44,7 +43,7 @@ class PrivacyFragment : ViewPagerBaseFragment(R.layout.onboarding_privacy_fragme
 
     override fun onResume() {
         super.onResume()
-        (activity as? AppCompatActivity)?.setLightStatusBar(ContextCompat.getColor(requireContext(), R.color.background))
+        (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background))
         updateUI()
     }
 
@@ -138,7 +137,7 @@ class PrivacyFragment : ViewPagerBaseFragment(R.layout.onboarding_privacy_fragme
 
     private fun highlight(card: MaterialCardView, highlight: Boolean) {
         card.strokeWidth = ScreenUtils.convertDpToPixels(requireContext(), 2)
-        if (highlight) card.strokeColor = ContextCompat.getColor(requireContext(), R.color.danger)
+        if (highlight) card.strokeColor = requireContext().getColorCompat(R.color.danger)
         else card.strokeWidth = 0
         card.isActivated = highlight
     }

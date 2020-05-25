@@ -16,10 +16,10 @@
 package it.ministerodellasalute.immuni.ui.upload
 
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.ui.ImmuniActivity
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -29,7 +29,7 @@ class UploadDataActivity : ImmuniActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setLightStatusBar(ContextCompat.getColor(this, R.color.background_darker))
+        setLightStatusBar(this.getColorCompat(R.color.transparent))
         viewModel = getViewModel()
 
         setContentView(R.layout.nav_host_activity)

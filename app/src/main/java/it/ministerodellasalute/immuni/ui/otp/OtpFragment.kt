@@ -18,7 +18,6 @@ package it.ministerodellasalute.immuni.ui.otp
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
@@ -27,6 +26,7 @@ import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
@@ -58,7 +58,7 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as? AppCompatActivity)?.setLightStatusBar(ContextCompat.getColor(requireContext(), R.color.background_darker))
+        (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background_darker))
         // Warning: if you get the sharedViewModel, then every time you create this fragment from
         // the same activity, you will have same OTP code.
         viewModel = getViewModel()

@@ -21,10 +21,10 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.DialogFragment
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 
 abstract class FullScreenDialogLightFragment : DialogFragment() {
 
@@ -41,7 +41,7 @@ abstract class FullScreenDialogLightFragment : DialogFragment() {
             val height = ViewGroup.LayoutParams.MATCH_PARENT
             it.window?.setLayout(width, height)
             it.window?.attributes?.windowAnimations = R.style.AppTheme_DialogSlide
-            it.window?.setBackgroundDrawable(ContextCompat.getColor(requireContext(), R.color.transparent).toDrawable())
+            it.window?.setBackgroundDrawable(requireContext().getColorCompat(R.color.transparent).toDrawable())
             it.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         }
     }
@@ -50,10 +50,10 @@ abstract class FullScreenDialogLightFragment : DialogFragment() {
         super.onActivityCreated(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             dialog?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            dialog?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.transparent)
+            dialog?.window?.statusBarColor = requireContext().getColorCompat(R.color.transparent)
         } else {
             dialog?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            dialog?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.transparent)
+            dialog?.window?.statusBarColor = requireContext().getColorCompat(R.color.transparent)
         }
         dialog?.window?.attributes?.windowAnimations = R.style.AppTheme_DialogSlide
     }

@@ -19,7 +19,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
@@ -28,6 +27,7 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.SettingsDirections
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.playstore.PlayStoreActions
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.settings_fragment.*
@@ -40,7 +40,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = getViewModel()
-        (activity as? AppCompatActivity)?.setLightStatusBar(ContextCompat.getColor(requireContext(), R.color.background_darker))
+        (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background_darker))
 
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->

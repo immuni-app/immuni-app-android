@@ -18,7 +18,6 @@ package it.ministerodellasalute.immuni.ui.faq
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -26,6 +25,7 @@ import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
@@ -40,7 +40,7 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener, Confirmat
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.setLightStatusBar(ContextCompat.getColor(requireContext(), R.color.background_darker))
+        (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background_darker))
 
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
