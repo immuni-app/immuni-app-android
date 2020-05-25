@@ -71,8 +71,9 @@ git clone git@github.com:immuni-app/immuni-app-android.git
 ```
 
 From Android Studio, select *Import Project*, then select the root folder of the cloned repository.
-Click *Make Project* to build the app and download all the required dependencies.
-Click *Run app* to install the app on your device or emulator.
+Depending on your OS, wait for indexing. The project will be automatically builded and ready to be executed.
+Otwherise, click *Make Project* to build the app and download all the required dependencies.
+After that, click *Run app* to install the app on your device or emulator.
 
 ## Using the Gradle Wrapper command line tool
 
