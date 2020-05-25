@@ -50,10 +50,8 @@ internal class ProgressDialogFragment : DialogFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            dialog?.window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            dialog?.window?.statusBarColor = Color.TRANSPARENT
-        }
+        dialog?.window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        dialog?.window?.statusBarColor = Color.TRANSPARENT
 
         // show message if available
         arguments?.getString(MESSAGE)?.let {
