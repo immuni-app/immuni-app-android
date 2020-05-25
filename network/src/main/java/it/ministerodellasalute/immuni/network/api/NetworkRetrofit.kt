@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.network.api
 import android.content.Context
 import android.util.Log
 import com.squareup.moshi.Moshi
+import it.ministerodellasalute.immuni.network.BuildConfig
 import it.ministerodellasalute.immuni.network.NetworkConfiguration
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -45,7 +46,9 @@ class NetworkRetrofit(
 
     val client by lazy {
         val builder = OkHttpClient.Builder()
-        builder.addInterceptor(loggingInterceptor)
+        if(BuildConfig.DEBUG) {
+            builder.addInterceptor(loggingInterceptor)
+        }
 
         /**
          * uncomment this line to verify if http cache is working
