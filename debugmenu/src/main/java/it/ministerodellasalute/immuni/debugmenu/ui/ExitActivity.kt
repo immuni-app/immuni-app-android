@@ -29,11 +29,7 @@ class ExitActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (android.os.Build.VERSION.SDK_INT >= 21) {
-            finishAndRemoveTask()
-        } else {
-            finish()
-        }
+        finishAndRemoveTask()
     }
 
     override fun onDestroy() {

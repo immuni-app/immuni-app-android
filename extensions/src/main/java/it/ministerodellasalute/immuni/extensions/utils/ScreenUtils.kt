@@ -72,12 +72,12 @@ object ScreenUtils {
         var widthPixels = metrics.widthPixels
         var heightPixels = metrics.heightPixels
         // includes window decorations (statusbar bar/menu bar)
-        if (Build.VERSION.SDK_INT >= 14 && Build.VERSION.SDK_INT < 17) try {
+        try {
             widthPixels = Display::class.java.getMethod("getRawWidth").invoke(d) as Int
             heightPixels = Display::class.java.getMethod("getRawHeight").invoke(d) as Int
         } catch (ignored: Exception) { }
         // includes window decorations (statusbar bar/menu bar)
-        if (Build.VERSION.SDK_INT >= 17) try {
+        try {
             val realSize = Point()
             Display::class.java.getMethod("getRealSize", Point::class.java)
                 .invoke(d, realSize)
