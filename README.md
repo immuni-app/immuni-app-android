@@ -120,7 +120,7 @@ For more information about how the project is generated and structured, please r
 
 ## Backend services
 
-At the current stage, the application points to backend services which are not publicly accessible and whose source code has not been released. Note that the application is designed to work without a backend, especially in the context of not having the Exposure Notification entitlements (see [Installation](https://docs.google.com/document/d/1oeInTAmpvbcm0CehjxCWZ_Ak_yrgeGtGUOavHmaxlv4/edit#heading=h.n0yobccwyo6h) for more details).
+At the current stage, the application points to backend services which are not publicly accessible and whose source code has not been released. Note that the application is designed to work without a backend, especially in the context of not having the Exposure Notification entitlements (see [Installation](#installation).
 
 Please see this [issue](https://github.com/immuni-app/immuni-app-android/issues/1) for more information about this topic.
 
