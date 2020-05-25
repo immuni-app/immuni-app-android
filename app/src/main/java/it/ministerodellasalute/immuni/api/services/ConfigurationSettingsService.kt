@@ -46,6 +46,9 @@ data class ConfigurationSettings(
     @field:Json(name = "risk_reminder_notification_period") val riskReminderNotificationPeriod: Int, // FIXME use me!
     @field:Json(name = "exposure_info_minimum_risk_score") val exposureInfoMinimumRiskScore: Int,
     @field:Json(name = "exposure_detection_period") val exposureDetectionPeriod: Int,
+    @field:Json(name = "dummy_teks_average_opportunity_waiting_time") val dummyTeksAverageOpportunityWaitingTime: Int,
+    @field:Json(name = "dummy_teks_average_request_waiting_time") val dummyTeksAverageRequestWaitingTime: Int,
+    @field:Json(name = "dummy_teks_request_probabilities") val dummyTeksRequestProbabilities: List<Double>,
     @field:Json(name = "support_email") val supportEmail: String = defaultSettings.supportEmail
 )
 
@@ -104,5 +107,13 @@ val defaultSettings = ConfigurationSettings(
     serviceNotActiveNotificationPeriod = 60 * 60 * 24, // 1 day
     onboardingNotCompletedNotificationPeriod = 60 * 60 * 24, // 1 day
     requiredUpdateNotificationPeriod = 60 * 60 * 24, // 1 day
-    riskReminderNotificationPeriod = 60 * 60 * 24 // 1 day
+    riskReminderNotificationPeriod = 60 * 60 * 24, // 1 day
+    dummyAnalyticsWaitingTime = 2592000,
+    dummyTeksWindowDuration = 86400,
+    dummyTeksAverageOpportunityWaitingTime = 864000 or 2592000,
+    dummyTeksAverageStartWaitingTime = 10,
+    dummyTeksAverageRequestWaitingTime = 10,
+    dummyTeksRequestProbabilities = listOf(1.0, 0.1),
+    operationalInfoWithExposureSamplingRate = 1.0,
+    operationalInfoWithoutExposureSamplingRate = 0.1
 )
