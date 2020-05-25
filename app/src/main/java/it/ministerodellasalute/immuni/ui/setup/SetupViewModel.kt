@@ -33,7 +33,7 @@ class SetupViewModel(
         initializeJob?.cancel()
     }
 
-    var initializeJob: Job? = null
+    private var initializeJob: Job? = null
     fun initializeApp() {
         initializeJob?.cancel()
         initializeJob = viewModelScope.launch {

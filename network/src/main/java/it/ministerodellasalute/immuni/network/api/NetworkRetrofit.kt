@@ -38,12 +38,12 @@ class NetworkRetrofit(
     config: NetworkConfiguration
 ) {
 
-    val loggingInterceptor = HttpLoggingInterceptor().apply {
+    private val loggingInterceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
-    var certificatePinner = config.certificatePinner()
+    private var certificatePinner = config.certificatePinner()
 
-    val client by lazy {
+    private val client by lazy {
         val builder = OkHttpClient.Builder()
         builder.addInterceptor(loggingInterceptor)
 

@@ -48,7 +48,7 @@ class PushNotificationManager(
      *
      * @return [PushNotificationState]
      */
-    fun getPushNotificationState(): PushNotificationState {
+    private fun getPushNotificationState(): PushNotificationState {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val manager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

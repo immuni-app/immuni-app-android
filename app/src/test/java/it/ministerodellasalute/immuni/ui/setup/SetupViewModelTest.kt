@@ -37,7 +37,7 @@ class SetupViewModelTest {
     /**
      * class under test
      */
-    lateinit var viewModel: SetupViewModel
+    private lateinit var viewModel: SetupViewModel
 
     @MockK(relaxed = true)
     lateinit var userManager: UserManager

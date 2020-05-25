@@ -34,7 +34,7 @@ import kotlin.reflect.full.primaryConstructor
 
 class HomeListAdapter(
     val context: Context,
-    val clickListener: HomeClickListener
+    private val clickListener: HomeClickListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
