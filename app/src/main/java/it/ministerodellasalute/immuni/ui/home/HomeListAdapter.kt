@@ -21,6 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -129,7 +130,7 @@ class HomeListAdapter(
                     holder.reactivate.gone()
                     holder.title.text = resources.getString(R.string.home_protection_active)
                         .color('{', '}',
-                            resources.getColor(R.color.colorPrimary))
+                            ContextCompat.getColor(context, R.color.colorPrimary))
                     // holder.shieldIcon.setImageResource(R.drawable.ic_shield)
                     // animate fade-in to avoid glitch on tab change
                     holder.lottieBg.alpha = 0f
@@ -146,7 +147,7 @@ class HomeListAdapter(
                     holder.reactivate.visible()
                     holder.title.text = resources.getString(R.string.home_protection_not_active)
                         .color('{', '}',
-                            resources.getColor(R.color.danger))
+                            ContextCompat.getColor(context, R.color.danger))
                     // holder.shieldIcon.setImageResource(R.drawable.ic_shield_warning)
                     holder.lottieBg.alpha = 0f
                     holder.lottieBg.setAnimation(R.raw.lottie_protection_not_active)

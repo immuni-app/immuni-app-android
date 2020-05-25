@@ -16,6 +16,7 @@
 package it.ministerodellasalute.immuni.ui.faq
 
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
@@ -25,7 +26,7 @@ class FaqActivity : ImmuniActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setLightStatusBar(resources.getColor(R.color.background_darker))
+        setLightStatusBar(ContextCompat.getColor(this, R.color.background_darker))
 
         setContentView(R.layout.nav_host_activity)
         findNavController(R.id.nav_host_fragment).setGraph(R.navigation.faq)

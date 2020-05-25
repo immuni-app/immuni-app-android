@@ -23,6 +23,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -81,7 +82,7 @@ class HomeFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(R.color.statusBarLight))
+        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(ContextCompat.getColor(requireContext(), R.color.statusBarLight))
 
         // hack to preserve the scrolling state across tab navigation
         // due to the top info card and list top padding that changes accordingly
@@ -148,17 +149,13 @@ class HomeFragment : Fragment(),
         when (exposureStatus) {
             is ExposureStatus.None -> {
                 (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(
-                    resources.getColor(
-                        R.color.background
-                    )
+                    ContextCompat.getColor(requireContext(), R.color.background)
                 )
                 infoCard.gone()
             }
             else -> {
                 (activity as? AppCompatActivity)?.setDarkStatusBarFullscreen(
-                    resources.getColor(
-                        R.color.statusBarLight
-                    )
+                    ContextCompat.getColor(requireContext(), R.color.statusBarLight)
                 )
                 infoCard.visible()
             }

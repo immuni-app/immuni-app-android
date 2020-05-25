@@ -26,6 +26,7 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.view.Window
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -55,7 +56,7 @@ abstract class BottomSheetDialogLightFragment : BottomSheetDialogFragment() {
             val dimDrawable = requireContext().getColorCompat(R.color.popup_mask).toDrawable()
             val navigationBarDrawable = GradientDrawable()
             navigationBarDrawable.shape = GradientDrawable.RECTANGLE
-            navigationBarDrawable.setColor(requireContext().resources.getColor(R.color.background))
+            navigationBarDrawable.setColor(ContextCompat.getColor(requireContext(), R.color.background))
             val layers = arrayOf<Drawable>(dimDrawable, navigationBarDrawable)
             val windowBackground = LayerDrawable(layers)
             windowBackground.setLayerInsetTop(1, metrics.heightPixels)
@@ -89,6 +90,6 @@ abstract class BottomSheetDialogLightFragment : BottomSheetDialogFragment() {
             dialog?.window?.decorView?.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
-        dialog?.window?.statusBarColor = resources.getColor(R.color.transparent)
+        dialog?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.transparent)
     }
 }

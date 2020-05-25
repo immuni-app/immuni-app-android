@@ -16,6 +16,7 @@
 package it.ministerodellasalute.immuni.ui.forceupdate
 
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setDarkStatusBar
 import it.ministerodellasalute.immuni.ui.ImmuniActivity
@@ -25,6 +26,6 @@ class ForceUpdateActivity : ImmuniActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.force_update_activity)
-        setDarkStatusBar(resources.getColor(R.color.colorPrimary))
+        setDarkStatusBar(ContextCompat.getColor(this, R.color.colorPrimary))
     }
 }

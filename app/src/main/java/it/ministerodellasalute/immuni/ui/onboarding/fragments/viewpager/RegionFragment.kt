@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.postDelayed
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
@@ -39,7 +40,7 @@ class RegionFragment :
 
     override fun onResume() {
         super.onResume()
-        (activity as? AppCompatActivity)?.setLightStatusBar(resources.getColor(R.color.background))
+        (activity as? AppCompatActivity)?.setLightStatusBar(ContextCompat.getColor(requireContext(), R.color.background))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

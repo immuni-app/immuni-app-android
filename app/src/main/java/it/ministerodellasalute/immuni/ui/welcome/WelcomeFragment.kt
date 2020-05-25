@@ -22,6 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -63,7 +64,7 @@ class WelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(R.color.statusBarLight))
+        (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(ContextCompat.getColor(requireContext(), R.color.statusBarLight))
 
         pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
 

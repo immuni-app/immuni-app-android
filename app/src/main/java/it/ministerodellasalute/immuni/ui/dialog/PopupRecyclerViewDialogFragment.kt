@@ -22,6 +22,7 @@ import android.view.ViewGroup
 import android.view.ViewStub
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,7 +50,7 @@ open class PopupRecyclerViewDialogFragment : BottomSheetDialogDarkFragment() {
      * Set the collapsing toolbar background color.
      */
     fun setToolbarColor(@ColorRes color: Int) {
-        toolbar.setTint(resources.getColor(color))
+        toolbar.setTint(ContextCompat.getColor(requireContext(), color))
     }
 
     /**
