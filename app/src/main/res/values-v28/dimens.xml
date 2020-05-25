@@ -13,7 +13,6 @@
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<resources
-    xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <dimen name="cards_elevation">20dp</dimen>
 </resources>

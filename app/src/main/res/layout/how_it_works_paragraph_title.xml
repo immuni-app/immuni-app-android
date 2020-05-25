@@ -16,7 +16,6 @@
 
 <TextView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/text"
     style="@style/H4Section"
     android:textColor="@color/grey_dark"

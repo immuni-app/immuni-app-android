@@ -17,7 +17,6 @@
 <View xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="3dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginStart="30dp"
     android:layout_marginEnd="30dp"
     android:layout_marginBottom="30dp"
