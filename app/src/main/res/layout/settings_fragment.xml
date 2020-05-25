@@ -202,7 +202,7 @@
                     android:layout_marginEnd="30dp"
                     android:gravity="start"
                     android:text="@string/settings_tab"
-                    android:textSize="27dp"
+                    android:textSize="27sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
