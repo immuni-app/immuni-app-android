@@ -120,7 +120,7 @@
     <string name="onboarding_bluetooth_title">Attiva il Bluetooth</string>
     <string name="onboarding_bluetooth_message">Immuni utilizza il Bluetooth Low Energy per registrare i tuoi contatti con altri utenti e permettere notifiche di esposizione al COVID-19.</string>
     <string name="onboarding_notifications_title">Consentici di comunicare con te</string>
-    <string name="onboarding_notifications_message">Le notiche permettono a Immuni di avvisarti tempestivamente in caso di contatto con un utente positivo al virus.</string>
+    <string name="onboarding_notifications_message">Le notifiche permettono a Immuni di avvisarti tempestivamente in caso di contatto con un utente positivo al virus.</string>
     <string name="onboarding_protect_device_title">Proteggi il tuo dispositivo</string>
     <string name="onboarding_protect_device_message">Se non l’hai già fatto, imposta un codice sul tuo dispositivo per proteggerlo e impedire ad altri di accedere ai tuoi dati e alle tue app, inclusa Immuni.</string>
     <string name="onboarding_phishing_warning_title">Fai attenzione alle false comunicazioni</string>
@@ -156,7 +156,7 @@
     <!-- Casual/Symptoms -->
     <!-- Positive -->
     <string name="positive_warning_title">Segui le indicazioni</string>
-    <string name="positive_warning_subtitle">Segui tutte le indicazioni che hai ricevuto dal tuo medico o dal Dipartimento di prevenzione della tua ASL.</string>
+    <string name="positive_warning_subtitle">Segui tutte le indicazioni che hai ricevuto dal tuo medico o dal Dipartimento di Prevenzione della tua ASL.</string>
     <string name="positive_recovery_action_description">Nel caso tu abbia ricevuto conferma di negatività al COVID-19 da parte della tua ASL, tocca il tasto qui sotto per riattivare le notifiche in caso di contatto.</string>
     <string name="positive_recovery_action">Sono negativo al COVID-19</string>
     <string name="positive_immuni_continues_working_title">Immuni sta continuando a funzionare, non disinstallarla</string>
@@ -176,7 +176,7 @@
     <string name="privacy_item_location"><b>Immuni non raccoglie alcun dato di geolocalizzazione</b>, inclusi i dati del GPS. I tuoi spostamenti non sono tracciati in alcun modo.</string>
     <string name="privacy_item_crypto"><b>I dati salvati sul tuo smartphone e le connessioni al server sono cifrati.</b></string>
     <string name="privacy_item_italy">I tuoi dati sono salvati su server in Italia, <b>sono gestiti da soggetti pubblici e controllati dal Ministero della Salute</b>.</string>
-    <string name="privacy_item_data_sent"><b>Per aiutare il Servizio Sanitario Nazionale,</b> a prendersi cura di te, Immuni invia al server del Ministero della Salute:\n
+    <string name="privacy_item_data_sent"><b>Per aiutare il Servizio Sanitario Nazionale</b> a prendersi cura di te, Immuni invia al server del Ministero della Salute:\n
         • La tua provincia di domicilio\n
         • Se l\'app funziona correttamente\n
         • Se sei stato avvertito di un contatto a rischio
@@ -225,7 +225,7 @@
     <string name="privacy_complete">Informativa completa</string>
     <string name="info_card_default_respect">In ogni caso, <b>cerca sempre di rispettare queste indicazioni generali</b>:</string>
     <string name="info_card_default_norms"><b>Rispetta la normativa vigente</b> in funzione nella tua area</string>
-    <string name="info_card_subtitle">Se sei in contatto con il tuo medico o con il Dipartimento di prevenzione della tua ASL, segui tutte le indicazioni che hai ricevuto.</string>
+    <string name="info_card_subtitle">Se sei in contatto con il tuo medico o con il Dipartimento di Prevenzione della tua ASL, segui tutte le indicazioni che hai ricevuto.</string>
 
     <string name="positive_recovered_confirm_alert_title">Confermi di essere COVID-19 negativo?</string>
     <string name="positive_recovered_confirm_alert_message">Confermi di essere COVID-19 negativo?</string>
