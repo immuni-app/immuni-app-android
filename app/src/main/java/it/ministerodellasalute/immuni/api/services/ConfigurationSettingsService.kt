@@ -50,7 +50,7 @@ data class ConfigurationSettings(
 )
 
 @JsonClass(generateAdapter = true)
-class ExposureConfiguration(
+data class ExposureConfiguration(
     @field:Json(name = "attenuation_thresholds") val attenuationThresholds: List<Int>,
     @field:Json(name = "attenuation_bucket_scores") val attenuationScores: List<Int>,
     @field:Json(name = "days_since_last_exposure_bucket_scores") val daysSinceLastExposureScores: List<Int>,
@@ -60,12 +60,12 @@ class ExposureConfiguration(
 )
 
 @JsonClass(generateAdapter = true)
-class Faqs(
+data class Faqs(
     @field:Json(name = "faqs") val faqs: List<Faq>
 )
 
 @JsonClass(generateAdapter = true)
-class Faq(
+data class Faq(
     @field:Json(name = "title") val title: String,
     @field:Json(name = "content") val content: String
 )
