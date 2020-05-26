@@ -16,7 +16,10 @@
 package it.ministerodellasalute.immuni.extensions.utils
 
 import android.util.Log
+import it.ministerodellasalute.immuni.extensions.BuildConfig
 
-fun log(msg: String) {
-    Log.d("Immuni", msg)
+fun Any.log(msg: String, tag: String = this::class.java.simpleName) {
+    if (BuildConfig.DEBUG) {
+        Log.d(tag, msg)
+    }
 }
