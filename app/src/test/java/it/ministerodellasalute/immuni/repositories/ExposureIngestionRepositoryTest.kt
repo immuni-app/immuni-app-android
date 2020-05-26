@@ -16,6 +16,7 @@
 package it.ministerodellasalute.immuni.repositories
 
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
+import it.ministerodellasalute.immuni.api.services.defaultSettings
 import it.ministerodellasalute.immuni.config.ExposureIngestionNetworkConfiguration
 import it.ministerodellasalute.immuni.immuniMoshi
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
@@ -38,19 +39,13 @@ class ExposureIngestionRepositoryTest {
         val dummyUploadSize = sizeForRequest {
             it.validateOtp(
                 isDummyData = 1,
-                authorization = ExposureIngestionRepository.authorization("DUMMY"),
-                body = ExposureIngestionService.ValidateOtpRequest(
-                    padding = ""
-                )
+                authorization = ExposureIngestionRepository.authorization("DUMMY")
             )
         }
         val validateOtpSize = sizeForRequest {
             it.validateOtp(
                 isDummyData = 0,
-                authorization = ExposureIngestionRepository.authorization("DUMMY"),
-                body = ExposureIngestionService.ValidateOtpRequest(
-                    padding = ""
-                )
+                authorization = ExposureIngestionRepository.authorization("DUMMY")
             )
         }
         val emptyUploadTeksSize = sizeForRequest {
@@ -61,8 +56,7 @@ class ExposureIngestionRepositoryTest {
                 body = ExposureIngestionService.UploadTeksRequest(
                     teks = listOf(),
                     province = ExposureIngestionService.Province.agrigento,
-                    exposureSummaries = listOf(),
-                    padding = ""
+                    exposureSummaries = listOf()
                 )
             )
         }
@@ -102,8 +96,7 @@ class ExposureIngestionRepositoryTest {
                                 )
                             }
                         )
-                    },
-                    padding = ""
+                    }
                 )
             )
         }
@@ -112,25 +105,24 @@ class ExposureIngestionRepositoryTest {
         assertEquals(dummyUploadSize, uploadTekSizeWithData)
     }
 
-    private suspend fun sizeForRequest(block: suspend (ExposureIngestionService) -> Unit): Long {
-        val sizeCompleter = CompletableDeferred<Long>()
+    data class Info(
+        val size: Long,
+        val contentLengthDigitLength: Int
+    )
+
+    private suspend fun sizeForRequest(block: suspend (ExposureIngestionService) -> Unit): Info {
+        val sizeCompleter = CompletableDeferred<Info>()
         val client = OkHttpClient.Builder().apply {
-            addInterceptor(ExposureIngestionNetworkConfiguration.Interceptor(30000))
+            addInterceptor(ExposureIngestionNetworkConfiguration.Interceptor(defaultSettings.teksPacketSize))
             addInterceptor { chain ->
                 val request = chain.request()
+                val contentLength = request.body!!.contentLength()
                 val requestSize = request.url.encodedPath.length +
                     request.headers.byteCount() +
-                    request.body!!.contentLength()
+                    contentLength
 
-//                val buffer = Buffer()
-//                val zipped = GzipSink(buffer).buffer()
-//                request.body!!.writeTo(zipped)
-//                zipped.close()
-//
-//                print(buffer.readUtf8())
+                sizeCompleter.complete(Info(requestSize, "$contentLength".length))
 
-
-                sizeCompleter.complete(requestSize)
                 Response.Builder()
                     .code(418) //Whatever code
                     .protocol(Protocol.HTTP_1_1)

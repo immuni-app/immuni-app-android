@@ -104,8 +104,8 @@ class DummyExposureIngestionWorker(
         }
 
         @VisibleForTesting
-        suspend fun performDummyUpload() {
-            exposureManager.dummyUpload()
+        suspend fun performDummyUpload(): Boolean {
+            return exposureManager.dummyUpload()
         }
 
         @VisibleForTesting

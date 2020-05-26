@@ -55,8 +55,6 @@ class DummyExposureIngestionWorkerTest {
             exposureManager = exposureManager
         ))
 
-        every {  }
-
         worker.doWork()
     }
 

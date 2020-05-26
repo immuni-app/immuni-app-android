@@ -33,14 +33,14 @@ interface ExposureIngestionService {
     // region: Validate Otp
     @JsonClass(generateAdapter = true)
     data class ValidateOtpRequest(
-        @field:Json(name = "padding") override val padding: String
+        @field:Json(name = "padding") override val padding: String = ""
     ) : RequestWithPadding
 
     @POST("/v1/ingestion/check-otp")
     suspend fun validateOtp(
         @Header("Authorization") authorization: String,
         @Header("Immuni-Dummy-Data") isDummyData: Int,
-        @Body body: ValidateOtpRequest
+        @Body body: ValidateOtpRequest = ValidateOtpRequest()
     ): Response<ResponseBody>
     // endregion
 
@@ -50,7 +50,7 @@ interface ExposureIngestionService {
         @field:Json(name = "teks") val teks: List<TemporaryExposureKey>,
         @field:Json(name = "province") val province: Province,
         @field:Json(name = "exposure_detection_summaries") val exposureSummaries: List<ExposureSummary>,
-        @field:Json(name = "padding") override val padding: String
+        @field:Json(name = "padding") override val padding: String = ""
     ) : RequestWithPadding
 
     @POST("/v1/ingestion/upload")

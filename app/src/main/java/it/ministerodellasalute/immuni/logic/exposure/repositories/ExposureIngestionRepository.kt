@@ -34,14 +34,11 @@ class ExposureIngestionRepository(
         fun authorization(otp: String): String = "Bearer ${otp.sha256()}"
     }
 
-    suspend fun validateOtp(otp: String, isDummy: Boolean): OtpValidationResult {
+    suspend fun validateOtp(otp: String): OtpValidationResult {
         val response = immuniApiCall {
             exposureIngestionService.validateOtp(
                 isDummyData = 0,
-                authorization = authorization(otp),
-                body = ExposureIngestionService.ValidateOtpRequest(
-                    padding = "" // fixme
-                )
+                authorization = authorization(otp)
             )
         }
         return when (response) {
@@ -77,9 +74,17 @@ class ExposureIngestionRepository(
                 body = ExposureIngestionService.UploadTeksRequest(
                     teks = tekHistory,
                     province = province,
-                    exposureSummaries = exposureSummaries,
-                    padding = "" // fixme
+                    exposureSummaries = exposureSummaries
                 )
+            )
+        } is NetworkResource.Success
+    }
+
+    suspend fun dummyUpload(): Boolean {
+        return immuniApiCall {
+            exposureIngestionService.validateOtp(
+                isDummyData = 1,
+                authorization = authorization("DUMMY")
             )
         } is NetworkResource.Success
     }

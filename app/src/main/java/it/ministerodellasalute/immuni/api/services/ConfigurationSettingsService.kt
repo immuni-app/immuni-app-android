@@ -49,6 +49,9 @@ data class ConfigurationSettings(
     @field:Json(name = "dummy_teks_average_opportunity_waiting_time") val dummyTeksAverageOpportunityWaitingTime: Int,
     @field:Json(name = "dummy_teks_average_request_waiting_time") val dummyTeksAverageRequestWaitingTime: Int,
     @field:Json(name = "dummy_teks_request_probabilities") val dummyTeksRequestProbabilities: List<Double>,
+    @field:Json(name = "teks_max_summary_count") val teksMaxSummaryCount: Int,
+    @field:Json(name = "teks_max_info_count") val teksMaxInfoCount: Int,
+    @field:Json(name = "teks_packet_size") val teksPacketSize: Int,
     @field:Json(name = "support_email") val supportEmail: String = defaultSettings.supportEmail
 )
 
@@ -110,5 +113,8 @@ val defaultSettings = ConfigurationSettings(
     riskReminderNotificationPeriod = 60 * 60 * 24, // 1 day
     dummyTeksAverageOpportunityWaitingTime = 864000 or 2592000,
     dummyTeksAverageRequestWaitingTime = 10,
-    dummyTeksRequestProbabilities = listOf(1.0, 0.1)
+    dummyTeksRequestProbabilities = listOf(1.0, 0.1),
+    teksMaxSummaryCount = 6 * 14,
+    teksMaxInfoCount = 200,
+    teksPacketSize = 200_000
 )
