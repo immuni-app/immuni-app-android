@@ -71,9 +71,14 @@ data class Faq(
 )
 
 enum class Language(val code: String) {
-    @Json(name = "en") EN("en"),
-    @Json(name = "it") IT("it"),
-    @Json(name = "de") DE("de");
+    @Json(name = "en")
+    EN("en"),
+
+    @Json(name = "it")
+    IT("it"),
+
+    @Json(name = "de")
+    DE("de");
 
     companion object {
         fun fromCode(code: String) = values().firstOrNull { it.code == code } ?: EN
