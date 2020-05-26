@@ -45,7 +45,7 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        imInContactWithASL.setSafeOnClickListener {
+        hideIfDoctorContact.setSafeOnClickListener {
             showHideAlert()
         }
 

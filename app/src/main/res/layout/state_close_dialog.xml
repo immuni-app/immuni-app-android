@@ -15,6 +15,7 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/privacyLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,7 +37,8 @@
         android:outlineSpotShadowColor="@color/danger"
         android:stateListAnimator="@null"
         app:background="@android:color/transparent"
-        app:backgroundTint="@android:color/transparent">
+        app:backgroundTint="@android:color/transparent"
+        tools:targetApi="p">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
@@ -143,25 +145,44 @@
                 style="@style/P1Text.Generic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:paddingStart="30dp"
-                android:paddingTop="40dp"
-                android:paddingEnd="30dp"
-                android:text="@string/suggestions_instruction_hide_alert_action"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/suggestions_instruction_follow_instructions"
                 android:textColor="@color/grey_dark" />
 
+            <LinearLayout style="@style/ParagraphCard.Layout">
+
+                <TextView
+                    style="@style/ParagraphCard.Title"
+                    android:drawableStart="@drawable/ic_doctor"
+                    android:text="@string/suggestions_instruction_contact_doctor_title" />
+
+                <TextView
+                    style="@style/ParagraphCard.Message"
+                    android:text="@string/suggestions_instruction_contact_doctor_message" />
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/imInContactWithASL"
                 style="@style/P1Text.Generic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:paddingStart="30dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="30dp"
-                android:paddingBottom="35dp"
-                android:text="@string/suggestions_instruction_hide_alert_action"
-                android:textColor="@color/grey_dark" />
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/suggestions_instruction_hide_if_contact_doctor_message" />
+
+            <Button
+                android:id="@+id/hideIfDoctorContact"
+                style="@style/RoundedButton.GreyDark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="30dp"
+                android:text="@string/suggestions_instruction_hide_if_contact_doctor_action" />
 
             <include layout="@layout/content_divider" />
 
@@ -169,14 +190,16 @@
                 style="@style/P1Text.Generic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="30dp"
-                android:text="@string/suggestions_instruction_hide_alert_action"
-                android:textColor="@color/grey_dark" />
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/suggestions_instruction_while_waiting_doctor" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_social_distancing"
-                android:text="@string/suggestions_instruction_social_distance" />
+                android:drawableStart="@drawable/ic_stay_home"
+                android:text="@string/suggestions_instruction_stay_home" />
 
             <TextView
                 style="@style/ParagraphCard"
@@ -200,11 +223,23 @@
                     android:text="@string/suggestions_instruction_check_symptoms_message" />
             </LinearLayout>
 
+            <LinearLayout style="@style/ParagraphCard.Layout">
+
+                <TextView
+                    style="@style/ParagraphCard.Title"
+                    android:drawableStart="@drawable/ic_isolate"
+                    android:text="@string/suggestions_instruction_isolate_title" />
+
+                <TextView
+                    style="@style/ParagraphCard.Message"
+                    android:text="@string/suggestions_instruction_isolate_message" />
+            </LinearLayout>
+
             <TextView
                 style="@style/ParagraphCard"
-                android:layout_marginBottom="30dp"
-                android:drawableStart="@drawable/ic_isolate"
-                android:text="@string/suggestions_instruction_hide_alert_action" />
+                android:drawableStart="@drawable/ic_emergency"
+                android:text="@string/suggestions_instruction_phone_contact" />
+
 
             <include layout="@layout/content_divider" />
 
@@ -222,9 +257,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="30dp"
                 android:text="@string/suggestions_instruction_hide_alert_action" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

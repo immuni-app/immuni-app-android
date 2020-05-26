@@ -269,9 +269,9 @@
     <style name="ParagraphCard" parent="CardShadowWhite">
         <item name="android:gravity">center_vertical</item>
         <item name="android:padding">25dp</item>
-        <item name="android:layout_marginStart">30dp</item>
-        <item name="android:layout_marginEnd">30dp</item>
-        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginStart">25dp</item>
+        <item name="android:layout_marginEnd">25dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
         <item name="android:background">@drawable/rounded_corners_30dp</item>
         <item name="android:backgroundTint">@color/background</item>
         <item name="cardElevation">@dimen/cards_elevation</item>

@@ -112,7 +112,7 @@
     <string name="suggestions_instruction_contact_doctor_title">Contatta il tuo Medico di Medicina Generale (o il Pediatra di Libera Scelta)</string>
     <string name="suggestions_instruction_follow_instructions">Per proteggere la tua salute e quella dei tuoi cari, <b>rispetta le seguenti indicazioni:</b></string>
     <string name="suggestions_instruction_hide_alert_action">Nascondi avviso</string>
-    <string name="suggestions_instruction_hide_alert_message">Puoi nascondere questo avviso toccando il tasto qui sotto. A meno che tu abbia una ragione valida per farlo (sei un operatore sanitario a contatto con casi di COVID-19, sei già in contatto con la tua ASL, ecc.), <b>ti sconsigliamo vivamente di farlo.</b></string>
+    <string name="suggestions_instruction_hide_alert_message">Se necessario puoi nascondere questo avviso. A meno che tu abbia una ragione valida, ti sconsigliamo vivamente di farlo.</string>
     <string name="suggestions_instruction_hide_if_contact_doctor_action">Ho contattato il medico</string>
     <string name="suggestions_instruction_hide_if_contact_doctor_message">Se sei in contatto con il tuo medico o la tua ASL, puoi nascondere questo avviso.</string>
     <string name="suggestions_instruction_isolate_message">Indossa una mascherina chirurgica e contatta immediatamente il tuo Medico di Medicina Generale (o il Pediatra di Libera Scelta) e il Dipartimento di Prevenzione della ASL</string>
@@ -123,7 +123,7 @@
     <string name="suggestions_instruction_social_distance"><b>Resta in casa e rispetta le misure di distanziamento fisico</b> (almeno 1 metro)</string>
     <string name="suggestions_instruction_stay_home"><b>Rimani a casa per i 14 giorni</b> successivi alla data del contatto</string>
     <string name="suggestions_instruction_use_napkins"><b>Tossisci e starnutisci direttamente su un fazzoletto di carta o nella piega del gomito</b></string>
-    <string name="suggestions_instruction_wash_hands"><b>Lavati frequentemente le mani</b></string>
+    <string name="suggestions_instruction_wash_hands"><b>Lavati frequentemente le mani </b>con acqua e sapone o con soluzioni idroalcoliche</string>
     <string name="suggestions_instruction_while_waiting_doctor">In via precauzionale, <b>in attesa delle indicazioni del tuo medico:</b></string>
     <string name="suggestions_neutral_alert">Se sei in contatto con il tuo medico o con il Dipartimento di prevenzione della tua ASL, segui tutte le indicazioni che hai ricevuto.</string>
     <string name="suggestions_neutral_message">In ogni caso, <b>cerca sempre di rispettare queste indicazioni generali</b>:</string>
