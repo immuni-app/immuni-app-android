@@ -67,20 +67,6 @@ abstract class ImmuniActivity : AppCompatActivity() {
         }
     }
 
-    /**
-     * Close the activity if an app force update
-     * or a Google Play Services update is required.
-     * Except for [ForceUpdateActivity] itself.
-     */
-    override fun onResume() {
-        super.onResume()
-        if (this !is ForceUpdateActivity) {
-            lifecycleScope.launch {
-                configurationSettingsManager.fetchSettings()
-            }
-        }
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         exposureManager.onRequestPermissionsResult(this, requestCode, resultCode, data)

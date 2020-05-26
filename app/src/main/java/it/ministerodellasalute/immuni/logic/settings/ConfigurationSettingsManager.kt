@@ -28,6 +28,7 @@ import it.ministerodellasalute.immuni.logic.settings.models.FetchFaqsResult
 import it.ministerodellasalute.immuni.logic.settings.models.FetchSettingsResult
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsNetworkRepository
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsStoreRepository
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -52,23 +53,29 @@ class ConfigurationSettingsManager(
         buildVersion = DeviceUtils.appVersionCode(context)
     )
 
-    // region: CongifurationSettings
+    private val job = Job()
+    private val scope = CoroutineScope(Dispatchers.Default + job)
+
+    // region: ConfigurationSettings
 
     private val _settings = MutableStateFlow(storeRepository.loadSettings())
     val settings: StateFlow<ConfigurationSettings> get() = _settings
 
-    suspend fun fetchSettings(): FetchSettingsResult {
-        val result = networkRepository.fetchSettings(buildVersion)
-        if (result is FetchSettingsResult.Success) {
-            onSettingsUpdate(result.settings)
+    fun fetchSettingsAsync(): Deferred<FetchSettingsResult> {
+        return scope.async {
+            val result = networkRepository.fetchSettings(buildVersion)
+            if (result is FetchSettingsResult.Success) {
+                onSettingsUpdate(result.settings)
+            }
+            result
         }
-        return result
     }
 
     @VisibleForTesting
     fun onSettingsUpdate(settings: ConfigurationSettings) {
         storeRepository.saveSettings(settings)
         _settings.value = settings
+        fetchFaqsAsync()
     }
 
     val isAppOutdated: Boolean
@@ -95,14 +102,17 @@ class ConfigurationSettingsManager(
             return _faqs
         }
 
-    suspend fun fetchFaqs(): FetchFaqsResult {
-        val language = currentLanguage
-        val url: String = settings.value.faqUrl[language] ?: ""
-        val result = networkRepository.fetchFaqs(url)
-        if (result is FetchFaqsResult.Success) {
-            onFaqsUpdate(language, result.faqs)
+    private fun fetchFaqsAsync(): Deferred<FetchFaqsResult> {
+        return scope.async {
+            val language = currentLanguage
+            val url: String = settings.value.faqUrl[language]
+                ?: error("Faq url for language ${language.code} not found")
+            val result = networkRepository.fetchFaqs(url)
+            if (result is FetchFaqsResult.Success) {
+                onFaqsUpdate(language, result.faqs)
+            }
+            result
         }
-        return result
     }
 
     @VisibleForTesting

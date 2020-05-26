@@ -27,11 +27,27 @@ class UserManager(
     private val regionRepository: RegionRepository,
     private val workerManager: WorkerManager
 ) : KoinComponent {
+    // region: Setup
+
+    val isSetupComplete = userRepository.isSetupComplete
+
+    fun setSetupComplete(complete: Boolean) {
+        userRepository.setSetupComplete(complete)
+    }
+
+    // endregion
+
+    // region: Welcome
+
     val isWelcomeComplete = userRepository.isWelcomeComplete
 
     fun setWelcomeComplete(complete: Boolean) {
         userRepository.setWelcomeComplete(complete)
     }
+
+    // endregion
+
+    // region: Onboarding
 
     val isOnboardingComplete = userRepository.isOnboardingComplete
 
@@ -42,6 +58,10 @@ class UserManager(
         }
     }
 
+    // endregion
+
+    // region: User
+
     val user = userRepository.user
 
     fun save(user: User) {
@@ -51,4 +71,6 @@ class UserManager(
     fun regions(): List<Region> = regionRepository.regions()
 
     fun provinces(region: Region) = regionRepository.provinces(region = region)
+
+    // endregion
 }
