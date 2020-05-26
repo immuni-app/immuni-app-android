@@ -22,7 +22,7 @@ import okhttp3.Response
 import java.io.IOException
 
 /**
- * HeadersInterceptor is a [OkHttpClient] network interceptor that
+ * TrafficAnalysisPreventionHeadersInterceptor is a [OkHttpClient] network interceptor that
  * remove some default added http headers.
  *
  * This behaviour will contribute in ensuring that the traffic analytics prevention
