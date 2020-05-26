@@ -145,7 +145,7 @@
                 android:textColor="@color/grey_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingStart="30dp"
                 android:paddingTop="40dp"
                 android:paddingEnd="30dp"
@@ -161,7 +161,7 @@
                 android:paddingTop="16dp"
                 android:paddingEnd="30dp"
                 android:paddingBottom="35dp"
-                android:gravity="left"
+                android:gravity="start"
                 android:text="@string/asl_already_in_contact" />
 
             <include layout="@layout/content_divider" />
