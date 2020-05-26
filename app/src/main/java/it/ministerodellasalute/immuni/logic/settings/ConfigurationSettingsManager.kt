@@ -18,6 +18,8 @@ package it.ministerodellasalute.immuni.logic.settings
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import it.ministerodellasalute.immuni.api.services.ConfigurationSettings
+import it.ministerodellasalute.immuni.api.services.Faq
+import it.ministerodellasalute.immuni.api.services.Faqs
 import it.ministerodellasalute.immuni.api.services.Language
 import it.ministerodellasalute.immuni.extensions.utils.DeviceUtils
 import it.ministerodellasalute.immuni.extensions.utils.UserLocale
@@ -50,16 +52,17 @@ class ConfigurationSettingsManager(
         buildVersion = DeviceUtils.appVersionCode(context)
     )
 
+    // region: CongifurationSettings
+
     private val _settings = MutableStateFlow(storeRepository.loadSettings())
     val settings: StateFlow<ConfigurationSettings> get() = _settings
 
     suspend fun fetchSettings(): FetchSettingsResult {
-        val response = networkRepository.fetchSettings(buildVersion)
-        if (response is FetchSettingsResult.Success) {
-            onSettingsUpdate(response.settings)
+        val result = networkRepository.fetchSettings(buildVersion)
+        if (result is FetchSettingsResult.Success) {
+            onSettingsUpdate(result.settings)
         }
-
-        return response
+        return result
     }
 
     @VisibleForTesting
@@ -70,14 +73,43 @@ class ConfigurationSettingsManager(
 
     val isAppOutdated: Boolean
         get() {
-            val outdated = settings.value.minimumBuildVersion > buildVersion
-            log("App outdated: $outdated")
-            return outdated
+            val isOutdated = settings.value.minimumBuildVersion > buildVersion
+            log("App outdated: $isOutdated")
+            return isOutdated
+        }
+
+    // endregion
+
+    // region: FAQs
+
+    private val currentLanguage get() = Language.fromCode(UserLocale.locale())
+    private var _faqLanguage = currentLanguage
+
+    private val _faqs = MutableStateFlow(storeRepository.loadFaqs(_faqLanguage))
+    val faqs: StateFlow<List<Faq>>
+        get() {
+            if (currentLanguage != _faqLanguage) {
+                _faqLanguage = currentLanguage
+                _faqs.value = storeRepository.loadFaqs(_faqLanguage)
+            }
+            return _faqs
         }
 
     suspend fun fetchFaqs(): FetchFaqsResult {
-        val language = Language.fromCode(UserLocale.locale())
+        val language = currentLanguage
         val url: String = settings.value.faqUrl[language] ?: ""
-        return networkRepository.fetchFaqs(url)
+        val result = networkRepository.fetchFaqs(url)
+        if (result is FetchFaqsResult.Success) {
+            onFaqsUpdate(language, result.faqs)
+        }
+        return result
     }
+
+    @VisibleForTesting
+    fun onFaqsUpdate(language: Language, faqs: Faqs) {
+        storeRepository.saveFaqs(language, faqs.faqs)
+        _faqs.value = faqs.faqs
+    }
+
+    // endregion
 }

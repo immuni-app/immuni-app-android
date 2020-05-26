@@ -15,7 +15,11 @@
 
 package it.ministerodellasalute.immuni.logic.settings.repositories
 
+import com.squareup.moshi.JsonClass
 import it.ministerodellasalute.immuni.api.services.ConfigurationSettings
+import it.ministerodellasalute.immuni.api.services.Faq
+import it.ministerodellasalute.immuni.api.services.Language
+import it.ministerodellasalute.immuni.api.services.defaultFaqs
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 
 /**
@@ -25,22 +29,51 @@ class ConfigurationSettingsStoreRepository(
     private val kvStorage: KVStorage,
     private val defaultSettings: ConfigurationSettings
 ) {
+    @JsonClass(generateAdapter = true)
+    data class Faqs(val faqs: Map<Language, List<Faq>>)
+
     companion object {
         val settingsKey = KVStorage.Key<ConfigurationSettings>("Settings")
+        val faqsKey = KVStorage.Key<Faqs>("Faqs")
     }
 
-    fun saveSettings(settings: ConfigurationSettings) {
+    fun saveSettings(settings: ConfigurationSettings) = synchronized(this) {
         kvStorage[settingsKey] = settings
     }
 
-    fun loadSettings(): ConfigurationSettings {
-        // we handle the case settings model is changed
-        // in that case we restart from the defaults.
+    fun loadSettings(): ConfigurationSettings = synchronized(this) {
+        // in case the ConfigurationSettings model has changed wrt the stored one,
+        // we delete it and call loadSettings again to return the default ones
         return try {
             kvStorage[settingsKey, defaultSettings]
         } catch (e: Exception) {
             kvStorage.delete(settingsKey)
             loadSettings()
+        }
+    }
+
+    fun saveFaqs(language: Language, faq: List<Faq>) = synchronized(this) {
+        var faqs = kvStorage[faqsKey]
+        if (faqs == null) {
+            faqs = Faqs(faqs = mapOf())
+        }
+        kvStorage[faqsKey] = faqs.copy(
+            faqs = mutableMapOf<Language, List<Faq>>().apply {
+                putAll(faqs.faqs)
+                put(language, faq)
+            }
+        )
+    }
+
+    fun loadFaqs(language: Language): List<Faq> = synchronized(this) {
+        // in case the Faq model has changed wrt the stored one,
+        // we delete it and call loadFaqs again to return the default ones
+        return try {
+            kvStorage[faqsKey, Faqs(faqs = defaultFaqs)].faqs[language]
+                ?: error("Faqs for language ${language.code} not found")
+        } catch (e: Exception) {
+            kvStorage.delete(faqsKey)
+            loadFaqs(language)
         }
     }
 }
