@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.network.api
 import android.content.Context
 import android.util.Log
 import com.squareup.moshi.Moshi
+import it.ministerodellasalute.immuni.extensions.http.TrafficAnalysisPreventionHeadersInterceptor
 import it.ministerodellasalute.immuni.network.BuildConfig
 import it.ministerodellasalute.immuni.network.NetworkConfiguration
 import okhttp3.Cache
@@ -39,17 +40,20 @@ class NetworkRetrofit(
     config: NetworkConfiguration
 ) {
 
-    val loggingInterceptor = HttpLoggingInterceptor().apply {
+    private val loggingInterceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
-    var certificatePinner = config.certificatePinner()
+    private val certificatePinner = config.certificatePinner()
+    private val headersInterceptor = TrafficAnalysisPreventionHeadersInterceptor()
 
-    val client by lazy {
+    private val client by lazy {
         val builder = OkHttpClient.Builder()
+
+        builder.addInterceptor(headersInterceptor)
+
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(loggingInterceptor)
         }
-
         /**
          * uncomment this line to verify if http cache is working
          * network interceptor is not called when the cache is used.
