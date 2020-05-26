@@ -96,7 +96,11 @@ val appModule = module {
     single {
         val network = Network(
             androidContext(),
-            ExposureIngestionNetworkConfiguration(androidContext(), get())
+            ExposureIngestionNetworkConfiguration(
+                androidContext(),
+                100_000,
+                get()
+            )
         )
         network.createServiceAPI(ExposureIngestionService::class)
     }

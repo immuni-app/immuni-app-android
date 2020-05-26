@@ -13,20 +13,29 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.network
+package it.ministerodellasalute.immuni.workers
 
-import com.squareup.moshi.Moshi
-import okhttp3.CertificatePinner
-import okhttp3.Interceptor
+import org.junit.Test
 
-/**
- * This is the networking configuration the app injects into this module
- * in order to customize it.
- */
-interface NetworkConfiguration {
-    fun baseUrl(): String
-    fun certificatePinner(): CertificatePinner?
-    fun interceptors(): List<Interceptor> = listOf()
-    fun useCacheHeaders(): Boolean
-    val moshi: Moshi
+class DummyExposureIngestionWorkerTest {
+
+    @Test
+    fun `when app is active, the work is canceled and rescheduled`() {
+
+    }
+
+    @Test
+    fun `when app becomes active, the work is canceled and rescheduled`() {
+
+    }
+
+    @Test
+    fun `with probability=0, the upload is performed exactly once`() {
+
+    }
+
+    @Test
+    fun `with 2 slots of probability=1, the upload is performed exactly three times`() {
+
+    }
 }

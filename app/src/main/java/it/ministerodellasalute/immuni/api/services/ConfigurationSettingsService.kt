@@ -108,12 +108,7 @@ val defaultSettings = ConfigurationSettings(
     onboardingNotCompletedNotificationPeriod = 60 * 60 * 24, // 1 day
     requiredUpdateNotificationPeriod = 60 * 60 * 24, // 1 day
     riskReminderNotificationPeriod = 60 * 60 * 24, // 1 day
-    dummyAnalyticsWaitingTime = 2592000,
-    dummyTeksWindowDuration = 86400,
     dummyTeksAverageOpportunityWaitingTime = 864000 or 2592000,
-    dummyTeksAverageStartWaitingTime = 10,
     dummyTeksAverageRequestWaitingTime = 10,
-    dummyTeksRequestProbabilities = listOf(1.0, 0.1),
-    operationalInfoWithExposureSamplingRate = 1.0,
-    operationalInfoWithoutExposureSamplingRate = 0.1
+    dummyTeksRequestProbabilities = listOf(1.0, 0.1)
 )

@@ -16,9 +16,11 @@
 package it.ministerodellasalute.immuni.logic.worker
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import it.ministerodellasalute.immuni.extensions.utils.exponential
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
@@ -88,10 +90,10 @@ class WorkerManager(
         )
     }
 
-    fun scheduleNextDiagnosisKeysRequest(delayMinutes: Long) {
+    fun scheduleNextDiagnosisKeysRequest() {
         enqueueDiagnosisKeysRequest(
             ExistingWorkPolicy.REPLACE,
-            delayMinutes = delayMinutes
+            delayMinutes = settings.exposureDetectionPeriod.toLong() / 60
         )
     }
 
@@ -113,5 +115,20 @@ class WorkerManager(
                 // )
                 .build()
         )
+    }
+
+    fun scheduleNextDummyExposureIngestionWorker() {
+        workManager.enqueueUniqueWork(
+            "RequestDiagnosisKeysWorker",
+            ExistingWorkPolicy.REPLACE,
+            OneTimeWorkRequest.Builder(RequestDiagnosisKeysWorker::class.java)
+                .setInitialDelay(computeNextDummyExposureIngestionScheduleDelay(), TimeUnit.MINUTES)
+                .build()
+        )
+    }
+
+    @VisibleForTesting
+    fun computeNextDummyExposureIngestionScheduleDelay(): Long {
+        return SecureRandom().exponential(settings.dummyTeksAverageOpportunityWaitingTime.toLong())
     }
 }

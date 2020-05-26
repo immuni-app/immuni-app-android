@@ -15,6 +15,7 @@
 
 package it.ministerodellasalute.immuni.logic.exposure.repositories
 
+import androidx.annotation.VisibleForTesting
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.utils.sha256
@@ -28,13 +29,19 @@ import java.util.*
 class ExposureIngestionRepository(
     private val exposureIngestionService: ExposureIngestionService
 ) {
-    private fun authorization(otp: String): String = "Bearer ${otp.sha256()}"
+    companion object {
+        @VisibleForTesting
+        fun authorization(otp: String): String = "Bearer ${otp.sha256()}"
+    }
 
-    suspend fun validateOtp(otp: String): OtpValidationResult {
+    suspend fun validateOtp(otp: String, isDummy: Boolean): OtpValidationResult {
         val response = immuniApiCall {
             exposureIngestionService.validateOtp(
-                isDummyData = false,
-                authorization = authorization(otp)
+                isDummyData = 0,
+                authorization = authorization(otp),
+                body = ExposureIngestionService.ValidateOtpRequest(
+                    padding = "" // fixme
+                )
             )
         }
         return when (response) {
@@ -66,11 +73,12 @@ class ExposureIngestionRepository(
             exposureIngestionService.uploadTeks(
                 systemTime = Date().time.div(1000).toInt(),
                 authorization = authorization(token.otp),
-                isDummyData = false,
+                isDummyData = 0,
                 body = ExposureIngestionService.UploadTeksRequest(
                     teks = tekHistory,
                     province = province,
-                    exposureSummaries = exposureSummaries
+                    exposureSummaries = exposureSummaries,
+                    padding = "" // fixme
                 )
             )
         } is NetworkResource.Success

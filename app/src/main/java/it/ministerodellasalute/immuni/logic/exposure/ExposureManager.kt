@@ -177,7 +177,12 @@ class ExposureManager(
     }
 
     suspend fun validateOtp(otp: String): OtpValidationResult {
-        return exposureIngestionRepository.validateOtp(otp)
+        return exposureIngestionRepository.validateOtp(otp, isDummy = false)
+    }
+
+    suspend fun dummyUpload(): OtpValidationResult {
+        val otp = "DUMMY"
+        return exposureIngestionRepository.validateOtp(otp, isDummy = true)
     }
 
     suspend fun uploadTeks(activity: Activity, token: OtpToken): Boolean {

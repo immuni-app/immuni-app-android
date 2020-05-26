@@ -13,20 +13,12 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.network
+package it.ministerodellasalute.immuni.extensions.utils
 
-import com.squareup.moshi.Moshi
-import okhttp3.CertificatePinner
-import okhttp3.Interceptor
+import java.util.*
+import kotlin.math.ln
 
-/**
- * This is the networking configuration the app injects into this module
- * in order to customize it.
- */
-interface NetworkConfiguration {
-    fun baseUrl(): String
-    fun certificatePinner(): CertificatePinner?
-    fun interceptors(): List<Interceptor> = listOf()
-    fun useCacheHeaders(): Boolean
-    val moshi: Moshi
+fun Random.exponential(mean: Long): Long {
+    val randomDouble = nextDouble()
+    return (ln(1.0 - randomDouble) * -mean).toLong()
 }

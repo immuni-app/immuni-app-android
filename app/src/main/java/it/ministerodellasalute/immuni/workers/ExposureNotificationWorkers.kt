@@ -142,9 +142,7 @@ class RequestDiagnosisKeysWorker(
     }
 
     private fun success(): Result {
-        workerManager.scheduleNextDiagnosisKeysRequest(
-            delayMinutes = settingsManager.settings.value.exposureDetectionPeriod.toLong() / 60
-        )
+        workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }
 }
