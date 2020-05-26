@@ -23,7 +23,7 @@ export default async () => {
 
   await commitLint({ enabled: true, allowedScopes: [] });
 
-  await kotlinLint("app/src/main/java/org/immuni/android/");
-  await kotlinLint("debugmenu/src/main/java/org/immuni/android");
-  await kotlinLint("extensions/src/main/java/org/immuni/android");
+  await kotlinLint("app/src/main/java/it/ministerodellasalute/immuni");
+  await kotlinLint("debugmenu/src/main/java/it/ministerodellasalute/immuni");
+  await kotlinLint("extensions/src/main/java/it/ministerodellasalute/immuni");
 };
