@@ -16,12 +16,8 @@
 package it.ministerodellasalute.immuni.ui.faq
 
 import androidx.lifecycle.*
-import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import it.ministerodellasalute.immuni.logic.settings.models.FetchFaqsResult
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
 class FaqViewModel(

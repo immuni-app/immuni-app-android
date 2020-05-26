@@ -23,11 +23,10 @@ import it.ministerodellasalute.immuni.extensions.test.getOrAwaitValue
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.testutils.CoroutinesTestRule
+import kotlin.test.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class SetupViewModelTest {
 
