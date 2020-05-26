@@ -15,13 +15,49 @@
 
 package it.ministerodellasalute.immuni.workers
 
+import io.mockk.MockKAnnotations
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.spyk
+import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
+import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.worker.WorkerManager
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Test
 
 class DummyExposureIngestionWorkerTest {
+    @MockK
+    private lateinit var workerManager: WorkerManager
+    @MockK
+    private lateinit var exposureManager: ExposureManager
+    @MockK
+    private lateinit var appLifecycleObserver: AppLifecycleObserver
+
+    @Before
+    fun before() {
+        MockKAnnotations.init(this)
+    }
 
     @Test
-    fun `when app is active, the work is canceled and rescheduled`() {
+    fun `when app is active, the work is canceled and rescheduled`() = runBlocking {
+        every { appLifecycleObserver.isInForeground } returns MutableStateFlow(true)
 
+        val worker = spyk(DummyExposureIngestionWorker.Impl(
+            configuration = DummyExposureIngestionWorker.Configuration(
+                teksAverageRequestWaitingTime = 1,
+                teksRequestProbabilities = listOf()
+            ),
+            appLifecycleObserver = AppLifecycleObserver(),
+            workerManager = workerManager,
+            exposureManager = exposureManager
+        ))
+
+        every {  }
+
+        worker.doWork()
     }
 
     @Test
