@@ -19,7 +19,7 @@ import android.util.Log
 import it.ministerodellasalute.immuni.extensions.BuildConfig
 
 fun Any.log(msg: String, tag: String = this::class.java.simpleName) {
-    if(BuildConfig.DEBUG) {
+    if (BuildConfig.DEBUG) {
         Log.d(tag, msg)
     }
 }
