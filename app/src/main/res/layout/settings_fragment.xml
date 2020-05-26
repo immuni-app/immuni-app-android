@@ -73,7 +73,7 @@
                             <include layout="@layout/settings_menu_item_arrow" />
                         </LinearLayout>
 
-                        <include layout="@layout/content_divider" />
+                        <include layout="@layout/settings_content_divider" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -101,14 +101,14 @@
                             <include layout="@layout/settings_menu_item_arrow" />
                         </LinearLayout>
 
-                        <include layout="@layout/content_divider" />
+                        <include layout="@layout/settings_content_divider" />
 
                         <TextView
                             android:id="@+id/termsOfServiceButton"
                             style="@style/SettingsMenuItem"
                             android:text="@string/settings_setting_tos" />
 
-                        <include layout="@layout/content_divider" />
+                        <include layout="@layout/settings_content_divider" />
 
                         <TextView
                             android:id="@+id/privacyPolicyButton"
@@ -133,14 +133,14 @@
                             style="@style/SettingsMenuItem"
                             android:text="@string/settings_setting_chage_province" />
 
-                        <include layout="@layout/content_divider" />
+                        <include layout="@layout/settings_content_divider" />
 
                         <TextView
                             android:id="@+id/sendFeedbackButton"
                             style="@style/SettingsMenuItem"
                             android:text="@string/settings_setting_leave_review" />
 
-                        <include layout="@layout/content_divider" />
+                        <include layout="@layout/settings_content_divider" />
 
                         <TextView
                             android:id="@+id/contactSupportButton"

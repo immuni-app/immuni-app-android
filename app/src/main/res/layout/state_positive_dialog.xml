@@ -163,7 +163,7 @@
                     android:text="@string/suggestions_positive_info_subtitle" />
             </LinearLayout>
 
-            <include layout="@layout/content_divider" />
+            <include layout="@layout/settings_content_divider" />
 
             <TextView
                 style="@style/P1Text"

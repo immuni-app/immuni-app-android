@@ -152,7 +152,9 @@
                 android:text="@string/suggestions_instruction_follow_instructions"
                 android:textColor="@color/grey_dark" />
 
-            <LinearLayout style="@style/ParagraphCard.Layout">
+            <LinearLayout
+                style="@style/ParagraphCard.Layout"
+                android:layout_marginBottom="25dp">
 
                 <TextView
                     style="@style/ParagraphCard.Title"
@@ -184,7 +186,7 @@
                 android:layout_marginBottom="30dp"
                 android:text="@string/suggestions_instruction_hide_if_contact_doctor_action" />
 
-            <include layout="@layout/content_divider" />
+            <include layout="@layout/state_suggestions_content_divider" />
 
             <TextView
                 style="@style/P1Text.Generic"
@@ -237,11 +239,12 @@
 
             <TextView
                 style="@style/ParagraphCard"
+                android:layout_marginBottom="30dp"
                 android:drawableStart="@drawable/ic_emergency"
                 android:text="@string/suggestions_instruction_phone_contact" />
 
 
-            <include layout="@layout/content_divider" />
+            <include layout="@layout/state_suggestions_content_divider" />
 
             <TextView
                 style="@style/P1Text"
