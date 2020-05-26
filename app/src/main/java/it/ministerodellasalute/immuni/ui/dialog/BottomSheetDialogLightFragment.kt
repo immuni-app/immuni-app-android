@@ -51,7 +51,7 @@ abstract class BottomSheetDialogLightFragment : BottomSheetDialogFragment() {
         val window: Window? = dialog?.window
         if (window != null) {
             val metrics = DisplayMetrics()
-            window.windowManager.defaultDisplay.getMetrics(metrics)
+            window.windowManager.defaultDisplay.getRealMetrics(metrics)
             val dimDrawable = requireContext().getColorCompat(R.color.popup_mask).toDrawable()
             val navigationBarDrawable = GradientDrawable()
             navigationBarDrawable.shape = GradientDrawable.RECTANGLE
