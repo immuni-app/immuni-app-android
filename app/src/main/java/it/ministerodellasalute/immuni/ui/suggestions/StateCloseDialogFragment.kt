@@ -46,7 +46,7 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
         super.onViewCreated(view, savedInstanceState)
 
         hideIfDoctorContact.setSafeOnClickListener {
-            showHideAlert()
+            showASLAlert()
         }
 
         hideNotice.setSafeOnClickListener {
@@ -55,6 +55,20 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
     }
 
     private fun showHideAlert() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.suggestions_instruction_hide_alert_action))
+            .setMessage(getString(R.string.suggestions_instruction_hide_alert_message))
+            .setNegativeButton(getString(R.string.suggestions_alert_asl_contact_confirmation_negative_answer)) { d, _ ->
+                d.dismiss()
+            }
+            .setPositiveButton(getString(R.string.suggestions_alert_asl_contact_confirmation_positive_answer)) { d, _ ->
+                executeHideNotice()
+                d.dismiss()
+            }
+            .show()
+    }
+
+    private fun showASLAlert() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.suggestions_alert_asl_contact_confirmation_title))
             .setMessage(getString(R.string.suggestions_alert_asl_contact_confirmation_description))
