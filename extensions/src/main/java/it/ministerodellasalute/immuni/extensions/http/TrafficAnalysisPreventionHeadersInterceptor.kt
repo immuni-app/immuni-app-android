@@ -23,7 +23,7 @@ import java.io.IOException
 
 /**
  * TrafficAnalysisPreventionHeadersInterceptor is a [OkHttpClient] network interceptor that
- * remove some default added http headers.
+ * removes some of the http headers added by default.
  *
  * This behaviour will contribute in ensuring that the traffic analytics prevention
  * logic can be implemented correctly.
