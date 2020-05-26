@@ -116,6 +116,7 @@
     <string name="consent">Consenti</string>
     <string name="activate">Attiva</string>
     <string name="i_get_it">Ho capito</string>
+    <string name="onboarding_exposure_message_extended">Le notifiche di esposizione richiedono che il servizio di localizzazione sia attivo a livello di sistema. <b>Immuni non ha accesso alla localizzazione e non può quindi conoscere la tua posizione o i tuoi spostamenti</b>.</string>
 
     <string name="onboarding_bluetooth_title">Attiva il Bluetooth</string>
     <string name="onboarding_bluetooth_message">Immuni utilizza il Bluetooth Low Energy per registrare i tuoi contatti con altri utenti e permettere notifiche di esposizione al COVID-19.</string>

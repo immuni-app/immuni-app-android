@@ -49,8 +49,8 @@ abstract class ImmuniActivity : AppCompatActivity() {
         /**
          * Disable screenshots for privacy reasons.
          */
-        if(!BuildConfig.DEBUG) {
-            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        if (!BuildConfig.DEBUG) {
+            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         }
 
         if (this !is ForceUpdateActivity) {
