@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni
 
 import android.app.Application
 import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.work.ExistingWorkPolicy
 import it.ministerodellasalute.immuni.debugmenu.DebugMenu
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
@@ -76,6 +77,8 @@ class ImmuniApplication : Application(), KoinComponent {
     }
 
     private fun startWorkers() {
+        workerManager.scheduleNextDummyExposureIngestionWorker(ExistingWorkPolicy.KEEP)
+
         val job = Job()
         val scope = CoroutineScope(Dispatchers.Default + job)
         lifecycleObserver.isInForeground.onEach { isInForeground ->

@@ -34,6 +34,7 @@ class ExposureIngestionNetworkConfiguration(
             val request = chain.request()
             val requestSize = request.url.encodedPath.length +
                 request.headers.byteCount() +
+                request.method.length +
                 request.body!!.contentLength()
 
             val buffer = Buffer()

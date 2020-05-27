@@ -118,6 +118,7 @@ class ExposureIngestionRepositoryTest {
                 val request = chain.request()
                 val contentLength = request.body!!.contentLength()
                 val requestSize = request.url.encodedPath.length +
+                    request.method.length +
                     request.headers.byteCount() +
                     contentLength
 

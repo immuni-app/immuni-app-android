@@ -115,6 +115,6 @@ val defaultSettings = ConfigurationSettings(
     dummyTeksAverageRequestWaitingTime = 10,
     dummyTeksRequestProbabilities = listOf(1.0, 0.1),
     teksMaxSummaryCount = 6 * 14,
-    teksMaxInfoCount = 200,
-    teksPacketSize = 200_000
+    teksMaxInfoCount = 600,
+    teksPacketSize = 110_000
 )

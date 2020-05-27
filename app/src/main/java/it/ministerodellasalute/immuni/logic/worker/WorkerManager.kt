@@ -16,7 +16,7 @@
 package it.ministerodellasalute.immuni.logic.worker
 
 import android.content.Context
-import androidx.annotation.VisibleForTesting
+import androidx.work.Constraints
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
@@ -27,11 +27,9 @@ import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManage
 import it.ministerodellasalute.immuni.workers.ForceUpdateNotificationWorker
 import it.ministerodellasalute.immuni.workers.OnboardingNotCompletedWorker
 import it.ministerodellasalute.immuni.workers.RequestDiagnosisKeysWorker
+import kotlinx.coroutines.*
 import java.security.SecureRandom
 import java.util.concurrent.TimeUnit
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.core.KoinComponent
@@ -107,28 +105,31 @@ class WorkerManager(
             policy,
             OneTimeWorkRequest.Builder(RequestDiagnosisKeysWorker::class.java)
                 .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
-                // .setConstraints(
-                    // Constraints.Builder()
-                        // .setRequiresBatteryNotLow(true)
-                        // .setRequiresDeviceIdle(true)
-                        // .build()
-                // )
+                .setConstraints(
+                    Constraints.Builder()
+                        .setRequiresBatteryNotLow(true)
+                        .build()
+                )
                 .build()
         )
     }
 
-    fun scheduleNextDummyExposureIngestionWorker() {
+    fun scheduleNextDummyExposureIngestionWorker(policy: ExistingWorkPolicy = ExistingWorkPolicy.REPLACE) {
         workManager.enqueueUniqueWork(
-            "RequestDiagnosisKeysWorker",
-            ExistingWorkPolicy.REPLACE,
+            "NextDummyExposureIngestionWorker",
+            policy,
             OneTimeWorkRequest.Builder(RequestDiagnosisKeysWorker::class.java)
                 .setInitialDelay(computeNextDummyExposureIngestionScheduleDelay(), TimeUnit.MINUTES)
+                .setConstraints(
+                    Constraints.Builder()
+                        .setRequiresBatteryNotLow(true)
+                        .build()
+                )
                 .build()
         )
     }
 
-    @VisibleForTesting
-    fun computeNextDummyExposureIngestionScheduleDelay(): Long {
+    private fun computeNextDummyExposureIngestionScheduleDelay(): Long {
         return SecureRandom().exponential(settings.dummyTeksAverageOpportunityWaitingTime.toLong())
     }
 }

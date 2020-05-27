@@ -74,7 +74,10 @@ class DummyExposureIngestionWorker(
             try {
                 coroutineScope {
                     // cancel and reschedule if the app goes to foreground while executing this work
-                    appLifecycleObserver.isInForeground
+                    if (appLifecycleObserver.isInForeground.value) {
+                        throw Exception("App is in foreground")
+                    }
+                    val isInForegroundJob = appLifecycleObserver.isInForeground
                         .filter { it }
                         .onEach { cancel() }
                         .launchIn(this)
@@ -84,6 +87,7 @@ class DummyExposureIngestionWorker(
                         performDummyUpload()
                         waitForNextUpload()
                     }
+                    isInForegroundJob.cancel()
                 }
             } catch (e: Exception) {
                 log("dummy exposure ingestion worker failed: $e")
@@ -93,13 +97,12 @@ class DummyExposureIngestionWorker(
             return Result.success()
         }
 
-        @VisibleForTesting
-        fun shouldPerformNextUpload(): Boolean {
+        private fun shouldPerformNextUpload(): Boolean {
             if (counter == 0) {
                 return true
             }
             val probabilities = configuration.teksRequestProbabilities
-            val probability = probabilities[min(counter, probabilities.count() - 1)]
+            val probability = probabilities[min(counter - 1, probabilities.count() - 1)]
             return random.nextDouble() < probability
         }
 
@@ -108,9 +111,9 @@ class DummyExposureIngestionWorker(
             return exposureManager.dummyUpload()
         }
 
-        @VisibleForTesting
-        suspend fun waitForNextUpload() {
-            delay(random.exponential(configuration.teksAverageRequestWaitingTime.toLong() * 1000))
+        private suspend fun waitForNextUpload() {
+            val timeToWait = random.exponential(configuration.teksAverageRequestWaitingTime.toLong() * 1000)
+            delay(timeToWait)
         }
     }
 

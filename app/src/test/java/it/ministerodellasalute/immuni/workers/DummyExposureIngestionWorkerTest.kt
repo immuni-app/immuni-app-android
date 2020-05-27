@@ -15,24 +15,23 @@
 
 package it.ministerodellasalute.immuni.workers
 
-import io.mockk.MockKAnnotations
-import io.mockk.every
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
-import io.mockk.spyk
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 
 class DummyExposureIngestionWorkerTest {
     @MockK
     private lateinit var workerManager: WorkerManager
+
     @MockK
     private lateinit var exposureManager: ExposureManager
+
     @MockK
     private lateinit var appLifecycleObserver: AppLifecycleObserver
 
@@ -42,34 +41,102 @@ class DummyExposureIngestionWorkerTest {
     }
 
     @Test
-    fun `when app is active, the work is canceled and rescheduled`() = runBlocking {
+    fun `when app is active, the work is canceled and rescheduled`() = runBlockingTest {
         every { appLifecycleObserver.isInForeground } returns MutableStateFlow(true)
+        every { workerManager.scheduleNextDummyExposureIngestionWorker() } returns Unit
 
-        val worker = spyk(DummyExposureIngestionWorker.Impl(
-            configuration = DummyExposureIngestionWorker.Configuration(
-                teksAverageRequestWaitingTime = 1,
-                teksRequestProbabilities = listOf()
-            ),
-            appLifecycleObserver = AppLifecycleObserver(),
-            workerManager = workerManager,
-            exposureManager = exposureManager
-        ))
+        val worker = spyk(
+            DummyExposureIngestionWorker.Impl(
+                configuration = DummyExposureIngestionWorker.Configuration(
+                    teksAverageRequestWaitingTime = 1,
+                    teksRequestProbabilities = listOf()
+                ),
+                appLifecycleObserver = appLifecycleObserver,
+                workerManager = workerManager,
+                exposureManager = exposureManager
+            )
+        )
 
         worker.doWork()
+
+        coVerify(exactly = 0) { worker.performDummyUpload() }
+        verify(exactly = 1) { workerManager.scheduleNextDummyExposureIngestionWorker() }
     }
 
     @Test
-    fun `when app becomes active, the work is canceled and rescheduled`() {
+    fun `when app becomes active, the work is canceled and rescheduled`() = runBlockingTest {
+        val isInForeground = MutableStateFlow(false)
+        every { appLifecycleObserver.isInForeground } returns isInForeground
+        every { workerManager.scheduleNextDummyExposureIngestionWorker() } returns Unit
 
+        val worker = spyk(
+            DummyExposureIngestionWorker.Impl(
+                configuration = DummyExposureIngestionWorker.Configuration(
+                    teksAverageRequestWaitingTime = 1,
+                    teksRequestProbabilities = listOf(1.0, 0.0)
+                ),
+                appLifecycleObserver = appLifecycleObserver,
+                workerManager = workerManager,
+                exposureManager = exposureManager
+            )
+        )
+
+        coEvery { worker.performDummyUpload() } answers {
+            isInForeground.value = true
+
+            true
+        }
+        worker.doWork()
+
+        coVerify(exactly = 1) { worker.performDummyUpload() }
+        verify(exactly = 1) { workerManager.scheduleNextDummyExposureIngestionWorker() }
     }
 
     @Test
-    fun `with probability=0, the upload is performed exactly once`() {
+    fun `with probability == 0, the upload is performed exactly once`() = runBlockingTest {
+        every { appLifecycleObserver.isInForeground } returns MutableStateFlow(false)
+        every { workerManager.scheduleNextDummyExposureIngestionWorker() } returns Unit
 
+        val worker = spyk(
+            DummyExposureIngestionWorker.Impl(
+                configuration = DummyExposureIngestionWorker.Configuration(
+                    teksAverageRequestWaitingTime = 1,
+                    teksRequestProbabilities = listOf(0.0)
+                ),
+                appLifecycleObserver = appLifecycleObserver,
+                workerManager = workerManager,
+                exposureManager = exposureManager
+            )
+        )
+
+        coEvery { worker.performDummyUpload() } returns true
+        worker.doWork()
+
+        coVerify(exactly = 1) { worker.performDummyUpload() }
+        verify(exactly = 1) { workerManager.scheduleNextDummyExposureIngestionWorker() }
     }
 
     @Test
-    fun `with 2 slots of probability=1, the upload is performed exactly three times`() {
+    fun `with 2 slots of probability == 1, the upload is performed exactly three times`() = runBlockingTest {
+        every { appLifecycleObserver.isInForeground } returns MutableStateFlow(false)
+        every { workerManager.scheduleNextDummyExposureIngestionWorker() } returns Unit
 
+        val worker = spyk(
+            DummyExposureIngestionWorker.Impl(
+                configuration = DummyExposureIngestionWorker.Configuration(
+                    teksAverageRequestWaitingTime = 1,
+                    teksRequestProbabilities = listOf(1.0, 1.0, 0.0)
+                ),
+                appLifecycleObserver = appLifecycleObserver,
+                workerManager = workerManager,
+                exposureManager = exposureManager
+            )
+        )
+
+        coEvery { worker.performDummyUpload() } returns true
+        worker.doWork()
+
+        coVerify(exactly = 3) { worker.performDummyUpload() }
+        verify(exactly = 1) { workerManager.scheduleNextDummyExposureIngestionWorker() }
     }
 }
