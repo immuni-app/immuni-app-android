@@ -53,7 +53,8 @@ class ExposureNotificationFragment :
         checkSpacing()
     }
 
-    private fun canProceed(): Boolean {
-        return viewModel.isBroadcastingActive.value ?: false
-    }
+   private fun canProceed(): Boolean {
+return true;
 }
+    }
+
