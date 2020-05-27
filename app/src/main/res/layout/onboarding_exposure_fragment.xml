@@ -51,7 +51,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="24dp"
-                android:text="@string/onboarding_exposure_title"
+                android:text="@string/onboarding_exposure_permission_title"
                 app:layout_constraintBottom_toTopOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -63,7 +63,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="@string/onboarding_exposure_message"
+                android:text="@string/onboarding_exposure_permission_description"
                 app:layout_constraintBottom_toTopOf="@+id/textView3"
                 app:layout_constraintEnd_toEndOf="@+id/title"
                 app:layout_constraintStart_toStartOf="@+id/title" />
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="120dp"
                 android:maxLines="5"
-                android:text="@string/know_more"
+                android:text="@string/welcome_view_discover_more"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/title"
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="32dp"
-            android:text="@string/activate"
+            android:text="@string/onboarding_push_permission_action"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

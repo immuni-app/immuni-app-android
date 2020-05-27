@@ -19,7 +19,6 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import it.ministerodellasalute.immuni.api.services.ConfigurationSettings
 import it.ministerodellasalute.immuni.api.services.Faq
-import it.ministerodellasalute.immuni.api.services.Faqs
 import it.ministerodellasalute.immuni.api.services.Language
 import it.ministerodellasalute.immuni.extensions.utils.DeviceUtils
 import it.ministerodellasalute.immuni.extensions.utils.UserLocale
@@ -116,9 +115,9 @@ class ConfigurationSettingsManager(
     }
 
     @VisibleForTesting
-    fun onFaqsUpdate(language: Language, faqs: Faqs) {
-        storeRepository.saveFaqs(language, faqs.faqs)
-        _faqs.value = faqs.faqs
+    fun onFaqsUpdate(language: Language, faqs: List<Faq>) {
+        storeRepository.saveFaqs(language, faqs)
+        _faqs.value = faqs
     }
 
     // endregion

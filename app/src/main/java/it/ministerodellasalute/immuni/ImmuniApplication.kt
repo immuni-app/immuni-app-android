@@ -78,8 +78,8 @@ class ImmuniApplication : Application(), KoinComponent {
     }
 
     private fun startWorkers() {
+        workerManager.scheduleNextDummyExposureIngestionWorker(ExistingWorkPolicy.KEEP)
         scheduleOnboardingNotCompletedWorker()
-
         scheduleServiceNotActiveNotificationWorker()
     }
 

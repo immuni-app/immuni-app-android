@@ -48,12 +48,14 @@ class NetworkRetrofit(
 
     private val client by lazy {
         val builder = OkHttpClient.Builder()
-
         builder.addInterceptor(headersInterceptor)
 
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(loggingInterceptor)
         }
+
+        config.interceptors().forEach { builder.addInterceptor(it) }
+
         /**
          * uncomment this line to verify if http cache is working
          * network interceptor is not called when the cache is used.

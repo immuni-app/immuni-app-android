@@ -30,7 +30,7 @@ interface ConfigurationSettingsService {
     suspend fun settings(@Query("build") build: Long): Response<ConfigurationSettings>
 
     @GET
-    suspend fun faqs(@Url url: String): Response<Faqs>
+    suspend fun faqs(@Url url: String): Response<List<Faq>>
 }
 
 @JsonClass(generateAdapter = true)
@@ -46,6 +46,12 @@ data class ConfigurationSettings(
     @field:Json(name = "risk_reminder_notification_period") val riskReminderNotificationPeriod: Int,
     @field:Json(name = "exposure_info_minimum_risk_score") val exposureInfoMinimumRiskScore: Int,
     @field:Json(name = "exposure_detection_period") val exposureDetectionPeriod: Int,
+    @field:Json(name = "dummy_teks_average_opportunity_waiting_time") val dummyTeksAverageOpportunityWaitingTime: Int,
+    @field:Json(name = "dummy_teks_average_request_waiting_time") val dummyTeksAverageRequestWaitingTime: Int,
+    @field:Json(name = "dummy_teks_request_probabilities") val dummyTeksRequestProbabilities: List<Double>,
+    @field:Json(name = "teks_max_summary_count") val teksMaxSummaryCount: Int,
+    @field:Json(name = "teks_max_info_count") val teksMaxInfoCount: Int,
+    @field:Json(name = "teks_packet_size") val teksPacketSize: Int,
     @field:Json(name = "support_email") val supportEmail: String = defaultSettings.supportEmail
 )
 
@@ -57,11 +63,6 @@ data class ExposureConfiguration(
     @field:Json(name = "duration_bucket_scores") val durationScores: List<Int>,
     @field:Json(name = "transmission_risk_bucket_scores") val transmissionRiskScores: List<Int>,
     @field:Json(name = "minimum_risk_score") val minimumRiskScore: Int
-)
-
-@JsonClass(generateAdapter = true)
-data class Faqs(
-    @field:Json(name = "faqs") val faqs: List<Faq>
 )
 
 @JsonClass(generateAdapter = true)
@@ -109,7 +110,13 @@ val defaultSettings = ConfigurationSettings(
     serviceNotActiveNotificationPeriod = 60 * 60 * 24, // 1 day
     onboardingNotCompletedNotificationPeriod = 60 * 60 * 24, // 1 day
     requiredUpdateNotificationPeriod = 60 * 60 * 24, // 1 day
-    riskReminderNotificationPeriod = 60 * 60 * 24 // 1 day
+    riskReminderNotificationPeriod = 60 * 60 * 24, // 1 day
+    dummyTeksAverageOpportunityWaitingTime = 864000 or 2592000,
+    dummyTeksAverageRequestWaitingTime = 10,
+    dummyTeksRequestProbabilities = listOf(1.0, 0.1),
+    teksMaxSummaryCount = 6 * 14,
+    teksMaxInfoCount = 600,
+    teksPacketSize = 110_000
 )
 
 val defaultFaqs = mapOf(

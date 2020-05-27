@@ -45,8 +45,8 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        imInContactWithASL.setSafeOnClickListener {
-            showHideAlert()
+        hideIfDoctorContact.setSafeOnClickListener {
+            showASLAlert()
         }
 
         hideNotice.setSafeOnClickListener {
@@ -56,12 +56,26 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
 
     private fun showHideAlert() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.contact_hide_confirm_alert_title))
-            .setMessage(getString(R.string.contact_hide_confirm_alert_message))
-            .setNegativeButton(getString(R.string.no)) { d, _ ->
+            .setTitle(getString(R.string.suggestions_instruction_hide_alert_action))
+            .setMessage(getString(R.string.suggestions_instruction_hide_alert_message))
+            .setNegativeButton(getString(R.string.suggestions_alert_asl_contact_confirmation_negative_answer)) { d, _ ->
                 d.dismiss()
             }
-            .setPositiveButton(getString(R.string.yes)) { d, _ ->
+            .setPositiveButton(getString(R.string.suggestions_alert_asl_contact_confirmation_positive_answer)) { d, _ ->
+                executeHideNotice()
+                d.dismiss()
+            }
+            .show()
+    }
+
+    private fun showASLAlert() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.suggestions_alert_asl_contact_confirmation_title))
+            .setMessage(getString(R.string.suggestions_alert_asl_contact_confirmation_description))
+            .setNegativeButton(getString(R.string.suggestions_alert_asl_contact_confirmation_negative_answer)) { d, _ ->
+                d.dismiss()
+            }
+            .setPositiveButton(getString(R.string.suggestions_alert_asl_contact_confirmation_positive_answer)) { d, _ ->
                 executeHideNotice()
                 d.dismiss()
             }

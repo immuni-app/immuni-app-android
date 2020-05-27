@@ -52,12 +52,12 @@ class StatePositiveDialogFragment : BaseStateDialogFragment(R.layout.state_posit
 
     private fun showRecoveredAlert() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.positive_recovered_confirm_alert_title))
-            .setMessage(getString(R.string.positive_recovered_confirm_alert_message))
-            .setNegativeButton(getString(R.string.no)) { d, _ ->
+            .setTitle(getString(R.string.suggestions_alert_covid_negative_title))
+            .setMessage(getString(R.string.suggestions_alert_covid_negative_description))
+            .setNegativeButton(getString(R.string.suggestions_alert_covid_negative_negative_answer)) { d, _ ->
                 d.dismiss()
             }
-            .setPositiveButton(getString(R.string.i_confirm)) { d, _ ->
+            .setPositiveButton(getString(R.string.suggestions_alert_covid_negative_positive_answer)) { d, _ ->
                 executeRecovered()
                 d.dismiss()
             }

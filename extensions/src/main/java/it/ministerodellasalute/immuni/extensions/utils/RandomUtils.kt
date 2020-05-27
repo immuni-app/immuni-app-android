@@ -13,8 +13,12 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.logic.settings.models
+package it.ministerodellasalute.immuni.extensions.utils
 
-import it.ministerodellasalute.immuni.api.services.Faqs
+import java.util.*
+import kotlin.math.ln
 
-typealias Faqs = Faqs
+fun Random.exponential(mean: Long): Long {
+    val randomDouble = nextDouble()
+    return (ln(1.0 - randomDouble) * -mean).toLong()
+}

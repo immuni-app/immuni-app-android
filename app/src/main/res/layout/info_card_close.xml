@@ -59,7 +59,7 @@
             android:gravity="left"
             android:lineSpacingMultiplier="1.2"
             android:textColor="#fff"
-            android:text="@string/home_warning_title"
+            android:text="@string/home_view_header_card_risk_title"
             app:layout_constraintEnd_toStartOf="@+id/infoCardAnimation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -72,7 +72,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="28dp"
         android:gravity="left"
-        android:text="@string/home_warning_subtitle"
+        android:text="@string/home_view_header_card_risk_button"
         android:textColor="#fff"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
