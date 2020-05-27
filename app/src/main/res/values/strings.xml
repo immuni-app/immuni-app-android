@@ -173,6 +173,9 @@
     <string name="welcome_view_items_third_title">Rallentiamo insieme l\'epidemia</string>
     <string name="welcome_view_next_page_title">Avanti</string>
 
+    <string name="home_view_header_card_positive_title">Segui le indicazioni che ti hanno fornito il tuo medico o la tua ASL</string>
+    <string name="home_view_header_card_positive_button">Sei guarito? Aggiorna il tuo stato ›</string>
+
     <!-- Android Specific -->
     <string name="notification_steps_title">Per attivare le notifiche</string>
     <string name="notification_steps_instruction_1">1. Apri le impostazioni dal bottone in basso</string>
