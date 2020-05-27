@@ -140,12 +140,6 @@
                             style="@style/SettingsMenuItem"
                             android:text="@string/settings_setting_leave_review" />
 
-                        <include layout="@layout/settings_content_divider" />
-
-                        <TextView
-                            android:id="@+id/contactSupportButton"
-                            style="@style/SettingsMenuItem"
-                            android:text="@string/settings_setting_contact_support" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
