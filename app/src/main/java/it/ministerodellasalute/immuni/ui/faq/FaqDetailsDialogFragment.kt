@@ -37,6 +37,6 @@ class FaqDetailsDialogFragment : PopupDialogFragment() {
     private fun bindData(questionAndAnswer: QuestionAndAnswer) {
         setTitle(questionAndAnswer.question)
         question.text = questionAndAnswer.question
-        answer.text = HtmlCompat.fromHtml(questionAndAnswer.answer, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        answer.text = questionAndAnswer.answer
     }
 }
