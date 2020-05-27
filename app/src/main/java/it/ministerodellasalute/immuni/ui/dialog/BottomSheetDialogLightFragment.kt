@@ -17,14 +17,11 @@ package it.ministerodellasalute.immuni.ui.dialog
 
 import android.app.Dialog
 import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.core.graphics.drawable.toDrawable
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -49,18 +46,10 @@ abstract class BottomSheetDialogLightFragment : BottomSheetDialogFragment() {
     // navigation bar color
     private fun setLightNavigationBar(dialog: Dialog?) {
         val window: Window? = dialog?.window
-        if (window != null) {
-            val metrics = DisplayMetrics()
-            window.windowManager.defaultDisplay.getRealMetrics(metrics)
-            val dimDrawable = requireContext().getColorCompat(R.color.popup_mask).toDrawable()
-            val navigationBarDrawable = GradientDrawable()
-            navigationBarDrawable.shape = GradientDrawable.RECTANGLE
-            navigationBarDrawable.setColor(requireContext().resources.getColor(R.color.background))
-            val layers = arrayOf<Drawable>(dimDrawable, navigationBarDrawable)
-            val windowBackground = LayerDrawable(layers)
-            windowBackground.setLayerInsetTop(1, metrics.heightPixels)
-            window.setBackgroundDrawable(windowBackground)
-        }
+        val dimDrawable = requireContext().getColorCompat(R.color.popup_mask).toDrawable()
+        window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window?.navigationBarColor = requireContext().getColorCompat(R.color.background)
+        window?.setBackgroundDrawable(dimDrawable)
     }
 
     // force state expanded on open
