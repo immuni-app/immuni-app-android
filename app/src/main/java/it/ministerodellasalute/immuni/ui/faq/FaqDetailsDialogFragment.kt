@@ -17,7 +17,6 @@ package it.ministerodellasalute.immuni.ui.faq
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.navArgs
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment

@@ -24,17 +24,16 @@ import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
 import it.ministerodellasalute.immuni.logic.exposure.repositories.*
-import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
-import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
+import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import java.io.File
 import java.util.*
 import kotlin.math.max
 import kotlinx.coroutines.flow.*
 
 class ExposureManager(
-    private val notificationManager: AppNotificationManager,
+    private val workerManager: WorkerManager,
     private val settingsManager: ConfigurationSettingsManager,
     private val exposureNotificationManager: ExposureNotificationManager,
     private val userRepository: UserRepository,
@@ -90,7 +89,7 @@ class ExposureManager(
                 exposureInfos = infos.map { it.repositoryExposureInformation }
             )
 
-            notificationManager.triggerNotification(NotificationType.Exposure)
+            workerManager.scheduleRiskReminderWorker()
         }
 
         exposureReportingRepository.addSummary(summaryEntity)

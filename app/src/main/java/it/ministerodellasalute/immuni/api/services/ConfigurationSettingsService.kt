@@ -40,10 +40,10 @@ data class ConfigurationSettings(
     @field:Json(name = "tos_url") val termsOfServiceUrl: String,
     @field:Json(name = "pp_url") val privacyPolicyUrl: String,
     @field:Json(name = "exposure_configuration") val exposureConfiguration: ExposureConfiguration,
-    @field:Json(name = "service_not_active_notification_period") val serviceNotActiveNotificationPeriod: Int, // FIXME use me!
+    @field:Json(name = "service_not_active_notification_period") val serviceNotActiveNotificationPeriod: Int,
     @field:Json(name = "onboarding_not_completed_notification_period") val onboardingNotCompletedNotificationPeriod: Int,
     @field:Json(name = "required_update_notification_period") val requiredUpdateNotificationPeriod: Int,
-    @field:Json(name = "risk_reminder_notification_period") val riskReminderNotificationPeriod: Int, // FIXME use me!
+    @field:Json(name = "risk_reminder_notification_period") val riskReminderNotificationPeriod: Int,
     @field:Json(name = "exposure_info_minimum_risk_score") val exposureInfoMinimumRiskScore: Int,
     @field:Json(name = "exposure_detection_period") val exposureDetectionPeriod: Int,
     @field:Json(name = "support_email") val supportEmail: String = defaultSettings.supportEmail

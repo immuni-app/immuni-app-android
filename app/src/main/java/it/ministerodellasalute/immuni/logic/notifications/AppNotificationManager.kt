@@ -45,10 +45,10 @@ class AppNotificationManager(val context: Context) : KoinComponent {
             setContentIntent(createPendingIntent())
         }
         when (type) {
-            NotificationType.Exposure -> setupExposureNotification(builder)
+            NotificationType.RiskReminder -> setupRiskReminderNotification(builder)
             NotificationType.OnboardingNotCompleted -> setupOnboardingNotCompletedNotification(builder)
             NotificationType.ForcedVersionUpdate -> setupForcedVersionUpdateNotification(builder)
-            NotificationType.ServiceNotActiveNotificationType -> setupServiceNotActiveNotification(builder)
+            NotificationType.ServiceNotActive -> setupServiceNotActiveNotification(builder)
         }
 
         val androidNotificationManager = NotificationManagerCompat.from(context)
@@ -62,7 +62,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         androidNotificationManager.cancel(type.id)
     }
 
-    private fun setupExposureNotification(builder: NotificationCompat.Builder) {
+    private fun setupRiskReminderNotification(builder: NotificationCompat.Builder) {
         val title = context.getString(R.string.notification_exposure_title)
         val message = context.getString(R.string.notification_exposure_message)
         builder.apply {
@@ -183,7 +183,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
 }
 
 enum class NotificationType(val id: Int) {
-    Exposure(id = 20001),
+    RiskReminder(id = 20001),
     OnboardingNotCompleted(id = 20002),
     ForcedVersionUpdate(id = 20003),
     ServiceNotActive(id = 20004),

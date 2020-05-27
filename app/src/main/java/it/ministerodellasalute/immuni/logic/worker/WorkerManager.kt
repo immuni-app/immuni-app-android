@@ -22,10 +22,7 @@ import androidx.work.WorkManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import it.ministerodellasalute.immuni.workers.ForceUpdateNotificationWorker
-import it.ministerodellasalute.immuni.workers.OnboardingNotCompletedWorker
-import it.ministerodellasalute.immuni.workers.RequestDiagnosisKeysWorker
-import it.ministerodellasalute.immuni.workers.ServiceNotActiveNotificationWorker
+import it.ministerodellasalute.immuni.workers.*
 import java.security.SecureRandom
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CoroutineScope
@@ -94,6 +91,24 @@ class WorkerManager(
                 )
                 .build()
         )
+    }
+
+    fun scheduleRiskReminderWorker() {
+        val delay = settings.riskReminderNotificationPeriod.toLong()
+        workManager.enqueueUniqueWork(
+            "ExposureNotificationWorker",
+            ExistingWorkPolicy.REPLACE,
+            OneTimeWorkRequest.Builder(RiskReminderWorker::class.java)
+                .setInitialDelay(
+                    delay,
+                    TimeUnit.SECONDS
+                )
+                .build()
+        )
+    }
+
+    fun cancelRiskReminderWorker() {
+        workManager.cancelUniqueWork("ExposureNotificationWorker")
     }
 
     fun scheduleInitialDiagnosisKeysRequest() {
