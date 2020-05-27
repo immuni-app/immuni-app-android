@@ -19,34 +19,61 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import it.ministerodellasalute.immuni.extensions.livedata.Event
+import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import kotlinx.coroutines.*
 
 class SetupViewModel(
-    private val userManager: UserManager
+    private val userManager: UserManager,
+    private val settingsManager: ConfigurationSettingsManager
 ) : ViewModel() {
 
-    val navigateToMainPage = MutableLiveData<Event<Boolean>>()
-    val navigateToWelcome = MutableLiveData<Event<Boolean>>()
-
-    fun cancelInitializeJob() {
-        initializeJob?.cancel()
+    enum class Destination {
+        Home, Welcome
     }
 
-    var initializeJob: Job? = null
+    val navigationDestination = MutableLiveData<Event<Destination>>()
+
+    private var initializationJob: Job? = null
+
+    fun cancelInitializationJob() {
+        initializationJob?.cancel()
+    }
+
     fun initializeApp() {
-        initializeJob?.cancel()
-        initializeJob = viewModelScope.launch {
-            delay(4000)
-            navigateTo()
+        initializationJob?.cancel()
+        initializationJob = viewModelScope.launch {
+            val minDelay = async {
+                delay(4000)
+            }
+            val isFirstLaunch = !userManager.isSetupComplete.value
+            if (isFirstLaunch) {
+                // Let's fetch the configuration settings,
+                // waiting no more than 10 seconds for them to download before proceeding
+                val completion = CompletableDeferred<Unit>()
+                async {
+                    delay(10_000)
+                    completion.complete(Unit)
+                }
+                async {
+                    settingsManager.fetchSettingsAsync().await()
+                    completion.complete(Unit)
+                }
+                completion.await()
+            }
+            minDelay.await()
+            userManager.setSetupComplete(true)
+            triggerNavigation()
         }
     }
 
-    private fun navigateTo() {
-        if (!userManager.isWelcomeComplete.value || !userManager.isOnboardingComplete.value) {
-            navigateToWelcome.value = Event(true)
-        } else {
-            navigateToMainPage.value = Event(true)
-        }
+    private fun triggerNavigation() {
+        val destination =
+            if (userManager.isWelcomeComplete.value && userManager.isOnboardingComplete.value)
+                Destination.Home
+            else
+                Destination.Welcome
+
+        navigationDestination.value = Event(destination)
     }
 }

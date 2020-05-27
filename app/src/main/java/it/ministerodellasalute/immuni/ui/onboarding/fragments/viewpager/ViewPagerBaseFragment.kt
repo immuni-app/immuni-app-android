@@ -23,10 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.ScreenUtils
-import it.ministerodellasalute.immuni.extensions.utils.log
-import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import it.ministerodellasalute.immuni.extensions.view.visible
 import it.ministerodellasalute.immuni.ui.onboarding.OnboardingViewModel
 import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
@@ -46,32 +43,15 @@ abstract class ViewPagerBaseFragment(@LayoutRes val layout: Int) : Fragment(layo
     }
 
     /**
-     * Hide illustration when there is not enough space on top.
-     * Use a maximum aspect ratio.
+     * Illustration can never be more than 50% of the screen height.
+     * So that there is enough space for the text and then scroll.
      */
     fun checkSpacing() {
-        view?.findViewById<TextView>(R.id.title)?.addOnLayoutChangeListener(object : View.OnLayoutChangeListener {
-            override fun onLayoutChange(
-                v: View?,
-                left: Int,
-                top: Int,
-                right: Int,
-                bottom: Int,
-                oldLeft: Int,
-                oldTop: Int,
-                oldRight: Int,
-                oldBottom: Int
-            ) {
-                view?.findViewById<TextView>(R.id.title)?.removeOnLayoutChangeListener(this)
-                val W = ScreenUtils.getScreenWidth(requireContext())
-                val aspectRatio = W.toFloat() / top.toFloat()
-                log("aspectRatio $aspectRatio")
-                if (aspectRatio > 2) {
-                    view?.findViewById<View>(R.id.image)?.gone()
-                } else {
-                    view?.findViewById<View>(R.id.image)?.visible()
-                }
-            }
-        })
+        val image = view?.findViewById<View>(R.id.image)
+        image?.let { view ->
+            var params = view.layoutParams
+            params.height = (ScreenUtils.getScreenHeight(requireContext()).toFloat() / 2f).toInt()
+            view.layoutParams = params
+        }
     }
 }
