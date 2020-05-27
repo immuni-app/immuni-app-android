@@ -26,7 +26,7 @@
                     android:endColor="#F15E5E"
                     android:angle="0"/>
                 <corners android:topLeftRadius="0.1dp" android:topRightRadius="0.1dp"
-                    android:bottomLeftRadius="20dp" android:bottomRightRadius="20dp"/>
+                    android:bottomLeftRadius="@dimen/card_radius" android:bottomRightRadius="@dimen/card_radius"/>
             </shape>
         </item>
     </selector>
