@@ -23,17 +23,13 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
-import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
-import it.ministerodellasalute.immuni.util.ProgressDialogFragment
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.faq_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener, ConfirmationDialogListener {
+class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
 
     lateinit var viewModel: FaqViewModel
 
@@ -54,45 +50,18 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener, Confirmat
 
         viewModel.questionAndAnswers.observe(viewLifecycleOwner) { adapter.data = it }
 
-        viewModel.loading.observe(viewLifecycleOwner) {
-            (activity as? AppCompatActivity)?.loading(it, ProgressDialogFragment())
-        }
-
-        viewModel.loadingError.observe(viewLifecycleOwner) {
-            it.getContentIfNotHandled()?.let {
-                openConfirmationDialog(
-                    positiveButton = getString(R.string.retry),
-                    negativeButton = getString(R.string.cancel),
-                    message = getString(R.string.app_setup_view_network_error),
-                    title = getString(R.string.app_setup_view_generic_error),
-                    cancelable = false,
-                    requestCode = 101
-                )
-            }
-        }
-
         navigationIcon.setSafeOnClickListener {
             // this fragment is accessible from the home as the root fragment
             // and from the settings as a middle fragment
             // so we handle both the back navigation cases
-            if (!findNavController().popBackStack()) activity?.finish()
+            if (!findNavController().popBackStack()) {
+                activity?.finish()
+            }
         }
     }
 
     override fun onClick(item: QuestionAndAnswer) {
         val action = FaqFragmentDirections.actionFaqDetailsDialogFragment(item)
         findNavController().navigate(action)
-    }
-
-    override fun onDialogPositive(requestCode: Int) {
-        if (requestCode == 101) {
-            viewModel.loadQuestionAndAnswers(delay = 2000)
-        }
-    }
-
-    override fun onDialogNegative(requestCode: Int) {
-        if (requestCode == 101) {
-            if (!findNavController().popBackStack()) activity?.finish()
-        }
     }
 }

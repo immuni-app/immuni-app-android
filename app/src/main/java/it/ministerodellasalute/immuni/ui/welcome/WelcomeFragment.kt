@@ -96,8 +96,8 @@ class WelcomeFragment : Fragment() {
         next.setSafeOnClickListener(intervalMillis = 250) {
             val newPos = viewPager.currentItem + 1
             if (newPos == (viewPager.adapter?.itemCount ?: 0)) {
-                navigateTo()
                 userManager.setWelcomeComplete(true)
+                navigateTo()
             } else {
                 viewPager.setCurrentItem(newPos, true)
             }

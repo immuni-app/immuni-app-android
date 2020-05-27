@@ -23,6 +23,7 @@ class UserRepository(
 ) {
     companion object {
         private val userKey = KVStorage.Key<User>("User")
+        private val setupCompleteKey = KVStorage.Key<Boolean>("SetupComplete")
         private val welcomeCompleteKey = KVStorage.Key<Boolean>("WelcomeComplete")
         private val onboardingCompleteKey = KVStorage.Key<Boolean>("OnboardingComplete")
     }
@@ -31,6 +32,12 @@ class UserRepository(
 
     fun save(user: User) {
         storage[userKey] = user
+    }
+
+    val isSetupComplete = storage.stateFlow(setupCompleteKey, defaultValue = false)
+
+    fun setSetupComplete(complete: Boolean) {
+        storage[setupCompleteKey] = complete
     }
 
     val isWelcomeComplete = storage.stateFlow(welcomeCompleteKey, defaultValue = false)

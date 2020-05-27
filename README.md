@@ -17,6 +17,10 @@
 		<a href="CODE-OF-CONDUCT.md">
       <img src="https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg" />
     </a>
+    <a href="https://circleci.com/gh/immuni-app/immuni-app-android">
+      <img alt="Circle CI Status"
+      src="https://circleci.com/gh/immuni-app/immuni-app-android.svg?style=svg">
+    </a>
 </div>
 
 <div align="center">
@@ -54,7 +58,9 @@ This repository contains the source code of Immuni's Android client. More detail
 - [High-Level Description](https://github.com/immuni-app/documentation)
 - [Product Description](https://github.com/immuni-app/documentation/blob/master/Product%20Description.md)
 - [Technology Description](https://github.com/immuni-app/documentation/blob/master/Technology%20Description.md)
+- [Traffic Analysis Mitigation](https://github.com/immuni-app/immuni-documentation/blob/master/Traffic%20Analysis%20Mitigation.md)
 
+**Please take the time to read and consider these documents in full before digging into the source code or opening an Issue. They contain a lot of details that are fundamental to understanding the source code and this repository's documentation.**
 
 # Installation
 
@@ -120,7 +126,7 @@ For more information about how the project is generated and structured, please r
 
 ## Backend services
 
-At the current stage, the application points to backend services which are not publicly accessible and whose source code has not been released. Note that the application is designed to work without a backend, especially in the context of not having the Exposure Notification entitlements (see [Installation](#installation).
+At the current stage, the application points to backend services which are not publicly accessible and whose source code has not been released. Note that the application is designed to work without a backend, especially in the context of not having the Exposure Notification entitlements (see [Installation](#installation)).
 
 Please see this [issue](https://github.com/immuni-app/immuni-app-android/issues/1) for more information about this topic.
 
@@ -196,4 +202,4 @@ Here is a list of Immuni's contributors. Thank you to everyone involved for impr
 
 ## License details
 
-The licence for this repository is a [GNU Affero General Public Licence version 3](https://www.gnu.org/licenses/agpl-3.0.html) (SPDX: AGPL-3.0). Please see the [LICENCE](LICENSE) file for full reference.
+The licence for this repository is a [GNU Affero General Public Licence version 3](https://www.gnu.org/licenses/agpl-3.0.html) (SPDX: AGPL-3.0). Please see the [LICENSE](LICENSE) file for full reference.
