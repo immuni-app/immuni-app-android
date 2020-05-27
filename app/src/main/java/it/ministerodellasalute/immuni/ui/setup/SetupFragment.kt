@@ -42,7 +42,7 @@ class SetupFragment : Fragment(R.layout.setup_fragment) {
 
     override fun onPause() {
         super.onPause()
-        viewModel.cancelInitializeJob()
+        viewModel.cancelInitializationJob()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,33 +53,20 @@ class SetupFragment : Fragment(R.layout.setup_fragment) {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer { it ->
-            it.getContentIfNotHandled()?.let { navigate -> // Only proceed if the event has never been handled
-                if (navigate) {
-                    goToHomeActivity()
-                }
-            }
-        })
-
-        viewModel.navigateToWelcome.observe(viewLifecycleOwner, Observer { it ->
-            it.getContentIfNotHandled()?.let { navigate -> // Only proceed if the event has never been handled
-                if (navigate) {
-                    goToWelcomeActivity()
-                }
+        viewModel.navigationDestination.observe(viewLifecycleOwner, Observer {
+            // Only proceed if the event has never been handled
+            it.getContentIfNotHandled()?.let { destination ->
+                navigateToDestination(destination)
             }
         })
     }
 
-    private fun goToHomeActivity() {
-        val intent = Intent(requireContext(), MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+    private fun navigateToDestination(destination: SetupViewModel.Destination) {
+        val activityClass = when (destination) {
+            SetupViewModel.Destination.Welcome -> WelcomeActivity::class.java
+            SetupViewModel.Destination.Home -> MainActivity::class.java
         }
-        activity?.startActivity(intent)
-        activity?.finish()
-    }
-
-    private fun goToWelcomeActivity() {
-        val intent = Intent(requireContext(), WelcomeActivity::class.java).apply {
+        val intent = Intent(requireContext(), activityClass).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
         activity?.startActivity(intent)

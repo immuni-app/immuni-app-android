@@ -232,7 +232,7 @@ val appModule = module {
 
     // Android ViewModels
 
-    viewModel { SetupViewModel(get()) }
+    viewModel { SetupViewModel(get(), get()) }
     viewModel {
         MainViewModel(
             androidContext(),
