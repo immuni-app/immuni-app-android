@@ -142,7 +142,7 @@
     </style>
 
     <style name="SText">
-        <item name="android:fontFamily">@font/euclid_circular_regular</item>
+        <item name="android:fontFamily">@font/euclid_circular_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/grey_normal</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
