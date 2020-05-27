@@ -113,7 +113,7 @@ class ExposureIngestionRepositoryTest {
     private suspend fun sizeForRequest(block: suspend (ExposureIngestionService) -> Unit): Info {
         val sizeCompleter = CompletableDeferred<Info>()
         val client = OkHttpClient.Builder().apply {
-            addInterceptor(ExposureIngestionNetworkConfiguration.Interceptor(defaultSettings.teksPacketSize))
+            addInterceptor(ExposureIngestionNetworkConfiguration.Interceptor { defaultSettings.teksPacketSize })
             addInterceptor { chain ->
                 val request = chain.request()
                 val contentLength = request.body!!.contentLength()

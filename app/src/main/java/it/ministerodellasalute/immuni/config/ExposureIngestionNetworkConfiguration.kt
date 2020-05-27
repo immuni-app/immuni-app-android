@@ -29,7 +29,7 @@ class ExposureIngestionNetworkConfiguration(
     private val settingsManager: ConfigurationSettingsManager,
     override val moshi: Moshi
 ) : BaseNetworkConfiguration(context, moshi) {
-    class Interceptor(private val settingsManager: ConfigurationSettingsManager) : okhttp3.Interceptor {
+    class Interceptor(private val tekPacketSize: () -> Int) : okhttp3.Interceptor {
         override fun intercept(chain: okhttp3.Interceptor.Chain): Response {
             val request = chain.request()
             val requestSize = request.url.encodedPath.length +
@@ -41,7 +41,7 @@ class ExposureIngestionNetworkConfiguration(
             request.body!!.writeTo(buffer)
             val bodyString = buffer.readUtf8()
 
-            val paddingSize = settingsManager.settings.value.teksPacketSize - requestSize.toInt()
+            val paddingSize = tekPacketSize() - requestSize.toInt()
             val padding = "0".repeat(paddingSize)
             val paddedRequest = request.newBuilder().post(
                 bodyString
@@ -57,5 +57,7 @@ class ExposureIngestionNetworkConfiguration(
         return context.getString(R.string.upload_base_url)
     }
 
-    override fun interceptors() = listOf(Interceptor(settingsManager))
+    override fun interceptors() = listOf(
+        Interceptor { settingsManager.settings.value.teksPacketSize }
+    )
 }
