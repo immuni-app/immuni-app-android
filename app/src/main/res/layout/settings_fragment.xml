@@ -139,13 +139,6 @@
                             android:id="@+id/sendFeedbackButton"
                             style="@style/SettingsMenuItem"
                             android:text="@string/settings_leave_review" />
-
-                        <include layout="@layout/content_divider" />
-
-                        <TextView
-                            android:id="@+id/contactSupportButton"
-                            style="@style/SettingsMenuItem"
-                            android:text="@string/settings_contact_support" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 

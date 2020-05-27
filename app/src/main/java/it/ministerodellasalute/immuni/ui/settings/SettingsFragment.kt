@@ -73,10 +73,6 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
         // general
 
-        contactSupportButton.setSafeOnClickListener {
-            viewModel.onSupportClick(this)
-        }
-
         changeProvinceButton.setSafeOnClickListener {
             val action = SettingsDirections.actionOnboardingActivity(true)
             findNavController().navigate(action)
