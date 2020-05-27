@@ -48,7 +48,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
             NotificationType.Exposure -> setupExposureNotification(builder)
             NotificationType.OnboardingNotCompleted -> setupOnboardingNotCompletedNotification(builder)
             NotificationType.ForcedVersionUpdate -> setupForcedVersionUpdateNotification(builder)
-            NotificationType.ExposurePlayServicesDisabled -> setupExposurePlayServicesDisabledNotification(builder)
+            NotificationType.ServiceNotActiveNotificationType -> setupServiceNotActiveNotification(builder)
         }
 
         val androidNotificationManager = NotificationManagerCompat.from(context)
@@ -114,7 +114,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         }
     }
 
-    private fun setupExposurePlayServicesDisabledNotification(builder: NotificationCompat.Builder) {
+    private fun setupServiceNotActiveNotification(builder: NotificationCompat.Builder) {
         val title = context.getString(R.string.notification_not_active_title)
         val message = context.getString(R.string.notification_not_active_message)
         builder.apply {
@@ -186,5 +186,5 @@ enum class NotificationType(val id: Int) {
     Exposure(id = 20001),
     OnboardingNotCompleted(id = 20002),
     ForcedVersionUpdate(id = 20003),
-    ExposurePlayServicesDisabled(id = 20004),
+    ServiceNotActive(id = 20004),
 }
