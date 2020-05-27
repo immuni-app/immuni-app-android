@@ -133,7 +133,6 @@
     <string name="suggestions_positive_info_title">Immuni sta continuando a funzionare, non disinstallarla</string>
     <string name="suggestions_positive_subtitle">Segui tutte le indicazioni che hai ricevuto dal tuo medico o dal Dipartimento di prevenzione della tua ASL.</string>
     <string name="suggestions_positive_title">Segui le indicazioni</string>
-    <!-- TODO: format in place -->
     <string name="suggestions_risk_subtitle">Immuni ha rilevato che il giorno %s sei stato vicino a un utente COVID-19 positivo.</string>
     <string name="suggestions_risk_title">Esposizione a rischio</string>
     <string name="tabbar_title_home">Home</string>
