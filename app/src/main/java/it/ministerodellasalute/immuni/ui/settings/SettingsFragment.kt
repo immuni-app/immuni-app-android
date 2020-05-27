@@ -94,7 +94,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SettingsViewModel.EXPOSRE_NOTIFICATION_SETTINGS_REQUEST) {
+        if (requestCode == SettingsViewModel.EXPOSURE_NOTIFICATION_SETTINGS_REQUEST) {
             // Nothing to do
         }
     }

@@ -28,7 +28,7 @@ class SettingsViewModel(
     private val settingsManager: ConfigurationSettingsManager
 ) : ViewModel(), KoinComponent {
     companion object {
-        const val EXPOSRE_NOTIFICATION_SETTINGS_REQUEST = 2206
+        const val EXPOSURE_NOTIFICATION_SETTINGS_REQUEST = 2206
     }
 
     private val settings get() = settingsManager.settings.value
@@ -54,7 +54,7 @@ class SettingsViewModel(
     fun openExposureSettings(fragment: SettingsFragment) {
         fragment.startActivityForResult(
             ExposureNotificationClient.exposureNotificationSettingsIntent,
-            EXPOSRE_NOTIFICATION_SETTINGS_REQUEST
+            EXPOSURE_NOTIFICATION_SETTINGS_REQUEST
         )
     }
 }
