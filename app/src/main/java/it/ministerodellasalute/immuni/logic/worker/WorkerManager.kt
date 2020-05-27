@@ -25,6 +25,7 @@ import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManage
 import it.ministerodellasalute.immuni.workers.ForceUpdateNotificationWorker
 import it.ministerodellasalute.immuni.workers.OnboardingNotCompletedWorker
 import it.ministerodellasalute.immuni.workers.RequestDiagnosisKeysWorker
+import it.ministerodellasalute.immuni.workers.ServiceNotActiveNotificationWorker
 import java.security.SecureRandom
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.CoroutineScope
@@ -81,6 +82,20 @@ class WorkerManager(
         )
     }
 
+    fun scheduleServiceNotActiveNotificationWorker(policy: ExistingWorkPolicy) {
+        val delay = settings.serviceNotActiveNotificationPeriod.toLong()
+        workManager.enqueueUniqueWork(
+            "ServiceNotActiveNotificationWorker",
+            policy,
+            OneTimeWorkRequest.Builder(ServiceNotActiveNotificationWorker::class.java)
+                .setInitialDelay(
+                    delay,
+                    TimeUnit.SECONDS
+                )
+                .build()
+        )
+    }
+
     fun scheduleInitialDiagnosisKeysRequest() {
         enqueueDiagnosisKeysRequest(
             ExistingWorkPolicy.KEEP,
@@ -106,10 +121,10 @@ class WorkerManager(
             OneTimeWorkRequest.Builder(RequestDiagnosisKeysWorker::class.java)
                 .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
                 // .setConstraints(
-                    // Constraints.Builder()
-                        // .setRequiresBatteryNotLow(true)
-                        // .setRequiresDeviceIdle(true)
-                        // .build()
+                // Constraints.Builder()
+                // .setRequiresBatteryNotLow(true)
+                // .setRequiresDeviceIdle(true)
+                // .build()
                 // )
                 .build()
         )

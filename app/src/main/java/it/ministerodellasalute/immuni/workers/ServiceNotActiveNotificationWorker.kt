@@ -20,11 +20,8 @@ import androidx.work.CoroutineWorker
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkerParameters
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
-import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
-import it.ministerodellasalute.immuni.logic.forceupdate.PlayServicesStatus
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
-import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -55,8 +52,7 @@ class ServiceNotActiveNotificationWorker(
                 notificationManager.triggerNotification(NotificationType.ServiceNotActive)
             }
 
-            
-
+            workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.REPLACE)
             return Result.success()
         }
     }
