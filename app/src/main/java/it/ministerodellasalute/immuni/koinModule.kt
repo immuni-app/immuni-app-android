@@ -91,14 +91,14 @@ val appModule = module {
     }
 
     /**
-     * Exposure Injestion Service APIs
+     * Exposure Ingestion Service APIs
      */
     single {
         val network = Network(
             androidContext(),
             ExposureIngestionNetworkConfiguration(
                 androidContext(),
-                100_000,
+                get(),
                 get()
             )
         )
