@@ -27,9 +27,9 @@ import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManage
 import it.ministerodellasalute.immuni.workers.ForceUpdateNotificationWorker
 import it.ministerodellasalute.immuni.workers.OnboardingNotCompletedWorker
 import it.ministerodellasalute.immuni.workers.RequestDiagnosisKeysWorker
-import kotlinx.coroutines.*
 import java.security.SecureRandom
 import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.core.KoinComponent

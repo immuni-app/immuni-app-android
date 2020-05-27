@@ -20,6 +20,8 @@ import it.ministerodellasalute.immuni.api.services.defaultSettings
 import it.ministerodellasalute.immuni.config.ExposureIngestionNetworkConfiguration
 import it.ministerodellasalute.immuni.immuniMoshi
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
+import java.util.*
+import kotlin.test.assertEquals
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.runBlocking
 import okhttp3.MediaType.Companion.toMediaType
@@ -30,8 +32,6 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.*
-import kotlin.test.assertEquals
 
 class ExposureIngestionRepositoryTest {
     @Test
@@ -125,7 +125,7 @@ class ExposureIngestionRepositoryTest {
                 sizeCompleter.complete(Info(requestSize, "$contentLength".length))
 
                 Response.Builder()
-                    .code(418) //Whatever code
+                    .code(418) // Whatever code
                     .protocol(Protocol.HTTP_1_1)
                     .message("Dummy response")
                     .body("{}".toResponseBody("application/json".toMediaType()))

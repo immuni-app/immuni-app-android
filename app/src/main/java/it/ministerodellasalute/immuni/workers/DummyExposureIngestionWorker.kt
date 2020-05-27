@@ -25,15 +25,15 @@ import it.ministerodellasalute.immuni.extensions.utils.log
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
+import java.security.SecureRandom
+import java.util.*
+import kotlin.math.min
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.security.SecureRandom
-import java.util.*
-import kotlin.math.min
 
 class DummyExposureIngestionWorker(
     appContext: Context,

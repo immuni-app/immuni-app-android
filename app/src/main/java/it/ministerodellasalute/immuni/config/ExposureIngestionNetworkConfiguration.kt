@@ -18,7 +18,6 @@ package it.ministerodellasalute.immuni.config
 import android.content.Context
 import com.squareup.moshi.Moshi
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import okhttp3.Interceptor
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
@@ -29,7 +28,7 @@ class ExposureIngestionNetworkConfiguration(
     val paddedRequestSize: Int,
     override val moshi: Moshi
 ) : BaseNetworkConfiguration(context, moshi) {
-    class Interceptor(private val paddedRequestSize: Int): okhttp3.Interceptor {
+    class Interceptor(private val paddedRequestSize: Int) : okhttp3.Interceptor {
         override fun intercept(chain: okhttp3.Interceptor.Chain): Response {
             val request = chain.request()
             val requestSize = request.url.encodedPath.length +
