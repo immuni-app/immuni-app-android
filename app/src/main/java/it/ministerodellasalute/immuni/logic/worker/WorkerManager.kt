@@ -16,9 +16,11 @@
 package it.ministerodellasalute.immuni.logic.worker
 
 import android.content.Context
+import androidx.work.Constraints
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import it.ministerodellasalute.immuni.extensions.utils.exponential
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
@@ -27,9 +29,7 @@ import it.ministerodellasalute.immuni.workers.OnboardingNotCompletedWorker
 import it.ministerodellasalute.immuni.workers.RequestDiagnosisKeysWorker
 import java.security.SecureRandom
 import java.util.concurrent.TimeUnit
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.core.KoinComponent
@@ -88,10 +88,10 @@ class WorkerManager(
         )
     }
 
-    fun scheduleNextDiagnosisKeysRequest(delayMinutes: Long) {
+    fun scheduleNextDiagnosisKeysRequest() {
         enqueueDiagnosisKeysRequest(
             ExistingWorkPolicy.REPLACE,
-            delayMinutes = delayMinutes
+            delayMinutes = settings.exposureDetectionPeriod.toLong() / 60
         )
     }
 
@@ -105,13 +105,31 @@ class WorkerManager(
             policy,
             OneTimeWorkRequest.Builder(RequestDiagnosisKeysWorker::class.java)
                 .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
-                // .setConstraints(
-                    // Constraints.Builder()
-                        // .setRequiresBatteryNotLow(true)
-                        // .setRequiresDeviceIdle(true)
-                        // .build()
-                // )
+                .setConstraints(
+                    Constraints.Builder()
+                        .setRequiresBatteryNotLow(true)
+                        .build()
+                )
                 .build()
         )
+    }
+
+    fun scheduleNextDummyExposureIngestionWorker(policy: ExistingWorkPolicy = ExistingWorkPolicy.REPLACE) {
+        workManager.enqueueUniqueWork(
+            "NextDummyExposureIngestionWorker",
+            policy,
+            OneTimeWorkRequest.Builder(RequestDiagnosisKeysWorker::class.java)
+                .setInitialDelay(computeNextDummyExposureIngestionScheduleDelay(), TimeUnit.MINUTES)
+                .setConstraints(
+                    Constraints.Builder()
+                        .setRequiresBatteryNotLow(true)
+                        .build()
+                )
+                .build()
+        )
+    }
+
+    private fun computeNextDummyExposureIngestionScheduleDelay(): Long {
+        return SecureRandom().exponential(settings.dummyTeksAverageOpportunityWaitingTime.toLong())
     }
 }

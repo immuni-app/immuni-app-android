@@ -18,13 +18,46 @@ package it.ministerodellasalute.immuni.config
 import android.content.Context
 import com.squareup.moshi.Moshi
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import okhttp3.Interceptor
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import okio.Buffer
 
 class ExposureIngestionNetworkConfiguration(
     context: Context,
+    private val settingsManager: ConfigurationSettingsManager,
     override val moshi: Moshi
 ) : BaseNetworkConfiguration(context, moshi) {
+    class Interceptor(private val tekPacketSize: () -> Int) : okhttp3.Interceptor {
+        override fun intercept(chain: okhttp3.Interceptor.Chain): Response {
+            val request = chain.request()
+            val requestSize = request.url.encodedPath.length +
+                request.headers.byteCount() +
+                request.method.length +
+                request.body!!.contentLength()
+
+            val buffer = Buffer()
+            request.body!!.writeTo(buffer)
+            val bodyString = buffer.readUtf8()
+
+            val paddingSize = tekPacketSize() - requestSize.toInt()
+            val padding = "0".repeat(paddingSize)
+            val paddedRequest = request.newBuilder().post(
+                bodyString
+                    .replace("padding\":\"\"", "padding\":\"$padding\"")
+                    .toRequestBody()
+            ).build()
+
+            return chain.proceed(paddedRequest)
+        }
+    }
 
     override fun baseUrl(): String {
         return context.getString(R.string.upload_base_url)
     }
+
+    override fun interceptors() = listOf(
+        Interceptor { settingsManager.settings.value.teksPacketSize }
+    )
 }
