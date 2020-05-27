@@ -44,6 +44,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:itemIconSize="40dp"
+        app:itemTextAppearanceActive="@style/TextAppearanceBottomNavBarActive"
+        app:itemTextAppearanceInactive="@style/TextAppearanceBottomNavBarInactive"
         app:itemRippleColor="@color/background"
         app:itemIconTint="@color/bottom_nav_color_selector"
         app:itemTextColor="@color/bottom_nav_color_selector"
