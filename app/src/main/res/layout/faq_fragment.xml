@@ -107,7 +107,7 @@
                     android:paddingStart="@dimen/activity_vertical_margin"
                     android:paddingEnd="32dp"
                     android:singleLine="true"
-                    android:text="@string/faq_title"
+                    android:text="@string/settings_setting_faq"
                     android:textAllCaps="false" />
             </androidx.appcompat.widget.Toolbar>
 

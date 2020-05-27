@@ -55,7 +55,7 @@
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="32dp"
         android:gravity="center"
-        android:text="@string/app_setup_check_connection"
+        android:text="@string/app_setup_view_network_error"
         android:textColor="#5181FD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

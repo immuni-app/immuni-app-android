@@ -46,23 +46,23 @@
             <TextView
                 style="@style/UploadCard"
                 android:drawableStart="@drawable/ic_test_result"
-                android:text="@string/upload_data_info_test_result" />
+                android:text="@string/confirm_data_cell_result_title" />
 
             <TextView
                 style="@style/UploadCard"
                 android:drawableStart="@drawable/ic_proximity_data"
-                android:text="@string/upload_data_info_random_codes" />
+                android:text="@string/confirm_data_cell_proximity_data_title" />
 
             <TextView
                 android:id="@+id/epidemiologicalData"
                 style="@style/UploadCard"
                 android:drawableStart="@drawable/ic_epid_data"
-                android:text="@string/upload_data_info_epidemiological_data" />
+                android:text="@string/confirm_data_cell_exposition_data_title" />
 
             <TextView
                 style="@style/UploadCard"
                 android:drawableStart="@drawable/ic_province"
-                android:text="@string/upload_data_info_your_province" />
+                android:text="@string/confirm_data_cell_province_title" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -106,7 +106,7 @@
                     android:layout_marginTop="64dp"
                     android:layout_marginEnd="30dp"
                     android:gravity="start"
-                    android:text="@string/upload_data_dialog_title"
+                    android:text="@string/confirm_data_title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +146,7 @@
                     android:paddingEnd="32dp"
                     android:singleLine="true"
                     android:textAllCaps="false"
-                    android:text="@string/upload_data_dialog_title" />
+                    android:text="@string/confirm_data_title" />
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -174,7 +174,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/upload_data_wait_instruction_before_upload"
+            android:text="@string/confirm_data_footer_message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -186,7 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="@string/upload_data"
+            android:text="@string/confirm_data_button_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

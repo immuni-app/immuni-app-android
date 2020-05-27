@@ -63,8 +63,8 @@ class AppNotificationManager(val context: Context) : KoinComponent {
     }
 
     private fun setupExposureNotification(builder: NotificationCompat.Builder) {
-        val title = context.getString(R.string.notification_exposure_title)
-        val message = context.getString(R.string.notification_exposure_message)
+        val title = context.getString(R.string.notifications_risk_title)
+        val message = context.getString(R.string.notifications_risk_description)
         builder.apply {
             setContentTitle(title)
             setContentText(message)
@@ -75,8 +75,8 @@ class AppNotificationManager(val context: Context) : KoinComponent {
     }
 
     private fun setupOnboardingNotCompletedNotification(builder: NotificationCompat.Builder) {
-        val title = context.getString(R.string.notification_onboarding_not_completed_title)
-        val message = context.getString(R.string.notification_onboarding_not_completed_message)
+        val title = context.getString(R.string.notifications_update_os_title)
+        val message = context.getString(R.string.notifications_update_os_description)
         builder.apply {
             setContentTitle(title)
             setContentText(message)
@@ -88,8 +88,8 @@ class AppNotificationManager(val context: Context) : KoinComponent {
     }
 
     private fun setupForcedVersionUpdateNotification(builder: NotificationCompat.Builder) {
-        val title = context.getString(R.string.notification_force_update_title)
-        val message = context.getString(R.string.notification_force_update_message)
+        val title = context.getString(R.string.notifications_update_app_title)
+        val message = context.getString(R.string.notifications_update_app_description)
 
         val notificationIntent = Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}")
@@ -115,8 +115,8 @@ class AppNotificationManager(val context: Context) : KoinComponent {
     }
 
     private fun setupExposurePlayServicesDisabledNotification(builder: NotificationCompat.Builder) {
-        val title = context.getString(R.string.notification_not_active_title)
-        val message = context.getString(R.string.notification_not_active_message)
+        val title = context.getString(R.string.notifications_not_active_service_title)
+        val message = context.getString(R.string.notifications_not_active_service_description)
         builder.apply {
             setContentTitle(title)
             setContentText(message)

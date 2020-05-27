@@ -37,12 +37,12 @@
 
         <TextView
             style="@style/PrivacyContentItem"
-            android:text="@string/privacy_item_data"
+            android:text="@string/privacy_item_identity"
             app:drawableStartCompat="@drawable/ic_identity_none" />
 
         <TextView
             style="@style/PrivacyContentItem"
-            android:text="@string/privacy_item_identity"
+            android:text="@string/privacy_item_people"
             app:drawableStartCompat="@drawable/ic_people_none" />
 
         <TextView
@@ -52,12 +52,12 @@
 
         <TextView
             style="@style/PrivacyContentItem"
-            android:text="@string/privacy_item_crypto"
+            android:text="@string/privacy_item_secure"
             app:drawableStartCompat="@drawable/ic_secure" />
 
         <TextView
             style="@style/PrivacyContentItem"
-            android:text="@string/privacy_item_data_sent"
+            android:text="@string/privacy_item_ministry"
             app:drawableStartCompat="@drawable/ic_epid_data" />
 
         <TextView
@@ -111,7 +111,7 @@
                     android:layout_marginBottom="30dp"
                     android:fontFamily="@font/euclid_circular_bold"
                     android:lineSpacingMultiplier="1.1"
-                    android:text="@string/privacy_14_years"
+                    android:text="@string/privacy_checkbox_above14"
                     android:textColor="@color/grey_dark"
                     android:textSize="16sp"
                     android:translationX="-8dp"
@@ -164,7 +164,7 @@
                     android:layout_marginBottom="30dp"
                     android:fontFamily="@font/euclid_circular_bold"
                     android:lineSpacingMultiplier="1.1"
-                    android:text="@string/privacy_checkbox"
+                    android:text="@string/privacy_checkbox_privacyPolicyRead"
                     android:textColor="@color/grey_dark"
                     android:textSize="16sp"
                     android:translationX="-8dp"
@@ -184,7 +184,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="32dp"
             android:fontFamily="@font/euclid_circular_medium"
-            android:text="@string/privacy_page_tos"
+            android:text="@string/privacy_tos"
             android:textColor="@color/grey_normal"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/next"

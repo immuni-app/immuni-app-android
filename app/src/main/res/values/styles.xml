@@ -269,16 +269,34 @@
     <style name="ParagraphCard" parent="CardShadowWhite">
         <item name="android:gravity">center_vertical</item>
         <item name="android:padding">25dp</item>
-        <item name="android:layout_marginStart">30dp</item>
-        <item name="android:layout_marginEnd">30dp</item>
-        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginStart">25dp</item>
+        <item name="android:layout_marginEnd">25dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
         <item name="android:background">@drawable/rounded_corners_30dp</item>
         <item name="android:backgroundTint">@color/background</item>
         <item name="cardElevation">@dimen/cards_elevation</item>
         <item name="android:textSize">16sp</item>
-        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="fontFamily">@font/euclid_circular</item>
         <item name="android:textColor">@color/grey_dark</item>
         <item name="android:drawablePadding">20dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ParagraphCard.Layout">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ParagraphCard.Title" parent="P1Text.Generic">
+        <item name="android:drawablePadding">20dp</item>
+        <item name="android:textColor">@color/grey_dark</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ParagraphCard.Message" parent="P1Text">
+        <item name="android:layout_marginTop">15dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

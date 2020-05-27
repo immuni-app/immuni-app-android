@@ -31,7 +31,7 @@
         android:layout_marginStart="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/wanna_know_more"/>
+        android:text="@string/permission_tutorial_how_immuni_works_action_description"/>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/faqButton"
         style="@style/RoundedButton"
@@ -42,7 +42,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="20dp"
-        android:text="@string/explore_faq"
+        android:text="@string/permission_tutorial_how_immuni_works_action_cta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 </LinearLayout>
