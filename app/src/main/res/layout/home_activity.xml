@@ -46,7 +46,7 @@
         app:itemIconSize="40dp"
         app:itemTextAppearanceActive="@style/TextAppearanceBottomNavBarActive"
         app:itemTextAppearanceInactive="@style/TextAppearanceBottomNavBarInactive"
-        app:itemRippleColor="@color/background"
+        app:itemRippleColor="@color/rippleColorLight"
         app:itemIconTint="@color/bottom_nav_color_selector"
         app:itemTextColor="@color/bottom_nav_color_selector"
         app:labelVisibilityMode="labeled"
