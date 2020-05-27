@@ -107,7 +107,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="24dp"
-                android:text="@string/reactivate_immuni"
+                android:text="@string/home_view_service_not_active_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -138,7 +138,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="32dp"
             android:gravity="left"
-            android:text="@string/home_protection_active_subtitle"
+            android:text="@string/home_view_service_active_subtitle"
             app:layout_constraintBottom_toTopOf="@+id/bottomContainer"
             app:layout_constraintEnd_toEndOf="@+id/title"
             app:layout_constraintStart_toStartOf="@+id/title"

@@ -54,7 +54,7 @@ class MainViewModel(
         protectionActive?.let {
             items.add(ProtectionCard(it))
         }
-        items.add(SectionHeader(context.getString(R.string.home_information_title)))
+        items.add(SectionHeader(context.getString(R.string.home_view_info_header_title)))
         items.add(SelfCareCard)
         items.add(HowItWorksCard)
         return items
