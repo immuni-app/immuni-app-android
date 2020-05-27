@@ -15,8 +15,10 @@
 
 package it.ministerodellasalute.immuni.logic.settings.models
 
+import it.ministerodellasalute.immuni.api.services.Faq
+
 sealed class FetchFaqsResult {
-    data class Success(val faqs: Faqs) : FetchFaqsResult()
+    data class Success(val faqs: List<Faq>) : FetchFaqsResult()
     object ConnectionError : FetchFaqsResult()
     object ServerError : FetchFaqsResult()
 }

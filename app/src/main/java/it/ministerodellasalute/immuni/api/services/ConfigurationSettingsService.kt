@@ -30,7 +30,7 @@ interface ConfigurationSettingsService {
     suspend fun settings(@Query("build") build: Long): Response<ConfigurationSettings>
 
     @GET
-    suspend fun faqs(@Url url: String): Response<Faqs>
+    suspend fun faqs(@Url url: String): Response<List<Faq>>
 }
 
 @JsonClass(generateAdapter = true)
@@ -57,11 +57,6 @@ data class ExposureConfiguration(
     @field:Json(name = "duration_bucket_scores") val durationScores: List<Int>,
     @field:Json(name = "transmission_risk_bucket_scores") val transmissionRiskScores: List<Int>,
     @field:Json(name = "minimum_risk_score") val minimumRiskScore: Int
-)
-
-@JsonClass(generateAdapter = true)
-data class Faqs(
-    @field:Json(name = "faqs") val faqs: List<Faq>
 )
 
 @JsonClass(generateAdapter = true)
