@@ -32,13 +32,14 @@ class ExposureIngestionNetworkConfiguration(
     class Interceptor(private val tekPacketSize: () -> Int) : okhttp3.Interceptor {
         override fun intercept(chain: okhttp3.Interceptor.Chain): Response {
             val request = chain.request()
+            val body = request.body!!
             val requestSize = request.url.encodedPath.length +
                 request.headers.byteCount() +
                 request.method.length +
-                request.body!!.contentLength()
+                body.contentLength()
 
             val buffer = Buffer()
-            request.body!!.writeTo(buffer)
+            body.writeTo(buffer)
             val bodyString = buffer.readUtf8()
 
             val paddingSize = tekPacketSize() - requestSize.toInt()
@@ -46,7 +47,7 @@ class ExposureIngestionNetworkConfiguration(
             val paddedRequest = request.newBuilder().post(
                 bodyString
                     .replace("padding\":\"\"", "padding\":\"$padding\"")
-                    .toRequestBody()
+                    .toRequestBody(body.contentType())
             ).build()
 
             return chain.proceed(paddedRequest)

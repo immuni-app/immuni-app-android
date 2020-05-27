@@ -50,11 +50,11 @@ class NetworkRetrofit(
         val builder = OkHttpClient.Builder()
         builder.addInterceptor(headersInterceptor)
 
+        config.interceptors().forEach { builder.addInterceptor(it) }
+
         if (BuildConfig.DEBUG) {
             builder.addInterceptor(loggingInterceptor)
         }
-
-        config.interceptors().forEach { builder.addInterceptor(it) }
 
         /**
          * uncomment this line to verify if http cache is working
