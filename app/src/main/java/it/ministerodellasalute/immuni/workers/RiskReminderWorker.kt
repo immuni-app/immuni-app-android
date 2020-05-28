@@ -17,37 +17,37 @@ package it.ministerodellasalute.immuni.workers
 
 import android.content.Context
 import androidx.work.CoroutineWorker
+import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkerParameters
-import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
-import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class ForceUpdateNotificationWorker(
+class RiskReminderWorker(
     appContext: Context,
     params: WorkerParameters
 ) : CoroutineWorker(appContext, params), KoinComponent {
     private val notificationManager: AppNotificationManager by inject()
     private val workerManager: WorkerManager by inject()
-    private val settingsManager: ConfigurationSettingsManager by inject()
-    private val forceUpdateManager: ForceUpdateManager by inject()
 
     override suspend fun doWork(): Result {
-        try {
-            settingsManager.fetchSettingsAsync().await()
-            if (!forceUpdateManager.isAppOutdated) {
-                return Result.success()
-            }
+        return doWork(
+            notificationManager,
+            workerManager
+        )
+    }
 
-            notificationManager.triggerNotification(NotificationType.ForcedVersionUpdate)
-            workerManager.scheduleForceUpdateNotificationWorker()
+    companion object {
+        fun doWork(
+            notificationManager: AppNotificationManager,
+            workerManager: WorkerManager
+        ): Result {
+            notificationManager.triggerNotification(NotificationType.RiskReminder)
 
+            workerManager.scheduleRiskReminderWorker(ExistingWorkPolicy.REPLACE)
             return Result.success()
-        } catch (e: Exception) {
-            return Result.retry()
         }
     }
 }

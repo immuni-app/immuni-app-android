@@ -24,11 +24,13 @@ import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.get
@@ -46,7 +48,7 @@ class ImmuniApplication : Application(), KoinComponent {
     private lateinit var debugMenu: DebugMenu
     private lateinit var lifecycleObserver: AppLifecycleObserver
     private lateinit var activityLifecycleObserver: AppActivityLifecycleCallbacks
-    private val userRepository: UserRepository by inject()
+    private val userManager: UserManager by inject()
     private val workerManager: WorkerManager by inject()
 
     override fun onCreate() {
@@ -77,21 +79,66 @@ class ImmuniApplication : Application(), KoinComponent {
     }
 
     private fun startWorkers() {
+        updateNextDummyExposureIngestionWorker()
+        updateOnboardingNotCompletedWorker()
+        updateServiceNotActiveNotificationWorker()
+        updateForceUpdateNotificationWorker()
+        updateRiskReminderWorker()
+        updateInitialDiagnosisKeysRequest()
+    }
+
+    private fun updateNextDummyExposureIngestionWorker() {
         workerManager.scheduleNextDummyExposureIngestionWorker(ExistingWorkPolicy.KEEP)
+    }
 
-        // TODO here? restater action/manager?
-        workerManager.scheduleNextDiagnosisKeysRequest()
-
+    private fun updateOnboardingNotCompletedWorker() {
         val job = Job()
         val scope = CoroutineScope(Dispatchers.Default + job)
         lifecycleObserver.isInForeground.onEach { isInForeground ->
-            if (!userRepository.isOnboardingComplete.value) {
+            if (!userManager.isOnboardingComplete.value) {
                 if (isInForeground) {
                     workerManager.scheduleOnboardingNotCompletedWorker()
                 }
             } else {
                 job.cancel()
             }
+        }.launchIn(scope)
+    }
+
+    private fun updateServiceNotActiveNotificationWorker() {
+        workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.KEEP)
+
+        val scope = CoroutineScope(Dispatchers.Default)
+        // When isBroadcastingActive becomes false, it means that the user manually disabled BLE or Location Services
+        // and so already received a notification from Google Play Services with that specific warning.
+        // We reschedule the worker, so that our custom notification will be triggered only if the user still didn't fix the issue
+        // by the time the Work is run again.
+        exposureManager.isBroadcastingActive.filter { it == false }.onEach {
+            workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.REPLACE)
+        }.launchIn(scope)
+    }
+
+    private fun updateForceUpdateNotificationWorker() {
+        val scope = CoroutineScope(Dispatchers.Default)
+
+        settingsManager.settings.onEach {
+            workerManager.updateForceUpdateNotificationWorkerSchedule()
+        }.launchIn(scope)
+    }
+
+    private fun updateRiskReminderWorker() {
+        val scope = CoroutineScope(Dispatchers.Default)
+
+        exposureManager.exposureStatus.onEach {
+            workerManager.updateRiskReminderWorker(it)
+        }.launchIn(scope)
+    }
+
+    private fun updateInitialDiagnosisKeysRequest() {
+        val scope = CoroutineScope(Dispatchers.Default)
+
+        userManager.isOnboardingComplete.filter { it }.onEach {
+            workerManager.scheduleInitialDiagnosisKeysRequest()
         }.launchIn(scope)
     }
 }

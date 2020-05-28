@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.logic.exposure
 
 import android.app.Activity
 import android.content.Intent
+import androidx.work.ExistingWorkPolicy
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
@@ -25,18 +26,16 @@ import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
 import it.ministerodellasalute.immuni.logic.exposure.repositories.*
-import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
-import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSettings
 import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
+import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import java.io.File
 import java.util.*
 import kotlin.math.max
 import kotlinx.coroutines.flow.*
 
 class ExposureManager(
-    private val notificationManager: AppNotificationManager,
     private val settingsManager: ConfigurationSettingsManager,
     private val exposureNotificationManager: ExposureNotificationManager,
     private val userRepository: UserRepository,
@@ -91,8 +90,6 @@ class ExposureManager(
             summaryEntity = summaryEntity.copy(
                 exposureInfos = infos.map { it.repositoryExposureInformation }
             )
-
-            notificationManager.triggerNotification(NotificationType.Exposure)
         }
 
         exposureReportingRepository.addSummary(summaryEntity)
@@ -211,13 +208,20 @@ class ExposureManager(
         exposureStatusRepository.mockExposureStatus = null
     }
 
-    fun debugCleanupDatabase() {
-        exposureReportingRepository.resetSummaries()
-        exposureReportingRepository.setLastProcessedChunk(null)
+    fun acknowledgeExposure() {
+        val exposureStatus = exposureStatus.value
+        if (exposureStatus is ExposureStatus.Exposed && !exposureStatus.acknowledged) {
+            exposureStatusRepository.setExposureStatus(exposureStatus.copy(acknowledged = true))
+        }
     }
 
     fun setMockExposureStatus(status: ExposureStatus?) {
         exposureStatusRepository.mockExposureStatus = status
+    }
+
+    fun debugCleanupDatabase() {
+        exposureReportingRepository.resetSummaries()
+        exposureReportingRepository.setLastProcessedChunk(null)
     }
 
     val hasSummaries: Boolean get() = exposureReportingRepository.getSummaries().isNotEmpty()

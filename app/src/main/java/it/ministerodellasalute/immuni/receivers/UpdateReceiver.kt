@@ -18,15 +18,13 @@ package it.ministerodellasalute.immuni.receivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.ACTION_MY_PACKAGE_REPLACED
 import it.ministerodellasalute.immuni.extensions.utils.log
 
 class UpdateReceiver : BroadcastReceiver() {
-
     override fun onReceive(context: Context, intent: Intent) {
-
-        log("Update event received, restarting workers...")
-
-        // start workers
-        // TODO
+        if (intent.action == ACTION_MY_PACKAGE_REPLACED) {
+            log("Update event received, workers have been restarted at application launch")
+        }
     }
 }
