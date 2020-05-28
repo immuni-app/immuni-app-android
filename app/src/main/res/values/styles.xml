@@ -318,6 +318,8 @@
     </style>
 
     <style name="SettingsMenuLayout" parent="CardShadowWhite">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
@@ -341,7 +343,10 @@
     <style name="SettingsMenuItem" parent="P1Text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">24dp</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
         <item name="android:textColor">@color/grey_dark</item>
         <item name="fontFamily">@font/euclid_circular_bold</item>
         <item name="android:background">?attr/selectableItemBackground</item>

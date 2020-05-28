@@ -73,8 +73,6 @@
                             <include layout="@layout/settings_menu_item_arrow" />
                         </LinearLayout>
 
-                        <include layout="@layout/settings_content_divider" />
-
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
