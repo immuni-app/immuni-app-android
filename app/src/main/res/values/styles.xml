@@ -178,7 +178,7 @@
         <item name="cornerRadius">27dp</item>
         <item name="android:textSize">18sp</item>
         <item name="textAllCaps">false</item>
-        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="fontFamily">@font/euclid_circular_bold</item>
         <item name="android:elevation">@dimen/cards_elevation</item>
         <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/colorPrimary</item>
         <item name="android:minHeight">55dp</item>
