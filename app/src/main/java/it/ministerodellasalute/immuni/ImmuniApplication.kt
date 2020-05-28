@@ -29,6 +29,7 @@ import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.get
@@ -78,7 +79,11 @@ class ImmuniApplication : Application(), KoinComponent {
 
     private fun startWorkers() {
         workerManager.scheduleNextDummyExposureIngestionWorker(ExistingWorkPolicy.KEEP)
+        scheduleOnboardingNotCompletedWorker()
+        scheduleServiceNotActiveNotificationWorker()
+    }
 
+    private fun scheduleOnboardingNotCompletedWorker() {
         val job = Job()
         val scope = CoroutineScope(Dispatchers.Default + job)
         lifecycleObserver.isInForeground.onEach { isInForeground ->
@@ -89,6 +94,19 @@ class ImmuniApplication : Application(), KoinComponent {
             } else {
                 job.cancel()
             }
+        }.launchIn(scope)
+    }
+
+    private fun scheduleServiceNotActiveNotificationWorker() {
+        workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.KEEP)
+
+        val scope = CoroutineScope(Dispatchers.Default)
+        // When isBroadcastingActive becomes false, it means that the user manually disabled BLE or Location Services
+        // and so already received a notification from Google Play Services with that specific warning.
+        // We reschedule the worker, so that our custom notification will be triggered only if the user still didn't fix the issue
+        // by the time the Work is run again.
+        exposureManager.isBroadcastingActive.filter { it == false }.onEach {
+            workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.REPLACE)
         }.launchIn(scope)
     }
 }

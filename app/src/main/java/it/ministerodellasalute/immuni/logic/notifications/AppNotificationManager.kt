@@ -45,10 +45,10 @@ class AppNotificationManager(val context: Context) : KoinComponent {
             setContentIntent(createPendingIntent())
         }
         when (type) {
-            NotificationType.Exposure -> setupExposureNotification(builder)
+            NotificationType.RiskReminder -> setupRiskReminderNotification(builder)
             NotificationType.OnboardingNotCompleted -> setupOnboardingNotCompletedNotification(builder)
             NotificationType.ForcedVersionUpdate -> setupForcedVersionUpdateNotification(builder)
-            NotificationType.ExposurePlayServicesDisabled -> setupExposurePlayServicesDisabledNotification(builder)
+            NotificationType.ServiceNotActive -> setupServiceNotActiveNotification(builder)
         }
 
         val androidNotificationManager = NotificationManagerCompat.from(context)
@@ -62,7 +62,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         androidNotificationManager.cancel(type.id)
     }
 
-    private fun setupExposureNotification(builder: NotificationCompat.Builder) {
+    private fun setupRiskReminderNotification(builder: NotificationCompat.Builder) {
         val title = context.getString(R.string.notifications_risk_title)
         val message = context.getString(R.string.notifications_risk_description)
         builder.apply {
@@ -114,7 +114,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         }
     }
 
-    private fun setupExposurePlayServicesDisabledNotification(builder: NotificationCompat.Builder) {
+    private fun setupServiceNotActiveNotification(builder: NotificationCompat.Builder) {
         val title = context.getString(R.string.notifications_not_active_service_title)
         val message = context.getString(R.string.notifications_not_active_service_description)
         builder.apply {
@@ -183,8 +183,8 @@ class AppNotificationManager(val context: Context) : KoinComponent {
 }
 
 enum class NotificationType(val id: Int) {
-    Exposure(id = 20001),
+    RiskReminder(id = 20001),
     OnboardingNotCompleted(id = 20002),
     ForcedVersionUpdate(id = 20003),
-    ExposurePlayServicesDisabled(id = 20004),
+    ServiceNotActive(id = 20004),
 }
