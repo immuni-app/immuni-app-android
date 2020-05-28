@@ -52,6 +52,7 @@ import it.ministerodellasalute.immuni.ui.onboarding.OnboardingViewModel
 import it.ministerodellasalute.immuni.ui.otp.OtpViewModel
 import it.ministerodellasalute.immuni.ui.settings.SettingsViewModel
 import it.ministerodellasalute.immuni.ui.setup.SetupViewModel
+import it.ministerodellasalute.immuni.ui.suggestions.StateCloseViewModel
 import it.ministerodellasalute.immuni.ui.upload.UploadViewModel
 import it.ministerodellasalute.immuni.util.CoroutineContextProvider
 import java.security.SecureRandom
@@ -91,12 +92,16 @@ val appModule = module {
     }
 
     /**
-     * Exposure Injestion Service APIs
+     * Exposure Ingestion Service APIs
      */
     single {
         val network = Network(
             androidContext(),
-            ExposureIngestionNetworkConfiguration(androidContext(), get())
+            ExposureIngestionNetworkConfiguration(
+                androidContext(),
+                get(),
+                get()
+            )
         )
         network.createServiceAPI(ExposureIngestionService::class)
     }
@@ -232,7 +237,7 @@ val appModule = module {
 
     // Android ViewModels
 
-    viewModel { SetupViewModel(get()) }
+    viewModel { SetupViewModel(get(), get()) }
     viewModel {
         MainViewModel(
             androidContext(),
@@ -251,6 +256,7 @@ val appModule = module {
     viewModel { ForceUpdateViewModel(get()) }
     viewModel { FaqViewModel(get()) }
     viewModel { SettingsViewModel(get()) }
+    viewModel { StateCloseViewModel(get()) }
 }
 
 val immuniMoshi = moshi(

@@ -16,8 +16,10 @@
 package it.ministerodellasalute.immuni.ui.suggestions
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.View
 import androidx.core.widget.NestedScrollView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
@@ -25,11 +27,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import kotlinx.android.synthetic.main.state_close_dialog.*
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_dialog) {
+
+    private lateinit var viewModel: StateCloseViewModel
 
     override val appBar: AppBarLayout
         get() = requireView().findViewById(R.id.appBar)
@@ -44,24 +50,46 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = getViewModel()
 
-        imInContactWithASL.setSafeOnClickListener {
-            showHideAlert()
+        hideIfDoctorContact.setSafeOnClickListener {
+            showASLAlert()
         }
 
         hideNotice.setSafeOnClickListener {
             showHideAlert()
         }
+
+        viewModel.exposureDate.observe(viewLifecycleOwner, Observer {
+            if (it is ExposureStatus.Exposed) {
+                val dateStr = DateFormat.getMediumDateFormat(requireContext()).format(it.lastExposureDate)
+                pageSubtitle.text = String.format(requireContext().getString(R.string.suggestions_risk_subtitle), dateStr)
+            }
+        })
     }
 
     private fun showHideAlert() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.contact_hide_confirm_alert_title))
-            .setMessage(getString(R.string.contact_hide_confirm_alert_message))
-            .setNegativeButton(getString(R.string.no)) { d, _ ->
+            .setTitle(getString(R.string.suggestions_instruction_hide_alert_action))
+            .setMessage(getString(R.string.suggestions_instruction_hide_alert_message))
+            .setNegativeButton(getString(R.string.suggestions_alert_asl_contact_confirmation_negative_answer)) { d, _ ->
                 d.dismiss()
             }
-            .setPositiveButton(getString(R.string.yes)) { d, _ ->
+            .setPositiveButton(getString(R.string.suggestions_alert_asl_contact_confirmation_positive_answer)) { d, _ ->
+                executeHideNotice()
+                d.dismiss()
+            }
+            .show()
+    }
+
+    private fun showASLAlert() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.suggestions_alert_asl_contact_confirmation_title))
+            .setMessage(getString(R.string.suggestions_alert_asl_contact_confirmation_description))
+            .setNegativeButton(getString(R.string.suggestions_alert_asl_contact_confirmation_negative_answer)) { d, _ ->
+                d.dismiss()
+            }
+            .setPositiveButton(getString(R.string.suggestions_alert_asl_contact_confirmation_positive_answer)) { d, _ ->
                 executeHideNotice()
                 d.dismiss()
             }

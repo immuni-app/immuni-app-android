@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.logic.settings
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import it.ministerodellasalute.immuni.api.services.ConfigurationSettings
+import it.ministerodellasalute.immuni.api.services.Faq
 import it.ministerodellasalute.immuni.api.services.Language
 import it.ministerodellasalute.immuni.extensions.utils.DeviceUtils
 import it.ministerodellasalute.immuni.extensions.utils.UserLocale
@@ -26,6 +27,7 @@ import it.ministerodellasalute.immuni.logic.settings.models.FetchFaqsResult
 import it.ministerodellasalute.immuni.logic.settings.models.FetchSettingsResult
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsNetworkRepository
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsStoreRepository
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -50,34 +52,73 @@ class ConfigurationSettingsManager(
         buildVersion = DeviceUtils.appVersionCode(context)
     )
 
+    private val job = Job()
+    private val scope = CoroutineScope(Dispatchers.Default + job)
+
+    // region: ConfigurationSettings
+
     private val _settings = MutableStateFlow(storeRepository.loadSettings())
     val settings: StateFlow<ConfigurationSettings> get() = _settings
 
-    suspend fun fetchSettings(): FetchSettingsResult {
-        val response = networkRepository.fetchSettings(buildVersion)
-        if (response is FetchSettingsResult.Success) {
-            onSettingsUpdate(response.settings)
+    fun fetchSettingsAsync(): Deferred<FetchSettingsResult> {
+        return scope.async {
+            val result = networkRepository.fetchSettings(buildVersion)
+            if (result is FetchSettingsResult.Success) {
+                onSettingsUpdate(result.settings)
+            }
+            result
         }
-
-        return response
     }
 
     @VisibleForTesting
     fun onSettingsUpdate(settings: ConfigurationSettings) {
         storeRepository.saveSettings(settings)
         _settings.value = settings
+        fetchFaqsAsync()
     }
 
     val isAppOutdated: Boolean
         get() {
-            val outdated = settings.value.minimumBuildVersion > buildVersion
-            log("App outdated: $outdated")
-            return outdated
+            val isOutdated = settings.value.minimumBuildVersion > buildVersion
+            log("App outdated: $isOutdated")
+            return isOutdated
         }
 
-    suspend fun fetchFaqs(): FetchFaqsResult {
-        val language = Language.fromCode(UserLocale.locale())
-        val url: String = settings.value.faqUrl[language] ?: ""
-        return networkRepository.fetchFaqs(url)
+    // endregion
+
+    // region: FAQs
+
+    private val currentLanguage get() = Language.fromCode(UserLocale.locale())
+    private var _faqLanguage = currentLanguage
+
+    private val _faqs = MutableStateFlow(storeRepository.loadFaqs(_faqLanguage))
+    val faqs: StateFlow<List<Faq>>
+        get() {
+            if (currentLanguage != _faqLanguage) {
+                _faqLanguage = currentLanguage
+                _faqs.value = storeRepository.loadFaqs(_faqLanguage)
+            }
+            return _faqs
+        }
+
+    private fun fetchFaqsAsync(): Deferred<FetchFaqsResult> {
+        return scope.async {
+            val language = currentLanguage
+            val url: String = settings.value.faqUrl[language]
+                ?: error("Faq url for language ${language.code} not found")
+            val result = networkRepository.fetchFaqs(url)
+            if (result is FetchFaqsResult.Success) {
+                onFaqsUpdate(language, result.faqs)
+            }
+            result
+        }
     }
+
+    @VisibleForTesting
+    fun onFaqsUpdate(language: Language, faqs: List<Faq>) {
+        storeRepository.saveFaqs(language, faqs)
+        _faqs.value = faqs
+    }
+
+    // endregion
 }

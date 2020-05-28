@@ -41,7 +41,7 @@ class ForceUpdateFragment : Fragment(R.layout.force_update_fragment) {
         when {
             viewModel.isAppOutdated -> {
                 title.text = getString(R.string.force_update_app_title)
-                message.text = getString(R.string.force_update_app_message)
+                message.text = getString(R.string.notifications_update_app_description)
             }
             viewModel.playServicesRequireUpdate -> {
                 title.text = getString(R.string.force_update_play_services_title)

@@ -33,7 +33,6 @@ import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.ui.otp.OtpToken
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
-import java.util.*
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.upload_data_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -82,7 +81,7 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             (activity as? AppCompatActivity)?.loading(it, ProgressDialogFragment(), Bundle().apply {
-                putString(ProgressDialogFragment.MESSAGE, getString(R.string.settings_data_load))
+                putString(ProgressDialogFragment.MESSAGE, getString(R.string.upload_data_send_data_loading))
             })
         })
 
@@ -96,8 +95,8 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
                 openConfirmationDialog(
                     positiveButton = getString(R.string.retry),
                     negativeButton = getString(R.string.cancel),
-                    message = getString(R.string.upload_data_error_confirmation_message),
-                    title = getString(R.string.upload_data_error_confirmation_title),
+                    message = getString(R.string.upload_data_vpn_error_message),
+                    title = getString(R.string.upload_data_vpn_error_title),
                     cancelable = true,
                     requestCode = ALERT_REQUEST_ERROR
                 )
@@ -111,10 +110,10 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
 
     private fun onDismiss() {
         openConfirmationDialog(
-            positiveButton = getString(R.string.upload_data_exit_confirmation_yes),
+            positiveButton = getString(R.string.confirm_data_close_verify_alert_affermative_answer),
             negativeButton = getString(R.string.cancel),
-            message = getString(R.string.upload_data_exit_confirmation_message),
-            title = getString(R.string.upload_data_exit_confirmation_title),
+            message = getString(R.string.confirm_data_close_verify_alert_message),
+            title = getString(R.string.confirm_data_close_verify_alert_title),
             cancelable = false,
             requestCode = ALERT_CONFIRM_EXIT
         )

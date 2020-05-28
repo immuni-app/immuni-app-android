@@ -15,51 +15,22 @@
 
 package it.ministerodellasalute.immuni.ui.faq
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import it.ministerodellasalute.immuni.extensions.livedata.Event
+import androidx.lifecycle.*
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import it.ministerodellasalute.immuni.logic.settings.models.FetchFaqsResult
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.map
 import org.koin.core.KoinComponent
 
 class FaqViewModel(
-    private val settingsManager: ConfigurationSettingsManager
+    settingsManager: ConfigurationSettingsManager
 ) : ViewModel(), KoinComponent {
 
-    private val _questionAndAnswers = MutableLiveData<List<QuestionAndAnswer>>()
-    val questionAndAnswers: LiveData<List<QuestionAndAnswer>> = _questionAndAnswers
-
-    val loading = MutableLiveData<Boolean>()
-    val loadingError = MutableLiveData<Event<Boolean>>()
-
-    init {
-        loadQuestionAndAnswers()
-    }
-
-    fun loadQuestionAndAnswers(delay: Long = 0L) {
-        viewModelScope.launch {
-            loading.value = true
-            delay(delay)
-            val response = settingsManager.fetchFaqs()
-            loading.value = false
-            when (response) {
-                is FetchFaqsResult.Success -> {
-                    val faqs = response.faqs
-                    _questionAndAnswers.value = faqs.faqs.filterNotNull().map {
-                        QuestionAndAnswer(
-                            it.title,
-                            it.content
-                        )
-                    }
-                }
-                else -> {
-                    loadingError.value = Event(true)
-                }
+    val questionAndAnswers: LiveData<List<QuestionAndAnswer>> =
+        settingsManager.faqs.asLiveData().map {
+            it.map { faq ->
+                QuestionAndAnswer(
+                    faq.title,
+                    faq.content
+                )
             }
         }
-    }
 }

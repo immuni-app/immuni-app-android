@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.network
 
 import com.squareup.moshi.Moshi
 import okhttp3.CertificatePinner
+import okhttp3.Interceptor
 
 /**
  * This is the networking configuration the app injects into this module
@@ -25,6 +26,7 @@ import okhttp3.CertificatePinner
 interface NetworkConfiguration {
     fun baseUrl(): String
     fun certificatePinner(): CertificatePinner?
+    fun interceptors(): List<Interceptor> = listOf()
     fun useCacheHeaders(): Boolean
     val moshi: Moshi
 }

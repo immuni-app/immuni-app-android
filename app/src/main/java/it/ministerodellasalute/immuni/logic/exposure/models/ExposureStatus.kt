@@ -34,6 +34,7 @@ sealed class ExposureStatus {
 
     @JsonClass(generateAdapter = true)
     data class Exposed(val lastExposureDate: Date) : ExposureStatus() {
+        // FIXME use me
         fun daysSinceLastExposure(serverDate: Date): Int {
             return ((serverDate.time - lastExposureDate.time) / MILLIS_IN_A_DAY).toInt()
         }

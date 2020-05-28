@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
   ~ Please refer to the AUTHORS file for more information.
   ~ This program is free software: you can redistribute it and/or modify
@@ -16,6 +15,7 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/privacyLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,7 +37,8 @@
         android:outlineSpotShadowColor="@color/colorPrimary"
         android:stateListAnimator="@null"
         app:background="@android:color/transparent"
-        app:backgroundTint="@android:color/transparent">
+        app:backgroundTint="@android:color/transparent"
+        tools:targetApi="p">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
@@ -62,14 +63,14 @@
                     android:layout_width="0dp"
                     android:layout_height="206dp"
                     android:layout_weight="1"
+                    android:contentDescription="@string/home_view_info_protection_title"
                     android:scaleType="matrix"
-                    app:matrixType="bottom_left"
-                    android:contentDescription="@string/home_information_self_care"
+                    android:src="@drawable/illustration_doctor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.4"
-                    android:src="@drawable/illustration_doctor" />
+                    app:matrixType="bottom_left" />
 
                 <TextView
                     android:id="@+id/title"
@@ -79,7 +80,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginBottom="32dp"
-                    android:text="@string/info_card_default_title"
+                    android:text="@string/suggestions_header_short_title_neutral"
                     android:textColor="@color/background"
                     android:textSize="26sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -113,7 +114,7 @@
                     android:paddingStart="@dimen/activity_vertical_margin"
                     android:paddingEnd="32dp"
                     android:singleLine="true"
-                    android:text="@string/info_card_default_title_short"
+                    android:text="@string/suggestions_header_short_title_neutral"
                     android:textAllCaps="false" />
             </androidx.appcompat.widget.Toolbar>
 
@@ -138,45 +139,57 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="24dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
             <TextView
                 style="@style/P1Text"
-                android:layout_margin="30dp"
-                android:fontFamily="@font/euclid_circular_medium"
-                android:background="@drawable/rounded_corners_30dp"
-                android:backgroundTint="#675AFF"
-                android:padding="24dp"
-                android:textColor="#FFFFFF"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:elevation="@dimen/cards_elevation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/info_card_subtitle"/>
+                android:layout_margin="25dp"
+                android:background="@drawable/rounded_corners_30dp"
+                android:backgroundTint="#675AFF"
+                android:fontFamily="@font/euclid_circular_semi_bold"
+                android:padding="24dp"
+                android:text="@string/suggestions_neutral_alert"
+                android:textColor="#FFFFFF" />
+
             <TextView
                 style="@style/P1Text.Generic"
-                android:textColor="@color/grey_dark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="30dp"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                android:text="@string/info_card_default_respect" />
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:paddingBottom="20dp"
+                android:text="@string/suggestions_neutral_message"
+                android:textColor="@color/grey_dark" />
+
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_ministry"
-                android:text="@string/info_card_default_norms" />
+                android:text="@string/suggestions_instruction_ministerial_decree" />
+
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_wash_hands"
-                android:text="@string/asl_instruction_wash_hands" />
+                android:text="@string/suggestions_instruction_wash_hands" />
 
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_sneeze"
-                android:text="@string/asl_instruction_cough_sneeze" />
+                android:text="@string/suggestions_instruction_use_napkins" />
+
             <TextView
                 style="@style/ParagraphCard"
                 android:drawableStart="@drawable/ic_social_distancing"
-                android:text="@string/asl_instruction_social_distancing" />
+                android:text="@string/suggestions_instruction_social_distance" />
+
+            <TextView
+                style="@style/ParagraphCard"
+                android:drawableStart="@drawable/ic_mask"
+                android:text="@string/suggestions_instruction_mask" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

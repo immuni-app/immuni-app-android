@@ -26,27 +26,43 @@ import retrofit2.http.POST
  * Exposure Ingestion Service API.
  */
 interface ExposureIngestionService {
+    interface RequestWithPadding {
+        val padding: String
+    }
+
+    // region: Validate Otp
+    @JsonClass(generateAdapter = true)
+    data class ValidateOtpRequest(
+        @field:Json(name = "padding") override val padding: String = ""
+    ) : RequestWithPadding
+
     @POST("/v1/ingestion/check-otp")
     suspend fun validateOtp(
         @Header("Authorization") authorization: String,
-        @Header("Exp-Dummy-Data") isDummyData: Boolean
+        @Header("Immuni-Dummy-Data") isDummyData: Int,
+        @Body body: ValidateOtpRequest = ValidateOtpRequest()
     ): Response<ResponseBody>
+    // endregion
 
+    // region: Upload Teks
     @JsonClass(generateAdapter = true)
     data class UploadTeksRequest(
         @field:Json(name = "teks") val teks: List<TemporaryExposureKey>,
         @field:Json(name = "province") val province: Province,
-        @field:Json(name = "exposure_detection_summaries") val exposureSummaries: List<ExposureSummary>
-    )
+        @field:Json(name = "exposure_detection_summaries") val exposureSummaries: List<ExposureSummary>,
+        @field:Json(name = "padding") override val padding: String = ""
+    ) : RequestWithPadding
 
     @POST("/v1/ingestion/upload")
     suspend fun uploadTeks(
-        @Header("Exp-Client-Clock") systemTime: Int,
         @Header("Authorization") authorization: String,
-        @Header("Exp-Dummy-Data") isDummyData: Boolean,
+        @Header("Immuni-Client-Clock") systemTime: Int,
+        @Header("Immuni-Dummy-Data") isDummyData: Int,
         @Body body: UploadTeksRequest
     ): Response<ResponseBody>
+    // endregion
 
+    // region: Models
     @JsonClass(generateAdapter = true)
     data class TemporaryExposureKey(
         @field:Json(name = "key_data") val keyData: String,
@@ -77,7 +93,6 @@ interface ExposureIngestionService {
     /**
      * Regions in Italy
      */
-
     enum class Region(val region: String) {
         abruzzo("Abruzzo"),
         basilicata("Basilicata"),
@@ -378,4 +393,5 @@ interface ExposureIngestionService {
             }
         }
     }
+    // endregion
 }

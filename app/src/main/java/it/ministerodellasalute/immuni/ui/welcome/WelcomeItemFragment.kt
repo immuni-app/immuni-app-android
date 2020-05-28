@@ -52,17 +52,17 @@ class WelcomeItemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         title.text = when (position) {
-            0 -> getString(R.string.welcome_1_title)
-            1 -> getString(R.string.welcome_2_title)
-            2 -> getString(R.string.welcome_3_title)
-            else -> getString(R.string.welcome_4_title)
+            0 -> getString(R.string.welcome_view_items_first_title)
+            1 -> getString(R.string.welcome_view_items_second_title)
+            2 -> getString(R.string.welcome_view_items_third_title)
+            else -> getString(R.string.welcome_view_items_fourth_title)
         }
 
         description.text = when (position) {
-            0 -> getString(R.string.welcome_1_description)
-            1 -> getString(R.string.welcome_2_description)
-            2 -> getString(R.string.welcome_3_description)
-            else -> getString(R.string.welcome_4_description)
+            0 -> getString(R.string.welcome_view_items_first_description)
+            1 -> getString(R.string.welcome_view_items_second_description)
+            2 -> getString(R.string.welcome_view_items_third_description)
+            else -> getString(R.string.welcome_view_items_fourth_description)
         }
 
         knowMore.setSafeOnClickListener {

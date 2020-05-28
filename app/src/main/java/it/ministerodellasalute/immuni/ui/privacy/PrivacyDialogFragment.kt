@@ -19,7 +19,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.SettingsDirections
+import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
@@ -43,10 +43,10 @@ class PrivacyDialogFragment : PopupDialogFragment() {
 
         completePrivacy.setSafeOnClickListener {
             findNavController().popBackStack()
-            val action = SettingsDirections.actionWebview(
+            ExternalLinksHelper.openLink(
+                requireContext(),
                 settingsManager.settings.value.privacyPolicyUrl
             )
-            findNavController().navigate(action)
         }
     }
 }

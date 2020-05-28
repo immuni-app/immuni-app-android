@@ -13,8 +13,14 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.logic.settings.models
+package it.ministerodellasalute.immuni.ui.suggestions
 
-import it.ministerodellasalute.immuni.api.services.Faqs
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 
-typealias Faqs = Faqs
+class StateCloseViewModel(
+    private val exposureManager: ExposureManager
+) : ViewModel() {
+    val exposureDate = exposureManager.exposureStatus.asLiveData()
+}

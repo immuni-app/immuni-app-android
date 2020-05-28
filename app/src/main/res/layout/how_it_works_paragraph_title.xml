@@ -26,4 +26,4 @@
     android:paddingTop="30dp"
     android:paddingStart="30dp"
     android:paddingEnd="30dp"
-    android:text="@string/how_it_works_title"/>
+    android:text="@string/permission_tutorial_how_immuni_works_title"/>

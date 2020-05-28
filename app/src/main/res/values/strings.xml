@@ -14,223 +14,204 @@
   -->
 
 <resources>
-    <string name="app_name">Immuni</string>
-
-    <string name="app_setup_check_connection">Ci dispiace, è stato impossibile connettersi. Riprova più tardi.</string>
-    <string name="home_tab">Home</string>
-    <string name="next">Avanti</string>
-    <string name="settings_tab">Impostazioni</string>
-
-    <string name="exit">Esci</string>
-    <string name="cancel">Annulla</string>
-    <string name="yes">Sì</string>
-    <string name="no">No</string>
-    <string name="welcome_lets_start">Iniziamo</string>
-
-    <string name="welcome_1_title">Benvenuto</string>
-    <string name="welcome_1_description">Con il contributo di tutti, Immuni può aiutarci a contenere il COVID-19 e a tornare il prima possibile alla normalità. </string>
-    <string name="welcome_2_title">Immuni si prende cura di te</string>
-    <string name="welcome_2_description">Se sei entrato in contatto con un utente in seguito risultato positivo al virus, Immuni ti notifica e ti fornisce indicazioni per proteggere la tua salute e quella dei tuoi cari.</string>
-    <string name="welcome_3_title">Rallentiamo insieme l\'epidemia</string>
-    <string name="welcome_3_description">Isolandosi, gli utenti che scoprono di essere potenzialmente contagiosi rallentano la diffusione del virus, accelerando il ritorno alla vita normale.</string>
-    <string name="welcome_4_title">La tua privacy è tutelata</string>
-    <string name="welcome_4_description">L\'app funziona senza seguire i tuoi spostamenti e senza conoscere la tua identità o quella delle persone con cui entri in contatto.</string>
-
-    <string name="privacy_checkbox">Ho letto l\'{informativa privacy}</string>
-    <string name="privacy_title">La tua privacy al sicuro</string>
-
-
-    <string name="update">Aggiorna</string>
-
+    <string name="force_update_view_update">Aggiorna</string>
     <string name="open_settings">Apri Impostazioni</string>
+    <string name="confirm_data_title">Ecco i dati che verranno caricati</string>
+    <string name="confirm_data_button_title">Carica i dati</string>
+    <string name="confirm_data_footer_message">Attendi conferma da parte dell’operatore per caricare i tuoi dati.</string>
+    <string name="confirm_data_cell_result_title">Il risultato dell\'esame</string>
+    <string name="confirm_data_cell_proximity_data_title">I tuoi codici casuali</string>
+    <string name="confirm_data_cell_exposition_data_title">Gli indicatori di rischio di precedenti contatti con persone COVID-19 positive</string>
+    <string name="confirm_data_cell_province_title">La tua provincia</string>
+    <string name="confirm_data_close_verify_alert_title">Sei sicuro di voler uscire?</string>
+    <string name="confirm_data_close_verify_alert_message">I tuoi dati non sono ancora stati caricati.</string>
+    <string name="confirm_data_close_verify_alert_affermative_answer">Sì, esci</string>
+    <string name="confirm_data_confirmation_title">Dati caricati con successo</string>
+    <string name="confirm_data_confirmation_subtitle">Grazie per il tuo contributo</string>
+    <string name="home_view_info_header_title">Informazioni</string>
+    <string name="home_view_info_protection_title">Cosa puoi fare per proteggerti</string>
+    <string name="notifications_risk_title">NOTIFICA DI CONTATTO</string>
+    <string name="notifications_risk_description">Un utente con cui sei entrato in contatto è risultato positivo al COVID-19. Scopri subito cosa devi fare.</string>
+    <string name="notifications_update_os_title">Il servizio non è ancora attivo</string>
+    <string name="notifications_update_os_description">Apri l\'app per completare l\'attivazione</string>
+    <string name="notifications_update_app_title">È necessario aggiornare l’applicazione</string>
+    <string name="notifications_update_app_description">È disponibile un aggiornamento importante. Aggiorna subito l’app per garantirne il funzionamento.</string>
+    <string name="notifications_not_active_service_title">Il servizio non è attivo</string>
+    <string name="notifications_not_active_service_description">Riattiva Immuni al più presto perché possa prendersi cura di te.</string>
+    <string name="onboarding_exposure_permission_title">Attiva le notifiche di esposizione COVID-19</string>
+    <string name="onboarding_exposure_permission_description">Immuni registra i contatti con altri utenti così da poterti informare in caso di esposizione al virus.</string>
+    <string name="onboarding_push_permission_action">Consenti</string>
+    <string name="onboarding_bluetooth_off_action">Attiva</string>
+    <string name="onboarding_communication_advice_action">Ho capito</string>
+    <string name="onboarding_bluetooth_off_title">Attiva il Bluetooth</string>
+    <string name="onboarding_bluetooth_off_description">Immuni utilizza il Bluetooth Low Energy per registrare i tuoi contatti con altri utenti e permettere notifiche di esposizione al COVID-19.</string>
+    <string name="onboarding_push_permission_title">Consentici di comunicare con te</string>
+    <string name="onboarding_push_permission_description">Le notiche permettono a Immuni di avvisarti tempestivamente in caso di contatto con un utente positivo al virus.</string>
+    <string name="onboarding_pin_advice_title">Proteggi il tuo dispositivo</string>
+    <string name="onboarding_pin_advice_description">Se non l’hai già fatto, imposta un codice sul tuo dispositivo per proteggerlo e impedire ad altri di accedere ai tuoi dati e alle tue app, inclusa Immuni.</string>
+    <string name="onboarding_communication_advice_title">Fai attenzione alle false comunicazioni</string>
+    <string name="onboarding_communication_advice_description">Immuni comunicherà con te sempre e solamente attraverso l’app e relative notifiche. Diffida di qualunque SMS, telefonata, email o altro tipo di avviso che sembri arrivare da Immuni, soprattutto se ti vengono richieste informazioni personali.</string>
+    <string name="force_update_app_title">Aggiorna l\'app per proseguire</string>
+    <string name="onboarding_complete_title">Configurazione completata</string>
+    <string name="home_view_service_not_active_subtitle">Intervieni subito per permettere a Immuni di funzionare correttamente.</string>
+    <string name="home_view_service_active_subtitle">Immuni resta operativa anche quando l\'app è chiusa.</string>
+    <string name="home_view_service_not_active_button">Riattiva Immuni</string>
+    <string name="home_view_header_card_risk_title">Rilevato contatto prolungato con un positivo al COVID-19</string>
+    <string name="home_view_header_card_risk_button">Scopri subito cosa fare ›</string>
+    <string name="onboarding_region_title">Qual è la tua regione?</string>
+    <string name="onboarding_region_description">Seleziona la tua regione di domicilio per permettere a Immuni di fornirti indicazioni più precise in caso di necessità.</string>
+    <string name="onboarding_province_title">Qual è la tua provincia?</string>
+    <string name="onboarding_province_description">Seleziona la tua provincia di domicilio per permettere a Immuni di fornirti indicazioni più precise in caso di necessità.</string>
+    <string name="permission_tutorial_how_immuni_works_second_message">Quando entri in contatto con un altro utente di Immuni, i dispositivi si scambiano i rispettivi codici tramite Bluetooth Low Energy. L\'applicazione riesce così a tenere traccia del contatto avvenuto, ma non può conoscere le vostre identità, né sapere dove vi siete incontrati.</string>
+    <string name="permission_tutorial_how_immuni_works_third_message">Se un utente risulta positivo al virus può scegliere in maniera del tutto volontaria di aggiungere i propri codici identificativi alla lista presente sul server.</string>
+    <string name="permission_tutorial_how_immuni_works_fourth_message">Immuni confronta periodicamente i codici con cui sei venuto a contatto con quelli caricati sul server. In questo modo determina se sei stato esposto a un potenziale contagio, proteggendo l\'identità di entrambi.</string>
+    <string name="permission_tutorial_how_immuni_works_fifth_message">Immuni ti mostra una notifica e ti fornisce informazioni utili e suggerimenti su come comportarti.</string>
+    <string name="permission_tutorial_how_immuni_works_first_message">Per tutelare al meglio la tua privacy, Immuni genera ogni ora un codice del tutto casuale. Questi codici identificano il tuo dispositivo ma non contengono informazioni su di te o sul tuo telefono.</string>
+    <string name="permission_tutorial_how_immuni_works_title">Come funziona l’app?</string>
+    <string name="permission_tutorial_how_immuni_works_action_cta">Esplora le domande frequenti</string>
+    <string name="permission_tutorial_how_immuni_works_action_description">Vuoi saperne di più?</string>
+    <string name="app_setup_view_generic_error">Connessione non riuscita.</string>
+    <string name="app_setup_view_network_error">Connessione non riuscita. Controlla la tua connessione a Internet e riprova.</string>
+    <string name="privacy_checkbox_above14">Dichiaro di avere almeno 14 anni</string>
+    <string name="privacy_checkbox_privacyPolicyRead">Ho letto l\'{informativa privacy}</string>
+    <string name="privacy_item_data_deletion"><b>Tutti i dati sono eliminati quando non più necessari</b> e in ogni caso non più tardi del 31 dicembre 2020.</string>
+    <string name="privacy_item_identity"><b>Immuni non raccoglie il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o email.</b></string>
+    <string name="privacy_item_italy">I tuoi dati sono salvati su server in Italia, <b>sono gestiti da soggetti pubblici e controllati dal Ministero della Salute</b>.</string>
+    <string name="privacy_item_location"><b>Immuni non raccoglie alcun dato di geolocalizzazione</b>, inclusi i dati del GPS. I tuoi spostamenti non sono tracciati in alcun modo.</string>
+    <string name="privacy_item_ministry"><b>Per aiutare il Servizio Sanitario Nazionale,</b> a prendersi cura di te, Immuni invia al server del Ministero della Salute:\n
+        • La tua provincia di domicilio\n
+        • Se l\'app funziona correttamente\n
+        • Se sei stato avvertito di un contatto a rischio
+    </string>
+    <string name="privacy_item_people"><b>Immuni non può risalire alla tua identità</b> o quella delle persone con cui entri in contatto.</string>
+    <string name="privacy_item_secure"><b>I dati salvati sul tuo smartphone e le connessioni al server sono cifrati.</b></string>
+    <string name="privacy_settings_show_full">Informativa completa</string>
+    <string name="privacy_title">La tua privacy al sicuro</string>
+    <string name="privacy_tos">Proseguendo, dichiaro di aver letto e accettato i {termini di utilizzo}</string>
+    <string name="settings_setting_chage_province">Cambia la provincia</string>
+    <string name="settings_setting_contact_support">Contatta il supporto</string>
+    <string name="settings_setting_faq">Domande frequenti</string>
+    <string name="settings_setting_leave_review">Lascia una recensione</string>
+    <string name="settings_setting_load_data">Caricamento dati</string>
+    <string name="settings_setting_privacy">Informativa privacy</string>
+    <string name="settings_setting_section_data">Gestione dati</string>
+    <string name="settings_setting_section_general">Generale</string>
+    <string name="settings_setting_section_info">Informazioni</string>
+    <string name="settings_setting_tos">Termini di utilizzo</string>
+    <string name="suggestions_alert_asl_contact_confirmation_description">Immuni nasconderà l’avviso di contatto. Dovrai comunque seguire tutte le indicazione che hai ricevuto dalla tua ASL.</string>
+    <string name="suggestions_alert_asl_contact_confirmation_negative_answer">No</string>
+    <string name="suggestions_alert_asl_contact_confirmation_positive_answer">Sì</string>
+    <string name="suggestions_alert_asl_contact_confirmation_title">Confermi di essere in contatto con la tua ASL?</string>
+    <string name="suggestions_alert_covid_negative_description">La tua ASL deve aver confermato che sei negativo al virus e che puoi tornare a uscire di casa.</string>
+    <string name="suggestions_alert_covid_negative_negative_answer">No</string>
+    <string name="suggestions_alert_covid_negative_positive_answer">Confermo</string>
+    <string name="suggestions_alert_covid_negative_title">Confermi di essere COVID-19 negativo?</string>
+    <string name="suggestions_header_short_title_neutral">Indicazioni per te</string>
+    <string name="suggestions_instruction_check_symptoms_message">In particolare febbre o almeno uno dei seguenti: mal di gola, tosse, raffreddore o naso chiuso, difficoltà respiratoria, dolori muscolari, perdita o alterazioni di olfatto o gusto, diarrea</string>
+    <string name="suggestions_instruction_check_symptoms_title"><b>Misura la temperatura corporea almeno due volte al giorno e valuta la comparsa di sintomi,</b> anche lievi.</string>
+    <string name="suggestions_instruction_contact_doctor_message">Spiega al medico di aver ricevuto una notifica di contatto stretto di COVID-19 da Immuni. Segui le indicazioni del tuo medico.</string>
+    <string name="suggestions_instruction_contact_doctor_title"><b>Contatta il tuo Medico di Medicina Generale (o il Pediatra di Libera Scelta)</b></string>
+    <string name="suggestions_instruction_follow_instructions">Per proteggere la tua salute e quella dei tuoi cari, <b>rispetta le seguenti indicazioni:</b></string>
+    <string name="suggestions_instruction_hide_alert_action">Nascondi avviso</string>
+    <string name="suggestions_instruction_hide_alert_message">Se necessario puoi nascondere questo avviso. A meno che tu abbia una ragione valida, ti sconsigliamo vivamente di farlo.</string>
+    <string name="suggestions_instruction_hide_if_contact_doctor_action">Ho contattato il medico</string>
+    <string name="suggestions_instruction_hide_if_contact_doctor_message">Se sei in contatto con il tuo medico o la tua ASL, puoi nascondere questo avviso.</string>
+    <string name="suggestions_instruction_isolate_message">Indossa una mascherina chirurgica e contatta immediatamente il tuo Medico di Medicina Generale (o il Pediatra di Libera Scelta) e il Dipartimento di Prevenzione della ASL</string>
+    <string name="suggestions_instruction_isolate_title"><b>In caso di comparsa dei sintomi, isolati dal resto dei tuoi conviventi</b></string>
+    <string name="suggestions_instruction_mask"><b>Indossa una mascherina nei luoghi al chiuso accessibili al pubblico</b>, inclusi i mezzi di trasporto e comunque in tutte le occasioni in cui non sia possibile garantire continuativamente il mantenimento della distanza di sicurezza</string>
+    <string name="suggestions_instruction_ministerial_decree"><b>Rispetta la normativa vigente</b> in funzione nella tua area</string>
+    <string name="suggestions_instruction_phone_contact"><b>In caso di sintomi gravi, contatta il 112 o il 118</b></string>
+    <string name="suggestions_instruction_social_distance"><b>Resta in casa e rispetta le misure di distanziamento fisico</b> (almeno 1 metro)</string>
+    <string name="suggestions_instruction_stay_home"><b>Rimani a casa per i 14 giorni</b> successivi alla data del contatto</string>
+    <string name="suggestions_instruction_use_napkins"><b>Tossisci e starnutisci direttamente su un fazzoletto di carta o nella piega del gomito</b></string>
+    <string name="suggestions_instruction_wash_hands"><b>Lavati frequentemente le mani </b>con acqua e sapone o con soluzioni idroalcoliche</string>
+    <string name="suggestions_instruction_while_waiting_doctor">In via precauzionale, <b>in attesa delle indicazioni del tuo medico:</b></string>
+    <string name="suggestions_neutral_alert">Se sei in contatto con il tuo medico o con il Dipartimento di prevenzione della tua ASL, segui tutte le indicazioni che hai ricevuto.</string>
+    <string name="suggestions_neutral_message">In ogni caso, <b>cerca sempre di rispettare queste indicazioni generali</b>:</string>
+    <string name="suggestions_positive_covid_negative_action">Sono COVID-19 negativo</string>
+    <string name="suggestions_positive_covid_negative_message"><b>Indicaci se la tua ASL ha confermato che sei COVID-19 negativo per riattivare le notifiche in caso di esposizione a rischio.</b></string>
+    <string name="suggestions_positive_info_subtitle">Per il momento, non riceverai eventuali nuove notifiche in caso di contatto con un utente positivo al COVID-19.</string>
+    <string name="suggestions_positive_info_title">Immuni sta continuando a funzionare, non disinstallarla</string>
+    <string name="suggestions_positive_subtitle">Segui tutte le indicazioni che hai ricevuto dal tuo medico o dal Dipartimento di prevenzione della tua ASL.</string>
+    <string name="suggestions_positive_title">Segui le indicazioni</string>
+    <string name="suggestions_risk_subtitle">Immuni ha rilevato che il giorno %s sei stato vicino a un utente COVID-19 positivo.</string>
+    <string name="suggestions_risk_title">Esposizione a rischio</string>
+    <string name="tabbar_title_home">Home</string>
+    <string name="tabbar_title_settings">Impostazioni</string>
+    <!-- TODO: upload api errors-->
+    <string name="upload_data_api_error_action">OK</string>
+    <string name="upload_data_api_error_message">Si è verificato un errore durante l’operazione. Ti invitiamo a riprovare. Nel caso il problema persista, ti suggeriamo di utilizzare una rete mobile.</string>
+    <string name="upload_data_api_error_title">Qualcosa è andato storto</string>
+    <string name="upload_data_code_message">Comunica questo codice all’operatore sanitario:</string>
+    <string name="upload_data_connection_error_action">OK</string>
+    <string name="upload_data_connection_error_message">Qualcosa è andato storto, controlla la tua connessione internet e riprova.</string>
+    <string name="upload_data_connection_error_title">Errore di connessione</string>
+    <!-- TODO: upload missing authorization -->
+    <string name="upload_data_missing_authorization_close">Chiudi</string>
+    <string name="upload_data_missing_authorization_enable">Attiva</string>
+    <string name="upload_data_missing_authorization_message">Le notifiche di esposizione sono necessarie durante questa procedura. Riattivale subito per continuare.</string>
+    <string name="upload_data_missing_authorization_title">Riattiva le notifiche di esposizione per continuare</string>
+    <string name="upload_data_send_data_loading">Caricamento dei dati...</string>
+    <string name="upload_data_verify_button">Verifica</string>
+    <string name="upload_data_verify_error">Codice non ancora autorizzato</string>
+    <string name="upload_data_verify_loading">Verifica autorizzazione...</string>
+    <!-- TODO: missing vpn functionality -->
+    <string name="upload_data_vpn_error_action">OK</string>
+    <string name="upload_data_vpn_error_message">Si è verificato un errore durante l’operazione. Ti invitiamo a riprovare. Se stai utilizzando una VPN, ti suggeriamo di selezionare un server europeo o di disabilitarla temporaneamente.</string>
+    <string name="upload_data_vpn_error_title">Qualcosa è andato storto</string>
+    <string name="upload_data_wait_operator_message">Attendi la conferma dell\'operatore</string>
+    <string name="upload_data_warning_message">Questa funzione richiede l\'autorizzazione di un operatore sanitario incaricato</string>
+    <string name="welcome_view_discover_more">Scopri di più</string>
+    <string name="welcome_view_go_next">Iniziamo</string>
+    <string name="welcome_view_items_first_description">Con il contributo di tutti, Immuni aiuta a contenere il virus e a tornare il prima possibile alla normalità.</string>
+    <string name="welcome_view_items_first_title">Ciao!</string>
+    <string name="welcome_view_items_fourth_description">L’app funziona senza seguire i tuoi spostamenti e senza conoscere la tua identità o quella delle persone con cui entri in contatto.</string>
+    <string name="welcome_view_items_fourth_title">La tua privacy è tutelata</string>
+    <string name="welcome_view_items_second_description">Se sei entrato in contatto con un utente in seguito risultato positivo al virus, Immuni ti avverte e ti fornisce indicazioni per proteggere la tua salute e quella dei tuoi cari. </string>
+    <string name="welcome_view_items_second_title">Immuni si prende cura di te</string>
+    <string name="welcome_view_items_third_description">Gli utenti che scoprono di essere stati esposti al virus possono isolarsi, rallentando così la diffusione del virus e  accelerando il ritorno alla vita normale.</string>
+    <string name="welcome_view_items_third_title">Rallentiamo insieme l\'epidemia</string>
+    <string name="welcome_view_next_page_title">Avanti</string>
 
-    <string name="app_exit_title">Uscire</string>
-    <string name="app_exit_message">Sei sicuro di voler uscire?</string>
+    <string name="home_view_header_card_positive_title">Segui le indicazioni che ti hanno fornito il tuo medico o la tua ASL</string>
+    <string name="home_view_header_card_positive_button">Sei guarito? Aggiorna il tuo stato ›</string>
 
-    <string name="settings_data_management">Gestione dati</string>
-    <string name="settings_data_load">Caricamento dati</string>
-
-    <string name="settings_information">Informazioni</string>
-    <string name="settings_faq">Domande frequenti</string>
-    <string name="settings_tos">Termini di utilizzo</string>
-    <string name="settings_privacy_policy">Informativa privacy</string>
-
-    <string name="settings_general">Generale</string>
-    <string name="settings_change_province">Cambia la provincia</string>
-    <string name="settings_leave_review">Lascia una recensione</string>
-    <string name="settings_contact_support">Contatta il supporto</string>
-
-    <string name="settings_app_version">Immuni v%s (%d)</string>
-
-
-    <string name="upload_data_title">Caricamento dati</string>
-    <string name="upload_data_healthcare_authorization_warning">Questa funzione richiede l\'autorizzazione di un operatore sanitario incaricato</string>
-    <string name="upload_data_code_instructions">Comunica questo codice all’operatore sanitario:</string>
-    <string name="upload_data_wait_for_confirmation">Attendi la conferma dell\'operatore</string>
-    <string name="upload_data_verify">Verifica</string>
-    <string name="upload_data_dialog_title">Ecco i dati che verranno caricati</string>
-    <string name="upload_data">Carica i dati</string>
-    <string name="upload_data_wait_instruction_before_upload">Attendi conferma da parte dell’operatore per caricare i tuoi dati.</string>
-    <string name="upload_data_info_test_result">Il risultato dell\'esame</string>
-    <string name="upload_data_info_random_codes">I tuoi codici casuali</string>
-    <string name="upload_data_info_epidemiological_data">Gli indicatori di rischio di precedenti contatti con persone COVID-19 positive</string>
-    <string name="upload_data_info_your_province">La tua provincia</string>
-    <string name="upload_data_exit_confirmation_title">Sei sicuro di voler uscire?</string>
-    <string name="upload_data_exit_confirmation_message">I tuoi dati non sono ancora stati caricati.</string>
-    <string name="upload_data_exit_confirmation_yes">Sì, esci</string>
-    <string name="upload_data_error_confirmation_message">Qualcosa è andato storto, controlla la tua connessione internet e riprova.</string>
-    <string name="upload_data_error_confirmation_title">Errore di connessione</string>
-
-
-    <string name="upload_data_success_title">Dati caricati con successo</string>
-    <string name="upload_data_success_subtitle">Grazie per il tuo contributo</string>
-
-    <string name="home_information_title">Informazioni</string>
-    <string name="home_information_self_care">Cosa puoi fare per proteggerti</string>
-    <string name="home_information_how_app_works">Come funziona l\'app?</string>
-
-    <string name="privacy_page_tos">Proseguendo, dichiaro di aver letto e accettato i {termini di utilizzo}</string>
-
-    <string name="contact_us_email_message"></string>
-
-    <string name="faq_title">Domande frequenti</string>
-
-    <string name="exposure_notification_channel">Notifiche di esposizione</string>
-
-    <string name="notification_exposure_title">NOTIFICA DI CONTATTO</string>
-    <string name="notification_exposure_message">Un utente con cui sei entrato in contatto è risultato positivo al COVID-19. Scopri subito cosa devi fare.</string>
-
-    <string name="notification_onboarding_not_completed_title">Il servizio non è ancora attivo</string>
-    <string name="notification_onboarding_not_completed_message">Apri l\'app per completare l\'attivazione</string>
-
-    <string name="notification_force_update_title">È necessario aggiornare l’applicazione</string>
-    <string name="notification_force_update_message">È disponibile un aggiornamento importante. Aggiorna subito l’app per garantirne il funzionamento.</string>
-
-    <string name="notification_not_active_title">Il servizio non è attivo</string>
-    <string name="notification_not_active_message">Riattiva Immuni al più presto perché possa prendersi cura di te.</string>
-
-    <!-- NEW DESIGN -->
-    <string name="onboarding_exposure_title">Attiva le notifiche di esposizione COVID-19</string>
-    <string name="onboarding_exposure_message">Immuni registra i contatti con altri utenti così da poterti informare in caso di esposizione al virus.</string>
-    <string name="know_more">Scopri di più</string>
-    <string name="consent">Consenti</string>
-    <string name="activate">Attiva</string>
-    <string name="i_get_it">Ho capito</string>
-
-    <string name="onboarding_bluetooth_title">Attiva il Bluetooth</string>
-    <string name="onboarding_bluetooth_message">Immuni utilizza il Bluetooth Low Energy per registrare i tuoi contatti con altri utenti e permettere notifiche di esposizione al COVID-19.</string>
-    <string name="onboarding_notifications_title">Consentici di comunicare con te</string>
-    <string name="onboarding_notifications_message">Le notiche permettono a Immuni di avvisarti tempestivamente in caso di contatto con un utente positivo al virus.</string>
-    <string name="onboarding_protect_device_title">Proteggi il tuo dispositivo</string>
-    <string name="onboarding_protect_device_message">Se non l’hai già fatto, imposta un codice sul tuo dispositivo per proteggerlo e impedire ad altri di accedere ai tuoi dati e alle tue app, inclusa Immuni.</string>
-    <string name="onboarding_phishing_warning_title">Fai attenzione alle false comunicazioni</string>
-    <string name="onboarding_phishing_warning_message">Immuni comunicherà con te sempre e solamente attraverso l’app e relative notifiche. Diffida di qualunque SMS, telefonata, email o altro tipo di avviso che sembri arrivare da Immuni, soprattutto se ti vengono richieste informazioni personali.</string>
-
+    <!-- Android Specific -->
     <string name="notification_steps_title">Per attivare le notifiche</string>
     <string name="notification_steps_instruction_1">1. Apri le impostazioni dal bottone in basso</string>
     <string name="notification_steps_instruction_2">2. Abilita la voce "Consenti notifiche"</string>
     <string name="notification_settings_allow">Consenti notifiche</string>
 
-    <string name="force_update_app_title">È disponibile una nuova versione</string>
-    <string name="force_update_app_message">Aggiorna l\'app per continuare</string>
     <string name="force_update_play_services_title">Aggiorna Google Play Services per proseguire</string>
     <string name="force_update_play_services_message">Una versione più recente di Google Play Services è necessaria per attivare il tracciamento di prossimità.</string>
-    <string name="force_update_not_available_title">Dispositivo non ancora supportato</string>
-    <string name="force_update_not_available_message">Non è ancora disponibile la versione di Google Play Services necessaria per attivare il tracciamento di prossimità. Si prega di ricontrollare in seguito.</string>
-    <string name="onboarding_completed_meassage">Configurazione completata</string>
-    <string name="home_protection_active">Servizio\n{attivo}</string>
-    <string name="home_protection_active_subtitle">Immuni resta operativa anche quando l\'app è chiusa.</string>
-    <string name="home_protection_not_active">Servizio\n{non attivo}</string>
-    <string name="reactivate_immuni">Riattiva Immuni</string>
-    <string name="home_warning_title">Rilevato contatto prolungato con un positivo al COVID-19</string>
-    <string name="home_warning_subtitle">Scopri subito cosa fare ›</string>
-    <!-- Close Contact -->
-    <string name="close_contact_warning_title">Rilevato un contatto ad alto rischio</string>
-    <string name="close_contact_warning_title_short">Contatto ad alto rischio</string>
-    <string name="close_contact_warning_subtitle">Immuni ha rilevato che due giorni fa hai avuto l’ultimo contatto con un utente positivo al COVID-19.</string>
-    <string name="close_contact_suggested_action"><b>Contatta immediatamente il Dipartimento di Prevenzione della tua ASL,</b> se non lo hai già fatto.</string>
-    <string name="close_contact_hide_warning">Puoi nascondere questo avviso toccando il tasto qui sotto. A meno che tu abbia una ragione valida per farlo (sei un operatore sanitario a contatto con casi di COVID-19, sei già in contatto con la tua ASL, ecc.), <b>ti sconsigliamo vivamente di farlo.</b></string>
-    <string name="hide_warning">Nascondi avviso</string>
-    <!-- Casual Contact -->
-
-    <!-- Casual/Symptoms -->
-    <!-- Positive -->
-    <string name="positive_warning_title">Segui le indicazioni</string>
-    <string name="positive_warning_subtitle">Segui tutte le indicazioni che hai ricevuto dal tuo medico o dal Dipartimento di prevenzione della tua ASL.</string>
-    <string name="positive_recovery_action_description">Nel caso tu abbia ricevuto conferma di negatività al COVID-19 da parte della tua ASL, tocca il tasto qui sotto per riattivare le notifiche in caso di contatto.</string>
-    <string name="positive_recovery_action">Sono negativo al COVID-19</string>
-    <string name="positive_immuni_continues_working_title">Immuni sta continuando a funzionare, non disinstallarla</string>
-    <string name="positive_immuni_continues_working_message">Per il momento, non riceverai eventuali nuove notifiche in caso di contatto con un utente positivo al COVID-19.</string>
-    <!-- ASL -->
-    <string name="asl_already_in_contact"><u>Sono in contatto con la ASL</u></string>
-    <string name="asl_instruction_title">In attesa di ricevere istruzioni dalla tua ASL,<b>segui queste semplici indicazioni:</b></string>
-    <string name="asl_instruction_social_distancing"><b>Resta in casa e rispetta le misure di distanziamento fisico</b> (almeno 1 metro)</string>
-    <string name="asl_instruction_wash_hands"><b>Lavati frequentemente le mani</b></string>
-    <string name="asl_instruction_cough_sneeze"><b>Tossisci e starnutisci direttamente su un fazzoletto di carta o nella piega del gomito</b></string>
-    <string name="asl_instruction_check_symptoms"><b>Valuta due volte al giorno la comparsa dei sintomi compatibili con il COVID-19:</b> febbre di qualsiasi grado, tosse, affaticamento, difficoltà respiratoria e perdita di gusto o di olfatto</string>
-    <string name="asl_instruction_isolate"><b>In caso di comparsa dei sintomi, isolati immediatamente</b> dal resto dei conviventi e indossa una mascherina protettiva</string>
-
-    <string name="privacy_14_years">Dichiaro di avere almeno 14 anni</string>
-    <string name="privacy_item_data"><b>Immuni non raccoglie il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o email.</b></string>
-    <string name="privacy_item_identity"><b>Immuni non può risalire alla tua identità</b> o quella delle persone con cui entri in contatto.</string>
-    <string name="privacy_item_location"><b>Immuni non raccoglie alcun dato di geolocalizzazione</b>, inclusi i dati del GPS. I tuoi spostamenti non sono tracciati in alcun modo.</string>
-    <string name="privacy_item_crypto"><b>I dati salvati sul tuo smartphone e le connessioni al server sono cifrati.</b></string>
-    <string name="privacy_item_italy">I tuoi dati sono salvati su server in Italia, <b>sono gestiti da soggetti pubblici e controllati dal Ministero della Salute</b>.</string>
-    <string name="privacy_item_data_sent"><b>Per aiutare il Servizio Sanitario Nazionale,</b> a prendersi cura di te, Immuni invia al server del Ministero della Salute:\n
-        • La tua provincia di domicilio\n
-        • Se l\'app funziona correttamente\n
-        • Se sei stato avvertito di un contatto a rischio
-    </string>
-    <string name="privacy_item_data_usage"><b>I dati aiutano il Servizio Sanitario Nazionale a prendersi cura degli utenti,</b> ad esempio predisponendo le risorse necessarie in base a una stima del numero di utenti avvertiti dall’app.</string>
-    <string name="privacy_item_data_deletion"><b>Tutti i dati sono eliminati quando non più necessari</b> e in ogni caso non più tardi del 31 dicembre 2020.</string>
-
-    <string name="onboarding_exposure_api_not_activated">Notifiche di esposizione non attivate</string>
-    <string name="onboarding_region_title">Qual è la tua regione?</string>
-    <string name="onboarding_region_description">Seleziona la tua regione di domicilio per permettere a Immuni di fornirti indicazioni più precise in caso di necessità.</string>
-    <string name="onboarding_province_title">Qual è la tua provincia?</string>
-    <string name="onboarding_province_description">Seleziona la tua provincia di domicilio per permettere a Immuni di fornirti indicazioni più precise in caso di necessità.</string>
-
-    <string name="how_it_works_title">Come funziona l’app?</string>
-    <string name="how_it_works_1">Per tutelare al meglio la tua privacy, Immuni genera ogni ora un codice del tutto casuale. Questi codici identificano il tuo dispositivo ma non contengono informazioni su di te o sul tuo telefono.</string>
-    <string name="how_it_works_2">Quando entri in contatto con un altro utente di Immuni, i dispositivi si scambiano i rispettivi codici tramite Bluetooth Low Energy. L\'applicazione riesce così a tenere traccia del contatto avvenuto, ma non può conoscere le vostre identità, né sapere dove vi siete incontrati.</string>
-    <string name="how_it_works_3">Se un utente risulta positivo al virus può scegliere in maniera del tutto volontaria di aggiungere i propri codici identificativi alla lista presente sul server.</string>
-    <string name="how_it_works_4">Immuni confronta periodicamente i codici con cui sei venuto a contatto con quelli caricati sul server. In questo modo determina se sei stato esposto a un potenziale contagio, proteggendo l\'identità di entrambi.</string>
-    <string name="how_it_works_5">Immuni ti mostra una notifica e ti fornisce informazioni utili e suggerimenti su come comportarti.</string>
-
-    <string name="how_it_works_tile_1">Immuni associa ad ogni telefono un codice anonimo</string>
-    <string name="how_it_works_tile_2">I telefoni che si incontrano si scambiano i rispettivi codici anonimi</string>
-    <string name="how_it_works_tile_3">Chi risulta positivo sceglie se inviare i propri codici anonimi a un server, per renderli consultabili da altri utenti</string>
-    <string name="how_it_works_tile_4">Ogni telefono confronta i codici con cui è venuto a contatto con quelli attualmente presenti sul server</string>
-    <string name="how_it_works_tile_5">In caso di riscontro positivo, l\'utente viene allertato</string>
-
-    <string name="explore_faq">Esplora le domande frequenti</string>
-    <string name="wanna_know_more">Vuoi saperne di più?</string>
-
-    <string name="info_card_default_title">Indicazioni\nper te</string>
-    <string name="info_card_default_title_short">Indicazioni per te</string>
-
-    <string name="generic_error_message">Si è verificato un errore, riprova più tardi.</string>
-    <string name="error_loading_data_title">Connessione non riuscita.</string>
-    <string name="error_loading_data_message">Connessione non riuscita. Controlla la tua connessione a Internet e riprova.</string>
+    <string name="force_update_not_available_title">Google Play Services non è ancora pronto</string>
+    <string name="force_update_not_available_message"> Google Play Services è aggiornato ma non può ancora abilitare le notifiche di esposizione. Riprova più tardi.</string>
+    <string name="force_update_gps_not_available_yet_title">Attendi  l\'aggiornamento di Google Play Services</string>
+    <string name="force_update_gps_not_available_yet_message">Non è ancora disponibile la versione di Google Play Services necessaria per attivare le notifiche di esposizione. Riprova più tardi.</string>
     <string name="retry">Riprova</string>
-    <string name="upload_code_not_authotized">Codice non ancora autorizzato</string>
-    <plurals name="upload_disable_button_text_seconds">
+    <string name="onboarding_exposure_message_extended">Le notifiche di esposizione richiedono che il servizio di localizzazione sia attivo a livello di sistema. <b>Immuni non ha accesso alla localizzazione e non può quindi conoscere la tua posizione o i tuoi spostamenti</b>.</string>
+    <string name="how_it_works_tile_1">Immuni associa a ogni telefono un codice casuale</string>
+    <string name="how_it_works_tile_2">I telefoni che si incontrano si scambiano i rispettivi codici casuali</string>
+    <string name="how_it_works_tile_3">Chi risulta positivo sceglie se condividere i propri codici casuali</string>
+    <string name="how_it_works_tile_4">Ogni telefono verifica se ha incontrato in precedenza uno o più dei codici condivisi</string>
+    <string name="how_it_works_tile_5">In caso di riscontro positivo, l\'utente viene avvertito</string>
+    <string name="exposure_notification_channel">Notifiche di esposizione</string>
+    <string name="onboarding_exposure_api_not_activated">Notifiche di esposizione non attivate</string>
+    <string name="home_protection_not_active">Servizio\n{non attivo}</string>
+    <string name="home_protection_active">Servizio\n{attivo}</string>
+    <plurals name="upload_data_verify_loading_button_seconds">
         <item quantity="one">Attendi %d secondo</item>
         <item quantity="other">Attendi %d secondi</item>
     </plurals>
-    <plurals name="upload_disable_button_text_minutes">
+    <plurals name="upload_data_verify_loading_button_minutes">
         <item quantity="one">Attendi %d minuto</item>
         <item quantity="other">Attendi %d minuti</item>
     </plurals>
-    <string name="privacy_complete">Informativa completa</string>
-    <string name="info_card_default_respect">In ogni caso, <b>cerca sempre di rispettare queste indicazioni generali</b>:</string>
-    <string name="info_card_default_norms"><b>Rispetta la normativa vigente</b> in funzione nella tua area</string>
-    <string name="info_card_subtitle">Se sei in contatto con il tuo medico o con il Dipartimento di prevenzione della tua ASL, segui tutte le indicazioni che hai ricevuto.</string>
-
-    <string name="positive_recovered_confirm_alert_title">Confermi di essere COVID-19 negativo?</string>
-    <string name="positive_recovered_confirm_alert_message">Confermi di essere COVID-19 negativo?</string>
-    <string name="i_confirm">Confermo</string>
-
-    <string name="contact_hide_confirm_alert_title">Confermi di essere in contatto con la tua ASL?</string>
-    <string name="contact_hide_confirm_alert_message">Immuni nasconderà l’avviso di contatto. Dovrai comunque seguire tutte le indicazione che hai ricevuto dalla tua ASL.</string>
+    <string name="app_exit_title">Uscire</string>
+    <string name="app_exit_message">Sei sicuro di voler uscire?</string>
+    <string name="settings_app_version">Immuni v%s (%d)</string>
+    <string name="contact_us_email_message"></string>
+    <string name="next">Avanti</string>
+    <string name="exit">Esci</string>
+    <string name="cancel">Annulla</string>
 </resources>

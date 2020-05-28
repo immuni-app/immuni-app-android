@@ -19,10 +19,10 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_tab_home"
-        android:title="@string/home_tab" />
+        android:title="@string/tabbar_title_home" />
 
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_tab_settings"
-        android:title="@string/settings_tab" />
+        android:title="@string/tabbar_title_settings" />
 </menu>

@@ -27,6 +27,7 @@ import com.airbnb.lottie.LottieAnimationView
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.color
 import it.ministerodellasalute.immuni.extensions.view.*
+import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import kotlin.reflect.full.primaryConstructor
 
 class HomeListAdapter(
@@ -127,7 +128,9 @@ class HomeListAdapter(
                     holder.title.text = resources.getString(R.string.home_protection_active)
                         .color('{', '}',
                             context.getColorCompat(R.color.colorPrimary))
-                    // holder.shieldIcon.setImageResource(R.drawable.ic_shield)
+
+                    holder.subtitle.text = resources.getString(R.string.home_view_service_active_subtitle)
+                  
                     // animate fade-in to avoid glitch on tab change
                     holder.lottieBg.alpha = 0f
                     holder.lottieBg.setAnimation(R.raw.lottie_shield_full)
@@ -144,7 +147,8 @@ class HomeListAdapter(
                     holder.title.text = resources.getString(R.string.home_protection_not_active)
                         .color('{', '}',
                             context.getColorCompat(R.color.danger))
-                    // holder.shieldIcon.setImageResource(R.drawable.ic_shield_warning)
+
+                    holder.subtitle.text = resources.getString(R.string.home_view_service_not_active_subtitle)
                     holder.lottieBg.alpha = 0f
                     holder.lottieBg.setAnimation(R.raw.lottie_protection_not_active)
                     holder.lottieBg.visible()
@@ -152,6 +156,12 @@ class HomeListAdapter(
                     holder.itemView.post { holder.lottieBg.playAnimation() }
 
                     holder.lottieFg.gone()
+
+                    if(item.status != ExposureStatus.None()) {
+                        holder.reactivate.setTint(context.getColor(R.color.grey_dark))
+                    } else {
+                        holder.reactivate.setTint(context.getColor(R.color.danger))
+                    }
                 }
             }
         }

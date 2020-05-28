@@ -73,15 +73,15 @@ class OtpViewModel(
                 is OtpValidationResult.Unauthorized -> {
                     uploadDisableManager.submitFailedAttempt()
                     _verificationError.value =
-                        Event(context.getString(R.string.upload_code_not_authotized))
+                        Event(context.getString(R.string.upload_data_verify_error))
                 }
                 is OtpValidationResult.ServerError -> {
                     _verificationError.value =
-                        Event(context.getString(R.string.generic_error_message))
+                        Event(context.getString(R.string.upload_data_api_error_title))
                 }
                 is OtpValidationResult.ConnectionError -> {
                     _verificationError.value =
-                        Event(context.getString(R.string.error_loading_data_message))
+                        Event(context.getString(R.string.app_setup_view_network_error))
                 }
             }
 
@@ -96,13 +96,13 @@ class OtpViewModel(
     private fun Long.toFormattedQuantityText(context: Context): String? {
         return when {
             this in 0..60 -> context.resources.getQuantityString(
-                R.plurals.upload_disable_button_text_seconds,
+                R.plurals.upload_data_verify_loading_button_seconds,
                 this.toInt(), this.toInt()
             )
             this > 60 -> {
                 val minutes = round(this.toDouble() / 60).toInt()
                 context.resources.getQuantityString(
-                    R.plurals.upload_disable_button_text_minutes,
+                    R.plurals.upload_data_verify_loading_button_minutes,
                     minutes, minutes
                 )
             }
