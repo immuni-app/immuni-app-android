@@ -198,10 +198,27 @@
                 android:layout_marginBottom="20dp"
                 android:text="@string/suggestions_instruction_while_waiting_doctor" />
 
+            <LinearLayout style="@style/ParagraphCard.Layout">
+
+                <TextView
+                    style="@style/ParagraphCard.Title"
+                    android:text="@string/suggestions_instruction_stay_home"
+                    app:drawableStartCompat="@drawable/ic_stay_home" />
+
+                <TextView
+                    style="@style/ParagraphCard.Message"
+                    android:text="TODO: stay home message" />
+            </LinearLayout>
+
             <TextView
                 style="@style/ParagraphCard"
-                android:text="@string/suggestions_instruction_stay_home"
-                app:drawableStartCompat="@drawable/ic_stay_home" />
+                android:text="TODO: Limit the movement"
+                app:drawableStartCompat="@drawable/ic_movement" />
+
+            <TextView
+                style="@style/ParagraphCard"
+                android:text="TODO: maintain distance"
+                app:drawableStartCompat="@drawable/ic_social_distancing" />
 
             <TextView
                 style="@style/ParagraphCard"
@@ -213,17 +230,10 @@
                 android:text="@string/suggestions_instruction_use_napkins"
                 app:drawableStartCompat="@drawable/ic_sneeze" />
 
-            <LinearLayout style="@style/ParagraphCard.Layout">
-
-                <TextView
-                    style="@style/ParagraphCard.Title"
-                    android:text="@string/suggestions_instruction_check_symptoms_title"
-                    app:drawableStartCompat="@drawable/ic_symptoms" />
-
-                <TextView
-                    style="@style/ParagraphCard.Message"
-                    android:text="@string/suggestions_instruction_check_symptoms_message" />
-            </LinearLayout>
+            <TextView
+                style="@style/ParagraphCard"
+                android:text="@string/suggestions_instruction_check_symptoms_title"
+                app:drawableStartCompat="@drawable/ic_symptoms" />
 
             <LinearLayout style="@style/ParagraphCard.Layout">
 

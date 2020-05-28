@@ -184,10 +184,17 @@
                 android:text="@string/suggestions_instruction_social_distance"
                 app:drawableStartCompat="@drawable/ic_social_distancing" />
 
-            <TextView
-                style="@style/ParagraphCard"
-                android:text="@string/suggestions_instruction_mask"
-                app:drawableStartCompat="@drawable/ic_mask" />
+            <LinearLayout style="@style/ParagraphCard.Layout">
+
+                <TextView
+                    style="@style/ParagraphCard.Title"
+                    android:text="@string/suggestions_instruction_mask"
+                    app:drawableStartCompat="@drawable/ic_mask" />
+
+                <TextView
+                    style="@style/ParagraphCard.Message"
+                    android:text="TODO: instruction mask message" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
