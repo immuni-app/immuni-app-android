@@ -79,6 +79,9 @@ class ImmuniApplication : Application(), KoinComponent {
     private fun startWorkers() {
         workerManager.scheduleNextDummyExposureIngestionWorker(ExistingWorkPolicy.KEEP)
 
+        // TODO here? restater action/manager?
+        workerManager.scheduleNextDiagnosisKeysRequest()
+
         val job = Job()
         val scope = CoroutineScope(Dispatchers.Default + job)
         lifecycleObserver.isInForeground.onEach { isInForeground ->
