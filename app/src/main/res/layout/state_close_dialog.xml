@@ -198,10 +198,27 @@
                 android:layout_marginBottom="20dp"
                 android:text="@string/suggestions_instruction_while_waiting_doctor" />
 
+            <LinearLayout style="@style/ParagraphCard.Layout">
+
+                <TextView
+                    style="@style/ParagraphCard.Title"
+                    android:text="@string/suggestions_instruction_stay_home"
+                    app:drawableStartCompat="@drawable/ic_stay_home" />
+
+                <TextView
+                    style="@style/ParagraphCard.Message"
+                    android:text="@string/suggestions_instruction_stay_home_message" />
+            </LinearLayout>
+
             <TextView
                 style="@style/ParagraphCard"
-                android:text="@string/suggestions_instruction_stay_home"
-                app:drawableStartCompat="@drawable/ic_stay_home" />
+                android:text="@string/suggestions_instruction_limit_movement"
+                app:drawableStartCompat="@drawable/ic_limit_movement" />
+
+            <TextView
+                style="@style/ParagraphCard"
+                android:text="@string/suggestions_instruction_distance"
+                app:drawableStartCompat="@drawable/ic_distancy" />
 
             <TextView
                 style="@style/ParagraphCard"
@@ -264,6 +281,16 @@
                 android:layout_marginEnd="25dp"
                 android:layout_marginBottom="30dp"
                 android:text="@string/suggestions_instruction_hide_alert_action" />
+
+            <include layout="@layout/state_suggestions_content_divider" />
+
+            <TextView
+                style="@style/P1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:text="@string/suggestions_risk_footer"
+                android:textColor="@color/grey_dark" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
