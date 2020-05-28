@@ -389,6 +389,7 @@
     </style>
 
     <style name="SuggestionTitle" parent="H2SubHeading">
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
         <item name="android:textSize">28sp</item>
     </style>
 
