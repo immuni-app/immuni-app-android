@@ -154,7 +154,7 @@ class HomeListAdapter(
 
                     holder.lottieFg.gone()
 
-                    if(item.status != ExposureStatus.None()) {
+                    if (item.status != ExposureStatus.None()) {
                         holder.reactivate.setTint(context.getColor(R.color.grey_dark))
                     } else {
                         holder.reactivate.setTint(context.getColor(R.color.danger))
