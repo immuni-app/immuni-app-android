@@ -53,6 +53,7 @@
     <string name="onboarding_communication_advice_description">Immuni comunicherà con te sempre e solamente attraverso l’app e relative notifiche. Diffida di qualunque SMS, telefonata, email o altro tipo di avviso che sembri arrivare da Immuni, soprattutto se ti vengono richieste informazioni personali.</string>
     <string name="force_update_app_title">Aggiorna l\'app per proseguire</string>
     <string name="onboarding_complete_title">Configurazione completata</string>
+    <string name="home_view_service_not_active_subtitle">Intervieni subito per permettere a Immuni di funzionare correttamente.</string>
     <string name="home_view_service_active_subtitle">Immuni resta operativa anche quando l\'app è chiusa.</string>
     <string name="home_view_service_not_active_button">Riattiva Immuni</string>
     <string name="home_view_header_card_risk_title">Rilevato contatto prolungato con un positivo al COVID-19</string>
