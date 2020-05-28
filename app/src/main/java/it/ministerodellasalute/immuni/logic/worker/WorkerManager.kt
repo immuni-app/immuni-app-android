@@ -160,7 +160,7 @@ class WorkerManager(
             "NextDummyExposureIngestionWorker",
             policy,
             OneTimeWorkRequest.Builder(RequestDiagnosisKeysWorker::class.java)
-                .setInitialDelay(computeNextDummyExposureIngestionScheduleDelay(), TimeUnit.MINUTES)
+                .setInitialDelay(computeNextDummyExposureIngestionScheduleDelay(), TimeUnit.SECONDS)
                 .setConstraints(
                     Constraints.Builder()
                         .setRequiresBatteryNotLow(true)
