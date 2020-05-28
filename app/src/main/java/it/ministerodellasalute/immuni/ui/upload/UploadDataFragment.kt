@@ -95,8 +95,8 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
                 openConfirmationDialog(
                     positiveButton = getString(R.string.retry),
                     negativeButton = getString(R.string.cancel),
-                    message = getString(R.string.upload_data_connection_error_message),
-                    title = getString(R.string.upload_data_connection_error_title),
+                    message = getString(R.string.upload_data_vpn_error_message),
+                    title = getString(R.string.upload_data_vpn_error_title),
                     cancelable = true,
                     requestCode = ALERT_REQUEST_ERROR
                 )

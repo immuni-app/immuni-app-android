@@ -142,7 +142,7 @@
     </style>
 
     <style name="SText">
-        <item name="android:fontFamily">@font/euclid_circular_regular</item>
+        <item name="android:fontFamily">@font/euclid_circular_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/grey_normal</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
@@ -178,7 +178,7 @@
         <item name="cornerRadius">27dp</item>
         <item name="android:textSize">18sp</item>
         <item name="textAllCaps">false</item>
-        <item name="fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="fontFamily">@font/euclid_circular_bold</item>
         <item name="android:elevation">@dimen/cards_elevation</item>
         <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/colorPrimary</item>
         <item name="android:minHeight">55dp</item>
@@ -241,6 +241,16 @@
         <item name="android:fontFamily">@font/euclid_circular_bold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:button">@drawable/checkbox</item>
+    </style>
+
+    <style name="TextAppearanceBottomNavBarActive">
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearanceBottomNavBarInactive">
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <!-- From API 28 we support colored shadows for cards -->
@@ -308,6 +318,8 @@
     </style>
 
     <style name="SettingsMenuLayout" parent="CardShadowWhite">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
@@ -331,7 +343,10 @@
     <style name="SettingsMenuItem" parent="P1Text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">24dp</item>
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
         <item name="android:textColor">@color/grey_dark</item>
         <item name="fontFamily">@font/euclid_circular_bold</item>
         <item name="android:background">?attr/selectableItemBackground</item>
@@ -374,6 +389,7 @@
     </style>
 
     <style name="SuggestionTitle" parent="H2SubHeading">
+        <item name="android:fontFamily">@font/euclid_circular_semi_bold</item>
         <item name="android:textSize">28sp</item>
     </style>
 
@@ -382,6 +398,5 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:drawablePadding">16dp</item>
         <item name="android:layout_marginBottom">24dp</item>
-
     </style>
 </resources>

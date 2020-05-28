@@ -22,7 +22,7 @@
 
     <style name="CardShadowWhite">
         <item name="android:elevation">@dimen/cards_elevation</item>
-        <item name="android:outlineSpotShadowColor">#08000000</item>
+        <item name="android:outlineSpotShadowColor">#1A5751FF</item>
     </style>
 
     <style name="CardShadowColorPrimary">

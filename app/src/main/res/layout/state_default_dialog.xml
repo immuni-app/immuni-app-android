@@ -144,12 +144,14 @@
 
             <TextView
                 style="@style/P1Text"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:elevation="@dimen/cards_elevation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="30dp"
+                android:layout_margin="25dp"
                 android:background="@drawable/rounded_corners_30dp"
                 android:backgroundTint="#675AFF"
-                android:fontFamily="@font/euclid_circular_medium"
+                android:fontFamily="@font/euclid_circular_semi_bold"
                 android:padding="24dp"
                 android:text="@string/suggestions_neutral_alert"
                 android:textColor="#FFFFFF" />
@@ -158,9 +160,9 @@
                 style="@style/P1Text.Generic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                android:paddingBottom="30dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:paddingBottom="20dp"
                 android:text="@string/suggestions_neutral_message"
                 android:textColor="@color/grey_dark" />
 
