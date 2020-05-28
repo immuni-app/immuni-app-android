@@ -45,8 +45,6 @@ class OnboardingViewModel(
     val pushNotificationManager: PushNotificationManager
 ) : ViewModel(), KoinComponent {
 
-    private val settings get() = settingsManager.settings.value
-
     val loading = MutableLiveData<Boolean>()
 
     private val _province = MutableStateFlow<Province?>(null)
@@ -77,14 +75,14 @@ class OnboardingViewModel(
     fun onPrivacyPolicyClick(fragment: Fragment) {
         ExternalLinksHelper.openLink(
             fragment.requireContext(),
-            settings.privacyPolicyUrl
+            settingsManager.privacyNoticeUrl
         )
     }
 
     fun onTosClick(fragment: Fragment) {
         ExternalLinksHelper.openLink(
             fragment.requireContext(),
-            settings.termsOfServiceUrl
+            settingsManager.termsOfUseUrl
         )
     }
 
