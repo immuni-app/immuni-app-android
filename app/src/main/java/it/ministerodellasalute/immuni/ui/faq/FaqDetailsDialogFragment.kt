@@ -17,7 +17,6 @@ package it.ministerodellasalute.immuni.ui.faq
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.text.HtmlCompat
 import androidx.navigation.fragment.navArgs
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
@@ -37,6 +36,6 @@ class FaqDetailsDialogFragment : PopupDialogFragment() {
     private fun bindData(questionAndAnswer: QuestionAndAnswer) {
         setTitle(questionAndAnswer.question)
         question.text = questionAndAnswer.question
-        answer.text = HtmlCompat.fromHtml(questionAndAnswer.answer, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        answer.text = questionAndAnswer.answer
     }
 }

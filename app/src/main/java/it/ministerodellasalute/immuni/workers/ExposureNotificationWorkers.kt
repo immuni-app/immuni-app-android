@@ -24,7 +24,6 @@ import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.models.FetchSettingsResult
-import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsNetworkRepository.*
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import it.ministerodellasalute.immuni.network.api.NetworkError
 import it.ministerodellasalute.immuni.network.api.NetworkResource
@@ -74,7 +73,7 @@ class RequestDiagnosisKeysWorker(
         val chunksDir = File(chunksDirPath)
 
         try {
-            val settingsResult = settingsManager.fetchSettings()
+            val settingsResult = settingsManager.fetchSettingsAsync().await()
             if (settingsResult is FetchSettingsResult.Success) {
                 // cleanup entities that are older than DAYS_OF_SELF_ISOLATION
                 exposureReportingRepository.deleteOldSummaries(settingsResult.serverDate)
@@ -142,9 +141,7 @@ class RequestDiagnosisKeysWorker(
     }
 
     private fun success(): Result {
-        workerManager.scheduleNextDiagnosisKeysRequest(
-            delayMinutes = settingsManager.settings.value.exposureDetectionPeriod.toLong() / 60
-        )
+        workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }
 }

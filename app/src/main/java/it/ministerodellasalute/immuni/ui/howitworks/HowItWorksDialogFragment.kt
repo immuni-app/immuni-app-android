@@ -35,7 +35,7 @@ class HowItWorksDialogFragment : PopupRecyclerViewDialogFragment(),
         val adapter = HowItWorksListAdapter(requireContext(), this, args.value.showFaq)
         recyclerView.adapter = adapter
 
-        setTitle(getString(R.string.how_it_works_title))
+        setTitle(getString(R.string.permission_tutorial_how_immuni_works_title))
     }
 
     override fun onClick(item: HowItWorksItem) {

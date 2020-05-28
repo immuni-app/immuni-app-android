@@ -45,10 +45,10 @@ class AppNotificationManager(val context: Context) : KoinComponent {
             setContentIntent(createPendingIntent())
         }
         when (type) {
-            NotificationType.Exposure -> setupExposureNotification(builder)
+            NotificationType.RiskReminder -> setupRiskReminderNotification(builder)
             NotificationType.OnboardingNotCompleted -> setupOnboardingNotCompletedNotification(builder)
             NotificationType.ForcedVersionUpdate -> setupForcedVersionUpdateNotification(builder)
-            NotificationType.ExposurePlayServicesDisabled -> setupExposurePlayServicesDisabledNotification(builder)
+            NotificationType.ServiceNotActive -> setupServiceNotActiveNotification(builder)
         }
 
         val androidNotificationManager = NotificationManagerCompat.from(context)
@@ -62,9 +62,9 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         androidNotificationManager.cancel(type.id)
     }
 
-    private fun setupExposureNotification(builder: NotificationCompat.Builder) {
-        val title = context.getString(R.string.notification_exposure_title)
-        val message = context.getString(R.string.notification_exposure_message)
+    private fun setupRiskReminderNotification(builder: NotificationCompat.Builder) {
+        val title = context.getString(R.string.notifications_risk_title)
+        val message = context.getString(R.string.notifications_risk_description)
         builder.apply {
             setContentTitle(title)
             setContentText(message)
@@ -75,8 +75,8 @@ class AppNotificationManager(val context: Context) : KoinComponent {
     }
 
     private fun setupOnboardingNotCompletedNotification(builder: NotificationCompat.Builder) {
-        val title = context.getString(R.string.notification_onboarding_not_completed_title)
-        val message = context.getString(R.string.notification_onboarding_not_completed_message)
+        val title = context.getString(R.string.notifications_update_os_title)
+        val message = context.getString(R.string.notifications_update_os_description)
         builder.apply {
             setContentTitle(title)
             setContentText(message)
@@ -88,8 +88,8 @@ class AppNotificationManager(val context: Context) : KoinComponent {
     }
 
     private fun setupForcedVersionUpdateNotification(builder: NotificationCompat.Builder) {
-        val title = context.getString(R.string.notification_force_update_title)
-        val message = context.getString(R.string.notification_force_update_message)
+        val title = context.getString(R.string.notifications_update_app_title)
+        val message = context.getString(R.string.notifications_update_app_description)
 
         val notificationIntent = Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}")
@@ -114,9 +114,9 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         }
     }
 
-    private fun setupExposurePlayServicesDisabledNotification(builder: NotificationCompat.Builder) {
-        val title = context.getString(R.string.notification_not_active_title)
-        val message = context.getString(R.string.notification_not_active_message)
+    private fun setupServiceNotActiveNotification(builder: NotificationCompat.Builder) {
+        val title = context.getString(R.string.notifications_not_active_service_title)
+        val message = context.getString(R.string.notifications_not_active_service_description)
         builder.apply {
             setContentTitle(title)
             setContentText(message)
@@ -183,8 +183,8 @@ class AppNotificationManager(val context: Context) : KoinComponent {
 }
 
 enum class NotificationType(val id: Int) {
-    Exposure(id = 20001),
+    RiskReminder(id = 20001),
     OnboardingNotCompleted(id = 20002),
     ForcedVersionUpdate(id = 20003),
-    ExposurePlayServicesDisabled(id = 20004),
+    ServiceNotActive(id = 20004),
 }

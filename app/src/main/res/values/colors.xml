@@ -21,7 +21,8 @@
     <color name="colorPrimaryDark">#0026cb</color>
     <color name="colorAccent">@color/colorPrimary</color>
     <color name="statusBarLight">#00FFFFFF</color>
-
+    <color name="rippleColorLight">#1AFFFFFF</color>
+    <color name="rippleColorDark">#1A000000</color>
     <!-- Figma colors -->
     <color name="background">#FFFFFF</color>
     <color name="background_light">#F9FBFF</color>

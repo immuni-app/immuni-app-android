@@ -19,7 +19,6 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.color
 import androidx.lifecycle.Observer
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.card.MaterialCardView
@@ -72,7 +71,7 @@ class PrivacyFragment : ViewPagerBaseFragment(R.layout.onboarding_privacy_fragme
             updateUI(true)
         }
 
-        val privacyRawText = getString(R.string.privacy_checkbox)
+        val privacyRawText = getString(R.string.privacy_checkbox_privacyPolicyRead)
         privacyPolicy.movementMethod = LinkMovementMethod.getInstance()
         privacyPolicy.text = privacyRawText.coloredClickable(
             color = requireContext().getColorCompat(R.color.colorPrimary),
@@ -81,7 +80,7 @@ class PrivacyFragment : ViewPagerBaseFragment(R.layout.onboarding_privacy_fragme
             viewModel.onPrivacyPolicyClick(this)
         }
 
-        val tosRawText = getString(R.string.privacy_page_tos)
+        val tosRawText = getString(R.string.privacy_tos)
         tos.movementMethod = LinkMovementMethod.getInstance()
         tos.text = tosRawText.coloredClickable(
             color = requireContext().getColorCompat(R.color.colorPrimary),

@@ -37,7 +37,7 @@ class ForceUpdateNotificationWorker(
 
     override suspend fun doWork(): Result {
         try {
-            settingsManager.fetchSettings()
+            settingsManager.fetchSettingsAsync().await()
             if (!forceUpdateManager.isAppOutdated) {
                 return Result.success()
             }

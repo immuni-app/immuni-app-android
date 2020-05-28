@@ -58,6 +58,10 @@ android {
         freeCompilerArgs += ["-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"]
     }
 
+    lintOptions {
+        fatal("VisibleForTests")
+    }
+
     sourceSets {
         androidTest.assets {
             srcDirs += files("$projectDir/schemas".toString())

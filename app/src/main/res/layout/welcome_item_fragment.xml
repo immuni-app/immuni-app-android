@@ -37,6 +37,7 @@
     <TextView
         android:id="@+id/title"
         style="@style/H2SubHeading"
+        android:fontFamily="@font/euclid_circular_bold"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -75,7 +76,7 @@
         android:layout_marginBottom="24dp"
         android:gravity="center"
         android:maxLines="1"
-        android:text="@string/know_more"
+        android:text="@string/welcome_view_discover_more"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

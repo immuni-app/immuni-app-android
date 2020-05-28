@@ -17,9 +17,9 @@ package it.ministerodellasalute.immuni.ui.settings
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
+import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.util.startSendingEmail
 import org.koin.core.KoinComponent
@@ -34,7 +34,10 @@ class SettingsViewModel(
     private val settings get() = settingsManager.settings.value
 
     fun onTosClick(fragment: Fragment) {
-        openUrlInDialog(fragment, settings.termsOfServiceUrl)
+        ExternalLinksHelper.openLink(
+            fragment.requireContext(),
+            settings.termsOfServiceUrl
+        )
     }
 
     fun onSupportClick(fragment: Fragment) {
@@ -44,16 +47,8 @@ class SettingsViewModel(
             email,
             fragment.getString(R.string.app_name),
             fragment.getString(R.string.contact_us_email_message),
-            fragment.getString(R.string.settings_contact_support)
+            fragment.getString(R.string.settings_setting_contact_support)
         )
-    }
-
-    private fun openUrlInDialog(fragment: Fragment, url: String) {
-        val action =
-            SettingsFragmentDirections.actionWebview(
-                url
-            )
-        fragment.findNavController().navigate(action)
     }
 
     fun openExposureSettings(fragment: SettingsFragment) {

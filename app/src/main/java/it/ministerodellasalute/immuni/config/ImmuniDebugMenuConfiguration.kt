@@ -120,10 +120,10 @@ class ImmuniDebugMenuConfiguration(
                 }
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Trigger Service not active Notification", { _, _ ->
-                notificationManger.triggerNotification(NotificationType.ExposurePlayServicesDisabled)
+                notificationManger.triggerNotification(NotificationType.ServiceNotActive)
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Trigger Exposure Notification", { _, _ ->
-                notificationManger.triggerNotification(NotificationType.Exposure)
+                notificationManger.triggerNotification(NotificationType.RiskReminder)
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Trigger Onboarding Notification", { _, _ ->
                 notificationManger.triggerNotification(NotificationType.OnboardingNotCompleted)

@@ -28,7 +28,7 @@ class Network(
 ) {
 
     /**
-     * Creates an instace of [apiClass]
+     * Creates an instance of [apiClass]
      * using the [Network] and [NetworkConfiguration] config.
      */
     fun <T : Any> createServiceAPI(apiClass: KClass<T>): T {

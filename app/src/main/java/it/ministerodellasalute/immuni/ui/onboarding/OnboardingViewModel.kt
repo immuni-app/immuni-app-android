@@ -18,23 +18,23 @@ package it.ministerodellasalute.immuni.ui.onboarding
 import android.app.Activity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.toast
 import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
+import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.Province
 import it.ministerodellasalute.immuni.logic.user.models.Region
 import it.ministerodellasalute.immuni.logic.user.models.User
-import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
 class OnboardingViewModel(
@@ -75,16 +75,17 @@ class OnboardingViewModel(
     }
 
     fun onPrivacyPolicyClick(fragment: Fragment) {
-        openUrlInDialog(fragment, settings.privacyPolicyUrl)
+        ExternalLinksHelper.openLink(
+            fragment.requireContext(),
+            settings.privacyPolicyUrl
+        )
     }
 
     fun onTosClick(fragment: Fragment) {
-        openUrlInDialog(fragment, settings.termsOfServiceUrl)
-    }
-
-    private fun openUrlInDialog(fragment: Fragment, url: String) {
-        val action = ViewPagerFragmentDirections.actionWebview(url)
-        fragment.findNavController().navigate(action)
+        ExternalLinksHelper.openLink(
+            fragment.requireContext(),
+            settings.termsOfServiceUrl
+        )
     }
 
     val isOnboardingComplete

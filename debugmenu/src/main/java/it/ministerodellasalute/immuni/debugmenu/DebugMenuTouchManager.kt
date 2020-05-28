@@ -31,11 +31,8 @@ class DebugMenuTouchManager(
 ) {
 
     companion object {
-        private const val FINGERS_COUNT = 4
-        private const val FINGERS_COUNT_DEVELOPMENT = 2
-
-        private const val DELAY = 2000L
-        private const val DELAY_DEVELOPMENT = 1000L
+        private const val FINGERS_COUNT = 2
+        private const val DELAY = 1000L
     }
 
     private var timerJob: Job? = null
@@ -47,14 +44,12 @@ class DebugMenuTouchManager(
      * the timer is cancelled and nothing happens.
      */
     fun onTouchEvent(ev: MotionEvent) {
-        val fingers = when (config.isDevelopmentDevice()) {
-            true -> FINGERS_COUNT_DEVELOPMENT
-            false -> FINGERS_COUNT
-        }
-        if (ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_POINTER_DOWN && ev.pointerCount == fingers) {
-            startTimer()
-        } else if (ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_POINTER_UP || ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_UP) {
-            cancelTimer()
+        if (config.isDevelopmentDevice()) {
+            if (ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_POINTER_DOWN && ev.pointerCount == FINGERS_COUNT) {
+                startTimer()
+            } else if (ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_POINTER_UP || ev.action and MotionEvent.ACTION_MASK == MotionEvent.ACTION_UP) {
+                cancelTimer()
+            }
         }
     }
 
@@ -63,15 +58,9 @@ class DebugMenuTouchManager(
     }
 
     private fun startTimer() {
-
-        val delay = when (config.isDevelopmentDevice()) {
-            true -> DELAY_DEVELOPMENT
-            false -> DELAY
-        }
-
         timerJob?.cancel()
         timerJob = GlobalScope.launch(Dispatchers.Main) {
-            delay(delay)
+            delay(DELAY)
             onTimerEnd()
         }
     }
