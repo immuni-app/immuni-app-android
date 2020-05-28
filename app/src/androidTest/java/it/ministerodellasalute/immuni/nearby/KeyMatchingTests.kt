@@ -21,6 +21,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import com.google.android.gms.common.api.ApiException
 import it.ministerodellasalute.immuni.extensions.file.copyInputStream
+import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager.Delegate
@@ -64,7 +65,7 @@ class KeyMatchingTests {
         val dstFile = File(dstFolder.path + File.separator + name + ".zip")
         dstFile.copyInputStream(inputStream)
 
-        val manager = ExposureNotificationManager(context).apply {
+        val manager = ExposureNotificationManager(context, AppLifecycleObserver()).apply {
             setup(object : Delegate {
                 override suspend fun processKeys(
                     serverDate: Date,

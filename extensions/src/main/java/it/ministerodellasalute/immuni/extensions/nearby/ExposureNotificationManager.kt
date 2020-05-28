@@ -46,12 +46,15 @@ class ExposureNotificationManager(
         )
     }
 
-    constructor(context: Context) : this(
+    constructor(context: Context, lifecycleObserver: AppLifecycleObserver) : this(
         locationStateFlow = LocationStateFlow(context),
         bluetoothStateFlow = BluetoothStateFlow(context),
-        lifecycleObserver = AppLifecycleObserver(),
-        exposureNotificationClient =
-        ExposureNotificationClientWrapper(Nearby.getExposureNotificationClient(context))
+        lifecycleObserver = lifecycleObserver,
+        exposureNotificationClient = ExposureNotificationClientWrapper(
+            Nearby.getExposureNotificationClient(
+                context
+            )
+        )
     )
 
     companion object {
