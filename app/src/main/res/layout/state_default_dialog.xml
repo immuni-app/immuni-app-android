@@ -65,7 +65,7 @@
                     android:layout_weight="1"
                     android:contentDescription="@string/home_view_info_protection_title"
                     android:scaleType="matrix"
-                    android:src="@drawable/illustration_doctor"
+                    app:srcCompat="@drawable/illustration_doctor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/exit"
-                    android:src="@drawable/ic_cross_white" />
+                    app:srcCompat="@drawable/ic_cross_white" />
 
                 <TextView
                     android:id="@+id/toolbarTitle"
