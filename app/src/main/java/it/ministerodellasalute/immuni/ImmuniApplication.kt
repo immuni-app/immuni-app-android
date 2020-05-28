@@ -25,7 +25,6 @@ import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.UserManager
-import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

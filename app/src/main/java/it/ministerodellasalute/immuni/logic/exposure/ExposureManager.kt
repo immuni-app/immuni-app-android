@@ -17,7 +17,6 @@ package it.ministerodellasalute.immuni.logic.exposure
 
 import android.app.Activity
 import android.content.Intent
-import androidx.work.ExistingWorkPolicy
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
@@ -29,7 +28,6 @@ import it.ministerodellasalute.immuni.logic.exposure.repositories.*
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSettings
 import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
-import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import java.io.File
 import java.util.*
 import kotlin.math.max

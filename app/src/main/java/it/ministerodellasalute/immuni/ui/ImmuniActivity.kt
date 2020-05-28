@@ -27,8 +27,6 @@ import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
-import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import it.ministerodellasalute.immuni.ui.forceupdate.ForceUpdateActivity
 import org.koin.android.ext.android.inject
 
