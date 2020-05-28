@@ -158,8 +158,8 @@
 
                 <TextView
                     style="@style/ParagraphCard.Title"
-                    android:drawableStart="@drawable/ic_doctor"
-                    android:text="@string/suggestions_instruction_contact_doctor_title" />
+                    android:text="@string/suggestions_instruction_contact_doctor_title"
+                    app:drawableStartCompat="@drawable/ic_doctor" />
 
                 <TextView
                     style="@style/ParagraphCard.Message"
@@ -200,25 +200,25 @@
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_stay_home"
-                android:text="@string/suggestions_instruction_stay_home" />
+                android:text="@string/suggestions_instruction_stay_home"
+                app:drawableStartCompat="@drawable/ic_stay_home" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_wash_hands"
-                android:text="@string/suggestions_instruction_wash_hands" />
+                android:text="@string/suggestions_instruction_wash_hands"
+                app:drawableStartCompat="@drawable/ic_wash_hands" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_sneeze"
-                android:text="@string/suggestions_instruction_use_napkins" />
+                android:text="@string/suggestions_instruction_use_napkins"
+                app:drawableStartCompat="@drawable/ic_sneeze" />
 
             <LinearLayout style="@style/ParagraphCard.Layout">
 
                 <TextView
                     style="@style/ParagraphCard.Title"
-                    android:drawableStart="@drawable/ic_symptoms"
-                    android:text="@string/suggestions_instruction_check_symptoms_title" />
+                    android:text="@string/suggestions_instruction_check_symptoms_title"
+                    app:drawableStartCompat="@drawable/ic_symptoms" />
 
                 <TextView
                     style="@style/ParagraphCard.Message"
@@ -229,8 +229,8 @@
 
                 <TextView
                     style="@style/ParagraphCard.Title"
-                    android:drawableStart="@drawable/ic_isolate"
-                    android:text="@string/suggestions_instruction_isolate_title" />
+                    android:text="@string/suggestions_instruction_isolate_title"
+                    app:drawableStartCompat="@drawable/ic_isolate" />
 
                 <TextView
                     style="@style/ParagraphCard.Message"
@@ -240,8 +240,8 @@
             <TextView
                 style="@style/ParagraphCard"
                 android:layout_marginBottom="30dp"
-                android:drawableStart="@drawable/ic_emergency"
-                android:text="@string/suggestions_instruction_phone_contact" />
+                android:text="@string/suggestions_instruction_phone_contact"
+                app:drawableStartCompat="@drawable/ic_emergency" />
 
 
             <include layout="@layout/state_suggestions_content_divider" />

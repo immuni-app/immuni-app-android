@@ -166,28 +166,28 @@
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_ministry"
-                android:text="@string/suggestions_instruction_ministerial_decree" />
+                android:text="@string/suggestions_instruction_ministerial_decree"
+                app:drawableStartCompat="@drawable/ic_ministry_small" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_wash_hands"
-                android:text="@string/suggestions_instruction_wash_hands" />
+                android:text="@string/suggestions_instruction_wash_hands"
+                app:drawableStartCompat="@drawable/ic_wash_hands" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_sneeze"
-                android:text="@string/suggestions_instruction_use_napkins" />
+                android:text="@string/suggestions_instruction_use_napkins"
+                app:drawableStartCompat="@drawable/ic_sneeze" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_social_distancing"
-                android:text="@string/suggestions_instruction_social_distance" />
+                android:text="@string/suggestions_instruction_social_distance"
+                app:drawableStartCompat="@drawable/ic_social_distancing" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_mask"
-                android:text="@string/suggestions_instruction_mask" />
+                android:text="@string/suggestions_instruction_mask"
+                app:drawableStartCompat="@drawable/ic_mask" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
