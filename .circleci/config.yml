@@ -294,6 +294,12 @@ jobs:
     resource_class: small
     steps:
       - run:
+          name: "[pr_check] Stop job if DANGER_GITHUB_API_TOKEN is missing"
+          command: |
+            if [[ -z "${DANGER_GITHUB_API_TOKEN}" ]]; then
+                circleci-agent step halt
+            fi
+      - run:
           name: "[pr_check] Stop job if not running in PR"
           command: |
             if [[ -z "${CIRCLE_PULL_REQUEST}" ]]; then
@@ -302,12 +308,9 @@ jobs:
       - checkout:
           name: "[pr_check] Checkout the code"
       - setup_pr_tools
-      - fetch_config
-      - install_android_dependencies
       - run:
           name: "[pr_check] Run danger"
-          command: |
-            [ -z "${DANGER_GITHUB_API_TOKEN}" ] || yarn danger ci
+          command: yarn danger ci
 
   release:
     working_directory: ~/code
@@ -322,20 +325,29 @@ jobs:
       - post_release_changelog
 
   scheduler:
-    docker:
-      - image: cimg/python:3.7.7
+    working_directory: ~/code
+    executor: default
     resource_class: small
     steps:
       - checkout
       - run:
           name: "[scheduler] Initialize scheduler submodule"
           command: git submodule update --init
+      - run:
+          name: "[scheduler] Initialize Python runtime"
+          command: |
+            sudo apt-get update
+            sudo apt-get install python3-pip
+      - run:
+          name: "[scheduler] Setup project path"
+          command: echo "export PROJECT_PATH=$(pwd)" >> $BASH_ENV
+      - setup_pr_tools
       - restore_cache:
           name: "[scheduler] Restore Python Cache"
           keys:
-            - pip-packages-v1-{{ .Branch }}-{{ checksum "scheduler/Pipfile.lock" }}
-            - pip-packages-v1-{{ .Branch }}-
-            - pip-packages-v1-
+            - pip-packages-v2-{{ .Branch }}-{{ checksum "scheduler/Pipfile.lock" }}
+            - pip-packages-v2-{{ .Branch }}-
+            - pip-packages-v2-
       - run:
           name: "[scheduler] Install dependencies"
           working_directory: scheduler
@@ -343,14 +355,14 @@ jobs:
             PIPENV_NOSPIN: 1
             PIPENV_VENV_IN_PROJECT: 1
           command: |
-            pip install pipenv
+            pip3 install pipenv
             pipenv install
       - save_cache:
           name: "[scheduler] Save Python Cache"
           paths:
             - ~/.cache/pip
             - scheduler/.venv
-          key: pip-packages-v1-{{ .Branch }}-{{ checksum "scheduler/Pipfile.lock" }}
+          key: pip-packages-v2-{{ .Branch }}-{{ checksum "scheduler/Pipfile.lock" }}
       - run:
           name: "[scheduler] Configure scheduler"
           command: |
