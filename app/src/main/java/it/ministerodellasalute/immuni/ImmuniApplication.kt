@@ -21,6 +21,7 @@ import androidx.work.ExistingWorkPolicy
 import it.ministerodellasalute.immuni.debugmenu.DebugMenu
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
+import it.ministerodellasalute.immuni.extensions.utils.log
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
@@ -84,6 +85,7 @@ class ImmuniApplication : Application(), KoinComponent {
         updateForceUpdateNotificationWorker()
         updateRiskReminderWorker()
         updateInitialDiagnosisKeysRequest()
+        log("Workers successfully started")
     }
 
     private fun updateNextDummyExposureIngestionWorker() {

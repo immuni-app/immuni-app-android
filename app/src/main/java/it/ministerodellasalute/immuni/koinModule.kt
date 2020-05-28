@@ -169,7 +169,6 @@ val appModule = module {
     single {
         ExposureManager(
             get(),
-            get(),
             ExposureNotificationManager(androidContext()),
             get(),
             get(),
@@ -211,7 +210,7 @@ val appModule = module {
     }
 
     single {
-        UserManager(get(), get(), get())
+        UserManager(get(), get())
     }
 
     single {
