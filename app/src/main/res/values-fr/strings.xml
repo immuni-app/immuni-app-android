@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
 <resources>
   <string name="accessibility_back">Retour</string>
   <string name="accessibility_close">Fermer</string>
@@ -34,12 +49,10 @@
   <string name="welcome_view_items_second_description">Si vous êtes entré en contact avec un utilisateur porteur du virus, Immuni vous préviendra et vous fournira des indications afin de protéger votre santé et celle de vos proches.</string>
   <string name="welcome_view_items_third_title">Ensemble, ralentissons l\'épidémie</string>
   <string name="welcome_view_items_third_description">Les utilisateurs qui découvrent avoir été exposés au virus peuvent s\'isoler afin de ralentir la propagation du virus et d\'accélérer le retour à une vie normale.</string>
-  <string name="welcome_view_items_fourth_title">Votre vie privée est protégée</string>
   <string name="welcome_view_items_fourth_description">L\'application fonctionne sans aucun suivi de vos mouvements et sans connaître votre identité ni celle des personnes avec lesquelles vous entrez en contact.</string>
   <string name="welcome_view_discover_more">En savoir plus</string>
   <string name="welcome_view_next_page_title">Suivant</string>
   <string name="welcome_view_go_next">C\'est parti</string>
-  <string name="privacy_title">Votre vie privée est protégée</string>
   <string name="privacy_item_identity"><b>Immuni ne collecte pas vos nom, prénom, date de naissance, adresse, numéro de téléphone ou e-mail.</b></string>
   <string name="privacy_item_people"><b>Immuni ne peut pas remonter à votre identité</b> ni à celle des personnes avec lesquelles vous entrez en contact.</string>
   <string name="privacy_item_location"><b>Immuni ne collecte aucune information de géolocalisation</b>, coordonnées GPS incluses. Vos mouvements ne font en aucun cas l\'objet d\'un suivi.</string>
@@ -54,7 +67,6 @@
   <string name="privacy_checkbox_privacyPolicyRead">J\\\'ai lu la {Politique de confidentialité}</string>
   <string name="privacy_tos">En continuant, je déclare avoir lu et accepté les {Conditions d\\\'utilisation}</string>
   <string name="privacy_next">Suivant</string>
-  <string name="privacy_settings_title">Votre vie privée est protégée</string>
   <string name="privacy_settings_show_full">Politique de confidentialité intégrale</string>
   <string name="onboarding_common_next">Suivant</string>
   <string name="onboarding_common_discover_more">En savoir plus</string>
@@ -95,7 +107,6 @@
   <string name="home_view_header_card_positive_button">Vous êtes guéri ? Mettez votre statut à jour ›</string>
   <string name="permission_tutorial_how_immuni_works_title">Comment fonctionne l\'application ?</string>
   <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni associe chaque téléphone à un code aléatoire</h>]]></string>
-  <string name="permission_tutorial_how_immuni_works_first_message">Le code est généré de manière aléatoire et ne contient pas d\'informations sur votre appareil, et encore moins sur vous. De plus, il change plusieurs fois par heure, pour mieux protéger votre vie privée.</string>
   <string name="permission_tutorial_how_immuni_works_second_title"><![CDATA[<h>Les téléphones qui entrent en contact échangent leurs codes aléatoires respectifs</h>]]></string>
   <string name="permission_tutorial_how_immuni_works_second_message">Lorsque vous entrez en contact avec un autre utilisateur d\'Immuni, les dispositifs échangent leurs codes via Bluetooth Low Energy. L\'application parvient ainsi à garder une trace du contact sans connaître vos identités, ni savoir où vous vous êtes rencontrés.</string>
   <string name="permission_tutorial_how_immuni_works_third_title"><![CDATA[<h>La personne testée positive est libre de partager ou non ses codes aléatoires</h>]]></string>
@@ -103,7 +114,6 @@
   <string name="permission_tutorial_how_immuni_works_fourth_title"><![CDATA[<h>Le téléphone vérifie s\'il a déjà rencontré un ou plusieurs des codes partagés</h>]]></string>
   <string name="permission_tutorial_how_immuni_works_fourth_message">Immuni vérifie périodiquement les codes présents sur le serveur et les compare avec ceux qui sont enregistrés sur votre dispositif. L\'application peut ainsi déterminer si vous avez été exposé à une potentielle infection.</string>
   <string name="permission_tutorial_how_immuni_works_fifth_title"><![CDATA[<h>Vous serez prévenu en cas de contact avec une personne positive</h>]]></string>
-  <string name="permission_tutorial_how_immuni_works_fifth_message">Si vous avez été en contact avec un utilisateur positif, Immuni vous avertira et vous indiquera la procédure à suivre. L\'application y parvient sans jamais savoir où vous allez ni qui vous rencontrez. Votre vie privée est protégée.</string>
   <string name="permission_tutorial_how_immuni_works_action_description">Vous voulez en savoir plus ?</string>
   <string name="permission_tutorial_how_immuni_works_action_cta">Consultez les questions fréquentes</string>
   <string name="settings_setting_section_data">Gestion des informations</string>
@@ -262,4 +272,9 @@
   <string name="suggestions_instruction_mask_message">Y compris dans les moyens de transport et chaque fois qu\'il n\'est pas possible de garantir en permanence le maintien des distances de sécurité.</string>
   <string name="upload_data_vpn_error_message">Une erreur s\'est produite durant le processus. Merci de bien vouloir réessayer. Si vous utilisez un VPN, nous vous suggérons de le désactiver temporairement ou de sélectionner un serveur italien.</string>
   <string name="suggestions_risk_footer">Afin d\'aider les services de santé nationaux à prendre soin de vous, l\'application a informé le Ministère de la Santé de la notification qui vous a été envoyée. <b>Le Ministère de la Santé ne peut en aucun cas retracer votre identité sur la base de cette information.</b></string>
+  <string name="welcome_view_items_fourth_title">Vos données restent confidentielles</string>
+  <string name="privacy_title">Vos données restent confidentielles</string>
+  <string name="privacy_settings_title">Vos données restent confidentielles</string>
+  <string name="permission_tutorial_how_immuni_works_first_message">Le code est généré de manière aléatoire et ne contient aucune information à propos de vous ou de votre appareil. De plus, il change plusieurs fois par heure pour mieux protéger vos données confidentielles.</string>
+  <string name="permission_tutorial_how_immuni_works_fifth_message">Si vous avez été en contact avec un utilisateur positif, Immuni vous avertira et vous indiquera la procédure à suivre. L\'application y parvient sans jamais savoir où vous allez ni qui vous rencontrez. Vos données restent confidentielles.</string>
 </resources>
