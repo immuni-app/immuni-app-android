@@ -26,10 +26,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.color
-import it.ministerodellasalute.immuni.extensions.view.animateShow
-import it.ministerodellasalute.immuni.extensions.view.gone
-import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import it.ministerodellasalute.immuni.extensions.view.visible
+import it.ministerodellasalute.immuni.extensions.view.*
+import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import kotlin.reflect.full.primaryConstructor
 
 class HomeListAdapter(
@@ -155,6 +153,12 @@ class HomeListAdapter(
                     holder.itemView.post { holder.lottieBg.playAnimation() }
 
                     holder.lottieFg.gone()
+
+                    if(item.status != ExposureStatus.None()) {
+                        holder.reactivate.setTint(context.getColor(R.color.grey_dark))
+                    } else {
+                        holder.reactivate.setTint(context.getColor(R.color.danger))
+                    }
                 }
             }
         }
