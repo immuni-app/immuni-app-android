@@ -46,7 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.4"
-            android:src="@drawable/illustration_doctor" />
+            app:srcCompat="@drawable/illustration_doctor" />
 
         <TextView
             android:id="@+id/title"

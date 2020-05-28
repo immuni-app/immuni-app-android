@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/exit"
-                    android:src="@drawable/ic_cross_white" />
+                    app:srcCompat="@drawable/ic_cross_white" />
 
                 <TextView
                     android:id="@+id/toolbarTitle"
