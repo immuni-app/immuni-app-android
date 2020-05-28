@@ -41,7 +41,11 @@
     <string name="onboarding_exposure_permission_title">Attiva le notifiche di esposizione COVID-19</string>
     <string name="onboarding_exposure_permission_description">Immuni registra i contatti con altri utenti così da poterti informare in caso di esposizione al virus.</string>
     <string name="onboarding_push_permission_action">Consenti</string>
+    <string name="suggestions_instruction_distance"><b>In presenza di altre persone, mantieni una distanza di almeno un metro.</b></string>
+    <string name="suggestions_risk_footer">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità, l\'app ha informato il Ministero della Salute della notifica che hai ricevuto. <b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di questa informazione.</b></string>
     <string name="onboarding_bluetooth_off_action">Attiva</string>
+    <string name="suggestions_instruction_mask_message">Inclusi i mezzi di trasporto e comunque in tutte le occasioni in cui non sia possibile garantire continuativamente il mantenimento della distanza di sicurezza</string>
+    <string name="suggestions_instruction_mask_title"><b>Indossa una mascherina nei luoghi al chiuso accessibili al pubblico</b></string>
     <string name="onboarding_communication_advice_action">Ho capito</string>
     <string name="onboarding_bluetooth_off_title">Attiva il Bluetooth</string>
     <string name="onboarding_bluetooth_off_description">Immuni utilizza il Bluetooth Low Energy per registrare i tuoi contatti con altri utenti e permettere notifiche di esposizione al COVID-19.</string>
@@ -83,6 +87,7 @@
         • Se l\'app funziona correttamente\n
         • Se sei stato avvertito di un contatto a rischio
     </string>
+    <string name="suggestions_instruction_limit_movement"><b>Limita al massimo i movimenti in altri spazi comuni della casa.</b></string>
     <string name="privacy_item_people"><b>Immuni non può risalire alla tua identità</b> o quella delle persone con cui entri in contatto.</string>
     <string name="privacy_item_secure"><b>I dati salvati sul tuo smartphone e le connessioni al server sono cifrati.</b></string>
     <string name="privacy_settings_show_full">Informativa completa</string>
@@ -123,6 +128,7 @@
     <string name="suggestions_instruction_phone_contact"><b>In caso di sintomi gravi, contatta il 112 o il 118</b></string>
     <string name="suggestions_instruction_social_distance"><b>Resta in casa e rispetta le misure di distanziamento fisico</b> (almeno 1 metro)</string>
     <string name="suggestions_instruction_stay_home"><b>Rimani a casa per i 14 giorni</b> successivi alla data del contatto</string>
+    <string name="suggestions_instruction_stay_home_message">Utilizza una stanza riservata e dotata di buona ventilazione, possibilmente con bagno dedicato.</string>
     <string name="suggestions_instruction_use_napkins"><b>Tossisci e starnutisci direttamente su un fazzoletto di carta o nella piega del gomito</b></string>
     <string name="suggestions_instruction_wash_hands"><b>Lavati frequentemente le mani </b>con acqua e sapone o con soluzioni idroalcoliche</string>
     <string name="suggestions_instruction_while_waiting_doctor">In via precauzionale, <b>in attesa delle indicazioni del tuo medico:</b></string>
