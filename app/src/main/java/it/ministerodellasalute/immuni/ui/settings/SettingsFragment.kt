@@ -63,7 +63,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
             findNavController().navigate(SettingsDirections.actionFaq())
         }
         termsOfServiceButton.setSafeOnClickListener {
-            viewModel.onTosClick(this)
+            viewModel.onTouClick(this)
         }
         privacyPolicyButton.setSafeOnClickListener {
             // viewModel.onPrivacyPolicyClick(this)
@@ -90,7 +90,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SettingsViewModel.EXPOSRE_NOTIFICATION_SETTINGS_REQUEST) {
+        if (requestCode == SettingsViewModel.EXPOSURE_NOTIFICATION_SETTINGS_REQUEST) {
             // Nothing to do
         }
     }
