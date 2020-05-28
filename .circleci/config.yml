@@ -411,6 +411,10 @@ workflows:
     jobs:
       - build:
           context: android
+          filters:
+            branches:
+              ignore:
+                - /pull\/.+/
   pr_check:
     jobs:
       - pr_check:
