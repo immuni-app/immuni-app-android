@@ -171,7 +171,7 @@ val appModule = module {
         ExposureManager(
             get(),
             get(),
-            ExposureNotificationManager(androidContext()),
+            ExposureNotificationManager(androidContext(), get()),
             get(),
             get(),
             get(),
