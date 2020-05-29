@@ -87,7 +87,7 @@ class ConfigurationSettingsManagerTest {
 
         async {
             for (i in 1..5) {
-                manager.onSettingsUpdate(settings.copy(termsOfUseUrls = mapOf(Language.EN to i.toString())))
+                manager.onSettingsUpdate(settings.copy(termsOfUseUrls = mapOf(Language.EN.code to i.toString())))
                 delay(100)
             }
             deferred.cancel()
