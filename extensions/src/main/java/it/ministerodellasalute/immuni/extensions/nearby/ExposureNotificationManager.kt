@@ -219,7 +219,7 @@ class ExposureNotificationManager(
                     throw e
                 } catch (e: Exception) {
                     log("user denied permissions")
-                    optInCompleter = null
+                    tekRequestCompleter = null
                     throw e
                 }
             } else {
