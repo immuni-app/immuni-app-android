@@ -231,7 +231,7 @@
   <string name="suggestions_alert_asl_contact_confirmation_positive_answer">Sì</string>
   <string name="notification_steps_title">Per attivare le notifiche</string>
   <string name="notification_steps_instruction_1">1. Apri le impostazioni dal bottone in basso</string>
-  <string name="notification_steps_instruction_2">2_ Abilita la voce \"Consenti notifiche\"</string>
+  <string name="notification_steps_instruction_2">2. Abilita la voce \"Consenti notifiche\"</string>
   <string name="notification_settings_allow">Consenti notifiche</string>
   <string name="open_settings">Apri Impostazioni</string>
   <string name="force_update_play_services_title">Aggiorna Google Play Services per proseguire</string>

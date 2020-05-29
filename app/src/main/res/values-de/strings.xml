@@ -231,7 +231,7 @@
   <string name="suggestions_alert_asl_contact_confirmation_positive_answer">Ja</string>
   <string name="notification_steps_title">So aktivieren Sie Mitteilungen</string>
   <string name="notification_steps_instruction_1">1. Öffnen Sie die Einstellungen über die Schaltfläche unten</string>
-  <string name="notification_steps_instruction_2">2_ Aktivieren Sie den Regler \"Mitteilungen zulassen\"</string>
+  <string name="notification_steps_instruction_2">2. Aktivieren Sie den Regler \"Mitteilungen zulassen\"</string>
   <string name="notification_settings_allow">Mitteilungen zulassen</string>
   <string name="open_settings">Einstellungen öffnen</string>
   <string name="force_update_play_services_title">Aktualisieren Sie Google Play Services, um fortzufahren</string>
