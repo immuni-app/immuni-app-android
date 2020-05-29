@@ -100,7 +100,7 @@
                     android:id="@+id/navigationIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/exit"
+                    android:contentDescription="@string/accessibility_close"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     app:srcCompat="@drawable/ic_cross_white" />
 

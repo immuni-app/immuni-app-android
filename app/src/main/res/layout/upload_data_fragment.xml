@@ -134,6 +134,7 @@
                     android:layout_width="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/accessibility_close"
                     app:srcCompat="@drawable/ic_cross" />
 
                 <TextView
