@@ -21,10 +21,11 @@ import androidx.work.ExistingWorkPolicy
 import it.ministerodellasalute.immuni.debugmenu.DebugMenu
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
+import it.ministerodellasalute.immuni.extensions.utils.log
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
+import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +48,7 @@ class ImmuniApplication : Application(), KoinComponent {
     private lateinit var debugMenu: DebugMenu
     private lateinit var lifecycleObserver: AppLifecycleObserver
     private lateinit var activityLifecycleObserver: AppActivityLifecycleCallbacks
-    private val userRepository: UserRepository by inject()
+    private val userManager: UserManager by inject()
     private val workerManager: WorkerManager by inject()
 
     override fun onCreate() {
@@ -78,16 +79,24 @@ class ImmuniApplication : Application(), KoinComponent {
     }
 
     private fun startWorkers() {
-        workerManager.scheduleNextDummyExposureIngestionWorker(ExistingWorkPolicy.KEEP)
-        scheduleOnboardingNotCompletedWorker()
-        scheduleServiceNotActiveNotificationWorker()
+        updateNextDummyExposureIngestionWorker()
+        updateOnboardingNotCompletedWorker()
+        updateServiceNotActiveNotificationWorker()
+        updateForceUpdateNotificationWorker()
+        updateRiskReminderWorker()
+        updateInitialDiagnosisKeysRequest()
+        log("Workers successfully started")
     }
 
-    private fun scheduleOnboardingNotCompletedWorker() {
+    private fun updateNextDummyExposureIngestionWorker() {
+        workerManager.scheduleNextDummyExposureIngestionWorker(ExistingWorkPolicy.KEEP)
+    }
+
+    private fun updateOnboardingNotCompletedWorker() {
         val job = Job()
         val scope = CoroutineScope(Dispatchers.Default + job)
         lifecycleObserver.isInForeground.onEach { isInForeground ->
-            if (!userRepository.isOnboardingComplete.value) {
+            if (!userManager.isOnboardingComplete.value) {
                 if (isInForeground) {
                     workerManager.scheduleOnboardingNotCompletedWorker()
                 }
@@ -97,7 +106,7 @@ class ImmuniApplication : Application(), KoinComponent {
         }.launchIn(scope)
     }
 
-    private fun scheduleServiceNotActiveNotificationWorker() {
+    private fun updateServiceNotActiveNotificationWorker() {
         workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.KEEP)
 
         val scope = CoroutineScope(Dispatchers.Default)
@@ -107,6 +116,30 @@ class ImmuniApplication : Application(), KoinComponent {
         // by the time the Work is run again.
         exposureManager.isBroadcastingActive.filter { it == false }.onEach {
             workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.REPLACE)
+        }.launchIn(scope)
+    }
+
+    private fun updateForceUpdateNotificationWorker() {
+        val scope = CoroutineScope(Dispatchers.Default)
+
+        settingsManager.settings.onEach {
+            workerManager.updateForceUpdateNotificationWorkerSchedule()
+        }.launchIn(scope)
+    }
+
+    private fun updateRiskReminderWorker() {
+        val scope = CoroutineScope(Dispatchers.Default)
+
+        exposureManager.exposureStatus.onEach {
+            workerManager.updateRiskReminderWorker(it)
+        }.launchIn(scope)
+    }
+
+    private fun updateInitialDiagnosisKeysRequest() {
+        val scope = CoroutineScope(Dispatchers.Default)
+
+        userManager.isOnboardingComplete.filter { it }.onEach {
+            workerManager.scheduleInitialDiagnosisKeysRequest()
         }.launchIn(scope)
     }
 }
