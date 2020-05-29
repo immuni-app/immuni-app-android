@@ -52,7 +52,8 @@ class OtpGeneratorTest {
             "A23X28L7F" to "A23-X28L-7F5",
             "I4A7KRXJ4" to "I4A-7KRX-J43",
             "QL412K779" to "QL4-12K7-79W",
-            "6IJ3E7A9Q" to "6IJ-3E7A-9QI"
+            "6IJ3E7A9Q" to "6IJ-3E7A-9QI",
+            "SSSSSSSSS" to "SSS-SSSS-SSL"
         )
         inputs.forEach { (mockDigits, expectedCode) ->
             // Random number generator returns indexes for this code
