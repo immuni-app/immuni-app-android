@@ -52,7 +52,7 @@ class KVStorage(
     val name: String,
     context: Context?,
     val cacheInMemory: Boolean = true,
-    val encrypted: Boolean,
+    val encrypted: Boolean = true,
     val moshi: Moshi,
     // The following two properties should be private but are not, because they're used in public
     // inline methods, thus the underscore prefix.
@@ -67,7 +67,7 @@ class KVStorage(
         mutableMapOf()
 
     /**
-     * Checks if the storage contains the given key.
+     * Checks if the storage contains the given [key].
      */
     fun <T : Any> contains(key: Key<T>): Boolean = synchronized(this) {
         _cache.contains(key) || _sharedPrefs.contains(key.name)
@@ -85,8 +85,8 @@ class KVStorage(
     }
 
     /**
-     * Saves value for the given key. If value's type is not one of the supported primitive types
-     * (Boolean, Int, Long, Float, String), it first serializes value to Json with Moshi
+     * Saves [value] for the given [key]. If value's type is not one of the supported primitive types
+     * (Boolean, Int, Long, Float, String), it first serializes value to Json with [Moshi]
      * and then saves it as a String.
      */
     inline operator fun <reified T : Any> set(key: Key<T>, value: T) = synchronized(this) {
