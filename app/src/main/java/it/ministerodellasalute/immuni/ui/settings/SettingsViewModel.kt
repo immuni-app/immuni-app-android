@@ -46,7 +46,7 @@ class SettingsViewModel(
         fragment.startSendingEmail(
             email,
             fragment.getString(R.string.app_name),
-            fragment.getString(R.string.contact_us_email_message),
+            "",
             fragment.getString(R.string.settings_setting_contact_support)
         )
     }
