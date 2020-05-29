@@ -14,5 +14,5 @@
   -->
 
 <resources>
-    <string name="app_name">Immuni</string>
+    <string name="app_name" translatable="false">Immuni</string>
 </resources>
