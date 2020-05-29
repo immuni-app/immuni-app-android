@@ -99,7 +99,7 @@ enum class Language(val code: String) {
 
 private fun languageMap(map: (Language) -> String): Map<String, String> {
     return mapOf(*Language.values().map { language ->
-        language.name to map(language)
+        language.code to map(language)
     }.toTypedArray())
 }
 
