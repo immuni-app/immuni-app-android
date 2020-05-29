@@ -43,7 +43,7 @@ class ForceUpdateNotificationWorker(
             }
 
             notificationManager.triggerNotification(NotificationType.ForcedVersionUpdate)
-            workerManager.scheduleForceUpdateNotificationWorker(withDelay = true)
+            workerManager.scheduleForceUpdateNotificationWorker()
 
             return Result.success()
         } catch (e: Exception) {

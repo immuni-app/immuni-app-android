@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.workers
 
 import android.content.Context
 import androidx.work.CoroutineWorker
+import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkerParameters
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
@@ -45,7 +46,7 @@ class RiskReminderWorker(
         ): Result {
             notificationManager.triggerNotification(NotificationType.RiskReminder)
 
-            workerManager.scheduleRiskReminderWorker()
+            workerManager.scheduleRiskReminderWorker(ExistingWorkPolicy.REPLACE)
             return Result.success()
         }
     }
