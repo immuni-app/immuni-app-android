@@ -70,7 +70,7 @@
   <string name="privacy_tos">By continuing, I declare that I have read and accepted the {terms of use}</string>
   <string name="privacy_next">Next</string>
   <string name="privacy_settings_title">Your privacy is safe</string>
-  <string name="privacy_settings_show_full">I have read the privacy policy</string>
+  <string name="privacy_settings_show_full">Show full notice</string>
   <string name="onboarding_common_next">Next</string>
   <string name="onboarding_common_discover_more">Find out more</string>
   <string name="onboarding_region_title">Which region do you live in?</string>
