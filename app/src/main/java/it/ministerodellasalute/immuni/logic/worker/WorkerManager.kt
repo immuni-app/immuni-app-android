@@ -83,14 +83,13 @@ class WorkerManager(
     }
 
     fun scheduleServiceNotActiveNotificationWorker(policy: ExistingWorkPolicy) {
-        val delay = settings.serviceNotActiveNotificationPeriod.toLong()
         workManager.enqueueUniqueWork(
             "ServiceNotActiveNotificationWorker",
             policy,
             OneTimeWorkRequest.Builder(ServiceNotActiveNotificationWorker::class.java)
                 .setInitialDelay(
-                    delay,
-                    TimeUnit.SECONDS
+                    15,
+                    TimeUnit.MINUTES
                 )
                 .build()
         )
@@ -159,7 +158,7 @@ class WorkerManager(
         workManager.enqueueUniqueWork(
             "NextDummyExposureIngestionWorker",
             policy,
-            OneTimeWorkRequest.Builder(RequestDiagnosisKeysWorker::class.java)
+            OneTimeWorkRequest.Builder(DummyExposureIngestionWorker::class.java)
                 .setInitialDelay(computeNextDummyExposureIngestionScheduleDelay(), TimeUnit.SECONDS)
                 .setConstraints(
                     Constraints.Builder()
