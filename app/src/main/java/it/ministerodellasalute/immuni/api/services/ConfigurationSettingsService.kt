@@ -37,9 +37,9 @@ interface ConfigurationSettingsService {
 @JsonClass(generateAdapter = true)
 data class ConfigurationSettings(
     @field:Json(name = "minimum_build_version") val minimumBuildVersion: Int,
-    @field:Json(name = "faq_url") val faqUrls: Map<Language, String>,
-    @field:Json(name = "tou_url") val termsOfUseUrls: Map<Language, String>,
-    @field:Json(name = "pn_url") val privacyNoticeUrls: Map<Language, String>,
+    @field:Json(name = "faq_url") val faqUrls: Map<String, String>,
+    @field:Json(name = "tou_url") val termsOfUseUrls: Map<String, String>,
+    @field:Json(name = "pn_url") val privacyNoticeUrls: Map<String, String>,
     @field:Json(name = "exposure_configuration") val exposureConfiguration: ExposureConfiguration,
     @field:Json(name = "service_not_active_notification_period") val serviceNotActiveNotificationPeriod: Int,
     @field:Json(name = "onboarding_not_completed_notification_period") val onboardingNotCompletedNotificationPeriod: Int,
@@ -52,8 +52,7 @@ data class ConfigurationSettings(
     @field:Json(name = "dummy_teks_request_probabilities") val dummyTeksRequestProbabilities: List<Double>,
     @field:Json(name = "teks_max_summary_count") val teksMaxSummaryCount: Int,
     @field:Json(name = "teks_max_info_count") val teksMaxInfoCount: Int,
-    @field:Json(name = "teks_packet_size") val teksPacketSize: Int,
-    @field:Json(name = "support_email") val supportEmail: String = defaultSettings.supportEmail
+    @field:Json(name = "teks_packet_size") val teksPacketSize: Int
 )
 
 @JsonClass(generateAdapter = true)
@@ -98,60 +97,35 @@ enum class Language(val code: String) {
     }
 }
 
-private fun languageMap(map: (Language) -> String): Map<Language, String> {
+private fun languageMap(map: (Language) -> String): Map<String, String> {
     return mapOf(*Language.values().map { language ->
-        language to map(language)
+        language.name to map(language)
     }.toTypedArray())
 }
 
-// FIXME define sensible defaults!
 val defaultSettings = ConfigurationSettings(
     minimumBuildVersion = 0,
-    faqUrls = languageMap { language ->
-        when (language) {
-            EN -> ""
-            IT -> ""
-            DE -> ""
-            FR -> ""
-            ES -> ""
-        }
-    },
-    termsOfUseUrls = languageMap { language ->
-        when (language) {
-            EN -> ""
-            IT -> ""
-            DE -> ""
-            FR -> ""
-            ES -> ""
-        }
-    },
-    privacyNoticeUrls = languageMap { language ->
-        when (language) {
-            EN -> ""
-            IT -> ""
-            DE -> ""
-            FR -> ""
-            ES -> ""
-        }
-    },
-    supportEmail = "",
+    faqUrls = languageMap { "https://get.immuni.gov.it/docs/faq-${it.code}.json" },
+    termsOfUseUrls = languageMap { "https://get.immuni.gov.it/docs/app-tou-${it.code}.html" },
+    privacyNoticeUrls = languageMap { "https://get.immuni.gov.it/docs/app-pn-${it.code}.html" },
+
     exposureConfiguration = ExposureConfiguration(
         attenuationThresholds = listOf(50, 70),
-        attenuationScores = listOf(1, 2, 3, 4, 5, 6, 7, 8),
-        daysSinceLastExposureScores = listOf(1, 2, 3, 4, 5, 6, 7, 8),
-        durationScores = listOf(1, 2, 3, 4, 5, 6, 7, 8),
-        transmissionRiskScores = listOf(1, 2, 3, 4, 5, 6, 7, 8),
+        attenuationScores = listOf(0, 0, 3, 5, 7, 7, 7, 7),
+        daysSinceLastExposureScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
+        durationScores = listOf(0, 0, 0, 3, 5, 5, 5, 7),
+        transmissionRiskScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
         minimumRiskScore = 1
     ),
-    exposureDetectionPeriod = 60 * 60 * 2, // 2 hours
-    exposureInfoMinimumRiskScore = 1,
+    exposureInfoMinimumRiskScore = 20,
+    exposureDetectionPeriod = 60 * 60 * 4, // 4 hours
     serviceNotActiveNotificationPeriod = 60 * 60 * 24, // 1 day
     onboardingNotCompletedNotificationPeriod = 60 * 60 * 24, // 1 day
     requiredUpdateNotificationPeriod = 60 * 60 * 24, // 1 day
     riskReminderNotificationPeriod = 60 * 60 * 24, // 1 day
-    dummyTeksAverageOpportunityWaitingTime = 864000 or 2592000,
+    dummyTeksAverageOpportunityWaitingTime = 60 * 24 * 60 * 60, // 60 days
     dummyTeksAverageRequestWaitingTime = 10,
-    dummyTeksRequestProbabilities = listOf(1.0, 0.1),
+    dummyTeksRequestProbabilities = listOf(0.95, 0.1),
     teksMaxSummaryCount = 6 * 14,
     teksMaxInfoCount = 600,
     teksPacketSize = 110_000

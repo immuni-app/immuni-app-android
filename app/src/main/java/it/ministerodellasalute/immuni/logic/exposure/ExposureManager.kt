@@ -28,14 +28,12 @@ import it.ministerodellasalute.immuni.logic.exposure.repositories.*
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSettings
 import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
-import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import java.io.File
 import java.util.*
 import kotlin.math.max
 import kotlinx.coroutines.flow.*
 
 class ExposureManager(
-    private val workerManager: WorkerManager,
     private val settingsManager: ConfigurationSettingsManager,
     private val exposureNotificationManager: ExposureNotificationManager,
     private val userRepository: UserRepository,
@@ -43,10 +41,6 @@ class ExposureManager(
     private val exposureIngestionRepository: ExposureIngestionRepository,
     private val exposureStatusRepository: ExposureStatusRepository
 ) : ExposureNotificationManager.Delegate {
-
-    companion object {
-        const val HIGH_RISK_ATTENUATION_DURATION_MINUTES = 15
-    }
 
     private val settings get() = settingsManager.settings.value
 
@@ -90,8 +84,6 @@ class ExposureManager(
             summaryEntity = summaryEntity.copy(
                 exposureInfos = infos.map { it.repositoryExposureInformation }
             )
-
-            workerManager.scheduleRiskReminderWorker()
         }
 
         exposureReportingRepository.addSummary(summaryEntity)
@@ -101,9 +93,7 @@ class ExposureManager(
         summary: ExposureSummary,
         oldExposureStatus: ExposureStatus
     ): ExposureStatus {
-        if (summary.matchedKeyCount == 0 || summary.highRiskAttenuationDurationMinutes < HIGH_RISK_ATTENUATION_DURATION_MINUTES ||
-            summary.maximumRiskScore < settings.exposureInfoMinimumRiskScore
-        ) {
+        if (summary.matchedKeyCount == 0 || summary.maximumRiskScore < settings.exposureInfoMinimumRiskScore) {
             return oldExposureStatus
         }
         val oldStatusLastExposureTime =
@@ -210,13 +200,20 @@ class ExposureManager(
         exposureStatusRepository.mockExposureStatus = null
     }
 
-    fun debugCleanupDatabase() {
-        exposureReportingRepository.resetSummaries()
-        exposureReportingRepository.setLastProcessedChunk(null)
+    fun acknowledgeExposure() {
+        val exposureStatus = exposureStatus.value
+        if (exposureStatus is ExposureStatus.Exposed && !exposureStatus.acknowledged) {
+            exposureStatusRepository.setExposureStatus(exposureStatus.copy(acknowledged = true))
+        }
     }
 
     fun setMockExposureStatus(status: ExposureStatus?) {
         exposureStatusRepository.mockExposureStatus = status
+    }
+
+    fun debugCleanupDatabase() {
+        exposureReportingRepository.resetSummaries()
+        exposureReportingRepository.setLastProcessedChunk(null)
     }
 
     val hasSummaries: Boolean get() = exposureReportingRepository.getSummaries().isNotEmpty()
