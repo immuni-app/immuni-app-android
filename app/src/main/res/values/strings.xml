@@ -97,7 +97,7 @@
   <string name="onboarding_complete_title">Setup complete</string>
   <string name="home_view_service_active_title">Service
 <b>active</b></string>
-  <string name="home_view_service_active_subtitle">Even when the app is closed, Immuni continues to operate.</string>
+  <string name="home_view_service_active_advice">Even when the app is closed, Immuni continues to operate.</string>
   <string name="home_view_service_not_active_title">Service
 <b>inactive</b></string>
   <string name="home_view_service_not_active_subtitle">Take action now to allow Immuni to work properly.</string>

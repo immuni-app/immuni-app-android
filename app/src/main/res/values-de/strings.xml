@@ -96,7 +96,7 @@
   <string name="onboarding_communication_advice_action">Alles klar</string>
   <string name="onboarding_complete_title">Konfiguration abgeschlossen</string>
   <string name="home_view_service_active_title">Service<b>aktiv</b></string>
-  <string name="home_view_service_active_subtitle">Immuni bleibt aktiv, auch wenn die App geschlossen ist.</string>
+  <string name="home_view_service_active_advice">Immuni bleibt aktiv, auch wenn die App geschlossen ist.</string>
   <string name="home_view_service_not_active_title">Service<b>nicht aktiv</b></string>
   <string name="home_view_service_not_active_subtitle">Handeln Sie sofort, damit Immuni richtig funktionieren kann.</string>
   <string name="home_view_service_not_active_button">Immuni erneut aktivieren</string>
