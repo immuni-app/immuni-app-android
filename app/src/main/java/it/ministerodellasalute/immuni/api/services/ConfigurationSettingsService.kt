@@ -104,9 +104,8 @@ private fun languageMap(map: (Language) -> String): Map<Language, String> {
     }.toTypedArray())
 }
 
-// FIXME define sensible defaults!
 val defaultSettings = ConfigurationSettings(
-    minimumBuildVersion = 0,
+    minimumBuildVersion = 1,
     faqUrls = languageMap { language ->
         when (language) {
             EN -> ""
@@ -137,21 +136,21 @@ val defaultSettings = ConfigurationSettings(
     supportEmail = "",
     exposureConfiguration = ExposureConfiguration(
         attenuationThresholds = listOf(50, 70),
-        durationScores = listOf(0, 0, 0, 3, 5, 5, 5, 7),
         attenuationScores = listOf(0, 0, 3, 5, 7, 7, 7, 7),
-        transmissionRiskScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
         daysSinceLastExposureScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
+        durationScores = listOf(0, 0, 0, 3, 5, 5, 5, 7),
+        transmissionRiskScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
         minimumRiskScore = 1
     ),
-    exposureDetectionPeriod = 60 * 60 * 2, // 2 hours
     exposureInfoMinimumRiskScore = 20,
+    exposureDetectionPeriod = 60 * 60 * 4, // 4 hours
     serviceNotActiveNotificationPeriod = 60 * 60 * 24, // 1 day
     onboardingNotCompletedNotificationPeriod = 60 * 60 * 24, // 1 day
     requiredUpdateNotificationPeriod = 60 * 60 * 24, // 1 day
     riskReminderNotificationPeriod = 60 * 60 * 24, // 1 day
     dummyTeksAverageOpportunityWaitingTime = 60 * 24 * 60 * 60, // 60 days
     dummyTeksAverageRequestWaitingTime = 10,
-    dummyTeksRequestProbabilities = listOf(1.0, 0.1),
+    dummyTeksRequestProbabilities = listOf(0.95, 0.1),
     teksMaxSummaryCount = 6 * 14,
     teksMaxInfoCount = 600,
     teksPacketSize = 110_000
