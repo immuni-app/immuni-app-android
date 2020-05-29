@@ -43,8 +43,8 @@ class DummyExposureIngestionWorker(
     private val workerManager: WorkerManager by inject()
     private val appLifecycleObserver: AppLifecycleObserver by inject()
     private val exposureManager: ExposureManager by inject()
-    private val random = SecureRandom()
     private val settingsManager: ConfigurationSettingsManager by inject()
+    private val random = SecureRandom()
 
     override suspend fun doWork(): Result {
         val settings = settingsManager.settings.value
