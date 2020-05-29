@@ -89,7 +89,7 @@
   <string name="onboarding_push_permission_action">Consenti</string>
   <string name="onboarding_push_permission_overlay_hint">Seleziona \"<b>Consenti</b>\" nel popup che apparirà qui sotto</string>
   <string name="onboarding_pin_advice_title">Proteggi il tuo dispositivo</string>
-  <string name="onboarding_pin_advice_description">Se non l’hai già fatto, imposta un codice sul tuo dispositivo per proteggerlo e impedire ad altri di accedere ai tuoi dati e alle tue app, inclusa Immuni.</string>
+  <string name="onboarding_pin_advice_description">L’uso di Immuni è strettamente personale. Se non l’hai già fatto, imposta un codice sul tuo dispositivo per proteggerlo e impedire ad altri di accedere ai tuoi dati e alle tue app, inclusa Immuni.</string>
   <string name="onboarding_pin_advice_action">Ho capito</string>
   <string name="onboarding_communication_advice_title">Fai attenzione alle false comunicazioni</string>
   <string name="onboarding_communication_advice_description">Immuni comunicherà con te sempre e solamente attraverso l’app e relative notifiche. <b>Diffida di qualunque SMS, telefonata, email o altro tipo di avviso</b> che sembri arrivare da Immuni, soprattutto se ti vengono richieste informazioni personali.</string>

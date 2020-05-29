@@ -89,7 +89,7 @@
   <string name="onboarding_push_permission_action">Erlauben</string>
   <string name="onboarding_push_permission_overlay_hint">Tippen Sie auf \"<b>Erlauben</b>\" in dem Popup-Fenster, das unten angezeigt wird</string>
   <string name="onboarding_pin_advice_title">Schützen Sie Ihr Gerät</string>
-  <string name="onboarding_pin_advice_description">Sollten Sie es noch nicht getan haben, schützen Sie Ihr Gerät mit einem Code, damit andere nicht auf Ihre Daten und Apps – einschließlich Immuni – zugreifen können.</string>
+  <string name="onboarding_pin_advice_description">Die Verwendung von Immuni ist streng persönlich. Sollten Sie es noch nicht getan haben, schützen Sie Ihr Gerät mit einem Code, damit andere nicht auf Ihre Daten und Apps – einschließlich Immuni – zugreifen können.</string>
   <string name="onboarding_pin_advice_action">Alles klar</string>
   <string name="onboarding_communication_advice_title">Vorsicht vor gefälschten Mitteilungen</string>
   <string name="onboarding_communication_advice_description">Immuni kommuniziert mit Ihnen immer und ausschließlich über die App und damit verbundene Mitteilungen. Vertrauen Sie keinen <b>Textnachrichten, Anrufen, E-Mails oder anderen Hinweisen</b>, die von Immuni zu kommen scheinen, insbesondere wenn Sie nach persönlichen Informationen gefragt werden.</string>

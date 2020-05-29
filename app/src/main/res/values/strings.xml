@@ -89,7 +89,7 @@
   <string name="onboarding_push_permission_action">Allow</string>
   <string name="onboarding_push_permission_overlay_hint">Select \'<b>Allow</b>\' in the pop-up that appears below</string>
   <string name="onboarding_pin_advice_title">Protect your device</string>
-  <string name="onboarding_pin_advice_description">If you haven\'t done so already, set up a PIN on your device to protect it and prevent others from accessing your data and apps, including Immuni.</string>
+  <string name="onboarding_pin_advice_description">The use of Immuni is strictly personal. If you haven\\\'t done so already, set up a PIN on your device to protect it and prevent others from accessing your data and apps, including Immuni.</string>
   <string name="onboarding_pin_advice_action">Got it</string>
   <string name="onboarding_communication_advice_title">Watch out for scam messages</string>
   <string name="onboarding_communication_advice_description">Immuni will only ever communicate with you via the app and the corresponding notifications. <b>Be wary of any text, phone call, email, or other kind of alert</b> that appears to be from Immuni, especially if it asks you for personal information.</string>

@@ -89,7 +89,7 @@
   <string name="onboarding_push_permission_action">Permitir</string>
   <string name="onboarding_push_permission_overlay_hint">Selecciona «<b>Permitir</b>» en la ventana emergente que aparecerá a continuación</string>
   <string name="onboarding_pin_advice_title">Protege tu dispositivo</string>
-  <string name="onboarding_pin_advice_description">Si aún no lo has hecho, configura un código en tu dispositivo para protegerlo e impedir que otras personas accedan a tus datos y aplicaciones, incluida Immuni.</string>
+  <string name="onboarding_pin_advice_description">El uso de Immuni es estrictamente personal. Si aún no lo has hecho, configura un código en tu dispositivo para protegerlo e impedir que otras personas accedan a tus datos y aplicaciones, incluida Immuni.</string>
   <string name="onboarding_pin_advice_action">Entendido</string>
   <string name="onboarding_communication_advice_title">Ten cuidado con los mensajes engañosos</string>
   <string name="onboarding_communication_advice_description">Immuni únicamente contactará contigo a través de la aplicación y de las notificaciones correspondientes. <b>No confíes en ningún aviso que recibas por SMS, llamada telefónica, correo electrónico u otro medio</b> y que parezca ser de Immuni, especialmente si te solicitan datos personales.</string>
