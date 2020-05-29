@@ -17,11 +17,9 @@ package it.ministerodellasalute.immuni.ui.settings
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
-import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import it.ministerodellasalute.immuni.util.startSendingEmail
 import org.koin.core.KoinComponent
 
 class SettingsViewModel(

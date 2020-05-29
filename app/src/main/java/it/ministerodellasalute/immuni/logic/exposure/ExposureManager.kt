@@ -42,10 +42,6 @@ class ExposureManager(
     private val exposureStatusRepository: ExposureStatusRepository
 ) : ExposureNotificationManager.Delegate {
 
-    companion object {
-        const val HIGH_RISK_ATTENUATION_DURATION_MINUTES = 15
-    }
-
     private val settings get() = settingsManager.settings.value
 
     val isBroadcastingActive: StateFlow<Boolean?> = exposureNotificationManager.isBroadcastingActive
@@ -97,9 +93,7 @@ class ExposureManager(
         summary: ExposureSummary,
         oldExposureStatus: ExposureStatus
     ): ExposureStatus {
-        if (summary.matchedKeyCount == 0 || summary.highRiskAttenuationDurationMinutes < HIGH_RISK_ATTENUATION_DURATION_MINUTES ||
-            summary.maximumRiskScore < settings.exposureInfoMinimumRiskScore
-        ) {
+        if (summary.matchedKeyCount == 0 || summary.maximumRiskScore < settings.exposureInfoMinimumRiskScore) {
             return oldExposureStatus
         }
         val oldStatusLastExposureTime =
