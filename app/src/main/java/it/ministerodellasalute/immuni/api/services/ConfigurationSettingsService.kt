@@ -147,7 +147,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Come viene tutelata la mia privacy?",
-            content = "Durante l'intero processo di design e sviluppo di Immuni, abbiamo posto grande attenzione sulla tutela della tua privacy.\n\nEccoti una lista di alcune delle misure con cui Immuni protegge i tuoi dati:\n\n • L'app non raccoglie alcun dato personale che consentirebbe di risalire alla tua identità. Per esempio, non ti chiede e non è in grado di ottenere il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o indirizzo email.\n\n • L'app non raccoglie alcun dato di geolocalizzazione, inclusi i dati del GPS. I tuoi spostamenti non sono tracciati in alcun modo.\n\n • Il codice Bluetooth Low Energy trasmesso dall'app è generato in maniera casuale e non contiene alcuna informazione riguardo al tuo smartphone, né su di te. Inoltre, questo codice cambia svariate volte ogni ora, per tutelare ancora meglio la tua privacy.\n\n • I dati salvati sul tuo smartphone sono cifrati.\n\n • Le connessioni tra l'app e il server sono cifrate.\n\n • Tutti i dati, siano essi salvati sul dispositivo o sul server, saranno cancellati non appena non saranno più necessari e in ogni caso non oltre il 31 dicembre 2020.\n\n • È il Ministero della Salute il soggetto che raccoglie i tuoi dati. I dati verranno usati solo per contenere l'epidemia del COVID-19 o per la ricerca scientifica.\n\n • I dati sono salvati su server in Italia e gestiti da soggetti pubblici."
+            content = "Durante l'intero processo di design e sviluppo di Immuni, abbiamo posto grande attenzione sulla tutela della tua privacy.\n\nEccoti una lista di alcune delle misure con cui Immuni protegge i tuoi dati:\n\n • L'app non raccoglie alcun dato che consentirebbe di risalire alla tua identità. Per esempio, non ti chiede e non è in grado di ottenere il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o indirizzo email.\n\n • L'app non raccoglie alcun dato di geolocalizzazione, inclusi i dati del GPS. I tuoi spostamenti non sono tracciati in alcun modo.\n\n • Il codice Bluetooth Low Energy trasmesso dall'app è generato in maniera casuale e non contiene alcuna informazione riguardo al tuo smartphone, né su di te. Inoltre, questo codice cambia svariate volte ogni ora, per tutelare ancora meglio la tua privacy.\n\n • I dati salvati sul tuo smartphone sono cifrati.\n\n • Le connessioni tra l'app e il server sono cifrate.\n\n • Tutti i dati, siano essi salvati sul dispositivo o sul server, saranno cancellati non appena non saranno più necessari e in ogni caso non oltre il 31 dicembre 2020.\n\n • È il Ministero della Salute il soggetto che raccoglie i tuoi dati. I dati verranno usati solo per contenere l'epidemia del COVID-19 o per la ricerca scientifica.\n\n • I dati sono salvati su server in Italia e gestiti da soggetti pubblici."
         ),
         Faq(
             title = "Il codice è open source?",
@@ -219,7 +219,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Devo fare una registrazione con indirizzo email e password?",
-            content = "No. L'app non raccoglie alcun dato personale che consentirebbe di risalire alla tua identità. Per esempio, non ti chiede e non è in grado di ottenere il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o indirizzo email."
+            content = "No. L'app non raccoglie alcun dato che consentirebbe di risalire alla tua identità. Per esempio, non ti chiede e non è in grado di ottenere il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o indirizzo email."
         ),
         Faq(
             title = "Devo tenere l'app aperta per farla funzionare correttamente? Posso usare altre app?",
@@ -251,7 +251,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Posso cambiare la lingua dell'app?",
-            content = "Le lingue attualmente supportate dall'app sono l'italiano, l'inglese, il tedesco, il francese, lo spagnolo e il portoghese. L'app usa la stessa lingua che hai impostato sul tuo smartphone, se disponibile, altrimenti l'inglese. Perciò per cambiare la lingua dell'app dovrai cambiare la lingua del tuo dispositivo."
+            content = "Le lingue attualmente supportate dall'app sono l'italiano, l'inglese, il tedesco, il francese e lo spagnolo. L'app usa la stessa lingua che hai impostato sul tuo smartphone, se disponibile, altrimenti l'inglese. Perciò per cambiare la lingua dell'app dovrai cambiare la lingua del tuo dispositivo."
         )
     ),
     EN to listOf(
@@ -373,7 +373,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Can I change the language of the app?",
-            content = "The languages currently supported are Italian, English, German, French, Spanish, and Portuguese. The app uses the same language that's set on your smartphone, where available. Otherwise, it uses English. Therefore, to change the language of the app, you'll need to change the language of your device."
+            content = "The languages currently supported are Italian, English, German, French and Spanish. The app uses the same language that's set on your smartphone, where available. Otherwise, it uses English. Therefore, to change the language of the app, you'll need to change the language of your device."
         )
     )
 )
