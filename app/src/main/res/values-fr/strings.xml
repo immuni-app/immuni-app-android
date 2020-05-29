@@ -93,7 +93,7 @@
   <string name="onboarding_communication_advice_action">J\'ai compris</string>
   <string name="onboarding_complete_title">Configuration terminée</string>
   <string name="home_view_service_active_title">Service<b>activé</b></string>
-  <string name="home_view_service_active_advice">Immuni fonctionne même lorsque l’application est fermée.</string>
+  <string name="home_view_service_active_advice">Ouvrez Immuni périodiquement pour vérifier son statut.</string>
   <string name="home_view_service_not_active_title">Service<b>désactivé</b></string>
   <string name="home_view_service_not_active_subtitle">Agissez dès maintenant pour permettre à Immuni de fonctionner correctement.</string>
   <string name="home_view_service_not_active_button">Réactiver Immuni</string>

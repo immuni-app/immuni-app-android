@@ -95,11 +95,9 @@
   <string name="onboarding_communication_advice_description">Immuni will only ever communicate with you via the app and the corresponding notifications. <b>Be wary of any text, phone call, email, or other kind of alert</b> that appears to be from Immuni, especially if it asks you for personal information.</string>
   <string name="onboarding_communication_advice_action">Got it</string>
   <string name="onboarding_complete_title">Setup complete</string>
-  <string name="home_view_service_active_title">Service
-<b>active</b></string>
-  <string name="home_view_service_active_advice">Even when the app is closed, Immuni continues to operate.</string>
-  <string name="home_view_service_not_active_title">Service
-<b>inactive</b></string>
+  <string name="home_view_service_active_title">Service<b>active</b></string>
+  <string name="home_view_service_active_advice">Open Immuni periodically to check its status.</string>
+  <string name="home_view_service_not_active_title">Service<b>inactive</b></string>
   <string name="home_view_service_not_active_subtitle">Take action now to allow Immuni to work properly.</string>
   <string name="home_view_service_not_active_button">Reactivate Immuni</string>
   <string name="home_view_info_protection_title">What you can do to protect yourself</string>
