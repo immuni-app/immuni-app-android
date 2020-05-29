@@ -66,12 +66,6 @@ import org.koin.dsl.module
  * Dependency Injection Koin module.
  */
 val appModule = module {
-
-    /**
-     * KVStorage to store generic non-database data encrypted using AES256.
-     */
-    single { KVStorage("state", androidContext(), encrypted = true, moshi = get()) }
-
     /**
      * App Configuration Service APIs
      */
@@ -132,7 +126,12 @@ val appModule = module {
 
     single {
         ConfigurationSettingsStoreRepository(
-            get(),
+            KVStorage(
+                name = "ConfigurationSettingsStoreRepository",
+                context = androidContext(),
+                encrypted = true,
+                moshi = get()
+            ),
             defaultSettings
         )
     }
@@ -174,7 +173,14 @@ val appModule = module {
     }
 
     single {
-        UploadDisablerStore(get())
+        UploadDisablerStore(
+            KVStorage(
+                name = "UploadDisablerStore",
+                context = androidContext(),
+                encrypted = true,
+                moshi = get()
+            )
+        )
     }
 
     single {
@@ -229,7 +235,15 @@ val appModule = module {
     }
 
     single {
-        UserRepository(get())
+        UserRepository(
+            KVStorage(
+                name = "UserRepository",
+                context = androidContext(),
+                encrypted = true,
+                moshi = immuniMoshi
+            )
+
+        )
     }
 
     single {
