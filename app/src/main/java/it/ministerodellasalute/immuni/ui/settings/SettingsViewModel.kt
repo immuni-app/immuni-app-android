@@ -40,17 +40,6 @@ class SettingsViewModel(
         )
     }
 
-    fun onSupportClick(fragment: Fragment) {
-        val email = settings.supportEmail
-
-        fragment.startSendingEmail(
-            email,
-            fragment.getString(R.string.app_name),
-            "",
-            fragment.getString(R.string.settings_setting_contact_support)
-        )
-    }
-
     fun openExposureSettings(fragment: SettingsFragment) {
         fragment.startActivityForResult(
             ExposureNotificationClient.exposureNotificationSettingsIntent,

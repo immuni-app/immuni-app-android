@@ -52,7 +52,6 @@ data class ConfigurationSettings(
     @field:Json(name = "dummy_teks_request_probabilities") val dummyTeksRequestProbabilities: List<Double>,
     @field:Json(name = "teks_max_summary_count") val teksMaxSummaryCount: Int,
     @field:Json(name = "teks_max_info_count") val teksMaxInfoCount: Int,
-    @field:Json(name = "support_email") val supportEmail: String = defaultSettings.supportEmail
     @field:Json(name = "teks_packet_size") val teksPacketSize: Int
 )
 
@@ -107,7 +106,6 @@ private fun languageMap(map: (Language) -> String): Map<String, String> {
 // FIXME define sensible defaults!
 val defaultSettings = ConfigurationSettings(
     minimumBuildVersion = 0,
-    supportEmail = "",
     faqUrls = languageMap { "https://get.immuni.gov.it/docs/faq-${it.code}.json" },
     termsOfUseUrls = languageMap { "https://get.immuni.gov.it/docs/app-tou-${it.code}.html" },
     privacyNoticeUrls = languageMap { "https://get.immuni.gov.it/docs/app-pn-${it.code}.html" },
