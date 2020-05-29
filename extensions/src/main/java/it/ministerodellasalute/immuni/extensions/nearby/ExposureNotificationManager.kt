@@ -217,6 +217,10 @@ class ExposureNotificationManager(
                     tekRequestCompleter?.completeExceptionally(e)
                     tekRequestCompleter = null
                     throw e
+                } catch (e: Exception) {
+                    log("user denied permissions")
+                    tekRequestCompleter = null
+                    throw e
                 }
             } else {
                 log("No RESOLUTION_REQUIRED in result, sending to settings")
