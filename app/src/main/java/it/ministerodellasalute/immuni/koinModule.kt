@@ -55,6 +55,8 @@ import it.ministerodellasalute.immuni.ui.setup.SetupViewModel
 import it.ministerodellasalute.immuni.ui.suggestions.StateCloseViewModel
 import it.ministerodellasalute.immuni.ui.upload.UploadViewModel
 import it.ministerodellasalute.immuni.util.CoroutineContextProvider
+import it.ministerodellasalute.immuni.workers.models.ServiceNotActiveNotificationWorkerStatus
+import it.ministerodellasalute.immuni.workers.repositories.ServiceNotActiveNotificationWorkerRepository
 import java.security.SecureRandom
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -137,6 +139,18 @@ val appModule = module {
 
     single {
         RegionRepository()
+    }
+
+    single {
+        ServiceNotActiveNotificationWorkerRepository(
+            KVStorage(
+                name = "ServiceNotActiveNotificationWorkerRepository",
+                context = androidContext(),
+                cacheInMemory = false,
+                encrypted = true,
+                moshi = immuniMoshi
+            )
+        )
     }
 
     single {
@@ -263,6 +277,7 @@ val immuniMoshi = moshi(
         ExposureIngestionService.Province::class to ExposureIngestionService.Province.MoshiAdapter()
     ),
     extraFactories = listOf(
-        ExposureStatus.moshiAdapter
+        ExposureStatus.moshiAdapter,
+        ServiceNotActiveNotificationWorkerStatus.moshiAdapter
     )
 )

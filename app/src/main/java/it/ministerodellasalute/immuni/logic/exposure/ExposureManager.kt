@@ -52,6 +52,11 @@ class ExposureManager(
 
     val exposureStatus = exposureStatusRepository.exposureStatus
 
+    suspend fun updateAndGetServiceIsActive(): Boolean {
+        exposureNotificationManager.update()
+        return exposureNotificationManager.areExposureNotificationsEnabled.value ?: false
+    }
+
     override suspend fun processKeys(
         serverDate: Date,
         summary: ExposureNotificationClient.ExposureSummary,

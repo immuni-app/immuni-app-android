@@ -22,7 +22,12 @@ import androidx.work.WorkerParameters
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
+import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
+import it.ministerodellasalute.immuni.workers.models.ServiceNotActiveNotificationWorkerStatus
+import it.ministerodellasalute.immuni.workers.repositories.ServiceNotActiveNotificationWorkerRepository
+import java.util.*
+import kotlinx.coroutines.delay
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -30,30 +35,74 @@ class ServiceNotActiveNotificationWorker(
     appContext: Context,
     params: WorkerParameters
 ) : CoroutineWorker(appContext, params), KoinComponent {
+    private val repository: ServiceNotActiveNotificationWorkerRepository by inject()
+    private val settingsManager: ConfigurationSettingsManager by inject()
     private val exposureManager: ExposureManager by inject()
     private val notificationManager: AppNotificationManager by inject()
     private val workerManager: WorkerManager by inject()
 
     override suspend fun doWork(): Result {
-        return doWork(
-            exposureManager.isBroadcastingActive.value ?: false,
-            notificationManager,
-            workerManager
-        )
+        Impl(
+            Date(),
+            settingsManager.settings.value.serviceNotActiveNotificationPeriod,
+            exposureManager,
+            repository,
+            notificationManager
+        ).doWork()
+
+        workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.REPLACE)
+        return Result.success()
     }
 
-    companion object {
-        fun doWork(
-            isServiceActive: Boolean,
-            notificationManager: AppNotificationManager,
-            workerManager: WorkerManager
-        ): Result {
-            if (!isServiceActive) {
-                notificationManager.triggerNotification(NotificationType.ServiceNotActive)
-            }
+    class Impl(
+        private val currentDate: Date,
+        private val serviceNotActiveNotificationPeriod: Int,
+        private val exposureManager: ExposureManager,
+        private val repository: ServiceNotActiveNotificationWorkerRepository,
+        private val notificationManager: AppNotificationManager
+    ) {
+        suspend fun doWork() {
+            val serviceIsActive = exposureManager.updateAndGetServiceIsActive()
 
-            workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.REPLACE)
-            return Result.success()
+            // give time to the listeners to propagate the updated status
+            delay(5000)
+
+            if (exposureManager.isBroadcastingActive.value == true) {
+                if (repository.status !is ServiceNotActiveNotificationWorkerStatus.Working) {
+                    repository.status = ServiceNotActiveNotificationWorkerStatus.Working()
+                }
+
+                return
+            }
+            val pastStatus = repository.status ?: return
+
+            when (pastStatus) {
+                is ServiceNotActiveNotificationWorkerStatus.Working -> {
+                    // if the past status was `Working`, we trigger a notification only if google play services has
+                    // not already sent one (i.e. the service itself has been disabled)
+                    if (!serviceIsActive) {
+                        notificationManager.triggerNotification(NotificationType.ServiceNotActive)
+                    }
+
+                    repository.status =
+                        ServiceNotActiveNotificationWorkerStatus.NotWorking(currentDate)
+                }
+                is ServiceNotActiveNotificationWorkerStatus.NotWorking -> {
+                    val secondsSinceLastNotification =
+                        (currentDate.time - pastStatus.lastNotificationTime.time) / 1000
+
+                    // time is skewed, reset everything
+                    if (secondsSinceLastNotification < 0) {
+                        repository.status =
+                            ServiceNotActiveNotificationWorkerStatus.NotWorking(currentDate)
+                    }
+                    if (secondsSinceLastNotification >= serviceNotActiveNotificationPeriod) {
+                        notificationManager.triggerNotification(NotificationType.ServiceNotActive)
+                        repository.status =
+                            ServiceNotActiveNotificationWorkerStatus.NotWorking(currentDate)
+                    }
+                }
+            }
         }
     }
 }

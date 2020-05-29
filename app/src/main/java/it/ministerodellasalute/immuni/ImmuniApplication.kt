@@ -108,15 +108,6 @@ class ImmuniApplication : Application(), KoinComponent {
 
     private fun updateServiceNotActiveNotificationWorker() {
         workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.KEEP)
-
-        val scope = CoroutineScope(Dispatchers.Default)
-        // When isBroadcastingActive becomes false, it means that the user manually disabled BLE or Location Services
-        // and so already received a notification from Google Play Services with that specific warning.
-        // We reschedule the worker, so that our custom notification will be triggered only if the user still didn't fix the issue
-        // by the time the Work is run again.
-        exposureManager.isBroadcastingActive.filter { it == false }.onEach {
-            workerManager.scheduleServiceNotActiveNotificationWorker(ExistingWorkPolicy.REPLACE)
-        }.launchIn(scope)
     }
 
     private fun updateForceUpdateNotificationWorker() {
