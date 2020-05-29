@@ -52,6 +52,7 @@ import it.ministerodellasalute.immuni.ui.onboarding.OnboardingViewModel
 import it.ministerodellasalute.immuni.ui.otp.OtpViewModel
 import it.ministerodellasalute.immuni.ui.settings.SettingsViewModel
 import it.ministerodellasalute.immuni.ui.setup.SetupViewModel
+import it.ministerodellasalute.immuni.ui.suggestions.StateCloseViewModel
 import it.ministerodellasalute.immuni.ui.upload.UploadViewModel
 import it.ministerodellasalute.immuni.util.CoroutineContextProvider
 import java.security.SecureRandom
@@ -169,7 +170,7 @@ val appModule = module {
     single {
         ExposureManager(
             get(),
-            ExposureNotificationManager(androidContext()),
+            ExposureNotificationManager(androidContext(), get()),
             get(),
             get(),
             get(),
@@ -254,6 +255,7 @@ val appModule = module {
     viewModel { ForceUpdateViewModel(get()) }
     viewModel { FaqViewModel(get()) }
     viewModel { SettingsViewModel(get()) }
+    viewModel { StateCloseViewModel(get()) }
 }
 
 val immuniMoshi = moshi(

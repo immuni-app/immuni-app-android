@@ -37,6 +37,7 @@
     <TextView
         android:id="@+id/title"
         style="@style/H2SubHeading"
+        android:fontFamily="@font/euclid_circular_bold"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

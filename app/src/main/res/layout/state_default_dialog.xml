@@ -65,7 +65,7 @@
                     android:layout_weight="1"
                     android:contentDescription="@string/home_view_info_protection_title"
                     android:scaleType="matrix"
-                    android:src="@drawable/illustration_doctor"
+                    app:srcCompat="@drawable/illustration_doctor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/exit"
-                    android:src="@drawable/ic_cross_white" />
+                    app:srcCompat="@drawable/ic_cross_white" />
 
                 <TextView
                     android:id="@+id/toolbarTitle"
@@ -144,12 +144,14 @@
 
             <TextView
                 style="@style/P1Text"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:elevation="@dimen/cards_elevation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="30dp"
+                android:layout_margin="25dp"
                 android:background="@drawable/rounded_corners_30dp"
                 android:backgroundTint="#675AFF"
-                android:fontFamily="@font/euclid_circular_medium"
+                android:fontFamily="@font/euclid_circular_semi_bold"
                 android:padding="24dp"
                 android:text="@string/suggestions_neutral_alert"
                 android:textColor="#FFFFFF" />
@@ -158,36 +160,44 @@
                 style="@style/P1Text.Generic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp"
-                android:paddingBottom="30dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:paddingBottom="20dp"
                 android:text="@string/suggestions_neutral_message"
                 android:textColor="@color/grey_dark" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_ministry"
-                android:text="@string/suggestions_instruction_ministerial_decree" />
+                android:text="@string/suggestions_instruction_ministerial_decree"
+                app:drawableStartCompat="@drawable/ic_ministry_small" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_wash_hands"
-                android:text="@string/suggestions_instruction_wash_hands" />
+                android:text="@string/suggestions_instruction_wash_hands"
+                app:drawableStartCompat="@drawable/ic_wash_hands" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_sneeze"
-                android:text="@string/suggestions_instruction_use_napkins" />
+                android:text="@string/suggestions_instruction_use_napkins"
+                app:drawableStartCompat="@drawable/ic_sneeze" />
 
             <TextView
                 style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_social_distancing"
-                android:text="@string/suggestions_instruction_social_distance" />
+                android:text="@string/suggestions_instruction_social_distance"
+                app:drawableStartCompat="@drawable/ic_social_distancing" />
 
-            <TextView
-                style="@style/ParagraphCard"
-                android:drawableStart="@drawable/ic_mask"
-                android:text="@string/suggestions_instruction_mask" />
+            <LinearLayout style="@style/ParagraphCard.Layout">
+
+                <TextView
+                    style="@style/ParagraphCard.Title"
+                    android:text="@string/suggestions_instruction_mask_title"
+                    app:drawableStartCompat="@drawable/ic_mask" />
+
+                <TextView
+                    style="@style/ParagraphCard.Message"
+                    android:text="@string/suggestions_instruction_mask_message" />
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

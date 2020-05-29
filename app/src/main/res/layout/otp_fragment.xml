@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="38dp"
                 android:contentDescription="@string/upload_data_warning_message"
-                android:src="@drawable/ic_warning_small"
+                app:srcCompat="@drawable/ic_warning_small"
                 app:layout_constraintBottom_toBottomOf="@+id/healthcareAuthorizationWarning"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/healthcareAuthorizationWarning" />
@@ -322,7 +322,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_back" />
+                    app:srcCompat="@drawable/ic_back" />
 
                 <TextView
                     android:id="@+id/toolbarTitle"

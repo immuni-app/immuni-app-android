@@ -27,11 +27,11 @@ import it.ministerodellasalute.immuni.logic.settings.models.FetchSettingsResult
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import it.ministerodellasalute.immuni.network.api.NetworkError
 import it.ministerodellasalute.immuni.network.api.NetworkResource
-import kotlinx.coroutines.withTimeout
 import java.io.File
 import java.io.InputStream
 import java.util.*
 import kotlin.math.max
+import kotlinx.coroutines.withTimeout
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

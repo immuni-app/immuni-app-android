@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="130.43478"
+    android:viewportHeight="130.43478"
+    android:tint="#FFFFFF">
+  <group android:translateX="5.2173915"
+      android:translateY="5.2173915">
+    <path
+        android:pathData="M60,120C93.137,120 120,93.137 120,60C120,26.863 93.137,0 60,0C26.863,0 0,26.863 0,60C0,93.137 26.863,120 60,120ZM74.302,28.253C74.302,36.151 67.899,42.555 60,42.555C52.101,42.555 45.698,36.151 45.698,28.253C45.698,20.354 52.101,13.951 60,13.951C67.899,13.951 74.302,20.354 74.302,28.253ZM47.374,46.889C42.569,42.712 35.287,43.22 31.109,48.025C26.931,52.83 27.44,60.112 32.245,64.29L42.429,73.145L32.246,81.999C27.441,86.177 26.932,93.459 31.11,98.264C35.288,103.069 42.57,103.577 47.375,99.399L77.571,73.145L47.374,46.889ZM64.081,91.971L72.625,99.399C77.43,103.577 84.712,103.069 88.889,98.264C93.067,93.459 92.559,86.177 87.754,81.999L81.652,76.693L64.081,91.971ZM81.652,69.596L87.755,64.29C92.56,60.112 93.068,52.83 88.89,48.025C84.712,43.22 77.43,42.712 72.625,46.889L64.081,54.319L81.652,69.596Z"
+        android:fillColor="#ffffff"
+        android:fillType="evenOdd"/>
+  </group>
+</vector>

@@ -53,16 +53,13 @@ class ConfigurationSettingsStoreRepository(
     }
 
     fun saveFaqs(language: Language, faq: List<Faq>) = synchronized(this) {
-        var faqs = kvStorage[faqsKey]
-        if (faqs == null) {
-            faqs = Faqs(faqs = mapOf())
-        }
-        kvStorage[faqsKey] = faqs.copy(
+        val faqs = kvStorage[faqsKey]
+        kvStorage[faqsKey] = faqs?.copy(
             faqs = mutableMapOf<Language, List<Faq>>().apply {
                 putAll(faqs.faqs)
                 put(language, faq)
             }
-        )
+        ) ?: Faqs(faqs = mapOf(language to faq))
     }
 
     fun loadFaqs(language: Language): List<Faq> = synchronized(this) {
@@ -70,7 +67,7 @@ class ConfigurationSettingsStoreRepository(
         // we delete it and call loadFaqs again to return the default ones
         return try {
             kvStorage[faqsKey, Faqs(faqs = defaultFaqs)].faqs[language]
-                ?: error("Faqs for language ${language.code} not found")
+                ?: if (language != Language.EN) loadFaqs(Language.EN) else error("Fallback with English Faqs failed")
         } catch (e: Exception) {
             kvStorage.delete(faqsKey)
             loadFaqs(language)

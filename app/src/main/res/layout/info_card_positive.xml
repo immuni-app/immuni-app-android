@@ -50,6 +50,7 @@
             android:id="@+id/infoSubtitle"
             style="@style/P1Text"
             android:textSize="15sp"
+            android:fontFamily="@font/euclid_circular_bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"

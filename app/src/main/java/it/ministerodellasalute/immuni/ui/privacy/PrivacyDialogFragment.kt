@@ -45,7 +45,7 @@ class PrivacyDialogFragment : PopupDialogFragment() {
             findNavController().popBackStack()
             ExternalLinksHelper.openLink(
                 requireContext(),
-                settingsManager.settings.value.privacyPolicyUrl
+                settingsManager.privacyNoticeUrl
             )
         }
     }

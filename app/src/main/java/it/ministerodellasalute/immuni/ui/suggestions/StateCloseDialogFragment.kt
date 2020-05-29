@@ -16,8 +16,10 @@
 package it.ministerodellasalute.immuni.ui.suggestions
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.View
 import androidx.core.widget.NestedScrollView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
@@ -25,11 +27,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import kotlinx.android.synthetic.main.state_close_dialog.*
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_dialog) {
+
+    private lateinit var viewModel: StateCloseViewModel
 
     override val appBar: AppBarLayout
         get() = requireView().findViewById(R.id.appBar)
@@ -44,6 +50,7 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = getViewModel()
 
         hideIfDoctorContact.setSafeOnClickListener {
             showASLAlert()
@@ -52,6 +59,13 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
         hideNotice.setSafeOnClickListener {
             showHideAlert()
         }
+
+        viewModel.exposureDate.observe(viewLifecycleOwner, Observer {
+            if (it is ExposureStatus.Exposed) {
+                val dateStr = DateFormat.getLongDateFormat(requireContext()).format(it.lastExposureDate)
+                pageSubtitle.text = String.format(requireContext().getString(R.string.suggestions_risk_subtitle), dateStr)
+            }
+        })
     }
 
     private fun showHideAlert() {

@@ -28,15 +28,15 @@ class SettingsViewModel(
     private val settingsManager: ConfigurationSettingsManager
 ) : ViewModel(), KoinComponent {
     companion object {
-        const val EXPOSRE_NOTIFICATION_SETTINGS_REQUEST = 2206
+        const val EXPOSURE_NOTIFICATION_SETTINGS_REQUEST = 2206
     }
 
     private val settings get() = settingsManager.settings.value
 
-    fun onTosClick(fragment: Fragment) {
+    fun onTouClick(fragment: Fragment) {
         ExternalLinksHelper.openLink(
             fragment.requireContext(),
-            settings.termsOfServiceUrl
+            settingsManager.termsOfUseUrl
         )
     }
 
@@ -46,7 +46,7 @@ class SettingsViewModel(
         fragment.startSendingEmail(
             email,
             fragment.getString(R.string.app_name),
-            fragment.getString(R.string.contact_us_email_message),
+            "",
             fragment.getString(R.string.settings_setting_contact_support)
         )
     }
@@ -54,7 +54,7 @@ class SettingsViewModel(
     fun openExposureSettings(fragment: SettingsFragment) {
         fragment.startActivityForResult(
             ExposureNotificationClient.exposureNotificationSettingsIntent,
-            EXPOSRE_NOTIFICATION_SETTINGS_REQUEST
+            EXPOSURE_NOTIFICATION_SETTINGS_REQUEST
         )
     }
 }

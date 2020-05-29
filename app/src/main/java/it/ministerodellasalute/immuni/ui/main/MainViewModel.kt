@@ -27,7 +27,7 @@ import kotlinx.coroutines.flow.*
 class MainViewModel(
     private val context: Context,
     private val pushNotificationManager: PushNotificationManager,
-    exposureManager: ExposureManager,
+    private val exposureManager: ExposureManager,
     appLifecycleObserver: AppLifecycleObserver
 ) : ViewModel() {
 
@@ -37,10 +37,11 @@ class MainViewModel(
     init {
         combine(
             exposureManager.isBroadcastingActive,
+            exposureManager.exposureStatus,
             appLifecycleObserver.isActive.filter { it }
-        ) { broadcastingIsActive, isActive ->
-            Pair(broadcastingIsActive, isActive)
-        }.onEach { (broadcastingIsActive, _) ->
+        ) { broadcastingIsActive, status, isActive ->
+            Triple(broadcastingIsActive, status, isActive)
+        }.onEach { (broadcastingIsActive, _, _) ->
             val protectionActive = when (broadcastingIsActive) {
                 null -> null
                 else -> broadcastingIsActive && pushNotificationManager.areNotificationsEnabled()
@@ -52,7 +53,7 @@ class MainViewModel(
     private fun homeListModel(protectionActive: Boolean?): List<HomeItemType> {
         val items = mutableListOf<HomeItemType>()
         protectionActive?.let {
-            items.add(ProtectionCard(it))
+            items.add(ProtectionCard(it, exposureManager.exposureStatus.value))
         }
         items.add(SectionHeader(context.getString(R.string.home_view_info_header_title)))
         items.add(SelfCareCard)

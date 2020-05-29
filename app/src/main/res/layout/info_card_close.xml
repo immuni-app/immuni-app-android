@@ -75,6 +75,7 @@
         android:text="@string/home_view_header_card_risk_button"
         android:textColor="#fff"
         android:textSize="15sp"
+        android:fontFamily="@font/euclid_circular_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/infoCardAnimation"
         app:layout_constraintStart_toStartOf="@+id/infoTitle"

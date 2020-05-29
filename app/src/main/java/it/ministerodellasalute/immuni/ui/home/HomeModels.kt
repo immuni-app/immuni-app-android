@@ -15,6 +15,8 @@
 
 package it.ministerodellasalute.immuni.ui.home
 
+import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
+
 /**
  * Represents an item in the home list.
  */
@@ -22,7 +24,8 @@ package it.ministerodellasalute.immuni.ui.home
 sealed class HomeItemType
 
 class ProtectionCard(
-    val active: Boolean
+    val active: Boolean,
+    val status: ExposureStatus
 ) : HomeItemType()
 
 data class SectionHeader(
