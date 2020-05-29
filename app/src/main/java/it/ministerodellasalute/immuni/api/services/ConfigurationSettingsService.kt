@@ -265,11 +265,11 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Does the app track my location?",
-            content = "No. Immuni's exposure notification system is based on Bluetooth Low Energy and doesn't collect any geolocalisation data, including GPS data. Immuni doesn't (and can't) know where you go or who you meet."
+            content = "No. Immuni's exposure notification system is based on Bluetooth Low Energy and doesn't collect any geolocation data, including GPS data. Immuni doesn't (and can't) know where you go or who you meet."
         ),
         Faq(
             title = "How's my privacy protected?",
-            content = "Throughout the entirety of Immuni's design and development, we have placed enormous focus on privacy protection.\n\nHere's a list of some of the measures Immuni uses to protect your data:\n\n • The app doesn't collect any data that could lead to it knowing your identity. For example, it doesn't ask for (and can't obtain) your name, date of birth, address, telephone number, or email address.\n\n • The app doesn't collect any geolocalisation data, including GPS data. Your movements aren't tracked in any shape or form.\n\n • The Bluetooth Low Energy code broadcast by the app is generated completely randomly and doesn't contain any information about you or your device. This code changes several times each hour, protecting your privacy even more.\n\n • All Immuni data stored on your smartphone is encrypted.\n\n • All connections between the app and the server are encrypted.\n\n • All data, whether stored on the device or on the server, is deleted when no longer relevant, and certainly no later than December 31, 2020.\n\n • The Ministry of Health is the entity that collects your data. The data is used solely with the aim of containing the COVID-19 epidemic or for scientific research.\n\n • The data is stored on servers located in Italy and managed by public entities."
+            content = "Throughout the entirety of Immuni's design and development, we have placed enormous focus on privacy protection.\n\nHere's a list of some of the measures Immuni uses to protect your data:\n\n • The app doesn't collect any data that could lead to it knowing your identity. For example, it doesn't ask for (and can't obtain) your name, date of birth, address, telephone number, or email address.\n\n • The app doesn't collect any geolocation data, including GPS data. Your movements aren't tracked in any shape or form.\n\n • The Bluetooth Low Energy code broadcast by the app is generated completely randomly and doesn't contain any information about you or your device. This code changes several times each hour, protecting your privacy even more.\n\n • All Immuni data stored on your smartphone is encrypted.\n\n • All connections between the app and the server are encrypted.\n\n • All data, whether stored on the device or on the server, is deleted when no longer relevant, and certainly no later than December 31, 2020.\n\n • The Ministry of Health is the body that collects your data. The data is used solely with the aim of containing the COVID-19 epidemic or for scientific research.\n\n • The data is stored on servers located in Italy and managed by public bodies."
         ),
         Faq(
             title = "Is the code open source?",
@@ -285,7 +285,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "What should I do to make sure I'm using the app correctly?",
-            content = "Failing to use the app correctly makes Immuni much less effective and increases the risk to you, your loved ones, and the community.\n\nTo make sure you are using the app as intended, simply open it and check that ‘Service active' is written in the Home section. If it's not, tap on ‘Reactivate Immuni' and follow the instructions to make the app work correctly.\n\nSome other important suggestions to ensure that Immuni is effective:\n\n • When you leave your house, always bring your smartphone with Immuni installed.\n\n • Don't disable Bluetooth (except when you're sleeping, if you prefer).\n\n • Don't uninstall the app.\n\n • When the app sends you a notification, it's vital that you read it, open the app, and follow all the instructions provided. For example, if the app asks you to upgrade it, please do so. If the app recommends that you self-isolate and call your general practitioner, it's crucial that you do so right away."
+            content = "Failing to use the app correctly makes Immuni much less effective and increases the risk to you, your loved ones, and the community.\n\nTo make sure you are using the app as intended, simply open it and check that 'Service active' is written in the Home section. If it's not, tap on 'Reactivate Immuni' and follow the instructions to make the app work correctly.\n\nSome other important suggestions to ensure that Immuni is effective:\n\n • When you leave your house, always bring your smartphone with Immuni installed.\n\n • Don't disable Bluetooth (except when you're sleeping, if you prefer).\n\n • Don't uninstall the app.\n\n • When the app sends you a notification, it's vital that you read it, open the app, and follow all the instructions provided. For example, if the app asks you to upgrade it, please do so. If the app recommends that you self-isolate and call your general practitioner, it's crucial that you do so right away."
         ),
         Faq(
             title = "Does this app make medical diagnoses or provide medical advice?",
@@ -373,7 +373,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Can I change the language of the app?",
-            content = "The languages currently supported are Italian, English, German, French and Spanish. The app uses the same language that's set on your smartphone, where available. Otherwise, it uses English. Therefore, to change the language of the app, you'll need to change the language of your device."
+            content = "The languages currently supported are Italian, English, German, French, and Spanish. The app uses the same language that's set on your smartphone, where available. Otherwise, it uses English. Therefore, to change the language of the app, you'll need to change the language of your device."
         )
     )
 )
