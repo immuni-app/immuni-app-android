@@ -79,7 +79,10 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
 
         viewModel.loading.observe(viewLifecycleOwner) {
             activity?.loading(it, ProgressDialogFragment(), Bundle().apply {
-                putString(ProgressDialogFragment.MESSAGE, getString(R.string.upload_data_verify_loading))
+                putString(
+                    ProgressDialogFragment.MESSAGE,
+                    getString(R.string.upload_data_verify_loading)
+                )
             })
         }
 
