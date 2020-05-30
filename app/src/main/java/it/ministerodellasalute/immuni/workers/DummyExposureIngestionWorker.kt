@@ -43,8 +43,8 @@ class DummyExposureIngestionWorker(
     private val workerManager: WorkerManager by inject()
     private val appLifecycleObserver: AppLifecycleObserver by inject()
     private val exposureManager: ExposureManager by inject()
-    private val random = SecureRandom()
     private val settingsManager: ConfigurationSettingsManager by inject()
+    private val random = SecureRandom()
 
     override suspend fun doWork(): Result {
         val settings = settingsManager.settings.value
@@ -72,7 +72,8 @@ class DummyExposureIngestionWorker(
         private var counter = 0
         suspend fun doWork(): Result {
             try {
-                coroutineScope {
+                // keep the maximum execution time within the 10 minutes limit imposed by WorkManager
+                withTimeout(9 * 60 * 1000L) {
                     // cancel and reschedule if the app goes to foreground while executing this work
                     if (appLifecycleObserver.isInForeground.value) {
                         throw Exception("App is in foreground")
@@ -112,7 +113,8 @@ class DummyExposureIngestionWorker(
         }
 
         private suspend fun waitForNextUpload() {
-            val timeToWait = random.exponential(configuration.teksAverageRequestWaitingTime.toLong() * 1000)
+            val timeToWait =
+                random.exponential(configuration.teksAverageRequestWaitingTime.toLong() * 1000)
             delay(timeToWait)
         }
     }

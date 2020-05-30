@@ -46,12 +46,15 @@ class ExposureNotificationManager(
         )
     }
 
-    constructor(context: Context) : this(
+    constructor(context: Context, lifecycleObserver: AppLifecycleObserver) : this(
         locationStateFlow = LocationStateFlow(context),
         bluetoothStateFlow = BluetoothStateFlow(context),
-        lifecycleObserver = AppLifecycleObserver(),
-        exposureNotificationClient =
-        ExposureNotificationClientWrapper(Nearby.getExposureNotificationClient(context))
+        lifecycleObserver = lifecycleObserver,
+        exposureNotificationClient = ExposureNotificationClientWrapper(
+            Nearby.getExposureNotificationClient(
+                context
+            )
+        )
     )
 
     companion object {
@@ -212,6 +215,10 @@ class ExposureNotificationManager(
                 } catch (e: IntentSender.SendIntentException) {
                     log("Error calling startResolutionForResult, sending to settings")
                     tekRequestCompleter?.completeExceptionally(e)
+                    tekRequestCompleter = null
+                    throw e
+                } catch (e: Exception) {
+                    log("user denied permissions")
                     tekRequestCompleter = null
                     throw e
                 }

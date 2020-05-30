@@ -128,9 +128,8 @@ class HomeListAdapter(
                     holder.title.text = resources.getString(R.string.home_protection_active)
                         .color('{', '}',
                             context.getColorCompat(R.color.colorPrimary))
+                    holder.subtitle.text = resources.getString(R.string.home_view_service_active_advice)
 
-                    holder.subtitle.text = resources.getString(R.string.home_view_service_active_subtitle)
-                  
                     // animate fade-in to avoid glitch on tab change
                     holder.lottieBg.alpha = 0f
                     holder.lottieBg.setAnimation(R.raw.lottie_shield_full)
@@ -157,7 +156,7 @@ class HomeListAdapter(
 
                     holder.lottieFg.gone()
 
-                    if(item.status != ExposureStatus.None()) {
+                    if (item.status != ExposureStatus.None()) {
                         holder.reactivate.setTint(context.getColor(R.color.grey_dark))
                     } else {
                         holder.reactivate.setTint(context.getColor(R.color.danger))

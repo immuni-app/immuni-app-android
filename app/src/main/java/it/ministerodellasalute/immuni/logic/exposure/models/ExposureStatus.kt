@@ -17,7 +17,6 @@ package it.ministerodellasalute.immuni.logic.exposure.models
 
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
-import it.ministerodellasalute.immuni.extensions.utils.DateUtils.MILLIS_IN_A_DAY
 import java.util.*
 
 sealed class ExposureStatus {
@@ -33,12 +32,8 @@ sealed class ExposureStatus {
     data class None(@Transient private val foo: Int = 0) : ExposureStatus()
 
     @JsonClass(generateAdapter = true)
-    data class Exposed(val lastExposureDate: Date) : ExposureStatus() {
-        // FIXME use me
-        fun daysSinceLastExposure(serverDate: Date): Int {
-            return ((serverDate.time - lastExposureDate.time) / MILLIS_IN_A_DAY).toInt()
-        }
-    }
+    data class Exposed(val lastExposureDate: Date, val acknowledged: Boolean = false) :
+        ExposureStatus()
 
     @JsonClass(generateAdapter = true)
     data class Positive(@Transient private val foo: Int = 0) : ExposureStatus()

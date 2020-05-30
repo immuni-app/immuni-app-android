@@ -55,6 +55,8 @@ import it.ministerodellasalute.immuni.ui.setup.SetupViewModel
 import it.ministerodellasalute.immuni.ui.suggestions.StateCloseViewModel
 import it.ministerodellasalute.immuni.ui.upload.UploadViewModel
 import it.ministerodellasalute.immuni.util.CoroutineContextProvider
+import it.ministerodellasalute.immuni.workers.models.ServiceNotActiveNotificationWorkerStatus
+import it.ministerodellasalute.immuni.workers.repositories.ServiceNotActiveNotificationWorkerRepository
 import java.security.SecureRandom
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -64,12 +66,6 @@ import org.koin.dsl.module
  * Dependency Injection Koin module.
  */
 val appModule = module {
-
-    /**
-     * KVStorage to store generic non-database data encrypted using AES256.
-     */
-    single { KVStorage("state", androidContext(), encrypted = true, moshi = get()) }
-
     /**
      * App Configuration Service APIs
      */
@@ -130,13 +126,30 @@ val appModule = module {
 
     single {
         ConfigurationSettingsStoreRepository(
-            get(),
+            KVStorage(
+                name = "ConfigurationSettingsStoreRepository",
+                context = androidContext(),
+                encrypted = true,
+                moshi = get()
+            ),
             defaultSettings
         )
     }
 
     single {
         RegionRepository()
+    }
+
+    single {
+        ServiceNotActiveNotificationWorkerRepository(
+            KVStorage(
+                name = "ServiceNotActiveNotificationWorkerRepository",
+                context = androidContext(),
+                cacheInMemory = false,
+                encrypted = true,
+                moshi = immuniMoshi
+            )
+        )
     }
 
     single {
@@ -160,7 +173,14 @@ val appModule = module {
     }
 
     single {
-        UploadDisablerStore(get())
+        UploadDisablerStore(
+            KVStorage(
+                name = "UploadDisablerStore",
+                context = androidContext(),
+                encrypted = true,
+                moshi = get()
+            )
+        )
     }
 
     single {
@@ -170,8 +190,7 @@ val appModule = module {
     single {
         ExposureManager(
             get(),
-            get(),
-            ExposureNotificationManager(androidContext()),
+            ExposureNotificationManager(androidContext(), get()),
             get(),
             get(),
             get(),
@@ -212,11 +231,19 @@ val appModule = module {
     }
 
     single {
-        UserManager(get(), get(), get())
+        UserManager(get(), get())
     }
 
     single {
-        UserRepository(get())
+        UserRepository(
+            KVStorage(
+                name = "UserRepository",
+                context = androidContext(),
+                encrypted = true,
+                moshi = immuniMoshi
+            )
+
+        )
     }
 
     single {
@@ -264,6 +291,7 @@ val immuniMoshi = moshi(
         ExposureIngestionService.Province::class to ExposureIngestionService.Province.MoshiAdapter()
     ),
     extraFactories = listOf(
-        ExposureStatus.moshiAdapter
+        ExposureStatus.moshiAdapter,
+        ServiceNotActiveNotificationWorkerStatus.moshiAdapter
     )
 )

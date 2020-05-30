@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.api.services
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import it.ministerodellasalute.immuni.api.services.Language.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -30,15 +31,15 @@ interface ConfigurationSettingsService {
     suspend fun settings(@Query("build") build: Long): Response<ConfigurationSettings>
 
     @GET
-    suspend fun faqs(@Url url: String): Response<List<Faq>>
+    suspend fun faqs(@Url url: String): Response<Faqs>
 }
 
 @JsonClass(generateAdapter = true)
 data class ConfigurationSettings(
     @field:Json(name = "minimum_build_version") val minimumBuildVersion: Int,
-    @field:Json(name = "faq_url") val faqUrl: Map<Language, String>,
-    @field:Json(name = "tos_url") val termsOfServiceUrl: String,
-    @field:Json(name = "pp_url") val privacyPolicyUrl: String,
+    @field:Json(name = "faq_url") val faqUrls: Map<String, String>,
+    @field:Json(name = "tou_url") val termsOfUseUrls: Map<String, String>,
+    @field:Json(name = "pn_url") val privacyNoticeUrls: Map<String, String>,
     @field:Json(name = "exposure_configuration") val exposureConfiguration: ExposureConfiguration,
     @field:Json(name = "service_not_active_notification_period") val serviceNotActiveNotificationPeriod: Int,
     @field:Json(name = "onboarding_not_completed_notification_period") val onboardingNotCompletedNotificationPeriod: Int,
@@ -51,8 +52,7 @@ data class ConfigurationSettings(
     @field:Json(name = "dummy_teks_request_probabilities") val dummyTeksRequestProbabilities: List<Double>,
     @field:Json(name = "teks_max_summary_count") val teksMaxSummaryCount: Int,
     @field:Json(name = "teks_max_info_count") val teksMaxInfoCount: Int,
-    @field:Json(name = "teks_packet_size") val teksPacketSize: Int,
-    @field:Json(name = "support_email") val supportEmail: String = defaultSettings.supportEmail
+    @field:Json(name = "teks_packet_size") val teksPacketSize: Int
 )
 
 @JsonClass(generateAdapter = true)
@@ -63,6 +63,11 @@ data class ExposureConfiguration(
     @field:Json(name = "duration_bucket_scores") val durationScores: List<Int>,
     @field:Json(name = "transmission_risk_bucket_scores") val transmissionRiskScores: List<Int>,
     @field:Json(name = "minimum_risk_score") val minimumRiskScore: Int
+)
+
+@JsonClass(generateAdapter = true)
+data class Faqs(
+    @field:Json(name = "faqs") val faqs: List<Faq>
 )
 
 @JsonClass(generateAdapter = true)
@@ -79,48 +84,55 @@ enum class Language(val code: String) {
     IT("it"),
 
     @Json(name = "de")
-    DE("de");
+    DE("de"),
+
+    @Json(name = "fr")
+    FR("fr"),
+
+    @Json(name = "es")
+    ES("es");
 
     companion object {
         fun fromCode(code: String) = values().firstOrNull { it.code == code } ?: EN
     }
 }
 
-// FIXME define sensible defaults!
+private fun languageMap(map: (Language) -> String): Map<String, String> {
+    return mapOf(*Language.values().map { language ->
+        language.code to map(language)
+    }.toTypedArray())
+}
+
 val defaultSettings = ConfigurationSettings(
     minimumBuildVersion = 0,
-    faqUrl = mapOf(
-        Language.IT to "",
-        Language.DE to "",
-        Language.EN to ""
-    ),
-    termsOfServiceUrl = "",
-    privacyPolicyUrl = "",
-    supportEmail = "",
+    faqUrls = languageMap { "https://get.immuni.gov.it/docs/faq-${it.code}.json" },
+    termsOfUseUrls = languageMap { "https://get.immuni.gov.it/docs/app-tou-${it.code}.html" },
+    privacyNoticeUrls = languageMap { "https://get.immuni.gov.it/docs/app-pn-${it.code}.html" },
+
     exposureConfiguration = ExposureConfiguration(
         attenuationThresholds = listOf(50, 70),
-        attenuationScores = listOf(1, 2, 3, 4, 5, 6, 7, 8),
-        daysSinceLastExposureScores = listOf(1, 2, 3, 4, 5, 6, 7, 8),
-        durationScores = listOf(1, 2, 3, 4, 5, 6, 7, 8),
-        transmissionRiskScores = listOf(1, 2, 3, 4, 5, 6, 7, 8),
+        attenuationScores = listOf(0, 0, 3, 5, 7, 7, 7, 7),
+        daysSinceLastExposureScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
+        durationScores = listOf(0, 0, 0, 3, 5, 5, 5, 7),
+        transmissionRiskScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
         minimumRiskScore = 1
     ),
-    exposureDetectionPeriod = 60 * 60 * 2, // 2 hours
-    exposureInfoMinimumRiskScore = 1,
+    exposureInfoMinimumRiskScore = 20,
+    exposureDetectionPeriod = 60 * 60 * 4, // 4 hours
     serviceNotActiveNotificationPeriod = 60 * 60 * 24, // 1 day
     onboardingNotCompletedNotificationPeriod = 60 * 60 * 24, // 1 day
     requiredUpdateNotificationPeriod = 60 * 60 * 24, // 1 day
     riskReminderNotificationPeriod = 60 * 60 * 24, // 1 day
-    dummyTeksAverageOpportunityWaitingTime = 864000 or 2592000,
+    dummyTeksAverageOpportunityWaitingTime = 60 * 24 * 60 * 60, // 60 days
     dummyTeksAverageRequestWaitingTime = 10,
-    dummyTeksRequestProbabilities = listOf(1.0, 0.1),
+    dummyTeksRequestProbabilities = listOf(0.95, 0.1),
     teksMaxSummaryCount = 6 * 14,
     teksMaxInfoCount = 600,
     teksPacketSize = 110_000
 )
 
 val defaultFaqs = mapOf(
-    Language.IT to listOf(
+    IT to listOf(
         Faq(
             title = "Cos'è Immuni?",
             content = "Immuni è un'app creata per aiutarci a combattere le epidemie, a partire da quella del COVID-19:\n\n • L'app si propone di avvertire gli utenti potenzialmente contagiati il prima possibile, anche quando sono asintomatici.\n\n • Questi utenti possono poi isolarsi per evitare di contagiare altri. Questo minimizza la diffusione del virus e, allo stesso tempo, velocizza il ritorno a una vita normale per la maggior parte della popolazione.\n\n • Venendo informati tempestivamente, gli utenti possono anche contattare il proprio medico di medicina generale prima e ridurre così il rischio di complicanze."
@@ -135,7 +147,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Come viene tutelata la mia privacy?",
-            content = "Durante l'intero processo di design e sviluppo di immuni, abbiamo posto grande attenzione sulla tutela della tua privacy.\n\nEccoti una lista di alcune delle misure con cui Immuni protegge i tuoi dati:\n\n • L'app non raccoglie alcun dato personale che consentirebbe di risalire alla tua identità. Per esempio, non ti chiede e non è in grado di ottenere il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o indirizzo email.\n\n • L'app non raccoglie alcun dato di geolocalizzazione, inclusi i dati del GPS. I tuoi spostamenti non sono tracciati in alcun modo.\n\n • Il codice Bluetooth Low Energy trasmesso dall'app è generato in maniera casuale e non contiene alcuna informazione riguardo al tuo smartphone, né su di te. Inoltre, questo codice cambia svariate volte ogni ora, per tutelare ancora meglio la tua privacy.\n\n • I dati salvati sul tuo smartphone sono cifrati.\n\n • Le connessioni tra l'app e il server sono cifrate.\n\n • Tutti i dati, siano essi salvati sul dispositivo o sul server, saranno cancellati non appena non saranno più necessari e in ogni caso non oltre il 31 dicembre 2020.\n\n • È il Ministero della Salute il soggetto che raccoglie i tuoi dati. I dati verranno usati solo per contenere l'epidemia del COVID-19 o per la ricerca scientifica.\n\n • I dati sono salvati su server in Italia e gestiti da soggetti pubblici."
+            content = "Durante l'intero processo di design e sviluppo di Immuni, abbiamo posto grande attenzione sulla tutela della tua privacy.\n\nEccoti una lista di alcune delle misure con cui Immuni protegge i tuoi dati:\n\n • L'app non raccoglie alcun dato che consentirebbe di risalire alla tua identità. Per esempio, non ti chiede e non è in grado di ottenere il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o indirizzo email.\n\n • L'app non raccoglie alcun dato di geolocalizzazione, inclusi i dati del GPS. I tuoi spostamenti non sono tracciati in alcun modo.\n\n • Il codice Bluetooth Low Energy trasmesso dall'app è generato in maniera casuale e non contiene alcuna informazione riguardo al tuo smartphone, né su di te. Inoltre, questo codice cambia svariate volte ogni ora, per tutelare ancora meglio la tua privacy.\n\n • I dati salvati sul tuo smartphone sono cifrati.\n\n • Le connessioni tra l'app e il server sono cifrate.\n\n • Tutti i dati, siano essi salvati sul dispositivo o sul server, saranno cancellati non appena non saranno più necessari e in ogni caso non oltre il 31 dicembre 2020.\n\n • È il Ministero della Salute il soggetto che raccoglie i tuoi dati. I dati verranno usati solo per contenere l'epidemia del COVID-19 o per la ricerca scientifica.\n\n • I dati sono salvati su server in Italia e gestiti da soggetti pubblici."
         ),
         Faq(
             title = "Il codice è open source?",
@@ -207,7 +219,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Devo fare una registrazione con indirizzo email e password?",
-            content = "No. L'app non raccoglie alcun dato personale che consentirebbe di risalire alla tua identità. Per esempio, non ti chiede e non è in grado di ottenere il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o indirizzo email."
+            content = "No. L'app non raccoglie alcun dato che consentirebbe di risalire alla tua identità. Per esempio, non ti chiede e non è in grado di ottenere il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o indirizzo email."
         ),
         Faq(
             title = "Devo tenere l'app aperta per farla funzionare correttamente? Posso usare altre app?",
@@ -215,7 +227,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Il Bluetooth del mio smartphone deve essere sempre attivo?",
-            content = "Il sistema di notifiche di esposizione si basa su Bluetooth Low Energy. È necessario, quindi, che il Bluetooth sia sempre attivo affinché il sistema possa rilevare i tuoi contatti con gli altri utenti. Resti ovviamente libero di attivare o disattivare il bluetooth quando preferisci."
+            content = "Il sistema di notifiche di esposizione si basa su Bluetooth Low Energy. È necessario, quindi, che il Bluetooth sia sempre attivo affinché il sistema possa rilevare i tuoi contatti con gli altri utenti. Resti ovviamente libero di attivare o disattivare il Bluetooth quando preferisci."
         ),
         Faq(
             title = "Tengo spesso il mio smartphone in modalità aereo. Posso continuare a farlo?",
@@ -239,10 +251,10 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Posso cambiare la lingua dell'app?",
-            content = "Le lingue attualmente supportate dall'app sono l'italiano, l'inglese, il tedesco, il francese, lo spagnolo e il portoghese. L'app usa la stessa lingua che hai impostato sul tuo smartphone, se disponibile, altrimenti l'inglese. Perciò per cambiare la lingua dell'app dovrai cambiare la lingua del tuo dispositivo."
+            content = "Le lingue attualmente supportate dall'app sono l'italiano, l'inglese, il tedesco, il francese e lo spagnolo. L'app usa la stessa lingua che hai impostato sul tuo smartphone, se disponibile, altrimenti l'inglese. Perciò per cambiare la lingua dell'app dovrai cambiare la lingua del tuo dispositivo."
         )
     ),
-    Language.EN to listOf(
+    EN to listOf(
         Faq(
             title = "What is Immuni?",
             content = "Immuni is an app that helps us fight epidemics—starting with COVID-19:\n\n • The app aims to notify users at risk of carrying the virus as early as possible—even when they are asymptomatic.\n\n • These users can then self-isolate to avoid infecting others. This minimises the spread of the virus, while speeding up a return to normal life for most people.\n\n • By being alerted early, these users can also contact their general practitioner promptly and lower the risk of serious consequences."
@@ -253,11 +265,11 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Does the app track my location?",
-            content = "No. Immuni's exposure notification system is based on Bluetooth Low Energy and doesn't collect any geolocalisation data, including GPS data. Immuni doesn't (and can't) know where you go or who you meet."
+            content = "No. Immuni's exposure notification system is based on Bluetooth Low Energy and doesn't collect any geolocation data, including GPS data. Immuni doesn't (and can't) know where you go or who you meet."
         ),
         Faq(
             title = "How's my privacy protected?",
-            content = "Throughout the entirety of Immuni's design and development, we have placed enormous focus on privacy protection.\n\nHere's a list of some of the measures Immuni uses to protect your data:\n\n • The app doesn't collect any data that could lead to it knowing your identity. For example, it doesn't ask for (and can't obtain) your name, date of birth, address, telephone number, or email address.\n\n • The app doesn't collect any geolocalisation data, including GPS data. Your movements aren't tracked in any shape or form.\n\n • The Bluetooth Low Energy code broadcast by the app is generated completely randomly and doesn't contain any information about you or your device. This code changes several times each hour, protecting your privacy even more.\n\n • All Immuni data stored on your smartphone are encrypted.\n\n • All connections between the app and the server are encrypted.\n\n • All data, whether stored on the device or on the server, are deleted when no longer relevant, and certainly no later than December 31, 2020.\n\n • The Ministry of Health is the entity that collects your data. The data are used solely with the aim of containing the COVID-19 epidemic or for scientific research.\n\n • The data are stored on servers located in Italy and managed by public entities."
+            content = "Throughout the entirety of Immuni's design and development, we have placed enormous focus on privacy protection.\n\nHere's a list of some of the measures Immuni uses to protect your data:\n\n • The app doesn't collect any data that could lead to it knowing your identity. For example, it doesn't ask for (and can't obtain) your name, date of birth, address, telephone number, or email address.\n\n • The app doesn't collect any geolocation data, including GPS data. Your movements aren't tracked in any shape or form.\n\n • The Bluetooth Low Energy code broadcast by the app is generated completely randomly and doesn't contain any information about you or your device. This code changes several times each hour, protecting your privacy even more.\n\n • All Immuni data stored on your smartphone is encrypted.\n\n • All connections between the app and the server are encrypted.\n\n • All data, whether stored on the device or on the server, is deleted when no longer relevant, and certainly no later than December 31, 2020.\n\n • The Ministry of Health is the body that collects your data. The data is used solely with the aim of containing the COVID-19 epidemic or for scientific research.\n\n • The data is stored on servers located in Italy and managed by public bodies."
         ),
         Faq(
             title = "Is the code open source?",
@@ -265,7 +277,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Why is Immuni important?",
-            content = "Everybody wants to reduce the spread of the epidemic, minimise the risk to our loved ones, and return to a normal life.\n\nImmuni plays an important role in achieving these goals. Thanks to its exposure notification system, the app makes it possible to quickly alert those who may have been exposed to a potentially infectious user, suggesting actions like self-isolation and calling a general practitioner. Such measures are critical in minimising the number of infections and ensuring that those affected can receive prompt, suitable medical attention—which, in turn, reduces the risk of complications.\n"
+            content = "Everybody wants to reduce the spread of the epidemic, minimise the risk to our loved ones, and return to a normal life.\n\nImmuni plays an important role in achieving these goals. Thanks to its exposure notification system, the app makes it possible to quickly alert those who may have been exposed to a potentially infectious user, suggesting actions like self-isolation and calling a general practitioner. Such measures are critical in minimising the number of infections and ensuring that those affected can receive prompt, suitable medical attention—which, in turn, reduces the risk of complications."
         ),
         Faq(
             title = "Is it really necessary that everybody uses the app? What happens if not enough people do so?",
@@ -273,7 +285,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "What should I do to make sure I'm using the app correctly?",
-            content = "Failing to use the app correctly makes Immuni much less effective and increases the risk to you, your loved ones, and the community.\n\nTo make sure you are using the app as intended, simply open it and check that ‘Service active' is written in the Home section. If it's not, tap on ‘Reactivate Immuni' and follow the instructions to make the app work correctly.\n\nSome other important suggestions to ensure that Immuni is effective:\n\n • When you leave your house, always bring your smartphone with Immuni installed.\n\n • Don't disable Bluetooth (except when you're sleeping, if you prefer).\n\n • Don't uninstall the app.\n\n • When the app sends you a notification, it's vital that you read it, open the app, and follow all the instructions provided. For example, if the app asks you to upgrade it, please do so. If the app recommends that you self-isolate and call your general practitioner, it's crucial that you do so right away."
+            content = "Failing to use the app correctly makes Immuni much less effective and increases the risk to you, your loved ones, and the community.\n\nTo make sure you are using the app as intended, simply open it and check that 'Service active' is written in the Home section. If it's not, tap on 'Reactivate Immuni' and follow the instructions to make the app work correctly.\n\nSome other important suggestions to ensure that Immuni is effective:\n\n • When you leave your house, always bring your smartphone with Immuni installed.\n\n • Don't disable Bluetooth (except when you're sleeping, if you prefer).\n\n • Don't uninstall the app.\n\n • When the app sends you a notification, it's vital that you read it, open the app, and follow all the instructions provided. For example, if the app asks you to upgrade it, please do so. If the app recommends that you self-isolate and call your general practitioner, it's crucial that you do so right away."
         ),
         Faq(
             title = "Does this app make medical diagnoses or provide medical advice?",
@@ -337,7 +349,7 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Do I need to keep my smartphone's Bluetooth turned on all the time?",
-            content = "The exposure notifications system is based on Bluetooth Low Energy, so Bluetooth must always be active for the system to detect your contact with other users. However, it is your choice and you are free to turn it on or off as you like."
+            content = "The exposure notification system is based on Bluetooth Low Energy, so Bluetooth must always be active for the system to detect your contact with other users. However, it is your choice and you are free to turn it on or off as you like."
         ),
         Faq(
             title = "I often keep my phone on airplane mode. Is this OK?",
@@ -357,11 +369,11 @@ val defaultFaqs = mapOf(
         ),
         Faq(
             title = "Does Immuni share or sell my data?",
-            content = "All data are controlled by the Ministry of Health. In no case will your data be sold or used for commercial reasons, including profiling for advertising purposes. This is a non-profit project that stems only from the desire to help defeat the epidemic. Data may be shared to facilitate scientific research, but only after their complete anonymisation and aggregation."
+            content = "All data is controlled by the Ministry of Health. In no case will your data be sold or used for commercial reasons, including profiling for advertising purposes. This is a non-profit project that stems only from the desire to help defeat the epidemic. Data may be shared to facilitate scientific research, but only after its complete anonymisation and aggregation."
         ),
         Faq(
             title = "Can I change the language of the app?",
-            content = "The languages currently supported are Italian, English, German, French, Spanish, and Portuguese. The app uses the same language that's set on your smartphone, where available. Otherwise, it uses English. Therefore, to change the language of the app, you'll need to change the language of your device."
+            content = "The languages currently supported are Italian, English, German, French, and Spanish. The app uses the same language that's set on your smartphone, where available. Otherwise, it uses English. Therefore, to change the language of the app, you'll need to change the language of your device."
         )
     )
 )

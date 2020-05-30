@@ -27,8 +27,6 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
-import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import it.ministerodellasalute.immuni.ui.forceupdate.ForceUpdateActivity
 import org.koin.android.ext.android.inject
 
@@ -40,8 +38,6 @@ abstract class ImmuniActivity : AppCompatActivity() {
 
     private val exposureManager: ExposureManager by inject()
     private val forceUpdateManager: ForceUpdateManager by inject()
-    private val workerManager: WorkerManager by inject()
-    private val configurationSettingsManager: ConfigurationSettingsManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,6 +79,6 @@ abstract class ImmuniActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        workerManager.cancelRiskReminderWorker()
+        exposureManager.acknowledgeExposure()
     }
 }

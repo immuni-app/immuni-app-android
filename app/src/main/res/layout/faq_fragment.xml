@@ -96,7 +96,8 @@
                     android:id="@+id/navigationIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_back" />
+                    android:contentDescription="@string/accessibility_back"
+                    app:srcCompat="@drawable/ic_back" />
 
                 <TextView
                     android:id="@+id/toolbarTitle"

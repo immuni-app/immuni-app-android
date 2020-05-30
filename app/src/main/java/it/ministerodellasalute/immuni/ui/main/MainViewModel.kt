@@ -41,7 +41,7 @@ class MainViewModel(
             appLifecycleObserver.isActive.filter { it }
         ) { broadcastingIsActive, status, isActive ->
             Triple(broadcastingIsActive, status, isActive)
-        }.onEach { (broadcastingIsActive, _,  _) ->
+        }.onEach { (broadcastingIsActive, _, _) ->
             val protectionActive = when (broadcastingIsActive) {
                 null -> null
                 else -> broadcastingIsActive && pushNotificationManager.areNotificationsEnabled()

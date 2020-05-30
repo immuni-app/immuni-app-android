@@ -103,9 +103,8 @@ class ConfigurationSettingsManager(
 
     private fun fetchFaqsAsync(): Deferred<FetchFaqsResult> {
         return scope.async {
-            val language = currentLanguage
-            val url: String = settings.value.faqUrl[language]
-                ?: error("Faq url for language ${language.code} not found")
+            val language = if (settings.value.faqUrls.containsKey(currentLanguage.code)) currentLanguage else Language.EN
+            val url = settings.value.faqUrls[language.code] ?: return@async FetchFaqsResult.ServerError
             val result = networkRepository.fetchFaqs(url)
             if (result is FetchFaqsResult.Success) {
                 onFaqsUpdate(language, result.faqs)
@@ -121,4 +120,16 @@ class ConfigurationSettingsManager(
     }
 
     // endregion
+
+    val privacyNoticeUrl: String
+        get() {
+            val privacyNoticeUrls = settings.value.privacyNoticeUrls
+            return privacyNoticeUrls[currentLanguage.code] ?: privacyNoticeUrls[Language.EN.code] ?: privacyNoticeUrls[Language.IT.code] ?: error("Missing Privacy Notice URL")
+        }
+
+    val termsOfUseUrl: String
+        get() {
+            val termsOfUseUrls = settings.value.termsOfUseUrls
+            return termsOfUseUrls[currentLanguage.code] ?: termsOfUseUrls[Language.EN.code] ?: termsOfUseUrls[Language.IT.code] ?: error("Missing Terms of Use URL")
+        }
 }

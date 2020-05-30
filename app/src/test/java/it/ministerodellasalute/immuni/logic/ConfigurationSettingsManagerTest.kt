@@ -19,6 +19,7 @@ import android.content.Context
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import it.ministerodellasalute.immuni.api.services.ConfigurationSettings
+import it.ministerodellasalute.immuni.api.services.Language
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsNetworkRepository
@@ -86,7 +87,7 @@ class ConfigurationSettingsManagerTest {
 
         async {
             for (i in 1..5) {
-                manager.onSettingsUpdate(settings.copy(termsOfServiceUrl = i.toString()))
+                manager.onSettingsUpdate(settings.copy(termsOfUseUrls = mapOf(Language.EN.code to i.toString())))
                 delay(100)
             }
             deferred.cancel()

@@ -36,7 +36,6 @@ class TrafficAnalysisPreventionHeadersInterceptor : Interceptor {
             .newBuilder()
             .addHeader("User-Agent", "Immuni")
             .addHeader("Accept-Language", "en-US;q=1.0")
-            .addHeader("Accept-Encoding", "gzip")
             .build()
         return chain.proceed(request)
     }

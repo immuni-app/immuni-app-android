@@ -102,7 +102,8 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_cross"/>
+                    android:contentDescription="@string/accessibility_close"
+                    app:srcCompat="@drawable/ic_cross"/>
                 <TextView
                     style="@style/H1NavBar"
                     android:id="@+id/toolbarTitle"

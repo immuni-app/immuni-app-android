@@ -47,7 +47,7 @@ class ConfigurationSettingsNetworkRepository(
         }
 
         return when (resource) {
-            is NetworkResource.Success -> FetchFaqsResult.Success(resource.data!!)
+            is NetworkResource.Success -> FetchFaqsResult.Success(resource.data!!.faqs)
             is NetworkResource.Error -> {
                 return if (resource.error == null) FetchFaqsResult.ConnectionError
                 else FetchFaqsResult.ServerError
