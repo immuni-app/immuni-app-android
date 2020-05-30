@@ -64,8 +64,8 @@
   <string name="privacy_item_italy">Vos données sont enregistrées sur des serveurs en Italie. <b>Elles sont gérées par des organismes publiques et contrôlées par le Ministère de la santé.</b></string>
   <string name="privacy_item_data_deletion"><b>Toutes les données sont supprimées lorsqu\'elles ne sont plus nécessaires </b> et dans tous les cas au plus tard le 31 décembre 2020.</string>
   <string name="privacy_checkbox_above14">Je déclare avoir au moins 14 ans</string>
-  <string name="privacy_checkbox_privacyPolicyRead">J\\\'ai lu la {Politique de confidentialité}</string>
-  <string name="privacy_tos">En continuant, je déclare avoir lu et accepté les {Conditions d\\\'utilisation}</string>
+  <string name="privacy_checkbox_privacyPolicyRead">J\'ai lu la {Politique de confidentialité}</string>
+  <string name="privacy_tos">En continuant, je déclare avoir lu et accepté les {Conditions d\'utilisation}</string>
   <string name="privacy_next">Suivant</string>
   <string name="privacy_settings_show_full">Politique de confidentialité intégrale</string>
   <string name="onboarding_common_next">Suivant</string>
@@ -86,7 +86,7 @@
   <string name="onboarding_push_permission_action">Autoriser</string>
   <string name="onboarding_push_permission_overlay_hint">Sélectionnez <b>Autoriser</b> dans la fenêtre contextuelle qui apparaîtra ci-dessous</string>
   <string name="onboarding_pin_advice_title">Protégez votre appareil</string>
-  <string name="onboarding_pin_advice_description">L’utilisation d’Immuni est strictement personnelle. Si ce n\\\'est pas déjà fait, configurez un code sur votre appareil afin de le protéger et d\\\'empêcher quiconque d\\\'accéder à vos informations et applications, Immuni incluse.</string>
+  <string name="onboarding_pin_advice_description">L’utilisation d’Immuni est strictement personnelle. Si ce n\'est pas déjà fait, configurez un code sur votre appareil afin de le protéger et d\'empêcher quiconque d\'accéder à vos informations et applications, Immuni incluse.</string>
   <string name="onboarding_pin_advice_action">J\'ai compris</string>
   <string name="onboarding_communication_advice_title">Méfiez-vous des communications frauduleuses</string>
   <string name="onboarding_communication_advice_description">Immuni communiquera avec vous exclusivement par le biais de l\'application et notifications associées. <b>Méfiez-vous de tout SMS, appel téléphonique, e-mail ou autre type d\'avertissement </b>qui semblerait provenir d\'Immuni, surtout si vous êtes invité à fournir des informations personnelles.</string>
