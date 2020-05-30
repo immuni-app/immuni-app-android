@@ -87,6 +87,8 @@
     <style name="AlertTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textColor">@color/grey_dark</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:maxLines">6</item>
     </style>
 
     <style name="AlertBodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
