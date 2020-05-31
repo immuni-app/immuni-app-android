@@ -202,7 +202,7 @@
   <string name="suggestions_instruction_wash_hands"><b>Waschen Sie Ihre Hände häufig</b> mit Wasser und Seife oder hydroalkoholischen Lösungen.</string>
   <string name="suggestions_instruction_use_napkins"><b>Husten und Niesen Sie direkt in ein Taschentuch oder in die Armbeuge</b>.</string>
   <string name="suggestions_instruction_social_distance"><b>Respektieren Sie die physischen Distanzierungsmaßnahmen</b>, wenn Sie das Haus verlassen müssen.</string>
-  <string name="suggestions_instruction_mask"><b>Tragen Sie eine Maske an öffentlich zugänglichen Orten in Innenräumen</b>, einschließlich Transportmitteln, und in allen Fällen, in denen es nicht möglich ist, die Einhaltung des Sicherheitsabstands kontinuierlich zu gewährleisten</string>
+  <string name="suggestions_instruction_mask"><b>Tragen Sie eine Maske an öffentlich zugänglichen Orten in Innenräumen</b>, einschließlich Transportmitteln, und in allen Fällen, in denen es nicht möglich ist, die Einhaltung des Sicherheitsabstands kontinuierlich zu gewährleisten.</string>
   <string name="suggestions_instruction_follow_instructions">Beachten Sie zum Schutz Ihrer Gesundheit und der Ihrer Angehörigen <b>die folgenden Richtlinien:</b></string>
   <string name="suggestions_instruction_contact_doctor_title"><b>Wenden Sie sich an Ihren Hausarzt (oder an einen Kinderarzt Ihrer Wahl)</b></string>
   <string name="suggestions_instruction_contact_doctor_message">Erklären Sie Ihrem Arzt, dass Sie von Immuni eine Mitteilung über einen engen Kontakt mit einer positiv auf COVID-19 getesteten Person erhalten haben. Folgen Sie den Anweisungen Ihres Arztes. Ihr Arzt wird sich an die Präventionsabteilung Ihrer örtlichen Gesundheitsbehörde wenden. Bleiben Sie daher für Aktivitäten zur Gesundheitsüberwachung durch Ihre örtliche Gesundheitsbehörde erreichbar.</string>
@@ -211,7 +211,7 @@
   <string name="suggestions_instruction_while_waiting_doctor">Als Vorsichtsmaßnahme, bis die Angaben Ihres Arztes oder Ihrer örtlichen Gesundheitsbehörde vorliegen:</string>
   <string name="suggestions_instruction_stay_home"><b>Bleiben Sie für 14 Tage nach dem Datum des Kontakts zu Hause.</b></string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Messen Sie die Körpertemperatur mindestens zweimal täglich und beurteilen Sie das Auftreten auch milder Symptome.</b></string>
-  <string name="suggestions_instruction_check_symptoms_message">Insbesondere bei Fieber oder Auftreten von mindestens einem der folgenden Symptome: Halsschmerzen, Husten, Erkältung oder verstopfte Nase, Atembeschwerden, Muskelschmerzen, Verlust oder Veränderung von Geruch oder Geschmack, Durchfall</string>
+  <string name="suggestions_instruction_check_symptoms_message">Insbesondere bei Fieber oder Auftreten von mindestens einem der folgenden Symptome: Halsschmerzen, Husten, Erkältung oder verstopfte Nase, Atembeschwerden, Muskelschmerzen, Verlust oder Veränderung von Geruch oder Geschmack, Durchfall.</string>
   <string name="suggestions_instruction_isolate_title"><b>Wenn Symptome auftreten, isolieren Sie sich vom Rest Ihrer Mitbewohner.</b></string>
   <string name="suggestions_instruction_isolate_message">Tragen Sie eine Mundschutzmaske und wenden Sie sich sofort an Ihren Hausarzt (oder Kinderarzt Ihrer Wahl) und die Präventionsabteilung Ihrer örtlichen Gesundheitsbehörde</string>
   <string name="suggestions_instruction_phone_contact"><b>Bei Atembeschwerden wenden Sie sich an 112/118.</b></string>
