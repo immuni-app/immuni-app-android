@@ -211,8 +211,8 @@
   <string name="suggestions_instruction_while_waiting_doctor">As a precaution, while you wait for instructions from your general practitioner or local health authority:</string>
   <string name="suggestions_instruction_stay_home"><b>Stay at home for 14 days</b> after the contact date</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Measure your body temperature at least twice a day and assess if you are exhibiting symptoms, even mild ones.</b></string>
-  <string name="suggestions_instruction_check_symptoms_message">In particular, fever or at least one of the following: sore throat, cough, cold or blocked nose, difficulty breathing, muscle pain, loss or alteration of sense of smell or taste, diarrhoea</string>
-  <string name="suggestions_instruction_isolate_title"><b>If you display symptoms, isolate yourself from the people you live with</b></string>
+  <string name="suggestions_instruction_check_symptoms_message">In particular, fever or at least one of the following: sore throat, cough, cold or blocked nose, difficulty breathing, muscle pain, loss or alteration of sense of smell or taste, diarrhoea.</string>
+  <string name="suggestions_instruction_isolate_title"><b>If you display symptoms, isolate yourself from the people you live with</b>.</string>
   <string name="suggestions_instruction_isolate_message">Wear a surgical mask and immediately contact your general practitioner (or primary care paediatrician) and your local health authority\'s health care service.</string>
   <string name="suggestions_instruction_phone_contact"><b>If you are having difficulty breathing, contact 112/118.</b></string>
   <string name="suggestions_instruction_hide_alert_message">If necessary, you can hide this alert. Unless you have a valid reason, we strongly advise against doing this.</string>
