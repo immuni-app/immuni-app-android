@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
@@ -34,6 +35,16 @@ class ExposureNotificationFragment :
                 handled = true
                 viewModel.onNextTap()
             }
+        })
+
+        viewModel.googlePlayServicesError.observe(viewLifecycleOwner, Observer { pair ->
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(pair.first)
+                .setMessage(pair.second)
+                .setPositiveButton(getString(R.string.onboarding_pin_advice_action)) { d, _ ->
+                    d.dismiss()
+                }
+                .show()
         })
 
         next.isEnabled = true
