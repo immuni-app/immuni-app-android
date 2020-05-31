@@ -19,7 +19,6 @@ import android.app.Activity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.activity.toast
 import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
 import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
@@ -178,7 +177,7 @@ class OnboardingViewModel(
                 val title = activity.getString(R.string.force_update_not_available_title)
                 var message = activity.getString(R.string.force_update_not_available_message)
                 errorCode?.let { code ->
-                    message += "\n\nError code: ${code}."
+                    message += "\n\nError code: $code."
                 }
                 googlePlayServicesError.value = Pair(title, message)
             }
