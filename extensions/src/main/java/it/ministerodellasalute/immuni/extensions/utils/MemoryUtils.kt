@@ -31,13 +31,13 @@ fun getMemoryInfo(context: Context): ActivityManager.MemoryInfo {
 /**
  * Return the total RAM of the device in MB.
  */
-fun totalRam(context: Context): Long {
-    return getMemoryInfo(context).totalMem / 1000000L
+fun totalRamMB(context: Context): Long {
+    return getMemoryInfo(context).totalMem / (1024L * 1024L)
 }
 
 /**
  * Return is this device is an high end device with enough RAM.
  */
 fun highEndDevice(context: Context): Boolean {
-    return totalRam(context) > 3500
+    return totalRamMB(context) > 5000
 }
