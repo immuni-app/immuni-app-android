@@ -39,5 +39,5 @@ fun totalRamMB(context: Context): Long {
  * Return is this device is an high end device with enough RAM.
  */
 fun highEndDevice(context: Context): Boolean {
-    return totalRamMB(context) > 5000
+    return totalRamMB(context) > 2000
 }

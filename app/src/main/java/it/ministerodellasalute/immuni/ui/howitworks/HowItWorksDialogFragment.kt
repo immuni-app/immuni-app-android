@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.RecyclerView
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.ui.dialog.PopupRecyclerViewDialogFragment
 import kotlinx.android.synthetic.main.how_it_works_dialog.*
@@ -36,6 +37,24 @@ class HowItWorksDialogFragment : PopupRecyclerViewDialogFragment(),
         recyclerView.adapter = adapter
 
         setTitle(getString(R.string.permission_tutorial_how_immuni_works_title))
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                when (newState) {
+                    RecyclerView.SCROLL_STATE_IDLE -> {
+                        adapter.onIdle()
+                    }
+                }
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy != 0) {
+                    adapter.onScrolling()
+                }
+            }
+        })
     }
 
     override fun onClick(item: HowItWorksItem) {
