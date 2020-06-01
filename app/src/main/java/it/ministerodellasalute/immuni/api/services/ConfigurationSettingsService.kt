@@ -186,8 +186,25 @@ val defaultFaqs = mapOf(
             content = "Non dovresti notare una differenza sostanziale nella durata della tua batteria. Immuni infatti usa il Bluetooth Low Energy, una tecnologia creata per essere particolarmente efficiente in termini di risparmio energetico.\n\nTuttavia, anche se pensi che la batteria del tuo smartphone si sia scaricata un po' più velocemente del solito, per favore continua a usare l'app in modo corretto. Il tuo contributo è importante perché Immuni sia efficace nell'aiutarci a combattere l'epidemia e tornare al più presto a una vita normale."
         ),
         Faq(
-            title = "Dove posso trovare Immuni?",
-            content = "Puoi scaricare Immuni dall'App Store (per iPhone) o da Google Play (per smartphone con sistema operativo Android). L'app non è disponibile su nessun altro canale di distribuzione."
+            title = "Dove posso scaricare Immuni? Quali dispositivi e sistemi operativi sono supportati?",
+            content = "Da dove puoi scaricare Immuni dipende dallo smartphone che usi. Non tutti i dispositivi sono supportati. Scegli la versione compatibile col tuo smartphone.\n" +
+                "\n" +
+                "App Store\n\n" +
+                "Puoi scaricare Immuni dall’App Store e usarla correttamente se il tuo iPhone ha iOS versione 13.5 o superiore. Aggiorna iOS all’ultima versione disponibile prima di effettuare il download di Immuni.\n" +
+                "\n" +
+                "I modelli di iPhone che supportano iOS 13.5 sono i seguenti: 11, 11 Pro, 11 Pro Max, Xr, Xs, Xs Max, X, SE (2nd generation), 8, 8 Plus, 7, 7 Plus, 6s, 6s Plus, SE (1st generation). Purtroppo, non potrai usare Immuni se il tuo modello di iPhone non permette l’aggiornamento di iOS a una versione pari o superiore alla 13.5.\n" +
+                "\n" +
+                "Google Play\n\n" +
+                "Puoi scaricare Immuni da Google Play e usarla correttamente se il tuo smartphone Android verifica tutti e tre i seguenti requisiti:\n" +
+                " • Ha il Bluetooth Low Energy\n" +
+                " • Android versione 6 (Marshmallow, API 23) o superiore\n" +
+                " • Google Play Services versione 20.18.13 o superiore\n" +
+                "Aggiorna Android e Google Play Services all’ultima versione disponibile prima di effettuare il download di Immuni.\n" +
+                "\n" +
+                "Purtroppo, non potrai usare Immuni se il tuo modello di smartphone Android non ha il Bluetooth Low Energy o non permette l’aggiornamento di Android e di Google Play Services alle versioni minime indicate.\n" +
+                "\n" +
+                "AppGallery\n\n" +
+                "Stiamo lavorando per permettere di scaricare Immuni anche da AppGallery al più presto. Questo consentirà ai possessori di alcuni modelli di smartphone Huawei di usare Immuni.\n"
         ),
         Faq(
             title = "I minori possono usare l'app?",
@@ -308,8 +325,25 @@ val defaultFaqs = mapOf(
             content = "You shouldn't notice a difference in terms of battery life. Immuni uses Bluetooth Low Energy, a technology designed to be particularly energy efficient.\n\nHowever, even if you think your smartphone's battery is being drained a touch faster than usual, please keep using the app the right way. Your contribution is an important part of making Immuni effective at helping us fight the epidemic and returning to normal as soon as possible."
         ),
         Faq(
-            title = "Where can I download Immuni?",
-            content = "You can download Immuni from the App Store (on iPhones) or from Google Play (on smartphones with an Android operating system). The app won't be available through any other distribution channels."
+            title = "Where can I download Immuni? What devices and operating systems are supported?",
+            content = "Where you can download Immuni from depends on the smartphone you use. Please note that not all devices are supported. Choose the version compatible with your smartphone.\n" +
+                "\n" +
+                "App Store\n\n" +
+                "You can download Immuni from the App Store and use it correctly if your iPhone supports running iOS version 13.5 or above. Please update iOS to the latest available version before downloading Immuni.\n" +
+                "\n" +
+                "The following iPhone models support iOS 13.5: 11, 11 Pro, 11 Pro Max, Xr, Xs, Xs Max, X, SE (2nd generation), 8, 8 Plus, 7, 7 Plus, 6s, 6s Plus, SE (1st generation). Unfortunately, you won’t be able to use Immuni if your iPhone model doesn’t support running iOS version 13.5 or above.\n" +
+                "\n" +
+                "Google Play\n\n" +
+                "You can download Immuni from Google Play and use it correctly if your Android smartphone fulfils all three of the following requirements:\n" +
+                " • Bluetooth Low Energy\n" +
+                " • Android version 6 (Marshmallow, API 23) or above\n" +
+                " • Google Play Services version 20.18.13 or above\n" +
+                "Please update Android and Google Play Services to the latest available version before downloading Immuni.\n" +
+                "\n" +
+                "Unfortunately, you won’t be able to use Immuni if your model of Android smartphone doesn’t feature Bluetooth Low Energy or doesn’t support the minimum Android and Google Play Services versions indicated above.\n" +
+                "\n" +
+                "AppGallery\n\n" +
+                "We’re working to make Immuni available for download from AppGallery as soon as possible. This will enable the users of certain Huawei smartphone models to use Immuni.\n"
         ),
         Faq(
             title = "Can minors use the app?",
