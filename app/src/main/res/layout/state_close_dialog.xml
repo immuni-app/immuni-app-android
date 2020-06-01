@@ -83,7 +83,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="28dp"
-                    android:text="@string/suggestions_risk_subtitle"
+                    android:text="@string/suggestions_risk_with_date_subtitle"
                     android:textColor="#fff"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

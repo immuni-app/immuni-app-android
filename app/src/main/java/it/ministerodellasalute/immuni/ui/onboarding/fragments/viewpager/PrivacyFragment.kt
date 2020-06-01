@@ -71,7 +71,7 @@ class PrivacyFragment : ViewPagerBaseFragment(R.layout.onboarding_privacy_fragme
             updateUI(true)
         }
 
-        val privacyRawText = getString(R.string.privacy_checkbox_privacyPolicyRead)
+        val privacyRawText = getString(R.string.privacy_checkbox_read)
         privacyPolicy.movementMethod = LinkMovementMethod.getInstance()
         privacyPolicy.text = privacyRawText.coloredClickable(
             color = requireContext().getColorCompat(R.color.colorPrimary),
@@ -80,7 +80,7 @@ class PrivacyFragment : ViewPagerBaseFragment(R.layout.onboarding_privacy_fragme
             viewModel.onPrivacyPolicyClick(this)
         }
 
-        val tosRawText = getString(R.string.privacy_tos)
+        val tosRawText = getString(R.string.privacy_tos_read)
         tos.movementMethod = LinkMovementMethod.getInstance()
         tos.text = tosRawText.coloredClickable(
             color = requireContext().getColorCompat(R.color.colorPrimary),

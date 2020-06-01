@@ -64,8 +64,8 @@
   <string name="privacy_item_italy">Vos données sont enregistrées sur des serveurs en Italie. <b>Elles sont gérées par des organismes publiques et contrôlées par le Ministère de la santé.</b></string>
   <string name="privacy_item_data_deletion"><b>Toutes les données sont supprimées lorsqu\'elles ne sont plus nécessaires </b> et dans tous les cas au plus tard le 31 décembre 2020.</string>
   <string name="privacy_checkbox_above14">Je déclare avoir au moins 14 ans</string>
-  <string name="privacy_checkbox_privacyPolicyRead">J\'ai lu la {Politique de confidentialité}</string>
-  <string name="privacy_tos">En continuant, je déclare avoir lu et accepté les {Conditions d\'utilisation}</string>
+  <string name="privacy_checkbox_read">J\'ai lu la {Politique de confidentialité}</string>
+  <string name="privacy_tos_read">En continuant, je déclare avoir lu et accepté les {Conditions d\'utilisation}</string>
   <string name="privacy_next">Suivant</string>
   <string name="privacy_settings_show_full">Politique de confidentialité intégrale</string>
   <string name="onboarding_common_next">Suivant</string>
@@ -190,7 +190,7 @@
   <string name="suggestions_neutral_alert">Si vous êtes en contact avec votre médecin ou avec le Service de prévention de votre ASL (agence de santé locale), veuillez suivre toutes les instructions que vous avez reçues.</string>
   <string name="suggestions_neutral_message">Dans tous les cas, <b>essayez toujours de respecter les indications générales suivantes :</b></string>
   <string name="suggestions_risk_title">Exposition à risque</string>
-  <string name="suggestions_risk_subtitle">Immuni a détecté que vous avez été proche d\'un utilisateur testé positif au COVID-19 le %s.</string>
+  <string name="suggestions_risk_with_date_subtitle">Immuni a détecté que vous avez été proche d\'un utilisateur testé positif au COVID-19 le %s.</string>
   <string name="suggestions_positive_title">Suivez les instructions</string>
   <string name="suggestions_positive_subtitle"><b>Suivez toutes les instructions fournies par votre médecin ou par le service de prévention de votre ASL (agence de santé locale).</b></string>
   <string name="suggestions_instruction_ministerial_decree"><b>Respectez la législation en vigueur dans votre région</b>.</string>

@@ -66,8 +66,8 @@
     <string name="privacy_item_italy">Your data is saved on servers in Italy, <b>managed by public bodies, and controlled by the Ministry of Health.</b></string>
     <string name="privacy_item_data_deletion"><b>All data is deleted when it is no longer needed</b>, and in any case no later than 31 December 2020.</string>
     <string name="privacy_checkbox_above14">I declare that I am at least 14 years old</string>
-    <string name="privacy_checkbox_privacyPolicyRead">I have read the {privacy notice}</string>
-    <string name="privacy_tos">By continuing, I declare that I have read and accepted the {terms of use}</string>
+    <string name="privacy_checkbox_read">I have read the {privacy notice}</string>
+    <string name="privacy_tos_read">By continuing, I declare that I have read and accepted the {terms of use}</string>
     <string name="privacy_next">Next</string>
     <string name="privacy_settings_title">Your privacy is safe</string>
     <string name="privacy_settings_show_full">Show full notice</string>
@@ -193,7 +193,7 @@
     <string name="suggestions_header_short_title_neutral">Instructions for you</string>
     <string name="suggestions_neutral_alert">If you are in contact with your general practitioner or your local health authority\'s health care service, follow all the instructions provided to you.</string>
     <string name="suggestions_neutral_message">In any case, <b>try to follow these general guidelines at all times:</b></string>
-    <string name="suggestions_risk_subtitle">Immuni has detected that you came into close contact with a COVID-19-positive user on %s.</string>
+    <string name="suggestions_risk_with_date_subtitle">Immuni has detected that you came into close contact with a COVID-19-positive user on %s.</string>
     <string name="suggestions_positive_title">Follow the instructions</string>
     <string name="suggestions_positive_subtitle"><b>Follow all the instructions that you have received from your general practitioner or from your local health authority\'s health care service.</b></string>
     <string name="suggestions_instruction_ministerial_decree"><b>Comply with the current regulations in your area.</b></string>
