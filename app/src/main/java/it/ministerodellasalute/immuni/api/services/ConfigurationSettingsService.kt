@@ -189,21 +189,21 @@ val defaultFaqs = mapOf(
             title = "Dove posso scaricare Immuni? Quali dispositivi e sistemi operativi sono supportati?",
             content = "Da dove puoi scaricare Immuni dipende dallo smartphone che usi. Non tutti i dispositivi sono supportati. Scegli la versione compatibile col tuo smartphone.\n" +
                 "\n" +
-                "App Store\n\n" +
+                "App Store\n" +
                 "Puoi scaricare Immuni dall’App Store e usarla correttamente se il tuo iPhone ha iOS versione 13.5 o superiore. Aggiorna iOS all’ultima versione disponibile prima di effettuare il download di Immuni.\n" +
                 "\n" +
                 "I modelli di iPhone che supportano iOS 13.5 sono i seguenti: 11, 11 Pro, 11 Pro Max, Xr, Xs, Xs Max, X, SE (2nd generation), 8, 8 Plus, 7, 7 Plus, 6s, 6s Plus, SE (1st generation). Purtroppo, non potrai usare Immuni se il tuo modello di iPhone non permette l’aggiornamento di iOS a una versione pari o superiore alla 13.5.\n" +
                 "\n" +
-                "Google Play\n\n" +
+                "Google Play\n" +
                 "Puoi scaricare Immuni da Google Play e usarla correttamente se il tuo smartphone Android verifica tutti e tre i seguenti requisiti:\n" +
-                " • Ha il Bluetooth Low Energy\n" +
+                " • Bluetooth Low Energy\n" +
                 " • Android versione 6 (Marshmallow, API 23) o superiore\n" +
                 " • Google Play Services versione 20.18.13 o superiore\n" +
                 "Aggiorna Android e Google Play Services all’ultima versione disponibile prima di effettuare il download di Immuni.\n" +
                 "\n" +
                 "Purtroppo, non potrai usare Immuni se il tuo modello di smartphone Android non ha il Bluetooth Low Energy o non permette l’aggiornamento di Android e di Google Play Services alle versioni minime indicate.\n" +
                 "\n" +
-                "AppGallery\n\n" +
+                "AppGallery\n" +
                 "Stiamo lavorando per permettere di scaricare Immuni anche da AppGallery al più presto. Questo consentirà ai possessori di alcuni modelli di smartphone Huawei di usare Immuni.\n"
         ),
         Faq(
@@ -328,12 +328,12 @@ val defaultFaqs = mapOf(
             title = "Where can I download Immuni? What devices and operating systems are supported?",
             content = "Where you can download Immuni from depends on the smartphone you use. Please note that not all devices are supported. Choose the version compatible with your smartphone.\n" +
                 "\n" +
-                "App Store\n\n" +
+                "App Store\n" +
                 "You can download Immuni from the App Store and use it correctly if your iPhone supports running iOS version 13.5 or above. Please update iOS to the latest available version before downloading Immuni.\n" +
                 "\n" +
                 "The following iPhone models support iOS 13.5: 11, 11 Pro, 11 Pro Max, Xr, Xs, Xs Max, X, SE (2nd generation), 8, 8 Plus, 7, 7 Plus, 6s, 6s Plus, SE (1st generation). Unfortunately, you won’t be able to use Immuni if your iPhone model doesn’t support running iOS version 13.5 or above.\n" +
                 "\n" +
-                "Google Play\n\n" +
+                "Google Play\n" +
                 "You can download Immuni from Google Play and use it correctly if your Android smartphone fulfils all three of the following requirements:\n" +
                 " • Bluetooth Low Energy\n" +
                 " • Android version 6 (Marshmallow, API 23) or above\n" +
@@ -342,7 +342,7 @@ val defaultFaqs = mapOf(
                 "\n" +
                 "Unfortunately, you won’t be able to use Immuni if your model of Android smartphone doesn’t feature Bluetooth Low Energy or doesn’t support the minimum Android and Google Play Services versions indicated above.\n" +
                 "\n" +
-                "AppGallery\n\n" +
+                "AppGallery\n" +
                 "We’re working to make Immuni available for download from AppGallery as soon as possible. This will enable the users of certain Huawei smartphone models to use Immuni.\n"
         ),
         Faq(
