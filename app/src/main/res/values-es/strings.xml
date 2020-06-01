@@ -66,8 +66,8 @@
   <string name="privacy_item_italy">Tus datos se guardan en un servidor en Italia, <b>son administrados por entidades públicas y los supervisa el Ministerio de Salud.</b></string>
   <string name="privacy_item_data_deletion"><b>Todos los datos se eliminarán cuando dejen de ser necesarios</b> y, en cualquier caso, el 31 de diciembre de 2020 como máximo.</string>
   <string name="privacy_checkbox_above14">Declaro que tengo al menos 14 años</string>
-  <string name="privacy_checkbox_privacyPolicyRead">He leído la {política de privacidad}</string>
-  <string name="privacy_tos">Al continuar, declaro que he leído y acepto los {términos de uso}</string>
+  <string name="privacy_checkbox_read">He leído la {política de privacidad}</string>
+  <string name="privacy_tos_read">Al continuar, declaro que he leído y acepto los {términos de uso}</string>
   <string name="privacy_next">Siguiente</string>
   <string name="privacy_settings_title">Tu privacidad está garantizada</string>
   <string name="privacy_settings_show_full">Política de privacidad completa</string>
@@ -195,7 +195,7 @@
   <string name="suggestions_neutral_alert">Si hablas con tu médico o con el Departamento de Prevención de tu Agencia Sanitaria Local, sigue todas sus indicaciones.</string>
   <string name="suggestions_neutral_message">En cualquier caso, <b>intenta respetar en todo momento estas recomendaciones generales:</b></string>
   <string name="suggestions_risk_title">Exposición al riesgo</string>
-  <string name="suggestions_risk_subtitle">Immuni ha detectado que el día %s estuviste cerca de un usuario que dio positivo por COVID-19.</string>
+  <string name="suggestions_risk_with_date_subtitle">Immuni ha detectado que el día %s estuviste cerca de un usuario que dio positivo por COVID-19.</string>
   <string name="suggestions_positive_title">Sigue las indicaciones</string>
   <string name="suggestions_positive_subtitle"><b>Sigue todas las indicaciones que hayas recibido de tu médico o del Departamento de Prevención de tu Agencia Sanitaria Local.</b></string>
   <string name="suggestions_instruction_ministerial_decree"><b>Respeta la normativa vigente en tu zona</b>.</string>

@@ -66,8 +66,8 @@
   <string name="privacy_item_italy">Ihre Daten werden auf Servern in Italien gespeichert, <b>von öffentlichen Stellen verwaltet und vom Gesundheitsministerium überwacht.</b></string>
   <string name="privacy_item_data_deletion"><b>Alle Daten werden gelöscht, sobald sie nicht mehr benötigt werden</b>. Die Löschung erfolgt bis spätestens 31. Dezember 2020.</string>
   <string name="privacy_checkbox_above14">Ich bin mindestens 14 Jahre alt</string>
-  <string name="privacy_checkbox_privacyPolicyRead">Ich habe die {Datenschutzerklärung}</string>
-  <string name="privacy_tos">Indem ich fortfahre, erkläre ich, die {Nutzungsbedingungen} gelesen und akzeptiert zu haben</string>
+  <string name="privacy_checkbox_read">Ich habe die {Datenschutzerklärung}</string>
+  <string name="privacy_tos_read">Indem ich fortfahre, erkläre ich, die {Nutzungsbedingungen} gelesen und akzeptiert zu haben</string>
   <string name="privacy_next">Weiter</string>
   <string name="privacy_settings_title">Ihre Privatsphäre bleibt geschützt</string>
   <string name="privacy_settings_show_full">Vollständige Datenschutzerklärung</string>
@@ -195,7 +195,7 @@
   <string name="suggestions_neutral_alert">Wenn Sie mit Ihrem Arzt oder der Abteilung für Prävention Ihrer örtlichen Gesundheitsbehörde in Kontakt stehen, befolgen Sie alle Anweisungen, die Sie erhalten haben</string>
   <string name="suggestions_neutral_message">Versuchen Sie stets, diese <b>allgemeinen Hinweise</b> zu berücksichtigen:</string>
   <string name="suggestions_risk_title">Risikoexposition</string>
-  <string name="suggestions_risk_subtitle">Immuni hat festgestellt, dass Sie am Tag %s einem Nutzer nahe waren, der positiv auf COVID-19 getestet wurde.</string>
+  <string name="suggestions_risk_with_date_subtitle">Immuni hat festgestellt, dass Sie am Tag %s einem Nutzer nahe waren, der positiv auf COVID-19 getestet wurde.</string>
   <string name="suggestions_positive_title">Folgen Sie den Anweisungen</string>
   <string name="suggestions_positive_subtitle"><b>Befolgen Sie alle Anweisungen, die Sie von Ihrem Arzt oder der Präventionsabteilung Ihrer örtlichen Gesundheitsbehörde erhalten haben.</b></string>
   <string name="suggestions_instruction_ministerial_decree"><b>Befolgen Sie die aktuellen Vorschriften in Ihrer Region</b></string>
