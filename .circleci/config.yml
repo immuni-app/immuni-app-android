@@ -107,7 +107,7 @@ commands:
           name: "[release] Stop if not executed on master"
           command: |
             # Verify if the commit belongs to master
-            ON_MASTER=$(git branch --contains tags/$CIRCLE_TAG | grep '^* master$' || true)
+            ON_MASTER=$(git branch --contains tags/$CIRCLE_TAG | grep '^. master$' || true)
 
             if [[ -z "${ON_MASTER}" ]]; then
               echo "Releases can only be tagged on master. Stopping the execution of the job."
