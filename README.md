@@ -53,14 +53,15 @@
 
 # Introduction
 
-This repository contains the source code of Immuni's Android client. More detailed information about Immuni can be found in the following documents:
+This repository contains the source code of Immuni for Android. More detailed information about Immuni can be found within following documents:
 
 - [High-Level Description](https://github.com/immuni-app/documentation)
 - [Product Description](https://github.com/immuni-app/documentation/blob/master/Product%20Description.md)
 - [Technology Description](https://github.com/immuni-app/documentation/blob/master/Technology%20Description.md)
 - [Traffic Analysis Mitigation](https://github.com/immuni-app/immuni-documentation/blob/master/Traffic%20Analysis%20Mitigation.md)
 
-**Please take the time to read and consider these documents in full before digging into the source code or opening an Issue. They contain a lot of details that are fundamental to understanding the source code and this repository's documentation.**
+**Please read carefully these documents and consider them as the guideline to fully understand the source code before analazying it and reporting any Issue.
+
 
 # Installation
 
@@ -142,15 +143,16 @@ To run the instrumentation/UI tests, execute the following Gradle task:
 
 # Checking the build
 
-In addition to making the code open-source, we wish to help people verify that builds published on the App Store are coming from a specific commit of this repository. Please refer to the [Immuni Technology Description](https://github.com/immuni-app/documentation/blob/master/Technology%20Description.md#android-app-technologies) for a complete overview of the goals and status of this effort.
+In addition, to make the code open-source, we support at last people to verify that every build published on the App Store comes from a new commit stored in this repository. Please refer to the [Immuni Technology Description](https://github.com/immuni-app/documentation/blob/master/Technology%20Description.md#android-app-technologies) for a complete overview of the goals and status of this effort.
 
-Currently, we have a working open continuous integration for building the client. [Here](.circleci/config.yml) is the full specification. When it comes to reproducible builds, we will instead open an issue explaining what we have done so far and any missing steps.
+Currently we provide an open and continuous integration for building and improving the client. [Here](.circleci/config.yml) is the full specification. Every new release will include, reported as a new Issue, what we have done and what we suppose to improve and implement.
 
 # Contributing
 
-Contributions are most welcome. Before proceeding, please read the [Code of Conduct](CODE_OF_CONDUCT.md) for guidance on how to approach the community and create a positive environment. Additionally, please read our [CONTRIBUTING](CONTRIBUTING.md) file, which contains guidance on ensuring a smooth contribution process.
+Contributions are really appreciated and more than welcome. Before proceeding, please read carefully the [Code of Conduct](CODE_OF_CONDUCT.md) and consider it as an "How-To" guide to contribute the community and create a positive and collaborative environment. Additionally, please read also our [CONTRIBUTING](CONTRIBUTING.md) file that provides all info to make the contribution process easy.
 
-The Immuni project is composed of different repositories—one for each component or service. Please use this repository for contributions strictly relevant to the Immuni Android client. To propose a feature request, please open an issue in the [Documentation repository](https://github.com/immuni-app/documentation). This lets everyone involved see it, consider it, and participate in the discussion. Opening an issue or pull request in this repository may slow down the overall process.
+The Immuni project consists of several different repositories (one per component or service). Please consider this repository only related to Immuni for iOS. To propose or request a new feature, please open an issue here [Documentation repository](https://github.com/immuni-app/immuni-documentation). 
+This will make everyone feel involved to see it, consider it, and participate to the discussion. Opening an issue or pull a request in this repository may slow down the overall process.
 
 ## Contributors
 
