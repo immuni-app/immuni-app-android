@@ -143,7 +143,7 @@ To run the instrumentation/UI tests, execute the following Gradle task:
 
 # Checking the build
 
-In addition, to make the code open-source, we support at last people to verify that every build published on the App Store comes from a new commit stored in this repository. Please refer to the [Immuni Technology Description](https://github.com/immuni-app/documentation/blob/master/Technology%20Description.md#android-app-technologies) for a complete overview of the goals and status of this effort.
+In addition, to make the code open-source, we support people to verify that every build published on the App Store comes from a new commit stored in this repository. Please refer to the [Immuni Technology Description](https://github.com/immuni-app/documentation/blob/master/Technology%20Description.md#android-app-technologies) for a complete overview of the goals and status of this effort.
 
 Currently we provide an open and continuous integration for building and improving the client. [Here](.circleci/config.yml) is the full specification. Every new release will include, reported as a new Issue, what we have done and what we suppose to improve and implement.
 
@@ -152,7 +152,7 @@ Currently we provide an open and continuous integration for building and improvi
 Contributions are really appreciated and more than welcome. Before proceeding, please read carefully the [Code of Conduct](CODE_OF_CONDUCT.md) and consider it as an "How-To" guide to contribute the community and create a positive and collaborative environment. Additionally, please read also our [CONTRIBUTING](CONTRIBUTING.md) file that provides all info to make the contribution process easy.
 
 The Immuni project consists of several different repositories (one per component or service). Please consider this repository only related to Immuni for iOS. To propose or request a new feature, please open an issue here [Documentation repository](https://github.com/immuni-app/immuni-documentation). 
-This will make everyone feel involved to see it, consider it, and participate to the discussion. Opening an issue or pull a request in this repository may slow down the overall process.
+This will make everyone feel involved to see it, consider it, and participate to the discussion. Any opened issue or pulled request could slow down the overall process.
 
 ## Contributors
 
