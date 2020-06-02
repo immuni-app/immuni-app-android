@@ -53,7 +53,7 @@
 
 # Introduction
 
-This repository contains the source code of Immuni for Android. More detailed information about Immuni can be found within following documents:
+This repository contains the source code of Immuni for Android. More detailed information can be found within following documents:
 
 - [High-Level Description](https://github.com/immuni-app/documentation)
 - [Product Description](https://github.com/immuni-app/documentation/blob/master/Product%20Description.md)
