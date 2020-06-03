@@ -20,7 +20,6 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.Charset
 import java.util.*
