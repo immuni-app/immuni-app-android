@@ -71,8 +71,12 @@ class ConfigurationSettingsStoreRepository(
             kvStorage[faqsKey]?.faqs?.get(language) ?: defaultFaqs(context, language)
                 ?: if (language != Language.EN) loadFaqs(Language.EN) else error("Fallback with English Faqs failed")
         } catch (e: Exception) {
-            kvStorage.delete(faqsKey)
-            loadFaqs(language)
+            if (kvStorage.contains(faqsKey)) {
+                kvStorage.delete(faqsKey)
+                loadFaqs(language)
+            } else {
+                error("Faqs corrupted")
+            }
         }
     }
 }
