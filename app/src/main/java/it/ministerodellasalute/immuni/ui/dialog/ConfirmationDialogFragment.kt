@@ -31,9 +31,7 @@ class ConfirmationDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            toast(requireContext(), "ciao")
-        }
+        requireActivity().onBackPressedDispatcher.addCallback(this) {}
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
