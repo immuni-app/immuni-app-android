@@ -110,7 +110,7 @@ interface ExposureIngestionService {
         sardegna("Sardegna"),
         sicilia("Sicilia"),
         toscana("Toscana"),
-        trentinoAltoAdige("Trentino-Alto Adige"),
+        trentinoAltoAdige("Trentino-Alto Adige/Südtirol"),
         umbria("Umbria"),
         valleAosta("Valle d'Aosta"),
         veneto("Veneto");
@@ -284,7 +284,7 @@ interface ExposureIngestionService {
         bergamo("BG", "Bergamo"),
         biella("BI", "Biella"),
         bologna("BO", "Bologna"),
-        bolzano("BZ", "Bolzano"),
+        bolzano("BZ", "Bolzano-Bozen"),
         brescia("BS", "Brescia"),
         brindisi("BR", "Brindisi"),
         cagliari("CA", "Cagliari"),
