@@ -135,6 +135,6 @@ val defaultSettings = ConfigurationSettings(
 )
 
 fun defaultFaqs(context: Context, language: Language): List<Faq>? {
-    val json = loadJsonAsset(context, "assets/faqs/faq-${language.code}.json") ?: return null
+    val json = loadJsonAsset(context, "faqs/faq-${language.code}.json") ?: return null
     return defaultMoshi.fromJson<Faqs>(json)?.faqs
 }
