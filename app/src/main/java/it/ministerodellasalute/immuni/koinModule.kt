@@ -126,6 +126,7 @@ val appModule = module {
 
     single {
         ConfigurationSettingsStoreRepository(
+            androidContext(),
             KVStorage(
                 name = "ConfigurationSettingsStoreRepository",
                 context = androidContext(),
