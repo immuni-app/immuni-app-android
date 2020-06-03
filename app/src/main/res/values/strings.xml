@@ -20,12 +20,12 @@
     <string name="accessibility_app_name">Immuni</string>
     <string name="tabbar_title_home">Home</string>
     <string name="tabbar_title_settings">Settings</string>
-    <string name="notifications_update_os_title">The service isn\'t activated yet</string>
-    <string name="notifications_update_os_description">Open the app to finish activating it.</string>
-    <string name="notifications_update_app_title">⚠️ You need to update the app</string>
-    <string name="notifications_update_app_description">An important update is available. Update the app now to make sure it keeps working. </string>
-    <string name="notifications_not_active_service_title">⚠️ The service is inactive</string>
-    <string name="notifications_not_active_service_description">Reactivate Immuni as soon as possible so that it can warn you in the case of risk.</string>
+    <string name="notifications_update_os_title">The activation is not complete. The service is not active.</string>
+    <string name="notifications_update_os_description">Please open the app to complete the activation.</string>
+    <string name="notifications_update_app_title">⚠️ Please update the app</string>
+    <string name="notifications_update_app_description">An important update is available. Please update the app for a better experience. </string>
+    <string name="notifications_not_active_service_title">⚠️ The service is not active</string>
+    <string name="notifications_not_active_service_description">Reactivate Immuni to enable automatic notifications in case of risk.</string>
     <string name="notifications_apple_exposure_notification_message">Someone you\'ve had close contact with has tested positive.</string>
     <string name="notifications_risk_title">Important message for you</string>
     <string name="notifications_risk_description">Open the app for more information.</string>
@@ -35,7 +35,7 @@
     <string name="force_update_view_app_details">An important update is available. Update the app now to make sure it keeps working.</string>
     <string name="force_update_view_update">Update</string>
     <string name="force_update_view_os_title">Update your operating system to continue</string>
-    <string name="force_update_view_os_details">A newer version of iOS (13.5 or higher) is required to enable exposure notifications.</string>
+    <string name="force_update_view_os_details">A newer version of Android is required to enable exposure notifications.</string>
     <string name="permission_tutorial_update_os_title">To update your operating system</string>
     <string name="permission_tutorial_update_os_first"><b>1. Open the system settings</b></string>
     <string name="permission_tutorial_update_os_second"><b>2. Go to \'General\'</b></string>
@@ -55,16 +55,16 @@
     <string name="welcome_view_next_page_title">Next</string>
     <string name="welcome_view_go_next">Let\'s get started</string>
     <string name="privacy_title">Your privacy is safe</string>
-    <string name="privacy_item_identity"><b>Immuni does not collect your first name, surname, date of birth, address, telephone number, or email address.</b></string>
-    <string name="privacy_item_people"><b>Immuni cannot determine your identity</b> or the identity of the people you come into contact with.</string>
-    <string name="privacy_item_location"><b>Immuni does not collect any geolocation data</b>, including GPS data. Your movements are not tracked in any way.</string>
-    <string name="privacy_item_secure"><b>The data saved on your smartphone and the connections to the server are encrypted.</b></string>
-    <string name="privacy_item_ministry"><b>To help the National Health Service</b> take care of you, Immuni tells the Ministry of Health server the following:\n
+    <string name="privacy_item_identity"><b>Immuni does not collect any personal information like your first name, surname, date of birth, address, telephone number, or email address.</b></string>
+    <string name="privacy_item_people"><b>Immuni cannot determine your identity</b> or the identity of anyone you met or you had a close contact with.</string>
+    <string name="privacy_item_location"><b>Immuni does not collect any geolocation or tracking data</b>, including GPS data or cellular base station.</string>
+    <string name="privacy_item_secure"><b>The data saved on your smartphone and any connection with the server are encrypted.</b></string>
+    <string name="privacy_item_ministry"><b>To help the National Health Service</b> to take care of you, Immuni provides the Ministry of Health server the following information:\n
 - The province where you live\n
-- If the app is working properly\n
+- If the app is running properly\n
 - If you have been warned of a high-risk contact</string>
-    <string name="privacy_item_italy">Your data is saved on servers in Italy, <b>managed by public bodies, and controlled by the Ministry of Health.</b></string>
-    <string name="privacy_item_data_deletion"><b>All data is deleted when it is no longer needed</b>, and in any case no later than 31 December 2020.</string>
+    <string name="privacy_item_italy">Your data are saved on servers in Italy, <b>managed by public bodies, and controlled by the Ministry of Health.</b></string>
+    <string name="privacy_item_data_deletion"><b>All data are deleted when it is no longer needed</b>, and in any case no later than 31 December 2020.</string>
     <string name="privacy_checkbox_above14">I declare that I am at least 14 years old</string>
     <string name="privacy_checkbox_read">I have read the {privacy notice}</string>
     <string name="privacy_tos_read">By continuing, I declare that I have read and accepted the {terms of use}</string>
