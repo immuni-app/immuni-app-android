@@ -252,6 +252,9 @@ class HomeFragment : Fragment(),
             SelfCareCard -> {
                 openSelfCare()
             }
+            is DisableExposureApi -> {
+                openDisableExposureApi()
+            }
         }
     }
 
@@ -272,6 +275,11 @@ class HomeFragment : Fragment(),
             HomeFragmentDirections.actionHowitworks(
                 true
             )
+        findNavController().navigate(action)
+    }
+
+    private fun openDisableExposureApi() {
+        val action = HomeFragmentDirections.actionDisableExposureApi()
         findNavController().navigate(action)
     }
 }
