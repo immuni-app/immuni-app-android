@@ -6,6 +6,8 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:paddingTop="65dp"
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp"
     android:paddingBottom="60dp">
 
     <Button
