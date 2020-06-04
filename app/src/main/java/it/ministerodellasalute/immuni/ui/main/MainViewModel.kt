@@ -58,6 +58,7 @@ class MainViewModel(
         items.add(SectionHeader(context.getString(R.string.home_view_info_header_title)))
         items.add(SelfCareCard)
         items.add(HowItWorksCard)
+        items.add(DisableExposureApi(protectionActive ?: false))
         return items
     }
 }

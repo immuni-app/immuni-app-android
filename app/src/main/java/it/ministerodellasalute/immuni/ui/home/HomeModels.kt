@@ -36,3 +36,5 @@ sealed class InformationCard : HomeItemType()
 
 object HowItWorksCard : InformationCard()
 object SelfCareCard : InformationCard()
+
+data class DisableExposureApi(val isEnabled: Boolean) : HomeItemType()
