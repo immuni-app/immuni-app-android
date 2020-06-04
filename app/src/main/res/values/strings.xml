@@ -95,6 +95,7 @@
     <string name="onboarding_communication_advice_description">Immuni will only ever communicate with you via the app and the corresponding notifications. <b>Be wary of any text, phone call, email, or other kind of alert</b> that appears to be from Immuni, especially if it asks you for personal information.</string>
     <string name="onboarding_communication_advice_action">Got it</string>
     <string name="onboarding_complete_title">Setup complete</string>
+    <string name="home_view_service_deactivate">Disattiva il servizio</string>
     <string name="home_view_service_active_title">Service<b>active</b></string>
     <string name="home_view_service_active_advice">Open Immuni periodically to check its status.</string>
     <string name="home_view_service_not_active_title">Service<b>inactive</b></string>
@@ -107,6 +108,7 @@
     <string name="home_view_header_card_risk_button">Find out what to do now ›</string>
     <string name="home_view_header_card_positive_title">Follow the instructions provided by your general practitioner or local health authority</string>
     <string name="home_view_header_card_positive_button">Recovered? Update your status ›</string>
+
     <string name="permission_tutorial_how_immuni_works_title">How does the app work?</string>
     <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni assigns a random code to each phone</h>]]></string>
     <string name="permission_tutorial_how_immuni_works_first_message">The code is generated randomly and does not contain information about your device, let alone about you. It also changes several times an hour to ensure your privacy is protected.</string>

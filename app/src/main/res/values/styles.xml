@@ -199,7 +199,8 @@
     <style name="RoundedButton.GreyDark">
         <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/grey_dark
         </item>
-        <item name="android:backgroundTint">@color/grey_dark</item>
+        <item name="android:backgroundTint">@color/color_state_rounded_button_grey_dark</item>
+        <item name="iconTint">@color/text_light</item>
     </style>
 
     <style name="RoundedButtonDanger" parent="RoundedButton">
