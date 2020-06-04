@@ -13,13 +13,21 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.logic.exposure.repositories
+package it.ministerodellasalute.immuni.extensions.attestation
 
-import it.ministerodellasalute.immuni.extensions.storage.KVStorage
-import java.util.*
+interface AttestationClient {
+    sealed class Result {
+        // use this class to signal that the attestation was done and (to the best of
+        // client's knowledge) is also valid
+        data class Success(val result: String): Result()
 
-class ServerDateRepository() {
-    companion object {
-        val serverDateKey = KVStorage.Key<Date>("ServerDate")
+        // use this class to signal that the attestation was done but the outcome is not valid
+        object Invalid: Result()
+
+        // use this class to signal a temporary error during the attestation process, and that
+        // a new attempt may be done in the future
+        data class Failure(val error: Exception): Result()
     }
+
+    suspend fun attestate(nonce: String) : Result
 }

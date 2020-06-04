@@ -21,6 +21,7 @@ import androidx.work.WorkerParameters
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureReportingService
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.models.FetchSettingsResult
@@ -62,6 +63,7 @@ class RequestDiagnosisKeysWorker(
 
     private val exposureReportingRepository: ExposureReportingRepository by inject()
     private val exposureManager: ExposureManager by inject()
+    private val analyticsManager: ExposureAnalyticsManager by inject()
     private val workerManager: WorkerManager by inject()
     private val api: ExposureReportingService by inject()
     private val settingsManager: ConfigurationSettingsManager by inject()
@@ -76,6 +78,7 @@ class RequestDiagnosisKeysWorker(
         try {
             // keep the maximum execution time within the 10 minutes limit imposed by WorkManager
             return withTimeout(9 * 60 * 1000) {
+                analyticsManager.setup()
                 val settingsResult = settingsManager.fetchSettingsAsync().await()
                 if (settingsResult is FetchSettingsResult.Success) {
                     // cleanup entities that are older than DAYS_OF_SELF_ISOLATION
@@ -143,6 +146,7 @@ class RequestDiagnosisKeysWorker(
     }
 
     private fun success(): Result {
+        analyticsManager.onRequestDiagnosisKeysSucceeded()
         workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }

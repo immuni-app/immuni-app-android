@@ -20,6 +20,8 @@ import androidx.lifecycle.SavedStateHandle
 import it.ministerodellasalute.immuni.api.services.*
 import it.ministerodellasalute.immuni.config.*
 import it.ministerodellasalute.immuni.debugmenu.DebugMenu
+import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
+import it.ministerodellasalute.immuni.extensions.attestation.SafetyNetAttestationClient
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
@@ -27,6 +29,7 @@ import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationM
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 import it.ministerodellasalute.immuni.extensions.utils.moshi
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.exposure.models.AnalyticsTokenStatus
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
@@ -191,6 +194,7 @@ val appModule = module {
         ExposureManager(
             get(),
             ExposureNotificationManager(androidContext(), get()),
+            SafetyNetAttestationClient(androidContext(), "FIXME"), // FIXME
             get(),
             get(),
             get(),
@@ -292,6 +296,7 @@ val immuniMoshi = moshi(
     ),
     extraFactories = listOf(
         ExposureStatus.moshiAdapter,
+        AnalyticsTokenStatus.moshiAdapter,
         ServiceNotActiveNotificationWorkerStatus.moshiAdapter
     )
 )
