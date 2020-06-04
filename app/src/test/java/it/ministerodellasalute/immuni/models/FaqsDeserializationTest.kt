@@ -18,17 +18,15 @@ package it.ministerodellasalute.immuni.models
 import it.ministerodellasalute.immuni.api.services.Faqs
 import it.ministerodellasalute.immuni.extensions.utils.defaultMoshi
 import it.ministerodellasalute.immuni.extensions.utils.fromJson
-import it.ministerodellasalute.immuni.extensions.utils.loadJsonAsset
-import org.junit.Test
 import java.io.BufferedReader
 import java.io.FileInputStream
 import java.io.InputStreamReader
-import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import org.junit.Test
 
 class FaqsDeserializationTest {
     companion object {
-        const val ASSET_BASE_PATH = "../app/src/main/assets/";
+        const val ASSET_BASE_PATH = "../app/src/main/assets/"
     }
 
     private fun readJsonFile(filename: String): String {
