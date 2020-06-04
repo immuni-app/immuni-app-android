@@ -214,7 +214,7 @@
     <string name="suggestions_instruction_hide_if_contact_doctor_message">If you\'re in contact with your general practitioner or local health authority, you can hide this alert.</string>
     <string name="suggestions_instruction_hide_if_contact_doctor_action">I have contacted my general practitioner</string>
     <string name="suggestions_instruction_while_waiting_doctor">As a precaution, while you wait for instructions from your general practitioner or local health authority:</string>
-    <string name="suggestions_instruction_stay_home"><b>Stay at home for 14 days</b> after the contact date</string>
+    <string name="suggestions_instruction_stay_home"><b>Stay at home for 14 days</b> after the contact date.</string>
     <string name="suggestions_instruction_check_symptoms_title"><b>Measure your body temperature at least twice a day and assess if you are exhibiting symptoms, even mild ones.</b></string>
     <string name="suggestions_instruction_check_symptoms_message">In particular, fever or at least one of the following: sore throat, cough, cold or blocked nose, difficulty breathing, muscle pain, loss or alteration of sense of smell or taste, diarrhoea.</string>
     <string name="suggestions_instruction_isolate_title"><b>If you display symptoms, isolate yourself from the people you live with</b>.</string>
@@ -284,6 +284,10 @@
     <string name="suggestions_risk_title">Risky exposure</string>
     <string name="suggestions_positive_info_subtitle">For the time being, you will not receive any new notifications in the event of a risky exposure to a COVID-19-positive user.</string>
     <string name="suggestions_positive_covid_negative_message"><b>Let us know if your local health authority has confirmed that you are COVID-19 negative to reactivate risky exposure notifications.</b></string>
+    <string name="suggestions_risk_first_message">L\'app ti mostra questo avviso sulla base delle informazioni a disposizione (durata del contatto e stima approssimativa della distanza) ma non può sapere se durante il contatto indossavi una mascherina o se davi le spalle. Il rischio di contagio potrebbe quindi essere sovrastimato.</string>
+    <string name="suggestions_risk_second_message">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità l’app ha informato il Ministero della Salute della notifica che hai ricevuto.</string>
+    <string name="suggestions_risk_third_message">Per ulteriori informazioni sui dati trasmessi al Ministero della salute puoi leggere l’{informativa privacy} al punto 4.</string>
+    <string name="suggestions_risk_fourth_message"><b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di queste informazioni</b>.</string>
     <string name="onboarding_pilot_title">Progetto pilota in corso</string>
     <string name="onboarding_pilot_description">Per la durata della fase di sperimentazione <b>verrai avvisato di un’esposizione a rischio solo se entri in contatto con un utente risultato positivo al virus assistito da una delle seguenti regioni: Abruzzo, Liguria, Marche e Puglia.</b></string>
 </resources>
