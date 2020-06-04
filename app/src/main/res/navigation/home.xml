@@ -77,6 +77,14 @@
         android:id="@+id/action_onboarding_activity"
         app:destination="@id/onboardingActivity"/>
 
+    <dialog
+        android:id="@+id/disableExposureApiDialog"
+        android:name="it.ministerodellasalute.immuni.ui.disableservice.DisableExposureApiDialogFragment"
+        tools:layout="@layout/disable_exposure_api_dialog" />
+    <action
+        android:id="@+id/action_disable_exposure_api"
+        app:destination="@id/disableExposureApiDialog" />
+
     <!-- Default -->
     <dialog
         android:id="@+id/stateDefaultDialog"

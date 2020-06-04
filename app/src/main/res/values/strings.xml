@@ -143,6 +143,11 @@
     <string name="permission_tutorial_bluetooth_first"><b>1. Go to the Control Centre.</b> Depending on your device, either swipe down from the top right corner, or up from the bottom of the screen.</string>
     <string name="permission_tutorial_bluetooth_second"><b>2. Turn on Bluetooth</b></string>
     <string name="permission_tutorial_bluetooth_action">Open Settings</string>
+    <string name="permission_tutorial_deactivate_service_title">Come disattivare il servizio</string>
+    <string name="permission_tutorial_deactivate_service_first_message">Per proteggere la tua salute e quella dei tuoi cari, disattiva il servizio solo se necessario e riattivalo appena puoi.</string>
+    <string name="permission_tutorial_deactivate_service_second_message">In certi casi può aver senso disattivare temporaneamente le notifiche di esposizione, ad esempio <b>se sei un operatore sanitario a contatto con pazienti COVID-19 e desideri disattivare l’app mentre sei al lavoro.</b></string>
+    <string name="permission_tutorial.deactivate_service_third_message">Disabilitando le notifiche di esposizione i successivi contatti con altri utenti non verranno registrati.</string>
+    <string name="permission_tutorial.deactivate_service_fourth_message">Per disabilitare le notifiche di esposizione</string>
     <string name="permission_tutorial_exposure_notification_restricted_title">To enable exposure notifications</string>
     <string name="permission_tutorial_exposure_notification_restricted_first"><b>1. Open the system settings</b></string>
     <string name="permission_tutorial_exposure_notification_restricted_second"><b>2. Go to \'Privacy\'</b></string>
