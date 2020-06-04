@@ -80,7 +80,7 @@ class HomeListAdapter(
     inner class InformationSelfCareVH(v: View) : RecyclerView.ViewHolder(v)
 
     inner class DisableExposureApiVH(v: View) : RecyclerView.ViewHolder(v) {
-        val disableExposureApi : Button = v.findViewById(R.id.disableExposureApi)
+        val disableExposureApi: Button = v.findViewById(R.id.disableExposureApi)
 
         init {
             disableExposureApi.setSafeOnClickListener { onItemClick(adapterPosition) }
