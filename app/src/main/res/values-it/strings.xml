@@ -277,4 +277,6 @@
   <string name="suggestions_instruction_mask_message">Inclusi i mezzi di trasporto e comunque in tutte le occasioni in cui non sia possibile garantire continuativamente il mantenimento della distanza di sicurezza.</string>
   <string name="upload_data_vpn_error_message">Si è verificato un errore durante l’operazione. Ti invitiamo a riprovare. Se stai utilizzando una VPN, ti suggeriamo di selezionare un server italiano o di disabilitarla temporaneamente.</string>
   <string name="suggestions_risk_footer">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità, l\'app ha informato il Ministero della Salute della notifica che hai ricevuto. <b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di questa informazione.</b></string>
+  <string name="onboarding_pilot_title">Progetto pilota in corso</string>
+  <string name="onboarding_pilot_description">Per la durata della fase di sperimentazione <b>verrai avvisato di un’esposizione a rischio solo se entri in contatto con un utente risultato positivo al virus assistito da una delle seguenti regioni: Abruzzo, Liguria, Marche e Puglia.</b></string>
 </resources>
