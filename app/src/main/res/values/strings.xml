@@ -277,4 +277,6 @@
     <string name="suggestions_risk_title">Risky exposure</string>
     <string name="suggestions_positive_info_subtitle">For the time being, you will not receive any new notifications in the event of a risky exposure to a COVID-19-positive user.</string>
     <string name="suggestions_positive_covid_negative_message"><b>Let us know if your local health authority has confirmed that you are COVID-19 negative to reactivate risky exposure notifications.</b></string>
+    <string name="onboarding_pilot_title">Progetto pilota in corso</string>
+    <string name="onboarding_pilot_description">Per la durata della fase di sperimentazione <b>verrai avvisato di un’esposizione a rischio solo se entri in contatto con un utente risultato positivo al virus assistito da una delle seguenti regioni: Abruzzo, Liguria, Marche e Puglia.</b></string>
 </resources>
