@@ -403,10 +403,7 @@
         <item name="android:layout_marginBottom">24dp</item>
     </style>
 
-    <style name="SupportInformationCard" parent="SettingsMenuCard">
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
-    </style>
+    <style name="SupportInformationCard" parent="SettingsMenuCard"/>
 
     <style name="SupportInformationRow">
         <item name="android:orientation">horizontal</item>

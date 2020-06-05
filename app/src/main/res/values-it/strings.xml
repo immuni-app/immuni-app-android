@@ -130,7 +130,7 @@
   <string name="settings_setting_privacy">Informativa privacy</string>
   <string name="settings_setting_chage_province">Cambia la provincia</string>
   <string name="settings_setting_leave_review">Lascia una recensione</string>
-  <string name="settings_setting_contact_support">Contatta il supporto</string>
+  <string name="settings_setting_support">Contatta il supporto</string>
   <string name="settings_setting_debug_utilities">Menu di Debug</string>
   <string name="settings_update_province_update_province">Aggiorna</string>
   <string name="permission_tutorial_notifications_title">Per attivare le notifiche</string>

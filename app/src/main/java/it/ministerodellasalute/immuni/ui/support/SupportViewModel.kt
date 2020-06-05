@@ -11,6 +11,10 @@ class SupportViewModel : ViewModel() {
         emit("800 91 24 91")
     }
 
+    val supportWorkingHours = liveData {
+        emit(7 to 22)
+    }
+
     val osVersion = liveData {
         emit("Android 9")
     }

@@ -1,11 +1,16 @@
 package it.ministerodellasalute.immuni.ui.support
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.SettingsDirections
 import it.ministerodellasalute.immuni.extensions.utils.coloredClickable
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
+import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 import it.ministerodellasalute.immuni.util.startPhoneDial
 import kotlinx.android.synthetic.main.support_dialog.*
@@ -23,11 +28,19 @@ class SupportDialogFragment : PopupDialogFragment() {
         setContentLayout(R.layout.support_dialog)
         setTitle(getString(R.string.support_title))
 
+        contactSupport.movementMethod = LinkMovementMethod.getInstance()
         viewModel.contactSupportPhone.observe(viewLifecycleOwner) {
-            contactSupport.text = getString(R.string.support_contact_support)
-                .coloredClickable(color = requireContext().getColorCompat(R.color.colorPrimary)) {
+            @SuppressLint("SetTextI18n")
+            contactSupport.text = "{$it}"
+                .coloredClickable(
+                    color = requireContext().getColorCompat(R.color.colorPrimary),
+                    bold = true
+                ) {
                     startPhoneDial(it)
                 }
+        }
+        viewModel.supportWorkingHours.observe(viewLifecycleOwner) { (from, to) ->
+            phoneDescription.text = getString(R.string.support_phone_description, from, to)
         }
 
         viewModel.osVersion.observe(viewLifecycleOwner) {
@@ -56,6 +69,12 @@ class SupportDialogFragment : PopupDialogFragment() {
 
         viewModel.connectionType.observe(viewLifecycleOwner) {
             connectionType.text = it
+        }
+
+        openFaq.setSafeOnClickListener {
+            dismiss()
+            val action = SettingsDirections.actionFaq()
+            findNavController().navigate(action)
         }
     }
 }

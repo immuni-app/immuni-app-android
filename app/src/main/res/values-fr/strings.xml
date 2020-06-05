@@ -125,7 +125,7 @@
   <string name="settings_setting_privacy">Politique de confidentialité</string>
   <string name="settings_setting_chage_province">Modifier la province</string>
   <string name="settings_setting_leave_review">Laisser un commentaire</string>
-  <string name="settings_setting_contact_support">Contacter le service d\'assistance</string>
+  <string name="settings_setting_support">Contacter le service d\'assistance</string>
   <string name="settings_setting_debug_utilities">Menu de débogage</string>
   <string name="settings_update_province_update_province">Mettre à jour</string>
   <string name="permission_tutorial_notifications_title">Pour activer les notifications</string>

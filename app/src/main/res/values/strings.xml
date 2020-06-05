@@ -131,7 +131,7 @@
     <string name="settings_setting_privacy">Privacy notice</string>
     <string name="settings_setting_chage_province">Change your province</string>
     <string name="settings_setting_leave_review">Leave a review</string>
-    <string name="settings_setting_contact_support">Contact Support</string>
+    <string name="settings_setting_support">Contact Support</string>
     <string name="settings_setting_debug_utilities">Debug menu</string>
     <string name="settings_update_province_update_province">Update</string>
     <string name="permission_tutorial_notifications_title">To enable notifications</string>
@@ -294,8 +294,9 @@
     <string name="support_title">Hai bisogno di aiuto?</string>
     <string name="support_faq_description">Se hai dubbi o hai avuto problemi nell\'utilizzo dell\'app, vai alla sezione “Domande frequenti”.</string>
     <string name="support_faq_action">Esplora le domande frequenti</string>
-    <string name="support_contact_support">Se non hai trovato la risposta che cercavi, puoi contattare il supporto di Immuni.</string>
-    <string name="support_phone"><b>Chiama il numero verde</b>\nNumero attivo dalle 7 alle 22.\n{telephone}</string>
+    <string name="support_contact_support">Se non hai trovato la risposta che cercavi, <b>puoi contattare il supporto di Immuni.</b></string>
+    <string name="support_phone_title">Chiama il numero verde</string>
+    <string name="support_phone_description">Numero attivo dalle %d alle %d.</string>
     <string name="support_info_title">Informazioni utili</string>
     <string name="support_info_item_os">Sistema operativo</string>
     <string name="support_info_item_device">Modello</string>
