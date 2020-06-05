@@ -63,6 +63,7 @@
         android:text="@string/support_contact_support" />
 
     <TextView
+        android:id="@+id/contactSupport"
         style="@style/P1Text.Generic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
