@@ -63,7 +63,7 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
             showHideAlert()
         }
 
-        val privacyRawText = getString(R.string.suggestions_risk_third_message)
+        val privacyRawText = getString(R.string.suggestions_risk_third_message_android)
         footerPrivacyLink.movementMethod = LinkMovementMethod.getInstance()
         footerPrivacyLink.text = privacyRawText.coloredClickable(
             color = requireContext().getColorCompat(R.color.colorPrimary),

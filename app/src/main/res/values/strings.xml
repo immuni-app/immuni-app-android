@@ -89,13 +89,11 @@
     <string name="onboarding_push_permission_action">Allow</string>
     <string name="onboarding_push_permission_overlay_hint">Select \'<b>Allow</b>\' in the pop-up that appears below</string>
     <string name="onboarding_pin_advice_title">Protect your device</string>
-    <string name="onboarding_pin_advice_description">The use of Immuni is strictly personal. If you haven\'t done so already, set up a PIN on your device to protect it and prevent others from accessing your data and apps, including Immuni.</string>
     <string name="onboarding_pin_advice_action">Got it</string>
     <string name="onboarding_communication_advice_title">Watch out for scam messages</string>
     <string name="onboarding_communication_advice_description">Immuni will only ever communicate with you via the app and the corresponding notifications. <b>Be wary of any text, phone call, email, or other kind of alert</b> that appears to be from Immuni, especially if it asks you for personal information.</string>
     <string name="onboarding_communication_advice_action">Got it</string>
     <string name="onboarding_complete_title">Setup complete</string>
-    <string name="home_view_service_deactivate">Disattiva il servizio</string>
     <string name="home_view_service_active_title">Service<b>active</b></string>
     <string name="home_view_service_active_advice">Open Immuni periodically to check its status.</string>
     <string name="home_view_service_not_active_title">Service<b>inactive</b></string>
@@ -143,11 +141,6 @@
     <string name="permission_tutorial_bluetooth_first"><b>1. Go to the Control Centre.</b> Depending on your device, either swipe down from the top right corner, or up from the bottom of the screen.</string>
     <string name="permission_tutorial_bluetooth_second"><b>2. Turn on Bluetooth</b></string>
     <string name="permission_tutorial_bluetooth_action">Open Settings</string>
-    <string name="permission_tutorial_deactivate_service_title">Come disattivare il servizio</string>
-    <string name="permission_tutorial_deactivate_service_first_message">Per proteggere la tua salute e quella dei tuoi cari, disattiva il servizio solo se necessario e riattivalo appena puoi.</string>
-    <string name="permission_tutorial_deactivate_service_second_message">In certi casi può aver senso disattivare temporaneamente le notifiche di esposizione, ad esempio <b>se sei un operatore sanitario a contatto con pazienti COVID-19 e desideri disattivare l’app mentre sei al lavoro.</b></string>
-    <string name="permission_tutorial_deactivate_service_third_message">Disabilitando le notifiche di esposizione i successivi contatti con altri utenti non verranno registrati.</string>
-    <string name="permission_tutorial_deactivate_service_fourth_message">Per disabilitare le notifiche di esposizione</string>
     <string name="permission_tutorial_exposure_notification_restricted_title">To enable exposure notifications</string>
     <string name="permission_tutorial_exposure_notification_restricted_first"><b>1. Open the system settings</b></string>
     <string name="permission_tutorial_exposure_notification_restricted_second"><b>2. Go to \'Privacy\'</b></string>
@@ -284,10 +277,19 @@
     <string name="suggestions_risk_title">Risky exposure</string>
     <string name="suggestions_positive_info_subtitle">For the time being, you will not receive any new notifications in the event of a risky exposure to a COVID-19-positive user.</string>
     <string name="suggestions_positive_covid_negative_message"><b>Let us know if your local health authority has confirmed that you are COVID-19 negative to reactivate risky exposure notifications.</b></string>
-    <string name="suggestions_risk_first_message">L\'app ti mostra questo avviso sulla base delle informazioni a disposizione (durata del contatto e stima approssimativa della distanza) ma non può sapere se durante il contatto indossavi una mascherina o se davi le spalle. Il rischio di contagio potrebbe quindi essere sovrastimato.</string>
-    <string name="suggestions_risk_second_message">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità l’app ha informato il Ministero della Salute della notifica che hai ricevuto.</string>
-    <string name="suggestions_risk_third_message">Per ulteriori informazioni sui dati trasmessi al Ministero della salute puoi leggere l’{informativa privacy} al punto 4.</string>
-    <string name="suggestions_risk_fourth_message"><b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di queste informazioni</b>.</string>
-    <string name="onboarding_pilot_title">Sperimentazione in corso</string>
-    <string name="onboarding_pilot_description">Durante la fase di sperimentazione verrai avvisato di un contatto a rischio con una persona positiva al virus solo se quest’ultima è assistita da un’ASL delle seguenti regioni: <b>Abruzzo, Liguria, Marche e Puglia.</b></string>
+
+
+    <string name="onboarding_pin_advice_description">Immuni is strictly for personal use. If you haven\'t done so already, set up a lock code on your smartphone to prevent others from accessing the app\'s features and any messages the app might send you.</string>
+    <string name="home_view_service_deactivate">Disable the service</string>
+    <string name="onboarding_pilot_title">Testing in progress</string>
+    <string name="onboarding_pilot_description">During the testing phase, you will only be notified of a high-risk contact with a COVID-19-positive person if this person is assisted by a local health authority in the following regions: Abruzzo, Liguria, Marche or Puglia.</string>
+    <string name="onboarding_pilot_action">Got it</string>
+    <string name="permission_tutorial_deactivate_service_title">How to disable the service</string>
+    <string name="permission_tutorial_deactivate_service_first_message_android">To protect your health and the health of your loved ones, only deactivate the service if necessary and reactivate it as soon as you can.</string>
+    <string name="permission_tutorial_deactivate_service_second_message">In certain cases, it may make sense to temporarily disable exposure notifications, such as <b>if you are a healthcare professional in contact with COVID-19 patients and want to disable the app while at work.</b></string>
+    <string name="permission_tutorial_deactivate_service_third_message">If you disable exposure notifications, subsequent contacts with other users will not be logged.</string>
+    <string name="suggestions_risk_first_message">The app shows you this warning based on the information available (duration of the contact and approximate estimate of the distance) but it cannot know if you wore a mask or if you turned your back during the contact. The risk of contagion could therefore be overestimated.</string>
+    <string name="suggestions_risk_second_message">To help the National Health Service take care of you should the need arise, the app has informed the Ministry of Health of the notification you have received.</string>
+    <string name="suggestions_risk_fourth_message">The Ministry of Health cannot determine your identity from this information.</string>
+    <string name="suggestions_risk_third_message_android">For more information on the data sent to the Ministry of Health, you can read the {privacy notice}, point 4.</string>
 </resources>

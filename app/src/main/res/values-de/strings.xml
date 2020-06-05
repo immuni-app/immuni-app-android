@@ -89,7 +89,6 @@
   <string name="onboarding_push_permission_action">Erlauben</string>
   <string name="onboarding_push_permission_overlay_hint">Tippen Sie auf \"<b>Erlauben</b>\" in dem Popup-Fenster, das unten angezeigt wird</string>
   <string name="onboarding_pin_advice_title">Schützen Sie Ihr Gerät</string>
-  <string name="onboarding_pin_advice_description">Die Verwendung von Immuni ist streng persönlich. Sollten Sie es noch nicht getan haben, schützen Sie Ihr Gerät mit einem Code, damit andere nicht auf Ihre Daten und Apps – einschließlich Immuni – zugreifen können.</string>
   <string name="onboarding_pin_advice_action">Alles klar</string>
   <string name="onboarding_communication_advice_title">Vorsicht vor gefälschten Mitteilungen</string>
   <string name="onboarding_communication_advice_description">Immuni kommuniziert mit Ihnen immer und ausschließlich über die App und damit verbundene Mitteilungen. Vertrauen Sie keinen <b>Textnachrichten, Anrufen, E-Mails oder anderen Hinweisen</b>, die von Immuni zu kommen scheinen, insbesondere wenn Sie nach persönlichen Informationen gefragt werden.</string>
@@ -277,4 +276,19 @@
   <string name="suggestions_instruction_mask_message">Auch in Transportmitteln und in jedem Fall überall, wo es nicht möglich ist, die Einhaltung des Sicherheitsabstands kontinuierlich zu gewährleisten.</string>
   <string name="upload_data_vpn_error_message">Während des Vorgangs ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut. Wenn Sie ein VPN verwenden, empfehlen wir Ihnen, einen italienischen Server auszuwählen oder es vorübergehend zu deaktivieren.</string>
   <string name="suggestions_risk_footer">Damit der staatliche Gesundheitsdienst Sie im Bedarfsfall bestmöglich unterstützen kann, hat die App das Gesundheitsministerium darüber informiert, dass Sie benachrichtigt wurden. <b>Das Gesundheitsministerium kann anhand dieser Information keine Rückschlüsse auf Ihre Identität ziehen.</b></string>
+
+  <string name="onboarding_pin_advice_description">Die Verwendung von Immuni ist an Ihre Person gebunden. Sollten Sie es noch nicht getan haben, schützen Sie Ihr Smartphone mit einem Code, damit andere nicht auf die Funktionen der App und die möglicherweise von ihr gesendeten Mitteilungen zugreifen können.</string>
+  <string name="home_view_service_deactivate">Service deaktivieren</string>
+  <string name="onboarding_pilot_title">Testphase läuft</string>
+  <string name="onboarding_pilot_description">Während der Testphase werden Sie nur dann über ein potenziell ansteckendes Treffen mit einer positiv auf das Virus getesteten Person informiert, wenn diese sich in einen der folgenden Regionen vom lokalen Gesundheitsdienst (ASL) behandeln lässt: Abruzzen, Ligurien, Marken und Apulien.</string>
+  <string name="onboarding_pilot_action">Alles klar</string>
+  <string name="permission_tutorial_deactivate_service_title">So deaktivieren Sie den Service</string>
+  <string name="permission_tutorial_deactivate_service_first_message_android">Deaktivieren Sie den Service zum Schutz Ihrer Gesundheit und der Ihrer Angehörigen nur im Bedarfsfall und aktivieren Sie ihn so bald wie möglich erneut.</string>
+  <string name="permission_tutorial_deactivate_service_second_message">Manchmal kann es sinnvoll sein, die Expositionsmeldungen vorübergehend zu deaktivieren, zum Beispiel, <b>wenn Sie zum medizinischen Fachpersonal gehören und sich häufig in der Nähe von COVID-19-Patienten aufhalten, können Sie die App während der Arbeitszeit deaktivieren.</b></string>
+  <string name="permission_tutorial_deactivate_service_third_message">Wenn Sie die Expositionsmeldungen deaktivieren, werden nachfolgende Treffen mit anderen Nutzern nicht aufgezeichnet.</string>
+
+  <string name="suggestions_risk_first_message">Die App zeigt Ihnen diese Warnung aufgrund der verfügbaren Informationen (Dauer des Treffens und geschätzter Abstand). Sie kann jedoch nicht wissen, ob Sie eine Maske trugen oder sich beim Treffen den Rücken zugewandt haben. Es kann daher sein, dass das Ansteckungsrisiko höher eingestuft wird, als es tatsächlich ist.</string>
+  <string name="suggestions_risk_second_message">Damit der staatliche Gesundheitsdienst Sie im Bedarfsfall bestmöglich unterstützen kann, hat die App das Gesundheitsministerium darüber informiert, dass Sie benachrichtigt wurden.</string>
+  <string name="suggestions_risk_fourth_message"><b>Das Gesundheitsministerium kann anhand dieser Informationen keine Rückschlüsse auf Ihre Identität ziehen</b>.</string>
+  <string name="suggestions_risk_third_message_android">Weitere Informationen zu den an das Gesundheitsministerium gesendeten Daten finden Sie in der {Datenschutzerklärung} unter Ziffer 4.</string>
 </resources>
