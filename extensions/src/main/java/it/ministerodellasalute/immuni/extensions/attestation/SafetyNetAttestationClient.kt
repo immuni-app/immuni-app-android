@@ -36,7 +36,7 @@ class SafetyNetAttestationClient(
         internal val requiresHardwareAttestation: Boolean
     )
 
-    override suspend fun attestate(nonce: String): AttestationClient.Result {
+    override suspend fun attest(nonce: String): AttestationClient.Result {
         try {
             val nonceByteArray = Base64.decode(nonce, Base64.DEFAULT)
             val result =

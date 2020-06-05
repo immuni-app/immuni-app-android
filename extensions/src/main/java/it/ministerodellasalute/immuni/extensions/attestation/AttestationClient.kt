@@ -29,5 +29,5 @@ interface AttestationClient {
         data class Failure(val error: Exception): Result()
     }
 
-    suspend fun attestate(nonce: String) : Result
+    suspend fun attest(nonce: String) : Result
 }

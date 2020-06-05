@@ -47,7 +47,7 @@ class ExposureAnalyticsManager(
         val token = ByteArray(32)
         SecureRandom().nextBytes(token)
         val base64Token = Base64.encodeToString(token, Base64.DEFAULT)
-        val attestationResponse = attestationClient.attestate(base64Token)
+        val attestationResponse = attestationClient.attest(base64Token)
         return when (attestationResponse) {
             is AttestationClient.Result.Failure -> AnalyticsTokenStatus.None()
             is AttestationClient.Result.Invalid -> AnalyticsTokenStatus.Invalid()
