@@ -292,7 +292,7 @@
     <string name="onboarding_pilot_description">Per la durata della fase di sperimentazione <b>verrai avvisato di un’esposizione a rischio solo se entri in contatto con un utente risultato positivo al virus assistito da una delle seguenti regioni: Abruzzo, Liguria, Marche e Puglia.</b></string>
 
     <string name="support_title">Hai bisogno di aiuto?</string>
-    <string name="support_faq_description">Se hai dubbi o hai avuto problemi nell'utilizzo dell'app, vai alla sezione “Domande frequenti”.</string>
+    <string name="support_faq_description">Se hai dubbi o hai avuto problemi nell\'utilizzo dell\'app, vai alla sezione “Domande frequenti”.</string>
     <string name="support_faq_action">Esplora le domande frequenti</string>
     <string name="support_contact_support">Se non hai trovato la risposta che cercavi, puoi contattare il supporto di Immuni.</string>
     <string name="support_phone"><b>Chiama il numero verde</b>\nNumero attivo dalle 7 alle 22.\n{telephone}</string>
