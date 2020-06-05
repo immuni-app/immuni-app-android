@@ -101,7 +101,7 @@
                     android:text="@string/support_info_item_os" />
 
                 <TextView
-                    android:id="@+id/supportInformationOsVersion"
+                    android:id="@+id/osVersion"
                     style="@style/SupportInformationValue"
                     tools:text="Android 9" />
             </LinearLayout>
@@ -115,7 +115,7 @@
                     android:text="@string/support_info_item_device" />
 
                 <TextView
-                    android:id="@+id/supportInformationModel"
+                    android:id="@+id/deviceModel"
                     style="@style/SupportInformationValue"
                     tools:text="Samsung Galaxy A41" />
             </LinearLayout>
@@ -129,7 +129,7 @@
                     android:text="@string/support_info_item_exposure_notification_enabled" />
 
                 <TextView
-                    android:id="@+id/supportInformationExposureNotification"
+                    android:id="@+id/isExposureNotificationEnabled"
                     style="@style/SupportInformationValue"
                     tools:text="Attive" />
             </LinearLayout>
@@ -141,7 +141,7 @@
                     android:text="@string/support_info_item_bluetooth_enabled" />
 
                 <TextView
-                    android:id="@+id/supportInformationBluetooth"
+                    android:id="@+id/isBluetoothActive"
                     style="@style/SupportInformationValue"
                     tools:text="Attivo" />
             </LinearLayout>
@@ -155,7 +155,7 @@
                     android:text="@string/support_info_item_app_version" />
 
                 <TextView
-                    android:id="@+id/supportInformationAppVersion"
+                    android:id="@+id/appVersion"
                     style="@style/SupportInformationValue"
                     tools:text="1.0.0 (23)" />
             </LinearLayout>
@@ -169,7 +169,7 @@
                     android:text="@string/support_info_item_play_services_version" />
 
                 <TextView
-                    android:id="@+id/supportInformationPlayServicesVersion"
+                    android:id="@+id/playServicesVersion"
                     style="@style/SupportInformationValue"
                     tools:text="1.17.20" />
             </LinearLayout>
@@ -183,7 +183,7 @@
                     android:text="@string/support_info_item_connection_type" />
 
                 <TextView
-                    android:id="@+id/supportInformationConnection"
+                    android:id="@+id/connectionType"
                     style="@style/SupportInformationValue"
                     tools:text="WI-FI" />
             </LinearLayout>

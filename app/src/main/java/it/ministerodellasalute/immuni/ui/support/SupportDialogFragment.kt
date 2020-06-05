@@ -21,11 +21,9 @@ class SupportDialogFragment : PopupDialogFragment() {
         viewModel = getViewModel()
 
         setContentLayout(R.layout.support_dialog)
-
         setTitle(getString(R.string.support_title))
 
-
-        viewModel.supportPhoneNumber.observe(viewLifecycleOwner) {
+        viewModel.contactSupportPhone.observe(viewLifecycleOwner) {
             contactSupport.text = getString(R.string.support_contact_support)
                 .coloredClickable(color = requireContext().getColorCompat(R.color.colorPrimary)) {
                     startPhoneDial(it)
@@ -33,31 +31,31 @@ class SupportDialogFragment : PopupDialogFragment() {
         }
 
         viewModel.osVersion.observe(viewLifecycleOwner) {
-            supportInformationOsVersion.text = it
+            osVersion.text = it
         }
 
-        viewModel.phoneModel.observe(viewLifecycleOwner) {
-            supportInformationModel.text = it
+        viewModel.deviceModel.observe(viewLifecycleOwner) {
+            deviceModel.text = it
         }
 
-        viewModel.isExposureNotificationsEnabled.observe(viewLifecycleOwner) {
-            supportInformationExposureNotification.text = it
+        viewModel.isExposureNotificationEnabled.observe(viewLifecycleOwner) {
+            isExposureNotificationEnabled.text = it
         }
 
         viewModel.isBluetoothEnabled.observe(viewLifecycleOwner) {
-            supportInformationBluetooth.text = it
+            isBluetoothActive.text = it
         }
 
         viewModel.appVersion.observe(viewLifecycleOwner) {
-            supportInformationAppVersion.text = it
+            appVersion.text = it
         }
 
         viewModel.googlePlayVersion.observe(viewLifecycleOwner) {
-            supportInformationPlayServicesVersion.text = it
+            playServicesVersion.text = it
         }
 
-        viewModel.connectionStatus.observe(viewLifecycleOwner) {
-            supportInformationConnection.text = it
+        viewModel.connectionType.observe(viewLifecycleOwner) {
+            connectionType.text = it
         }
     }
 }

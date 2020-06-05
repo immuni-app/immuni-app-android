@@ -7,7 +7,7 @@ class SupportViewModel : ViewModel() {
 
     // TODO replace livedata with real values.
 
-    val supportPhoneNumber = liveData {
+    val contactSupportPhone = liveData {
         emit("800 91 24 91")
     }
 
@@ -15,11 +15,11 @@ class SupportViewModel : ViewModel() {
         emit("Android 9")
     }
 
-    val phoneModel = liveData {
+    val deviceModel = liveData {
         emit("Samsung Galaxy A41")
     }
 
-    val isExposureNotificationsEnabled = liveData {
+    val isExposureNotificationEnabled = liveData {
         emit("Attiva")
     }
 
@@ -34,7 +34,7 @@ class SupportViewModel : ViewModel() {
         emit("1.17.20")
     }
 
-    val connectionStatus = liveData {
+    val connectionType = liveData {
         emit("Wi-Fi")
     }
 }
