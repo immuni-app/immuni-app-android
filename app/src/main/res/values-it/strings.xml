@@ -240,7 +240,7 @@
   <string name="force_update_not_available_message"> Google Play Services è aggiornato ma non può ancora abilitare le notifiche di esposizione. Riprova più tardi.</string>
   <string name="force_update_gps_not_available_yet_title">Attendi l\'aggiornamento di Google Play Services</string>
   <string name="force_update_gps_not_available_yet_message">Non è ancora disponibile la versione di Google Play Services necessaria per attivare le notifiche di esposizione. Riprova più tardi.</string>
-  <string name="onboarding_exposure_message_extended">Le notifiche di esposizione richiedono che il servizio di localizzazione sia attivo a livello di sistema. <b>Immuni non ha accesso alla localizzazione e non può quindi conoscere la tua posizione o i tuoi spostamenti</b>.</string>
+  <string name="onboarding_exposure_message_extended">Per via di una limitazione tecnica, il servizio di localizzazione di sistema deve essere attivo, ma <b>Immuni non potrà comunque avere accesso alla tua posizione o ai tuoi spostamenti</b>.\n\nPuoi scegliere di disabilitare invece il solo GPS, separatamente dalla localizzazione di sistema, se il tuo cellulare lo consente.</string>
   <string name="suggestions_alert_hide_alert_title">Vuoi nascondere questo avviso?</string>
   <string name="suggestions_alert_hide_alert_description">A meno che tu abbia una ragione valida, ti sconsigliamo vivamente di farlo. Ne potrebbe andare della tua salute e di quella delle persone che ti circondano.</string>
   <string name="suggestions_alert_hide_alert_negative_answer">No</string>
