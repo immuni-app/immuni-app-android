@@ -58,6 +58,7 @@ buildscript {
         recyclerviewVersion = "1.1.0"
         workVersion = "2.3.4"
         viewPager2Version = "1.0.0"
+        browserVersion= "1.2.0"
         conscryptVersion = "2.4.0"
         testCoreKtxVersion = "1.2.0"
         testFragmentVersion = "1.2.4"

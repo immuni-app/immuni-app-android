@@ -53,6 +53,7 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.security:security-crypto:$securityVersion"
     implementation "androidx.work:work-runtime-ktx:$workVersion"
+    implementation "androidx.browser:browser:$browserVersion"
 
     // Google GMS
     implementation 'com.google.android.gms:play-services-tasks:17.0.2'
