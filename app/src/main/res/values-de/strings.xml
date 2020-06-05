@@ -100,14 +100,14 @@
   <string name="home_view_service_not_active_subtitle">Handeln Sie sofort, damit Immuni richtig funktionieren kann.</string>
   <string name="home_view_service_not_active_button">Immuni erneut aktivieren</string>
   <string name="home_view_info_protection_title">So können Sie sich schützen</string>
-  <string name="home_view_info_app_title">Wie funktioniert die App?</string>
+  <string name="home_view_info_app_title">Wie funktioniert die App</string>
   <string name="home_view_info_button_title">Mehr erfahren</string>
   <string name="home_view_info_header_title">Informationen</string>
   <string name="home_view_header_card_risk_title">Ansteckungsgefahr durch einen positiv auf COVID-19 getesteten Nutzer erkannt</string>
   <string name="home_view_header_card_risk_button">Das sollten Sie jetzt tun ›</string>
   <string name="home_view_header_card_positive_title">Befolgen Sie die Anweisungen Ihres Arztes oder Ihrer örtlichen Gesundheitsbehörde</string>
   <string name="home_view_header_card_positive_button">Sie sind genesen? Aktualisieren Sie Ihren Status ›</string>
-  <string name="permission_tutorial_how_immuni_works_title">Wie funktioniert die App?</string>
+  <string name="permission_tutorial_how_immuni_works_title">Wie funktioniert die App</string>
   <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni ordnet jedem Handy einen Zufallscode zu</h>]]></string>
   <string name="permission_tutorial_how_immuni_works_first_message">Der Code wird zufällig generiert und enthält keine Informationen über Ihr Gerät oder über Sie. Zudem ändert er sich mehrmals pro Stunde, um Ihre Privatsphäre bestmöglich zu schützen.</string>
   <string name="permission_tutorial_how_immuni_works_second_title"><![CDATA[<h>Wenn Handys aufeinander treffen, tauschen sie ihre Zufallscodes aus</h>]]></string>

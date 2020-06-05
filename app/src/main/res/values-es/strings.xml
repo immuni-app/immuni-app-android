@@ -98,14 +98,14 @@
   <string name="home_view_service_not_active_subtitle">Toma las medidas necesarias cuanto antes para que Immuni funcione correctamente.</string>
   <string name="home_view_service_not_active_button">Reactivar Immuni</string>
   <string name="home_view_info_protection_title">¿Qué medidas puedes adoptar para protegerte?</string>
-  <string name="home_view_info_app_title">¿Cómo funciona la aplicación?</string>
+  <string name="home_view_info_app_title">Wie funktioniert die App</string>
   <string name="home_view_info_button_title">Más información</string>
   <string name="home_view_info_header_title">Información</string>
   <string name="home_view_header_card_risk_title">Se ha detectado riesgo de exposición a una persona con la COVID-19</string>
   <string name="home_view_header_card_risk_button">Descubre qué debes hacer ›</string>
   <string name="home_view_header_card_positive_title">Sigue las indicaciones de tu médico o Agencia Sanitaria Local</string>
   <string name="home_view_header_card_positive_button">¿Te has recuperado? Actualiza tu estado ›</string>
-  <string name="permission_tutorial_how_immuni_works_title">¿Cómo funciona la aplicación?</string>
+  <string name="permission_tutorial_how_immuni_works_title">Cómo funciona la aplicación</string>
   <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni vincula un código aleatorio a cada teléfono</h>]]></string>
   <string name="permission_tutorial_how_immuni_works_first_message">El código se genera de forma aleatoria y no contiene información sobre tu dispositivo y, por supuesto, tampoco sobre ti. Además, cambia varias veces cada hora para garantizar la máxima protección de tu privacidad.</string>
   <string name="permission_tutorial_how_immuni_works_second_title"><![CDATA[<h>Los teléfonos que se detectan entre sí intercambian sus códigos aleatorios</h>]]></string>
