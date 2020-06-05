@@ -403,7 +403,7 @@
         <item name="android:layout_marginBottom">24dp</item>
     </style>
 
-    <style name="SupportInformationCard" parent="SettingsMenuCard"/>
+    <style name="SupportInformationCard" parent="SettingsMenuCard" />
 
     <style name="SupportInformationRow">
         <item name="android:orientation">horizontal</item>
@@ -413,18 +413,23 @@
         <item name="android:paddingEnd">30dp</item>
         <item name="android:paddingBottom">22dp</item>
         <item name="android:paddingTop">22dp</item>
+        <item name="android:weightSum">1</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="SupportInformationKey" parent="P1Text.Bold">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:layout_weight">0.6</item>
     </style>
 
     <style name="SupportInformationValue" parent="P1Text.Generic">
         <item name="android:layout_width">0dp</item>
         <item name="android:gravity">end</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_weight">0.4</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">3</item>
     </style>
 </resources>
