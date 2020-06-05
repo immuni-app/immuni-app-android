@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/H1Heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/support_title" />
+
+
+    <TextView
+        style="@style/P1Text.Generic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/support_faq_description" />
+
+    <Button
+        android:id="@+id/openFaq"
+        style="@style/RoundedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/support_faq_action" />
+
+    <include layout="@layout/settings_content_divider" />
+
+    <TextView
+        style="@style/P1Text.Generic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/support_contact_support" />
+
+    <TextView
+        style="@style/P1Text.Generic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:drawablePadding="16dp"
+        android:text="@string/support_phone"
+        app:drawableStartCompat="@drawable/ic_call" />
+
+    <include layout="@layout/settings_content_divider" />
+
+    <TextView
+        style="@style/P1Text.SemiBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/support_info_title" />
+
+    <com.google.android.material.card.MaterialCardView style="@style/SupportInformationCard">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_os" />
+
+                <TextView
+                    android:id="@+id/supportInformationOsVersion"
+                    style="@style/SupportInformationValue"
+                    tools:text="Android 9" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_device" />
+
+                <TextView
+                    android:id="@+id/supportInformationModel"
+                    style="@style/SupportInformationValue"
+                    tools:text="Samsung Galaxy A41" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_exposure_notification_enabled" />
+
+                <TextView
+                    android:id="@+id/supportInformationExposureNotification"
+                    style="@style/SupportInformationValue"
+                    tools:text="Attive" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_bluetooth_enabled" />
+
+                <TextView
+                    android:id="@+id/supportInformationBluetooth"
+                    style="@style/SupportInformationValue"
+                    tools:text="Attivo" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_app_version" />
+
+                <TextView
+                    android:id="@+id/supportInformationAppVersion"
+                    style="@style/SupportInformationValue"
+                    tools:text="1.0.0 (23)" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_play_services_version" />
+
+                <TextView
+                    android:id="@+id/supportInformationPlayServicesVersion"
+                    style="@style/SupportInformationValue"
+                    tools:text="1.17.20" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_connection_type" />
+
+                <TextView
+                    android:id="@+id/supportInformationConnection"
+                    style="@style/SupportInformationValue"
+                    tools:text="WI-FI" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

@@ -402,4 +402,32 @@
         <item name="android:drawablePadding">16dp</item>
         <item name="android:layout_marginBottom">24dp</item>
     </style>
+
+    <style name="SupportInformationCard" parent="SettingsMenuCard">
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="SupportInformationRow">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">30dp</item>
+        <item name="android:paddingBottom">22dp</item>
+        <item name="android:paddingTop">22dp</item>
+    </style>
+
+    <style name="SupportInformationKey" parent="P1Text.Bold">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">20dp</item>
+    </style>
+
+    <style name="SupportInformationValue" parent="P1Text.Generic">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">end</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>
