@@ -86,7 +86,6 @@
   <string name="onboarding_push_permission_action">Autoriser</string>
   <string name="onboarding_push_permission_overlay_hint">Sélectionnez <b>Autoriser</b> dans la fenêtre contextuelle qui apparaîtra ci-dessous</string>
   <string name="onboarding_pin_advice_title">Protégez votre appareil</string>
-  <string name="onboarding_pin_advice_description">L’utilisation d’Immuni est strictement personnelle. Si ce n\'est pas déjà fait, configurez un code sur votre appareil afin de le protéger et d\'empêcher quiconque d\'accéder à vos informations et applications, Immuni incluse.</string>
   <string name="onboarding_pin_advice_action">J\'ai compris</string>
   <string name="onboarding_communication_advice_title">Méfiez-vous des communications frauduleuses</string>
   <string name="onboarding_communication_advice_description">Immuni communiquera avec vous exclusivement par le biais de l\'application et notifications associées. <b>Méfiez-vous de tout SMS, appel téléphonique, e-mail ou autre type d\'avertissement </b>qui semblerait provenir d\'Immuni, surtout si vous êtes invité à fournir des informations personnelles.</string>
@@ -277,4 +276,19 @@
   <string name="privacy_settings_title">Vos données restent confidentielles</string>
   <string name="permission_tutorial_how_immuni_works_first_message">Le code est généré de manière aléatoire et ne contient aucune information à propos de vous ou de votre appareil. De plus, il change plusieurs fois par heure pour mieux protéger vos données confidentielles.</string>
   <string name="permission_tutorial_how_immuni_works_fifth_message">Si vous avez été en contact avec un utilisateur positif, Immuni vous avertira et vous indiquera la procédure à suivre. L\'application y parvient sans jamais savoir où vous allez ni qui vous rencontrez. Vos données restent confidentielles.</string>
+
+  <string name="onboarding_pin_advice_description">L\'utilisation d\'Immuni est strictement personnelle. Si vous ne l\'avez pas déjà fait, configurez un code de déverrouillage sur votre smartphone afin d\'empêcher toute autre personne d\'accéder aux fonctionnalités de l\'application et aux messages qu\'elle pourrait vous envoyer.</string>
+  <string name="home_view_service_deactivate">Désactiver le service</string>
+  <string name="onboarding_pilot_title">Expérimentation en cours</string>
+  <string name="onboarding_pilot_description">Au cours de la phase d\'expérimentation, vous ne serez averti(e) d\'un contact à risque avec une personne positive au virus que si celle-ci est assistée par une ASL (unité sanitaire locale) des régions suivantes : Abruzzes, Ligurie, Marches et Pouilles.</string>
+  <string name="onboarding_pilot_action">J\'ai compris</string>
+  <string name="permission_tutorial_deactivate_service_title">Comment désactiver le service</string>
+  <string name="permission_tutorial_deactivate_service_first_message_android">Pour protéger votre santé et celle de vos proches, ne désactivez le service que si nécessaire et réactivez-le dès que possible.</string>
+  <string name="permission_tutorial_deactivate_service_second_message">Dans certains cas, il peut être judicieux de désactiver temporairement les notifications d\'exposition, par exemple <b>si vous êtes un professionnel de la santé en contact avec des patients atteints du COVID-19 et que vous souhaitez désactiver l\'application lorsque vous êtes au travail.</b></string>
+  <string name="permission_tutorial_deactivate_service_third_message">La désactivation des notifications d\'exposition implique que les contacts ultérieurs avec d\'autres utilisateurs ne seront pas enregistrés.</string>
+
+  <string name="suggestions_risk_first_message">L\'application vous montre cet avertissement sur la base des informations disponibles (durée du contact et estimation approximative de la distance) mais ne peut pas savoir si lors du contact vous avez porté un masque ou si vous étiez de dos. Le risque de contagion pourrait donc être surestimé.</string>
+  <string name="suggestions_risk_second_message">Pour aider les Services nationaux de santé à prendre soin de vous le cas échéant, l\'application a informé le Ministère de la Santé de la notification qui vous a été envoyée.</string>
+  <string name="suggestions_risk_fourth_message"><b>Le Ministère de la Santé ne peut en aucun cas retracer votre identité sur la base de ces informations</b>.</string>
+  <string name="suggestions_risk_third_message_android">Pour plus d\'informations sur les données envoyées au Ministère de la Santé, merci de bien vouloir lire la {politique sur le respect de la vie privée} disponible au point 4.</string>
 </resources>

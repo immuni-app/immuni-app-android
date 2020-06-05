@@ -87,7 +87,6 @@
   <string name="onboarding_push_permission_action">Permitir</string>
   <string name="onboarding_push_permission_overlay_hint">Selecciona «<b>Permitir</b>» en la ventana emergente que aparecerá a continuación</string>
   <string name="onboarding_pin_advice_title">Protege tu dispositivo</string>
-  <string name="onboarding_pin_advice_description">El uso de Immuni es estrictamente personal. Si aún no lo has hecho, configura un código en tu dispositivo para protegerlo e impedir que otras personas accedan a tus datos y aplicaciones, incluida Immuni.</string>
   <string name="onboarding_pin_advice_action">Entendido</string>
   <string name="onboarding_communication_advice_title">Ten cuidado con los mensajes engañosos</string>
   <string name="onboarding_communication_advice_description">Immuni únicamente contactará contigo a través de la aplicación y de las notificaciones correspondientes. <b>No confíes en ningún aviso que recibas por SMS, llamada telefónica, correo electrónico u otro medio</b> y que parezca ser de Immuni, especialmente si te solicitan datos personales.</string>
@@ -277,4 +276,18 @@
   <string name="suggestions_risk_footer">Para ayudar al Servicio Nacional de Salud (SSN) a cuidarte si fuera necesario, la aplicación ha avisado al Ministerio de Salud de la notificación que has recibido. <b>No obstante, el Ministerio de Salud no podrá conocer tu identidad a partir de esta información.</b></string>
   <string name="onboarding_exposure_permission_action">Activar</string>
   <string name="onboarding_exposure_permission_overlay.hint">Selecciona «<b>Activar</b>» en la ventana emergente que aparecerá a continuación</string>
+
+  <string name="onboarding_pin_advice_description">El uso de Immuni es estrictamente personal. Si aún no lo has hecho, configura un código de desbloqueo en tu teléfono inteligente para impedir que otras personas accedan a las funciones de la aplicación y a los mensajes que pueda enviarte.</string>
+  <string name="home_view_service_deactivate">Desactivar el servicio</string>
+  <string name="onboarding_pilot_title">Experimentación en curso</string>
+  <string name="onboarding_pilot_description">Durante la fase de experimentación, se te notificará si has tenido un contacto de riesgo con una persona que ha dado positivo en el virus solo si la ha atendido una Agencia Sanitaria Local de las siguientes regiones: Abruzos, Liguria, Las Marcas y Apulia.</string>
+  <string name="onboarding_pilot_action">Entendido</string>
+  <string name="permission_tutorial_deactivate_service_title">Cómo desactivar el servicio</string>
+  <string name="permission_tutorial_deactivate_service_first_message_android">Para proteger tu salud y la de tus seres queridos, desactiva el servicio solo si es necesario y reactívalo lo antes posible.</string>
+  <string name="permission_tutorial_deactivate_service_second_message">En algunos casos, puede tener sentido desactivar temporalmente las notificaciones de exposición, por ejemplo, <b>si eres un profesional sanitario que está en contacto con pacientes de COVID-19 y quieres desactivar la aplicación mientras estás en el trabajo.</b></string>
+  <string name="permission_tutorial_deactivate_service_third_message">Al deshabilitar las notificaciones de exposición, no se registrarán los contactos posteriores con otros usuarios.</string>
+  <string name="suggestions_risk_first_message">La aplicación te muestra esta advertencia en función de la información disponible (duración del contacto y estimación de la distancia aproximada), pero no puede saber si durante el contacto llevabas mascarilla o si estabas de espaldas. Por lo tanto, el riesgo de contagio podría haberse sobreestimado.</string>
+  <string name="suggestions_risk_second_message">Para ayudar al Servicio Nacional de Salud (SSN) a cuidarte si fuera necesario, la aplicación ha avisado al Ministerio de Salud de la notificación que has recibido.</string>
+  <string name="suggestions_risk_fourth_message"><b>El Ministerio de Salud no puede en ningún caso rastrear tu identidad a través de esta información</b>.</string>
+  <string name="suggestions_risk_third_message_android">Para obtener más información sobre los datos enviados al Ministerio de Salud, puedes leer la {política de privacidad} en el punto 4.</string>
 </resources>

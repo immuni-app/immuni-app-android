@@ -26,7 +26,7 @@
         android:layout_marginBottom="24dp"
         android:drawablePadding="16dp"
         android:gravity="center_vertical"
-        android:text="@string/permission_tutorial_deactivate_service_first_message"
+        android:text="@string/permission_tutorial_deactivate_service_first_message_android"
         android:textColor="@color/text_error_red"
         app:drawableStartCompat="@drawable/ic_warning_small" />
 
