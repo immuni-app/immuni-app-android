@@ -78,7 +78,7 @@
   <string name="onboarding_province_title">¿En qué provincia vives?</string>
   <string name="onboarding_province_description">Selecciona la provincia en la que resides para que el Servicio Nacional de Salud (SSN) pueda asistirte de la mejor forma posible.</string>
   <string name="onboarding_exposure_permission_title">Habilita las notificaciones de exposición a la COVID-19</string>
-  <string name="onboarding_exposure_permission_description">Immuni registra los contactos con otros usuarios a través de Bluetooth Low Energy para poder informarte en caso de exposición al virus.</string>
+  <string name="onboarding_exposure_permission_description">Immuni registra los contactos con otros usuarios a través de Bluetooth Low Energy para poder informarte en caso de exposición al virus. Podrás deshabilitar las notificaciones temporalmente desde la pantalla principal.</string>
   <string name="onboarding_bluetooth_off_title">Activa el Bluetooth</string>
   <string name="onboarding_bluetooth_off_description">Immuni utiliza Bluetooth Low Energy para registrar los contactos con otros usuarios y poder enviarte notificaciones de exposición a la COVID-19.</string>
   <string name="onboarding_bluetooth_off_action">Activar</string>

@@ -78,7 +78,7 @@
   <string name="onboarding_province_title">In welcher Provinz leben Sie?</string>
   <string name="onboarding_province_description">Wählen Sie die Provinz aus, in der Sie leben, damit der staatliche Gesundheitsdienst Sie bestmöglich unterstützen kann.</string>
   <string name="onboarding_exposure_permission_title">So aktivieren Sie COVID-19-Mitteilungen</string>
-  <string name="onboarding_exposure_permission_description">Immuni zeichnet Zusammentreffen mit anderen Nutzern über Bluetooth Low Energy auf, sodass Sie bei Ansteckungsgefahr informiert werden können.</string>
+  <string name="onboarding_exposure_permission_description">Immuni zeichnet Zusammentreffen mit anderen Nutzern über Bluetooth Low Energy auf, sodass Sie bei Ansteckungsgefahr informiert werden können. Sie können die App über das Hauptmenü vorübergehend deaktivieren.</string>
   <string name="onboarding_exposure_permission_action">Aktivieren</string>
   <string name="onboarding_exposure_permission_overlay_hint">Tippen Sie auf \"<b>Aktivieren</b>\" in dem Popup-Fenster, das unten angezeigt wird</string>
   <string name="onboarding_bluetooth_off_title">Aktivieren Sie Bluetooth</string>

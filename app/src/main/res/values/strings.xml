@@ -78,7 +78,7 @@
     <string name="onboarding_province_title">Which province do you live in?</string>
     <string name="onboarding_province_description">Select the province where you live to help the National Health Service provide the best possible assistance.</string>
     <string name="onboarding_exposure_permission_title">Enable COVID-19 exposure notifications</string>
-    <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus.</string>
+    <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus. You can temporarily disable it from the home screen.</string>
     <string name="onboarding_exposure_permission_action">Enable</string>
     <string name="onboarding_exposure_permission_overlay_hint">Select \'<b>Enable</b>\' in the pop-up that appears below</string>
     <string name="onboarding_bluetooth_off_title">Turn on Bluetooth</string>

@@ -75,7 +75,7 @@
   <string name="onboarding_province_title">Dans quelle province habitez-vous ?</string>
   <string name="onboarding_province_description">Sélectionnez la province de votre domicile pour aider les services de santé nationaux à vous fournir une meilleure assistance.</string>
   <string name="onboarding_exposure_permission_title">Activez les notifications de risque d\'exposition au COVID-19</string>
-  <string name="onboarding_exposure_permission_description">Immuni enregistre les contacts avec d\'autres utilisateurs en utilisant la technologie Bluetooth Low Energy afin de pouvoir vous informer en cas d\'exposition au virus.</string>
+  <string name="onboarding_exposure_permission_description">Immuni enregistre les contacts avec d’autres utilisateurs en utilisant la technologie Bluetooth Low Energy afin de pouvoir vous informer en cas d’exposition au virus. Vous pouvez les désactiver temporairement à partir de la page d’accueil.</string>
   <string name="onboarding_exposure_permission_action">Activer</string>
   <string name="onboarding_exposure_permission_overlay_hint">Sélectionnez <b>Activer</b> dans la fenêtre contextuelle qui s\'affichera ci-dessous</string>
   <string name="onboarding_bluetooth_off_title">Activez la technologie Bluetooth</string>
