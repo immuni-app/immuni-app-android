@@ -78,7 +78,7 @@
   <string name="onboarding_province_title">¿En qué provincia vives?</string>
   <string name="onboarding_province_description">Selecciona la provincia en la que resides para que el Servicio Nacional de Salud (SSN) pueda asistirte de la mejor forma posible.</string>
   <string name="onboarding_exposure_permission_title">Habilita las notificaciones de exposición a la COVID-19</string>
-  <string name="onboarding_exposure_permission_description">Immuni registra los contactos con otros usuarios a través de Bluetooth Low Energy para poder informarte en caso de exposición al virus.</string>
+  <string name="onboarding_exposure_permission_description">Immuni registra los contactos con otros usuarios a través de Bluetooth Low Energy para poder informarte en caso de exposición al virus. Podrás deshabilitar las notificaciones temporalmente desde la pantalla principal.</string>
   <string name="onboarding_bluetooth_off_title">Activa el Bluetooth</string>
   <string name="onboarding_bluetooth_off_description">Immuni utiliza Bluetooth Low Energy para registrar los contactos con otros usuarios y poder enviarte notificaciones de exposición a la COVID-19.</string>
   <string name="onboarding_bluetooth_off_action">Activar</string>
@@ -98,14 +98,14 @@
   <string name="home_view_service_not_active_subtitle">Toma las medidas necesarias cuanto antes para que Immuni funcione correctamente.</string>
   <string name="home_view_service_not_active_button">Reactivar Immuni</string>
   <string name="home_view_info_protection_title">¿Qué medidas puedes adoptar para protegerte?</string>
-  <string name="home_view_info_app_title">¿Cómo funciona la aplicación?</string>
+  <string name="home_view_info_app_title">Wie funktioniert die App</string>
   <string name="home_view_info_button_title">Más información</string>
   <string name="home_view_info_header_title">Información</string>
   <string name="home_view_header_card_risk_title">Se ha detectado riesgo de exposición a una persona con la COVID-19</string>
   <string name="home_view_header_card_risk_button">Descubre qué debes hacer ›</string>
   <string name="home_view_header_card_positive_title">Sigue las indicaciones de tu médico o Agencia Sanitaria Local</string>
   <string name="home_view_header_card_positive_button">¿Te has recuperado? Actualiza tu estado ›</string>
-  <string name="permission_tutorial_how_immuni_works_title">¿Cómo funciona la aplicación?</string>
+  <string name="permission_tutorial_how_immuni_works_title">Cómo funciona la aplicación</string>
   <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni vincula un código aleatorio a cada teléfono</h>]]></string>
   <string name="permission_tutorial_how_immuni_works_first_message">El código se genera de forma aleatoria y no contiene información sobre tu dispositivo y, por supuesto, tampoco sobre ti. Además, cambia varias veces cada hora para garantizar la máxima protección de tu privacidad.</string>
   <string name="permission_tutorial_how_immuni_works_second_title"><![CDATA[<h>Los teléfonos que se detectan entre sí intercambian sus códigos aleatorios</h>]]></string>

@@ -78,7 +78,7 @@
     <string name="onboarding_province_title">Which province do you live in?</string>
     <string name="onboarding_province_description">Select the province where you live to help the National Health Service provide the best possible assistance.</string>
     <string name="onboarding_exposure_permission_title">Enable COVID-19 exposure notifications</string>
-    <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus.</string>
+    <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus. You can temporarily disable it from the home screen.</string>
     <string name="onboarding_exposure_permission_action">Enable</string>
     <string name="onboarding_exposure_permission_overlay_hint">Select \'<b>Enable</b>\' in the pop-up that appears below</string>
     <string name="onboarding_bluetooth_off_title">Turn on Bluetooth</string>
@@ -100,14 +100,14 @@
     <string name="home_view_service_not_active_subtitle">Take action now to allow Immuni to work properly.</string>
     <string name="home_view_service_not_active_button">Reactivate Immuni</string>
     <string name="home_view_info_protection_title">What you can do to protect yourself</string>
-    <string name="home_view_info_app_title">How does the app work?</string>
+    <string name="home_view_info_app_title">How the app works</string>
     <string name="home_view_info_button_title">Find out more</string>
     <string name="home_view_info_header_title">Information</string>
     <string name="home_view_header_card_risk_button">Find out what to do now ›</string>
     <string name="home_view_header_card_positive_title">Follow the instructions provided by your general practitioner or local health authority</string>
     <string name="home_view_header_card_positive_button">Recovered? Update your status ›</string>
 
-    <string name="permission_tutorial_how_immuni_works_title">How does the app work?</string>
+    <string name="permission_tutorial_how_immuni_works_title">How the app works</string>
     <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni assigns a random code to each phone</h>]]></string>
     <string name="permission_tutorial_how_immuni_works_first_message">The code is generated randomly and does not contain information about your device, let alone about you. It also changes several times an hour to ensure your privacy is protected.</string>
     <string name="permission_tutorial_how_immuni_works_second_title"><![CDATA[<h>Phones that come into contact exchange their random codes</h>]]></string>
