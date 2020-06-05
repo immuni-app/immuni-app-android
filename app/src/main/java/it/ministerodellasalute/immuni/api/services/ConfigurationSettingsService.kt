@@ -55,7 +55,8 @@ data class ConfigurationSettings(
     @field:Json(name = "dummy_teks_request_probabilities") val dummyTeksRequestProbabilities: List<Double>,
     @field:Json(name = "teks_max_summary_count") val teksMaxSummaryCount: Int,
     @field:Json(name = "teks_max_info_count") val teksMaxInfoCount: Int,
-    @field:Json(name = "teks_packet_size") val teksPacketSize: Int
+    @field:Json(name = "teks_packet_size") val teksPacketSize: Int,
+    @field:Json(name = "experimental_phase") val experimentalPhase: Boolean = false
 )
 
 @JsonClass(generateAdapter = true)
@@ -131,7 +132,8 @@ val defaultSettings = ConfigurationSettings(
     dummyTeksRequestProbabilities = listOf(0.95, 0.1),
     teksMaxSummaryCount = 6 * 14,
     teksMaxInfoCount = 600,
-    teksPacketSize = 110_000
+    teksPacketSize = 110_000,
+    experimentalPhase = false
 )
 
 fun defaultFaqs(context: Context, language: Language): List<Faq>? {

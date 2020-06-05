@@ -26,7 +26,8 @@ class ViewPagerAdapter(
     isOnboardingComplete: Boolean,
     isBroadcastingActive: Boolean,
     areNotificationsEnabled: Boolean,
-    isEditingProvince: Boolean
+    isEditingProvince: Boolean,
+    experimentalPhase: Boolean
 ) : FragmentStateAdapter(fragment), KoinComponent {
 
     private val items: MutableList<Type> = mutableListOf()
@@ -50,7 +51,9 @@ class ViewPagerAdapter(
             if (!isOnboardingComplete) {
                 items.add(Type.PROTECT_DEVICE)
                 items.add(Type.PHISHING_WARNING)
-                items.add(Type.PILOT_PROJECT)
+                if (experimentalPhase) {
+                    items.add(Type.PILOT_PROJECT)
+                }
             }
         }
     }
