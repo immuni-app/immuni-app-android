@@ -79,8 +79,6 @@
   <string name="onboarding_province_description">Selecciona la provincia en la que resides para que el Servicio Nacional de Salud (SSN) pueda asistirte de la mejor forma posible.</string>
   <string name="onboarding_exposure_permission_title">Habilita las notificaciones de exposición a la COVID-19</string>
   <string name="onboarding_exposure_permission_description">Immuni registra los contactos con otros usuarios a través de Bluetooth Low Energy para poder informarte en caso de exposición al virus.</string>
-  <string name="onboarding_exposure_permission_action">Habilitar</string>
-  <string name="onboarding_exposure_permission_overlay_hint">Selecciona «<b>Habilitar</b>» en la ventana emergente que aparecerá a continuación</string>
   <string name="onboarding_bluetooth_off_title">Activa el Bluetooth</string>
   <string name="onboarding_bluetooth_off_description">Immuni utiliza Bluetooth Low Energy para registrar los contactos con otros usuarios y poder enviarte notificaciones de exposición a la COVID-19.</string>
   <string name="onboarding_bluetooth_off_action">Activar</string>
@@ -277,4 +275,6 @@
   <string name="suggestions_instruction_mask_message">Incluidos los medios de transporte y en aquellos casos en que no sea posible mantener el distanciamiento físico de manera continua.</string>
   <string name="upload_data_vpn_error_message">Se ha producido un error. Inténtalo de nuevo. Si estás usando una VPN, te recomendamos que selecciones un servidor italiano o que la desactives temporalmente.</string>
   <string name="suggestions_risk_footer">Para ayudar al Servicio Nacional de Salud (SSN) a cuidarte si fuera necesario, la aplicación ha avisado al Ministerio de Salud de la notificación que has recibido. <b>No obstante, el Ministerio de Salud no podrá conocer tu identidad a partir de esta información.</b></string>
+  <string name="onboarding_exposure_permission_action">Activar</string>
+  <string name="onboarding_exposure_permission_overlay.hint">Selecciona «<b>Activar</b>» en la ventana emergente que aparecerá a continuación</string>
 </resources>

@@ -15,10 +15,13 @@
 
 package it.ministerodellasalute.immuni.extensions.utils
 
+import android.content.Context
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.io.InputStream
+import java.nio.charset.Charset
 import java.util.*
 import kotlin.reflect.KClass
 
@@ -75,4 +78,19 @@ fun <T : Any> Moshi.fromJson(
         jsonAdapter = jsonAdapter.lenient()
     }
     return jsonAdapter.fromJson(json)
+}
+
+fun loadJsonAsset(context: Context, path: String): String? {
+    var ins: InputStream? = null
+    try {
+        ins = context.assets.open(path)
+        val size = ins.available()
+        val buffer = ByteArray(size)
+        ins.read(buffer)
+        return String(buffer, Charset.forName("UTF-8"))
+    } catch (e: Exception) {
+        return null
+    } finally {
+        ins?.close()
+    }
 }

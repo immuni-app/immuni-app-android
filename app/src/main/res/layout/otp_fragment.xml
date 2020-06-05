@@ -227,7 +227,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
-                        android:text="@string/upload_data_wait_operator_message"
+                        android:text="@string/upload_data_verify_message"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/stepNumberThree"
                         app:layout_constraintTop_toTopOf="parent" />

@@ -22,7 +22,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import it.ministerodellasalute.immuni.extensions.activity.toast
 
 class ConfirmationDialogFragment : DialogFragment() {
 
@@ -31,9 +30,7 @@ class ConfirmationDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            toast(requireContext(), "ciao")
-        }
+        requireActivity().onBackPressedDispatcher.addCallback(this) {}
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
