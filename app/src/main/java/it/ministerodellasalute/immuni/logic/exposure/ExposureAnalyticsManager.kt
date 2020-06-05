@@ -32,7 +32,6 @@ class ExposureAnalyticsManager(
      * Generates random and registers token if needed
      */
     suspend fun setup(serverDate: Date) {
-        // 1 volta per mese solare rigenerare il token, tirando un dado random da quel momento a fine mese
         val token = storeRepository.token
         if (token is AnalyticsTokenStatus.None) {
             storeRepository.token = generateAndValidateToken(serverDate)
@@ -59,7 +58,7 @@ class ExposureAnalyticsManager(
                 when (networkResult) {
                     is ExposureAnalyticsNetworkRepository.ValidateTokenResult.Success -> AnalyticsTokenStatus.Valid(
                         base64Token,
-                        tokenExpiration(serverDate)
+                        computeTokenExpiration(serverDate)
                     )
                     is ExposureAnalyticsNetworkRepository.ValidateTokenResult.ValidationError -> AnalyticsTokenStatus.Invalid()
                     is ExposureAnalyticsNetworkRepository.ValidateTokenResult.NetworkError -> AnalyticsTokenStatus.None()
@@ -70,8 +69,9 @@ class ExposureAnalyticsManager(
         }
     }
 
-    private fun tokenExpiration(serverDate: Date): Date {
+    private fun computeTokenExpiration(serverDate: Date): Date {
         val lastDayOfNextMonth = Calendar.getInstance().apply {
+            time = serverDate
             add(Calendar.MONTH, 2)
             set(Calendar.DAY_OF_MONTH, 1)
             add(Calendar.DAY_OF_MONTH, -1)
@@ -80,6 +80,7 @@ class ExposureAnalyticsManager(
         val randomDayOfNextMonth = SecureRandom().nextInt(lastDayOfNextMonth) + 1
 
         return Calendar.getInstance().apply {
+            time = serverDate
             add(Calendar.MONTH, 1)
             set(Calendar.DAY_OF_MONTH, randomDayOfNextMonth)
             set(Calendar.HOUR, 0)
