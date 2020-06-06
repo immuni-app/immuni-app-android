@@ -52,7 +52,11 @@ data class ConfigurationSettings(
     @field:Json(name = "dummy_teks_request_probabilities") val dummyTeksRequestProbabilities: List<Double>,
     @field:Json(name = "teks_max_summary_count") val teksMaxSummaryCount: Int,
     @field:Json(name = "teks_max_info_count") val teksMaxInfoCount: Int,
-    @field:Json(name = "teks_packet_size") val teksPacketSize: Int
+    @field:Json(name = "teks_packet_size") val teksPacketSize: Int,
+    @field:Json(name = "operational_info_with_exposure_sampling_rate") val operationalInfoWithExposureSamplingRate: Double,
+    @field:Json(name = "operational_info_without_exposure_sampling_rate") val operationalInfoWithoutExposureSamplingRate: Double,
+    @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int
+
 )
 
 @JsonClass(generateAdapter = true)
@@ -128,7 +132,10 @@ val defaultSettings = ConfigurationSettings(
     dummyTeksRequestProbabilities = listOf(0.95, 0.1),
     teksMaxSummaryCount = 6 * 14,
     teksMaxInfoCount = 600,
-    teksPacketSize = 110_000
+    teksPacketSize = 110_000,
+    operationalInfoWithExposureSamplingRate = 1.0,
+    operationalInfoWithoutExposureSamplingRate = 0.1, // FIXME: doc says 0.6 but staging server has 0.1. Ask what's best.
+    dummyAnalyticsWaitingTime = 2_592_000
 )
 
 val defaultFaqs = mapOf(
