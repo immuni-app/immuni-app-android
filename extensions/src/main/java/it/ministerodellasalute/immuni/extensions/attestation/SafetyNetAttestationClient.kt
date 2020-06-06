@@ -31,8 +31,8 @@ class SafetyNetAttestationClient(
         internal val apiKey: String,
         internal val apkPackageName: String,
         internal val apkCertificateDigestSha256: String,
-        internal val requiresCtsProfile: Boolean,
         internal val requiresBasicIntegrity: Boolean,
+        internal val requiresCtsProfile: Boolean,
         internal val requiresHardwareAttestation: Boolean
     )
 

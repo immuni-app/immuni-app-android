@@ -194,7 +194,17 @@ val appModule = module {
         ExposureManager(
             get(),
             ExposureNotificationManager(androidContext(), get()),
-            SafetyNetAttestationClient(androidContext(), "FIXME"), // FIXME
+            SafetyNetAttestationClient(
+                androidContext(),
+                SafetyNetAttestationClient.AttestationParameters(
+                    apiKey = "FIXME", // FIXME: is it ok to put it here?
+                    apkPackageName = androidContext().packageName,
+                    apkCertificateDigestSha256 = "FIXME", // FIXME
+                    requiresBasicIntegrity = true,
+                    requiresCtsProfile = true,
+                    requiresHardwareAttestation = true
+                )
+            ),
             get(),
             get(),
             get(),

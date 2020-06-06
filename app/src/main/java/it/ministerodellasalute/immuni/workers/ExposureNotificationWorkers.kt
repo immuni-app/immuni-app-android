@@ -78,7 +78,6 @@ class RequestDiagnosisKeysWorker(
         try {
             // keep the maximum execution time within the 10 minutes limit imposed by WorkManager
             return withTimeout(9 * 60 * 1000) {
-                analyticsManager.setup()
                 val settingsResult = settingsManager.fetchSettingsAsync().await()
                 if (settingsResult is FetchSettingsResult.Success) {
                     // cleanup entities that are older than DAYS_OF_SELF_ISOLATION
@@ -90,6 +89,10 @@ class RequestDiagnosisKeysWorker(
                 if (settingsManager.isAppOutdated) {
                     return@withTimeout Result.retry()
                 }
+
+                val serverDate = settingsResult.serverDate
+
+                analyticsManager.setup(serverDate)
 
                 chunksDir.apply {
                     deleteRecursively()
@@ -126,7 +129,7 @@ class RequestDiagnosisKeysWorker(
                     try {
                         chunkResponse.data?.byteStream()?.saveToFile(filePath)
                             ?: return@withTimeout Result.retry()
-                        val token = "${UUID.randomUUID()}_${settingsResult.serverDate.time}"
+                        val token = "${UUID.randomUUID()}_${serverDate.time}"
                         exposureManager.provideDiagnosisKeys(
                             keyFiles = listOf(File(filePath)),
                             token = token
@@ -146,7 +149,6 @@ class RequestDiagnosisKeysWorker(
     }
 
     private fun success(): Result {
-        analyticsManager.onRequestDiagnosisKeysSucceeded()
         workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }

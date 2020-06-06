@@ -26,9 +26,9 @@ class ExposureAnalyticsStoreRepository(
         val tokenStatusKey = KVStorage.Key<AnalyticsTokenStatus>("tokenStatus")
         val infoWithExposureLastReportingMonthKey =
             KVStorage.Key<Int>("infoWithExposureLastReportingMonth")
-        val infoWithoutExposureLastReportingMonthKey =
-            KVStorage.Key<Int>("infoWithoutExposureLastReportingMonth")
-        val dummyInfoLastReportingDateKey = KVStorage.Key<Date>("dummyInfoLastReportingDate")
+        val infoWithoutExposureReportingDateKey =
+            KVStorage.Key<Date>("infoWithoutExposureReportingDate")
+        val dummyInfoReportingDateKey = KVStorage.Key<Date>("dummyInfoReportingDate")
     }
 
     var token: AnalyticsTokenStatus
@@ -43,15 +43,15 @@ class ExposureAnalyticsStoreRepository(
         set(value) {
             storage[infoWithExposureLastReportingMonthKey] = value!!
         }
-    var infoWithoutExposureLastReportingMonth: Int?
-        get() = storage[infoWithoutExposureLastReportingMonthKey]
+    var infoWithoutExposureReportingDate: Date?
+        get() = storage[infoWithoutExposureReportingDateKey]
         set(value) {
-            storage[infoWithoutExposureLastReportingMonthKey] = value!!
+            storage[infoWithoutExposureReportingDateKey] = value!!
         }
 
-    var dummyInfoLastReportingDate: Date?
-    get() = storage[dummyInfoLastReportingDateKey]
+    var dummyInfoReportingDate: Date?
+    get() = storage[dummyInfoReportingDateKey]
     set(value) {
-        storage[dummyInfoLastReportingDateKey] = value!!
+        storage[dummyInfoReportingDateKey] = value!!
     }
 }
