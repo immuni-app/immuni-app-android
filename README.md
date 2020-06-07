@@ -45,7 +45,7 @@
 - [Contributing](#contributing)
   - [Contributors](#contributors)
 - [License](#license)
-  - [Authors / Copyright](#authors---copyright)
+  - [Authors / Copyright](#authors--copyright)
   - [Third-party component licenses](#third-party-component-licenses)
     - [Tools](#tools)
     - [Libraries](#libraries)
