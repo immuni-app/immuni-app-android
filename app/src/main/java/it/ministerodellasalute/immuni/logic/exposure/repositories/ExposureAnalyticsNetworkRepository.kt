@@ -23,34 +23,4 @@ import it.ministerodellasalute.immuni.network.api.NetworkResource
 class ExposureAnalyticsNetworkRepository(
     private val service: ExposureAnalyticsService
 ) {
-    sealed class ValidateTokenResult {
-        object Success : ValidateTokenResult()
-        object ValidationError : ValidateTokenResult()
-        object NetworkError : ValidateTokenResult()
-    }
-
-    suspend fun validateToken(token: String, attestationPayload: String): ValidateTokenResult {
-        val response = immuniApiCall { service.token(
-            ExposureAnalyticsService.TokenRequest(
-                analyticsToken = token,
-                deviceToken = attestationPayload
-            )
-        )}
-
-        return when(response) {
-            is NetworkResource.Success -> ValidateTokenResult.Success
-            is NetworkResource.Error -> {
-                when(val error = response.error) {
-                    is NetworkError.HttpError -> {
-                        if (error.httpCode == 400) { // FIXME
-                            ValidateTokenResult.ValidationError
-                        } else {
-                            ValidateTokenResult.NetworkError
-                        }
-                    }
-                    else -> ValidateTokenResult.NetworkError
-                }
-            }
-        }
-    }
 }

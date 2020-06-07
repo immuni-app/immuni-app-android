@@ -25,13 +25,4 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ExposureAnalyticsService {
-    @JsonClass(generateAdapter = true)
-    data class TokenRequest(
-        @field:Json(name = "analytics_token") val analyticsToken: String,
-        @field:Json(name = "device_token") val deviceToken: String,
-        @field:Json(name = "platform") val platform: String = "android"
-    )
-
-    @POST("/v1/analytics/token")
-    suspend fun token(@Body body: TokenRequest): Response<ResponseBody>
 }

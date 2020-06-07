@@ -149,22 +149,10 @@ class ExposureAnalyticsManager(
         return when (attestationResponse) {
             is AttestationClient.Result.Failure -> AnalyticsTokenStatus.None()
             is AttestationClient.Result.Invalid -> AnalyticsTokenStatus.Invalid()
-            is AttestationClient.Result.Success -> {
-                val networkResult = networkRepository.validateToken(
-                    token = base64Token,
-                    attestationPayload = attestationResponse.result
-                )
-                when (networkResult) {
-                    is ExposureAnalyticsNetworkRepository.ValidateTokenResult.Success -> AnalyticsTokenStatus.Valid(
-                        base64Token,
-                        randomDateInMonth(serverDate, isForNextMonth = true)
-                    )
-                    is ExposureAnalyticsNetworkRepository.ValidateTokenResult.ValidationError -> AnalyticsTokenStatus.Invalid()
-                    is ExposureAnalyticsNetworkRepository.ValidateTokenResult.NetworkError -> AnalyticsTokenStatus.None()
-                }
-
-
-            }
+            is AttestationClient.Result.Success -> AnalyticsTokenStatus.Valid(
+                base64Token,
+                randomDateInMonth(serverDate, isForNextMonth = true)
+            )
         }
     }
 
