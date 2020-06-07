@@ -96,8 +96,8 @@ fun String.coloredClickable(
     onClick: () -> Unit
 ): SpannedString {
     return spanPlaceholder(startPlaceholder, endPlaceholder) {
-        clickable(onClick) {
-            color(color) {
+        color(color) {
+            clickable(onClick) {
                 if (bold) {
                     bold {
                         append(it)

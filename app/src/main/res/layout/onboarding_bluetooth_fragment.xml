@@ -65,7 +65,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:text="@string/onboarding_bluetooth_off_description"
-                app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toTopOf="@+id/knowMore"
                 app:layout_constraintEnd_toEndOf="@+id/title"
                 app:layout_constraintHorizontal_bias="0.0"

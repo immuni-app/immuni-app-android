@@ -78,7 +78,8 @@ class ViewPagerFragment : Fragment() {
                     isOnboardingComplete = userManager.isOnboardingComplete.value,
                     isBroadcastingActive = exposureManager.isBroadcastingActive.value ?: false,
                     areNotificationsEnabled = pushNotificationManager.areNotificationsEnabled(),
-                    isEditingProvince = args.value.isEditingProvince
+                    isEditingProvince = args.value.isEditingProvince,
+                    experimentalPhase = settingsManager.settings.value.experimentalPhase
                 )
             }
             clipToPadding = false

@@ -289,7 +289,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="30dp"
-                android:text="@string/suggestions_risk_footer"
+                android:text="@string/suggestions_risk_first_message"
+                android:textColor="@color/grey_dark" />
+
+            <TextView
+                style="@style/P1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:text="@string/suggestions_risk_second_message"
+                android:textColor="@color/grey_dark" />
+
+            <TextView
+                android:id="@+id/footerPrivacyLink"
+                style="@style/P1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:text="@string/suggestions_risk_third_message_android"
+                android:textColor="@color/grey_dark" />
+
+            <TextView
+                style="@style/P1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:paddingBottom="30dp"
+                android:text="@string/suggestions_risk_fourth_message"
                 android:textColor="@color/grey_dark" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

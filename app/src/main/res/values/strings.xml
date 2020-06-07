@@ -78,7 +78,7 @@
     <string name="onboarding_province_title">Which province do you live in?</string>
     <string name="onboarding_province_description">Select the province where you live to help the National Health Service provide the best possible assistance.</string>
     <string name="onboarding_exposure_permission_title">Enable COVID-19 exposure notifications</string>
-    <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus.</string>
+    <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus. You can temporarily disable it from the home screen.</string>
     <string name="onboarding_exposure_permission_action">Enable</string>
     <string name="onboarding_exposure_permission_overlay_hint">Select \'<b>Enable</b>\' in the pop-up that appears below</string>
     <string name="onboarding_bluetooth_off_title">Turn on Bluetooth</string>
@@ -89,7 +89,6 @@
     <string name="onboarding_push_permission_action">Allow</string>
     <string name="onboarding_push_permission_overlay_hint">Select \'<b>Allow</b>\' in the pop-up that appears below</string>
     <string name="onboarding_pin_advice_title">Protect your device</string>
-    <string name="onboarding_pin_advice_description">The use of Immuni is strictly personal. If you haven\'t done so already, set up a PIN on your device to protect it and prevent others from accessing your data and apps, including Immuni.</string>
     <string name="onboarding_pin_advice_action">Got it</string>
     <string name="onboarding_communication_advice_title">Watch out for scam messages</string>
     <string name="onboarding_communication_advice_description">Immuni will only ever communicate with you via the app and the corresponding notifications. <b>Be wary of any text, phone call, email, or other kind of alert</b> that appears to be from Immuni, especially if it asks you for personal information.</string>
@@ -101,13 +100,14 @@
     <string name="home_view_service_not_active_subtitle">Take action now to allow Immuni to work properly.</string>
     <string name="home_view_service_not_active_button">Reactivate Immuni</string>
     <string name="home_view_info_protection_title">What you can do to protect yourself</string>
-    <string name="home_view_info_app_title">How does the app work?</string>
+    <string name="home_view_info_app_title">How the app works</string>
     <string name="home_view_info_button_title">Find out more</string>
     <string name="home_view_info_header_title">Information</string>
     <string name="home_view_header_card_risk_button">Find out what to do now ›</string>
     <string name="home_view_header_card_positive_title">Follow the instructions provided by your general practitioner or local health authority</string>
     <string name="home_view_header_card_positive_button">Recovered? Update your status ›</string>
-    <string name="permission_tutorial_how_immuni_works_title">How does the app work?</string>
+
+    <string name="permission_tutorial_how_immuni_works_title">How the app works</string>
     <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni assigns a random code to each phone</h>]]></string>
     <string name="permission_tutorial_how_immuni_works_first_message">The code is generated randomly and does not contain information about your device, let alone about you. It also changes several times an hour to ensure your privacy is protected.</string>
     <string name="permission_tutorial_how_immuni_works_second_title"><![CDATA[<h>Phones that come into contact exchange their random codes</h>]]></string>
@@ -207,7 +207,7 @@
     <string name="suggestions_instruction_hide_if_contact_doctor_message">If you\'re in contact with your general practitioner or local health authority, you can hide this alert.</string>
     <string name="suggestions_instruction_hide_if_contact_doctor_action">I have contacted my general practitioner</string>
     <string name="suggestions_instruction_while_waiting_doctor">As a precaution, while you wait for instructions from your general practitioner or local health authority:</string>
-    <string name="suggestions_instruction_stay_home"><b>Stay at home for 14 days</b> after the contact date</string>
+    <string name="suggestions_instruction_stay_home"><b>Stay at home for 14 days</b> after the contact date.</string>
     <string name="suggestions_instruction_check_symptoms_title"><b>Measure your body temperature at least twice a day and assess if you are exhibiting symptoms, even mild ones.</b></string>
     <string name="suggestions_instruction_check_symptoms_message">In particular, fever or at least one of the following: sore throat, cough, cold or blocked nose, difficulty breathing, muscle pain, loss or alteration of sense of smell or taste, diarrhoea.</string>
     <string name="suggestions_instruction_isolate_title"><b>If you display symptoms, isolate yourself from the people you live with</b>.</string>
@@ -277,4 +277,19 @@
     <string name="suggestions_risk_title">Risky exposure</string>
     <string name="suggestions_positive_info_subtitle">For the time being, you will not receive any new notifications in the event of a risky exposure to a COVID-19-positive user.</string>
     <string name="suggestions_positive_covid_negative_message"><b>Let us know if your local health authority has confirmed that you are COVID-19 negative to reactivate risky exposure notifications.</b></string>
+
+
+    <string name="onboarding_pin_advice_description">Immuni is strictly for personal use. If you haven\'t done so already, set up a lock code on your smartphone to prevent others from accessing the app\'s features and any messages the app might send you.</string>
+    <string name="home_view_service_deactivate">Disable the service</string>
+    <string name="onboarding_pilot_title">Testing in progress</string>
+    <string name="onboarding_pilot_description">During the testing phase, you will only be notified of a high-risk contact with a COVID-19-positive person if this person is assisted by a local health authority in the following regions: Abruzzo, Liguria, Marche or Puglia.</string>
+    <string name="onboarding_pilot_action">Got it</string>
+    <string name="permission_tutorial_deactivate_service_title">How to disable the service</string>
+    <string name="permission_tutorial_deactivate_service_first_message_android">To protect your health and the health of your loved ones, only deactivate the service if necessary and reactivate it as soon as you can.</string>
+    <string name="permission_tutorial_deactivate_service_second_message">In certain cases, it may make sense to temporarily disable exposure notifications, such as <b>if you are a healthcare professional in contact with COVID-19 patients and want to disable the app while at work.</b></string>
+    <string name="permission_tutorial_deactivate_service_third_message">If you disable exposure notifications, subsequent contacts with other users will not be logged.</string>
+    <string name="suggestions_risk_first_message">The app shows you this warning based on the information available (duration of the contact and approximate estimate of the distance) but it cannot know if you wore a mask or if you turned your back during the contact. The risk of contagion could therefore be overestimated.</string>
+    <string name="suggestions_risk_second_message">To help the National Health Service take care of you should the need arise, the app has informed the Ministry of Health of the notification you have received.</string>
+    <string name="suggestions_risk_fourth_message">The Ministry of Health cannot determine your identity from this information.</string>
+    <string name="suggestions_risk_third_message_android">For more information on the data sent to the Ministry of Health, you can read the {privacy notice}, point 4.</string>
 </resources>

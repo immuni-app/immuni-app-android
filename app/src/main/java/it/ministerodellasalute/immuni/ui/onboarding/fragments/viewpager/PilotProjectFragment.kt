@@ -13,28 +13,25 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.ui.home
+package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
+import android.os.Bundle
+import android.view.View
+import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
+import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
 
-/**
- * Represents an item in the home list.
- */
+class PilotProjectFragment : ViewPagerBaseFragment(R.layout.onboarding_pilot_project) {
 
-sealed class HomeItemType
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        next.isEnabled = true
 
-class ProtectionCard(
-    val active: Boolean,
-    val status: ExposureStatus
-) : HomeItemType()
+        next.setOnClickListener(null)
+        next.setSafeOnClickListener {
+            viewModel.onNextTap()
+        }
 
-data class SectionHeader(
-    val title: String
-) : HomeItemType()
-
-sealed class InformationCard : HomeItemType()
-
-object HowItWorksCard : InformationCard()
-object SelfCareCard : InformationCard()
-
-data class DisableExposureApi(val isEnabled: Boolean) : HomeItemType()
+        checkSpacing()
+    }
+}
