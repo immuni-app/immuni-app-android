@@ -105,18 +105,15 @@ class RequestDiagnosisKeysWorker(
                     val error = indexResponse.error
                     // 404 means that the list is empty, so the work is successful
                     if (error is NetworkError.HttpError && error.httpCode == 404) {
-                        return@withTimeout success()
+                        return@withTimeout success(serverDate)
                     }
 
                     return@withTimeout Result.retry()
                 }
 
                 val data = indexResponse.data ?: return@withTimeout Result.retry()
-                val currentOldest =
-                    max(
-                        data.oldest,
-                        exposureReportingRepository.lastProcessedChunk(default = 0) + 1
-                    )
+                val lastProcessedChunkSuccessor = exposureReportingRepository.lastProcessedChunk(default = 0) + 1
+                val currentOldest = max(data.oldest, lastProcessedChunkSuccessor)
                 val chunkRange = (currentOldest..data.newest).toList().takeLast(20)
 
                 for (currentChunk in chunkRange) {
@@ -139,7 +136,7 @@ class RequestDiagnosisKeysWorker(
                         return@withTimeout Result.retry()
                     }
                 }
-                return@withTimeout success()
+                return@withTimeout success(serverDate)
             }
         } catch (e: Exception) {
             return Result.retry()
@@ -148,7 +145,8 @@ class RequestDiagnosisKeysWorker(
         }
     }
 
-    private fun success(): Result {
+    private fun success(serverDate: Date): Result {
+        workerManager.scheduleExposureAnalyticsWorker(serverDate)
         workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }

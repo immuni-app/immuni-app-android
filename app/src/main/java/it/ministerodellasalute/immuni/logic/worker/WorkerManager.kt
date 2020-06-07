@@ -16,10 +16,7 @@
 package it.ministerodellasalute.immuni.logic.worker
 
 import android.content.Context
-import androidx.work.Constraints
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
+import androidx.work.*
 import it.ministerodellasalute.immuni.extensions.utils.exponential
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
@@ -29,6 +26,7 @@ import it.ministerodellasalute.immuni.workers.*
 import java.security.SecureRandom
 import java.util.concurrent.TimeUnit
 import org.koin.core.KoinComponent
+import java.util.*
 
 class WorkerManager(
     private val settingsManager: ConfigurationSettingsManager,
@@ -171,5 +169,21 @@ class WorkerManager(
 
     private fun computeNextDummyExposureIngestionScheduleDelay(): Long {
         return SecureRandom().exponential(settings.dummyTeksAverageOpportunityWaitingTime.toLong())
+    }
+
+    fun scheduleExposureAnalyticsWorker(serverDate: Date, delayMinutes: Long = 10) {
+        workManager.enqueueUniqueWork(
+            "ExposureAnalyticsWorker",
+            ExistingWorkPolicy.REPLACE,
+            OneTimeWorkRequest.Builder(ExposureAnalyticsWorker::class.java)
+                .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
+                .setConstraints(
+                    Constraints.Builder()
+                        .setRequiresBatteryNotLow(true)
+                        .build()
+                )
+                .setInputData(workDataOf(ExposureAnalyticsWorker.SERVER_DATE_INPUT_DATA_KEY to serverDate.time))
+                .build()
+        )
     }
 }
