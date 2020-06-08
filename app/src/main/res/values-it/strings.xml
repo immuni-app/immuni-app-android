@@ -267,6 +267,7 @@
     <item quantity="one">Attendi %d minuto</item>
     <item quantity="other">Attendi %d minuti</item>
   </plurals>
+  <string name="support_phone_description_android">Numero attivo dalle %1$s alle %2$s.</string>
   <string name="settings_app_version" formatted="false">Immuni v%s (%d)</string>
   <string name="upload_data_diagnosis_keys_overlay_hint">Seleziona \"<b>Condividi</b>\" nel popup che apparirà qui sotto</string>
   <string name="suggestions_instruction_stay_home_message">Utilizza una stanza riservata e dotata di buona ventilazione, possibilmente con bagno dedicato.</string>

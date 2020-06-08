@@ -13,6 +13,7 @@ import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 import it.ministerodellasalute.immuni.util.startPhoneDial
+import it.ministerodellasalute.immuni.util.startSendingEmail
 import kotlinx.android.synthetic.main.support_dialog.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -39,8 +40,20 @@ class SupportDialogFragment : PopupDialogFragment() {
                     startPhoneDial(it)
                 }
         }
+
+        mailSupport.movementMethod = LinkMovementMethod.getInstance()
+        viewModel.contactSupportEmail.observe(viewLifecycleOwner) {
+            @SuppressLint("SetTextI18n")
+            mailSupport.text = "{$it}"
+                .coloredClickable(
+                    color = requireContext().getColorCompat(R.color.colorPrimary),
+                    bold = true
+                ) {
+                    startSendingEmail(it, "")
+                }
+        }
         viewModel.supportWorkingHours.observe(viewLifecycleOwner) { (from, to) ->
-            phoneDescription.text = getString(R.string.support_phone_description, from, to)
+            phoneDescription.text = getString(R.string.support_phone_description_android, from, to)
         }
 
         viewModel.osVersion.observe(viewLifecycleOwner) {

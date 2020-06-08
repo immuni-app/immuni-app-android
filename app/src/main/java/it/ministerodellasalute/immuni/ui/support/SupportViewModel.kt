@@ -7,12 +7,16 @@ class SupportViewModel : ViewModel() {
 
     // TODO replace livedata with real values.
 
+    val contactSupportEmail = liveData {
+        emit("support@example.com")
+    }
+
     val contactSupportPhone = liveData {
         emit("800 91 24 91")
     }
 
     val supportWorkingHours = liveData {
-        emit(7 to 22)
+        emit("7:00" to "20:00")
     }
 
     val osVersion = liveData {

@@ -283,14 +283,15 @@
     <string name="support_faq_action">Esplora le domande frequenti</string>
     <string name="support_contact_support">Se non hai trovato la risposta che cercavi, <b>puoi contattare il supporto di Immuni.</b></string>
     <string name="support_phone_title">Chiama il numero verde</string>
-    <string name="support_phone_description">Numero attivo dalle %d alle %d.</string>
+    <string name="support_phone_description_android">Numero attivo dalle %1$s alle %2$s.</string>
+    <string name="support_email_title">Invia un\'email</string>
+    <string name="support_email_description">Se scegli di contattare il supporto tramite email, il tuo indirizzo email sarà visibile al servizio clienti.</string>
     <string name="support_info_title">Informazioni utili</string>
     <string name="support_info_item_os">Sistema operativo</string>
     <string name="support_info_item_device">Modello</string>
     <string name="support_info_item_exposure_notification_enabled">Notifiche di esposizione</string>
     <string name="support_info_item_bluetooth_enabled">Bluetooth</string>
     <string name="support_info_item_app_version">Versione app</string>
-    <string name="support_info_item_play_services_version">Google Play Services</string>
     <string name="support_info_item_connection_type">Connessione</string>
     <string name="onboarding_pin_advice_description">Immuni is strictly for personal use. If you haven\'t done so already, set up a lock code on your smartphone to prevent others from accessing the app\'s features and any messages the app might send you.</string>
     <string name="home_view_service_deactivate">Disable the service</string>

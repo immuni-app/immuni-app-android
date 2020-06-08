@@ -63,6 +63,7 @@
         android:text="@string/support_contact_support" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/phoneContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="30dp">
@@ -85,7 +86,8 @@
             android:paddingBottom="5dp"
             android:text="@string/support_phone_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/phoneIcon" />
+            app:layout_constraintStart_toEndOf="@id/phoneIcon"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/phoneDescription"
@@ -94,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:paddingBottom="5dp"
-            android:text="@string/support_phone_description"
+            android:text="@string/support_phone_description_android"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/phoneIcon"
             app:layout_constraintTop_toBottomOf="@+id/phoneTitle" />
@@ -109,6 +111,60 @@
             app:layout_constraintStart_toEndOf="@id/phoneIcon"
             app:layout_constraintTop_toBottomOf="@+id/phoneDescription"
             tools:text="128120 2912" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mailContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="30dp">
+
+        <ImageView
+            android:id="@+id/mailIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_mail" />
+
+        <TextView
+            android:id="@+id/mailTitle"
+            style="@style/P1Text.Bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="5dp"
+            android:text="@string/support_email_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mailIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mailDescription"
+            style="@style/P1Text.Generic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="5dp"
+            android:text="@string/support_email_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mailIcon"
+            app:layout_constraintTop_toBottomOf="@+id/mailTitle" />
+
+        <TextView
+            android:id="@+id/mailSupport"
+            style="@style/P1Text.Generic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mailIcon"
+            app:layout_constraintTop_toBottomOf="@+id/mailDescription"
+            tools:text="support@example.com" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -209,7 +265,7 @@
 
                 <TextView
                     style="@style/SupportInformationKey"
-                    android:text="@string/support_info_item_play_services_version" />
+                    android:text="Google Play Services" />
 
                 <TextView
                     android:id="@+id/playServicesVersion"

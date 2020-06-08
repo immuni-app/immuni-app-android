@@ -69,6 +69,7 @@
   <string name="privacy_checkbox_read">He leído la {política de privacidad}</string>
   <string name="privacy_tos_read">Al continuar, declaro que he leído y acepto los {términos de uso}</string>
   <string name="privacy_next">Siguiente</string>
+  <string name="support_phone_description_android">Numero attivo dalle %1$s alle %2$s.</string>
   <string name="privacy_settings_title">Tu privacidad está garantizada</string>
   <string name="privacy_settings_show_full">Política de privacidad completa</string>
   <string name="onboarding_common_next">Siguiente</string>
