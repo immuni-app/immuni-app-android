@@ -56,7 +56,11 @@ data class ConfigurationSettings(
     @field:Json(name = "teks_max_summary_count") val teksMaxSummaryCount: Int,
     @field:Json(name = "teks_max_info_count") val teksMaxInfoCount: Int,
     @field:Json(name = "teks_packet_size") val teksPacketSize: Int,
-    @field:Json(name = "experimental_phase") val experimentalPhase: Boolean = false
+    @field:Json(name = "experimental_phase") val experimentalPhase: Boolean = false,
+    @field:Json(name = "support_phone_closing_time") val supportPhoneClosingTime: String,
+    @field:Json(name = "support_phone_opening_time") val supportPhoneOpeningTime: String,
+    @field:Json(name = "support_phone") val supportPhone: String,
+    @field:Json(name = "support_email") val supportEmail: String? = null
 )
 
 @JsonClass(generateAdapter = true)
@@ -133,7 +137,11 @@ val defaultSettings = ConfigurationSettings(
     teksMaxSummaryCount = 6 * 14,
     teksMaxInfoCount = 600,
     teksPacketSize = 110_000,
-    experimentalPhase = false
+    experimentalPhase = false,
+    supportEmail = null,
+    supportPhone = "800912491",
+    supportPhoneOpeningTime = "7",
+    supportPhoneClosingTime = "22"
 )
 
 fun defaultFaqs(context: Context, language: Language): List<Faq>? {
