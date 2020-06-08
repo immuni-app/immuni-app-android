@@ -31,6 +31,7 @@ import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReport
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.Province
+import kotlinx.coroutines.delay
 import org.koin.core.KoinComponent
 import org.koin.core.get
 import java.security.SecureRandom
@@ -125,7 +126,7 @@ class ExposureAnalyticsManager(
         }
     }
 
-    private suspend fun sendOperationalInfo(summary: ExposureSummary?, isDummy: Boolean) {
+    private suspend fun sendOperationalInfo(summary: ExposureSummary?, isDummy: Boolean, retryCount: Long = 0) {
         val baseOperationalInfo: BaseOperationalInfo = get()
         val operationalInfo = ExposureAnalyticsOperationalInfo(
             province = baseOperationalInfo.province,
@@ -143,7 +144,13 @@ class ExposureAnalyticsManager(
             }
             is AttestationClient.Result.Invalid -> {}
             is AttestationClient.Result.Failure -> {
-                // FIXME: retry N times with exponential backoff
+                val retryCount = retryCount + 1
+                if (retryCount > 5) {
+                    return
+                }
+                val delayMillis = retryCount * retryCount * 60 * 1000
+                delay(delayMillis)
+                sendOperationalInfo(summary, isDummy, retryCount)
             }
         }
     }
