@@ -21,6 +21,7 @@ import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationMana
 import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
 import it.ministerodellasalute.immuni.extensions.utils.byAdding
 import it.ministerodellasalute.immuni.extensions.utils.exponential
+import it.ministerodellasalute.immuni.extensions.utils.isoDateString
 import it.ministerodellasalute.immuni.extensions.utils.sha256
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureAnalyticsOperationalInfo
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
@@ -132,13 +133,13 @@ class ExposureAnalyticsManager(
             bluetoothActive = if (baseOperationalInfo.bluetoothActive) 1 else 0,
             notificationPermission = if (baseOperationalInfo.notificationPermission) 1 else 0,
             exposureNotification = if (summary?.let { it.matchedKeyCount > 0 } == true) 1 else 0,
-            lastRiskyExposureOn = (summary?.date ?: Date(0)).let { "VALID_DATE_FROM_$it" }, // FIXME isoDateString
+            lastRiskyExposureOn = (summary?.date ?: Date(0)).isoDateString,
             salt = randomSalt()
         )
-        val result = attestationClient.attest(operationalInfo.digest.sha256())
-        when (result) {
+        val attestationResult = attestationClient.attest(operationalInfo.digest.sha256())
+        when (attestationResult) {
             is AttestationClient.Result.Success -> {
-                networkRepository.sendOperationalInfo(operationalInfo)
+                networkRepository.sendOperationalInfo(operationalInfo, attestationResult.result)
             }
             is AttestationClient.Result.Invalid -> {}
             is AttestationClient.Result.Failure -> {

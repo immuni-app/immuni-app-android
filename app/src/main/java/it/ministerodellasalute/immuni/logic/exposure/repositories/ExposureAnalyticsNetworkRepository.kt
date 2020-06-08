@@ -19,8 +19,6 @@ import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureAnalyticsService
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureAnalyticsOperationalInfo
 import it.ministerodellasalute.immuni.logic.exposure.operationalInfoRequest
-import it.ministerodellasalute.immuni.network.api.NetworkError
-import it.ministerodellasalute.immuni.network.api.NetworkResource
 
 class ExposureAnalyticsNetworkRepository(
     private val service: ExposureAnalyticsService
