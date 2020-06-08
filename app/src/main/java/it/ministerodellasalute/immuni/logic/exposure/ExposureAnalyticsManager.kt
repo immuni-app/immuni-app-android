@@ -145,9 +145,14 @@ class ExposureAnalyticsManager(
         val attestationResult = attestationClient.attest(operationalInfo.digest.base64EncodedSha256())
         when (attestationResult) {
             is AttestationClient.Result.Success -> {
-                networkRepository.sendOperationalInfo(operationalInfo, attestationResult.result)
+                if (isDummy) {
+                    networkRepository.sendDummyOperationalInfo(operationalInfo, attestationResult.result)
+                } else {
+                    networkRepository.sendOperationalInfo(operationalInfo, attestationResult.result)
+                }
             }
             is AttestationClient.Result.Invalid -> {
+                // Nothing to do
             }
             is AttestationClient.Result.Failure -> {
                 val retryCount = retryCount + 1
