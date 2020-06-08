@@ -59,7 +59,7 @@ data class ConfigurationSettings(
     @field:Json(name = "experimental_phase") val experimentalPhase: Boolean = false,
     @field:Json(name = "support_phone_closing_time") val supportPhoneClosingTime: String,
     @field:Json(name = "support_phone_opening_time") val supportPhoneOpeningTime: String,
-    @field:Json(name = "support_phone") val supportPhone: String,
+    @field:Json(name = "support_phone") val supportPhone: String? = null,
     @field:Json(name = "support_email") val supportEmail: String? = null
 )
 
@@ -139,7 +139,7 @@ val defaultSettings = ConfigurationSettings(
     teksPacketSize = 110_000,
     experimentalPhase = false,
     supportEmail = null,
-    supportPhone = "800912491",
+    supportPhone = null,
     supportPhoneOpeningTime = "7",
     supportPhoneClosingTime = "22"
 )
