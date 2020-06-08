@@ -22,6 +22,8 @@ import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
+import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 import kotlinx.android.synthetic.main.disable_exposure_api_dialog.*
 import kotlinx.coroutines.launch
@@ -37,8 +39,10 @@ class DisableExposureApiDialogFragment : PopupDialogFragment() {
 
         disableExposureApi.setSafeOnClickListener {
             val exposureManager: ExposureManager by inject()
+            val appNotificationManager: AppNotificationManager by inject()
             lifecycleScope.launch {
                 exposureManager.stopExposureNotification()
+                appNotificationManager.triggerNotification(NotificationType.ServiceNotActive)
                 findNavController().popBackStack()
             }
         }

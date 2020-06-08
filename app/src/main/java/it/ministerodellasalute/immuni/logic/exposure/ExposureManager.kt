@@ -142,7 +142,6 @@ class ExposureManager(
 
     suspend fun stopExposureNotification() {
         exposureNotificationManager.stopExposureNotification()
-        appNotificationManager.triggerNotification(NotificationType.ServiceNotActive)
     }
 
     suspend fun provideDiagnosisKeys(keyFiles: List<File>, token: String) {
