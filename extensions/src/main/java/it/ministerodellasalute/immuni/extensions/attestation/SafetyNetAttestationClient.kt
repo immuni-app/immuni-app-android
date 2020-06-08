@@ -30,7 +30,6 @@ class SafetyNetAttestationClient(
     data class AttestationParameters(
         internal val apiKey: String,
         internal val apkPackageName: String,
-        internal val apkCertificateDigestSha256: String,
         internal val requiresBasicIntegrity: Boolean,
         internal val requiresCtsProfile: Boolean,
         internal val requiresHardwareAttestation: Boolean
@@ -50,11 +49,6 @@ class SafetyNetAttestationClient(
 
             if (parameters.apkPackageName != jsonResult["apkPackageName"]) {
                 log("Attestation failed: non matching apkPackageName")
-                return AttestationClient.Result.Invalid
-            }
-
-            if (parameters.apkCertificateDigestSha256 != (jsonResult["apkCertificateDigestSha256"] as List<*>).first()) {
-                log("Attestation failed: non matching apkCertificateDigestSha256")
                 return AttestationClient.Result.Invalid
             }
 

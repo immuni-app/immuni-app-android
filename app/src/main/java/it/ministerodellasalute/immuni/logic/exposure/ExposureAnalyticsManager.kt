@@ -32,8 +32,6 @@ import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManage
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.Province
 import kotlinx.coroutines.delay
-import org.koin.core.KoinComponent
-import org.koin.core.get
 import java.security.SecureRandom
 import java.util.*
 
@@ -42,10 +40,10 @@ class ExposureAnalyticsManager(
     private val networkRepository: ExposureAnalyticsNetworkRepository,
     private val exposureReportingRepository: ExposureReportingRepository,
     private val settingsManager: ConfigurationSettingsManager,
-    private val userManager: UserManager,
     private val attestationClient: AttestationClient,
+    private val baseOperationalInfoProvider: () -> BaseOperationalInfo,
     private val random: Random = SecureRandom()
-) : KoinComponent {
+) {
     /**
      * Generates random and registers token if needed
      */
@@ -54,7 +52,8 @@ class ExposureAnalyticsManager(
             storeRepository.installDate = serverDate
         }
 
-        val isWithin24HoursSinceInstall = storeRepository.installDate!!.byAdding(hours = 24) > serverDate
+        val isWithin24HoursSinceInstall =
+            storeRepository.installDate!!.byAdding(hours = 24) > serverDate
         if (isWithin24HoursSinceInstall) {
             return
         }
@@ -82,7 +81,11 @@ class ExposureAnalyticsManager(
 
     private fun setupDummyInfoReportingDate(serverDate: Date) {
         val dummyInfoReportingDate = storeRepository.dummyInfoReportingDate
-        if (dummyInfoReportingDate == null || isDatePast24HoursSinceDate(serverDate, dummyInfoReportingDate)) {
+        if (dummyInfoReportingDate == null || isDatePast24HoursSinceDate(
+                serverDate,
+                dummyInfoReportingDate
+            )
+        ) {
             scheduleNextDummyInfoReport(serverDate)
         }
     }
@@ -114,7 +117,8 @@ class ExposureAnalyticsManager(
             }
             storeRepository.infoWithExposureLastReportingMonth = month
         } else if (couldSendInfoWithoutExposureNow(serverDate)) {
-            val threshold = settingsManager.settings.value.operationalInfoWithoutExposureSamplingRate
+            val threshold =
+                settingsManager.settings.value.operationalInfoWithoutExposureSamplingRate
             val canSend = random.nextDouble() < threshold
             if (canSend) {
                 sendOperationalInfo(summary = null, isDummy = false)
@@ -126,8 +130,12 @@ class ExposureAnalyticsManager(
         }
     }
 
-    private suspend fun sendOperationalInfo(summary: ExposureSummary?, isDummy: Boolean, retryCount: Long = 0) {
-        val baseOperationalInfo: BaseOperationalInfo = get()
+    private suspend fun sendOperationalInfo(
+        summary: ExposureSummary?,
+        isDummy: Boolean,
+        retryCount: Long = 0
+    ) {
+        val baseOperationalInfo: BaseOperationalInfo = baseOperationalInfoProvider()
         val operationalInfo = ExposureAnalyticsOperationalInfo(
             province = baseOperationalInfo.province,
             exposurePermission = if (baseOperationalInfo.exposurePermission) 1 else 0,
@@ -142,7 +150,8 @@ class ExposureAnalyticsManager(
             is AttestationClient.Result.Success -> {
                 networkRepository.sendOperationalInfo(operationalInfo, attestationResult.result)
             }
-            is AttestationClient.Result.Invalid -> {}
+            is AttestationClient.Result.Invalid -> {
+            }
             is AttestationClient.Result.Failure -> {
                 val retryCount = retryCount + 1
                 if (retryCount > 5) {
@@ -231,7 +240,8 @@ data class BaseOperationalInfo constructor(
         pushNotificationManager: PushNotificationManager
     ) : this(
         province = userManager.user.value!!.province,
-        exposurePermission = exposureNotificationManager.areExposureNotificationsEnabled.value ?: false,
+        exposurePermission = exposureNotificationManager.areExposureNotificationsEnabled.value
+            ?: false,
         bluetoothActive = exposureNotificationManager.bluetoothStateFlow.value,
         notificationPermission = pushNotificationManager.areNotificationsEnabled()
     )

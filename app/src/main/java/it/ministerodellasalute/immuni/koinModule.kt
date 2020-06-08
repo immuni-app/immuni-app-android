@@ -34,6 +34,7 @@ import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationM
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 import it.ministerodellasalute.immuni.extensions.utils.moshi
 import it.ministerodellasalute.immuni.logic.exposure.BaseOperationalInfo
+import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
@@ -199,21 +200,30 @@ val appModule = module {
         ExposureManager(
             get(),
             ExposureNotificationManager(androidContext(), get()),
+            get(),
+            get(),
+            get(),
+            get()
+        )
+    }
+
+    single {
+        ExposureAnalyticsManager(
+            get(),
+            get(),
+            get(),
+            get(),
             SafetyNetAttestationClient(
                 androidContext(),
                 SafetyNetAttestationClient.AttestationParameters(
-                    apiKey = "FIXME", // FIXME: is it ok to put it here?
+                    apiKey = BuildConfig.SAFETY_NET_API_KEY,
                     apkPackageName = androidContext().packageName,
-                    apkCertificateDigestSha256 = "FIXME", // FIXME
                     requiresBasicIntegrity = true,
                     requiresCtsProfile = true,
                     requiresHardwareAttestation = true
                 )
             ),
-            get(),
-            get(),
-            get(),
-            get()
+            { get() }
         )
     }
 
