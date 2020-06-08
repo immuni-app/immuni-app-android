@@ -44,8 +44,8 @@ class SupportViewModel(
     val isExposureNotificationEnabled = liveData {
         val enabled = exposureManager.isBroadcastingActive.value
         emit(when(enabled){
-            true -> "Attive"
-            else -> "Non attive"
+            true -> context.getString(R.string.support_exposure_state_active)
+            else -> context.getString(R.string.support_exposure_state_not_active)
         })
     }
 
@@ -53,8 +53,8 @@ class SupportViewModel(
         val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
         val enabled = bluetoothAdapter?.isEnabled ?: false
         emit(when(enabled){
-            true -> "Attivo"
-            false -> "Non attivo"
+            true -> context.getString(R.string.support_bt_state_active)
+            false -> context.getString(R.string.support_bt_state_not_active)
         })
     }
 
@@ -80,8 +80,8 @@ class SupportViewModel(
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val isMetered = cm.isActiveNetworkMetered
         emit(when(isMetered){
-            true -> "Mobile"
-            false -> "Wi-Fi"
+            true -> context.getString(R.string.support_connection_type_mobile)
+            false -> context.getString(R.string.support_connection_type_wifi)
         })
     }
 }
