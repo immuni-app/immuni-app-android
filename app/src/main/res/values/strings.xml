@@ -80,7 +80,6 @@
     <string name="onboarding_exposure_permission_title">Enable COVID-19 exposure notifications</string>
     <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus. You can temporarily disable it from the home screen.</string>
     <string name="onboarding_exposure_permission_action">Enable</string>
-    <string name="onboarding_exposure_permission_overlay_hint">Select \'<b>Enable</b>\' in the pop-up that appears below</string>
     <string name="onboarding_bluetooth_off_title">Turn on Bluetooth</string>
     <string name="onboarding_bluetooth_off_description">Immuni uses Bluetooth Low Energy to log your contact with other users and to enable COVID-19 exposure notifications.</string>
     <string name="onboarding_bluetooth_off_action">Turn on</string>
@@ -129,7 +128,6 @@
     <string name="settings_setting_privacy">Privacy notice</string>
     <string name="settings_setting_chage_province">Change your province</string>
     <string name="settings_setting_leave_review">Leave a review</string>
-    <string name="settings_setting_contact_support">Contact Support</string>
     <string name="settings_setting_debug_utilities">Debug menu</string>
     <string name="settings_update_province_update_province">Update</string>
     <string name="permission_tutorial_notifications_title">To enable notifications</string>
