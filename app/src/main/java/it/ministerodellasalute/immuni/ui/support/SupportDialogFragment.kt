@@ -10,6 +10,7 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.SettingsDirections
 import it.ministerodellasalute.immuni.extensions.utils.coloredClickable
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
+import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 import it.ministerodellasalute.immuni.util.startPhoneDial
@@ -31,26 +32,33 @@ class SupportDialogFragment : PopupDialogFragment() {
 
         contactSupport.movementMethod = LinkMovementMethod.getInstance()
         viewModel.contactSupportPhone.observe(viewLifecycleOwner) {
-            @SuppressLint("SetTextI18n")
-            contactSupport.text = "{$it}"
-                .coloredClickable(
-                    color = requireContext().getColorCompat(R.color.colorPrimary),
-                    bold = true
-                ) {
-                    startPhoneDial(it)
-                }
+
+            if (it == null) phoneContainer.gone()
+            else {
+                @SuppressLint("SetTextI18n")
+                contactSupport.text = "{$it}"
+                    .coloredClickable(
+                        color = requireContext().getColorCompat(R.color.colorPrimary),
+                        bold = true
+                    ) {
+                        startPhoneDial(it)
+                    }
+            }
         }
 
         mailSupport.movementMethod = LinkMovementMethod.getInstance()
         viewModel.contactSupportEmail.observe(viewLifecycleOwner) {
-            @SuppressLint("SetTextI18n")
-            mailSupport.text = "{$it}"
-                .coloredClickable(
-                    color = requireContext().getColorCompat(R.color.colorPrimary),
-                    bold = true
-                ) {
-                    startSendingEmail(it, "")
-                }
+            if (it == null) mailContainer.gone()
+            else {
+                @SuppressLint("SetTextI18n")
+                mailSupport.text = "{$it}"
+                    .coloredClickable(
+                        color = requireContext().getColorCompat(R.color.colorPrimary),
+                        bold = true
+                    ) {
+                        startSendingEmail(it, "")
+                    }
+            }
         }
         viewModel.supportWorkingHours.observe(viewLifecycleOwner) { (from, to) ->
             phoneDescription.text = getString(R.string.support_phone_description_android, from, to)

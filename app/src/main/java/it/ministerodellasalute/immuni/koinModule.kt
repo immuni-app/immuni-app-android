@@ -287,7 +287,7 @@ val appModule = module {
     viewModel { FaqViewModel(get()) }
     viewModel { SettingsViewModel(get()) }
     viewModel { StateCloseViewModel(get(), get()) }
-    viewModel { SupportViewModel() }
+    viewModel { SupportViewModel(androidContext(), get(), get()) }
 }
 
 val immuniMoshi = moshi(
