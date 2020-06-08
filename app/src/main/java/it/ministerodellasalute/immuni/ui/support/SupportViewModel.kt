@@ -3,6 +3,7 @@ package it.ministerodellasalute.immuni.ui.support
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
 import androidx.lifecycle.ViewModel
@@ -44,8 +45,8 @@ class SupportViewModel(
     val isExposureNotificationEnabled = liveData {
         val enabled = exposureManager.isBroadcastingActive.value
         emit(when(enabled){
-            true -> context.getString(R.string.support_exposure_state_active)
-            else -> context.getString(R.string.support_exposure_state_not_active)
+            true -> context.getString(R.string.support_info_exposure_notifications_active)
+            else -> context.getString(R.string.support_info_exposure_notifications_inactive)
         })
     }
 
@@ -53,8 +54,8 @@ class SupportViewModel(
         val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
         val enabled = bluetoothAdapter?.isEnabled ?: false
         emit(when(enabled){
-            true -> context.getString(R.string.support_bt_state_active)
-            false -> context.getString(R.string.support_bt_state_not_active)
+            true -> context.getString(R.string.support_info_bluetooth_active)
+            false -> context.getString(R.string.support_info_bluetooth_inactive)
         })
     }
 
@@ -78,10 +79,19 @@ class SupportViewModel(
 
     val connectionType = liveData {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val isMetered = cm.isActiveNetworkMetered
-        emit(when(isMetered){
-            true -> context.getString(R.string.support_connection_type_mobile)
-            false -> context.getString(R.string.support_connection_type_wifi)
-        })
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+        if(!isConnected) {
+            emit(context.getString(R.string.support_info_item_connectionType_none))
+        }
+        else {
+            val isMetered = cm.isActiveNetworkMetered
+            emit(
+                when (isMetered) {
+                    true -> context.getString(R.string.support_info_item_connectionType_mobile)
+                    false -> context.getString(R.string.support_info_item_connectionType_wifi)
+                }
+            )
+        }
     }
 }
