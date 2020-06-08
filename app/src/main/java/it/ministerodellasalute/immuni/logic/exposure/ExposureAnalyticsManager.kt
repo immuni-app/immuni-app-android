@@ -156,10 +156,10 @@ class ExposureAnalyticsManager(
             }
             is AttestationClient.Result.Failure -> {
                 val retryCount = retryCount + 1
-                if (retryCount > 5) {
+                if (retryCount > 4) {
                     return
                 }
-                val delayMillis = retryCount * retryCount * 60 * 1000
+                val delayMillis = retryCount * retryCount * 10 * 1000
                 delay(delayMillis)
                 sendOperationalInfo(summary, isDummy, retryCount)
             }

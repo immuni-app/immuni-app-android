@@ -19,6 +19,8 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
+import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.withTimeoutOrNull
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import java.util.*
@@ -35,8 +37,10 @@ class ExposureAnalyticsWorker(
     private val analyticsManager: ExposureAnalyticsManager by inject()
 
     override suspend fun doWork(): Result {
-        val serverDate = params.inputData.getLong(SERVER_DATE_INPUT_DATA_KEY, 0)
-        analyticsManager.onRequestDiagnosisKeysSucceeded(Date(serverDate))
+        withTimeoutOrNull(9 * 60 * 1000) {
+            val serverDate = params.inputData.getLong(SERVER_DATE_INPUT_DATA_KEY, 0)
+            analyticsManager.onRequestDiagnosisKeysSucceeded(Date(serverDate))
+        }
         return Result.success()
     }
 }
