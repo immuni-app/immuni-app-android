@@ -37,7 +37,6 @@ import kotlinx.coroutines.flow.*
 class ExposureManager(
     private val settingsManager: ConfigurationSettingsManager,
     private val exposureNotificationManager: ExposureNotificationManager,
-    private val attestationClient: AttestationClient,
     private val userRepository: UserRepository,
     private val exposureReportingRepository: ExposureReportingRepository,
     private val exposureIngestionRepository: ExposureIngestionRepository,

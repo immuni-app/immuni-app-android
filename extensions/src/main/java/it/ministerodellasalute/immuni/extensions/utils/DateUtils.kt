@@ -55,3 +55,7 @@ fun Date.byAdding(
         }
     }.time
 }
+
+private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+
+val Date.isoDateString: String get() = dateFormatter.format(this)

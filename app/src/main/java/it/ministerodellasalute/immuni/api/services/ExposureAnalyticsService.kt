@@ -19,10 +19,24 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ExposureAnalyticsService {
+    @JsonClass(generateAdapter = true)
+    data class OperationalInfoRequest(
+        @field:Json(name = "province") val province: ExposureIngestionService.Province,
+        @field:Json(name = "exposure_permission") val exposurePermission: Int,
+        @field:Json(name = "bluetooth_active") val bluetoothActive: Int,
+        @field:Json(name = "notification_permission") val notificationPermission: Int,
+        @field:Json(name = "exposure_notification") val exposureNotification: Int,
+        @field:Json(name = "last_risky_exposure_on") val lastRiskyExposureOn: String,
+        @field:Json(name = "salt") val salt: String,
+        @field:Json(name = "signed_attestation") val signedAttestation: String
+    )
+
+    @POST("/v1/analytics/google/operational-info")
+    suspend fun operationalInfo(
+        @Header("Immuni-Dummy-Data") isDummyData: Int,
+        @Body body: OperationalInfoRequest
+    ): Response<ResponseBody>
 }

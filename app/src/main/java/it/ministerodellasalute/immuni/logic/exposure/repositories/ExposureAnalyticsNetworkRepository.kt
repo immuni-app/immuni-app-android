@@ -18,13 +18,34 @@ package it.ministerodellasalute.immuni.logic.exposure.repositories
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureAnalyticsService
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureAnalyticsOperationalInfo
+import it.ministerodellasalute.immuni.logic.exposure.operationalInfoRequest
 import it.ministerodellasalute.immuni.network.api.NetworkError
 import it.ministerodellasalute.immuni.network.api.NetworkResource
 
 class ExposureAnalyticsNetworkRepository(
     private val service: ExposureAnalyticsService
 ) {
-    suspend fun sendOperationalInfo(operationalInfo: ExposureAnalyticsOperationalInfo) {
-        TODO("Not yet implemented")
+    suspend fun sendOperationalInfo(
+        operationalInfo: ExposureAnalyticsOperationalInfo,
+        signedAttestation: String
+    ) {
+        immuniApiCall {
+            service.operationalInfo(
+                isDummyData = 0,
+                body = operationalInfo.operationalInfoRequest(signedAttestation)
+            )
+        }
+    }
+
+    suspend fun sendDummyOperationalInfo(
+        operationalInfo: ExposureAnalyticsOperationalInfo,
+        signedAttestation: String
+    ) {
+        immuniApiCall {
+            service.operationalInfo(
+                isDummyData = 1,
+                body = operationalInfo.operationalInfoRequest((signedAttestation))
+            )
+        }
     }
 }

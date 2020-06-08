@@ -15,16 +15,16 @@
 
 package it.ministerodellasalute.immuni.logic.exposure.models
 
-import kotlin.random.Random
+import it.ministerodellasalute.immuni.logic.user.models.Province
 
 data class ExposureAnalyticsOperationalInfo(
-    val province: String,
+    val province: Province,
     val exposurePermission: Int,
     val bluetoothActive: Int,
     val notificationPermission: Int,
     val exposureNotification: Int,
     val lastRiskyExposureOn: String,
-    val token: String
+    val salt: String
 ) {
-    val digest = "$province$exposurePermission$bluetoothActive$notificationPermission$exposureNotification$lastRiskyExposureOn$token"
+    val digest = "${province.code}$exposurePermission$bluetoothActive$notificationPermission$exposureNotification$lastRiskyExposureOn$salt"
 }

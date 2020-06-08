@@ -33,6 +33,7 @@ import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationMana
 import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 import it.ministerodellasalute.immuni.extensions.utils.moshi
+import it.ministerodellasalute.immuni.logic.exposure.BaseOperationalInfo
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
@@ -278,6 +279,10 @@ val appModule = module {
 
     single {
         immuniMoshi
+    }
+
+    factory {
+        BaseOperationalInfo(get(), get(), get())
     }
 
     // Android ViewModels

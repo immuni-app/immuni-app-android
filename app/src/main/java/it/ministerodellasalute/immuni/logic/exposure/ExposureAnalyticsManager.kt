@@ -17,6 +17,8 @@ package it.ministerodellasalute.immuni.logic.exposure
 
 import android.util.Base64
 import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
+import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
+import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
 import it.ministerodellasalute.immuni.extensions.utils.byAdding
 import it.ministerodellasalute.immuni.extensions.utils.exponential
 import it.ministerodellasalute.immuni.extensions.utils.sha256
@@ -27,6 +29,9 @@ import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureAnalyt
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.UserManager
+import it.ministerodellasalute.immuni.logic.user.models.Province
+import org.koin.core.KoinComponent
+import org.koin.core.get
 import java.security.SecureRandom
 import java.util.*
 
@@ -38,7 +43,7 @@ class ExposureAnalyticsManager(
     private val userManager: UserManager,
     private val attestationClient: AttestationClient,
     private val random: Random = SecureRandom()
-) {
+) : KoinComponent {
     /**
      * Generates random and registers token if needed
      */
@@ -120,14 +125,15 @@ class ExposureAnalyticsManager(
     }
 
     private suspend fun sendOperationalInfo(summary: ExposureSummary?, isDummy: Boolean) {
+        val baseOperationalInfo: BaseOperationalInfo = get()
         val operationalInfo = ExposureAnalyticsOperationalInfo(
-            province = userManager.user.value!!.province.code,
-            exposurePermission = 1, // FIXME
-            bluetoothActive = 1, // FIXME
-            notificationPermission = 1, // FIXME
-            exposureNotification = 1, // FIXME
-            lastRiskyExposureOn = (summary?.date ?: Date(0)).let { "VALID_DATE_FROM_$it" }, // FIXME
-            token = randomToken()
+            province = baseOperationalInfo.province,
+            exposurePermission = if (baseOperationalInfo.exposurePermission) 1 else 0,
+            bluetoothActive = if (baseOperationalInfo.bluetoothActive) 1 else 0,
+            notificationPermission = if (baseOperationalInfo.notificationPermission) 1 else 0,
+            exposureNotification = if (summary?.let { it.matchedKeyCount > 0 } == true) 1 else 0,
+            lastRiskyExposureOn = (summary?.date ?: Date(0)).let { "VALID_DATE_FROM_$it" }, // FIXME isoDateString
+            salt = randomSalt()
         )
         val result = attestationClient.attest(operationalInfo.digest.sha256())
         when (result) {
@@ -141,10 +147,10 @@ class ExposureAnalyticsManager(
         }
     }
 
-    private fun randomToken(): String {
-        val token = ByteArray(16)
-        SecureRandom().nextBytes(token)
-        return Base64.encodeToString(token, Base64.DEFAULT)
+    private fun randomSalt(): String {
+        val salt = ByteArray(16)
+        SecureRandom().nextBytes(salt)
+        return Base64.encodeToString(salt, Base64.DEFAULT)
     }
 
     private fun monthFromDate(serverDate: Date): Int {
@@ -203,4 +209,22 @@ class ExposureAnalyticsManager(
             set(Calendar.MILLISECOND, 0)
         }.time
     }
+}
+
+data class BaseOperationalInfo constructor(
+    val province: Province,
+    val exposurePermission: Boolean,
+    val bluetoothActive: Boolean,
+    val notificationPermission: Boolean
+) {
+    constructor(
+        userManager: UserManager,
+        exposureNotificationManager: ExposureNotificationManager,
+        pushNotificationManager: PushNotificationManager
+    ) : this(
+        province = userManager.user.value!!.province,
+        exposurePermission = exposureNotificationManager.areExposureNotificationsEnabled.value ?: false,
+        bluetoothActive = exposureNotificationManager.bluetoothStateFlow.value,
+        notificationPermission = pushNotificationManager.areNotificationsEnabled()
+    )
 }
