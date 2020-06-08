@@ -16,14 +16,13 @@
 package it.ministerodellasalute.immuni.logic.exposure.repositories
 
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
-import it.ministerodellasalute.immuni.logic.exposure.models.AnalyticsTokenStatus
 import java.util.*
 
 class ExposureAnalyticsStoreRepository(
     private val storage: KVStorage
 ) {
     companion object {
-        val tokenStatusKey = KVStorage.Key<AnalyticsTokenStatus>("tokenStatus")
+        val installDateKey = KVStorage.Key<Date>("installDate")
         val infoWithExposureLastReportingMonthKey =
             KVStorage.Key<Int>("infoWithExposureLastReportingMonth")
         val infoWithoutExposureReportingDateKey =
@@ -31,11 +30,10 @@ class ExposureAnalyticsStoreRepository(
         val dummyInfoReportingDateKey = KVStorage.Key<Date>("dummyInfoReportingDate")
     }
 
-    var token: AnalyticsTokenStatus
-        get() = storage[tokenStatusKey] ?: AnalyticsTokenStatus.None()
-        set(value) = when (value) {
-            is AnalyticsTokenStatus.None -> storage.delete(tokenStatusKey)
-            else -> storage[tokenStatusKey] = value
+    var installDate: Date?
+        get() = storage[installDateKey]
+        set(value) {
+            storage[installDateKey] = value!!
         }
 
     var infoWithExposureLastReportingMonth: Int?
@@ -43,6 +41,7 @@ class ExposureAnalyticsStoreRepository(
         set(value) {
             storage[infoWithExposureLastReportingMonthKey] = value!!
         }
+
     var infoWithoutExposureReportingDate: Date?
         get() = storage[infoWithoutExposureReportingDateKey]
         set(value) {

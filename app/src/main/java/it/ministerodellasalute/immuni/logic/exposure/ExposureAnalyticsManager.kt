@@ -19,11 +19,14 @@ import android.util.Base64
 import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
 import it.ministerodellasalute.immuni.extensions.utils.byAdding
 import it.ministerodellasalute.immuni.extensions.utils.exponential
-import it.ministerodellasalute.immuni.logic.exposure.models.AnalyticsTokenStatus
+import it.ministerodellasalute.immuni.extensions.utils.sha256
+import it.ministerodellasalute.immuni.logic.exposure.models.ExposureAnalyticsOperationalInfo
+import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureAnalyticsNetworkRepository
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureAnalyticsStoreRepository
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.logic.user.UserManager
 import java.security.SecureRandom
 import java.util.*
 
@@ -32,15 +35,21 @@ class ExposureAnalyticsManager(
     private val networkRepository: ExposureAnalyticsNetworkRepository,
     private val exposureReportingRepository: ExposureReportingRepository,
     private val settingsManager: ConfigurationSettingsManager,
-    private val attestationClient: AttestationClient
+    private val userManager: UserManager,
+    private val attestationClient: AttestationClient,
+    private val random: Random = SecureRandom()
 ) {
     /**
      * Generates random and registers token if needed
      */
     suspend fun setup(serverDate: Date) {
-        val token = storeRepository.token
-        if (token is AnalyticsTokenStatus.None) {
-            storeRepository.token = generateAndValidateToken(serverDate)
+        if (storeRepository.installDate == null) {
+            storeRepository.installDate = serverDate
+        }
+
+        val isWithin24HoursSinceInstall = storeRepository.installDate!!.byAdding(hours = 24) > serverDate
+        if (isWithin24HoursSinceInstall) {
+            return
         }
 
         setupInfoWithoutExposureReportingDate(serverDate)
@@ -55,8 +64,7 @@ class ExposureAnalyticsManager(
                 isForNextMonth = false
             )
         }
-        val infoWithoutExposureExpirationDate = infoWithoutExposureReportingDate.byAdding(hours = 24)
-        if (serverDate > infoWithoutExposureExpirationDate) {
+        if (isDatePast24HoursSinceDate(serverDate, infoWithoutExposureReportingDate)) {
             infoWithoutExposureReportingDate = randomDateInMonth(
                 serverDate = serverDate,
                 isForNextMonth = true
@@ -67,7 +75,7 @@ class ExposureAnalyticsManager(
 
     private fun setupDummyInfoReportingDate(serverDate: Date) {
         val dummyInfoReportingDate = storeRepository.dummyInfoReportingDate
-        if (dummyInfoReportingDate == null || dummyInfoReportingDate < serverDate) {
+        if (dummyInfoReportingDate == null || isDatePast24HoursSinceDate(serverDate, dummyInfoReportingDate)) {
             scheduleNextDummyInfoReport(serverDate)
         }
     }
@@ -81,7 +89,7 @@ class ExposureAnalyticsManager(
 
     private fun scheduleNextDummyInfoReport(serverDate: Date) {
         val meanWaitingTime = settingsManager.settings.value.dummyAnalyticsWaitingTime
-        val waitingTime = SecureRandom().exponential(meanWaitingTime.toLong()).toInt()
+        val waitingTime = random.exponential(meanWaitingTime.toLong()).toInt()
         storeRepository.dummyInfoReportingDate = serverDate.byAdding(seconds = waitingTime)
     }
 
@@ -93,22 +101,50 @@ class ExposureAnalyticsManager(
         val month = monthFromDate(serverDate)
         if (hadExposure && hasYetToSendInfoWithExposureThisMonth(month)) {
             val threshold = settingsManager.settings.value.operationalInfoWithExposureSamplingRate
-            val canSend = SecureRandom().nextDouble() < threshold
+            val canSend = random.nextDouble() < threshold
             if (canSend) {
-                // FIXME: send
+                sendOperationalInfo(summary = exposureSummary, isDummy = false)
             }
             storeRepository.infoWithExposureLastReportingMonth = month
         } else if (couldSendInfoWithoutExposureNow(serverDate)) {
             val threshold = settingsManager.settings.value.operationalInfoWithoutExposureSamplingRate
-            val canSend = SecureRandom().nextDouble() < threshold
+            val canSend = random.nextDouble() < threshold
             if (canSend) {
-                // FIXME: send
+                sendOperationalInfo(summary = null, isDummy = false)
             }
             scheduleNextInfoWithoutExposureReport(serverDate)
-        } else if (couldSendDummyInfo(serverDate)) {
-            // FIXME: send
+        } else if (couldSendDummyInfoNow(serverDate)) {
+            sendOperationalInfo(summary = null, isDummy = true)
             scheduleNextDummyInfoReport(serverDate)
         }
+    }
+
+    private suspend fun sendOperationalInfo(summary: ExposureSummary?, isDummy: Boolean) {
+        val operationalInfo = ExposureAnalyticsOperationalInfo(
+            province = userManager.user.value!!.province.code,
+            exposurePermission = 1, // FIXME
+            bluetoothActive = 1, // FIXME
+            notificationPermission = 1, // FIXME
+            exposureNotification = 1, // FIXME
+            lastRiskyExposureOn = (summary?.date ?: Date(0)).let { "VALID_DATE_FROM_$it" }, // FIXME
+            token = randomToken()
+        )
+        val result = attestationClient.attest(operationalInfo.digest.sha256())
+        when (result) {
+            is AttestationClient.Result.Success -> {
+                networkRepository.sendOperationalInfo(operationalInfo)
+            }
+            is AttestationClient.Result.Invalid -> {}
+            is AttestationClient.Result.Failure -> {
+                // FIXME: retry N times with exponential backoff
+            }
+        }
+    }
+
+    private fun randomToken(): String {
+        val token = ByteArray(16)
+        SecureRandom().nextBytes(token)
+        return Base64.encodeToString(token, Base64.DEFAULT)
     }
 
     private fun monthFromDate(serverDate: Date): Int {
@@ -130,7 +166,7 @@ class ExposureAnalyticsManager(
         )
     }
 
-    private fun couldSendDummyInfo(serverDate: Date): Boolean {
+    private fun couldSendDummyInfoNow(serverDate: Date): Boolean {
         return isDateWithin24HoursSinceDate(
             serverDate,
             storeRepository.dummyInfoReportingDate!!
@@ -141,19 +177,8 @@ class ExposureAnalyticsManager(
         return date in periodStartDate..periodStartDate.byAdding(hours = 24)
     }
 
-    private suspend fun generateAndValidateToken(serverDate: Date): AnalyticsTokenStatus {
-        val token = ByteArray(32)
-        SecureRandom().nextBytes(token)
-        val base64Token = Base64.encodeToString(token, Base64.DEFAULT)
-        val attestationResponse = attestationClient.attest(base64Token)
-        return when (attestationResponse) {
-            is AttestationClient.Result.Failure -> AnalyticsTokenStatus.None()
-            is AttestationClient.Result.Invalid -> AnalyticsTokenStatus.Invalid()
-            is AttestationClient.Result.Success -> AnalyticsTokenStatus.Valid(
-                base64Token,
-                randomDateInMonth(serverDate, isForNextMonth = true)
-            )
-        }
+    private fun isDatePast24HoursSinceDate(date: Date, periodStartDate: Date): Boolean {
+        return date > periodStartDate.byAdding(hours = 24)
     }
 
     private fun randomDateInMonth(serverDate: Date, isForNextMonth: Boolean): Date {
@@ -164,7 +189,7 @@ class ExposureAnalyticsManager(
             add(Calendar.DAY_OF_MONTH, -1)
         }.get(Calendar.DAY_OF_MONTH)
 
-        val randomDayOfCurrentMonth = SecureRandom().nextInt(lastDayOfCurrentMonth) + 1
+        val randomDayOfCurrentMonth = random.nextInt(lastDayOfCurrentMonth) + 1
 
         return Calendar.getInstance().apply {
             time = serverDate

@@ -171,17 +171,12 @@ class WorkerManager(
         return SecureRandom().exponential(settings.dummyTeksAverageOpportunityWaitingTime.toLong())
     }
 
-    fun scheduleExposureAnalyticsWorker(serverDate: Date, delayMinutes: Long = 10) {
+    fun scheduleExposureAnalyticsWorker(serverDate: Date) {
         workManager.enqueueUniqueWork(
             "ExposureAnalyticsWorker",
             ExistingWorkPolicy.REPLACE,
             OneTimeWorkRequest.Builder(ExposureAnalyticsWorker::class.java)
-                .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
-                .setConstraints(
-                    Constraints.Builder()
-                        .setRequiresBatteryNotLow(true)
-                        .build()
-                )
+                .setInitialDelay(10, TimeUnit.MINUTES)
                 .setInputData(workDataOf(ExposureAnalyticsWorker.SERVER_DATE_INPUT_DATA_KEY to serverDate.time))
                 .build()
         )

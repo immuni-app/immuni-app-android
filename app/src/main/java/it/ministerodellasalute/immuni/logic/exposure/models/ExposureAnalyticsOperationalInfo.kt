@@ -13,18 +13,18 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.logic.exposure.repositories
+package it.ministerodellasalute.immuni.logic.exposure.models
 
-import it.ministerodellasalute.immuni.api.immuniApiCall
-import it.ministerodellasalute.immuni.api.services.ExposureAnalyticsService
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureAnalyticsOperationalInfo
-import it.ministerodellasalute.immuni.network.api.NetworkError
-import it.ministerodellasalute.immuni.network.api.NetworkResource
+import kotlin.random.Random
 
-class ExposureAnalyticsNetworkRepository(
-    private val service: ExposureAnalyticsService
+data class ExposureAnalyticsOperationalInfo(
+    val province: String,
+    val exposurePermission: Int,
+    val bluetoothActive: Int,
+    val notificationPermission: Int,
+    val exposureNotification: Int,
+    val lastRiskyExposureOn: String,
+    val token: String
 ) {
-    suspend fun sendOperationalInfo(operationalInfo: ExposureAnalyticsOperationalInfo) {
-        TODO("Not yet implemented")
-    }
+    val digest = "$province$exposurePermission$bluetoothActive$notificationPermission$exposureNotification$lastRiskyExposureOn$token"
 }

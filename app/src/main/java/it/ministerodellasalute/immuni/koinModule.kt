@@ -17,10 +17,15 @@ package it.ministerodellasalute.immuni
 
 import android.app.Application
 import androidx.lifecycle.SavedStateHandle
-import it.ministerodellasalute.immuni.api.services.*
-import it.ministerodellasalute.immuni.config.*
+import it.ministerodellasalute.immuni.api.services.ConfigurationSettingsService
+import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
+import it.ministerodellasalute.immuni.api.services.ExposureReportingService
+import it.ministerodellasalute.immuni.api.services.defaultSettings
+import it.ministerodellasalute.immuni.config.ExposureIngestionNetworkConfiguration
+import it.ministerodellasalute.immuni.config.ExposureReportingNetworkConfiguration
+import it.ministerodellasalute.immuni.config.ImmuniDebugMenuConfiguration
+import it.ministerodellasalute.immuni.config.SettingsNetworkConfiguration
 import it.ministerodellasalute.immuni.debugmenu.DebugMenu
-import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
 import it.ministerodellasalute.immuni.extensions.attestation.SafetyNetAttestationClient
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
@@ -29,7 +34,6 @@ import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationM
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 import it.ministerodellasalute.immuni.extensions.utils.moshi
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
-import it.ministerodellasalute.immuni.logic.exposure.models.AnalyticsTokenStatus
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
@@ -60,10 +64,10 @@ import it.ministerodellasalute.immuni.ui.upload.UploadViewModel
 import it.ministerodellasalute.immuni.util.CoroutineContextProvider
 import it.ministerodellasalute.immuni.workers.models.ServiceNotActiveNotificationWorkerStatus
 import it.ministerodellasalute.immuni.workers.repositories.ServiceNotActiveNotificationWorkerRepository
-import java.security.SecureRandom
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import java.security.SecureRandom
 
 /**
  * Dependency Injection Koin module.
@@ -306,7 +310,6 @@ val immuniMoshi = moshi(
     ),
     extraFactories = listOf(
         ExposureStatus.moshiAdapter,
-        AnalyticsTokenStatus.moshiAdapter,
         ServiceNotActiveNotificationWorkerStatus.moshiAdapter
     )
 )
