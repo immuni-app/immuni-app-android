@@ -89,7 +89,6 @@
   <string name="onboarding_push_permission_action">Consenti</string>
   <string name="onboarding_push_permission_overlay_hint">Seleziona \"<b>Consenti</b>\" nel popup che apparirà qui sotto</string>
   <string name="onboarding_pin_advice_title">Proteggi il tuo dispositivo</string>
-  <string name="onboarding_pin_advice_description">L’uso di Immuni è strettamente personale. Se non l’hai già fatto, imposta un codice sul tuo dispositivo per proteggerlo e impedire ad altri di accedere ai tuoi dati e alle tue app, inclusa Immuni.</string>
   <string name="onboarding_pin_advice_action">Ho capito</string>
   <string name="onboarding_communication_advice_title">Fai attenzione alle false comunicazioni</string>
   <string name="onboarding_communication_advice_description">Immuni comunicherà con te sempre e solamente attraverso l’app e relative notifiche. <b>Diffida di qualunque SMS, telefonata, email o altro tipo di avviso</b> che sembri arrivare da Immuni, soprattutto se ti vengono richieste informazioni personali.</string>
@@ -101,14 +100,14 @@
   <string name="home_view_service_not_active_subtitle">Intervieni subito per permettere a Immuni di funzionare correttamente.</string>
   <string name="home_view_service_not_active_button">Riattiva Immuni</string>
   <string name="home_view_info_protection_title">Cosa puoi fare per proteggerti</string>
-  <string name="home_view_info_app_title">Come funziona l\'app?</string>
+  <string name="home_view_info_app_title">Come funziona l\'app</string>
   <string name="home_view_info_button_title">Scopri di più</string>
   <string name="home_view_info_header_title">Informazioni</string>
   <string name="home_view_header_card_risk_title">Rilevata esposizione a rischio con una persona COVID-19 positiva</string>
   <string name="home_view_header_card_risk_button">Scopri subito cosa fare ›</string>
   <string name="home_view_header_card_positive_title">Segui le indicazioni che ti hanno fornito il tuo medico o la tua ASL</string>
   <string name="home_view_header_card_positive_button">Sei guarito? Aggiorna il tuo stato ›</string>
-  <string name="permission_tutorial_how_immuni_works_title">Come funziona l’app?</string>
+  <string name="permission_tutorial_how_immuni_works_title">Come funziona l’app</string>
   <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni associa a ogni telefono un codice casuale</h>]]></string>
   <string name="permission_tutorial_how_immuni_works_first_message">Il codice è generato in modo casuale e non contiene informazioni sul tuo dispositivo, tanto meno su di te. Inoltre, cambia diverse volte ogni ora, per tutelare al meglio la tua privacy.</string>
   <string name="permission_tutorial_how_immuni_works_second_title"><![CDATA[<h>I telefoni che si incontrano si scambiano i rispettivi codici casuali</h>]]></string>
@@ -277,6 +276,17 @@
   <string name="suggestions_instruction_mask_message">Inclusi i mezzi di trasporto e comunque in tutte le occasioni in cui non sia possibile garantire continuativamente il mantenimento della distanza di sicurezza.</string>
   <string name="upload_data_vpn_error_message">Si è verificato un errore durante l’operazione. Ti invitiamo a riprovare. Se stai utilizzando una VPN, ti suggeriamo di selezionare un server italiano o di disabilitarla temporaneamente.</string>
   <string name="suggestions_risk_footer">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità, l\'app ha informato il Ministero della Salute della notifica che hai ricevuto. <b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di questa informazione.</b></string>
-  <string name="onboarding_pilot_title">Progetto pilota in corso</string>
-  <string name="onboarding_pilot_description">Per la durata della fase di sperimentazione <b>verrai avvisato di un’esposizione a rischio solo se entri in contatto con un utente risultato positivo al virus assistito da una delle seguenti regioni: Abruzzo, Liguria, Marche e Puglia.</b></string>
+  <string name="onboarding_pin_advice_description">L\'uso di Immuni è strettamente personale. Se non l\'hai già fatto, imposta un codice di sblocco sul tuo smartphone per impedire ad altri di accedere alle funzionalità dell\'app e ai messaggi che potrebbe inviarti.</string>
+  <string name="home_view_service_deactivate">Disattiva il servizio</string>
+  <string name="onboarding_pilot_title">Sperimentazione in corso</string>
+  <string name="onboarding_pilot_description">Durante la fase di sperimentazione verrai avvisato di un contatto a rischio con una persona positiva al virus solo se quest’ultima è assistita da un’ASL delle seguenti regioni: Abruzzo, Liguria, Marche e Puglia.</string>
+  <string name="onboarding_pilot_action">Ho capito</string>
+  <string name="permission_tutorial_deactivate_service_title">Come disattivare il servizio</string>
+  <string name="permission_tutorial_deactivate_service_first_message_android">Per proteggere la tua Salute e quella dei tuoi cari, disattiva il servizio solo se necessario e riattivalo appena puoi.</string>
+  <string name="permission_tutorial_deactivate_service_second_message">In certi casi può aver senso disattivare temporaneamente le notifiche di esposizione, ad esempio <b>se sei un operatore sanitario a contatto con pazienti COVID-19 e desideri disattivare l’app mentre sei al lavoro.</b></string>
+  <string name="permission_tutorial_deactivate_service_third_message">Disabilitando le notifiche di esposizione i successivi contatti con altri utenti non verranno registrati.</string>
+  <string name="suggestions_risk_first_message">L\'app ti mostra questo avviso sulla base delle informazioni a disposizione (durata del contatto e stima approssimativa della distanza) ma non può sapere se durante il contatto indossavi una mascherina o se davi le spalle. Il rischio di contagio potrebbe quindi essere sovrastimato.</string>
+  <string name="suggestions_risk_second_message">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità l’app ha informato il Ministero della Salute della notifica che hai ricevuto.</string>
+  <string name="suggestions_risk_fourth_message"><b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di queste informazioni</b>.</string>
+  <string name="suggestions_risk_third_message_android">Per ulteriori informazioni sui dati trasmessi al Ministero della Salute puoi leggere l\'{informativa privacy} al punto 4.</string>
 </resources>

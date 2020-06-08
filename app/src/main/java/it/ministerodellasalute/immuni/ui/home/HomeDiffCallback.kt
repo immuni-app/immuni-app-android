@@ -18,7 +18,10 @@ package it.ministerodellasalute.immuni.ui.home
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil
 
-class HomeDiffCallback(private val oldList: List<HomeItemType>, private val newList: List<HomeItemType>) : DiffUtil.Callback() {
+class HomeDiffCallback(
+    private val oldList: List<HomeItemType>,
+    private val newList: List<HomeItemType>
+) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldList.size
 
@@ -29,6 +32,7 @@ class HomeDiffCallback(private val oldList: List<HomeItemType>, private val newL
         val new = newList[newItemPosition]
         if (old::class != new::class) return false
         if (old is ProtectionCard) return true
+        if (old is DisableExposureApi) return true
         if (old is SectionHeader && new is SectionHeader) {
             return old.title == new.title
         } else return old == new
