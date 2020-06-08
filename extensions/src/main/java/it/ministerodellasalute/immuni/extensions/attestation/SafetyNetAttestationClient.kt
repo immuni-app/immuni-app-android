@@ -22,6 +22,7 @@ import it.ministerodellasalute.immuni.extensions.utils.defaultMoshi
 import it.ministerodellasalute.immuni.extensions.utils.fromJson
 import it.ministerodellasalute.immuni.extensions.utils.log
 import kotlinx.coroutines.tasks.await
+import okio.Utf8
 
 class SafetyNetAttestationClient(
     private val context: Context,
@@ -40,8 +41,8 @@ class SafetyNetAttestationClient(
             val nonceByteArray = Base64.decode(nonce, Base64.DEFAULT)
             val result =
                 SafetyNet.getClient(context).attest(nonceByteArray, parameters.apiKey).await()
-            // FIXME: check if this is correct
-            val jsonResult = defaultMoshi.fromJson<Map<String, Any>>(result.jwsResult)!!
+            val payload = String(Base64.decode(result.jwsResult.split(".")[1], Base64.DEFAULT))
+            val jsonResult = defaultMoshi.fromJson<Map<String, Any>>(payload)!!
             if (nonce != jsonResult["nonce"]) {
                 log("Attestation failed: non matching nonces")
                 return AttestationClient.Result.Invalid

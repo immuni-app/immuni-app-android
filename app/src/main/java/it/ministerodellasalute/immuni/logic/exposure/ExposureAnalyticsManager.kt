@@ -19,10 +19,7 @@ import android.util.Base64
 import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
 import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
-import it.ministerodellasalute.immuni.extensions.utils.byAdding
-import it.ministerodellasalute.immuni.extensions.utils.exponential
-import it.ministerodellasalute.immuni.extensions.utils.isoDateString
-import it.ministerodellasalute.immuni.extensions.utils.sha256
+import it.ministerodellasalute.immuni.extensions.utils.*
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureAnalyticsOperationalInfo
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureAnalyticsNetworkRepository
@@ -145,7 +142,7 @@ class ExposureAnalyticsManager(
             lastRiskyExposureOn = (summary?.date ?: Date(0)).isoDateString,
             salt = randomSalt()
         )
-        val attestationResult = attestationClient.attest(operationalInfo.digest.sha256())
+        val attestationResult = attestationClient.attest(operationalInfo.digest.base64EncodedSha256())
         when (attestationResult) {
             is AttestationClient.Result.Success -> {
                 networkRepository.sendOperationalInfo(operationalInfo, attestationResult.result)

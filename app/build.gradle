@@ -42,6 +42,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField("String", "SAFETY_NET_API_KEY", appProperties["safetyNetApiKey"])
+        buildConfigField("String", "SAFETY_NET_TEST_API_KEY", appProperties["safetyNetTestApiKey"])
     }
 
     buildTypes {
