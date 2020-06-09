@@ -16,26 +16,56 @@
 package it.ministerodellasalute.immuni.ui.settings
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.logic.settings.models.FetchFaqsResult
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 import org.koin.core.KoinComponent
 
 class SettingsViewModel(
     private val settingsManager: ConfigurationSettingsManager
 ) : ViewModel(), KoinComponent {
+
     companion object {
         const val EXPOSURE_NOTIFICATION_SETTINGS_REQUEST = 2206
     }
 
-    private val settings get() = settingsManager.settings.value
+    val navigateToFaqs = MutableLiveData<Event<Boolean>>()
+    val errorFetchingFaqs = MutableLiveData<Event<Boolean>>()
+    val loading = MutableLiveData<Boolean>()
 
     fun onTouClick(fragment: Fragment) {
         ExternalLinksHelper.openLink(
             fragment.requireContext(),
             settingsManager.termsOfUseUrl
         )
+    }
+
+    fun onFaqClick() {
+        if (settingsManager.faqs.value.isNullOrEmpty()) {
+            viewModelScope.launch {
+                loading.value = true
+                delay(1000)
+                val faqs = withTimeoutOrNull(5000) {
+                    settingsManager.fetchFaqsAsync().await()
+                }
+                loading.value = false
+                if (faqs is FetchFaqsResult.Success) {
+                    navigateToFaqs.value = Event(true)
+                } else {
+                    errorFetchingFaqs.value = Event(true)
+                }
+            }
+        } else {
+            navigateToFaqs.value = Event(true)
+        }
     }
 
     fun openExposureSettings(fragment: SettingsFragment) {
