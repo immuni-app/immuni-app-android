@@ -61,11 +61,11 @@ class SupportDialogFragment : PopupDialogFragment() {
                             listOf(
                                 "${getString(R.string.support_info_item_os)}: ${viewModel.osVersion.value}",
                                 "${getString(R.string.support_info_item_device)}: ${viewModel.deviceModel.value}",
-                                "${getString(R.string.support_info_item_exposure_notification_enabled)}: ${viewModel.isExposureNotificationEnabled.value}",
-                                "${getString(R.string.support_info_item_bluetooth_enabled)}: ${viewModel.isBluetoothEnabled.value}",
-                                "${getString(R.string.support_info_item_app_version)}: ${viewModel.appVersion.value}",
+                                "${getString(R.string.support_info_item_exposureNotificationEnabled)}: ${viewModel.isExposureNotificationEnabled.value}",
+                                "${getString(R.string.support_info_item_bluetoothEnabled)}: ${viewModel.isBluetoothEnabled.value}",
+                                "${getString(R.string.support_info_item_appVersion)}: ${viewModel.appVersion.value}",
                                 "Google Play Services: ${viewModel.googlePlayVersion.value}",
-                                "${getString(R.string.support_info_item_connection_type)}: ${viewModel.connectionType.value}"
+                                "${getString(R.string.support_info_item_connectionType)}: ${viewModel.connectionType.value}"
                             ).joinToString(separator = "; ", postfix = ".")
 
                         startSendingEmail(it, subject = "", message = message)

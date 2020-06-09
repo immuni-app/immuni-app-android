@@ -80,7 +80,6 @@
   <string name="onboarding_exposure_permission_title">So aktivieren Sie COVID-19-Mitteilungen</string>
   <string name="onboarding_exposure_permission_description">Immuni zeichnet Zusammentreffen mit anderen Nutzern über Bluetooth Low Energy auf, sodass Sie bei Ansteckungsgefahr informiert werden können. Sie können die App über das Hauptmenü vorübergehend deaktivieren.</string>
   <string name="onboarding_exposure_permission_action">Aktivieren</string>
-  <string name="onboarding_exposure_permission_overlay_hint">Tippen Sie auf \"<b>Aktivieren</b>\" in dem Popup-Fenster, das unten angezeigt wird</string>
   <string name="onboarding_bluetooth_off_title">Aktivieren Sie Bluetooth</string>
   <string name="onboarding_bluetooth_off_description">Immuni verwendet Bluetooth Low Energy, um Ihr Zusammentreffen mit anderen Nutzern aufzuzeichnen und COVID-19-Mitteilungen zu ermöglichen.</string>
   <string name="onboarding_bluetooth_off_action">Aktivieren</string>
@@ -129,8 +128,6 @@
   <string name="settings_setting_privacy">Datenschutzerklärung</string>
   <string name="settings_setting_chage_province">Provinz ändern</string>
   <string name="settings_setting_leave_review">Bewertung schreiben</string>
-  <string name="settings_setting_support">Kundendienst kontaktieren</string>
-  <string name="support_phone_description_android">Numero attivo dalle %1$s alle %2$s.</string>
   <string name="settings_setting_debug_utilities">Debug-Menü</string>
   <string name="settings_update_province_update_province">Aktualisieren</string>
   <string name="permission_tutorial_notifications_title">So aktivieren Sie Mitteilungen</string>
@@ -292,4 +289,21 @@
   <string name="suggestions_risk_second_message">Damit der staatliche Gesundheitsdienst Sie im Bedarfsfall bestmöglich unterstützen kann, hat die App das Gesundheitsministerium darüber informiert, dass Sie benachrichtigt wurden.</string>
   <string name="suggestions_risk_fourth_message"><b>Das Gesundheitsministerium kann anhand dieser Informationen keine Rückschlüsse auf Ihre Identität ziehen</b>.</string>
   <string name="suggestions_risk_third_message_android">Weitere Informationen zu den an das Gesundheitsministerium gesendeten Daten finden Sie in der {Datenschutzerklärung} unter Ziffer 4.</string>
+  <string name="settings_setting_contact_support">Kundendienst kontaktieren</string>
+  <string name="settings_setting_support">Kundendienst kontaktieren</string>
+  <string name="support_title">Benötigen Sie Hilfe?</string>
+  <string name="support_faq_description">Wenn Sie Fragen haben oder Probleme bei der Nutzung der App auftreten, können Ihnen die \"häufig gestellten Fragen\" weiterhelfen.</string>
+  <string name="support_faq_action">Häufig gestellte Fragen durchsehen</string>
+  <string name="support_contact_support">Sollten Sie die Antwort auf Ihre Frage nicht finden, <b>können Sie sich an den Kundendienst von Immuni wenden.</b></string>
+  <string name="support_phone_title">Kostenlose Hotline anrufen</string>
+  <string name="support_email_title">Eine E-Mail senden</string>
+  <string name="support_email_description">Wenn Sie sich per E-Mail an den Kundendienst wenden, wird Ihre E-Mail-Adresse den Mitarbeitern des Kundendiensts angezeigt.</string>
+  <string name="support_info_title">Nützliche Hinweise</string>
+  <string name="support_info_item_os">Betriebssystem</string>
+  <string name="support_info_item_device">Modell</string>
+  <string name="support_info_item_exposureNotificationEnabled">Expositionsmeldungen</string>
+  <string name="support_info_item_bluetoothEnabled">Bluetooth</string>
+  <string name="support_info_item_appVersion">App-Version</string>
+  <string name="support_info_item_connectionType">Verbindung</string>
+  <string name="support_phone_description_android">Die Hotline ist von %1$s bis %2$s verfügbar.</string>
 </resources>
