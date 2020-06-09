@@ -44,7 +44,7 @@ class SupportViewModel(
 
     val isExposureNotificationEnabled = liveData {
         val enabled = exposureManager.isBroadcastingActive.value
-        emit(when(enabled){
+        emit(when (enabled) {
             true -> context.getString(R.string.support_info_exposure_notifications_active)
             else -> context.getString(R.string.support_info_exposure_notifications_inactive)
         })
@@ -53,7 +53,7 @@ class SupportViewModel(
     val isBluetoothEnabled = liveData {
         val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
         val enabled = bluetoothAdapter?.isEnabled ?: false
-        emit(when(enabled){
+        emit(when (enabled) {
             true -> context.getString(R.string.support_info_bluetooth_active)
             false -> context.getString(R.string.support_info_bluetooth_inactive)
         })
@@ -81,10 +81,9 @@ class SupportViewModel(
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
-        if(!isConnected) {
+        if (!isConnected) {
             emit(context.getString(R.string.support_info_item_connectionType_none))
-        }
-        else {
+        } else {
             val isMetered = cm.isActiveNetworkMetered
             emit(
                 when (isMetered) {
