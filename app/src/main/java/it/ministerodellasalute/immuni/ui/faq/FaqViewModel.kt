@@ -26,11 +26,11 @@ class FaqViewModel(
 
     val questionAndAnswers: LiveData<List<QuestionAndAnswer>> =
         settingsManager.faqs.asLiveData().map {
-            it.map { faq ->
+            it?.map { faq ->
                 QuestionAndAnswer(
                     faq.title,
                     faq.content
                 )
-            }
+            } ?: listOf()
         }
 }

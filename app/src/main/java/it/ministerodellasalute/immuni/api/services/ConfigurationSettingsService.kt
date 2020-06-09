@@ -15,12 +15,8 @@
 
 package it.ministerodellasalute.immuni.api.services
 
-import android.content.Context
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import it.ministerodellasalute.immuni.extensions.utils.defaultMoshi
-import it.ministerodellasalute.immuni.extensions.utils.fromJson
-import it.ministerodellasalute.immuni.extensions.utils.loadJsonAsset
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -143,8 +139,3 @@ val defaultSettings = ConfigurationSettings(
     supportPhoneOpeningTime = "7",
     supportPhoneClosingTime = "22"
 )
-
-fun defaultFaqs(context: Context, language: Language): List<Faq>? {
-    val json = loadJsonAsset(context, "faqs/faq-${language.code}.json") ?: return null
-    return defaultMoshi.fromJson<Faqs>(json)?.faqs
-}
