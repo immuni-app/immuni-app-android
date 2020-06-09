@@ -291,6 +291,7 @@
     <string name="support_info_item_bluetooth_enabled">Bluetooth</string>
     <string name="support_info_item_app_version">Versione app</string>
     <string name="support_info_item_connection_type">Connessione</string>
+    <string name="support_email_body_message">Descrivi eventuali dubbi o problemi di funzionamento dell’app sopra la linea. Se possibile, non cancellare il testo qui sotto. Aiuterà il supporto di Immuni ad assisterti al meglio.</string>
     <string name="onboarding_pin_advice_description">Immuni is strictly for personal use. If you haven\'t done so already, set up a lock code on your smartphone to prevent others from accessing the app\'s features and any messages the app might send you.</string>
     <string name="home_view_service_deactivate">Disable the service</string>
     <string name="onboarding_pilot_title">Testing in progress</string>

@@ -56,7 +56,19 @@ class SupportDialogFragment : PopupDialogFragment() {
                         color = requireContext().getColorCompat(R.color.colorPrimary),
                         bold = true
                     ) {
-                        startSendingEmail(it, "")
+                        val message = "\n\n\n——————————\n" +
+                            "${getString(R.string.support_email_body_message)}\n\n" +
+                            listOf(
+                                "${getString(R.string.support_info_item_os)}: ${viewModel.osVersion.value}",
+                                "${getString(R.string.support_info_item_device)}: ${viewModel.deviceModel.value}",
+                                "${getString(R.string.support_info_item_exposure_notification_enabled)}: ${viewModel.isExposureNotificationEnabled.value}",
+                                "${getString(R.string.support_info_item_bluetooth_enabled)}: ${viewModel.isBluetoothEnabled.value}",
+                                "${getString(R.string.support_info_item_app_version)}: ${viewModel.appVersion.value}",
+                                "Google Play Services: ${viewModel.googlePlayVersion.value}",
+                                "${getString(R.string.support_info_item_connection_type)}: ${viewModel.connectionType.value}"
+                            ).joinToString(separator = "; ", postfix = ".")
+
+                        startSendingEmail(it, subject = "", message = message)
                     }
             }
         }
