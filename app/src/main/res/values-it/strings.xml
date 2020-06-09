@@ -80,7 +80,6 @@
   <string name="onboarding_exposure_permission_title">Abilita le notifiche di esposizione al COVID-19</string>
   <string name="onboarding_exposure_permission_description">Immuni registra i contatti con altri utenti usando il Bluetooth Low Energy, così da poterti informare in caso di esposizione al virus. Potrai disabilitarle temporaneamente dalla schermata principale.</string>
   <string name="onboarding_exposure_permission_action">Abilita</string>
-  <string name="onboarding_exposure_permission_overlay_hint">Seleziona \"<b>Abilita </b>\" nel popup che apparirà qui sotto</string>
   <string name="onboarding_bluetooth_off_title">Attiva il Bluetooth</string>
   <string name="onboarding_bluetooth_off_description">Immuni utilizza il Bluetooth Low Energy per registrare i tuoi contatti con altri utenti e permettere notifiche di esposizione al COVID-19.</string>
   <string name="onboarding_bluetooth_off_action">Attiva</string>
@@ -129,7 +128,6 @@
   <string name="settings_setting_privacy">Informativa privacy</string>
   <string name="settings_setting_chage_province">Cambia la provincia</string>
   <string name="settings_setting_leave_review">Lascia una recensione</string>
-  <string name="settings_setting_contact_support">Contatta il supporto</string>
   <string name="settings_setting_debug_utilities">Menu di Debug</string>
   <string name="settings_update_province_update_province">Aggiorna</string>
   <string name="permission_tutorial_notifications_title">Per attivare le notifiche</string>
@@ -289,4 +287,28 @@
   <string name="suggestions_risk_second_message">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità l’app ha informato il Ministero della Salute della notifica che hai ricevuto.</string>
   <string name="suggestions_risk_fourth_message"><b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di queste informazioni</b>.</string>
   <string name="suggestions_risk_third_message_android">Per ulteriori informazioni sui dati trasmessi al Ministero della Salute puoi leggere l\'{informativa privacy} al punto 4.</string>
+  <string name="settings_setting_contact_support">Contatta il supporto</string>
+  <string name="settings_setting_support">Contatta il supporto</string>
+  <string name="support_title">Hai bisogno di aiuto?</string>
+  <string name="support_faq_description">Se hai dubbi o hai avuto problemi nell\'utilizzo dell\'app, vai alla sezione “Domande frequenti”.</string>
+  <string name="support_faq_action">Esplora le domande frequenti</string>
+  <string name="support_contact_support">Se non hai trovato la risposta che cercavi, <b>puoi contattare il supporto di Immuni.</b></string>
+  <string name="support_phone_title">Chiama il numero verde</string>
+  <string name="support_email_title">Invia un\'email</string>
+  <string name="support_email_description">Se scegli di contattare il supporto tramite email, il tuo indirizzo email sarà visibile al servizio clienti.</string>
+  <string name="support_info_title">Informazioni utili</string>
+  <string name="support_info_item_os">Sistema operativo</string>
+  <string name="support_info_item_device">Modello</string>
+  <string name="support_info_item_exposureNotificationEnabled">Notifiche di esposizione</string>
+  <string name="support_info_item_bluetoothEnabled">Bluetooth</string>
+  <string name="support_info_item_appVersion">Versione app</string>
+  <string name="support_info_item_connectionType">Connessione</string>
+  <string name="support_info_active">Attivo</string>
+  <string name="support_info_not_active">Non Attivo</string>
+  <string name="support_info_active_plural">Attive</string>
+  <string name="support_info_not_active_plural">Non Attive</string>
+  <string name="support_phone_description_android">Numero attivo dalle %1$s alle %2$s.</string>
+  <string name="support_info_item_connectionType_wifi">Wi-Fi</string>
+  <string name="support_info_item_connectionType_mobile">Mobile</string>
+  <string name="support_info_item_connectionType_none">Nessuna</string>
 </resources>

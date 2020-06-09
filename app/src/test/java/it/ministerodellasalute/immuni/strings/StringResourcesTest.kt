@@ -37,6 +37,7 @@ class StringResourcesTest {
 
         containsAll("settings_app_version", listOf("%s", "%d")) // Immuni v%s (%d)
         containsAll("suggestions_risk_with_date_subtitle", listOf("%s")) // The day %s you...
+        containsAll("support_phone_description", listOf("%1\$s", "%2\$s")) // Number active from  %s to %s...
 
         pluralContainsAll("upload_data_verify_loading_button_seconds", listOf("one", "other"), listOf("%d")) // Wait %d seconds
         pluralContainsAll("upload_data_verify_loading_button_minutes", listOf("one", "other"), listOf("%d")) // Wait %d minutes

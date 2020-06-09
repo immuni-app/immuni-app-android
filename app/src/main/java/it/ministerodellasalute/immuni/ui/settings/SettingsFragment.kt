@@ -80,6 +80,10 @@ class SettingsFragment : Fragment(R.layout.settings_fragment) {
         sendFeedbackButton.setSafeOnClickListener {
             PlayStoreActions.goToPlayStoreAppDetails(requireContext(), requireContext().packageName)
         }
+        contactSupport.setSafeOnClickListener {
+            val action = SettingsDirections.actionSupport()
+            findNavController().navigate(action)
+        }
 
         applicationVersion.text = getString(
             R.string.settings_app_version,

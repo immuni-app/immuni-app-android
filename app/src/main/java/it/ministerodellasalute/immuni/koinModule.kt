@@ -53,6 +53,7 @@ import it.ministerodellasalute.immuni.ui.otp.OtpViewModel
 import it.ministerodellasalute.immuni.ui.settings.SettingsViewModel
 import it.ministerodellasalute.immuni.ui.setup.SetupViewModel
 import it.ministerodellasalute.immuni.ui.suggestions.StateCloseViewModel
+import it.ministerodellasalute.immuni.ui.support.SupportViewModel
 import it.ministerodellasalute.immuni.ui.upload.UploadViewModel
 import it.ministerodellasalute.immuni.util.CoroutineContextProvider
 import it.ministerodellasalute.immuni.workers.models.ServiceNotActiveNotificationWorkerStatus
@@ -286,6 +287,7 @@ val appModule = module {
     viewModel { FaqViewModel(get()) }
     viewModel { SettingsViewModel(get()) }
     viewModel { StateCloseViewModel(get(), get()) }
+    viewModel { SupportViewModel(androidContext(), get(), get()) }
 }
 
 val immuniMoshi = moshi(
