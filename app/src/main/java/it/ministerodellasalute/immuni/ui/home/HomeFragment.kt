@@ -30,7 +30,6 @@ import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setDarkStatusBarFullscreen
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBarFullscreen
-import it.ministerodellasalute.immuni.extensions.activity.toast
 import it.ministerodellasalute.immuni.extensions.utils.ScreenUtils
 import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
@@ -247,7 +246,8 @@ class HomeFragment : Fragment(),
                 if (viewId == R.id.reactivate) {
                     openOnboarding()
                 } else if (viewId == R.id.knowMore) {
-                    toast(requireContext(),"know more")
+                    val action = HomeFragmentDirections.actionCheckAppStatus()
+                    findNavController().navigate(action)
                 }
             }
             is SectionHeader -> {

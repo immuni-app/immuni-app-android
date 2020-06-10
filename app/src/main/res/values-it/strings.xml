@@ -119,10 +119,10 @@
   <string name="permission_tutorial_how_immuni_works_fifth_message">Se sei stato in contatto con un utente positivo, Immuni ti avverte e ti dice cosa fare. Riesce a fare tutto questo senza mai sapere dove vai e con chi ti incontri. La tua privacy è al sicuro.</string>
   <string name="permission_tutorial_how_immuni_works_action_description">Vuoi saperne di più?</string>
   <string name="permission_tutorial_how_immuni_works_action_cta">Esplora le domande frequenti</string>
-  <string name="settings_setting_section_data">Gestione dati</string>
+  <string name="settings_setting_section_data">Caricamento dati</string>
   <string name="settings_setting_section_info">Informazioni</string>
   <string name="settings_setting_section_general">Generale</string>
-  <string name="settings_setting_load_data">Caricamento dati</string>
+  <string name="settings_setting_load_data">Segnala positività</string>
   <string name="settings_setting_faq">Domande frequenti</string>
   <string name="settings_setting_tos">Termini di utilizzo</string>
   <string name="settings_setting_privacy">Informativa privacy</string>
@@ -149,7 +149,7 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Apri le impostazioni</b> dal bottone in basso</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Abilita le notifiche di esposizione</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Apri Impostazioni</string>
-  <string name="upload_data_warning_message">Questa funzione richiede l\'assistenza di un operatore sanitario autorizzato</string>
+  <string name="upload_data_warning_message">Questa funzione richiede l\'assistenza dell\'operatore sanitario che ti comunica telefonicamente l\'esito positivo del test.</string>
   <string name="upload_data_code_message">Comunica questo codice all\'operatore sanitario:</string>
   <string name="upload_data_wait_operator_message">Attendi la conferma dell\'operatore</string>
   <string name="upload_data_verify_message">Per proseguire, verifica l\'autorizzazione </string>
