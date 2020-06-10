@@ -25,6 +25,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.animateHide
+import it.ministerodellasalute.immuni.extensions.view.animateShow
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import kotlinx.android.synthetic.main.faq_fragment.*
@@ -54,6 +56,11 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
 
         viewModel.questionAndAnswers.observe(viewLifecycleOwner) { (highlight, faqList) ->
             adapter.submitData(faqList, highlight)
+            if (faqList.isEmpty()) {
+                emptyView.animateShow()
+            } else {
+                emptyView.animateHide()
+            }
         }
 
         navigationIcon.setSafeOnClickListener {
