@@ -22,25 +22,30 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.utils.colorHighlight
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 
 class FaqListAdapter(private val clickListener: FaqClickListener) :
     RecyclerView.Adapter<FaqListAdapter.FaqVH>() {
 
-    var data: List<QuestionAndAnswer> = emptyList()
-        set(value) {
-            val diffResult =
-                DiffUtil.calculateDiff(
-                    QuestionAndAnswerDiffCallback(
-                        oldList = field,
-                        newList = value,
-                        oldHighlight = "",
-                        newHighlight = ""
-                    )
+    private var highlight: String = ""
+    private var data: List<QuestionAndAnswer> = emptyList()
+
+    fun submitData(newData: List<QuestionAndAnswer>, newHighlight: String) {
+        val diffResult =
+            DiffUtil.calculateDiff(
+                QuestionAndAnswerDiffCallback(
+                    oldList = data,
+                    newList = newData,
+                    oldHighlight = highlight,
+                    newHighlight = newHighlight
                 )
-            field = value
-            diffResult.dispatchUpdatesTo(this)
-        }
+            )
+        data = newData
+        highlight = newHighlight
+        diffResult.dispatchUpdatesTo(this)
+    }
 
     private fun onItemClick(pos: Int) {
         if (pos != RecyclerView.NO_POSITION) {
@@ -65,8 +70,10 @@ class FaqListAdapter(private val clickListener: FaqClickListener) :
 
     override fun onBindViewHolder(holder: FaqVH, position: Int) {
         val dataItem = data[position]
+        val question = dataItem.question
 
-        holder.question.text = dataItem.question
+        val highlightColor = holder.question.context.getColorCompat(R.color.colorPrimary)
+        holder.question.text = question.colorHighlight(highlight, highlightColor)
     }
 }
 
@@ -81,9 +88,8 @@ class QuestionAndAnswerDiffCallback(
 
     override fun getNewListSize(): Int = newList.size
 
-    // TODO add hightlight
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].answer == newList[newItemPosition].answer
+        return oldList[oldItemPosition].answer == newList[newItemPosition].answer && oldHighlight == newHighlight
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

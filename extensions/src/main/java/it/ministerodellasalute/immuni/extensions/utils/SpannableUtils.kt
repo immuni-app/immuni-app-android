@@ -107,3 +107,25 @@ fun String.coloredClickable(
         }
     }
 }
+
+
+fun String.colorHighlight(
+    highlight: String,
+    @ColorInt color: Int
+): SpannedString {
+    val text = this
+    val startIdx = this.indexOf(highlight, ignoreCase = true)
+    val endIdx = startIdx + highlight.length
+
+    return buildSpannedString {
+        // In case no highlight is found
+        if (highlight.isEmpty() || startIdx < 0) append(text)
+        else {
+            append(text.subSequence(0, startIdx))
+            color(color) { append(text.subSequence(startIdx, endIdx)) }
+            if (endIdx < text.length) {
+                append(text.subSequence(endIdx, text.length))
+            }
+        }
+    }
+}

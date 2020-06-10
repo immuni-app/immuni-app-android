@@ -51,7 +51,13 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
         val adapter = FaqListAdapter(this)
         faqRecycler.adapter = adapter
 
-        viewModel.questionAndAnswers.observe(viewLifecycleOwner) { adapter.data = it }
+        viewModel.questionAndAnswers.observe(viewLifecycleOwner) {
+            // TODO this must be coming from viewModel
+            adapter.submitData(
+                it,
+                searchInput.text.toString()
+            )
+        }
 
         navigationIcon.setSafeOnClickListener {
             // this fragment is accessible from the home as the root fragment
