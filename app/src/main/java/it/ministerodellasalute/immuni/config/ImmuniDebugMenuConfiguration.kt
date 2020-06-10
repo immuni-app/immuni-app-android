@@ -22,6 +22,7 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.debugmenu.DebugMenuConfiguration
 import it.ministerodellasalute.immuni.debugmenu.DebugMenuItem
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
+import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
@@ -43,6 +44,7 @@ class ImmuniDebugMenuConfiguration(
     private val workerManager: WorkerManager by inject()
     private val exposureReportingRepository: ExposureReportingRepository by inject()
     private val notificationManger: AppNotificationManager by inject()
+    private val analyticsManager: ExposureAnalyticsManager by inject()
 
     /**
      * In debug mode enable the debug menu.
@@ -127,6 +129,14 @@ class ImmuniDebugMenuConfiguration(
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Trigger Onboarding Notification", { _, _ ->
                 notificationManger.triggerNotification(NotificationType.OnboardingNotCompleted)
+            }) {},
+            object : DebugMenuItem("\uD83D\uDD14 Trigger Send Dummy Analytics", { _, _ ->
+                GlobalScope.launch {
+                    analyticsManager.sendOperationalInfo(
+                        summary = null,
+                        isDummy = true
+                    )
+                }
             }) {}
         )
     }

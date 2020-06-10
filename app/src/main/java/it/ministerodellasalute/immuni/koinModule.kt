@@ -17,14 +17,8 @@ package it.ministerodellasalute.immuni
 
 import android.app.Application
 import androidx.lifecycle.SavedStateHandle
-import it.ministerodellasalute.immuni.api.services.ConfigurationSettingsService
-import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
-import it.ministerodellasalute.immuni.api.services.ExposureReportingService
-import it.ministerodellasalute.immuni.api.services.defaultSettings
-import it.ministerodellasalute.immuni.config.ExposureIngestionNetworkConfiguration
-import it.ministerodellasalute.immuni.config.ExposureReportingNetworkConfiguration
-import it.ministerodellasalute.immuni.config.ImmuniDebugMenuConfiguration
-import it.ministerodellasalute.immuni.config.SettingsNetworkConfiguration
+import it.ministerodellasalute.immuni.api.services.*
+import it.ministerodellasalute.immuni.config.*
 import it.ministerodellasalute.immuni.debugmenu.DebugMenu
 import it.ministerodellasalute.immuni.extensions.attestation.SafetyNetAttestationClient
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
@@ -37,9 +31,7 @@ import it.ministerodellasalute.immuni.logic.exposure.BaseOperationalInfo
 import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
-import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
-import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
-import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureStatusRepository
+import it.ministerodellasalute.immuni.logic.exposure.repositories.*
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
@@ -109,6 +101,16 @@ val appModule = module {
             )
         )
         network.createServiceAPI(ExposureIngestionService::class)
+    }
+
+    /**
+     * Exposure Analytics Service APIs
+     */
+    single {
+        val network = Network(
+            androidContext(), ExposureAnalyticsNetworkConfiguration(androidContext(), get())
+        )
+        network.createServiceAPI(ExposureAnalyticsService::class)
     }
 
     /**
@@ -197,14 +199,34 @@ val appModule = module {
     }
 
     single {
+        ExposureNotificationManager(androidContext(), get())
+    }
+
+    single {
         ExposureManager(
             get(),
-            ExposureNotificationManager(androidContext(), get()),
+            get(),
             get(),
             get(),
             get(),
             get()
         )
+    }
+
+    single {
+        ExposureAnalyticsStoreRepository(
+            KVStorage(
+                name = "ExposureAnalyticsStoreRepository",
+                context = androidContext(),
+                moshi = get(),
+                cacheInMemory = true,
+                encrypted = true
+            )
+        )
+    }
+
+    single {
+        ExposureAnalyticsNetworkRepository(get())
     }
 
     single {

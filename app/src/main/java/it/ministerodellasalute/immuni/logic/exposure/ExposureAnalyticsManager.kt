@@ -16,6 +16,7 @@
 package it.ministerodellasalute.immuni.logic.exposure
 
 import android.util.Base64
+import androidx.annotation.VisibleForTesting
 import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
 import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
@@ -31,14 +32,13 @@ import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.Province
 import kotlinx.coroutines.delay
 import java.security.SecureRandom
-import java.time.ZoneId
 import java.util.*
 
 class ExposureAnalyticsManager(
     private val networkRepository: ExposureAnalyticsNetworkRepository,
     private val exposureReportingRepository: ExposureReportingRepository,
     private val attestationClient: AttestationClient,
-    private val baseOperationalInfoProvider: () -> BaseOperationalInfo,
+    private val baseOperationalInfoFactory: () -> BaseOperationalInfo,
     private val schedulerFactory: () -> Scheduler
 ) {
     constructor(
@@ -47,7 +47,7 @@ class ExposureAnalyticsManager(
         networkRepository: ExposureAnalyticsNetworkRepository,
         exposureReportingRepository: ExposureReportingRepository,
         attestationClient: AttestationClient,
-        baseOperationalInfoProvider: () -> BaseOperationalInfo,
+        baseOperationalInfoFactory: () -> BaseOperationalInfo,
         schedulerFactory: () -> Scheduler = {
             Scheduler(
                 storeRepository = storeRepository,
@@ -58,7 +58,7 @@ class ExposureAnalyticsManager(
         networkRepository = networkRepository,
         exposureReportingRepository = exposureReportingRepository,
         attestationClient = attestationClient,
-        baseOperationalInfoProvider = baseOperationalInfoProvider,
+        baseOperationalInfoFactory = baseOperationalInfoFactory,
         schedulerFactory = schedulerFactory
     )
 
@@ -75,7 +75,7 @@ class ExposureAnalyticsManager(
         val exposureSummary = exposureReportingRepository.getSummaries().find {
             serverDate == it.date
         }
-        val hadExposure = exposureSummary != null
+        val hadExposure = exposureSummary != null && exposureSummary.matchedKeyCount > 0
         if (hadExposure && scheduler.hasYetToSendInfoWithExposureThisMonth(serverDate)) {
             if (scheduler.canSendInfoWithExposure()) {
                 sendOperationalInfo(summary = exposureSummary, isDummy = false)
@@ -92,12 +92,12 @@ class ExposureAnalyticsManager(
         }
     }
 
-    private suspend fun sendOperationalInfo(
+    suspend fun sendOperationalInfo(
         summary: ExposureSummary?,
         isDummy: Boolean,
         retryCount: Long = 0
     ) {
-        val baseOperationalInfo: BaseOperationalInfo = baseOperationalInfoProvider()
+        val baseOperationalInfo: BaseOperationalInfo = baseOperationalInfoFactory()
         val operationalInfo = ExposureAnalyticsOperationalInfo(
             province = baseOperationalInfo.province,
             exposurePermission = if (baseOperationalInfo.exposurePermission) 1 else 0,
@@ -260,7 +260,7 @@ class ExposureAnalyticsManager(
         }
 
         private fun isDatePast24HoursSinceDate(date: Date, periodStartDate: Date): Boolean {
-            return date > periodStartDate.byAdding(hours = 24)
+            return date >= periodStartDate.byAdding(hours = 24)
         }
 
         private fun randomDateInMonth(serverDate: Date, isForNextMonth: Boolean): Date {
