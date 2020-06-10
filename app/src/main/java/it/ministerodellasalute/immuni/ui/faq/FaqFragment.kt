@@ -64,6 +64,7 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
 
         searchInput.doOnTextChanged { text, _, _, _ ->
             viewModel.onFaqSearchChanged(text.toString())
+            faqRecycler.scrollToPosition(0)
         }
     }
 

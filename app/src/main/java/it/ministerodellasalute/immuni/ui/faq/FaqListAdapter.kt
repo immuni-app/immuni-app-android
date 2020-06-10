@@ -19,6 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
@@ -28,8 +29,17 @@ class FaqListAdapter(private val clickListener: FaqClickListener) :
 
     var data: List<QuestionAndAnswer> = emptyList()
         set(value) {
+            val diffResult =
+                DiffUtil.calculateDiff(
+                    QuestionAndAnswerDiffCallback(
+                        oldList = field,
+                        newList = value,
+                        oldHighlight = "",
+                        newHighlight = ""
+                    )
+                )
             field = value
-            notifyDataSetChanged()
+            diffResult.dispatchUpdatesTo(this)
         }
 
     private fun onItemClick(pos: Int) {
@@ -57,6 +67,27 @@ class FaqListAdapter(private val clickListener: FaqClickListener) :
         val dataItem = data[position]
 
         holder.question.text = dataItem.question
+    }
+}
+
+class QuestionAndAnswerDiffCallback(
+    private val oldList: List<QuestionAndAnswer>,
+    private val newList: List<QuestionAndAnswer>,
+    private val oldHighlight: String,
+    private val newHighlight: String
+) : DiffUtil.Callback() {
+
+    override fun getOldListSize(): Int = oldList.size
+
+    override fun getNewListSize(): Int = newList.size
+
+    // TODO add hightlight
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition].answer == newList[newItemPosition].answer
+    }
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition].answer == newList[newItemPosition].answer
     }
 }
 
