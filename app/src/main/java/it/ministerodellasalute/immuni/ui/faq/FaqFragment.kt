@@ -25,6 +25,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import kotlinx.android.synthetic.main.faq_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -36,7 +37,7 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? AppCompatActivity)?.setLightStatusBar(resources.getColor(R.color.background_darker))
+        (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background_darker))
 
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -51,12 +52,8 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
         val adapter = FaqListAdapter(this)
         faqRecycler.adapter = adapter
 
-        viewModel.questionAndAnswers.observe(viewLifecycleOwner) {
-            // TODO this must be coming from viewModel
-            adapter.submitData(
-                it,
-                searchInput.text.toString()
-            )
+        viewModel.questionAndAnswers.observe(viewLifecycleOwner) { (highlight, faqList) ->
+            adapter.submitData(faqList, highlight)
         }
 
         navigationIcon.setSafeOnClickListener {

@@ -31,8 +31,8 @@ class FaqViewModel(
     val settingsManager: ConfigurationSettingsManager
 ) : ViewModel(), KoinComponent {
 
-    private val _questionAndAnswers = MutableLiveData<List<QuestionAndAnswer>>()
-    val questionAndAnswers: LiveData<List<QuestionAndAnswer>> = _questionAndAnswers
+    private val _questionAndAnswers = MutableLiveData<FaqListViewData>()
+    val questionAndAnswers: LiveData<FaqListViewData> = _questionAndAnswers
 
     private var filterJob: Job? = null
 
@@ -52,7 +52,7 @@ class FaqViewModel(
                         faq.content
                     )
                 } ?: listOf()
-                _questionAndAnswers.postValue(filteredFaq)
+                _questionAndAnswers.postValue(FaqListViewData(text, filteredFaq))
             }
         }
     }
@@ -61,3 +61,5 @@ class FaqViewModel(
         onFaqSearchChanged("")
     }
 }
+
+data class FaqListViewData(val highlight: String, val faqList: List<QuestionAndAnswer>)
