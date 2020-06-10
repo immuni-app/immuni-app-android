@@ -22,6 +22,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -29,6 +30,7 @@ import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setDarkStatusBarFullscreen
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBarFullscreen
+import it.ministerodellasalute.immuni.extensions.activity.toast
 import it.ministerodellasalute.immuni.extensions.utils.ScreenUtils
 import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
@@ -239,10 +241,14 @@ class HomeFragment : Fragment(),
             1f - (scrollY.toFloat() / fadeThreshold).coerceIn(0f, 1f)
     }
 
-    override fun onClick(item: HomeItemType) {
+    override fun onClick(item: HomeItemType, @IdRes viewId: Int) {
         when (item) {
             is ProtectionCard -> {
-                openOnboarding()
+                if (viewId == R.id.reactivate) {
+                    openOnboarding()
+                } else if (viewId == R.id.knowMore) {
+                    toast(requireContext(),"know more")
+                }
             }
             is SectionHeader -> {
             }
