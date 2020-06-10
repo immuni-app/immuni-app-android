@@ -114,18 +114,31 @@ fun String.colorHighlight(
     @ColorInt color: Int
 ): SpannedString {
     val text = this
-    val startIdx = this.indexOf(highlight, ignoreCase = true)
-    val endIdx = startIdx + highlight.length
+    if (highlight.isBlank()) return buildSpannedString { append(text) }
+
+    // Find all start indices
+    val highlightStartIndices = mutableListOf<Int>()
+    while (true) {
+        val startIndex = text.indexOf(
+            string = highlight,
+            startIndex = highlightStartIndices.lastOrNull()?.let { it + highlight.length } ?: 0,
+            ignoreCase = true
+        )
+        if (startIndex < 0) break
+        highlightStartIndices.add(startIndex)
+    }
 
     return buildSpannedString {
-        // In case no highlight is found
-        if (highlight.isEmpty() || startIdx < 0) append(text)
-        else {
-            append(text.subSequence(0, startIdx))
-            color(color) { append(text.subSequence(startIdx, endIdx)) }
-            if (endIdx < text.length) {
-                append(text.subSequence(endIdx, text.length))
-            }
+        var currStart = 0
+        highlightStartIndices.forEach { highlightStartIdx ->
+            // append before highlight
+            append(text.subSequence(currStart, highlightStartIdx))
+            val highlightEndIdx = highlightStartIdx + highlight.length
+            // append highlight
+            color(color) { append(text.subSequence(highlightStartIdx, highlightEndIdx)) }
+            currStart = highlightEndIdx
         }
+        // append last part
+        append(text.subSequence(currStart, text.length))
     }
 }
