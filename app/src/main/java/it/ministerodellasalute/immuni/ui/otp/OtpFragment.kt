@@ -75,6 +75,11 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
 
         verify.setSafeOnClickListener { viewModel.verify() }
 
+        knowMore.setSafeOnClickListener {
+            val action = OtpFragmentDirections.actionHowToUploadPositive()
+            findNavController().navigate(action)
+        }
+
         viewModel.otpCode.observe(viewLifecycleOwner) { otpCode.text = it }
 
         viewModel.loading.observe(viewLifecycleOwner) {

@@ -94,7 +94,7 @@
   <string name="onboarding_communication_advice_action">Ho capito</string>
   <string name="onboarding_complete_title">Configurazione completata</string>
   <string name="home_view_service_active_title">Servizio<b>attivo</b></string>
-  <string name="home_view_service_active_advice">Apri periodicamente Immuni per verificarne lo stato.</string>
+  <string name="home_view_service_active_advice">Apri Immuni una volta al giorno per verificarne lo stato.</string>
   <string name="home_view_service_not_active_title">Servizio<b>non attivo</b></string>
   <string name="home_view_service_not_active_subtitle">Intervieni subito per permettere a Immuni di funzionare correttamente.</string>
   <string name="home_view_service_not_active_button">Riattiva Immuni</string>
