@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
   ~ Please refer to the AUTHORS file for more information.
   ~ This program is free software: you can redistribute it and/or modify
@@ -12,7 +13,6 @@
   ~ You should have received a copy of the GNU Affero General Public License
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
-
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -94,9 +94,10 @@
                         app:startIconTint="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/searchInput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/faq_search_hint"
+                            android:hint="@string/faq_search_bar_placeholder"
                             android:inputType="text"
                             android:padding="16dp"
                             android:textColor="@color/colorPrimary" />

@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.ui.faq
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -59,6 +60,10 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
             if (!findNavController().popBackStack()) {
                 activity?.finish()
             }
+        }
+
+        searchInput.doOnTextChanged { text, _, _, _ ->
+            viewModel.onFaqSearchChanged(text.toString())
         }
     }
 
