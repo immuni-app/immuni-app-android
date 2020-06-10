@@ -40,7 +40,7 @@ class VerifyAppWorksDialogFragment : PopupDialogFragment() {
         val settingsManager: ConfigurationSettingsManager by inject()
         val reopenReminder = settingsManager.settings.value.reopenReminder
 
-        if(reopenReminder) {
+        if (reopenReminder) {
             fourth.visible()
             first.text = getString(R.string.verify_immuni_works_first)
             second.text = getString(R.string.verify_immuni_works_second)

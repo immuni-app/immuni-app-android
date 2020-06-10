@@ -146,7 +146,7 @@ class HomeListAdapter(
 
                     val reopenReminder = settingsManager.settings.value.reopenReminder
 
-                    holder.subtitle.text = when(reopenReminder) {
+                    holder.subtitle.text = when (reopenReminder) {
                         true -> resources.getString(R.string.home_view_service_active_advice)
                         false -> resources.getString(R.string.home_view_service_active_subtitle)
                     }
