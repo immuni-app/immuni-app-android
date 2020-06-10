@@ -24,9 +24,9 @@ import it.ministerodellasalute.immuni.extensions.test.getValueForTest
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.models.FetchFaqsResult
 import it.ministerodellasalute.immuni.testutils.CoroutinesTestRule
-import kotlinx.coroutines.CompletableDeferred
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlinx.coroutines.CompletableDeferred
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -40,7 +40,6 @@ class SettingsViewModelTest {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: SettingsViewModel
-
 
     @MockK(relaxed = true)
     lateinit var settingsManager: ConfigurationSettingsManager
