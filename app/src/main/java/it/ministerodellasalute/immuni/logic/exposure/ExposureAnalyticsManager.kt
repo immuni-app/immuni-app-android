@@ -26,104 +26,69 @@ import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureAnalyt
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureAnalyticsStoreRepository
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSettings
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.Province
 import kotlinx.coroutines.delay
 import java.security.SecureRandom
+import java.time.ZoneId
 import java.util.*
 
 class ExposureAnalyticsManager(
-    private val storeRepository: ExposureAnalyticsStoreRepository,
     private val networkRepository: ExposureAnalyticsNetworkRepository,
     private val exposureReportingRepository: ExposureReportingRepository,
-    private val settingsManager: ConfigurationSettingsManager,
     private val attestationClient: AttestationClient,
     private val baseOperationalInfoProvider: () -> BaseOperationalInfo,
-    private val random: Random = SecureRandom()
+    private val schedulerFactory: () -> Scheduler
 ) {
-    /**
-     * Generates random and registers token if needed
-     */
-    suspend fun setup(serverDate: Date) {
-        if (storeRepository.installDate == null) {
-            storeRepository.installDate = serverDate
-        }
-
-        val isWithin24HoursSinceInstall =
-            storeRepository.installDate!!.byAdding(hours = 24) > serverDate
-        if (isWithin24HoursSinceInstall) {
-            return
-        }
-
-        setupInfoWithoutExposureReportingDate(serverDate)
-        setupDummyInfoReportingDate(serverDate)
-    }
-
-    private fun setupInfoWithoutExposureReportingDate(serverDate: Date) {
-        var infoWithoutExposureReportingDate = storeRepository.infoWithoutExposureReportingDate
-        if (infoWithoutExposureReportingDate == null) {
-            infoWithoutExposureReportingDate = randomDateInMonth(
-                serverDate = serverDate,
-                isForNextMonth = false
+    constructor(
+        storeRepository: ExposureAnalyticsStoreRepository,
+        settingsManager: ConfigurationSettingsManager,
+        networkRepository: ExposureAnalyticsNetworkRepository,
+        exposureReportingRepository: ExposureReportingRepository,
+        attestationClient: AttestationClient,
+        baseOperationalInfoProvider: () -> BaseOperationalInfo,
+        schedulerFactory: () -> Scheduler = {
+            Scheduler(
+                storeRepository = storeRepository,
+                settings = settingsManager.settings.value
             )
         }
-        if (isDatePast24HoursSinceDate(serverDate, infoWithoutExposureReportingDate)) {
-            infoWithoutExposureReportingDate = randomDateInMonth(
-                serverDate = serverDate,
-                isForNextMonth = true
-            )
-        }
-        storeRepository.infoWithoutExposureReportingDate = infoWithoutExposureReportingDate
-    }
+    ) : this(
+        networkRepository = networkRepository,
+        exposureReportingRepository = exposureReportingRepository,
+        attestationClient = attestationClient,
+        baseOperationalInfoProvider = baseOperationalInfoProvider,
+        schedulerFactory = schedulerFactory
+    )
 
-    private fun setupDummyInfoReportingDate(serverDate: Date) {
-        val dummyInfoReportingDate = storeRepository.dummyInfoReportingDate
-        if (dummyInfoReportingDate == null || isDatePast24HoursSinceDate(
-                serverDate,
-                dummyInfoReportingDate
-            )
-        ) {
-            scheduleNextDummyInfoReport(serverDate)
-        }
-    }
-
-    private fun scheduleNextInfoWithoutExposureReport(serverDate: Date) {
-        storeRepository.infoWithoutExposureReportingDate = randomDateInMonth(
-            serverDate = serverDate,
-            isForNextMonth = true
-        )
-    }
-
-    private fun scheduleNextDummyInfoReport(serverDate: Date) {
-        val meanWaitingTime = settingsManager.settings.value.dummyAnalyticsWaitingTime
-        val waitingTime = random.exponential(meanWaitingTime.toLong()).toInt()
-        storeRepository.dummyInfoReportingDate = serverDate.byAdding(seconds = waitingTime)
+    fun setup(serverDate: Date) {
+        val scheduler = schedulerFactory()
+        scheduler.setup(serverDate)
     }
 
     suspend fun onRequestDiagnosisKeysSucceeded(serverDate: Date) {
+        val scheduler = schedulerFactory()
+        if (!scheduler.couldSendInfo(serverDate)) {
+            return
+        }
         val exposureSummary = exposureReportingRepository.getSummaries().find {
             serverDate == it.date
         }
         val hadExposure = exposureSummary != null
-        val month = monthFromDate(serverDate)
-        if (hadExposure && hasYetToSendInfoWithExposureThisMonth(month)) {
-            val threshold = settingsManager.settings.value.operationalInfoWithExposureSamplingRate
-            val canSend = random.nextDouble() < threshold
-            if (canSend) {
+        if (hadExposure && scheduler.hasYetToSendInfoWithExposureThisMonth(serverDate)) {
+            if (scheduler.canSendInfoWithExposure()) {
                 sendOperationalInfo(summary = exposureSummary, isDummy = false)
             }
-            storeRepository.infoWithExposureLastReportingMonth = month
-        } else if (couldSendInfoWithoutExposureNow(serverDate)) {
-            val threshold =
-                settingsManager.settings.value.operationalInfoWithoutExposureSamplingRate
-            val canSend = random.nextDouble() < threshold
-            if (canSend) {
+            scheduler.updateInfoWithExposureLastReportingMonth(serverDate)
+        } else if (scheduler.couldSendInfoWithoutExposureNow(serverDate)) {
+            if (scheduler.canSendInfoWithoutExposure()) {
                 sendOperationalInfo(summary = null, isDummy = false)
             }
-            scheduleNextInfoWithoutExposureReport(serverDate)
-        } else if (couldSendDummyInfoNow(serverDate)) {
+            scheduler.scheduleNextInfoWithoutExposureReport(serverDate)
+        } else if (scheduler.couldSendDummyInfoNow(serverDate)) {
             sendOperationalInfo(summary = null, isDummy = true)
-            scheduleNextDummyInfoReport(serverDate)
+            scheduler.scheduleNextDummyInfoReport(serverDate)
         }
     }
 
@@ -142,11 +107,15 @@ class ExposureAnalyticsManager(
             lastRiskyExposureOn = (summary?.date ?: Date(0)).isoDateString,
             salt = randomSalt()
         )
-        val attestationResult = attestationClient.attest(operationalInfo.digest.base64EncodedSha256())
+        val attestationResult =
+            attestationClient.attest(operationalInfo.digest.base64EncodedSha256())
         when (attestationResult) {
             is AttestationClient.Result.Success -> {
                 if (isDummy) {
-                    networkRepository.sendDummyOperationalInfo(operationalInfo, attestationResult.result)
+                    networkRepository.sendDummyOperationalInfo(
+                        operationalInfo,
+                        attestationResult.result
+                    )
                 } else {
                     networkRepository.sendOperationalInfo(operationalInfo, attestationResult.result)
                 }
@@ -169,64 +138,153 @@ class ExposureAnalyticsManager(
     private fun randomSalt(): String {
         val salt = ByteArray(16)
         SecureRandom().nextBytes(salt)
-        return Base64.encodeToString(salt, Base64.DEFAULT)
+        return Base64.encodeToString(salt, Base64.NO_WRAP)
     }
 
-    private fun monthFromDate(serverDate: Date): Int {
-        return Calendar.getInstance().apply {
-            time = serverDate
-        }[Calendar.MONTH]
-    }
-
-    private fun hasYetToSendInfoWithExposureThisMonth(month: Int): Boolean {
-        return storeRepository.infoWithExposureLastReportingMonth?.let {
-            it != month
-        } ?: true
-    }
-
-    private fun couldSendInfoWithoutExposureNow(serverDate: Date): Boolean {
-        return isDateWithin24HoursSinceDate(
-            serverDate,
-            storeRepository.infoWithoutExposureReportingDate!!
-        )
-    }
-
-    private fun couldSendDummyInfoNow(serverDate: Date): Boolean {
-        return isDateWithin24HoursSinceDate(
-            serverDate,
-            storeRepository.dummyInfoReportingDate!!
-        )
-    }
-
-    private fun isDateWithin24HoursSinceDate(date: Date, periodStartDate: Date): Boolean {
-        return date in periodStartDate..periodStartDate.byAdding(hours = 24)
-    }
-
-    private fun isDatePast24HoursSinceDate(date: Date, periodStartDate: Date): Boolean {
-        return date > periodStartDate.byAdding(hours = 24)
-    }
-
-    private fun randomDateInMonth(serverDate: Date, isForNextMonth: Boolean): Date {
-        val lastDayOfCurrentMonth = Calendar.getInstance().apply {
-            time = serverDate
-            add(Calendar.MONTH, if (isForNextMonth) 2 else 1)
-            set(Calendar.DAY_OF_MONTH, 1)
-            add(Calendar.DAY_OF_MONTH, -1)
-        }.get(Calendar.DAY_OF_MONTH)
-
-        val randomDayOfCurrentMonth = random.nextInt(lastDayOfCurrentMonth) + 1
-
-        return Calendar.getInstance().apply {
-            time = serverDate
-            if (isForNextMonth) {
-                add(Calendar.MONTH, 1)
+    class Scheduler(
+        private val storeRepository: ExposureAnalyticsStoreRepository,
+        private val settings: ConfigurationSettings,
+        private val random: Random = SecureRandom()
+    ) {
+        companion object {
+            fun monthFromDate(serverDate: Date): Int {
+                return Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
+                    time = serverDate
+                }[Calendar.MONTH]
             }
-            set(Calendar.DAY_OF_MONTH, randomDayOfCurrentMonth)
-            set(Calendar.HOUR_OF_DAY, 0)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
-        }.time
+        }
+
+        fun setup(serverDate: Date) {
+            setupInstallDate(serverDate)
+
+            if (isWithin24HoursSinceInstall(serverDate)) {
+                return
+            }
+
+            setupInfoWithoutExposureReportingDate(serverDate)
+            setupDummyInfoReportingDate(serverDate)
+        }
+
+        private fun setupInstallDate(serverDate: Date) {
+            if (storeRepository.installDate == null) {
+                storeRepository.installDate = serverDate
+            }
+        }
+
+        private fun setupInfoWithoutExposureReportingDate(serverDate: Date) {
+            var infoWithoutExposureReportingDate = storeRepository.infoWithoutExposureReportingDate
+            if (infoWithoutExposureReportingDate == null) {
+                infoWithoutExposureReportingDate = randomDateInMonth(
+                    serverDate = serverDate,
+                    isForNextMonth = false
+                )
+            }
+            if (isDatePast24HoursSinceDate(serverDate, infoWithoutExposureReportingDate)) {
+                infoWithoutExposureReportingDate = randomDateInMonth(
+                    serverDate = serverDate,
+                    isForNextMonth = true
+                )
+            }
+            storeRepository.infoWithoutExposureReportingDate = infoWithoutExposureReportingDate
+        }
+
+        private fun setupDummyInfoReportingDate(serverDate: Date) {
+            val dummyInfoReportingDate = storeRepository.dummyInfoReportingDate
+            if (dummyInfoReportingDate == null || isDatePast24HoursSinceDate(
+                    serverDate,
+                    dummyInfoReportingDate
+                )
+            ) {
+                scheduleNextDummyInfoReport(serverDate)
+            }
+        }
+
+        private fun isWithin24HoursSinceInstall(serverDate: Date): Boolean {
+            return storeRepository.installDate!!.byAdding(hours = 24) > serverDate
+        }
+
+        fun scheduleNextInfoWithoutExposureReport(serverDate: Date) {
+            storeRepository.infoWithoutExposureReportingDate = randomDateInMonth(
+                serverDate = serverDate,
+                isForNextMonth = true
+            )
+        }
+
+        fun scheduleNextDummyInfoReport(serverDate: Date) {
+            val meanWaitingTime = settings.dummyAnalyticsWaitingTime
+            val waitingTime = random.exponential(meanWaitingTime.toLong()).toInt()
+            storeRepository.dummyInfoReportingDate = serverDate.byAdding(seconds = waitingTime)
+        }
+
+        fun couldSendInfo(serverDate: Date): Boolean {
+            return !isWithin24HoursSinceInstall(serverDate)
+        }
+
+        fun hasYetToSendInfoWithExposureThisMonth(serverDate: Date): Boolean {
+            val month = monthFromDate(serverDate)
+            return storeRepository.infoWithExposureLastReportingMonth?.let {
+                it != month
+            } ?: true
+        }
+
+        fun updateInfoWithExposureLastReportingMonth(serverDate: Date) {
+            storeRepository.infoWithExposureLastReportingMonth = monthFromDate(serverDate)
+        }
+
+        fun couldSendInfoWithoutExposureNow(serverDate: Date): Boolean {
+            return isDateWithin24HoursSinceDate(
+                serverDate,
+                storeRepository.infoWithoutExposureReportingDate!!
+            )
+        }
+
+        fun canSendInfoWithExposure(): Boolean {
+            val threshold = settings.operationalInfoWithExposureSamplingRate
+            return random.nextDouble() < threshold
+        }
+
+        fun canSendInfoWithoutExposure(): Boolean {
+            val threshold = settings.operationalInfoWithoutExposureSamplingRate
+            return random.nextDouble() < threshold
+        }
+
+        fun couldSendDummyInfoNow(serverDate: Date): Boolean {
+            return isDateWithin24HoursSinceDate(
+                serverDate,
+                storeRepository.dummyInfoReportingDate!!
+            )
+        }
+
+        private fun isDateWithin24HoursSinceDate(date: Date, periodStartDate: Date): Boolean {
+            return date in periodStartDate..periodStartDate.byAdding(hours = 24)
+        }
+
+        private fun isDatePast24HoursSinceDate(date: Date, periodStartDate: Date): Boolean {
+            return date > periodStartDate.byAdding(hours = 24)
+        }
+
+        private fun randomDateInMonth(serverDate: Date, isForNextMonth: Boolean): Date {
+            val lastDayOfCurrentMonth = Calendar.getInstance().apply {
+                time = serverDate
+                add(Calendar.MONTH, if (isForNextMonth) 2 else 1)
+                set(Calendar.DAY_OF_MONTH, 1)
+                add(Calendar.DAY_OF_MONTH, -1)
+            }.get(Calendar.DAY_OF_MONTH)
+
+            val randomDayOfCurrentMonth = random.nextInt(lastDayOfCurrentMonth) + 1
+
+            return Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
+                time = serverDate
+                if (isForNextMonth) {
+                    add(Calendar.MONTH, 1)
+                }
+                set(Calendar.DAY_OF_MONTH, randomDayOfCurrentMonth)
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }.time
+        }
     }
 }
 

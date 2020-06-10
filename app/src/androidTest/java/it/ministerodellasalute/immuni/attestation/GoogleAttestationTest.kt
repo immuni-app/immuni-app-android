@@ -15,14 +15,12 @@
 
 package it.ministerodellasalute.immuni.attestation
 
-import android.util.Base64
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
 import it.ministerodellasalute.immuni.extensions.attestation.SafetyNetAttestationClient
 import it.ministerodellasalute.immuni.extensions.utils.base64EncodedSha256
-import it.ministerodellasalute.immuni.extensions.utils.sha256
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -30,7 +28,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class GoogleAttestationTest {
-    private val testContext get() = InstrumentationRegistry.getInstrumentation().context
     private val context get() = InstrumentationRegistry.getInstrumentation().targetContext
 
     @Test
