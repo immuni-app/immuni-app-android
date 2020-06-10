@@ -313,4 +313,5 @@
     <string name="suggestions_risk_second_message">To help the National Health Service take care of you should the need arise, the app has informed the Ministry of Health of the notification you have received.</string>
     <string name="suggestions_risk_fourth_message">The Ministry of Health cannot determine your identity from this information.</string>
     <string name="suggestions_risk_third_message_android">For more information on the data sent to the Ministry of Health, you can read the {privacy notice}, point 4.</string>
+    <string name="faq_search_hint">Search for a question</string>
 </resources>

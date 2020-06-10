@@ -25,9 +25,9 @@ import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import kotlin.math.abs
 import kotlinx.android.synthetic.main.faq_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import kotlin.math.abs
 
 class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
 
@@ -41,6 +41,8 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val ratio = abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
             toolbarSeparator?.alpha = ratio
+            searchDivider?.alpha = 1 - ratio
+            searchCard?.alpha = 1 - ratio
         })
 
         viewModel = getViewModel()
