@@ -72,6 +72,11 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
             viewModel.onFaqSearchChanged(text.toString())
             faqRecycler.scrollToPosition(0)
         }
+        // To activate search icon, we need to send activation event
+        searchInput.setOnFocusChangeListener { _, hasFocus ->
+            searchInputLayout.isActivated = hasFocus
+            searchInputLayout.refreshStartIconDrawableState()
+        }
     }
 
     override fun onClick(item: QuestionAndAnswer) {

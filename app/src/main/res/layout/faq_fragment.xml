@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
   ~ Please refer to the AUTHORS file for more information.
   ~ This program is free software: you can redistribute it and/or modify
@@ -80,6 +79,7 @@
                     app:cardCornerRadius="@dimen/card_radius">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/searchInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:boxBackgroundMode="none"
@@ -91,7 +91,7 @@
                         app:hintEnabled="false"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Searchbox"
                         app:startIconDrawable="@drawable/ic_search"
-                        app:startIconTint="@color/colorPrimary">
+                        app:startIconTint="@color/color_state_search_start_icon">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/searchInput"
@@ -99,6 +99,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/faq_search_bar_placeholder"
                             android:inputType="text"
+                            android:maxLines="1"
                             android:padding="16dp"
                             android:textColor="@color/colorPrimary" />
                     </com.google.android.material.textfield.TextInputLayout>
