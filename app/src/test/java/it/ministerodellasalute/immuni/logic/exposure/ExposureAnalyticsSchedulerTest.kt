@@ -25,6 +25,7 @@ import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSetting
 import org.junit.Before
 import org.junit.Test
 import java.text.DateFormat
+import java.time.Instant
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.test.assertEquals
@@ -71,12 +72,12 @@ class ExposureAnalyticsSchedulerTest {
         assertFalse(scheduler.couldSendInfo(serverDate))
     }
 
-    fun parseUTCDate(string: String): 
+    private fun parseUTCDate(string: String) = Date.from(Instant.from(DateTimeFormatter.ISO_INSTANT.parse(string)))
 
     @Test
     fun `after 24h the dices are rolled`() {
-        val serverDate = DateTimeFormatter.ISO_INSTANT.parse("2020-02-01T00:00:00Z")
-        val nextMonth = Date(1583020800000) // 2020-03-01T00:00:00+00:00
+        val serverDate = parseUTCDate("2020-02-01T00:00:00Z")
+        val nextMonth = parseUTCDate("2020-03-01T00:00:00Z")
 
         every { storeRepository.installDate } answers { serverDate.byAdding(days = -1) }
         var infoWithoutExposureReportingDate: Date? = null
