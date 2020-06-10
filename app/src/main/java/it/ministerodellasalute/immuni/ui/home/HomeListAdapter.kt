@@ -29,11 +29,13 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.color
 import it.ministerodellasalute.immuni.extensions.view.*
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
+import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import kotlin.reflect.full.primaryConstructor
 
 class HomeListAdapter(
     val context: Context,
-    val clickListener: HomeClickListener
+    val clickListener: HomeClickListener,
+    val settingsManager: ConfigurationSettingsManager
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -141,7 +143,13 @@ class HomeListAdapter(
                     holder.title.text = resources.getString(R.string.home_protection_active)
                         .color('{', '}',
                             resources.getColor(R.color.colorPrimary))
-                    holder.subtitle.text = resources.getString(R.string.home_view_service_active_advice)
+
+                    val reopenReminder = settingsManager.settings.value.reopenReminder
+
+                    holder.subtitle.text = when(reopenReminder) {
+                        true -> resources.getString(R.string.home_view_service_active_advice)
+                        false -> resources.getString(R.string.home_view_service_active_subtitle)
+                    }
                     // animate fade-in to avoid glitch on tab change
                     holder.lottieBg.alpha = 0f
                     holder.lottieBg.setAnimation(R.raw.lottie_shield_full)

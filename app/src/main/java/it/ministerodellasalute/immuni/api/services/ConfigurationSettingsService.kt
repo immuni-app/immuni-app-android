@@ -56,7 +56,8 @@ data class ConfigurationSettings(
     @field:Json(name = "support_phone_closing_time") val supportPhoneClosingTime: String,
     @field:Json(name = "support_phone_opening_time") val supportPhoneOpeningTime: String,
     @field:Json(name = "support_phone") val supportPhone: String? = null,
-    @field:Json(name = "support_email") val supportEmail: String? = null
+    @field:Json(name = "support_email") val supportEmail: String? = null,
+    @field:Json(name = "reopen_reminder") val reopenReminder: Boolean = true
 )
 
 @JsonClass(generateAdapter = true)
@@ -137,5 +138,6 @@ val defaultSettings = ConfigurationSettings(
     supportEmail = null,
     supportPhone = null,
     supportPhoneOpeningTime = "7",
-    supportPhoneClosingTime = "22"
+    supportPhoneClosingTime = "22",
+    reopenReminder = true
 )
