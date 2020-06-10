@@ -109,6 +109,9 @@ fun String.coloredClickable(
 }
 
 
+/**
+ * Highlights every word that matches `highlight` in this text with specified color.
+ */
 fun String.colorHighlight(
     highlight: String,
     @ColorInt color: Int
@@ -124,7 +127,8 @@ fun String.colorHighlight(
             startIndex = highlightStartIndices.lastOrNull()?.let { it + highlight.length } ?: 0,
             ignoreCase = true
         )
-        if (startIndex < 0) break
+        // if we are getting lower index than we should, quit searching.
+        if (startIndex < 0 || startIndex < highlightStartIndices.size) break
         highlightStartIndices.add(startIndex)
     }
 
