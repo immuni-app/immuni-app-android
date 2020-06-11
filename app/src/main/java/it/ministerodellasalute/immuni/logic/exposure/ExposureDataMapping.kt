@@ -24,7 +24,6 @@ import it.ministerodellasalute.immuni.extensions.utils.isoDateString
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureAnalyticsOperationalInfo
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureInformation
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
-import java.text.SimpleDateFormat
 import java.util.*
 
 val ExposureConfiguration.clientExposureConfiguration: ExposureNotificationClient.ExposureConfiguration

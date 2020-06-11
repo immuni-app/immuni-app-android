@@ -30,11 +30,10 @@ import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManage
 import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSettings
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.Province
-import it.ministerodellasalute.immuni.network.api.NetworkResource
-import kotlinx.coroutines.delay
 import java.security.MessageDigest
 import java.security.SecureRandom
 import java.util.*
+import kotlinx.coroutines.delay
 
 class ExposureAnalyticsManager(
     private val networkRepository: ExposureAnalyticsNetworkRepository,

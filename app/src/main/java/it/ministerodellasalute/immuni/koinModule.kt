@@ -60,10 +60,10 @@ import it.ministerodellasalute.immuni.ui.upload.UploadViewModel
 import it.ministerodellasalute.immuni.util.CoroutineContextProvider
 import it.ministerodellasalute.immuni.workers.models.ServiceNotActiveNotificationWorkerStatus
 import it.ministerodellasalute.immuni.workers.repositories.ServiceNotActiveNotificationWorkerRepository
+import java.security.SecureRandom
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import java.security.SecureRandom
 
 /**
  * Dependency Injection Koin module.

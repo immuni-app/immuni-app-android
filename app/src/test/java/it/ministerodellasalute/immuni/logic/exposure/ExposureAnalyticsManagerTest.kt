@@ -26,13 +26,13 @@ import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureAnalyt
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.user.models.Province
 import it.ministerodellasalute.immuni.testutils.parseUTCDate
+import java.util.*
+import kotlin.test.assertEquals
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
-import java.util.*
-import kotlin.test.assertEquals
 
 class ExposureAnalyticsManagerTest {
     @MockK

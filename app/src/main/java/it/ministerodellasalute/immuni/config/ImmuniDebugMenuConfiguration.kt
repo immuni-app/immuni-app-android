@@ -18,7 +18,6 @@ package it.ministerodellasalute.immuni.config
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Base64
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.debugmenu.DebugMenuConfiguration
 import it.ministerodellasalute.immuni.debugmenu.DebugMenuItem
@@ -33,8 +32,8 @@ import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReport
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
-import kotlinx.coroutines.*
 import java.util.Calendar
+import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

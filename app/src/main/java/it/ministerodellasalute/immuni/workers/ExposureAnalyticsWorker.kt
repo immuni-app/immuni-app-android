@@ -19,11 +19,10 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
-import kotlinx.coroutines.withTimeout
+import java.util.*
 import kotlinx.coroutines.withTimeoutOrNull
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.util.*
 
 class ExposureAnalyticsWorker(
     appContext: Context,

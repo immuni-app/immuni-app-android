@@ -18,7 +18,6 @@ package it.ministerodellasalute.immuni.logic.exposure
 import android.app.Activity
 import android.content.Intent
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
-import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus

@@ -19,15 +19,15 @@ interface AttestationClient {
     sealed class Result {
         // use this class to signal that the attestation was done and (to the best of
         // client's knowledge) is also valid
-        data class Success(val result: String): Result()
+        data class Success(val result: String) : Result()
 
         // use this class to signal that the attestation was done but the outcome is not valid
-        object Invalid: Result()
+        object Invalid : Result()
 
         // use this class to signal a temporary error during the attestation process, and that
         // a new attempt may be done in the future
-        data class Failure(val error: Exception): Result()
+        data class Failure(val error: Exception) : Result()
     }
 
-    suspend fun attest(nonce: String) : Result
+    suspend fun attest(nonce: String): Result
 }

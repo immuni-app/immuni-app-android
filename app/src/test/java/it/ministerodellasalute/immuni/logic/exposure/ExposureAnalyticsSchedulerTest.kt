@@ -23,15 +23,12 @@ import it.ministerodellasalute.immuni.extensions.utils.byAdding
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureAnalyticsStoreRepository
 import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSettings
 import it.ministerodellasalute.immuni.testutils.parseUTCDate
-import org.junit.Before
-import org.junit.Test
-import java.text.DateFormat
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
+import org.junit.Before
+import org.junit.Test
 
 class ExposureAnalyticsSchedulerTest {
     @MockK
@@ -115,7 +112,6 @@ class ExposureAnalyticsSchedulerTest {
         every { settings.dummyAnalyticsWaitingTime } returns 10 * 60 * 60 * 24
         every { random.nextInt(any()) } returns 0
         every { random.nextDouble() } returns 0.1
-
 
         scheduler.setup(serverDate)
 

@@ -27,4 +27,3 @@ class ExposureAnalyticsNetworkConfiguration(
         return context.getString(R.string.analytics_base_url)
     }
 }
-

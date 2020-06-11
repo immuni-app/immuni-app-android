@@ -22,7 +22,6 @@ import it.ministerodellasalute.immuni.extensions.utils.defaultMoshi
 import it.ministerodellasalute.immuni.extensions.utils.fromJson
 import it.ministerodellasalute.immuni.extensions.utils.log
 import kotlinx.coroutines.tasks.await
-import okio.Utf8
 
 class SafetyNetAttestationClient(
     private val context: Context,

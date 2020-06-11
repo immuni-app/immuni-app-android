@@ -24,9 +24,9 @@ import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.workers.*
 import java.security.SecureRandom
+import java.util.*
 import java.util.concurrent.TimeUnit
 import org.koin.core.KoinComponent
-import java.util.*
 
 class WorkerManager(
     private val settingsManager: ConfigurationSettingsManager,
