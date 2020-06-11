@@ -108,7 +108,6 @@ fun String.coloredClickable(
     }
 }
 
-
 /**
  * Highlights every word that matches `highlight` in this text with specified color.
  */
