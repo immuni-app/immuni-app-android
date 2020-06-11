@@ -142,6 +142,7 @@
                             android:inputType="text"
                             android:maxLines="1"
                             android:padding="16dp"
+                            android:textColorHint="@color/grey_normal"
                             android:textColor="@color/colorPrimary" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </com.google.android.material.card.MaterialCardView>
