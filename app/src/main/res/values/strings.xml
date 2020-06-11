@@ -329,6 +329,6 @@
     <string name="permission_tutorial_verify_immuni_works_third"><b>Se entri in contatto con una persona che in seguito risulti positiva al virus, Immuni ti invierà una notifica per avvertirti del rischio di contagio.</b> Aprendo l’app, riceverai indicazioni chiare ed esaustive sul da farsi.</string>
     <string name="home_view_service_active_subtitle">Immuni resta operativa anche quando l\'app è chiusa.</string>
     <string name="faq_search_bar_placeholder">Search for a question</string>
-    <string name="faq_search_empty_title">Nessun argomento trovato</string>
-    <string name="faq_search_empty_description">Non abbiamo trovato nessun argomento corrispondente alla tua ricerca.</string>
+    <string name="faq_no_result_title">Nessun argomento trovato</string>
+    <string name="faq_no_result_message">Non abbiamo trovato nessun argomento corrispondente alla tua ricerca.</string>
 </resources>

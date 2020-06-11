@@ -55,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:contentDescription="@string/faq_search_empty_title"
+            android:contentDescription="@string/faq_no_result_title"
             android:src="@drawable/ic_faq_empty" />
 
         <TextView
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:gravity="center"
-            android:text="@string/faq_search_empty_title" />
+            android:text="@string/faq_no_result_title" />
 
         <TextView
             android:id="@+id/emptyViewDescription"
@@ -75,7 +75,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="200dp"
             android:gravity="center"
-            android:text="@string/faq_search_empty_description" />
+            android:text="@string/faq_no_result_message" />
     </LinearLayout>
 
     <!-- Collapsing toolbar -->
