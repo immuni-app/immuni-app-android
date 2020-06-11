@@ -114,7 +114,7 @@ class ExposureAnalyticsManagerTest {
         every { scheduler.canSendInfoWithExposure() } returns true
         every { scheduler.couldSendInfoWithoutExposureNow(serverDate) } returns true
         every { scheduler.couldSendDummyInfoNow(serverDate) } returns true
-        coEvery { spiedManager.sendOperationalInfo(any(), any()) } returns Unit
+        coEvery { spiedManager.sendOperationalInfo(any(), any()) } returns true
         every { scheduler.updateInfoWithExposureLastReportingMonth(serverDate) } returns Unit
 
         spiedManager.onRequestDiagnosisKeysSucceeded(serverDate)
@@ -145,7 +145,7 @@ class ExposureAnalyticsManagerTest {
             every { scheduler.couldSendInfoWithoutExposureNow(serverDate) } returns true
             every { scheduler.canSendInfoWithoutExposure() } returns true
             every { scheduler.couldSendDummyInfoNow(serverDate) } returns true
-            coEvery { spiedManager.sendOperationalInfo(any(), any()) } returns Unit
+            coEvery { spiedManager.sendOperationalInfo(any(), any()) } returns true
             every { scheduler.scheduleNextInfoWithoutExposureReport(serverDate) } returns Unit
 
             spiedManager.onRequestDiagnosisKeysSucceeded(serverDate)
@@ -175,7 +175,7 @@ class ExposureAnalyticsManagerTest {
             every { scheduler.hasYetToSendInfoWithExposureThisMonth(serverDate) } returns true
             every { scheduler.couldSendInfoWithoutExposureNow(serverDate) } returns false
             every { scheduler.couldSendDummyInfoNow(serverDate) } returns true
-            coEvery { spiedManager.sendOperationalInfo(any(), any()) } returns Unit
+            coEvery { spiedManager.sendOperationalInfo(any(), any()) } returns true
             every { scheduler.scheduleNextDummyInfoReport(serverDate) } returns Unit
 
             spiedManager.onRequestDiagnosisKeysSucceeded(serverDate)
@@ -203,7 +203,7 @@ class ExposureAnalyticsManagerTest {
         coEvery {
             attestationClient.attest(any())
         } returns AttestationClient.Result.Success(successString)
-        coEvery { networkRepository.sendDummyOperationalInfo(any(), successString) } returns Unit
+        coEvery { networkRepository.sendDummyOperationalInfo(any(), successString) } returns true
 
         manager.sendOperationalInfo(
             summary = null,
@@ -239,7 +239,7 @@ class ExposureAnalyticsManagerTest {
         coEvery {
             attestationClient.attest(any())
         } returns AttestationClient.Result.Success(successString)
-        coEvery { networkRepository.sendOperationalInfo(any(), successString) } returns Unit
+        coEvery { networkRepository.sendOperationalInfo(any(), successString) } returns true
 
         manager.sendOperationalInfo(
             summary = null,
@@ -275,7 +275,7 @@ class ExposureAnalyticsManagerTest {
         coEvery {
             attestationClient.attest(any())
         } returns AttestationClient.Result.Success(successString)
-        coEvery { networkRepository.sendOperationalInfo(any(), successString) } returns Unit
+        coEvery { networkRepository.sendOperationalInfo(any(), successString) } returns true
 
         val summary = ExposureSummary(
             date = Date(),
@@ -322,7 +322,7 @@ class ExposureAnalyticsManagerTest {
         coEvery {
             attestationClient.attest(any())
         } returns AttestationClient.Result.Success(successString)
-        coEvery { networkRepository.sendOperationalInfo(any(), successString) } returns Unit
+        coEvery { networkRepository.sendOperationalInfo(any(), successString) } returns true
         val lastExposureDate = Date().byAdding(days = -2)
         val summary = ExposureSummary(
             date = Date(),
@@ -383,7 +383,7 @@ class ExposureAnalyticsManagerTest {
                     any(),
                     successString
                 )
-            } returns Unit
+            } returns true
             val mockManager = spyk(manager)
 
             val job = async {

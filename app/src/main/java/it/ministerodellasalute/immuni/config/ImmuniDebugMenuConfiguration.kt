@@ -135,10 +135,16 @@ class ImmuniDebugMenuConfiguration(
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Send Dummy Analytics", { _, _ ->
                 GlobalScope.launch {
-                    analyticsManager.sendOperationalInfo(
+                    val isSuccess = analyticsManager.sendOperationalInfo(
                         summary = null,
                         isDummy = true
                     )
+                    withContext(Dispatchers.Main) {
+                        toast(
+                            context,
+                            "Dummy analytics result: ${if (isSuccess) "success" else "failure"}"
+                        )
+                    }
                 }
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Verify Attestation", { _, _ ->

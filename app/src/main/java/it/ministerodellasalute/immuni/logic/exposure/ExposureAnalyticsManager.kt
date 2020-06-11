@@ -30,6 +30,7 @@ import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManage
 import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSettings
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.Province
+import it.ministerodellasalute.immuni.network.api.NetworkResource
 import kotlinx.coroutines.delay
 import java.security.MessageDigest
 import java.security.SecureRandom
@@ -107,7 +108,7 @@ class ExposureAnalyticsManager(
         summary: ExposureSummary?,
         isDummy: Boolean,
         retryCount: Int = 0
-    ) {
+    ): Boolean {
         val baseOperationalInfo = baseOperationalInfoFactory()
         val operationalInfo = ExposureAnalyticsOperationalInfo(
             province = baseOperationalInfo.province,
@@ -125,7 +126,7 @@ class ExposureAnalyticsManager(
         val attestationResult = attestationClient.attest(base64Encoder(sha256digest))
         when (attestationResult) {
             is AttestationClient.Result.Success -> {
-                if (isDummy) {
+                return if (isDummy) {
                     networkRepository.sendDummyOperationalInfo(
                         operationalInfo,
                         attestationResult.result
@@ -135,23 +136,27 @@ class ExposureAnalyticsManager(
                 }
             }
             is AttestationClient.Result.Invalid -> {
-                // Nothing to do
+                return false
             }
             is AttestationClient.Result.Failure -> {
                 val newRetryCount = retryCount + 1
                 if (newRetryCount > 4) {
-                    return
+                    return false
                 }
                 val delayMillis = newRetryCount * newRetryCount * 10 * 1000
                 delay(delayMillis.toLong())
-                retrySendOperationalInfo(summary, isDummy, newRetryCount)
+                return retrySendOperationalInfo(summary, isDummy, newRetryCount)
             }
         }
     }
 
     @VisibleForTesting
-    suspend fun retrySendOperationalInfo(summary: ExposureSummary?, isDummy: Boolean, retryCount: Int) {
-        sendOperationalInfo(summary, isDummy, retryCount)
+    suspend fun retrySendOperationalInfo(
+        summary: ExposureSummary?,
+        isDummy: Boolean,
+        retryCount: Int
+    ): Boolean {
+        return sendOperationalInfo(summary, isDummy, retryCount)
     }
 
     class Scheduler(

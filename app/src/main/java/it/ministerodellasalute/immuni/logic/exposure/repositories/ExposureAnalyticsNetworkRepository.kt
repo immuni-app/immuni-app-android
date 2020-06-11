@@ -19,6 +19,7 @@ import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureAnalyticsService
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureAnalyticsOperationalInfo
 import it.ministerodellasalute.immuni.logic.exposure.operationalInfoRequest
+import it.ministerodellasalute.immuni.network.api.NetworkResource
 
 class ExposureAnalyticsNetworkRepository(
     private val service: ExposureAnalyticsService
@@ -26,24 +27,28 @@ class ExposureAnalyticsNetworkRepository(
     suspend fun sendOperationalInfo(
         operationalInfo: ExposureAnalyticsOperationalInfo,
         signedAttestation: String
-    ) {
-        immuniApiCall {
+    ): Boolean {
+        val response = immuniApiCall {
             service.operationalInfo(
                 isDummyData = 0,
                 body = operationalInfo.operationalInfoRequest(signedAttestation)
             )
         }
+
+        return response is NetworkResource.Success
     }
 
     suspend fun sendDummyOperationalInfo(
         operationalInfo: ExposureAnalyticsOperationalInfo,
         signedAttestation: String
-    ) {
-        immuniApiCall {
+    ): Boolean {
+        val response = immuniApiCall {
             service.operationalInfo(
                 isDummyData = 1,
                 body = operationalInfo.operationalInfoRequest((signedAttestation))
             )
         }
+
+        return response is NetworkResource.Success
     }
 }
