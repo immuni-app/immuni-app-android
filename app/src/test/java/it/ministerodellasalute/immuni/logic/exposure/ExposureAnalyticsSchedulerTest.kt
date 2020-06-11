@@ -198,4 +198,28 @@ class ExposureAnalyticsSchedulerTest {
             shouldSendDummyInfo = true
         )
     }
+
+    @Test
+    fun `canSendInfoWithExposure is coherent with its setting`() {
+        every { settings.operationalInfoWithExposureSamplingRate } returns 0.7
+        every { random.nextDouble() } returns 0.6
+        assertTrue(scheduler.canSendInfoWithExposure())
+
+        verify { settings.operationalInfoWithExposureSamplingRate }
+
+        every { random.nextDouble() } returns 0.8
+        assertFalse(scheduler.canSendInfoWithExposure())
+    }
+
+    @Test
+    fun `canSendInfoWithoutExposure is coherent with its setting`() {
+        every { settings.operationalInfoWithoutExposureSamplingRate } returns 0.2
+        every { random.nextDouble() } returns 0.1
+        assertTrue(scheduler.canSendInfoWithoutExposure())
+
+        verify { settings.operationalInfoWithoutExposureSamplingRate }
+
+        every { random.nextDouble() } returns 0.3
+        assertFalse(scheduler.canSendInfoWithoutExposure())
+    }
 }

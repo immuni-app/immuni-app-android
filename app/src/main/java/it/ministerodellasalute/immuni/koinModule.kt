@@ -20,6 +20,7 @@ import androidx.lifecycle.SavedStateHandle
 import it.ministerodellasalute.immuni.api.services.*
 import it.ministerodellasalute.immuni.config.*
 import it.ministerodellasalute.immuni.debugmenu.DebugMenu
+import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
 import it.ministerodellasalute.immuni.extensions.attestation.SafetyNetAttestationClient
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
@@ -229,22 +230,26 @@ val appModule = module {
         ExposureAnalyticsNetworkRepository(get())
     }
 
+    single<AttestationClient> {
+        SafetyNetAttestationClient(
+            androidContext(),
+            SafetyNetAttestationClient.AttestationParameters(
+                apiKey = BuildConfig.SAFETY_NET_API_KEY,
+                apkPackageName = androidContext().packageName,
+                requiresBasicIntegrity = true,
+                requiresCtsProfile = true,
+                requiresHardwareAttestation = true
+            )
+        )
+    }
+
     single {
         ExposureAnalyticsManager(
+            get<ExposureAnalyticsStoreRepository>(),
             get(),
             get(),
             get(),
             get(),
-            SafetyNetAttestationClient(
-                androidContext(),
-                SafetyNetAttestationClient.AttestationParameters(
-                    apiKey = BuildConfig.SAFETY_NET_API_KEY,
-                    apkPackageName = androidContext().packageName,
-                    requiresBasicIntegrity = true,
-                    requiresCtsProfile = true,
-                    requiresHardwareAttestation = true
-                )
-            ),
             { get() }
         )
     }
