@@ -358,7 +358,7 @@ class ExposureAnalyticsManagerTest {
     }
 
     @Test
-    fun `exponential backoff on attestation`() = runBlockingTest {
+    fun `exponential backoff on attestation failure`() = runBlockingTest {
         pauseDispatcher {
             every { baseOperationalInfoFactory() } returns BaseOperationalInfo(
                 province = Province.cagliari,
@@ -378,7 +378,12 @@ class ExposureAnalyticsManagerTest {
                 if (callCount == 5) AttestationClient.Result.Success(successString)
                 else AttestationClient.Result.Failure(error)
             }
-            coEvery { networkRepository.sendDummyOperationalInfo(any(), successString) } returns Unit
+            coEvery {
+                networkRepository.sendDummyOperationalInfo(
+                    any(),
+                    successString
+                )
+            } returns Unit
             val mockManager = spyk(manager)
 
             val job = async {
@@ -398,9 +403,38 @@ class ExposureAnalyticsManagerTest {
             coVerify(exactly = 0) {
                 mockManager.retrySendOperationalInfo(any(), true, 5)
             }
-            coVerify(exactly = 1) { networkRepository.sendDummyOperationalInfo(any(), successString) }
+            coVerify(exactly = 1) {
+                networkRepository.sendDummyOperationalInfo(
+                    any(),
+                    successString
+                )
+            }
 
             job.await()
         }
+    }
+
+    @Test
+    fun `does not send and does not retry with invalid attestation`() = runBlockingTest {
+        every { baseOperationalInfoFactory() } returns BaseOperationalInfo(
+            province = Province.cagliari,
+            exposurePermission = true,
+            bluetoothActive = false,
+            notificationPermission = false
+        )
+        val salt = "1234567812345678"
+        every { randomSaltFactory() } returns salt
+
+        coEvery {
+            attestationClient.attest(any())
+        } returns AttestationClient.Result.Invalid
+
+        manager.sendOperationalInfo(
+            summary = null,
+            isDummy = true
+        )
+
+        coVerify(exactly = 0) { networkRepository.sendOperationalInfo(any(), any()) }
+        coVerify(exactly = 0) { networkRepository.sendDummyOperationalInfo(any(), any()) }
     }
 }
