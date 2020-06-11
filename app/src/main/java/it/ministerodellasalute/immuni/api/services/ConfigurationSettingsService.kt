@@ -134,7 +134,7 @@ val defaultSettings = ConfigurationSettings(
     teksMaxInfoCount = 600,
     teksPacketSize = 110_000,
     operationalInfoWithExposureSamplingRate = 1.0,
-    operationalInfoWithoutExposureSamplingRate = 0.1, // FIXME: doc says 0.6 but staging server has 0.1. Ask what's best.
+    operationalInfoWithoutExposureSamplingRate = 0.6,
     dummyAnalyticsWaitingTime = 2_592_000
 )
 
