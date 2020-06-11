@@ -27,18 +27,18 @@
 
     <style name="CardShadowColorPrimary">
         <item name="android:elevation">@dimen/cards_elevation</item>
-        <item name="android:outlineSpotShadowColor">@color/colorPrimary</item>
+        <item name="android:outlineSpotShadowColor">#805751FF</item>
     </style>
 
     <style name="PrivacyCards">
         <item name="cardElevation">@dimen/cards_elevation</item>
         <item name="cardCornerRadius">20dp</item>
-        <item name="android:outlineSpotShadowColor">@color/colorPrimary</item>
+        <item name="android:outlineSpotShadowColor">#805751FF</item>
     </style>
 
     <style name="FAQCards">
         <item name="cardElevation">@dimen/cards_elevation</item>
         <item name="cardCornerRadius">20dp</item>
-        <item name="android:outlineSpotShadowColor">#08000000</item>
+        <item name="android:outlineSpotShadowColor">#805751FF</item>
     </style>
 </resources>
