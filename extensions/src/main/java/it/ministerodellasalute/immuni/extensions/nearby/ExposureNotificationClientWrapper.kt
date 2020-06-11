@@ -40,7 +40,7 @@ class ExposureNotificationClientWrapper(
         val history = client.temporaryExposureKeyHistory.await()
         return history.map {
             ExposureNotificationClient.TemporaryExposureKey(
-                keyData = Base64.encodeToString(it.keyData, Base64.DEFAULT),
+                keyData = Base64.encodeToString(it.keyData, Base64.NO_WRAP),
                 rollingStartIntervalNumber = it.rollingStartIntervalNumber,
                 // TODO: remove once fixed by Google
                 // this workaround is needed because of a Google's bug
