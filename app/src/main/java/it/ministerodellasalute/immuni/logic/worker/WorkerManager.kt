@@ -82,6 +82,20 @@ class WorkerManager(
         )
     }
 
+    fun scheduleNotificationsCleanerWorker(withDelay: Boolean = true) {
+        val delay = 60 * 15L // 15 minutes
+        workManager.enqueueUniqueWork(
+            "NotificationsCleanerWorker",
+            ExistingWorkPolicy.REPLACE,
+            OneTimeWorkRequest.Builder(NotificationsCleanerWorker::class.java)
+                .setInitialDelay(
+                    if (withDelay) delay else 0,
+                    TimeUnit.SECONDS
+                )
+                .build()
+        )
+    }
+
     fun scheduleServiceNotActiveNotificationWorker(policy: ExistingWorkPolicy) {
         workManager.enqueueUniqueWork(
             "ServiceNotActiveNotificationWorker",
