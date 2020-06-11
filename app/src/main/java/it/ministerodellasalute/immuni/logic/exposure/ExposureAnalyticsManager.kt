@@ -116,7 +116,7 @@ class ExposureAnalyticsManager(
             bluetoothActive = if (baseOperationalInfo.bluetoothActive) 1 else 0,
             notificationPermission = if (baseOperationalInfo.notificationPermission) 1 else 0,
             exposureNotification = if (summary?.let { it.matchedKeyCount > 0 } == true) 1 else 0,
-            lastRiskyExposureOn = (summary?.lastExposureDate ?: Date(0)).isoDateString,
+            lastRiskyExposureOn = (summary?.lastExposureDate ?: Date()).isoDateString,
             salt = randomSaltFactory()
         )
         val sha256digest = MessageDigest
