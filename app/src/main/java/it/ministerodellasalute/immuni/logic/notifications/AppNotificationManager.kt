@@ -53,7 +53,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
 
         val androidNotificationManager = NotificationManagerCompat.from(context)
         androidNotificationManager.notify(type.id, builder.build().apply {
-            flags = flags or Notification.FLAG_NO_CLEAR or Notification.FLAG_AUTO_CANCEL
+            flags = flags or Notification.FLAG_AUTO_CANCEL
         })
     }
 

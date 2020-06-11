@@ -97,4 +97,19 @@
     <action
         android:id="@+id/action_privacy"
         app:destination="@id/privacy" />
+
+    <dialog android:id="@+id/support"
+        android:name="it.ministerodellasalute.immuni.ui.support.SupportDialogFragment"
+        tools:layout="@layout/support_dialog" />
+    <action
+        android:id="@+id/action_support"
+        app:destination="@id/support" />
+
+    <dialog android:id="@+id/howToUploadPositive"
+        android:name="it.ministerodellasalute.immuni.ui.howtouploadpositive.HowToUploadPositiveDialogFragment"
+        tools:layout="@layout/how_to_upload_positive_dialog" />
+
+    <action
+        android:id="@+id/action_how_to_upload_positive"
+        app:destination="@id/howToUploadPositive" />
 </navigation>

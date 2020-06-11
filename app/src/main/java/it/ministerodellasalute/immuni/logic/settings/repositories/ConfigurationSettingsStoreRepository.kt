@@ -15,17 +15,18 @@
 
 package it.ministerodellasalute.immuni.logic.settings.repositories
 
+import android.content.Context
 import com.squareup.moshi.JsonClass
 import it.ministerodellasalute.immuni.api.services.ConfigurationSettings
 import it.ministerodellasalute.immuni.api.services.Faq
 import it.ministerodellasalute.immuni.api.services.Language
-import it.ministerodellasalute.immuni.api.services.defaultFaqs
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 
 /**
  * Stores and loads the settings.
  */
 class ConfigurationSettingsStoreRepository(
+    private val context: Context,
     private val kvStorage: KVStorage,
     private val defaultSettings: ConfigurationSettings
 ) {
@@ -62,15 +63,18 @@ class ConfigurationSettingsStoreRepository(
         ) ?: Faqs(faqs = mapOf(language to faq))
     }
 
-    fun loadFaqs(language: Language): List<Faq> = synchronized(this) {
+    fun loadFaqs(language: Language): List<Faq>? = synchronized(this) {
         // in case the Faq model has changed wrt the stored one,
         // we delete it and call loadFaqs again to return the default ones
         return try {
-            kvStorage[faqsKey, Faqs(faqs = defaultFaqs)].faqs[language]
-                ?: if (language != Language.EN) loadFaqs(Language.EN) else error("Fallback with English Faqs failed")
+            kvStorage[faqsKey]?.faqs?.get(language)
         } catch (e: Exception) {
-            kvStorage.delete(faqsKey)
-            loadFaqs(language)
+            if (kvStorage.contains(faqsKey)) {
+                kvStorage.delete(faqsKey)
+                loadFaqs(language)
+            } else {
+                error("Faqs corrupted")
+            }
         }
     }
 }

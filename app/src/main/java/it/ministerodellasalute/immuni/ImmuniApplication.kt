@@ -38,7 +38,6 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.KoinComponent
 import org.koin.core.context.startKoin
-import org.koin.core.inject
 
 class ImmuniApplication : Application(), KoinComponent {
 
@@ -48,8 +47,8 @@ class ImmuniApplication : Application(), KoinComponent {
     private lateinit var debugMenu: DebugMenu
     private lateinit var lifecycleObserver: AppLifecycleObserver
     private lateinit var activityLifecycleObserver: AppActivityLifecycleCallbacks
-    private val userManager: UserManager by inject()
-    private val workerManager: WorkerManager by inject()
+    private lateinit var userManager: UserManager
+    private lateinit var workerManager: WorkerManager
 
     override fun onCreate() {
         super.onCreate()
@@ -66,6 +65,8 @@ class ImmuniApplication : Application(), KoinComponent {
         settingsManager = get()
         forceUpdateManager = get()
         exposureManager = get()
+        userManager = get()
+        workerManager = get()
 
         // register app lifecycle
         lifecycleObserver = get()

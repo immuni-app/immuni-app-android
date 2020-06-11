@@ -33,7 +33,7 @@ class ExposureNotificationFragment :
         viewModel.isBroadcastingActive.observe(viewLifecycleOwner, Observer { isBroadcastingActive ->
             if (!handled && isBroadcastingActive == true && this.isResumed) {
                 handled = true
-                viewModel.onNextTap()
+                navigateNext()
             }
         })
 
@@ -53,7 +53,7 @@ class ExposureNotificationFragment :
         next.setSafeOnClickListener {
 
             if (canProceed()) {
-                viewModel.onNextTap()
+                navigateNext()
             } else {
                 activity?.let {
                     viewModel.startExposureNotification(it)
@@ -62,6 +62,10 @@ class ExposureNotificationFragment :
         }
 
         checkSpacing()
+    }
+
+    private fun navigateNext() {
+        viewModel.onNextTap()
     }
 
     private fun canProceed(): Boolean {

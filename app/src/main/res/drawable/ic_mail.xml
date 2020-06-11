@@ -1,0 +1,33 @@
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="28dp"
+    android:height="28dp"
+    android:viewportWidth="28"
+    android:viewportHeight="28">
+  <path
+      android:pathData="M8.75,7L19.25,7A3.5,3.5 0,0 1,22.75 10.5L22.75,17.5A3.5,3.5 0,0 1,19.25 21L8.75,21A3.5,3.5 0,0 1,5.25 17.5L5.25,10.5A3.5,3.5 0,0 1,8.75 7z"
+      android:strokeWidth="2.625"
+      android:fillColor="#00000000"
+      android:strokeColor="#2F4F75"/>
+  <path
+      android:pathData="M9.7751,11.7503L14,15.1002L18.2249,11.7503"
+      android:strokeLineJoin="round"
+      android:strokeWidth="2.625"
+      android:fillColor="#00000000"
+      android:strokeColor="#2F4F75"
+      android:strokeLineCap="round"/>
+</vector>

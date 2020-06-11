@@ -86,9 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="120dp"
-                android:maxLines="5"
                 android:text="@string/welcome_view_discover_more"
-                app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/title"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -113,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="32dp"
-            android:text="@string/onboarding_push_permission_action"
+            android:text="@string/onboarding_exposure_permission_action"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

@@ -15,22 +15,51 @@
 
 package it.ministerodellasalute.immuni.ui.faq
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
 class FaqViewModel(
-    settingsManager: ConfigurationSettingsManager
+    val settingsManager: ConfigurationSettingsManager
 ) : ViewModel(), KoinComponent {
 
-    val questionAndAnswers: LiveData<List<QuestionAndAnswer>> =
-        settingsManager.faqs.asLiveData().map {
-            it.map { faq ->
-                QuestionAndAnswer(
-                    faq.title,
-                    faq.content
-                )
+    private val _questionAndAnswers = MutableLiveData<FaqListViewData>()
+    val questionAndAnswers: LiveData<FaqListViewData> = _questionAndAnswers
+
+    private var filterJob: Job? = null
+
+    fun onFaqSearchChanged(text: String) {
+        // Stop previous filter, since it's not needed anymore
+        filterJob?.cancel()
+        filterJob = viewModelScope.launch(Dispatchers.Default) {
+            settingsManager.faqs.collect { faqList ->
+                val filteredFaq = faqList?.filter { faq ->
+                    // Check if filter is not cancelled
+                    if (!isActive) return@collect
+                    faq.title.contains(text, ignoreCase = true)
+                }?.map { faq ->
+                    if (!isActive) return@collect
+                    QuestionAndAnswer(
+                        faq.title,
+                        faq.content
+                    )
+                } ?: listOf()
+                _questionAndAnswers.postValue(FaqListViewData(text, filteredFaq))
             }
         }
+    }
+
+    init {
+        onFaqSearchChanged("")
+    }
 }
+
+data class FaqListViewData(val highlight: String, val faqList: List<QuestionAndAnswer>)

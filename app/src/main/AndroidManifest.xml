@@ -53,7 +53,7 @@
             android:name=".ui.main.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.welcome.WelcomeActivity"
             android:launchMode="singleTop"
@@ -68,7 +68,7 @@
             android:name=".ui.faq.FaqActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.upload.UploadDataActivity"
             android:launchMode="singleTop"

@@ -41,30 +41,32 @@
             android:clipChildren="false"
             app:layout_collapseMode="pin">
 
-            <ImageView
-                android:id="@+id/warningIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="38dp"
-                android:contentDescription="@string/upload_data_warning_message"
-                app:srcCompat="@drawable/ic_warning_small"
-                app:layout_constraintBottom_toBottomOf="@+id/healthcareAuthorizationWarning"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/healthcareAuthorizationWarning" />
 
             <TextView
                 android:id="@+id/healthcareAuthorizationWarning"
                 style="@style/P1Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:fontFamily="@font/euclid_circular_semi_bold"
                 android:text="@string/upload_data_warning_message"
-                android:textColor="@color/text_error_red"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/warningIcon"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/knowMore"
+                style="@style/OnboardingKnowMore"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:text="@string/home_view_service_active_discover_more"
+                app:layout_constraintEnd_toEndOf="@+id/healthcareAuthorizationWarning"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="@+id/healthcareAuthorizationWarning"
+                app:layout_constraintTop_toBottomOf="@+id/healthcareAuthorizationWarning" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/firstStepCard"
@@ -72,11 +74,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/healthcareAuthorizationWarning">
+                app:layout_constraintTop_toBottomOf="@+id/knowMore">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

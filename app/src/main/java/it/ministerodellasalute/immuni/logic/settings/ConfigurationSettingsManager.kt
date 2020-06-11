@@ -92,7 +92,7 @@ class ConfigurationSettingsManager(
     private var _faqLanguage = currentLanguage
 
     private val _faqs = MutableStateFlow(storeRepository.loadFaqs(_faqLanguage))
-    val faqs: StateFlow<List<Faq>>
+    val faqs: StateFlow<List<Faq>?>
         get() {
             if (currentLanguage != _faqLanguage) {
                 _faqLanguage = currentLanguage
@@ -101,7 +101,7 @@ class ConfigurationSettingsManager(
             return _faqs
         }
 
-    private fun fetchFaqsAsync(): Deferred<FetchFaqsResult> {
+    fun fetchFaqsAsync(): Deferred<FetchFaqsResult> {
         return scope.async {
             val language = if (settings.value.faqUrls.containsKey(currentLanguage.code)) currentLanguage else Language.EN
             val url = settings.value.faqUrls[language.code] ?: return@async FetchFaqsResult.ServerError

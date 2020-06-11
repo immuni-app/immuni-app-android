@@ -4,8 +4,8 @@ buildscript {
     ext {
         // App version digits
         versionMajor = 1
-        versionMinor = 0
-        versionPatch = 1
+        versionMinor = 1
+        versionPatch = 0
 
         // Version name follows the <major>.<minor>.<patch> convention
         computeVersionName = { ->
@@ -39,7 +39,7 @@ buildscript {
         appcompatVersion = "1.1.0"
         ktxCoreVersion = "1.2.0"
         securityVersion = "1.0.0-rc02"
-        materialVersion = "1.2.0-alpha06"
+        materialVersion = "1.3.0-alpha01"
         glideVersion = "4.9.0"
         lottieVersion = "3.4.0"
         jUnitVersion = "4.12"

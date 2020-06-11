@@ -26,6 +26,8 @@ import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
 import it.ministerodellasalute.immuni.logic.exposure.repositories.*
+import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
+import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSettings
 import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
@@ -40,7 +42,8 @@ class ExposureManager(
     private val userRepository: UserRepository,
     private val exposureReportingRepository: ExposureReportingRepository,
     private val exposureIngestionRepository: ExposureIngestionRepository,
-    private val exposureStatusRepository: ExposureStatusRepository
+    private val exposureStatusRepository: ExposureStatusRepository,
+    private val appNotificationManager: AppNotificationManager
 ) : ExposureNotificationManager.Delegate {
 
     private val settings get() = settingsManager.settings.value
@@ -135,6 +138,7 @@ class ExposureManager(
     suspend fun optInAndStartExposureTracing(activity: Activity) {
         stopExposureNotification()
         exposureNotificationManager.optInAndStartExposureTracing(activity)
+        appNotificationManager.removeNotification(NotificationType.ServiceNotActive)
     }
 
     suspend fun stopExposureNotification() {
