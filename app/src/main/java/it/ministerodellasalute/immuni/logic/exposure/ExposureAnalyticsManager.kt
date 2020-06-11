@@ -31,6 +31,7 @@ import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSetting
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.Province
 import kotlinx.coroutines.delay
+import java.security.MessageDigest
 import java.security.SecureRandom
 import java.util.*
 
@@ -39,7 +40,9 @@ class ExposureAnalyticsManager(
     private val exposureReportingRepository: ExposureReportingRepository,
     private val attestationClient: AttestationClient,
     private val baseOperationalInfoFactory: () -> BaseOperationalInfo,
-    private val schedulerFactory: () -> Scheduler
+    private val schedulerFactory: () -> Scheduler,
+    private val randomSaltFactory: () -> String = { randomSalt() },
+    private val base64Encoder: (ByteArray) -> String = { Base64.encodeToString(it, Base64.NO_WRAP) }
 ) {
     constructor(
         storeRepository: ExposureAnalyticsStoreRepository,
@@ -61,6 +64,14 @@ class ExposureAnalyticsManager(
         baseOperationalInfoFactory = baseOperationalInfoFactory,
         schedulerFactory = schedulerFactory
     )
+
+    companion object {
+        private fun randomSalt(): String {
+            val salt = ByteArray(16)
+            SecureRandom().nextBytes(salt)
+            return Base64.encodeToString(salt, Base64.NO_WRAP)
+        }
+    }
 
     fun setup(serverDate: Date) {
         val scheduler = schedulerFactory()
@@ -95,20 +106,23 @@ class ExposureAnalyticsManager(
     suspend fun sendOperationalInfo(
         summary: ExposureSummary?,
         isDummy: Boolean,
-        retryCount: Long = 0
+        retryCount: Int = 0
     ) {
-        val baseOperationalInfo: BaseOperationalInfo = baseOperationalInfoFactory()
+        val baseOperationalInfo = baseOperationalInfoFactory()
         val operationalInfo = ExposureAnalyticsOperationalInfo(
             province = baseOperationalInfo.province,
             exposurePermission = if (baseOperationalInfo.exposurePermission) 1 else 0,
             bluetoothActive = if (baseOperationalInfo.bluetoothActive) 1 else 0,
             notificationPermission = if (baseOperationalInfo.notificationPermission) 1 else 0,
             exposureNotification = if (summary?.let { it.matchedKeyCount > 0 } == true) 1 else 0,
-            lastRiskyExposureOn = (summary?.date ?: Date(0)).isoDateString,
-            salt = randomSalt()
+            lastRiskyExposureOn = (summary?.lastExposureDate ?: Date(0)).isoDateString,
+            salt = randomSaltFactory()
         )
-        val attestationResult =
-            attestationClient.attest(operationalInfo.digest.base64EncodedSha256())
+        val sha256digest = MessageDigest
+            .getInstance("SHA-256")
+            .digest(operationalInfo.digest.toByteArray())
+
+        val attestationResult = attestationClient.attest(base64Encoder(sha256digest))
         when (attestationResult) {
             is AttestationClient.Result.Success -> {
                 if (isDummy) {
@@ -124,21 +138,20 @@ class ExposureAnalyticsManager(
                 // Nothing to do
             }
             is AttestationClient.Result.Failure -> {
-                val retryCount = retryCount + 1
-                if (retryCount > 4) {
+                val newRetryCount = retryCount + 1
+                if (newRetryCount > 4) {
                     return
                 }
-                val delayMillis = retryCount * retryCount * 10 * 1000
-                delay(delayMillis)
-                sendOperationalInfo(summary, isDummy, retryCount)
+                val delayMillis = newRetryCount * newRetryCount * 10 * 1000
+                delay(delayMillis.toLong())
+                retrySendOperationalInfo(summary, isDummy, newRetryCount)
             }
         }
     }
 
-    private fun randomSalt(): String {
-        val salt = ByteArray(16)
-        SecureRandom().nextBytes(salt)
-        return Base64.encodeToString(salt, Base64.NO_WRAP)
+    @VisibleForTesting
+    suspend fun retrySendOperationalInfo(summary: ExposureSummary?, isDummy: Boolean, retryCount: Int) {
+        sendOperationalInfo(summary, isDummy, retryCount)
     }
 
     class Scheduler(
