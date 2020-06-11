@@ -375,11 +375,10 @@ class ExposureAnalyticsManagerTest {
                 attestationClient.attest(any())
             } answers {
                 callCount += 1
-                if (callCount == 5)
-                    AttestationClient.Result.Success(successString)
+                if (callCount == 5) AttestationClient.Result.Success(successString)
                 else AttestationClient.Result.Failure(error)
             }
-            coEvery { networkRepository.sendOperationalInfo(any(), successString) } returns Unit
+            coEvery { networkRepository.sendDummyOperationalInfo(any(), successString) } returns Unit
             val mockManager = spyk(manager)
 
             val job = async {
@@ -399,19 +398,9 @@ class ExposureAnalyticsManagerTest {
             coVerify(exactly = 0) {
                 mockManager.retrySendOperationalInfo(any(), true, 5)
             }
-            coVerify(exactly = 1) { networkRepository.sendOperationalInfo(any(), successString) }
+            coVerify(exactly = 1) { networkRepository.sendDummyOperationalInfo(any(), successString) }
 
             job.await()
         }
     }
-
-//    fun `foo`() {
-//        val serverDate = parseUTCDate("2020-02-01T00:00:00Z")
-//
-//        val spiedManager = spyk(manager)
-//
-//        val exposureSummary = mockk<ExposureSummary>()
-//
-//        val operationalInfo
-//    }
 }
