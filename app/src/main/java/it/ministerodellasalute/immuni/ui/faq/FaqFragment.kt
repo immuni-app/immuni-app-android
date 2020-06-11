@@ -15,6 +15,7 @@
 
 package it.ministerodellasalute.immuni.ui.faq
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -28,6 +29,7 @@ import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.view.animateHide
 import it.ministerodellasalute.immuni.extensions.view.animateShow
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
+import it.ministerodellasalute.immuni.extensions.view.hideKeyboard
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.faq_fragment.*
@@ -37,6 +39,7 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
 
     lateinit var viewModel: FaqViewModel
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background_darker))
@@ -81,6 +84,11 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
         searchInput.setOnFocusChangeListener { _, hasFocus ->
             searchInputLayout.isActivated = hasFocus
             searchInputLayout.refreshStartIconDrawableState()
+        }
+        // Hide soft keyboard when user wants to scroll content
+        faqRecycler.setOnTouchListener { _, _ ->
+            searchInput.hideKeyboard()
+            false
         }
     }
 
