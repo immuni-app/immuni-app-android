@@ -29,9 +29,9 @@ import it.ministerodellasalute.immuni.extensions.view.animateHide
 import it.ministerodellasalute.immuni.extensions.view.animateShow
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
+import kotlin.math.abs
 import kotlinx.android.synthetic.main.faq_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import kotlin.math.abs
 
 class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
 
