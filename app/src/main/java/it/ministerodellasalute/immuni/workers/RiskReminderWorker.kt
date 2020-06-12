@@ -19,6 +19,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkerParameters
+import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
@@ -33,6 +34,12 @@ class RiskReminderWorker(
     private val workerManager: WorkerManager by inject()
 
     override suspend fun doWork(): Result {
+
+        // DEBUG notification
+        if (applicationContext.resources.getBoolean(R.bool.development_device)) {
+            notificationManager.triggerDebugNotification("Risk reminder Worker.")
+        }
+
         return doWork(
             notificationManager,
             workerManager

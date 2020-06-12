@@ -19,6 +19,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkerParameters
+import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.forceupdate.PlayServicesStatus
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
@@ -38,6 +39,12 @@ class OnboardingNotCompletedWorker(
     private val workerManager: WorkerManager by inject()
 
     override suspend fun doWork(): Result {
+
+        // DEBUG notification
+        if (applicationContext.resources.getBoolean(R.bool.development_device)) {
+            notificationManager.triggerDebugNotification("Onboarding Not Completed Worker.")
+        }
+
         return doWork(
             userManager.isOnboardingComplete.value,
             { forceUpdateManager.playServicesStatus },

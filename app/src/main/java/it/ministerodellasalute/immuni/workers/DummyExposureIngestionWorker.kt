@@ -19,10 +19,12 @@ import android.content.Context
 import androidx.annotation.VisibleForTesting
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.extensions.utils.exponential
 import it.ministerodellasalute.immuni.extensions.utils.log
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import java.security.SecureRandom
@@ -44,9 +46,16 @@ class DummyExposureIngestionWorker(
     private val appLifecycleObserver: AppLifecycleObserver by inject()
     private val exposureManager: ExposureManager by inject()
     private val settingsManager: ConfigurationSettingsManager by inject()
+    private val notificationManager: AppNotificationManager by inject()
     private val random = SecureRandom()
 
     override suspend fun doWork(): Result {
+
+        // DEBUG notification
+        if (applicationContext.resources.getBoolean(R.bool.development_device)) {
+            notificationManager.triggerDebugNotification("Dummy Injestion Worker.")
+        }
+
         val settings = settingsManager.settings.value
         val impl = Impl(
             configuration = Configuration(
