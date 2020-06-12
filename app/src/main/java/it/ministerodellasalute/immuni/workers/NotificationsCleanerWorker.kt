@@ -16,18 +16,15 @@
 package it.ministerodellasalute.immuni.workers
 
 import android.content.Context
-import androidx.core.app.NotificationCompat
 import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
-import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.log
+import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
-import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
-import kotlinx.coroutines.delay
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -37,14 +34,29 @@ class NotificationsCleanerWorker(
 ) : CoroutineWorker(appContext, params), KoinComponent {
     private val notificationManager: AppNotificationManager by inject()
     private val workerManager: WorkerManager by inject()
-    private val settingsManager: ConfigurationSettingsManager by inject()
+    private val userManager: UserManager by inject()
     private val forceUpdateManager: ForceUpdateManager by inject()
+    private val exposureManager: ExposureManager by inject()
 
     override suspend fun doWork(): Result {
         log("NotificationsCleanerWorker running...")
         try {
-            notificationManager.removeNotification(NotificationType.ServiceNotActive)
-            notificationManager.removeNotification(NotificationType.ForcedVersionUpdate) //TODO
+
+            // Force update
+            if (!forceUpdateManager.isAppOutdated) {
+                notificationManager.removeNotification(NotificationType.ForcedVersionUpdate)
+            }
+
+            // Exposure active
+            if (exposureManager.isBroadcastingActive.value == true) {
+                notificationManager.removeNotification(NotificationType.ServiceNotActive)
+            }
+
+            // Onboarding not complete
+            if (userManager.isOnboardingComplete.value) {
+                notificationManager.removeNotification(NotificationType.OnboardingNotCompleted)
+            }
+
             workerManager.scheduleNotificationsCleanerWorker()
 
             return Result.success()
