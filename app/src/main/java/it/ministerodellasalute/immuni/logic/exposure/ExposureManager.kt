@@ -34,6 +34,7 @@ import java.io.File
 import java.util.*
 import kotlin.math.max
 import kotlinx.coroutines.flow.*
+import kotlin.math.roundToInt
 
 class ExposureManager(
     private val settingsManager: ConfigurationSettingsManager,
@@ -101,7 +102,15 @@ class ExposureManager(
         summary: ExposureSummary,
         oldExposureStatus: ExposureStatus
     ): ExposureStatus {
-        if (summary.matchedKeyCount == 0 || summary.maximumRiskScore < settings.exposureInfoMinimumRiskScore) {
+        if (summary.matchedKeyCount == 0) {
+            return oldExposureStatus
+        }
+        if (summary.maximumRiskScore < settings.exposureInfoMinimumRiskScore) {
+            return oldExposureStatus
+        }
+        val weightedDurationMinutes =
+            summary.weightedDurationMinutes(settings.attenuationDurationsWeights)
+        if ((weightedDurationMinutes * 60).roundToInt() < settings.attenuationDurationsThreshold) {
             return oldExposureStatus
         }
         val oldStatusLastExposureTime =

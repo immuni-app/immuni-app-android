@@ -29,4 +29,10 @@ data class ExposureSummary(
     val lowRiskAttenuationDurationMinutes: Int,
     val riskScoreSum: Int,
     val exposureInfos: List<ExposureInformation> = listOf()
-)
+) {
+    fun weightedDurationMinutes(attenuationDurationsWeights: List<Double>): Double {
+        return highRiskAttenuationDurationMinutes * attenuationDurationsWeights[0] +
+            mediumRiskAttenuationDurationMinutes * attenuationDurationsWeights[1] +
+            lowRiskAttenuationDurationMinutes * attenuationDurationsWeights[2]
+    }
+}

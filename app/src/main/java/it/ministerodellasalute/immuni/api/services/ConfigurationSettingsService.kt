@@ -45,6 +45,8 @@ data class ConfigurationSettings(
     @field:Json(name = "required_update_notification_period") val requiredUpdateNotificationPeriod: Int,
     @field:Json(name = "risk_reminder_notification_period") val riskReminderNotificationPeriod: Int,
     @field:Json(name = "exposure_info_minimum_risk_score") val exposureInfoMinimumRiskScore: Int,
+    @field:Json(name = "attenuation_durations_weights") val attenuationDurationsWeights: List<Double>,
+    @field:Json(name = "attenuation_durations_threshold") val attenuationDurationsThreshold: Int,
     @field:Json(name = "exposure_detection_period") val exposureDetectionPeriod: Int,
     @field:Json(name = "dummy_teks_average_opportunity_waiting_time") val dummyTeksAverageOpportunityWaitingTime: Int,
     @field:Json(name = "dummy_teks_average_request_waiting_time") val dummyTeksAverageRequestWaitingTime: Int,
@@ -123,6 +125,8 @@ val defaultSettings = ConfigurationSettings(
         minimumRiskScore = 1
     ),
     exposureInfoMinimumRiskScore = 20,
+    attenuationDurationsWeights = listOf(1.0, 1.0, 1.0),
+    attenuationDurationsThreshold = 0,
     exposureDetectionPeriod = 60 * 60 * 4, // 4 hours
     serviceNotActiveNotificationPeriod = 60 * 60 * 24, // 1 day
     onboardingNotCompletedNotificationPeriod = 60 * 60 * 24, // 1 day
