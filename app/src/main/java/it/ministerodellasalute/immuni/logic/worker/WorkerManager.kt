@@ -20,6 +20,7 @@ import androidx.work.Constraints
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.extensions.utils.exponential
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
@@ -74,6 +75,25 @@ class WorkerManager(
             "ForceUpdateNotificationWorker",
             ExistingWorkPolicy.KEEP,
             OneTimeWorkRequest.Builder(ForceUpdateNotificationWorker::class.java)
+                .setInitialDelay(
+                    if (withDelay) delay else 0,
+                    TimeUnit.SECONDS
+                )
+                .build()
+        )
+    }
+
+    fun scheduleNotificationsCleanerWorker(withDelay: Boolean = true) {
+
+        val delay = when (BuildConfig.DEBUG) {
+            true -> 10L // 10 seconds
+            else -> 60 * 15L // 15 minutes
+        }
+
+        workManager.enqueueUniqueWork(
+            "NotificationsCleanerWorker",
+            ExistingWorkPolicy.REPLACE,
+            OneTimeWorkRequest.Builder(NotificationsCleanerWorker::class.java)
                 .setInitialDelay(
                     if (withDelay) delay else 0,
                     TimeUnit.SECONDS

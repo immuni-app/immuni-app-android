@@ -86,11 +86,20 @@ class ImmuniApplication : Application(), KoinComponent {
         updateForceUpdateNotificationWorker()
         updateRiskReminderWorker()
         updateInitialDiagnosisKeysRequest()
+        updateNotificationsCleanerWorker()
         log("Workers successfully started")
     }
 
     private fun updateNextDummyExposureIngestionWorker() {
         workerManager.scheduleNextDummyExposureIngestionWorker(ExistingWorkPolicy.KEEP)
+    }
+
+    private fun updateNotificationsCleanerWorker() {
+        val job = Job()
+        val scope = CoroutineScope(Dispatchers.Default + job)
+        lifecycleObserver.isInForeground.filter { it }.onEach {
+            workerManager.scheduleNotificationsCleanerWorker(withDelay = false)
+        }.launchIn(scope)
     }
 
     private fun updateOnboardingNotCompletedWorker() {
