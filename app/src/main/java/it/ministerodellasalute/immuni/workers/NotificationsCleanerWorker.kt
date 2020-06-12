@@ -18,7 +18,7 @@ package it.ministerodellasalute.immuni.workers
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import it.ministerodellasalute.immuni.extensions.utils.log
+import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
@@ -39,7 +39,12 @@ class NotificationsCleanerWorker(
     private val exposureManager: ExposureManager by inject()
 
     override suspend fun doWork(): Result {
-        log("NotificationsCleanerWorker running...")
+
+        // DEBUG notification
+        if (applicationContext.resources.getBoolean(R.bool.development_device)) {
+            // notificationManager.triggerDebugNotification("Notification Cleaner Worker.")
+        }
+
         try {
 
             // Force update
