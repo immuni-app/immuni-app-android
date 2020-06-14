@@ -24,6 +24,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.ScreenUtils
+import it.ministerodellasalute.immuni.extensions.utils.highEndDevice
 import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
@@ -36,7 +37,6 @@ class WelcomeItemFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         position = arguments?.getInt("position") ?: 0
     }
 
@@ -73,19 +73,58 @@ class WelcomeItemFragment : Fragment() {
         checkSpacing()
     }
 
+    /**
+     * Use Lottie animations or simple images
+     * depending on the device specs.
+     */
     private fun loadIllustrations() {
-        val imageResource = when (position) {
-            0 -> R.drawable.welcome_1
-            1 -> R.drawable.welcome_2
-            2 -> R.drawable.welcome_3
-            else -> R.drawable.welcome_4
-        }
 
-        GlideApp
-            .with(requireContext())
-            .load(imageResource)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .into(image)
+        if (highEndDevice(requireContext())) {
+            val lottieResource = when (position) {
+                0 -> R.raw.lottie_happiness_01
+                1 -> R.raw.lottie_selfcare_02
+                2 -> R.raw.lottie_window_03
+                else -> R.raw.lottie_lock_04
+            }
+            image.setAnimation(lottieResource)
+        } else {
+            val imageResource = when (position) {
+                0 -> R.drawable.welcome_1
+                1 -> R.drawable.welcome_2
+                2 -> R.drawable.welcome_3
+                else -> R.drawable.welcome_4
+            }
+
+            GlideApp
+                .with(requireContext())
+                .load(imageResource)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(image)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (highEndDevice(requireContext())) {
+            image.pauseAnimation()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (highEndDevice(requireContext())) {
+            // the first animation doesn't loop
+            // the others yes
+            if (position == 0) {
+                if (image.progress == 0f) {
+                    image.loop(false)
+                    image.resumeAnimation()
+                }
+            } else {
+                image.loop(true)
+                image.resumeAnimation()
+            }
+        }
     }
 
     /**
