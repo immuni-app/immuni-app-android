@@ -28,7 +28,7 @@ import it.ministerodellasalute.immuni.extensions.utils.isHighEndDevice
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.util.GlideApp
-import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
+import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
 
 class BluetoothFragment :
     ViewPagerBaseFragment(R.layout.onboarding_bluetooth_fragment) {
