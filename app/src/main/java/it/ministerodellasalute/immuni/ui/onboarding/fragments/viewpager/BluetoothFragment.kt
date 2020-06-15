@@ -20,10 +20,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.bluetooth.BluetoothUtils
+import it.ministerodellasalute.immuni.extensions.utils.isHighEndDevice
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
+import it.ministerodellasalute.immuni.util.GlideApp
 import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
 
 class BluetoothFragment :
@@ -31,7 +35,7 @@ class BluetoothFragment :
 
     override fun onResume() {
         super.onResume()
-        (activity as? AppCompatActivity)?.setLightStatusBar(resources.getColor(R.color.background))
+        (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,6 +47,17 @@ class BluetoothFragment :
             viewModel.onNextTap()
         }
 
+        if (isHighEndDevice(requireContext())) {
+            image.setAnimation(R.raw.lottie_girls_06)
+            image.loop(true)
+            image.playAnimation()
+        } else {
+            GlideApp
+                .with(requireContext())
+                .load(R.drawable.ic_onboarding_bluetooth)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(image)
+        }
         checkSpacing()
     }
 
