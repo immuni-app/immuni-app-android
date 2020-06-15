@@ -17,11 +17,8 @@ package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 
 import android.os.Bundle
 import android.view.View
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.utils.isHighEndDevice
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import it.ministerodellasalute.immuni.util.GlideApp
 import kotlinx.android.synthetic.main.onboarding_phishing_warning.*
 
 class PhishingWarningFragment : ViewPagerBaseFragment(R.layout.onboarding_phishing_warning) {
@@ -35,17 +32,7 @@ class PhishingWarningFragment : ViewPagerBaseFragment(R.layout.onboarding_phishi
             viewModel.onNextTap()
         }
 
-        if (isHighEndDevice(requireContext())) {
-            image.setAnimation(R.raw.lottie_man_10)
-            image.loop(true)
-            image.playAnimation()
-        } else {
-            GlideApp
-                .with(requireContext())
-                .load(R.drawable.ic_onboarding_phishing_warning)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(image)
-        }
+        setupImage(R.raw.lottie_man_10, R.drawable.ic_onboarding_phishing_warning)
         checkSpacing()
     }
 }

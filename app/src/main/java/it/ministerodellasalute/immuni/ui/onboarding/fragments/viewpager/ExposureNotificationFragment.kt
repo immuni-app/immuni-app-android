@@ -19,13 +19,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.utils.isHighEndDevice
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
-import it.ministerodellasalute.immuni.util.GlideApp
 import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
 
 class ExposureNotificationFragment :
@@ -71,17 +68,7 @@ class ExposureNotificationFragment :
             findNavController().navigate(action)
         }
 
-        if (isHighEndDevice(requireContext())) {
-            image.setAnimation(R.raw.lottie_notifications_05)
-            image.loop(true)
-            image.playAnimation()
-        } else {
-            GlideApp
-                .with(requireContext())
-                .load(R.drawable.ic_onboarding_exposure)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(image)
-        }
+        setupImage(R.raw.lottie_notifications_05, R.drawable.ic_onboarding_exposure)
         checkSpacing()
     }
 

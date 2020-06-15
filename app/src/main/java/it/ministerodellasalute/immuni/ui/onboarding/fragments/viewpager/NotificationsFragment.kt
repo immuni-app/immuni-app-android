@@ -19,13 +19,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import it.ministerodellasalute.immuni.OnboardingDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
-import it.ministerodellasalute.immuni.extensions.utils.isHighEndDevice
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import it.ministerodellasalute.immuni.util.GlideApp
 import kotlinx.android.synthetic.main.onboarding_notifications_fragment.*
 
 class NotificationsFragment :
@@ -44,17 +41,7 @@ class NotificationsFragment :
             }
         }
 
-        if (isHighEndDevice(requireContext())) {
-            image.setAnimation(R.raw.lottie_phones_07)
-            image.loop(true)
-            image.playAnimation()
-        } else {
-            GlideApp
-                .with(requireContext())
-                .load(R.drawable.ic_onboarding_notifications)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(image)
-        }
+        setupImage(R.raw.lottie_phones_07, R.drawable.ic_onboarding_notifications)
         checkSpacing()
     }
 
