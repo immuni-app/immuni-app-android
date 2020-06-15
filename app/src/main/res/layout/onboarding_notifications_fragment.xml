@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:background="@color/background">
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -41,7 +41,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_onboarding_notifications" />
+                tools:src="@drawable/ic_onboarding_notifications" />
 
             <TextView
                 android:id="@+id/title"

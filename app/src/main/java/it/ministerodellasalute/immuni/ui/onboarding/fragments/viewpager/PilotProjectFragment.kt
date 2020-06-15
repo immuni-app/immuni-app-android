@@ -19,7 +19,7 @@ import android.os.Bundle
 import android.view.View
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
+import kotlinx.android.synthetic.main.onboarding_pilot_project.*
 
 class PilotProjectFragment : ViewPagerBaseFragment(R.layout.onboarding_pilot_project) {
 

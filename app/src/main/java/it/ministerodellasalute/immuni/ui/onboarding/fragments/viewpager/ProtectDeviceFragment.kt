@@ -17,9 +17,12 @@ package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 
 import android.os.Bundle
 import android.view.View
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.utils.isHighEndDevice
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
+import it.ministerodellasalute.immuni.util.GlideApp
+import kotlinx.android.synthetic.main.onboarding_protect_device_fragment.*
 
 class ProtectDeviceFragment : ViewPagerBaseFragment(R.layout.onboarding_protect_device_fragment) {
 
@@ -32,6 +35,17 @@ class ProtectDeviceFragment : ViewPagerBaseFragment(R.layout.onboarding_protect_
             viewModel.onNextTap()
         }
 
+        if (isHighEndDevice(requireContext())) {
+            image.setAnimation(R.raw.lottie_password_09)
+            image.loop(true)
+            image.playAnimation()
+        } else {
+            GlideApp
+                .with(requireContext())
+                .load(R.drawable.ic_onboarding_protect_device)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(image)
+        }
         checkSpacing()
     }
 }
