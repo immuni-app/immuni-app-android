@@ -317,7 +317,7 @@
                 android:padding="30dp"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
-                android:text="@string/suggestions_risk_fourth_message"
+                android:text="@string/suggestions_risk_third_message"
                 android:textColor="@color/grey_dark" />
 
             <TextView

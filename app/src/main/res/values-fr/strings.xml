@@ -287,7 +287,7 @@
 
   <string name="suggestions_risk_first_message">L\'application vous montre cet avertissement sur la base des informations disponibles (durée du contact et estimation approximative de la distance) mais ne peut pas savoir si lors du contact vous avez porté un masque ou si vous étiez de dos. Le risque de contagion pourrait donc être surestimé.</string>
   <string name="suggestions_risk_second_message">Pour aider les Services nationaux de santé à prendre soin de vous le cas échéant, l\'application a informé le Ministère de la Santé de la notification qui vous a été envoyée.</string>
-  <string name="suggestions_risk_fourth_message"><b>Le Ministère de la Santé ne peut en aucun cas retracer votre identité sur la base de ces informations</b>.</string>
+  <string name="suggestions_risk_third_message"><b>Le Ministère de la Santé ne peut en aucun cas retracer votre identité sur la base de ces informations</b>.</string>
   <string name="suggestions_risk_third_message_android">Pour plus d\'informations sur les données envoyées au Ministère de la Santé, merci de bien vouloir lire la {politique sur le respect de la vie privée} disponible au point 4.</string>
   <string name="settings_setting_contact_support">Contacter le service d\'assistance</string>
   <string name="settings_setting_support">Contactez le service d\'assistance</string>

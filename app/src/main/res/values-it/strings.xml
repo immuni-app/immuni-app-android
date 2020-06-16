@@ -285,7 +285,7 @@
   <string name="permission_tutorial_deactivate_service_third_message">Disabilitando le notifiche di esposizione i successivi contatti con altri utenti non verranno registrati.</string>
   <string name="suggestions_risk_first_message">L\'app ti mostra questo avviso sulla base delle informazioni a disposizione (durata del contatto e stima approssimativa della distanza) ma non può sapere se durante il contatto indossavate mascherine o se vi davate le spalle. Il rischio di contagio potrebbe quindi essere sovrastimato.</string>
   <string name="suggestions_risk_second_message">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità l’app ha informato il Ministero della Salute della notifica che hai ricevuto.</string>
-  <string name="suggestions_risk_fourth_message"><b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di queste informazioni</b>.</string>
+  <string name="suggestions_risk_third_message"><b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di queste informazioni</b>.</string>
   <string name="suggestions_risk_third_message_android">Per ulteriori informazioni sui dati trasmessi al Ministero della Salute puoi leggere l\'{informativa privacy} al punto 4.</string>
   <string name="settings_setting_contact_support">Contatta il supporto</string>
   <string name="settings_setting_support">Contatta il supporto</string>
