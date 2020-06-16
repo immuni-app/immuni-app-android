@@ -56,7 +56,7 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
 
         val adapter = FaqListAdapter(this)
         faqRecycler.adapter = adapter
-        faqRecycler.itemAnimator?.changeDuration = 0
+        //faqRecycler.itemAnimator?.changeDuration = 0
 
         viewModel.questionAndAnswers.observe(viewLifecycleOwner) { (highlight, faqList) ->
             adapter.submitData(faqList, highlight)
