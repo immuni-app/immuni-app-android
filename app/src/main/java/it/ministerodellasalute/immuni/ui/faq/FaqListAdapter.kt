@@ -22,7 +22,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.utils.colorHighlight
+import it.ministerodellasalute.immuni.extensions.utils.fuzzyMatchHighlight
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 
@@ -73,7 +73,7 @@ class FaqListAdapter(private val clickListener: FaqClickListener) :
         val question = dataItem.question
 
         val highlightColor = holder.question.context.getColorCompat(R.color.colorPrimary)
-        holder.question.text = question.colorHighlight(highlight, highlightColor)
+        holder.question.text = question.fuzzyMatchHighlight(highlight, highlightColor)
     }
 }
 

@@ -44,7 +44,7 @@ class FaqViewModel(
                 val filteredFaq = faqList?.filter { faq ->
                     // Check if filter is not cancelled
                     if (!isActive) return@collect
-                    faq.title.contains(text, ignoreCase = true)
+                    faq.title.fuzzyContains(text)
                 }?.map { faq ->
                     if (!isActive) return@collect
                     QuestionAndAnswer(
@@ -63,3 +63,22 @@ class FaqViewModel(
 }
 
 data class FaqListViewData(val highlight: String, val faqList: List<QuestionAndAnswer>)
+
+fun String.fuzzyContains(other: String): Boolean {
+    val text = this
+    if (other.length > text.length) return false
+
+    var otherIdx = 0
+    var textIdx = 0
+
+    while (otherIdx != other.length) {
+        if (textIdx == text.length) return false
+
+        if (other[otherIdx].equals(text[textIdx], ignoreCase = true)) {
+            otherIdx += 1
+        }
+
+        textIdx += 1
+    }
+    return true
+}
