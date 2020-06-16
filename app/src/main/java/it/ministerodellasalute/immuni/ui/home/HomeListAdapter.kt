@@ -71,6 +71,7 @@ class HomeListAdapter(
         init {
             reactivate.setSafeOnClickListener { onItemClick(adapterPosition, R.id.reactivate) }
             knowMore.setSafeOnClickListener { onItemClick(adapterPosition, R.id.knowMore) }
+            lottieBg.setSafeOnClickListener { onItemClick(adapterPosition, R.id.knowMore) }
         }
     }
 
