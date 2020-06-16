@@ -19,6 +19,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import it.ministerodellasalute.immuni.api.services.Faq
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -41,17 +42,25 @@ class FaqViewModel(
         filterJob?.cancel()
         filterJob = viewModelScope.launch(Dispatchers.Default) {
             settingsManager.faqs.collect { faqList ->
-                val filteredFaq = faqList?.filter { faq ->
-                    // Check if filter is not cancelled
+                val exactMatch = mutableListOf<Faq>()
+                val fuzzyMatch = mutableListOf<Faq>()
+
+                faqList?.forEach { faq ->
                     if (!isActive) return@collect
-                    faq.title.fuzzyContains(text)
-                }?.map { faq ->
+                    when {
+                        faq.title.contains(text, ignoreCase = true) -> exactMatch += faq
+                        faq.title.fuzzyContains(text) -> fuzzyMatch += faq
+                    }
+                }
+
+                val filteredFaq = (exactMatch + fuzzyMatch).map { faq ->
                     if (!isActive) return@collect
                     QuestionAndAnswer(
                         faq.title,
                         faq.content
                     )
-                } ?: listOf()
+                }
+
                 _questionAndAnswers.postValue(FaqListViewData(text, filteredFaq))
             }
         }

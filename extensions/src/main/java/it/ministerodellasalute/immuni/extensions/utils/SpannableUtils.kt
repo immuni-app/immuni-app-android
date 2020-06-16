@@ -145,29 +145,3 @@ fun String.colorHighlight(
         append(text.subSequence(currStart, text.length))
     }
 }
-
-fun String.fuzzyMatchHighlight(
-    fuzzyMatch: String,
-    @ColorInt color: Int
-): SpannedString {
-    val text = this
-    if (fuzzyMatch.length > text.length) return buildSpannedString { append(text) }
-
-    var textIdx = 0
-    var matchIdx = 0
-
-    return buildSpannedString {
-        while (matchIdx != fuzzyMatch.length) {
-            if (textIdx == text.length) return buildSpannedString { append(text) }
-
-            if (fuzzyMatch[matchIdx].equals(text[textIdx], ignoreCase = true)) {
-                color(color) { append(text[textIdx]) }
-                matchIdx += 1
-            } else {
-                append(text[textIdx])
-            }
-            textIdx += 1
-        }
-        append(text.substring(textIdx))
-    }
-}
