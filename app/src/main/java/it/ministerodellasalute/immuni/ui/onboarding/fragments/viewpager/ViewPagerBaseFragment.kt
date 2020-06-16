@@ -16,11 +16,13 @@
 package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.RawRes
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
@@ -46,6 +48,13 @@ abstract class ViewPagerBaseFragment(@LayoutRes val layout: Int) : Fragment(layo
         view.findViewById<TextView>(R.id.knowMore)?.setSafeOnClickListener {
             val action = ViewPagerFragmentDirections.actionHowitworks(false)
             findNavController().navigate(action)
+        }
+
+        // pause animation while scrolling
+        view.findViewById<NestedScrollView>(R.id.scrollView)?.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) resumeAnimations()
+            else if (event.action == MotionEvent.ACTION_DOWN) pauseAnimations()
+            false
         }
     }
 
@@ -85,11 +94,19 @@ abstract class ViewPagerBaseFragment(@LayoutRes val layout: Int) : Fragment(layo
 
     override fun onPause() {
         super.onPause()
-        animationView?.pauseAnimation()
+        pauseAnimations()
     }
 
     override fun onResume() {
         super.onResume()
+        resumeAnimations()
+    }
+
+    fun pauseAnimations() {
+        animationView?.pauseAnimation()
+    }
+
+    fun resumeAnimations() {
         animationView?.resumeAnimation()
     }
 }

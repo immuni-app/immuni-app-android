@@ -20,6 +20,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import it.ministerodellasalute.immuni.R
@@ -30,6 +31,8 @@ import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
 import it.ministerodellasalute.immuni.util.GlideApp
 import kotlinx.android.synthetic.main.welcome_item_fragment.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class WelcomeItemFragment : Fragment() {
 
@@ -118,11 +121,17 @@ class WelcomeItemFragment : Fragment() {
             if (position == 0) {
                 if (image.progress == 0f) {
                     image.loop(false)
-                    image.resumeAnimation()
+                    lifecycleScope.launch {
+                        delay(250)
+                        image.resumeAnimation()
+                    }
                 }
             } else {
                 image.loop(true)
-                image.resumeAnimation()
+                lifecycleScope.launch {
+                    delay(250)
+                    image.resumeAnimation()
+                }
             }
         }
     }
