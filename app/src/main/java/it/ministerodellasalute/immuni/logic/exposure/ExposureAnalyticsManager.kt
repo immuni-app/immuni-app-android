@@ -42,7 +42,7 @@ class ExposureAnalyticsManager(
     private val baseOperationalInfoFactory: () -> BaseOperationalInfo,
     private val schedulerFactory: () -> Scheduler,
     private val randomSaltFactory: () -> String = { randomSalt() },
-    private val base64Encoder: (ByteArray) -> String = { Base64.encodeToString(it, Base64.NO_WRAP) }
+    private val base64Encoder: (ByteArray) -> String = { encodeToBase64String(it) }
 ) {
     constructor(
         storeRepository: ExposureAnalyticsStoreRepository,
@@ -66,10 +66,14 @@ class ExposureAnalyticsManager(
     )
 
     companion object {
+        private fun encodeToBase64String(data: ByteArray): String {
+            return Base64.encodeToString(data, Base64.NO_WRAP)
+        }
+
         private fun randomSalt(): String {
             val salt = ByteArray(16)
             SecureRandom().nextBytes(salt)
-            return Base64.encodeToString(salt, Base64.NO_WRAP)
+            return encodeToBase64String(salt)
         }
     }
 
