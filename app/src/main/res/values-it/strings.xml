@@ -149,11 +149,11 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Apri le impostazioni</b> dal bottone in basso</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Abilita le notifiche di esposizione</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Apri Impostazioni</string>
-  <string name="upload_data_warning_message">Questa funzione richiede l\'assistenza dell\'operatore sanitario che ti comunica telefonicamente l\'esito positivo del test.</string>
+  <string name="upload_data_warning_message">Questa funzione richiede l\'assistenza dell\'operatore sanitario che ti comunica telefonicamente l\'esito positivo del tampone.</string>
   <string name="upload_data_code_message">Comunica questo codice all\'operatore sanitario:</string>
   <string name="upload_data_wait_operator_message">Attendi la conferma dell\'operatore</string>
-  <string name="upload_data_verify_message">Per proseguire, verifica l\'autorizzazione </string>
-  <string name="upload_data_verify_button">Verifica</string>
+  <string name="upload_data_verify_message">Prosegui per verificare l\'autorizzazione del codice</string>
+  <string name="upload_data_verify_button">Prosegui</string>
   <string name="upload_data_verify_error">Codice non ancora autorizzato</string>
   <string name="upload_data_verify_loading">Verifica autorizzazione...</string>
   <string name="upload_data_verify_loading_button" formatted="false">Attendi %d %@</string>
@@ -281,11 +281,11 @@
   <string name="onboarding_pilot_action">Ho capito</string>
   <string name="permission_tutorial_deactivate_service_title">Come disattivare il servizio</string>
   <string name="permission_tutorial_deactivate_service_first_message_android">Per proteggere la tua Salute e quella dei tuoi cari, disattiva il servizio solo se necessario e riattivalo appena puoi.</string>
-  <string name="permission_tutorial_deactivate_service_second_message">In certi casi può aver senso disattivare temporaneamente le notifiche di esposizione, ad esempio <b>se sei un operatore sanitario a contatto con pazienti COVID-19 e desideri disattivare l’app mentre sei al lavoro.</b></string>
+  <string name="permission_tutorial_deactivate_service_second_message">In certi casi può aver senso disattivare temporaneamente l’app, ad esempio mentre sei al lavoro se sei un operatore sanitario a contatto con pazienti COVID-19.</string>
   <string name="permission_tutorial_deactivate_service_third_message">Disabilitando le notifiche di esposizione i successivi contatti con altri utenti non verranno registrati.</string>
-  <string name="suggestions_risk_first_message">L\'app ti mostra questo avviso sulla base delle informazioni a disposizione (durata del contatto e stima approssimativa della distanza) ma non può sapere se durante il contatto indossavi una mascherina o se davi le spalle. Il rischio di contagio potrebbe quindi essere sovrastimato.</string>
+  <string name="suggestions_risk_first_message">L\'app ti mostra questo avviso sulla base delle informazioni a disposizione (durata del contatto e stima approssimativa della distanza) ma non può sapere se durante il contatto indossavate mascherine o se vi davate le spalle. Il rischio di contagio potrebbe quindi essere sovrastimato.</string>
   <string name="suggestions_risk_second_message">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità l’app ha informato il Ministero della Salute della notifica che hai ricevuto.</string>
-  <string name="suggestions_risk_fourth_message"><b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di queste informazioni</b>.</string>
+  <string name="suggestions_risk_third_message"><b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di queste informazioni</b>.</string>
   <string name="suggestions_risk_third_message_android">Per ulteriori informazioni sui dati trasmessi al Ministero della Salute puoi leggere l\'{informativa privacy} al punto 4.</string>
   <string name="settings_setting_contact_support">Contatta il supporto</string>
   <string name="settings_setting_support">Contatta il supporto</string>

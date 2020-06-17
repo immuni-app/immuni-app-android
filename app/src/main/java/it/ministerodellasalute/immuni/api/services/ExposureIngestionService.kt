@@ -110,7 +110,7 @@ interface ExposureIngestionService {
         sardegna("Sardegna"),
         sicilia("Sicilia"),
         toscana("Toscana"),
-        trentinoAltoAdige("Trentino-Alto Adige"),
+        trentinoAltoAdige("Trentino-Alto Adige/Südtirol"),
         umbria("Umbria"),
         valleAosta("Valle d'Aosta"),
         veneto("Veneto");
@@ -284,7 +284,7 @@ interface ExposureIngestionService {
         @Json(name = "BG") bergamo("BG", "Bergamo"),
         @Json(name = "BI") biella("BI", "Biella"),
         @Json(name = "BO") bologna("BO", "Bologna"),
-        @Json(name = "BZ") bolzano("BZ", "Bolzano"),
+        @Json(name = "BZ") bolzano("BZ", "Bolzano/Bozen"),
         @Json(name = "BS") brescia("BS", "Brescia"),
         @Json(name = "BR") brindisi("BR", "Brindisi"),
         @Json(name = "CA") cagliari("CA", "Cagliari"),

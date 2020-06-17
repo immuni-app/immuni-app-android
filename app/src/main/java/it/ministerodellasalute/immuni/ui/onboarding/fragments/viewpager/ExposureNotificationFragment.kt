@@ -18,9 +18,11 @@ package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
+import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
 import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
 
 class ExposureNotificationFragment :
@@ -59,6 +61,11 @@ class ExposureNotificationFragment :
                     viewModel.startExposureNotification(it)
                 }
             }
+        }
+
+        knowMore.setSafeOnClickListener {
+            val action = ViewPagerFragmentDirections.actionLocalisationExplanation()
+            findNavController().navigate(action)
         }
 
         checkSpacing()

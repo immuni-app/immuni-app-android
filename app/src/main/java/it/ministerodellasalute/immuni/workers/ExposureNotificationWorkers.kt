@@ -18,11 +18,13 @@ package it.ministerodellasalute.immuni.workers
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureReportingService
 import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
+import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.models.FetchSettingsResult
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
@@ -67,8 +69,15 @@ class RequestDiagnosisKeysWorker(
     private val workerManager: WorkerManager by inject()
     private val api: ExposureReportingService by inject()
     private val settingsManager: ConfigurationSettingsManager by inject()
+    private val notificationManager: AppNotificationManager by inject()
 
     override suspend fun doWork(): Result {
+
+        // DEBUG notification
+        if (applicationContext.resources.getBoolean(R.bool.development_device)) {
+            notificationManager.triggerDebugNotification("Check Exposition Worker.")
+        }
+
         val chunksDirPath = listOf(
             applicationContext.filesDir,
             "chunks"

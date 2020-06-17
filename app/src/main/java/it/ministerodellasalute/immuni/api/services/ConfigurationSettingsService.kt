@@ -115,8 +115,8 @@ private fun languageMap(map: (Language) -> String): Map<String, String> {
 val defaultSettings = ConfigurationSettings(
     minimumBuildVersion = 0,
     faqUrls = languageMap { "https://get.immuni.gov.it/docs/faq-${it.code}.json" },
-    termsOfUseUrls = languageMap { "https://get.immuni.gov.it/docs/app-tou-${it.code}.html" },
-    privacyNoticeUrls = languageMap { "https://get.immuni.gov.it/docs/app-pn-${it.code}.html" },
+    termsOfUseUrls = languageMap { "https://www.immuni.italia.it/app-tou.html" },
+    privacyNoticeUrls = languageMap { "https://www.immuni.italia.it/app-pn.html" },
 
     exposureConfiguration = ExposureConfiguration(
         attenuationThresholds = listOf(50, 70),

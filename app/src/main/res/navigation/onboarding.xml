@@ -77,4 +77,12 @@
     <action
         android:id="@+id/action_notification_steps"
         app:destination="@id/notificationSteps" />
+
+    <dialog
+        android:id="@+id/localisationExplanation"
+        android:name="it.ministerodellasalute.immuni.ui.onboarding.fragments.dialogs.LocalisationExplanationDialogFragment"
+        tools:layout="@layout/localisation_explanation_dialog" />
+    <action
+        android:id="@+id/action_localisation_explanation"
+        app:destination="@id/localisationExplanation" />
 </navigation>

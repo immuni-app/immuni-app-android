@@ -17,44 +17,56 @@ package it.ministerodellasalute.immuni.workers
 
 import android.content.Context
 import androidx.work.CoroutineWorker
-import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkerParameters
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
+import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class RiskReminderWorker(
+class NotificationsCleanerWorker(
     appContext: Context,
     params: WorkerParameters
 ) : CoroutineWorker(appContext, params), KoinComponent {
     private val notificationManager: AppNotificationManager by inject()
     private val workerManager: WorkerManager by inject()
+    private val userManager: UserManager by inject()
+    private val forceUpdateManager: ForceUpdateManager by inject()
+    private val exposureManager: ExposureManager by inject()
 
     override suspend fun doWork(): Result {
 
         // DEBUG notification
         if (applicationContext.resources.getBoolean(R.bool.development_device)) {
-            notificationManager.triggerDebugNotification("Risk reminder Worker.")
+            // notificationManager.triggerDebugNotification("Notification Cleaner Worker.")
         }
 
-        return doWork(
-            notificationManager,
-            workerManager
-        )
-    }
+        try {
 
-    companion object {
-        fun doWork(
-            notificationManager: AppNotificationManager,
-            workerManager: WorkerManager
-        ): Result {
-            notificationManager.triggerNotification(NotificationType.RiskReminder)
+            // Force update
+            if (!forceUpdateManager.isAppOutdated) {
+                notificationManager.removeNotification(NotificationType.ForcedVersionUpdate)
+            }
 
-            workerManager.scheduleRiskReminderWorker(ExistingWorkPolicy.REPLACE)
+            // Exposure active
+            if (exposureManager.isBroadcastingActive.value == true) {
+                notificationManager.removeNotification(NotificationType.ServiceNotActive)
+            }
+
+            // Onboarding not complete
+            if (userManager.isOnboardingComplete.value) {
+                notificationManager.removeNotification(NotificationType.OnboardingNotCompleted)
+            }
+
+            workerManager.scheduleNotificationsCleanerWorker()
+
             return Result.success()
+        } catch (e: Exception) {
+            return Result.retry()
         }
     }
 }
