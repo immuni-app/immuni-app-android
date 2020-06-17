@@ -133,31 +133,27 @@ class ImmuniDebugMenuConfiguration(
                 notificationManger.triggerNotification(NotificationType.OnboardingNotCompleted)
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Send Dummy Analytics", { _, _ ->
-                GlobalScope.launch {
+                GlobalScope.launch(Dispatchers.Main) {
                     val isSuccess = analyticsManager.sendOperationalInfo(
                         summary = null,
                         isDummy = true
                     )
-                    withContext(Dispatchers.Main) {
-                        toast(
-                            context,
-                            "Dummy analytics result: ${if (isSuccess) "success" else "failure"}"
-                        )
-                    }
+                    toast(
+                        context,
+                        "Dummy analytics result: ${if (isSuccess) "success" else "failure"}"
+                    )
                 }
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Verify Attestation", { _, _ ->
-                GlobalScope.launch {
+                GlobalScope.launch(Dispatchers.Main) {
                     val attestationResult = attestationClient.attest("FOO".base64EncodedSha256())
-                    withContext(Dispatchers.Main) {
-                        when (attestationResult) {
-                            is AttestationClient.Result.Success -> toast(context, "Success")
-                            is AttestationClient.Result.Invalid -> toast(context, "Invalid")
-                            is AttestationClient.Result.Failure -> toast(
-                                context,
-                                "Failure: ${attestationResult.error}"
-                            )
-                        }
+                    when (attestationResult) {
+                        is AttestationClient.Result.Success -> toast(context, "Success")
+                        is AttestationClient.Result.Invalid -> toast(context, "Invalid")
+                        is AttestationClient.Result.Failure -> toast(
+                            context,
+                            "Failure: ${attestationResult.error}"
+                        )
                     }
                 }
             }) {}
