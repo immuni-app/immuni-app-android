@@ -29,7 +29,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.ScreenUtils
-import it.ministerodellasalute.immuni.extensions.utils.isHighEndDevice
+import it.ministerodellasalute.immuni.extensions.utils.isTopEndDevice
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.onboarding.OnboardingViewModel
 import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
@@ -77,7 +77,7 @@ abstract class ViewPagerBaseFragment(@LayoutRes val layout: Int) : Fragment(layo
     protected fun setupImage(@RawRes animationResId: Int, @DrawableRes fallbackImageResId: Int) {
         val animationView = this.animationView ?: return
 
-        if (isHighEndDevice(requireContext())) {
+        if (isTopEndDevice(requireContext())) {
             animationView.apply {
                 setAnimation(animationResId)
                 loop(true)

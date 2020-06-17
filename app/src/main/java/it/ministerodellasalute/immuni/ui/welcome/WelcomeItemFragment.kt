@@ -25,7 +25,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.ScreenUtils
-import it.ministerodellasalute.immuni.extensions.utils.isHighEndDevice
+import it.ministerodellasalute.immuni.extensions.utils.isTopEndDevice
 import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
@@ -82,7 +82,7 @@ class WelcomeItemFragment : Fragment() {
      */
     private fun loadIllustrations() {
 
-        if (isHighEndDevice(requireContext())) {
+        if (isTopEndDevice(requireContext())) {
             val lottieResource = when (position) {
                 0 -> R.raw.lottie_happiness_01
                 1 -> R.raw.lottie_selfcare_02
@@ -108,14 +108,14 @@ class WelcomeItemFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        if (isHighEndDevice(requireContext())) {
+        if (isTopEndDevice(requireContext())) {
             image.pauseAnimation()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (isHighEndDevice(requireContext())) {
+        if (isTopEndDevice(requireContext())) {
             // the first animation doesn't loop
             // the others yes
             if (position == 0) {
