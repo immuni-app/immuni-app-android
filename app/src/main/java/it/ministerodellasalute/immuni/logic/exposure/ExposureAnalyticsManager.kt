@@ -142,8 +142,8 @@ class ExposureAnalyticsManager(
                 if (newRetryCount > 4) {
                     return false
                 }
-                val delayMillis = newRetryCount * newRetryCount * 10 * 1000
-                delay(delayMillis.toLong())
+                val delayMillis = newRetryCount * newRetryCount * 10 * 1000L
+                delay(delayMillis)
                 return retrySendOperationalInfo(summary, isDummy, newRetryCount)
             }
         }
