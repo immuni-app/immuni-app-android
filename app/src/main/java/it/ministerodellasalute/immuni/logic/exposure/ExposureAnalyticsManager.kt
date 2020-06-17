@@ -163,14 +163,6 @@ class ExposureAnalyticsManager(
         private val settings: ConfigurationSettings,
         private val random: Random = SecureRandom()
     ) {
-        companion object {
-            fun monthFromDate(serverDate: Date): Int {
-                return Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
-                    time = serverDate
-                }[Calendar.MONTH]
-            }
-        }
-
         fun setup(serverDate: Date) {
             setupInstallDate(serverDate)
 
@@ -238,18 +230,18 @@ class ExposureAnalyticsManager(
         }
 
         fun hasYetToSendInfoWithExposureThisMonth(serverDate: Date): Boolean {
-            val month = monthFromDate(serverDate)
+            val month = CalendarUtils.monthFromDate(serverDate)
             return storeRepository.infoWithExposureLastReportingMonth?.let {
                 it != month
             } ?: true
         }
 
         fun updateInfoWithExposureLastReportingMonth(serverDate: Date) {
-            storeRepository.infoWithExposureLastReportingMonth = monthFromDate(serverDate)
+            storeRepository.infoWithExposureLastReportingMonth = CalendarUtils.monthFromDate(serverDate)
         }
 
         fun couldSendInfoWithoutExposureNow(serverDate: Date): Boolean {
-            return isDateWithin24HoursSinceDate(
+            return CalendarUtils.isDateWithin24HoursSinceDate(
                 serverDate,
                 storeRepository.infoWithoutExposureReportingDate!!
             )
@@ -266,14 +258,10 @@ class ExposureAnalyticsManager(
         }
 
         fun couldSendDummyInfoNow(serverDate: Date): Boolean {
-            return isDateWithin24HoursSinceDate(
+            return CalendarUtils.isDateWithin24HoursSinceDate(
                 serverDate,
                 storeRepository.dummyInfoReportingDate!!
             )
-        }
-
-        private fun isDateWithin24HoursSinceDate(date: Date, periodStartDate: Date): Boolean {
-            return date in periodStartDate..periodStartDate.byAdding(hours = 24)
         }
 
         private fun isDatePast24HoursSinceDate(date: Date, periodStartDate: Date): Boolean {
@@ -322,4 +310,16 @@ data class BaseOperationalInfo constructor(
         bluetoothActive = exposureNotificationManager.bluetoothStateFlow.value,
         notificationPermission = pushNotificationManager.areNotificationsEnabled()
     )
+}
+
+object CalendarUtils {
+    fun monthFromDate(serverDate: Date): Int {
+        return Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
+            time = serverDate
+        }[Calendar.MONTH]
+    }
+
+    fun isDateWithin24HoursSinceDate(date: Date, periodStartDate: Date): Boolean {
+        return date in periodStartDate..periodStartDate.byAdding(hours = 24)
+    }
 }
