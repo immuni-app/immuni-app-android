@@ -68,6 +68,7 @@ class ExposureNotificationFragment :
             findNavController().navigate(action)
         }
 
+        setupImage(R.raw.lottie_notifications_05, R.drawable.ic_onboarding_exposure)
         checkSpacing()
     }
 

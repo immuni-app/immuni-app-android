@@ -19,7 +19,7 @@ import android.os.Bundle
 import android.view.View
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
+import kotlinx.android.synthetic.main.onboarding_phishing_warning.*
 
 class PhishingWarningFragment : ViewPagerBaseFragment(R.layout.onboarding_phishing_warning) {
 
@@ -32,6 +32,7 @@ class PhishingWarningFragment : ViewPagerBaseFragment(R.layout.onboarding_phishi
             viewModel.onNextTap()
         }
 
+        setupImage(R.raw.lottie_man_10, R.drawable.ic_onboarding_phishing_warning)
         checkSpacing()
     }
 }
