@@ -285,7 +285,7 @@
   <string name="permission_tutorial_deactivate_service_third_message">Al deshabilitar las notificaciones de exposición, no se registrarán los contactos posteriores con otros usuarios.</string>
   <string name="suggestions_risk_first_message">La aplicación te muestra esta advertencia en función de la información disponible (duración del contacto y estimación de la distancia aproximada), pero no puede saber si durante el contacto llevabas mascarilla o si estabas de espaldas. Por lo tanto, el riesgo de contagio podría haberse sobreestimado.</string>
   <string name="suggestions_risk_second_message">Para ayudar al Servicio Nacional de Salud (SSN) a cuidarte si fuera necesario, la aplicación ha avisado al Ministerio de Salud de la notificación que has recibido.</string>
-  <string name="suggestions_risk_fourth_message"><b>El Ministerio de Salud no puede en ningún caso rastrear tu identidad a través de esta información</b>.</string>
+  <string name="suggestions_risk_third_message"><b>El Ministerio de Salud no puede en ningún caso rastrear tu identidad a través de esta información</b>.</string>
   <string name="suggestions_risk_third_message_android">Para obtener más información sobre los datos enviados al Ministerio de Salud, puedes leer la {política de privacidad} en el punto 4.</string>
   <string name="settings_setting_contact_support">Contactar con el servicio de asistencia</string>
   <string name="settings_setting_support">Contacta con el servicio de asistencia</string>

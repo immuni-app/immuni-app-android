@@ -287,7 +287,7 @@
 
   <string name="suggestions_risk_first_message">Die App zeigt Ihnen diese Warnung aufgrund der verfügbaren Informationen (Dauer des Treffens und geschätzter Abstand). Sie kann jedoch nicht wissen, ob Sie eine Maske trugen oder sich beim Treffen den Rücken zugewandt haben. Es kann daher sein, dass das Ansteckungsrisiko höher eingestuft wird, als es tatsächlich ist.</string>
   <string name="suggestions_risk_second_message">Damit der staatliche Gesundheitsdienst Sie im Bedarfsfall bestmöglich unterstützen kann, hat die App das Gesundheitsministerium darüber informiert, dass Sie benachrichtigt wurden.</string>
-  <string name="suggestions_risk_fourth_message"><b>Das Gesundheitsministerium kann anhand dieser Informationen keine Rückschlüsse auf Ihre Identität ziehen</b>.</string>
+  <string name="suggestions_risk_third_message"><b>Das Gesundheitsministerium kann anhand dieser Informationen keine Rückschlüsse auf Ihre Identität ziehen</b>.</string>
   <string name="suggestions_risk_third_message_android">Weitere Informationen zu den an das Gesundheitsministerium gesendeten Daten finden Sie in der {Datenschutzerklärung} unter Ziffer 4.</string>
   <string name="settings_setting_contact_support">Kundendienst kontaktieren</string>
   <string name="settings_setting_support">Kundendienst kontaktieren</string>
