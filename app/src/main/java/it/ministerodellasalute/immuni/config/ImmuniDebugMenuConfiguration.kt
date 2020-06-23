@@ -147,7 +147,7 @@ class ImmuniDebugMenuConfiguration(
                 }
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Send Non-Dummy w/Exposure Analytics", { _, _ ->
-                GlobalScope.launch {
+                GlobalScope.launch(Dispatchers.Main) {
                     val isSuccess = analyticsManager.sendOperationalInfo(
                         summary = ExposureSummary(
                             date = Date(),
@@ -161,26 +161,22 @@ class ImmuniDebugMenuConfiguration(
                         ),
                         isDummy = false
                     )
-                    withContext(Dispatchers.Main) {
-                        toast(
-                            context,
-                            "Non-dummy w/Exposure analytics result: ${if (isSuccess) "success" else "failure"}"
-                        )
-                    }
+                    toast(
+                        context,
+                        "Non-dummy w/Exposure analytics result: ${if (isSuccess) "success" else "failure"}"
+                    )
                 }
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Send Non-Dummy w/o Exposure Analytics", { _, _ ->
-                GlobalScope.launch {
+                GlobalScope.launch(Dispatchers.Main) {
                     val isSuccess = analyticsManager.sendOperationalInfo(
                         summary = null,
                         isDummy = false
                     )
-                    withContext(Dispatchers.Main) {
-                        toast(
-                            context,
-                            "Non-dummy w/o exposure analytics result: ${if (isSuccess) "success" else "failure"}"
-                        )
-                    }
+                    toast(
+                        context,
+                        "Non-dummy w/o exposure analytics result: ${if (isSuccess) "success" else "failure"}"
+                    )
                 }
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Verify Attestation", { _, _ ->
