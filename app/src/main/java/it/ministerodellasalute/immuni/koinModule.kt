@@ -241,7 +241,7 @@ val appModule = module {
                 apkPackageName = androidContext().packageName,
                 requiresBasicIntegrity = true,
                 requiresCtsProfile = true,
-                requiresHardwareAttestation = false
+                requiresHardwareAttestation = true
             )
         )
     }
