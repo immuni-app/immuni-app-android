@@ -62,10 +62,10 @@
 
                         <LinearLayout
                             android:id="@+id/dataLoadButton"
-                            style="@style/SettingsMenuItemArrowLayout">
+                            style="@style/SettingsMenuItemWithIconLayout">
 
                             <TextView
-                                style="@style/SettingsMenuItem.WithArrow"
+                                style="@style/SettingsMenuItem.WithIcon"
                                 android:text="@string/settings_setting_load_data" />
 
                             <include layout="@layout/settings_menu_item_arrow" />
@@ -88,10 +88,10 @@
 
                         <LinearLayout
                             android:id="@+id/faqButton"
-                            style="@style/SettingsMenuItemArrowLayout">
+                            style="@style/SettingsMenuItemWithIconLayout">
 
                             <TextView
-                                style="@style/SettingsMenuItem.WithArrow"
+                                style="@style/SettingsMenuItem.WithIcon"
                                 android:text="@string/settings_setting_faq" />
 
                             <include layout="@layout/settings_menu_item_arrow" />
@@ -126,10 +126,10 @@
 
                         <LinearLayout
                             android:id="@+id/shareApp"
-                            style="@style/SettingsMenuItemArrowLayout">
+                            style="@style/SettingsMenuItemWithIconLayout">
 
                             <TextView
-                                style="@style/SettingsMenuItem.WithArrow"
+                                style="@style/SettingsMenuItem.WithIcon"
                                 android:text="@string/settings_setting_share" />
 
                             <ImageView
