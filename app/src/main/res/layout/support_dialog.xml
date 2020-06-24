@@ -287,6 +287,18 @@
                     tools:text="WI-FI" />
             </LinearLayout>
 
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_lastencheck" />
+
+                <TextView
+                    android:id="@+id/lastCheckDate"
+                    style="@style/SupportInformationValue"
+                    tools:text="22 luglio 2020 alle 22:20" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
