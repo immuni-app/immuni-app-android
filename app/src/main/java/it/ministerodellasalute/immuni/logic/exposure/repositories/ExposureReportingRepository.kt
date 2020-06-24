@@ -31,6 +31,7 @@ class ExposureReportingRepository(
     companion object {
         private val summariesKey = KVStorage.Key<ExposureSummaryList>("summaries")
         private val lastProcessedChunkKey = KVStorage.Key<Int>("LastProcessedChunk")
+        private val lastSuccessfulCheckDateKey = KVStorage.Key<Date>("LastSuccessfulCheckDate")
     }
 
     fun getSummaries(): List<ExposureSummary> {
@@ -74,4 +75,10 @@ class ExposureReportingRepository(
             storage[lastProcessedChunkKey] = value
         }
     }
+
+    var lastSuccessfulCheckDate: Date?
+        get() = storage[lastSuccessfulCheckDateKey]
+        set(value) {
+            storage[lastSuccessfulCheckDateKey] = value!!
+        }
 }

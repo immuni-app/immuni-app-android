@@ -116,8 +116,7 @@ class SupportViewModel(
     }
 
     val lastCheckDate = liveData<String> {
-        // TODO swap this date with real date from exposure manager
-        val date: Date? = Date()
+        val date = exposureManager.lastSuccessfulCheckDate
         val lastCheckDateStr = if (date != null) {
             val dateStr = DateFormat.getLongDateFormat(context).format(date)
             val timeStr = DateFormat.getTimeFormat(context).format(date)
