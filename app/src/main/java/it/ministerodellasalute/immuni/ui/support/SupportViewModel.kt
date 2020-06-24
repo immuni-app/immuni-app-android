@@ -119,7 +119,7 @@ class SupportViewModel(
         // TODO swap this date with real date from exposure manager
         val date: Date? = Date()
         val lastCheckDateStr = if (date != null) {
-            val dateStr = DateFormat.getDateFormat(context).format(date)
+            val dateStr = DateFormat.getLongDateFormat(context).format(date)
             val timeStr = DateFormat.getTimeFormat(context).format(date)
             context.getString(R.string.support_info_item_lastencheck_date, dateStr, timeStr)
         } else {
