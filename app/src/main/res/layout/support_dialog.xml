@@ -287,6 +287,8 @@
                     tools:text="WI-FI" />
             </LinearLayout>
 
+            <include layout="@layout/support_information_content_divider" />
+
             <LinearLayout style="@style/SupportInformationRow">
 
                 <TextView
