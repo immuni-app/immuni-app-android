@@ -21,11 +21,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.postDelayed
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.user.models.Region
+import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.faq_fragment.appBar
 import kotlinx.android.synthetic.main.faq_fragment.toolbarSeparator
@@ -66,6 +68,11 @@ class RegionFragment :
         next.setOnClickListener(null)
         next.setSafeOnClickListener {
             viewModel.onRegionNextTap()
+        }
+
+        knowMore.setSafeOnClickListener {
+            val action = ViewPagerFragmentDirections.actionRegionProvinceExplanation()
+            findNavController().navigate(action)
         }
 
         adapter.data = viewModel.regions
