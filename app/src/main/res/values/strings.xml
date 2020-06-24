@@ -75,6 +75,11 @@
   <string name="onboarding_region_description">Select the region where you live to help the National Health Service provide the best possible assistance.</string>
   <string name="onboarding_province_title">Which province do you live in?</string>
   <string name="onboarding_province_description">Select the province where you live to help the National Health Service provide the best possible assistance.</string>
+  <string name="onboarding_region_abroad_item">Non vivo in Italia</string>
+  <string name="onboarding_region_abroad_alert_title">Sei sicuro?</string>
+  <string name="onboarding_region_abroad_alert_message">Se non vivi in Italia ma hai intenzione di recartici, ti suggeriamo di selezionare già la regione (e successivamente la provincia) in cui soggiornerai per più tempo. Lo stesso vale nel caso in cui tu ti trovi già in Italia.</string>
+  <string name="onboarding_region_abroad_alert_cancel">Annulla</string>
+  <string name="onboarding_region_abroad_alert_confirm">Continua</string>
   <string name="onboarding_exposure_permission_title">Enable COVID-19 exposure notifications</string>
   <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus. You can temporarily disable the service from the home screen.</string>
   <string name="onboarding_exposure_permission_action">Enable</string>

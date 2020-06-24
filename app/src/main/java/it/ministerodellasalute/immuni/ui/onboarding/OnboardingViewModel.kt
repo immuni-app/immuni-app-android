@@ -62,6 +62,7 @@ class OnboardingViewModel(
     val navigateToMainPage = MutableLiveData<Event<Boolean>>()
     val navigateToNextPage = MutableLiveData<Event<Boolean>>()
     val skipNextPage = MutableLiveData<Event<Boolean>>()
+    val askRegionConfirmation = MutableLiveData<Event<Boolean>>()
     val isBroadcastingActive = exposureManager.isBroadcastingActive.asLiveData()
     val navigateToPrevPage = MutableLiveData<Event<Boolean>>()
     val googlePlayServicesError = MutableLiveData<Pair<String, String>>()
@@ -130,6 +131,17 @@ class OnboardingViewModel(
     // If this region has only one province, skip the province selection page
     // And automatically select this province
     fun onRegionNextTap() {
+        when (_region.value) {
+            Region.abroad -> askRegionConfirmation.value = Event(true)
+            else -> moveToNext()
+        }
+    }
+
+    fun onAbroadRegionConfirmed() {
+        moveToNext()
+    }
+
+    private fun moveToNext() {
         val provinces = _region.value?.provinces()
         val provincesCount = provinces?.size ?: Int.MAX_VALUE
         if (provinces != null && provincesCount == 1) {
