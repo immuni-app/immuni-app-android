@@ -76,9 +76,10 @@ class ExposureReportingRepository(
         }
     }
 
-    var lastSuccessfulCheckDate: Date?
+    val lastSuccessfulCheckDate: Date?
         get() = storage[lastSuccessfulCheckDateKey]
-        set(value) {
-            storage[lastSuccessfulCheckDateKey] = value!!
-        }
+
+    fun setLastSuccessfulCheckDate(value: Date) {
+        storage[lastSuccessfulCheckDateKey] = value
+    }
 }

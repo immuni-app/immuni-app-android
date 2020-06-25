@@ -153,7 +153,7 @@ class RequestDiagnosisKeysWorker(
     }
 
     private fun success(serverDate: Date): Result {
-        exposureReportingRepository.lastSuccessfulCheckDate = serverDate
+        exposureReportingRepository.setLastSuccessfulCheckDate(serverDate)
         workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }
