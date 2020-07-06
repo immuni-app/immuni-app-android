@@ -23,15 +23,16 @@ import androidx.appcompat.app.AppCompatActivity
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.bluetooth.BluetoothUtils
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
+import kotlinx.android.synthetic.main.onboarding_bluetooth_fragment.*
 
 class BluetoothFragment :
     ViewPagerBaseFragment(R.layout.onboarding_bluetooth_fragment) {
 
     override fun onResume() {
         super.onResume()
-        (activity as? AppCompatActivity)?.setLightStatusBar(resources.getColor(R.color.background))
+        (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,6 +44,7 @@ class BluetoothFragment :
             viewModel.onNextTap()
         }
 
+        setupImage(R.raw.lottie_girls_06, R.drawable.ic_onboarding_bluetooth)
         checkSpacing()
     }
 

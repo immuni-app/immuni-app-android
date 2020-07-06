@@ -28,7 +28,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.utils.highEndDevice
+import it.ministerodellasalute.immuni.extensions.utils.isHighEndDevice
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import java.lang.ref.WeakReference
 import kotlin.reflect.full.primaryConstructor
@@ -100,7 +100,7 @@ class HowItWorksListAdapter(
         holder.itemView.setOnClickListener(holder as? View.OnClickListener)
         when (holder) {
             is ImageVH -> {
-                if (highEndDevice(context)) {
+                if (isHighEndDevice(context)) {
                     lottiesMap[holder.adapterPosition] = WeakReference(holder.lottieAnimation)
                     holder.lottieAnimation.playAnimation()
                 }
@@ -162,7 +162,7 @@ class HowItWorksListAdapter(
             is ImageVH -> {
                 val item = dataItem as HowItWorksItem.Image
 
-                if (highEndDevice(context)) {
+                if (isHighEndDevice(context)) {
                     holder.lottieAnimation.setAnimation(item.animation)
                 } else {
                     holder.lottieAnimation.setImageResource(item.image)

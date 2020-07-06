@@ -13,26 +13,19 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
+package it.ministerodellasalute.immuni.ui.onboarding.fragments.dialogs
 
 import android.os.Bundle
 import android.view.View
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import kotlinx.android.synthetic.main.onboarding_protect_device_fragment.*
+import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 
-class ProtectDeviceFragment : ViewPagerBaseFragment(R.layout.onboarding_protect_device_fragment) {
+class RegionProvinceExplanationDialogFragment : PopupDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        next.isEnabled = true
+        setContentLayout(R.layout.region_province_explanation_dialog)
 
-        next.setOnClickListener(null)
-        next.setSafeOnClickListener {
-            viewModel.onNextTap()
-        }
-
-        setupImage(R.raw.lottie_password_09, R.drawable.ic_onboarding_protect_device)
-        checkSpacing()
+        setTitle(getString(R.string.permission_tutorial_why_province_region_title))
     }
 }

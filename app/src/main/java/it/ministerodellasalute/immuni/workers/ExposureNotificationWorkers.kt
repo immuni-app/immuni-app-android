@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.workers
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureReportingService
@@ -121,7 +122,8 @@ class RequestDiagnosisKeysWorker(
                 }
 
                 val data = indexResponse.data ?: return@withTimeout Result.retry()
-                val lastProcessedChunkSuccessor = exposureReportingRepository.lastProcessedChunk(default = 0) + 1
+                val lastProcessedChunkSuccessor =
+                    exposureReportingRepository.lastProcessedChunk(default = 0) + 1
                 val currentOldest = max(data.oldest, lastProcessedChunkSuccessor)
                 val chunkRange = (currentOldest..data.newest).toList().takeLast(20)
 
@@ -156,6 +158,12 @@ class RequestDiagnosisKeysWorker(
 
     private fun success(serverDate: Date): Result {
         workerManager.scheduleExposureAnalyticsWorker(serverDate)
+        exposureReportingRepository.setLastSuccessfulCheckDate(
+            when (BuildConfig.DEBUG) {
+                true -> Date()
+                false -> serverDate
+            }
+        )
         workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }

@@ -14,11 +14,10 @@
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:id="@+id/settingsLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settingsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
@@ -28,8 +27,8 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"
         android:clipToPadding="false"
+        android:overScrollMode="never"
         android:paddingTop="32dp"
         android:paddingBottom="120dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -97,6 +96,19 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/pageTitle"
                     app:layout_constraintTop_toBottomOf="@+id/pageTitle" />
+
+                <TextView
+                    android:id="@+id/knowMore"
+                    style="@style/OnboardingKnowMore"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:maxLines="1"
+                    android:text="@string/onboarding_common_discover_more"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintEnd_toEndOf="@+id/description"
+                    app:layout_constraintStart_toStartOf="@+id/description"
+                    app:layout_constraintTop_toBottomOf="@id/description" />
 
                 <include
                     android:id="@+id/toolbarSeparator"

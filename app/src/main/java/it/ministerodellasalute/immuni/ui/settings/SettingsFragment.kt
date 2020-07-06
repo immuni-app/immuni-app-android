@@ -29,6 +29,7 @@ import it.ministerodellasalute.immuni.SettingsDirections
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.playstore.PlayStoreActions
+import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
@@ -88,6 +89,14 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ConfirmationDialo
         contactSupport.setSafeOnClickListener {
             val action = SettingsDirections.actionSupport()
             findNavController().navigate(action)
+        }
+        shareApp.setSafeOnClickListener {
+            ExternalLinksHelper.shareText(
+                requireContext(),
+                message = getString(R.string.settings_setting_share_message),
+                subject = getString(R.string.app_name),
+                chooserTitle = getString(R.string.settings_setting_share)
+            )
         }
 
         applicationVersion.text = getString(
