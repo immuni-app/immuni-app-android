@@ -20,11 +20,13 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.user.models.Province
+import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.onboarding_province_fragment.*
 import kotlinx.android.synthetic.main.onboarding_province_fragment.appBar
@@ -53,6 +55,7 @@ class ProvinceFragment :
             pageTitle?.alpha = 1 - ratio
             description?.alpha = 1 - ratio
             toolbarTitle?.alpha = ratio
+            knowMore?.alpha = 1 - ratio
         })
 
         val adapter = ProvinceListAdapter(this)
@@ -62,6 +65,11 @@ class ProvinceFragment :
 
         next.setSafeOnClickListener {
             viewModel.onNextTap()
+        }
+
+        knowMore.setSafeOnClickListener {
+            val action = ViewPagerFragmentDirections.actionRegionProvinceExplanation()
+            findNavController().navigate(action)
         }
 
         navigationIcon.setSafeOnClickListener {
