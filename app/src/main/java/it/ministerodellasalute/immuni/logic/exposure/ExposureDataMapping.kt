@@ -89,7 +89,7 @@ val ExposureNotificationClient.ExposureInformation.repositoryExposureInformation
 
 fun ExposureAnalyticsOperationalInfo.operationalInfoRequest(signedAttestation: String): ExposureAnalyticsService.OperationalInfoRequest =
     ExposureAnalyticsService.OperationalInfoRequest(
-        province = province,
+        province = province.code,
         exposurePermission = exposurePermission,
         bluetoothActive = bluetoothActive,
         notificationPermission = notificationPermission,
