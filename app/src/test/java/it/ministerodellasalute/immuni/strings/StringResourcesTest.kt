@@ -41,6 +41,8 @@ class StringResourcesTest {
 
         pluralContainsAll("upload_data_verify_loading_button_seconds", listOf("one", "other"), listOf("%d")) // Wait %d seconds
         pluralContainsAll("upload_data_verify_loading_button_minutes", listOf("one", "other"), listOf("%d")) // Wait %d minutes
+
+        containsAll("support_info_item_lastencheck_date_android", listOf("%1\$s", "%2\$s")) // %s at %s
     }
 
     private fun containsMatch(name: String, regex: Regex) {

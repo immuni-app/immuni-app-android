@@ -30,7 +30,6 @@ import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import java.util.*
 import kotlinx.coroutines.flow.map
 
 class SupportViewModel(
@@ -121,7 +120,7 @@ class SupportViewModel(
         val lastCheckDateStr = if (date != null) {
             val dateStr = DateFormat.getLongDateFormat(context).format(date)
             val timeStr = DateFormat.getTimeFormat(context).format(date)
-            context.getString(R.string.support_info_item_lastencheck_date, dateStr, timeStr)
+            context.getString(R.string.support_info_item_lastencheck_date_android, dateStr, timeStr)
         } else {
             context.getString(R.string.support_info_item_lastencheck_none)
         }
