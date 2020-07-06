@@ -85,4 +85,11 @@
     <action
         android:id="@+id/action_localisation_explanation"
         app:destination="@id/localisationExplanation" />
+
+    <dialog android:id="@+id/regionProvinceExplanation"
+        android:name="it.ministerodellasalute.immuni.ui.onboarding.fragments.dialogs.RegionProvinceExplanationDialogFragment"
+        tools:layout="@layout/region_province_explanation_dialog"/>
+    <action
+        android:id="@+id/action_region_province_explanation"
+        app:destination="@id/regionProvinceExplanation" />
 </navigation>
