@@ -58,6 +58,7 @@ class RegionFragment :
             pageTitle?.alpha = 1 - ratio
             description?.alpha = 1 - ratio
             toolbarTitle?.alpha = ratio
+            knowMore?.alpha = 1 - ratio
         })
 
         adapter = RegionListAdapter(this)
