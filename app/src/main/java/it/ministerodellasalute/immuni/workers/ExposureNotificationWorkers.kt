@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.workers
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureReportingService
@@ -102,13 +103,14 @@ class RequestDiagnosisKeysWorker(
                     mkdir()
                 }
 
+                val serverDate = settingsResult.serverDate
                 val indexResponse = immuniApiCall { api.index() }
 
                 if (indexResponse !is NetworkResource.Success) {
                     val error = indexResponse.error
                     // 404 means that the list is empty, so the work is successful
                     if (error is NetworkError.HttpError && error.httpCode == 404) {
-                        return@withTimeout success()
+                        return@withTimeout success(serverDate)
                     }
 
                     return@withTimeout Result.retry()
@@ -132,7 +134,7 @@ class RequestDiagnosisKeysWorker(
                     try {
                         chunkResponse.data?.byteStream()?.saveToFile(filePath)
                             ?: return@withTimeout Result.retry()
-                        val token = "${UUID.randomUUID()}_${settingsResult.serverDate.time}"
+                        val token = "${UUID.randomUUID()}_${serverDate.time}"
                         exposureManager.provideDiagnosisKeys(
                             keyFiles = listOf(File(filePath)),
                             token = token
@@ -142,7 +144,7 @@ class RequestDiagnosisKeysWorker(
                         return@withTimeout Result.retry()
                     }
                 }
-                return@withTimeout success()
+                return@withTimeout success(serverDate)
             }
         } catch (e: Exception) {
             return Result.retry()
@@ -151,7 +153,11 @@ class RequestDiagnosisKeysWorker(
         }
     }
 
-    private fun success(): Result {
+    private fun success(serverDate: Date): Result {
+        exposureReportingRepository.setLastSuccessfulCheckDate(when (BuildConfig.DEBUG) {
+            true -> Date()
+            false -> serverDate
+        })
         workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }

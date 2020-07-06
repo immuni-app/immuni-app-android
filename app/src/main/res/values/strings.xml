@@ -332,6 +332,9 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="support_info_item_bluetoothEnabled">Bluetooth</string>
   <string name="support_info_item_appVersion">App version</string>
   <string name="support_info_item_connectionType">Connection</string>
+  <string name="support_info_item_lastencheck">Ultima verifica</string>
+  <string name="support_info_item_lastencheck_none">Nessuna</string>
+  <string name="support_info_item_lastencheck_date">%s alle %s</string>
   <string name="permission_tutorial_deactivate_service_first_message_android">To protect your health and the health of your loved ones, only disable the service if necessary and reactivate it as soon as you can.</string>
   <string name="support_info_active">Active</string>
   <string name="support_info_not_active">Not active</string>
