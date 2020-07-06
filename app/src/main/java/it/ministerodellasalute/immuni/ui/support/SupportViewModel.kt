@@ -23,6 +23,7 @@ import android.os.Build
 import android.text.format.DateFormat
 import androidx.core.content.pm.PackageInfoCompat
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import com.google.android.gms.common.GoogleApiAvailability
 import it.ministerodellasalute.immuni.BuildConfig
@@ -30,6 +31,7 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import java.util.*
+import kotlinx.coroutines.flow.map
 
 class SupportViewModel(
     val context: Context,
@@ -115,8 +117,7 @@ class SupportViewModel(
         }
     }
 
-    val lastCheckDate = liveData<String> {
-        val date = exposureManager.lastSuccessfulCheckDate
+    val lastCheckDate = exposureManager.lastSuccessfulCheckDate.map { date ->
         val lastCheckDateStr = if (date != null) {
             val dateStr = DateFormat.getLongDateFormat(context).format(date)
             val timeStr = DateFormat.getTimeFormat(context).format(date)
@@ -124,7 +125,6 @@ class SupportViewModel(
         } else {
             context.getString(R.string.support_info_item_lastencheck_none)
         }
-
-        emit(lastCheckDateStr)
-    }
+        lastCheckDateStr
+    }.asLiveData()
 }

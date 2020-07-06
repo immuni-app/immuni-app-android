@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.workers
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureReportingService
@@ -153,7 +154,10 @@ class RequestDiagnosisKeysWorker(
     }
 
     private fun success(serverDate: Date): Result {
-        exposureReportingRepository.setLastSuccessfulCheckDate(serverDate)
+        exposureReportingRepository.setLastSuccessfulCheckDate(when (BuildConfig.DEBUG) {
+            true -> Date()
+            false -> serverDate
+        })
         workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }

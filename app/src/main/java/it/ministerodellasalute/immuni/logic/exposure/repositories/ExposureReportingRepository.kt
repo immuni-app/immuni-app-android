@@ -21,6 +21,7 @@ import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 import it.ministerodellasalute.immuni.extensions.utils.DateUtils.MILLIS_IN_A_DAY
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import java.util.Date
+import kotlinx.coroutines.flow.StateFlow
 
 class ExposureReportingRepository(
     private val storage: KVStorage
@@ -76,8 +77,8 @@ class ExposureReportingRepository(
         }
     }
 
-    val lastSuccessfulCheckDate: Date?
-        get() = storage[lastSuccessfulCheckDateKey]
+    val lastSuccessfulCheckDate: StateFlow<Date?>
+        get() = storage.stateFlow(lastSuccessfulCheckDateKey)
 
     fun setLastSuccessfulCheckDate(value: Date) {
         storage[lastSuccessfulCheckDateKey] = value
