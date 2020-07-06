@@ -13,27 +13,21 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.extensions.utils
+package it.ministerodellasalute.immuni.extensions.attestation
 
-import android.util.Base64
-import java.security.MessageDigest
+interface AttestationClient {
+    sealed class Result {
+        // use this class to signal that the attestation was done and (to the best of
+        // client's knowledge) is also valid
+        data class Success(val result: String) : Result()
 
-fun String.sha256(): String {
-    return hashString(this, "SHA-256")
-}
+        // use this class to signal that the attestation was done but the outcome is not valid
+        object Invalid : Result()
 
-private fun hashString(input: String, algorithm: String): String {
-    return MessageDigest
-        .getInstance(algorithm)
-        .digest(input.toByteArray())
-        .fold("", { str, it -> str + "%02x".format(it) })
-}
+        // use this class to signal a temporary error during the attestation process, and that
+        // a new attempt may be done in the future
+        data class Failure(val error: Exception) : Result()
+    }
 
-fun String.base64EncodedSha256(): String {
-    return Base64.encodeToString(
-        MessageDigest
-            .getInstance("SHA-256")
-            .digest(toByteArray()),
-        Base64.NO_WRAP
-    )
+    suspend fun attest(nonce: String): Result
 }

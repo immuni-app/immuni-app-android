@@ -58,6 +58,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-tasks:17.0.2'
     api 'com.google.android.gms:play-services-base:17.2.1'
     implementation 'com.google.android.gms:play-services-basement:17.2.1'
+    implementation 'com.google.android.gms:play-services-safetynet:17.0.0'
 
     //Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"

@@ -13,13 +13,11 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.logic.exposure.repositories
+package it.ministerodellasalute.immuni.testutils
 
-import it.ministerodellasalute.immuni.extensions.storage.KVStorage
+import java.time.Instant
+import java.time.format.DateTimeFormatter
 import java.util.*
 
-class ServerDateRepository() {
-    companion object {
-        val serverDateKey = KVStorage.Key<Date>("ServerDate")
-    }
-}
+fun parseUTCDate(string: String): Date =
+    Date.from(Instant.from(DateTimeFormatter.ISO_INSTANT.parse(string)))

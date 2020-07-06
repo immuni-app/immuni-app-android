@@ -13,27 +13,18 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.extensions.utils
+package it.ministerodellasalute.immuni.logic.exposure.models
 
-import android.util.Base64
-import java.security.MessageDigest
+import it.ministerodellasalute.immuni.logic.user.models.Province
 
-fun String.sha256(): String {
-    return hashString(this, "SHA-256")
-}
-
-private fun hashString(input: String, algorithm: String): String {
-    return MessageDigest
-        .getInstance(algorithm)
-        .digest(input.toByteArray())
-        .fold("", { str, it -> str + "%02x".format(it) })
-}
-
-fun String.base64EncodedSha256(): String {
-    return Base64.encodeToString(
-        MessageDigest
-            .getInstance("SHA-256")
-            .digest(toByteArray()),
-        Base64.NO_WRAP
-    )
+data class ExposureAnalyticsOperationalInfo(
+    val province: Province,
+    val exposurePermission: Int,
+    val bluetoothActive: Int,
+    val notificationPermission: Int,
+    val exposureNotification: Int,
+    val lastRiskyExposureOn: String,
+    val salt: String
+) {
+    val digest = "${province.code}$exposurePermission$bluetoothActive$notificationPermission$exposureNotification$lastRiskyExposureOn$salt"
 }

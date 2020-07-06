@@ -21,17 +21,21 @@ import android.net.Uri
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.debugmenu.DebugMenuConfiguration
 import it.ministerodellasalute.immuni.debugmenu.DebugMenuItem
+import it.ministerodellasalute.immuni.extensions.activity.toast
+import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
+import it.ministerodellasalute.immuni.extensions.utils.base64EncodedSha256
+import it.ministerodellasalute.immuni.extensions.utils.byAdding
+import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
+import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
-import java.util.Calendar
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import java.util.*
+import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -43,6 +47,8 @@ class ImmuniDebugMenuConfiguration(
     private val workerManager: WorkerManager by inject()
     private val exposureReportingRepository: ExposureReportingRepository by inject()
     private val notificationManger: AppNotificationManager by inject()
+    private val analyticsManager: ExposureAnalyticsManager by inject()
+    private val attestationClient: AttestationClient by inject()
 
     /**
      * In debug mode enable the debug menu.
@@ -127,6 +133,64 @@ class ImmuniDebugMenuConfiguration(
             }) {},
             object : DebugMenuItem("\uD83D\uDD14 Trigger Onboarding Notification", { _, _ ->
                 notificationManger.triggerNotification(NotificationType.OnboardingNotCompleted)
+            }) {},
+            object : DebugMenuItem("\uD83D\uDD14 Send Dummy Analytics", { _, _ ->
+                GlobalScope.launch(Dispatchers.Main) {
+                    val isSuccess = analyticsManager.sendOperationalInfo(
+                        summary = null,
+                        isDummy = true
+                    )
+                    toast(
+                        context,
+                        "Dummy analytics result: ${if (isSuccess) "success" else "failure"}"
+                    )
+                }
+            }) {},
+            object : DebugMenuItem("\uD83D\uDD14 Send Non-Dummy w/Exposure Analytics", { _, _ ->
+                GlobalScope.launch(Dispatchers.Main) {
+                    val isSuccess = analyticsManager.sendOperationalInfo(
+                        summary = ExposureSummary(
+                            date = Date(),
+                            lastExposureDate = Date().byAdding(days = -2),
+                            matchedKeyCount = 1,
+                            maximumRiskScore = 100,
+                            highRiskAttenuationDurationMinutes = 15,
+                            mediumRiskAttenuationDurationMinutes = 15,
+                            lowRiskAttenuationDurationMinutes = 15,
+                            riskScoreSum = 50
+                        ),
+                        isDummy = false
+                    )
+                    toast(
+                        context,
+                        "Non-dummy w/Exposure analytics result: ${if (isSuccess) "success" else "failure"}"
+                    )
+                }
+            }) {},
+            object : DebugMenuItem("\uD83D\uDD14 Send Non-Dummy w/o Exposure Analytics", { _, _ ->
+                GlobalScope.launch(Dispatchers.Main) {
+                    val isSuccess = analyticsManager.sendOperationalInfo(
+                        summary = null,
+                        isDummy = false
+                    )
+                    toast(
+                        context,
+                        "Non-dummy w/o exposure analytics result: ${if (isSuccess) "success" else "failure"}"
+                    )
+                }
+            }) {},
+            object : DebugMenuItem("\uD83D\uDD14 Verify Attestation", { _, _ ->
+                GlobalScope.launch(Dispatchers.Main) {
+                    val attestationResult = attestationClient.attest("FOO".base64EncodedSha256())
+                    when (attestationResult) {
+                        is AttestationClient.Result.Success -> toast(context, "Success")
+                        is AttestationClient.Result.Invalid -> toast(context, "Invalid")
+                        is AttestationClient.Result.Failure -> toast(
+                            context,
+                            "Failure: ${attestationResult.error}"
+                        )
+                    }
+                }
             }) {}
         )
     }

@@ -13,27 +13,17 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.extensions.utils
+package it.ministerodellasalute.immuni.config
 
-import android.util.Base64
-import java.security.MessageDigest
+import android.content.Context
+import com.squareup.moshi.Moshi
+import it.ministerodellasalute.immuni.R
 
-fun String.sha256(): String {
-    return hashString(this, "SHA-256")
-}
-
-private fun hashString(input: String, algorithm: String): String {
-    return MessageDigest
-        .getInstance(algorithm)
-        .digest(input.toByteArray())
-        .fold("", { str, it -> str + "%02x".format(it) })
-}
-
-fun String.base64EncodedSha256(): String {
-    return Base64.encodeToString(
-        MessageDigest
-            .getInstance("SHA-256")
-            .digest(toByteArray()),
-        Base64.NO_WRAP
-    )
+class ExposureAnalyticsNetworkConfiguration(
+    context: Context,
+    override val moshi: Moshi
+) : BaseNetworkConfiguration(context, moshi) {
+    override fun baseUrl(): String {
+        return context.getString(R.string.analytics_base_url)
+    }
 }

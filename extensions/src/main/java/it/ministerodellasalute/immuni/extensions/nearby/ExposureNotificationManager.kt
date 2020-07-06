@@ -34,7 +34,7 @@ import kotlinx.coroutines.flow.*
 
 class ExposureNotificationManager(
     private val locationStateFlow: LocationStateFlow,
-    private val bluetoothStateFlow: BluetoothStateFlow,
+    val bluetoothStateFlow: BluetoothStateFlow,
     private val lifecycleObserver: AppLifecycleObserver,
     private val exposureNotificationClient: ExposureNotificationClient
 ) {

@@ -22,6 +22,7 @@ import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureReportingService
+import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
@@ -65,6 +66,7 @@ class RequestDiagnosisKeysWorker(
 
     private val exposureReportingRepository: ExposureReportingRepository by inject()
     private val exposureManager: ExposureManager by inject()
+    private val analyticsManager: ExposureAnalyticsManager by inject()
     private val workerManager: WorkerManager by inject()
     private val api: ExposureReportingService by inject()
     private val settingsManager: ConfigurationSettingsManager by inject()
@@ -98,12 +100,15 @@ class RequestDiagnosisKeysWorker(
                     return@withTimeout Result.retry()
                 }
 
+                val serverDate = settingsResult.serverDate
+
+                analyticsManager.setup(serverDate)
+
                 chunksDir.apply {
                     deleteRecursively()
                     mkdir()
                 }
 
-                val serverDate = settingsResult.serverDate
                 val indexResponse = immuniApiCall { api.index() }
 
                 if (indexResponse !is NetworkResource.Success) {
@@ -117,11 +122,9 @@ class RequestDiagnosisKeysWorker(
                 }
 
                 val data = indexResponse.data ?: return@withTimeout Result.retry()
-                val currentOldest =
-                    max(
-                        data.oldest,
-                        exposureReportingRepository.lastProcessedChunk(default = 0) + 1
-                    )
+                val lastProcessedChunkSuccessor =
+                    exposureReportingRepository.lastProcessedChunk(default = 0) + 1
+                val currentOldest = max(data.oldest, lastProcessedChunkSuccessor)
                 val chunkRange = (currentOldest..data.newest).toList().takeLast(20)
 
                 for (currentChunk in chunkRange) {
@@ -154,10 +157,13 @@ class RequestDiagnosisKeysWorker(
     }
 
     private fun success(serverDate: Date): Result {
-        exposureReportingRepository.setLastSuccessfulCheckDate(when (BuildConfig.DEBUG) {
-            true -> Date()
-            false -> serverDate
-        })
+        workerManager.scheduleExposureAnalyticsWorker(serverDate)
+        exposureReportingRepository.setLastSuccessfulCheckDate(
+            when (BuildConfig.DEBUG) {
+                true -> Date()
+                false -> serverDate
+            }
+        )
         workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }
