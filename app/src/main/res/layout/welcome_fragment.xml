@@ -49,7 +49,7 @@
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/knowMore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
