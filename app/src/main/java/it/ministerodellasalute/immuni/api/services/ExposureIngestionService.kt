@@ -113,7 +113,8 @@ interface ExposureIngestionService {
         trentinoAltoAdige("Trentino-Alto Adige/Südtirol"),
         umbria("Umbria"),
         valleAosta("Valle d'Aosta"),
-        veneto("Veneto");
+        veneto("Veneto"),
+        abroad("");
 
         fun provinces(): List<Province> {
             return when (this) {
@@ -264,6 +265,9 @@ interface ExposureIngestionService {
                     Province.verona,
                     Province.vicenza
                 )
+                abroad -> listOf(
+                    Province.abroad
+                )
             }
         }
     }
@@ -375,7 +379,8 @@ interface ExposureIngestionService {
         verona("VR", "Verona"),
         viboValentia("VV", "Vibo Valentia"),
         vicenza("VI", "Vicenza"),
-        viterbo("VT", "Viterbo");
+        viterbo("VT", "Viterbo"),
+        abroad("EX", "");
 
         companion object {
             fun fromCode(code: String) = values().first { province -> province.code == code }
