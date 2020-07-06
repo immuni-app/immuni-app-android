@@ -49,7 +49,6 @@
   <string name="welcome_view_items_third_description">Les utilisateurs qui découvrent avoir été exposés au virus peuvent s\'isoler afin de ralentir la propagation du virus et d\'accélérer le retour à une vie normale.</string>
   <string name="welcome_view_items_fourth_title">Vos données restent confidentielles</string>
   <string name="welcome_view_items_fourth_description">L\'application fonctionne sans aucun suivi de vos mouvements et sans connaître votre identité ni celle des personnes avec lesquelles vous entrez en contact.</string>
-  <string name="welcome_view_discover_more">En savoir plus</string>
   <string name="welcome_view_next_page_title">Suivant</string>
   <string name="welcome_view_go_next">C\'est parti</string>
   <string name="privacy_title">Vos données restent confidentielles</string>
@@ -94,7 +93,6 @@
   <string name="onboarding_complete_title">Configuration terminée</string>
   <string name="home_view_service_active_title">Service
 <b>activé</b></string>
-  <string name="home_view_service_active_subtitle">Ouvrez Immuni une fois par jour pour vérifier son statut.</string>
   <string name="home_view_service_not_active_title">Service
 <b>désactivé</b></string>
   <string name="home_view_service_not_active_subtitle">Agissez dès maintenant pour permettre à Immuni de fonctionner correctement.</string>
@@ -359,4 +357,20 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="permission_tutorial_how_to_upload_positive_second">Le professionnel de la santé qui vous communiquera le résultat positif du test vous assistera par téléphone. Il vous demandera de lui fournir le code à usage unique affiché sur la page-écran précédente et l\'utilisera pour vous autoriser à télécharger vos données.</string>
   <string name="permission_tutorial_how_to_upload_positive_third">Ce processus d\'autorisation empêche les utilisateurs qui n\'ont pas été effectivement testés positifs au virus de télécharger leurs données et de provoquer ainsi de fausses alarmes. Le code à usage unique et les données téléchargées ne sont en aucun cas associés à votre identité.</string>
   <string name="suggestions_instruction_under_18_message">Si vous avez moins de 18 ans, demandez à vos parents de lire ce message.</string>
+  <string name="home_view_service_active_subtitle">Immuni fonctionne même lorsque l’application est fermée.</string>
+  <string name="welcome_view_discover_more">Découvrez comment l\'application fonctionne</string>
+  <string name="permission_tutorial_why_province_region_title">Pourquoi indiquer la région et la province de domicile ?</string>
+  <string name="permission_tutorial_why_province_region_first"><b>La région et la province de domicile permettent au Service national de santé de prévenir l\'apparition de nouveaux foyers épidémiques,</b> tout en permettant d\'estimer la diffusion de l\'application sur le territoire national. La province de domicile est envoyée sur le serveur du Ministère de la santé avec des informations sur le bon fonctionnement de l\'application et le fait que vous ayez été averti ou non d\'un contact à risque. Immuni recueille ces informations en respectant la confidentialité de vos données personnelles.</string>
+  <string name="permission_tutorial_why_province_region_second">Il est possible de modifier votre région et votre province d\'origine à tout moment en accédant aux paramètres de l\'application. Nous vous conseillons de les mettre à jour uniquement si vous décidez de changer de lieu de résidence. Dans tous les autres cas, y compris les déplacements occasionnels, ceci n\'est pas nécessaire.</string>
+  <string name="permission_tutorial_why_province_region_third"><b>Si vous habitez à l\'étranger mais avez l\'intention de voyager en Italie, nous vous suggérons de sélectionner la région (puis la province) dans laquelle vous séjournerez le plus longtemps.</b> Vous pouvez utiliser Immuni même si vous êtes à l\'étranger. L\'application enregistrera régulièrement vos contacts avec d\'autres utilisateurs. Toutefois, si votre test se révélait positif, vous ne pourrez pas télécharger vos codes aléatoires tant que vous ne serez pas en Italie.</string>
+  <string name="onboarding_region_abroad_item">Je ne vis pas en italie</string>
+  <string name="onboarding_region_abroad_alert_title">Vous êtes sûr ?</string>
+  <string name="onboarding_region_abroad_alert_message">Si vous ne vivez pas en Italie mais avez l\'intention de vous y rendre, nous vous suggérons de sélectionner la région (puis la province) dans laquelle vous séjournerez le plus longtemps. Il en va de même si vous vous trouvez déjà en Italie.</string>
+  <string name="onboarding_region_abroad_alert_cancel">Annuler</string>
+  <string name="onboarding_region_abroad_alert_confirm">Continuer</string>
+  <string name="support_info_item_lastencheck">Dernière vérification</string>
+  <string name="settings_setting_share">Partagez l\'application</string>
+  <string name="settings_setting_share_message">Aidez-nous à combattre l\'épidémie de COVID-19. Vous aussi, téléchargez Immuni. https://www.immuni.italia.it/</string>
+  <string name="support_info_item_lastencheck_none">Aucune</string>
+  <string name="support_info_item_lastencheck_date_android" formatted="false">%1$s à %2$s</string>
 </resources>

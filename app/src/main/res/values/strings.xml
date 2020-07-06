@@ -50,7 +50,6 @@
   <string name="welcome_view_items_third_description">Users who discover that they have been exposed to the virus can self-isolate, slowing down the spread of the virus and helping us return to normal life faster.</string>
   <string name="welcome_view_items_fourth_title">Your privacy is protected</string>
   <string name="welcome_view_items_fourth_description">The app works without tracking your movements and without knowing your identity or the identity of the people you come into contact with.</string>
-  <string name="welcome_view_discover_more">Find out more</string>
   <string name="welcome_view_next_page_title">Next</string>
   <string name="welcome_view_go_next">Let\'s get started</string>
   <string name="privacy_title">Your privacy is safe</string>
@@ -75,11 +74,6 @@
   <string name="onboarding_region_description">Select the region where you live to help the National Health Service provide the best possible assistance.</string>
   <string name="onboarding_province_title">Which province do you live in?</string>
   <string name="onboarding_province_description">Select the province where you live to help the National Health Service provide the best possible assistance.</string>
-  <string name="onboarding_region_abroad_item">Non vivo in Italia</string>
-  <string name="onboarding_region_abroad_alert_title">Sei sicuro?</string>
-  <string name="onboarding_region_abroad_alert_message">Se non vivi in Italia ma hai intenzione di recartici, ti suggeriamo di selezionare già la regione (e successivamente la provincia) in cui soggiornerai per più tempo. Lo stesso vale nel caso in cui tu ti trovi già in Italia.</string>
-  <string name="onboarding_region_abroad_alert_cancel">Annulla</string>
-  <string name="onboarding_region_abroad_alert_confirm">Continua</string>
   <string name="onboarding_exposure_permission_title">Enable COVID-19 exposure notifications</string>
   <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus. You can temporarily disable the service from the home screen.</string>
   <string name="onboarding_exposure_permission_action">Enable</string>
@@ -100,7 +94,6 @@
   <string name="onboarding_complete_title">Setup complete</string>
   <string name="home_view_service_active_title">Service
 <b>active</b></string>
-  <string name="home_view_service_active_subtitle">Open Immuni once a day to check its status.</string>
   <string name="home_view_service_not_active_title">Service
 <b>inactive</b></string>
   <string name="home_view_service_not_active_subtitle">Take action now to allow Immuni to work properly.</string>
@@ -126,10 +119,6 @@
   <string name="permission_tutorial_how_immuni_works_fifth_message">If you\'ve been in contact with a positive user, Immuni notifies you and tells you what to do. It does all this without ever knowing where you\'ve been and who you\'ve met. Your privacy is safe.</string>
   <string name="permission_tutorial_how_immuni_works_action_description">Want to know more?</string>
   <string name="permission_tutorial_how_immuni_works_action_cta">Read the FAQ</string>
-  <string name="permission_tutorial_why_province_region_title">A cosa serve inserire regione e provincia di domicilio</string>
-  <string name="permission_tutorial_why_province_region_first">Regione e provincia di domicilio sono utili al Servizio Sanitario Nazionale per poter prevenire l’insorgenza di nuovi focolai, oltre che per poter stimare la diffusione dell’app sul territorio nazionale. La provincia di domicilio viene inviata al server del Ministero della Salute contestualmente alle informazioni sul corretto funzionamento dell’app e sul fatto che tu sia stato o meno avvertito di un contatto a rischio. Immuni raccoglie queste informazioni nella piena tutela della tua privacy.</string>
-  <string name="permission_tutorial_why_province_region_second">È possibile modificare regione e provincia di domicilio in un qualsiasi momento dalle impostazioni dell’app. Ti consigliamo di modificarle solamente in caso tu decida di cambiare domicilio. In tutti gli altri casi, inclusi viaggi occasionali, non è invece necessario farlo.</string>
-  <string name="permission_tutorial_why_province_region_third"><b>Nel caso in cui tu viva all’estero ma abbia intenzione di recarti in Italia, ti suggeriamo di selezionare già la regione (e successivamente la provincia) in cui soggiornerai per più tempo.</b> Puoi usare Immuni anche se ti trovi all’estero. L’app registrerà regolarmente i tuoi contatti con altri utenti. Non potrai tuttavia caricare i tuoi codici casuali in caso di rilevata positività fintanto che non ti troverai in Italia.</string>
   <string name="settings_setting_section_info">Information</string>
   <string name="settings_setting_section_general">General</string>
   <string name="settings_setting_section_data">Upload data</string>
@@ -315,8 +304,6 @@ The data saved on your smartphone and the connections to the server are encrypte
 Above the line, describe your queries or issues with the app. If possible, do not delete the text below. It will help the Immuni Support team to better assist you. 
 Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; [other useful info, same as the info displayed on the contact support screen]</string>
   <string name="settings_setting_support">Contact Support</string>
-  <string name="settings_setting_share">Condividi l\'app</string>
-  <string name="settings_setting_share_message">Aiutaci a combattere insieme l’epidemia di COVID-19. Scarica anche tu Immuni. https://www.immuni.italia.it/</string>
   <string name="support_title">Need help?</string>
   <string name="support_faq_description">If you\'re unsure about anything or you\'re having problems using the app, please go to the \'FAQ\' section.</string>
   <string name="support_faq_action">Read the FAQ</string>
@@ -332,9 +319,6 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="support_info_item_bluetoothEnabled">Bluetooth</string>
   <string name="support_info_item_appVersion">App version</string>
   <string name="support_info_item_connectionType">Connection</string>
-  <string name="support_info_item_lastencheck">Ultima verifica</string>
-  <string name="support_info_item_lastencheck_none">Nessuna</string>
-  <string name="support_info_item_lastencheck_date">%s alle %s</string>
   <string name="permission_tutorial_deactivate_service_first_message_android">To protect your health and the health of your loved ones, only disable the service if necessary and reactivate it as soon as you can.</string>
   <string name="support_info_active">Active</string>
   <string name="support_info_not_active">Not active</string>
@@ -373,4 +357,20 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="permission_tutorial_how_to_upload_positive_second">The healthcare operator who informs you that your swab has tested positive will assist you by phone. They will ask you for the one-time code displayed on the previous screen, which they will use to give you authorisation to upload your data.</string>
   <string name="permission_tutorial_how_to_upload_positive_third">This authorisation process prevents users who have not actually tested positive for the virus from uploading their data and causing false alarms. The one-time code and the data uploaded are not associated with your identity in any way.</string>
   <string name="suggestions_instruction_under_18_message">If you\'re under 18, please have your parents/legal guardian read this message.</string>
+  <string name="home_view_service_active_subtitle">Even when the app is closed, Immuni continues to operate.</string>
+  <string name="welcome_view_discover_more">Find out how the app works</string>
+  <string name="permission_tutorial_why_province_region_title">Why we ask you to enter your home region and province</string>
+  <string name="permission_tutorial_why_province_region_first"><b>The National Health Service uses your home region and province details to help prevent new outbreaks,</b> as well as to estimate how widely the app is being used across the country. Your home province is sent to the Ministry of Health server along with information on whether the app is functioning properly and whether you have been informed of a high-risk contact. Immuni fully protects your privacy in collecting this information.</string>
+  <string name="permission_tutorial_why_province_region_second">You can change your home region and province at any time from the app\'s settings menu. We advise you to change them only if you decide to move house. In all other cases, including occasional trips, you do not need to do so.</string>
+  <string name="permission_tutorial_why_province_region_third"><b>If you live abroad but intend to travel to Italy, we suggest that you now select the region (and then the province) where you will be staying for the longest during your visit.</b> You can use Immuni even if you are abroad. The app will log your contact with other users as normal. However, you will not be able to upload your random codes if you test positive until you are in Italy.</string>
+  <string name="onboarding_region_abroad_item">I don\'t live in Italy</string>
+  <string name="onboarding_region_abroad_alert_title">Are you sure?</string>
+  <string name="onboarding_region_abroad_alert_message">If you don\'t live in Italy but intend to visit, we suggest that you now select the region (and then the province) where you will be staying for the longest. The same applies if you are already in Italy.</string>
+  <string name="onboarding_region_abroad_alert_cancel">Cancel</string>
+  <string name="onboarding_region_abroad_alert_confirm">Continue</string>
+  <string name="support_info_item_lastencheck">Last verified</string>
+  <string name="settings_setting_share">Share the app</string>
+  <string name="settings_setting_share_message">Help us fight the COVID-19 epidemic together. Download Immuni. https://www.immuni.italia.it/</string>
+  <string name="support_info_item_lastencheck_none">None</string>
+  <string name="support_info_item_lastencheck_date_android" formatted="false">%1$s at %2$s</string>
 </resources>

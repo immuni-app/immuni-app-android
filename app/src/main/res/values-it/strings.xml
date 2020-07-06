@@ -50,7 +50,6 @@
   <string name="welcome_view_items_third_description">Gli utenti che scoprono di essere stati esposti al virus possono isolarsi, rallentando così la diffusione del virus e  accelerando il ritorno alla vita normale.</string>
   <string name="welcome_view_items_fourth_title">La tua privacy è tutelata</string>
   <string name="welcome_view_items_fourth_description">L’app funziona senza seguire i tuoi spostamenti e senza conoscere la tua identità o quella delle persone con cui entri in contatto.</string>
-  <string name="welcome_view_discover_more">Scopri come funziona l\'app</string>
   <string name="welcome_view_next_page_title">Avanti</string>
   <string name="welcome_view_go_next">Iniziamo</string>
   <string name="privacy_title">La tua privacy è al sicuro</string>
@@ -95,7 +94,6 @@
   <string name="onboarding_complete_title">Configurazione completata</string>
   <string name="home_view_service_active_title">Servizio
 <b>attivo</b></string>
-  <string name="home_view_service_active_subtitle">Apri Immuni una volta al giorno per verificarne lo stato.</string>
   <string name="home_view_service_not_active_title">Servizio
 <b>non attivo</b></string>
   <string name="home_view_service_not_active_subtitle">Intervieni subito per permettere a Immuni di funzionare correttamente.</string>
@@ -359,4 +357,20 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="permission_tutorial_how_to_upload_positive_second">L’operatore sanitario che comunica l’esito positivo del tampone ti assisterà telefonicamente. Ti chiederà il codice monouso visualizzato nella schermata precedente e lo userà per autorizzarti al caricamento dei tuoi dati.</string>
   <string name="permission_tutorial_how_to_upload_positive_third">Questo processo di autorizzazione impedisce a utenti che non siano effettivamente risultati positivi al virus di caricare i loro dati, causando falsi allarmi. Il codice monouso e i dati caricati non sono in alcun modo associati alla tua identità.</string>
   <string name="suggestions_instruction_under_18_message">Se hai meno di 18 anni, fai leggere questo messaggio ai tuoi genitori.</string>
+  <string name="home_view_service_active_subtitle">Immuni resta operativa anche quando l\'app è chiusa.</string>
+  <string name="welcome_view_discover_more">Scopri come funziona l\'app</string>
+  <string name="permission_tutorial_why_province_region_title">A cosa serve inserire regione e provincia di domicilio</string>
+  <string name="permission_tutorial_why_province_region_first"><b>Regione e provincia di domicilio sono utili al Servizio Sanitario Nazionale per poter prevenire l\'insorgenza di nuovi focolai,</b> oltre che per poter stimare la diffusione dell\'app sul territorio nazionale. La provincia di domicilio viene inviata al server del Ministero della Salute contestualmente alle informazioni sul corretto funzionamento dell\'app e sul fatto che tu sia stato o meno avvertito di un contatto a rischio. Immuni raccoglie queste informazioni nella piena tutela della tua privacy.</string>
+  <string name="permission_tutorial_why_province_region_second">È possibile modificare regione e provincia di domicilio in un qualsiasi momento dalle impostazioni dell’app. Ti consigliamo di modificarle solamente in caso tu decida di cambiare domicilio. In tutti gli altri casi, inclusi viaggi occasionali, non è invece necessario farlo.</string>
+  <string name="permission_tutorial_why_province_region_third"><b>Nel caso in cui tu viva all’estero ma abbia intenzione di recarti in Italia, ti suggeriamo di selezionare già la regione (e successivamente la provincia) in cui soggiornerai per più tempo.</b> Puoi usare Immuni anche se ti trovi all’estero. L’app registrerà regolarmente i tuoi contatti con altri utenti. Non potrai tuttavia caricare i tuoi codici casuali in caso di rilevata positività fintanto che non ti troverai in Italia.</string>
+  <string name="onboarding_region_abroad_item">Non vivo in Italia</string>
+  <string name="onboarding_region_abroad_alert_title">Sei sicuro?</string>
+  <string name="onboarding_region_abroad_alert_message">Se non vivi in Italia ma hai intenzione di recartici, ti suggeriamo di selezionare già la regione (e successivamente la provincia) in cui soggiornerai per più tempo. Lo stesso vale nel caso in cui tu ti trovi già in Italia.</string>
+  <string name="onboarding_region_abroad_alert_cancel">Annulla</string>
+  <string name="onboarding_region_abroad_alert_confirm">Continua</string>
+  <string name="support_info_item_lastencheck">Ultima verifica</string>
+  <string name="settings_setting_share">Condividi l\'app</string>
+  <string name="settings_setting_share_message">Aiutaci a combattere insieme l\'epidemia di COVID-19. Scarica anche tu Immuni. https://www.immuni.italia.it/</string>
+  <string name="support_info_item_lastencheck_none">Nessuna</string>
+  <string name="support_info_item_lastencheck_date_android" formatted="false">%1$s alle %2$s</string>
 </resources>
