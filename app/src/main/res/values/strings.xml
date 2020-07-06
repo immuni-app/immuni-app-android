@@ -315,6 +315,8 @@ The data saved on your smartphone and the connections to the server are encrypte
 Above the line, describe your queries or issues with the app. If possible, do not delete the text below. It will help the Immuni Support team to better assist you. 
 Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; [other useful info, same as the info displayed on the contact support screen]</string>
   <string name="settings_setting_support">Contact Support</string>
+  <string name="settings_setting_share">Condividi l\'app</string>
+  <string name="settings_setting_share_message">Aiutaci a combattere insieme l’epidemia di COVID-19. Scarica anche tu Immuni. https://www.immuni.italia.it/</string>
   <string name="support_title">Need help?</string>
   <string name="support_faq_description">If you\'re unsure about anything or you\'re having problems using the app, please go to the \'FAQ\' section.</string>
   <string name="support_faq_action">Read the FAQ</string>
