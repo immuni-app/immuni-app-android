@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.config
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.debugmenu.DebugMenuConfiguration
 import it.ministerodellasalute.immuni.debugmenu.DebugMenuItem
@@ -191,6 +192,9 @@ class ImmuniDebugMenuConfiguration(
                         )
                     }
                 }
+            }) {},
+            object : DebugMenuItem("\uD83D\uDD14 Show Attestation API Key", { _, _ ->
+                toast(context, "API KEY: ${BuildConfig.SAFETY_NET_API_KEY}")
             }) {}
         )
     }
