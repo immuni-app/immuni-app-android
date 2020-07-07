@@ -223,7 +223,7 @@
 
                 <TextView
                     style="@style/SupportInformationKey"
-                    android:text="@string/support_info_item_exposureNotificationEnabled" />
+                    android:text="@string/support_info_item_exposurenotificationenabled" />
 
                 <TextView
                     android:id="@+id/isExposureNotificationEnabled"
@@ -237,7 +237,7 @@
 
                 <TextView
                     style="@style/SupportInformationKey"
-                    android:text="@string/support_info_item_bluetoothEnabled" />
+                    android:text="@string/support_info_item_bluetoothenabled" />
 
                 <TextView
                     android:id="@+id/isBluetoothActive"
@@ -251,7 +251,7 @@
 
                 <TextView
                     style="@style/SupportInformationKey"
-                    android:text="@string/support_info_item_appVersion" />
+                    android:text="@string/support_info_item_appversion" />
 
                 <TextView
                     android:id="@+id/appVersion"
@@ -279,7 +279,7 @@
 
                 <TextView
                     style="@style/SupportInformationKey"
-                    android:text="@string/support_info_item_connectionType" />
+                    android:text="@string/support_info_item_connectiontype" />
 
                 <TextView
                     android:id="@+id/connectionType"

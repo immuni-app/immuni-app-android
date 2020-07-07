@@ -104,13 +104,13 @@ class SupportViewModel(
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
         if (!isConnected) {
-            emit(context.getString(R.string.support_info_item_connectionType_none))
+            emit(context.getString(R.string.support_info_item_connectiontype_none))
         } else {
             val isMetered = cm.isActiveNetworkMetered
             emit(
                 when (isMetered) {
-                    true -> context.getString(R.string.support_info_item_connectionType_mobile)
-                    false -> context.getString(R.string.support_info_item_connectionType_wifi)
+                    true -> context.getString(R.string.support_info_item_connectiontype_mobile)
+                    false -> context.getString(R.string.support_info_item_connectiontype_wifi)
                 }
             )
         }

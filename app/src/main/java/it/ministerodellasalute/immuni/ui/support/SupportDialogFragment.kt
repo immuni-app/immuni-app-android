@@ -76,11 +76,11 @@ class SupportDialogFragment : PopupDialogFragment() {
                             listOf(
                                 "${getString(R.string.support_info_item_os)}: ${viewModel.osVersion.value}",
                                 "${getString(R.string.support_info_item_device)}: ${viewModel.deviceModel.value}",
-                                "${getString(R.string.support_info_item_exposureNotificationEnabled)}: ${viewModel.isExposureNotificationEnabled.value}",
-                                "${getString(R.string.support_info_item_bluetoothEnabled)}: ${viewModel.isBluetoothEnabled.value}",
-                                "${getString(R.string.support_info_item_appVersion)}: ${viewModel.appVersion.value}",
+                                "${getString(R.string.support_info_item_exposurenotificationenabled)}: ${viewModel.isExposureNotificationEnabled.value}",
+                                "${getString(R.string.support_info_item_bluetoothenabled)}: ${viewModel.isBluetoothEnabled.value}",
+                                "${getString(R.string.support_info_item_appversion)}: ${viewModel.appVersion.value}",
                                 "Google Play Services: ${viewModel.googlePlayVersion.value}",
-                                "${getString(R.string.support_info_item_connectionType)}: ${viewModel.connectionType.value}",
+                                "${getString(R.string.support_info_item_connectiontype)}: ${viewModel.connectionType.value}",
                                 "${getString(R.string.support_info_item_lastencheck)}: ${viewModel.lastCheckDate.value}"
                             ).joinToString(separator = "; ", postfix = ".")
 
