@@ -19,6 +19,9 @@ commands:
   build:
     description: Perform a build of the Immuni Android application.
     steps:
+      - run: 
+          name: "[build] Configure app.properties"
+          command: echo $APP_PROPERTIES | base64 --decode > app.properties
       - run:
           name: "[build] Compile and archive"
           command: |
@@ -151,7 +154,6 @@ commands:
           name: "[fetch_config] Setup custom environment variables"
           command: |
             # Create necessary files
-            echo $APP_PROPERTIES | base64 --decode > app.properties
             echo $KEYSTORE | base64 --decode > app/immuni-android.keystore
             echo $UPLOAD_SERVICE_ACCOUNT_JSON | base64 --decode > app/immuni-upload.json
 
