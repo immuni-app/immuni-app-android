@@ -60,11 +60,9 @@
   <string name="privacy_item_italy">Ihre Daten werden auf Servern in Italien gespeichert, <b>von öffentlichen Stellen verwaltet und vom Gesundheitsministerium überwacht.</b></string>
   <string name="privacy_item_data_deletion"><b>Alle Daten werden gelöscht, sobald sie nicht mehr benötigt werden</b>. Die Löschung erfolgt bis spätestens 31. Dezember 2020.</string>
   <string name="privacy_checkbox_above14">Ich bin mindestens 14 Jahre alt</string>
-  <string name="privacy_checkbox_privacyPolicyRead"><![CDATA[Ich habe die <l>Datenschutzerklärung</l> gelesen]]></string>
+  <string name="privacy_checkbox_privacypolicyread"><![CDATA[Ich habe die <l>Datenschutzerklärung</l> gelesen]]></string>
   <string name="privacy_tos"><![CDATA[Indem ich fortfahre, erkläre ich, die <l>Nutzungsbedingungen</l> gelesen und akzeptiert zu haben]]></string>
   <string name="privacy_next">Weiter</string>
-  <string name="privacy_checkbox_read">Ich habe die {Datenschutzerklärung}</string>
-  <string name="privacy_tos_read">Indem ich fortfahre, erkläre ich, die {Nutzungsbedingungen} gelesen und akzeptiert zu haben</string>
   <string name="privacy_settings_title">Ihre Privatsphäre bleibt geschützt</string>
   <string name="privacy_settings_show_full">Vollständige Datenschutzerklärung</string>
   <string name="onboarding_common_next">Weiter</string>
@@ -93,6 +91,7 @@
   <string name="onboarding_complete_title">Konfiguration abgeschlossen</string>
   <string name="home_view_service_active_title">Service
 <b>aktiv</b></string>
+  <string name="home_view_service_active_subtitle">Immuni bleibt aktiv, auch wenn die App geschlossen ist.</string>
   <string name="home_view_service_not_active_title">Service
 <b>nicht aktiv</b></string>
   <string name="home_view_service_not_active_subtitle">Handeln Sie sofort, damit Immuni richtig funktionieren kann.</string>
@@ -154,14 +153,12 @@
   <string name="upload_data_verify_message">Weiter zur Überprüfung der Code-Autorisierung</string>
   <string name="upload_data_verify_button">Weiter</string>
   <string name="upload_data_verify_error">Der Code wurde noch nicht autorisiert</string>
-  <string name="upload_data_verify_loading">Autorisierung wird
-überprüft&#8230;</string>
+  <string name="upload_data_verify_loading">Autorisierung wird überprüft&#8230;</string>
   <string name="upload_data_verify_loading_button" formatted="false">%d %@ warten</string>
   <string name="upload_data_verify_loading_button_second">Sekunde</string>
   <string name="upload_data_verify_loading_button_seconds">Sekunden</string>
   <string name="upload_data_verify_loading_button_minutes">Minuten</string>
-  <string name="upload_data_send_data_loading">Daten werden
-geladen&#8230;</string>
+  <string name="upload_data_send_data_loading">Daten werden geladen&#8230;</string>
   <string name="upload_data_missing_authorization_title">Aktivieren Sie die Expositionsmeldungen</string>
   <string name="upload_data_missing_authorization_message">Für diesen Vorgang sind Expositionsmeldungen notwendig. Aktivieren Sie sie jetzt erneut, um fortzufahren.</string>
   <string name="upload_data_missing_authorization_close">Schließen</string>
@@ -190,18 +187,17 @@ geladen&#8230;</string>
   <string name="confirm_data_close_verify_alert_affermative_answer">Ja, schließen</string>
   <string name="confirm_data_close_verify_alert_negative_answer">Abbrechen</string>
   <string name="suggestions_header_short_title_neutral">Anweisungen für Sie</string>
-  <string name="suggestions_neutral_alert">Wenn Sie mit Ihrem Arzt oder der Abteilung für Gesundheitsvorsorge Ihrer örtlichen Gesundheitsbehörde in Kontakt stehen, befolgen Sie alle Anweisungen, die Sie erhalten haben</string>
+  <string name="suggestions_neutral_alert">Wenn Sie mit Ihrem Arzt oder der Abteilung für Gesundheitsvorsorge Ihrer örtlichen Gesundheitsbehörde in Kontakt stehen, befolgen Sie alle Anweisungen, die Sie erhalten haben.</string>
   <string name="suggestions_neutral_message">Versuchen Sie stets, diese <b>allgemeinen Hinweise</b> zu berücksichtigen:</string>
   <string name="suggestions_risk_title">Risikoexposition</string>
-  <string name="suggestions_risk_with_date_subtitle">Immuni hat festgestellt, dass Sie am Tag %s einem Nutzer nahe waren, der positiv auf COVID-19 getestet wurde.</string>
   <string name="suggestions_risk_subtitle">Immuni hat festgestellt, dass Sie am Tag %@ einem Nutzer nahe waren, der positiv auf COVID-19 getestet wurde.</string>
   <string name="suggestions_positive_title">Folgen Sie den Anweisungen</string>
   <string name="suggestions_positive_subtitle"><b>Befolgen Sie alle Anweisungen, die Sie von Ihrem Arzt oder der Abteilung für Gesundheitsvorsorge Ihrer örtlichen Gesundheitsbehörde erhalten haben.</b></string>
-  <string name="suggestions_instruction_ministerial_decree"><b>Befolgen Sie die aktuellen Vorschriften in Ihrer Region</b></string>
-  <string name="suggestions_instruction_wash_hands"><b>Waschen Sie Ihre Hände häufig</b> mit Wasser und Seife oder hydroalkoholischen Lösungen</string>
-  <string name="suggestions_instruction_use_napkins"><b>Husten und Niesen Sie direkt in ein Taschentuch oder in die Armbeuge</b></string>
-  <string name="suggestions_instruction_social_distance"><b>Respektieren Sie die physischen Distanzierungsmaßnahmen</b>, wenn Sie das Haus verlassen müssen</string>
-  <string name="suggestions_instruction_mask"><b>Tragen Sie eine Maske an öffentlich zugänglichen Orten in Innenräumen</b> , einschließlich Transportmitteln, und in allen Fällen, in denen es nicht möglich ist, die Einhaltung des Sicherheitsabstands kontinuierlich zu gewährleisten</string>
+  <string name="suggestions_instruction_ministerial_decree"><b>Befolgen Sie die aktuellen Vorschriften in Ihrer Region.</b></string>
+  <string name="suggestions_instruction_wash_hands"><b>Waschen Sie Ihre Hände häufig</b> mit Wasser und Seife oder hydroalkoholischen Lösungen.</string>
+  <string name="suggestions_instruction_use_napkins"><b>Husten und Niesen Sie direkt in ein Taschentuch oder in die Armbeuge.</b></string>
+  <string name="suggestions_instruction_social_distance"><b>Respektieren Sie die physischen Distanzierungsmaßnahmen</b>, wenn Sie das Haus verlassen müssen.</string>
+  <string name="suggestions_instruction_mask"><b>Tragen Sie eine Maske an öffentlich zugänglichen Orten in Innenräumen</b>, einschließlich Transportmitteln, und in allen Fällen, in denen es nicht möglich ist, die Einhaltung des Sicherheitsabstands kontinuierlich zu gewährleisten.</string>
   <string name="suggestions_instruction_follow_instructions">Beachten Sie zum Schutz Ihrer Gesundheit und der Ihrer Angehörigen <b>die folgenden Richtlinien:</b></string>
   <string name="suggestions_instruction_contact_doctor_title"><b>Wenden Sie sich an Ihren Hausarzt (oder an einen Kinderarzt Ihrer Wahl)</b></string>
   <string name="suggestions_instruction_contact_doctor_message">Erklären Sie Ihrem Arzt, dass Sie von Immuni eine Mitteilung über einen engen Kontakt mit einer positiv auf COVID-19 getesteten Person erhalten haben. Folgen Sie den Anweisungen Ihres Arztes. Ihr Arzt wird sich an die Abteilung für Gesundheitsvorsorge Ihrer örtlichen Gesundheitsbehörde wenden. Bleiben Sie daher für Aktivitäten zur Gesundheitsüberwachung durch Ihre örtliche Gesundheitsbehörde erreichbar.</string>
@@ -210,9 +206,9 @@ geladen&#8230;</string>
   <string name="suggestions_instruction_while_waiting_doctor">Als Vorsichtsmaßnahme, bis die Angaben Ihres Arztes oder Ihrer örtlichen Gesundheitsbehörde vorliegen:</string>
   <string name="suggestions_instruction_stay_home"><b>Bleiben Sie für 14 Tage nach dem Datum des Kontakts zu Hause.</b></string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Messen Sie die Körpertemperatur mindestens zweimal täglich und beurteilen Sie das Auftreten auch milder Symptome.</b></string>
-  <string name="suggestions_instruction_check_symptoms_message">Insbesondere bei Fieber oder Auftreten von mindestens einem der folgenden Symptome: Halsschmerzen, Husten, Erkältung oder verstopfte Nase, Atembeschwerden, Muskelschmerzen, Verlust oder Veränderung von Geruch oder Geschmack, Durchfall</string>
+  <string name="suggestions_instruction_check_symptoms_message">Insbesondere bei Fieber oder Auftreten von mindestens einem der folgenden Symptome: Halsschmerzen, Husten, Erkältung oder verstopfte Nase, Atembeschwerden, Muskelschmerzen, Verlust oder Veränderung von Geruch oder Geschmack, Durchfall.</string>
   <string name="suggestions_instruction_isolate_title"><b>Wenn Symptome auftreten, isolieren Sie sich vom Rest Ihrer Mitbewohner.</b></string>
-  <string name="suggestions_instruction_isolate_message">Tragen Sie eine Mundschutzmaske und wenden Sie sich sofort an Ihren Hausarzt (oder Kinderarzt Ihrer Wahl) und die Abteilung für Gesundheitsvorsorge Ihrer örtlichen Gesundheitsbehörde</string>
+  <string name="suggestions_instruction_isolate_message">Tragen Sie eine Mundschutzmaske und wenden Sie sich sofort an Ihren Hausarzt (oder Kinderarzt Ihrer Wahl) und die Abteilung für Gesundheitsvorsorge Ihrer örtlichen Gesundheitsbehörde.</string>
   <string name="suggestions_instruction_phone_contact"><b>Bei Atembeschwerden wenden Sie sich an 112/118.</b></string>
   <string name="suggestions_instruction_hide_alert_message">Bei Bedarf können Sie diese Warnung ausblenden. Sofern Sie keinen triftigen Grund haben, raten wir Ihnen dringend davon ab.</string>
   <string name="suggestions_instruction_hide_alert_action">Warnung ausblenden</string>
@@ -297,7 +293,7 @@ Die auf Ihrem Smartphone gespeicherten Daten und die Verbindungen zum Server sin
   <string name="suggestions_risk_first_message">Die App zeigt Ihnen diese Warnung basierend auf den verfügbaren Informationen (Dauer des Kontakts und ungefähre Schätzung der Entfernung). Die App kann jedoch nicht wissen, ob Sie während des Kontakts Masken getragen haben oder ob Sie mit dem Rücken zueinander standen. Das Ansteckungsrisiko könnte daher überschätzt werden.</string>
   <string name="suggestions_risk_second_message">Damit der staatliche Gesundheitsdienst Sie im Bedarfsfall bestmöglich unterstützen kann, hat die App das Gesundheitsministerium darüber informiert, dass Sie benachrichtigt wurden.</string>
   <string name="suggestions_risk_fourth_message"><![CDATA[Weitere Informationen zu den an das Gesundheitsministerium gesendeten Daten finden Sie in der <l>Datenschutzerklärung</l> unter Ziffer 4.]]></string>
-  <string name="suggestions_risk_third_message"><b>Das Gesundheitsministerium kann anhand dieser Informationen keine Rückschlüsse auf Ihre Identität ziehen</b>.</string>
+  <string name="suggestions_risk_third_message"><b>Das Gesundheitsministerium kann anhand dieser Informationen keine Rückschlüsse auf Ihre Identität ziehen.</b></string>
   <string name="suggestions_risk_third_message_android">Weitere Informationen zu den an das Gesundheitsministerium gesendeten Daten finden Sie in der {Datenschutzerklärung} unter Ziffer 4.</string>
   <string name="support_email_template">\n\n\n——————————
 Beschreiben Sie oberhalb der Linie, welche Fragen oder Funktionsstörungen bei der Nutzung der App aufgetreten sind. Bitte löschen Sie den folgenden Text nicht, da er dem Kundendienst von Immuni hilft, Sie bestmöglich zu unterstützen.
@@ -314,19 +310,19 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="support_info_title">Nützliche Hinweise</string>
   <string name="support_info_item_os">Betriebssystem</string>
   <string name="support_info_item_device">Modell</string>
-  <string name="support_info_item_exposureNotificationEnabled">Expositionsmeldungen</string>
-  <string name="support_info_item_bluetoothEnabled">Bluetooth</string>
-  <string name="support_info_item_appVersion">App-Version</string>
-  <string name="support_info_item_connectionType">Verbindung</string>
+  <string name="support_info_item_exposurenotificationenabled">Expositionsmeldungen</string>
+  <string name="support_info_item_bluetoothenabled">Bluetooth</string>
+  <string name="support_info_item_appversion">App-Version</string>
+  <string name="support_info_item_connectiontype">Verbindung</string>
   <string name="permission_tutorial_deactivate_service_first_message_android">Deaktivieren Sie den Service zum Schutz Ihrer Gesundheit und der Ihrer Angehörigen nur im Bedarfsfall und aktivieren Sie ihn so bald wie möglich erneut.</string>
   <string name="support_info_active">Aktiv</string>
   <string name="support_info_not_active">Nicht aktiv</string>
   <string name="support_info_active_plural">Aktiv</string>
   <string name="support_info_not_active_plural">Nicht aktiv</string>
   <string name="support_phone_description_android">Die Hotline ist von %1$s bis %2$s Uhr verfügbar.</string>
-  <string name="support_info_item_connectionType_wifi">WLAN</string>
-  <string name="support_info_item_connectionType_mobile">Mobil</string>
-  <string name="support_info_item_connectionType_none">Keine</string>
+  <string name="support_info_item_connectiontype_wifi">WLAN</string>
+  <string name="support_info_item_connectiontype_mobile">Mobil</string>
+  <string name="support_info_item_connectiontype_none">Keine</string>
   <string name="permission_tutorial_update_os_first"><b>1. Stellen Sie sicher, dass Sie über WLAN verbunden sind.</b> Das Update kann nicht über Mobilfunknetz heruntergeladen werden.</string>
   <string name="permission_tutorial_cant_update_title">Ist die Aktualisierung fehlgeschlagen?</string>
   <string name="permission_tutorial_cant_update_first"><b>1. Stellen Sie sicher, dass Sie über WLAN verbunden sind.</b> Das Update kann nicht über das Mobilfunknetz heruntergeladen werden.</string>
@@ -334,14 +330,14 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="permission_tutorial_cant_update_third"><b>3. Wählen Sie \"Herunterladen und installieren\"</b></string>
   <string name="permission_tutorial_cant_update_fourth"><b>4.</b> Versichern Sie sich nach dem Herunterladen, <b>dass die Installation abgeschlossen wird, indem Sie \"Jetzt installieren\" wählen</b></string>
   <string name="force_update_view_os_seconday_button">Ist die Aktualisierung fehlgeschlagen?</string>
-  <string name="support_email_body_message">Beschreiben Sie etwaige Zweifel oder Probleme mit dem Betrieb der App oberhalb der Zeile. Wenn möglich, löschen Sie den untenstehenden Text nicht. Er wird dem Immuni-Support helfen, Sie zu unterstützen.</string>
-  <string name="verify_immuni_works_first"><b>Wenn Sie \"Service aktiv\" lesen, bedeutet dies, dass Immuni bereits richtig funktioniert.</b></string>
-  <string name="verify_immuni_works_second"><b>Wenn es Probleme gibt, lesen Sie \"Service nicht aktiv\".</b>Immuni wird Ihnen einfache Anweisungen zur Wiederherstellung des korrekten Betriebs geben.</string>
-  <string name="verify_immuni_works_third"><b>Wenn Sie einer Person ausgesetzt waren, die später positiv auf das Virus getestet wird, schickt Immuni Ihnen eine Mitteilung, um Sie vor dem Infektionsrisiko zu warnen.</b> Wenn Sie die App öffnen, erhalten Sie eine klare und umfassende Anleitung darüber, was zu tun ist.</string>
-  <string name="verify_immuni_works_fourth">Aus technischen Gründen <b>können einige Android-Smartphone-Modelle die Funktion von Immuni unterbrechen, wenn die App für einige Tage geschlossen bleibt</b>. In diesem Fall bleibt der Austausch von Zufallscodes mit anderen Geräten aktiv, Immuni kann jedoch nicht überprüfen, ob Sie potenziell ansteckenden Nutzern ausgesetzt waren, und Sie im Falle eines Risikos nicht warnen. Um dies zu verhindern empfehlen wir Ihnen, die App einmal täglich zu öffnen . Google arbeitet mit den Herstellern dieser Modelle zusammen, um das Problem zu lösen.</string>
+  <string name="support_email_body_message">Beschreiben Sie etwaige Zweifel oder Probleme mit dem Betrieb der App oberhalb der Zeile. Wenn möglich, löschen Sie den untenstehenden Text nicht. Er hilft dem Kundendienst von Immuni dabei, Sie zu unterstützen.</string>
+  <string name="verify_immuni_works_first"><b>Wenn Ihnen \"Service aktiv\" angezeigt wird, bedeutet dies, dass Immuni bereits richtig funktioniert.</b></string>
+  <string name="verify_immuni_works_second"><b>Sollten Probleme auftreten, wird Ihnen \"Service nicht aktiv\" angezeigt.</b> Immuni wird Ihnen einfache Anweisungen zur Wiederherstellung des korrekten Betriebs geben.</string>
+  <string name="verify_immuni_works_third"><b>Wenn Sie Kontakt mit einer Person hatten, die später positiv auf das Virus getestet wurde, schickt Immuni Ihnen eine Mitteilung, um Sie vor dem Infektionsrisiko zu warnen.</b> Wenn Sie die App öffnen, erhalten Sie eine klare und umfassende Anleitung darüber, was zu tun ist.</string>
+  <string name="verify_immuni_works_fourth">Aus technischen Gründen <b>können einige Android-Smartphone-Modelle die Funktion von Immuni unterbrechen, wenn die App für einige Tage geschlossen bleibt</b>. In diesem Fall bleibt der Austausch von Zufallscodes mit anderen Geräten aktiv, Immuni kann jedoch nicht überprüfen, ob Sie potenziell ansteckenden Nutzern ausgesetzt waren, und Sie im Falle eines Risikos nicht warnen. Um dies zu verhindern, empfehlen wir Ihnen, die App einmal täglich zu öffnen. Google arbeitet mit den Herstellern dieser Modelle zusammen, um das Problem zu lösen.</string>
   <string name="localisation_explanation_title">Warum der Lokalisierungsdienst aktiv sein muss</string>
   <string name="localisation_explanation_message_first">Immuni nutzt das von Apple und Google entwickelte Expositionsmeldesystem. Aufgrund einer Einschränkung des Betriebssystems erfordert das Scannen von Bluetooth-Signalen im Hintergrund, das für den Austausch von Zufallscodes und die anschließende Aufzeichnung der Kontakte notwendig ist, einen aktiven Lokalisierungsdienst.</string>
-  <string name="localisation_explanation_message_second">Die App hat jedoch keinen Zugriff auf Ihren Standort und kann daher Ihre Bewegungen nachverfolgen. Sie können dies leicht überprüfen, indem Sie die Liste der für Immuni erforderlichen Berechtigungen im Menü Einstellungen Ihres Smartphones einsehen und feststellen, dass keine Zugriffsberechtigung für Ihren Standort erforderlich ist.</string>
+  <string name="localisation_explanation_message_second">Die App hat jedoch keinen Zugriff auf Ihren Standort und kann daher Ihre Bewegungen nicht nachverfolgen. Sie können dies leicht überprüfen, indem Sie die Liste der für Immuni erforderlichen Berechtigungen im Menü Einstellungen Ihres Smartphones einsehen und feststellen, dass keine Zugriffsberechtigung für Ihren Standort erforderlich ist.</string>
   <string name="home_view_service_active_discover_more">Mehr erfahren</string>
   <string name="faq_search_bar_placeholder">Eine Frage suchen</string>
   <string name="faq_no_result_title">Keine Themen gefunden</string>
@@ -349,7 +345,7 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="settings_setting_load_data">Positives Ergebnis melden</string>
   <string name="permission_tutorial_verify_immuni_works_title">So überprüfen Sie, ob Immuni funktioniert</string>
   <string name="permission_tutorial_verify_immuni_works_first"><b>Wenn \"Service aktiv\" erscheint, bedeutet dies, dass Immuni bereits ordnungsgemäß funktioniert.</b> Sie müssen nichts weiter tun: Die App funktioniert auch dann weiter, wenn sie geschlossen ist.</string>
-  <string name="permission_tutorial_verify_immuni_works_second"><b>Sollte es Probleme geben, erscheint die Meldung \"Service nicht aktiv\".</b>Immuni wird Ihnen einfache Anweisungen zur Wiederherstellung des korrekten Betriebs geben.</string>
+  <string name="permission_tutorial_verify_immuni_works_second"><b>Sollte es Probleme geben, erscheint die Meldung \"Service nicht aktiv\".</b> Immuni wird Ihnen einfache Anweisungen zur Wiederherstellung des korrekten Betriebs geben.</string>
   <string name="permission_tutorial_verify_immuni_works_third"><b>Wenn Sie mit einer Person in Kontakt kommen, die später positiv auf das Virus getestet wird, wird Immuni Ihnen eine Benachrichtigung senden, um Sie vor dem Risiko einer Ansteckung zu warnen.</b> Wenn Sie die App öffnen, erhalten Sie eine klare und umfassende Anleitung darüber, was zu tun ist.</string>
   <string name="upload_data_warning_discover_more">Mehr erfahren</string>
   <string name="permission_tutorial_how_to_upload_positive_title">So melden Sie das positive Ergebnis</string>
@@ -357,7 +353,9 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="permission_tutorial_how_to_upload_positive_second">Das medizinische Fachpersonal, das Ihnen das positive Ergebnis des Tests mitteilt, hilft Ihnen telefonisch weiter. Sie werden nach dem auf dem vorherigen Bildschirm angezeigten Einmalcode gefragt, der dazu dient, das Hochladen Ihrer Daten zu autorisieren.</string>
   <string name="permission_tutorial_how_to_upload_positive_third">Dieser Autorisierungsprozess verhindert, dass Nutzer, die nicht positiv auf den Virus getestet wurden, ihre Daten hochladen und somit Fehlalarme verursachen. Der Einmalcode und die hochgeladenen Daten sind in keiner Weise mit Ihrer Identität verbunden.</string>
   <string name="suggestions_instruction_under_18_message">Wenn Sie unter 18 Jahre alt sind, zeigen Sie diese Nachricht Ihren Eltern.</string>
-  <string name="home_view_service_active_subtitle">Immuni bleibt aktiv, auch wenn die App geschlossen ist.</string>
+  <string name="privacy_tos_read">Indem ich fortfahre, erkläre ich, die {Nutzungsbedingungen} gelesen und akzeptiert zu haben</string>
+  <string name="privacy_checkbox_read">Ich habe die {Datenschutzerklärung} gelesen</string>
+  <string name="suggestions_risk_with_date_subtitle">Immuni hat festgestellt, dass Sie am Tag %s einem Nutzer nahe waren, der positiv auf COVID-19 getestet wurde.</string>
   <string name="welcome_view_discover_more">So funktioniert die App</string>
   <string name="permission_tutorial_why_province_region_title">Darum sollten Sie die Region und Provinz Ihres Wohnsitzes angeben</string>
   <string name="permission_tutorial_why_province_region_first"><b>Region und Provinz des Wohnsitzes sind für den nationalen Gesundheitsdienst nützlich, um neue Ausbrüche zu verhindern</b> und um die Verbreitung der App auf dem Staatsgebiet abschätzen zu können. Die Provinz des Wohnsitzes wird zusammen mit Informationen über die ordnungsgemäße Funktion der App und darüber, ob Sie vor einem Risikokontakt gewarnt wurden, an den Server des Gesundheitsministeriums gesendet. Immuni sammelt diese Informationen unter vollständiger Einhaltung der Datenschutzbestimmungen.</string>
@@ -372,5 +370,6 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="settings_setting_share">App teilen</string>
   <string name="settings_setting_share_message">Helfen Sie uns, gemeinsam die COVID-19-Epidemie zu bekämpfen. Laden Sie auch Immuni herunter. https://www.immuni.italia.it/</string>
   <string name="support_info_item_lastencheck_none">Keine</string>
-  <string name="support_info_item_lastencheck_date_android" formatted="false">%1$s um %2$s</string>
+  <string name="support_info_item_lastencheck_date" formatted="false">%@ um %@</string>
+  <string name="support_info_item_lastencheck_date_android">%1$s um %2$s</string>
 </resources>

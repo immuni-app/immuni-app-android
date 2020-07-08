@@ -19,6 +19,9 @@ commands:
   build:
     description: Perform a build of the Immuni Android application.
     steps:
+      - run: 
+          name: "[build] Configure app.properties"
+          command: echo $APP_PROPERTIES | base64 --decode > app.properties
       - run:
           name: "[build] Compile and archive"
           command: |
