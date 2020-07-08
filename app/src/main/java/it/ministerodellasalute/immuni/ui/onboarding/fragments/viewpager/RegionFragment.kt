@@ -21,11 +21,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.postDelayed
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.user.models.Region
+import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
+import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
+import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.faq_fragment.appBar
 import kotlinx.android.synthetic.main.faq_fragment.toolbarSeparator
@@ -33,7 +37,8 @@ import kotlinx.android.synthetic.main.faq_fragment.toolbarTitle
 import kotlinx.android.synthetic.main.onboarding_region_fragment.*
 
 class RegionFragment :
-    ViewPagerBaseFragment(R.layout.onboarding_region_fragment), RegionClickListener {
+    ViewPagerBaseFragment(R.layout.onboarding_region_fragment), RegionClickListener,
+    ConfirmationDialogListener {
 
     lateinit var adapter: RegionListAdapter
 
@@ -56,6 +61,7 @@ class RegionFragment :
             pageTitle?.alpha = 1 - ratio
             description?.alpha = 1 - ratio
             toolbarTitle?.alpha = ratio
+            knowMore?.alpha = 1 - ratio
         })
 
         adapter = RegionListAdapter(this)
@@ -68,12 +74,28 @@ class RegionFragment :
             viewModel.onRegionNextTap()
         }
 
+        knowMore.setSafeOnClickListener {
+            val action = ViewPagerFragmentDirections.actionRegionProvinceExplanation()
+            findNavController().navigate(action)
+        }
+
         adapter.data = viewModel.regions
 
         viewModel.region.asLiveData().observe(viewLifecycleOwner, Observer {
             adapter.selectedRegion = it
             adapter.notifyDataSetChanged()
             validate(it)
+        })
+
+        viewModel.askRegionConfirmation.observe(viewLifecycleOwner, Observer {
+            openConfirmationDialog(
+                positiveButton = getString(R.string.onboarding_region_abroad_alert_confirm),
+                negativeButton = getString(R.string.onboarding_region_abroad_alert_cancel),
+                message = getString(R.string.onboarding_region_abroad_alert_message),
+                title = getString(R.string.onboarding_region_abroad_alert_title),
+                cancelable = false,
+                requestCode = REQUEST_CODE_ABROAD_CONFIRMATION
+            )
         })
     }
 
@@ -83,5 +105,17 @@ class RegionFragment :
 
     override fun onClick(item: Region) {
         viewModel.onRegionSelected(item)
+    }
+
+    override fun onDialogPositive(requestCode: Int) {
+        viewModel.onAbroadRegionConfirmed()
+    }
+
+    override fun onDialogNegative(requestCode: Int) {
+        // Pass
+    }
+
+    companion object {
+        const val REQUEST_CODE_ABROAD_CONFIRMATION = 291
     }
 }

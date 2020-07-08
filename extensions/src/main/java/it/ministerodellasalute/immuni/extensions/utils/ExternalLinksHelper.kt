@@ -40,4 +40,13 @@ object ExternalLinksHelper {
             Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun shareText(context: Context, message: String, subject: String, chooserTitle: String) {
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, message)
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+        }
+        context.startActivity(Intent.createChooser(intent, chooserTitle))
+    }
 }

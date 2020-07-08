@@ -49,7 +49,6 @@
   <string name="welcome_view_items_third_description">Los usuarios que descubren que han estado expuestos al virus se pueden aislar para ralentizar su propagación y acelerar el regreso a la normalidad.</string>
   <string name="welcome_view_items_fourth_title">Tu privacidad está garantizada</string>
   <string name="welcome_view_items_fourth_description">La aplicación funciona sin llevar un seguimiento de tus desplazamientos y sin conocer tu identidad o la de las personas con las que entres en contacto.</string>
-  <string name="welcome_view_discover_more">Más información</string>
   <string name="welcome_view_next_page_title">Siguiente</string>
   <string name="welcome_view_go_next">Empezar</string>
   <string name="privacy_title">Tu privacidad está garantizada</string>
@@ -61,11 +60,9 @@
   <string name="privacy_item_italy">Tus datos se guardan en un servidor en Italia, <b>son administrados por entidades públicas y los supervisa el Ministerio de Salud.</b></string>
   <string name="privacy_item_data_deletion"><b>Todos los datos se eliminarán cuando dejen de ser necesarios</b> y, en cualquier caso, el 31 de diciembre de 2020 como máximo.</string>
   <string name="privacy_checkbox_above14">Declaro que tengo al menos 14 años</string>
-  <string name="privacy_checkbox_privacyPolicyRead"><![CDATA[He leído la <l>política de privacidad</l>]]></string>
+  <string name="privacy_checkbox_privacypolicyread"><![CDATA[He leído la <l>política de privacidad</l>]]></string>
   <string name="privacy_tos"><![CDATA[Al continuar, declaro que he leído y acepto los <l>términos de uso</l>]]></string>
   <string name="privacy_next">Siguiente</string>
-  <string name="privacy_checkbox_read">He leído la {política de privacidad}</string>
-  <string name="privacy_tos_read">Al continuar, declaro que he leído y acepto los {términos de uso}</string>
   <string name="privacy_settings_title">Tu privacidad está garantizada</string>
   <string name="privacy_settings_show_full">Política de privacidad completa</string>
   <string name="onboarding_common_next">Siguiente</string>
@@ -94,7 +91,7 @@
   <string name="onboarding_complete_title">Configuración completada</string>
   <string name="home_view_service_active_title">Servicio
 <b>activo</b></string>
-  <string name="home_view_service_active_subtitle">Abre Immuni una vez al día para verificar su estado.</string>
+  <string name="home_view_service_active_subtitle">Immuni sigue funcionando aunque la aplicación esté cerrada.</string>
   <string name="home_view_service_not_active_title">Servicio
 <b>inactivo</b></string>
   <string name="home_view_service_not_active_subtitle">Toma las medidas necesarias cuanto antes para que Immuni funcione correctamente.</string>
@@ -162,7 +159,7 @@ autorización&#8230;</string>
   <string name="upload_data_verify_loading_button_second">segundo</string>
   <string name="upload_data_verify_loading_button_seconds">segundos</string>
   <string name="upload_data_verify_loading_button_minutes">minutos</string>
-  <string name="upload_data_send_data_loading">Subiendo 
+  <string name="upload_data_send_data_loading">Subiendo
 los datos&#8230;</string>
   <string name="upload_data_missing_authorization_title">Reactiva las notificaciones de exposición para continuar</string>
   <string name="upload_data_missing_authorization_message">Las notificaciones de exposición son necesarias durante este procedimiento. Reactívalas ahora para continuar.</string>
@@ -195,26 +192,25 @@ los datos&#8230;</string>
   <string name="suggestions_neutral_alert">Si hablas con tu médico o con el Departamento de Prevención de tu Agencia Sanitaria Local, sigue todas sus indicaciones.</string>
   <string name="suggestions_neutral_message">En cualquier caso, <b>intenta respetar en todo momento estas recomendaciones generales:</b></string>
   <string name="suggestions_risk_title">Exposición de riesgo</string>
-  <string name="suggestions_risk_with_date_subtitle">Immuni ha detectado que el día %s estuviste cerca de un usuario que dio positivo por COVID-19.</string>
   <string name="suggestions_risk_subtitle">Immuni ha detectado que el día %@ estuviste cerca de un usuario que dio positivo por COVID-19.</string>
   <string name="suggestions_positive_title">Sigue las indicaciones</string>
   <string name="suggestions_positive_subtitle"><b>Sigue todas las indicaciones que hayas recibido de tu médico o del Departamento de Prevención de tu Agencia Sanitaria Local.</b></string>
-  <string name="suggestions_instruction_ministerial_decree"><b>Respeta la normativa vigente en tu zona</b></string>
-  <string name="suggestions_instruction_wash_hands"><b>Lávate las manos frecuentemente</b>con agua y jabón o soluciones hidroalcohólicas</string>
-  <string name="suggestions_instruction_use_napkins"><b>Tose o estornuda en un pañuelo de papel o en el pliegue del codo</b></string>
-  <string name="suggestions_instruction_social_distance"><b>Respeta las medidas de distanciamiento físico</b>si debes salir de casa</string>
-  <string name="suggestions_instruction_mask"><b>Usa una mascarilla en lugares públicos cerrados</b>, incluidos los medios de transporte y en aquellos casos en que no sea posible mantener el distanciamiento físico de manera continua</string>
+  <string name="suggestions_instruction_ministerial_decree"><b>Respeta la normativa vigente en tu zona.</b></string>
+  <string name="suggestions_instruction_wash_hands"><b>Lávate las manos frecuentemente</b> con agua y jabón o soluciones hidroalcohólicas.</string>
+  <string name="suggestions_instruction_use_napkins"><b>Tose o estornuda en un pañuelo de papel o en el pliegue del codo.</b></string>
+  <string name="suggestions_instruction_social_distance"><b>Respeta las medidas de distanciamiento físico</b> si debes salir de casa.</string>
+  <string name="suggestions_instruction_mask"><b>Usa una mascarilla en lugares públicos cerrados</b>, incluidos los medios de transporte y en aquellos casos en que no sea posible mantener el distanciamiento físico de manera continua.</string>
   <string name="suggestions_instruction_follow_instructions">Para proteger tu salud y la de tus seres queridos, <b>respeta las siguientes indicaciones:</b></string>
   <string name="suggestions_instruction_contact_doctor_title"><b>Ponte en contacto con tu médico de cabecera (o con tu pediatra)</b></string>
   <string name="suggestions_instruction_contact_doctor_message">Explica al médico que has recibido una notificación de contacto cercano con COVID-19 por parte de Immuni. Sigue las indicaciones de tu médico. Tu médico se pondrá en contacto con el Departamento de Prevención de tu Agencia Sanitaria Local. Por tanto, mantente disponible para las operaciones de vigilancia sanitaria que lleve a cabo tu Agencia Sanitaria Local.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_message">Si estás en contacto con tu médico o tu Agencia Sanitaria Local, puedes ocultar este aviso.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_action">He contactado con el médico</string>
   <string name="suggestions_instruction_while_waiting_doctor">Como precaución, mientras esperas las indicaciones de tu médico o de la Agencia Sanitaria Local:</string>
-  <string name="suggestions_instruction_stay_home"><b>Quédate en casa durante 14 días</b> a partir de la fecha de contacto</string>
+  <string name="suggestions_instruction_stay_home"><b>Quédate en casa durante 14 días</b> a partir de la fecha de contacto.</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Mide la temperatura corporal al menos dos veces al día y evalúa los posibles síntomas, aunque sean leves.</b></string>
-  <string name="suggestions_instruction_check_symptoms_message">En especial, fiebre o al menos uno de los siguientes: dolor de garganta, tos, catarro o congestión nasal, dificultad para respirar, dolor muscular, pérdida o alteración del olfato o el gusto, diarrea</string>
-  <string name="suggestions_instruction_isolate_title"><b>Si muestras síntomas, aíslate de las personas con las que vivas</b></string>
-  <string name="suggestions_instruction_isolate_message">Usa una mascarilla quirúrgica y ponte en contacto de inmediato con tu médico de cabecera (o pediatra) y el Departamento de Prevención de la Agencia Sanitaria Local</string>
+  <string name="suggestions_instruction_check_symptoms_message">En especial, fiebre o al menos uno de los siguientes: dolor de garganta, tos, catarro o congestión nasal, dificultad para respirar, dolor muscular, pérdida o alteración del olfato o el gusto, diarrea.</string>
+  <string name="suggestions_instruction_isolate_title"><b>Si muestras síntomas, aíslate de las personas con las que vivas.</b></string>
+  <string name="suggestions_instruction_isolate_message">Usa una mascarilla quirúrgica y ponte en contacto de inmediato con tu médico de cabecera (o pediatra) y el Departamento de Prevención de la Agencia Sanitaria Local.</string>
   <string name="suggestions_instruction_phone_contact"><b>En caso de dificultades para respirar, llama al 112/118.</b></string>
   <string name="suggestions_instruction_hide_alert_message">Si es necesario, puedes ocultar este aviso. Sin embargo, a menos que tengas una razón de peso, te recomendamos encarecidamente que no lo hagas.</string>
   <string name="suggestions_instruction_hide_alert_action">Ocultar aviso</string>
@@ -241,7 +237,7 @@ los datos&#8230;</string>
   <string name="force_update_not_available_message">Google Play Services está actualizado, pero todavía no puede habilitar las notificaciones de exposición. Vuelve a intentarlo más adelante.</string>
   <string name="force_update_gps_not_available_yet_title">Google Play Services debe actualizarse</string>
   <string name="force_update_gps_not_available_yet_message">Todavía no está disponible la versión de Google Play Services necesaria para activar las notificaciones de exposición. Vuelve a intentarlo más adelante.</string>
-  <string name="onboarding_exposure_message_extended">Debido a una limitación del sistema operativo, la ubicación debe estar activada para que se puedan intercambiar los códigos aleatorios a través de Bluetooth. <b>Immuni no tiene acceso a tu ubicación, como podrás comprobar si consultas la lista de los permisos que solicita la aplicación</b>.</string>
+  <string name="onboarding_exposure_message_extended">Debido a una limitación del sistema operativo, la ubicación debe estar activada para que se puedan intercambiar los códigos aleatorios a través de Bluetooth. <b>Immuni no tiene acceso a tu ubicación, como podrás comprobar si consultas la lista de los permisos que solicita la aplicación.</b></string>
   <string name="suggestions_alert_hide_alert_title">¿Quieres ocultar este aviso?</string>
   <string name="suggestions_alert_hide_alert_description">A menos que tengas un motivo válido, te recomendamos que no lo hagas. Podría poner en riesgo tu salud y la de las personas que te rodean.</string>
   <string name="suggestions_alert_hide_alert_negative_answer">No</string>
@@ -299,7 +295,7 @@ Los datos guardados en su smartphone y los datos enviados al servidor serán cif
   <string name="suggestions_risk_first_message">La aplicación te muestra este aviso en función de la información disponible (duración del contacto y estimación de la distancia aproximada), pero no puede saber si durante el contacto llevabais mascarilla o si estabais de espaldas. Por lo tanto, el riesgo de contagio podría haberse sobreestimado.</string>
   <string name="suggestions_risk_second_message">Para ayudar al Servicio Nacional de Salud (SSN) a cuidarte si fuera necesario, la aplicación ha avisado al Ministerio de Salud de la notificación que has recibido.</string>
   <string name="suggestions_risk_fourth_message"><![CDATA[Para obtener más información sobre los datos enviados al Ministerio de Salud, puedes leer la <l>política de privacidad</l> en el punto 4.]]></string>
-  <string name="suggestions_risk_third_message"><b>El Ministerio de Salud no puede en ningún caso rastrear tu identidad a través de esta información</b>.</string>
+  <string name="suggestions_risk_third_message"><b>El Ministerio de Salud no puede en ningún caso rastrear tu identidad a través de esta información.</b></string>
   <string name="suggestions_risk_third_message_android">Para obtener más información sobre los datos enviados al Ministerio de Salud, puedes leer la {política de privacidad} en el punto 4.</string>
   <string name="support_email_template">\n\n\n——————————
 Si tienes dudas o problemas con el funcionamiento de la aplicación, descríbelos encima de la línea. Si es posible, no elimines este texto, ya que permitirá al servicio de asistencia de Immuni ayudarte de la mejor forma posible.
@@ -316,25 +312,25 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="support_info_title">Información útil</string>
   <string name="support_info_item_os">Sistema operativo</string>
   <string name="support_info_item_device">Modelo</string>
-  <string name="support_info_item_exposureNotificationEnabled">Notificaciones de exposición</string>
-  <string name="support_info_item_bluetoothEnabled">Bluetooth</string>
-  <string name="support_info_item_appVersion">Versión de la app</string>
-  <string name="support_info_item_connectionType">Conexión</string>
+  <string name="support_info_item_exposurenotificationenabled">Notificaciones de exposición</string>
+  <string name="support_info_item_bluetoothenabled">Bluetooth</string>
+  <string name="support_info_item_appversion">Versión de la app</string>
+  <string name="support_info_item_connectiontype">Conexión</string>
   <string name="permission_tutorial_deactivate_service_first_message_android">Para proteger tu salud y la de tus seres queridos, desactiva el servicio solo si es necesario y reactívalo lo antes posible.</string>
   <string name="support_info_active">Activo</string>
   <string name="support_info_not_active">Inactivo</string>
   <string name="support_info_active_plural">Activas</string>
   <string name="support_info_not_active_plural">Inactivas</string>
   <string name="support_phone_description_android">Número activo de %1$s a %2$s.</string>
-  <string name="support_info_item_connectionType_wifi">Wifi</string>
-  <string name="support_info_item_connectionType_mobile">Móvil</string>
-  <string name="support_info_item_connectionType_none">Ninguna</string>
+  <string name="support_info_item_connectiontype_wifi">Wifi</string>
+  <string name="support_info_item_connectiontype_mobile">Móvil</string>
+  <string name="support_info_item_connectiontype_none">Ninguna</string>
   <string name="permission_tutorial_update_os_first"><b>1. Asegúrate de estar conectado a una red wifi.</b> No se puede descargar la actualización desde redes móviles.</string>
   <string name="permission_tutorial_cant_update_title">¿No consigues actualizar el software?</string>
   <string name="permission_tutorial_cant_update_first"><b>1. Asegúrate de estar conectado a una red wifi.</b> No se puede descargar la actualización desde redes móviles.</string>
   <string name="permission_tutorial_cant_update_second"><b>2. Cuando te hayas conectado a una red wifi, vuelve a Ajustes &gt; General &gt; Actualización de software.</b></string>
   <string name="permission_tutorial_cant_update_third"><b>3. Pulsa en «Descargar e instalar».</b></string>
-  <string name="permission_tutorial_cant_update_fourth"><b>4.</b> Cuando la descargues, <b>asegúrate de instalarla pulsando en «Instalar ahora».</b></string>
+  <string name="permission_tutorial_cant_update_fourth"><b>4.</b> Cuando la descargues, <b>asegúrate de instalarla pulsando en \«Instalar ahora\».</b></string>
   <string name="force_update_view_os_seconday_button">¿No consigues actualizar el software?</string>
   <string name="support_email_body_message">Si tienes dudas o problemas con el funcionamiento de la aplicación, descríbelos encima de la línea. Si es posible, no elimines este texto, ya que permitirá al servicio de asistencia de Immuni ayudarte de la mejor forma posible.</string>
   <string name="verify_immuni_works_first"><b>Si se muestra «Servicio activo», Immuni ya está funcionando correctamente.</b></string>
@@ -359,4 +355,23 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="permission_tutorial_how_to_upload_positive_second">El profesional sanitario que te comunique que el resultado de la prueba es positivo te ayudará por teléfono. Te pedirá el código de un solo uso que aparecía en la pantalla anterior y lo utilizará para darte permiso para que subas tus datos.</string>
   <string name="permission_tutorial_how_to_upload_positive_third">Este proceso de autorización impide que los usuarios que no hayan dado positivo en el virus suban sus datos y generen falsas alarmas. El código de un solo uso y los datos que se suben no están vinculados de ningún modo con tu identidad.</string>
   <string name="suggestions_instruction_under_18_message">Si eres menor de 18 años, pídeles a tus padres que lean este mensaje.</string>
+  <string name="privacy_tos_read">Al continuar, declaro que he leído y acepto los {términos de uso}</string>
+  <string name="privacy_checkbox_read">He leído la {política de privacidad}</string>
+  <string name="suggestions_risk_with_date_subtitle">Immuni ha detectado que el día %s estuviste cerca de un usuario que dio positivo por COVID-19.</string>
+  <string name="welcome_view_discover_more">Descubre cómo funciona la aplicación</string>
+  <string name="permission_tutorial_why_province_region_title">¿De qué sirve indicar la región y la provincia de residencia?</string>
+  <string name="permission_tutorial_why_province_region_first"><b>La región y la provincia de residencia ayudan al Servicio Nacional de Salud (SSN) a prevenir la aparición de nuevos focos de contagio</b> y permiten estimar el uso de la aplicación en el territorio nacional. La información sobre la provincia de residencia se envía al servidor del Ministerio de Salud junto con los datos sobre el correcto funcionamiento de la aplicación y la confirmación de si has recibido o no algún aviso sobre un contacto de riesgo. Immuni recopila esta información protegiendo en todo momento tu privacidad.</string>
+  <string name="permission_tutorial_why_province_region_second">Desde los ajustes de la aplicación, podrás modificar la región y la provincia de residencia en cualquier momento. Te recomendamos que modifiques esta información únicamente si decides cambiar de domicilio. En el resto de los casos, incluso si haces algún viaje esporádico, no es necesario que hagas ningún cambio.</string>
+  <string name="permission_tutorial_why_province_region_third"><b>Si vives en el extranjero, pero tienes previsto viajar a Italia, te sugerimos que selecciones ya la región (y, a continuación, la provincia) donde te alojarás durante más tiempo.</b> Puedes utilizar Immuni aunque te encuentres en el extranjero. La aplicación registrará periódicamente tus contactos con otros usuarios. Sin embargo, en caso de que des positivo, no podrás subir tus códigos aleatorios hasta que no estés en Italia.</string>
+  <string name="onboarding_region_abroad_item">No vivo en Italia</string>
+  <string name="onboarding_region_abroad_alert_title">¿Seguro?</string>
+  <string name="onboarding_region_abroad_alert_message">Si no vives en Italia, pero tienes previsto viajar al país, te sugerimos que selecciones ya la región (y, a continuación, la provincia) donde te alojarás durante más tiempo. También te aconsejamos que indiques esta información si te encuentras ya en Italia.</string>
+  <string name="onboarding_region_abroad_alert_cancel">Cancelar</string>
+  <string name="onboarding_region_abroad_alert_confirm">Continuar</string>
+  <string name="support_info_item_lastencheck">Última comprobación</string>
+  <string name="settings_setting_share">Compartir la app</string>
+  <string name="settings_setting_share_message">Ayúdanos a combatir juntos la epidemia de COVID-19. Descárgate Immuni tú también. https://www.immuni.italia.it/</string>
+  <string name="support_info_item_lastencheck_none">Ninguna</string>
+  <string name="support_info_item_lastencheck_date" formatted="false">%@ a las %@</string>
+  <string name="support_info_item_lastencheck_date_android">%1$s a las %2$s</string>
 </resources>

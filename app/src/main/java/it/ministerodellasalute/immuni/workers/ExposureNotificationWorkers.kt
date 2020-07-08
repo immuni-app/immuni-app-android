@@ -18,9 +18,11 @@ package it.ministerodellasalute.immuni.workers
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureReportingService
+import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
@@ -64,6 +66,7 @@ class RequestDiagnosisKeysWorker(
 
     private val exposureReportingRepository: ExposureReportingRepository by inject()
     private val exposureManager: ExposureManager by inject()
+    private val analyticsManager: ExposureAnalyticsManager by inject()
     private val workerManager: WorkerManager by inject()
     private val api: ExposureReportingService by inject()
     private val settingsManager: ConfigurationSettingsManager by inject()
@@ -97,6 +100,10 @@ class RequestDiagnosisKeysWorker(
                     return@withTimeout Result.retry()
                 }
 
+                val serverDate = settingsResult.serverDate
+
+                analyticsManager.setup(serverDate)
+
                 chunksDir.apply {
                     deleteRecursively()
                     mkdir()
@@ -108,18 +115,16 @@ class RequestDiagnosisKeysWorker(
                     val error = indexResponse.error
                     // 404 means that the list is empty, so the work is successful
                     if (error is NetworkError.HttpError && error.httpCode == 404) {
-                        return@withTimeout success()
+                        return@withTimeout success(serverDate)
                     }
 
                     return@withTimeout Result.retry()
                 }
 
                 val data = indexResponse.data ?: return@withTimeout Result.retry()
-                val currentOldest =
-                    max(
-                        data.oldest,
-                        exposureReportingRepository.lastProcessedChunk(default = 0) + 1
-                    )
+                val lastProcessedChunkSuccessor =
+                    exposureReportingRepository.lastProcessedChunk(default = 0) + 1
+                val currentOldest = max(data.oldest, lastProcessedChunkSuccessor)
                 val chunkRange = (currentOldest..data.newest).toList().takeLast(20)
 
                 for (currentChunk in chunkRange) {
@@ -132,7 +137,7 @@ class RequestDiagnosisKeysWorker(
                     try {
                         chunkResponse.data?.byteStream()?.saveToFile(filePath)
                             ?: return@withTimeout Result.retry()
-                        val token = "${UUID.randomUUID()}_${settingsResult.serverDate.time}"
+                        val token = "${UUID.randomUUID()}_${serverDate.time}"
                         exposureManager.provideDiagnosisKeys(
                             keyFiles = listOf(File(filePath)),
                             token = token
@@ -142,7 +147,7 @@ class RequestDiagnosisKeysWorker(
                         return@withTimeout Result.retry()
                     }
                 }
-                return@withTimeout success()
+                return@withTimeout success(serverDate)
             }
         } catch (e: Exception) {
             return Result.retry()
@@ -151,7 +156,14 @@ class RequestDiagnosisKeysWorker(
         }
     }
 
-    private fun success(): Result {
+    private fun success(serverDate: Date): Result {
+        workerManager.scheduleExposureAnalyticsWorker(serverDate)
+        exposureReportingRepository.setLastSuccessfulCheckDate(
+            when (BuildConfig.DEBUG) {
+                true -> Date()
+                false -> serverDate
+            }
+        )
         workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }

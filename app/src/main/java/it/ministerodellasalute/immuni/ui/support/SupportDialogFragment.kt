@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+ * Please refer to the AUTHORS file for more information.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package it.ministerodellasalute.immuni.ui.support
 
 import android.annotation.SuppressLint
@@ -61,11 +76,12 @@ class SupportDialogFragment : PopupDialogFragment() {
                             listOf(
                                 "${getString(R.string.support_info_item_os)}: ${viewModel.osVersion.value}",
                                 "${getString(R.string.support_info_item_device)}: ${viewModel.deviceModel.value}",
-                                "${getString(R.string.support_info_item_exposureNotificationEnabled)}: ${viewModel.isExposureNotificationEnabled.value}",
-                                "${getString(R.string.support_info_item_bluetoothEnabled)}: ${viewModel.isBluetoothEnabled.value}",
-                                "${getString(R.string.support_info_item_appVersion)}: ${viewModel.appVersion.value}",
+                                "${getString(R.string.support_info_item_exposurenotificationenabled)}: ${viewModel.isExposureNotificationEnabled.value}",
+                                "${getString(R.string.support_info_item_bluetoothenabled)}: ${viewModel.isBluetoothEnabled.value}",
+                                "${getString(R.string.support_info_item_appversion)}: ${viewModel.appVersion.value}",
                                 "Google Play Services: ${viewModel.googlePlayVersion.value}",
-                                "${getString(R.string.support_info_item_connectionType)}: ${viewModel.connectionType.value}"
+                                "${getString(R.string.support_info_item_connectiontype)}: ${viewModel.connectionType.value}",
+                                "${getString(R.string.support_info_item_lastencheck)}: ${viewModel.lastCheckDate.value}"
                             ).joinToString(separator = "; ", postfix = ".")
 
                         startSendingEmail(it, subject = "", message = message)
@@ -102,6 +118,9 @@ class SupportDialogFragment : PopupDialogFragment() {
 
         viewModel.connectionType.observe(viewLifecycleOwner) {
             connectionType.text = it
+        }
+        viewModel.lastCheckDate.observe(viewLifecycleOwner) {
+            lastCheckDate.text = it
         }
 
         openFaq.setSafeOnClickListener {

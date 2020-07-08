@@ -15,13 +15,15 @@
 
 package it.ministerodellasalute.immuni.logic.exposure
 
+import it.ministerodellasalute.immuni.api.services.ExposureAnalyticsService
 import it.ministerodellasalute.immuni.api.services.ExposureConfiguration
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.utils.DateUtils
+import it.ministerodellasalute.immuni.extensions.utils.isoDateString
+import it.ministerodellasalute.immuni.logic.exposure.models.ExposureAnalyticsOperationalInfo
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureInformation
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
-import java.text.SimpleDateFormat
 import java.util.*
 
 val ExposureConfiguration.clientExposureConfiguration: ExposureNotificationClient.ExposureConfiguration
@@ -43,7 +45,7 @@ val ExposureNotificationClient.TemporaryExposureKey.serviceTemporaryExposureKey
 
 val ExposureInformation.serviceExposureInformation
     get() = ExposureIngestionService.ExposureInformation(
-        date = dateFormatter.format(this.date),
+        date = this.date.isoDateString,
         duration = this.durationMinutes * 60,
         attenuationValue = this.attenuationValue,
         transmissionRiskLevel = this.transmissionRiskLevel.value,
@@ -55,14 +57,12 @@ val ExposureInformation.serviceExposureInformation
         )
     )
 
-private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-
 fun ExposureSummary.serviceExposureSummary(serverDate: Date): ExposureIngestionService.ExposureSummary {
     val daysSinceLastExposure =
         (serverDate.time - this.lastExposureDate.time) / DateUtils.MILLIS_IN_A_DAY
 
     return ExposureIngestionService.ExposureSummary(
-        date = dateFormatter.format(this.date),
+        date = this.date.isoDateString,
         daysSinceLastExposure = daysSinceLastExposure.toInt(),
         matchedKeyCount = this.matchedKeyCount,
         maximumRiskScore = this.maximumRiskScore,
@@ -85,4 +85,16 @@ val ExposureNotificationClient.ExposureInformation.repositoryExposureInformation
         highRiskAttenuationDurationMinutes = highRiskAttenuationDurationMinutes,
         mediumRiskAttenuationDurationMinutes = mediumRiskAttenuationDurationMinutes,
         lowRiskAttenuationDurationMinutes = lowRiskAttenuationDurationMinutes
+    )
+
+fun ExposureAnalyticsOperationalInfo.operationalInfoRequest(signedAttestation: String): ExposureAnalyticsService.OperationalInfoRequest =
+    ExposureAnalyticsService.OperationalInfoRequest(
+        province = province.code,
+        exposurePermission = exposurePermission,
+        bluetoothActive = bluetoothActive,
+        notificationPermission = notificationPermission,
+        exposureNotification = exposureNotification,
+        lastRiskyExposureOn = lastRiskyExposureOn,
+        salt = salt,
+        signedAttestation = signedAttestation
     )

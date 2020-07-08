@@ -61,7 +61,10 @@ class RegionListAdapter(private val clickListener: RegionClickListener) :
     override fun onBindViewHolder(holder: RegionVH, position: Int) {
         val dataItem = data[position]
         holder.radioButton.isEnabled = false
-        holder.radioButton.text = dataItem.region
+        holder.radioButton.text = when (dataItem) {
+            Region.abroad -> holder.itemView.context.getString(R.string.onboarding_region_abroad_item)
+            else -> dataItem.region
+        }
 
         holder.radioButton.isChecked = data[position] == selectedRegion
     }

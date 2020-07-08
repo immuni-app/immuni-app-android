@@ -21,13 +21,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.ScreenUtils
 import it.ministerodellasalute.immuni.extensions.utils.isTopEndDevice
 import it.ministerodellasalute.immuni.extensions.view.gone
-import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
 import it.ministerodellasalute.immuni.util.GlideApp
 import kotlinx.android.synthetic.main.welcome_item_fragment.*
@@ -66,11 +64,6 @@ class WelcomeItemFragment : Fragment() {
             1 -> getString(R.string.welcome_view_items_second_description)
             2 -> getString(R.string.welcome_view_items_third_description)
             else -> getString(R.string.welcome_view_items_fourth_description)
-        }
-
-        knowMore.setSafeOnClickListener {
-            val action = WelcomeFragmentDirections.actionHowitworks(false)
-            findNavController().navigate(action)
         }
 
         checkSpacing()

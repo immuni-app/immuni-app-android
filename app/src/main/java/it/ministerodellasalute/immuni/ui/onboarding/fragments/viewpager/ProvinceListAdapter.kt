@@ -61,7 +61,10 @@ class ProvinceListAdapter(private val clickListener: ProvinceClickListener) :
     override fun onBindViewHolder(holder: ProvinceVH, position: Int) {
         val dataItem = data[position]
         holder.radioButton.isEnabled = false
-        holder.radioButton.text = dataItem.fullName
+        holder.radioButton.text = when (dataItem) {
+            Province.abroad -> holder.itemView.context.getString(R.string.onboarding_region_abroad_item)
+            else -> dataItem.fullName
+        }
 
         holder.radioButton.isChecked = data[position] == selectedProvince
     }

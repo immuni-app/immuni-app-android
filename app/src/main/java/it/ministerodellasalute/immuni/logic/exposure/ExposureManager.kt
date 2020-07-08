@@ -55,6 +55,8 @@ class ExposureManager(
 
     val exposureStatus = exposureStatusRepository.exposureStatus
 
+    val lastSuccessfulCheckDate = exposureReportingRepository.lastSuccessfulCheckDate
+
     suspend fun updateAndGetServiceIsActive(): Boolean {
         exposureNotificationManager.update()
         return exposureNotificationManager.areExposureNotificationsEnabled.value ?: false

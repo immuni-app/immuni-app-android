@@ -36,7 +36,6 @@
   <string name="force_update_view_os_title">Update your operating system to continue</string>
   <string name="force_update_view_os_details">A newer version of iOS (13.5 or higher) is required to enable exposure notifications.</string>
   <string name="permission_tutorial_update_os_title">To update your operating system</string>
-  <string name="permission_tutorial_update_os_first"><b>1. Open the system settings</b></string>
   <string name="permission_tutorial_update_os_second"><b>2. Go to \'General\'</b></string>
   <string name="permission_tutorial_update_os_third"><b>3. Go to \'Software Update\'</b></string>
   <string name="permission_tutorial_update_os_fourth"><b>4. Select \'Download and install\' and follow the instructions</b></string>
@@ -50,7 +49,6 @@
   <string name="welcome_view_items_third_description">Users who discover that they have been exposed to the virus can self-isolate, slowing down the spread of the virus and helping us return to normal life faster.</string>
   <string name="welcome_view_items_fourth_title">Your privacy is protected</string>
   <string name="welcome_view_items_fourth_description">The app works without tracking your movements and without knowing your identity or the identity of the people you come into contact with.</string>
-  <string name="welcome_view_discover_more">Find out more</string>
   <string name="welcome_view_next_page_title">Next</string>
   <string name="welcome_view_go_next">Let\'s get started</string>
   <string name="privacy_title">Your privacy is safe</string>
@@ -62,11 +60,9 @@
   <string name="privacy_item_italy">Your data is saved on servers in Italy, <b>managed by public bodies, and controlled by the Ministry of Health.</b></string>
   <string name="privacy_item_data_deletion"><b>All data is deleted when it is no longer needed</b>, and in any case no later than 31 December 2020.</string>
   <string name="privacy_checkbox_above14">I declare that I am at least 14 years old</string>
-  <string name="privacy_checkbox_privacyPolicyRead"><![CDATA[I have read the <l>privacy notice</l>]]></string>
+  <string name="privacy_checkbox_privacypolicyread"><![CDATA[I have read the <l>privacy notice</l>]]></string>
   <string name="privacy_tos"><![CDATA[By continuing, I declare that I have read and accepted the <l>terms of use</l>]]></string>
   <string name="privacy_next">Next</string>
-  <string name="privacy_checkbox_read">I have read the {privacy notice}</string>
-  <string name="privacy_tos_read">By continuing, I declare that I have read and accepted the {terms of use}</string>
   <string name="privacy_settings_title">Your privacy is safe</string>
   <string name="privacy_settings_show_full">Show full notice</string>
   <string name="onboarding_common_next">Next</string>
@@ -93,11 +89,9 @@
   <string name="onboarding_communication_advice_description">Immuni will only ever communicate with you via the app and the corresponding notifications. <b>Be wary of any text, phone call, email, or other kind of alert</b> that appears to be from Immuni, especially if it asks you for personal information.</string>
   <string name="onboarding_communication_advice_action">Got it</string>
   <string name="onboarding_complete_title">Setup complete</string>
-  <string name="home_view_service_active_title">Service
-<b>active</b></string>
-  <string name="home_view_service_active_subtitle">Open Immuni once a day to check its status.</string>
-  <string name="home_view_service_not_active_title">Service
-<b>inactive</b></string>
+  <string name="home_view_service_active_title">Service <b>active</b></string>
+  <string name="home_view_service_active_subtitle">Even when the app is closed, Immuni continues to operate.</string>
+  <string name="home_view_service_not_active_title">Service <b>inactive</b></string>
   <string name="home_view_service_not_active_subtitle">Take action now to allow Immuni to work properly.</string>
   <string name="home_view_service_not_active_button">Reactivate Immuni</string>
   <string name="home_view_info_protection_title">What you can do to protect yourself</string>
@@ -157,14 +151,12 @@
   <string name="upload_data_verify_message">Continue to verify code authorisation</string>
   <string name="upload_data_verify_button">Continue</string>
   <string name="upload_data_verify_error">Code not authorised yet</string>
-  <string name="upload_data_verify_loading">Checking
-authorisation&#8230;</string>
+  <string name="upload_data_verify_loading">Checking authorisation&#8230;</string>
   <string name="upload_data_verify_loading_button" formatted="false">Wait %d %@</string>
   <string name="upload_data_verify_loading_button_second">second</string>
   <string name="upload_data_verify_loading_button_seconds">seconds</string>
   <string name="upload_data_verify_loading_button_minutes">minutes</string>
-  <string name="upload_data_send_data_loading">Uploading
-data&#8230;</string>
+  <string name="upload_data_send_data_loading">Uploading data&#8230;</string>
   <string name="upload_data_missing_authorization_title">Reactivate exposure notifications to continue</string>
   <string name="upload_data_missing_authorization_message">Exposure notifications are required for this process. Please reactivate them now to continue.</string>
   <string name="upload_data_missing_authorization_close">Close</string>
@@ -189,7 +181,6 @@ data&#8230;</string>
   <string name="confirm_data_confirmation_subtitle">Thank you for your help</string>
   <string name="confirm_data_exposure_permission_overlay_hint">Select \'<b>OK</b>\' in the pop-up that appears below</string>
   <string name="confirm_data_close_verify_alert_title">Are you sure you want to exit?</string>
-  <string name="suggestions_risk_with_date_subtitle">Immuni has detected that you came into close contact with a COVID-19-positive user on %s.</string>
   <string name="confirm_data_close_verify_alert_message">Your data hasn\'t been uploaded yet.</string>
   <string name="confirm_data_close_verify_alert_affermative_answer">Yes, exit</string>
   <string name="confirm_data_close_verify_alert_negative_answer">Cancel</string>
@@ -211,9 +202,9 @@ data&#8230;</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_message">If you\'re in contact with your general practitioner or local health authority, you can hide this alert.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_action">I have contacted my general practitioner</string>
   <string name="suggestions_instruction_while_waiting_doctor">As a precaution, while you wait for instructions from your general practitioner or local health authority:</string>
-  <string name="suggestions_instruction_stay_home"><b>Stay at home for 14 days</b> after the contact date</string>
+  <string name="suggestions_instruction_stay_home"><b>Stay at home for 14 days</b> after the date of contact.</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Measure your body temperature at least twice a day and assess if you are exhibiting symptoms, even mild ones.</b></string>
-  <string name="suggestions_instruction_check_symptoms_message">In particular, fever or at least one of the following: sore throat, cough, cold or blocked nose, difficulty breathing, muscle pain, loss or alteration of sense of smell or taste, diarrhoea</string>
+  <string name="suggestions_instruction_check_symptoms_message">In particular, fever or at least one of the following: sore throat, cough, cold or blocked nose, breathing difficulty, muscle pain, loss or alteration of sense of smell or taste, diarrhoea.</string>
   <string name="suggestions_instruction_isolate_title"><b>If you display symptoms, isolate yourself from the people you live with.</b></string>
   <string name="suggestions_instruction_isolate_message">Wear a surgical mask and immediately contact your general practitioner (or primary care paediatrician) and your local health authority\'s healthcare service.</string>
   <string name="suggestions_instruction_phone_contact"><b>If you are having difficulty breathing, contact 112/118.</b></string>
@@ -302,8 +293,8 @@ The data saved on your smartphone and the connections to the server are encrypte
   <string name="suggestions_risk_fourth_message">For more information on the data sent to the Ministry of Health, you can read the {privacy notice}, point 4.</string>
   <string name="suggestions_risk_third_message"><b>The Ministry of Health cannot determine your identity from this information.</b></string>
   <string name="suggestions_risk_third_message_android">For more information on the data sent to the Ministry of Health, you can read the {privacy notice}, point 4.</string>
-  <string name="support_email_template">\n\n\n------------------------------ 
-Above the line, describe your queries or issues with the app. If possible, do not delete the text below. It will help the Immuni Support team to better assist you. 
+  <string name="support_email_template">\n\n\n------------------------------
+Above the line, describe your queries or issues with the app. If possible, do not delete the text below. It will help the Immuni Support team to better assist you.
 Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; [other useful info, same as the info displayed on the contact support screen]</string>
   <string name="settings_setting_support">Contact Support</string>
   <string name="support_title">Need help?</string>
@@ -317,19 +308,20 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="support_info_title">Useful information</string>
   <string name="support_info_item_os">Operating system</string>
   <string name="support_info_item_device">Model</string>
-  <string name="support_info_item_exposureNotificationEnabled">Exposure notifications</string>
-  <string name="support_info_item_bluetoothEnabled">Bluetooth</string>
-  <string name="support_info_item_appVersion">App version</string>
-  <string name="support_info_item_connectionType">Connection</string>
+  <string name="support_info_item_exposurenotificationenabled">Exposure notifications</string>
+  <string name="support_info_item_bluetoothenabled">Bluetooth</string>
+  <string name="support_info_item_appversion">App version</string>
+  <string name="support_info_item_connectiontype">Connection</string>
   <string name="permission_tutorial_deactivate_service_first_message_android">To protect your health and the health of your loved ones, only disable the service if necessary and reactivate it as soon as you can.</string>
   <string name="support_info_active">Active</string>
   <string name="support_info_not_active">Not active</string>
   <string name="support_info_active_plural">Active</string>
   <string name="support_info_not_active_plural">Not Active</string>
   <string name="support_phone_description_android">Lines open from %1$s to %2$s.</string>
-  <string name="support_info_item_connectionType_wifi">Wi-Fi</string>
-  <string name="support_info_item_connectionType_mobile">Mobile</string>
-  <string name="support_info_item_connectionType_none">None</string>
+  <string name="support_info_item_connectiontype_wifi">Wi-Fi</string>
+  <string name="support_info_item_connectiontype_mobile">Mobile</string>
+  <string name="support_info_item_connectiontype_none">None</string>
+  <string name="permission_tutorial_update_os_first"><b>1. Make sure you\'re connected via Wi-Fi.</b> The update cannot be downloaded using mobile data.</string>
   <string name="permission_tutorial_cant_update_title">Can\'t update?</string>
   <string name="permission_tutorial_cant_update_first"><b>1. Make sure you\'re connected via Wi-Fi.</b> The update cannot be downloaded using mobile data.</string>
   <string name="permission_tutorial_cant_update_second"><b>2. Once you\'re connected to Wi-Fi, go back to Settings &gt; General &gt; Software Update.</b></string>
@@ -351,7 +343,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="settings_setting_load_data">Report a positive result</string>
   <string name="permission_tutorial_verify_immuni_works_title">How to check that Immuni is working</string>
   <string name="permission_tutorial_verify_immuni_works_first"><b>If you see \'Service active\', Immuni is already working properly.</b> You don\'t need to do anything else: the app will continue working, even when you close it.</string>
-  <string name="permission_tutorial_verify_immuni_works_second"><b>If there are any problems, you will see \'Service not active\.</b> Immuni will provide straightforward instructions to get the app working properly again.</string>
+  <string name="permission_tutorial_verify_immuni_works_second"><b>If there are any problems, you will see \'Service not active\'.</b> Immuni will provide straightforward instructions to get the app working properly again.</string>
   <string name="permission_tutorial_verify_immuni_works_third"><b>If you come into contact with someone who later tests positive for the virus, Immuni will send you a notification to warn you of the risk of infection.</b> When you open the app, you will receive clear and comprehensive guidance on what to do.</string>
   <string name="upload_data_warning_discover_more">Find out more</string>
   <string name="permission_tutorial_how_to_upload_positive_title">How to report a positive result</string>
@@ -359,4 +351,23 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="permission_tutorial_how_to_upload_positive_second">The healthcare operator who informs you that your swab has tested positive will assist you by phone. They will ask you for the one-time code displayed on the previous screen, which they will use to give you authorisation to upload your data.</string>
   <string name="permission_tutorial_how_to_upload_positive_third">This authorisation process prevents users who have not actually tested positive for the virus from uploading their data and causing false alarms. The one-time code and the data uploaded are not associated with your identity in any way.</string>
   <string name="suggestions_instruction_under_18_message">If you\'re under 18, please have your parents/legal guardian read this message.</string>
+  <string name="privacy_tos_read">By continuing, I declare that I have read and accepted the {terms of use}</string>
+  <string name="privacy_checkbox_read">I have read the {privacy notice}</string>
+  <string name="suggestions_risk_with_date_subtitle">Immuni has detected that you came into close contact with a COVID-19-positive user on %s.</string>
+  <string name="welcome_view_discover_more">Find out how the app works</string>
+  <string name="permission_tutorial_why_province_region_title">Why we ask you to enter your home region and province</string>
+  <string name="permission_tutorial_why_province_region_first"><b>The National Health Service uses your home region and province details to help prevent new outbreaks,</b> as well as to estimate how widely the app is being used across the country. Your home province is sent to the Ministry of Health server along with information on whether the app is functioning properly and whether you have been informed of a high-risk contact. Immuni fully protects your privacy in collecting this information.</string>
+  <string name="permission_tutorial_why_province_region_second">You can change your home region and province at any time from the app\'s settings menu. We advise you to change them only if you decide to move house. In all other cases, including occasional trips, you do not need to do so.</string>
+  <string name="permission_tutorial_why_province_region_third"><b>If you live abroad but intend to travel to Italy, we suggest that you now select the region (and then the province) where you will be staying for the longest during your visit.</b> You can use Immuni even if you are abroad. The app will log your contact with other users as normal. However, you will not be able to upload your random codes if you test positive until you are in Italy.</string>
+  <string name="onboarding_region_abroad_item">I don\'t live in Italy</string>
+  <string name="onboarding_region_abroad_alert_title">Are you sure?</string>
+  <string name="onboarding_region_abroad_alert_message">If you don\'t live in Italy but intend to visit, we suggest that you now select the region (and then the province) where you will be staying for the longest. The same applies if you are already in Italy.</string>
+  <string name="onboarding_region_abroad_alert_cancel">Cancel</string>
+  <string name="onboarding_region_abroad_alert_confirm">Continue</string>
+  <string name="support_info_item_lastencheck">Last verified</string>
+  <string name="settings_setting_share">Share the app</string>
+  <string name="settings_setting_share_message">Help us fight the COVID-19 epidemic together. Download Immuni. https://www.immuni.italia.it/</string>
+  <string name="support_info_item_lastencheck_none">None</string>
+  <string name="support_info_item_lastencheck_date" formatted="false">%@ at %@</string>
+  <string name="support_info_item_lastencheck_date_android">%1$s at %2$s</string>
 </resources>

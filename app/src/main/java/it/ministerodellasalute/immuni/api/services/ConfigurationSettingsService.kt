@@ -57,7 +57,11 @@ data class ConfigurationSettings(
     @field:Json(name = "support_phone_opening_time") val supportPhoneOpeningTime: String,
     @field:Json(name = "support_phone") val supportPhone: String? = null,
     @field:Json(name = "support_email") val supportEmail: String? = null,
-    @field:Json(name = "reopen_reminder") val reopenReminder: Boolean = true
+    @field:Json(name = "reopen_reminder") val reopenReminder: Boolean = true,
+    @field:Json(name = "operational_info_with_exposure_sampling_rate") val operationalInfoWithExposureSamplingRate: Double,
+    @field:Json(name = "operational_info_without_exposure_sampling_rate") val operationalInfoWithoutExposureSamplingRate: Double,
+    @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int
+
 )
 
 @JsonClass(generateAdapter = true)
@@ -139,5 +143,8 @@ val defaultSettings = ConfigurationSettings(
     supportPhone = null,
     supportPhoneOpeningTime = "7",
     supportPhoneClosingTime = "22",
-    reopenReminder = true
+    reopenReminder = true,
+    operationalInfoWithExposureSamplingRate = 1.0,
+    operationalInfoWithoutExposureSamplingRate = 0.6,
+    dummyAnalyticsWaitingTime = 2_592_000
 )

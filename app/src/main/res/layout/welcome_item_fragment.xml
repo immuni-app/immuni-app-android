@@ -61,26 +61,9 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/knowMore"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="TextView" />
-
-    <TextView
-        android:id="@+id/knowMore"
-        style="@style/OnboardingKnowMore"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:maxLines="1"
-        android:text="@string/welcome_view_discover_more"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -366,13 +366,13 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
-    <style name="SettingsMenuItem.WithArrow">
+    <style name="SettingsMenuItem.WithIcon">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:background">@null</item>
     </style>
 
-    <style name="SettingsMenuItemArrowLayout">
+    <style name="SettingsMenuItemWithIconLayout">
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

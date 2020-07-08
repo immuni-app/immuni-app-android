@@ -15,6 +15,7 @@
 
 package it.ministerodellasalute.immuni.extensions.utils
 
+import android.util.Base64
 import java.security.MessageDigest
 
 fun String.sha256(): String {
@@ -26,4 +27,13 @@ private fun hashString(input: String, algorithm: String): String {
         .getInstance(algorithm)
         .digest(input.toByteArray())
         .fold("", { str, it -> str + "%02x".format(it) })
+}
+
+fun String.base64EncodedSha256(): String {
+    return Base64.encodeToString(
+        MessageDigest
+            .getInstance("SHA-256")
+            .digest(toByteArray()),
+        Base64.NO_WRAP
+    )
 }
