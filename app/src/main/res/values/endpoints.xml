@@ -17,6 +17,7 @@
     <!-- Host names -->
     <string name="get_base_url" translatable="false">https://get.immuni.gov.it</string>
     <string name="upload_base_url" translatable="false">https://upload.immuni.gov.it</string>
+    <string name="analytics_base_url" translatable="false">https://analytics.immuni.gov.it</string>
 
     <!-- Certificate pinning -->
     <string name="certificate_pinning_domain" translatable="false">**.immuni.gov.it</string>

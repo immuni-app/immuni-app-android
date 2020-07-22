@@ -17,10 +17,21 @@ package it.ministerodellasalute.immuni.ui.suggestions
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 
 class StateCloseViewModel(
-    private val exposureManager: ExposureManager
+    private val exposureManager: ExposureManager,
+    val settingsManager: ConfigurationSettingsManager
 ) : ViewModel() {
+
+    fun onPrivacyPolicyClick(fragment: StateCloseDialogFragment) {
+        ExternalLinksHelper.openLink(
+            fragment.requireContext(),
+            settingsManager.privacyNoticeUrl
+        )
+    }
+
     val exposureDate = exposureManager.exposureStatus.asLiveData()
 }

@@ -94,6 +94,11 @@ class WelcomeFragment : Fragment() {
             // Some implementation
         }.attach()
 
+        knowMore.setSafeOnClickListener {
+            val action = WelcomeFragmentDirections.actionHowitworks(false)
+            findNavController().navigate(action)
+        }
+
         next.setSafeOnClickListener(intervalMillis = 250) {
             val newPos = viewPager.currentItem + 1
             if (newPos == (viewPager.adapter?.itemCount ?: 0)) {

@@ -24,7 +24,7 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
+import kotlinx.android.synthetic.main.onboarding_notifications_fragment.*
 
 class NotificationsFragment :
     ViewPagerBaseFragment(R.layout.onboarding_notifications_fragment) {
@@ -42,6 +42,7 @@ class NotificationsFragment :
             }
         }
 
+        setupImage(R.raw.lottie_phones_07, R.drawable.ic_onboarding_notifications)
         checkSpacing()
     }
 

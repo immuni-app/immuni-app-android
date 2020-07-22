@@ -96,8 +96,8 @@ fun String.coloredClickable(
     onClick: () -> Unit
 ): SpannedString {
     return spanPlaceholder(startPlaceholder, endPlaceholder) {
-        clickable(onClick) {
-            color(color) {
+        color(color) {
+            clickable(onClick) {
                 if (bold) {
                     bold {
                         append(it)
@@ -105,5 +105,43 @@ fun String.coloredClickable(
                 } else append(it)
             }
         }
+    }
+}
+
+/**
+ * Highlights every word that matches `highlight` in this text with specified color.
+ */
+fun String.colorHighlight(
+    highlight: String,
+    @ColorInt color: Int
+): SpannedString {
+    val text = this
+    if (highlight.isBlank()) return buildSpannedString { append(text) }
+
+    // Find all start indices
+    val highlightStartIndices = mutableListOf<Int>()
+    while (true) {
+        val startIndex = text.indexOf(
+            string = highlight,
+            startIndex = highlightStartIndices.lastOrNull()?.let { it + highlight.length } ?: 0,
+            ignoreCase = true
+        )
+        // if we are getting lower index than we should, quit searching.
+        if (startIndex < 0 || startIndex < highlightStartIndices.size) break
+        highlightStartIndices.add(startIndex)
+    }
+
+    return buildSpannedString {
+        var currStart = 0
+        highlightStartIndices.forEach { highlightStartIdx ->
+            // append before highlight
+            append(text.subSequence(currStart, highlightStartIdx))
+            val highlightEndIdx = highlightStartIdx + highlight.length
+            // append highlight
+            color(color) { append(text.subSequence(highlightStartIdx, highlightEndIdx)) }
+            currStart = highlightEndIdx
+        }
+        // append last part
+        append(text.subSequence(currStart, text.length))
     }
 }

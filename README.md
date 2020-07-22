@@ -124,13 +124,6 @@ To build the APK and immediately install it on a running emulator or connected d
 
 For more information about how the project is generated and structured, please refer to the [CONTRIBUTING](CONTRIBUTING.md) file.
 
-## Backend services
-
-At the current stage, the application points to backend services which are not publicly accessible and whose source code has not been released. Note that the application is designed to work without a backend, especially in the context of not having the Exposure Notification entitlements (see [Installation](#installation)).
-
-Please see this [issue](https://github.com/immuni-app/immuni-app-android/issues/1) for more information about this topic.
-
-
 # Testing
 
 The repository contains several unit and integration tests to guarantee high code quality and maintainability.

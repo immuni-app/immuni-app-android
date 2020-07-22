@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/H1Heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/support_title" />
+
+
+    <TextView
+        style="@style/P1Text.Generic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/support_faq_description" />
+
+    <Button
+        android:id="@+id/openFaq"
+        style="@style/RoundedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/support_faq_action" />
+
+    <include layout="@layout/settings_content_divider" />
+
+    <TextView
+        style="@style/P1Text.Generic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/support_contact_support" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/phoneContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp">
+
+        <ImageView
+            android:id="@+id/phoneIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_call" />
+
+        <TextView
+            android:id="@+id/phoneTitle"
+            style="@style/P1Text.Bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="5dp"
+            android:text="@string/support_phone_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/phoneIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/phoneDescription"
+            style="@style/P1Text.Generic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="5dp"
+            android:text="@string/support_phone_description_android"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/phoneIcon"
+            app:layout_constraintTop_toBottomOf="@+id/phoneTitle" />
+
+        <TextView
+            android:id="@+id/contactSupport"
+            style="@style/P1Text.Generic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/phoneIcon"
+            app:layout_constraintTop_toBottomOf="@+id/phoneDescription"
+            tools:text="128120 2912" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mailContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="30dp">
+
+        <ImageView
+            android:id="@+id/mailIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_mail" />
+
+        <TextView
+            android:id="@+id/mailTitle"
+            style="@style/P1Text.Bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="5dp"
+            android:text="@string/support_email_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mailIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mailDescription"
+            style="@style/P1Text.Generic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:paddingBottom="5dp"
+            android:text="@string/support_email_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mailIcon"
+            app:layout_constraintTop_toBottomOf="@+id/mailTitle" />
+
+        <TextView
+            android:id="@+id/mailSupport"
+            style="@style/P1Text.Generic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mailIcon"
+            app:layout_constraintTop_toBottomOf="@+id/mailDescription"
+            tools:text="support@example.com" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include layout="@layout/settings_content_divider" />
+
+    <TextView
+        style="@style/P1Text.SemiBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/support_info_title" />
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/SupportInformationCard"
+        android:layout_marginBottom="32dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_os" />
+
+                <TextView
+                    android:id="@+id/osVersion"
+                    style="@style/SupportInformationValue"
+                    tools:text="Android 9" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_device" />
+
+                <TextView
+                    android:id="@+id/deviceModel"
+                    style="@style/SupportInformationValue"
+                    tools:text="Samsung Galaxy A41" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_exposurenotificationenabled" />
+
+                <TextView
+                    android:id="@+id/isExposureNotificationEnabled"
+                    style="@style/SupportInformationValue"
+                    tools:text="Attive" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_bluetoothenabled" />
+
+                <TextView
+                    android:id="@+id/isBluetoothActive"
+                    style="@style/SupportInformationValue"
+                    tools:text="Attivo" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_appversion" />
+
+                <TextView
+                    android:id="@+id/appVersion"
+                    style="@style/SupportInformationValue"
+                    tools:text="1.0.0 (23)" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="Google Play Services" />
+
+                <TextView
+                    android:id="@+id/playServicesVersion"
+                    style="@style/SupportInformationValue"
+                    tools:text="1.17.20" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_connectiontype" />
+
+                <TextView
+                    android:id="@+id/connectionType"
+                    style="@style/SupportInformationValue"
+                    tools:text="WI-FI" />
+            </LinearLayout>
+
+            <include layout="@layout/support_information_content_divider" />
+
+            <LinearLayout style="@style/SupportInformationRow">
+
+                <TextView
+                    style="@style/SupportInformationKey"
+                    android:text="@string/support_info_item_lastencheck" />
+
+                <TextView
+                    android:id="@+id/lastCheckDate"
+                    style="@style/SupportInformationValue"
+                    tools:text="22 luglio 2020 alle 22:20" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

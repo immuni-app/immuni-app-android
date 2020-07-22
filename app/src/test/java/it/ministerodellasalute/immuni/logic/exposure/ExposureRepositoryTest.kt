@@ -13,7 +13,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.logic
+package it.ministerodellasalute.immuni.logic.exposure
 
 import android.content.SharedPreferences
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager.Companion.DAYS_OF_SELF_ISOLATION

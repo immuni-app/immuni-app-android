@@ -19,7 +19,6 @@ import android.app.Activity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.activity.toast
 import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
 import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
@@ -63,8 +62,10 @@ class OnboardingViewModel(
     val navigateToMainPage = MutableLiveData<Event<Boolean>>()
     val navigateToNextPage = MutableLiveData<Event<Boolean>>()
     val skipNextPage = MutableLiveData<Event<Boolean>>()
+    val askRegionConfirmation = MutableLiveData<Event<Boolean>>()
     val isBroadcastingActive = exposureManager.isBroadcastingActive.asLiveData()
     val navigateToPrevPage = MutableLiveData<Event<Boolean>>()
+    val googlePlayServicesError = MutableLiveData<Pair<String, String>>()
 
     init {
         userManager.user.value?.region?.let {
@@ -130,6 +131,17 @@ class OnboardingViewModel(
     // If this region has only one province, skip the province selection page
     // And automatically select this province
     fun onRegionNextTap() {
+        when (_region.value) {
+            Region.abroad -> askRegionConfirmation.value = Event(true)
+            else -> moveToNext()
+        }
+    }
+
+    fun onAbroadRegionConfirmed() {
+        moveToNext()
+    }
+
+    private fun moveToNext() {
         val provinces = _region.value?.provinces()
         val provincesCount = provinces?.size ?: Int.MAX_VALUE
         if (provinces != null && provincesCount == 1) {
@@ -153,11 +165,33 @@ class OnboardingViewModel(
             try {
                 exposureManager.optInAndStartExposureTracing(activity)
             } catch (e: Exception) {
-                toast(
-                    activity.applicationContext,
-                    activity.getString(R.string.onboarding_exposure_api_not_activated)
-                )
                 e.printStackTrace()
+
+                val errorCode: String? = when {
+                    // The hardware capability of the device was not supported
+                    // (missing bluetooth multi-cast or BLE support altogether).
+                    e.message?.contains("39501") == true -> {
+                        "39501"
+                    }
+                    // The client is unauthorized to access the APIs (wrong SHA256 or package name).
+                    e.message?.contains("39507") == true -> {
+                        "39507"
+                    }
+                    // The client has been rate limited for access to this API.
+                    e.message?.contains("39508") == true -> {
+                        "39508"
+                    }
+                    else -> {
+                        null
+                    }
+                }
+
+                val title = activity.getString(R.string.force_update_not_available_title)
+                var message = activity.getString(R.string.force_update_not_available_message)
+                errorCode?.let { code ->
+                    message += "\n\nError code: $code."
+                }
+                googlePlayServicesError.value = Pair(title, message)
             }
         }
     }

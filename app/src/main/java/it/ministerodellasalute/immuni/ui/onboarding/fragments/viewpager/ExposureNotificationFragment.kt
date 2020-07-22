@@ -18,8 +18,11 @@ package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
+import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
 import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
 
 class ExposureNotificationFragment :
@@ -32,8 +35,18 @@ class ExposureNotificationFragment :
         viewModel.isBroadcastingActive.observe(viewLifecycleOwner, Observer { isBroadcastingActive ->
             if (!handled && isBroadcastingActive == true && this.isResumed) {
                 handled = true
-                viewModel.onNextTap()
+                navigateNext()
             }
+        })
+
+        viewModel.googlePlayServicesError.observe(viewLifecycleOwner, Observer { pair ->
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(pair.first)
+                .setMessage(pair.second)
+                .setPositiveButton(getString(R.string.onboarding_pin_advice_action)) { d, _ ->
+                    d.dismiss()
+                }
+                .show()
         })
 
         next.isEnabled = true
@@ -42,7 +55,7 @@ class ExposureNotificationFragment :
         next.setSafeOnClickListener {
 
             if (canProceed()) {
-                viewModel.onNextTap()
+                navigateNext()
             } else {
                 activity?.let {
                     viewModel.startExposureNotification(it)
@@ -50,7 +63,17 @@ class ExposureNotificationFragment :
             }
         }
 
+        knowMore.setSafeOnClickListener {
+            val action = ViewPagerFragmentDirections.actionLocalisationExplanation()
+            findNavController().navigate(action)
+        }
+
+        setupImage(R.raw.lottie_notifications_05, R.drawable.ic_onboarding_exposure)
         checkSpacing()
+    }
+
+    private fun navigateNext() {
+        viewModel.onNextTap()
     }
 
     private fun canProceed(): Boolean {

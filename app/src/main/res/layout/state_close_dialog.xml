@@ -83,7 +83,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginBottom="28dp"
-                    android:text="@string/suggestions_risk_subtitle"
+                    android:text="@string/suggestions_risk_with_date_subtitle"
                     android:textColor="#fff"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -256,10 +256,19 @@
 
             <TextView
                 style="@style/ParagraphCard"
-                android:layout_marginBottom="30dp"
                 android:text="@string/suggestions_instruction_phone_contact"
                 app:drawableStartCompat="@drawable/ic_emergency" />
 
+            <TextView
+                style="@style/P1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="30dp"
+                android:paddingEnd="30dp"
+                android:paddingStart="30dp"
+                android:paddingTop="24dp"
+                android:text="@string/suggestions_instruction_under_18_message"
+                android:textColor="@color/grey_dark" />
 
             <include layout="@layout/state_suggestions_content_divider" />
 
@@ -289,7 +298,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="30dp"
-                android:text="@string/suggestions_risk_footer"
+                android:text="@string/suggestions_risk_first_message"
+                android:textColor="@color/grey_dark" />
+
+            <TextView
+                style="@style/P1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:text="@string/suggestions_risk_second_message"
+                android:textColor="@color/grey_dark" />
+
+            <TextView
+                style="@style/P1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:text="@string/suggestions_risk_third_message"
+                android:textColor="@color/grey_dark" />
+
+            <TextView
+                android:id="@+id/footerPrivacyLink"
+                style="@style/P1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:paddingBottom="30dp"
+                android:text="@string/suggestions_risk_third_message_android"
                 android:textColor="@color/grey_dark" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

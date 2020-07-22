@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.workers
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
@@ -36,6 +37,12 @@ class ForceUpdateNotificationWorker(
     private val forceUpdateManager: ForceUpdateManager by inject()
 
     override suspend fun doWork(): Result {
+
+        // DEBUG notification
+        if (applicationContext.resources.getBoolean(R.bool.development_device)) {
+            notificationManager.triggerDebugNotification("Force Update Worker.")
+        }
+
         try {
             settingsManager.fetchSettingsAsync().await()
             if (!forceUpdateManager.isAppOutdated) {

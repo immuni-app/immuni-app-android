@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.ui.suggestions
 
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
@@ -25,6 +26,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.utils.coloredClickable
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
@@ -60,10 +63,19 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
             showHideAlert()
         }
 
+        val privacyRawText = getString(R.string.suggestions_risk_third_message_android)
+        footerPrivacyLink.movementMethod = LinkMovementMethod.getInstance()
+        footerPrivacyLink.text = privacyRawText.coloredClickable(
+            color = requireContext().getColorCompat(R.color.colorPrimary),
+            bold = true
+        ) {
+            viewModel.onPrivacyPolicyClick(this)
+        }
+
         viewModel.exposureDate.observe(viewLifecycleOwner, Observer {
             if (it is ExposureStatus.Exposed) {
                 val dateStr = DateFormat.getLongDateFormat(requireContext()).format(it.lastExposureDate)
-                pageSubtitle.text = String.format(requireContext().getString(R.string.suggestions_risk_subtitle), dateStr)
+                pageSubtitle.text = String.format(requireContext().getString(R.string.suggestions_risk_with_date_subtitle), dateStr)
             }
         })
     }

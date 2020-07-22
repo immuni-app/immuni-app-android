@@ -87,6 +87,8 @@
     <style name="AlertTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textColor">@color/grey_dark</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:maxLines">6</item>
     </style>
 
     <style name="AlertBodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
@@ -197,7 +199,8 @@
     <style name="RoundedButton.GreyDark">
         <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/grey_dark
         </item>
-        <item name="android:backgroundTint">@color/grey_dark</item>
+        <item name="android:backgroundTint">@color/color_state_rounded_button_grey_dark</item>
+        <item name="iconTint">@color/text_light</item>
     </style>
 
     <style name="RoundedButtonDanger" parent="RoundedButton">
@@ -363,13 +366,13 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
-    <style name="SettingsMenuItem.WithArrow">
+    <style name="SettingsMenuItem.WithIcon">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:background">@null</item>
     </style>
 
-    <style name="SettingsMenuItemArrowLayout">
+    <style name="SettingsMenuItemWithIconLayout">
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -398,5 +401,34 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:drawablePadding">16dp</item>
         <item name="android:layout_marginBottom">24dp</item>
+    </style>
+
+    <style name="SupportInformationCard" parent="SettingsMenuCard" />
+
+    <style name="SupportInformationRow">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">30dp</item>
+        <item name="android:paddingBottom">22dp</item>
+        <item name="android:paddingTop">22dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="SupportInformationKey" parent="P1Text.Bold">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SupportInformationValue" parent="P1Text.Generic">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Searchbox" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30dp</item>
     </style>
 </resources>

@@ -21,6 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.IdRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -28,11 +29,13 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.color
 import it.ministerodellasalute.immuni.extensions.view.*
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
+import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import kotlin.reflect.full.primaryConstructor
 
 class HomeListAdapter(
     val context: Context,
-    val clickListener: HomeClickListener
+    val clickListener: HomeClickListener,
+    val settingsManager: ConfigurationSettingsManager
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -51,9 +54,9 @@ class HomeListAdapter(
         items.addAll(newList)
     }
 
-    private fun onItemClick(pos: Int) {
+    private fun onItemClick(pos: Int, @IdRes viewId: Int = -1) {
         if (pos != RecyclerView.NO_POSITION) {
-            clickListener.onClick(items[pos])
+            clickListener.onClick(items[pos], viewId)
         }
     }
 
@@ -63,9 +66,12 @@ class HomeListAdapter(
         val reactivate: Button = v.findViewById(R.id.reactivate)
         val lottieBg: LottieAnimationView = v.findViewById(R.id.lottieAnimation)
         val lottieFg: LottieAnimationView = v.findViewById(R.id.lottieAnimationForeground)
+        val knowMore: TextView = v.findViewById(R.id.knowMore)
 
         init {
-            reactivate.setSafeOnClickListener { onItemClick(adapterPosition) }
+            reactivate.setSafeOnClickListener { onItemClick(adapterPosition, R.id.reactivate) }
+            knowMore.setSafeOnClickListener { onItemClick(adapterPosition, R.id.knowMore) }
+            lottieBg.setSafeOnClickListener { onItemClick(adapterPosition, R.id.knowMore) }
         }
     }
 
@@ -78,6 +84,14 @@ class HomeListAdapter(
     }
 
     inner class InformationSelfCareVH(v: View) : RecyclerView.ViewHolder(v)
+
+    inner class DisableExposureApiVH(v: View) : RecyclerView.ViewHolder(v) {
+        val disableExposureApi: Button = v.findViewById(R.id.disableExposureApi)
+
+        init {
+            disableExposureApi.setSafeOnClickListener { onItemClick(adapterPosition) }
+        }
+    }
 
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
@@ -95,6 +109,7 @@ class HomeListAdapter(
             1 -> Pair(R.layout.home_section_header_item, SectionHeaderVH::class)
             2 -> Pair(R.layout.home_information_how_app_works_card, InformationHowAppWorksVH::class)
             3 -> Pair(R.layout.home_information_self_care_card, InformationSelfCareVH::class)
+            4 -> Pair(R.layout.home_disable_exposure_api, DisableExposureApiVH::class)
             else -> error("Unhandled viewType $viewType")
         }
 
@@ -124,12 +139,18 @@ class HomeListAdapter(
             is ProtectionCardVH -> {
                 val item = items[position] as ProtectionCard
                 if (item.active) {
+                    holder.knowMore.visible()
                     holder.reactivate.gone()
                     holder.title.text = resources.getString(R.string.home_protection_active)
                         .color('{', '}',
                             context.getColorCompat(R.color.colorPrimary))
-                    holder.subtitle.text = resources.getString(R.string.home_view_service_active_advice)
 
+                    val reopenReminder = settingsManager.settings.value.reopenReminder
+
+                    holder.subtitle.text = when (reopenReminder) {
+                        true -> resources.getString(R.string.home_view_service_active_advice)
+                        false -> resources.getString(R.string.home_view_service_active_subtitle)
+                    }
                     // animate fade-in to avoid glitch on tab change
                     holder.lottieBg.alpha = 0f
                     holder.lottieBg.setAnimation(R.raw.lottie_shield_full)
@@ -142,6 +163,7 @@ class HomeListAdapter(
                     holder.lottieFg.animateShow()
                     holder.itemView.post { holder.lottieFg.playAnimation() }
                 } else {
+                    holder.knowMore.gone()
                     holder.reactivate.visible()
                     holder.title.text = resources.getString(R.string.home_protection_not_active)
                         .color('{', '}',
@@ -163,6 +185,9 @@ class HomeListAdapter(
                     }
                 }
             }
+            is DisableExposureApiVH -> {
+                holder.disableExposureApi.isEnabled = (items[position] as DisableExposureApi).isEnabled
+            }
         }
     }
 
@@ -172,6 +197,7 @@ class HomeListAdapter(
             is SectionHeader -> 1
             is HowItWorksCard -> 2
             is SelfCareCard -> 3
+            is DisableExposureApi -> 4
         }
     }
 
@@ -179,5 +205,5 @@ class HomeListAdapter(
 }
 
 interface HomeClickListener {
-    fun onClick(item: HomeItemType)
+    fun onClick(item: HomeItemType, @IdRes viewId: Int = -1)
 }

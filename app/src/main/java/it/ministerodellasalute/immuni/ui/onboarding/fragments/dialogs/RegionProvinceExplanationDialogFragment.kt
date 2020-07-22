@@ -13,13 +13,19 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.logic.exposure.repositories
+package it.ministerodellasalute.immuni.ui.onboarding.fragments.dialogs
 
-import it.ministerodellasalute.immuni.extensions.storage.KVStorage
-import java.util.*
+import android.os.Bundle
+import android.view.View
+import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 
-class ServerDateRepository() {
-    companion object {
-        val serverDateKey = KVStorage.Key<Date>("ServerDate")
+class RegionProvinceExplanationDialogFragment : PopupDialogFragment() {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setContentLayout(R.layout.region_province_explanation_dialog)
+
+        setTitle(getString(R.string.permission_tutorial_why_province_region_title))
     }
 }

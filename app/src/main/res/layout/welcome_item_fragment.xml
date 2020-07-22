@@ -21,18 +21,19 @@
     android:layout_height="match_parent"
     android:background="@color/transparent">
 
-    <ImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_gravity="bottom"
         android:scaleType="fitCenter"
+        app:lottie_autoPlay="false"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/welcome_1" />
+        tools:src="@drawable/welcome_1" />
 
     <TextView
         android:id="@+id/title"
@@ -60,26 +61,9 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/knowMore"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="TextView" />
-
-    <TextView
-        android:id="@+id/knowMore"
-        style="@style/OnboardingKnowMore"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
-        android:gravity="center"
-        android:maxLines="1"
-        android:text="@string/welcome_view_discover_more"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

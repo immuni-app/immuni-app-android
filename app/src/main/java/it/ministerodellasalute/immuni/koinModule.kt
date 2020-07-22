@@ -20,17 +20,19 @@ import androidx.lifecycle.SavedStateHandle
 import it.ministerodellasalute.immuni.api.services.*
 import it.ministerodellasalute.immuni.config.*
 import it.ministerodellasalute.immuni.debugmenu.DebugMenu
+import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
+import it.ministerodellasalute.immuni.extensions.attestation.SafetyNetAttestationClient
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
 import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 import it.ministerodellasalute.immuni.extensions.utils.moshi
+import it.ministerodellasalute.immuni.logic.exposure.BaseOperationalInfo
+import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
-import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
-import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
-import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureStatusRepository
+import it.ministerodellasalute.immuni.logic.exposure.repositories.*
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
@@ -53,6 +55,7 @@ import it.ministerodellasalute.immuni.ui.otp.OtpViewModel
 import it.ministerodellasalute.immuni.ui.settings.SettingsViewModel
 import it.ministerodellasalute.immuni.ui.setup.SetupViewModel
 import it.ministerodellasalute.immuni.ui.suggestions.StateCloseViewModel
+import it.ministerodellasalute.immuni.ui.support.SupportViewModel
 import it.ministerodellasalute.immuni.ui.upload.UploadViewModel
 import it.ministerodellasalute.immuni.util.CoroutineContextProvider
 import it.ministerodellasalute.immuni.workers.models.ServiceNotActiveNotificationWorkerStatus
@@ -103,6 +106,16 @@ val appModule = module {
     }
 
     /**
+     * Exposure Analytics Service APIs
+     */
+    single {
+        val network = Network(
+            androidContext(), ExposureAnalyticsNetworkConfiguration(androidContext(), get())
+        )
+        network.createServiceAPI(ExposureAnalyticsService::class)
+    }
+
+    /**
      * Debug Menu module.
      */
     single {
@@ -126,6 +139,7 @@ val appModule = module {
 
     single {
         ConfigurationSettingsStoreRepository(
+            androidContext(),
             KVStorage(
                 name = "ConfigurationSettingsStoreRepository",
                 context = androidContext(),
@@ -188,13 +202,58 @@ val appModule = module {
     }
 
     single {
+        ExposureNotificationManager(androidContext(), get())
+    }
+
+    single {
         ExposureManager(
             get(),
-            ExposureNotificationManager(androidContext(), get()),
+            get(),
+            get(),
             get(),
             get(),
             get(),
             get()
+        )
+    }
+
+    single {
+        ExposureAnalyticsStoreRepository(
+            KVStorage(
+                name = "ExposureAnalyticsStoreRepository",
+                context = androidContext(),
+                moshi = get(),
+                cacheInMemory = true,
+                encrypted = true
+            )
+        )
+    }
+
+    single {
+        ExposureAnalyticsNetworkRepository(get())
+    }
+
+    single<AttestationClient> {
+        SafetyNetAttestationClient(
+            androidContext(),
+            SafetyNetAttestationClient.AttestationParameters(
+                apiKey = BuildConfig.SAFETY_NET_API_KEY,
+                apkPackageName = androidContext().packageName,
+                requiresBasicIntegrity = true,
+                requiresCtsProfile = true,
+                requiresHardwareAttestation = true
+            )
+        )
+    }
+
+    single {
+        ExposureAnalyticsManager(
+            get<ExposureAnalyticsStoreRepository>(),
+            get(),
+            get(),
+            get(),
+            get(),
+            { get() }
         )
     }
 
@@ -262,6 +321,10 @@ val appModule = module {
         immuniMoshi
     }
 
+    factory {
+        BaseOperationalInfo(get(), get(), get())
+    }
+
     // Android ViewModels
 
     viewModel { SetupViewModel(get(), get()) }
@@ -283,7 +346,8 @@ val appModule = module {
     viewModel { ForceUpdateViewModel(get()) }
     viewModel { FaqViewModel(get()) }
     viewModel { SettingsViewModel(get()) }
-    viewModel { StateCloseViewModel(get()) }
+    viewModel { StateCloseViewModel(get(), get()) }
+    viewModel { SupportViewModel(androidContext(), get(), get()) }
 }
 
 val immuniMoshi = moshi(

@@ -26,7 +26,8 @@ class ViewPagerAdapter(
     isOnboardingComplete: Boolean,
     isBroadcastingActive: Boolean,
     areNotificationsEnabled: Boolean,
-    isEditingProvince: Boolean
+    isEditingProvince: Boolean,
+    experimentalPhase: Boolean
 ) : FragmentStateAdapter(fragment), KoinComponent {
 
     private val items: MutableList<Type> = mutableListOf()
@@ -50,6 +51,9 @@ class ViewPagerAdapter(
             if (!isOnboardingComplete) {
                 items.add(Type.PROTECT_DEVICE)
                 items.add(Type.PHISHING_WARNING)
+                if (experimentalPhase) {
+                    items.add(Type.PILOT_PROJECT)
+                }
             }
         }
     }
@@ -66,6 +70,7 @@ class ViewPagerAdapter(
             Type.NOTIFICATIONS -> NotificationsFragment()
             Type.PROTECT_DEVICE -> ProtectDeviceFragment()
             Type.PHISHING_WARNING -> PhishingWarningFragment()
+            Type.PILOT_PROJECT -> PilotProjectFragment()
         }
 
         return fragment.apply {
@@ -74,6 +79,6 @@ class ViewPagerAdapter(
     }
 
     private enum class Type {
-        REGION, PROVINCE, PRIVACY, BLUETOOTH, EXPOSURE_NOTIFICATION, NOTIFICATIONS, PROTECT_DEVICE, PHISHING_WARNING
+        REGION, PROVINCE, PRIVACY, BLUETOOTH, EXPOSURE_NOTIFICATION, NOTIFICATIONS, PROTECT_DEVICE, PHISHING_WARNING, PILOT_PROJECT
     }
 }

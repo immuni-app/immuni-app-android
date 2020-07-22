@@ -22,6 +22,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -35,10 +36,12 @@ import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
+import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.home_fragment.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class HomeFragment : Fragment(),
@@ -95,10 +98,12 @@ class HomeFragment : Fragment(),
         // end hack
 
         with(homeList) {
+            val settingsManager: ConfigurationSettingsManager by inject()
             layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
             adapter = HomeListAdapter(
                 requireContext(),
-                this@HomeFragment
+                this@HomeFragment,
+                settingsManager
             )
         }
 
@@ -236,10 +241,15 @@ class HomeFragment : Fragment(),
             1f - (scrollY.toFloat() / fadeThreshold).coerceIn(0f, 1f)
     }
 
-    override fun onClick(item: HomeItemType) {
+    override fun onClick(item: HomeItemType, @IdRes viewId: Int) {
         when (item) {
             is ProtectionCard -> {
-                openOnboarding()
+                if (viewId == R.id.reactivate) {
+                    openOnboarding()
+                } else if (viewId == R.id.knowMore) {
+                    val action = HomeFragmentDirections.actionCheckAppStatus()
+                    findNavController().navigate(action)
+                }
             }
             is SectionHeader -> {
             }
@@ -248,6 +258,9 @@ class HomeFragment : Fragment(),
             }
             SelfCareCard -> {
                 openSelfCare()
+            }
+            is DisableExposureApi -> {
+                openDisableExposureApi()
             }
         }
     }
@@ -269,6 +282,11 @@ class HomeFragment : Fragment(),
             HomeFragmentDirections.actionHowitworks(
                 true
             )
+        findNavController().navigate(action)
+    }
+
+    private fun openDisableExposureApi() {
+        val action = HomeFragmentDirections.actionDisableExposureApi()
         findNavController().navigate(action)
     }
 }

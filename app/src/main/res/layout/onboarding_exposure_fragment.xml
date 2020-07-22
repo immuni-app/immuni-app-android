@@ -19,6 +19,7 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -28,7 +29,7 @@
             android:layout_height="match_parent"
             android:background="@color/background">
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -41,7 +42,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_onboarding_exposure" />
+                tools:src="@drawable/ic_onboarding_exposure" />
 
             <TextView
                 android:id="@+id/title"
@@ -86,9 +87,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="120dp"
-                android:maxLines="5"
-                android:text="@string/welcome_view_discover_more"
-                app:autoSizeTextType="uniform"
+                android:text="@string/onboarding_common_discover_more"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/title"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -113,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="32dp"
-            android:text="@string/onboarding_push_permission_action"
+            android:text="@string/onboarding_exposure_permission_action"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

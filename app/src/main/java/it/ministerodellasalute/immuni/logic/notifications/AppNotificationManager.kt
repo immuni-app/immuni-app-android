@@ -23,22 +23,28 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.text.format.DateFormat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.ui.main.MainActivity
 import it.ministerodellasalute.immuni.ui.setup.SetupActivity
+import java.util.*
 import org.koin.core.KoinComponent
 
 class AppNotificationManager(val context: Context) : KoinComponent {
     companion object {
         const val CHANNEL_ID = "exposure_notification"
+        const val DEBUG_CHANNEL_ID = "debug_channel"
+        private var DEBUG_ID = 0
+        const val GROUP_ID = 20000
     }
 
     fun triggerNotification(type: NotificationType) {
         createExposureNotificationChannel()
-        val builder = NotificationCompat.Builder(context,
+        val builder = NotificationCompat.Builder(
+            context,
             CHANNEL_ID
         ).apply {
             setSmallIcon(R.drawable.ic_notification_app)
@@ -46,14 +52,16 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         }
         when (type) {
             NotificationType.RiskReminder -> setupRiskReminderNotification(builder)
-            NotificationType.OnboardingNotCompleted -> setupOnboardingNotCompletedNotification(builder)
+            NotificationType.OnboardingNotCompleted -> setupOnboardingNotCompletedNotification(
+                builder
+            )
             NotificationType.ForcedVersionUpdate -> setupForcedVersionUpdateNotification(builder)
             NotificationType.ServiceNotActive -> setupServiceNotActiveNotification(builder)
         }
 
         val androidNotificationManager = NotificationManagerCompat.from(context)
         androidNotificationManager.notify(type.id, builder.build().apply {
-            flags = flags or Notification.FLAG_NO_CLEAR or Notification.FLAG_AUTO_CANCEL
+            flags = flags or Notification.FLAG_AUTO_CANCEL
         })
     }
 
@@ -161,6 +169,11 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         createChannel(id = CHANNEL_ID, name = channelName)
     }
 
+    private fun createDebugChannel() {
+        val channelName = "Immuni - Debug"
+        createChannel(id = DEBUG_CHANNEL_ID, name = channelName, mute = true, showBadge = false)
+    }
+
     private fun createChannel(
         id: String,
         name: String,
@@ -179,6 +192,48 @@ class AppNotificationManager(val context: Context) : KoinComponent {
             val androidNotificationManager = NotificationManagerCompat.from(context)
             androidNotificationManager.createNotificationChannel(channel)
         }
+    }
+
+    /**
+     * Show debugging notifications in a unique notification group.
+     */
+    fun triggerDebugNotification(message: String) {
+        createDebugChannel()
+
+        val dateStr = DateFormat.getTimeFormat(context).format(Date())
+
+        val groupBuilder = NotificationCompat.Builder(
+            context, DEBUG_CHANNEL_ID
+        ).apply {
+            setSmallIcon(R.drawable.ic_notification_app)
+            setContentTitle("Immuni - Debug")
+            setContentText(message)
+            setGroupSummary(true)
+            color = context.getColorCompat(R.color.colorPrimary)
+            setGroup(DEBUG_CHANNEL_ID)
+            setStyle(NotificationCompat.BigTextStyle().bigText(message))
+            setContentIntent(createPendingIntent())
+        }
+
+        val builder = NotificationCompat.Builder(
+            context,
+            DEBUG_CHANNEL_ID
+        ).apply {
+            setSmallIcon(R.drawable.ic_notification_app)
+            setContentIntent(createPendingIntent())
+            setContentTitle(dateStr)
+            setContentText(message)
+            setGroup(DEBUG_CHANNEL_ID)
+            color = context.getColorCompat(R.color.colorPrimary)
+            priority = NotificationCompat.PRIORITY_HIGH
+            setStyle(NotificationCompat.BigTextStyle().bigText(message))
+        }
+
+        val androidNotificationManager = NotificationManagerCompat.from(context)
+        androidNotificationManager.notify(GROUP_ID, groupBuilder.build())
+        androidNotificationManager.notify(DEBUG_ID++, builder.build().apply {
+            flags = flags or Notification.FLAG_AUTO_CANCEL
+        })
     }
 }
 

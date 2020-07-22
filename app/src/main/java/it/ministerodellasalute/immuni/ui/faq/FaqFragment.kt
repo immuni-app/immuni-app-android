@@ -15,16 +15,21 @@
 
 package it.ministerodellasalute.immuni.ui.faq
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.animateHide
+import it.ministerodellasalute.immuni.extensions.view.animateShow
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
+import it.ministerodellasalute.immuni.extensions.view.hideKeyboard
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.faq_fragment.*
@@ -34,6 +39,7 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
 
     lateinit var viewModel: FaqViewModel
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setLightStatusBar(requireContext().getColorCompat(R.color.background_darker))
@@ -42,6 +48,8 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val ratio = abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
             toolbarSeparator?.alpha = ratio
+            searchDivider?.alpha = 1 - ratio
+            searchCard?.alpha = 1 - ratio
         })
 
         viewModel = getViewModel()
@@ -49,7 +57,14 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
         val adapter = FaqListAdapter(this)
         faqRecycler.adapter = adapter
 
-        viewModel.questionAndAnswers.observe(viewLifecycleOwner) { adapter.data = it }
+        viewModel.questionAndAnswers.observe(viewLifecycleOwner) { (highlight, faqList) ->
+            adapter.submitData(faqList, highlight)
+            if (faqList.isEmpty()) {
+                emptyView.animateShow()
+            } else {
+                emptyView.animateHide()
+            }
+        }
 
         navigationIcon.setSafeOnClickListener {
             // this fragment is accessible from the home as the root fragment
@@ -58,6 +73,21 @@ class FaqFragment : Fragment(R.layout.faq_fragment), FaqClickListener {
             if (!findNavController().popBackStack()) {
                 activity?.finish()
             }
+        }
+
+        searchInput.doOnTextChanged { text, _, _, _ ->
+            viewModel.onFaqSearchChanged(text.toString())
+            faqRecycler.scrollToPosition(0)
+        }
+        // To activate search icon, we need to send activation event
+        searchInput.setOnFocusChangeListener { _, hasFocus ->
+            searchInputLayout.isActivated = hasFocus
+            searchInputLayout.refreshStartIconDrawableState()
+        }
+        // Hide soft keyboard when user wants to scroll content
+        faqRecycler.setOnTouchListener { _, _ ->
+            searchInput.hideKeyboard()
+            false
         }
     }
 

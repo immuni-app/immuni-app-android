@@ -79,13 +79,12 @@
             app:lottie_loop="false"
             app:lottie_autoPlay="true"
             android:translationX="30dp"
-            app:layout_constraintBottom_toBottomOf="@+id/subtitle"
+            app:layout_constraintBottom_toBottomOf="@+id/lottieAnimation"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/lottieAnimation"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView7"
-            app:layout_constraintVertical_bias="0.23000002"
+            app:layout_constraintStart_toStartOf="@+id/lottieAnimation"
+            app:layout_constraintTop_toTopOf="@+id/lottieAnimation"
             tools:src="@drawable/ic_tab_home"/>
 
         <LinearLayout
@@ -142,7 +141,22 @@
             app:layout_constraintBottom_toTopOf="@+id/bottomContainer"
             app:layout_constraintEnd_toEndOf="@+id/title"
             app:layout_constraintStart_toStartOf="@+id/title"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/knowMore"
+            style="@style/OnboardingKnowMore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="35dp"
+            android:text="@string/home_view_service_active_discover_more"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/subtitle" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

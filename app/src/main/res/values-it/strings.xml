@@ -13,7 +13,6 @@
   ~ You should have received a copy of the GNU Affero General Public License
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
-
 <resources>
   <string name="accessibility_back">Indietro</string>
   <string name="accessibility_close">Chiudi</string>
@@ -23,7 +22,7 @@
   <string name="notifications_update_os_title">Il servizio non è ancora attivo</string>
   <string name="notifications_update_os_description">Apri l’app per completare l’attivazione.</string>
   <string name="notifications_update_app_title">⚠️ È necessario aggiornare l\'applicazione</string>
-  <string name="notifications_update_app_description">È disponibile un aggiornamento importante. Aggiorna subito l’app per garantirne il funzionamento. </string>
+  <string name="notifications_update_app_description">È disponibile un aggiornamento importante. Aggiorna subito l’app per garantirne il funzionamento.</string>
   <string name="notifications_not_active_service_title">⚠️ Il servizio non è attivo</string>
   <string name="notifications_not_active_service_description">Riattiva Immuni al più presto perché ti possa avvertire in caso di rischio.</string>
   <string name="notifications_apple_exposure_notification_message">Una persona con cui hai avuto un contatto ravvicinato è risultata positiva al test.</string>
@@ -46,12 +45,11 @@
   <string name="welcome_view_items_first_title">Ciao!</string>
   <string name="welcome_view_items_first_description">Con il contributo di tutti, Immuni aiuta a contenere il virus e a tornare il prima possibile alla normalità.</string>
   <string name="welcome_view_items_second_title">Immuni si prende cura di te</string>
-  <string name="welcome_view_items_second_description">Se sei entrato in contatto con un utente in seguito risultato positivo al virus, Immuni ti avverte e ti fornisce indicazioni per proteggere la tua salute e quella dei tuoi cari. </string>
+  <string name="welcome_view_items_second_description">Se sei entrato in contatto con un utente in seguito risultato positivo al virus, Immuni ti avverte e ti fornisce indicazioni per proteggere la tua salute e quella dei tuoi cari.</string>
   <string name="welcome_view_items_third_title">Rallentiamo insieme l\'epidemia</string>
   <string name="welcome_view_items_third_description">Gli utenti che scoprono di essere stati esposti al virus possono isolarsi, rallentando così la diffusione del virus e  accelerando il ritorno alla vita normale.</string>
   <string name="welcome_view_items_fourth_title">La tua privacy è tutelata</string>
   <string name="welcome_view_items_fourth_description">L’app funziona senza seguire i tuoi spostamenti e senza conoscere la tua identità o quella delle persone con cui entri in contatto.</string>
-  <string name="welcome_view_discover_more">Scopri di più</string>
   <string name="welcome_view_next_page_title">Avanti</string>
   <string name="welcome_view_go_next">Iniziamo</string>
   <string name="privacy_title">La tua privacy è al sicuro</string>
@@ -59,15 +57,12 @@
   <string name="privacy_item_people"><b>Immuni non può risalire alla tua identità</b> o a quella delle persone con cui entri in contatto.</string>
   <string name="privacy_item_location"><b>Immuni non raccoglie alcun dato di geolocalizzazione</b>, inclusi i dati del GPS. I tuoi spostamenti non sono tracciati in alcun modo.</string>
   <string name="privacy_item_secure"><b>I dati salvati sul tuo smartphone e le connessioni al server sono cifrati.</b></string>
-  <string name="privacy_item_ministry"><b>Per aiutare il Servizio Sanitario Nazionale</b> a prendersi cura di te, Immuni invia al server del Ministero della Salute:\n
-• La tua provincia di domicilio\n
-• Se l’app funziona correttamente\n
-• Se sei stato avvertito di un contatto a rischio</string>
+  <string name="privacy_item_ministry"><b>Per aiutare il Servizio Sanitario Nazionale</b> a prendersi cura di te, Immuni invia al server del Ministero della Salute:\n• La tua provincia di domicilio\n• Se l’app funziona correttamente\n• Se sei stato avvertito di un contatto a rischio</string>
   <string name="privacy_item_italy">I tuoi dati sono salvati su server in Italia, <b>sono gestiti da soggetti pubblici e controllati dal Ministero della Salute.</b></string>
   <string name="privacy_item_data_deletion"><b>Tutti i dati sono eliminati quando non più necessari</b> e in ogni caso non più tardi del 31 dicembre 2020.</string>
   <string name="privacy_checkbox_above14">Dichiaro di avere almeno 14 anni</string>
-  <string name="privacy_checkbox_privacyPolicyRead">Ho letto l\'{informativa privacy}</string>
-  <string name="privacy_tos">Proseguendo, dichiaro di aver letto e accettato i {termini di utilizzo}</string>
+  <string name="privacy_checkbox_privacypolicyread"><![CDATA[Ho letto l\'<l>informativa privacy</l>]]></string>
+  <string name="privacy_tos"><![CDATA[Proseguendo, dichiaro di aver letto e accettato i <l>termini di utilizzo</l>]]></string>
   <string name="privacy_next">Avanti</string>
   <string name="privacy_settings_title">La tua privacy è al sicuro</string>
   <string name="privacy_settings_show_full">Informativa completa</string>
@@ -78,26 +73,28 @@
   <string name="onboarding_province_title">In che provincia vivi?</string>
   <string name="onboarding_province_description">Seleziona la tua provincia di domicilio per aiutare il Servizio Sanitario Nazionale ad assisterti al meglio.</string>
   <string name="onboarding_exposure_permission_title">Abilita le notifiche di esposizione al COVID-19</string>
-  <string name="onboarding_exposure_permission_description">Immuni registra i contatti con altri utenti usando il Bluetooth Low Energy, così da poterti informare in caso di esposizione al virus.</string>
+  <string name="onboarding_exposure_permission_description">Immuni registra i contatti con altri utenti usando il Bluetooth Low Energy, così da poterti informare in caso di esposizione al virus. Potrai disabilitare il servizio temporaneamente dalla schermata principale.</string>
   <string name="onboarding_exposure_permission_action">Abilita</string>
-  <string name="onboarding_exposure_permission_overlay_hint">Seleziona \"<b>Abilita </b>\" nel popup che apparirà qui sotto</string>
+  <string name="onboarding_exposure_permission_overlay_hint">Seleziona \"<b>Abilita</b>\" nel popup che apparirà qui sotto</string>
   <string name="onboarding_bluetooth_off_title">Attiva il Bluetooth</string>
   <string name="onboarding_bluetooth_off_description">Immuni utilizza il Bluetooth Low Energy per registrare i tuoi contatti con altri utenti e permettere notifiche di esposizione al COVID-19.</string>
   <string name="onboarding_bluetooth_off_action">Attiva</string>
   <string name="onboarding_push_permission_title">Consentici di comunicare con te</string>
-  <string name="onboarding_push_permission_description">Le notifiche permettono a Immuni di avvisarti tempestivamente in caso di necessità. </string>
+  <string name="onboarding_push_permission_description">Le notifiche permettono a Immuni di avvisarti tempestivamente in caso di necessità.</string>
   <string name="onboarding_push_permission_action">Consenti</string>
   <string name="onboarding_push_permission_overlay_hint">Seleziona \"<b>Consenti</b>\" nel popup che apparirà qui sotto</string>
   <string name="onboarding_pin_advice_title">Proteggi il tuo dispositivo</string>
-  <string name="onboarding_pin_advice_description">L’uso di Immuni è strettamente personale. Se non l’hai già fatto, imposta un codice sul tuo dispositivo per proteggerlo e impedire ad altri di accedere ai tuoi dati e alle tue app, inclusa Immuni.</string>
+  <string name="onboarding_pin_advice_description">L\'uso di Immuni è strettamente personale. Se non l\'hai già fatto, imposta un codice di sblocco sul tuo smartphone per impedire ad altri di accedere alle funzionalità dell\'app e ai messaggi che potrebbe inviarti.</string>
   <string name="onboarding_pin_advice_action">Ho capito</string>
   <string name="onboarding_communication_advice_title">Fai attenzione alle false comunicazioni</string>
-  <string name="onboarding_communication_advice_description">Immuni comunicherà con te sempre e solamente attraverso l’app e relative notifiche. <b>Diffida di qualunque SMS, telefonata, email o altro tipo di avviso</b> che sembri arrivare da Immuni, soprattutto se ti vengono richieste informazioni personali.</string>
+  <string name="onboarding_communication_advice_description">Immuni comunicherà con te sempre e solamente attraverso l’app e le relative notifiche. <b>Diffida di qualunque SMS, telefonata, email o altro tipo di avviso</b> che sembri arrivare da Immuni, soprattutto se ti vengono richieste informazioni personali.</string>
   <string name="onboarding_communication_advice_action">Ho capito</string>
   <string name="onboarding_complete_title">Configurazione completata</string>
-  <string name="home_view_service_active_title">Servizio<b>attivo</b></string>
-  <string name="home_view_service_active_advice">Apri periodicamente Immuni per verificarne lo stato.</string>
-  <string name="home_view_service_not_active_title">Servizio<b>non attivo</b></string>
+  <string name="home_view_service_active_title">Servizio
+<b>attivo</b></string>
+  <string name="home_view_service_active_subtitle">Immuni resta operativa anche quando l\'app è chiusa.</string>
+  <string name="home_view_service_not_active_title">Servizio
+<b>non attivo</b></string>
   <string name="home_view_service_not_active_subtitle">Intervieni subito per permettere a Immuni di funzionare correttamente.</string>
   <string name="home_view_service_not_active_button">Riattiva Immuni</string>
   <string name="home_view_info_protection_title">Cosa puoi fare per proteggerti</string>
@@ -108,23 +105,22 @@
   <string name="home_view_header_card_risk_button">Scopri subito cosa fare ›</string>
   <string name="home_view_header_card_positive_title">Segui le indicazioni che ti hanno fornito il tuo medico o la tua ASL</string>
   <string name="home_view_header_card_positive_button">Sei guarito? Aggiorna il tuo stato ›</string>
-  <string name="permission_tutorial_how_immuni_works_title">Come funziona l’app?</string>
+  <string name="permission_tutorial_how_immuni_works_title">Come funziona l’app</string>
   <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni associa a ogni telefono un codice casuale</h>]]></string>
   <string name="permission_tutorial_how_immuni_works_first_message">Il codice è generato in modo casuale e non contiene informazioni sul tuo dispositivo, tanto meno su di te. Inoltre, cambia diverse volte ogni ora, per tutelare al meglio la tua privacy.</string>
   <string name="permission_tutorial_how_immuni_works_second_title"><![CDATA[<h>I telefoni che si incontrano si scambiano i rispettivi codici casuali</h>]]></string>
   <string name="permission_tutorial_how_immuni_works_second_message">Quando entri in contatto con un altro utente di Immuni, i dispositivi si scambiano i rispettivi codici tramite Bluetooth Low Energy. L\'app riesce così a tenere traccia del contatto avvenuto, ma non può conoscere le vostre identità, né sapere dove vi siete incontrati.</string>
   <string name="permission_tutorial_how_immuni_works_third_title"><![CDATA[<h>Chi risulta positivo sceglie se condividere i propri codici casuali</h>]]></string>
-  <string name="permission_tutorial_how_immuni_works_third_message">Gli utenti che sono risultati positivi al virus possono caricare su un server i codici casuali che i loro dispositivi hanno trasmesso nei giorni precedenti, in modo da renderli disponibili agli altri utenti.</string>
+  <string name="permission_tutorial_how_immuni_works_third_message">Gli utenti che sono risultati positivi al virus possono caricare su un server i codici casuali che i loro dispositivi hanno trasmesso nei giorni precedenti, in modo da renderli disponibili agli altri utenti. Questa procedura avviene con l\'assistenza dell\'operatore sanitario che comunica l\'esito positivo del tampone.</string>
   <string name="permission_tutorial_how_immuni_works_fourth_title"><![CDATA[<h>Ogni telefono verifica se ha incontrato in precedenza uno o più dei codici condivisi</h>]]></string>
   <string name="permission_tutorial_how_immuni_works_fourth_message">Immuni controlla periodicamente i codici presenti sul server e li confronta con quelli salvati sul tuo dispositivo. In questo modo determina se sei stato esposto a un potenziale contagio.</string>
   <string name="permission_tutorial_how_immuni_works_fifth_title"><![CDATA[<h>In caso di riscontro positivo, l\'utente viene avvertito</h>]]></string>
   <string name="permission_tutorial_how_immuni_works_fifth_message">Se sei stato in contatto con un utente positivo, Immuni ti avverte e ti dice cosa fare. Riesce a fare tutto questo senza mai sapere dove vai e con chi ti incontri. La tua privacy è al sicuro.</string>
   <string name="permission_tutorial_how_immuni_works_action_description">Vuoi saperne di più?</string>
   <string name="permission_tutorial_how_immuni_works_action_cta">Esplora le domande frequenti</string>
-  <string name="settings_setting_section_data">Gestione dati</string>
   <string name="settings_setting_section_info">Informazioni</string>
   <string name="settings_setting_section_general">Generale</string>
-  <string name="settings_setting_load_data">Caricamento dati</string>
+  <string name="settings_setting_section_data">Caricamento dati</string>
   <string name="settings_setting_faq">Domande frequenti</string>
   <string name="settings_setting_tos">Termini di utilizzo</string>
   <string name="settings_setting_privacy">Informativa privacy</string>
@@ -139,7 +135,7 @@
   <string name="permission_tutorial_notifications_third"><b>3. Abilita la voce \"Consenti notifiche\"</b></string>
   <string name="permission_tutorial_notifications_action">Apri Impostazioni</string>
   <string name="permission_tutorial_bluetooth_title">Per attivare il Bluetooth</string>
-  <string name="permission_tutorial_bluetooth_first"><b>1. Accedi al Centro di Controllo.</b> Scorri verso il basso dall\'angolo in alto a destra–o verso l\'alto dalla parte inferiore dello schermo, a seconda del dispositivo.</string>
+  <string name="permission_tutorial_bluetooth_first"><b>1. Accedi al Centro di Controllo.</b> Scorri verso il basso dall’angolo in alto a destra oppure verso l’alto dalla parte inferiore dello schermo, a seconda del dispositivo.</string>
   <string name="permission_tutorial_bluetooth_second"><b>2. Attiva il Bluetooth</b></string>
   <string name="permission_tutorial_bluetooth_action">Apri Impostazioni</string>
   <string name="permission_tutorial_exposure_notification_restricted_title">Per attivare le notifiche di esposizione</string>
@@ -152,18 +148,20 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Apri le impostazioni</b> dal bottone in basso</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Abilita le notifiche di esposizione</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Apri Impostazioni</string>
-  <string name="upload_data_warning_message">Questa funzione richiede l\'assistenza di un operatore sanitario autorizzato</string>
-  <string name="upload_data_code_message">Comunica questo codice all\'operatore sanitario:</string>
+  <string name="upload_data_warning_message">Questa funzione richiede l’assistenza dell\'operatore sanitario che ti comunica telefonicamente l\'esito positivo del tampone.</string>
+  <string name="upload_data_code_message">Comunica il codice monouso all\'operatore sanitario:</string>
   <string name="upload_data_wait_operator_message">Attendi la conferma dell\'operatore</string>
-  <string name="upload_data_verify_message">Per proseguire, verifica l\'autorizzazione </string>
-  <string name="upload_data_verify_button">Verifica</string>
+  <string name="upload_data_verify_message">Prosegui per verificare l’autorizzazione del codice</string>
+  <string name="upload_data_verify_button">Prosegui</string>
   <string name="upload_data_verify_error">Codice non ancora autorizzato</string>
-  <string name="upload_data_verify_loading">Verifica autorizzazione...</string>
+  <string name="upload_data_verify_loading">Verifica
+autorizzazione&#8230;</string>
   <string name="upload_data_verify_loading_button" formatted="false">Attendi %d %@</string>
   <string name="upload_data_verify_loading_button_second">secondo</string>
   <string name="upload_data_verify_loading_button_seconds">secondi</string>
   <string name="upload_data_verify_loading_button_minutes">minuti</string>
-  <string name="upload_data_send_data_loading">Caricamento dei dati...</string>
+  <string name="upload_data_send_data_loading">Caricamento
+dei dati&#8230;</string>
   <string name="upload_data_missing_authorization_title">Riattiva le notifiche di esposizione per continuare</string>
   <string name="upload_data_missing_authorization_message">Le notifiche di esposizione sono necessarie durante questa procedura. Riattivale subito per continuare.</string>
   <string name="upload_data_missing_authorization_close">Chiudi</string>
@@ -195,30 +193,30 @@
   <string name="suggestions_neutral_alert">Se sei in contatto con il tuo medico o con il Dipartimento di Prevenzione della tua ASL, segui tutte le indicazioni che hai ricevuto.</string>
   <string name="suggestions_neutral_message">In ogni caso, <b>cerca sempre di rispettare queste indicazioni generali:</b></string>
   <string name="suggestions_risk_title">Esposizione a rischio</string>
-  <string name="suggestions_risk_subtitle">Immuni ha rilevato che il giorno %s sei stato vicino a un utente COVID-19 positivo.</string>
+  <string name="suggestions_risk_subtitle">Immuni ha rilevato che il giorno %@ sei stato vicino a un utente COVID-19 positivo.</string>
   <string name="suggestions_positive_title">Segui le indicazioni</string>
   <string name="suggestions_positive_subtitle"><b>Segui tutte le indicazioni che hai ricevuto dal tuo medico o dal Dipartimento di Prevenzione della tua ASL.</b></string>
-  <string name="suggestions_instruction_ministerial_decree"><b>Rispetta la normativa vigente nella tua area</b></string>
-  <string name="suggestions_instruction_wash_hands"><b>Lavati frequentemente le mani </b>con acqua e sapone o con soluzioni idroalcoliche</string>
-  <string name="suggestions_instruction_use_napkins"><b>Tossisci e starnutisci direttamente su un fazzoletto di carta o nella piega del gomito</b></string>
-  <string name="suggestions_instruction_social_distance"><b>Rispetta le misure di distanziamento fisico </b>se devi uscire di casa</string>
-  <string name="suggestions_instruction_mask"><b>Indossa una mascherina nei luoghi al chiuso accessibili al pubblico</b>, inclusi i mezzi di trasporto e comunque in tutte le occasioni in cui non sia possibile garantire continuativamente il mantenimento della distanza di sicurezza</string>
+  <string name="suggestions_instruction_ministerial_decree"><b>Rispetta la normativa vigente nella tua area.</b></string>
+  <string name="suggestions_instruction_wash_hands"><b>Lavati frequentemente le mani</b> con acqua e sapone o con soluzioni idroalcoliche.</string>
+  <string name="suggestions_instruction_use_napkins"><b>Tossisci e starnutisci direttamente su un fazzoletto di carta o nella piega del gomito.</b></string>
+  <string name="suggestions_instruction_social_distance"><b>Rispetta le misure di distanziamento fisico</b> se devi uscire di casa.</string>
+  <string name="suggestions_instruction_mask"><b>Indossa una mascherina nei luoghi al chiuso accessibili al pubblico</b>, inclusi i mezzi di trasporto e comunque in tutte le occasioni in cui non sia possibile garantire continuativamente il mantenimento della distanza di sicurezza.</string>
   <string name="suggestions_instruction_follow_instructions">Per proteggere la tua salute e quella dei tuoi cari, <b>rispetta le seguenti indicazioni:</b></string>
   <string name="suggestions_instruction_contact_doctor_title"><b>Contatta il tuo Medico di Medicina Generale (o il Pediatra di Libera Scelta)</b></string>
   <string name="suggestions_instruction_contact_doctor_message">Spiega al medico di aver ricevuto una notifica di contatto stretto di COVID-19 da Immuni. Segui le indicazioni del tuo medico. Il tuo medico contatterà il Dipartimento di Prevenzione della tua ASL. Rimani, pertanto, raggiungibile per le attività di sorveglianza sanitaria da parte della tua ASL.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_message">Se sei in contatto con il tuo medico o la tua ASL, puoi nascondere questo avviso.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_action">Ho contattato il medico</string>
   <string name="suggestions_instruction_while_waiting_doctor">In via precauzionale, in attesa delle indicazioni del tuo medico o della ASL:</string>
-  <string name="suggestions_instruction_stay_home"><b>Rimani a casa per i 14 giorni</b> successivi alla data del contatto</string>
+  <string name="suggestions_instruction_stay_home"><b>Rimani a casa per i 14 giorni</b> successivi alla data del contatto.</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Misura la temperatura corporea almeno due volte al giorno e valuta la comparsa di sintomi, anche lievi.</b></string>
-  <string name="suggestions_instruction_check_symptoms_message">In particolare febbre o almeno uno dei seguenti: mal di gola, tosse, raffreddore o naso chiuso, difficoltà respiratoria, dolori muscolari, perdita o alterazioni di olfatto o gusto, diarrea</string>
-  <string name="suggestions_instruction_isolate_title"><b>In caso di comparsa dei sintomi, isolati dal resto dei tuoi conviventi</b></string>
-  <string name="suggestions_instruction_isolate_message">Indossa una mascherina chirurgica e contatta immediatamente il tuo Medico di Medicina Generale (o il Pediatra di Libera Scelta) e il Dipartimento di Prevenzione della ASL</string>
+  <string name="suggestions_instruction_check_symptoms_message">In particolare febbre o almeno uno dei seguenti: mal di gola, tosse, raffreddore o naso chiuso, difficoltà respiratoria, dolori muscolari, perdita o alterazioni di olfatto o gusto, diarrea.</string>
+  <string name="suggestions_instruction_isolate_title"><b>In caso di comparsa dei sintomi, isolati dal resto dei tuoi conviventi.</b></string>
+  <string name="suggestions_instruction_isolate_message">Indossa una mascherina chirurgica e contatta immediatamente il tuo Medico di Medicina Generale (o il Pediatra di Libera Scelta) e il Dipartimento di Prevenzione della ASL.</string>
   <string name="suggestions_instruction_phone_contact"><b>In caso di difficoltà respiratoria contatta il 112/118.</b></string>
   <string name="suggestions_instruction_hide_alert_message">Se necessario puoi nascondere questo avviso. A meno che tu abbia una ragione valida, ti sconsigliamo vivamente di farlo.</string>
   <string name="suggestions_instruction_hide_alert_action">Nascondi avviso</string>
   <string name="suggestions_alert_asl_contact_confirmation_title">Confermi di essere in contatto con il tuo medico o con la tua ASL?</string>
-  <string name="suggestions_alert_asl_contact_confirmation_description">Immuni nasconderà l’avviso di contatto. Dovrai comunque seguire tutte le indicazione che hai ricevuto dal tuo medico o dalla tua ASL.</string>
+  <string name="suggestions_alert_asl_contact_confirmation_description">Immuni nasconderà l’avviso di contatto. Dovrai comunque seguire tutte le indicazioni che hai ricevuto dal tuo medico o dalla tua ASL.</string>
   <string name="suggestions_positive_info_title">Immuni sta continuando a funzionare: non disinstallarla!</string>
   <string name="suggestions_positive_info_subtitle">Per il momento, non riceverai eventuali nuove notifiche in caso di esposizione a rischio con un utente COVID-19 positivo.</string>
   <string name="suggestions_positive_covid_negative_message"><b>Indicaci se la tua ASL ha confermato che sei COVID-19 negativo per riattivare le notifiche in caso di esposizione a rischio.</b></string>
@@ -240,7 +238,7 @@
   <string name="force_update_not_available_message"> Google Play Services è aggiornato ma non può ancora abilitare le notifiche di esposizione. Riprova più tardi.</string>
   <string name="force_update_gps_not_available_yet_title">Attendi l\'aggiornamento di Google Play Services</string>
   <string name="force_update_gps_not_available_yet_message">Non è ancora disponibile la versione di Google Play Services necessaria per attivare le notifiche di esposizione. Riprova più tardi.</string>
-  <string name="onboarding_exposure_message_extended">Le notifiche di esposizione richiedono che il servizio di localizzazione sia attivo a livello di sistema. <b>Immuni non ha accesso alla localizzazione e non può quindi conoscere la tua posizione o i tuoi spostamenti</b>.</string>
+  <string name="onboarding_exposure_message_extended">A causa di una limitazione del sistema operativo, il servizio di geolocalizzazione deve essere attivo per consentire lo scambio di codici casuali via Bluetooth. <b>Immuni non accede alla tua localizzazione, come puoi verificare consultando la lista dei permessi richiesti dall\'app.</b></string>
   <string name="suggestions_alert_hide_alert_title">Vuoi nascondere questo avviso?</string>
   <string name="suggestions_alert_hide_alert_description">A meno che tu abbia una ragione valida, ti sconsigliamo vivamente di farlo. Ne potrebbe andare della tua salute e di quella delle persone che ti circondano.</string>
   <string name="suggestions_alert_hide_alert_negative_answer">No</string>
@@ -277,4 +275,103 @@
   <string name="suggestions_instruction_mask_message">Inclusi i mezzi di trasporto e comunque in tutte le occasioni in cui non sia possibile garantire continuativamente il mantenimento della distanza di sicurezza.</string>
   <string name="upload_data_vpn_error_message">Si è verificato un errore durante l’operazione. Ti invitiamo a riprovare. Se stai utilizzando una VPN, ti suggeriamo di selezionare un server italiano o di disabilitarla temporaneamente.</string>
   <string name="suggestions_risk_footer">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità, l\'app ha informato il Ministero della Salute della notifica che hai ricevuto. <b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di questa informazione.</b></string>
+  <string name="home_view_service_active_advice">Apri Immuni una volta al giorno per verificarne lo stato.</string>
+  <string name="aso_1">Proteggi te stesso e aiuta a rallentare l’epidemia</string>
+  <string name="aso_2">Immuni non raccoglie il tuo nome, cognome, data di nascita, indirizzo, numero di telefono o email.
+Immuni non può risalire alla tua identità o a quella della persone con cui entri in contatto.
+Immuni non raccoglie alcun dato di geolocalizzazione, inclusi i dati del GPS.
+I dati salvati sul tuo smartphone e le connessioni al server sono cifrate.</string>
+  <string name="home_view_service_deactivate">Disattiva il servizio</string>
+  <string name="onboarding_pilot_title">Sperimentazione in corso</string>
+  <string name="onboarding_pilot_description">Durante la fase di sperimentazione verrai avvisato di un contatto a rischio con una persona positiva al virus solo se quest’ultima è assistita da un’ASL delle seguenti regioni: Abruzzo, Liguria, Marche e Puglia.</string>
+  <string name="onboarding_pilot_action">Ho capito</string>
+  <string name="permission_tutorial_deactivate_service_title">Come disattivare il servizio</string>
+  <string name="permission_tutorial_deactivate_service_first_message"><![CDATA[<red>Per proteggere la tua Salute e quella dei tuoi cari, disattiva il servizio solo se necessario e riattivalo appena puoi.</red>]]></string>
+  <string name="permission_tutorial_deactivate_service_second_message">In certi casi può aver senso disattivare temporaneamente l’app, ad esempio mentre sei al lavoro se sei un operatore sanitario a contatto con pazienti COVID-19.</string>
+  <string name="permission_tutorial_deactivate_service_third_message">Disabilitando le notifiche di esposizione i successivi contatti con altri utenti non verranno registrati.</string>
+  <string name="permission_tutorial_deactivate_service_fourth_message"><![CDATA[<h3>Per disabilitare le notifiche di esposizione</h3>]]></string>
+  <string name="permission_tutorial_deactivate_service_fifth_message"><b>1. Apri le impostazioni dal bottone in basso</b></string>
+  <string name="permission_tutorial_deactivate_service_sixth_message"><b>2. Disabilita le notifiche di esposizione</b></string>
+  <string name="permission_tutorial_deactivate_service_action_cta">Apri Impostazioni</string>
+  <string name="suggestions_risk_first_message">L\'app ti mostra questo avviso sulla base delle informazioni a disposizione (durata del contatto e stima approssimativa della distanza) ma non può sapere se durante il contatto indossavate mascherine o se vi davate le spalle. Il rischio di contagio potrebbe quindi essere sovrastimato.</string>
+  <string name="suggestions_risk_second_message">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità l’app ha informato il Ministero della Salute della notifica che hai ricevuto.</string>
+  <string name="suggestions_risk_fourth_message"><![CDATA[Per ulteriori informazioni sui dati trasmessi al Ministero della Salute puoi leggere l’<l>informativa privacy</l> al punto 4.]]></string>
+  <string name="suggestions_risk_third_message"><b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di queste informazioni.</b></string>
+  <string name="suggestions_risk_third_message_android">Per ulteriori informazioni sui dati trasmessi al Ministero della Salute puoi leggere l\'{informativa privacy} al punto 4.</string>
+  <string name="support_email_template">\n\n\n——————————
+Descrivi eventuali dubbi o problemi di funzionamento dell\'app sopra la linea. Se possibile, non cancellare il testo qui sotto. Aiuterà il supporto di Immuni ad assisterti al meglio.
+Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Attive; [other useful info, same as those displayed in the contact support screen]</string>
+  <string name="settings_setting_support">Contatta il supporto</string>
+  <string name="support_title">Hai bisogno di aiuto?</string>
+  <string name="support_faq_description">Se hai dubbi o hai avuto problemi nell\'utilizzo dell\'app, vai alla sezione “Domande frequenti”.</string>
+  <string name="support_faq_action">Esplora le domande frequenti</string>
+  <string name="support_contact_support">Se non hai trovato la risposta che cercavi, <b>puoi contattare il supporto di Immuni.</b></string>
+  <string name="support_phone_title">Chiama il numero verde</string>
+  <string name="support_phone_description" formatted="false">Numero attivo dalle %@ alle %@.</string>
+  <string name="support_email_title">Invia un\'email</string>
+  <string name="support_email_description">Se scegli di contattare il supporto tramite email, il tuo indirizzo email sarà visibile al servizio clienti.</string>
+  <string name="support_info_title">Informazioni utili</string>
+  <string name="support_info_item_os">Sistema operativo</string>
+  <string name="support_info_item_device">Modello</string>
+  <string name="support_info_item_exposurenotificationenabled">Notifiche di esposizione</string>
+  <string name="support_info_item_bluetoothenabled">Bluetooth</string>
+  <string name="support_info_item_appversion">Versione app</string>
+  <string name="support_info_item_connectiontype">Connessione</string>
+  <string name="permission_tutorial_deactivate_service_first_message_android">Per proteggere la tua Salute e quella dei tuoi cari, disattiva il servizio solo se necessario e riattivalo appena puoi.</string>
+  <string name="support_info_active">Attivo</string>
+  <string name="support_info_not_active">Non Attivo</string>
+  <string name="support_info_active_plural">Attive</string>
+  <string name="support_info_not_active_plural">Non Attive</string>
+  <string name="support_phone_description_android">Numero attivo dalle %1$s alle %2$s.</string>
+  <string name="support_info_item_connectiontype_wifi">Wi-Fi</string>
+  <string name="support_info_item_connectiontype_mobile">Mobile</string>
+  <string name="support_info_item_connectiontype_none">Nessuna</string>
+  <string name="permission_tutorial_cant_update_title">Non riesci ad aggiornare?</string>
+  <string name="permission_tutorial_cant_update_first"><b>1. Assicurati di essere connesso tramite Wi-Fi.</b> Non è possibile scaricare l’aggiornamento da rete mobile.</string>
+  <string name="permission_tutorial_cant_update_second"><b>2. Una volta connesso al Wi-Fi, torna in Impostazioni &gt; Generali &gt; Aggiornamento Software</b></string>
+  <string name="permission_tutorial_cant_update_third"><b>3. Seleziona \"Scarica e installa\"</b></string>
+  <string name="permission_tutorial_cant_update_fourth"><b>4.</b> Dopo averlo scaricato, <b>assicurati di averlo installato selezionando \"Installa ora\"</b></string>
+  <string name="force_update_view_os_seconday_button">Non riesci ad aggiornare?</string>
+  <string name="support_email_body_message">Descrivi eventuali dubbi o problemi di funzionamento dell’app sopra la linea. Se possibile, non cancellare il testo qui sotto. Aiuterà il supporto di Immuni ad assisterti al meglio.</string>
+  <string name="verify_immuni_works_first"><b>Se leggi \"Servizio attivo\" significa che Immuni sta già funzionando correttamente.</b></string>
+  <string name="verify_immuni_works_second"><b>Se invece dovessero esserci problemi, leggerai “Servizio non attivo”.</b> Immuni ti fornirà istruzioni semplici per ripristinarne il corretto funzionamento.</string>
+  <string name="verify_immuni_works_third"><b>Se sei esposto a una persona che in seguito risulti positiva al virus, Immuni ti invierà una notifica per avvertirti del rischio di contagio.</b> Aprendo l’app, riceverai indicazioni chiare ed esaustive sul da farsi.</string>
+  <string name="verify_immuni_works_fourth">Per motivi tecnici, <b>alcuni modelli di smartphone Android possono interrompere il funzionamento di Immuni se l’app rimane chiusa per qualche giorno</b>. Quando questo accade, lo scambio di codici casuali con altri dispositivi rimane attivo, ma Immuni non è in grado di verificare se sei stato esposto a utenti potenzialmente contagiosi, avvertendoti in caso di rischio. Per evitare che ciò accada, apri l’app una volta al giorno. Google sta collaborando con i produttori di questi modelli per risolvere il problema.</string>
+  <string name="localisation_explanation_title">Perché il servizio di localizzazione dev\'essere attivo</string>
+  <string name="localisation_explanation_message_first">Immuni sfrutta il sistema di notifiche di esposizione sviluppato da Apple e Google. A causa di una limitazione del sistema operativo, la scansione di segnali Bluetooth nel background, necessaria per lo scambio dei codici casuali e la conseguente registrazione dei contatti avvenuti, richiede che il servizio di localizzazione sia attivo.</string>
+  <string name="localisation_explanation_message_second">L’app non ha tuttavia accesso alla tua posizione e non può quindi conoscere i tuoi spostamenti. Puoi verificarlo facilmente, consultando la lista di autorizzazioni richieste da Immuni disponibile nel menù Impostazioni del tuo smartphone e constatando che non è richiesta l’autorizzazione di accesso alla tua localizzazione.</string>
+  <string name="home_view_service_active_discover_more">Scopri di più</string>
+  <string name="faq_search_bar_placeholder">Cerca una domanda</string>
+  <string name="faq_no_result_title">Nessun argomento trovato</string>
+  <string name="faq_no_result_message">Non abbiamo trovato nessun argomento corrispondente alla tua ricerca.</string>
+  <string name="settings_setting_load_data">Segnala positività</string>
+  <string name="permission_tutorial_verify_immuni_works_title">Come verificare che Immuni stia funzionando</string>
+  <string name="permission_tutorial_verify_immuni_works_first"><b>Se leggi \"Servizio attivo\" significa che Immuni sta già funzionando correttamente.</b> Non devi fare altro: l\'app continuerà a funzionare anche quando è chiusa.</string>
+  <string name="permission_tutorial_verify_immuni_works_second"><b>Se invece dovessero esserci problemi, leggerai \"Servizio non attivo\".</b> Immuni ti fornirà istruzioni semplici per ripristinarne il corretto funzionamento.</string>
+  <string name="permission_tutorial_verify_immuni_works_third"><b>Se entri in contatto con una persona che in seguito risulti positiva al virus, Immuni ti invierà una notifica per avvertirti del rischio di contagio.</b> Aprendo l\'app, riceverai indicazioni chiare ed esaustive sul da farsi.</string>
+  <string name="upload_data_warning_discover_more">Scopri di più</string>
+  <string name="permission_tutorial_how_to_upload_positive_title">Come segnalare la positività</string>
+  <string name="permission_tutorial_how_to_upload_positive_first">Se risulti positivo al virus, puoi segnalarlo a Immuni caricando i tuoi codici casuali. Facendolo permetti all’app di avvertire del rischio di contagio gli utenti con cui sei stato a contatto nei giorni precedenti.</string>
+  <string name="permission_tutorial_how_to_upload_positive_second">L’operatore sanitario che comunica l’esito positivo del tampone ti assisterà telefonicamente. Ti chiederà il codice monouso visualizzato nella schermata precedente e lo userà per autorizzarti al caricamento dei tuoi dati.</string>
+  <string name="permission_tutorial_how_to_upload_positive_third">Questo processo di autorizzazione impedisce a utenti che non siano effettivamente risultati positivi al virus di caricare i loro dati, causando falsi allarmi. Il codice monouso e i dati caricati non sono in alcun modo associati alla tua identità.</string>
+  <string name="suggestions_instruction_under_18_message">Se hai meno di 18 anni, fai leggere questo messaggio ai tuoi genitori.</string>
+  <string name="privacy_tos_read">Proseguendo, dichiaro di aver letto e accettato i {termini di utilizzo}</string>
+  <string name="privacy_checkbox_read">Ho letto l\'{informativa privacy}</string>
+  <string name="suggestions_risk_with_date_subtitle">Immuni ha rilevato che il giorno %s sei stato vicino a un utente COVID-19 positivo.</string>
+  <string name="welcome_view_discover_more">Scopri come funziona l\'app</string>
+  <string name="permission_tutorial_why_province_region_title">A cosa serve inserire regione e provincia di domicilio</string>
+  <string name="permission_tutorial_why_province_region_first"><b>Regione e provincia di domicilio sono utili al Servizio Sanitario Nazionale per poter prevenire l\'insorgenza di nuovi focolai,</b> oltre che per poter stimare la diffusione dell\'app sul territorio nazionale. La provincia di domicilio viene inviata al server del Ministero della Salute contestualmente alle informazioni sul corretto funzionamento dell\'app e sul fatto che tu sia stato o meno avvertito di un contatto a rischio. Immuni raccoglie queste informazioni nella piena tutela della tua privacy.</string>
+  <string name="permission_tutorial_why_province_region_second">È possibile modificare regione e provincia di domicilio in un qualsiasi momento dalle impostazioni dell’app. Ti consigliamo di modificarle solamente in caso tu decida di cambiare domicilio. In tutti gli altri casi, inclusi viaggi occasionali, non è invece necessario farlo.</string>
+  <string name="permission_tutorial_why_province_region_third"><b>Nel caso in cui tu viva all’estero ma abbia intenzione di recarti in Italia, ti suggeriamo di selezionare già la regione (e successivamente la provincia) in cui soggiornerai per più tempo.</b> Puoi usare Immuni anche se ti trovi all’estero. L’app registrerà regolarmente i tuoi contatti con altri utenti. Non potrai tuttavia caricare i tuoi codici casuali in caso di rilevata positività fintanto che non ti troverai in Italia.</string>
+  <string name="onboarding_region_abroad_item">Non vivo in Italia</string>
+  <string name="onboarding_region_abroad_alert_title">Sei sicuro?</string>
+  <string name="onboarding_region_abroad_alert_message">Se non vivi in Italia ma hai intenzione di recartici, ti suggeriamo di selezionare già la regione (e successivamente la provincia) in cui soggiornerai per più tempo. Lo stesso vale nel caso in cui tu ti trovi già in Italia.</string>
+  <string name="onboarding_region_abroad_alert_cancel">Annulla</string>
+  <string name="onboarding_region_abroad_alert_confirm">Continua</string>
+  <string name="support_info_item_lastencheck">Ultima verifica</string>
+  <string name="settings_setting_share">Condividi l\'app</string>
+  <string name="settings_setting_share_message">Aiutaci a combattere insieme l\'epidemia di COVID-19. Scarica anche tu Immuni. https://www.immuni.italia.it/</string>
+  <string name="support_info_item_lastencheck_none">Nessuna</string>
+  <string name="support_info_item_lastencheck_date" formatted="false">%@ alle %@</string>
+  <string name="support_info_item_lastencheck_date_android">%1$s alle %2$s</string>
 </resources>
