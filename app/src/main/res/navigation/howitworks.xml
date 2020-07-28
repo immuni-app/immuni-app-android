@@ -18,7 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/howitworks"
+    android:id="@+id/howitworks_nav"
     app:startDestination="@id/howItWorksDialogFragment" >
     <dialog
         android:id="@+id/howItWorksDialogFragment"

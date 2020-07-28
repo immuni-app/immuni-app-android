@@ -25,7 +25,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.SettingsDirections
+import it.ministerodellasalute.immuni.SettingsNavDirections
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.playstore.PlayStoreActions
@@ -59,7 +59,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ConfirmationDialo
         // data management
 
         dataLoadButton.setSafeOnClickListener {
-            val action = SettingsDirections.actionUploadData()
+            val action = SettingsNavDirections.actionUploadData()
             findNavController().navigate(action)
         }
 
@@ -80,14 +80,14 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ConfirmationDialo
         // general
 
         changeProvinceButton.setSafeOnClickListener {
-            val action = SettingsDirections.actionOnboardingActivity(true)
+            val action = SettingsNavDirections.actionOnboardingActivity(true)
             findNavController().navigate(action)
         }
         sendFeedbackButton.setSafeOnClickListener {
             PlayStoreActions.goToPlayStoreAppDetails(requireContext(), requireContext().packageName)
         }
         contactSupport.setSafeOnClickListener {
-            val action = SettingsDirections.actionSupport()
+            val action = SettingsNavDirections.actionSupport()
             findNavController().navigate(action)
         }
         shareApp.setSafeOnClickListener {
@@ -107,7 +107,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ConfirmationDialo
 
         viewModel.navigateToFaqs.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {
-                findNavController().navigate(SettingsDirections.actionFaq())
+                findNavController().navigate(SettingsNavDirections.actionFaq())
             }
         })
 

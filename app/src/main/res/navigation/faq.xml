@@ -17,7 +17,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/faq"
+    android:id="@+id/faq_nav"
     app:startDestination="@id/faqFragment">
 
     <fragment

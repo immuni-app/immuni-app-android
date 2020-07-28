@@ -60,7 +60,7 @@ class MainActivity : ImmuniActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
         val navGraphIds = listOf(R.navigation.home, R.navigation.settings)
-        val menuItemsIds = listOf(R.id.home, R.id.settings)
+        val menuItemsIds = listOf(R.id.home_nav, R.id.settings_nav)
         val defaultIconsIds =
             listOf(R.drawable.ic_home_unselected, R.drawable.ic_settings_unselected)
         val selectedIconsIds = listOf(R.drawable.ic_home_selected, R.drawable.ic_settings_selected)
