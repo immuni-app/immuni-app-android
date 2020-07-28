@@ -17,7 +17,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/onboarding"
+    android:id="@+id/onboarding_nav"
     app:startDestination="@id/viewPagerFragment">
 
     <include app:graph="@navigation/webview" />
@@ -54,7 +54,7 @@
 
     <action
         android:id="@+id/action_webview"
-        app:destination="@id/webview">
+        app:destination="@id/webview_nav">
         <argument
             android:name="url"
             app:argType="string"
@@ -63,7 +63,7 @@
 
     <action
         android:id="@+id/action_howitworks"
-        app:destination="@id/howitworks">
+        app:destination="@id/howitworks_nav">
         <argument
             android:name="showFaq"
             app:argType="boolean"

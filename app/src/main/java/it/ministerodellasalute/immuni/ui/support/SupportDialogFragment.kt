@@ -22,7 +22,7 @@ import android.view.View
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.SettingsDirections
+import it.ministerodellasalute.immuni.SettingsNavDirections
 import it.ministerodellasalute.immuni.extensions.utils.coloredClickable
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.gone
@@ -125,7 +125,7 @@ class SupportDialogFragment : PopupDialogFragment() {
 
         openFaq.setSafeOnClickListener {
             dismiss()
-            val action = SettingsDirections.actionFaq()
+            val action = SettingsNavDirections.actionFaq()
             findNavController().navigate(action)
         }
     }

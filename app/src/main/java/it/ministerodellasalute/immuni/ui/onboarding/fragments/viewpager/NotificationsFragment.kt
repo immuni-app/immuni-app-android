@@ -19,7 +19,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
-import it.ministerodellasalute.immuni.OnboardingDirections
+import it.ministerodellasalute.immuni.OnboardingNavDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
@@ -36,7 +36,7 @@ class NotificationsFragment :
             if (canProceed()) {
                 viewModel.onNextTap()
             } else {
-                val action = OnboardingDirections.actionNotificationSteps()
+                val action = OnboardingNavDirections.actionNotificationSteps()
                 findNavController().navigate(action)
             }
         }
