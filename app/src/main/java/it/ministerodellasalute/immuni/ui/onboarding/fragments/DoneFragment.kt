@@ -17,9 +17,7 @@ package it.ministerodellasalute.immuni.ui.onboarding.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -28,12 +26,13 @@ import it.ministerodellasalute.immuni.ui.main.MainActivity
 import it.ministerodellasalute.immuni.ui.onboarding.OnboardingViewModel
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
-class DoneFragment : Fragment() {
+class DoneFragment : Fragment(R.layout.onboarding_done_fragment) {
 
     private lateinit var viewModel: OnboardingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = getSharedViewModel()
 
         // prevent crashes for invalid state
         if (savedInstanceState != null) activity?.finish()
@@ -41,15 +40,6 @@ class DoneFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             // users must select a choice
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        viewModel = getSharedViewModel()
-        return inflater.inflate(R.layout.onboarding_done_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -16,7 +16,6 @@
 package it.ministerodellasalute.immuni.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -40,7 +39,7 @@ import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
-class HomeFragment : Fragment(),
+class HomeFragment : Fragment(R.layout.home_fragment),
     HomeClickListener {
 
     private lateinit var viewModel: MainViewModel
@@ -49,17 +48,9 @@ class HomeFragment : Fragment(),
     // so will be overridden later
     private var statusBarHeight: Int = 0
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        viewModel = getSharedViewModel()
-        return inflater.inflate(R.layout.home_fragment, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = getSharedViewModel()
         (activity as? AppCompatActivity)?.setLightStatusBarFullscreen(resources.getColor(R.color.statusBarLight))
 
         // hack to preserve the scrolling state across tab navigation

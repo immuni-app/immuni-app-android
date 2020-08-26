@@ -17,9 +17,7 @@ package it.ministerodellasalute.immuni.ui.welcome
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -34,7 +32,7 @@ import it.ministerodellasalute.immuni.ui.main.MainActivity
 import kotlinx.android.synthetic.main.welcome_fragment.*
 import org.koin.android.ext.android.inject
 
-class WelcomeFragment : Fragment() {
+class WelcomeFragment : Fragment(R.layout.welcome_fragment) {
 
     private lateinit var pageChangeCallback: ViewPager2.OnPageChangeCallback
     private val userManager: UserManager by inject()
@@ -51,14 +49,6 @@ class WelcomeFragment : Fragment() {
         if (userManager.isOnboardingComplete.value) {
             activity?.finish()
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.welcome_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
