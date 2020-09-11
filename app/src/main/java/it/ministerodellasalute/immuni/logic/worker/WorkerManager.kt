@@ -142,9 +142,12 @@ class WorkerManager(
     }
 
     fun scheduleInitialDiagnosisKeysRequest() {
+        // Use a unique work to avoid multiple workers.
+        // Use ExistingPeriodicWorkPolicy.REPLACE to ensure that the job is rescheduled
+        // as a workaround for https://issuetracker.google.com/166292069.
         enqueueDiagnosisKeysRequest(
-            ExistingWorkPolicy.KEEP,
-            delayMinutes = SecureRandom().nextInt(2 * 60).toLong()
+            ExistingWorkPolicy.REPLACE,
+            delayMinutes = 0
         )
     }
 
@@ -167,7 +170,6 @@ class WorkerManager(
                 .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
                 .setConstraints(
                     Constraints.Builder()
-                        .setRequiresBatteryNotLow(true)
                         .build()
                 )
                 .build()
