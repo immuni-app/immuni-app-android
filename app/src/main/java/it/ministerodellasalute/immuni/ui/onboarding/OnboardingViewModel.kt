@@ -71,6 +71,10 @@ class OnboardingViewModel(
         userManager.user.value?.region?.let {
             _region.value = it
         }
+
+        userManager.user.value?.province?.let {
+            _province.value = it
+        }
     }
 
     fun onPrivacyPolicyClick(fragment: Fragment) {

@@ -21,7 +21,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.addCallback
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -36,42 +35,19 @@ import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
-import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
 class HomeFragment : Fragment(),
-    HomeClickListener, ConfirmationDialogListener {
+    HomeClickListener {
 
     private lateinit var viewModel: MainViewModel
 
     // this value varies depending on device models
     // so will be overridden later
     private var statusBarHeight: Int = 0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            openConfirmationDialog(
-                positiveButton = getString(R.string.exit),
-                negativeButton = getString(R.string.cancel),
-                message = getString(R.string.app_exit_message),
-                title = getString(R.string.app_exit_title),
-                requestCode = 101
-            )
-        }
-    }
-
-    override fun onDialogNegative(requestCode: Int) {
-        // Do nothing
-    }
-
-    override fun onDialogPositive(requestCode: Int) {
-        activity?.finish()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

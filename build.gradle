@@ -4,7 +4,7 @@ buildscript {
     ext {
         // App version digits
         versionMajor = 1
-        versionMinor = 3
+        versionMinor = 4
         versionPatch = 0
 
         // Version name follows the <major>.<minor>.<patch> convention
@@ -29,7 +29,7 @@ buildscript {
 
         // App dependencies
         kotlinVersion = '1.3.72'
-        navigationVersion = "2.2.2"
+        navigationVersion = "2.3.0"
         koinVersion = "2.1.4"
         moshiVersion = "1.8.0"
         retrofitVersion = "2.6.1"

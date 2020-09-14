@@ -34,6 +34,7 @@ import java.util.*
 import org.koin.core.KoinComponent
 
 class AppNotificationManager(val context: Context) : KoinComponent {
+
     companion object {
         const val CHANNEL_ID = "exposure_notification"
         const val DEBUG_CHANNEL_ID = "debug_channel"
@@ -192,6 +193,18 @@ class AppNotificationManager(val context: Context) : KoinComponent {
             val androidNotificationManager = NotificationManagerCompat.from(context)
             androidNotificationManager.createNotificationChannel(channel)
         }
+    }
+
+    fun fetchKeysForegroundNotification(): Notification {
+        createExposureNotificationChannel()
+        return NotificationCompat.Builder(context, CHANNEL_ID)
+            .setContentTitle(context.getString(R.string.app_name))
+            .setTicker(context.getString(R.string.app_name))
+            .setContentText(context.getString(R.string.home_view_service_active_title))
+            .setSmallIcon(R.drawable.ic_notification_app)
+            .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            .setOngoing(true)
+            .build()
     }
 
     /**
