@@ -26,6 +26,7 @@ import android.os.Build
 import android.text.format.DateFormat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.NotificationManagerCompat.IMPORTANCE_LOW
 import androidx.core.content.ContextCompat
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.ui.main.MainActivity
@@ -37,6 +38,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
 
     companion object {
         const val CHANNEL_ID = "exposure_notification"
+        const val FOREGROUND_SERVICE_CHANNEL_ID = "fetch_teks_foreground_service"
         const val DEBUG_CHANNEL_ID = "debug_channel"
         private var DEBUG_ID = 0
         const val GROUP_ID = 20000
@@ -170,9 +172,20 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         createChannel(id = CHANNEL_ID, name = channelName)
     }
 
+    private fun createForegroundServiceChannel() {
+        val channelName = context.getString(R.string.app_name)
+        createChannel(
+            id = FOREGROUND_SERVICE_CHANNEL_ID, name = channelName, mute = true, showBadge = false,
+            importance = IMPORTANCE_LOW
+        )
+    }
+
     private fun createDebugChannel() {
         val channelName = "Immuni - Debug"
-        createChannel(id = DEBUG_CHANNEL_ID, name = channelName, mute = true, showBadge = false)
+        createChannel(
+            id = DEBUG_CHANNEL_ID, name = channelName, mute = true, showBadge = false,
+            importance = IMPORTANCE_LOW
+        )
     }
 
     private fun createChannel(
@@ -196,14 +209,18 @@ class AppNotificationManager(val context: Context) : KoinComponent {
     }
 
     fun fetchKeysForegroundNotification(): Notification {
-        createExposureNotificationChannel()
-        return NotificationCompat.Builder(context, CHANNEL_ID)
+        createForegroundServiceChannel()
+        return NotificationCompat.Builder(context, FOREGROUND_SERVICE_CHANNEL_ID)
             .setContentTitle(context.getString(R.string.app_name))
             .setTicker(context.getString(R.string.app_name))
             .setContentText(context.getString(R.string.home_view_service_active_title))
             .setSmallIcon(R.drawable.ic_notification_app)
+            .setOnlyAlertOnce(true)
             .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
             .setOngoing(true)
+            .setSound(null)
+            .setVibrate(longArrayOf(0L))
+            .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)
             .build()
     }
 
