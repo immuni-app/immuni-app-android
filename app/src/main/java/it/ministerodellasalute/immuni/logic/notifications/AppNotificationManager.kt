@@ -213,7 +213,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         return NotificationCompat.Builder(context, FOREGROUND_SERVICE_CHANNEL_ID)
             .setContentTitle(context.getString(R.string.app_name))
             .setTicker(context.getString(R.string.app_name))
-            .setContentText(context.getString(R.string.home_view_service_active_title))
+            .setContentText(context.getString(R.string.exposure_check_in_progress))
             .setSmallIcon(R.drawable.ic_notification_app)
             .setOnlyAlertOnce(true)
             .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
