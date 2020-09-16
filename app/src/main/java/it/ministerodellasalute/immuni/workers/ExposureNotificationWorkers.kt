@@ -17,7 +17,6 @@ package it.ministerodellasalute.immuni.workers
 
 import android.content.Context
 import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
@@ -73,18 +72,7 @@ class RequestDiagnosisKeysWorker(
     private val settingsManager: ConfigurationSettingsManager by inject()
     private val notificationManager: AppNotificationManager by inject()
 
-    private val NOTIFICATION_FETCH_ID = 10001
-
     override suspend fun doWork(): Result {
-
-        // Make the worker run in a Foreground Service to reduce the chance of falling into the rare bucket
-        // https://developer.android.com/topic/performance/appstandby#rare-bucket
-        setForeground(
-            ForegroundInfo(
-                NOTIFICATION_FETCH_ID,
-                notificationManager.fetchKeysForegroundNotification()
-            )
-        )
 
         // DEBUG notification
         if (applicationContext.resources.getBoolean(R.bool.development_device)) {
