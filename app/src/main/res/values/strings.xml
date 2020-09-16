@@ -370,4 +370,5 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="support_info_item_lastencheck_none">None</string>
   <string name="support_info_item_lastencheck_date" formatted="false">%@ at %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s at %2$s</string>
+  <string name="exposure_check_in_progress">Exposure check in progress</string>
 </resources>

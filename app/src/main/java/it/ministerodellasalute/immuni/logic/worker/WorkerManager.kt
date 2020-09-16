@@ -48,7 +48,7 @@ class WorkerManager(
 
     private val settings get() = settingsManager.settings.value
 
-    fun scheduleOnboardingNotCompletedWorker(policy: ExistingWorkPolicy = ExistingWorkPolicy.KEEP) {
+    fun scheduleOnboardingNotCompletedWorker(policy: ExistingWorkPolicy = ExistingWorkPolicy.REPLACE) {
         workManager.enqueueUniqueWork(
             "OnboardingNotCompletedWorker",
             policy,
@@ -73,7 +73,7 @@ class WorkerManager(
         val delay = settings.requiredUpdateNotificationPeriod.toLong()
         workManager.enqueueUniqueWork(
             "ForceUpdateNotificationWorker",
-            ExistingWorkPolicy.KEEP,
+            ExistingWorkPolicy.REPLACE,
             OneTimeWorkRequest.Builder(ForceUpdateNotificationWorker::class.java)
                 .setInitialDelay(
                     if (withDelay) delay else 0,
@@ -117,7 +117,7 @@ class WorkerManager(
 
     fun updateRiskReminderWorker(exposureStatus: ExposureStatus) {
         if (exposureStatus is ExposureStatus.Exposed && !exposureStatus.acknowledged) {
-            scheduleRiskReminderWorker(ExistingWorkPolicy.KEEP)
+            scheduleRiskReminderWorker(ExistingWorkPolicy.REPLACE)
         } else {
             cancelRiskReminderWorker()
         }
