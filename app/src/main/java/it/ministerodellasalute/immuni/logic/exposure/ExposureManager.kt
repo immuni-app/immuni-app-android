@@ -57,6 +57,8 @@ class ExposureManager(
 
     val lastSuccessfulCheckDate = exposureReportingRepository.lastSuccessfulCheckDate
 
+    fun deviceSupportsLocationlessScanning() = exposureNotificationManager.deviceSupportsLocationlessScanning()
+
     suspend fun updateAndGetServiceIsActive(): Boolean {
         exposureNotificationManager.update()
         return exposureNotificationManager.areExposureNotificationsEnabled.value ?: false

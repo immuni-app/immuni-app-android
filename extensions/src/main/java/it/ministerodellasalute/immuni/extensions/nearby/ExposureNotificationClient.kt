@@ -103,6 +103,8 @@ interface ExposureNotificationClient {
 
     suspend fun isEnabled(): Boolean
 
+    fun deviceSupportsLocationlessScanning(): Boolean
+
     suspend fun getTemporaryExposureKeyHistory(): List<TemporaryExposureKey>
 
     suspend fun provideDiagnosisKeys(
