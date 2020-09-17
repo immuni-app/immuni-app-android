@@ -15,24 +15,4 @@
 
 package it.ministerodellasalute.immuni.ui.dialog
 
-import android.os.Build
-import android.os.Bundle
-import android.view.View
-import it.ministerodellasalute.immuni.R
-
-abstract class BottomSheetDialogDarkFragment : BottomSheetDialogLightFragment() {
-
-    // dark theme, but with light navigation bar
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            dialog?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                    View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-            dialog?.window?.statusBarColor = resources.getColor(R.color.transparent)
-        } else {
-            dialog?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            dialog?.window?.statusBarColor = resources.getColor(R.color.transparent)
-        }
-    }
-}
+abstract class BottomSheetDialogDarkFragment : BottomSheetDialogLightFragment()

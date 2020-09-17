@@ -4,8 +4,8 @@ buildscript {
     ext {
         // App version digits
         versionMajor = 1
-        versionMinor = 4
-        versionPatch = 1
+        versionMinor = 5
+        versionPatch = 0
 
         // Version name follows the <major>.<minor>.<patch> convention
         computeVersionName = { ->
@@ -22,7 +22,7 @@ buildscript {
         versionCode = computeVersionCode()
 
         // SDK and tools
-        compileSdkVersion = 29
+        compileSdkVersion = 30
         minSdkVersion = 23
         targetSdkVersion = 29
         buildToolsVersion = "29.0.3"

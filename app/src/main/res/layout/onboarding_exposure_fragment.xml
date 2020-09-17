@@ -65,12 +65,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:text="@string/onboarding_exposure_permission_description"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintBottom_toTopOf="@+id/extendedMessage"
                 app:layout_constraintEnd_toEndOf="@+id/title"
                 app:layout_constraintStart_toStartOf="@+id/title" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/extendedMessage"
                 style="@style/P1Text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

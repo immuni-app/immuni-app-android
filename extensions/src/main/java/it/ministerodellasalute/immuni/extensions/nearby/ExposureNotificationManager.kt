@@ -19,6 +19,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
+import android.os.Build
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.nearby.Nearby
 import com.google.android.gms.nearby.exposurenotification.ExposureNotificationStatusCodes
@@ -26,6 +27,7 @@ import it.ministerodellasalute.immuni.extensions.bluetooth.BluetoothStateFlow
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.extensions.location.LocationStateFlow
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient.*
+import it.ministerodellasalute.immuni.extensions.utils.DeviceUtils
 import it.ministerodellasalute.immuni.extensions.utils.log
 import java.io.File
 import java.util.*
@@ -87,8 +89,12 @@ class ExposureNotificationManager(
             log("isLocationActive $isLocationActive")
             log("isBluetoothActive $isBluetoothActive")
             log("areExposureNotificationsEnabled $areExposureNotificationsEnabled")
-            if (areExposureNotificationsEnabled == null) null
-            else isLocationActive && isBluetoothActive && (areExposureNotificationsEnabled == true)
+            when {
+                areExposureNotificationsEnabled == null -> null
+                // EN on Android 11 don't require active location
+                DeviceUtils.androidVersionAPI >= Build.VERSION_CODES.R -> isBluetoothActive && (areExposureNotificationsEnabled == true)
+                else -> isLocationActive && isBluetoothActive && (areExposureNotificationsEnabled == true)
+            }
         }.conflate().onEach {
             _isBroadcastingActive.value = it
         }.launchIn(scope)

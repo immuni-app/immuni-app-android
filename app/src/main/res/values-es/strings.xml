@@ -374,4 +374,5 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="support_info_item_lastencheck_none">Ninguna</string>
   <string name="support_info_item_lastencheck_date" formatted="false">%@ a las %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s a las %2$s</string>
+    <string name="exposure_check_in_progress">Control de las posibles exposiciones en curso</string>
 </resources>

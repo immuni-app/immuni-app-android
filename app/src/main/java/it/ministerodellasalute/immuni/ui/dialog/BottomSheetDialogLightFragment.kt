@@ -15,52 +15,22 @@
 
 package it.ministerodellasalute.immuni.ui.dialog
 
-import android.app.Dialog
 import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.LayerDrawable
-import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.View
-import android.view.Window
 import android.widget.FrameLayout
-import androidx.core.graphics.drawable.toDrawable
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 
 abstract class BottomSheetDialogLightFragment : BottomSheetDialogFragment() {
 
     protected val bottomSheetBehavior: BottomSheetBehavior<FrameLayout>?
         get() = (dialog as? BottomSheetDialog)?.behavior
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            setLightNavigationBar(dialog)
-        }
-        return dialog
-    }
-
-    // navigation bar color
-    private fun setLightNavigationBar(dialog: Dialog?) {
-        val window: Window? = dialog?.window
-        if (window != null) {
-            val metrics = DisplayMetrics()
-            window.windowManager.defaultDisplay.getMetrics(metrics)
-            val dimDrawable = requireContext().getColorCompat(R.color.popup_mask).toDrawable()
-            val navigationBarDrawable = GradientDrawable()
-            navigationBarDrawable.shape = GradientDrawable.RECTANGLE
-            navigationBarDrawable.setColor(requireContext().resources.getColor(R.color.background))
-            val layers = arrayOf<Drawable>(dimDrawable, navigationBarDrawable)
-            val windowBackground = LayerDrawable(layers)
-            windowBackground.setLayerInsetTop(1, metrics.heightPixels)
-            window.setBackgroundDrawable(windowBackground)
-        }
+    override fun getTheme(): Int {
+        return R.style.Widget_AppTheme_BottomSheet
     }
 
     // force state expanded on open
@@ -75,20 +45,5 @@ abstract class BottomSheetDialogLightFragment : BottomSheetDialogFragment() {
                 BottomSheetBehavior.from(bottomSheet!!)
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
-    }
-
-    // light theme
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            dialog?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or
-                View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-        } else {
-            dialog?.window?.decorView?.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        }
-        dialog?.window?.statusBarColor = resources.getColor(R.color.transparent)
     }
 }
