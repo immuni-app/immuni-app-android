@@ -249,11 +249,11 @@ commands:
           name: "[pr_setup] Install ktlint"
           command: |
             # Get binaries from official repository
-            curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.36.0/ktlint && chmod a+x ktlint
+            curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.39.0/ktlint && chmod a+x ktlint
 
             # Verify PGP signature
-            curl -sS https://keybase.io/pinterestandroid/pgp_keys.asc | sudo gpg --import
-            curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.36.0/ktlint.asc
+            curl -sS https://keybase.io/ktlint/pgp_keys.asc | sudo gpg --import
+            curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.39.0/ktlint.asc
             sudo gpg --verify ktlint.asc
 
             # Install globally
