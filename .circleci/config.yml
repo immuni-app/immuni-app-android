@@ -438,7 +438,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - development
     jobs:
       - scheduler:
           context: scheduler
