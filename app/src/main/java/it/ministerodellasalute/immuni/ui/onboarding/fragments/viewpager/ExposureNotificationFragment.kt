@@ -15,12 +15,14 @@
 
 package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.utils.DeviceUtils
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
 import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
@@ -64,8 +66,14 @@ class ExposureNotificationFragment :
         }
 
         knowMore.setSafeOnClickListener {
-            val action = ViewPagerFragmentDirections.actionLocalisationExplanation()
-            findNavController().navigate(action)
+            // EN on Android 11 don't require active location
+            if (DeviceUtils.androidVersionAPI >= Build.VERSION_CODES.R) {
+                val action = ViewPagerFragmentDirections.actionHowitworks(false)
+                findNavController().navigate(action)
+            } else {
+                val action = ViewPagerFragmentDirections.actionLocalisationExplanation()
+                findNavController().navigate(action)
+            }
         }
 
         setupImage(R.raw.lottie_notifications_05, R.drawable.ic_onboarding_exposure)
