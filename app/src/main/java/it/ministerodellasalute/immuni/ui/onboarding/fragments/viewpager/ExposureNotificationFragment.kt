@@ -23,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.DeviceUtils
+import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
 import kotlinx.android.synthetic.main.onboarding_exposure_fragment.*
@@ -78,6 +79,14 @@ class ExposureNotificationFragment :
 
         setupImage(R.raw.lottie_notifications_05, R.drawable.ic_onboarding_exposure)
         checkSpacing()
+        checkLocalisationRequired()
+    }
+
+    private fun checkLocalisationRequired() {
+        // EN on Android 11 don't require active location
+        if (DeviceUtils.androidVersionAPI >= Build.VERSION_CODES.R) {
+            extendedMessage.gone()
+        }
     }
 
     private fun navigateNext() {
