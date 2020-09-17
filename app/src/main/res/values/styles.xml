@@ -74,6 +74,11 @@
         <item name="android:background">@drawable/bottom_sheet_rounded</item>
     </style>
 
+    <style name="Widget.AppTheme.BottomSheet" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:navigationBarColor">@color/background</item>
+    </style>
+
     <style name="ShapeAppearance.AppTheme.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10dp</item>
