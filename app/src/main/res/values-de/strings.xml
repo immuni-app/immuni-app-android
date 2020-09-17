@@ -372,4 +372,5 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="support_info_item_lastencheck_none">Keine</string>
   <string name="support_info_item_lastencheck_date" formatted="false">%@ um %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s um %2$s</string>
+    <string name="exposure_check_in_progress">Kontrolle potenzieller Expositionen im Gange</string>
 </resources>
