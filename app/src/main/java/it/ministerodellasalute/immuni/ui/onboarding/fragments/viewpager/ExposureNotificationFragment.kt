@@ -15,14 +15,12 @@
 
 package it.ministerodellasalute.immuni.ui.onboarding.fragments.viewpager
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.utils.DeviceUtils
 import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.onboarding.fragments.ViewPagerFragmentDirections
@@ -68,7 +66,7 @@ class ExposureNotificationFragment :
 
         knowMore.setSafeOnClickListener {
             // EN on Android 11 don't require active location
-            if (DeviceUtils.androidVersionAPI >= Build.VERSION_CODES.R) {
+            if (viewModel.deviceSupportsLocationlessScanning) {
                 val action = ViewPagerFragmentDirections.actionHowitworks(false)
                 findNavController().navigate(action)
             } else {
@@ -84,7 +82,7 @@ class ExposureNotificationFragment :
 
     private fun checkLocalisationRequired() {
         // EN on Android 11 don't require active location
-        if (DeviceUtils.androidVersionAPI >= Build.VERSION_CODES.R) {
+        if (viewModel.deviceSupportsLocationlessScanning) {
             extendedMessage.gone()
         }
     }

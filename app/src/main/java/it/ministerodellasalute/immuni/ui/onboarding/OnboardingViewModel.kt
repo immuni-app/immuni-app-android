@@ -94,6 +94,9 @@ class OnboardingViewModel(
     val isOnboardingComplete
         get() = userManager.isOnboardingComplete.value
 
+    val deviceSupportsLocationlessScanning
+        get() = exposureManager.deviceSupportsLocationlessScanning()
+
     fun completeOnboarding() {
         userManager.setOnboardingComplete(true)
     }

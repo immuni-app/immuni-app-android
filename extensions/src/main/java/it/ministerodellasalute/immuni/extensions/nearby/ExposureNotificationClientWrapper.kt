@@ -34,6 +34,8 @@ class ExposureNotificationClientWrapper(
         client.stop().await()
     }
 
+    override fun deviceSupportsLocationlessScanning(): Boolean = client.deviceSupportsLocationlessScanning()
+
     override suspend fun isEnabled(): Boolean = client.isEnabled.await()
 
     override suspend fun getTemporaryExposureKeyHistory(): List<ExposureNotificationClient.TemporaryExposureKey> {
