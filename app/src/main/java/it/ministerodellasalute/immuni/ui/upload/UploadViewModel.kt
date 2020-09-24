@@ -38,6 +38,9 @@ class UploadViewModel(
     private val _uploadSuccess = MutableLiveData<Event<Boolean>>()
     val uploadSuccess: LiveData<Event<Boolean>> = _uploadSuccess
 
+    private val _uploadEuFinish = MutableLiveData<Event<Boolean>>()
+    val uploadEuFinish: LiveData<Event<Boolean>> = _uploadEuFinish
+
     val hasExposureSummaries = exposureManager.hasSummaries
 
     private val job = Job()
@@ -62,25 +65,21 @@ class UploadViewModel(
         }
     }
 
-    fun uploadEu(activity: Activity, token: OtpToken): Deferred<Boolean> {
-        return scope.async {
-            var isSuccess = false
-            viewModelScope.launch {
-                _loading.value = true
-                delay(1000)
-                try {
-                    isSuccess = exposureManager.uploadTeksEu(activity, token)
-                    if (!isSuccess) {
-                        _uploadError.value = Event(true)
-                    }
-                } catch (e: Exception) {
+    fun uploadEu(activity: Activity, token: OtpToken) {
+        viewModelScope.launch {
+            _loading.value = true
+            delay(1000)
+            try {
+                val isSuccess = exposureManager.uploadTeksEu(activity, token)
+                if (!isSuccess) {
                     _uploadError.value = Event(true)
-                    e.printStackTrace()
                 }
-                _loading.value = false
+                _uploadEuFinish.value = Event(isSuccess)
+            } catch (e: Exception) {
+                _uploadError.value = Event(true)
+                e.printStackTrace()
             }
-            isSuccess
+            _loading.value = false
         }
-
     }
 }
