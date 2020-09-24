@@ -33,9 +33,11 @@ import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.ui.otp.OtpToken
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
-import kotlin.math.abs
 import kotlinx.android.synthetic.main.upload_data_fragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import kotlin.math.abs
 
 class UploadDataFragment : Fragment(R.layout.upload_data_fragment), ConfirmationDialogListener {
 
@@ -66,7 +68,9 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
         })
 
         upload.setSafeOnClickListener {
-            uploadOtp()
+            GlobalScope.launch {
+                uploadOtp()
+            }
         }
 
         back.setSafeOnClickListener {
@@ -81,7 +85,10 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
 
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             (activity as? AppCompatActivity)?.loading(it, ProgressDialogFragment(), Bundle().apply {
-                putString(ProgressDialogFragment.MESSAGE, getString(R.string.upload_data_send_data_loading))
+                putString(
+                    ProgressDialogFragment.MESSAGE,
+                    getString(R.string.upload_data_send_data_loading)
+                )
             })
         })
 
@@ -104,8 +111,12 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
         })
     }
 
-    private fun uploadOtp() {
-        viewModel.upload(requireActivity(), token.toLogic())
+    private suspend fun uploadOtp() {
+
+        var isSuccess = viewModel.uploadEu(requireActivity(), token.toLogic()).await()
+        if (isSuccess) {
+            viewModel.upload(requireActivity(), token.toLogic())
+        }
     }
 
     private fun onDismiss() {
@@ -128,7 +139,9 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
             activity?.finish()
         }
         if (requestCode == ALERT_REQUEST_ERROR) {
-            uploadOtp()
+            GlobalScope.launch {
+                uploadOtp()
+            }
         }
     }
 

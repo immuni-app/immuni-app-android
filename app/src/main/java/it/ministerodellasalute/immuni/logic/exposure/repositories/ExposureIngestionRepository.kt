@@ -80,6 +80,26 @@ class ExposureIngestionRepository(
         } is NetworkResource.Success
     }
 
+    suspend fun uploadTeksEu(
+        token: OtpToken,
+        tekHistory: List<ExposureIngestionService.TemporaryExposureKey>,
+        exposureSummaries: List<ExposureIngestionService.ExposureSummary>,
+        countries: List<String>
+    ): Boolean {
+        return immuniApiCall {
+            exposureIngestionService.uploadTeksEu(
+                systemTime = Date().time.div(1000).toInt(),
+                authorization = authorization(token.otp),
+                isDummyData = 0,
+                body = ExposureIngestionService.UploadTeksEuRequest(
+                    teks = tekHistory,
+                    exposureSummaries = exposureSummaries,
+                    country = countries
+                )
+            )
+        } is NetworkResource.Success
+    }
+
     suspend fun dummyUpload(): Boolean {
         return immuniApiCall {
             exposureIngestionService.validateOtp(

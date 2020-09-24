@@ -53,12 +53,29 @@ interface ExposureIngestionService {
         @field:Json(name = "padding") override val padding: String = ""
     ) : RequestWithPadding
 
+    // region: Upload Teks EU
+    @JsonClass(generateAdapter = true)
+    data class UploadTeksEuRequest(
+        @field:Json(name = "teks") val teks: List<TemporaryExposureKey>,
+        @field:Json(name = "exposure_detection_summaries") val exposureSummaries: List<ExposureSummary>,
+        @field:Json(name = "padding") override val padding: String = "",
+        @field:Json(name = "countries_of_interest") val country: List<String>
+    ) : RequestWithPadding
+
     @POST("/v1/ingestion/upload")
     suspend fun uploadTeks(
         @Header("Authorization") authorization: String,
         @Header("Immuni-Client-Clock") systemTime: Int,
         @Header("Immuni-Dummy-Data") isDummyData: Int,
         @Body body: UploadTeksRequest
+    ): Response<ResponseBody>
+
+    @POST("/v1/ingestion/upload")
+    suspend fun uploadTeksEu(
+        @Header("Authorization") authorization: String,
+        @Header("Immuni-Client-Clock") systemTime: Int,
+        @Header("Immuni-Dummy-Data") isDummyData: Int,
+        @Body body: UploadTeksEuRequest
     ): Response<ResponseBody>
     // endregion
 
@@ -398,5 +415,54 @@ interface ExposureIngestionService {
             }
         }
     }
+
     // endregion
+
+    /**
+     * Countries EU
+     */
+    enum class Country(val code: String, val fullName: String) {
+        austria("AT", "Austria"),
+        belgio("BE", "Belgio"),
+        bulgaria("BG", "Bulgaria"),
+        cipro("CY", "Cipro"),
+        croazia("HR", "Croazia"),
+        danimarca("DK", "Danimarca"),
+        estonia("EE", "Estonia"),
+        finlandia("FI", "Finlandia"),
+        francia("FR", "Francia"),
+        germania("DE", "Germania"),
+        grecia("GR", "Grecia"),
+        irlanda("IE", "Irlanda"),
+        lettonia("LV", "Lettonia"),
+        lituania("LT", "Lituania"),
+        lussemburgo("LU", "Lussemburgo"),
+        malta("MT", "Malta"),
+        paesiBassi("AL", "Paesi Bassi"),
+        polonia("NL", "Polonia"),
+        portogallo("PT", "Portogallo"),
+        repubblicaCeca("CZ", "Repubblica Ceca"),
+        romania("RO", "Romania"),
+        slovacchia("SK", "Slovacchia"),
+        slovenia("SI", "Slovenia"),
+        spagna("ES", "Spagna"),
+        svezia("SE", "Svezia"),
+        ungheria("HU", "Ungheria");
+
+        companion object {
+            fun fromCode(code: String) = values().first { country -> country.code == code }
+        }
+
+        class MoshiAdapter : JsonAdapter<Country>() {
+            override fun fromJson(reader: JsonReader): Country? {
+                return fromCode(
+                    reader.nextString()
+                )
+            }
+
+            override fun toJson(writer: JsonWriter, value: Country?) {
+                writer.value(value?.code)
+            }
+        }
+    }
 }

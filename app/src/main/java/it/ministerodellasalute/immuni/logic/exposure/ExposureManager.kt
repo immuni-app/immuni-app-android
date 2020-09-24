@@ -24,16 +24,18 @@ import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
-import it.ministerodellasalute.immuni.logic.exposure.repositories.*
+import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
+import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
+import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureStatusRepository
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.models.ConfigurationSettings
 import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
+import kotlinx.coroutines.flow.StateFlow
 import java.io.File
 import java.util.*
 import kotlin.math.max
-import kotlinx.coroutines.flow.*
 
 class ExposureManager(
     private val settingsManager: ConfigurationSettingsManager,
@@ -57,7 +59,8 @@ class ExposureManager(
 
     val lastSuccessfulCheckDate = exposureReportingRepository.lastSuccessfulCheckDate
 
-    fun deviceSupportsLocationlessScanning() = exposureNotificationManager.deviceSupportsLocationlessScanning()
+    fun deviceSupportsLocationlessScanning() =
+        exposureNotificationManager.deviceSupportsLocationlessScanning()
 
     suspend fun updateAndGetServiceIsActive(): Boolean {
         exposureNotificationManager.update()
@@ -199,6 +202,27 @@ class ExposureManager(
             province = userRepository.user.value!!.province,
             tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
             exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate)
+        )
+
+        if (isSuccess) {
+            exposureStatusRepository.setExposureStatus(ExposureStatus.Positive())
+        }
+
+        return isSuccess
+    }
+
+    suspend fun uploadTeksEu(activity: Activity, token: OtpToken): Boolean {
+        val tekHistory = requestTekHistory(activity)
+
+        val exposureSummaries = exposureReportingRepository.getSummaries()
+
+        val countriesOfInterest = exposureReportingRepository.getCountriesOfInterest()
+
+        val isSuccess = exposureIngestionRepository.uploadTeksEu(
+            token = token,
+            tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
+            exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate),
+            countries = countriesOfInterest
         )
 
         if (isSuccess) {
