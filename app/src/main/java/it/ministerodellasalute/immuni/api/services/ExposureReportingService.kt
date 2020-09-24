@@ -32,7 +32,17 @@ interface ExposureReportingService {
     @GET("/v1/keys/index")
     suspend fun index(): Response<IndexResponse>
 
+    @GET("/v1/keyseu/index/{Country}")
+    suspend fun indexEu(@Path("Country") country: String): Response<IndexResponse>
+
     @Streaming
     @GET("/v1/keys/{chunkNumber}")
     suspend fun chunk(@Path("chunkNumber") chunkNumber: Int): Response<ResponseBody>
+
+    @Streaming
+    @GET("/v1/keyseu/{Country}/{TEKChunkIndex}")
+    suspend fun chunkEu(
+        @Path("Country") country: String,
+        @Path("TEKChunkIndex") chunkNumber: Int
+    ): Response<ResponseBody>
 }

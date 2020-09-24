@@ -86,6 +86,7 @@ class ImmuniApplication : Application(), KoinComponent {
         updateForceUpdateNotificationWorker()
         updateRiskReminderWorker()
         updateInitialDiagnosisKeysRequest()
+        updateInitialDiagnosisEuKeysRequest()
         updateNotificationsCleanerWorker()
         log("Workers successfully started")
     }
@@ -143,4 +144,13 @@ class ImmuniApplication : Application(), KoinComponent {
             workerManager.scheduleInitialDiagnosisKeysRequest()
         }.launchIn(scope)
     }
+
+    private fun updateInitialDiagnosisEuKeysRequest() {
+        val scope = CoroutineScope(Dispatchers.Default)
+
+        userManager.isOnboardingComplete.filter { it }.onEach {
+            workerManager.scheduleInitialDiagnosisEuKeysRequest()
+        }.launchIn(scope)
+    }
+
 }

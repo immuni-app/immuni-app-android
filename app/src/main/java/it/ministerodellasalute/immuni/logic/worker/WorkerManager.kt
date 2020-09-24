@@ -151,8 +151,22 @@ class WorkerManager(
         )
     }
 
+    fun scheduleInitialDiagnosisEuKeysRequest() {
+        enqueueDiagnosisEuKeysRequest(
+            ExistingWorkPolicy.REPLACE,
+            delayMinutes = 0
+        )
+    }
+
     fun scheduleNextDiagnosisKeysRequest() {
         enqueueDiagnosisKeysRequest(
+            ExistingWorkPolicy.REPLACE,
+            delayMinutes = settings.exposureDetectionPeriod.toLong() / 60
+        )
+    }
+
+    fun scheduleNextDiagnosisEuKeysRequest() {
+        enqueueDiagnosisEuKeysRequest(
             ExistingWorkPolicy.REPLACE,
             delayMinutes = settings.exposureDetectionPeriod.toLong() / 60
         )
@@ -167,6 +181,20 @@ class WorkerManager(
             "RequestDiagnosisKeysWorker",
             policy,
             OneTimeWorkRequest.Builder(RequestDiagnosisKeysWorker::class.java)
+                .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
+                .setConstraints(
+                    Constraints.Builder()
+                        .build()
+                )
+                .build()
+        )
+    }
+
+    private fun enqueueDiagnosisEuKeysRequest(policy: ExistingWorkPolicy, delayMinutes: Long = 0) {
+        workManager.enqueueUniqueWork(
+            "RequestDiagnosisEuKeysWorker",
+            policy,
+            OneTimeWorkRequest.Builder(RequestDiagnosisEuKeysWorker::class.java)
                 .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
                 .setConstraints(
                     Constraints.Builder()
