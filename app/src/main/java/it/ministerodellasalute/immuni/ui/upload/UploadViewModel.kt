@@ -23,7 +23,8 @@ import androidx.lifecycle.viewModelScope
 import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class UploadViewModel(
     private val exposureManager: ExposureManager
@@ -38,13 +39,7 @@ class UploadViewModel(
     private val _uploadSuccess = MutableLiveData<Event<Boolean>>()
     val uploadSuccess: LiveData<Event<Boolean>> = _uploadSuccess
 
-    private val _uploadEuFinish = MutableLiveData<Event<Boolean>>()
-    val uploadEuFinish: LiveData<Event<Boolean>> = _uploadEuFinish
-
     val hasExposureSummaries = exposureManager.hasSummaries
-
-    private val job = Job()
-    private val scope = CoroutineScope(Dispatchers.Default + job)
 
     fun upload(activity: Activity, token: OtpToken) {
         viewModelScope.launch {
@@ -65,21 +60,4 @@ class UploadViewModel(
         }
     }
 
-    fun uploadEu(activity: Activity, token: OtpToken) {
-        viewModelScope.launch {
-            _loading.value = true
-            delay(1000)
-            try {
-                val isSuccess = exposureManager.uploadTeksEu(activity, token)
-                if (!isSuccess) {
-                    _uploadError.value = Event(true)
-                }
-                _uploadEuFinish.value = Event(isSuccess)
-            } catch (e: Exception) {
-                _uploadError.value = Event(true)
-                e.printStackTrace()
-            }
-            _loading.value = false
-        }
-    }
 }
