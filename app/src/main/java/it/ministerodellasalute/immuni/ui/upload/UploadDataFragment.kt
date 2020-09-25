@@ -109,14 +109,18 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
                 )
             }
         })
+
+        viewModel.uploadEuFinish.observe(viewLifecycleOwner, Observer { event ->
+            event.getContentIfNotHandled().let {
+                if (it!!) {
+                    viewModel.upload(requireActivity(), token.toLogic())
+                }
+            }
+        })
     }
 
-    private suspend fun uploadOtp() {
-
-        var isSuccess = viewModel.uploadEu(requireActivity(), token.toLogic()).await()
-        if (isSuccess) {
-            viewModel.upload(requireActivity(), token.toLogic())
-        }
+    private fun uploadOtp() {
+        viewModel.uploadEu(requireActivity(), token.toLogic())
     }
 
     private fun onDismiss() {
