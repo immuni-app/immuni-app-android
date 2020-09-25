@@ -55,11 +55,12 @@ interface ExposureIngestionService {
 
     // region: Upload Teks EU
     @JsonClass(generateAdapter = true)
-    data class UploadTeksEuRequest(
+    data class UploadTeksWithEuRequest(
         @field:Json(name = "teks") val teks: List<TemporaryExposureKey>,
+        @field:Json(name = "province") val province: Province,
         @field:Json(name = "exposure_detection_summaries") val exposureSummaries: List<ExposureSummary>,
         @field:Json(name = "padding") override val padding: String = "",
-        @field:Json(name = "countries_of_interest") val country: List<String>
+        @field:Json(name = "countries_of_interest") val countries: List<String>
     ) : RequestWithPadding
 
     @POST("/v1/ingestion/upload")
@@ -75,7 +76,7 @@ interface ExposureIngestionService {
         @Header("Authorization") authorization: String,
         @Header("Immuni-Client-Clock") systemTime: Int,
         @Header("Immuni-Dummy-Data") isDummyData: Int,
-        @Body body: UploadTeksEuRequest
+        @Body body: UploadTeksWithEuRequest
     ): Response<ResponseBody>
     // endregion
 

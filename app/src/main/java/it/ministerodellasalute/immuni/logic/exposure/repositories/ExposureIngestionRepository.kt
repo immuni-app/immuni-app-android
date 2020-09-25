@@ -82,6 +82,7 @@ class ExposureIngestionRepository(
 
     suspend fun uploadTeksEu(
         token: OtpToken,
+        province: Province,
         tekHistory: List<ExposureIngestionService.TemporaryExposureKey>,
         exposureSummaries: List<ExposureIngestionService.ExposureSummary>,
         countries: List<String>
@@ -91,10 +92,11 @@ class ExposureIngestionRepository(
                 systemTime = Date().time.div(1000).toInt(),
                 authorization = authorization(token.otp),
                 isDummyData = 0,
-                body = ExposureIngestionService.UploadTeksEuRequest(
+                body = ExposureIngestionService.UploadTeksWithEuRequest(
                     teks = tekHistory,
+                    province = province,
                     exposureSummaries = exposureSummaries,
-                    country = countries
+                    countries = countries
                 )
             )
         } is NetworkResource.Success
