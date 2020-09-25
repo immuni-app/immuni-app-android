@@ -39,6 +39,8 @@ class ExposureReportingRepository(
         private val lastSuccessfulCheckDateKey = KVStorage.Key<Date>("LastSuccessfulCheckDate")
         private val countriesOfInterestKey =
             KVStorage.Key<CountryOfInterestList>("CountriesOfInterest")
+//        private val countriesOfInterest =
+//            KVStorage.Key<CountriesOfInterestList>("countriesOfInterest")
     }
 
     fun getSummaries(): List<ExposureSummary> {
@@ -97,4 +99,12 @@ class ExposureReportingRepository(
     fun setLastSuccessfulCheckDate(value: Date) {
         storage[lastSuccessfulCheckDateKey] = value
     }
+
+//    fun getCountriesOfInterest(): List<String> {
+//        return storage[countriesOfInterest]?.values ?: listOf()
+//    }
+//
+//    fun setCountriesOfInterest(value: List<String>) {
+//        storage[countriesOfInterest] = CountriesOfInterestList(value)
+//    }
 }

@@ -16,11 +16,13 @@
 package it.ministerodellasalute.immuni.ui.upload
 
 import android.app.Activity
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
-import java.lang.Exception
 import kotlinx.coroutines.*
 
 class UploadViewModel(
@@ -37,6 +39,9 @@ class UploadViewModel(
     val uploadSuccess: LiveData<Event<Boolean>> = _uploadSuccess
 
     val hasExposureSummaries = exposureManager.hasSummaries
+
+    private val job = Job()
+    private val scope = CoroutineScope(Dispatchers.Default + job)
 
     fun upload(activity: Activity, token: OtpToken) {
         viewModelScope.launch {
@@ -55,5 +60,27 @@ class UploadViewModel(
             }
             _loading.value = false
         }
+    }
+
+    fun uploadEu(activity: Activity, token: OtpToken): Deferred<Boolean> {
+        return scope.async {
+            var isSuccess = false
+            viewModelScope.launch {
+                _loading.value = true
+                delay(1000)
+                try {
+                    isSuccess = exposureManager.uploadTeksEu(activity, token)
+                    if (!isSuccess) {
+                        _uploadError.value = Event(true)
+                    }
+                } catch (e: Exception) {
+                    _uploadError.value = Event(true)
+                    e.printStackTrace()
+                }
+                _loading.value = false
+            }
+            isSuccess
+        }
+
     }
 }

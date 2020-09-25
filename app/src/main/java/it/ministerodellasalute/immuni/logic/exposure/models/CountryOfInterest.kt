@@ -19,6 +19,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class CountryOfInterest(
-    val name: String,
+    val code: String,
     var lastProcessedChunk: Int = 0
 )

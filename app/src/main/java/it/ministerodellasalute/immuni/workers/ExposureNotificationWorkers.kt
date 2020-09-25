@@ -154,7 +154,7 @@ class RequestDiagnosisKeysWorker(
         } catch (e: Exception) {
             return Result.retry()
         } finally {
-            chunksDir.deleteRecursively()
+            deleteRecursivelyIt(chunksDir)
         }
     }
 
@@ -236,7 +236,7 @@ class RequestDiagnosisEuKeysWorker(
                 }
                 val countries = exposureReportingRepository.getCountriesOfInterest()
                 countries.forEach { country ->
-                    val indexResponse = immuniApiCall { api.indexEu(country.name) }
+                    val indexResponse = immuniApiCall { api.indexEu(country.code) }
                     if (indexResponse !is NetworkResource.Success) {
                         val error = indexResponse.error
                         if (error is NetworkError.HttpError && error.httpCode == 404) {
@@ -251,14 +251,14 @@ class RequestDiagnosisEuKeysWorker(
                     val chunkRange = (currentOldest..data.newest).toList().takeLast(20)
                     for (currentChunk in chunkRange) {
                         val chunkResponse =
-                            immuniApiCall { api.chunkEu(country.name, currentChunk) }
+                            immuniApiCall { api.chunkEu(country.code, currentChunk) }
                         if (chunkResponse !is NetworkResource.Success) {
                             return@withTimeout Result.retry()
                         }
                         val filePath =
                             listOf(
                                 chunksDirPath,
-                                "EU_" + country.name + "_$currentChunk.zip"
+                                "EU_" + country.code + "_$currentChunk.zip"
                             ).joinToString(File.separator)
                         try {
                             chunkResponse.data?.byteStream()?.saveToFile(filePath)
@@ -280,7 +280,7 @@ class RequestDiagnosisEuKeysWorker(
         } catch (e: Exception) {
             return Result.retry()
         } finally {
-            chunksDir.deleteRecursively()
+            deleteRecursivelyEu(chunksDir)
         }
     }
 
