@@ -235,6 +235,7 @@ class RequestDiagnosisEuKeysWorker(
                     }
                 }
                 val countries = exposureReportingRepository.getCountriesOfInterest()
+                val diagnosisEuKeyList = mutableListOf<File>()
                 countries.forEach { country ->
                     val indexResponse = immuniApiCall { api.indexEu(country.code) }
                     if (indexResponse !is NetworkResource.Success) {
@@ -263,17 +264,17 @@ class RequestDiagnosisEuKeysWorker(
                         try {
                             chunkResponse.data?.byteStream()?.saveToFile(filePath)
                                 ?: return@withTimeout Result.retry()
-                            val token = "${UUID.randomUUID()}_${serverDate.time}"
-                            exposureManager.provideDiagnosisKeys(
-                                keyFiles = listOf(File(filePath)),
-                                token = token
-                            )
+                            diagnosisEuKeyList.addAll(listOf(File(filePath)))
                             country.lastProcessedChunk = data.newest
                         } catch (e: Exception) {
                             return@withTimeout Result.retry()
                         }
                     }
                 }
+                exposureManager.provideDiagnosisKeys(
+                    keyFiles = diagnosisEuKeyList,
+                    token = "${UUID.randomUUID()}_${serverDate.time}"
+                )
                 exposureReportingRepository.setCountriesOfInterest(countries)
                 return@withTimeout success(serverDate)
             }
