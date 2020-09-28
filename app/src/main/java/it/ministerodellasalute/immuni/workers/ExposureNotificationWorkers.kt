@@ -105,10 +105,8 @@ class RequestDiagnosisKeysWorker(
                 analyticsManager.setup(serverDate)
 
                 chunksDir.apply {
-                    if (!exists()) {
-                        mkdir()
-                    }
-                    deleteRecursivelyIt(this)
+                    deleteRecursively()
+                    mkdir()
                 }
 
                 val indexResponse = immuniApiCall { api.index() }
@@ -154,7 +152,7 @@ class RequestDiagnosisKeysWorker(
         } catch (e: Exception) {
             return Result.retry()
         } finally {
-            deleteRecursivelyIt(chunksDir)
+            chunksDir.deleteRecursively()
         }
     }
 
@@ -169,19 +167,6 @@ class RequestDiagnosisKeysWorker(
         workerManager.scheduleNextDiagnosisKeysRequest()
         return Result.success()
     }
-
-    private fun deleteRecursivelyIt(dir: File) {
-        if (dir.isFile && !dir.name.startsWith("EU")) {
-            dir.delete()
-            return
-        }
-        if (dir.isDirectory && dir.listFiles() != null) {
-            for (subDir in dir.listFiles()!!) {
-                deleteRecursivelyIt(subDir)
-            }
-        }
-    }
-
 }
 
 class RequestDiagnosisEuKeysWorker(
@@ -205,7 +190,7 @@ class RequestDiagnosisEuKeysWorker(
 
         val chunksDirPath = listOf(
             applicationContext.filesDir,
-            "chunks"
+            "euchunks"
         ).joinToString(File.separator)
         val chunksDir = File(chunksDirPath)
 
@@ -228,11 +213,8 @@ class RequestDiagnosisEuKeysWorker(
                 analyticsManager.setup(serverDate)
 
                 chunksDir.apply {
-                    if (!exists()) {
-                        mkdir()
-                    } else {
-                        deleteRecursivelyEu(this)
-                    }
+                    deleteRecursively()
+                    mkdir()
                 }
                 val countries = exposureReportingRepository.getCountriesOfInterest()
                 val diagnosisEuKeyList = mutableListOf<File>()
@@ -281,19 +263,7 @@ class RequestDiagnosisEuKeysWorker(
         } catch (e: Exception) {
             return Result.retry()
         } finally {
-            deleteRecursivelyEu(chunksDir)
-        }
-    }
-
-    private fun deleteRecursivelyEu(dir: File) {
-        if (dir.isFile && dir.name.startsWith("EU")) {
-            dir.delete()
-            return
-        }
-        if (dir.isDirectory && dir.listFiles() != null) {
-            for (subDir in dir.listFiles()!!) {
-                deleteRecursivelyEu(subDir)
-            }
+            chunksDir.deleteRecursively()
         }
     }
 
