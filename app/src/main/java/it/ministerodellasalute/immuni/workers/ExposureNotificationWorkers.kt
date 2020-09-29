@@ -250,10 +250,11 @@ class RequestDiagnosisEuKeysWorker(
                         }
                     }
                 }
+                if(diagnosisEuKeyList.isNotEmpty()){
                 exposureManager.provideDiagnosisKeys(
                     keyFiles = diagnosisEuKeyList,
                     token = "${UUID.randomUUID()}_${serverDate.time}"
-                )
+                )}
                 exposureReportingRepository.setCountriesOfInterest(countries)
                 return@withTimeout success(serverDate)
             }
@@ -265,12 +266,6 @@ class RequestDiagnosisEuKeysWorker(
     }
 
     private fun success(serverDate: Date): Result {
-//        exposureReportingRepository.setLastSuccessfulEuCheckDate(
-//            when (BuildConfig.DEBUG) {
-//                true -> Date()
-//                false -> serverDate
-//            }
-//        )
         workerManager.scheduleNextDiagnosisEuKeysRequest()
         return Result.success()
     }
