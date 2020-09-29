@@ -200,24 +200,13 @@ class ExposureManager(
         val countriesOfInterest =
             exposureReportingRepository.getCountriesOfInterest().map { it.code }
 
-        val isSuccess: Boolean
-
-        if (countriesOfInterest.isEmpty()) {
-            isSuccess = exposureIngestionRepository.uploadTeks(
-                token = token,
-                province = userRepository.user.value!!.province,
-                tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
-                exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate)
-            )
-        } else {
-            isSuccess = exposureIngestionRepository.uploadTeksEu(
-                token = token,
-                province = userRepository.user.value!!.province,
-                tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
-                exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate),
-                countries = countriesOfInterest
-            )
-        }
+        val isSuccess = exposureIngestionRepository.uploadTeks(
+            token = token,
+            province = userRepository.user.value!!.province,
+            tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
+            exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate),
+            countries = countriesOfInterest
+        )
 
         if (isSuccess) {
             exposureStatusRepository.setExposureStatus(ExposureStatus.Positive())
