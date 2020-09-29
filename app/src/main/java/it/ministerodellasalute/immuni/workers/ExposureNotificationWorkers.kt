@@ -239,10 +239,7 @@ class RequestDiagnosisEuKeysWorker(
                             return@withTimeout Result.retry()
                         }
                         val filePath =
-                            listOf(
-                                chunksDirPath,
-                                "EU_" + country.code + "_$currentChunk.zip"
-                            ).joinToString(File.separator)
+                            listOf(chunksDirPath, "$currentChunk.zip").joinToString(File.separator)
                         try {
                             chunkResponse.data?.byteStream()?.saveToFile(filePath)
                                 ?: return@withTimeout Result.retry()
@@ -268,7 +265,6 @@ class RequestDiagnosisEuKeysWorker(
     }
 
     private fun success(serverDate: Date): Result {
-//        workerManager.scheduleExposureAnalyticsWorker(serverDate)
 //        exposureReportingRepository.setLastSuccessfulEuCheckDate(
 //            when (BuildConfig.DEBUG) {
 //                true -> Date()
