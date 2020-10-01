@@ -161,6 +161,13 @@
                             style="@style/SettingsMenuItem"
                             android:text="@string/settings_setting_chage_province" />
 
+                        <include layout="@layout/settings_content_divider" />
+
+                        <TextView
+                            android:id="@+id/chooseCountriesOfInterestButton"
+                            style="@style/SettingsMenuItem"
+                            android:text="Scegli i paesi di interesse" />
+
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 

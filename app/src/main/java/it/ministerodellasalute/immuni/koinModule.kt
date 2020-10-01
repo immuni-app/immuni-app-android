@@ -36,8 +36,10 @@ import it.ministerodellasalute.immuni.logic.exposure.repositories.*
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.logic.settings.CountriesOfInterestManager
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsNetworkRepository
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsStoreRepository
+import it.ministerodellasalute.immuni.logic.settings.repositories.CountriesOfInterestRepository
 import it.ministerodellasalute.immuni.logic.upload.OtpGenerator
 import it.ministerodellasalute.immuni.logic.upload.UploadDisabler
 import it.ministerodellasalute.immuni.logic.upload.UploadDisablerStore
@@ -52,6 +54,7 @@ import it.ministerodellasalute.immuni.ui.howitworks.HowItWorksDataSource
 import it.ministerodellasalute.immuni.ui.main.MainViewModel
 import it.ministerodellasalute.immuni.ui.onboarding.OnboardingViewModel
 import it.ministerodellasalute.immuni.ui.otp.OtpViewModel
+import it.ministerodellasalute.immuni.ui.settings.CountriesViewModel
 import it.ministerodellasalute.immuni.ui.settings.SettingsViewModel
 import it.ministerodellasalute.immuni.ui.setup.SetupViewModel
 import it.ministerodellasalute.immuni.ui.suggestions.StateCloseViewModel
@@ -321,6 +324,21 @@ val appModule = module {
         immuniMoshi
     }
 
+    single {
+        CountriesOfInterestManager(get())
+    }
+
+    single {
+        CountriesOfInterestRepository(
+            KVStorage(
+                name = "CountriesOfInterestRepository",
+                context = androidContext(),
+                encrypted = true,
+                moshi = immuniMoshi
+            )
+        )
+    }
+
     factory {
         BaseOperationalInfo(get(), get(), get())
     }
@@ -348,6 +366,7 @@ val appModule = module {
     viewModel { SettingsViewModel(get()) }
     viewModel { StateCloseViewModel(get(), get()) }
     viewModel { SupportViewModel(androidContext(), get(), get()) }
+    viewModel { CountriesViewModel(get()) }
 }
 
 val immuniMoshi = moshi(
