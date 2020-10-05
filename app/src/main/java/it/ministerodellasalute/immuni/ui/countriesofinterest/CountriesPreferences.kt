@@ -49,7 +49,6 @@ class CountriesPreferences : Fragment(),
             pageTitle?.alpha = 1 - ratio
             description?.alpha = 1 - ratio
             toolbarTitle?.alpha = ratio
-            knowMore?.alpha = 1 - ratio
         })
 
         adapter =
@@ -70,10 +69,6 @@ class CountriesPreferences : Fragment(),
             }
             adapter.notifyDataSetChanged()
             validate()
-        }
-
-        knowMore.setSafeOnClickListener {
-
         }
 
         saveButton.setOnClickListener(null)

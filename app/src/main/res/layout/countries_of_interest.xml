@@ -76,7 +76,7 @@
                     android:layout_marginTop="64dp"
                     android:layout_marginEnd="30dp"
                     android:gravity="start"
-                    android:text="Scegli i paesi di interesse"
+                    android:text="@string/country_of_interest_title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,24 +89,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:gravity="start"
-                    android:text="Seleziona il paese/i dove devi andare per aiutare il Servizio Sanitario Nazionale ad assisterti al meglio."
+                    android:text="@string/countries_of_interest_description"
                     app:layout_constraintEnd_toEndOf="@+id/pageTitle"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/pageTitle"
                     app:layout_constraintTop_toBottomOf="@+id/pageTitle" />
-
-                <TextView
-                    android:id="@+id/knowMore"
-                    style="@style/OnboardingKnowMore"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:maxLines="1"
-                    android:text="@string/onboarding_common_discover_more"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintEnd_toEndOf="@+id/description"
-                    app:layout_constraintStart_toStartOf="@+id/description"
-                    app:layout_constraintTop_toBottomOf="@id/description" />
 
                 <include
                     android:id="@+id/toolbarSeparator"
@@ -133,7 +120,7 @@
                     android:paddingStart="@dimen/activity_vertical_margin"
                     android:paddingEnd="32dp"
                     android:singleLine="true"
-                    android:text="Scegli i paesi di interesse"
+                    android:text="@string/country_of_interest_title"
                     android:textAllCaps="false" />
             </androidx.appcompat.widget.Toolbar>
 
