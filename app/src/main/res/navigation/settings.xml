@@ -114,19 +114,12 @@
         android:id="@+id/action_how_to_upload_positive"
         app:destination="@id/howToUploadPositive" />
 
-    <dialog
-        android:id="@+id/countries_of_interest"
-        android:name="it.ministerodellasalute.immuni.ui.countriesofinterest.CountriesPreferences"
-        tools:layout="@layout/settings_countries_of_interest" />
+    <activity
+        android:id="@+id/countryOfInterestActivity"
+        android:name="it.ministerodellasalute.immuni.ui.countriesofinterest.CountryOfInterestActivity"
+        android:label="CountryOfInterestActivity" />
     <action
         android:id="@+id/action_countries_of_interest"
-        app:destination="@id/countries_of_interest" />
+        app:destination="@id/countryOfInterestActivity" />
 
-    <dialog
-        android:id="@+id/countriesExplanation"
-        android:name="it.ministerodellasalute.immuni.ui.countriesofinterest.CountriesExplanationDialogFragment"
-        tools:layout="@layout/countries_explanation_dialog" />
-    <action
-        android:id="@+id/action_countries_explanation"
-        app:destination="@id/countriesExplanation" />
 </navigation>

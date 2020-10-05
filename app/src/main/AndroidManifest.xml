@@ -74,6 +74,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.countriesofinterest.CountryOfInterestActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <!-- Keep for instrumentation tests -->
         <activity
             android:name=".nearby.NearbyTestActivity"/>

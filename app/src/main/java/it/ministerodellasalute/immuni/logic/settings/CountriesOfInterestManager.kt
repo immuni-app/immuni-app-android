@@ -1,28 +1,22 @@
 package it.ministerodellasalute.immuni.logic.settings
 
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
-import it.ministerodellasalute.immuni.logic.settings.models.CountryOb
-import it.ministerodellasalute.immuni.logic.settings.repositories.CountriesOfInterestRepository
+import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
+import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import org.koin.core.KoinComponent
 
 class CountriesOfInterestManager(
-    private val countriesOfInterestRepository: CountriesOfInterestRepository
+    private val exposureReportingRepository: ExposureReportingRepository
 ) : KoinComponent {
 
-    //val nations = nationsRepository.nations
-
-    fun save(nations: CountryOb) {
-        countriesOfInterestRepository.save(nations)
+    fun setCountriesOfInterest(listCountries: List<CountryOfInterest>) {
+        exposureReportingRepository.setCountriesOfInterest(listCountries)
     }
 
-    fun getCountriesSelected(): CountryOb? {
-        return if (countriesOfInterestRepository.getCountriesSelected() == null) {
-            return CountryOb()
-        } else {
-            countriesOfInterestRepository.getCountriesSelected()
-        }
-//        return countriesOfInterestRepository.getNationsSelected()
+    fun getCountriesSelected(): List<CountryOfInterest> {
+        return exposureReportingRepository.getCountriesOfInterest()
     }
 
-    fun getCountries(): List<ExposureIngestionService.Country> = countriesOfInterestRepository.getCountries()
+    fun getCountries(): List<ExposureIngestionService.Country> =
+        ExposureIngestionService.Country.values().toList()
 }

@@ -10,7 +10,7 @@ class CountriesExplanationDialogFragment : PopupDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         setContentLayout(R.layout.countries_explanation_dialog)
 
-//        setTitle(getString(R.string.permission_tutorial_why_province_region_title))
+        //TODO: title dialog
         setTitle("A cosa serve scegliere il paese/i dove devi viaggiare?")
     }
 

@@ -39,7 +39,6 @@ import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManage
 import it.ministerodellasalute.immuni.logic.settings.CountriesOfInterestManager
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsNetworkRepository
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsStoreRepository
-import it.ministerodellasalute.immuni.logic.settings.repositories.CountriesOfInterestRepository
 import it.ministerodellasalute.immuni.logic.upload.OtpGenerator
 import it.ministerodellasalute.immuni.logic.upload.UploadDisabler
 import it.ministerodellasalute.immuni.logic.upload.UploadDisablerStore
@@ -54,7 +53,6 @@ import it.ministerodellasalute.immuni.ui.howitworks.HowItWorksDataSource
 import it.ministerodellasalute.immuni.ui.main.MainViewModel
 import it.ministerodellasalute.immuni.ui.onboarding.OnboardingViewModel
 import it.ministerodellasalute.immuni.ui.otp.OtpViewModel
-import it.ministerodellasalute.immuni.ui.settings.CountriesViewModel
 import it.ministerodellasalute.immuni.ui.settings.SettingsViewModel
 import it.ministerodellasalute.immuni.ui.setup.SetupViewModel
 import it.ministerodellasalute.immuni.ui.suggestions.StateCloseViewModel
@@ -63,10 +61,10 @@ import it.ministerodellasalute.immuni.ui.upload.UploadViewModel
 import it.ministerodellasalute.immuni.util.CoroutineContextProvider
 import it.ministerodellasalute.immuni.workers.models.ServiceNotActiveNotificationWorkerStatus
 import it.ministerodellasalute.immuni.workers.repositories.ServiceNotActiveNotificationWorkerRepository
-import java.security.SecureRandom
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import java.security.SecureRandom
 
 /**
  * Dependency Injection Koin module.
@@ -328,17 +326,6 @@ val appModule = module {
         CountriesOfInterestManager(get())
     }
 
-    single {
-        CountriesOfInterestRepository(
-            KVStorage(
-                name = "CountriesOfInterestRepository",
-                context = androidContext(),
-                encrypted = true,
-                moshi = immuniMoshi
-            )
-        )
-    }
-
     factory {
         BaseOperationalInfo(get(), get(), get())
     }
@@ -366,7 +353,6 @@ val appModule = module {
     viewModel { SettingsViewModel(get()) }
     viewModel { StateCloseViewModel(get(), get()) }
     viewModel { SupportViewModel(androidContext(), get(), get()) }
-    viewModel { CountriesViewModel(get()) }
 }
 
 val immuniMoshi = moshi(

@@ -45,14 +45,6 @@ class ExposureReportingRepository(
         return storage[summariesKey]?.values ?: listOf()
     }
 
-    fun getCountriesOfInterest(): List<CountryOfInterest> {
-        return storage[countriesOfInterestKey]?.values ?: listOf()
-    }
-
-    fun setCountriesOfInterest(countries: List<CountryOfInterest>) {
-        storage[countriesOfInterestKey] = CountryOfInterestList(countries)
-    }
-
     fun addSummary(summary: ExposureSummary) {
         synchronized(this) {
             val oldSummaries = getSummaries()
@@ -96,6 +88,14 @@ class ExposureReportingRepository(
 
     fun setLastSuccessfulCheckDate(value: Date) {
         storage[lastSuccessfulCheckDateKey] = value
+    }
+
+    fun getCountriesOfInterest(): List<CountryOfInterest> {
+        return storage[countriesOfInterestKey]?.values ?: listOf()
+    }
+
+    fun setCountriesOfInterest(countries: List<CountryOfInterest>) {
+        storage[countriesOfInterestKey] = CountryOfInterestList(countries)
     }
 
 }

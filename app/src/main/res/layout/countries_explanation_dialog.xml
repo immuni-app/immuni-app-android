@@ -15,7 +15,6 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/transparent"
@@ -46,12 +45,14 @@
         app:layout_constraintTop_toBottomOf="@+id/question"
         app:layout_constraintVertical_bias="0.0">
 
+        <!-- TODO: content -->
+
         <TextView
             android:id="@+id/first"
             style="@style/P1Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/permission_tutorial_why_province_region_first" />
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet porttitor eget dolor morbi non. Egestas maecenas pharetra convallis posuere morbi leo urna molestie. Diam quam nulla porttitor massa id neque aliquam. Nibh sit amet commodo nulla facilisi nullam vehicula. Duis tristique sollicitudin nibh sit amet commodo. Viverra justo nec ultrices dui sapien eget mi proin. Morbi tempus iaculis urna id volutpat lacus laoreet. Tortor id aliquet lectus proin nibh nisl. Diam quam nulla porttitor massa id neque. At volutpat diam ut venenatis tellus. Nisi porta lorem mollis aliquam." />
 
     </LinearLayout>
 

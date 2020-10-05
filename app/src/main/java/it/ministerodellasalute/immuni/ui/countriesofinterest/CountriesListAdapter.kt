@@ -37,7 +37,7 @@ class CountriesListAdapter(private val clickListener: CountriesPreferences) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NationsVH {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.settings_countries_of_interest_list_item, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.countries_of_interest_list_item, parent, false)
         return NationsVH(v)
     }
 
