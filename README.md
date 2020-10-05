@@ -56,8 +56,8 @@
 This repository contains the source code of Immuni's Android client. More detailed information about Immuni can be found in the following documents:
 
 - [High-Level Description](https://github.com/immuni-app/documentation)
-- [Product Description](https://github.com/immuni-app/documentation/blob/master/Product%20Description.md)
-- [Technology Description](https://github.com/immuni-app/documentation/blob/master/Technology%20Description.md)
+- [Product](https://github.com/immuni-app/documentation/blob/master/Product.md)
+- [Technology](https://github.com/immuni-app/documentation/blob/master/Technology.md)
 - [Traffic Analysis Mitigation](https://github.com/immuni-app/immuni-documentation/blob/master/Traffic%20Analysis%20Mitigation.md)
 
 **Please take the time to read and consider these documents in full before digging into the source code or opening an Issue. They contain a lot of details that are fundamental to understanding the source code and this repository's documentation.**
