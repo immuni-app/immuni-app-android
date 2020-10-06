@@ -60,7 +60,8 @@ data class ConfigurationSettings(
     @field:Json(name = "reopen_reminder") val reopenReminder: Boolean = true,
     @field:Json(name = "operational_info_with_exposure_sampling_rate") val operationalInfoWithExposureSamplingRate: Double,
     @field:Json(name = "operational_info_without_exposure_sampling_rate") val operationalInfoWithoutExposureSamplingRate: Double,
-    @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int
+    @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int,
+    @field:Json(name = "countries") val countries: Map<String, String>
 
 )
 
@@ -112,6 +113,37 @@ private fun languageMap(map: (Language) -> String): Map<String, String> {
     }.toTypedArray())
 }
 
+private fun countriesMap(): Map<String, String> {
+    return mapOf(
+        "AT" to "Austria",
+        "BE" to "Belgio",
+        "BG" to "Bulgaria",
+        "CY" to "Cipro",
+        "HR" to "Croazia",
+        "DK" to "Danimarca",
+        "EE" to "Estonia",
+        "FI" to "Finlandia",
+        "DE" to "Germania",
+        "GB" to "Gran Bretagna",
+        "EL" to "Grecia",
+        "IE" to "Irlanda",
+        "LV" to "Lettonia",
+        "LT" to "Lituania",
+        "LU" to "Lussemburgo",
+        "MT" to "Malta",
+        "NL" to "Olanda",
+        "PL" to "Polonia",
+        "PT" to "Portogallo",
+        "CZ" to "Repubblica Ceca",
+        "SK" to "Repubblica Slovacca",
+        "RO" to "Romania",
+        "SI" to "Slovenia",
+        "ES" to "Spagna",
+        "SE" to "Svezia",
+        "HU" to "Ungheria"
+    )
+}
+
 val defaultSettings = ConfigurationSettings(
     minimumBuildVersion = 0,
     faqUrls = languageMap { "https://get.immuni.gov.it/docs/faq-${it.code}.json" },
@@ -146,5 +178,6 @@ val defaultSettings = ConfigurationSettings(
     reopenReminder = true,
     operationalInfoWithExposureSamplingRate = 1.0,
     operationalInfoWithoutExposureSamplingRate = 0.6,
-    dummyAnalyticsWaitingTime = 2_592_000
+    dummyAnalyticsWaitingTime = 2_592_000,
+    countries = countriesMap()
 )

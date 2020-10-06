@@ -35,6 +35,15 @@
         android:minHeight="140dp">
 
         <it.ministerodellasalute.immuni.ui.view.ImageScaleView
+            android:id="@+id/iconNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="matrix"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_new" />
+
+        <it.ministerodellasalute.immuni.ui.view.ImageScaleView
             android:id="@+id/icon"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -44,7 +53,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.4"
             app:matrixType="bottom_left"
-            app:srcCompat="@drawable/illustration_person" />
+            app:srcCompat="@drawable/flageuropa" />
 
         <!-- TODO: title card -->
 
@@ -56,7 +65,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
-            android:text="Sei in viaggio? Scegli qui il paese"
+            android:text="In quale paese dell'Europa devi andare?"
             android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/subtitle"
             app:layout_constraintEnd_toStartOf="@+id/icon"

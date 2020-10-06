@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+ * Please refer to the AUTHORS file for more information.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package it.ministerodellasalute.immuni.ui.countriesofinterest
 
 import android.os.Bundle
@@ -5,10 +20,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.SettingsNavDirections
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
@@ -20,10 +33,10 @@ import org.koin.android.ext.android.inject
 import kotlin.math.abs
 
 class CountriesPreferences : Fragment(),
-    NationsClickListener,
+    CountriesClickListener,
     ConfirmationDialogListener {
 
-    val ALERT_CONFIRM_DELETE = 210
+    private val ALERT_CONFIRM_DELETE = 210
 
     private val countriesManager: CountriesOfInterestManager by inject()
     lateinit var adapter: CountriesListAdapter
@@ -57,6 +70,7 @@ class CountriesPreferences : Fragment(),
             )
         recyclerView.adapter = adapter
         saveButton.isEnabled = false
+
         adapter.data = countriesManager.getCountries()
 
         if (countriesManager.getCountriesSelected().isNotEmpty()) {
@@ -110,7 +124,6 @@ class CountriesPreferences : Fragment(),
                 CountryOfInterest(item.code)
             )
         ) {
-            // TODO: traduzione + title
             openConfirmationDialog(
                 positiveButton = "Remove",
                 negativeButton = getString(R.string.cancel),

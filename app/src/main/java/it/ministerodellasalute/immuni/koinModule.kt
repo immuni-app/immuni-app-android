@@ -323,7 +323,7 @@ val appModule = module {
     }
 
     single {
-        CountriesOfInterestManager(get())
+        CountriesOfInterestManager(get(), get())
     }
 
     factory {
