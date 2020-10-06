@@ -21,6 +21,8 @@
         android:drawable="@drawable/ic_checkbox_selected" />
     <item android:state_checked="false" android:state_window_focused="false"
         android:drawable="@drawable/ic_checkbox_not_selected" />
+    <item android:state_checked="true" android:state_enabled="false"
+        android:drawable="@drawable/ic_checkbox_not_deselectable" />
     <item android:state_checked="true" android:state_pressed="true"
         android:drawable="@drawable/ic_checkbox_selected" />
     <item android:state_checked="false" android:state_pressed="true"
