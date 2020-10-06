@@ -63,7 +63,7 @@ class CountriesListAdapter(private val clickListener: CountriesPreferences) :
 
     override fun onBindViewHolder(holder: CountriesVH, position: Int) {
         val dataItem = data[position]
-        holder.checkBox.isEnabled = false
+//        holder.checkBox.isEnabled = false
         holder.checkBox.text = dataItem.fullName
         holder.checkBox.isChecked = false
         for (country in this.selectedCountries!!) {

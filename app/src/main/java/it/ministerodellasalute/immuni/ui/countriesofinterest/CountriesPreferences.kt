@@ -36,7 +36,7 @@ class CountriesPreferences : Fragment(),
     CountriesClickListener,
     ConfirmationDialogListener {
 
-    private val ALERT_CONFIRM_DELETE = 210
+    private val ALERT_CONFIRM_SAVE = 210
 
     private val countriesManager: CountriesOfInterestManager by inject()
     lateinit var adapter: CountriesListAdapter
@@ -87,12 +87,14 @@ class CountriesPreferences : Fragment(),
 
         saveButton.setOnClickListener(null)
         saveButton.setSafeOnClickListener {
-            var listNationsToSave = mutableListOf<CountryOfInterest>()
-            for (country in adapter.selectedCountries!!) {
-                listNationsToSave.add(CountryOfInterest(code = country.code))
-            }
-            countriesManager.setCountriesOfInterest(listNationsToSave.toList())
-            activity?.finish()
+            openConfirmationDialog(
+                positiveButton = "Salva",
+                negativeButton = getString(R.string.cancel),
+                message = "Se salvi non potrai rimuovere i paesi scelti per 14 giorni",
+                title = "Sei sicuro di voler salvare?",
+                cancelable = true,
+                requestCode = ALERT_CONFIRM_SAVE
+            )
         }
 
     }
@@ -102,12 +104,14 @@ class CountriesPreferences : Fragment(),
     }
 
     override fun onDialogPositive(requestCode: Int) {
-        if (requestCode == ALERT_CONFIRM_DELETE) {
-            adapter.selectedCountries!!.remove(itemClicked)
-            itemListSelected.remove(itemClicked?.code?.let { CountryOfInterest(it) })
+        if (requestCode == ALERT_CONFIRM_SAVE) {
+            var listNationsToSave = mutableListOf<CountryOfInterest>()
+            for (country in adapter.selectedCountries!!) {
+                listNationsToSave.add(CountryOfInterest(code = country.code))
+            }
+            countriesManager.setCountriesOfInterest(listNationsToSave.toList())
+            activity?.finish()
         }
-        adapter.notifyDataSetChanged()
-        validate()
         itemClicked = null
     }
 
@@ -120,19 +124,7 @@ class CountriesPreferences : Fragment(),
     override fun onClick(item: ExposureIngestionService.Country) {
         itemClicked = item
 
-        if (adapter.selectedCountries!!.contains(item) && itemListSelected.contains(
-                CountryOfInterest(item.code)
-            )
-        ) {
-            openConfirmationDialog(
-                positiveButton = "Remove",
-                negativeButton = getString(R.string.cancel),
-                message = "Sei sicuro di voler rimuovere",
-                title = "Rimuovere ${item.fullName}",
-                cancelable = true,
-                requestCode = ALERT_CONFIRM_DELETE
-            )
-        } else if (adapter.selectedCountries!!.contains(item)) {
+        if (adapter.selectedCountries!!.contains(item)) {
             adapter.selectedCountries!!.remove(item)
         } else {
             adapter.selectedCountries!!.add(item)
