@@ -166,7 +166,7 @@
                         <TextView
                             android:id="@+id/chooseCountriesOfInterestButton"
                             style="@style/SettingsMenuItem"
-                            android:text="Scegli i paesi di interesse" />
+                            android:text="@string/settings_countries_of_interest" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>

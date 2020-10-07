@@ -382,4 +382,5 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="countries_of_interest_dialog_message">Se salvi non potrai rimuovere i paesi scelti per 14 giorni</string>
   <string name="countries_of_interest_dialog_positive">Salva</string>
   <string name="countries_of_interest_dialog_negative">Annulla</string>
+    <string name="settings_countries_of_interest">Scegli i paesi di interesse</string>
 </resources>
