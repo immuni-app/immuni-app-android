@@ -36,8 +36,6 @@ class CountriesPreferences : Fragment(),
     CountriesClickListener,
     ConfirmationDialogListener {
 
-    private val ALERT_CONFIRM_SAVE = 210
-
     private val countriesManager: CountriesOfInterestManager by inject()
     lateinit var adapter: CountriesListAdapter
 
@@ -134,5 +132,9 @@ class CountriesPreferences : Fragment(),
         }
         adapter.notifyDataSetChanged()
         validate()
+    }
+
+    companion object {
+        const val ALERT_CONFIRM_SAVE = 212
     }
 }
