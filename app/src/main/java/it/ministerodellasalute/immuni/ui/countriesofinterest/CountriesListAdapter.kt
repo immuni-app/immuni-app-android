@@ -21,15 +21,19 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.RecyclerView
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
+import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager.Companion.DAYS_OF_SELF_ISOLATION
+import it.ministerodellasalute.immuni.extensions.utils.DateUtils.MILLIS_IN_A_DAY
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
+import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class CountriesListAdapter(private val clickListener: CountriesPreferences) :
     RecyclerView.Adapter<CountriesListAdapter.CountriesVH>() {
 
-    var selectedCountries: MutableList<ExposureIngestionService.Country>? = mutableListOf()
+    var selectedCountries: MutableList<CountryOfInterest>? = mutableListOf()
 
-    var data: List<ExposureIngestionService.Country> = mutableListOf()
+    var data: List<CountryOfInterest> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -63,17 +67,26 @@ class CountriesListAdapter(private val clickListener: CountriesPreferences) :
 
     override fun onBindViewHolder(holder: CountriesVH, position: Int) {
         val dataItem = data[position]
-//        holder.checkBox.isEnabled = false
+        holder.checkBox.isEnabled = true
         holder.checkBox.text = dataItem.fullName
         holder.checkBox.isChecked = false
         for (country in this.selectedCountries!!) {
-            if (country == data[position]) {
+            if (country.code == data[position].code && country.insertDate != null && Date() < Date(
+                    country.insertDate!!.time + DAYS_OF_SELF_ISOLATION * MILLIS_IN_A_DAY
+                )
+            ) {
+                holder.checkBox.isEnabled = false
                 holder.checkBox.isChecked = true
+                break
+            } else if (country.code == data[position].code) {
+                holder.checkBox.isChecked = true
+                holder.checkBox.isEnabled = true
+                break
             }
         }
     }
 }
 
 interface CountriesClickListener {
-    fun onClick(item: ExposureIngestionService.Country)
+    fun onClick(item: CountryOfInterest)
 }

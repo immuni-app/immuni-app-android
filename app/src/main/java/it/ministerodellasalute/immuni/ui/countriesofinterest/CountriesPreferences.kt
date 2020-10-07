@@ -22,7 +22,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import it.ministerodellasalute.immuni.logic.settings.CountriesOfInterestManager
@@ -30,6 +29,7 @@ import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import kotlinx.android.synthetic.main.countries_of_interest.*
 import org.koin.android.ext.android.inject
+import java.util.*
 import kotlin.math.abs
 
 class CountriesPreferences : Fragment(),
@@ -40,9 +40,6 @@ class CountriesPreferences : Fragment(),
 
     private val countriesManager: CountriesOfInterestManager by inject()
     lateinit var adapter: CountriesListAdapter
-    private var itemClicked: ExposureIngestionService.Country? = null
-    private var itemListSelected =
-        countriesManager.getCountriesSelected().toMutableList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,7 +74,7 @@ class CountriesPreferences : Fragment(),
             for (country in adapter.data) {
                 for (countrySelected in countriesManager.getCountriesSelected()) {
                     if (country.code == countrySelected.code) {
-                        adapter.selectedCountries!!.add(country)
+                        adapter.selectedCountries!!.add(countrySelected)
                     }
                 }
             }
@@ -88,10 +85,10 @@ class CountriesPreferences : Fragment(),
         saveButton.setOnClickListener(null)
         saveButton.setSafeOnClickListener {
             openConfirmationDialog(
-                positiveButton = "Salva",
-                negativeButton = getString(R.string.cancel),
-                message = "Se salvi non potrai rimuovere i paesi scelti per 14 giorni",
-                title = "Sei sicuro di voler salvare?",
+                positiveButton = getString(R.string.countries_of_interest_dialog_positive),
+                negativeButton = getString(R.string.countries_of_interest_dialog_negative),
+                message = getString(R.string.countries_of_interest_dialog_message),
+                title = getString(R.string.countries_of_interest_dialog_title),
                 cancelable = true,
                 requestCode = ALERT_CONFIRM_SAVE
             )
@@ -105,14 +102,22 @@ class CountriesPreferences : Fragment(),
 
     override fun onDialogPositive(requestCode: Int) {
         if (requestCode == ALERT_CONFIRM_SAVE) {
-            var listNationsToSave = mutableListOf<CountryOfInterest>()
+            val listNationsToSave = countriesManager.getCountriesSelected().toMutableList()
             for (country in adapter.selectedCountries!!) {
-                listNationsToSave.add(CountryOfInterest(code = country.code))
+                if (!listNationsToSave.contains(country)) {
+                    listNationsToSave.add(
+                        CountryOfInterest(
+                            code = country.code,
+                            fullName = country.fullName,
+                            insertDate = Date()
+                        )
+                    )
+
+                }
             }
             countriesManager.setCountriesOfInterest(listNationsToSave.toList())
             activity?.finish()
         }
-        itemClicked = null
     }
 
     private fun validate() {
@@ -121,9 +126,7 @@ class CountriesPreferences : Fragment(),
                 .isNotEmpty() || !adapter.selectedCountries.isNullOrEmpty()
     }
 
-    override fun onClick(item: ExposureIngestionService.Country) {
-        itemClicked = item
-
+    override fun onClick(item: CountryOfInterest) {
         if (adapter.selectedCountries!!.contains(item)) {
             adapter.selectedCountries!!.remove(item)
         } else {

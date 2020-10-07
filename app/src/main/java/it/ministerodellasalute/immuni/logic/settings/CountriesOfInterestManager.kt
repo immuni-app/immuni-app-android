@@ -1,6 +1,5 @@
 package it.ministerodellasalute.immuni.logic.settings
 
-import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsStoreRepository
@@ -22,11 +21,17 @@ class CountriesOfInterestManager(
 //    fun getCountries(): List<ExposureIngestionService.Country> =
 //        ExposureIngestionService.Country.values().toList()
 
-    fun getCountries(): MutableList<ExposureIngestionService.Country> {
-        val listCountries = mutableListOf<ExposureIngestionService.Country>()
+    fun getCountries(): MutableList<CountryOfInterest> {
+        val listCountries = mutableListOf<CountryOfInterest>()
         val country = (settingsRepository.loadSettings()).countries
         for (coun in country) {
-            listCountries.add(ExposureIngestionService.Country.fromCode(coun.key))
+            listCountries.add(
+                CountryOfInterest(
+                    code = coun.key,
+                    fullName = coun.value,
+                    insertDate = null
+                )
+            )
         }
         return listCountries
     }

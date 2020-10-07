@@ -55,8 +55,6 @@
             app:matrixType="bottom_left"
             app:srcCompat="@drawable/flageuropa" />
 
-        <!-- TODO: title card -->
-
         <TextView
             android:id="@+id/title"
             style="@style/H4Section"
@@ -65,7 +63,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
-            android:text="In quale paese dell'Europa devi andare?"
+            android:text="@string/home_countries_of_interest_title"
             android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/subtitle"
             app:layout_constraintEnd_toStartOf="@+id/icon"
