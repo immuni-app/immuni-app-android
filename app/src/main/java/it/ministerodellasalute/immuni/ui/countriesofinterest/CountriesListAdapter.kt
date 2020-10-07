@@ -26,7 +26,6 @@ import it.ministerodellasalute.immuni.extensions.utils.DateUtils.MILLIS_IN_A_DAY
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class CountriesListAdapter(private val clickListener: CountriesPreferences) :
     RecyclerView.Adapter<CountriesListAdapter.CountriesVH>() {

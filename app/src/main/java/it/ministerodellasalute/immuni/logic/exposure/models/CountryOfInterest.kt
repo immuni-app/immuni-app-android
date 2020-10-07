@@ -16,12 +16,13 @@
 package it.ministerodellasalute.immuni.logic.exposure.models
 
 import com.squareup.moshi.JsonClass
+import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import java.util.*
 
 @JsonClass(generateAdapter = true)
 data class CountryOfInterest(
-    val code: String,
-    val fullName: String,
+    var code: String,
+    var fullName: String,
     var insertDate: Date?,
     var lastProcessedChunk: Int = 0
 )
