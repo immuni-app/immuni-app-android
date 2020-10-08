@@ -56,7 +56,8 @@ class ExposureIngestionRepositoryTest {
                 body = ExposureIngestionService.UploadTeksRequest(
                     teks = listOf(),
                     province = ExposureIngestionService.Province.agrigento,
-                    exposureSummaries = listOf()
+                    exposureSummaries = listOf(),
+                    countries = listOf("AT", "DK")
                 )
             )
         }
@@ -96,7 +97,8 @@ class ExposureIngestionRepositoryTest {
                                 )
                             }
                         )
-                    }
+                    },
+                    countries = listOf("AT", "DK")
                 )
             )
         }
