@@ -377,5 +377,5 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="countries_of_interest_dialog_message">You won\'t be able to remove selected countries for 14 days</string>
     <string name="countries_of_interest_dialog_positive">Done</string>
     <string name="countries_of_interest_dialog_negative">Cancel</string>
-    <string name="settings_countries_of_interest">Choose countries of interest</string>
+    <string name="settings_countries_of_interest">My countries of interest</string>
 </resources>

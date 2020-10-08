@@ -33,15 +33,4 @@ class CountriesOfInterestManager(
         return listCountries
     }
 
-    // Questa funzione è un alternativa alla funzione getCountries per versioni da Android N in poi
-//    @RequiresApi(Build.VERSION_CODES.N)
-//    fun getNewCountries(): MutableList<CountryOfInterest> {
-//        return (settingsRepository.loadSettings()).countries.entries.stream().map { e ->
-//            return@map CountryOfInterest(
-//                code = e.key,
-//                fullName = e.value,
-//                insertDate = null
-//            )
-//        }.collect(Collectors.toList())
-//    }
 }

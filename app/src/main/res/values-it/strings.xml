@@ -378,9 +378,9 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="country_of_interest_title">In quale paese della comunità Europea devi andare?</string>
   <string name="countries_of_interest_description">Seleziona il paese/i dove devi andare tra quelli che hanno aderito all’interoperabilità per contribuire al contenimento della diffusione del virus all’interno della comunità Europea.</string>
     <string name="home_countries_of_interest_title">In quale paese EU devi andare?</string>
-  <string name="countries_of_interest_dialog_title">Sei sicuro di voler salvare?</string>
-  <string name="countries_of_interest_dialog_message">Se salvi non potrai rimuovere i paesi scelti per 14 giorni</string>
-  <string name="countries_of_interest_dialog_positive">Salva</string>
+  <string name="countries_of_interest_dialog_title">Sei sicuro di voler procedere?</string>
+  <string name="countries_of_interest_dialog_message">Confermando non potrai rimuovere i paesi scelti per i prossimi 14 giorni</string>
+  <string name="countries_of_interest_dialog_positive">Conferma</string>
   <string name="countries_of_interest_dialog_negative">Annulla</string>
-    <string name="settings_countries_of_interest">Scegli i paesi di interesse</string>
+    <string name="settings_countries_of_interest">" I miei paesi di interesse"</string>
 </resources>

@@ -37,8 +37,7 @@ class ExposureReportingRepository(
         private val summariesKey = KVStorage.Key<ExposureSummaryList>("summaries")
         private val lastProcessedChunkKey = KVStorage.Key<Int>("LastProcessedChunk")
         private val lastSuccessfulCheckDateKey = KVStorage.Key<Date>("LastSuccessfulCheckDate")
-        private val countriesOfInterestKey =
-            KVStorage.Key<CountryOfInterestList>("CountriesOfInterest")
+        private val countriesOfInterestKey = KVStorage.Key<CountryOfInterestList>("CountriesOfInterest")
     }
 
     fun getSummaries(): List<ExposureSummary> {
