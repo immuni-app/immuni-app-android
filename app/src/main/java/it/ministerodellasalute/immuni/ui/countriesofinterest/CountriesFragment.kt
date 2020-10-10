@@ -37,6 +37,7 @@ class CountriesFragment :
 
     private val countriesManager: CountriesOfInterestManager by inject()
     lateinit var adapter: CountriesListAdapter
+    private val countriesSelected = countriesManager.getCountriesSelected()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,12 +67,11 @@ class CountriesFragment :
             )
         recyclerView.adapter = adapter
         saveButton.isEnabled = false
-
         adapter.data = countriesManager.getCountries()
 
-        if (countriesManager.getCountriesSelected().isNotEmpty()) {
+        if (countriesSelected.isNotEmpty()) {
             for (country in adapter.data) {
-                for (countrySelected in countriesManager.getCountriesSelected()) {
+                for (countrySelected in countriesSelected) {
                     if (country.code == countrySelected.code) {
                         adapter.selectedCountries.add(countrySelected)
                     }
@@ -83,7 +83,7 @@ class CountriesFragment :
 
         saveButton.setOnClickListener(null)
         saveButton.setSafeOnClickListener {
-            if (countriesManager.checkListsEqual(adapter.selectedCountries, countriesManager.getCountriesSelected())) {
+            if (countriesManager.checkListsEqual(adapter.selectedCountries, countriesSelected)) {
                 activity?.finish()
             } else {
                 openConfirmationDialog(
@@ -104,10 +104,9 @@ class CountriesFragment :
 
     override fun onDialogPositive(requestCode: Int) {
         if (requestCode == ALERT_CONFIRM_SAVE) {
-            val listNationsToSave = countriesManager.getCountriesSelected()
             for (country in adapter.selectedCountries) {
-                if (!listNationsToSave.contains(country)) {
-                    listNationsToSave.add(
+                if (!countriesSelected.contains(country)) {
+                    countriesSelected.add(
                         CountryOfInterest(
                             code = country.code,
                             fullName = country.fullName,
@@ -116,13 +115,13 @@ class CountriesFragment :
                     )
                 }
             }
-            countriesManager.setCountriesOfInterest(listNationsToSave.toList())
+            countriesManager.setCountriesOfInterest(countriesSelected)
             activity?.finish()
         }
     }
 
     private fun validate() {
-        saveButton.isEnabled = countriesManager.getCountriesSelected()
+        saveButton.isEnabled = countriesSelected
             .isNotEmpty() || !adapter.selectedCountries.isNullOrEmpty()
     }
 
