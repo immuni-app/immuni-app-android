@@ -113,7 +113,6 @@ class RequestDiagnosisKeysWorker(
 
                 if (indexResponse !is NetworkResource.Success) {
                     val error = indexResponse.error
-                    // 404 means that the list is empty, so the work is successful
                     if (error is NetworkError.HttpError && error.httpCode == 404) {
                         return@withTimeout success(serverDate)
                     }
@@ -145,6 +144,44 @@ class RequestDiagnosisKeysWorker(
                         exposureReportingRepository.setLastProcessedChunk(data.newest)
                     } catch (e: Exception) {
                         return@withTimeout Result.retry()
+                    }
+                }
+                val countries = exposureReportingRepository.getCountriesOfInterest()
+                countries.forEach { country ->
+                    val indexEuResponse = immuniApiCall { api.indexEu(country.code) }
+                    if (indexEuResponse !is NetworkResource.Success) {
+                        val error = indexEuResponse.error
+                        if (!(error is NetworkError.HttpError && error.httpCode == 404)) {
+                            return@withTimeout Result.retry()
+                        }
+                    } else {
+                        val euData = indexEuResponse.data ?: return@withTimeout Result.retry()
+                        val lastEuProcessedChunkSuccessor = country.lastProcessedChunk + 1
+                        val currentEuOldest = max(euData.oldest, lastEuProcessedChunkSuccessor)
+                        val euChunkRange = (currentEuOldest..euData.newest).toList().subList(0, 20)
+                        for (currentChunk in euChunkRange) {
+                            val chunkResponse = immuniApiCall { api.chunkEu(country.code, currentChunk) }
+                            if (chunkResponse !is NetworkResource.Success) {
+                                return@withTimeout Result.retry()
+                            }
+                            val filePath =
+                                listOf(
+                                    chunksDirPath,
+                                    "$currentChunk.zip"
+                                ).joinToString(File.separator)
+                            try {
+                                chunkResponse.data?.byteStream()?.saveToFile(filePath)
+                                    ?: return@withTimeout Result.retry()
+                                exposureManager.provideDiagnosisKeys(
+                                    keyFiles = listOf(File(filePath)),
+                                    token = "${UUID.randomUUID()}_${serverDate.time}"
+                                )
+                                country.lastProcessedChunk = euChunkRange.indexOf(currentChunk)
+                                exposureReportingRepository.setCountriesOfInterest(countries)
+                            } catch (e: Exception) {
+                                return@withTimeout Result.retry()
+                            }
+                        }
                     }
                 }
                 return@withTimeout success(serverDate)
