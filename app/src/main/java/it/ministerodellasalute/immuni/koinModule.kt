@@ -29,6 +29,7 @@ import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationM
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 import it.ministerodellasalute.immuni.extensions.utils.moshi
 import it.ministerodellasalute.immuni.logic.exposure.BaseOperationalInfo
+import it.ministerodellasalute.immuni.logic.exposure.CountriesOfInterestManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureAnalyticsManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
@@ -319,6 +320,10 @@ val appModule = module {
 
     single {
         immuniMoshi
+    }
+
+    single {
+        CountriesOfInterestManager(get(), get())
     }
 
     factory {

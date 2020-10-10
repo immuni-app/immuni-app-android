@@ -16,7 +16,6 @@
 package it.ministerodellasalute.immuni.logic.exposure.models
 
 import com.squareup.moshi.JsonClass
-import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import java.util.*
 
 @JsonClass(generateAdapter = true)
