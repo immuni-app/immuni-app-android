@@ -158,7 +158,8 @@ class RequestDiagnosisKeysWorker(
                         val euData = indexEuResponse.data ?: return@withTimeout Result.retry()
                         val lastEuProcessedChunkSuccessor = country.lastProcessedChunk + 1
                         val currentEuOldest = max(euData.oldest, lastEuProcessedChunkSuccessor)
-                        val euChunkRange = (currentEuOldest..euData.newest).toList().subList(0, 20)
+                        val euChunkRange = (currentEuOldest..euData.newest).toList()
+                        val countryChunkList= mutableListOf<File>()
                         for (currentChunk in euChunkRange) {
                             val chunkResponse = immuniApiCall { api.chunkEu(country.code, currentChunk) }
                             if (chunkResponse !is NetworkResource.Success) {
@@ -172,16 +173,17 @@ class RequestDiagnosisKeysWorker(
                             try {
                                 chunkResponse.data?.byteStream()?.saveToFile(filePath)
                                     ?: return@withTimeout Result.retry()
-                                exposureManager.provideDiagnosisKeys(
-                                    keyFiles = listOf(File(filePath)),
-                                    token = "${UUID.randomUUID()}_${serverDate.time}"
-                                )
-                                country.lastProcessedChunk = euChunkRange.indexOf(currentChunk)
-                                exposureReportingRepository.setCountriesOfInterest(countries)
+                                countryChunkList.addAll(listOf(File(filePath)))
                             } catch (e: Exception) {
                                 return@withTimeout Result.retry()
                             }
                         }
+                        exposureManager.provideDiagnosisKeys(
+                            keyFiles = countryChunkList,
+                            token = "${UUID.randomUUID()}_${serverDate.time}"
+                        )
+                        country.lastProcessedChunk = euChunkRange.indexOf(euData.newest)
+                        exposureReportingRepository.setCountriesOfInterest(countries)
                     }
                 }
                 return@withTimeout success(serverDate)
