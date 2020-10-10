@@ -194,11 +194,15 @@ class ExposureManager(
 
         val exposureSummaries = exposureReportingRepository.getSummaries()
 
+        val countriesOfInterest =
+            exposureReportingRepository.getCountriesOfInterest().map { it.code }
+
         val isSuccess = exposureIngestionRepository.uploadTeks(
             token = token,
             province = userRepository.user.value!!.province,
             tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
-            exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate)
+            exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate),
+            countries = countriesOfInterest
         )
 
         if (isSuccess) {
