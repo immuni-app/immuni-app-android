@@ -372,5 +372,12 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="support_info_item_lastencheck_none">Keine</string>
   <string name="support_info_item_lastencheck_date" formatted="false">%@ um %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s um %2$s</string>
-    <string name="exposure_check_in_progress">Kontrolle potenzieller Expositionen im Gange</string>
+  <string name="exposure_check_in_progress">Kontrolle potenzieller Expositionen im Gange</string>
+  <string name="countries_of_interest_description">Wählen Sie die Länder, die sich der Interoperabilität angeschlossen haben, das Land aus, in welches sie einreisen müssen, um die Ausbreitung des Virus innerhalb der Europäischen Gemeinschaft einzudämmen.</string>
+  <string name="countries_of_interest_title">In welches EU-Land müssen Sie gehen?</string>
+  <string name="countries_of_interest_dialog_title">Sind Sie sich sicher, dass Sie fortfahren möchten?</string>
+  <string name="countries_of_interest_dialog_message">Durch diese Bestätigung kÖnnen Sie die ausgewählten Länder für die nächsten 14 Tage nicht entfernen</string>
+  <string name="countries_of_interest_dialog_positive">Bestätigung</string>
+  <string name="countries_of_interest_dialog_negative">Stornieren</string>
+  <string name="settings_countries_of_interest">"Meine Länder von Interesse "</string>
 </resources>
