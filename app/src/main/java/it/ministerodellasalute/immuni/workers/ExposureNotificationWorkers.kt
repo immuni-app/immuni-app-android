@@ -168,7 +168,7 @@ class RequestDiagnosisKeysWorker(
                             val filePath =
                                 listOf(
                                     chunksDirPath,
-                                    "$currentChunk.zip"
+                                    "${country.code}_$currentChunk.zip"
                                 ).joinToString(File.separator)
                             try {
                                 chunkResponse.data?.byteStream()?.saveToFile(filePath)
