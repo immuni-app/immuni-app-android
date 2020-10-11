@@ -372,10 +372,11 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="support_info_item_lastencheck_date_android">%1$s at %2$s</string>
   <string name="exposure_check_in_progress">Exposure check in progress</string>
   <string name="countries_of_interest_description">Select the country/countries where you have to travel among those who joined the agreement to contribute decreasing the virus spread across the European Union.</string>
-  <string name="countries_of_interest_title">Where in EU do you have to travel?</string>
+  <string name="home_countries_of_interest_title">Where in EU do you have to travel?</string>
   <string name="countries_of_interest_dialog_title">Are you sure?</string>
   <string name="countries_of_interest_dialog_message">You won\'t be able to remove selected countries for 14 days</string>
   <string name="countries_of_interest_dialog_positive">Done</string>
   <string name="countries_of_interest_dialog_negative">Cancel</string>
   <string name="settings_countries_of_interest">My countries of interest</string>
+  <string name="countries_of_interest_title">Where in EU do you have to travel?</string>
 </resources>

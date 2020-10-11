@@ -63,7 +63,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
-            android:text="@string/countries_of_interest_title"
+            android:text="@string/home_countries_of_interest_title"
             android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/subtitle"
             app:layout_constraintEnd_toStartOf="@+id/icon"

@@ -38,8 +38,8 @@ class CountriesListAdapter(private val clickListener: CountriesFragment) :
             notifyDataSetChanged()
         }
 
-    private fun onItemClick(pos: Int) {
-        if (pos != RecyclerView.NO_POSITION) {
+    private fun onItemClick(pos: Int, checkBox: AppCompatCheckBox) {
+        if (pos != RecyclerView.NO_POSITION && checkBox.isEnabled) {
             clickListener.onClick(data[pos])
         }
     }
@@ -49,7 +49,7 @@ class CountriesListAdapter(private val clickListener: CountriesFragment) :
 
         init {
             v.setSafeOnClickListener {
-                onItemClick(adapterPosition)
+                onItemClick(adapterPosition, checkBox)
             }
         }
     }

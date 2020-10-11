@@ -54,4 +54,15 @@ class CountriesOfInterestManager(
     ): Boolean {
         return HashSet(list1) == HashSet(list2)
     }
+
+    fun addRemoveFromListByItem(listCountries: MutableList<CountryOfInterest>, country: CountryOfInterest): MutableList<CountryOfInterest> {
+        for (countryOfInterest in listCountries) {
+            if(countryOfInterest.code == country.code) {
+                listCountries.remove(countryOfInterest)
+                return listCountries
+            }
+        }
+        listCountries.add(country)
+        return listCountries
+    }
 }

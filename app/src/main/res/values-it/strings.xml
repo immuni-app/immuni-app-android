@@ -375,11 +375,12 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="support_info_item_lastencheck_date" formatted="false">%@ alle %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s alle %2$s</string>
   <string name="exposure_check_in_progress">Controllo potenziali esposizioni in corso</string>
-  <string name="countries_of_interest_description">Seleziona il paese/i dove devi andare tra quelli che hanno aderito all’interoperabilità per contribuire al contenimento della diffusione del virus all’interno della comunità Europea.</string>
-  <string name="countries_of_interest_title">In quale paese EU devi andare?</string>
+  <string name="countries_of_interest_description">Se stai per andare in Europa puoi selezionare il/i Paese/i di interesse, se ha/hanno già aderito all\'interoperabilità, così che Immuni possa collegarsi con le altre APP europee di contact tracing e aiutare a contenere la diffusione del Covid-19 anche in ambito europeo. Puoi selezionare fino ad un massimo di 3 Paesi. La tua selezione sarà valida e non modificabile per 14 giorni</string>
+  <string name="home_countries_of_interest_title">Se stai andando in un altro Paese europeo</string>
   <string name="countries_of_interest_dialog_title">Sei sicuro di voler procedere?</string>
   <string name="countries_of_interest_dialog_message">Confermando non potrai rimuovere i paesi scelti per i prossimi 14 giorni</string>
   <string name="countries_of_interest_dialog_positive">Conferma</string>
   <string name="countries_of_interest_dialog_negative">Annulla</string>
-  <string name="settings_countries_of_interest">" I miei paesi di interesse"</string>
+  <string name="settings_countries_of_interest">Seleziona Paese europeo</string>
+  <string name="countries_of_interest_title">Stai andando in uno o più di questi Paesi europei?</string>
 </resources>

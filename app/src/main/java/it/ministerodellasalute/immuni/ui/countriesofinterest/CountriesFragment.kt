@@ -105,17 +105,11 @@ class CountriesFragment :
     override fun onDialogPositive(requestCode: Int) {
         if (requestCode == ALERT_CONFIRM_SAVE) {
             for (country in adapter.selectedCountries) {
-                if (!countriesSelected.contains(country)) {
-                    countriesSelected.add(
-                        CountryOfInterest(
-                            code = country.code,
-                            fullName = country.fullName,
-                            insertDate = Date()
-                        )
-                    )
+                if (country.insertDate == null) {
+                    country.insertDate = Date()
                 }
             }
-            countriesManager.setCountriesOfInterest(countriesSelected)
+            countriesManager.setCountriesOfInterest(adapter.selectedCountries)
             activity?.finish()
         }
     }
@@ -126,11 +120,7 @@ class CountriesFragment :
     }
 
     override fun onClick(item: CountryOfInterest) {
-        if (adapter.selectedCountries.contains(item)) {
-            adapter.selectedCountries.remove(item)
-        } else {
-            adapter.selectedCountries.add(item)
-        }
+        adapter.selectedCountries = countriesManager.addRemoveFromListByItem(adapter.selectedCountries, item)
         adapter.notifyDataSetChanged()
         validate()
     }

@@ -381,5 +381,5 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="countries_of_interest_dialog_positive">Aceptar</string>
   <string name="countries_of_interest_dialog_negative">Cancelar</string>
   <string name="settings_countries_of_interest">Países que me interesan</string>
-  <string name="countries_of_interest_title">¿A qué país de la UE tienes que dirigirte?</string>
+  <string name="home_countries_of_interest_title">¿A qué país de la UE tienes que dirigirte?</string>
 </resources>
