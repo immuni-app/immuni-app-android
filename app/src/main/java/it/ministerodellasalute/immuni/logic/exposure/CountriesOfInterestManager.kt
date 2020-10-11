@@ -19,6 +19,8 @@ import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsStoreRepository
 import org.koin.core.KoinComponent
+import java.util.*
+import kotlin.collections.HashSet
 
 class CountriesOfInterestManager(
     private val exposureReportingRepository: ExposureReportingRepository,
@@ -35,7 +37,8 @@ class CountriesOfInterestManager(
 
     fun getCountries(): MutableList<CountryOfInterest> {
         val listCountries = mutableListOf<CountryOfInterest>()
-        val countries = (settingsRepository.loadSettings()).countries
+        val settingsCountries = (settingsRepository.loadSettings()).countries
+        val countries = settingsCountries.getOrDefault(Locale.getDefault().language, settingsCountries["en"])!!
         for (country in countries) {
             listCountries.add(
                 CountryOfInterest(
