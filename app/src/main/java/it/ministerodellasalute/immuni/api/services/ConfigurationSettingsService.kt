@@ -61,7 +61,7 @@ data class ConfigurationSettings(
     @field:Json(name = "operational_info_with_exposure_sampling_rate") val operationalInfoWithExposureSamplingRate: Double,
     @field:Json(name = "operational_info_without_exposure_sampling_rate") val operationalInfoWithoutExposureSamplingRate: Double,
     @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int,
-    @field:Json(name = "countries") val countries: Map<String, String>
+    @field:Json(name = "countries") val countries: Map<String, Map<String, String>>
 )
 
 @JsonClass(generateAdapter = true)
@@ -114,34 +114,68 @@ private fun languageMap(map: (Language) -> String): Map<String, String> {
     )
 }
 
-private fun countriesMap(): Map<String, String> {
+private fun countriesMap(): Map<String, Map<String, String>> {
     return mapOf(
-        "AT" to "Austria",
-        "BE" to "Belgio",
-        "BG" to "Bulgaria",
-        "CY" to "Cipro",
-        "HR" to "Croazia",
-        "DK" to "Danimarca",
-        "EE" to "Estonia",
-        "FI" to "Finlandia",
-        "DE" to "Germania",
-        "GB" to "Gran Bretagna",
-        "EL" to "Grecia",
-        "IE" to "Irlanda",
-        "LV" to "Lettonia",
-        "LT" to "Lituania",
-        "LU" to "Lussemburgo",
-        "MT" to "Malta",
-        "NL" to "Olanda",
-        "PL" to "Polonia",
-        "PT" to "Portogallo",
-        "CZ" to "Repubblica Ceca",
-        "SK" to "Repubblica Slovacca",
-        "RO" to "Romania",
-        "SI" to "Slovenia",
-        "ES" to "Spagna",
-        "SE" to "Svezia",
-        "HU" to "Ungheria"
+        "it" to mapOf(
+            "AT" to "AUSTRIA",
+            "DK" to "DANIMARCA",
+            "EE" to "ESTONIA",
+            "DE" to "GERMANIA",
+            "IE" to "IRLANDA",
+            "LV" to "LETTONIA",
+            "NL" to "OLANDA",
+            "PL" to "POLONIA",
+            "CZ" to "REPUBBLICA CECA",
+            "ES" to "SPAGNA"
+        ),
+        "de" to mapOf(
+            "AT" to "ÖSTERREICH",
+            "DK" to "DÄNEMARK",
+            "EE" to "ESTONIA",
+            "DE" to "DEUTSCHLAND",
+            "IE" to "IRLAND",
+            "LV" to "LETTLAND",
+            "NL" to "NIEDERLANDE",
+            "PL" to "POLEN",
+            "CZ" to "TSCHECHISCHE REPUBLIK",
+            "ES" to "SPANIEN"
+        ),
+        "en" to mapOf(
+            "AT" to "AUSTRIA",
+            "DK" to "DENMARK",
+            "EE" to "ESTONIA",
+            "DE" to "GERMANY",
+            "IE" to "IRELAND",
+            "LV" to "LATVIA",
+            "NL" to "NETHERLANDS",
+            "PL" to "POLAND",
+            "CZ" to "CZECH REPUBLIC",
+            "ES" to "SPAIN"
+        ),
+        "fr" to mapOf(
+            "AT" to "AUTRICHE",
+            "DK" to "DANEMARK",
+            "EE" to "ESTONIE",
+            "DE" to "ALLEMAGNE",
+            "IE" to "IRLANDE",
+            "LV" to "LETTONIE",
+            "NL" to "PAYS-BAS",
+            "PL" to "POLOGNE",
+            "CZ" to "RÉPUBLIQUE TCHÈQUE",
+            "ES" to "ESPAGNE"
+        ),
+        "es" to mapOf(
+            "EN" to "AUSTRIA",
+            "DK" to "DINAMARCA",
+            "EE" to "ESTONIA",
+            "DE" to "ALEMANIA",
+            "IE" to "IRLANDA",
+            "LV" to "LETONIA",
+            "NL" to "PAÍSES BAJOS",
+            "PL" to "POLONIA",
+            "CZ" to "REPÚBLICA CHECA",
+            "ES" to "ESPAÑA"
+        )
     )
 }
 
