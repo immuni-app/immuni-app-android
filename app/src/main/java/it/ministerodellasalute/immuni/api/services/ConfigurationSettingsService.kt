@@ -107,11 +107,9 @@ enum class Language(val code: String) {
 }
 
 private fun languageMap(map: (Language) -> String): Map<String, String> {
-    return mapOf(
-        *Language.values().map { language ->
+    return mapOf(*Language.values().map { language ->
         language.code to map(language)
-    }.toTypedArray()
-    )
+    }.toTypedArray())
 }
 
 private fun countriesMap(): Map<String, Map<String, String>> {

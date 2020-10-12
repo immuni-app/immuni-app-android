@@ -53,12 +53,12 @@ class CountriesFragment :
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(
             AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            val ratio = abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
-            toolbarSeparator?.alpha = ratio
-            pageTitle?.alpha = 1 - ratio
-            description?.alpha = 1 - ratio
-            toolbarTitle?.alpha = ratio
-        }
+                val ratio = abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
+                toolbarSeparator?.alpha = ratio
+                pageTitle?.alpha = 1 - ratio
+                description?.alpha = 1 - ratio
+                toolbarTitle?.alpha = ratio
+                }
         )
 
         adapter =
@@ -129,4 +129,3 @@ class CountriesFragment :
         const val ALERT_CONFIRM_SAVE = 212
     }
 }
-

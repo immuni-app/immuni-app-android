@@ -60,7 +60,7 @@ class CountriesOfInterestManager(
 
     fun addRemoveFromListByItem(listCountries: MutableList<CountryOfInterest>, country: CountryOfInterest): MutableList<CountryOfInterest> {
         for (countryOfInterest in listCountries) {
-            if(countryOfInterest.code == country.code) {
+            if (countryOfInterest.code == country.code) {
                 listCountries.remove(countryOfInterest)
                 return listCountries
             }

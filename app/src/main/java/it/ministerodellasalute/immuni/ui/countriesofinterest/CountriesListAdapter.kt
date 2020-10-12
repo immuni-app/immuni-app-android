@@ -44,7 +44,7 @@ class CountriesListAdapter(private val clickListener: CountriesFragment) :
         }
     }
 
-    inner class CountriesVH(v: View): RecyclerView.ViewHolder(v) {
+    inner class CountriesVH(v: View) : RecyclerView.ViewHolder(v) {
         val checkBox: AppCompatCheckBox = v.findViewById(R.id.checkboxNazioni)
 
         init {
