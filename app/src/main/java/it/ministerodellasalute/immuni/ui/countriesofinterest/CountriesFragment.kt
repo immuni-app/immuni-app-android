@@ -87,7 +87,7 @@ class CountriesFragment :
                 countriesManager.checkListsEqual(adapter.selectedCountries, countriesSelected) -> {
                     activity?.finish()
                 }
-                adapter.selectedCountries.size > 3 -> {
+                adapter.selectedCountries.size > SELECTION_LIMIT -> {
                     openConfirmationDialog(
                         positiveButton = getString(R.string.countries_of_interest_dialog_positive),
                         negativeButton = null,
@@ -141,5 +141,6 @@ class CountriesFragment :
     companion object {
         const val ALERT_CONFIRM_SAVE = 212
         const val ALERT_CLOSE = 213
+        const val SELECTION_LIMIT = 3
     }
 }
