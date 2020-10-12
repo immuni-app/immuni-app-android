@@ -383,4 +383,6 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="countries_of_interest_dialog_negative">Annulla</string>
   <string name="settings_countries_of_interest">Seleziona Paese europeo</string>
   <string name="countries_of_interest_title">Stai andando in uno o più di questi Paesi europei?</string>
+  <string name="countries_of_interest_limit_dialog_title">Limite selezione superato</string>
+  <string name="countries_of_interest_limit_dialog_message">Puoi selezionare fino ad un massimo di 3 Paesi. La tua selezione sarà valida e non modificabile per 14 giorni</string>
 </resources>

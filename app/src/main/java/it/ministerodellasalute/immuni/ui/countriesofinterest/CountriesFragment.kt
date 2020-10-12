@@ -83,17 +83,30 @@ class CountriesFragment :
 
         saveButton.setOnClickListener(null)
         saveButton.setSafeOnClickListener {
-            if (countriesManager.checkListsEqual(adapter.selectedCountries, countriesSelected)) {
-                activity?.finish()
-            } else {
-                openConfirmationDialog(
-                    positiveButton = getString(R.string.countries_of_interest_dialog_positive),
-                    negativeButton = getString(R.string.countries_of_interest_dialog_negative),
-                    message = getString(R.string.countries_of_interest_dialog_message),
-                    title = getString(R.string.countries_of_interest_dialog_title),
-                    cancelable = true,
-                    requestCode = ALERT_CONFIRM_SAVE
-                )
+            when {
+                countriesManager.checkListsEqual(adapter.selectedCountries, countriesSelected) -> {
+                    activity?.finish()
+                }
+                adapter.selectedCountries.size > 3 -> {
+                    openConfirmationDialog(
+                        positiveButton = getString(R.string.countries_of_interest_dialog_positive),
+                        negativeButton = null,
+                        message = getString(R.string.countries_of_interest_limit_dialog_message),
+                        title = getString(R.string.countries_of_interest_limit_dialog_title),
+                        cancelable = true,
+                        requestCode = ALERT_CLOSE
+                    )
+                }
+                else -> {
+                    openConfirmationDialog(
+                        positiveButton = getString(R.string.countries_of_interest_dialog_positive),
+                        negativeButton = getString(R.string.countries_of_interest_dialog_negative),
+                        message = getString(R.string.countries_of_interest_dialog_message),
+                        title = getString(R.string.countries_of_interest_dialog_title),
+                        cancelable = true,
+                        requestCode = ALERT_CONFIRM_SAVE
+                    )
+                }
             }
         }
     }
@@ -127,5 +140,6 @@ class CountriesFragment :
 
     companion object {
         const val ALERT_CONFIRM_SAVE = 212
+        const val ALERT_CLOSE = 213
     }
 }
