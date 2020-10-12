@@ -21,8 +21,8 @@ import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 import it.ministerodellasalute.immuni.extensions.utils.DateUtils.MILLIS_IN_A_DAY
 import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
-import java.util.Date
 import kotlinx.coroutines.flow.StateFlow
+import java.util.*
 
 class ExposureReportingRepository(
     private val storage: KVStorage

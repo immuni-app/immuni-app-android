@@ -31,13 +31,13 @@ import it.ministerodellasalute.immuni.logic.settings.models.FetchSettingsResult
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import it.ministerodellasalute.immuni.network.api.NetworkError
 import it.ministerodellasalute.immuni.network.api.NetworkResource
+import kotlinx.coroutines.withTimeout
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import java.io.File
 import java.io.InputStream
 import java.util.*
 import kotlin.math.max
-import kotlinx.coroutines.withTimeout
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class StateUpdatedWorker(
     appContext: Context,
@@ -159,7 +159,7 @@ class RequestDiagnosisKeysWorker(
                         val lastEuProcessedChunkSuccessor = country.lastProcessedChunk + 1
                         val currentEuOldest = max(euData.oldest, lastEuProcessedChunkSuccessor)
                         val euChunkRange = (currentEuOldest..euData.newest).toList()
-                        val countryChunkList= mutableListOf<File>()
+                        val countryChunkList = mutableListOf<File>()
                         for (currentChunk in euChunkRange) {
                             val chunkResponse = immuniApiCall { api.chunkEu(country.code, currentChunk) }
                             if (chunkResponse !is NetworkResource.Success) {
