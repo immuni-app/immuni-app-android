@@ -18,9 +18,8 @@ package it.ministerodellasalute.immuni.logic.exposure.repositories
 import com.squareup.moshi.JsonClass
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager.Companion.DAYS_OF_SELF_ISOLATION
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
-import it.ministerodellasalute.immuni.extensions.utils.DateUtils.MILLIS_IN_A_DAY
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
-import java.util.Date
+import java.util.*
 import kotlinx.coroutines.flow.StateFlow
 
 class ExposureReportingRepository(
@@ -52,7 +51,10 @@ class ExposureReportingRepository(
 
     // cleanup entities that are older than DAYS_OF_SELF_ISOLATION
     fun deleteOldSummaries(serverDate: Date) {
-        val referenceDate = Date(serverDate.time - DAYS_OF_SELF_ISOLATION * MILLIS_IN_A_DAY)
+        val referenceDate = Calendar.getInstance().apply {
+            timeInMillis = serverDate.time
+            add(Calendar.DAY_OF_YEAR, -DAYS_OF_SELF_ISOLATION)
+        }.time
 
         synchronized(this) {
             val oldSummaries = getSummaries()
