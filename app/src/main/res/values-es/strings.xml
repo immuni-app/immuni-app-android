@@ -375,11 +375,14 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="support_info_item_lastencheck_date" formatted="false">%@ a las %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s a las %2$s</string>
   <string name="exposure_check_in_progress">Control de las posibles exposiciones en curso</string>
-  <string name="countries_of_interest_description">Selecciona el país o los países a los que tienes que dirigirte entre los que se han unido a la interoperabilidad para ayudar a contener la propagación del virus en la Unión Europea.</string>
+  <string name="countries_of_interest_description">Si te diriges a Europa puedes seleccionar el país, o los países que te interesan, entre los que se han unido a la interoperabilidad, para que Immuni pueda conectarse con las otras aplicaciones móviles europeas de rastreo de contacto (Contact Tracing) y ayudar a contener la propagación de Covid-19 también en Europa. Puedes seleccionar hasta un máximo de 3 países. Tu selección será válida e inalterable durante 14 días.</string>
   <string name="countries_of_interest_dialog_title">¿Estás seguro de que deseas continuar?</string>
   <string name="countries_of_interest_dialog_message">Si aceptas no podrás cancelar los países seleccionados por los próximos 14 días</string>
   <string name="countries_of_interest_dialog_positive">Aceptar</string>
   <string name="countries_of_interest_dialog_negative">Cancelar</string>
-  <string name="settings_countries_of_interest">Países que me interesan</string>
-  <string name="home_countries_of_interest_title">¿A qué país de la UE tienes que dirigirte?</string>
+  <string name="settings_countries_of_interest">Seleccionar el país europeo</string>
+  <string name="home_countries_of_interest_title">Si te diriges a otro país europeo</string>
+  <string name="countries_of_interest_title">¿Te diriges a uno o más de estos países europeos?</string>
+  <string name="countries_of_interest_limit_dialog_message">Puedes seleccionar hasta un máximo de 3 países. Tu selección será válida e inalterable durante 14 días.</string>
+  <string name="countries_of_interest_limit_dialog_title">Límite de selección excedido</string>
 </resources>

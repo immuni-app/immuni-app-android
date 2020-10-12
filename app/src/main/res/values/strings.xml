@@ -380,5 +380,5 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="settings_countries_of_interest">My countries of interest</string>
   <string name="countries_of_interest_title">Where in EU do you have to travel?</string>
   <string name="countries_of_interest_limit_dialog_title">Selection limit exceeded</string>
-  <string name="countries_of_interest_limit_dialog_message"></string>
+  <string name="countries_of_interest_limit_dialog_message">Puoi selezionare fino ad un massimo di 3 Paesi. La tua selezione sarà valida e non modificabile per 14 giorni</string>
 </resources>
