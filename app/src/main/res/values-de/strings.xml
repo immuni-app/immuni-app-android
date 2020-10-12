@@ -373,11 +373,14 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="support_info_item_lastencheck_date" formatted="false">%@ um %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s um %2$s</string>
   <string name="exposure_check_in_progress">Kontrolle potenzieller Expositionen im Gange</string>
-  <string name="countries_of_interest_description">Wählen Sie die Länder, die sich der Interoperabilität angeschlossen haben, das Land aus, in welches sie einreisen müssen, um die Ausbreitung des Virus innerhalb der Europäischen Gemeinschaft einzudämmen.</string>
-  <string name="home_countries_of_interest_title">In welches EU-Land müssen Sie gehen?</string>
+  <string name="countries_of_interest_description">Wenn Sie nach Europa reisen, können Sie das/die interessierende (n) Land (e) Länder auswählen, sofern /das bereits der Interoperabilität beigetreten ist, damit Immuni eine Verbindung zu den anderen europäischen Kontactverfolgungs-APPs herstellen und die verbreitung von Covid-19 in Europa eindämmen kann. Sie können maximal 3 Länder auswählen. Ihre Auswahl ist 14 Tage lang gültig und bei der keine Veränderung mehr für 14 Tage möglich ist.</string>
+  <string name="home_countries_of_interest_title">Wenn Sie in ein anderes europäisches Land reisen</string>
   <string name="countries_of_interest_dialog_title">Sind Sie sich sicher, dass Sie fortfahren möchten?</string>
-  <string name="countries_of_interest_dialog_message">Durch diese Bestätigung kÖnnen Sie die ausgewählten Länder für die nächsten 14 Tage nicht entfernen</string>
+  <string name="countries_of_interest_dialog_message">Durch die Bestätigung können Sie die ausgewählten Länder für die nächsten 14 Tage nicht entfernen</string>
   <string name="countries_of_interest_dialog_positive">Bestätigung</string>
   <string name="countries_of_interest_dialog_negative">Stornieren</string>
-  <string name="settings_countries_of_interest">"Meine Länder von Interesse "</string>
+  <string name="settings_countries_of_interest">Wählen Sie ein europäisches Land aus</string>
+  <string name="countries_of_interest_title">Gehen Sie in eines oder mehrere dieser europäischen Länder?</string>
+  <string name="countries_of_interest_limit_dialog_message">Sie können maximal 3 Länder auswählen. Ihre Auswahl ist 14 Tage lang gültig und bei der keine Veränderung mehr für 14 Tage möglich ist</string>
+    <string name="countries_of_interest_limit_dialog_title">Auswahlgrenze überschritten</string>
 </resources>
