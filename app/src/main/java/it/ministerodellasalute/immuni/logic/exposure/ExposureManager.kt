@@ -231,6 +231,7 @@ class ExposureManager(
     fun debugCleanupDatabase() {
         exposureReportingRepository.resetSummaries()
         exposureReportingRepository.setLastProcessedChunk(null)
+        exposureReportingRepository.setCountriesOfInterest(listOf())
     }
 
     val hasSummaries: Boolean get() = exposureReportingRepository.getSummaries().isNotEmpty()
