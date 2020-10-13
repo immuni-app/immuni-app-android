@@ -57,7 +57,10 @@ class ExposureReportingRepository(
 
     // cleanup entities that are older than DAYS_OF_SELF_ISOLATION
     fun deleteOldSummaries(serverDate: Date) {
-        val referenceDate = Date(serverDate.time - DAYS_OF_SELF_ISOLATION * MILLIS_IN_A_DAY)
+        val referenceDate = Calendar.getInstance().apply {
+            timeInMillis = serverDate.time
+            add(Calendar.DAY_OF_YEAR, -DAYS_OF_SELF_ISOLATION)
+        }.time
 
         synchronized(this) {
             val oldSummaries = getSummaries()
