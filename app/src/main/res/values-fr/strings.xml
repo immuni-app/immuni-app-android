@@ -58,7 +58,7 @@
   <string name="privacy_item_secure"><b>Les données enregistrées sur votre smartphone et les connexions au serveur sont cryptées.</b></string>
   <string name="privacy_item_ministry"><b>Pour aider les services de santé nationaux</b> à prendre soin de vous, Immuni envoie les informations suivantes au Ministère de la santé :\n• La province de votre domicile\n• L\'état de fonctionnement de votre application\n• L\'avertissement d\'un contact à risque</string>
   <string name="privacy_item_italy">Vos données sont enregistrées sur des serveurs en Italie. <b>Elles sont gérées par des organismes publiques et contrôlées par le Ministère de la santé.</b></string>
-  <string name="privacy_item_data_deletion"><b>Toutes les données sont supprimées lorsqu\'elles ne sont plus nécessaires</b> et dans tous les cas au plus tard le 31 décembre 2020.</string>
+  <string name="privacy_item_data_deletion"><b>Toutes les données sont supprimées lorsqu\'elles ne sont plus nécessaires.</b></string>
   <string name="privacy_checkbox_above14">Je déclare avoir au moins 14 ans</string>
   <string name="privacy_checkbox_privacypolicyread"><![CDATA[J\'ai lu la <l>Politique de confidentialité</l>]]></string>
   <string name="privacy_tos"><![CDATA[En continuant, je déclare avoir lu et accepté les <l>Conditions d\'utilisation</l>]]></string>

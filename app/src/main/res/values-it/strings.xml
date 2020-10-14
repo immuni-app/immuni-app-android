@@ -59,7 +59,7 @@
   <string name="privacy_item_secure"><b>I dati salvati sul tuo smartphone e le connessioni al server sono cifrati.</b></string>
   <string name="privacy_item_ministry"><b>Per aiutare il Servizio Sanitario Nazionale</b> a prendersi cura di te, Immuni invia al server del Ministero della Salute:\n• La tua provincia di domicilio\n• Se l’app funziona correttamente\n• Se sei stato avvertito di un contatto a rischio</string>
   <string name="privacy_item_italy">I tuoi dati sono salvati su server in Italia, <b>sono gestiti da soggetti pubblici e controllati dal Ministero della Salute.</b></string>
-  <string name="privacy_item_data_deletion"><b>Tutti i dati sono eliminati quando non più necessari</b> e in ogni caso non più tardi del 31 dicembre 2020.</string>
+  <string name="privacy_item_data_deletion"><b>Tutti i dati sono eliminati quando non più necessari.</b></string>
   <string name="privacy_checkbox_above14">Dichiaro di avere almeno 14 anni</string>
   <string name="privacy_checkbox_privacypolicyread"><![CDATA[Ho letto l\'<l>informativa privacy</l>]]></string>
   <string name="privacy_tos"><![CDATA[Proseguendo, dichiaro di aver letto e accettato i <l>termini di utilizzo</l>]]></string>

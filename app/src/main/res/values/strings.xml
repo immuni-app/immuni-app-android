@@ -58,7 +58,7 @@
   <string name="privacy_item_secure"><b>The data saved on your smartphone and the connections to the server are encrypted.</b></string>
   <string name="privacy_item_ministry"><b>To help the National Health Service</b> take care of you, Immuni tells the Ministry of Health server the following:\n- The province where you live\n- If the app is working properly\n- If you have been warned of a high-risk contact</string>
   <string name="privacy_item_italy">Your data is saved on servers in Italy, <b>managed by public bodies, and controlled by the Ministry of Health.</b></string>
-  <string name="privacy_item_data_deletion"><b>All data is deleted when it is no longer needed</b>, and in any case no later than 31 December 2020.</string>
+  <string name="privacy_item_data_deletion"><b>All data is deleted when it is no longer needed.</b></string>
   <string name="privacy_checkbox_above14">I declare that I am at least 14 years old</string>
   <string name="privacy_checkbox_privacypolicyread"><![CDATA[I have read the <l>privacy notice</l>]]></string>
   <string name="privacy_tos"><![CDATA[By continuing, I declare that I have read and accepted the <l>terms of use</l>]]></string>
