@@ -191,14 +191,14 @@ des données en cours&#8230;</string>
   <string name="suggestions_header_short_title_neutral">Indications</string>
   <string name="suggestions_neutral_alert">Si vous êtes en contact avec votre médecin ou avec le Service de prévention de votre ASL (agence de santé locale), veuillez suivre toutes les instructions que vous avez reçues.</string>
   <string name="suggestions_neutral_message">Dans tous les cas, <b>essayez toujours de respecter les indications générales suivantes :</b></string>
-  <string name="suggestions_risk_title">Exposition à risque</string>
+  <string name="suggestions_risk_title"> Contact à risque</string>
   <string name="suggestions_risk_subtitle">Immuni a détecté que vous avez été proche d\'un utilisateur testé positif au COVID-19 le %@.</string>
   <string name="suggestions_positive_title">Suivez les instructions</string>
   <string name="suggestions_positive_subtitle"><b>Suivez toutes les instructions fournies par votre médecin ou par le service de prévention de votre ASL (agence de santé locale).</b></string>
-  <string name="suggestions_instruction_ministerial_decree"><b>Respectez toutes les normes locales</b></string>
-  <string name="suggestions_instruction_wash_hands"><b>Se laver régulièrement les mains</b> ou utiliser une solution hydro-alcoolique</string>
-  <string name="suggestions_instruction_use_napkins"><b>Tousser ou éternuer dans son coude ou dans son mouchoir</b></string>
-  <string name="suggestions_instruction_social_distance"><b>Respecter une distance d’au moins un mètre avec les autres</b> et éviter tout rassemblements</string>
+  <string name="suggestions_instruction_ministerial_decree"><b>Respectez toutes les normes locales.</b></string>
+  <string name="suggestions_instruction_wash_hands"><b>Se laver régulièrement les mains</b> ou utiliser une solution hydro-alcoolique.</string>
+  <string name="suggestions_instruction_use_napkins"><b>Tousser ou éternuer dans son coude ou dans son mouchoir.</b></string>
+  <string name="suggestions_instruction_social_distance"><b>Respecter une distance d’au moins un mètre avec les autres</b> et éviter tout rassemblements.</string>
   <string name="suggestions_instruction_mask"><b>Portez un masque dans les lieux intérieurs accessibles au public</b>, y compris les moyens de transport et chaque fois qu\'il n\'est pas possible de garantir en permanence le maintien des distances de sécurité.</string>
   <string name="suggestions_instruction_follow_instructions">Pour protéger votre santé et celle de vos proches, <b>respectez les consignes suivantes :</b></string>
   <string name="suggestions_instruction_contact_doctor_title"><b>Contactez votre médecin généraliste (ou votre pédiatre)</b></string>
@@ -206,7 +206,7 @@ des données en cours&#8230;</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_message">Si vous êtes en contact avec votre médecin ou l\'ASL (agence de santé locale), vous pouvez masquer cet avertissement.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_action">J’ai contacté le médecin</string>
   <string name="suggestions_instruction_while_waiting_doctor">Par mesure de précaution et dans l\'attente des indications de votre médecin ou de l\'ASL (agence de santé locale) :</string>
-  <string name="suggestions_instruction_stay_home"><b>Restez à la maison pendant 14 jours</b> après la date de contact.</string>
+  <string name="suggestions_instruction_stay_home"><b>Rester isolé à votre domicile pendant les 14 jours</b> après le contact avec une personne malade du Covid-19.</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Contrôlez votre température au moins deux fois par jour et prenez en compte l\'apparition de symptômes, même s\'ils sont légers.</b></string>
   <string name="suggestions_instruction_check_symptoms_message">Prêtez particulièrement attention à la fièvre ou à l\'apparition d\'au moins un des symptômes suivants : mal de gorge, toux, rhume ou nez bouché, difficulté à respirer, douleur musculaire, perte ou altération de l\'odorat ou du goût, diarrhée.</string>
   <string name="suggestions_instruction_isolate_title"><b>Si des symptômes apparaissent, isolez-vous des personnes partageant votre domicile.</b></string>
@@ -267,11 +267,11 @@ des données en cours&#8230;</string>
   </plurals>
   <string name="settings_app_version" formatted="false">Immuni v%s (%d)</string>
   <string name="upload_data_diagnosis_keys_overlay_hint">Sélectionnez <b>Partager</b> dans la fenêtre contextuelle qui apparaîtra ci-dessous</string>
-  <string name="suggestions_instruction_stay_home_message">On indication of the ASL, the quarantine period may be reduced to 10 days in the event of a negative antigen or molecular test performed on the tenth day.</string>
-  <string name="suggestions_instruction_limit_movement"><b>Utilisez une chambre bien ventilée et non partagée, avec salle de bain privée si possible,</b> et limitez autant que possible vos déplacements dans les autres parties communes de la maison.</string>
-  <string name="suggestions_instruction_distance"><b>En présence d\'autres personnes, maintenez une distance d\'au moins un mètre.</b></string>
+  <string name="suggestions_instruction_stay_home_message">Sur indication de votre société de santé locale, la période de quarantaine peut être réduite à 10 jours en cas de test anti-hygiène ou moléculaire négatif effectué le dixième jour.</string>
+  <string name="suggestions_instruction_limit_movement"><b>Utiliser une pièce privée et bien aérée, si possible avec une salle de toilette privée.</b> Rester, si possible, dans une pièce séparée et évitez les contacts avec les autres personnes de la maison.</string>
+  <string name="suggestions_instruction_distance"><b>Respecter une distance d’au moins un mètre avec les autres.</b></string>
   <string name="suggestions_instruction_mask_title"><b>Emmener votre propre masque partout.</b> Si vous recevez des personnes chez vous, vous devez porter un masque.</string>
-  <string name="suggestions_instruction_mask_message">Portez le masque à l\'extérieur quand la distance sociale n'est pas possible</string>
+  <string name="suggestions_instruction_mask_message">Portez le masque à l\'extérieur quand la distance sociale n'est pas possible.</string>
   <string name="upload_data_vpn_error_message">Une erreur s\'est produite durant le processus. Merci de bien vouloir réessayer. Si vous utilisez un VPN, nous vous suggérons de le désactiver temporairement ou de sélectionner un serveur italien.</string>
   <string name="suggestions_risk_footer">Afin d\'aider les services de santé nationaux à prendre soin de vous, l\'application a informé le Ministère de la Santé de la notification qui vous a été envoyée. <b>Le Ministère de la Santé ne peut en aucun cas retracer votre identité sur la base de cette information.</b></string>
   <string name="home_view_service_active_advice">Ouvrez Immuni une fois par jour pour vérifier son statut.</string>

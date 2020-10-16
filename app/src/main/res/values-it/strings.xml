@@ -272,7 +272,7 @@ dei dati&#8230;</string>
   <string name="suggestions_instruction_limit_movement"><b>Utilizza una stanza riservata e dotata di buona ventilazione, possibilmente con bagno dedicato,</b> e limita al massimo i movimenti in altri spazi comuni della casa.</string>
   <string name="suggestions_instruction_distance"><b>In presenza di altre persone, mantieni una distanza di almeno un metro.</b></string>
   <string name="suggestions_instruction_mask_title"><b>Porta sempre con te la mascherina</b> e indossala nei luoghi al chiuso diversi dalla tua casa.</string>
-  <string name="suggestions_instruction_mask_message">Indossala a casa in presenza di persone non conviventi. Usala anche all\'aperto quando non è possibile restare isolati.</string>
+  <string name="suggestions_instruction_mask_message">Indossala a casa o in presenza di persone non conviventi. Usala anche all\'aperto quando non è possibile restare isolati.</string>
   <string name="upload_data_vpn_error_message">Si è verificato un errore durante l’operazione. Ti invitiamo a riprovare. Se stai utilizzando una VPN, ti suggeriamo di selezionare un server italiano o di disabilitarla temporaneamente.</string>
   <string name="suggestions_risk_footer">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità, l\'app ha informato il Ministero della Salute della notifica che hai ricevuto. <b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di questa informazione.</b></string>
   <string name="home_view_service_active_advice">Apri Immuni una volta al giorno per verificarne lo stato.</string>
