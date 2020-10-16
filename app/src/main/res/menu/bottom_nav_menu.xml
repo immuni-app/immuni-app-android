@@ -14,7 +14,7 @@
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"> 
 
     <item
         android:id="@+id/home_nav"
