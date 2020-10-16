@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
   ~ Please refer to the AUTHORS file for more information.
@@ -14,15 +13,19 @@
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"> 
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="30dp"
+    android:height="30dp"
+    android:viewportWidth="30"
+    android:viewportHeight="30">
+    <path
+        android:pathData="M22,0H8C3.5817,0 0,3.5817 0,8V22C0,26.4183 3.5817,30 8,30H22C26.4183,30 30,26.4183 30,22V8C30,3.5817 26.4183,0 22,0Z"
+        android:fillColor="#A6AFFF"/>
+    <path
+        android:pathData="M8,14.2595L13.4239,19.6L22.4,10"
+        android:strokeWidth="2.4"
+        android:fillColor="#00000000"
+        android:strokeColor="#ffffff"
+        android:strokeLineCap="round"/>
+</vector>
 
-    <item
-        android:id="@+id/home_nav"
-        android:icon="@drawable/ic_tab_home"
-        android:title="@string/tabbar_title_home" />
-
-    <item
-        android:id="@+id/settings_nav"
-        android:icon="@drawable/ic_tab_settings"
-        android:title="@string/tabbar_title_settings" />
-</menu>

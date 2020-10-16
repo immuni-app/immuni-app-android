@@ -13,29 +13,15 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.ui.home
+package it.ministerodellasalute.immuni.logic.exposure.models
 
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
+import com.squareup.moshi.JsonClass
+import java.util.*
 
-/**
- * Represents an item in the home list.
- */
-
-sealed class HomeItemType
-
-class ProtectionCard(
-    val active: Boolean,
-    val status: ExposureStatus
-) : HomeItemType()
-
-data class SectionHeader(
-    val title: String
-) : HomeItemType()
-
-sealed class InformationCard : HomeItemType()
-
-object HowItWorksCard : InformationCard()
-object SelfCareCard : InformationCard()
-object CountriesOfInterestCard : InformationCard()
-
-data class DisableExposureApi(val isEnabled: Boolean) : HomeItemType()
+@JsonClass(generateAdapter = true)
+data class CountryOfInterest(
+    var code: String,
+    var fullName: String,
+    var insertDate: Date?,
+    var lastProcessedChunk: Int = 0
+)

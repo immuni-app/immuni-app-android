@@ -238,6 +238,9 @@ class HomeFragment : Fragment(),
             SelfCareCard -> {
                 openSelfCare()
             }
+            CountriesOfInterestCard -> {
+                openCountriesOfInterest()
+            }
             is DisableExposureApi -> {
                 openDisableExposureApi()
             }
@@ -266,6 +269,11 @@ class HomeFragment : Fragment(),
 
     private fun openDisableExposureApi() {
         val action = HomeFragmentDirections.actionDisableExposureApi()
+        findNavController().navigate(action)
+    }
+
+    private fun openCountriesOfInterest() {
+        val action = HomeFragmentDirections.actionCountriesOfInterest()
         findNavController().navigate(action)
     }
 }

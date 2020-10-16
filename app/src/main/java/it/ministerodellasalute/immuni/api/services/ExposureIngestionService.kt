@@ -50,7 +50,8 @@ interface ExposureIngestionService {
         @field:Json(name = "teks") val teks: List<TemporaryExposureKey>,
         @field:Json(name = "province") val province: Province,
         @field:Json(name = "exposure_detection_summaries") val exposureSummaries: List<ExposureSummary>,
-        @field:Json(name = "padding") override val padding: String = ""
+        @field:Json(name = "padding") override val padding: String = "",
+        @field:Json(name = "countries_of_interest") val countries: List<String>
     ) : RequestWithPadding
 
     @POST("/v1/ingestion/upload")

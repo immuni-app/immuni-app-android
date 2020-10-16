@@ -18,9 +18,11 @@ package it.ministerodellasalute.immuni.logic.exposure.repositories
 import com.squareup.moshi.JsonClass
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager.Companion.DAYS_OF_SELF_ISOLATION
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
+import it.ministerodellasalute.immuni.extensions.utils.DateUtils.MILLIS_IN_A_DAY
+import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
-import java.util.*
 import kotlinx.coroutines.flow.StateFlow
+import java.util.*
 
 class ExposureReportingRepository(
     private val storage: KVStorage
@@ -28,10 +30,14 @@ class ExposureReportingRepository(
     @JsonClass(generateAdapter = true)
     data class ExposureSummaryList(val values: List<ExposureSummary>)
 
+    @JsonClass(generateAdapter = true)
+    data class CountryOfInterestList(val values: List<CountryOfInterest>)
+
     companion object {
         private val summariesKey = KVStorage.Key<ExposureSummaryList>("summaries")
         private val lastProcessedChunkKey = KVStorage.Key<Int>("LastProcessedChunk")
         private val lastSuccessfulCheckDateKey = KVStorage.Key<Date>("LastSuccessfulCheckDate")
+        private val countriesOfInterestKey = KVStorage.Key<CountryOfInterestList>("CountriesOfInterest")
     }
 
     fun getSummaries(): List<ExposureSummary> {
@@ -84,5 +90,13 @@ class ExposureReportingRepository(
 
     fun setLastSuccessfulCheckDate(value: Date) {
         storage[lastSuccessfulCheckDateKey] = value
+    }
+
+    fun getCountriesOfInterest(): List<CountryOfInterest> {
+        return storage[countriesOfInterestKey]?.values ?: listOf()
+    }
+
+    fun setCountriesOfInterest(countries: List<CountryOfInterest>) {
+        storage[countriesOfInterestKey] = CountryOfInterestList(countries)
     }
 }
