@@ -198,7 +198,7 @@ des données en cours&#8230;</string>
   <string name="suggestions_instruction_ministerial_decree"><b>Respectez la législation en vigueur dans votre région.</b></string>
   <string name="suggestions_instruction_wash_hands"><b>Lavez-vous fréquemment les mains</b> à l\'eau et au savon ou avec une solution hydroalcoolique.</string>
   <string name="suggestions_instruction_use_napkins"><b>Toussez et éternuez directement dans un mouchoir en papier ou dans votre coude.</b></string>
-  <string name="suggestions_instruction_social_distance"><b>Respectez les mesures de distanciation physique</b> et évitez les rassemblements.</string>
+  <string name="suggestions_instruction_social_distance"><b>Respect physical distancing measures</b> and avoid gatherings.</string>
   <string name="suggestions_instruction_mask"><b>Portez un masque dans les lieux intérieurs accessibles au public</b>, y compris les moyens de transport et chaque fois qu\'il n\'est pas possible de garantir en permanence le maintien des distances de sécurité.</string>
   <string name="suggestions_instruction_follow_instructions">Pour protéger votre santé et celle de vos proches, <b>respectez les consignes suivantes :</b></string>
   <string name="suggestions_instruction_contact_doctor_title"><b>Contactez votre médecin généraliste (ou votre pédiatre)</b></string>
@@ -267,11 +267,11 @@ des données en cours&#8230;</string>
   </plurals>
   <string name="settings_app_version" formatted="false">Immuni v%s (%d)</string>
   <string name="upload_data_diagnosis_keys_overlay_hint">Sélectionnez <b>Partager</b> dans la fenêtre contextuelle qui apparaîtra ci-dessous</string>
-  <string name="suggestions_instruction_stay_home_message">Utilisez une chambre bien ventilée et non partagée, avec salle de bain privée si possible.</string>
-  <string name="suggestions_instruction_limit_movement"><b>Limitez autant que possible vos déplacements dans les autres parties communes de la maison.</b></string>
-  <string name="suggestions_instruction_distance"><b>En présence d\'autres personnes, maintenez une distance d\'au moins un mètre. Sur indication de l'ASL, la période de quarantaine peut être ramenée à 10 jours en cas d'antigène négatif ou de test moléculaire effectué le dixième jour.</b></string>
-  <string name="suggestions_instruction_mask_title"><b>Ayez toujours un masque avec vous</b></string>
-  <string name="suggestions_instruction_mask_message">portez-le dans des endroits intérieurs autres que votre domicile (portez-le également à la maison en présence de personnes non cohabitantes) Utilisez-le également à l\'extérieur lorsqu'il n'est pas possible de rester isolé.</string>
+  <string name="suggestions_instruction_stay_home_message">On indication of the ASL, the quarantine period may be reduced to 10 days in the event of a negative antigen or molecular test performed on the tenth day.</string>
+  <string name="suggestions_instruction_limit_movement"><b>Utilisez une chambre bien ventilée et non partagée, avec salle de bain privée si possible,</b> et limitez autant que possible vos déplacements dans les autres parties communes de la maison.</string>
+  <string name="suggestions_instruction_distance"><b>En présence d\'autres personnes, maintenez une distance d\'au moins un mètre.</b></string>
+  <string name="suggestions_instruction_mask_title"><b>Always carry a mask with you</b> and wear it in indoor places other than your home.</string>
+  <string name="suggestions_instruction_mask_message">Wear it at home in presence of non-cohabiting people. Also use it outdoors when it is not possible to remain isolated.</string>
   <string name="upload_data_vpn_error_message">Une erreur s\'est produite durant le processus. Merci de bien vouloir réessayer. Si vous utilisez un VPN, nous vous suggérons de le désactiver temporairement ou de sélectionner un serveur italien.</string>
   <string name="suggestions_risk_footer">Afin d\'aider les services de santé nationaux à prendre soin de vous, l\'application a informé le Ministère de la Santé de la notification qui vous a été envoyée. <b>Le Ministère de la Santé ne peut en aucun cas retracer votre identité sur la base de cette information.</b></string>
   <string name="home_view_service_active_advice">Ouvrez Immuni une fois par jour pour vérifier son statut.</string>
