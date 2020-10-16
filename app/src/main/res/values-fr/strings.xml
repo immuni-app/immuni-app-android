@@ -271,7 +271,7 @@ des données en cours&#8230;</string>
   <string name="suggestions_instruction_limit_movement"><b>Utiliser une pièce privée et bien aérée, si possible avec une salle de toilette privée.</b> Rester, si possible, dans une pièce séparée et évitez les contacts avec les autres personnes de la maison.</string>
   <string name="suggestions_instruction_distance"><b>Respecter une distance d’au moins un mètre avec les autres.</b></string>
   <string name="suggestions_instruction_mask_title"><b>Emmener votre propre masque partout.</b> Si vous recevez des personnes chez vous, vous devez porter un masque.</string>
-  <string name="suggestions_instruction_mask_message">Portez le masque à l\'extérieur quand la distance sociale n'est pas possible.</string>
+  <string name="suggestions_instruction_mask_message">Portez le masque à l\'extérieur quand la distance sociale n\'est pas possible.</string>
   <string name="upload_data_vpn_error_message">Une erreur s\'est produite durant le processus. Merci de bien vouloir réessayer. Si vous utilisez un VPN, nous vous suggérons de le désactiver temporairement ou de sélectionner un serveur italien.</string>
   <string name="suggestions_risk_footer">Afin d\'aider les services de santé nationaux à prendre soin de vous, l\'application a informé le Ministère de la Santé de la notification qui vous a été envoyée. <b>Le Ministère de la Santé ne peut en aucun cas retracer votre identité sur la base de cette information.</b></string>
   <string name="home_view_service_active_advice">Ouvrez Immuni une fois par jour pour vérifier son statut.</string>
