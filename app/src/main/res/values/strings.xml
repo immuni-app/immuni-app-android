@@ -263,11 +263,11 @@
   </plurals>
   <string name="settings_app_version" formatted="false">Immuni v%s (%d)</string>
   <string name="upload_data_diagnosis_keys_overlay_hint">Select \'<b>Share</b>\' in the pop-up that appears below</string>
-  <string name="suggestions_instruction_stay_home_message">Use a well-ventilated private room, if possible with its own bathroom.</string>
-  <string name="suggestions_instruction_limit_movement"><b>Minimise the time you spend in other common areas of the house.</b></string>
-  <string name="suggestions_instruction_distance"><b>Keep a distance of at least one metre when around other people. On the indication of the ASL, the quarantine period may be reduced to 10 days in the event of a negative antigen or molecular test carried out on the tenth day.</b></string>
-  <string name="suggestions_instruction_mask_title"><b>Always carry a mask with you</b></string>
-  <string name="suggestions_instruction_mask_message">wear it in indoor places other than your home (also wear it at home in the presence of non-cohabiting people). Also use it outdoors when it is not possible to remain isolated.</string>
+  <string name="suggestions_instruction_stay_home_message">On indication of the ASL, the quarantine period may be reduced to 10 days in the event of a negative antigen or molecular test performed on the tenth day.</string>
+  <string name="suggestions_instruction_limit_movement"><b>Use a well-ventilated private room, if possible with its own bathroom,</b> and minimise the time you spend in other common areas of the house.</string>
+  <string name="suggestions_instruction_distance"><b>Keep a distance of at least one metre when around other people.</b></string>
+  <string name="suggestions_instruction_mask_title"><b>Always carry a mask with you</b> and wear it in indoor places other than your home.</string>
+  <string name="suggestions_instruction_mask_message">Wear it at home in presence of non-cohabiting people. Also use it outdoors when it is not possible to remain isolated.</string>
   <string name="upload_data_vpn_error_message">An error occurred during the operation. Please try again. If you are using a VPN, we suggest that you select an Italian server or temporarily disable it.</string>
   <string name="suggestions_risk_footer">To help the National Health Service take care of you should the need arise, the app has informed the Ministry of Health of the notification you have received. <b>Please note, the Ministry of Health cannot determine your identity based on this information.</b></string>
   <string name="home_view_service_active_advice">Open Immuni once a day to check its status.</string>
