@@ -3,8 +3,8 @@
 buildscript {
     ext {
         // App version digits
-        versionMajor = 1
-        versionMinor = 5
+        versionMajor = 2
+        versionMinor = 0
         versionPatch = 0
 
         // Version name follows the <major>.<minor>.<patch> convention
