@@ -199,7 +199,7 @@ dei dati&#8230;</string>
   <string name="suggestions_instruction_ministerial_decree"><b>Rispetta la normativa vigente nella tua area.</b></string>
   <string name="suggestions_instruction_wash_hands"><b>Lavati frequentemente le mani</b> con acqua e sapone o con soluzioni idroalcoliche.</string>
   <string name="suggestions_instruction_use_napkins"><b>Tossisci e starnutisci direttamente su un fazzoletto di carta o nella piega del gomito.</b></string>
-  <string name="suggestions_instruction_social_distance"><b>Rispetta le misure di distanziamento fisico</b> se devi uscire di casa.</string>
+  <string name="suggestions_instruction_social_distance"><b>Rispetta le misure di distanziamento fisico</b> ed evita gli assembramenti.</string>
   <string name="suggestions_instruction_mask"><b>Indossa una mascherina nei luoghi al chiuso accessibili al pubblico</b>, inclusi i mezzi di trasporto e comunque in tutte le occasioni in cui non sia possibile garantire continuativamente il mantenimento della distanza di sicurezza.</string>
   <string name="suggestions_instruction_follow_instructions">Per proteggere la tua salute e quella dei tuoi cari, <b>rispetta le seguenti indicazioni:</b></string>
   <string name="suggestions_instruction_contact_doctor_title"><b>Contatta il tuo Medico di Medicina Generale (o il Pediatra di Libera Scelta)</b></string>
@@ -268,11 +268,11 @@ dei dati&#8230;</string>
   </plurals>
   <string name="settings_app_version" formatted="false">Immuni v%s (%d)</string>
   <string name="upload_data_diagnosis_keys_overlay_hint">Seleziona \"<b>Condividi</b>\" nel popup che apparirà qui sotto</string>
-  <string name="suggestions_instruction_stay_home_message">Utilizza una stanza riservata e dotata di buona ventilazione, possibilmente con bagno dedicato.</string>
-  <string name="suggestions_instruction_limit_movement"><b>Limita al massimo i movimenti in altri spazi comuni della casa.</b></string>
+  <string name="suggestions_instruction_stay_home_message">Su indicazione dell\'ASL, il periodo di quarantena potrà essere ridotto a 10 giorni in caso di test antigenico o molecolare negativo effettuato il decimo giorno.</string>
+  <string name="suggestions_instruction_limit_movement"><b>Utilizza una stanza riservata e dotata di buona ventilazione, possibilmente con bagno dedicato,</b> e limita al massimo i movimenti in altri spazi comuni della casa.</string>
   <string name="suggestions_instruction_distance"><b>In presenza di altre persone, mantieni una distanza di almeno un metro.</b></string>
-  <string name="suggestions_instruction_mask_title"><b>Indossa una mascherina nei luoghi al chiuso accessibili al pubblico.</b></string>
-  <string name="suggestions_instruction_mask_message">Inclusi i mezzi di trasporto e comunque in tutte le occasioni in cui non sia possibile garantire continuativamente il mantenimento della distanza di sicurezza.</string>
+  <string name="suggestions_instruction_mask_title"><b>Porta sempre con te la mascherina</b> e indossala nei luoghi al chiuso diversi dalla tua casa.</string>
+  <string name="suggestions_instruction_mask_message">Indossala a casa o in presenza di persone non conviventi. Usala anche all\'aperto quando non è possibile restare isolati.</string>
   <string name="upload_data_vpn_error_message">Si è verificato un errore durante l’operazione. Ti invitiamo a riprovare. Se stai utilizzando una VPN, ti suggeriamo di selezionare un server italiano o di disabilitarla temporaneamente.</string>
   <string name="suggestions_risk_footer">Per aiutare il Servizio Sanitario Nazionale a prendersi cura di te in caso di necessità, l\'app ha informato il Ministero della Salute della notifica che hai ricevuto. <b>Il Ministero della Salute non può in ogni caso risalire alla tua identità sulla base di questa informazione.</b></string>
   <string name="home_view_service_active_advice">Apri Immuni una volta al giorno per verificarne lo stato.</string>
