@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'com.huawei.agconnect'
 
 // Template properties file
 def mockPropertiesFile = rootProject.file("template.properties")
@@ -22,11 +23,17 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
 
     signingConfigs {
-        release {
+        /*release {
             keyAlias appProperties['keyAlias']
             keyPassword appProperties['keyPassword']
             storeFile file(appProperties['storeFile'])
             storePassword appProperties['storePassword']
+        }*/
+        release {
+            storeFile file('./keystoreDebug.jks')
+            keyAlias 'key0'
+            keyPassword 'test123'
+            storePassword 'test123'
         }
     }
     defaultConfig {
@@ -73,6 +80,15 @@ android {
 
     testOptions {
         unitTests.returnDefaultValues = true
+    }
+
+    flavorDimensions 'store'
+    productFlavors {
+        google {
+        }
+        huawei {
+            applicationId "it.ministerodellasalute.immuni.huaweidevitaly"
+        }
     }
 }
 

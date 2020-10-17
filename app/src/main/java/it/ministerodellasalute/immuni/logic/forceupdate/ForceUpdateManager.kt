@@ -16,10 +16,9 @@
 package it.ministerodellasalute.immuni.logic.forceupdate
 
 import android.content.Context
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.storeservices.StoreServices
 import kotlinx.coroutines.flow.*
 
 /**
@@ -29,6 +28,8 @@ class ForceUpdateManager(
     private val context: Context,
     private val settingsManager: ConfigurationSettingsManager
 ) {
+    private val storeServicesClient = StoreServices()
+
     val shouldShowForceUpdate: Flow<Boolean> = settingsManager.settings.map {
         isAppOutdated || !arePlayServicesAvailable
     }.distinctUntilChanged().filter { it }.conflate()
@@ -36,9 +37,9 @@ class ForceUpdateManager(
     private val arePlayServicesAvailable: Boolean
     get() {
         return when (playServicesStatus) {
-            PlayServicesStatus.AVAILABLE -> true
-            PlayServicesStatus.UPDATE_REQUIRED,
-            PlayServicesStatus.NOT_AVAILABLE -> false
+            StoreServicesClient.ServicesStatus.AVAILABLE -> true
+            StoreServicesClient.ServicesStatus.UPDATE_REQUIRED,
+            StoreServicesClient.ServicesStatus.NOT_AVAILABLE -> false
         }
     }
 
@@ -46,33 +47,22 @@ class ForceUpdateManager(
         get() = settingsManager.isAppOutdated
 
     val playServicesRequireUpdate: Boolean
-        get() = playServicesStatus == PlayServicesStatus.UPDATE_REQUIRED
+        get() = playServicesStatus == StoreServicesClient.ServicesStatus.UPDATE_REQUIRED
 
     val exposureNotificationsNotAvailable: Boolean
-        get() = playServicesStatus == PlayServicesStatus.NOT_AVAILABLE
+        get() = playServicesStatus == StoreServicesClient.ServicesStatus.NOT_AVAILABLE
 
     val updateRequired: Boolean
         get() = isAppOutdated || playServicesRequireUpdate || exposureNotificationsNotAvailable
 
-    val playServicesStatus: PlayServicesStatus
+    val playServicesStatus: StoreServicesClient.ServicesStatus
         get() {
             val hasExposureNotificationSettings =
                 ExposureNotificationClient.hasExposureNotificationSettings(context)
             if (hasExposureNotificationSettings) {
-                return PlayServicesStatus.AVAILABLE
+                return StoreServicesClient.ServicesStatus.AVAILABLE
             }
 
-            val status = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context)
-            val isUpdateRequired = status in listOf(
-                ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED,
-                ConnectionResult.SERVICE_UPDATING
-            )
-            return if (isUpdateRequired) PlayServicesStatus.UPDATE_REQUIRED else PlayServicesStatus.NOT_AVAILABLE
+            return storeServicesClient.getServicesUpdateStatus(context)
         }
-}
-
-enum class PlayServicesStatus {
-    NOT_AVAILABLE,
-    UPDATE_REQUIRED,
-    AVAILABLE
 }

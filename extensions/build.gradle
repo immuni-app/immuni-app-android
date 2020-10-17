@@ -32,6 +32,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    flavorDimensions 'store'
+    productFlavors {
+        google {
+        }
+        huawei {
+        }
+    }
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
@@ -55,10 +63,15 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:$workVersion"
 
     // Google GMS
-    implementation 'com.google.android.gms:play-services-tasks:17.0.2'
-    api 'com.google.android.gms:play-services-base:17.2.1'
-    implementation 'com.google.android.gms:play-services-basement:17.2.1'
-    implementation 'com.google.android.gms:play-services-safetynet:17.0.0'
+    googleImplementation 'com.google.android.gms:play-services-tasks:17.0.2'
+    googleApi 'com.google.android.gms:play-services-base:17.2.1'
+    googleImplementation 'com.google.android.gms:play-services-basement:17.2.1'
+    googleImplementation 'com.google.android.gms:play-services-safetynet:17.0.0'
+
+    // Huawei HMS
+    huaweiImplementation "com.huawei.hms:contactshield:$contactShieldVersion"
+    huaweiImplementation "com.huawei.hms:safetydetect:$safetyDetectVersion"
+    huaweiApi "com.huawei.hms:game:$gameServiceVersion"
 
     //Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"

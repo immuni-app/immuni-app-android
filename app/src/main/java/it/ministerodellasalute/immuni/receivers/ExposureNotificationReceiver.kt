@@ -23,6 +23,7 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
+import it.ministerodellasalute.immuni.extensions.nearby_constants.NearbyConstants
 import it.ministerodellasalute.immuni.extensions.utils.log
 import it.ministerodellasalute.immuni.workers.StateUpdatedWorker
 import it.ministerodellasalute.immuni.workers.StateUpdatedWorker.Companion.TOKEN_KEY
@@ -35,8 +36,8 @@ class ExposureNotificationReceiver : BroadcastReceiver() {
         log("ExposureNotificationReceiver action received")
         val action = intent.action
         val workManager = WorkManager.getInstance(context)
-        if (ExposureNotificationClient.ACTION_EXPOSURE_STATE_UPDATED == action) {
-            val token = intent.getStringExtra(ExposureNotificationClient.EXTRA_TOKEN)!!
+        if (NearbyConstants.ACTION_EXPOSURE_STATE_UPDATED == action) {
+            val token = intent.getStringExtra(NearbyConstants.EXTRA_TOKEN)!!
             workManager.enqueueUniqueWork(
                 "StateUpdatedWorker",
                 ExistingWorkPolicy.KEEP,

@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.extensions.nearby
 
 import android.content.Context
 import android.content.Intent
+import it.ministerodellasalute.immuni.extensions.nearby_constants.NearbyConstants
 import java.io.File
 
 interface ExposureNotificationClient {
@@ -85,12 +86,7 @@ interface ExposureNotificationClient {
     )
 
     companion object {
-        const val ACTION_EXPOSURE_STATE_UPDATED = com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient.ACTION_EXPOSURE_STATE_UPDATED
-        const val EXTRA_EXPOSURE_SUMMARY = com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient.EXTRA_EXPOSURE_SUMMARY
-        const val EXTRA_TOKEN = com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient.EXTRA_TOKEN
-        const val ACTION_EXPOSURE_NOTIFICATION_SETTINGS = com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient.ACTION_EXPOSURE_NOTIFICATION_SETTINGS
-
-        val exposureNotificationSettingsIntent get() = Intent(ACTION_EXPOSURE_NOTIFICATION_SETTINGS)
+        val exposureNotificationSettingsIntent get() = Intent(NearbyConstants.ACTION_EXPOSURE_NOTIFICATION_SETTINGS)
 
         fun hasExposureNotificationSettings(context: Context): Boolean {
             return exposureNotificationSettingsIntent.resolveActivity(context.packageManager) != null

@@ -21,15 +21,14 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
 import android.text.format.DateFormat
-import androidx.core.content.pm.PackageInfoCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
-import com.google.android.gms.common.GoogleApiAvailability
 import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.storeservices.StoreServices
 import kotlinx.coroutines.flow.map
 
 class SupportViewModel(
@@ -89,15 +88,7 @@ class SupportViewModel(
         )
         emit(version)
     }
-    val googlePlayVersion = liveData {
-        val version = PackageInfoCompat.getLongVersionCode(
-            context.packageManager.getPackageInfo(
-                GoogleApiAvailability.GOOGLE_PLAY_SERVICES_PACKAGE,
-                0
-            )
-        )
-        emit(version.toString())
-    }
+    val googlePlayVersion = StoreServices().getVersionInformation(context)
 
     val connectionType = liveData {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
