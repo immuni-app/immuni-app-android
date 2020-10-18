@@ -65,7 +65,4 @@ class StoreServices : StoreServicesClient {
         )
         emit(version.toString())
     }
-
-    override fun update() {
-    }
 }

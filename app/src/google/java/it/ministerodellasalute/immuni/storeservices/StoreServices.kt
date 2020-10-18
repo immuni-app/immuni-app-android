@@ -30,9 +30,6 @@ class StoreServices: StoreServicesClient {
         PlayStoreActions.goToPlayStoreAppDetails(context, playServicesPackage)
     }
 
-    override fun update() {
-    }
-
     override fun getVersionInformation(context: Context) = liveData {
         val version = PackageInfoCompat.getLongVersionCode(
             context.packageManager.getPackageInfo(

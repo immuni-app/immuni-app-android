@@ -1,4 +1,4 @@
-package it.ministerodellasalute.immuni.extensions.nearby_constants
+package it.ministerodellasalute.immuni.extensions.nearby
 
 object NearbyConstants {
     const val ACTION_EXPOSURE_STATE_UPDATED = ""

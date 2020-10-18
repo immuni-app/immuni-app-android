@@ -10,8 +10,6 @@ interface StoreServicesClient {
 
     fun checkUpdate(context: Context)
 
-    fun update()
-
     fun getVersionInformation(context: Context): LiveData<String>
 
     enum class ServicesStatus {

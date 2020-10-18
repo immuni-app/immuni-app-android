@@ -17,7 +17,6 @@ package it.ministerodellasalute.immuni.extensions.nearby
 
 import android.content.Context
 import android.content.Intent
-import it.ministerodellasalute.immuni.extensions.nearby_constants.NearbyConstants
 import java.io.File
 
 interface ExposureNotificationClient {
