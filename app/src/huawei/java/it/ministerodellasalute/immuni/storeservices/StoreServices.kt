@@ -14,7 +14,7 @@ import it.ministerodellasalute.immuni.logic.forceupdate.StoreServicesClient
 
 class StoreServices : StoreServicesClient {
 
-    private val minVersion = 500030300
+    private val minVersion = 40100300
 
     override fun areServicesAvailable(context: Context) =
         HuaweiApiAvailability.getInstance()

@@ -35,13 +35,12 @@ class ExposureNotificationClientWrapper(
     override suspend fun start() {
         withContext(Dispatchers.Default) {
             val result = CompletableDeferred<Boolean>()
-            client.startContactShield(ContactShieldSetting.DEFAULT).addOnCompleteListener { task ->
-                task.addOnSuccessListener {
+            client.startContactShield(ContactShieldSetting.DEFAULT)
+                .addOnSuccessListener {
                     result.complete(true)
                 }.addOnFailureListener {
                     result.completeExceptionally(it)
                 }
-            }
 
             result.await()
         }
@@ -50,12 +49,10 @@ class ExposureNotificationClientWrapper(
     override suspend fun stop() {
         withContext(Dispatchers.Default) {
             val result = CompletableDeferred<Boolean>()
-            client.stopContactShield().addOnCompleteListener { task ->
-                task.addOnSuccessListener {
-                    result.complete(true)
-                }.addOnFailureListener {
-                    result.completeExceptionally(it)
-                }
+            client.stopContactShield().addOnSuccessListener {
+                result.complete(true)
+            }.addOnFailureListener {
+                result.completeExceptionally(it)
             }
 
             result.await()
@@ -66,12 +63,10 @@ class ExposureNotificationClientWrapper(
 
     override suspend fun isEnabled(): Boolean = withContext(Dispatchers.Default) {
         val result = CompletableDeferred<Boolean>()
-        client.isContactShieldRunning.addOnCompleteListener { task ->
-            task.addOnSuccessListener {
-                result.complete(true)
-            }.addOnFailureListener {
-                result.completeExceptionally(it)
-            }
+        client.isContactShieldRunning.addOnSuccessListener {
+            result.complete(it)
+        }.addOnFailureListener {
+            result.completeExceptionally(it)
         }
 
         result.await()
@@ -81,19 +76,19 @@ class ExposureNotificationClientWrapper(
         return withContext(Dispatchers.Default) {
             val result =
                 CompletableDeferred<List<ExposureNotificationClient.TemporaryExposureKey>>()
-            client.periodicKey.addOnCompleteListener { task ->
-                task.addOnSuccessListener {
-                    result.complete(it.map { key ->
-                        ExposureNotificationClient.TemporaryExposureKey(
-                            keyData = Base64.encodeToString(key.content, Base64.NO_WRAP),
-                            rollingStartIntervalNumber = key.periodicKeyValidTime.toInt(),
-                            rollingPeriod = key.periodicKeyLifeTime.toInt(),
-                            transmissionRiskLevel = ExposureNotificationClient.RiskLevel.fromValue(key.initialRiskLevel)
+            client.periodicKey.addOnSuccessListener {
+                result.complete(it.map { key ->
+                    ExposureNotificationClient.TemporaryExposureKey(
+                        keyData = Base64.encodeToString(key.content, Base64.NO_WRAP),
+                        rollingStartIntervalNumber = key.periodicKeyValidTime.toInt(),
+                        rollingPeriod = key.periodicKeyLifeTime.toInt(),
+                        transmissionRiskLevel = ExposureNotificationClient.RiskLevel.fromValue(
+                            key.initialRiskLevel
                         )
-                    })
-                }.addOnFailureListener {
-                    result.completeExceptionally(it)
-                }
+                    )
+                })
+            }.addOnFailureListener {
+                result.completeExceptionally(it)
             }
 
             result.await()
@@ -124,12 +119,10 @@ class ExposureNotificationClientWrapper(
         withContext(Dispatchers.Default) {
             val result = CompletableDeferred<Boolean>()
             client.putSharedKeyFiles(intent, keyFiles, diagnosisConfiguration, token)
-                .addOnCompleteListener { task ->
-                    task.addOnSuccessListener {
-                        result.complete(true)
-                    }.addOnFailureListener {
-                        result.completeExceptionally(it)
-                    }
+                .addOnSuccessListener {
+                    result.complete(true)
+                }.addOnFailureListener {
+                    result.completeExceptionally(it)
                 }
 
             result.await()
@@ -139,12 +132,10 @@ class ExposureNotificationClientWrapper(
     override suspend fun getExposureSummary(token: String): ExposureNotificationClient.ExposureSummary {
         val summary = withContext(Dispatchers.Default) {
             val result = CompletableDeferred<ContactSketch>()
-            client.getContactSketch(token).addOnCompleteListener { task ->
-                task.addOnSuccessListener {
-                    result.complete(it)
-                }.addOnFailureListener {
-                    result.completeExceptionally(it)
-                }
+            client.getContactSketch(token).addOnSuccessListener {
+                result.complete(it)
+            }.addOnFailureListener {
+                result.completeExceptionally(it)
             }
 
             return@withContext result.await()
@@ -164,12 +155,10 @@ class ExposureNotificationClientWrapper(
     override suspend fun getExposureInformation(token: String): List<ExposureNotificationClient.ExposureInformation> {
         val exposureInfo = withContext(Dispatchers.Default) {
             val result = CompletableDeferred<List<ContactDetail>>()
-            client.getContactDetail(token).addOnCompleteListener { task ->
-                task.addOnSuccessListener {
-                    result.complete(it)
-                }.addOnFailureListener {
-                    result.completeExceptionally(it)
-                }
+            client.getContactDetail(token).addOnSuccessListener {
+                result.complete(it)
+            }.addOnFailureListener {
+                result.completeExceptionally(it)
             }
 
             return@withContext result.await()
