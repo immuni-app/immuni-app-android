@@ -186,17 +186,17 @@
   <string name="confirm_data_close_verify_alert_message">Ihre Daten wurden noch nicht hochgeladen.</string>
   <string name="confirm_data_close_verify_alert_affermative_answer">Ja, schließen</string>
   <string name="confirm_data_close_verify_alert_negative_answer">Abbrechen</string>
-  <string name="suggestions_header_short_title_neutral">Wegbeschreibung für Sie</string>
+  <string name="suggestions_header_short_title_neutral">Vorschriften für Sie</string>
   <string name="suggestions_neutral_alert">Wenn Sie mit Ihrem Arzt oder der Abteilung für Gesundheitsvorsorge Ihrer örtlichen Gesundheitsbehörde in Kontakt stehen, befolgen Sie alle Anweisungen, die Sie erhalten haben.</string>
   <string name="suggestions_neutral_message">Versuchen Sie stets, diese <b>allgemeinen Hinweise</b> zu berücksichtigen:</string>
   <string name="suggestions_risk_title">Risikoexposition</string>
   <string name="suggestions_risk_subtitle">Immuni hat festgestellt, dass Sie am Tag %@ einem Nutzer nahe waren, der positiv auf COVID-19 getestet wurde.</string>
   <string name="suggestions_positive_title">Folgen Sie den Anweisungen</string>
   <string name="suggestions_positive_subtitle"><b>Befolgen Sie alle Anweisungen, die Sie von Ihrem Arzt oder der Abteilung für Gesundheitsvorsorge Ihrer örtlichen Gesundheitsbehörde erhalten haben.</b></string>
-  <string name="suggestions_instruction_ministerial_decree"><b> Respektieren Sie das Gesetz in Ihrer Nähe</b></string>
-  <string name="suggestions_instruction_wash_hands"><b>Waschen Sie Ihre Hände häufig</b> mit Wasser und Seife oder hydro alkoholischen Lösungen.</string>
-  <string name="suggestions_instruction_use_napkins"><b>Husten und Niesen direkt auf einem Papiertaschentuch oder in der Ellbogenbeuge.</b></string>
-  <string name="suggestions_instruction_social_distance"><b>Respektieren Sie physische Distanzierung Maßnahmen</b> und vermeiden Sie Versammlungen.</string>
+  <string name="suggestions_instruction_ministerial_decree"><b>Respektieren Sie die maßnahmen in Ihrem gebiet</b></string>
+  <string name="suggestions_instruction_wash_hands"><b>Waschen Sie Ihre Hände häufig</b> mit Wasser und Seife oder hydroalkoholischen Lösungen.</string>
+  <string name="suggestions_instruction_use_napkins"><b>Husten Sie und Niesen Sie direkt auf einem Papiertaschentuch oder in der Ellbogenbeuge.</b></string>
+  <string name="suggestions_instruction_social_distance"><b>Respektieren Sie die maßnahmen des körperlichen Abstand</b> und vermeiden Sie Versammlungen.</string>
   <string name="suggestions_instruction_mask"><b>Tragen Sie eine Maske an öffentlich zugänglichen Orten in Innenräumen</b>, einschließlich Transportmitteln, und in allen Fällen, in denen es nicht möglich ist, die Einhaltung des Sicherheitsabstands kontinuierlich zu gewährleisten.</string>
   <string name="suggestions_instruction_follow_instructions">Beachten Sie zum Schutz Ihrer Gesundheit und der Ihrer Angehörigen <b>die folgenden Richtlinien:</b></string>
   <string name="suggestions_instruction_contact_doctor_title"><b>Wenden Sie sich an Ihren Hausarzt (oder an einen Kinderarzt Ihrer Wahl)</b></string>
@@ -204,7 +204,7 @@
   <string name="suggestions_instruction_hide_if_contact_doctor_message">Wenn Sie mit Ihrem Arzt oder Ihrer örtlichen Gesundheitsbehörde in Kontakt stehen, können Sie diese Warnung ausblenden.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_action">Ich habe den Arzt kontaktiert</string>
   <string name="suggestions_instruction_while_waiting_doctor">Als Vorsichtsmaßnahme, bis die Angaben Ihres Arztes oder Ihrer örtlichen Gesundheitsbehörde vorliegen:</string>
-  <string name="suggestions_instruction_stay_home">Bleiben Sie nach dem Kontaktdatum <b>14 Tage zu Hause.</b></string>
+  <string name="suggestions_instruction_stay_home"><b>Bleiben Sie 14 Tage</b> nach dem Kontaktdatum zu Hause.</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Messen Sie die Körpertemperatur mindestens zweimal täglich und beurteilen Sie das Auftreten auch milder Symptome.</b></string>
   <string name="suggestions_instruction_check_symptoms_message">Insbesondere bei Fieber oder Auftreten von mindestens einem der folgenden Symptome: Halsschmerzen, Husten, Erkältung oder verstopfte Nase, Atembeschwerden, Muskelschmerzen, Verlust oder Veränderung von Geruch oder Geschmack, Durchfall.</string>
   <string name="suggestions_instruction_isolate_title"><b>Wenn Symptome auftreten, isolieren Sie sich vom Rest Ihrer Mitbewohner.</b></string>
@@ -265,11 +265,11 @@
   </plurals>
   <string name="settings_app_version" formatted="false">Immuni v%s (%d)</string>
   <string name="upload_data_diagnosis_keys_overlay_hint">Tippen Sie auf \"<b>Freigeben</b>\" in dem Popup-Fenster, das unten angezeigt wird</string>
-  <string name="suggestions_instruction_stay_home_message">Bei Angabe der ASL kann die Quarantänezeit auf 10 Tage verkürzt werden, wenn am zehnten Tag ein negativer Anti-Hygiene- oder molekularer Test durchgeführt wird.</string>
-  <string name="suggestions_instruction_limit_movement"><b>Verwenden Sie einen privaten Raum mit guter Belüftung, möglicherweise mit einem eigenen Badezimmer,</b> und beschränken Sie die Bewegungen so weit wie möglich auf anderen gemeinsamen Räumen des Hauses.</string>
+  <string name="suggestions_instruction_stay_home_message">Bei Angabe der ASL kann die Quarantänezeit auf 10 Tage verkürzt werden, wenn ein negativer Anti-Hygiene- oder molekularer Test am zehnten Tag durchgeführt wird.</string>
+  <string name="suggestions_instruction_limit_movement"><b>Verwenden Sie einen privaten Raum mit guter Belüftung, möglicherweise mit einem eigenen Badezimmer,</b> und beschränken Sie so weit wie möglich die Bewegungen in anderen gemeinsamen Räumen des Hauses.</string>
   <string name="suggestions_instruction_distance"><b>Halten Sie in Anwesenheit anderer Personen einen Abstand von mindestens einem Meter ein.</b></string>
-  <string name="suggestions_instruction_mask_title"><b>Tragen Sie die Maske immer bei sich</b> und tragen Sie sie an anderen geschlossenen Räumen als zu Hause.</string>
-  <string name="suggestions_instruction_mask_message">Tragen Sie es zu Hause oder in Gegenwart von Menschen, die nicht zusammen leben. Verwenden Sie es auch im Freien, wenn es nicht möglich ist, isoliert zu bleiben.</string>
+  <string name="suggestions_instruction_mask_title"><b>Nehmen Sie die Maske immer mit</b> und tragen Sie sie in geschlossenen Räumen außer Ihrer wohnung.</string>
+  <string name="suggestions_instruction_mask_message">Tragen Sie sie zu Hause in anwesenheit von nicht zusammen wohnenden personen. Verwenden Sie sie auch im Freien, wenn es nicht möglich ist, isoliert zu bleiben.</string>
   <string name="upload_data_vpn_error_message">Während des Vorgangs ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut. Wenn Sie ein VPN verwenden, empfehlen wir Ihnen, einen italienischen Server auszuwählen oder es vorübergehend zu deaktivieren.</string>
   <string name="suggestions_risk_footer">Damit der staatliche Gesundheitsdienst Sie im Bedarfsfall bestmöglich unterstützen kann, hat die App das Gesundheitsministerium darüber informiert, dass Sie benachrichtigt wurden. <b>Das Gesundheitsministerium kann anhand dieser Information keine Rückschlüsse auf Ihre Identität ziehen.</b></string>
   <string name="home_view_service_active_advice">Öffnen Sie Immuni einmal täglich, um den Status zu überprüfen.</string>
