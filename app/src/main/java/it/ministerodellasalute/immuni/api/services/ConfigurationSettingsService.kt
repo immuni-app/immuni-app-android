@@ -185,7 +185,7 @@ val defaultSettings = ConfigurationSettings(
 
     exposureConfiguration = ExposureConfiguration(
         attenuationThresholds = listOf(50, 70),
-        attenuationScores = listOf(0, 5, 5, 5, 5, 5, 5, 5),
+        attenuationScores = listOf(0, 0, 5, 5, 5, 5, 5, 5),
         daysSinceLastExposureScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
         durationScores = listOf(0, 0, 0, 0, 5, 5, 5, 5),
         transmissionRiskScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
