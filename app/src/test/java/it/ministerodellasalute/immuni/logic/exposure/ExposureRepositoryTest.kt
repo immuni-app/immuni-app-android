@@ -19,13 +19,14 @@ import android.content.SharedPreferences
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager.Companion.DAYS_OF_SELF_ISOLATION
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
 import it.ministerodellasalute.immuni.immuniMoshi
+import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.testutils.MockSharedPreferences
-import java.util.*
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import java.util.*
 
 class ExposureRepositoryTest {
     private lateinit var repository: ExposureReportingRepository
@@ -75,5 +76,19 @@ class ExposureRepositoryTest {
         }.time
         repository.deleteOldSummaries(serverDateAfterDaysOfSelfIsolationPlusOneSecond)
         assertTrue(repository.getSummaries().isEmpty())
+    }
+
+    @Test
+    fun `manage list of countries of interest`() {
+        val country = CountryOfInterest("DK", "DANIMARCA", Date())
+
+        repository.setCountriesOfInterest(listOf(country))
+        assertTrue(repository.getCountriesOfInterest().isNotEmpty())
+
+        val countries= repository.getCountriesOfInterest().toMutableList()
+        countries.remove(country)
+        
+        repository.setCountriesOfInterest(countries)
+        assertTrue(repository.getCountriesOfInterest().isEmpty())
     }
 }

@@ -13,29 +13,24 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.ui.home
+package it.ministerodellasalute.immuni.ui.countriesofinterest
 
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
+import android.os.Bundle
+import androidx.navigation.findNavController
+import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.ui.ImmuniActivity
 
-/**
- * Represents an item in the home list.
- */
+class CountriesOfInterestActivity : ImmuniActivity() {
 
-sealed class HomeItemType
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setLightStatusBar(resources.getColor(R.color.background))
 
-class ProtectionCard(
-    val active: Boolean,
-    val status: ExposureStatus
-) : HomeItemType()
-
-data class SectionHeader(
-    val title: String
-) : HomeItemType()
-
-sealed class InformationCard : HomeItemType()
-
-object HowItWorksCard : InformationCard()
-object SelfCareCard : InformationCard()
-object CountriesOfInterestCard : InformationCard()
-
-data class DisableExposureApi(val isEnabled: Boolean) : HomeItemType()
+        setContentView(R.layout.nav_host_activity)
+        findNavController(R.id.nav_host_fragment).setGraph(
+            R.navigation.countries_of_interest,
+            intent.extras
+        )
+    }
+}

@@ -112,4 +112,12 @@
     <action
         android:id="@+id/action_how_to_upload_positive"
         app:destination="@id/howToUploadPositive" />
+
+    <activity
+        android:id="@+id/countriesOfInterestActivity"
+        android:name="it.ministerodellasalute.immuni.ui.countriesofinterest.CountriesOfInterestActivity"
+        android:label="CountriesOfInterestActivity" />
+    <action
+        android:id="@+id/action_countries_of_interest"
+        app:destination="@id/countriesOfInterestActivity" />
 </navigation>

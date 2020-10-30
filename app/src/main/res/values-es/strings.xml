@@ -58,7 +58,7 @@
   <string name="privacy_item_secure"><b>Los datos guardados en tu teléfono inteligente y las conexiones al servidor están cifrados.</b></string>
   <string name="privacy_item_ministry"><b>Para ayudar al Servicio Nacional de Salud (SSN)</b> a cuidarte, Immuni envía al servidor del Ministerio de Salud la siguiente información:\n• La provincia en la que resides.\n• Si la app funciona correctamente.\n• Si has recibido un aviso de un contacto de riesgo.</string>
   <string name="privacy_item_italy">Tus datos se guardan en un servidor en Italia, <b>son administrados por entidades públicas y los supervisa el Ministerio de Salud.</b></string>
-  <string name="privacy_item_data_deletion"><b>Todos los datos se eliminarán cuando dejen de ser necesarios</b> y, en cualquier caso, el 31 de diciembre de 2020 como máximo.</string>
+  <string name="privacy_item_data_deletion"><b>Todos los datos se eliminarán cuando dejen de ser necesarios.</b></string>
   <string name="privacy_checkbox_above14">Declaro que tengo al menos 14 años</string>
   <string name="privacy_checkbox_privacypolicyread"><![CDATA[He leído la <l>política de privacidad</l>]]></string>
   <string name="privacy_tos"><![CDATA[Al continuar, declaro que he leído y acepto los <l>términos de uso</l>]]></string>
@@ -198,7 +198,7 @@ los datos&#8230;</string>
   <string name="suggestions_instruction_ministerial_decree"><b>Respeta la normativa vigente en tu zona.</b></string>
   <string name="suggestions_instruction_wash_hands"><b>Lávate las manos frecuentemente</b> con agua y jabón o soluciones hidroalcohólicas.</string>
   <string name="suggestions_instruction_use_napkins"><b>Tose o estornuda en un pañuelo de papel o en el pliegue del codo.</b></string>
-  <string name="suggestions_instruction_social_distance"><b>Respeta las medidas de distanciamiento físico</b> si debes salir de casa.</string>
+  <string name="suggestions_instruction_social_distance"><b>Respeta las medidas de distanciamiento físico</b> y evita las aglomeraciones.</string>
   <string name="suggestions_instruction_mask"><b>Usa una mascarilla en lugares públicos cerrados</b>, incluidos los medios de transporte y en aquellos casos en que no sea posible mantener el distanciamiento físico de manera continua.</string>
   <string name="suggestions_instruction_follow_instructions">Para proteger tu salud y la de tus seres queridos, <b>respeta las siguientes indicaciones:</b></string>
   <string name="suggestions_instruction_contact_doctor_title"><b>Ponte en contacto con tu médico de cabecera (o con tu pediatra)</b></string>
@@ -267,11 +267,11 @@ los datos&#8230;</string>
   </plurals>
   <string name="settings_app_version" formatted="false">Immuni v%s (%d)</string>
   <string name="upload_data_diagnosis_keys_overlay_hint">Selecciona «<b>Compartir</b>» en la ventana emergente que aparecerá a continuación</string>
-  <string name="suggestions_instruction_stay_home_message">Permanece en una habitación privada y con buena ventilación, a ser posible con baño separado.</string>
-  <string name="suggestions_instruction_limit_movement"><b>Limita al máximo tus desplazamientos a otros espacios comunes de la casa.</b></string>
+  <string name="suggestions_instruction_stay_home_message">Bajo indicación de la ASL, el periodo de cuarentena puede ser reducido a 10 días en el caso de que haya hecho la prueba de antígeno o prueba molecular el décimo día y este resulte negativo.</string>
+  <string name="suggestions_instruction_limit_movement"><b>Permanece en una habitación privada con buena ventilación, si es posible con baño separado,</b> y limita al máximo tus desplazamientos a otros espacios comunes de la casa.</string>
   <string name="suggestions_instruction_distance"><b>En presencia de otras personas, mantén una distancia de al menos un metro.</b></string>
-  <string name="suggestions_instruction_mask_title"><b>Usa una mascarilla en lugares públicos cerrados.</b></string>
-  <string name="suggestions_instruction_mask_message">Incluidos los medios de transporte y en aquellos casos en que no sea posible mantener el distanciamiento físico de manera continua.</string>
+  <string name="suggestions_instruction_mask_title"><b>Lleva siempre contigo la mascarilla</b> y úsala en lugares cerrados a diferencia de tu casa.</string>
+  <string name="suggestions_instruction_mask_message">Úsala en casa en presencia de personas no convivientes y también al aire libre cuando no es posible mantener la distancia social.</string>
   <string name="upload_data_vpn_error_message">Se ha producido un error. Inténtalo de nuevo. Si estás usando una VPN, te recomendamos que selecciones un servidor italiano o que la deshabilites temporalmente.</string>
   <string name="suggestions_risk_footer">Para ayudar al Servicio Nacional de Salud (SSN) a cuidarte si fuera necesario, la aplicación ha avisado al Ministerio de Salud de la notificación que has recibido. <b>No obstante, el Ministerio de Salud no podrá conocer tu identidad a partir de esta información.</b></string>
   <string name="home_view_service_active_advice">Abre Immuni una vez al día para verificar su estado.</string>
@@ -374,5 +374,15 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="support_info_item_lastencheck_none">Ninguna</string>
   <string name="support_info_item_lastencheck_date" formatted="false">%@ a las %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s a las %2$s</string>
-    <string name="exposure_check_in_progress">Control de las posibles exposiciones en curso</string>
+  <string name="exposure_check_in_progress">Control de las posibles exposiciones en curso</string>
+  <string name="countries_of_interest_description">Si te diriges a Europa puedes seleccionar el país, o los países que te interesan, entre los que se han unido a la interoperabilidad, para que Immuni pueda conectarse con las otras aplicaciones móviles europeas de rastreo de contacto (Contact Tracing) y ayudar a contener la propagación de Covid-19 también en Europa. Puedes seleccionar hasta un máximo de 3 países. Tu selección será válida e inalterable durante 14 días.</string>
+  <string name="countries_of_interest_dialog_title">¿Estás seguro de que deseas continuar?</string>
+  <string name="countries_of_interest_dialog_message">Si aceptas no podrás cancelar los países seleccionados por los próximos 14 días</string>
+  <string name="countries_of_interest_dialog_positive">Aceptar</string>
+  <string name="countries_of_interest_dialog_negative">Cancelar</string>
+  <string name="settings_countries_of_interest">Seleccionar el país europeo</string>
+  <string name="home_countries_of_interest_title">Si te diriges a otro país europeo</string>
+  <string name="countries_of_interest_title">¿Te diriges a uno o más de estos países europeos?</string>
+  <string name="countries_of_interest_limit_dialog_message">Puedes seleccionar hasta un máximo de 3 países. Tu selección será válida e inalterable durante 14 días.</string>
+  <string name="countries_of_interest_limit_dialog_title">Límite de selección excedido</string>
 </resources>

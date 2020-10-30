@@ -79,6 +79,11 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ConfirmationDialo
 
         // general
 
+        chooseCountriesOfInterestButton.setSafeOnClickListener {
+            val action = SettingsFragmentDirections.actionCountriesOfInterest()
+            findNavController().navigate(action)
+        }
+
         changeProvinceButton.setSafeOnClickListener {
             val action = SettingsNavDirections.actionOnboardingActivity(true)
             findNavController().navigate(action)
