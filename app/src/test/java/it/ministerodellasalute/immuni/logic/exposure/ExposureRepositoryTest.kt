@@ -23,10 +23,10 @@ import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.testutils.MockSharedPreferences
+import java.util.*
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class ExposureRepositoryTest {
     private lateinit var repository: ExposureReportingRepository
@@ -85,9 +85,9 @@ class ExposureRepositoryTest {
         repository.setCountriesOfInterest(listOf(country))
         assertTrue(repository.getCountriesOfInterest().isNotEmpty())
 
-        val countries= repository.getCountriesOfInterest().toMutableList()
+        val countries = repository.getCountriesOfInterest().toMutableList()
         countries.remove(country)
-        
+
         repository.setCountriesOfInterest(countries)
         assertTrue(repository.getCountriesOfInterest().isEmpty())
     }
