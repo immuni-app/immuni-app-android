@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
   ~ Please refer to the AUTHORS file for more information.
   ~ This program is free software: you can redistribute it and/or modify
@@ -14,15 +13,15 @@
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android"> 
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/upload_nav"
+    app:startDestination="@id/countries_of_interest">
 
-    <item
-        android:id="@+id/home_nav"
-        android:icon="@drawable/ic_tab_home"
-        android:title="@string/tabbar_title_home" />
+    <fragment
+        android:id="@+id/countries_of_interest"
+        android:name="it.ministerodellasalute.immuni.ui.countriesofinterest.CountriesFragment"
+        android:label="countriesOfInterestFragment" />
 
-    <item
-        android:id="@+id/settings_nav"
-        android:icon="@drawable/ic_tab_settings"
-        android:title="@string/tabbar_title_settings" />
-</menu>
+</navigation>

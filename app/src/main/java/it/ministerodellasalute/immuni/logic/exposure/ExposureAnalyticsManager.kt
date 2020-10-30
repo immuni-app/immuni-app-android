@@ -34,8 +34,10 @@ import java.security.MessageDigest
 import java.security.SecureRandom
 import java.util.*
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.StateFlow
 
 class ExposureAnalyticsManager(
+    private val settings: StateFlow<ConfigurationSettings>,
     private val networkRepository: ExposureAnalyticsNetworkRepository,
     private val exposureReportingRepository: ExposureReportingRepository,
     private val attestationClient: AttestationClient,
@@ -58,6 +60,7 @@ class ExposureAnalyticsManager(
             )
         }
     ) : this(
+        settings = settingsManager.settings,
         networkRepository = networkRepository,
         exposureReportingRepository = exposureReportingRepository,
         attestationClient = attestationClient,
@@ -90,7 +93,10 @@ class ExposureAnalyticsManager(
         val exposureSummary = exposureReportingRepository.getSummaries().find {
             serverDate == it.date
         }
-        val hadExposure = exposureSummary != null && exposureSummary.matchedKeyCount > 0
+        val hadExposure = exposureSummary != null
+            && exposureSummary.matchedKeyCount > 0
+            && exposureSummary.maximumRiskScore >= settings.value.exposureInfoMinimumRiskScore
+
         if (hadExposure && scheduler.hasYetToSendInfoWithExposureThisMonth(serverDate)) {
             if (scheduler.canSendInfoWithExposure()) {
                 sendOperationalInfo(summary = exposureSummary, isDummy = false)
@@ -241,7 +247,8 @@ class ExposureAnalyticsManager(
         }
 
         fun updateInfoWithExposureLastReportingMonth(serverDate: Date) {
-            storeRepository.infoWithExposureLastReportingMonth = CalendarUtils.monthFromDate(serverDate)
+            storeRepository.infoWithExposureLastReportingMonth =
+                CalendarUtils.monthFromDate(serverDate)
         }
 
         fun couldSendInfoWithoutExposureNow(serverDate: Date): Boolean {

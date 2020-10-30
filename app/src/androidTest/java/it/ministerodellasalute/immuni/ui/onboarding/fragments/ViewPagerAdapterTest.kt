@@ -60,7 +60,8 @@ class ViewPagerAdapterTest {
                 isEditingProvince = true,
                 isOnboardingComplete = true,
                 areNotificationsEnabled = areNotificationsEnabled,
-                isBroadcastingActive = isBroadcastingActive
+                isBroadcastingActive = isBroadcastingActive,
+                experimentalPhase = false
             )
 
             assertEquals(2, adapter.itemCount)
@@ -91,7 +92,8 @@ class ViewPagerAdapterTest {
                 isEditingProvince = false,
                 isOnboardingComplete = true,
                 areNotificationsEnabled = areNotificationsEnabled,
-                isBroadcastingActive = isBroadcastingActive
+                isBroadcastingActive = isBroadcastingActive,
+                experimentalPhase = false
             )
             val adapterFragments = Array(adapter.itemCount) { adapter.createFragment(it) }
             assertTrue(adapterFragments.none { it is RegionFragment })

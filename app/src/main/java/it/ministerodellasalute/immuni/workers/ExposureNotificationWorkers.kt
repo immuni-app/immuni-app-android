@@ -31,13 +31,13 @@ import it.ministerodellasalute.immuni.logic.settings.models.FetchSettingsResult
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import it.ministerodellasalute.immuni.network.api.NetworkError
 import it.ministerodellasalute.immuni.network.api.NetworkResource
+import kotlinx.coroutines.withTimeout
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import java.io.File
 import java.io.InputStream
 import java.util.*
 import kotlin.math.max
-import kotlinx.coroutines.withTimeout
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
 class StateUpdatedWorker(
     appContext: Context,
@@ -113,7 +113,6 @@ class RequestDiagnosisKeysWorker(
 
                 if (indexResponse !is NetworkResource.Success) {
                     val error = indexResponse.error
-                    // 404 means that the list is empty, so the work is successful
                     if (error is NetworkError.HttpError && error.httpCode == 404) {
                         return@withTimeout success(serverDate)
                     }
@@ -145,6 +144,46 @@ class RequestDiagnosisKeysWorker(
                         exposureReportingRepository.setLastProcessedChunk(data.newest)
                     } catch (e: Exception) {
                         return@withTimeout Result.retry()
+                    }
+                }
+                val countries = exposureReportingRepository.getCountriesOfInterest()
+                countries.forEach { country ->
+                    val indexEuResponse = immuniApiCall { api.indexEu(country.code) }
+                    if (indexEuResponse !is NetworkResource.Success) {
+                        val error = indexEuResponse.error
+                        if (!(error is NetworkError.HttpError && error.httpCode == 404)) {
+                            return@withTimeout Result.retry()
+                        }
+                    } else {
+                        val euData = indexEuResponse.data ?: return@withTimeout Result.retry()
+                        val lastEuProcessedChunkSuccessor = country.lastProcessedChunk + 1
+                        val currentEuOldest = max(euData.oldest, lastEuProcessedChunkSuccessor)
+                        val euChunkRange = (currentEuOldest..euData.newest).toList()
+                        val countryChunkList = mutableListOf<File>()
+                        for (currentChunk in euChunkRange) {
+                            val chunkResponse = immuniApiCall { api.chunkEu(country.code, currentChunk) }
+                            if (chunkResponse !is NetworkResource.Success) {
+                                return@withTimeout Result.retry()
+                            }
+                            val filePath =
+                                listOf(
+                                    chunksDirPath,
+                                    "${country.code}_$currentChunk.zip"
+                                ).joinToString(File.separator)
+                            try {
+                                chunkResponse.data?.byteStream()?.saveToFile(filePath)
+                                    ?: return@withTimeout Result.retry()
+                                countryChunkList.addAll(listOf(File(filePath)))
+                            } catch (e: Exception) {
+                                return@withTimeout Result.retry()
+                            }
+                        }
+                        exposureManager.provideDiagnosisKeys(
+                            keyFiles = countryChunkList,
+                            token = "${UUID.randomUUID()}_${serverDate.time}"
+                        )
+                        country.lastProcessedChunk = euChunkRange.indexOf(euData.newest)
+                        exposureReportingRepository.setCountriesOfInterest(countries)
                     }
                 }
                 return@withTimeout success(serverDate)

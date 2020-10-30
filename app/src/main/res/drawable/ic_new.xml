@@ -1,0 +1,46 @@
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+    android:viewportWidth="103"
+    android:viewportHeight="99"
+    android:width="93dp"
+    android:height="89dp">
+    <path
+        android:pathData="M-23 -10C-23 -16.0672 -18.0111 -21 -11.875 -21L54.875 -21C61.0111 -21 66 -16.0672 66 -10C66 -7.06094 64.8354 -4.29375 62.732 -2.23125L-4.01797 63.7688C-6.12129 65.8484 -8.91992 67 -11.875 67C-18.0111 67 -23 62.0672 -23 56C-23 55.5016 -22.8609 55.0203 -22.635 54.625C-22.8609 54.2297 -23 53.7484 -23 53.25L-23 -10Z"
+        android:fillColor="#6859FE" />
+    <path
+        android:pathData="M-23 -10C-23 -16.0672 -18.0111 -21 -11.875 -21L54.875 -21C61.0111 -21 66 -16.0672 66 -10C66 -7.06094 64.8354 -4.29375 62.732 -2.23125L-4.01797 63.7688C-6.12129 65.8484 -8.91992 67 -11.875 67C-18.0111 67 -23 62.0672 -23 56C-23 55.5016 -22.8609 55.0203 -22.635 54.625C-22.8609 54.2297 -23 53.7484 -23 53.25L-23 -10Z">
+        <aapt:attr
+            name="android:fillColor">
+            <gradient
+                android:startX="21.5"
+                android:startY="-21"
+                android:endX="21.5"
+                android:endY="67"
+                android:tileMode="clamp">
+                <item
+                    android:color="#837EFF"
+                    android:offset="0" />
+                <item
+                    android:color="#6B66FF"
+                    android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:pathData="M20.1746 31.6708L18.7043 33.1066L10.3904 32.0212L14.991 36.7326L13.2847 38.3988L5.84403 30.7792L7.3143 29.3434L15.6174 30.4392L11.0168 25.7279L12.7339 24.0512L20.1746 31.6708ZM21.7843 30.099L14.3436 22.4793L19.173 17.7634L20.7659 19.3946L17.6429 22.4442L18.9739 23.8072L21.453 21.3864L23.0459 23.0176L20.5668 25.4385L21.8977 26.8014L25.0207 23.7518L26.6136 25.3831L21.7843 30.099ZM33.9145 18.2538L28.6575 16.1123L30.6734 21.4187L29.0529 23.0011L19.8522 17.1001L21.6767 15.3186L27.4336 19.1314L24.7276 12.0878L31.7156 14.95L28.0407 9.10407L29.8651 7.32251L35.535 16.6714L33.9145 18.2538Z"
+        android:fillColor="#FFFFFF" />
+</vector>

@@ -194,11 +194,15 @@ class ExposureManager(
 
         val exposureSummaries = exposureReportingRepository.getSummaries()
 
+        val countriesOfInterest =
+            exposureReportingRepository.getCountriesOfInterest().map { it.code }
+
         val isSuccess = exposureIngestionRepository.uploadTeks(
             token = token,
             province = userRepository.user.value!!.province,
             tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
-            exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate)
+            exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate),
+            countries = countriesOfInterest
         )
 
         if (isSuccess) {
@@ -227,6 +231,7 @@ class ExposureManager(
     fun debugCleanupDatabase() {
         exposureReportingRepository.resetSummaries()
         exposureReportingRepository.setLastProcessedChunk(null)
+        exposureReportingRepository.setCountriesOfInterest(listOf())
     }
 
     val hasSummaries: Boolean get() = exposureReportingRepository.getSummaries().isNotEmpty()

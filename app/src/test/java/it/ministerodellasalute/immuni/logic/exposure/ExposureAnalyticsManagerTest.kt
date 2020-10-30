@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.logic.exposure
 
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
+import it.ministerodellasalute.immuni.api.services.defaultSettings
 import it.ministerodellasalute.immuni.extensions.attestation.AttestationClient
 import it.ministerodellasalute.immuni.extensions.utils.byAdding
 import it.ministerodellasalute.immuni.extensions.utils.isoDateString
@@ -29,6 +30,7 @@ import it.ministerodellasalute.immuni.testutils.parseUTCDate
 import java.util.*
 import kotlin.test.assertEquals
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -59,6 +61,7 @@ class ExposureAnalyticsManagerTest {
     fun setup() {
         MockKAnnotations.init(this)
         manager = ExposureAnalyticsManager(
+            settings = MutableStateFlow(defaultSettings),
             networkRepository = networkRepository,
             exposureReportingRepository = exposureReportingRepository,
             attestationClient = attestationClient,
@@ -99,6 +102,37 @@ class ExposureAnalyticsManagerTest {
     }
 
     @Test
+    fun `does not send operational info with exposure when maximum risk score is below the threshold`() = runBlocking {
+        val serverDate = parseUTCDate("2020-02-01T00:00:00Z")
+
+        val spiedManager = spyk(manager)
+
+        val exposureSummary = mockk<ExposureSummary>()
+
+        every { scheduler.couldSendInfo(serverDate) } returns true
+        every { exposureSummary.matchedKeyCount } returns 1
+        every { exposureSummary.maximumRiskScore } returns 10
+        every { exposureSummary.date } returns serverDate
+        every { exposureReportingRepository.getSummaries() } returns listOf(exposureSummary)
+        every { scheduler.hasYetToSendInfoWithExposureThisMonth(serverDate) } returns true
+        every { scheduler.canSendInfoWithExposure() } returns true
+        every { scheduler.couldSendInfoWithoutExposureNow(serverDate) } returns false
+        every { scheduler.couldSendDummyInfoNow(serverDate) } returns false
+        coEvery { spiedManager.sendOperationalInfo(any(), any()) } returns true
+        every { scheduler.updateInfoWithExposureLastReportingMonth(serverDate) } returns Unit
+
+        spiedManager.onRequestDiagnosisKeysSucceeded(serverDate)
+
+        verify(exactly = 1) { exposureReportingRepository.getSummaries() }
+
+        coVerify(exactly = 0) { spiedManager.sendOperationalInfo(exposureSummary, false) }
+        coVerify(exactly = 0) { spiedManager.sendOperationalInfo(any(), any()) }
+        verify(exactly = 0) { scheduler.updateInfoWithExposureLastReportingMonth(serverDate) }
+        verify(exactly = 0) { scheduler.scheduleNextInfoWithoutExposureReport(serverDate) }
+        verify(exactly = 0) { scheduler.scheduleNextDummyInfoReport(serverDate) }
+    }
+
+    @Test
     fun `sends operational info with exposure when it can`() = runBlocking {
         val serverDate = parseUTCDate("2020-02-01T00:00:00Z")
 
@@ -108,6 +142,7 @@ class ExposureAnalyticsManagerTest {
 
         every { scheduler.couldSendInfo(serverDate) } returns true
         every { exposureSummary.matchedKeyCount } returns 1
+        every { exposureSummary.maximumRiskScore } returns 30
         every { exposureSummary.date } returns serverDate
         every { exposureReportingRepository.getSummaries() } returns listOf(exposureSummary)
         every { scheduler.hasYetToSendInfoWithExposureThisMonth(serverDate) } returns true
@@ -139,6 +174,7 @@ class ExposureAnalyticsManagerTest {
 
             every { scheduler.couldSendInfo(serverDate) } returns true
             every { exposureSummary.matchedKeyCount } returns 1
+            every { exposureSummary.maximumRiskScore } returns 50
             every { exposureSummary.date } returns serverDate
             every { exposureReportingRepository.getSummaries() } returns listOf(exposureSummary)
             every { scheduler.hasYetToSendInfoWithExposureThisMonth(serverDate) } returns false

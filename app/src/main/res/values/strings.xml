@@ -58,7 +58,7 @@
   <string name="privacy_item_secure"><b>The data saved on your smartphone and the connections to the server are encrypted.</b></string>
   <string name="privacy_item_ministry"><b>To help the National Health Service</b> take care of you, Immuni tells the Ministry of Health server the following:\n- The province where you live\n- If the app is working properly\n- If you have been warned of a high-risk contact</string>
   <string name="privacy_item_italy">Your data is saved on servers in Italy, <b>managed by public bodies, and controlled by the Ministry of Health.</b></string>
-  <string name="privacy_item_data_deletion"><b>All data is deleted when it is no longer needed</b>, and in any case no later than 31 December 2020.</string>
+  <string name="privacy_item_data_deletion"><b>All data is deleted when it is no longer needed.</b></string>
   <string name="privacy_checkbox_above14">I declare that I am at least 14 years old</string>
   <string name="privacy_checkbox_privacypolicyread"><![CDATA[I have read the <l>privacy notice</l>]]></string>
   <string name="privacy_tos"><![CDATA[By continuing, I declare that I have read and accepted the <l>terms of use</l>]]></string>
@@ -194,7 +194,7 @@
   <string name="suggestions_instruction_ministerial_decree"><b>Comply with the current regulations in your area.</b></string>
   <string name="suggestions_instruction_wash_hands"><b>Wash your hands frequently</b> with soap and water or with alcohol hand sanitiser.</string>
   <string name="suggestions_instruction_use_napkins"><b>Cough and sneeze directly into a tissue or into the crook of your elbow.</b></string>
-  <string name="suggestions_instruction_social_distance"><b>Respect physical distancing measures</b> if you have to leave the house.</string>
+  <string name="suggestions_instruction_social_distance"><b>Respect physical distancing measures</b> and avoid gatherings.</string>
   <string name="suggestions_instruction_mask"><b>Wear a mask in indoor public places.</b> This includes public transport and all situations where it is not possible to ensure that a safe distance is maintained at all times.</string>
   <string name="suggestions_instruction_follow_instructions">To protect your health and the health of your loved ones, <b>please follow these guidelines:</b></string>
   <string name="suggestions_instruction_contact_doctor_title"><b>Contact your general practitioner (or primary care paediatrician)</b></string>
@@ -263,11 +263,11 @@
   </plurals>
   <string name="settings_app_version" formatted="false">Immuni v%s (%d)</string>
   <string name="upload_data_diagnosis_keys_overlay_hint">Select \'<b>Share</b>\' in the pop-up that appears below</string>
-  <string name="suggestions_instruction_stay_home_message">Use a well-ventilated private room, if possible with its own bathroom.</string>
-  <string name="suggestions_instruction_limit_movement"><b>Minimise the time you spend in other common areas of the house.</b></string>
+  <string name="suggestions_instruction_stay_home_message">On indication of the ASL, the quarantine period may be reduced to 10 days in the event of a negative antigen or molecular test performed on the tenth day.</string>
+  <string name="suggestions_instruction_limit_movement"><b>Use a well-ventilated private room, if possible with its own bathroom,</b> and minimise the time you spend in other common areas of the house.</string>
   <string name="suggestions_instruction_distance"><b>Keep a distance of at least one metre when around other people.</b></string>
-  <string name="suggestions_instruction_mask_title"><b>Wear a mask in indoor public places.</b></string>
-  <string name="suggestions_instruction_mask_message">This includes public transport and all situations where it is not possible to ensure that a safe distance is maintained at all times.</string>
+  <string name="suggestions_instruction_mask_title"><b>Always carry a mask with you</b> and wear it in indoor places other than your home.</string>
+  <string name="suggestions_instruction_mask_message">Wear it at home in presence of non-cohabiting people. Also use it outdoors when it is not possible to remain isolated.</string>
   <string name="upload_data_vpn_error_message">An error occurred during the operation. Please try again. If you are using a VPN, we suggest that you select an Italian server or temporarily disable it.</string>
   <string name="suggestions_risk_footer">To help the National Health Service take care of you should the need arise, the app has informed the Ministry of Health of the notification you have received. <b>Please note, the Ministry of Health cannot determine your identity based on this information.</b></string>
   <string name="home_view_service_active_advice">Open Immuni once a day to check its status.</string>
@@ -371,4 +371,14 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="support_info_item_lastencheck_date" formatted="false">%@ at %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s at %2$s</string>
   <string name="exposure_check_in_progress">Exposure check in progress</string>
+  <string name="countries_of_interest_description">If you are going to Europe you can select the country/s of Interest, if it has/have already joined interoperability, so that Immuni can connect with the other European contact tracing APP\'s and help to contain the spead of Covid-19 in Europe. You can select up to maximum of 3 countries. Your selection will be valid and unchangeable for the next 14 days.</string>
+  <string name="home_countries_of_interest_title">If you are going to another European country</string>
+  <string name="countries_of_interest_dialog_title">Are you sure you want to proceed?</string>
+  <string name="countries_of_interest_dialog_message">By confirming you will not be able to remove the chosen countries for the next 14 days</string>
+  <string name="countries_of_interest_dialog_positive">Done</string>
+  <string name="countries_of_interest_dialog_negative">Cancel</string>
+  <string name="settings_countries_of_interest">Select European country</string>
+  <string name="countries_of_interest_title">Are you going to one or more of these European countries?</string>
+  <string name="countries_of_interest_limit_dialog_title">Selection limit exceeded</string>
+  <string name="countries_of_interest_limit_dialog_message">You can select up to a maximum of 3 countries. Your selection will be valid and unchangeable for 14 days</string>
 </resources>

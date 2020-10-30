@@ -64,7 +64,8 @@ class ExposureIngestionRepository(
         token: OtpToken,
         province: Province,
         tekHistory: List<ExposureIngestionService.TemporaryExposureKey>,
-        exposureSummaries: List<ExposureIngestionService.ExposureSummary>
+        exposureSummaries: List<ExposureIngestionService.ExposureSummary>,
+        countries: List<String>
     ): Boolean {
         return immuniApiCall {
             exposureIngestionService.uploadTeks(
@@ -74,7 +75,8 @@ class ExposureIngestionRepository(
                 body = ExposureIngestionService.UploadTeksRequest(
                     teks = tekHistory,
                     province = province,
-                    exposureSummaries = exposureSummaries
+                    exposureSummaries = exposureSummaries,
+                    countries = countries
                 )
             )
         } is NetworkResource.Success

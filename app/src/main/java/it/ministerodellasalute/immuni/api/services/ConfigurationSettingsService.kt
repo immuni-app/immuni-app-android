@@ -60,8 +60,8 @@ data class ConfigurationSettings(
     @field:Json(name = "reopen_reminder") val reopenReminder: Boolean = true,
     @field:Json(name = "operational_info_with_exposure_sampling_rate") val operationalInfoWithExposureSamplingRate: Double,
     @field:Json(name = "operational_info_without_exposure_sampling_rate") val operationalInfoWithoutExposureSamplingRate: Double,
-    @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int
-
+    @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int,
+    @field:Json(name = "countries") val countries: Map<String, Map<String, String>>
 )
 
 @JsonClass(generateAdapter = true)
@@ -112,6 +112,71 @@ private fun languageMap(map: (Language) -> String): Map<String, String> {
     }.toTypedArray())
 }
 
+private fun countriesMap(): Map<String, Map<String, String>> {
+    return mapOf(
+        "it" to mapOf(
+            "AT" to "AUSTRIA",
+            "DK" to "DANIMARCA",
+            "EE" to "ESTONIA",
+            "DE" to "GERMANIA",
+            "IE" to "IRLANDA",
+            "LV" to "LETTONIA",
+            "NL" to "OLANDA",
+            "PL" to "POLONIA",
+            "CZ" to "REPUBBLICA CECA",
+            "ES" to "SPAGNA"
+        ),
+        "de" to mapOf(
+            "AT" to "ÖSTERREICH",
+            "DK" to "DÄNEMARK",
+            "EE" to "ESTONIA",
+            "DE" to "DEUTSCHLAND",
+            "IE" to "IRLAND",
+            "LV" to "LETTLAND",
+            "NL" to "NIEDERLANDE",
+            "PL" to "POLEN",
+            "CZ" to "TSCHECHISCHE REPUBLIK",
+            "ES" to "SPANIEN"
+        ),
+        "en" to mapOf(
+            "AT" to "AUSTRIA",
+            "DK" to "DENMARK",
+            "EE" to "ESTONIA",
+            "DE" to "GERMANY",
+            "IE" to "IRELAND",
+            "LV" to "LATVIA",
+            "NL" to "NETHERLANDS",
+            "PL" to "POLAND",
+            "CZ" to "CZECH REPUBLIC",
+            "ES" to "SPAIN"
+        ),
+        "fr" to mapOf(
+            "AT" to "AUTRICHE",
+            "DK" to "DANEMARK",
+            "EE" to "ESTONIE",
+            "DE" to "ALLEMAGNE",
+            "IE" to "IRLANDE",
+            "LV" to "LETTONIE",
+            "NL" to "PAYS-BAS",
+            "PL" to "POLOGNE",
+            "CZ" to "RÉPUBLIQUE TCHÈQUE",
+            "ES" to "ESPAGNE"
+        ),
+        "es" to mapOf(
+            "EN" to "AUSTRIA",
+            "DK" to "DINAMARCA",
+            "EE" to "ESTONIA",
+            "DE" to "ALEMANIA",
+            "IE" to "IRLANDA",
+            "LV" to "LETONIA",
+            "NL" to "PAÍSES BAJOS",
+            "PL" to "POLONIA",
+            "CZ" to "REPÚBLICA CHECA",
+            "ES" to "ESPAÑA"
+        )
+    )
+}
+
 val defaultSettings = ConfigurationSettings(
     minimumBuildVersion = 0,
     faqUrls = languageMap { "https://get.immuni.gov.it/docs/faq-${it.code}.json" },
@@ -120,7 +185,7 @@ val defaultSettings = ConfigurationSettings(
 
     exposureConfiguration = ExposureConfiguration(
         attenuationThresholds = listOf(50, 70),
-        attenuationScores = listOf(0, 5, 5, 5, 5, 5, 5, 5),
+        attenuationScores = listOf(0, 0, 5, 5, 5, 5, 5, 5),
         daysSinceLastExposureScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
         durationScores = listOf(0, 0, 0, 0, 5, 5, 5, 5),
         transmissionRiskScores = listOf(1, 1, 1, 1, 1, 1, 1, 1),
@@ -146,5 +211,6 @@ val defaultSettings = ConfigurationSettings(
     reopenReminder = true,
     operationalInfoWithExposureSamplingRate = 1.0,
     operationalInfoWithoutExposureSamplingRate = 0.6,
-    dummyAnalyticsWaitingTime = 2_592_000
+    dummyAnalyticsWaitingTime = 2_592_000,
+    countries = countriesMap()
 )
