@@ -61,7 +61,7 @@ buildscript {
         conscryptVersion = "2.4.0"
         testCoreKtxVersion = "1.2.0"
         testFragmentVersion = "1.2.4"
-        contactShieldVersion = "5.0.3.300"
+        contactShieldVersion = "5.0.4.300"
         safetyDetectVersion = "5.0.3.300"
         gameServiceVersion = "5.0.3.300"
     }
