@@ -5,7 +5,7 @@ buildscript {
         // App version digits
         versionMajor = 2
         versionMinor = 1
-        versionPatch = 0
+        versionPatch = 1
 
         // Version name follows the <major>.<minor>.<patch> convention
         computeVersionName = { ->
