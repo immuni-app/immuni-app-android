@@ -93,9 +93,9 @@ class ExposureAnalyticsManager(
         val exposureSummary = exposureReportingRepository.getSummaries().find {
             serverDate == it.date
         }
-        val hadExposure = exposureSummary != null
-            && exposureSummary.matchedKeyCount > 0
-            && exposureSummary.maximumRiskScore >= settings.value.exposureInfoMinimumRiskScore
+        val hadExposure = exposureSummary != null &&
+            exposureSummary.matchedKeyCount > 0 &&
+            exposureSummary.maximumRiskScore >= settings.value.exposureInfoMinimumRiskScore
 
         if (hadExposure && scheduler.hasYetToSendInfoWithExposureThisMonth(serverDate)) {
             if (scheduler.canSendInfoWithExposure()) {

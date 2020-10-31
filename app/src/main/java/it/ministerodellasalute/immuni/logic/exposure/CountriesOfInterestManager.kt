@@ -18,9 +18,9 @@ package it.ministerodellasalute.immuni.logic.exposure
 import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsStoreRepository
-import org.koin.core.KoinComponent
 import java.util.*
 import kotlin.collections.HashSet
+import org.koin.core.KoinComponent
 
 class CountriesOfInterestManager(
     private val exposureReportingRepository: ExposureReportingRepository,

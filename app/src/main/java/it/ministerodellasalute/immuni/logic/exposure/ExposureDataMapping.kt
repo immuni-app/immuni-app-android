@@ -15,6 +15,7 @@
 
 package it.ministerodellasalute.immuni.logic.exposure
 
+import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.api.services.ExposureAnalyticsService
 import it.ministerodellasalute.immuni.api.services.ExposureConfiguration
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
@@ -90,6 +91,7 @@ val ExposureNotificationClient.ExposureInformation.repositoryExposureInformation
 fun ExposureAnalyticsOperationalInfo.operationalInfoRequest(signedAttestation: String): ExposureAnalyticsService.OperationalInfoRequest =
     ExposureAnalyticsService.OperationalInfoRequest(
         province = province.code,
+        build = BuildConfig.VERSION_CODE,
         exposurePermission = exposurePermission,
         bluetoothActive = bluetoothActive,
         notificationPermission = notificationPermission,
