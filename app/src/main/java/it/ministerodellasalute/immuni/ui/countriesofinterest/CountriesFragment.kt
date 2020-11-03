@@ -27,10 +27,10 @@ import it.ministerodellasalute.immuni.logic.exposure.CountriesOfInterestManager
 import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
-import kotlinx.android.synthetic.main.countries_of_interest.*
-import org.koin.android.ext.android.inject
 import java.util.*
 import kotlin.math.abs
+import kotlinx.android.synthetic.main.countries_of_interest.*
+import org.koin.android.ext.android.inject
 
 class CountriesFragment :
     Fragment(), CountriesClickListener, ConfirmationDialogListener {

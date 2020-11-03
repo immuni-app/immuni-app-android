@@ -25,6 +25,7 @@ interface ExposureAnalyticsService {
     @JsonClass(generateAdapter = true)
     data class OperationalInfoRequest(
         @field:Json(name = "province") val province: String,
+        @field:Json(name = "build") val build: Int,
         @field:Json(name = "exposure_permission") val exposurePermission: Int,
         @field:Json(name = "bluetooth_active") val bluetoothActive: Int,
         @field:Json(name = "notification_permission") val notificationPermission: Int,
