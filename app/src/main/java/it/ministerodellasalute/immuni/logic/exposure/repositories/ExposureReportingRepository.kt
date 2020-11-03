@@ -18,11 +18,10 @@ package it.ministerodellasalute.immuni.logic.exposure.repositories
 import com.squareup.moshi.JsonClass
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager.Companion.DAYS_OF_SELF_ISOLATION
 import it.ministerodellasalute.immuni.extensions.storage.KVStorage
-import it.ministerodellasalute.immuni.extensions.utils.DateUtils.MILLIS_IN_A_DAY
 import it.ministerodellasalute.immuni.logic.exposure.models.CountryOfInterest
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
-import kotlinx.coroutines.flow.StateFlow
 import java.util.*
+import kotlinx.coroutines.flow.StateFlow
 
 class ExposureReportingRepository(
     private val storage: KVStorage
