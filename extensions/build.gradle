@@ -69,9 +69,9 @@ dependencies {
     googleImplementation 'com.google.android.gms:play-services-safetynet:17.0.0'
 
     // Huawei HMS
+    huaweiApi "com.huawei.hms:base:$huaweiBaseVersion"
     huaweiImplementation "com.huawei.hms:contactshield:$contactShieldVersion"
     huaweiImplementation "com.huawei.hms:safetydetect:$safetyDetectVersion"
-    huaweiApi "com.huawei.hms:game:$gameServiceVersion"
 
     //Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"

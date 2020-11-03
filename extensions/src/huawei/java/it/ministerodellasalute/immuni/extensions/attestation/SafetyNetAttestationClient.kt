@@ -46,14 +46,11 @@ class SafetyNetAttestationClient(
             val nonceByteArray = Base64.decode(nonce, Base64.DEFAULT)
             val sysIntegrityResult = withContext(Dispatchers.Default) {
                 val result = CompletableDeferred<SysIntegrityResp>()
-                client.sysIntegrity(nonceByteArray, parameters.apiKey)
-                    .addOnCompleteListener { task ->
-                        task.addOnSuccessListener {
-                            result.complete(it)
-                        }.addOnFailureListener {
-                            result.completeExceptionally(it)
-                        }
-                    }
+                client.sysIntegrity(nonceByteArray, parameters.apiKey).addOnSuccessListener {
+                    result.complete(it)
+                }.addOnFailureListener {
+                    result.completeExceptionally(it)
+                }
                 result.await()
             }
             val payload =
