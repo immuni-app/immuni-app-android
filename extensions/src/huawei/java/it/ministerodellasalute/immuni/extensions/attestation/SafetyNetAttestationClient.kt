@@ -42,6 +42,9 @@ class SafetyNetAttestationClient(
     private var client: SafetyDetectClient = SafetyDetect.getClient(context)
 
     override suspend fun attest(nonce: String): AttestationClient.Result {
+        //at the moment safety detect is disabled
+        return AttestationClient.Result.Invalid
+
         try {
             val nonceByteArray = Base64.decode(nonce, Base64.DEFAULT)
             val sysIntegrityResult = withContext(Dispatchers.Default) {
