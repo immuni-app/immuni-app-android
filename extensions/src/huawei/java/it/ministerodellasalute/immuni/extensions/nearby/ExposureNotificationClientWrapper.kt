@@ -24,6 +24,7 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
+import kotlin.math.min
 
 /**
  * Wrapper around Huawei Contact Shield APIs.
@@ -80,8 +81,11 @@ class ExposureNotificationClientWrapper(
                 result.complete(it.map { key ->
                     ExposureNotificationClient.TemporaryExposureKey(
                         keyData = Base64.encodeToString(key.content, Base64.NO_WRAP),
-                        rollingStartIntervalNumber = key.periodicKeyValidTime.toInt(),
-                        rollingPeriod = key.periodicKeyLifeTime.toInt(),
+                        rollingStartIntervalNumber = ((key.periodicKeyValidTime / 144) * 144).toInt(),
+                        rollingPeriod = rollingPeriodExchange(
+                            key.periodicKeyValidTime,
+                            key.periodicKeyLifeTime
+                        ).toInt(),
                         transmissionRiskLevel = ExposureNotificationClient.RiskLevel.fromValue(
                             key.initialRiskLevel
                         )
@@ -93,6 +97,11 @@ class ExposureNotificationClientWrapper(
 
             result.await()
         }
+    }
+
+    private fun rollingPeriodExchange(rollingStartNumber: Long, rollingPeriod: Long): Long {
+        val dayFirstInterval = rollingStartNumber / 144 * 144
+        return min(rollingStartNumber + rollingPeriod - dayFirstInterval, 144)
     }
 
     override suspend fun provideDiagnosisKeys(
