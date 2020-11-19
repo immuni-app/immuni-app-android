@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni.extensions.nearby
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.util.Base64
 import com.huawei.hms.contactshield.*
 import kotlinx.coroutines.CompletableDeferred
@@ -120,12 +121,21 @@ class ExposureNotificationClientWrapper(
             .setAttenuationDurationThresholds(*configuration.attenuationThresholds.toIntArray())
             .build()
 
-        val intent = PendingIntent.getService(
-            context,
-            0,
-            Intent(context, BackgroundContactShieldIntentService::class.java),
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
+        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            PendingIntent.getForegroundService(
+                context,
+                0,
+                Intent(context, BackgroundContactShieldIntentService::class.java),
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        } else {
+            PendingIntent.getService(
+                context,
+                0,
+                Intent(context, BackgroundContactShieldIntentService::class.java),
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        }
 
         withContext(Dispatchers.Default) {
             val result = CompletableDeferred<Boolean>()
