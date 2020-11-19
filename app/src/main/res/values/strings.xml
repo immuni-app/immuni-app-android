@@ -371,7 +371,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="support_info_item_lastencheck_date" formatted="false">%@ at %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s at %2$s</string>
   <string name="exposure_check_in_progress">Exposure check in progress</string>
-  <string name="countries_of_interest_description">If you are going to Europe you can select the country/s of Interest, if it has/have already joined interoperability, so that Immuni can connect with the other European contact tracing APP\'s and help to contain the spead of Covid-19 in Europe. You can select up to maximum of 3 countries. Your selection will be valid and unchangeable for the next 14 days.</string>
+  <string name="countries_of_interest_description">If you are going to Europe you can select the country/s of Interest, if it has/have already joined interoperability, so that Immuni can connect with the other European contact tracing APP\'s and help to contain the spread of Covid-19 in Europe. You can select up to maximum of 3 countries. Your selection will be valid and unchangeable for the next 14 days.</string>
   <string name="home_countries_of_interest_title">If you are going to another European country</string>
   <string name="countries_of_interest_dialog_title">Are you sure you want to proceed?</string>
   <string name="countries_of_interest_dialog_message">By confirming you will not be able to remove the chosen countries for the next 14 days</string>
