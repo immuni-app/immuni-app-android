@@ -16,6 +16,7 @@
 package it.ministerodellasalute.immuni.extensions.nearby
 
 import android.app.Activity
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import com.huawei.hms.common.ApiException
@@ -44,13 +45,14 @@ class ExposureNotificationManager(
         )
     }
 
-    constructor(context: Context, lifecycleObserver: AppLifecycleObserver) : this(
+    constructor(context: Context, lifecycleObserver: AppLifecycleObserver, exposurePendingIntent: PendingIntent) : this(
         locationStateFlow = LocationStateFlow(context),
         bluetoothStateFlow = BluetoothStateFlow(context),
         lifecycleObserver = lifecycleObserver,
         exposureNotificationClient = ExposureNotificationClientWrapper(
             ContactShield.getContactShieldEngine(context),
-            context
+            context,
+            exposurePendingIntent
         )
     )
 

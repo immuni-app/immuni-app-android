@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="it.ministerodellasalute.immuni">
 
     <application>
 
-        <receiver
-            android:name=".receivers.ExposureNotificationReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="ACTION_EXPOSURE_STATE_UPDATED" />
-            </intent-filter>
-        </receiver>
-
         <service
-            android:name=".extensions.nearby.BackgroundContactShieldIntentService"
+            android:name=".BackgroundContactShieldIntentService"
             android:enabled="true"
-            android:exported="true"
             />
 
     </application>

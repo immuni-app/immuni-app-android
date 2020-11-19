@@ -17,8 +17,6 @@ package it.ministerodellasalute.immuni.extensions.nearby
 
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.util.Base64
 import com.huawei.hms.contactshield.*
 import kotlinx.coroutines.CompletableDeferred
@@ -32,7 +30,8 @@ import kotlin.math.min
  */
 class ExposureNotificationClientWrapper(
     private val client: ContactShieldEngine,
-    private val context: Context
+    private val context: Context,
+    private val exposurePendingIntent: PendingIntent
 ) : ExposureNotificationClient {
     override suspend fun start() {
         withContext(Dispatchers.Default) {
@@ -121,25 +120,9 @@ class ExposureNotificationClientWrapper(
             .setAttenuationDurationThresholds(*configuration.attenuationThresholds.toIntArray())
             .build()
 
-        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            PendingIntent.getForegroundService(
-                context,
-                0,
-                Intent(context, BackgroundContactShieldIntentService::class.java),
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-        } else {
-            PendingIntent.getService(
-                context,
-                0,
-                Intent(context, BackgroundContactShieldIntentService::class.java),
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-        }
-
         withContext(Dispatchers.Default) {
             val result = CompletableDeferred<Boolean>()
-            client.putSharedKeyFiles(intent, keyFiles, diagnosisConfiguration, token)
+            client.putSharedKeyFiles(exposurePendingIntent, keyFiles, diagnosisConfiguration, token)
                 .addOnSuccessListener {
                     result.complete(true)
                 }.addOnFailureListener {
