@@ -81,6 +81,7 @@ class ExposureNotificationClientWrapper(
                 result.complete(it.map { key ->
                     ExposureNotificationClient.TemporaryExposureKey(
                         keyData = Base64.encodeToString(key.content, Base64.NO_WRAP),
+                        //force the periodicKeyValidTime to be equal to the start of the day
                         rollingStartIntervalNumber = ((key.periodicKeyValidTime / 144) * 144).toInt(),
                         rollingPeriod = rollingPeriodExchange(
                             key.periodicKeyValidTime,
@@ -99,6 +100,7 @@ class ExposureNotificationClientWrapper(
         }
     }
 
+    //attenuation between the updated startnumber and the rolling period
     private fun rollingPeriodExchange(rollingStartNumber: Long, rollingPeriod: Long): Long {
         val dayFirstInterval = rollingStartNumber / 144 * 144
         return min(rollingStartNumber + rollingPeriod - dayFirstInterval, 144)
@@ -121,7 +123,7 @@ class ExposureNotificationClientWrapper(
         val intent = PendingIntent.getService(
             context,
             0,
-            Intent(context, BackgroundContackShieldIntentService::class.java),
+            Intent(context, BackgroundContactShieldIntentService::class.java),
             PendingIntent.FLAG_UPDATE_CURRENT
         )
 

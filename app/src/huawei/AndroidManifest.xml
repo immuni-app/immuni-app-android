@@ -13,6 +13,12 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name=".extensions.nearby.BackgroundContactShieldIntentService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
     </application>
 
 </manifest>
