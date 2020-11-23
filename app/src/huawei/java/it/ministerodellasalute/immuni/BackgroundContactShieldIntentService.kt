@@ -1,7 +1,6 @@
 package it.ministerodellasalute.immuni
 
 import android.app.IntentService
-import android.app.Notification
 import android.content.Intent
 import android.os.Build
 import android.util.Log
@@ -12,12 +11,14 @@ import androidx.work.WorkManager
 import com.huawei.hms.contactshield.ContactShield
 import com.huawei.hms.contactshield.ContactShieldCallback
 import com.huawei.hms.contactshield.ContactShieldEngine
+import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.workers.StateUpdatedWorker
 
 class BackgroundContactShieldIntentService :
     IntentService(TAG) {
     private lateinit var contactEngine: ContactShieldEngine
     private lateinit var workManager: WorkManager
+    private lateinit var appNotificationManager: AppNotificationManager
 
     override fun onCreate() {
         super.onCreate()
@@ -25,14 +26,13 @@ class BackgroundContactShieldIntentService :
         contactEngine =
             ContactShield.getContactShieldEngine(this@BackgroundContactShieldIntentService)
         workManager = WorkManager.getInstance(this@BackgroundContactShieldIntentService)
+        appNotificationManager = AppNotificationManager(this@BackgroundContactShieldIntentService)
 
         Log.d(TAG, "BackgroundContackCheckingIntentService onCreate")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val id = (System.currentTimeMillis() % 10000).toInt()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForeground(id, Notification.Builder(this, null).build())
-            }
+            startForeground(id, appNotificationManager.fetchKeysForegroundNotification())
         }
     }
 
