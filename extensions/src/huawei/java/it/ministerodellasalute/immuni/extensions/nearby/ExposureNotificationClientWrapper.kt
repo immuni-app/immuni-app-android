@@ -19,10 +19,12 @@ import android.app.PendingIntent
 import android.content.Context
 import android.util.Base64
 import com.huawei.hms.contactshield.*
+import it.ministerodellasalute.immuni.extensions.signatureverify.ProvideDiagnosisKeys
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.lang.Exception
 import kotlin.math.min
 
 /**
@@ -111,6 +113,21 @@ class ExposureNotificationClientWrapper(
         configuration: ExposureNotificationClient.ExposureConfiguration,
         token: String
     ) {
+        val provideDiagnosisKeys = ProvideDiagnosisKeys(context)
+        val packageName = context.packageName
+        val verifiedKeyFiles = mutableListOf<File>()
+
+        try {
+            //verifying the keys with Google Open Source solution. In future the contact shield will provide its own verify solution
+            keyFiles.forEach { file ->
+                if (provideDiagnosisKeys.verify(packageName, file)) {
+                    verifiedKeyFiles.add(file)
+                }
+            }
+        } catch (e: Exception) {
+
+        }
+
         val diagnosisConfiguration = DiagnosisConfiguration.Builder()
             .setMinimumRiskValueThreshold(configuration.minimumRiskScore)
             .setAttenuationRiskValues(*configuration.attenuationScores.toIntArray())
@@ -122,7 +139,7 @@ class ExposureNotificationClientWrapper(
 
         withContext(Dispatchers.Default) {
             val result = CompletableDeferred<Boolean>()
-            client.putSharedKeyFiles(exposurePendingIntent, keyFiles, diagnosisConfiguration, token)
+            client.putSharedKeyFiles(exposurePendingIntent, verifiedKeyFiles, diagnosisConfiguration, token)
                 .addOnSuccessListener {
                     result.complete(true)
                 }.addOnFailureListener {

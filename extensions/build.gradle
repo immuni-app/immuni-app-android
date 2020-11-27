@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.protobuf'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -51,6 +52,22 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     }
 }
 
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.11.0'
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option "lite"
+                }
+            }
+        }
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
@@ -71,6 +88,10 @@ dependencies {
     // Huawei HMS
     huaweiApi "com.huawei.hms:contactshield:$contactShieldVersion"
     huaweiImplementation "com.huawei.hms:safetydetect:$safetyDetectVersion"
+
+    //google open source solution in order to verify the keys. In future contact shield will provide its own solution
+    huaweiImplementation 'com.google.protobuf:protobuf-javalite:3.8.0'
+    huaweiImplementation "com.google.guava:guava:29.0-android"
 
     //Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"

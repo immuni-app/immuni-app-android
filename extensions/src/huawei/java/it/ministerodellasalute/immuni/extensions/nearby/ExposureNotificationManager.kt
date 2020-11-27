@@ -153,32 +153,6 @@ class ExposureNotificationManager(
                 log("Unknown error")
                 throw exception
             }
-
-            /*if (exception.statusCode == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
-                optInCompleter = CompletableDeferred()
-                try {
-                    exception.status.startResolutionForResult(
-                        activity,
-                        REQUEST_CODE_START_EXPOSURE_NOTIFICATION
-                    )
-                    optInCompleter?.await()
-                    optInCompleter = null
-
-                    optInAndStartExposureTracing(activity)
-                    return
-                } catch (e: IntentSender.SendIntentException) {
-                    log("Error calling startResolutionForResult, sending to settings")
-                    optInCompleter?.completeExceptionally(e)
-                    optInCompleter = null
-                    return
-                } catch (e: Exception) {
-                    log("user denied permissions")
-                    optInCompleter = null
-                }
-            } else {
-                log("No RESOLUTION_REQUIRED in result, sending to settings")
-                throw exception
-            }*/
         }
         update()
     }
@@ -205,32 +179,6 @@ class ExposureNotificationManager(
                 log("Unknown error")
                 throw exception
             }
-
-            /*if (exception.statusCode == ExposureNotificationStatusCodes.RESOLUTION_REQUIRED) {
-                tekRequestCompleter = CompletableDeferred()
-                try {
-                    exception.status.startResolutionForResult(
-                        activity,
-                        REQUEST_CODE_TEK_HISTORY
-                    )
-                    tekRequestCompleter?.await()
-                    tekRequestCompleter = null
-
-                    return requestTekHistory(activity)
-                } catch (e: IntentSender.SendIntentException) {
-                    log("Error calling startResolutionForResult, sending to settings")
-                    tekRequestCompleter?.completeExceptionally(e)
-                    tekRequestCompleter = null
-                    throw e
-                } catch (e: Exception) {
-                    log("user denied permissions")
-                    tekRequestCompleter = null
-                    throw e
-                }
-            } else {
-                log("No RESOLUTION_REQUIRED in result, sending to settings")
-                throw exception
-            }*/
 
             throw exception
         }
