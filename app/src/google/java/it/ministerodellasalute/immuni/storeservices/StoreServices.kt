@@ -1,8 +1,11 @@
 package it.ministerodellasalute.immuni.storeservices
 
 import android.content.Context
+import androidx.core.content.pm.PackageInfoCompat
+import androidx.lifecycle.liveData
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
+import it.ministerodellasalute.immuni.extensions.playstore.PlayStoreActions
 import it.ministerodellasalute.immuni.logic.forceupdate.StoreServicesClient
 
 class StoreServices: StoreServicesClient {
@@ -15,7 +18,7 @@ class StoreServices: StoreServicesClient {
         )
     }
 
-    override fun getServicesStatus(context: Context): StoreServicesClient.ServicesStatus {
+    override fun getServicesUpdateStatus(context: Context): StoreServicesClient.ServicesStatus {
         val status = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context)
         val isUpdateRequired = status in listOf(
             ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED,

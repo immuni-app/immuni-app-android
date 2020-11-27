@@ -22,7 +22,6 @@ import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import it.ministerodellasalute.immuni.extensions.nearby.NearbyConstants
 import it.ministerodellasalute.immuni.extensions.utils.log
 import it.ministerodellasalute.immuni.workers.StateUpdatedWorker
 import it.ministerodellasalute.immuni.workers.StateUpdatedWorker.Companion.TOKEN_KEY
