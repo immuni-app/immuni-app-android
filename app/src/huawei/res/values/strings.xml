@@ -14,5 +14,5 @@
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
 <resources>
-  <string name="services_name">Huawei Mobile Services</string>
+  <string name="services_name" translatable="false">Huawei Mobile Services</string>
 </resources>

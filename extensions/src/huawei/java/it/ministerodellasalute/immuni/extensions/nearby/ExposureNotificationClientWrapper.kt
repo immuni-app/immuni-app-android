@@ -25,6 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.lang.Exception
+import java.lang.NullPointerException
 import kotlin.math.min
 
 /**
@@ -117,15 +118,19 @@ class ExposureNotificationClientWrapper(
         val packageName = context.packageName
         val verifiedKeyFiles = mutableListOf<File>()
 
+        //verifying the keys with Google Open Source solution. In future the contact shield will provide its own verify solution
         try {
-            //verifying the keys with Google Open Source solution. In future the contact shield will provide its own verify solution
             keyFiles.forEach { file ->
                 if (provideDiagnosisKeys.verify(packageName, file)) {
                     verifiedKeyFiles.add(file)
                 }
             }
         } catch (e: Exception) {
+            throw OldVersionException()
+        }
 
+        if (verifiedKeyFiles.isEmpty()) {
+            throw OldVersionException()
         }
 
         val diagnosisConfiguration = DiagnosisConfiguration.Builder()
@@ -139,7 +144,12 @@ class ExposureNotificationClientWrapper(
 
         withContext(Dispatchers.Default) {
             val result = CompletableDeferred<Boolean>()
-            client.putSharedKeyFiles(exposurePendingIntent, verifiedKeyFiles, diagnosisConfiguration, token)
+            client.putSharedKeyFiles(
+                exposurePendingIntent,
+                verifiedKeyFiles,
+                diagnosisConfiguration,
+                token
+            )
                 .addOnSuccessListener {
                     result.complete(true)
                 }.addOnFailureListener {

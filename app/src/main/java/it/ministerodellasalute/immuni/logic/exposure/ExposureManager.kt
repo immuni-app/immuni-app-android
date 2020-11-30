@@ -20,6 +20,7 @@ import android.content.Intent
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
+import it.ministerodellasalute.immuni.extensions.nearby.OldVersionException
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
@@ -34,6 +35,8 @@ import java.io.File
 import java.util.*
 import kotlin.math.max
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 class ExposureManager(
     private val settingsManager: ConfigurationSettingsManager,
@@ -57,7 +60,8 @@ class ExposureManager(
 
     val lastSuccessfulCheckDate = exposureReportingRepository.lastSuccessfulCheckDate
 
-    fun deviceSupportsLocationlessScanning() = exposureNotificationManager.deviceSupportsLocationlessScanning()
+    fun deviceSupportsLocationlessScanning() =
+        exposureNotificationManager.deviceSupportsLocationlessScanning()
 
     suspend fun updateAndGetServiceIsActive(): Boolean {
         exposureNotificationManager.update()
@@ -149,11 +153,15 @@ class ExposureManager(
     }
 
     suspend fun provideDiagnosisKeys(keyFiles: List<File>, token: String) {
-        exposureNotificationManager.provideDiagnosisKeys(
-            keyFiles = keyFiles,
-            configuration = settings.exposureConfiguration.clientExposureConfiguration,
-            token = token
-        )
+        try {
+            exposureNotificationManager.provideDiagnosisKeys(
+                keyFiles = keyFiles,
+                configuration = settings.exposureConfiguration.clientExposureConfiguration,
+                token = token
+            )
+        } catch (e: OldVersionException) {
+            appNotificationManager.triggerNotification(NotificationType.ForcedVersionUpdate)
+        }
     }
 
     suspend fun startProcessingKeys(token: String, serverDate: Date) {

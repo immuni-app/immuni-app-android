@@ -18,6 +18,7 @@ package it.ministerodellasalute.immuni
 import android.app.Application
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.work.ExistingWorkPolicy
+import appModule
 import it.ministerodellasalute.immuni.debugmenu.DebugMenu
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppActivityLifecycleCallbacks
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver

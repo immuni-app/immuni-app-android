@@ -103,7 +103,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
         val message = context.getString(R.string.notifications_update_app_description)
 
         val notificationIntent = Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}")
+            data = Uri.parse("market://details?id=${context.packageName}")
             setPackage("com.android.vending")
         }
 
@@ -121,7 +121,7 @@ class AppNotificationManager(val context: Context) : KoinComponent {
             priority = NotificationCompat.PRIORITY_HIGH
             setStyle(NotificationCompat.BigTextStyle().bigText(message))
             setContentIntent(pendingIntent)
-            setAutoCancel(true)
+            setAutoCancel(false)
         }
     }
 
