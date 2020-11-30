@@ -106,7 +106,7 @@ public class ContactTracingFeature {
      */
     private static final String[] PUBLIC_KEYS = {
             "com.google.android.apps.exposurenotification:ExampleServer-v1,MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEUczyMAkfSeoU77Nmcb1G7t7xyGCAhQqMOIVDFLFas3J+elP7CiotovigCLWj706F07j1EPL27ThRzZl7Ha9uOA==|310-v1,MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE49JY6kekDgxj3Crm4y6kEHdfoKQFSNDM4mV9cgDb+e5nOAw0GeRoRThCu9/wX5wDT2QloFoOjl2pGZHI0f3C3w==",
-            "it.ministerodellasalute.immuni:222-v1,MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEw4rImGfl1eU13nq2OdnHor73/BAaMuTVNiR7zShVj8LCTApq+f2oNRdcwoCt3U3oCKtZj473FuZp4Yx889ttWA==|222-v2,MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoYUk5kfvyUEOfumu1/jjIWORiROu5msDe8dpW6DBCtZ0CgNPz/LXUHaLe+hFx3NzxSREBh03Y99sjEhGTvqSmg=="
+            "it.ministerodellasalute.immuni:222-v2,MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEoYUk5kfvyUEOfumu1/jjIWORiROu5msDe8dpW6DBCtZ0CgNPz/LXUHaLe+hFx3NzxSREBh03Y99sjEhGTvqSmg=="
     };
 
     /**
