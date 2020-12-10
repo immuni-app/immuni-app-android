@@ -1,3 +1,5 @@
+package it.ministerodellasalute.immuni.extensions.nearby
+
 object NearbyConstants {
     const val ACTION_EXPOSURE_STATE_UPDATED = com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient.ACTION_EXPOSURE_STATE_UPDATED
     const val EXTRA_EXPOSURE_SUMMARY = com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient.EXTRA_EXPOSURE_SUMMARY

@@ -13,6 +13,8 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+package it.ministerodellasalute.immuni
+
 import android.app.Application
 import android.app.PendingIntent
 import android.content.Intent
