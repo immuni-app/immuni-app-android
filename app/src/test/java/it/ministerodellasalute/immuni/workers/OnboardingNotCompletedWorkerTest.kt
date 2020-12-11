@@ -19,7 +19,7 @@ import androidx.work.ExistingWorkPolicy
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
 import io.mockk.verify
-import it.ministerodellasalute.immuni.logic.forceupdate.PlayServicesStatus
+import it.ministerodellasalute.immuni.logic.forceupdate.StoreServicesClient
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
@@ -41,7 +41,7 @@ class OnboardingNotCompletedWorkerTest {
     fun `triggers the notification when onboarding is not complete and EN is available`() {
         OnboardingNotCompletedWorker.doWork(
             isOnboardingComplete = false,
-            playServicesStatus = { PlayServicesStatus.AVAILABLE },
+            playServicesStatus = { StoreServicesClient.ServicesStatus.AVAILABLE },
             notificationManager = notificationManager,
             workerManager = workerManager
         )
@@ -54,7 +54,7 @@ class OnboardingNotCompletedWorkerTest {
     fun `triggers the notification when onboarding is not complete and EN is update required`() {
         OnboardingNotCompletedWorker.doWork(
             isOnboardingComplete = false,
-            playServicesStatus = { PlayServicesStatus.UPDATE_REQUIRED },
+            playServicesStatus = { StoreServicesClient.ServicesStatus.UPDATE_REQUIRED },
             notificationManager = notificationManager,
             workerManager = workerManager
         )
@@ -67,7 +67,7 @@ class OnboardingNotCompletedWorkerTest {
     fun `reschedules the worker but does not trigger the notification when onboarding is not complete and EN is not available`() {
         OnboardingNotCompletedWorker.doWork(
             isOnboardingComplete = false,
-            playServicesStatus = { PlayServicesStatus.NOT_AVAILABLE },
+            playServicesStatus = { StoreServicesClient.ServicesStatus.NOT_AVAILABLE },
             notificationManager = notificationManager,
             workerManager = workerManager
         )
@@ -80,7 +80,7 @@ class OnboardingNotCompletedWorkerTest {
     fun `does not reschedule the worker if onboarding is complete and does not trigger notification`() {
         OnboardingNotCompletedWorker.doWork(
             isOnboardingComplete = true,
-            playServicesStatus = { PlayServicesStatus.AVAILABLE },
+            playServicesStatus = { StoreServicesClient.ServicesStatus.AVAILABLE },
             notificationManager = notificationManager,
             workerManager = workerManager
         )
