@@ -21,7 +21,7 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkerParameters
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
-import it.ministerodellasalute.immuni.logic.forceupdate.PlayServicesStatus
+import it.ministerodellasalute.immuni.logic.forceupdate.StoreServicesClient
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.user.UserManager
@@ -56,12 +56,12 @@ class OnboardingNotCompletedWorker(
     companion object {
         fun doWork(
             isOnboardingComplete: Boolean,
-            playServicesStatus: () -> PlayServicesStatus,
+            playServicesStatus: () -> StoreServicesClient.ServicesStatus,
             notificationManager: AppNotificationManager,
             workerManager: WorkerManager
         ): Result {
             if (!isOnboardingComplete) {
-                if (playServicesStatus() == PlayServicesStatus.NOT_AVAILABLE) {
+                if (playServicesStatus() == StoreServicesClient.ServicesStatus.NOT_AVAILABLE) {
                     workerManager.scheduleOnboardingNotCompletedWorker(ExistingWorkPolicy.REPLACE)
                 } else {
                     notificationManager.triggerNotification(NotificationType.OnboardingNotCompleted)

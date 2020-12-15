@@ -1,0 +1,128 @@
+/*
+ *
+ * NOTE:  This proto is agreed upon with Apple as well as servers that
+ *        generate EN Exposure Key export files. Do not make non-essential
+ *        changes or non-backwards compatible edits.
+ *
+ * See:
+ * https://github.com/google/exposure-notifications-server/blob/main/internal/pb/export/export.proto
+ * https://developers.google.com/android/exposure-notifications/exposure-key-file-format
+ * https://developer.apple.com/documentation/exposurenotification/setting_up_an_exposure_notification_server#3591262
+ * https://github.com/google/exposure-notifications-android/blob/master/app/src/main/java/com/google/android/apps/exposurenotification/proto/key_file.proto
+ *
+ */
+syntax = "proto2";  // Apple's framework proto libraries only support proto2
+
+package it.ministerodellasalute.immuni;
+//import "nanopb.proto";
+
+option java_package = "it.ministerodellasalute.immuni";
+option java_outer_classname = "ExposureKeyExportProto";
+
+// Protobuf definition for exports of confirmed temporary exposure keys.
+//
+// The full file format is documented under "Exposure Key Export File Format
+// and Verification" at https://www.google.com/covid19/exposurenotifications/
+//
+// These files have a 16-byte, space-padded header before the protobuf data
+// starts. They will be contained in a zip archive, alongside a signature
+// file verifying the contents.
+message TemporaryExposureKeyExport {
+  // Time window of keys in this file based on arrival to server, in UTC
+  // seconds
+  optional fixed64 start_timestamp = 1;
+  optional fixed64 end_timestamp = 2;
+
+  // Region for which these keys came from (e.g., country)
+  optional string region = 3;
+
+  // E.g., Batch 2 of 10. Ordinal, 1-based numbering.
+  // Note: Not yet supported on iOS. Use values of 1 for both.
+  optional int32 batch_num = 4;
+  optional int32 batch_size = 5;
+
+  // Information about signatures
+  repeated SignatureInfo signature_infos = 6;
+
+  // The TemporaryExposureKeys for initial release of keys.
+  // Keys should be included in this list for initial release,
+  // whereas revised or revoked keys should go in revised_keys.
+  repeated TemporaryExposureKey keys = 7;
+
+  // TemporaryExposureKeys that have changed status.
+  // Keys should be included in this list if they have changed status
+  // or have been revoked.
+  repeated TemporaryExposureKey revised_keys = 8;
+}
+
+message SignatureInfo {
+  // These fields are no longer needed (confirmed with Apple)
+  // Apple read bundle id from an app's metadata, and we were
+  // always using calling app package. It's not needed in the file.
+  reserved 1, 2;
+  reserved "app_bundle_id", "android_package";
+  // Key version for rollovers
+  // Must be in character class [a-zA-Z0-9_]. E.g., 'v1'
+  optional string verification_key_version = 3;
+  // Alias with which to identify public key to be used for verification
+  // Must be in character class [a-zA-Z0-9_]
+  // For cross-compatibility with Apple, use MCC
+  // (https://en.wikipedia.org/wiki/Mobile_country_code).
+  optional string verification_key_id = 4;
+  // ASN.1 OID for Algorithm Identifier. Supported algorithms are
+  // either 1.2.840.10045.4.3.2 or 1.2.840.10045.4.3.4
+  optional string signature_algorithm = 5;
+}
+
+message TemporaryExposureKey {
+  // Key of infected user
+  optional bytes key_data = 1;
+  //[(nanopb).type = FT_STATIC, (nanopb).max_size = 16];
+
+  // Varying risks associated with exposure depending on type of verification
+  // Ignored by the v1.5 API when report_type is set.
+  optional int32 transmission_risk_level = 2 [deprecated = true];
+
+  // The interval number since epoch for which a key starts
+  optional int32 rolling_start_interval_number = 3;
+
+  // Increments of 10 minutes describing how long a key is valid
+  optional int32 rolling_period = 4 [default = 144];  // defaults to 24 hours
+
+  // Data type representing why this key was published.
+  enum ReportType {
+    // Never returned by the API.
+    REPORT_TYPE_UNKNOWN = 0;
+    CONFIRMED_TEST = 1;
+    CONFIRMED_CLINICAL_DIAGNOSIS = 2;
+    SELF_REPORT = 3;
+    // Reserved for future use.
+    RECURSIVE = 4;
+    // Used to revoke a key, never returned by API.
+    REVOKED = 5;
+  }
+
+  // Type of diagnosis associated with a key.
+  optional ReportType report_type = 5;
+
+  // Number of days elapsed between symptom onset and the TEK being used.
+  // E.g. 2 means TEK is 2 days after onset of symptoms.
+  optional sint32 days_since_onset_of_symptoms = 6;
+}
+
+message TEKSignatureList {
+  repeated TEKSignature signatures = 1;
+}
+
+message TEKSignature {
+  // Info about the signing key, version, algorithm, etc. Only the
+  // verification_key_id, verification_key_version, and
+  // signature_algorithm fields within signature_info are read.
+  optional SignatureInfo signature_info = 1;
+  // E.g., Batch 2 of 10 - these fields are ignored on android in favor of the
+  // batch fields within TemporaryExposureKeyExport
+  optional int32 batch_num = 2;
+  optional int32 batch_size = 3;
+  // Signature in X9.62 format (ASN.1 SEQUENCE of two INTEGER fields)
+  optional bytes signature = 4;
+}
