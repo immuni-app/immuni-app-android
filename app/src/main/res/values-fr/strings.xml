@@ -374,5 +374,6 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="support_info_item_lastencheck_none">Aucune</string>
   <string name="support_info_item_lastencheck_date" formatted="false">%@ à %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s à %2$s</string>
-    <string name="exposure_check_in_progress">Contrôle des expositions potentielles en cours</string>
+  <string name="exposure_check_in_progress">Contrôle des expositions potentielles en cours</string>
+  <string name="home_report_positivity_card_title">Signaler un résultat positif</string>
 </resources>

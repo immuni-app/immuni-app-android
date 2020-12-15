@@ -382,5 +382,6 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="settings_countries_of_interest">Wählen Sie ein europäisches Land aus</string>
   <string name="countries_of_interest_title">Gehen Sie in eines oder mehrere dieser europäischen Länder?</string>
   <string name="countries_of_interest_limit_dialog_message">Sie können maximal 3 Länder auswählen. Ihre Auswahl ist 14 Tage lang gültig und bei der keine Veränderung mehr für 14 Tage möglich ist</string>
-    <string name="countries_of_interest_limit_dialog_title">Auswahlgrenze überschritten</string>
+  <string name="countries_of_interest_limit_dialog_title">Auswahlgrenze überschritten</string>
+  <string name="home_report_positivity_card_title">Positives Ergebnis melden</string>
 </resources>

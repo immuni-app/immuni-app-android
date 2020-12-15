@@ -385,4 +385,5 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="countries_of_interest_title">¿Te diriges a uno o más de estos países europeos?</string>
   <string name="countries_of_interest_limit_dialog_message">Puedes seleccionar hasta un máximo de 3 países. Tu selección será válida e inalterable durante 14 días.</string>
   <string name="countries_of_interest_limit_dialog_title">Límite de selección excedido</string>
+  <string name="home_report_positivity_card_title">Informa de un resultado positivo</string>
 </resources>
