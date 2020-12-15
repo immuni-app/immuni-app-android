@@ -23,6 +23,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
+import it.ministerodellasalute.immuni.DataUploadDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
@@ -76,7 +77,7 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
         verify.setSafeOnClickListener { viewModel.verify() }
 
         knowMore.setSafeOnClickListener {
-            val action = OtpFragmentDirections.actionHowToUploadPositive()
+            val action = DataUploadDirections.actionHowToUploadPositive()
             findNavController().navigate(action)
         }
 

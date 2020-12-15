@@ -353,7 +353,7 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="permission_tutorial_how_to_upload_positive_title">Cómo informar de un resultado positivo</string>
   <string name="permission_tutorial_how_to_upload_positive_first">Si das positivo en el virus, puedes indicarlo en Immuni subiendo tus códigos aleatorios. Así permitirás que la aplicación avise del riesgo de contagio a los usuarios con los que hayas mantenido contacto en los días anteriores.</string>
   <string name="permission_tutorial_how_to_upload_positive_second">El profesional sanitario que te comunique que el resultado de la prueba es positivo te ayudará por teléfono. Te pedirá el código de un solo uso que aparecía en la pantalla anterior y lo utilizará para darte permiso para que subas tus datos.</string>
-  <string name="permission_tutorial_how_to_upload_positive_third">Este proceso de autorización impide que los usuarios que no hayan dado positivo en el virus suban sus datos y generen falsas alarmas. El código de un solo uso y los datos que se suben no están vinculados de ningún modo con tu identidad.</string>
+  <string name="permission_tutorial_how_to_upload_positive_fourth">Este proceso de autorización impide que los usuarios que no hayan dado positivo en el virus suban sus datos y generen falsas alarmas. El código de un solo uso y los datos que se suben no están vinculados de ningún modo con tu identidad.</string>
   <string name="suggestions_instruction_under_18_message">Si eres menor de 18 años, pídeles a tus padres que lean este mensaje.</string>
   <string name="privacy_tos_read">Al continuar, declaro que he leído y acepto los {términos de uso}</string>
   <string name="privacy_checkbox_read">He leído la {política de privacidad}</string>

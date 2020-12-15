@@ -24,25 +24,18 @@
 
     <include app:graph="@navigation/faq" />
 
+    <include app:graph="@navigation/data_upload" />
+
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="it.ministerodellasalute.immuni.ui.settings.SettingsFragment"
         android:label="homeFragment"
         tools:layout="@layout/settings_fragment" />
 
-    <fragment
-        android:id="@+id/otpFragment"
-        android:name="it.ministerodellasalute.immuni.ui.otp.OtpFragment"
-        android:label="UploadVerification"
-        tools:layout="@layout/otp_fragment" />
-
     <action
-        android:id="@+id/action_upload_data"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
-        app:destination="@id/otpFragment" />
+        android:id="@+id/action_data_upload_nav"
+        app:destination="@+id/data_upload" />
 
     <action
         android:id="@+id/action_faq"
@@ -51,21 +44,6 @@
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
         app:destination="@id/faq_nav" />
-
-    <activity
-        android:id="@+id/uploadActivity"
-        android:name="it.ministerodellasalute.immuni.ui.upload.UploadDataActivity"
-        android:label="UploadDataActivity"
-        tools:layout="@layout/upload_data_fragment">
-        <argument
-            android:name="token"
-            app:argType="it.ministerodellasalute.immuni.ui.otp.OtpToken"
-            app:nullable="false" />
-    </activity>
-
-    <action
-        android:id="@+id/action_upload_activity"
-        app:destination="@id/uploadActivity"/>
 
     <activity
         android:id="@+id/onboardingActivity"
@@ -104,14 +82,6 @@
     <action
         android:id="@+id/action_support"
         app:destination="@id/support" />
-
-    <dialog android:id="@+id/howToUploadPositive"
-        android:name="it.ministerodellasalute.immuni.ui.howtouploadpositive.HowToUploadPositiveDialogFragment"
-        tools:layout="@layout/how_to_upload_positive_dialog" />
-
-    <action
-        android:id="@+id/action_how_to_upload_positive"
-        app:destination="@id/howToUploadPositive" />
 
     <activity
         android:id="@+id/countriesOfInterestActivity"

@@ -349,7 +349,8 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="permission_tutorial_how_to_upload_positive_title">How to report a positive result</string>
   <string name="permission_tutorial_how_to_upload_positive_first">If you test positive for the virus, you can report this to Immuni and upload your random codes. By doing so, you allow the app to warn users with whom you have been in contact over the previous days that there is a risk of infection.</string>
   <string name="permission_tutorial_how_to_upload_positive_second">The healthcare operator who informs you that your swab has tested positive will assist you by phone. They will ask you for the one-time code displayed on the previous screen, which they will use to give you authorisation to upload your data.</string>
-  <string name="permission_tutorial_how_to_upload_positive_third">This authorisation process prevents users who have not actually tested positive for the virus from uploading their data and causing false alarms. The one-time code and the data uploaded are not associated with your identity in any way.</string>
+  <string name="permission_tutorial_how_to_upload_positive_third"></string>
+  <string name="permission_tutorial_how_to_upload_positive_fourth">This authorisation process prevents users who have not actually tested positive for the virus from uploading their data and causing false alarms. The one-time code and the data uploaded are not associated with your identity in any way.</string>
   <string name="suggestions_instruction_under_18_message">If you\'re under 18, please have your parents/legal guardian read this message.</string>
   <string name="privacy_tos_read">By continuing, I declare that I have read and accepted the {terms of use}</string>
   <string name="privacy_checkbox_read">I have read the {privacy notice}</string>
@@ -381,4 +382,5 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="countries_of_interest_title">Are you going to one or more of these European countries?</string>
   <string name="countries_of_interest_limit_dialog_title">Selection limit exceeded</string>
   <string name="countries_of_interest_limit_dialog_message">You can select up to a maximum of 3 countries. Your selection will be valid and unchangeable for 14 days</string>
+  <string name="home_report_positivity_card_title"></string>
 </resources>

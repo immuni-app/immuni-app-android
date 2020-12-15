@@ -59,7 +59,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ConfirmationDialo
         // data management
 
         dataLoadButton.setSafeOnClickListener {
-            val action = SettingsNavDirections.actionUploadData()
+            val action = SettingsNavDirections.actionDataUploadNav()
             findNavController().navigate(action)
         }
 
