@@ -35,15 +35,6 @@
         android:minHeight="140dp">
 
         <it.ministerodellasalute.immuni.ui.view.ImageScaleView
-            android:id="@+id/iconNew"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="matrix"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_new_white" />
-
-        <it.ministerodellasalute.immuni.ui.view.ImageScaleView
             android:id="@+id/icon"
             android:layout_width="0dp"
             android:layout_height="0dp"
