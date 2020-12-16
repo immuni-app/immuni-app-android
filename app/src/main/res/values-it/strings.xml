@@ -148,7 +148,7 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Apri le impostazioni</b> dal bottone in basso</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Abilita le notifiche di esposizione</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Apri Impostazioni</string>
-  <string name="upload_data_warning_message">"Questa funzione richiede l’assistenza dell'operatore sanitario che ti comunica telefonicamente l'esito positivo del tampone. Se hai ricevuto il Codice Unico Nazionale (CUN) puoi segnalare la tua positività anche attraverso il numero verde 800.91.24.91 "</string>
+  <string name="upload_data_warning_message">"Questa funzione richiede l’assistenza dell'operatore sanitario che ti comunica telefonicamente l'esito positivo del tampone. Se hai ricevuto il Codice Unico Nazionale (CUN) puoi segnalare la tua positività anche attraverso il numero verde 800.91.24.91"</string>
   <string name="upload_data_code_message">Comunica il codice all\'operatore:</string>
   <string name="upload_data_wait_operator_message">Attendi la conferma dell\'operatore</string>
   <string name="upload_data_verify_message">Prosegui per verificare l’autorizzazione del codice</string>
