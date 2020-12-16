@@ -147,8 +147,8 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Accede a los ajustes</b> pulsando el botón de abajo</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Habilita las notificaciones de exposición</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Abrir los ajustes</string>
-  <string name="upload_data_warning_message">Esta función requiere la asistencia del profesional sanitario que te comunique por teléfono que el resultado de la prueba es positivo.</string>
-  <string name="upload_data_code_message">Proporciona el código de un solo uso al profesional sanitario:</string>
+  <string name="upload_data_warning_message">Esta función requiere la asistencia del profesional sanitario que te comunique por teléfono que el resultado de la prueba es positivo. Si has recibido el Código Nacional Único (CUN) también puedes informar tu resultado positivo a través del número gratuito 800.91.24.91</string>
+  <string name="upload_data_code_message">Proporciona el código de un solo uso al profesional:</string>
   <string name="upload_data_wait_operator_message">Espera a recibir la confirmación del profesional sanitario</string>
   <string name="upload_data_verify_message">Continúa para verificar la autorización del código</string>
   <string name="upload_data_verify_button">Continúa</string>
@@ -353,7 +353,8 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="permission_tutorial_how_to_upload_positive_title">Cómo informar de un resultado positivo</string>
   <string name="permission_tutorial_how_to_upload_positive_first">Si das positivo en el virus, puedes indicarlo en Immuni subiendo tus códigos aleatorios. Así permitirás que la aplicación avise del riesgo de contagio a los usuarios con los que hayas mantenido contacto en los días anteriores.</string>
   <string name="permission_tutorial_how_to_upload_positive_second">El profesional sanitario que te comunique que el resultado de la prueba es positivo te ayudará por teléfono. Te pedirá el código de un solo uso que aparecía en la pantalla anterior y lo utilizará para darte permiso para que subas tus datos.</string>
-  <string name="permission_tutorial_how_to_upload_positive_third">Este proceso de autorización impide que los usuarios que no hayan dado positivo en el virus suban sus datos y generen falsas alarmas. El código de un solo uso y los datos que se suben no están vinculados de ningún modo con tu identidad.</string>
+  <string name="permission_tutorial_how_to_upload_positive_third">Si has recibido el Código Nacional Único (CUN) el operador del centro de llamadas 800.91.24.91 te pedirá también el numero de tu “tessera sanitaria” (tarjeta sanitaria).</string>
+  <string name="permission_tutorial_how_to_upload_positive_fourth">Estos procesos de autorización previenen que los usuarios que no hayan dado positivo en el virus suban sus datos y generen falsas alarmas. El código de un solo uso y los datos que se suben no están vinculados de ningún modo con tu identidad.</string>
   <string name="suggestions_instruction_under_18_message">Si eres menor de 18 años, pídeles a tus padres que lean este mensaje.</string>
   <string name="privacy_tos_read">Al continuar, declaro que he leído y acepto los {términos de uso}</string>
   <string name="privacy_checkbox_read">He leído la {política de privacidad}</string>
@@ -385,4 +386,5 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="countries_of_interest_title">¿Te diriges a uno o más de estos países europeos?</string>
   <string name="countries_of_interest_limit_dialog_message">Puedes seleccionar hasta un máximo de 3 países. Tu selección será válida e inalterable durante 14 días.</string>
   <string name="countries_of_interest_limit_dialog_title">Límite de selección excedido</string>
+  <string name="home_report_positivity_card_title">Informa de un resultado positivo</string>
 </resources>

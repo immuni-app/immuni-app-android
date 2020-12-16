@@ -22,6 +22,7 @@
 
     <include app:graph="@navigation/webview" />
     <include app:graph="@navigation/howitworks" />
+    <include app:graph="@navigation/data_upload" />
 
     <fragment
         android:id="@+id/homeFragment"
@@ -125,4 +126,8 @@
     <action
         android:id="@+id/action_countries_of_interest"
         app:destination="@id/countriesOfInterestActivity" />
+
+    <action
+        android:id="@+id/action_data_upload_nav"
+        app:destination="@+id/data_upload" />
 </navigation>

@@ -23,6 +23,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
+import it.ministerodellasalute.immuni.DataUploadDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
@@ -30,14 +31,11 @@ import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
-import kotlin.math.abs
 import kotlinx.android.synthetic.main.otp_fragment.*
-import kotlinx.android.synthetic.main.otp_fragment.appBar
-import kotlinx.android.synthetic.main.otp_fragment.navigationIcon
-import kotlinx.android.synthetic.main.otp_fragment.toolbarSeparator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import kotlin.math.abs
 
 class OtpFragment : Fragment(R.layout.otp_fragment) {
 
@@ -76,7 +74,7 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
         verify.setSafeOnClickListener { viewModel.verify() }
 
         knowMore.setSafeOnClickListener {
-            val action = OtpFragmentDirections.actionHowToUploadPositive()
+            val action = DataUploadDirections.actionHowToUploadPositive()
             findNavController().navigate(action)
         }
 
@@ -111,8 +109,7 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
 
         viewModel.navigateToUploadPage.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { token ->
-                val action =
-                    OtpFragmentDirections.actionUploadActivity(OtpToken.fromLogic(token))
+                val action = OtpFragmentDirections.actionUploadActivity(OtpToken.fromLogic(token))
                 findNavController().navigate(action)
 
                 lifecycleScope.launch {
