@@ -28,7 +28,7 @@
         android:clipToPadding="false"
         android:overScrollMode="never"
         android:paddingTop="32dp"
-        android:paddingBottom="120dp"
+        android:paddingBottom="180dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"

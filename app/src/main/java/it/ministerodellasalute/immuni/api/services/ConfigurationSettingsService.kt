@@ -116,18 +116,20 @@ private fun countriesMap(): Map<String, Map<String, String>> {
     return mapOf(
         "it" to mapOf(
             "AT" to "AUSTRIA",
+            "HR" to "CROAZIA",
             "DK" to "DANIMARCA",
             "EE" to "ESTONIA",
             "DE" to "GERMANIA",
             "IE" to "IRLANDA",
             "LV" to "LETTONIA",
-            "NL" to "OLANDA",
+            "NL" to "PAESI BASSI",
             "PL" to "POLONIA",
             "CZ" to "REPUBBLICA CECA",
             "ES" to "SPAGNA"
         ),
         "de" to mapOf(
             "AT" to "ÖSTERREICH",
+            "HR" to "KROATIEN",
             "DK" to "DÄNEMARK",
             "EE" to "ESTONIA",
             "DE" to "DEUTSCHLAND",
@@ -140,6 +142,7 @@ private fun countriesMap(): Map<String, Map<String, String>> {
         ),
         "en" to mapOf(
             "AT" to "AUSTRIA",
+            "HR" to "CROATIA",
             "DK" to "DENMARK",
             "EE" to "ESTONIA",
             "DE" to "GERMANY",
@@ -152,6 +155,7 @@ private fun countriesMap(): Map<String, Map<String, String>> {
         ),
         "fr" to mapOf(
             "AT" to "AUTRICHE",
+            "HR" to "CROATIE",
             "DK" to "DANEMARK",
             "EE" to "ESTONIE",
             "DE" to "ALLEMAGNE",
@@ -164,6 +168,7 @@ private fun countriesMap(): Map<String, Map<String, String>> {
         ),
         "es" to mapOf(
             "EN" to "AUSTRIA",
+            "HR" to "CROACIA",
             "DK" to "DINAMARCA",
             "EE" to "ESTONIA",
             "DE" to "ALEMANIA",
