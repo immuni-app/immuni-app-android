@@ -122,7 +122,7 @@ private fun countriesMap(): Map<String, Map<String, String>> {
             "DE" to "GERMANIA",
             "IE" to "IRLANDA",
             "LV" to "LETTONIA",
-            "NL" to "OLANDA",
+            "NL" to "PAESI BASSI",
             "PL" to "POLONIA",
             "CZ" to "REPUBBLICA CECA",
             "ES" to "SPAGNA"
