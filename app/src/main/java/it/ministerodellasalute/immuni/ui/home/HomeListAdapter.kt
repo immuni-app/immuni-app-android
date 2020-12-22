@@ -87,6 +87,8 @@ class HomeListAdapter(
 
     inner class CountriesOfInterestVH(v: View) : RecyclerView.ViewHolder(v)
 
+    inner class ReportPositivityVH(v: View) : RecyclerView.ViewHolder(v)
+
     inner class DisableExposureApiVH(v: View) : RecyclerView.ViewHolder(v) {
         val disableExposureApi: Button = v.findViewById(R.id.disableExposureApi)
 
@@ -112,7 +114,8 @@ class HomeListAdapter(
             2 -> Pair(R.layout.home_information_how_app_works_card, InformationHowAppWorksVH::class)
             3 -> Pair(R.layout.home_information_self_care_card, InformationSelfCareVH::class)
             4 -> Pair(R.layout.home_countries_of_interest, CountriesOfInterestVH::class)
-            5 -> Pair(R.layout.home_disable_exposure_api, DisableExposureApiVH::class)
+            5 -> Pair(R.layout.home_report_positivity_card, ReportPositivityVH::class)
+            6 -> Pair(R.layout.home_disable_exposure_api, DisableExposureApiVH::class)
             else -> error("Unhandled viewType $viewType")
         }
 
@@ -200,7 +203,8 @@ class HomeListAdapter(
             is HowItWorksCard -> 2
             is SelfCareCard -> 3
             is CountriesOfInterestCard -> 4
-            is DisableExposureApi -> 5
+            is ReportPositivityCard -> 5
+            is DisableExposureApi -> 6
         }
     }
 

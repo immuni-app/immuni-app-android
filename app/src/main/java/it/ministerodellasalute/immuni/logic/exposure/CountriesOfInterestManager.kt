@@ -27,6 +27,8 @@ class CountriesOfInterestManager(
     private val settingsRepository: ConfigurationSettingsStoreRepository
 ) : KoinComponent {
 
+    fun selector(country: CountryOfInterest): String = country.fullName
+
     fun setCountriesOfInterest(listCountries: List<CountryOfInterest>) {
         exposureReportingRepository.setCountriesOfInterest(listCountries)
     }
@@ -48,6 +50,7 @@ class CountriesOfInterestManager(
                 )
             )
         }
+        listCountries.sortBy { selector(it) }
         return listCountries
     }
 

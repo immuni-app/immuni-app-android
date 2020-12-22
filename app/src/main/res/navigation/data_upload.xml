@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/data_upload"
+    app:startDestination="@id/otpFragment">
+
+    <fragment
+        android:id="@+id/otpFragment"
+        android:name="it.ministerodellasalute.immuni.ui.otp.OtpFragment"
+        android:label="UploadVerification"
+        tools:layout="@layout/otp_fragment">
+    </fragment>
+
+    <action
+        android:id="@+id/action_upload_data"
+        app:destination="@id/otpFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <activity
+        android:id="@+id/uploadActivity"
+        android:name="it.ministerodellasalute.immuni.ui.upload.UploadDataActivity"
+        android:label="UploadDataActivity"
+        tools:layout="@layout/upload_data_fragment">
+        <argument
+            android:name="token"
+            app:argType="it.ministerodellasalute.immuni.ui.otp.OtpToken"
+            app:nullable="false" />
+    </activity>
+
+    <action
+        android:id="@+id/action_upload_activity"
+        app:destination="@id/uploadActivity" />
+
+    <dialog
+        android:id="@+id/howToUploadPositive"
+        android:name="it.ministerodellasalute.immuni.ui.howtouploadpositive.HowToUploadPositiveDialogFragment"
+        tools:layout="@layout/how_to_upload_positive_dialog" />
+
+    <action
+        android:id="@+id/action_how_to_upload_positive"
+        app:destination="@id/howToUploadPositive" />
+
+</navigation>

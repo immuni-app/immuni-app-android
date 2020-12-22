@@ -145,8 +145,8 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Open Settings</b> using the button below</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Enable exposure notifications</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Open Settings</string>
-  <string name="upload_data_warning_message">This feature requires assistance from the healthcare operator, who will inform you by phone of the positive result of the swab test.</string>
-  <string name="upload_data_code_message">Give the healthcare operator the one-time code:</string>
+  <string name="upload_data_warning_message">This feature requires assistance from the healthcare operator, who will inform you by phone of the positive result of the swab test. If you have received the Unique National Code (CUN) you can also report your positive result through our toll-free number 800.91.24.91</string>
+  <string name="upload_data_code_message">Give the operator the one-time code:</string>
   <string name="upload_data_wait_operator_message">Wait for the healthcare operator to confirm</string>
   <string name="upload_data_verify_message">Continue to verify code authorisation</string>
   <string name="upload_data_verify_button">Continue</string>
@@ -349,7 +349,8 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="permission_tutorial_how_to_upload_positive_title">How to report a positive result</string>
   <string name="permission_tutorial_how_to_upload_positive_first">If you test positive for the virus, you can report this to Immuni and upload your random codes. By doing so, you allow the app to warn users with whom you have been in contact over the previous days that there is a risk of infection.</string>
   <string name="permission_tutorial_how_to_upload_positive_second">The healthcare operator who informs you that your swab has tested positive will assist you by phone. They will ask you for the one-time code displayed on the previous screen, which they will use to give you authorisation to upload your data.</string>
-  <string name="permission_tutorial_how_to_upload_positive_third">This authorisation process prevents users who have not actually tested positive for the virus from uploading their data and causing false alarms. The one-time code and the data uploaded are not associated with your identity in any way.</string>
+  <string name="permission_tutorial_how_to_upload_positive_third">If you have received the Unique National Code (CUN), the call center operator 800.91.24.91 will also ask you to provide your health card number.</string>
+  <string name="permission_tutorial_how_to_upload_positive_fourth">These authorization processes prevent users who have not actually tested positive for the virus from uploading their data and causing false alarms. The one-time code and the data uploaded are not associated with your identity in any way.</string>
   <string name="suggestions_instruction_under_18_message">If you\'re under 18, please have your parents/legal guardian read this message.</string>
   <string name="privacy_tos_read">By continuing, I declare that I have read and accepted the {terms of use}</string>
   <string name="privacy_checkbox_read">I have read the {privacy notice}</string>
@@ -371,7 +372,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="support_info_item_lastencheck_date" formatted="false">%@ at %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s at %2$s</string>
   <string name="exposure_check_in_progress">Exposure check in progress</string>
-  <string name="countries_of_interest_description">If you are going to Europe you can select the country/s of Interest, if it has/have already joined interoperability, so that Immuni can connect with the other European contact tracing APP\'s and help to contain the spead of Covid-19 in Europe. You can select up to maximum of 3 countries. Your selection will be valid and unchangeable for the next 14 days.</string>
+  <string name="countries_of_interest_description">If you are going to Europe you can select the country/s of Interest, if it has/have already joined interoperability, so that Immuni can connect with the other European contact tracing APP\'s and help to contain the spread of Covid-19 in Europe. You can select up to maximum of 3 countries. Your selection will be valid and unchangeable for the next 14 days.</string>
   <string name="home_countries_of_interest_title">If you are going to another European country</string>
   <string name="countries_of_interest_dialog_title">Are you sure you want to proceed?</string>
   <string name="countries_of_interest_dialog_message">By confirming you will not be able to remove the chosen countries for the next 14 days</string>
@@ -381,4 +382,5 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="countries_of_interest_title">Are you going to one or more of these European countries?</string>
   <string name="countries_of_interest_limit_dialog_title">Selection limit exceeded</string>
   <string name="countries_of_interest_limit_dialog_message">You can select up to a maximum of 3 countries. Your selection will be valid and unchangeable for 14 days</string>
+  <string name="home_report_positivity_card_title">Report a positive result</string>
 </resources>
