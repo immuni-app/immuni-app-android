@@ -59,6 +59,7 @@ class MainViewModel(
         items.add(HowItWorksCard)
         items.add(SelfCareCard)
         items.add(CountriesOfInterestCard)
+        items.add(ReportPositivityCard)
         items.add(DisableExposureApi(protectionActive ?: false))
         return items
     }

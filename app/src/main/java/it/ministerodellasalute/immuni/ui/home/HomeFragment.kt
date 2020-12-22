@@ -241,6 +241,9 @@ class HomeFragment : Fragment(),
             CountriesOfInterestCard -> {
                 openCountriesOfInterest()
             }
+            ReportPositivityCard -> {
+                openReportPositivity()
+            }
             is DisableExposureApi -> {
                 openDisableExposureApi()
             }
@@ -274,6 +277,11 @@ class HomeFragment : Fragment(),
 
     private fun openCountriesOfInterest() {
         val action = HomeFragmentDirections.actionCountriesOfInterest()
+        findNavController().navigate(action)
+    }
+
+    private fun openReportPositivity() {
+        val action = HomeFragmentDirections.actionDataUploadNav()
         findNavController().navigate(action)
     }
 }

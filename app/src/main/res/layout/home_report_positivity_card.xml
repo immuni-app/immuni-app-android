@@ -22,7 +22,7 @@
     android:layout_marginTop="8dp"
     android:layout_marginEnd="25dp"
     android:layout_marginBottom="8dp"
-    android:backgroundTint="@color/card_light"
+    android:backgroundTint="@color/card_dark"
     android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/card_radius"
     app:cardElevation="@dimen/cards_elevation"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.4"
             app:matrixType="bottom_left"
-            app:srcCompat="@drawable/flageuropa" />
+            app:srcCompat="@drawable/advice" />
 
         <TextView
             android:id="@+id/title"
@@ -54,8 +54,8 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="45dp"
             android:layout_marginEnd="30dp"
-            android:text="@string/home_countries_of_interest_title"
-            android:textColor="@color/colorPrimary"
+            android:text="@string/home_report_positivity_card_title"
+            android:textColor="@color/background"
             app:layout_constraintBottom_toTopOf="@+id/subtitle"
             app:layout_constraintEnd_toStartOf="@+id/icon"
             app:layout_constraintHorizontal_bias="0.5"
@@ -71,7 +71,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="45dp"
             android:text="@string/home_view_info_button_title"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/title"
             app:layout_constraintTop_toBottomOf="@+id/title"
