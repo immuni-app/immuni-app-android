@@ -119,7 +119,7 @@ class ExposureNotificationManager(
     suspend fun update() {
         var isEnabled = false
         try {
-            isEnabled = exposureNotificationClient.isEnabled()
+            isEnabled = exposureNotificationClient.isEnabled(null)
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
@@ -133,7 +133,7 @@ class ExposureNotificationManager(
             log("we are already performing this operation")
             return
         }
-        if (exposureNotificationClient.isEnabled()) {
+        if (exposureNotificationClient.isEnabled(null)) {
             log("Already enabled. Skipping.")
             return
         }
@@ -255,9 +255,9 @@ class ExposureNotificationManager(
         }
     }
 
-    suspend fun stopExposureNotification() {
+    suspend fun stopExposureNotification(activity: Activity?) {
         // if already disabled, avoid throwing errors
-        if (exposureNotificationClient.isEnabled()) {
+        if (exposureNotificationClient.isEnabled(null)) {
             exposureNotificationClient.stop()
             update()
         }

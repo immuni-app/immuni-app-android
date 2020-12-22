@@ -15,6 +15,7 @@
 
 package it.ministerodellasalute.immuni.extensions.nearby
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import java.io.File
@@ -96,7 +97,7 @@ interface ExposureNotificationClient {
 
     suspend fun stop()
 
-    suspend fun isEnabled(): Boolean
+    suspend fun isEnabled(activity: Activity?): Boolean
 
     fun deviceSupportsLocationlessScanning(): Boolean
 
