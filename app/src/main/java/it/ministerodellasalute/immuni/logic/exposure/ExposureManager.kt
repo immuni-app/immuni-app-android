@@ -143,13 +143,13 @@ class ExposureManager(
     }
 
     suspend fun optInAndStartExposureTracing(activity: Activity) {
-        stopExposureNotification()
+        stopExposureNotification(activity)
         exposureNotificationManager.optInAndStartExposureTracing(activity)
         appNotificationManager.removeNotification(NotificationType.ServiceNotActive)
     }
 
-    suspend fun stopExposureNotification() {
-        exposureNotificationManager.stopExposureNotification()
+    suspend fun stopExposureNotification(activity: Activity?) {
+        exposureNotificationManager.stopExposureNotification(activity)
     }
 
     suspend fun provideDiagnosisKeys(keyFiles: List<File>, token: String) {

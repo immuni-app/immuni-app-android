@@ -4,8 +4,8 @@ buildscript {
     ext {
         // App version digits
         versionMajor = 2
-        versionMinor = 1
-        versionPatch = 1
+        versionMinor = 2
+        versionPatch = 0
 
         // Version name follows the <major>.<minor>.<patch> convention
         computeVersionName = { ->
@@ -61,7 +61,7 @@ buildscript {
         conscryptVersion = "2.4.0"
         testCoreKtxVersion = "1.2.0"
         testFragmentVersion = "1.2.4"
-        contactShieldVersion = "5.0.4.302"
+        contactShieldVersion = "5.1.0.300"
         safetyDetectVersion = "5.0.3.300"
         huaweiBaseVersion = "5.0.3.300"
     }

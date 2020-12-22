@@ -147,8 +147,8 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Öffnen Sie die Einstellungen</b> über die Schaltfläche unten</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Aktivieren Sie die Expositionsmeldungen</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Einstellungen öffnen</string>
-  <string name="upload_data_warning_message">Diese Funktion erfordert die Unterstützung des medizinischen Fachpersonals, das Sie telefonisch über das positive Ergebnis des Tests informiert.</string>
-  <string name="upload_data_code_message">Teilen Sie dem medizinischen Fachpersonal den Einmalcode mit:</string>
+  <string name="upload_data_warning_message">Diese Funktion erfordert die Unterstützung des medizinischen Fachpersonals, das Sie telefonisch über das positive Ergebnis des Tests informiert. Wenn Sie den Unique National Code (CUN) erhalten haben, können Sie Ihr positives Ergebnis auch über die gebührenfreie Nummer 800.91.24.91 melden.</string>
+  <string name="upload_data_code_message">Teilen Sie dem Fachpersonal den Einmalcode mit:</string>
   <string name="upload_data_wait_operator_message">Warten Sie auf die Bestätigung des Bedieners</string>
   <string name="upload_data_verify_message">Weiter zur Überprüfung der Code-Autorisierung</string>
   <string name="upload_data_verify_button">Weiter</string>
@@ -351,7 +351,8 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="permission_tutorial_how_to_upload_positive_title">So melden Sie das positive Ergebnis</string>
   <string name="permission_tutorial_how_to_upload_positive_first">Wenn Sie positiv auf das Virus getestet werden, können Sie es Immuni melden, indem Sie Ihre Zufallscodes hochladen. Auf diese Weise können Sie der App ermöglichen, Nutzer, mit denen Sie in den letzten Tagen Kontakt hatten, vor dem Risiko einer Ansteckung zu warnen.</string>
   <string name="permission_tutorial_how_to_upload_positive_second">Das medizinische Fachpersonal, das Ihnen das positive Ergebnis des Tests mitteilt, hilft Ihnen telefonisch weiter. Sie werden nach dem auf dem vorherigen Bildschirm angezeigten Einmalcode gefragt, der dazu dient, das Hochladen Ihrer Daten zu autorisieren.</string>
-  <string name="permission_tutorial_how_to_upload_positive_third">Dieser Autorisierungsprozess verhindert, dass Nutzer, die nicht positiv auf den Virus getestet wurden, ihre Daten hochladen und somit Fehlalarme verursachen. Der Einmalcode und die hochgeladenen Daten sind in keiner Weise mit Ihrer Identität verbunden.</string>
+  <string name="permission_tutorial_how_to_upload_positive_third">Wenn Sie den Unique National Code (CUN) erhalten haben, werden Sie vom Callcenter-Betreiber 800.91.24.91 ebenfalls nach Ihrer Gesundheitskartennummer gefragt.</string>
+  <string name="permission_tutorial_how_to_upload_positive_fourth">Diese Autorisierungsprozesse verhindern, dass Nutzer, die nicht positiv auf den Virus getestet wurden, ihre Daten hochladen und somit Fehlalarme verursachen. Der Einmalcode und die hochgeladenen Daten sind in keiner Weise mit Ihrer Identität verbunden.</string>
   <string name="suggestions_instruction_under_18_message">Wenn Sie unter 18 Jahre alt sind, zeigen Sie diese Nachricht Ihren Eltern.</string>
   <string name="privacy_tos_read">Indem ich fortfahre, erkläre ich, die {Nutzungsbedingungen} gelesen und akzeptiert zu haben</string>
   <string name="privacy_checkbox_read">Ich habe die {Datenschutzerklärung} gelesen</string>
@@ -382,5 +383,6 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="settings_countries_of_interest">Wählen Sie ein europäisches Land aus</string>
   <string name="countries_of_interest_title">Gehen Sie in eines oder mehrere dieser europäischen Länder?</string>
   <string name="countries_of_interest_limit_dialog_message">Sie können maximal 3 Länder auswählen. Ihre Auswahl ist 14 Tage lang gültig und bei der keine Veränderung mehr für 14 Tage möglich ist</string>
-    <string name="countries_of_interest_limit_dialog_title">Auswahlgrenze überschritten</string>
+  <string name="countries_of_interest_limit_dialog_title">Auswahlgrenze überschritten</string>
+  <string name="home_report_positivity_card_title">Positives Ergebnis melden</string>
 </resources>

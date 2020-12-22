@@ -15,9 +15,11 @@
 
 package it.ministerodellasalute.immuni.extensions.nearby
 
+import android.app.Activity
 import android.app.PendingIntent
 import android.content.Context
 import android.util.Base64
+import com.huawei.hms.common.ResolvableApiException
 import com.huawei.hms.contactshield.*
 import it.ministerodellasalute.immuni.extensions.signatureverify.ProvideDiagnosisKeys
 import kotlinx.coroutines.CompletableDeferred
@@ -65,12 +67,18 @@ class ExposureNotificationClientWrapper(
 
     override fun deviceSupportsLocationlessScanning(): Boolean = false
 
-    override suspend fun isEnabled(): Boolean = withContext(Dispatchers.Default) {
+    override suspend fun isEnabled(activity: Activity?): Boolean = withContext(Dispatchers.Default) {
         val result = CompletableDeferred<Boolean>()
         client.isContactShieldRunning.addOnSuccessListener {
             result.complete(it)
-        }.addOnFailureListener {
-            result.completeExceptionally(it)
+        }.addOnFailureListener { exc ->
+            activity?.let {
+                if (exc is ResolvableApiException) {
+                    exc.startResolutionForResult(it, 1212)
+                }
+            }
+
+            result.completeExceptionally(exc)
         }
 
         result.await()

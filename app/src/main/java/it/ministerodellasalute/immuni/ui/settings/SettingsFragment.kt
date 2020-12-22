@@ -34,9 +34,9 @@ import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
-import kotlin.math.abs
 import kotlinx.android.synthetic.main.settings_fragment.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import kotlin.math.abs
 
 class SettingsFragment : Fragment(R.layout.settings_fragment), ConfirmationDialogListener {
 
@@ -59,7 +59,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ConfirmationDialo
         // data management
 
         dataLoadButton.setSafeOnClickListener {
-            val action = SettingsNavDirections.actionUploadData()
+            val action = SettingsNavDirections.actionDataUploadNav()
             findNavController().navigate(action)
         }
 

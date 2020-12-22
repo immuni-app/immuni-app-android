@@ -41,7 +41,7 @@ class DisableExposureApiDialogFragment : PopupDialogFragment() {
             val exposureManager: ExposureManager by inject()
             val appNotificationManager: AppNotificationManager by inject()
             lifecycleScope.launch {
-                exposureManager.stopExposureNotification()
+                exposureManager.stopExposureNotification(null)
                 appNotificationManager.triggerNotification(NotificationType.ServiceNotActive)
                 findNavController().popBackStack()
             }

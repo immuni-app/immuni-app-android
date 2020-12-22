@@ -99,7 +99,7 @@ class ImmuniDebugMenuConfiguration(
             }) {},
             object : DebugMenuItem("❌ Stop Exposure Notification", { _, _ ->
                 GlobalScope.launch {
-                    exposureManager.stopExposureNotification()
+                    exposureManager.stopExposureNotification(null)
                 }
             }) {},
             object : DebugMenuItem("\uD83D\uDE37 Reset exposure status", { _, _ ->
