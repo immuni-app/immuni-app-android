@@ -74,7 +74,7 @@ class ExposureNotificationClientWrapper(
         }.addOnFailureListener { exc ->
             activity?.let {
                 if (exc is ResolvableApiException) {
-                    exc.startResolutionForResult(it, 1111)
+                    exc.startResolutionForResult(it, 1212)
                 }
             }
 
