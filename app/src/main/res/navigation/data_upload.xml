@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
   ~ Please refer to the AUTHORS file for more information.
   ~ This program is free software: you can redistribute it and/or modify
@@ -15,21 +14,40 @@
   -->
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/data_upload"
-    app:startDestination="@id/otpFragment">
+    app:startDestination="@id/chooseDataUploadMode">
+
+    <fragment
+        android:id="@+id/chooseDataUploadMode"
+        android:name="it.ministerodellasalute.immuni.ui.otp.ChooseDataUploadMode"
+        android:label="ChooseTypeUpload"
+        tools:layout="@layout/choose_data_upload_mode" />
 
     <fragment
         android:id="@+id/otpFragment"
         android:name="it.ministerodellasalute.immuni.ui.otp.OtpFragment"
         android:label="UploadVerification"
-        tools:layout="@layout/otp_fragment">
-    </fragment>
+        tools:layout="@layout/otp_fragment"></fragment>
 
     <action
         android:id="@+id/action_upload_data"
         app:destination="@id/otpFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/reportPositivityIndepentlyFragment"
+        android:name="it.ministerodellasalute.immuni.ui.otp.ReportPositivityIndependently"
+        android:label="UploadVerificationCun"
+        tools:layout="@layout/report_positivity_cun"></fragment>
+
+    <action
+        android:id="@+id/action_report_positivity_independently"
+        app:destination="@id/reportPositivityIndepentlyFragment"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
         app:popEnterAnim="@anim/slide_in_left"
@@ -58,5 +76,14 @@
     <action
         android:id="@+id/action_how_to_upload_positive"
         app:destination="@id/howToUploadPositive" />
+
+    <dialog
+        android:id="@+id/howToUploadPositiveIndependently"
+        android:name="it.ministerodellasalute.immuni.ui.howtouploadpositive.HowToUploadPositiveIndependentlyDialogFragment"
+        tools:layout="@layout/how_to_upload_positive_independently_dialog" />
+
+    <action
+        android:id="@+id/action_how_to_upload_positive_independently"
+        app:destination="@id/howToUploadPositiveIndependently" />
 
 </navigation>

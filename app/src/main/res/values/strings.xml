@@ -383,4 +383,17 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="countries_of_interest_limit_dialog_title">Selection limit exceeded</string>
   <string name="countries_of_interest_limit_dialog_message">You can select up to a maximum of 3 countries. Your selection will be valid and unchangeable for 14 days</string>
   <string name="home_report_positivity_card_title">Report a positive result</string>
+  <string name="cdum_title_OS">Sei stato contattato da un Operatore Sanitario?</string>
+  <string name="cdum_description_OS">Segui la procedura per segnalare la tua positività</string>
+  <string name="continue_label">Prosegui</string>
+  <string name="cdum_title_independently">Vuoi segnalare la tua positività in autonomia?</string>
+  <string name="cdum_description_independently">Se hai ricevuto il Codice Unico Nazionale (CUN) puoi segnalare la tua positività direttamente in app</string>
+  <string name="report_positivity_description_independently">Questa funzione ti permette di segnalare la tua positività autonomamaente tramite l\'inserimento dei dati richiesti. Ricordati di avere a portata di mano codice CUN, la tua Tessera Sanitaria e la data di inizio dei primi sintomi.</string>
+  <string name="cun_placeholder">Inserisci CUN del referto</string>
+  <string name="health_insurance_card_placeholder">Inserisci ultime 8 cifre della Tessera Sanitaria</string>
+  <string name="symptom_onset_date_placeholder">Seleziona data inizio sintomi</string>
+  <string name="how_to_upload_positive_independently_title">Come segnalare la positività in autonomia</string>
+  <string name="how_to_upload_positive_independently_first">Se risulti positivo al virus, puoi segnalarlo a Immuni caricando i tuoi codici casuali. Facendolo permetti all\'app di avvertire del rischio di contagio gli utenti con cui sei stato a contatto nei giorni precedenti.</string>
+  <string name="how_to_upload_positive_independently_second">L\'operatore sanitario che comunica l\'esito positivo del tampone ti assisterà telefonicamente. Ti chiederà il codice monouso visualizzato nella schermata precedente e lo userà per autorizzarti al caricamento dei tuoi dati.</string>
+  <string name="how_to_upload_positive_independently_third">Questo processo di autorizzazione impedisce a utenti che non siano effettivamente risultati positivi al virus di caricare i loro dati, causando falsi allarmi. Il codice monouso e i dati caricati non sono in alcun modo associati alla tua identità.</string>
 </resources>
