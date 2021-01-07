@@ -20,10 +20,7 @@ import android.content.Intent
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
-import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
-import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
+import it.ministerodellasalute.immuni.logic.exposure.models.*
 import it.ministerodellasalute.immuni.logic.exposure.repositories.*
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
@@ -183,6 +180,10 @@ class ExposureManager(
 
     suspend fun validateOtp(otp: String): OtpValidationResult {
         return exposureIngestionRepository.validateOtp(otp)
+    }
+
+    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String, cunConst: String): CunValidationResult {
+        return exposureIngestionRepository.validateCun(cun, healthInsuranceCard, symptom_onset_date, cunConst)
     }
 
     suspend fun dummyUpload(): Boolean {

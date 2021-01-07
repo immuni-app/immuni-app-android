@@ -148,7 +148,7 @@
                         android:drawablePadding="10dp"
                         android:text="@string/cdum_title_independently"
                         android:textColor="@color/colorPrimary"
-                        app:drawableEndCompat="@drawable/ic_stethoscope"
+                        app:drawableEndCompat="@drawable/hand"
                         app:layout_constraintBottom_toTopOf="@+id/subtitleIndependently"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"

@@ -29,7 +29,7 @@
         android:id="@+id/otpFragment"
         android:name="it.ministerodellasalute.immuni.ui.otp.OtpFragment"
         android:label="UploadVerification"
-        tools:layout="@layout/otp_fragment"></fragment>
+        tools:layout="@layout/otp_fragment" />
 
     <action
         android:id="@+id/action_upload_data"
@@ -41,9 +41,9 @@
 
     <fragment
         android:id="@+id/reportPositivityIndepentlyFragment"
-        android:name="it.ministerodellasalute.immuni.ui.otp.ReportPositivityIndependently"
+        android:name="it.ministerodellasalute.immuni.ui.cun.ReportPositivityIndependently"
         android:label="UploadVerificationCun"
-        tools:layout="@layout/report_positivity_cun"></fragment>
+        tools:layout="@layout/report_positivity_cun" />
 
     <action
         android:id="@+id/action_report_positivity_independently"
@@ -61,7 +61,14 @@
         <argument
             android:name="token"
             app:argType="it.ministerodellasalute.immuni.ui.otp.OtpToken"
-            app:nullable="false" />
+            app:nullable="true" />
+        <argument
+            android:name="cun"
+            app:argType="it.ministerodellasalute.immuni.ui.cun.CunToken"
+            app:nullable="true" />
+        <argument
+            android:name="navigateUpIndependently"
+            app:argType="boolean" />
     </activity>
 
     <action

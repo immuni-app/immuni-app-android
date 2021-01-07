@@ -21,6 +21,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
+import java.util.*
 
 /**
  * Exposure Ingestion Service API.
@@ -41,6 +42,20 @@ interface ExposureIngestionService {
         @Header("Authorization") authorization: String,
         @Header("Immuni-Dummy-Data") isDummyData: Int,
         @Body body: ValidateOtpRequest = ValidateOtpRequest()
+    ): Response<ResponseBody>
+
+    @JsonClass(generateAdapter = true)
+    data class ValidateCunRequest(
+        @field:Json(name = "padding") override val padding: String = "",
+        @field:Json(name = "last_his_number") val healthInsuranceCard: String,
+        @field:Json(name = "symptoms_started_on") val symptomOnsetDate: String
+    ) : RequestWithPadding
+
+    @POST("/v1/ingestion/check-cun")
+    suspend fun validateCun(
+        @Header("Authorization") authorization: String,
+        @Header("Immuni-Dummy-Data") isDummyData: Int,
+        @Body body: ValidateCunRequest
     ): Response<ResponseBody>
     // endregion
 

@@ -19,19 +19,24 @@ import androidx.annotation.VisibleForTesting
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.utils.sha256
+import it.ministerodellasalute.immuni.logic.exposure.models.CunToken
+import it.ministerodellasalute.immuni.logic.exposure.models.CunValidationResult
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
+import it.ministerodellasalute.immuni.logic.upload.CunValidator
 import it.ministerodellasalute.immuni.logic.user.models.Province
 import it.ministerodellasalute.immuni.network.api.NetworkError
 import it.ministerodellasalute.immuni.network.api.NetworkResource
 import java.util.*
 
 class ExposureIngestionRepository(
-    private val exposureIngestionService: ExposureIngestionService
+    private val exposureIngestionService: ExposureIngestionService,
+    private val cunValidator: CunValidator
 ) {
     companion object {
         @VisibleForTesting
         fun authorization(otp: String): String = "Bearer ${otp.sha256()}"
+        fun authorizationCun(cun: String): String = "Bearer ${cun.sha256()}"
     }
 
     suspend fun validateOtp(otp: String): OtpValidationResult {
@@ -55,6 +60,41 @@ class ExposureIngestionRepository(
                     }
                 } else {
                     OtpValidationResult.ConnectionError
+                }
+            }
+        }
+    }
+
+    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String, cunConst: String): CunValidationResult {
+
+        if (cunValidator.validaCheckDigitCUN(cun) == CunValidationResult.CunWrong) {
+            return CunValidationResult.CunWrong
+        }
+
+        val response = immuniApiCall {
+            exposureIngestionService.validateCun(
+                isDummyData = 0,
+                authorization = authorizationCun(cunConst + cun),
+                body = ExposureIngestionService.ValidateCunRequest(
+                    healthInsuranceCard = healthInsuranceCard,
+                    symptomOnsetDate = symptom_onset_date
+                )
+            )
+        }
+        return when (response) {
+            is NetworkResource.Success -> CunValidationResult.Success(
+                CunToken(cun)
+            )
+            is NetworkResource.Error -> {
+                val errorResponse = response.error
+                if (errorResponse is NetworkError.HttpError) {
+                    if (errorResponse.httpCode == 401) {
+                        CunValidationResult.Unauthorized
+                    } else {
+                        CunValidationResult.ServerError
+                    }
+                } else {
+                    CunValidationResult.ConnectionError
                 }
             }
         }

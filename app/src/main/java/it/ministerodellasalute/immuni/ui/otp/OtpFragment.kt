@@ -109,7 +109,7 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
 
         viewModel.navigateToUploadPage.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { token ->
-                val action = OtpFragmentDirections.actionUploadActivity(OtpToken.fromLogic(token))
+                val action = OtpFragmentDirections.actionUploadActivity(OtpToken.fromLogic(token), null,false)
                 findNavController().navigate(action)
 
                 lifecycleScope.launch {

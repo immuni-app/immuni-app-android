@@ -15,7 +15,6 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/uploadDataLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,7 +36,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clickable="true"
             android:clipChildren="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:paddingStart="24dp"
             android:paddingEnd="32dp"
             android:paddingBottom="40dp"
@@ -68,8 +70,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/descriptionIndependently" />
 
 
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
@@ -91,9 +91,11 @@
                     app:hintEnabled="false"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:prefixText="@string/const_cun"
+                    app:prefixTextColor="@color/colorPrimary"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Textbox"
-                    app:startIconDrawable="@drawable/ic_search"
-                    app:startIconTint="@color/color_state_search_start_icon">
+                    app:startIconDrawable="@drawable/ic_data_grey"
+                    app:startIconTint="@color/color_state_form_start_icon">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/cunInput"
@@ -101,6 +103,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/cun_placeholder"
                         android:inputType="text"
+                        android:maxLength="10"
                         android:maxLines="1"
                         android:padding="16dp"
                         android:textColor="@color/colorPrimary"
@@ -122,15 +125,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cunInputLayout"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Textbox"
-                    app:startIconDrawable="@drawable/ic_search"
-                    app:startIconTint="@color/color_state_search_start_icon">
+                    app:startIconDrawable="@drawable/ic_id_grey"
+                    app:startIconTint="@color/color_state_form_start_icon">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/healthInsuranceCardInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/health_insurance_card_placeholder"
-                        android:inputType="textMultiLine"
+                        android:inputType="number"
+                        android:maxLength="8"
                         android:maxLines="1"
                         android:padding="16dp"
                         android:textColor="@color/colorPrimary"
@@ -152,27 +156,26 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/healthInsuranceCardInputLayout"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Textbox"
-                    app:startIconDrawable="@drawable/ic_search"
-                    app:startIconTint="@color/color_state_search_start_icon">
+                    app:startIconDrawable="@drawable/ic_calendar_grey"
+                    app:startIconTint="@color/color_state_form_start_icon">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/symptomOnsetDateInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
                         android:hint="@string/symptom_onset_date_placeholder"
                         android:inputType="none"
-                        android:clickable="true"
                         android:maxLines="1"
                         android:padding="16dp"
                         android:textColor="@color/colorPrimary"
-                        android:textColorHint="@color/grey_normal"
-                        android:focusable="false" />
+                        android:textColorHint="@color/grey_normal" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                android:id="@+id/next"
+                android:id="@+id/verify"
                 style="@style/RoundedButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

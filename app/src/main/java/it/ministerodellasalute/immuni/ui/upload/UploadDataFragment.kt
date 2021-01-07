@@ -86,7 +86,7 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
         })
 
         viewModel.uploadSuccess.observe(viewLifecycleOwner, Observer {
-            val action = UploadDataFragmentDirections.actionGlobalSuccess()
+            val action = UploadDataFragmentDirections.actionGlobalSuccess(args.value.navigateUpIndependently)
             findNavController().navigate(action)
         })
 
