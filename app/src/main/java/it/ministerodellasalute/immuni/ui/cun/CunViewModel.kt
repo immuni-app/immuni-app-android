@@ -132,21 +132,4 @@ class CunViewModel(
         }
         return false
     }
-
-    private fun Long.toFormattedQuantityText(context: Context): String? {
-        return when {
-            this in 0..60 -> context.resources.getQuantityString(
-                R.plurals.upload_data_verify_loading_button_seconds,
-                this.toInt(), this.toInt()
-            )
-            this > 60 -> {
-                val minutes = round(this.toDouble() / 60).toInt()
-                context.resources.getQuantityString(
-                    R.plurals.upload_data_verify_loading_button_minutes,
-                    minutes, minutes
-                )
-            }
-            else -> null
-        }
-    }
 }
