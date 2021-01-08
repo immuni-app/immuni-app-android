@@ -40,14 +40,13 @@ import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.utils.byAdding
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.report_positivity_cun.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import java.text.SimpleDateFormat
-import java.util.*
-
 
 class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
 
@@ -178,15 +177,19 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
                 }
 
                 override fun beforeTextChanged(
-                    s: CharSequence, start: Int,
-                    count: Int, after: Int
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
                 ) {
                     beforeText = s.toString()
                 }
 
                 override fun onTextChanged(
-                    s: CharSequence, start: Int,
-                    before: Int, count: Int
+                    s: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int
                 ) {
                 }
             }

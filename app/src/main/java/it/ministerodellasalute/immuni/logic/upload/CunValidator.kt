@@ -18,7 +18,6 @@ package it.ministerodellasalute.immuni.logic.upload
 import it.ministerodellasalute.immuni.logic.exposure.models.CunToken
 import it.ministerodellasalute.immuni.logic.exposure.models.CunValidationResult
 
-
 class CunValidator {
 
     fun validaCheckDigitCUN(cun: String): CunValidationResult {
@@ -36,7 +35,6 @@ class CunValidator {
             CunValidationResult.CunWrong
         }
     }
-
 }
 
 private inline val Int.isEven get() = (this and 1) == 0

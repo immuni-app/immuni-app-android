@@ -29,7 +29,6 @@ import it.ministerodellasalute.immuni.logic.upload.UploadDisabler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
-import kotlin.math.round
 
 class CunViewModel(
     val context: Context,
@@ -46,7 +45,6 @@ class CunViewModel(
 
     private val _navigateToUploadPage = MutableLiveData<Event<CunToken>>()
     val navigateToUploadPage: LiveData<Event<CunToken>> = _navigateToUploadPage
-
 
     fun verifyIndependently(
         cun: String,
@@ -102,7 +100,6 @@ class CunViewModel(
         }
     }
 
-
     private fun checkFormHasError(
         cun: String,
         healthInsuranceCard: String,
@@ -115,11 +112,9 @@ class CunViewModel(
         }
         if (healthInsuranceCard.isBlank() || healthInsuranceCard.length < 8) {
             message += context.getString(R.string.health_insurance_card_form_error)
-
         }
         if (symptom_onset_date.isBlank()) {
             message += context.getString(R.string.symptom_onset_date_form_error)
-
         }
         if (message.isNotEmpty()) {
             _alertError.value = Event(

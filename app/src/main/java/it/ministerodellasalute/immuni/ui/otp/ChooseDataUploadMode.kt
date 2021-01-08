@@ -22,7 +22,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.DataUploadDirections
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.SettingsNavDirections
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import kotlinx.android.synthetic.main.choose_data_upload_mode.*
