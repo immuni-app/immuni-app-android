@@ -13,20 +13,26 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.ui.otp
+package it.ministerodellasalute.immuni.ui.choosedatauploadmode
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.DataUploadDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
+import it.ministerodellasalute.immuni.extensions.view.visible
 import kotlinx.android.synthetic.main.choose_data_upload_mode.*
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class ChooseDataUploadMode : Fragment(R.layout.choose_data_upload_mode) {
+
+    private lateinit var viewModel: ChooseDataUploadModeViewModel
 
     companion object {
         var NAVIGATE_UP = false
@@ -44,6 +50,8 @@ class ChooseDataUploadMode : Fragment(R.layout.choose_data_upload_mode) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setLightStatusBar(resources.getColor(R.color.background_darker))
 
+        viewModel = getViewModel()
+
         navigationIcon.setSafeOnClickListener {
             findNavController().popBackStack()
         }
@@ -57,6 +65,16 @@ class ChooseDataUploadMode : Fragment(R.layout.choose_data_upload_mode) {
         nextIndependently.setSafeOnClickListener {
             val action = DataUploadDirections.actionReportPositivityIndependently()
             findNavController().navigate(action)
+        }
+
+        viewModel.allowedRegionsSelfUpload.observe(viewLifecycleOwner) {
+            if (viewModel.allowedRegionsSelfUpload.value!!.contains(viewModel.region.value?.region)) {
+                nextIndependently.isEnabled = true
+                allowedRegionsSelfUploadError.gone()
+            } else {
+                nextIndependently.isEnabled = false
+                allowedRegionsSelfUploadError.visible()
+            }
         }
     }
 }

@@ -25,14 +25,12 @@ import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.CunToken
 import it.ministerodellasalute.immuni.logic.exposure.models.CunValidationResult
-import it.ministerodellasalute.immuni.logic.upload.UploadDisabler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
 class CunViewModel(
     val context: Context,
-    private val uploadDisableManager: UploadDisabler,
     private val exposureManager: ExposureManager
 ) : ViewModel(),
     KoinComponent {
@@ -108,7 +106,7 @@ class CunViewModel(
         var message = ""
 
         if (cun.isBlank() || cun.length < 10) {
-            message += context.getString(R.string.check_cun_error_message)
+            message += context.getString(R.string.cun_form_error)
         }
         if (healthInsuranceCard.isBlank() || healthInsuranceCard.length < 8) {
             message += context.getString(R.string.health_insurance_card_form_error)

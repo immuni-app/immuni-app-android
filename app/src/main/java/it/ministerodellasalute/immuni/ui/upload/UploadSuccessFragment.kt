@@ -23,8 +23,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.ui.choosedatauploadmode.ChooseDataUploadMode
 import it.ministerodellasalute.immuni.ui.cun.ReportPositivityIndependently
-import it.ministerodellasalute.immuni.ui.otp.ChooseDataUploadMode
 import it.ministerodellasalute.immuni.ui.otp.OtpFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

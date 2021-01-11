@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/chooseDataUploadMode"
-        android:name="it.ministerodellasalute.immuni.ui.otp.ChooseDataUploadMode"
+        android:name="it.ministerodellasalute.immuni.ui.choosedatauploadmode.ChooseDataUploadMode"
         android:label="ChooseTypeUpload"
         tools:layout="@layout/choose_data_upload_mode" />
 
