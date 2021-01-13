@@ -29,7 +29,12 @@
         android:id="@+id/otpFragment"
         android:name="it.ministerodellasalute.immuni.ui.otp.OtpFragment"
         android:label="UploadVerification"
-        tools:layout="@layout/otp_fragment" />
+        tools:layout="@layout/otp_fragment">
+        <argument
+            android:name="callCenterMode"
+            app:argType="boolean"
+            app:nullable="false" />
+    </fragment>
 
     <action
         android:id="@+id/action_upload_data"
@@ -68,6 +73,9 @@
             app:nullable="true" />
         <argument
             android:name="navigateUpIndependently"
+            app:argType="boolean" />
+        <argument
+            android:name="callCenterMode"
             app:argType="boolean" />
     </activity>
 

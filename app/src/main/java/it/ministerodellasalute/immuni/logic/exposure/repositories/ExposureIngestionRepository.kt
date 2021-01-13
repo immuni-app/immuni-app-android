@@ -36,7 +36,7 @@ class ExposureIngestionRepository(
     companion object {
         @VisibleForTesting
         fun authorization(otp: String): String = "Bearer ${otp.sha256()}"
-        fun authorizationCun(cun: String): String = "Bearer ${cun.sha256()}"
+        fun authorizationCun(cun: String): String = "Bearer ${("CUN-$cun").sha256()}"
     }
 
     suspend fun validateOtp(otp: String): OtpValidationResult {
@@ -65,7 +65,7 @@ class ExposureIngestionRepository(
         }
     }
 
-    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String, cunConst: String): CunValidationResult {
+    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String): CunValidationResult {
 
         if (cunValidator.validaCheckDigitCUN(cun) == CunValidationResult.CunWrong) {
             return CunValidationResult.CunWrong
@@ -74,7 +74,7 @@ class ExposureIngestionRepository(
         val response = immuniApiCall {
             exposureIngestionService.validateCun(
                 isDummyData = 0,
-                authorization = authorizationCun(cunConst + cun),
+                authorization = authorizationCun(cun),
                 body = ExposureIngestionService.ValidateCunRequest(
                     healthInsuranceCard = healthInsuranceCard,
                     symptomOnsetDate = symptom_onset_date
@@ -83,7 +83,7 @@ class ExposureIngestionRepository(
         }
         return when (response) {
             is NetworkResource.Success -> CunValidationResult.Success(
-                CunToken(cun)
+                CunToken(cun, response.serverDate!!)
             )
             is NetworkResource.Error -> {
                 val errorResponse = response.error
@@ -101,7 +101,8 @@ class ExposureIngestionRepository(
     }
 
     suspend fun uploadTeks(
-        token: OtpToken,
+        token: OtpToken?,
+        cun: CunToken?,
         province: Province,
         tekHistory: List<ExposureIngestionService.TemporaryExposureKey>,
         exposureSummaries: List<ExposureIngestionService.ExposureSummary>,
@@ -110,7 +111,11 @@ class ExposureIngestionRepository(
         return immuniApiCall {
             exposureIngestionService.uploadTeks(
                 systemTime = Date().time.div(1000).toInt(),
-                authorization = authorization(token.otp),
+                authorization = if (token != null) {
+                    authorization(token.otp)
+                } else {
+                    authorizationCun(cun!!.cun)
+                },
                 isDummyData = 0,
                 body = ExposureIngestionService.UploadTeksRequest(
                     teks = tekHistory,

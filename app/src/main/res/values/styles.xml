@@ -284,6 +284,11 @@
         <item name="cardCornerRadius">@dimen/card_radius</item>
     </style>
 
+    <style name="ReportPositivityCards">
+        <item name="cardElevation">@dimen/cards_elevation</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+    </style>
+
     <style name="ParagraphCard" parent="CardShadowWhite">
         <item name="android:gravity">center_vertical</item>
         <item name="android:padding">25dp</item>

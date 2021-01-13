@@ -30,7 +30,7 @@ class CunValidator {
         val checkDigit = CHECK_DIGIT_MAP[checkSum % 25]
 
         return if (checkDigit == cun[CUN_CODE_LENGTH - 1]) {
-            CunValidationResult.Success(CunToken(cun))
+            CunValidationResult.Success(CunToken(cun, null))
         } else {
             CunValidationResult.CunWrong
         }

@@ -28,9 +28,16 @@
         <argument
             android:name="token"
             app:argType="it.ministerodellasalute.immuni.ui.otp.OtpToken"
-            app:nullable="false" />
+            app:nullable="true" />
+        <argument
+            android:name="cun"
+            app:argType="it.ministerodellasalute.immuni.ui.cun.CunToken"
+            app:nullable="true" />
         <argument
             android:name="navigateUpIndependently"
+            app:argType="boolean" />
+        <argument
+            android:name="callCenterMode"
             app:argType="boolean" />
     </fragment>
 
@@ -41,6 +48,9 @@
         tools:layout="@layout/upload_data_success_fragment">
         <argument
             android:name="navigateUpIndependently"
+            app:argType="boolean" />
+        <argument
+            android:name="callCenterMode"
             app:argType="boolean" />
     </fragment>
 

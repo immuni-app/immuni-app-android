@@ -43,6 +43,9 @@ class UploadSuccessFragment : Fragment(R.layout.upload_data_success_fragment) {
 
     private fun close() {
         val args = navArgs<UploadSuccessFragmentArgs>()
+        if (args.value.callCenterMode) {
+            OtpFragment.NAVIGATE_UP = true
+        }
         if (args.value.navigateUpIndependently) {
             ReportPositivityIndependently.NAVIGATE_UP = true
         } else {

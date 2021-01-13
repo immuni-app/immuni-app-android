@@ -147,7 +147,7 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Öffnen Sie die Einstellungen</b> über die Schaltfläche unten</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Aktivieren Sie die Expositionsmeldungen</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Einstellungen öffnen</string>
-  <string name="upload_data_warning_message">Diese Funktion erfordert die Unterstützung des medizinischen Fachpersonals, das Sie telefonisch über das positive Ergebnis des Tests informiert. Wenn Sie den Unique National Code (CUN) erhalten haben, können Sie Ihr positives Ergebnis auch über die gebührenfreie Nummer 800.91.24.91 melden.</string>
+  <string name="upload_data_warning_message">Diese Funktion erfordert die Unterstützung des medizinischen Fachpersonals, das Sie telefonisch über das positive Ergebnis des Tests informiert.</string>
   <string name="upload_data_code_message">Teilen Sie dem Fachpersonal den Einmalcode mit:</string>
   <string name="upload_data_wait_operator_message">Warten Sie auf die Bestätigung des Bedieners</string>
   <string name="upload_data_verify_message">Weiter zur Überprüfung der Code-Autorisierung</string>

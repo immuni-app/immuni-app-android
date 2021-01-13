@@ -148,7 +148,7 @@
                         android:drawablePadding="10dp"
                         android:text="@string/cdum_title_independently"
                         android:textColor="@color/colorPrimary"
-                        app:drawableEndCompat="@drawable/hand"
+                        app:drawableEndCompat="@drawable/ic_cuncode"
                         app:layout_constraintBottom_toTopOf="@+id/allowedRegionsSelfUploadError"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -267,8 +267,7 @@
                     android:ellipsize="end"
                     android:paddingStart="@dimen/activity_vertical_margin"
                     android:paddingEnd="32dp"
-                    android:singleLine="true"
-                    android:text="@string/settings_setting_load_data"
+                    android:text="Questa funzione ti permette di segnalare la tua positività"
                     android:textAllCaps="false" />
             </androidx.appcompat.widget.Toolbar>
 

@@ -57,8 +57,7 @@ class ChooseDataUploadMode : Fragment(R.layout.choose_data_upload_mode) {
         }
 
         nextOS.setSafeOnClickListener {
-            val action =
-                DataUploadDirections.actionUploadData()
+            val action = DataUploadDirections.actionUploadData(false)
             findNavController().navigate(action)
         }
 

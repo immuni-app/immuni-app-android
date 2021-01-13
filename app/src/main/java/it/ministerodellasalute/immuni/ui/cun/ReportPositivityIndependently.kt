@@ -102,6 +102,11 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
             )
         }
 
+        goTo.setSafeOnClickListener {
+            val action = DataUploadDirections.actionUploadData(true)
+            findNavController().navigate(action)
+        }
+
         viewModel.loading.observe(viewLifecycleOwner) {
             activity?.loading(it, ProgressDialogFragment(), Bundle().apply {
                 putString(
@@ -114,13 +119,8 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
         viewModel.navigateToUploadPage.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { token ->
                 val action =
-                    DataUploadDirections.actionUploadActivity(null, CunToken.fromLogic(token), true)
+                    DataUploadDirections.actionUploadActivity(null, CunToken.fromLogic(token), true, false)
                 findNavController().navigate(action)
-
-                lifecycleScope.launch {
-                    delay(1000)
-                    findNavController().popBackStack()
-                }
             }
         }
 
@@ -139,6 +139,12 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
     }
 
     private fun setInput() {
+        container.setOnClickListener {
+            cunInput.clearFocus()
+            healthInsuranceCardInput.clearFocus()
+            symptomOnsetDateInput.clearFocus()
+        }
+
         cunInput.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 symptomOnsetDateInputLayout.setStartIconTintList(

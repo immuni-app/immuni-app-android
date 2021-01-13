@@ -15,7 +15,9 @@
 
 package it.ministerodellasalute.immuni.logic.exposure.models
 
-data class CunToken(val cun: String)
+import java.util.*
+
+data class CunToken(val cun: String, val serverDate: Date?)
 
 sealed class CunValidationResult {
     data class Success(val token: CunToken) : CunValidationResult()

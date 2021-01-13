@@ -16,21 +16,30 @@
 package it.ministerodellasalute.immuni.ui.otp
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.appbar.AppBarLayout
 import it.ministerodellasalute.immuni.DataUploadDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
+import it.ministerodellasalute.immuni.util.startPhoneDial
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.otp_fragment.*
 import kotlinx.coroutines.delay
@@ -66,6 +75,13 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
             val ratio = abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
             toolbarSeparator?.alpha = ratio
         })
+
+        val args = navArgs<OtpFragmentArgs>()
+        if (args.value.callCenterMode) {
+            toolbarTitle.text = getString(R.string.call_center_title)
+            healthcareAuthorizationWarning.text = getString(R.string.call_center_description)
+            setClickableCallCenterNumber()
+        }
 
         navigationIcon.setSafeOnClickListener {
             findNavController().popBackStack()
@@ -109,14 +125,45 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
 
         viewModel.navigateToUploadPage.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { token ->
-                val action = OtpFragmentDirections.actionUploadActivity(OtpToken.fromLogic(token), null, false)
+                val action = OtpFragmentDirections.actionUploadActivity(
+                    OtpToken.fromLogic(token),
+                    null,
+                    args.value.callCenterMode,
+                    args.value.callCenterMode
+                )
                 findNavController().navigate(action)
 
-                lifecycleScope.launch {
-                    delay(1000)
-                    findNavController().popBackStack()
-                }
+//                lifecycleScope.launch {
+//                    delay(1000)
+//                    findNavController().popBackStack()
+//                }
             }
         }
+    }
+
+    private fun setClickableCallCenterNumber() {
+        val spannableString = SpannableString(healthcareAuthorizationWarning.text)
+        val numberCallCenter = getString(R.string.call_center_number)
+        var startIndexOfLink = -1
+        val clickableSpan = object : ClickableSpan() {
+            override fun updateDrawState(textPaint: TextPaint) {
+                textPaint.color = requireContext().getColorCompat(R.color.colorPrimary)
+                textPaint.isUnderlineText = true
+            }
+
+            override fun onClick(view: View) {
+                val phone = numberCallCenter.replace(".", "")
+                startPhoneDial(phone)
+            }
+        }
+        startIndexOfLink = healthcareAuthorizationWarning.text.toString()
+            .indexOf(numberCallCenter, startIndexOfLink + 1)
+        spannableString.setSpan(
+            clickableSpan, startIndexOfLink, startIndexOfLink + numberCallCenter.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        healthcareAuthorizationWarning.movementMethod =
+            LinkMovementMethod.getInstance()
+        healthcareAuthorizationWarning.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 }

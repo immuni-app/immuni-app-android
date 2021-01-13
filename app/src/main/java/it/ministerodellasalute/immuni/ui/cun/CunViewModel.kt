@@ -59,8 +59,7 @@ class CunViewModel(
 
             when (val result = exposureManager.validateCun(
                 cun, health_insurance_card,
-                symptom_onset_date,
-                context.getString(R.string.const_cun)
+                symptom_onset_date
             )) {
                 is CunValidationResult.Success -> {
                     _navigateToUploadPage.value = Event(result.token)
@@ -70,7 +69,7 @@ class CunViewModel(
                         Event(
                             listOf(
                                 context.getString(R.string.upload_data_api_error_title),
-                                context.getString(R.string.upload_data_api_error_title)
+                                ""
                             )
                         )
                 }
@@ -80,6 +79,15 @@ class CunViewModel(
                             listOf(
                                 context.getString(R.string.upload_data_api_error_title),
                                 context.getString(R.string.app_setup_view_network_error)
+                            )
+                        )
+                }
+                is CunValidationResult.Unauthorized -> {
+                    _alertError.value =
+                        Event(
+                            listOf(
+                                context.getString(R.string.upload_data_api_error_title),
+                                context.getString(R.string.upload_data_verify_error)
                             )
                         )
                 }

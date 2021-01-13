@@ -147,7 +147,7 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Accédez à Réglages</b> en utilisant le bouton ci-dessous</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Activez les notifications de risque d\'exposition</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Accédez à Réglages</string>
-  <string name="upload_data_warning_message">Cette fonction nécessite l\'assistance du professionnel de santé qui vous informera par téléphone de l\'issue positive du tampon. Si tu as reçu le Code Unique National (CUN), tu peux signaler le fait que tu es positif aussi au travers du numero vert 800.91.24.91</string>
+  <string name="upload_data_warning_message">Cette fonction nécessite l\'assistance du professionnel de santé qui vous informera par téléphone de l\'issue positive du tampon.</string>
   <string name="upload_data_code_message">Communiquez le code à usage unique au professionnel:</string>
   <string name="upload_data_wait_operator_message">Attendez la confirmation de l\'opérateur</string>
   <string name="upload_data_verify_message">Continuez pour vérifier l\'autorisation du code</string>

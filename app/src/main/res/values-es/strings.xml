@@ -147,7 +147,7 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Accede a los ajustes</b> pulsando el botón de abajo</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Habilita las notificaciones de exposición</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Abrir los ajustes</string>
-  <string name="upload_data_warning_message">Esta función requiere la asistencia del profesional sanitario que te comunique por teléfono que el resultado de la prueba es positivo. Si has recibido el Código Nacional Único (CUN) también puedes informar tu resultado positivo a través del número gratuito 800.91.24.91</string>
+  <string name="upload_data_warning_message">Esta función requiere la asistencia del profesional sanitario que te comunique por teléfono que el resultado de la prueba es positivo.</string>
   <string name="upload_data_code_message">Proporciona el código de un solo uso al profesional:</string>
   <string name="upload_data_wait_operator_message">Espera a recibir la confirmación del profesional sanitario</string>
   <string name="upload_data_verify_message">Continúa para verificar la autorización del código</string>
