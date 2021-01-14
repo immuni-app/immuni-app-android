@@ -96,7 +96,16 @@ class CunViewModel(
                         Event(
                             listOf(
                                 context.getString(R.string.upload_data_api_error_title),
-                                context.getString(R.string.check_cun_error_message)
+                                context.getString(R.string.cun_form_error)
+                            )
+                        )
+                }
+                is CunValidationResult.CunAlreadyUsed -> {
+                    _alertError.value =
+                        Event(
+                            listOf(
+                                context.getString(R.string.upload_data_api_error_title),
+                                context.getString(R.string.cun_already_used)
                             )
                         )
                 }

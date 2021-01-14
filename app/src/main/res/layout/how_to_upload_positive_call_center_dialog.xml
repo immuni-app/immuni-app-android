@@ -51,7 +51,7 @@
             style="@style/P1Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/permission_tutorial_how_to_upload_positive_first"
+            android:text="@string/how_to_upload_positive_call_center_first"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/question" />
@@ -61,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/permission_tutorial_how_to_upload_positive_second"
+            android:text="@string/how_to_upload_positive_call_center_second"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/question" />
@@ -71,7 +71,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/permission_tutorial_how_to_upload_positive_third"
+            android:text="@string/how_to_upload_positive_call_center_third" />
+
+        <TextView
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/how_to_upload_positive_call_center_fourth"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/question" />

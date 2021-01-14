@@ -25,7 +25,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -42,8 +41,6 @@ import it.ministerodellasalute.immuni.util.ProgressDialogFragment
 import it.ministerodellasalute.immuni.util.startPhoneDial
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.otp_fragment.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class OtpFragment : Fragment(R.layout.otp_fragment) {
@@ -90,7 +87,11 @@ class OtpFragment : Fragment(R.layout.otp_fragment) {
         verify.setSafeOnClickListener { viewModel.verify() }
 
         knowMore.setSafeOnClickListener {
-            val action = DataUploadDirections.actionHowToUploadPositive()
+            val action = if (args.value.callCenterMode) {
+                DataUploadDirections.actionHowToUploadPositiveCallCenter()
+            } else {
+                DataUploadDirections.actionHowToUploadPositive()
+            }
             findNavController().navigate(action)
         }
 

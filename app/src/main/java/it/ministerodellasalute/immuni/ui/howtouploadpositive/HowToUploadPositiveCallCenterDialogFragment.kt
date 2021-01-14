@@ -13,17 +13,19 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.logic.exposure.models
+package it.ministerodellasalute.immuni.ui.howtouploadpositive
 
-import java.util.*
+import android.os.Bundle
+import android.view.View
+import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 
-data class CunToken(val cun: String, val serverDate: Date?)
+class HowToUploadPositiveCallCenterDialogFragment : PopupDialogFragment() {
 
-sealed class CunValidationResult {
-    data class Success(val token: CunToken) : CunValidationResult()
-    object Unauthorized : CunValidationResult()
-    object ConnectionError : CunValidationResult()
-    object ServerError : CunValidationResult()
-    object CunWrong : CunValidationResult()
-    object CunAlreadyUsed : CunValidationResult()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setContentLayout(R.layout.how_to_upload_positive_call_center_dialog)
+
+        setTitle(getString(R.string.how_to_upload_positive_call_center_title))
+    }
 }

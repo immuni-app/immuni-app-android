@@ -93,6 +93,15 @@
         app:destination="@id/howToUploadPositive" />
 
     <dialog
+        android:id="@+id/howToUploadPositiveCallCenter"
+        android:name="it.ministerodellasalute.immuni.ui.howtouploadpositive.HowToUploadPositiveCallCenterDialogFragment"
+        tools:layout="@layout/how_to_upload_positive_call_center_dialog" />
+
+    <action
+        android:id="@+id/action_how_to_upload_positive_call_center"
+        app:destination="@id/howToUploadPositiveCallCenter" />
+
+    <dialog
         android:id="@+id/howToUploadPositiveIndependently"
         android:name="it.ministerodellasalute.immuni.ui.howtouploadpositive.HowToUploadPositiveIndependentlyDialogFragment"
         tools:layout="@layout/how_to_upload_positive_independently_dialog" />

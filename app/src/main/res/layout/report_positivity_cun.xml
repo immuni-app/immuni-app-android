@@ -93,8 +93,8 @@
                         style="@style/H4Section"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
                         android:drawablePadding="16dp"
                         android:gravity="center_vertical"
                         android:text="@string/form_report_positivity_title"
@@ -107,7 +107,10 @@
                         style="@style/SettingsMenuCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="25dp"
                         app:layout_constraintTop_toBottomOf="@id/titleForm">
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -148,7 +151,10 @@
                         style="@style/SettingsMenuCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="25dp"
                         app:layout_constraintTop_toBottomOf="@+id/cunCard">
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -187,7 +193,10 @@
                         style="@style/SettingsMenuCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="25dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="25dp"
                         app:layout_constraintTop_toBottomOf="@+id/healthInsuranceCard">
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -240,8 +249,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
                         android:elevation="10dp"
                         android:text="@string/continue_label"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -273,7 +282,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -305,8 +314,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="25dp"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginEnd="40dp"
                         android:elevation="10dp"
                         android:text="@string/continue_label"
                         app:layout_constraintBottom_toBottomOf="parent"

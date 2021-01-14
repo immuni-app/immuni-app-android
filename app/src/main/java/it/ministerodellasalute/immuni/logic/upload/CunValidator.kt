@@ -22,7 +22,7 @@ class CunValidator {
 
     fun validaCheckDigitCUN(cun: String): CunValidationResult {
         var checkSum = 0
-        repeat(OTP_CODE_LENGTH - 1) {
+        repeat(CUN_CODE_LENGTH - 1) {
             val char = cun[it]
             checkSum += (if (it.isEven) ODD_MAP else EVEN_MAP).getValue(char)
         }

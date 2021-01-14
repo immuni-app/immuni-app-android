@@ -88,10 +88,16 @@ class ExposureIngestionRepository(
             is NetworkResource.Error -> {
                 val errorResponse = response.error
                 if (errorResponse is NetworkError.HttpError) {
-                    if (errorResponse.httpCode == 401) {
-                        CunValidationResult.Unauthorized
-                    } else {
-                        CunValidationResult.ServerError
+                    when (errorResponse.httpCode) {
+                        401 -> {
+                            CunValidationResult.Unauthorized
+                        }
+                        409 -> {
+                            CunValidationResult.CunAlreadyUsed
+                        }
+                        else -> {
+                            CunValidationResult.ServerError
+                        }
                     }
                 } else {
                     CunValidationResult.ConnectionError

@@ -27,7 +27,6 @@ import android.view.View
 import android.view.View.OnTouchListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.CalendarConstraints
@@ -44,8 +43,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.report_positivity_cun.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
