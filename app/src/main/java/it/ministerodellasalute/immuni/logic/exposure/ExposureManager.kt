@@ -20,10 +20,7 @@ import android.content.Intent
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
-import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
-import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
+import it.ministerodellasalute.immuni.logic.exposure.models.*
 import it.ministerodellasalute.immuni.logic.exposure.repositories.*
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
@@ -185,11 +182,15 @@ class ExposureManager(
         return exposureIngestionRepository.validateOtp(otp)
     }
 
+    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String): CunValidationResult {
+        return exposureIngestionRepository.validateCun(cun, healthInsuranceCard, symptom_onset_date)
+    }
+
     suspend fun dummyUpload(): Boolean {
         return exposureIngestionRepository.dummyUpload()
     }
 
-    suspend fun uploadTeks(activity: Activity, token: OtpToken): Boolean {
+    suspend fun uploadTeks(activity: Activity, token: OtpToken?, cun: CunToken?): Boolean {
         val tekHistory = requestTekHistory(activity)
 
         val exposureSummaries = exposureReportingRepository.getSummaries()
@@ -199,9 +200,10 @@ class ExposureManager(
 
         val isSuccess = exposureIngestionRepository.uploadTeks(
             token = token,
+            cun = cun,
             province = userRepository.user.value!!.province,
             tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
-            exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate),
+            exposureSummaries = exposureSummaries.prepareForUpload(settings, token?.serverDate ?: cun!!.serverDate!!),
             countries = countriesOfInterest
         )
 

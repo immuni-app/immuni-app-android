@@ -56,9 +56,9 @@ class UploadViewModelTest {
 
     @Test
     fun `upload handles error`() = coroutineTestRule.runBlockingTest {
-        coEvery { exposureManager.uploadTeks(activity, otpToken) } returns false
+        coEvery { exposureManager.uploadTeks(activity, otpToken, null) } returns false
         // act
-        viewModel.upload(activity, otpToken)
+        viewModel.upload(activity, otpToken, null)
         // assert
         advanceUntilIdle() // bypass delay
         assertNull(viewModel.uploadSuccess.getValueForTest())
@@ -69,9 +69,9 @@ class UploadViewModelTest {
     @Test
     fun `upload success`() = coroutineTestRule.runBlockingTest {
         // arrange
-        coEvery { exposureManager.uploadTeks(activity, otpToken) } returns true
+        coEvery { exposureManager.uploadTeks(activity, otpToken, null) } returns true
         // act
-        viewModel.upload(activity, otpToken)
+        viewModel.upload(activity, otpToken, null)
         // assert
         advanceUntilIdle() // bypass delay
         assertNull(viewModel.uploadError.getValueForTest())

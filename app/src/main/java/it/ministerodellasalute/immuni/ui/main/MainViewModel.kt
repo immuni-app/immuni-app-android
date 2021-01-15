@@ -56,10 +56,10 @@ class MainViewModel(
             items.add(ProtectionCard(it, exposureManager.exposureStatus.value))
         }
         items.add(SectionHeader(context.getString(R.string.home_view_info_header_title)))
+        items.add(ReportPositivityCard)
+        items.add(CountriesOfInterestCard)
         items.add(HowItWorksCard)
         items.add(SelfCareCard)
-        items.add(CountriesOfInterestCard)
-        items.add(ReportPositivityCard)
         items.add(DisableExposureApi(protectionActive ?: false))
         return items
     }
