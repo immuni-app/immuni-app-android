@@ -61,8 +61,7 @@ data class ConfigurationSettings(
     @field:Json(name = "operational_info_with_exposure_sampling_rate") val operationalInfoWithExposureSamplingRate: Double,
     @field:Json(name = "operational_info_without_exposure_sampling_rate") val operationalInfoWithoutExposureSamplingRate: Double,
     @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int,
-    @field:Json(name = "countries") val countries: Map<String, Map<String, String>>,
-    @field:Json(name = "allowed_regions_self_upload") val allowed_regions_self_upload: List<String>
+    @field:Json(name = "countries") val countries: Map<String, Map<String, String>>
 )
 
 @JsonClass(generateAdapter = true)
@@ -183,31 +182,6 @@ private fun countriesMap(): Map<String, Map<String, String>> {
     )
 }
 
-private fun allowed_regions_self_upload(): List<String> {
-    return listOf(
-        "Abruzzo",
-        "Basilicata",
-        "Calabria",
-        "Campania",
-        "Emilia-Romagna",
-        "Friuli-Venezia Giulia",
-        "Lazio",
-        "Liguria",
-        "Lombardia",
-        "Marche",
-        "Molise",
-        "Piemonte",
-        "Puglia",
-        "Sardegna",
-        "Sicilia",
-        "Toscana",
-        "Trentino-Alto Adige",
-        "Umbria",
-        "Valle d’Aosta",
-        "Veneto"
-    )
-}
-
 val defaultSettings = ConfigurationSettings(
     minimumBuildVersion = 0,
     faqUrls = languageMap { "https://get.immuni.gov.it/docs/faq-${it.code}.json" },
@@ -243,6 +217,5 @@ val defaultSettings = ConfigurationSettings(
     operationalInfoWithExposureSamplingRate = 1.0,
     operationalInfoWithoutExposureSamplingRate = 0.6,
     dummyAnalyticsWaitingTime = 2_592_000,
-    countries = countriesMap(),
-    allowed_regions_self_upload = allowed_regions_self_upload()
+    countries = countriesMap()
 )

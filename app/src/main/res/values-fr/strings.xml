@@ -375,40 +375,47 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="support_info_item_lastencheck_date" formatted="false">%@ à %@</string>
   <string name="support_info_item_lastencheck_date_android">%1$s à %2$s</string>
   <string name="exposure_check_in_progress">Contrôle des expositions potentielles en cours</string>
-
+  <string name="home_countries_of_interest_title">Si vous vous rendez dans un autre pays européen</string>
+  <string name="countries_of_interest_description">Si vous allez en Europe, vous pouvez sélectionner le ou les pays d\'intérêt, s\'il a / ont déjà rejoint l\'interopérabilité, afin qu\'Immuni puisse se connecter avec les autres applications européennes de recherche de contacts et aider à contenir la propagation de Covid-19 également en Europe. Vous pouvez sélectionner jusqu\'à un maximum de 3 pays. Votre sélection sera valide et inchangeable pendant 14 jours</string>
+  <string name="countries_of_interest_dialog_title">Êtes-vous sur de vouloir continuer?</string>
+  <string name="countries_of_interest_dialog_positive">Confirmation</string>
+  <string name="countries_of_interest_dialog_negative">Annuler</string>
+  <string name="countries_of_interest_dialog_message">En confirmant, vous ne pourrez pas supprimer les pays choisis pendant les 14 prochains jours</string>
+  <string name="settings_countries_of_interest">Sélectionnez un pays européen</string>
+  <string name="countries_of_interest_title">Allez-vous dans un ou plusieurs de ces pays européens?</string>
+  <string name="countries_of_interest_limit_dialog_title">Limite de sélection dépassée</string>
+  <string name="countries_of_interest_limit_dialog_message">Vous pouvez sélectionner jusqu\'à un maximum de 3 pays. Votre sélection sera valide et inchangeable pendant 14 jours</string>
+  <string name="how_to_upload_positive_independently_second">En saisissant ces informations, Immuni enverra automatiquement des notifications aux autres utilisateurs qui ont eu des contacts étroits avec vous deux jours avant l\'apparition des symptômes ou jusqu\'à 14 jours.</string>
   <string name="home_report_positivity_card_title">Signaler un résultat positif</string>
-
-  <string name="cdum_title_OS">Sei in contatto con un Operatore Sanitario?</string>
-  <string name="cdum_description_OS">Segui la procedura per segnalare la tua positività</string>
+  <string name="cdum_title_OS">Avez-vous été contacté par un professionnel de la santé?</string>
+  <string name="cdum_description_OS">Suivez la procédure pour signaler votre positivité</string>
   <string name="continue_label">Continuer</string>
-  <string name="cdum_title_independently">Hai il codice CUN?</string>
-  <string name="cdum_description_independently">Puoi inserire i dati direttamente in app oppure chiamando il call center 800.91.24.91</string>
-  <string name="report_positivity_description_independently">Questa funzione ti permette di segnalare la tua positività inserendo direttamente i dati richiesti.</string>
-  <string name="form_report_positivity_title">Sblocca in autonomia</string>
-  <string name="call_center_report_positivity_title">Chiama il call center 800.91.24.91</string>
-  <string name="cun_placeholder"><font size="14">CUN del referto</font></string>
-  <string name="health_insurance_card_placeholder"><font size="14">Ultime 8 cifre Tessera Sanitaria</font></string>
-  <string name="symptom_onset_date_placeholder"><font size="14">Data inizio sintomi*</font></string>
-  <string name="symptom_date_hint"><font size="14">*Se sei un soggetto asintomatico, inserisci la data del tampone</font></string>
-  <string name="or_label">oppure</string>
+  <string name="cdum_title_independently">Avez-vous le code CUN?</string>
+  <string name="cdum_description_independently">Vous pouvez saisir les données directement dans l\'application ou en appelant le centre d\'appels 800.91.24.91</string>
+  <string name="report_positivity_description_independently">Cette fonction vous permet de signaler votre positivité en saisissant directement les données demandées.</string>
+  <string name="form_report_positivity_title">Déverrouillez vous-même</string>
+  <string name="call_center_report_positivity_title">Appelez le centre d\'appels 800.91.24.91</string>
+  <string name="cun_placeholder">CUN du rapport</string>
+  <string name="health_insurance_card_placeholder">Carte Santé des 8 derniers chiffres</string>
+  <string name="symptom_onset_date_placeholder">Date de début du symptôme*</string>
+  <string name="symptom_date_hint">*Si vous êtes asymptomatique, entrez la date du tampon</string>
+  <string name="or_label">ou</string>
   <string name="button_dialog_confirm">OK</string>
   <string name="how_to_upload_positive_call_center_title">Comment signaler un résultat positif</string>
   <string name="how_to_upload_positive_call_center_first">Si le résultat de votre test est positif au virus, vous pouvez le signaler à Immuni en téléchargeant vos codes aléatoires. Ceci permettra à l\'application d\'avertir les utilisateurs avec lesquels vous avez été en contact les jours précédents du risque de contagion.</string>
   <string name="how_to_upload_positive_call_center_second">Le professionnel de la santé qui vous communiquera le résultat positif du test vous assistera par téléphone. Il vous demandera de lui fournir le code à usage unique affiché sur la page-écran précédente et l\'utilisera pour vous autoriser à télécharger vos données.</string>
   <string name="how_to_upload_positive_call_center_third">Si tu as reçu le Code Unique National (CUN), l’opérateur du call center 800.91.24.91 te demandera aussi le numero de la “tessera sanitaria” (carte d’assurance).</string>
   <string name="how_to_upload_positive_call_center_fourth">Ces processus d\'autorisation empêchent les utilisateurs qui n\'ont pas été effectivement testés positifs au virus de télécharger leurs données et de provoquer ainsi de fausses alarmes. Le code à usage unique et les données téléchargées ne sont en aucun cas associés à votre identité.</string>
-  <string name="how_to_upload_positive_independently_title">Come segnalare la positività</string>
-  <string name="how_to_upload_positive_independently_first">Se risulti positivo al virus puoi segnalarlo in autonomia a Immuni caricando il codice CUN, le ultime 8 cifre della tessera sanitaria e la data di inizio dei sintomi.</string>
-  <string name="how_to_upload_positive_independently_second">Inserendo queste informazioni Immuni invierà automaticamente le notifiche agli altri utenti che hanno avuto contatti stretti con te a partire da due giorni prima dell\'inizio dei sintomi o fino a 14 giorni prima della data in cui hai eseguito il tampone.</string>
-  <string name="how_to_upload_positive_independently_third">Il codice CUN è un codice univoco nazionale alfanumerico (ad esempio CUN-AB1234C567) associato al risultato del tampone molecolare. Viene comunicato ai cittadini tramite SMS, via email o all\'interno del fascicolo sanitario elettronico.</string>
-  <string name="how_to_upload_positive_independently_fourth">Il numero di tessera sanitaria è un codice di 20 cifre che si trova all\'ultima riga sul retro della tessera sanitaria.\nRicorda che è importante comunicare la data esatta di inizio sintomi per avviare un tracciamento preciso dei contatti.</string>
-  <string name="check_cun_error_message">\n- Cun non corretto\n</string>
-  <string name="dialog_error_form_title">Errore nell\'inserimento dei dati</string>
-  <string name="cun_form_error">\n- Inserisci gli ultimi 10 caratteri del codice CUN che ti è stato comunicato\n</string>
-  <string name="health_insurance_card_form_error">\n- Inserisci le ultime 8 cifre che trovi nel retro della Tessera Sanitaria\n</string>
-  <string name="symptom_onset_date_form_error">\n- Inserisci la data di inizio sintomi\n</string>
-  <string name="allowed_regions_self_upload_error">Attenzione questo servizio non è attivo nella tua Regione</string>
-  <string name="call_center_title">Hai il codice CUN?</string>
-  <string name="call_center_description">Se hai ricevuto il Codice Univoco Nazionale (CUN) puoi segnalare la tua positività attraverso il numero verde 800.91.24.91</string>
-  <string name="cun_already_used">Cun già utilizzato</string>
+  <string name="how_to_upload_positive_independently_title">Comment signaler la positivité</string>
+  <string name="how_to_upload_positive_independently_first">Si vous testez positif pour le virus, vous pouvez le signaler indépendamment à Immuni en téléchargeant le code CUN, les 8 derniers chiffres de la carte santé et la date de début des symptômes.</string>
+  <string name="how_to_upload_positive_independently_third">Le code CUN est un code alphanumérique national unique (par exemple CUN-AB1234C567) associé au résultat de l\'écouvillon moléculaire. Il est communiqué aux citoyens par SMS, e-mail ou dans le dossier de santé.</string>
+  <string name="how_to_upload_positive_independently_fourth">Le numéro de la carte Santé est un code à 20 chiffres qui se trouve sur la dernière ligne au dos de la carte Santé. N\'oubliez pas qu\'il est important de communiquer la date exacte d\'apparition des symptômes pour.</string>
+  <string name="dialog_error_form_title">Erreur lors de la saisie des données</string>
+  <string name="cun_form_error">- Saisissez les 10 derniers caractères du code CUN qui vous a été communiqué\n</string>
+  <string name="health_insurance_card_form_error">- Entrez les 8 derniers chiffres que vous trouverez au dos de la carte Santé\n</string>
+  <string name="symptom_onset_date_form_error">- Entrez la date de début du symptôme\n</string>
+  <string name="call_center_title">Avez-vous le code CUN?</string>
+  <string name="call_center_description">Si vous avez reçu le code national unique (CUN), vous pouvez signaler votre positivité via le numéro sans frais 800.91.24.91</string>
+  <string name="cun_already_used">Cun déjà utilisé</string>
+  <string name="cun_wrong">- Mauvais CUN\n</string>
 </resources>

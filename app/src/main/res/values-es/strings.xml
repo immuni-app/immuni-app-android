@@ -387,37 +387,36 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="countries_of_interest_limit_dialog_title">Límite de selección excedido</string>
   <string name="home_report_positivity_card_title">Informa de un resultado positivo</string>
 
-  <string name="cdum_title_OS">Sei in contatto con un Operatore Sanitario?</string>
-  <string name="cdum_description_OS">Segui la procedura per segnalare la tua positività</string>
+  <string name="cdum_title_OS">¿Estás en contacto con un profesional sanitario?</string>
+  <string name="cdum_description_OS">Sigue el procedimiento para informar tu positividad</string>
   <string name="continue_label">Continúa</string>
-  <string name="cdum_title_independently">Hai il codice CUN?</string>
-  <string name="cdum_description_independently">Puoi inserire i dati direttamente in app oppure chiamando il call center 800.91.24.91</string>
-  <string name="report_positivity_description_independently">Questa funzione ti permette di segnalare la tua positività inserendo direttamente i dati richiesti.</string>
-  <string name="form_report_positivity_title">Sblocca in autonomia</string>
-  <string name="call_center_report_positivity_title">Chiama il call center 800.91.24.91</string>
-  <string name="cun_placeholder"><font size="14">CUN del referto</font></string>
-  <string name="health_insurance_card_placeholder"><font size="14">Ultime 8 cifre Tessera Sanitaria</font></string>
-  <string name="symptom_onset_date_placeholder"><font size="14">Data inizio sintomi*</font></string>
-  <string name="symptom_date_hint"><font size="14">*Se sei un soggetto asintomatico, inserisci la data del tampone</font></string>
-  <string name="or_label">oppure</string>
+  <string name="cdum_title_independently">¿Tienes el codigo CUN?</string>
+  <string name="cdum_description_independently">Puede ingresar los datos directamente en la aplicación o llamando al centro de llamadas 800.91.24.91</string>
+  <string name="report_positivity_description_independently">Esta función te permite reportar tu positividad ingresando directamente los datos solicitados.</string>
+  <string name="form_report_positivity_title">Desbloquea por tu cuenta</string>
+  <string name="call_center_report_positivity_title">Llama el centro de llamadas 800.91.24.91</string>
+  <string name="cun_placeholder">CUN del reporte</string>
+  <string name="health_insurance_card_placeholder">Ultimas 8 cifras de la tarjeta sanitaria</string>
+  <string name="symptom_onset_date_placeholder">Fecha de inicio de síntomas*</string>
+  <string name="symptom_date_hint">*Si está asintomático, ingrese la fecha del hisopo</string>
+  <string name="or_label">o</string>
   <string name="button_dialog_confirm">OK</string>
   <string name="how_to_upload_positive_call_center_title">Cómo informar de un resultado positivo</string>
   <string name="how_to_upload_positive_call_center_first">Si das positivo en el virus, puedes indicarlo en Immuni subiendo tus códigos aleatorios. Así permitirás que la aplicación avise del riesgo de contagio a los usuarios con los que hayas mantenido contacto en los días anteriores.</string>
   <string name="how_to_upload_positive_call_center_second">El profesional sanitario que te comunique que el resultado de la prueba es positivo te ayudará por teléfono. Te pedirá el código de un solo uso que aparecía en la pantalla anterior y lo utilizará para darte permiso para que subas tus datos.</string>
   <string name="how_to_upload_positive_call_center_third">Si has recibido el Código Nacional Único (CUN) el operador del centro de llamadas 800.91.24.91 te pedirá también el numero de tu “tessera sanitaria” (tarjeta sanitaria).</string>
   <string name="how_to_upload_positive_call_center_fourth">Estos procesos de autorización previenen que los usuarios que no hayan dado positivo en el virus suban sus datos y generen falsas alarmas. El código de un solo uso y los datos que se suben no están vinculados de ningún modo con tu identidad.</string>
-  <string name="how_to_upload_positive_independently_title">Come segnalare la positività</string>
-  <string name="how_to_upload_positive_independently_first">Se risulti positivo al virus puoi segnalarlo in autonomia a Immuni caricando il codice CUN, le ultime 8 cifre della tessera sanitaria e la data di inizio dei sintomi.</string>
-  <string name="how_to_upload_positive_independently_second">Inserendo queste informazioni Immuni invierà automaticamente le notifiche agli altri utenti che hanno avuto contatti stretti con te a partire da due giorni prima dell\'inizio dei sintomi o fino a 14 giorni prima della data in cui hai eseguito il tampone.</string>
-  <string name="how_to_upload_positive_independently_third">Il codice CUN è un codice univoco nazionale alfanumerico (ad esempio CUN-AB1234C567) associato al risultato del tampone molecolare. Viene comunicato ai cittadini tramite SMS, via email o all\'interno del fascicolo sanitario elettronico.</string>
-  <string name="how_to_upload_positive_independently_fourth">Il numero di tessera sanitaria è un codice di 20 cifre che si trova all\'ultima riga sul retro della tessera sanitaria.\nRicorda che è importante comunicare la data esatta di inizio sintomi per avviare un tracciamento preciso dei contatti.</string>
-  <string name="check_cun_error_message">\n- Cun non corretto\n</string>
-  <string name="dialog_error_form_title">Errore nell\'inserimento dei dati</string>
-  <string name="cun_form_error">\n- Inserisci gli ultimi 10 caratteri del codice CUN che ti è stato comunicato\n</string>
-  <string name="health_insurance_card_form_error">\n- Inserisci le ultime 8 cifre che trovi nel retro della Tessera Sanitaria\n</string>
-  <string name="symptom_onset_date_form_error">\n- Inserisci la data di inizio sintomi\n</string>
-  <string name="allowed_regions_self_upload_error">Attenzione questo servizio non è attivo nella tua Regione</string>
-  <string name="call_center_title">Hai il codice CUN?</string>
-  <string name="call_center_description">Se hai ricevuto il Codice Univoco Nazionale (CUN) puoi segnalare la tua positività attraverso il numero verde 800.91.24.91</string>
-  <string name="cun_already_used">Cun già utilizzato</string>
+  <string name="how_to_upload_positive_independently_title">Cómo informar tu positividad</string>
+  <string name="how_to_upload_positive_independently_first">Si resultas positivo al virus, puedes informarlo por tu cuenta a Immuni cargando el código CUN, las últimas 8 cifras de la tarjeta sanitaria y la fecha de inicio de síntomas.</string>
+  <string name="how_to_upload_positive_independently_second">Al ingresar esta información, Immuni enviará automáticamente notificaciones a otros usuarios que hayan tenido contacto cercano contigo a partir de dos días antes del inicio de los síntomas o hasta 14 días antes de la fecha en que te hicistes el hisopo.</string>
+  <string name="how_to_upload_positive_independently_third">El código CUN es un código alfanumérico nacional único (por ejemplo, CUN-AB1234C567) asociado con el resultado del hisopo molecular. Se comunica a los ciudadanos a través de SMS, correo electrónico o en la historia clínica electrónica.</string>
+  <string name="how_to_upload_positive_independently_fourth">El número de la tarjeta sanitaria es un código de 20 dígitos que se encuentra en la última línea del reverso de la tarjeta sanitaria. Recuerda que es importante comunicar la fecha exacta de aparición de los síntomas para iniciar un rastreo de contacto preciso.</string>
+  <string name="dialog_error_form_title">Error al ingresar los datos</string>
+  <string name="cun_form_error">- Introduce los últimos 10 caracteres del código CUN que te comunicaron\n</string>
+  <string name="health_insurance_card_form_error">- Introduce las últimas 8 cifras que encuentras en reverso de la tarjeta sanitaria\n</string>
+  <string name="symptom_onset_date_form_error">- Introduce la fecha de inicio de síntomas\n</string>
+  <string name="call_center_title">¿Tienes el codigo CUN?</string>
+  <string name="call_center_description">Si has recibido el Código Nacional Único (CUN) puedes informar tu positividad a través del número gratuito 800.91.24.91</string>
+  <string name="cun_already_used">CUN ya utilizado</string>
+  <string name="cun_wrong">- CUN incorrecto\n</string>
 </resources>

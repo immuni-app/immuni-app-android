@@ -22,6 +22,7 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
@@ -116,7 +117,12 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
         viewModel.navigateToUploadPage.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { token ->
                 val action =
-                    DataUploadDirections.actionUploadActivity(null, CunToken.fromLogic(token), true, false)
+                    DataUploadDirections.actionUploadActivity(
+                        null,
+                        CunToken.fromLogic(token),
+                        true,
+                        false
+                    )
                 findNavController().navigate(action)
             }
         }
@@ -136,12 +142,13 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
     }
 
     private fun setInput() {
+        val regexAlphaNum = "^[A-Z0-9]*$".toRegex()
+
         container.setOnClickListener {
             cunInput.clearFocus()
             healthInsuranceCardInput.clearFocus()
             symptomOnsetDateInput.clearFocus()
         }
-
         cunInput.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 symptomOnsetDateInputLayout.setStartIconTintList(
@@ -155,19 +162,9 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
                 cunInput.hint = getString(R.string.cun_placeholder)
             }
         }
-        healthInsuranceCardInput.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                symptomOnsetDateInputLayout.setStartIconTintList(
-                    context?.getColor(R.color.grey_normal)?.let {
-                        ColorStateList.valueOf(it)
-                    })
-                cunInput.clearFocus()
-                symptomOnsetDateInput.clearFocus()
-            }
-        }
+
         cunInput.filters += InputFilter.AllCaps()
 
-        val regexAlphaNum = "^[A-Z0-9]*$".toRegex()
         cunInput.addTextChangedListener(
             object : TextWatcher {
                 private var beforeText = ""
@@ -176,6 +173,12 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
                     if (!s.toString().matches(regexAlphaNum) && "" != s.toString()) {
                         cunInput.setText(beforeText)
                         cunInput.setSelection(cunInput.text.toString().length)
+                    } else {
+                        if (cunInput.text?.isNotBlank()!!) {
+                            cunInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
+                        } else {
+                            cunInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
+                        }
                     }
                 }
 
@@ -197,12 +200,49 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
                 }
             }
         )
+
+        healthInsuranceCardInput.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                symptomOnsetDateInputLayout.setStartIconTintList(
+                    context?.getColor(R.color.grey_normal)?.let {
+                        ColorStateList.valueOf(it)
+                    })
+                cunInput.clearFocus()
+                symptomOnsetDateInput.clearFocus()
+            }
+        }
+        healthInsuranceCardInput.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    if (healthInsuranceCardInput.text?.isNotBlank()!!) {
+                        healthInsuranceCardInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
+                    } else {
+                        healthInsuranceCardInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
+                    }
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            }
+        )
+
         setDatePicker()
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setDatePicker() {
         symptomOnsetDateInput.inputType = InputType.TYPE_NULL
+        symptomOnsetDateInputLayout.setEndIconOnClickListener {
+            symptomOnsetDateInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
+            symptomOnsetDateInput.text?.clear()
+        }
         symptomOnsetDateInput.setOnTouchListener(OnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 symptomOnsetDateInputLayout.setStartIconTintList(
@@ -239,6 +279,7 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
             val date = Date(it)
             val format = SimpleDateFormat("dd/MM/yyyy")
             symptomOnsetDateInput.setText(format.format(date))
+            symptomOnsetDateInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
         }
         materialDatePicker.addOnDismissListener {
             symptomOnsetDateInputLayout.setStartIconTintList(

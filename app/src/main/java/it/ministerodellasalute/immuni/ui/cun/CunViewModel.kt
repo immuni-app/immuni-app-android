@@ -25,13 +25,15 @@ import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.CunToken
 import it.ministerodellasalute.immuni.logic.exposure.models.CunValidationResult
+import it.ministerodellasalute.immuni.logic.upload.CunValidator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
 class CunViewModel(
     val context: Context,
-    private val exposureManager: ExposureManager
+    private val exposureManager: ExposureManager,
+    private val cunValidator: CunValidator
 ) : ViewModel(),
     KoinComponent {
 
@@ -91,15 +93,6 @@ class CunViewModel(
                             )
                         )
                 }
-                is CunValidationResult.CunWrong -> {
-                    _alertError.value =
-                        Event(
-                            listOf(
-                                context.getString(R.string.upload_data_api_error_title),
-                                context.getString(R.string.cun_form_error)
-                            )
-                        )
-                }
                 is CunValidationResult.CunAlreadyUsed -> {
                     _alertError.value =
                         Event(
@@ -124,6 +117,8 @@ class CunViewModel(
 
         if (cun.isBlank() || cun.length < 10) {
             message += context.getString(R.string.cun_form_error)
+        } else if (cunValidator.validaCheckDigitCUN(cun) == CunValidationResult.CunWrong) {
+            message += context.getString(R.string.cun_wrong)
         }
         if (healthInsuranceCard.isBlank() || healthInsuranceCard.length < 8) {
             message += context.getString(R.string.health_insurance_card_form_error)

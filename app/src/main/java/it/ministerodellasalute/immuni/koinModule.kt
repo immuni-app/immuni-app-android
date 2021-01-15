@@ -290,7 +290,7 @@ val appModule = module {
     }
 
     single {
-        ExposureIngestionRepository(get(), get())
+        ExposureIngestionRepository(get())
     }
 
     single {
@@ -360,7 +360,7 @@ val appModule = module {
     viewModel { SettingsViewModel(get()) }
     viewModel { StateCloseViewModel(get(), get()) }
     viewModel { SupportViewModel(androidContext(), get(), get()) }
-    viewModel { CunViewModel(get(), get()) }
+    viewModel { CunViewModel(get(), get(), get()) }
     viewModel { ChooseDataUploadModeViewModel(get(), get(), get()) }
 }
 

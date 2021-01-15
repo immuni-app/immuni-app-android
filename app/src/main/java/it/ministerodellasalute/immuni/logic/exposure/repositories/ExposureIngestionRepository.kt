@@ -23,15 +23,13 @@ import it.ministerodellasalute.immuni.logic.exposure.models.CunToken
 import it.ministerodellasalute.immuni.logic.exposure.models.CunValidationResult
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
-import it.ministerodellasalute.immuni.logic.upload.CunValidator
 import it.ministerodellasalute.immuni.logic.user.models.Province
 import it.ministerodellasalute.immuni.network.api.NetworkError
 import it.ministerodellasalute.immuni.network.api.NetworkResource
 import java.util.*
 
 class ExposureIngestionRepository(
-    private val exposureIngestionService: ExposureIngestionService,
-    private val cunValidator: CunValidator
+    private val exposureIngestionService: ExposureIngestionService
 ) {
     companion object {
         @VisibleForTesting
@@ -66,11 +64,6 @@ class ExposureIngestionRepository(
     }
 
     suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String): CunValidationResult {
-
-        if (cunValidator.validaCheckDigitCUN(cun) == CunValidationResult.CunWrong) {
-            return CunValidationResult.CunWrong
-        }
-
         val response = immuniApiCall {
             exposureIngestionService.validateCun(
                 isDummyData = 0,

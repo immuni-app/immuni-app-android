@@ -72,6 +72,7 @@
                         android:layout_marginTop="30dp"
                         android:layout_marginEnd="30dp"
                         android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
                         android:text="@string/cdum_title_OS"
                         android:textColor="@color/colorPrimary"
                         app:drawableEndCompat="@drawable/ic_stethoscope"
@@ -146,31 +147,15 @@
                         android:layout_marginTop="30dp"
                         android:layout_marginEnd="30dp"
                         android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
                         android:text="@string/cdum_title_independently"
                         android:textColor="@color/colorPrimary"
                         app:drawableEndCompat="@drawable/ic_cuncode"
-                        app:layout_constraintBottom_toTopOf="@+id/allowedRegionsSelfUploadError"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
-
-                    <TextView
-                        android:id="@+id/allowedRegionsSelfUploadError"
-                        style="@style/SText"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/euclid_circular_semi_bold"
-                        android:text="@string/allowed_regions_self_upload_error"
-                        android:textColor="@color/text_error_red"
-                        android:visibility="visible"
-                        app:drawableStartCompat="@drawable/ic_warning_small"
-                        app:layout_constraintTop_toBottomOf="@id/titleIndependently"
-                        app:layout_constraintStart_toStartOf="@id/titleIndependently"
-                        app:layout_constraintEnd_toEndOf="@id/titleIndependently"/>
-
 
                     <TextView
                         android:id="@+id/subtitleIndependently"
@@ -179,8 +164,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="@string/cdum_description_independently"
-                        app:layout_constraintStart_toStartOf="@id/nextIndependently"
-                        app:layout_constraintTop_toBottomOf="@id/allowedRegionsSelfUploadError"
+                        app:layout_constraintStart_toStartOf="@id/titleIndependently"
+                        app:layout_constraintTop_toBottomOf="@id/titleIndependently"
                         app:layout_constraintWidth_percent="0.65" />
 
                     <Button
