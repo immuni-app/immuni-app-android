@@ -403,9 +403,9 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="button_dialog_confirm">OK</string>
   <string name="how_to_upload_positive_call_center_title">Comment signaler un résultat positif</string>
   <string name="how_to_upload_positive_call_center_first">Si le résultat de votre test est positif au virus, vous pouvez le signaler à Immuni en téléchargeant vos codes aléatoires. Ceci permettra à l\'application d\'avertir les utilisateurs avec lesquels vous avez été en contact les jours précédents du risque de contagion.</string>
-  <string name="how_to_upload_positive_call_center_second">Le professionnel de la santé qui vous communiquera le résultat positif du test vous assistera par téléphone. Il vous demandera de lui fournir le code à usage unique affiché sur la page-écran précédente et l\'utilisera pour vous autoriser à télécharger vos données.</string>
-  <string name="how_to_upload_positive_call_center_third">Si tu as reçu le Code Unique National (CUN), l’opérateur du call center 800.91.24.91 te demandera aussi le numero de la “tessera sanitaria” (carte d’assurance).</string>
-  <string name="how_to_upload_positive_call_center_fourth">Ces processus d\'autorisation empêchent les utilisateurs qui n\'ont pas été effectivement testés positifs au virus de télécharger leurs données et de provoquer ainsi de fausses alarmes. Le code à usage unique et les données téléchargées ne sont en aucun cas associés à votre identité.</string>
+  <string name="how_to_upload_positive_call_center_second">L’opérateur du call center 800.91.24.91 vous assistera par téléphone vous assistera par téléphone. Il vous demandera le code CUN, les 8 derniers chiffres de la carte santé, la date de début des symptômes et le code à usage unique affiché sur la page-écran précédente et l\'utilisera pour vous autoriser à télécharger vos données.</string>
+  <string name="how_to_upload_positive_call_center_third">Le code CUN est un code alphanumérique national unique (par exemple CUN-AB1234C567) associé au résultat de l\'écouvillon moléculaire. Il est communiqué aux citoyens par SMS, e-mail ou dans le dossier de santé.</string>
+  <string name="how_to_upload_positive_call_center_fourth">Le numéro de la carte Santé est un code à 20 chiffres qui se trouve sur la dernière ligne au dos de la carte Santé. N\'oubliez pas qu\'il est important de communiquer la date exacte d\'apparition des symptômes pour.</string>
   <string name="how_to_upload_positive_independently_title">Comment signaler la positivité</string>
   <string name="how_to_upload_positive_independently_first">Si vous testez positif pour le virus, vous pouvez le signaler indépendamment à Immuni en téléchargeant le code CUN, les 8 derniers chiffres de la carte santé et la date de début des symptômes.</string>
   <string name="how_to_upload_positive_independently_third">Le code CUN est un code alphanumérique national unique (par exemple CUN-AB1234C567) associé au résultat de l\'écouvillon moléculaire. Il est communiqué aux citoyens par SMS, e-mail ou dans le dossier de santé.</string>
@@ -418,4 +418,5 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="call_center_description">Si vous avez reçu le code national unique (CUN), vous pouvez signaler votre positivité via le numéro sans frais 800.91.24.91</string>
   <string name="cun_already_used">Cun déjà utilisé</string>
   <string name="cun_wrong">- Mauvais CUN\n</string>
+  <string name="cun_unauthorized">Aucun résultat. Vérifiez que le CUN et les 8 derniers chiffres de la carte Santé sont corrects.</string>
 </resources>

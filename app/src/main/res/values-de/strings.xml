@@ -400,9 +400,9 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="button_dialog_confirm">OK</string>
   <string name="how_to_upload_positive_call_center_title">So melden Sie das positive Ergebnis</string>
   <string name="how_to_upload_positive_call_center_first">Wenn Sie positiv auf das Virus getestet werden, können Sie es Immuni melden, indem Sie Ihre Zufallscodes hochladen. Auf diese Weise können Sie der App ermöglichen, Nutzer, mit denen Sie in den letzten Tagen Kontakt hatten, vor dem Risiko einer Ansteckung zu warnen.</string>
-  <string name="how_to_upload_positive_call_center_second">Das medizinische Fachpersonal, das Ihnen das positive Ergebnis des Tests mitteilt, hilft Ihnen telefonisch weiter. Sie werden nach dem auf dem vorherigen Bildschirm angezeigten Einmalcode gefragt, der dazu dient, das Hochladen Ihrer Daten zu autorisieren.</string>
-  <string name="how_to_upload_positive_call_center_third">Wenn Sie den Unique National Code (CUN) erhalten haben, werden Sie vom Callcenter-Betreiber 800.91.24.91 ebenfalls nach Ihrer Gesundheitskartennummer gefragt.</string>
-  <string name="how_to_upload_positive_call_center_fourth">Diese Autorisierungsprozesse verhindern, dass Nutzer, die nicht positiv auf den Virus getestet wurden, ihre Daten hochladen und somit Fehlalarme verursachen. Der Einmalcode und die hochgeladenen Daten sind in keiner Weise mit Ihrer Identität verbunden.</string>
+  <string name="how_to_upload_positive_call_center_second">Der Call Center-Betreiber 800.91.24.91 hilft Ihnen telefonisch weiter. Sie werden nach dem auf Sie werden nach dem CUN-Code, den letzten 8 Ziffern der Gesundheitskarte, dem Startdatum der Symptome und dem Einwegcode gefragt der dazu dient, das Hochladen Ihrer Daten zu autorisieren.</string>
+  <string name="how_to_upload_positive_call_center_third">Der CUN-Code ist ein eindeutiger nationaler alphanumerischer Code (z. B. CUN-AB1234C567), der dem Ergebnis des Molekularabstrichs zugeordnet ist. Es wird den Bürgern per SMS, E-Mail oder in der elektronischen Gesundheitsakte mitgeteilt wird.</string>
+  <string name="how_to_upload_positive_call_center_fourth">Die Gesundheitskartennummer ist ein 20-stelliger Code in der letzten Zeile auf der Rückseite der Gesundheitskarte. Denken Sie daran, dass es wichtig ist, das genaue Datum des Auftretens der Symptome anzugeben, um eine genaue Kontaktverfolgung einzuleiten.</string>
   <string name="how_to_upload_positive_independently_title">Wie man das Positive Testergebnis anmeldet</string>
   <string name="how_to_upload_positive_independently_first">Wenn Sie positiv auf das Virus testen, können Sie es Immuni unabhängig melden, indem Sie den CUN-Code, die letzten 8 Ziffern der Gesundheitskarte und das Startdatum der Symptome hochladen.</string>
   <string name="how_to_upload_positive_independently_second">Durch Eingabe dieser Informationen sendet Immuni automatisch Benachrichtigungen an andere Benutzer, die zwei Tage vor dem Auftreten der Symptome oder bis zu 14 Tage vor dem Datum des Abwischens engen Kontakt mit Ihnen hatten.</string>
@@ -416,4 +416,5 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="call_center_description">Wenn Sie den National Unique Code (CUN) erhalten haben, können Sie Ihre Positivität unter der gebührenfreien Nummer 800.91.24.91 melden</string>
   <string name="cun_already_used">CUN schon benutzt</string>
   <string name="cun_wrong">- Falsche CUN\n</string>
+  <string name="cun_unauthorized">Keine Treffer gefunden. Stellen Sie sicher, dass CUN und die letzten 8 Ziffern der Gesundheitskarte korrekt sind.</string>
 </resources>

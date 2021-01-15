@@ -402,9 +402,9 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="button_dialog_confirm">OK</string>
   <string name="how_to_upload_positive_call_center_title">Come segnalare la positività</string>
   <string name="how_to_upload_positive_call_center_first">Se risulti positivo al virus, puoi segnalarlo a Immuni caricando i tuoi codici casuali. Facendolo permetti all’app di avvertire del rischio di contagio gli utenti con cui sei stato a contatto nei giorni precedenti.</string>
-  <string name="how_to_upload_positive_call_center_second">L’operatore sanitario che comunica l’esito positivo del tampone ti assisterà telefonicamente. Ti chiederà il codice monouso visualizzato nella schermata precedente e lo userà per autorizzarti al caricamento dei tuoi dati.</string>
-  <string name="how_to_upload_positive_call_center_third">Se ha ricevuto il Codice Unico Nazionale (CUN) l\'operatore del call center 800.91.24.91 ti chiederà anche il numero di tessera sanitaria.</string>
-  <string name="how_to_upload_positive_call_center_fourth">Questi processi di autorizzazione impediscono a utenti che non siano effettivamente risultati positivi al virus di caricare i loro dati, causando falsi allarmi. Il codice monouso e i dati caricati non sono in alcun modo associati alla tua identità.</string>
+  <string name="how_to_upload_positive_call_center_second">L\'operatore del call center 800.91.24.91 ti assisterà telefonicamente. Ti chiederà il codice CUN, le ultime 8 cifre della tessera sanitaria, la data di inizio dei sintomi e il codice monouso visualizzato nella schermata precedente che userà per autorizzarti al caricamento dei tuoi dati.</string>
+  <string name="how_to_upload_positive_call_center_third">Il codice CUN è un codice univoco nazionale alfanumerico (ad esempio CUN-AB1234C567) associato al risultato del tampone molecolare. Viene comunicato ai cittadini tramite SMS, via email o all\'interno del fascicolo sanitario elettronico.</string>
+  <string name="how_to_upload_positive_call_center_fourth">Il numero di tessera sanitaria è un codice di 20 cifre che si trova all\'ultima riga sul retro della tessera sanitaria.\nRicorda che è importante comunicare la data esatta di inizio sintomi per avviare un tracciamento preciso dei contatti.</string>
   <string name="how_to_upload_positive_independently_title">Come segnalare la positività</string>
   <string name="how_to_upload_positive_independently_first">Se risulti positivo al virus puoi segnalarlo in autonomia a Immuni caricando il codice CUN, le ultime 8 cifre della tessera sanitaria e la data di inizio dei sintomi.</string>
   <string name="how_to_upload_positive_independently_second">Inserendo queste informazioni Immuni invierà automaticamente le notifiche agli altri utenti che hanno avuto contatti stretti con te a partire da due giorni prima dell\'inizio dei sintomi o fino a 14 giorni prima della data in cui hai eseguito il tampone.</string>
@@ -418,4 +418,5 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="call_center_description">Se hai ricevuto il Codice Univoco Nazionale (CUN) puoi segnalare la tua positività attraverso il numero verde 800.91.24.91</string>
   <string name="cun_already_used">Cun già utilizzato</string>
   <string name="cun_wrong">- CUN errato\n</string>
+  <string name="cun_unauthorized">Nessuna corrispondenza trovata. Verificare che CUN e le ultime 8 cifre della Tessera Sanitaria siano corretti.</string>
 </resources>

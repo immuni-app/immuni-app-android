@@ -403,9 +403,9 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="button_dialog_confirm">OK</string>
   <string name="how_to_upload_positive_call_center_title">Cómo informar de un resultado positivo</string>
   <string name="how_to_upload_positive_call_center_first">Si das positivo en el virus, puedes indicarlo en Immuni subiendo tus códigos aleatorios. Así permitirás que la aplicación avise del riesgo de contagio a los usuarios con los que hayas mantenido contacto en los días anteriores.</string>
-  <string name="how_to_upload_positive_call_center_second">El profesional sanitario que te comunique que el resultado de la prueba es positivo te ayudará por teléfono. Te pedirá el código de un solo uso que aparecía en la pantalla anterior y lo utilizará para darte permiso para que subas tus datos.</string>
-  <string name="how_to_upload_positive_call_center_third">Si has recibido el Código Nacional Único (CUN) el operador del centro de llamadas 800.91.24.91 te pedirá también el numero de tu “tessera sanitaria” (tarjeta sanitaria).</string>
-  <string name="how_to_upload_positive_call_center_fourth">Estos procesos de autorización previenen que los usuarios que no hayan dado positivo en el virus suban sus datos y generen falsas alarmas. El código de un solo uso y los datos que se suben no están vinculados de ningún modo con tu identidad.</string>
+  <string name="how_to_upload_positive_call_center_second">El operador del centro de llamadas 800.91.24.91 te ayudará por teléfono. Te pedirá el código CUN, los últimos 8 dígitos de la tarjeta sanitaria, la fecha de inicio de síntomas y el código de un solo uso que aparecía en la pantalla anterior y lo utilizará para darte permiso para que subas tus datos.</string>
+  <string name="how_to_upload_positive_call_center_third">El código CUN es un código alfanumérico nacional único (por ejemplo, CUN-AB1234C567) asociado con el resultado del hisopo molecular. Se comunica a los ciudadanos a través de SMS, correo electrónico o en la historia clínica electrónica.</string>
+  <string name="how_to_upload_positive_call_center_fourth">El número de la tarjeta sanitaria es un código de 20 dígitos que se encuentra en la última línea del reverso de la tarjeta sanitaria. Recuerda que es importante comunicar la fecha exacta de aparición de los síntomas para iniciar un rastreo de contacto preciso.</string>
   <string name="how_to_upload_positive_independently_title">Cómo informar tu positividad</string>
   <string name="how_to_upload_positive_independently_first">Si resultas positivo al virus, puedes informarlo por tu cuenta a Immuni cargando el código CUN, las últimas 8 cifras de la tarjeta sanitaria y la fecha de inicio de síntomas.</string>
   <string name="how_to_upload_positive_independently_second">Al ingresar esta información, Immuni enviará automáticamente notificaciones a otros usuarios que hayan tenido contacto cercano contigo a partir de dos días antes del inicio de los síntomas o hasta 14 días antes de la fecha en que te hicistes el hisopo.</string>
@@ -419,4 +419,5 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="call_center_description">Si has recibido el Código Nacional Único (CUN) puedes informar tu positividad a través del número gratuito 800.91.24.91</string>
   <string name="cun_already_used">CUN ya utilizado</string>
   <string name="cun_wrong">- CUN incorrecto\n</string>
+  <string name="cun_unauthorized">No se encontraron coincidencias. Verifique que CUN y los últimos 8 dígitos de la Tarjeta de Salud sean correctos.</string>
 </resources>

@@ -89,7 +89,7 @@ class CunViewModel(
                         Event(
                             listOf(
                                 context.getString(R.string.upload_data_api_error_title),
-                                context.getString(R.string.upload_data_verify_error)
+                                context.getString(R.string.cun_unauthorized)
                             )
                         )
                 }
