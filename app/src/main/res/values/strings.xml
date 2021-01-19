@@ -145,7 +145,7 @@
   <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Open Settings</b> using the button below</string>
   <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Enable exposure notifications</b></string>
   <string name="permission_tutorial_exposure_notification_unauthorized_action">Open Settings</string>
-  <string name="upload_data_warning_message">This feature requires assistance from the healthcare operator, who will inform you by phone of the positive result of the swab test. If you have received the Unique National Code (CUN) you can also report your positive result through our toll-free number 800.91.24.91</string>
+  <string name="upload_data_warning_message">This feature requires assistance from the healthcare operator, who will inform you by phone of the positive result of the swab test.</string>
   <string name="upload_data_code_message">Give the operator the one-time code:</string>
   <string name="upload_data_wait_operator_message">Wait for the healthcare operator to confirm</string>
   <string name="upload_data_verify_message">Continue to verify code authorisation</string>
@@ -349,8 +349,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="permission_tutorial_how_to_upload_positive_title">How to report a positive result</string>
   <string name="permission_tutorial_how_to_upload_positive_first">If you test positive for the virus, you can report this to Immuni and upload your random codes. By doing so, you allow the app to warn users with whom you have been in contact over the previous days that there is a risk of infection.</string>
   <string name="permission_tutorial_how_to_upload_positive_second">The healthcare operator who informs you that your swab has tested positive will assist you by phone. They will ask you for the one-time code displayed on the previous screen, which they will use to give you authorisation to upload your data.</string>
-  <string name="permission_tutorial_how_to_upload_positive_third">If you have received the Unique National Code (CUN), the call center operator 800.91.24.91 will also ask you to provide your health card number.</string>
-  <string name="permission_tutorial_how_to_upload_positive_fourth">These authorization processes prevent users who have not actually tested positive for the virus from uploading their data and causing false alarms. The one-time code and the data uploaded are not associated with your identity in any way.</string>
+  <string name="permission_tutorial_how_to_upload_positive_third">These authorization processes prevent users who have not actually tested positive for the virus from uploading their data and causing false alarms. The one-time code and the data uploaded are not associated with your identity in any way.</string>
   <string name="suggestions_instruction_under_18_message">If you\'re under 18, please have your parents/legal guardian read this message.</string>
   <string name="privacy_tos_read">By continuing, I declare that I have read and accepted the {terms of use}</string>
   <string name="privacy_checkbox_read">I have read the {privacy notice}</string>
@@ -383,4 +382,39 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="countries_of_interest_limit_dialog_title">Selection limit exceeded</string>
   <string name="countries_of_interest_limit_dialog_message">You can select up to a maximum of 3 countries. Your selection will be valid and unchangeable for 14 days</string>
   <string name="home_report_positivity_card_title">Report a positive result</string>
+  <string name="cdum_title_OS">Are you in contact with a healthcare provider?</string>
+  <string name="cdum_description_OS">Follow the procedure to report your being positive</string>
+  <string name="continue_label">Continue</string>
+  <string name="cdum_title_independently">Do you have a CUN code?</string>
+  <string name="cdum_description_independently">You can enter the data directly in the app or by calling the call center at 800.91.24.91</string>
+  <string name="report_positivity_description_independently">This function allows you to report your positivity by directly entering the requested data.</string>
+  <string name="form_report_positivity_title">Unblock freely</string>
+  <string name="call_center_report_positivity_title">Call the Call Center at 800.91.24.91</string>
+  <string name="cun_placeholder">CUN of the report</string>
+  <string name="health_insurance_card_placeholder">The last eight digits of your Health ID Card</string>
+  <string name="symptom_onset_date_placeholder">Initial beginning date of the Symptoms*</string>
+  <string name="symptom_date_hint">*If you are asymptomatic, enter the date of the swab test</string>
+  <string name="or_label">or</string>
+  <string name="button_dialog_confirm">OK</string>
+  <string name="how_to_upload_positive_call_center_title">How to report a positive result</string>
+  <string name="how_to_upload_positive_call_center_first">If you test positive for the virus, you can report this to Immuni and upload your random codes. By doing so, you allow the app to warn users with whom you have been in contact over the previous days that there is a risk of infection.</string>
+  <string name="how_to_upload_positive_call_center_second">The call center operator 800.91.24.91 will assist you by phone. They will ask you for the CUN code, the last 8 digits of the health card, the start date of symptoms and the one-time code displayed on the previous screen, which they will use to give you authorisation to upload your data.</string>
+  <string name="how_to_upload_positive_call_center_third">The CUN code is a unique national alphanumeric code (e.g. CUN-AB1234C567) associated with the molecular swab result. It is communicated to citizens via SMS, email or through the electronic health record.</string>
+  <string name="how_to_upload_positive_call_center_fourth">The health card number is a 20-digit code found on the last line on the back of the health card. Remember that it is important to communicate the exact date  the  symptoms began to initiate accurate contact tracking.</string>
+  <string name="how_to_upload_positive_independently_title">How can I make a report of testing positive</string>
+  <string name="how_to_upload_positive_independently_first">If you test positive for the virus, you can report it independently to Immuni by uploading the CUN code, the last 8 digits of the health card and the beginning date of the symptoms.</string>
+  <string name="how_to_upload_positive_independently_second">By entering this information Immuni will automatically send notifications to other users who have had close contact with you starting two days before the beginning of the symptoms or up to 14 days before the date you took the Swab Test.</string>
+  <string name="how_to_upload_positive_independently_third">The CUN code is a unique national alphanumeric code (e.g. CUN-AB1234C567) associated with the molecular swab result. It is communicated to citizens via SMS, email or through the electronic health record.</string>
+  <string name="how_to_upload_positive_independently_fourth">The health card number is a 20-digit code found on the last line on the back of the health card. Remember that it is important to communicate the exact date  the  symptoms began to initiate accurate contact tracking.</string>
+  <string name="dialog_error_form_title">Error in entering data</string>
+  <string name="cun_form_error">- Enter the last 10 characters of the CUN code that was communicated to you\n</string>
+  <string name="health_insurance_card_form_error">- Enter the last 8 digits you see on the back of your Health ID Card \n</string>
+  <string name="symptom_onset_date_form_error">- Enter the date when your symptoms began\n</string>
+  <string name="call_center_title">Do you have a CUN code?</string>
+  <string name="call_center_description">Once you have received the National Unique Code (CUN) you can report your positivity through the toll-free number 800.91.24.91</string>
+  <string name="cun_already_used">CUN already used</string>
+  <string name="const_cun" translatable="false">CUN-</string>
+  <string name="call_center_number" translatable="false">800.91.24.91</string>
+  <string name="cun_wrong">- Wrong CUN\n</string>
+  <string name="cun_unauthorized">No matches found. Verify that CUN and the last 8 digits of the Health Card are correct.</string>
 </resources>

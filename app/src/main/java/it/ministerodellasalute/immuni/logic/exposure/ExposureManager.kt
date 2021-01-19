@@ -193,11 +193,15 @@ class ExposureManager(
         return exposureIngestionRepository.validateOtp(otp)
     }
 
+    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String): CunValidationResult {
+        return exposureIngestionRepository.validateCun(cun, healthInsuranceCard, symptom_onset_date)
+    }
+
     suspend fun dummyUpload(): Boolean {
         return exposureIngestionRepository.dummyUpload()
     }
 
-    suspend fun uploadTeks(activity: Activity, token: OtpToken): Boolean {
+    suspend fun uploadTeks(activity: Activity, token: OtpToken?, cun: CunToken?): Boolean {
         val tekHistory = requestTekHistory(activity)
 
         val exposureSummaries = exposureReportingRepository.getSummaries()
@@ -207,9 +211,10 @@ class ExposureManager(
 
         val isSuccess = exposureIngestionRepository.uploadTeks(
             token = token,
+            cun = cun,
             province = userRepository.user.value!!.province,
             tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
-            exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate),
+            exposureSummaries = exposureSummaries.prepareForUpload(settings, token?.serverDate ?: cun!!.serverDate!!),
             countries = countriesOfInterest
         )
 

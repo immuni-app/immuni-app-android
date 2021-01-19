@@ -19,6 +19,7 @@ import android.app.Activity
 import androidx.lifecycle.*
 import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.exposure.models.CunToken
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
 import java.lang.Exception
 import kotlinx.coroutines.*
@@ -38,12 +39,16 @@ class UploadViewModel(
 
     val hasExposureSummaries = exposureManager.hasSummaries
 
-    fun upload(activity: Activity, token: OtpToken) {
+    fun upload(activity: Activity, token: OtpToken?, cun: CunToken?) {
         viewModelScope.launch {
             _loading.value = true
             delay(1000)
             try {
-                val isSuccess = exposureManager.uploadTeks(activity, token)
+                val isSuccess = if (token != null) {
+                    exposureManager.uploadTeks(activity, token, null)
+                } else {
+                    exposureManager.uploadTeks(activity, null, cun)
+                }
                 if (isSuccess) {
                     _uploadSuccess.value = Event(true)
                 } else {
