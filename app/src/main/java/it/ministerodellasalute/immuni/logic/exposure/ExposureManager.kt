@@ -182,7 +182,7 @@ class ExposureManager(
         return exposureIngestionRepository.validateOtp(otp)
     }
 
-    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String): CunValidationResult {
+    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String?): CunValidationResult {
         return exposureIngestionRepository.validateCun(cun, healthInsuranceCard, symptom_onset_date)
     }
 

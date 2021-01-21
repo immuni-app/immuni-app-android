@@ -397,7 +397,7 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="cun_placeholder">CUN del referto</string>
   <string name="health_insurance_card_placeholder">Ultime 8 cifre Tessera Sanitaria</string>
   <string name="symptom_onset_date_placeholder">Data inizio sintomi*</string>
-  <string name="symptom_date_hint">*Se sei un soggetto asintomatico, inserisci la data del tampone</string>
+  <string name="symptom_date_hint">*Spunta la casella se sei un soggetto asintomatico così da non inserire la data.</string>
   <string name="or_label">oppure</string>
   <string name="button_dialog_confirm">OK</string>
   <string name="how_to_upload_positive_call_center_title">Come segnalare la positività</string>

@@ -87,12 +87,14 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
         }
 
         verify.setSafeOnClickListener {
-            var symptomOnsetDate: String = symptomOnsetDateInput.text.toString()
-            if (symptomOnsetDateInput.text!!.isNotBlank()) {
-                val dateSplitted = symptomOnsetDateInput.text!!.split("/")
-                symptomOnsetDate = dateSplitted.reversed().joinToString("-")
+            var symptomOnsetDate: String? = null
+            if (!checkboxDate.isChecked) {
+                symptomOnsetDate = symptomOnsetDateInput.text.toString()
+                if (symptomOnsetDateInput.text!!.isNotBlank()) {
+                    val dateSplitted = symptomOnsetDateInput.text!!.split("/")
+                    symptomOnsetDate = dateSplitted.reversed().joinToString("-")
+                }
             }
-
             viewModel.verifyIndependently(
                 cun = cunInput.text.toString(),
                 health_insurance_card = healthInsuranceCardInput.text.toString(),
@@ -232,7 +234,7 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             }
         )
-
+        checkboxDate.setOnClickListener { checkboxClick() }
         setDatePicker()
     }
 
@@ -287,6 +289,11 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
                     ColorStateList.valueOf(it)
                 })
         }
+    }
+
+    private fun checkboxClick() {
+        symptomOnsetDateInput.text?.clear()
+        symptomOnsetDateInput.isEnabled = !checkboxDate.isChecked
     }
 }
 
