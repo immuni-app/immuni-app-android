@@ -19,7 +19,7 @@ buildscript {
 
         // App version
         versionName = computeVersionName()
-        versionCode = computeVersionCode()
+        versionCode = 2300001 //computeVersionCode()
 
         // SDK and tools
         compileSdkVersion = 30
