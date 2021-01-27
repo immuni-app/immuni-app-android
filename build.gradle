@@ -7,9 +7,6 @@ buildscript {
         versionMinor = 2
         versionPatch = 1
 
-        versionMajorCode = 2
-        versionMinorCode = 3
-        versionPatchCode = 0
         // Version name follows the <major>.<minor>.<patch> convention
         computeVersionName = { ->
             return String.format('%d.%d.%d', versionMajor, versionMinor, versionPatch)
@@ -17,7 +14,7 @@ buildscript {
 
         // Version code is computed as: major + minor + patch + build number (where available)
         computeVersionCode = { ->
-            return (versionMajorCode * 1000000) + (versionMinorCode * 100000) + (versionPatchCode * 10000) + Integer.valueOf(System.env.BUILD_NUMBER ?: 0)
+            return (versionMajor * 1000000) + (versionMinor * 100000) + (versionPatch * 10000) + Integer.valueOf(System.env.BUILD_NUMBER ?: 0)
         }
 
         // App version
