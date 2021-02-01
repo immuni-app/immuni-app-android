@@ -419,4 +419,7 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="cun_already_used">Cun già utilizzato</string>
   <string name="cun_wrong">- CUN errato\n</string>
   <string name="cun_unauthorized">Nessuna corrispondenza trovata. Verificare che CUN e le ultime 8 cifre della Tessera Sanitaria siano corretti.</string>
+  <string name="date_error">La data di inizio sintomi supera la data del tampone</string>
+  <string name="warning_title_modal">Attenzione</string>
+  <string name="warning_message_modal">Spunta la casella se sei un soggetto asintomatico così da non inserire la data.</string>
 </resources>
