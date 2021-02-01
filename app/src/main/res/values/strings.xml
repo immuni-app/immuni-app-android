@@ -417,4 +417,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="call_center_number" translatable="false">800.91.24.91</string>
   <string name="cun_wrong">- Wrong CUN\n</string>
   <string name="cun_unauthorized">No matches found. Verify that CUN and the last 8 digits of the Health Card are correct.</string>
+  <string name="date_error">La data di inizio sintomi supera la data del tampone</string>
+  <string name="warning_title_modal">Attenzione</string>
+  <string name="warning_message_modal">Spunta la casella se sei un soggetto asintomatico così da non inserire la data.</string>
 </resources>

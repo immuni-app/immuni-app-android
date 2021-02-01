@@ -63,7 +63,11 @@ class ExposureIngestionRepository(
         }
     }
 
-    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String?): CunValidationResult {
+    suspend fun validateCun(
+        cun: String,
+        healthInsuranceCard: String,
+        symptom_onset_date: String?
+    ): CunValidationResult {
         val response = immuniApiCall {
             exposureIngestionService.validateCun(
                 isDummyData = 0,
@@ -84,6 +88,9 @@ class ExposureIngestionRepository(
                     when (errorResponse.httpCode) {
                         401 -> {
                             CunValidationResult.Unauthorized
+                        }
+                        406 -> {
+                            CunValidationResult.DateError
                         }
                         409 -> {
                             CunValidationResult.CunAlreadyUsed
