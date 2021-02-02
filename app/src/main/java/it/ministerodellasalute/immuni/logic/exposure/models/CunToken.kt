@@ -26,5 +26,4 @@ sealed class CunValidationResult {
     object ServerError : CunValidationResult()
     object CunWrong : CunValidationResult()
     object CunAlreadyUsed : CunValidationResult()
-    object DateError : CunValidationResult()
 }
