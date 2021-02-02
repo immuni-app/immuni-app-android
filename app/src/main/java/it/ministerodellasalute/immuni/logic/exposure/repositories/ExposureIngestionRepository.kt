@@ -89,9 +89,6 @@ class ExposureIngestionRepository(
                         401 -> {
                             CunValidationResult.Unauthorized
                         }
-                        406 -> {
-                            CunValidationResult.DateError
-                        }
                         409 -> {
                             CunValidationResult.CunAlreadyUsed
                         }

@@ -102,15 +102,6 @@ class CunViewModel(
                             )
                         )
                 }
-                is CunValidationResult.DateError -> {
-                    _alertError.value =
-                        Event(
-                            listOf(
-                                context.getString(R.string.upload_data_api_error_title),
-                                context.getString(R.string.date_error)
-                            )
-                        )
-                }
             }
 
             _loading.value = false
