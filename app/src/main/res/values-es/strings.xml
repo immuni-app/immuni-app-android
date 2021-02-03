@@ -398,7 +398,7 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="cun_placeholder">CUN del reporte</string>
   <string name="health_insurance_card_placeholder">Ultimas 8 cifras de la tarjeta sanitaria</string>
   <string name="symptom_onset_date_placeholder">Fecha de inicio de síntomas*</string>
-  <string name="symptom_date_hint">*Si está asintomático, ingrese la fecha del hisopo</string>
+  <string name="symptom_date_hint">*Sin síntomas</string>
   <string name="or_label">o</string>
   <string name="button_dialog_confirm">OK</string>
   <string name="how_to_upload_positive_call_center_title">Cómo informar de un resultado positivo</string>
@@ -420,4 +420,6 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="cun_already_used">CUN ya utilizado</string>
   <string name="cun_wrong">- CUN incorrecto\n</string>
   <string name="cun_unauthorized">No se encontraron coincidencias. Verifique que CUN y los últimos 8 dígitos de la Tarjeta de Salud sean correctos.</string>
+  <string name="warning_title_modal">Atención</string>
+  <string name="warning_message_modal">Es importante comunicar la fecha exacta de aparición de los síntomas para iniciar un seguimiento preciso de los contactos. Seleccione \"sin síntomas\" solo en caso de ausencia total de síntomas o la aparición de síntomas después del hisopo.</string>
 </resources>

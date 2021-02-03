@@ -395,7 +395,7 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="cun_placeholder">CUN des Berichts</string>
   <string name="health_insurance_card_placeholder">Letzten 8-stellige Nummern der Gesundheitskarte</string>
   <string name="symptom_onset_date_placeholder">Startdatum des Symptoms*</string>
-  <string name="symptom_date_hint">*Wenn Sie asymptomatisch sind, geben Sie das Datum des Tampons ein</string>
+  <string name="symptom_date_hint">*Keine Symptome</string>
   <string name="or_label">oder</string>
   <string name="button_dialog_confirm">OK</string>
   <string name="how_to_upload_positive_call_center_title">So melden Sie das positive Ergebnis</string>
@@ -417,4 +417,6 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="cun_already_used">CUN schon benutzt</string>
   <string name="cun_wrong">- Falsche CUN\n</string>
   <string name="cun_unauthorized">Keine Treffer gefunden. Stellen Sie sicher, dass CUN und die letzten 8 Ziffern der Gesundheitskarte korrekt sind.</string>
+  <string name="warning_title_modal">Beachtung</string>
+  <string name="warning_message_modal">Es ist wichtig, das genaue Datum des Symptombeginns mitzuteilen, um eine genaue Kontaktverfolgung einzuleiten. Wählen Sie „keine Symptome“ nur, wenn keine Symptome vorliegen oder wenn nach dem Tupfer Symptome auftreten.</string>
 </resources>
