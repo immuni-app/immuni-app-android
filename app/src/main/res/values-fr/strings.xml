@@ -397,8 +397,8 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="call_center_report_positivity_title">Appelez le centre d\'appels 800.91.24.91</string>
   <string name="cun_placeholder">CUN du rapport</string>
   <string name="health_insurance_card_placeholder">Carte Santé des 8 derniers chiffres</string>
-  <string name="symptom_onset_date_placeholder">Date de début du symptôme*</string>
-  <string name="symptom_date_hint">*Aucun symptôme</string>
+  <string name="symptom_onset_date_placeholder">Date de début du symptôme</string>
+  <string name="symptom_date_hint">Aucun symptôme</string>
   <string name="or_label">ou</string>
   <string name="button_dialog_confirm">OK</string>
   <string name="how_to_upload_positive_call_center_title">Comment signaler un résultat positif</string>
