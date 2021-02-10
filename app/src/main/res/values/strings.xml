@@ -418,5 +418,5 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
   <string name="cun_wrong">- Wrong CUN\n</string>
   <string name="cun_unauthorized">No matches found. Verify that CUN and the last 8 digits of the Health Card are correct.</string>
   <string name="warning_title_modal">Attention</string>
-  <string name="warning_message_modal">It is important to communicate the exact symptom onset date to initiate accurate contact tracking. Select “no symptoms” only in case of complete absence of symptoms or the appearance of symptoms after the swab.</string>
+  <string name="warning_message_modal">It is important to communicate the exact symptom onset date to initiate accurate contact tracking. Select \"no symptoms\" only in case of complete absence of symptoms or the appearance of symptoms after the swab.</string>
 </resources>

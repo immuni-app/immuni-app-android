@@ -418,5 +418,5 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="cun_wrong">- Falsche CUN\n</string>
   <string name="cun_unauthorized">Keine Treffer gefunden. Stellen Sie sicher, dass CUN und die letzten 8 Ziffern der Gesundheitskarte korrekt sind.</string>
   <string name="warning_title_modal">Beachtung</string>
-  <string name="warning_message_modal">Es ist wichtig, das genaue Datum des Symptombeginns mitzuteilen, um eine genaue Kontaktverfolgung einzuleiten. Wählen Sie „keine Symptome“ nur, wenn keine Symptome vorliegen oder wenn nach dem Tupfer Symptome auftreten.</string>
+  <string name="warning_message_modal">Es ist wichtig, das genaue Datum des Symptombeginns mitzuteilen, um eine genaue Kontaktverfolgung einzuleiten. Wählen Sie \"keine Symptome\" nur, wenn keine Symptome vorliegen oder wenn nach dem Tupfer Symptome auftreten.</string>
 </resources>

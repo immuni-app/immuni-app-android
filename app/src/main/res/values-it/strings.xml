@@ -420,5 +420,5 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="cun_wrong">- CUN errato\n</string>
   <string name="cun_unauthorized">Nessuna corrispondenza trovata. Verificare che CUN e le ultime 8 cifre della Tessera Sanitaria siano corretti.</string>
   <string name="warning_title_modal">Attenzione</string>
-  <string name="warning_message_modal">È importante comunicare la data esatta di inizio sintomi per avviare un tracciamento preciso dei contatti. Seleziona “nessun sintomo” solo in caso di completa assenza di sintomi o di comparsa dei sintomi dopo il tampone.</string>
+  <string name="warning_message_modal">È importante comunicare la data esatta di inizio sintomi per avviare un tracciamento preciso dei contatti. Seleziona \"nessun sintomo\" solo in caso di completa assenza di sintomi o di comparsa dei sintomi dopo il tampone.</string>
 </resources>
