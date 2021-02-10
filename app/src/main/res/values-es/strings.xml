@@ -421,5 +421,5 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="cun_wrong">- CUN incorrecto\n</string>
   <string name="cun_unauthorized">No se encontraron coincidencias. Verifique que CUN y los últimos 8 dígitos de la Tarjeta de Salud sean correctos.</string>
   <string name="warning_title_modal">Atención</string>
-  <string name="warning_message_modal">Es importante comunicar la fecha exacta de aparición de los síntomas para iniciar un seguimiento preciso de los contactos. Seleccione \"sin síntomas\" solo en caso de ausencia total de síntomas o la aparición de síntomas después del hisopo.</string>
+  <string name="warning_message_modal">Es importante comunicar la fecha exacta de aparición de los síntomas para iniciar un seguimiento de contacto preciso. Seleccione \"sin síntomas\" solo en caso de ausencia total de síntomas o después del hisopo.</string>
 </resources>

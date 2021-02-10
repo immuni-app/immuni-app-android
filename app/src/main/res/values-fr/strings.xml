@@ -420,5 +420,5 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="cun_wrong">- Mauvais CUN\n</string>
   <string name="cun_unauthorized">Aucun résultat. Vérifiez que le CUN et les 8 derniers chiffres de la carte Santé sont corrects.</string>
   <string name="warning_title_modal">Attention</string>
-  <string name="warning_message_modal">Il est important de communiquer la date exacte d\'apparition des symptômes pour lancer un suivi précis des contacts. Sélectionnez «aucun symptôme» uniquement en cas d\'absence totale de symptômes ou d\'apparition de symptômes après le prélèvement.</string>
+  <string name="warning_message_modal">Il est important de communiquer la date exacte d\'apparition des symptômes pour lancer un suivi précis des contacts. Sélectionnez \"aucun symptôme\" uniquement en cas d\'absence totale de symptômes ou d\'apparition de symptômes après le prélèvement.</string>
 </resources>
