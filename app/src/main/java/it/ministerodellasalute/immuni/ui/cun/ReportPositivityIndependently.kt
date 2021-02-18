@@ -322,6 +322,17 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
             checkboxDate.isChecked = !checkboxDate.isChecked
             symptomOnsetDateInput.text?.clear()
             symptomOnsetDateInput.isEnabled = !checkboxDate.isChecked
+            if (!symptomOnsetDateInput.isEnabled) {
+                symptomOnsetDateInputLayout.setStartIconTintList(
+                    context?.getColor(R.color.grey_light)?.let {
+                        ColorStateList.valueOf(it)
+                    })
+            } else {
+                symptomOnsetDateInputLayout.setStartIconTintList(
+                context?.getColor(R.color.grey_normal)?.let {
+                    ColorStateList.valueOf(it)
+                })
+            }
         }
     }
 }

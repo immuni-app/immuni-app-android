@@ -221,7 +221,6 @@
                                 android:id="@+id/symptomOnsetDateInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@color/color_state_edit_text"
                                 android:focusable="false"
                                 android:hint="@string/symptom_onset_date_placeholder"
                                 android:inputType="none"
