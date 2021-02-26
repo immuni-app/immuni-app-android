@@ -73,7 +73,7 @@
   <string name="onboarding_province_title">In che provincia vivi?</string>
   <string name="onboarding_province_description">Seleziona la tua provincia di domicilio per aiutare il Servizio Sanitario Nazionale ad assisterti al meglio.</string>
   <string name="onboarding_exposure_permission_title">Abilita le notifiche di esposizione al COVID-19</string>
-  <string name="onboarding_exposure_permission_description">Immuni registra i contatti con altri utenti usando il Bluetooth Low Energy, così da poterti informare in caso di esposizione al virus. Potrai disabilitare il servizio temporaneamente dalla schermata principale.</string>
+  <string name="onboarding_exposure_permission_description">Immuni registra i contatti con altri utenti usando il Bluetooth Low Energy, così da poterti informare in caso di esposizione al virus. Potrai disabilitare il servizio temporaneamente dalla schermata principale. <b>Il servizio non è disponibile se Immuni viene eseguita su un profilo secondario o di lavoro.</b></string>
   <string name="onboarding_exposure_permission_action">Abilita</string>
   <string name="onboarding_exposure_permission_overlay_hint">Seleziona \"<b>Abilita</b>\" nel popup che apparirà qui sotto</string>
   <string name="onboarding_bluetooth_off_title">Attiva il Bluetooth</string>
