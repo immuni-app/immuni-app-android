@@ -265,7 +265,7 @@
 
                 <TextView
                     style="@style/SupportInformationKey"
-                    android:text="Google Play Services" />
+                    android:text="HMS Core" />
 
                 <TextView
                     android:id="@+id/playServicesVersion"
