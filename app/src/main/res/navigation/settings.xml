@@ -35,7 +35,11 @@
 
     <action
         android:id="@+id/action_data_upload_nav"
-        app:destination="@+id/data_upload" />
+        app:destination="@+id/data_upload"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 
     <action
         android:id="@+id/action_faq"

@@ -28,14 +28,31 @@
         <argument
             android:name="token"
             app:argType="it.ministerodellasalute.immuni.ui.otp.OtpToken"
-            app:nullable="false" />
+            app:nullable="true" />
+        <argument
+            android:name="cun"
+            app:argType="it.ministerodellasalute.immuni.ui.cun.CunToken"
+            app:nullable="true" />
+        <argument
+            android:name="navigateUpIndependently"
+            app:argType="boolean" />
+        <argument
+            android:name="callCenterMode"
+            app:argType="boolean" />
     </fragment>
 
     <fragment
         android:id="@+id/uploadSuccessFragment"
         android:name="it.ministerodellasalute.immuni.ui.upload.UploadSuccessFragment"
         android:label="Success"
-        tools:layout="@layout/upload_data_success_fragment" />
+        tools:layout="@layout/upload_data_success_fragment">
+        <argument
+            android:name="navigateUpIndependently"
+            app:argType="boolean" />
+        <argument
+            android:name="callCenterMode"
+            app:argType="boolean" />
+    </fragment>
 
     <action
         android:id="@+id/action_global_success"
