@@ -48,7 +48,6 @@ import it.ministerodellasalute.immuni.logic.user.repositories.RegionRepository
 import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import it.ministerodellasalute.immuni.network.Network
-import it.ministerodellasalute.immuni.ui.choosedatauploadmode.ChooseDataUploadModeViewModel
 import it.ministerodellasalute.immuni.ui.cun.CunViewModel
 import it.ministerodellasalute.immuni.ui.faq.FaqViewModel
 import it.ministerodellasalute.immuni.ui.forceupdate.ForceUpdateViewModel
@@ -361,7 +360,6 @@ val appModule = module {
     viewModel { StateCloseViewModel(get(), get()) }
     viewModel { SupportViewModel(androidContext(), get(), get()) }
     viewModel { CunViewModel(get(), get(), get()) }
-    viewModel { ChooseDataUploadModeViewModel(get(), get(), get()) }
 }
 
 val immuniMoshi = moshi(
