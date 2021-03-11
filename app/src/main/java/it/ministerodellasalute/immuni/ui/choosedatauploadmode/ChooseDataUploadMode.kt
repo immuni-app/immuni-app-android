@@ -25,17 +25,12 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import kotlinx.android.synthetic.main.choose_data_upload_mode.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class ChooseDataUploadMode : Fragment(R.layout.choose_data_upload_mode) {
-
-    private lateinit var viewModel: ChooseDataUploadModeViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setLightStatusBar(resources.getColor(R.color.background_darker))
-
-        viewModel = getViewModel()
 
         navigationIcon.setSafeOnClickListener {
             findNavController().popBackStack()
