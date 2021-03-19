@@ -72,7 +72,7 @@
   <string name="onboarding_province_title">In welcher Provinz leben Sie?</string>
   <string name="onboarding_province_description">Wählen Sie die Provinz aus, in der Sie leben, damit der staatliche Gesundheitsdienst Sie bestmöglich unterstützen kann.</string>
   <string name="onboarding_exposure_permission_title">So aktivieren Sie COVID-19-Expositionsmeldungen</string>
-  <string name="onboarding_exposure_permission_description">Immuni zeichnet Kontakte mit anderen Nutzern über Bluetooth Low Energy auf, sodass Sie im Falle einer Exposition gegenüber dem Virus informiert werden können. Sie können den Dienst vom Hauptbildschirm aus vorübergehend deaktivieren.</string>
+  <string name="onboarding_exposure_permission_description">Immuni zeichnet Kontakte mit anderen Nutzern über Bluetooth Low Energy auf, sodass Sie im Falle einer Exposition gegenüber dem Virus informiert werden können. Sie können den Dienst vom Hauptbildschirm aus vorübergehend deaktivieren. <b>Dieser Dienst ist nicht verfügbar, wenn Sie Immuni in einem sekundären Profil oder in einem Arbeitsprofil ausführen.</b></string>
   <string name="onboarding_exposure_permission_action">Aktivieren</string>
   <string name="onboarding_exposure_permission_overlay_hint">Tippen Sie auf \"<b>Aktivieren</b>\" in dem Popup-Fenster, das unten angezeigt wird</string>
   <string name="onboarding_bluetooth_off_title">Aktivieren Sie Bluetooth</string>
