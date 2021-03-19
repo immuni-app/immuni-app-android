@@ -29,6 +29,7 @@ import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
+import it.ministerodellasalute.immuni.ui.cun.CunToken
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.ui.otp.OtpToken
@@ -40,7 +41,8 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class UploadDataFragment : Fragment(R.layout.upload_data_fragment), ConfirmationDialogListener {
 
     private lateinit var viewModel: UploadViewModel
-    private lateinit var token: OtpToken
+    private var token: OtpToken? = null
+    private var cun: CunToken? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +56,11 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
         viewModel = getViewModel()
 
         val args = navArgs<UploadDataFragmentArgs>()
-        token = args.value.token
+        if (args.value.token != null) {
+            token = args.value.token
+        } else {
+            cun = args.value.cun
+        }
 
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -86,7 +92,7 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
         })
 
         viewModel.uploadSuccess.observe(viewLifecycleOwner, Observer {
-            val action = UploadDataFragmentDirections.actionGlobalSuccess()
+            val action = UploadDataFragmentDirections.actionGlobalSuccess(args.value.navigateUpIndependently, args.value.callCenterMode)
             findNavController().navigate(action)
         })
 
@@ -105,7 +111,11 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
     }
 
     private fun uploadOtp() {
-        viewModel.upload(requireActivity(), token.toLogic())
+        if (token != null) {
+            viewModel.upload(requireActivity(), token!!.toLogic(), null)
+        } else {
+            viewModel.upload(requireActivity(), null, cun!!.toLogic())
+        }
     }
 
     private fun onDismiss() {
