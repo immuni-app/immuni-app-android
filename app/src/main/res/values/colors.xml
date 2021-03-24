@@ -36,6 +36,7 @@
     <color name="card_dark">#675AFF</color>
     <color name="popup_mask">#333F4A73</color>
     <color name="data_upload_vertical_divider">#995751FF</color>
+    <color name="grey_light">#E3E3EB</color>
     <color name="grey_normal">#627890</color>
     <color name="grey_dark">#2F4F75</color>
     <color name="light_blue">#E9EFFF</color>

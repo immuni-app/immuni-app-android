@@ -49,7 +49,7 @@ class CunViewModel(
     fun verifyIndependently(
         cun: String,
         health_insurance_card: String,
-        symptom_onset_date: String
+        symptom_onset_date: String?
     ) {
         if (checkFormHasError(cun, health_insurance_card, symptom_onset_date)) {
             return
@@ -111,7 +111,7 @@ class CunViewModel(
     private fun checkFormHasError(
         cun: String,
         healthInsuranceCard: String,
-        symptom_onset_date: String
+        symptom_onset_date: String?
     ): Boolean {
         var message = ""
 
@@ -123,7 +123,7 @@ class CunViewModel(
         if (healthInsuranceCard.isBlank() || healthInsuranceCard.length < 8) {
             message += context.getString(R.string.health_insurance_card_form_error)
         }
-        if (symptom_onset_date.isBlank()) {
+        if (symptom_onset_date != null && symptom_onset_date.isBlank()) {
             message += context.getString(R.string.symptom_onset_date_form_error)
         }
         if (message.isNotEmpty()) {
