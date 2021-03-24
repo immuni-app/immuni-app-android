@@ -23,17 +23,11 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
 
     signingConfigs {
-        /*release {
+        release {
             keyAlias appProperties['keyAlias']
             keyPassword appProperties['keyPassword']
             storeFile file(appProperties['storeFile'])
             storePassword appProperties['storePassword']
-        }*/
-        release {
-            storeFile file('./keystoreDebug.jks')
-            keyAlias 'key0'
-            keyPassword 'test123'
-            storePassword 'test123'
         }
     }
     defaultConfig {
@@ -90,7 +84,6 @@ android {
         google {
         }
         huawei {
-            applicationId "it.ministerodellasalute.immuni.huaweidevitaly"
         }
     }
 }

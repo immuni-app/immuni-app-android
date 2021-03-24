@@ -44,6 +44,7 @@ import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsNetworkRepository
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsStoreRepository
+import it.ministerodellasalute.immuni.logic.upload.CunValidator
 import it.ministerodellasalute.immuni.logic.upload.OtpGenerator
 import it.ministerodellasalute.immuni.logic.upload.UploadDisabler
 import it.ministerodellasalute.immuni.logic.upload.UploadDisablerStore
@@ -52,6 +53,8 @@ import it.ministerodellasalute.immuni.logic.user.repositories.RegionRepository
 import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import it.ministerodellasalute.immuni.network.Network
+import it.ministerodellasalute.immuni.ui.choosedatauploadmode.ChooseDataUploadModeViewModel
+import it.ministerodellasalute.immuni.ui.cun.CunViewModel
 import it.ministerodellasalute.immuni.ui.faq.FaqViewModel
 import it.ministerodellasalute.immuni.ui.forceupdate.ForceUpdateViewModel
 import it.ministerodellasalute.immuni.ui.howitworks.HowItWorksDataSource
@@ -300,7 +303,9 @@ val appModule = module {
             )
         )
     }
-
+    single {
+        CunValidator()
+    }
     single {
         ExposureIngestionRepository(get())
     }
@@ -372,6 +377,9 @@ val appModule = module {
     viewModel { SettingsViewModel(get()) }
     viewModel { StateCloseViewModel(get(), get()) }
     viewModel { SupportViewModel(androidContext(), get(), get()) }
+    viewModel { CunViewModel(get(), get(), get()) }
+    viewModel { ChooseDataUploadModeViewModel(get(), get(), get()) }
+
 }
 
 val immuniMoshi = moshi(
