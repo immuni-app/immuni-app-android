@@ -48,7 +48,7 @@ interface ExposureIngestionService {
     data class ValidateCunRequest(
         @field:Json(name = "padding") override val padding: String = "",
         @field:Json(name = "last_his_number") val healthInsuranceCard: String,
-        @field:Json(name = "symptoms_started_on") val symptomOnsetDate: String
+        @field:Json(name = "symptoms_started_on") val symptomOnsetDate: String?
     ) : RequestWithPadding
 
     @POST("/v1/ingestion/check-cun")
