@@ -61,7 +61,7 @@ buildscript {
         conscryptVersion = "2.4.0"
         testCoreKtxVersion = "1.2.0"
         testFragmentVersion = "1.2.4"
-        contactShieldVersion = "5.2.0.301"
+        contactShieldVersion = "5.2.1.300"
         safetyDetectVersion = "5.0.3.300"
         huaweiBaseVersion = "5.0.3.300"
     }
