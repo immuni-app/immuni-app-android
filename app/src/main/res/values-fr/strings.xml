@@ -72,7 +72,7 @@
   <string name="onboarding_province_title">Dans quelle province habitez-vous ?</string>
   <string name="onboarding_province_description">Sélectionnez la province de votre domicile pour aider les services de santé nationaux à vous fournir une meilleure assistance.</string>
   <string name="onboarding_exposure_permission_title">Activez les notifications de risque d\'exposition au COVID-19</string>
-  <string name="onboarding_exposure_permission_description">Immuni enregistre les contacts avec d\'autres utilisateurs en utilisant la technologie Bluetooth Low Energy afin de pouvoir vous informer en cas d\'exposition au virus. Vous pouvez désactiver le service temporairement à partir de la page d\'accueil.</string>
+  <string name="onboarding_exposure_permission_description">Immuni enregistre les contacts avec d\'autres utilisateurs en utilisant la technologie Bluetooth Low Energy afin de pouvoir vous informer en cas d\'exposition au virus. Vous pouvez désactiver le service temporairement à partir de la page d\'accueil. <b>Ce service n\'est pas disponible si vous exécutez Immuni dans un profil secondaire ou dans un profil professionnel.</b></string>
   <string name="onboarding_exposure_permission_action">Activer</string>
   <string name="onboarding_exposure_permission_overlay_hint">Sélectionnez <b>Activer</b> dans la fenêtre contextuelle qui s\'affichera ci-dessous</string>
   <string name="onboarding_bluetooth_off_title">Activez la technologie Bluetooth</string>
@@ -395,7 +395,7 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="report_positivity_description_independently">Cette fonction vous permet de signaler votre positivité en saisissant directement les données demandées.</string>
   <string name="form_report_positivity_title">Déverrouillez vous-même</string>
   <string name="call_center_report_positivity_title">Appelez le centre d\'appels 800.91.24.91</string>
-  <string name="cun_placeholder">CUN du rapport</string>
+  <string name="cun_placeholder">CUN du test positive</string>
   <string name="health_insurance_card_placeholder">Carte Santé des 8 derniers chiffres</string>
   <string name="symptom_onset_date_placeholder">Date de début du symptôme</string>
   <string name="symptom_date_hint">Aucun symptôme</string>
@@ -412,13 +412,13 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="how_to_upload_positive_independently_fourth">Le numéro de la carte Santé est un code à 20 chiffres qui se trouve sur la dernière ligne au dos de la carte Santé. N\'oubliez pas qu\'il est important de communiquer la date exacte d\'apparition des symptômes pour.</string>
   <string name="dialog_error_form_title">Erreur lors de la saisie des données</string>
   <string name="cun_form_error">- Saisissez les 10 derniers caractères du code CUN qui vous a été communiqué\n</string>
-  <string name="health_insurance_card_form_error">- Entrez les 8 derniers chiffres que vous trouverez au dos de la carte Santé\n</string>
-  <string name="symptom_onset_date_form_error">- Entrez la date de début du symptôme\n</string>
+  <string name="health_insurance_card_form_error">- Le numéro de carte Santé saisi n\'est pas formellement valide. Assurez-vous d\'avoir saisi les 8 derniers chiffres de votre carte Santé associés à un prélèvement positif\n</string>
+  <string name="symptom_onset_date_form_error">- Entrez la date de début du symptôme, si vous êtes symptomatique ou cochez la case si vous ne présentez aucun symptôme\n</string>
   <string name="call_center_title">Avez-vous le code CUN?</string>
   <string name="call_center_description">Si vous avez reçu le code national unique (CUN), vous pouvez signaler votre positivité via le numéro sans frais 800.91.24.91</string>
   <string name="cun_already_used">Cun déjà utilisé</string>
-  <string name="cun_wrong">- Mauvais CUN\n</string>
-  <string name="cun_unauthorized">Aucun résultat. Vérifiez que le CUN et les 8 derniers chiffres de la carte Santé sont corrects.</string>
+  <string name="cun_wrong">- Le CUN saisi n\'est pas formellement valide. Assurez-vous d\'avoir saisi les 10 derniers chiffres du CUN que vous avez reçu par SMS ou dans le rapport associé à un écouvillon positif</string>
+  <string name="cun_unauthorized">Attention. CUN non valide. Assurez-vous d\'avoir saisi les 10 derniers chiffres du CUN que vous avez reçu par SMS ou dans le rapport associé à un écouvillon positif</string>
   <string name="warning_title_modal">Attention</string>
   <string name="warning_message_modal">Il est important de communiquer la date exacte d\'apparition des symptômes pour lancer un suivi précis des contacts. Sélectionnez \"aucun symptôme\" uniquement en cas d\'absence totale de symptômes ou d\'apparition de symptômes après le prélèvement.</string>
 </resources>

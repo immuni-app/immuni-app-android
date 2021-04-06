@@ -72,7 +72,7 @@
   <string name="onboarding_province_title">In welcher Provinz leben Sie?</string>
   <string name="onboarding_province_description">Wählen Sie die Provinz aus, in der Sie leben, damit der staatliche Gesundheitsdienst Sie bestmöglich unterstützen kann.</string>
   <string name="onboarding_exposure_permission_title">So aktivieren Sie COVID-19-Expositionsmeldungen</string>
-  <string name="onboarding_exposure_permission_description">Immuni zeichnet Kontakte mit anderen Nutzern über Bluetooth Low Energy auf, sodass Sie im Falle einer Exposition gegenüber dem Virus informiert werden können. Sie können den Dienst vom Hauptbildschirm aus vorübergehend deaktivieren.</string>
+  <string name="onboarding_exposure_permission_description">Immuni zeichnet Kontakte mit anderen Nutzern über Bluetooth Low Energy auf, sodass Sie im Falle einer Exposition gegenüber dem Virus informiert werden können. Sie können den Dienst vom Hauptbildschirm aus vorübergehend deaktivieren. <b>Dieser Dienst ist nicht verfügbar, wenn Sie Immuni in einem sekundären Profil oder in einem Arbeitsprofil ausführen.</b></string>
   <string name="onboarding_exposure_permission_action">Aktivieren</string>
   <string name="onboarding_exposure_permission_overlay_hint">Tippen Sie auf \"<b>Aktivieren</b>\" in dem Popup-Fenster, das unten angezeigt wird</string>
   <string name="onboarding_bluetooth_off_title">Aktivieren Sie Bluetooth</string>
@@ -392,7 +392,7 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="report_positivity_description_independently">Mit dieser Funktion können Sie Ihre Positivität melden, indem Sie die angeforderten Daten direkt eingeben.</string>
   <string name="form_report_positivity_title">Freischalten in Autonomie</string>
   <string name="call_center_report_positivity_title">Rufen Sie das Callcenter unter 800.91.24.91 an</string>
-  <string name="cun_placeholder">CUN des Berichts</string>
+  <string name="cun_placeholder">CUN des positiven Tampons</string>
   <string name="health_insurance_card_placeholder">Letzten 8-stellige Nummern der Gesundheitskarte</string>
   <string name="symptom_onset_date_placeholder">Startdatum des Symptoms</string>
   <string name="symptom_date_hint">Keine Symptome</string>
@@ -410,13 +410,13 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="how_to_upload_positive_independently_fourth">Die Gesundheitskartennummer ist ein 20-stelliger Code in der letzten Zeile auf der Rückseite der Gesundheitskarte. Denken Sie daran, dass es wichtig ist, das genaue Datum des Auftretens der Symptome anzugeben, um eine genaue Kontaktverfolgung einzuleiten.</string>
   <string name="dialog_error_form_title">Fehler bei der Dateneingabe</string>
   <string name="cun_form_error">- Geben Sie die letzten 10 Zeichen des CUN-Codes ein, der Ihnen mitgeteilt wurde\n</string>
-  <string name="health_insurance_card_form_error">- Geben Sie die letzten 8 Ziffern ein, die Sie auf der Rückseite der Gesundheitskarte finden\n</string>
-  <string name="symptom_onset_date_form_error">- Geben Sie das Symptomstartdatum ein\n</string>
+  <string name="health_insurance_card_form_error">- Die eingegebene Gesundheitskartennummer ist formal nicht gültig. Stellen Sie sicher, dass Sie die letzten 8 Ziffern Ihrer Gesundheitskarte eingegeben haben, die einem positiven Tupfer zugeordnet sind\n</string>
+  <string name="symptom_onset_date_form_error">- Geben Sie das Symptomstartdatum ein, Wenn Sie symptomatisch sind oder aktivieren Sie das Kontrollkästchen, wenn Sie keine Symptome haben\n</string>
   <string name="call_center_title">Haben Sie den CUN-Code?</string>
   <string name="call_center_description">Wenn Sie den National Unique Code (CUN) erhalten haben, können Sie Ihre Positivität unter der gebührenfreien Nummer 800.91.24.91 melden</string>
   <string name="cun_already_used">CUN schon benutzt</string>
-  <string name="cun_wrong">- Falsche CUN\n</string>
-  <string name="cun_unauthorized">Keine Treffer gefunden. Stellen Sie sicher, dass CUN und die letzten 8 Ziffern der Gesundheitskarte korrekt sind.</string>
+  <string name="cun_wrong">- Die eingegebene CUN ist formal nicht gültig. Stellen Sie sicher, dass Sie die letzten 10 Ziffern der CUN eingegeben haben, die Sie per SMS oder in dem Bericht erhalten haben, der einem positiven Tupfer zugeordnet ist\n</string>
+  <string name="cun_unauthorized">Beachtung. Ungültige CUN. Stellen Sie sicher, dass Sie die letzten 10 Ziffern der CUN eingegeben haben, die Sie per SMS oder in dem Bericht erhalten haben, der einem positiven Tupfer zugeordnet ist</string>
   <string name="warning_title_modal">Beachtung</string>
   <string name="warning_message_modal">Es ist wichtig, das genaue Datum des Symptombeginns mitzuteilen, um eine genaue Kontaktverfolgung einzuleiten. Wählen Sie \"keine Symptome\" nur, wenn keine Symptome vorliegen oder wenn nach dem Tupfer Symptome auftreten.</string>
 </resources>

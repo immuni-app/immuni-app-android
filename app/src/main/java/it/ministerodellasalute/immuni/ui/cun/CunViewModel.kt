@@ -97,7 +97,7 @@ class CunViewModel(
                     _alertError.value =
                         Event(
                             listOf(
-                                context.getString(R.string.upload_data_api_error_title),
+                                context.getString(R.string.warning_title_modal),
                                 context.getString(R.string.cun_already_used)
                             )
                         )
