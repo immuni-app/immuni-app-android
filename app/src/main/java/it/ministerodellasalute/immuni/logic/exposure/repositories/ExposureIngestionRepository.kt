@@ -19,6 +19,8 @@ import androidx.annotation.VisibleForTesting
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.utils.sha256
+import it.ministerodellasalute.immuni.logic.exposure.models.CunToken
+import it.ministerodellasalute.immuni.logic.exposure.models.CunValidationResult
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
 import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
 import it.ministerodellasalute.immuni.logic.user.models.Province
@@ -32,6 +34,7 @@ class ExposureIngestionRepository(
     companion object {
         @VisibleForTesting
         fun authorization(otp: String): String = "Bearer ${otp.sha256()}"
+        fun authorizationCun(cun: String): String = "Bearer ${("CUN-$cun").sha256()}"
     }
 
     suspend fun validateOtp(otp: String): OtpValidationResult {
@@ -60,8 +63,49 @@ class ExposureIngestionRepository(
         }
     }
 
+    suspend fun validateCun(
+        cun: String,
+        healthInsuranceCard: String,
+        symptom_onset_date: String?
+    ): CunValidationResult {
+        val response = immuniApiCall {
+            exposureIngestionService.validateCun(
+                isDummyData = 0,
+                authorization = authorizationCun(cun),
+                body = ExposureIngestionService.ValidateCunRequest(
+                    healthInsuranceCard = healthInsuranceCard,
+                    symptomOnsetDate = symptom_onset_date
+                )
+            )
+        }
+        return when (response) {
+            is NetworkResource.Success -> CunValidationResult.Success(
+                CunToken(cun, response.serverDate!!)
+            )
+            is NetworkResource.Error -> {
+                val errorResponse = response.error
+                if (errorResponse is NetworkError.HttpError) {
+                    when (errorResponse.httpCode) {
+                        401 -> {
+                            CunValidationResult.Unauthorized
+                        }
+                        409 -> {
+                            CunValidationResult.CunAlreadyUsed
+                        }
+                        else -> {
+                            CunValidationResult.ServerError
+                        }
+                    }
+                } else {
+                    CunValidationResult.ConnectionError
+                }
+            }
+        }
+    }
+
     suspend fun uploadTeks(
-        token: OtpToken,
+        token: OtpToken?,
+        cun: CunToken?,
         province: Province,
         tekHistory: List<ExposureIngestionService.TemporaryExposureKey>,
         exposureSummaries: List<ExposureIngestionService.ExposureSummary>,
@@ -70,7 +114,11 @@ class ExposureIngestionRepository(
         return immuniApiCall {
             exposureIngestionService.uploadTeks(
                 systemTime = Date().time.div(1000).toInt(),
-                authorization = authorization(token.otp),
+                authorization = if (token != null) {
+                    authorization(token.otp)
+                } else {
+                    authorizationCun(cun!!.cun)
+                },
                 isDummyData = 0,
                 body = ExposureIngestionService.UploadTeksRequest(
                     teks = tekHistory,

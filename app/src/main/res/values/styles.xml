@@ -284,6 +284,11 @@
         <item name="cardCornerRadius">@dimen/card_radius</item>
     </style>
 
+    <style name="ReportPositivityCards">
+        <item name="cardElevation">@dimen/cards_elevation</item>
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+    </style>
+
     <style name="ParagraphCard" parent="CardShadowWhite">
         <item name="android:gravity">center_vertical</item>
         <item name="android:padding">25dp</item>
@@ -436,4 +441,29 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">30dp</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.Textbox" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
+    </style>
+
+    <style name="Widget.AppTheme.MaterialDatePicker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="materialCalendarHeaderLayout">@style/Widget.AppTheme.MaterialCalendar.HeaderLayout</item>
+    </style>
+
+    <style name="Widget.AppTheme.MaterialCalendar.HeaderLayout" parent="Widget.MaterialComponents.MaterialCalendar.HeaderLayout">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="CheckboxForm" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textColor">@color/grey_normal</item>
+        <item name="android:fontFamily">@font/euclid_circular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:button">@drawable/checkbox</item>
+    </style>
+
+
 </resources>

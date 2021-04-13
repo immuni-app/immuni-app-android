@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/uploadDataLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_darker">
+
+    <!-- Scrollable content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_darker"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:paddingBottom="80dp"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:clipChildren="false"
+            android:focusable="true"
+            app:layout_collapseMode="pin">
+
+            <TextView
+                android:id="@+id/descriptionIndependently"
+                style="@style/P1Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:fontFamily="@font/euclid_circular_bold"
+                android:text="@string/report_positivity_description_independently"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/knowMore"
+                style="@style/OnboardingKnowMore"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="30dp"
+                android:text="@string/home_view_service_active_discover_more"
+                app:layout_constraintEnd_toEndOf="@+id/descriptionIndependently"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toStartOf="@+id/descriptionIndependently"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionIndependently" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/formCard"
+                style="@style/SettingsMenuCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/knowMore">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp">
+
+                    <TextView
+                        android:id="@+id/titleForm"
+                        style="@style/H4Section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:drawablePadding="16dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/form_report_positivity_title"
+                        android:textColor="@color/colorPrimary"
+                        app:drawableStartCompat="@drawable/ic_smartphone"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cunCard"
+                        style="@style/SettingsMenuCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="25dp"
+                        app:layout_constraintTop_toBottomOf="@id/titleForm">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/cunInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxBackgroundColor="@android:color/white"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="@color/colorPrimary"
+                            app:hintAnimationEnabled="false"
+                            app:hintEnabled="false"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:prefixText="@string/const_cun"
+                            app:prefixTextColor="@color/colorPrimary"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Textbox"
+                            app:startIconDrawable="@drawable/ic_data_grey"
+                            app:startIconTint="@color/color_state_form_start_icon">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/cunInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/cun_placeholder"
+                                android:inputType="text"
+                                android:maxLength="10"
+                                android:maxLines="1"
+                                android:padding="16dp"
+                                android:textColor="@color/colorPrimary"
+                                android:textColorHint="@color/grey_normal"
+                                android:textSize="14sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/healthInsuranceCard"
+                        style="@style/SettingsMenuCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="25dp"
+                        app:layout_constraintTop_toBottomOf="@+id/cunCard">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/healthInsuranceCardInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxBackgroundColor="@android:color/white"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="@color/colorPrimary"
+                            app:hintAnimationEnabled="false"
+                            app:hintEnabled="false"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cunInputLayout"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Textbox"
+                            app:startIconDrawable="@drawable/ic_id_grey"
+                            app:startIconTint="@color/color_state_form_start_icon">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/healthInsuranceCardInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/health_insurance_card_placeholder"
+                                android:inputType="number"
+                                android:maxLength="8"
+                                android:maxLines="1"
+                                android:padding="16dp"
+                                android:textColor="@color/colorPrimary"
+                                android:textColorHint="@color/grey_normal"
+                                android:textSize="14sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/symptomOnsetDateCard"
+                        style="@style/SettingsMenuCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="25dp"
+                        app:layout_constraintTop_toBottomOf="@+id/healthInsuranceCard">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/symptomOnsetDateInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:boxBackgroundColor="@android:color/white"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="@color/colorPrimary"
+                            app:hintAnimationEnabled="false"
+                            app:hintEnabled="false"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/healthInsuranceCardInputLayout"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Textbox"
+                            app:startIconDrawable="@drawable/ic_calendar_grey"
+                            app:startIconTint="@color/color_state_form_start_icon">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/symptomOnsetDateInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:hint="@string/symptom_onset_date_placeholder"
+                                android:inputType="none"
+                                android:maxLines="1"
+                                android:padding="16dp"
+                                android:textColor="@color/colorPrimary"
+                                android:textColorHint="@color/color_state_text_view"
+                                android:textSize="14sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/checkboxDate"
+                        style="@style/CheckboxForm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="25dp"
+                        android:checked="false"
+                        android:text="@string/symptom_date_hint"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/symptomOnsetDateCard" />
+
+
+                    <Button
+                        android:id="@+id/verify"
+                        style="@style/RoundedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="40dp"
+                        android:elevation="10dp"
+                        android:text="@string/continue_label"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/checkboxDate" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/orLabel"
+                style="@style/P1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                android:text="@string/or_label"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/formCard" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/callCenterCard"
+                style="@style/SettingsMenuCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orLabel">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="25dp"
+                    android:paddingBottom="25dp">
+
+                    <TextView
+                        android:id="@+id/titleCallCenter"
+                        style="@style/H4Section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="25dp"
+                        android:drawablePadding="16dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/call_center_report_positivity_title"
+                        android:textColor="@color/colorPrimary"
+                        app:drawableStartCompat="@drawable/ic_call_center"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/goTo"
+                        style="@style/RoundedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="40dp"
+                        android:elevation="10dp"
+                        android:text="@string/continue_label"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/titleCallCenter" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Collapsing toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+        android:stateListAnimator="@null"
+        app:background="@android:color/transparent"
+        app:backgroundTint="@android:color/transparent"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:contentScrim="@android:color/transparent"
+            app:expandedTitleGravity="bottom"
+            app:expandedTitleMarginStart="32dp"
+            app:expandedTitleMarginTop="32dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                app:layout_collapseMode="pin"
+                app:layout_collapseParallaxMultiplier="0.5">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:id="@+id/toolbarSeparator"
+                    layout="@layout/toolbar_separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_separator_height"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="pin">
+
+                <ImageView
+                    android:id="@+id/navigationIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/accessibility_back"
+                    app:srcCompat="@drawable/ic_back" />
+
+                <TextView
+                    android:id="@+id/toolbarTitle"
+                    style="@style/H1NavBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/activity_vertical_margin"
+                    android:paddingEnd="32dp"
+                    android:text="@string/cdum_title_independently"
+                    android:textAlignment="center"
+                    android:textAllCaps="false" />
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

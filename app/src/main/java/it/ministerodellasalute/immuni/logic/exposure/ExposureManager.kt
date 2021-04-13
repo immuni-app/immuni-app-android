@@ -21,10 +21,7 @@ import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
 import it.ministerodellasalute.immuni.extensions.nearby.OldVersionException
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureSummary
-import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
-import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
+import it.ministerodellasalute.immuni.logic.exposure.models.*
 import it.ministerodellasalute.immuni.logic.exposure.repositories.*
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
@@ -35,8 +32,6 @@ import java.io.File
 import java.util.*
 import kotlin.math.max
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 class ExposureManager(
     private val settingsManager: ConfigurationSettingsManager,
@@ -60,8 +55,7 @@ class ExposureManager(
 
     val lastSuccessfulCheckDate = exposureReportingRepository.lastSuccessfulCheckDate
 
-    fun deviceSupportsLocationlessScanning() =
-        exposureNotificationManager.deviceSupportsLocationlessScanning()
+    fun deviceSupportsLocationlessScanning() = exposureNotificationManager.deviceSupportsLocationlessScanning()
 
     suspend fun updateAndGetServiceIsActive(): Boolean {
         exposureNotificationManager.update()
@@ -143,25 +137,21 @@ class ExposureManager(
     }
 
     suspend fun optInAndStartExposureTracing(activity: Activity) {
-        stopExposureNotification(activity)
+        stopExposureNotification()
         exposureNotificationManager.optInAndStartExposureTracing(activity)
         appNotificationManager.removeNotification(NotificationType.ServiceNotActive)
     }
 
-    suspend fun stopExposureNotification(activity: Activity?) {
-        exposureNotificationManager.stopExposureNotification(activity)
+    suspend fun stopExposureNotification() {
+        exposureNotificationManager.stopExposureNotification()
     }
 
     suspend fun provideDiagnosisKeys(keyFiles: List<File>, token: String) {
-        try {
-            exposureNotificationManager.provideDiagnosisKeys(
-                keyFiles = keyFiles,
-                configuration = settings.exposureConfiguration.clientExposureConfiguration,
-                token = token
-            )
-        } catch (e: OldVersionException) {
-            appNotificationManager.triggerNotification(NotificationType.ForcedVersionUpdate)
-        }
+        exposureNotificationManager.provideDiagnosisKeys(
+            keyFiles = keyFiles,
+            configuration = settings.exposureConfiguration.clientExposureConfiguration,
+            token = token
+        )
     }
 
     suspend fun startProcessingKeys(token: String, serverDate: Date) {
@@ -193,11 +183,15 @@ class ExposureManager(
         return exposureIngestionRepository.validateOtp(otp)
     }
 
+    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String?): CunValidationResult {
+        return exposureIngestionRepository.validateCun(cun, healthInsuranceCard, symptom_onset_date)
+    }
+
     suspend fun dummyUpload(): Boolean {
         return exposureIngestionRepository.dummyUpload()
     }
 
-    suspend fun uploadTeks(activity: Activity, token: OtpToken): Boolean {
+    suspend fun uploadTeks(activity: Activity, token: OtpToken?, cun: CunToken?): Boolean {
         val tekHistory = requestTekHistory(activity)
 
         val exposureSummaries = exposureReportingRepository.getSummaries()
@@ -207,9 +201,10 @@ class ExposureManager(
 
         val isSuccess = exposureIngestionRepository.uploadTeks(
             token = token,
+            cun = cun,
             province = userRepository.user.value!!.province,
             tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
-            exposureSummaries = exposureSummaries.prepareForUpload(settings, token.serverDate),
+            exposureSummaries = exposureSummaries.prepareForUpload(settings, token?.serverDate ?: cun!!.serverDate!!),
             countries = countriesOfInterest
         )
 

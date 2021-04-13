@@ -111,10 +111,10 @@ class HomeListAdapter(
         val (layout, cardType) = when (viewType) {
             0 -> Pair(R.layout.home_protection_state_card, ProtectionCardVH::class)
             1 -> Pair(R.layout.home_section_header_item, SectionHeaderVH::class)
-            2 -> Pair(R.layout.home_information_how_app_works_card, InformationHowAppWorksVH::class)
-            3 -> Pair(R.layout.home_information_self_care_card, InformationSelfCareVH::class)
-            4 -> Pair(R.layout.home_countries_of_interest, CountriesOfInterestVH::class)
-            5 -> Pair(R.layout.home_report_positivity_card, ReportPositivityVH::class)
+            2 -> Pair(R.layout.home_report_positivity_card, ReportPositivityVH::class)
+            3 -> Pair(R.layout.home_countries_of_interest, CountriesOfInterestVH::class)
+            4 -> Pair(R.layout.home_information_how_app_works_card, InformationHowAppWorksVH::class)
+            5 -> Pair(R.layout.home_information_self_care_card, InformationSelfCareVH::class)
             6 -> Pair(R.layout.home_disable_exposure_api, DisableExposureApiVH::class)
             else -> error("Unhandled viewType $viewType")
         }
@@ -200,10 +200,10 @@ class HomeListAdapter(
         return when (items[position]) {
             is ProtectionCard -> 0
             is SectionHeader -> 1
-            is HowItWorksCard -> 2
-            is SelfCareCard -> 3
-            is CountriesOfInterestCard -> 4
-            is ReportPositivityCard -> 5
+            is ReportPositivityCard -> 2
+            is CountriesOfInterestCard -> 3
+            is HowItWorksCard -> 4
+            is SelfCareCard -> 5
             is DisableExposureApi -> 6
         }
     }
