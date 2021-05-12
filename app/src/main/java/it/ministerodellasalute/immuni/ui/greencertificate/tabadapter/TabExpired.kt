@@ -57,7 +57,6 @@ class TabExpired : Fragment(R.layout.green_certificate_expired), TabExpiredClick
         layoutQrCode.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
         qrCode.setImageBitmap(createQRCode(item))
-        expiredText.text = getString(R.string.green_pass_expired_text) + item.expiredDate
     }
 
     private fun createQRCode(item: GreenCertificate): Bitmap? {

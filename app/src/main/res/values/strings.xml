@@ -419,11 +419,20 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="warning_title_modal">Attention</string>
     <string name="warning_message_modal">It is important to communicate the exact symptom onset date to initiate accurate contact tracking. Select \"no symptoms\" only in case of complete absence of symptoms or the appearance of symptoms after the swab.</string>
 
-    <string name="home_green_certificate_title">Green Certificate</string>
-    <string name="green_pass_title">Green Certificate</string>
-    <string name="green_pass_expired_text">SCADUTO IL:&#160;</string>
-    <string name="green_pass_how_to_generate_title">Come generare il tuo Green Pass</string>
+    <string name="home_green_certificate_title">Digital Green Certificate</string>
+    <string name="green_pass_title">Digital Green Certificate</string>
+    <string name="green_pass_description">Il Digital Green Certificate ti permette di certificare la tua immunità al COVID-19.</string>
+    <string name="green_pass_subtitle">Il tuo Digital Green Certificate</string>
+    <string name="green_pass_active">Attivo</string>
     <string name="green_pass_no_certificate_available">Nessun certificato attivo</string>
     <string name="green_pass_button_generate">Recupera Digital Green Certificate</string>
-    <string name="green_pass_description">Questa funzione ti permette di generare il Green Certificate di cui hai bisogno per certificare la tua immunità al Covid-19.</string>
+    <string name="green_pass_generate_title">Recupera Digital Green Certificate</string>
+    <string name="green_pass_generate_description">Questa funzione ti permette di generare il tuo Digital Green Certificate inserendo direttamente i dati richiesti.</string>
+    <string name="green_pass_code_hint">NRFE/CUN/NUCG/OTP</string>
+    <string name="green_pass_health_insurance_hint">Ultime 8 cifre Tessera Sanitaria</string>
+    <string name="green_pass_expired_date_hs_hint">Data scadenza Tessera Sanitaria</string>
+    <string name="green_pass_confirm_button">Conferma</string>
+    <string name="green_pass_how_to_generate_title">Come generare il tuo Digital Green Certificate</string>
+    <string name="green_pass_generation_successfully">Digital Green Certificate recuperato con successo</string>
+
 </resources>

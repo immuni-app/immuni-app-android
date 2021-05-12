@@ -87,19 +87,6 @@
                     <LinearLayout style="@style/SettingsMenuLayout">
 
                         <LinearLayout
-                            android:id="@+id/greenCertificateButton"
-                            style="@style/SettingsMenuItemWithIconLayout">
-
-                            <TextView
-                                style="@style/SettingsMenuItem.WithIcon"
-                                android:text="Green Certificate" />
-
-                            <include layout="@layout/settings_menu_item_arrow" />
-                        </LinearLayout>
-
-                        <include layout="@layout/settings_content_divider" />
-
-                        <LinearLayout
                             android:id="@+id/faqButton"
                             style="@style/SettingsMenuItemWithIconLayout">
 

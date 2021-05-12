@@ -26,8 +26,6 @@
 
     <include app:graph="@navigation/data_upload" />
 
-    <include app:graph="@navigation/green_certificate" />
-
 
     <fragment
         android:id="@+id/settingsFragment"
@@ -50,14 +48,6 @@
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right"
         app:destination="@id/faq_nav" />
-
-    <action
-        android:id="@+id/action_green_certificate_nav"
-        app:destination="@+id/green_certificate"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
 
     <activity
         android:id="@+id/onboardingActivity"

@@ -24,9 +24,8 @@ class GreenCertificate : Fragment(R.layout.green_certificate) {
         )
 
         tabLayout.addTab(tabLayout.newTab())
-        tabLayout.addTab(tabLayout.newTab())
 
-        val adapter = TabAdapter(this@GreenCertificate, tabLayout.tabCount)
+        val adapter = TabAdapter(requireContext(), this@GreenCertificate, tabLayout.tabCount)
         viewpager.adapter = adapter
         viewpager.isUserInputEnabled = false
 

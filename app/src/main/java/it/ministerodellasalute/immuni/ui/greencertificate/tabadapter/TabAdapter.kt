@@ -1,9 +1,12 @@
 package it.ministerodellasalute.immuni.ui.greencertificate.tabadapter
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import it.ministerodellasalute.immuni.R
 
 class TabAdapter(
+    val context: Context,
     fm: Fragment,
     var totalTabs: Int
 ) :
@@ -12,7 +15,6 @@ class TabAdapter(
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> TabActive()
-            1 -> TabExpired()
             else -> createFragment(position)
         }
     }
@@ -21,30 +23,10 @@ class TabAdapter(
         return totalTabs
     }
 
-//    override fun getItem(position: Int): Fragment {
-//        var f: Fragment? = null
-//        when (position) {
-//            0 -> {
-//                val tab1 = TabActive()
-//                f = tab1
-//            }
-//            1 -> {
-//                val tab2 = TabExpired()
-//                f = tab2
-//            }
-//        }
-//        return f!!
-//    }
-
     fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> "Active"
-            1 -> "Expired"
+            0 -> context.getString(R.string.green_pass_active)
             else -> getPageTitle(position)
         }
     }
-//
-//    override fun getCount(): Int {
-//        return totalTabs
-//    }
 }

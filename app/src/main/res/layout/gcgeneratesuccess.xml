@@ -30,7 +30,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:gravity="center"
-        android:text="Green pass generato con successo"
+        android:text="@string/green_pass_generation_successfully"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

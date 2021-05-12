@@ -63,11 +63,6 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ConfirmationDialo
             findNavController().navigate(action)
         }
 
-        greenCertificateButton.setSafeOnClickListener {
-            val action = SettingsNavDirections.actionGreenCertificateNav()
-            findNavController().navigate(action)
-        }
-
         // information
 
         faqButton.setSafeOnClickListener {

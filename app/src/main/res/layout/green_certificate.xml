@@ -57,44 +57,30 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/knowMore"
-                style="@style/OnboardingKnowMore"
+                android:id="@+id/yourDigitalCertificate"
+                style="@style/H5Section"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/home_view_service_active_discover_more"
+                android:text="@string/green_pass_subtitle"
                 app:layout_constraintEnd_toEndOf="@+id/descriptionIndependently"
                 app:layout_constraintHorizontal_bias="0.2"
                 app:layout_constraintStart_toStartOf="@+id/descriptionIndependently"
                 app:layout_constraintTop_toBottomOf="@+id/descriptionIndependently" />
 
-            <Button
-                android:id="@+id/generate"
-                style="@style/RoundedButtonSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:elevation="10dp"
-                android:text="@string/green_pass_button_generate"
-                app:icon="@drawable/ic_calendar_grey"
-                app:iconGravity="start"
-                app:layout_constraintEnd_toEndOf="@id/knowMore"
-                app:layout_constraintStart_toStartOf="@id/knowMore"
-                app:layout_constraintTop_toBottomOf="@+id/knowMore" />
 
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/formCard"
+                android:id="@+id/tabCard"
                 style="@style/SettingsMenuCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/generate">
+                app:layout_constraintTop_toBottomOf="@+id/yourDigitalCertificate">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -130,6 +116,22 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <Button
+                android:id="@+id/generate"
+                style="@style/RoundedButtonSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:elevation="10dp"
+                android:text="@string/green_pass_button_generate"
+                app:icon="@drawable/ic_calendar_grey"
+                app:iconGravity="start"
+                app:layout_constraintEnd_toEndOf="@id/tabCard"
+                app:layout_constraintStart_toStartOf="@id/tabCard"
+                app:layout_constraintTop_toBottomOf="@+id/tabCard" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
