@@ -171,4 +171,6 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test:core-ktx:$testCoreKtxVersion"
     debugImplementation "androidx.fragment:fragment-testing:$testFragmentVersion"
+
+    implementation 'com.google.zxing:core:3.4.0'
 }

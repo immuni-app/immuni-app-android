@@ -51,6 +51,7 @@ import it.ministerodellasalute.immuni.network.Network
 import it.ministerodellasalute.immuni.ui.cun.CunViewModel
 import it.ministerodellasalute.immuni.ui.faq.FaqViewModel
 import it.ministerodellasalute.immuni.ui.forceupdate.ForceUpdateViewModel
+import it.ministerodellasalute.immuni.ui.greencertificate.GreenCertificateViewModel
 import it.ministerodellasalute.immuni.ui.howitworks.HowItWorksDataSource
 import it.ministerodellasalute.immuni.ui.main.MainViewModel
 import it.ministerodellasalute.immuni.ui.onboarding.OnboardingViewModel
@@ -360,6 +361,7 @@ val appModule = module {
     viewModel { StateCloseViewModel(get(), get()) }
     viewModel { SupportViewModel(androidContext(), get(), get()) }
     viewModel { CunViewModel(get(), get(), get()) }
+    viewModel { GreenCertificateViewModel(get(), get(), get()) }
 }
 
 val immuniMoshi = moshi(

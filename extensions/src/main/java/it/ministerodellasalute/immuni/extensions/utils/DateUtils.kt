@@ -28,6 +28,7 @@ object DateUtils {
 }
 
 fun Date.byAdding(
+    year: Int = 0,
     days: Int = 0,
     hours: Int = 0,
     minutes: Int = 0,
@@ -38,6 +39,9 @@ fun Date.byAdding(
     val date = this
     return calendar.apply {
         time = date
+        if (year != 0) {
+            add(Calendar.YEAR, year)
+        }
         if (days != 0) {
             add(Calendar.DAY_OF_YEAR, days)
         }

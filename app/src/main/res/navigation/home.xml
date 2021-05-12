@@ -23,6 +23,8 @@
     <include app:graph="@navigation/webview" />
     <include app:graph="@navigation/howitworks" />
     <include app:graph="@navigation/data_upload" />
+    <include app:graph="@navigation/green_certificate" />
+
 
     <fragment
         android:id="@+id/homeFragment"
@@ -130,4 +132,12 @@
     <action
         android:id="@+id/action_data_upload_nav"
         app:destination="@+id/data_upload" />
+
+    <action
+        android:id="@+id/action_green_certificate_nav"
+        app:destination="@+id/green_certificate"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
 </navigation>

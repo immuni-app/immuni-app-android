@@ -21,7 +21,8 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class User(
     @field:Json(name = "region") val region: Region,
-    @field:Json(name = "province") val province: Province
+    @field:Json(name = "province") val province: Province,
+    @field:Json(name = "greenPass") val greenPass: GreenCertificate?
 )
 
 data class PartialUser(
