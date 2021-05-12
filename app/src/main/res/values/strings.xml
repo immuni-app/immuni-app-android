@@ -424,6 +424,6 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_pass_expired_text">SCADUTO IL:&#160;</string>
     <string name="green_pass_how_to_generate_title">Come generare il tuo Green Pass</string>
     <string name="green_pass_no_certificate_available">Nessun certificato attivo</string>
-    <string name="green_pass_button_generate">Generate certificate</string>
+    <string name="green_pass_button_generate">Recupera Digital Green Certificate</string>
     <string name="green_pass_description">Questa funzione ti permette di generare il Green Certificate di cui hai bisogno per certificare la tua immunità al Covid-19.</string>
 </resources>
