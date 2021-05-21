@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
   ~ Please refer to the AUTHORS file for more information.
   ~ This program is free software: you can redistribute it and/or modify
@@ -44,14 +43,14 @@
         android:id="@+id/lottieAnimation"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:lottie_rawRes="@raw/lottie_setup_complete"
-        app:lottie_loop="false"
-        app:lottie_autoPlay="true"
         app:layout_constraintBottom_toTopOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:src="@drawable/ic_onboarding_success"/>
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/lottie_setup_complete"
+        tools:src="@drawable/ic_onboarding_success" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

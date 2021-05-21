@@ -13,19 +13,18 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.ui.greencertificate
+package it.ministerodellasalute.immuni.logic.exposure.models
 
-import android.os.Bundle
-import android.view.View
-import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
+import it.ministerodellasalute.immuni.logic.user.models.GreenCertificate
+import java.util.*
 
-class KnowMoreGreenCertificate : PopupDialogFragment() {
+data class GreenPassToken(val greenPass: GreenCertificate, val serverDate: Date?)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setContentLayout(R.layout.know_more_green_certificate)
-
-        setTitle(getString(R.string.green_pass_how_to_generate_title))
-    }
+sealed class GreenPassValidationResult {
+    data class Success(val greenpass: GreenPassToken) : GreenPassValidationResult()
+    data class Valid(val valid: Boolean) : GreenPassValidationResult()
+    object Unauthorized : GreenPassValidationResult()
+    object ConnectionError : GreenPassValidationResult()
+    object ServerError : GreenPassValidationResult()
+    object TokenWrong : GreenPassValidationResult()
 }

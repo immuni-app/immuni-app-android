@@ -61,7 +61,7 @@
                 style="@style/H5Section"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/green_pass_subtitle"
                 app:layout_constraintEnd_toEndOf="@+id/descriptionIndependently"
                 app:layout_constraintHorizontal_bias="0.2"

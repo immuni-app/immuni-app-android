@@ -22,19 +22,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.livedata.Event
-import it.ministerodellasalute.immuni.logic.exposure.models.CunValidationResult
-import it.ministerodellasalute.immuni.logic.upload.CunValidator
+import it.ministerodellasalute.immuni.logic.DigitValidator
+import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassToken
+import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassValidationResult
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.GreenCertificate
 import it.ministerodellasalute.immuni.logic.user.models.User
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
 class GreenCertificateViewModel(
     val context: Context,
+    private val exposureManager: ExposureManager,
     private val userManager: UserManager,
-    private val cunValidator: CunValidator
+    private val digitValidator: DigitValidator
 ) : ViewModel(),
     KoinComponent {
 
@@ -44,8 +46,8 @@ class GreenCertificateViewModel(
     private val _alertError = MutableLiveData<Event<List<String>>>()
     val alertError: LiveData<Event<List<String>>> = _alertError
 
-    private val _navigateToSuccessPage = MutableLiveData<Event<Boolean>>()
-    val navigateToSuccessPage: LiveData<Event<Boolean>> = _navigateToSuccessPage
+    private val _navigateToSuccessPage = MutableLiveData<Event<GreenPassToken>>()
+    val navigateToSuccessPage: LiveData<Event<GreenPassToken>> = _navigateToSuccessPage
 
     val greenPass = GreenCertificate(
         "06 Gennaio 2021",
@@ -53,94 +55,101 @@ class GreenCertificateViewModel(
     )
 
     fun genera(
-        cun: String,
-        health_insurance_card: String,
-        symptom_onset_date: String?
+        typeToken: String,
+        token: String,
+        health_insurance: String,
+        expiredHealthIDDate: String
     ) {
-//        if (checkFormHasError(cun, health_insurance_card, symptom_onset_date)) {
-//            return
-//        }
+        if (checkFormHasError(typeToken, token, health_insurance, expiredHealthIDDate)) {
+            return
+        }
         viewModelScope.launch {
             _loading.value = true
+            when (val result = exposureManager.generateGreenCard(
+                typeToken, token, health_insurance, expiredHealthIDDate
+            )) {
+                is GreenPassValidationResult.Success -> {
+                    val user = userManager.user
+                    userManager.save(
+                        User(
+                            region = user.value?.region!!,
+                            province = user.value?.province!!,
+                            greenPass = greenPass
+                        )
+                    )
+                    _navigateToSuccessPage.value = Event(result.greenpass)
+                }
+                is GreenPassValidationResult.ServerError -> {
+                    _alertError.value =
+                        Event(
+                            listOf(
+                                context.getString(R.string.upload_data_api_error_title),
+                                ""
+                            )
+                        )
+                }
+                is GreenPassValidationResult.ConnectionError -> {
+                    _alertError.value =
+                        Event(
+                            listOf(
+                                context.getString(R.string.upload_data_api_error_title),
+                                context.getString(R.string.app_setup_view_network_error)
+                            )
+                        )
+                }
+                is GreenPassValidationResult.Unauthorized -> {
+                    _alertError.value =
+                        Event(
+                            listOf(
+                                context.getString(R.string.upload_data_api_error_title),
+                                context.getString(R.string.cun_unauthorized)
+                            )
+                        )
+                }
+            }
 
-            delay(1000)
-            val user = userManager.user
-            userManager.save(
-                User(
-                    region = user.value?.region!!,
-                    province = user.value?.province!!,
-                    greenPass = greenPass
-                )
-            )
-            _navigateToSuccessPage.value = Event(true)
             _loading.value = false
-
-//            when (val result = exposureManager.validateCun(
-//                cun, health_insurance_card,
-//                symptom_onset_date
-//            )) {
-//                is CunValidationResult.Success -> {
-//                    _navigateToSuccessPage.value = Event(result.token)
-//                }
-//                is CunValidationResult.ServerError -> {
-//                    _alertError.value =
-//                        Event(
-//                            listOf(
-//                                context.getString(R.string.upload_data_api_error_title),
-//                                ""
-//                            )
-//                        )
-//                }
-//                is CunValidationResult.ConnectionError -> {
-//                    _alertError.value =
-//                        Event(
-//                            listOf(
-//                                context.getString(R.string.upload_data_api_error_title),
-//                                context.getString(R.string.app_setup_view_network_error)
-//                            )
-//                        )
-//                }
-//                is CunValidationResult.Unauthorized -> {
-//                    _alertError.value =
-//                        Event(
-//                            listOf(
-//                                context.getString(R.string.upload_data_api_error_title),
-//                                context.getString(R.string.cun_unauthorized)
-//                            )
-//                        )
-//                }
-//                is CunValidationResult.CunAlreadyUsed -> {
-//                    _alertError.value =
-//                        Event(
-//                            listOf(
-//                                context.getString(R.string.warning_title_modal),
-//                                context.getString(R.string.cun_already_used)
-//                            )
-//                        )
-//                }
-//            }
-//
-//            _loading.value = false
         }
     }
 
     private fun checkFormHasError(
-        cun: String,
+        typeToken: String,
+        token: String,
         healthInsuranceCard: String,
         symptom_onset_date: String?
     ): Boolean {
         var message = ""
 
-        if (cun.isBlank() || cun.length < 10) {
-            message += context.getString(R.string.cun_form_error)
-        } else if (cunValidator.validaCheckDigitCUN(cun) == CunValidationResult.CunWrong) {
-            message += context.getString(R.string.cun_wrong)
+        var resultValidateToken: GreenPassValidationResult? = null
+        if (typeToken.isNotBlank() && token.isNotBlank()) {
+            resultValidateToken = when (typeToken) {
+                "CUN" -> digitValidator.validaCheckDigitCUN(token)
+                "NRFE" -> digitValidator.validaCheckDigitNRFE(token)
+                "NUCG" -> digitValidator.validaCheckDigitNUCG(token)
+                "OTP" -> digitValidator.validaCheckDigitOTP(token)
+                else -> digitValidator.validaCheckDigitOTP(token)
+            }
+        } else if (typeToken.isBlank() && token.isBlank()) {
+            message += (context.getString(R.string.form_code_empty) + typeToken)
+        } else {
+            message += context.getString(R.string.form_type_and_code_empty)
         }
+
+        if (resultValidateToken == GreenPassValidationResult.TokenWrong) {
+            message += when (typeToken) {
+                "CUN" -> context.getString(R.string.cun_wrong)
+                "NRFE" -> context.getString(R.string.nrfe_wrong)
+                "NUCG" -> context.getString(R.string.nucg_wrong)
+                "OTP" -> context.getString(R.string.otp_wrong)
+                else -> context.getString(R.string.otp_wrong)
+            }
+        }
+
         if (healthInsuranceCard.isBlank() || healthInsuranceCard.length < 8) {
             message += context.getString(R.string.health_insurance_card_form_error)
         }
         if (symptom_onset_date != null && symptom_onset_date.isBlank()) {
-            message += context.getString(R.string.symptom_onset_date_form_error)
+            message += context.getString(R.string.form_expired_health_date)
         }
         if (message.isNotEmpty()) {
             _alertError.value = Event(

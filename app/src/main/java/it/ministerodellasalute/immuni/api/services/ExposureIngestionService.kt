@@ -16,12 +16,11 @@
 package it.ministerodellasalute.immuni.api.services
 
 import com.squareup.moshi.*
+import it.ministerodellasalute.immuni.logic.user.models.GreenCertificate
 import java.util.*
 import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * Exposure Ingestion Service API.
@@ -57,6 +56,17 @@ interface ExposureIngestionService {
         @Header("Immuni-Dummy-Data") isDummyData: Int,
         @Body body: ValidateCunRequest
     ): Response<ResponseBody>
+
+    @JsonClass(generateAdapter = true)
+    data class GreenCardResponse(val greenPass: GreenCertificate)
+
+    @GET("v1/ingestion/generate-green-card")
+    suspend fun generateGreenCard(
+        @Header("Authorization") authorization: String,
+        @Query("last_his_number") healthInsurance: String,
+        @Query("expired_healt_ID_date") expiredHealthIDDate: String
+    ): Response<GreenCardResponse>
+
     // endregion
 
     // region: Upload Teks

@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+ * Please refer to the AUTHORS file for more information.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package it.ministerodellasalute.immuni.ui.greencertificate
 
 import android.annotation.SuppressLint
@@ -10,6 +25,8 @@ import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -25,10 +42,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.generate_green_certificate.*
-import kotlinx.android.synthetic.main.generate_green_certificate.container
-import kotlinx.android.synthetic.main.generate_green_certificate.cunInput
-import kotlinx.android.synthetic.main.generate_green_certificate.healthInsuranceCardInput
-import kotlinx.android.synthetic.main.generate_green_certificate.navigationIcon
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
@@ -62,9 +75,10 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
 
         generateGC.setOnClickListener {
             viewModel.genera(
-                cun = cunInput.text.toString(),
-                health_insurance_card = healthInsuranceCardInput.text.toString(),
-                symptom_onset_date = expiredDateHealthIDDateInput.text.toString()
+                typeToken = listTypeToken.text.toString(),
+                token = cunInput.text.toString(),
+                health_insurance = healthInsuranceCardInput.text.toString(),
+                expiredHealthIDDate = expiredDateHealthIDDateInput.text.toString()
             )
         }
 
@@ -108,6 +122,46 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
     @SuppressLint("ClickableViewAccessibility")
     private fun setInput() {
         val regexAlphaNum = "^[A-Z0-9]*$".toRegex()
+
+        val typeTokenList = resources.getStringArray(R.array.type_token)
+        val adapter = ArrayAdapter(requireContext(), R.layout.exposed_list_item, typeTokenList)
+        listTypeToken.setAdapter(adapter)
+
+        listTypeToken.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                if (position == 0) {
+                    cunInput.text?.clear()
+                    cunInput.isEnabled = false
+                    cunInputLayout.isEnabled = false
+                } else {
+                    cunInput.text?.clear()
+                    cunInput.isEnabled = true
+                    cunInputLayout.isEnabled = true
+                }
+                cunInputLayout.prefixText = when (position) {
+                    0 -> {
+                        cunInput.hint = getString(R.string.green_pass_code_hint)
+                        getString(R.string.const_otp)
+                    }
+                    1 -> {
+                        cunInput.setHint(R.string.cun_placeholder)
+                        getString(R.string.const_cun)
+                    }
+                    2 -> {
+                        cunInput.hint = "Inserisci il codice NRFE"
+                        getString(R.string.const_nrfe)
+                    }
+                    3 -> {
+                        cunInput.hint = "Inserisci il codice NUCG"
+                        getString(R.string.const_nucg)
+                    }
+                    4 -> {
+                        cunInput.hint = "Inserisci il codice OTP"
+                        getString(R.string.const_otp)
+                    }
+                    else -> ""
+                }
+            }
 
         container.setOnClickListener {
             cunInput.clearFocus()

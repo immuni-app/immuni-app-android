@@ -19,10 +19,7 @@ import androidx.annotation.VisibleForTesting
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.utils.sha256
-import it.ministerodellasalute.immuni.logic.exposure.models.CunToken
-import it.ministerodellasalute.immuni.logic.exposure.models.CunValidationResult
-import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
-import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
+import it.ministerodellasalute.immuni.logic.exposure.models.*
 import it.ministerodellasalute.immuni.logic.user.models.Province
 import it.ministerodellasalute.immuni.network.api.NetworkError
 import it.ministerodellasalute.immuni.network.api.NetworkResource
@@ -35,6 +32,8 @@ class ExposureIngestionRepository(
         @VisibleForTesting
         fun authorization(otp: String): String = "Bearer ${otp.sha256()}"
         fun authorizationCun(cun: String): String = "Bearer ${("CUN-$cun").sha256()}"
+        fun authorizationNrfe(cun: String): String = "Bearer ${("NRFE-$cun").sha256()}"
+        fun authorizationNucg(cun: String): String = "Bearer ${("NUCG-$cun").sha256()}"
     }
 
     suspend fun validateOtp(otp: String): OtpValidationResult {
@@ -98,6 +97,49 @@ class ExposureIngestionRepository(
                     }
                 } else {
                     CunValidationResult.ConnectionError
+                }
+            }
+        }
+    }
+
+    suspend fun generateGreenCard(
+        typeToken: String,
+        token: String,
+        healthInsurance: String,
+        expiredHealthIDDate: String
+    ): GreenPassValidationResult {
+        val authorization = when (typeToken) {
+            "CUN" -> authorizationCun(token)
+            "NRFE" -> authorizationNrfe(token)
+            "NUCG" -> authorizationNucg(token)
+            "OTP" -> authorization(token)
+            else -> authorization(token)
+        }
+
+        val response = immuniApiCall {
+            exposureIngestionService.generateGreenCard(
+                authorization = authorization,
+                healthInsurance = healthInsurance,
+                expiredHealthIDDate = expiredHealthIDDate
+            )
+        }
+        return when (response) {
+            is NetworkResource.Success -> GreenPassValidationResult.Success(
+                GreenPassToken(response.response.body()!!.greenPass, response.serverDate!!)
+            )
+            is NetworkResource.Error -> {
+                val errorResponse = response.error
+                if (errorResponse is NetworkError.HttpError) {
+                    when (errorResponse.httpCode) {
+                        401 -> {
+                            GreenPassValidationResult.Unauthorized
+                        }
+                        else -> {
+                            GreenPassValidationResult.ServerError
+                        }
+                    }
+                } else {
+                    GreenPassValidationResult.ConnectionError
                 }
             }
         }

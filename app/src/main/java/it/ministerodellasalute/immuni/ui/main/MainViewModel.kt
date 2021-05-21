@@ -61,10 +61,11 @@ class MainViewModel(
         protectionActive?.let {
             items.add(ProtectionCard(it, exposureManager.exposureStatus.value))
         }
-        items.add(SectionHeader(context.getString(R.string.home_view_info_header_title)))
+        items.add(SectionHeader(context.getString(R.string.home_what_do_you_want_today)))
         items.add(GreenPassCard)
         items.add(ReportPositivityCard)
         items.add(CountriesOfInterestCard)
+        items.add(SectionHeader(context.getString(R.string.home_view_info_header_title)))
         items.add(HowItWorksCard)
         items.add(SelfCareCard)
         items.add(DisableExposureApi(protectionActive ?: false))
