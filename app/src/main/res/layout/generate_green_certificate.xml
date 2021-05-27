@@ -15,7 +15,6 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/uploadDataLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -62,22 +61,34 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="30dp"
                 android:text="@string/home_view_service_active_discover_more"
                 app:layout_constraintEnd_toEndOf="@+id/descriptionIndependently"
                 app:layout_constraintStart_toStartOf="@+id/descriptionIndependently"
                 app:layout_constraintTop_toBottomOf="@+id/descriptionIndependently" />
 
-
+            <TextView
+                android:id="@+id/typeCodeLabel"
+                style="@style/P1Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/euclid_circular_bold"
+                android:text="@string/form_type_code_label"
+                android:textColor="@color/grey_dark"
+                app:layout_constraintEnd_toEndOf="@id/descriptionIndependently"
+                app:layout_constraintStart_toStartOf="@id/descriptionIndependently"
+                app:layout_constraintTop_toBottomOf="@id/knowMore" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/typeToken"
                 style="@style/SettingsMenuCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="25dp"
-                app:layout_constraintTop_toBottomOf="@id/knowMore">
+                app:layout_constraintEnd_toEndOf="@id/descriptionIndependently"
+                app:layout_constraintStart_toStartOf="@id/descriptionIndependently"
+                app:layout_constraintTop_toBottomOf="@id/typeCodeLabel">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/typeInputLayout"
@@ -87,85 +98,104 @@
                     app:boxBackgroundColor="@android:color/white"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
+                    app:endIconDrawable="@drawable/ic_arrow_down"
                     app:hintAnimationEnabled="false"
                     app:hintEnabled="false"
-                    app:endIconMode="dropdown_menu"
-                    app:endIconTint="@color/background"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Textbox"
-                    app:startIconDrawable="@drawable/ic_data_grey"
+                    app:startIconDrawable="@drawable/ic_tipology"
                     app:startIconTint="@color/color_state_form_start_icon">
 
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    <AutoCompleteTextView
                         android:id="@+id/listTypeToken"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/green_pass_select_type_token"
+                        android:inputType="none"
                         android:maxLines="1"
                         android:padding="16dp"
                         android:textColor="@color/colorPrimary"
                         android:textColorHint="@color/grey_normal"
-                        android:textSize="14sp"
-                        android:inputType="none"/>
+                        android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.card.MaterialCardView>
 
 
+            <TextView
+                android:id="@+id/codeLabel"
+                style="@style/P1Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/euclid_circular_bold"
+                android:text="@string/form_code_label"
+                android:textColor="@color/grey_dark"
+                app:layout_constraintEnd_toEndOf="@id/descriptionIndependently"
+                app:layout_constraintStart_toStartOf="@id/descriptionIndependently"
+                app:layout_constraintTop_toBottomOf="@id/typeToken" />
+
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cunCard"
+                android:id="@+id/codeCard"
                 style="@style/SettingsMenuCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="25dp"
-                app:layout_constraintTop_toBottomOf="@id/typeToken">
+                app:layout_constraintTop_toBottomOf="@id/codeLabel">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/cunInputLayout"
+                    android:id="@+id/codeInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:boxBackgroundMode="none"
+                    android:enabled="false"
+                    app:boxBackgroundColor="@android:color/white"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
                     app:endIconMode="clear_text"
                     app:endIconTint="@color/colorPrimary"
                     app:hintAnimationEnabled="false"
                     app:hintEnabled="false"
-                    android:enabled="false"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:prefixText="@string/const_cun"
                     app:prefixTextColor="@color/colorPrimary"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Textbox"
                     app:startIconDrawable="@drawable/ic_data_grey"
                     app:startIconTint="@color/color_state_form_start_icon">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/cunInput"
+                        android:id="@+id/codeInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/green_pass_code_hint"
                         android:inputType="text"
-                        android:enabled="false"
-                        android:maxLength="10"
                         android:maxLines="1"
                         android:padding="16dp"
                         android:textColor="@color/colorPrimary"
                         android:textColorHint="@color/color_state_text_view"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/lasthealthLabel"
+                style="@style/P1Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/euclid_circular_bold"
+                android:text="@string/health_insurance_card_placeholder"
+                android:textColor="@color/grey_dark"
+                app:layout_constraintEnd_toEndOf="@id/descriptionIndependently"
+                app:layout_constraintStart_toStartOf="@id/descriptionIndependently"
+                app:layout_constraintTop_toBottomOf="@id/codeCard" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/healthInsuranceCard"
                 style="@style/SettingsMenuCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="25dp"
-                app:layout_constraintTop_toBottomOf="@+id/cunCard">
+                app:layout_constraintTop_toBottomOf="@+id/lasthealthLabel">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/healthInsuranceCardInputLayout"
@@ -179,7 +209,7 @@
                     app:hintAnimationEnabled="false"
                     app:hintEnabled="false"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cunInputLayout"
+                    app:layout_constraintTop_toBottomOf="@id/codeInputLayout"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Textbox"
                     app:startIconDrawable="@drawable/ic_id_grey"
                     app:startIconTint="@color/color_state_form_start_icon">
@@ -188,7 +218,8 @@
                         android:id="@+id/healthInsuranceCardInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/green_pass_health_insurance_hint"
+                        android:ellipsize="end"
+                        android:hint="@string/form_health_id_placeholder"
                         android:inputType="number"
                         android:maxLength="8"
                         android:maxLines="1"
@@ -199,14 +230,27 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <TextView
+                android:id="@+id/datehealthLabel"
+                style="@style/P1Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/euclid_circular_bold"
+                android:text="@string/form_expired_date_healt_id_label"
+                android:textColor="@color/grey_dark"
+                app:layout_constraintEnd_toEndOf="@id/descriptionIndependently"
+                app:layout_constraintStart_toStartOf="@id/descriptionIndependently"
+                app:layout_constraintTop_toBottomOf="@id/healthInsuranceCard" />
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/expiredDateHealthIDDateCard"
                 style="@style/SettingsMenuCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="25dp"
-                app:layout_constraintTop_toBottomOf="@+id/healthInsuranceCard">
+                app:layout_constraintTop_toBottomOf="@+id/datehealthLabel">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/expiredDateHealthIDDateInputLayout"
@@ -229,14 +273,15 @@
                         android:id="@+id/expiredDateHealthIDDateInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
                         android:focusable="false"
-                        android:hint="@string/green_pass_expired_date_hs_hint"
+                        android:hint="@string/form_expired_date_placeholder"
                         android:inputType="none"
                         android:maxLines="1"
                         android:padding="16dp"
                         android:textColor="@color/colorPrimary"
                         android:textColorHint="@color/color_state_text_view"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -252,7 +297,6 @@
                 app:layout_constraintEnd_toEndOf="@id/expiredDateHealthIDDateCard"
                 app:layout_constraintStart_toStartOf="@id/expiredDateHealthIDDateCard"
                 app:layout_constraintTop_toBottomOf="@+id/expiredDateHealthIDDateCard" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

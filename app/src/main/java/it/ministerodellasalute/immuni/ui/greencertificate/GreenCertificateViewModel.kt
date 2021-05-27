@@ -22,13 +22,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.livedata.Event
-import it.ministerodellasalute.immuni.logic.DigitValidator
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassToken
 import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassValidationResult
 import it.ministerodellasalute.immuni.logic.user.UserManager
-import it.ministerodellasalute.immuni.logic.user.models.GreenCertificate
 import it.ministerodellasalute.immuni.logic.user.models.User
+import it.ministerodellasalute.immuni.util.DigitValidator
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
@@ -49,24 +49,22 @@ class GreenCertificateViewModel(
     private val _navigateToSuccessPage = MutableLiveData<Event<GreenPassToken>>()
     val navigateToSuccessPage: LiveData<Event<GreenPassToken>> = _navigateToSuccessPage
 
-    val greenPass = GreenCertificate(
-        "06 Gennaio 2021",
-        "NCFOXN%TS3DH3ZSUZK+.V0ETD%65NL-AH%TAIOOW%IN5H8B48WAS*PX*GKD93B4:ZH6I1\$4JN:IN1MKK9+OC*PP:+P*.1D9R+Q6646C%6RF6:X93O5RF6\$T61R6B46646VY9WC5ME65H1KD34LT HBSZ4GH0B69X5Q/36MZ5BTMUW5-5QNF6O M9R1RF6ECM676746C0FFS6NWE0Y6Z EJZ6KS6YQEE%61Y6LMEA46B 17PPDFPVX1R270:6NEQ0R6AOM6PPL4Q0RUS-EBHU68E1W5XC52T9UF5LDCPF5RBQ746B46O1N646BQ99Q9E\$B ZJY1B QTOD3CQSP\$SR\$S3NDC9UOD3Y.TJET9G3DZI65BDM14NJ*XI-XIFRLL:F*ZR.OVOIF/HLTNP8EFNC3P:HDD8B1MM1M9NTNC30GH.Z8VHL+KLF%CD 810H% 0R%0ZD5CC9T0H\$/I*44SA3ZX8MWB8XU%7AAVMXQQYUGS6S97T95GW38TW959EGNSMJQ115QTBD MD6U725O2DZ2QQ.961GIMC3DUUKUC5QU8N4D40I5:SIK1O606I:VD30O7KK0"
-    )
-
     fun genera(
         typeToken: String,
         token: String,
-        health_insurance: String,
+        healthInsurance: String,
         expiredHealthIDDate: String
     ) {
-        if (checkFormHasError(typeToken, token, health_insurance, expiredHealthIDDate)) {
+        if (checkFormHasError(typeToken, token, healthInsurance, expiredHealthIDDate)) {
             return
         }
         viewModelScope.launch {
             _loading.value = true
-            when (val result = exposureManager.generateGreenCard(
-                typeToken, token, health_insurance, expiredHealthIDDate
+
+            delay(1000)
+
+            when (val result = exposureManager.getGreenCard(
+                typeToken, token, healthInsurance, expiredHealthIDDate
             )) {
                 is GreenPassValidationResult.Success -> {
                     val user = userManager.user
@@ -74,7 +72,7 @@ class GreenCertificateViewModel(
                         User(
                             region = user.value?.region!!,
                             province = user.value?.province!!,
-                            greenPass = greenPass
+                            greenPass = result.greenpass.greenPass
                         )
                     )
                     _navigateToSuccessPage.value = Event(result.greenpass)
@@ -116,10 +114,9 @@ class GreenCertificateViewModel(
         typeToken: String,
         token: String,
         healthInsuranceCard: String,
-        symptom_onset_date: String?
+        expiredHealthIDDate: String?
     ): Boolean {
         var message = ""
-
         var resultValidateToken: GreenPassValidationResult? = null
         if (typeToken.isNotBlank() && token.isNotBlank()) {
             resultValidateToken = when (typeToken) {
@@ -148,7 +145,7 @@ class GreenCertificateViewModel(
         if (healthInsuranceCard.isBlank() || healthInsuranceCard.length < 8) {
             message += context.getString(R.string.health_insurance_card_form_error)
         }
-        if (symptom_onset_date != null && symptom_onset_date.isBlank()) {
+        if (expiredHealthIDDate != null && expiredHealthIDDate.isBlank()) {
             message += context.getString(R.string.form_expired_health_date)
         }
         if (message.isNotEmpty()) {

@@ -20,14 +20,20 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
+import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.ui.greencertificate.tabadapter.TabAdapter
+import kotlin.math.abs
 import kotlinx.android.synthetic.main.green_certificate.*
+import org.koin.android.ext.android.get
 
 class GreenCertificate : Fragment(R.layout.green_certificate) {
+
+    private lateinit var userManager: UserManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,9 +44,18 @@ class GreenCertificate : Fragment(R.layout.green_certificate) {
             )
         )
 
+        userManager = get()
+
+        // Fade out toolbar on scroll
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val ratio = abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
+            toolbarSeparator?.alpha = ratio
+        })
+
         tabLayout.addTab(tabLayout.newTab())
 
-        val adapter = TabAdapter(requireContext(), this@GreenCertificate, tabLayout.tabCount)
+        val adapter =
+            TabAdapter(requireContext(), this@GreenCertificate, tabLayout.tabCount, userManager)
         viewpager.adapter = adapter
         viewpager.isUserInputEnabled = false
 
@@ -57,6 +72,12 @@ class GreenCertificate : Fragment(R.layout.green_certificate) {
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
+
+        if (userManager.user.value?.greenPass == null) {
+            tabLayout.tabTextColors = resources.getColorStateList(R.color.grey_dark, null)
+        } else {
+            tabLayout.tabTextColors = resources.getColorStateList(R.color.colorPrimary, null)
+        }
 
         navigationIcon.setOnClickListener {
             findNavController().popBackStack()

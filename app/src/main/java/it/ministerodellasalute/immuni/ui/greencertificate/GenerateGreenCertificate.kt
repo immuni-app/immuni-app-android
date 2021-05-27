@@ -20,6 +20,7 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.text.TextWatcher
 import android.util.TypedValue
@@ -30,6 +31,7 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -40,6 +42,7 @@ import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.generate_green_certificate.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -69,6 +72,12 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
 
         viewModel = getViewModel()
 
+        // Fade out toolbar on scroll
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val ratio = abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
+            toolbarSeparator?.alpha = ratio
+        })
+
         navigationIcon.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -76,8 +85,8 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
         generateGC.setOnClickListener {
             viewModel.genera(
                 typeToken = listTypeToken.text.toString(),
-                token = cunInput.text.toString(),
-                health_insurance = healthInsuranceCardInput.text.toString(),
+                token = codeInput.text.toString(),
+                healthInsurance = healthInsuranceCardInput.text.toString(),
                 expiredHealthIDDate = expiredDateHealthIDDateInput.text.toString()
             )
         }
@@ -91,7 +100,7 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
             activity?.loading(it, ProgressDialogFragment(), Bundle().apply {
                 putString(
                     ProgressDialogFragment.MESSAGE,
-                    getString(R.string.upload_data_verify_loading)
+                    getString(R.string.get_dgc_loading)
                 )
             })
         }
@@ -126,78 +135,91 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
         val typeTokenList = resources.getStringArray(R.array.type_token)
         val adapter = ArrayAdapter(requireContext(), R.layout.exposed_list_item, typeTokenList)
         listTypeToken.setAdapter(adapter)
+        listTypeToken.setDropDownBackgroundDrawable(
+            resources.getDrawable(
+                R.drawable.dropdown_rounded,
+                null
+            )
+        )
 
         listTypeToken.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 if (position == 0) {
-                    cunInput.text?.clear()
-                    cunInput.isEnabled = false
-                    cunInputLayout.isEnabled = false
+                    codeInput.text?.clear()
+                    codeInputLayout.isEnabled = false
                 } else {
-                    cunInput.text?.clear()
-                    cunInput.isEnabled = true
-                    cunInputLayout.isEnabled = true
+                    codeInput.text?.clear()
+                    codeInputLayout.isEnabled = true
                 }
-                cunInputLayout.prefixText = when (position) {
+                codeInputLayout.prefixText = when (position) {
                     0 -> {
-                        cunInput.hint = getString(R.string.green_pass_code_hint)
-                        getString(R.string.const_otp)
+                        codeLabel.text = getString(R.string.form_code_label)
+                        codeInput.hint = getString(R.string.green_pass_code_hint)
+                        ""
                     }
                     1 -> {
-                        cunInput.setHint(R.string.cun_placeholder)
+                        codeLabel.text = getString(R.string.cun_title)
+                        codeInput.setHint(R.string.code_placeholder)
                         getString(R.string.const_cun)
                     }
                     2 -> {
-                        cunInput.hint = "Inserisci il codice NRFE"
-                        getString(R.string.const_nrfe)
+                        codeLabel.text = getString(R.string.nrfe_title)
+                        codeInput.setHint(R.string.code_placeholder)
+                        ""
                     }
                     3 -> {
-                        cunInput.hint = "Inserisci il codice NUCG"
+                        codeLabel.text = getString(R.string.nucg_title)
+                        codeInput.setHint(R.string.code_placeholder)
                         getString(R.string.const_nucg)
                     }
                     4 -> {
-                        cunInput.hint = "Inserisci il codice OTP"
-                        getString(R.string.const_otp)
+                        codeLabel.text = getString(R.string.otp_title)
+                        codeInput.setHint(R.string.code_placeholder)
+                        ""
                     }
                     else -> ""
                 }
+
+                val lengthFilter = when (position) {
+                    1 -> LengthFilter(10)
+                    2 -> LengthFilter(17)
+                    3 -> LengthFilter(10)
+                    4 -> LengthFilter(12)
+                    else -> LengthFilter(0)
+                }
+                codeInput.filters = arrayOf(InputFilter.AllCaps(), lengthFilter)
             }
 
         container.setOnClickListener {
-            cunInput.clearFocus()
+            codeInput.clearFocus()
             healthInsuranceCardInput.clearFocus()
             expiredDateHealthIDDateInput.clearFocus()
         }
-        cunInput.setOnFocusChangeListener { _, hasFocus ->
+        codeInput.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 expiredDateHealthIDDateInputLayout.setStartIconTintList(
                     context?.getColor(R.color.grey_normal)?.let {
                         ColorStateList.valueOf(it)
                     })
-                cunInput.hint = ""
+                codeInput.hint = ""
                 healthInsuranceCardInput.clearFocus()
                 expiredDateHealthIDDateInput.clearFocus()
             } else {
-                cunInput.hint = getString(R.string.cun_placeholder)
+                codeInput.hint = getString(R.string.cun_placeholder)
             }
         }
 
-        cunInput.filters += InputFilter.AllCaps()
+        codeInput.filters += InputFilter.AllCaps()
+        codeInput.filters += LengthFilter(0)
 
-        cunInput.addTextChangedListener(
+        codeInput.addTextChangedListener(
             object : TextWatcher {
                 private var beforeText = ""
 
                 override fun afterTextChanged(s: Editable) {
                     if (!s.toString().matches(regexAlphaNum) && "" != s.toString()) {
-                        cunInput.setText(beforeText)
-                        cunInput.setSelection(cunInput.text.toString().length)
-                    } else {
-                        if (cunInput.text?.isNotBlank()!!) {
-                            cunInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
-                        } else {
-                            cunInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
-                        }
+                        codeInput.setText(beforeText)
+                        codeInput.setSelection(codeInput.text.toString().length)
                     }
                 }
 
@@ -226,7 +248,7 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                     context?.getColor(R.color.grey_normal)?.let {
                         ColorStateList.valueOf(it)
                     })
-                cunInput.clearFocus()
+                codeInput.clearFocus()
                 expiredDateHealthIDDateInput.clearFocus()
             }
         }
@@ -259,7 +281,6 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
     private fun setDatePicker() {
         expiredDateHealthIDDateInput.inputType = InputType.TYPE_NULL
         expiredDateHealthIDDateInputLayout.setEndIconOnClickListener {
-            expiredDateHealthIDDateInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
             expiredDateHealthIDDateInput.text?.clear()
         }
         expiredDateHealthIDDateInput.setOnTouchListener(View.OnTouchListener { _, event ->
@@ -268,7 +289,7 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                     context?.getColor(R.color.colorPrimary)?.let {
                         ColorStateList.valueOf(it)
                     })
-                cunInput.clearFocus()
+                codeInput.clearFocus()
                 healthInsuranceCardInput.clearFocus()
                 openDatePicker()
                 return@OnTouchListener true
@@ -300,7 +321,6 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
             val date = Date(it)
             val format = SimpleDateFormat("dd/MM/yyyy")
             expiredDateHealthIDDateInput.setText(format.format(date))
-            expiredDateHealthIDDateInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
         }
         materialDatePicker.addOnDismissListener {
             expiredDateHealthIDDateInputLayout.setStartIconTintList(

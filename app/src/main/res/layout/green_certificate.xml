@@ -15,7 +15,6 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/uploadDataLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -69,7 +68,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/descriptionIndependently" />
 
 
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/tabCard"
                 style="@style/SettingsMenuCard"
@@ -102,7 +100,7 @@
                         android:background="#1A495D74"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tabLayout"/>
+                        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
 
                     <androidx.viewpager2.widget.ViewPager2
@@ -125,13 +123,11 @@
                 android:layout_marginTop="20dp"
                 android:elevation="10dp"
                 android:text="@string/green_pass_button_generate"
-                app:icon="@drawable/ic_calendar_grey"
+                app:icon="@drawable/ic_qr"
                 app:iconGravity="start"
                 app:layout_constraintEnd_toEndOf="@id/tabCard"
                 app:layout_constraintStart_toStartOf="@id/tabCard"
                 app:layout_constraintTop_toBottomOf="@+id/tabCard" />
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

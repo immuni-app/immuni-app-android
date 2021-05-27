@@ -19,11 +19,13 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.logic.user.UserManager
 
 class TabAdapter(
     val context: Context,
-    fm: Fragment,
-    var totalTabs: Int
+    var fm: Fragment,
+    var totalTabs: Int,
+    var userManager: UserManager
 ) :
     FragmentStateAdapter(fm) {
 
@@ -40,7 +42,13 @@ class TabAdapter(
 
     fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> context.getString(R.string.green_pass_active)
+            0 -> {
+                if (userManager.user.value?.greenPass == null) {
+                    context.getString(R.string.green_pass_inactive)
+                } else {
+                    context.getString(R.string.green_pass_active)
+                }
+            }
             else -> getPageTitle(position)
         }
     }

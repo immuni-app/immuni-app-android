@@ -425,6 +425,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_pass_description">Il Digital Green Certificate ti permette di certificare la tua immunità al COVID-19.</string>
     <string name="green_pass_subtitle">Il tuo Digital Green Certificate</string>
     <string name="green_pass_active">Attivo</string>
+    <string name="green_pass_inactive">Non attivo</string>
     <string name="green_pass_no_certificate_available">Nessun certificato attivo</string>
     <string name="green_pass_button_generate">Recupera Digital Green Certificate</string>
     <string name="green_pass_generate_title">Recupera Digital Green Certificate</string>
@@ -448,9 +449,24 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     </string-array>
     <string name="const_nrfe" translatable="false">NRFE-</string>
     <string name="const_nucg" translatable="false">NUCG-</string>
-    <string name="const_otp" translatable="false" />
+    <string name="const_otp" translatable="false">OTP-</string>
     <string name="form_code_empty">- Inserisci il codice\n</string>
     <string name="form_type_and_code_empty">- I campi tipo token e token sono obbligatori.\n</string>
     <string name="form_expired_health_date">- Inserisci la data di scadenza della tessera sanitaria.\n</string>
-
+    <string name="code_placeholder">Inserisci il codice</string>
+    <string name="cun_title">Codice CUN</string>
+    <string name="nrfe_title">Codice NRFE</string>
+    <string name="nucg_title">Codice NUCG</string>
+    <string name="otp_title">Codice OTP</string>
+    <string name="title_modal_confirm_delete_dcg">Elimina Digital Green Certificate</string>
+    <string name="message_modal_confirm_delete_dcg">Sei sicuro di voler eliminare il tuo Digital Green Certificate?</string>
+    <string name="form_type_code_label">Tipo Codice</string>
+    <string name="form_code_label">Codice</string>
+    <string name="form_code_placeholder">Codice</string>
+    <string name="form_health_id_placeholder">Tessera sanitaria</string>
+    <string name="form_expired_date_healt_id_label">Data scadenza Tessera Sanitaria</string>
+    <string name="form_expired_date_placeholder">Data scadenza</string>
+    <string name="form_symptoms_date_placeholder">Data</string>
+    <string name="dcg_clear_code">Elimina codice</string>
+    <string name="get_dgc_loading">Recupero DGC in corso..</string>
 </resources>

@@ -60,9 +60,10 @@ interface ExposureIngestionService {
     @JsonClass(generateAdapter = true)
     data class GreenCardResponse(val greenPass: GreenCertificate)
 
-    @GET("v1/ingestion/generate-green-card")
-    suspend fun generateGreenCard(
+    @GET("v1/ingestion/get-dgc")
+    suspend fun getGreenCard(
         @Header("Authorization") authorization: String,
+        @Query("token_typestring") token_typestring: String,
         @Query("last_his_number") healthInsurance: String,
         @Query("expired_healt_ID_date") expiredHealthIDDate: String
     ): Response<GreenCardResponse>

@@ -485,5 +485,4 @@
         <item name="android:button">@drawable/checkbox</item>
     </style>
 
-
 </resources>
