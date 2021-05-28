@@ -27,4 +27,5 @@ sealed class GreenPassValidationResult {
     object ConnectionError : GreenPassValidationResult()
     object ServerError : GreenPassValidationResult()
     object TokenWrong : GreenPassValidationResult()
+    object TokenLengthWrong : GreenPassValidationResult()
 }

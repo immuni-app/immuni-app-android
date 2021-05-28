@@ -39,6 +39,7 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.utils.byAdding
+import it.ministerodellasalute.immuni.extensions.view.hideKeyboard
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
@@ -48,11 +49,6 @@ import java.util.*
 import kotlin.math.abs
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.report_positivity_cun.*
-import kotlinx.android.synthetic.main.report_positivity_cun.appBar
-import kotlinx.android.synthetic.main.report_positivity_cun.knowMore
-import kotlinx.android.synthetic.main.report_positivity_cun.navigationIcon
-import kotlinx.android.synthetic.main.report_positivity_cun.toolbarSeparator
-import kotlinx.android.synthetic.main.report_positivity_cun.verify
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
@@ -180,6 +176,7 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
                 symptomOnsetDateInput.clearFocus()
             } else {
                 cunInput.hint = getString(R.string.cun_placeholder)
+                cunInput.hideKeyboard()
             }
         }
 
@@ -223,6 +220,8 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
                     })
                 cunInput.clearFocus()
                 symptomOnsetDateInput.clearFocus()
+            } else {
+                healthInsuranceCardInput.hideKeyboard()
             }
         }
         healthInsuranceCardInput.addTextChangedListener(
@@ -334,9 +333,9 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
                     })
             } else {
                 symptomOnsetDateInputLayout.setStartIconTintList(
-                context?.getColor(R.color.grey_normal)?.let {
-                    ColorStateList.valueOf(it)
-                })
+                    context?.getColor(R.color.grey_normal)?.let {
+                        ColorStateList.valueOf(it)
+                    })
             }
         }
     }

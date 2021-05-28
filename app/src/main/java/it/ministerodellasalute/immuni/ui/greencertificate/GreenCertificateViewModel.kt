@@ -126,19 +126,33 @@ class GreenCertificateViewModel(
                 "OTP" -> digitValidator.validaCheckDigitOTP(token)
                 else -> digitValidator.validaCheckDigitOTP(token)
             }
-        } else if (typeToken.isBlank() && token.isBlank()) {
-            message += (context.getString(R.string.form_code_empty) + typeToken)
+        } else if (typeToken.isBlank()) {
+            message += context.getString(R.string.form_type_code_empty)
         } else {
-            message += context.getString(R.string.form_type_and_code_empty)
+            message += when (typeToken) {
+                "CUN" -> context.getString(R.string.form_code_cun_empty)
+                "NRFE" -> context.getString(R.string.form_code_nrfe_empty)
+                "NUCG" -> context.getString(R.string.form_code_nucg_empty)
+                "OTP" -> context.getString(R.string.form_code_otp_empty)
+                else -> ""
+            }
         }
 
         if (resultValidateToken == GreenPassValidationResult.TokenWrong) {
             message += when (typeToken) {
-                "CUN" -> context.getString(R.string.cun_wrong)
-                "NRFE" -> context.getString(R.string.nrfe_wrong)
-                "NUCG" -> context.getString(R.string.nucg_wrong)
-                "OTP" -> context.getString(R.string.otp_wrong)
-                else -> context.getString(R.string.otp_wrong)
+                "CUN" -> context.getString(R.string.form_code_cun_wrong)
+                "NRFE" -> context.getString(R.string.form_code_nrfe_wrong)
+                "NUCG" -> context.getString(R.string.form_code_nucg_wrong)
+                "OTP" -> context.getString(R.string.form_code_otp_wrong)
+                else -> ""
+            }
+        } else if (resultValidateToken == GreenPassValidationResult.TokenLengthWrong) {
+            message += when (typeToken) {
+                "CUN" -> context.getString(R.string.form_code_cun_empty)
+                "NRFE" -> context.getString(R.string.form_code_nrfe_empty)
+                "NUCG" -> context.getString(R.string.form_code_nucg_empty)
+                "OTP" -> context.getString(R.string.form_code_otp_empty)
+                else -> ""
             }
         }
 

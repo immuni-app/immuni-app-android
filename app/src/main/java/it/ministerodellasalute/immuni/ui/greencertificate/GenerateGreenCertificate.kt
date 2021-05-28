@@ -38,6 +38,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.utils.byAdding
+import it.ministerodellasalute.immuni.extensions.view.hideKeyboard
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
 import java.text.SimpleDateFormat
@@ -144,35 +145,25 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
 
         listTypeToken.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
-                if (position == 0) {
-                    codeInput.text?.clear()
-                    codeInputLayout.isEnabled = false
-                } else {
-                    codeInput.text?.clear()
-                    codeInputLayout.isEnabled = true
-                }
+                codeInput.text?.clear()
+                codeInputLayout.isEnabled = true
                 codeInputLayout.prefixText = when (position) {
                     0 -> {
-                        codeLabel.text = getString(R.string.form_code_label)
-                        codeInput.hint = getString(R.string.green_pass_code_hint)
-                        ""
-                    }
-                    1 -> {
                         codeLabel.text = getString(R.string.cun_title)
                         codeInput.setHint(R.string.code_placeholder)
                         getString(R.string.const_cun)
                     }
-                    2 -> {
+                    1 -> {
                         codeLabel.text = getString(R.string.nrfe_title)
                         codeInput.setHint(R.string.code_placeholder)
                         ""
                     }
-                    3 -> {
+                    2 -> {
                         codeLabel.text = getString(R.string.nucg_title)
                         codeInput.setHint(R.string.code_placeholder)
                         getString(R.string.const_nucg)
                     }
-                    4 -> {
+                    3 -> {
                         codeLabel.text = getString(R.string.otp_title)
                         codeInput.setHint(R.string.code_placeholder)
                         ""
@@ -181,10 +172,10 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                 }
 
                 val lengthFilter = when (position) {
-                    1 -> LengthFilter(10)
-                    2 -> LengthFilter(17)
-                    3 -> LengthFilter(10)
-                    4 -> LengthFilter(12)
+                    0 -> LengthFilter(10)
+                    1 -> LengthFilter(17)
+                    2 -> LengthFilter(10)
+                    3 -> LengthFilter(12)
                     else -> LengthFilter(0)
                 }
                 codeInput.filters = arrayOf(InputFilter.AllCaps(), lengthFilter)
@@ -205,7 +196,8 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                 healthInsuranceCardInput.clearFocus()
                 expiredDateHealthIDDateInput.clearFocus()
             } else {
-                codeInput.hint = getString(R.string.cun_placeholder)
+                codeInput.hint = getString(R.string.code_placeholder)
+                codeInput.hideKeyboard()
             }
         }
 
@@ -250,6 +242,8 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                     })
                 codeInput.clearFocus()
                 expiredDateHealthIDDateInput.clearFocus()
+            } else {
+                healthInsuranceCardInput.hideKeyboard()
             }
         }
         healthInsuranceCardInput.addTextChangedListener(

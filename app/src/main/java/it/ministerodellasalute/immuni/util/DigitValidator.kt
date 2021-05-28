@@ -20,6 +20,9 @@ import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassValidationR
 class DigitValidator {
 
     fun validaCheckDigitCUN(token: String): GreenPassValidationResult {
+        if (token.length != CUN_CODE_LENGTH) {
+            return GreenPassValidationResult.TokenLengthWrong
+        }
         var checkSum = 0
         repeat(CUN_CODE_LENGTH - 1) {
             val char = token[it]
@@ -36,6 +39,9 @@ class DigitValidator {
     }
 
     fun validaCheckDigitOTP(token: String): GreenPassValidationResult {
+        if (token.length != OTP_CODE_LENGTH) {
+            return GreenPassValidationResult.TokenLengthWrong
+        }
         var checkSum = 0
         repeat(OTP_CODE_LENGTH - 1) {
             val char = token[it]
@@ -54,6 +60,8 @@ class DigitValidator {
     fun validaCheckDigitNRFE(token: String): GreenPassValidationResult {
         return if (token.length == NRFE_CODE_LENGTH && token.substring(0, 2) == NRFE_START_WITH) {
             GreenPassValidationResult.Valid(true)
+        } else if (token.length != NRFE_CODE_LENGTH) {
+            GreenPassValidationResult.TokenLengthWrong
         } else {
             GreenPassValidationResult.TokenWrong
         }
@@ -61,7 +69,7 @@ class DigitValidator {
 
     fun validaCheckDigitNUCG(token: String): GreenPassValidationResult {
         if (token.length != NUCG_CODE_LENGTH) {
-            return GreenPassValidationResult.TokenWrong
+            return GreenPassValidationResult.TokenLengthWrong
         }
         var checkSum = 0
         repeat(NUCG_CODE_LENGTH - 1) {
