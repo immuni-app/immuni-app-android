@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/greenCertificate"
-        android:name="it.ministerodellasalute.immuni.ui.greencertificate.GreenCertificate"
+        android:name="it.ministerodellasalute.immuni.ui.greencertificate.GreenCertificateFragment"
         android:label="GreenCertificate"
         tools:layout="@layout/green_certificate" />
 
@@ -57,10 +57,23 @@
         android:id="@+id/knowMoreGreenCertificateFragment"
         android:name="it.ministerodellasalute.immuni.ui.greencertificate.KnowMoreGreenCertificate"
         android:label="knowMoreGreenCertificateFragment"
-        tools:layout="@layout/know_more_green_certificate" />
+        tools:layout="@layout/green_certificate_know_more" />
 
     <action
         android:id="@+id/action_know_more_green_certificate_dialog"
         app:destination="@id/knowMoreGreenCertificateFragment" />
 
+    <dialog
+        android:id="@+id/moreDetailsGreenCertificateFragment"
+        android:name="it.ministerodellasalute.immuni.ui.greencertificate.MoreDetailGreenCertificate"
+        android:label="moreDetailGreenCertificate"
+        tools:layout="@layout/green_certificate_more_details">
+        <argument
+            android:name="greenCertificate"
+            app:argType="it.ministerodellasalute.immuni.logic.user.models.GreenCertificate" />
+    </dialog>
+
+    <action
+        android:id="@+id/action_more_details_green_certificate_dialog"
+        app:destination="@id/moreDetailsGreenCertificateFragment" />
 </navigation>

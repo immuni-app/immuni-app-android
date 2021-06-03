@@ -16,7 +16,6 @@
 package it.ministerodellasalute.immuni.api.services
 
 import com.squareup.moshi.*
-import it.ministerodellasalute.immuni.logic.user.models.GreenCertificate
 import java.util.*
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -58,7 +57,7 @@ interface ExposureIngestionService {
     ): Response<ResponseBody>
 
     @JsonClass(generateAdapter = true)
-    data class GreenCardResponse(val greenPass: GreenCertificate)
+    data class GreenCardResponse(val greenPass: String)
 
     @GET("v1/ingestion/get-dgc")
     suspend fun getGreenCard(

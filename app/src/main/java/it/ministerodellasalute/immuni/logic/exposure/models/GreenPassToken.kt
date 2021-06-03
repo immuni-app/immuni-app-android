@@ -15,10 +15,9 @@
 
 package it.ministerodellasalute.immuni.logic.exposure.models
 
-import it.ministerodellasalute.immuni.logic.user.models.GreenCertificate
 import java.util.*
 
-data class GreenPassToken(val greenPass: GreenCertificate, val serverDate: Date?)
+data class GreenPassToken(val greenPass: String, val serverDate: Date?)
 
 sealed class GreenPassValidationResult {
     data class Success(val greenpass: GreenPassToken) : GreenPassValidationResult()

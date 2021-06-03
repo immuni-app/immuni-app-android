@@ -114,6 +114,7 @@
                         android:inputType="none"
                         android:maxLines="1"
                         android:padding="16dp"
+                        android:popupTheme="@style/AppTheme.PopupOverlay"
                         android:textColor="@color/colorPrimary"
                         android:textColorHint="@color/grey_normal"
                         android:textSize="16sp" />

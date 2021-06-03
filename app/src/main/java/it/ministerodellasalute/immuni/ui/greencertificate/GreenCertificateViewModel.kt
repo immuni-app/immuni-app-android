@@ -26,6 +26,7 @@ import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassToken
 import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassValidationResult
 import it.ministerodellasalute.immuni.logic.user.UserManager
+import it.ministerodellasalute.immuni.logic.user.models.GreenCertificate
 import it.ministerodellasalute.immuni.logic.user.models.User
 import it.ministerodellasalute.immuni.util.DigitValidator
 import kotlinx.coroutines.delay
@@ -67,12 +68,14 @@ class GreenCertificateViewModel(
                 typeToken, token, healthInsurance, expiredHealthIDDate
             )) {
                 is GreenPassValidationResult.Success -> {
+
                     val user = userManager.user
+                    user.value?.greenPass!!.add(decodeGreenPass(result.greenpass.greenPass))
                     userManager.save(
                         User(
                             region = user.value?.region!!,
                             province = user.value?.province!!,
-                            greenPass = result.greenpass.greenPass
+                            greenPass = user.value?.greenPass!!
                         )
                     )
                     _navigateToSuccessPage.value = Event(result.greenpass)
@@ -172,5 +175,14 @@ class GreenCertificateViewModel(
             return true
         }
         return false
+    }
+
+    private fun decodeGreenPass(greenPass: String): GreenCertificate {
+        return GreenCertificate(
+            base64 = greenPass,
+            vaccineName = "Moderna",
+            dosesNumber = "1",
+            totalDosesNumber = "2"
+        )
     }
 }

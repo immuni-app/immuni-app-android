@@ -35,6 +35,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import it.ministerodellasalute.immuni.GreenCertificateDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.utils.byAdding
@@ -164,7 +165,7 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                         getString(R.string.const_nucg)
                     }
                     3 -> {
-                        codeLabel.text = getString(R.string.otp_title)
+                        codeLabel.text = getString(R.string.authcode_title)
                         codeInput.setHint(R.string.code_placeholder)
                         ""
                     }

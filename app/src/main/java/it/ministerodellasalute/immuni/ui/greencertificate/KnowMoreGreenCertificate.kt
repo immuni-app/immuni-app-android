@@ -24,7 +24,7 @@ class KnowMoreGreenCertificate : PopupDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setContentLayout(R.layout.know_more_green_certificate)
+        setContentLayout(R.layout.green_certificate_know_more)
 
         setTitle(getString(R.string.green_pass_how_to_generate_title))
     }

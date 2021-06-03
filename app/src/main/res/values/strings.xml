@@ -420,28 +420,24 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="warning_message_modal">It is important to communicate the exact symptom onset date to initiate accurate contact tracking. Select \"no symptoms\" only in case of complete absence of symptoms or the appearance of symptoms after the swab.</string>
 
     <string name="home_what_do_you_want_today">Cosa vuoi fare oggi?</string>
-    <string name="home_green_certificate_title">Digital Green Certificate</string>
-    <string name="green_pass_title">Digital Green Certificate</string>
-    <string name="green_pass_description">Il Digital Green Certificate ti permette di certificare la tua immunità al COVID-19.</string>
-    <string name="green_pass_subtitle">Il tuo Digital Green Certificate</string>
-    <string name="green_pass_active">Attivo</string>
-    <string name="green_pass_inactive">Non attivo</string>
-    <string name="green_pass_no_certificate_available">Nessun certificato attivo</string>
-    <string name="green_pass_button_generate">Recupera Digital Green Certificate</string>
-    <string name="green_pass_generate_title">Recupera Digital Green Certificate</string>
-    <string name="green_pass_generate_description">Questa funzione ti permette di generare il tuo Digital Green Certificate inserendo direttamente i dati richiesti.</string>
-    <string name="green_pass_code_hint">NRFE/CUN/NUCG/OTP</string>
+    <string name="home_green_certificate_title">EU Digital Covid Certificate</string>
+    <string name="green_pass_title">EU Digital Covid Certificate</string>
+    <string name="green_pass_no_certificate_available">Non sono ancora stati recuperati EU Digital Covid Certificate</string>
+    <string name="green_pass_button_generate">Recupera EU Digital Covid Certificate</string>
+    <string name="green_pass_generate_title">Recupera EU Digital Covid Certificate</string>
+    <string name="green_pass_generate_description">Questa funzione ti permette di generare l\'EU Digital Covid Certificate inserendo direttamente i dati richiesti.</string>
+    <string name="green_pass_code_hint">NRFE/CUN/NUCG/AUTHCODE</string>
     <string name="green_pass_health_insurance_hint">Ultime 8 cifre Tessera Sanitaria</string>
     <string name="green_pass_expired_date_hs_hint">Data scadenza Tessera Sanitaria</string>
     <string name="green_pass_confirm_button">Conferma</string>
-    <string name="green_pass_how_to_generate_title">Come generare il tuo Digital Green Certificate</string>
-    <string name="green_pass_generation_successfully">Digital Green Certificate recuperato con successo</string>
+    <string name="green_pass_how_to_generate_title">Come generare l\'EU Digital Covid Certificate</string>
+    <string name="green_pass_generation_successfully">EU Digital Covid Certificate recuperato con successo</string>
     <string name="green_pass_select_type_token">Seleziona tipologia</string>
     <string-array name="type_token">
         <item>CUN</item>
         <item>NRFE</item>
         <item>NUCG</item>
-        <item>OTP</item>
+        <item>AUTHCODE</item>
     </string-array>
     <string name="const_nrfe" translatable="false">NRFE-</string>
     <string name="const_nucg" translatable="false">NUCG-</string>
@@ -453,14 +449,14 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="form_code_cun_wrong">- Il CUN inserito non risulta formalmente valido. Assicurati di aver inserito le ultime 10 cifre del CUN che hai ricevuto per SMS o nel referto associato a un tampone positivo\n</string>
     <string name="form_code_nrfe_wrong">- Il codice NRFE inserito non risulta formalmente valido. Assicurati di aver inserito le ultime 17 cifre del codice NRFE che hai ricevuto\n</string>
     <string name="form_code_nucg_wrong">- Il codice NUCG inserito non risulta formalmente valido. Assicurati di aver inserito le ultime 10 cifre del codice NUCG che hai ricevuto\n</string>
-    <string name="form_code_otp_wrong">- Il codice OTP inserito non risulta formalmente valido. Assicurati di aver inserito le ultime 12 cifre del codice OTP che hai ricevuto\n</string>
+    <string name="form_code_otp_wrong">- Il codice AUTHCODE inserito non risulta formalmente valido. Assicurati di aver inserito le ultime 12 cifre del codice AUTHCODE che hai ricevuto\n</string>
     <string name="form_type_code_empty">- Seleziona la tipologia del codice\n</string>
     <string name="form_expired_health_date">- Inserisci la data di scadenza della tessera sanitaria\n</string>
     <string name="code_placeholder">Inserisci il codice</string>
-    <string name="cun_title">Codice CUN</string>
-    <string name="nrfe_title">Codice NRFE</string>
-    <string name="nucg_title">Codice NUCG</string>
-    <string name="otp_title">Codice OTP</string>
+    <string name="cun_title">CUN</string>
+    <string name="nrfe_title">NRFE</string>
+    <string name="nucg_title">NUCG</string>
+    <string name="authcode_title">AUTHCODE</string>
     <string name="title_modal_confirm_delete_dcg">Elimina Digital Green Certificate</string>
     <string name="message_modal_confirm_delete_dcg">Sei sicuro di voler eliminare il tuo Digital Green Certificate?</string>
     <string name="form_type_code_label">Tipologia del Codice</string>
@@ -472,4 +468,27 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="form_symptoms_date_placeholder">Data</string>
     <string name="dcg_clear_code">Elimina codice</string>
     <string name="get_dgc_loading">Recupero DGC in corso..</string>
+    <string name="green_certificate_tab_swipe">Scorri per visualizzare gli altri certificati</string>
+    <string name="green_certificate_tab_surname_name">Cognome e Nome</string>
+    <string name="green_certificate_tab_birth_date">Data di nascita (aaaa-mm-gg)</string>
+    <string name="green_certificate_tab_certificate_id">Identificativo univoco del certificato</string>
+    <string name="green_certificate_tab_more_details">Più dettagli</string>
+    <string name="green_certificate_tab_download">Scarica</string>
+    <string name="green_certificate_tab_delete">Elimina</string>
+    <string name="green_pass_more_details_title">EU Digital Covid Certificate</string>
+    <string name="green_certificate_more_details_target_agent">Malattia o agente bersaglio</string>
+    <string name="green_certificate_more_details_vaccine_type">Tipo di vaccino</string>
+    <string name="green_certificate_more_details_denom_vaccine">Denominazione del vaccino</string>
+    <string name="green_certificate_more_details_producer_vaccine">Produttore o titolare dell\'AIC del vaccino</string>
+    <string name="green_certificate_more_details_doses_number">Numero della dose effettuata/numero totale dosi previste</string>
+    <string name="green_certificate_more_details_country_vaccination">Nazione in cui è stata eseguita la vaccinazione</string>
+    <string name="green_certificate_more_details_data_last_administration">Data dell\'ultima somministrazione</string>
+    <string name="green_certificate_more_details_entity_issued_certificate">Ente che ha rilasciato il certificato</string>
+    <string name="green_certificate_more_details_last_description">Questo certificato non è un documento di viaggio. Le evidenze scientifiche sulla vaccinazione, sui test e sulla guarigione da COVID-19 continuano ad evolversi, anche in considerazioni delle nuove varianti del virus. Prima di viaggiare si prega di controllare le misure di salute pubblica applicate nel luogo di destinazione e le relative restrizioni anche consultando il sito:</string>
+    <string name="green_certificate_more_details_europe_restriction_url" translatable="false">https://reopen.europa.eu</string>
+    <string name="green_certificate_more_details_doses_number_text">%s di %s</string>
+    <string name="permission_go_to_settings">Vai a Impostazioni</string>
+    <string name="permission_needed_permission_message">E\' necessario attivare i permessi di scrittura per poter scaricare l\'EU Digital Covid Certificate.</string>
+    <string name="permission_need_permission_title">Permesso richiesto</string>
+    <string name="green_certificate_downloaded">Ente che ha rilasciato il certificato</string>
 </resources>

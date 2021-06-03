@@ -126,7 +126,7 @@ class OnboardingViewModel(
                 User(
                     region = region,
                     province = province,
-                    greenPass = null
+                    greenPass = mutableListOf()
                 )
             )
         }
