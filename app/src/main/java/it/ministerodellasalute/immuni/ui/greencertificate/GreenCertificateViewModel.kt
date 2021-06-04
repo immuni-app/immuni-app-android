@@ -28,6 +28,7 @@ import dgca.verifier.app.decoder.compression.CompressorService
 import dgca.verifier.app.decoder.cose.CoseService
 import dgca.verifier.app.decoder.cose.CryptoService
 import dgca.verifier.app.decoder.model.GreenCertificate
+import dgca.verifier.app.decoder.model.TestVerificationResult
 import dgca.verifier.app.decoder.model.VerificationResult
 import dgca.verifier.app.decoder.prefixvalidation.PrefixValidationService
 import dgca.verifier.app.decoder.schema.SchemaValidator
@@ -202,7 +203,8 @@ class GreenCertificateViewModel(
     }
 
     private fun decodeGreenPass(greenPass: String): GreenCertificateUser {
-        decode("HC1:NCFOXN%TS3DH3ZSUZK+.V0ETD%65NL-AH-R6IOOP-II6DPEFGJLVYBV9T+QI6M8SA3/-2E%5VR5VVB9ZILAPIZI.EJJ14B2MZ8DC8COVD9VC/MJK.A+ C/8DXED%JCC8C62KXJAUYCOS2QW6%PQRZMPK9I+0MCIKYJGCC:H3J1D1I3-*TW CXBDW33+ CD8CQ8C0EC%*TGHD1KT0NDPST7KDQHDN8TSVD2NDB*S6ECX%LBZI+PB/VSQOL9DLKWCZ3EBKD8IIGDB0D48UJ06J9UBSVAXCIF4LEIIPBJ7OICWK%5BBS22T9UF5LDCPF5RBQ746B46JZ0V-OEA7IB6\$C94JB2E9Z3E8AE-QD+PB.QCD-H/8O3BEQ8L9VN.6A4JBLHLM7A\$JD IBCLCK5MJMS68H36DH.K:Z28AL**I3DN3F7MHFEVV%*4HBTSCNT 4C%C47TO*47*KB*KYQT3LT+*4.\$S6ZC0JB%JB% NHTC6MS7YS..A7THL5B4\$O3EG58GM1M3/L%0Q%LFZHTQ6D6SU\$DW0BOS5FQ2R-LN./6FML*OJ:+EAGHJPK+-PEPAZ EY1C0VFZ.2SFN9C1V502Y4XAH")
+        val base45 = "HC1:NCFOXN%TS3DH3ZSUZK+.V0ETD%65NL-AH-R6IOOP-IIDTMB9GJL1%BJ.4+QI6M8SA3/-2E%5VR5VVB9ZILAPIZI.EJJ14B2MZ8DC8COVD9VC/MJK.A+ C/8DXED%JCC8C62KXJAUYCOS2QW6%PQRZMPK9I+0MCIKYJGCC:H3J1D1I3-*TW CXBDW33+ CD8CQ8C0EC%*TGHD1KT0NDPST7KDQHDN8TSVD2NDB*S6ECX%LBZI+PB/VSQOL9DLKWCZ3EBKD8IIGDB0D48UJ06J9UBSVAXCIF4LEIIPBJ7OICWK%5BBS22T9UF5LDCPF5RBQ746B46JZ0V-OEA7IB6" + "$" + "C94JB2E9Z3E8AE-QD+PB.QCD-H/8O3BEQ8L9VN.6A4JBLHLM7A"+"$"+"JD IBCLCK5MJMS68H36DH.K:Z28AL**I3DN3F7MHFEVV%*4HBTSCNT 4C%C47TO*47*KB*KYQT3LT+*4." + "$" + "S6ZC0JB%JB% NHTC:OS:DT887WA6+1V/FOX048H6HT2D:M%M3 -IKYAT03-KFL"+"$"+"T6QM*17H.3RO6-BBC%F+KTW:LKO3*QTHSP1*7APSOP8WJGV"+"$"+"FPUU5U1ZN2X%ERMH"
+        decode(base45)
         return GreenCertificateUser(
             base64 = greenPass,
             vaccineName = "Moderna",
@@ -237,6 +239,8 @@ class GreenCertificateViewModel(
 
                 schemaValidator.validate(coseData.cbor, verificationResult)
                 greenCertificate = cborService.decode(coseData.cbor, verificationResult)
+                validateCertData(greenCertificate, verificationResult)
+
 
 //                // Load from API for now. Replace with cache logic.
 //                val certificate = exposureManager.getCertificate(kid.toBase64())
@@ -247,7 +251,6 @@ class GreenCertificateViewModel(
 //                }
 //                cryptoService.validate(cose, certificate, verificationResult)
             }
-
             _loading.value = false
             val cert = greenCertificate?.toCertificateModel()
             val verRes = verificationResult
@@ -256,13 +259,11 @@ class GreenCertificateViewModel(
         }
     }
 
-    fun GreenCertificate.toCertificateModel(): CertificateModel {
-        return CertificateModel(
-            person.toPersonModel(),
-            dateOfBirth,
-            vaccinations?.map { it.toVaccinationModel() },
-            tests?.map { it.toTestModel() },
-            recoveryStatements?.map { it.toRecoveryModel() }
-        )
+    private fun validateCertData(certificate: GreenCertificate?, verificationResult: VerificationResult) {
+        certificate?.tests?.let {
+            if (it.isNotEmpty()) {
+                verificationResult.testVerification = TestVerificationResult(it.first().isTestValid())
+            }
+        }
     }
 }

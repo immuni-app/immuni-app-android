@@ -22,10 +22,9 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
 
     packagingOptions {
-        exclude 'META-INF/ASL2.0'
         exclude 'META-INF/ASL-2.0.txt'
-        exclude 'draftv4/schema'
-        exclude 'draftv3/schema'
+        pickFirst 'draftv4/schema'
+        pickFirst 'draftv3/schema'
         exclude 'META-INF/LGPL-3.0.txt'
     }
 
@@ -109,7 +108,7 @@ dependencies {
     implementation project(':extensions')
     implementation project(':debugmenu')
     implementation project(':network')
-    implementation project(':decoder')
+    implementation project(':decoder1.0.0')
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
