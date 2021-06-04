@@ -61,6 +61,12 @@ buildscript {
         conscryptVersion = "2.4.0"
         testCoreKtxVersion = "1.2.0"
         testFragmentVersion = "1.2.4"
+        coseJavaVersion = "1.1.0"
+        jsonSchemaValidatorVersion = "2.2.6"
+        jacksonDataformatCborVersion = "2.12.3"
+        bcpkixVersion = "1.68"
+        jUnitJupiterVersion = "5.7.1"
+        hamcrestVersion = "2.2"
     }
 
     repositories {

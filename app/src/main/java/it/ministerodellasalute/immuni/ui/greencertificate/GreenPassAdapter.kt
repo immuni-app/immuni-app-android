@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import it.ministerodellasalute.immuni.GreenCertificateDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
-import it.ministerodellasalute.immuni.logic.user.models.GreenCertificate
+import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.util.ImageUtils
 
@@ -22,7 +22,7 @@ class GreenPassAdapter(
 ) :
     RecyclerView.Adapter<GreenPassAdapter.GreenPassVH>() {
 
-    var data: List<GreenCertificate> = emptyList()
+    var data: List<GreenCertificateUser> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()

@@ -17,6 +17,20 @@ package it.ministerodellasalute.immuni
 
 import android.app.Application
 import androidx.lifecycle.SavedStateHandle
+import dgca.verifier.app.decoder.base45.Base45Service
+import dgca.verifier.app.decoder.base45.DefaultBase45Service
+import dgca.verifier.app.decoder.cbor.CborService
+import dgca.verifier.app.decoder.cbor.DefaultCborService
+import dgca.verifier.app.decoder.compression.CompressorService
+import dgca.verifier.app.decoder.compression.DefaultCompressorService
+import dgca.verifier.app.decoder.cose.CoseService
+import dgca.verifier.app.decoder.cose.CryptoService
+import dgca.verifier.app.decoder.cose.DefaultCoseService
+import dgca.verifier.app.decoder.cose.VerificationCryptoService
+import dgca.verifier.app.decoder.prefixvalidation.DefaultPrefixValidationService
+import dgca.verifier.app.decoder.prefixvalidation.PrefixValidationService
+import dgca.verifier.app.decoder.schema.DefaultSchemaValidator
+import dgca.verifier.app.decoder.schema.SchemaValidator
 import it.ministerodellasalute.immuni.api.services.*
 import it.ministerodellasalute.immuni.config.*
 import it.ministerodellasalute.immuni.debugmenu.DebugMenu
@@ -74,6 +88,15 @@ import org.koin.dsl.module
  * Dependency Injection Koin module.
  */
 val appModule = module {
+
+    single { DefaultPrefixValidationService() as PrefixValidationService }
+    single { DefaultBase45Service() as Base45Service }
+    single { DefaultCompressorService() as CompressorService }
+    single { VerificationCryptoService() as CryptoService }
+    single { DefaultCoseService() as CoseService }
+    single { DefaultSchemaValidator() as SchemaValidator }
+    single { DefaultCborService() as CborService }
+
     /**
      * App Configuration Service APIs
      */
@@ -366,7 +389,7 @@ val appModule = module {
     viewModel { StateCloseViewModel(get(), get()) }
     viewModel { SupportViewModel(androidContext(), get(), get()) }
     viewModel { CunViewModel(get(), get(), get()) }
-    viewModel { GreenCertificateViewModel(get(), get(), get(), get()) }
+    viewModel { GreenCertificateViewModel(androidContext(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 }
 
 val immuniMoshi = moshi(

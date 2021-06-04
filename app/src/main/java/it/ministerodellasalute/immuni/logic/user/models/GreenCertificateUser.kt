@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class GreenCertificate(
+data class GreenCertificateUser(
     @field:Json(name = "base64") val base64: String,
     @field:Json(name = "nameSurname") val nameSurname: String = "-",
     @field:Json(name = "birthDate") val birthDate: String = "-",

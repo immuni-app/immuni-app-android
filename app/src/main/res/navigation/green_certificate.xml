@@ -70,7 +70,7 @@
         tools:layout="@layout/green_certificate_more_details">
         <argument
             android:name="greenCertificate"
-            app:argType="it.ministerodellasalute.immuni.logic.user.models.GreenCertificate" />
+            app:argType="it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser" />
     </dialog>
 
     <action

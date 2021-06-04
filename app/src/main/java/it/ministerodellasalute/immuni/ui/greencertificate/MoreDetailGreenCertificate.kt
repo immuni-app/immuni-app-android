@@ -9,7 +9,7 @@ import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.extensions.utils.coloredClickable
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
-import it.ministerodellasalute.immuni.logic.user.models.GreenCertificate
+import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 import kotlinx.android.synthetic.main.green_certificate_more_details.*
 import org.koin.android.ext.android.get
@@ -19,7 +19,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
     lateinit var settingsManager: ConfigurationSettingsManager
 
-    lateinit var greenCertificateDetail: GreenCertificate
+    lateinit var greenCertificateDetail: GreenCertificateUser
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

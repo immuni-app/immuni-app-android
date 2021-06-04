@@ -22,7 +22,7 @@ import com.squareup.moshi.JsonClass
 data class User(
     @field:Json(name = "region") val region: Region,
     @field:Json(name = "province") val province: Province,
-    @field:Json(name = "greenPass") val greenPass: MutableList<GreenCertificate> = mutableListOf()
+    @field:Json(name = "greenPass") val greenPass: MutableList<GreenCertificateUser> = mutableListOf()
 )
 
 data class PartialUser(
