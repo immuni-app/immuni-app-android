@@ -48,7 +48,6 @@ class DefaultCborService : CborService {
             return CBORMapper()
                 .readValue(hcertv1, GreenCertificate::class.java)
                 .also { verificationResult.cborDecoded = true }
-
         } catch (e: Throwable) {
             return null
         }

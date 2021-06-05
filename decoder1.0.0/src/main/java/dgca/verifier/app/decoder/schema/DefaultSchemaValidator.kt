@@ -52,7 +52,6 @@ class DefaultSchemaValidator : SchemaValidator {
 
             isValid = report.isSuccess
             verificationResult.isSchemaValid = isValid
-
         } catch (ex: Exception) {
         }
 

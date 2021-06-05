@@ -63,3 +63,11 @@ fun Date.byAdding(
 private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
 val Date.isoDateString: String get() = dateFormatter.format(this)
+
+fun String.formatDateString(date: String?): String? {
+    return if (date != null) {
+        SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(date)!!.isoDateString
+    } else {
+        null
+    }
+}

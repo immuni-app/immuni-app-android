@@ -31,7 +31,8 @@ fun generateClaimSignature(
     tanHash: String,
     certHash: String,
     publicKey: String,
-    privateKey: PrivateKey, sigAlg: String
+    privateKey: PrivateKey,
+    sigAlg: String
 ): String {
     val sigValue = StringBuilder()
     sigValue.append(tanHash)

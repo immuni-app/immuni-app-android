@@ -181,6 +181,6 @@ dependencies {
     debugImplementation "androidx.fragment:fragment-testing:$testFragmentVersion"
 
     implementation "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava"
-    implementation 'javax.inject:javax.inject:1'
+    implementation "com.journeyapps:zxing-android-embedded:4.2.0"
 
 }

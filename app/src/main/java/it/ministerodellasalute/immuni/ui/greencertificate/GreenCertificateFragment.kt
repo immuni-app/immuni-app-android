@@ -41,6 +41,7 @@ import it.ministerodellasalute.immuni.util.ImageUtils
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.green_certificate.*
 import org.koin.android.ext.android.get
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class GreenCertificateFragment : Fragment(R.layout.green_certificate), ConfirmationDialogListener {
 
@@ -52,6 +53,7 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
     var positionToDelete: Int? = null
 
     lateinit var greenPassAdapter: GreenPassAdapter
+    private lateinit var viewModel: GreenCertificateViewModel
 
     companion object {
         const val DELETE_QR = 200
@@ -68,6 +70,7 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
         )
 
         userManager = get()
+        viewModel = getViewModel()
 
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -87,7 +90,8 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
 
         greenPassAdapter = GreenPassAdapter(
             context = requireContext(),
-            fragment = this@GreenCertificateFragment
+            fragment = this@GreenCertificateFragment,
+            viewModel = viewModel
         )
         greenPassAdapter.data = userManager.user.value?.greenPass!!
 

@@ -65,10 +65,8 @@ class DefaultCertificateDecoder(private val base45Decoder: Base45Decoder) :
             return CertificateDecodingResult.Error(CertificateDecodingError.GreenCertificateDecodingError(error))
         } ?: return CertificateDecodingResult.Error(CertificateDecodingError.EmptyGreenCertificate)
 
-
         return CertificateDecodingResult.Success(greenCertificate)
     }
-
 
     private fun ByteArray.decompressBase45DecodedData(): ByteArray {
         // ZLIB magic headers

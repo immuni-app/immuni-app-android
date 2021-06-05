@@ -38,8 +38,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.GreenCertificateDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
-import it.ministerodellasalute.immuni.extensions.utils.byAdding
 import it.ministerodellasalute.immuni.extensions.view.hideKeyboard
+import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
 import java.text.SimpleDateFormat
@@ -47,6 +47,7 @@ import java.util.*
 import kotlin.math.abs
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.generate_green_certificate.*
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
@@ -60,6 +61,7 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
     private lateinit var viewModel: GreenCertificateViewModel
     val builder = MaterialDatePicker.Builder.datePicker()
     private lateinit var materialDatePicker: MaterialDatePicker<Long>
+    private lateinit var userManager: UserManager
 
     override fun onResume() {
         super.onResume()
@@ -73,6 +75,7 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = getViewModel()
+        userManager = get()
 
         // Fade out toolbar on scroll
         appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
@@ -295,20 +298,20 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
 
     @SuppressLint("SimpleDateFormat")
     private fun openDatePicker() {
-        val endYear = Calendar.getInstance()
-        endYear.set(endYear.get(Calendar.YEAR), 11, 31)
-        val minDate = Date().byAdding(days = -1).time
-        val maxDate = Date(endYear.timeInMillis).byAdding(year = 11).time
-        val constraintsBuilder = CalendarConstraints.Builder()
-        constraintsBuilder.setEnd(maxDate)
-        constraintsBuilder.setStart(minDate)
-        constraintsBuilder.setValidator(
-            RangeValidator(
-                minDate,
-                maxDate
-            )
-        )
-        builder.setCalendarConstraints(constraintsBuilder.build())
+//        val endYear = Calendar.getInstance()
+//        endYear.set(endYear.get(Calendar.YEAR), 11, 31)
+//        val minDate = Date().byAdding(days = -1).time
+//        val maxDate = Date(endYear.timeInMillis).byAdding(year = 11).time
+//        val constraintsBuilder = CalendarConstraints.Builder()
+//        constraintsBuilder.setEnd(maxDate)
+//        constraintsBuilder.setStart(minDate)
+//        constraintsBuilder.setValidator(
+//            RangeValidator(
+//                minDate,
+//                maxDate
+//            )
+//        )
+//        builder.setCalendarConstraints(constraintsBuilder.build())
         builder.setTheme(R.style.Widget_AppTheme_MaterialDatePicker)
         materialDatePicker = builder.build()
         materialDatePicker.show(requireActivity().supportFragmentManager, "DATE PICKER")

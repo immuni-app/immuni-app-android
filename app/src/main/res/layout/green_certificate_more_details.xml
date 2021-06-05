@@ -35,6 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
@@ -45,10 +46,28 @@
         app:layout_constraintTop_toBottomOf="@+id/question">
 
         <TextView
+            android:id="@+id/subHeading"
+            style="@style/H3SectionHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="@color/grey_dark"
+            android:fontFamily="@font/euclid_circular_bold"
+            android:text="@string/green_certificate_disease_text"/>
+
+        <TextView
             style="@style/P1Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/green_certificate_more_details_target_agent" />
+            android:textStyle="italic"
+            android:layout_marginTop="24dp"
+            android:text="@string/green_certificate_disease_label" />
+
+        <TextView
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/green_certificate_disease" />
 
         <TextView
             android:id="@+id/diseaseOrtargetAgent"
@@ -56,104 +75,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/grey_dark"
-            android:fontFamily="@font/euclid_circular_bold" />
-
-        <TextView
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/green_certificate_more_details_vaccine_type"
-            android:layout_marginTop="24dp" />
-
-        <TextView
-            android:id="@+id/vaccineType"
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey_dark"
-            android:fontFamily="@font/euclid_circular_bold" />
-
-        <TextView
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/green_certificate_more_details_denom_vaccine"
-            android:layout_marginTop="24dp" />
-
-        <TextView
-            android:id="@+id/denomVaccine"
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey_dark"
-            android:fontFamily="@font/euclid_circular_bold" />
-
-        <TextView
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/green_certificate_more_details_producer_vaccine"
-            android:layout_marginTop="24dp" />
-
-        <TextView
-            android:id="@+id/producerVaccine"
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey_dark"
-            android:fontFamily="@font/euclid_circular_bold" />
-
-        <TextView
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/green_certificate_more_details_doses_number"
-            android:layout_marginTop="24dp" />
-
-        <TextView
-            android:id="@+id/dosesNumber"
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey_dark"
-            android:fontFamily="@font/euclid_circular_bold" />
-
-        <TextView
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/green_certificate_more_details_data_last_administration"
-            android:layout_marginTop="24dp" />
-
-        <TextView
-            android:id="@+id/lastAdministration"
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/grey_dark"
-            android:fontFamily="@font/euclid_circular_bold" />
-
-        <TextView
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/green_certificate_more_details_country_vaccination"
-            android:layout_marginTop="24dp" />
-
-        <TextView
-            android:id="@+id/countryVaccination"
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:fontFamily="@font/euclid_circular_bold"
-            android:textColor="@color/grey_dark" />
+            android:text="@string/green_certificate_disease_text"/>
 
         <TextView
             style="@style/P1Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/green_certificate_more_details_entity_issued_certificate"
+            android:textStyle="italic"
+            android:text="@string/green_certificate_certificate_issuer_label"
             android:layout_marginTop="24dp" />
+
+        <TextView
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/green_certificate_certificate_issuer" />
 
         <TextView
             android:id="@+id/entityIssuedCertificate"

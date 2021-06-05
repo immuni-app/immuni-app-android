@@ -17,11 +17,15 @@ package it.ministerodellasalute.immuni.ui.greencertificate
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.zxing.*
+import com.google.zxing.common.HybridBinarizer
 import dgca.verifier.app.decoder.base45.Base45Service
 import dgca.verifier.app.decoder.cbor.CborService
 import dgca.verifier.app.decoder.compression.CompressorService
@@ -35,17 +39,14 @@ import dgca.verifier.app.decoder.schema.SchemaValidator
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.livedata.Event
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
-import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassToken
 import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassValidationResult
-import it.ministerodellasalute.immuni.logic.greencovidcertificate.model.*
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.logic.user.models.User
 import it.ministerodellasalute.immuni.util.DigitValidator
-import kotlinx.coroutines.Dispatchers
+import kotlinx.android.synthetic.main.report_positivity_cun.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.core.KoinComponent
 
 private const val TAG = "GreenCertificateVM"
@@ -72,8 +73,8 @@ class GreenCertificateViewModel(
     private val _alertError = MutableLiveData<Event<List<String>>>()
     val alertError: LiveData<Event<List<String>>> = _alertError
 
-    private val _navigateToSuccessPage = MutableLiveData<Event<GreenPassToken>>()
-    val navigateToSuccessPage: LiveData<Event<GreenPassToken>> = _navigateToSuccessPage
+    private val _navigateToSuccessPage = MutableLiveData<Event<Boolean>>()
+    val navigateToSuccessPage: LiveData<Event<Boolean>> = _navigateToSuccessPage
 
     fun genera(
         typeToken: String,
@@ -88,22 +89,32 @@ class GreenCertificateViewModel(
             _loading.value = true
 
             delay(1000)
-
+            val dateSplitted = expiredHealthIDDate.split("/")
+            val dateToPost = dateSplitted.reversed().joinToString("-")
             when (val result = exposureManager.getGreenCard(
-                typeToken, token, healthInsurance, expiredHealthIDDate
+                typeToken, token, healthInsurance, dateToPost
             )) {
                 is GreenPassValidationResult.Success -> {
-
-                    val user = userManager.user
-                    user.value?.greenPass!!.add(decodeGreenPass(result.greenpass.greenPass))
-                    userManager.save(
-                        User(
-                            region = user.value?.region!!,
-                            province = user.value?.province!!,
-                            greenPass = user.value?.greenPass!!
+                    val greenCertificate = decode(decodeImage(result.greenpass.greenPass.toString()))
+                    if (greenCertificate == null) {
+                        _navigateToSuccessPage.value = Event(false)
+                    } else {
+                        val user = userManager.user
+                        user.value?.greenPass!!.add(
+                            GreenCertificateUser(
+                                base64 = result.greenpass.greenPass.toString(),
+                                data = greenCertificate
+                            )
                         )
-                    )
-                    _navigateToSuccessPage.value = Event(result.greenpass)
+                        userManager.save(
+                            User(
+                                region = user.value?.region!!,
+                                province = user.value?.province!!,
+                                greenPass = user.value?.greenPass!!
+                            )
+                        )
+                        _navigateToSuccessPage.value = Event(true)
+                    }
                 }
                 is GreenPassValidationResult.ServerError -> {
                     _alertError.value =
@@ -202,45 +213,29 @@ class GreenCertificateViewModel(
         return false
     }
 
-    private fun decodeGreenPass(greenPass: String): GreenCertificateUser {
-        val base45 = "HC1:NCFOXN%TS3DH3ZSUZK+.V0ETD%65NL-AH-R6IOOP-IIDTMB9GJL1%BJ.4+QI6M8SA3/-2E%5VR5VVB9ZILAPIZI.EJJ14B2MZ8DC8COVD9VC/MJK.A+ C/8DXED%JCC8C62KXJAUYCOS2QW6%PQRZMPK9I+0MCIKYJGCC:H3J1D1I3-*TW CXBDW33+ CD8CQ8C0EC%*TGHD1KT0NDPST7KDQHDN8TSVD2NDB*S6ECX%LBZI+PB/VSQOL9DLKWCZ3EBKD8IIGDB0D48UJ06J9UBSVAXCIF4LEIIPBJ7OICWK%5BBS22T9UF5LDCPF5RBQ746B46JZ0V-OEA7IB6" + "$" + "C94JB2E9Z3E8AE-QD+PB.QCD-H/8O3BEQ8L9VN.6A4JBLHLM7A"+"$"+"JD IBCLCK5MJMS68H36DH.K:Z28AL**I3DN3F7MHFEVV%*4HBTSCNT 4C%C47TO*47*KB*KYQT3LT+*4." + "$" + "S6ZC0JB%JB% NHTC:OS:DT887WA6+1V/FOX048H6HT2D:M%M3 -IKYAT03-KFL"+"$"+"T6QM*17H.3RO6-BBC%F+KTW:LKO3*QTHSP1*7APSOP8WJGV"+"$"+"FPUU5U1ZN2X%ERMH"
-        decode(base45)
-        return GreenCertificateUser(
-            base64 = greenPass,
-            vaccineName = "Moderna",
-            dosesNumber = "1",
-            totalDosesNumber = "2"
-        )
-    }
-
     @SuppressLint("SetTextI18n")
-    fun decode(code: String) {
-        viewModelScope.launch {
-            _loading.value = true
-            var greenCertificate: GreenCertificate? = null
-            val verificationResult = VerificationResult()
+    fun decode(base45: String): GreenCertificate? {
+        val greenCertificate: GreenCertificate?
+        val verificationResult = VerificationResult()
+        val plainInput = prefixValidationService.decode(base45, verificationResult)
+        val compressedCose = base45Service.decode(plainInput, verificationResult)
+        val cose = compressorService.decode(compressedCose, verificationResult)
 
-            withContext(Dispatchers.IO) {
-                val plainInput = prefixValidationService.decode(code, verificationResult)
-                val compressedCose = base45Service.decode(plainInput, verificationResult)
-                val cose = compressorService.decode(compressedCose, verificationResult)
+        val coseData = coseService.decode(cose, verificationResult)
+        if (coseData == null) {
+            Log.d(TAG, "Verification failed: COSE not decoded")
+            return null
+        }
 
-                val coseData = coseService.decode(cose, verificationResult)
-                if (coseData == null) {
-                    Log.d(TAG, "Verification failed: COSE not decoded")
-                    return@withContext
-                }
+        val kid = coseData.kid
+        if (kid == null) {
+            Log.d(TAG, "Verification failed: cannot extract kid from COSE")
+            return null
+        }
 
-                val kid = coseData.kid
-                if (kid == null) {
-                    Log.d(TAG, "Verification failed: cannot extract kid from COSE")
-                    return@withContext
-                }
-
-                schemaValidator.validate(coseData.cbor, verificationResult)
-                greenCertificate = cborService.decode(coseData.cbor, verificationResult)
-                validateCertData(greenCertificate, verificationResult)
-
+        schemaValidator.validate(coseData.cbor, verificationResult)
+        greenCertificate = cborService.decode(coseData.cbor, verificationResult)
+        validateCertData(greenCertificate, verificationResult)
 
 //                // Load from API for now. Replace with cache logic.
 //                val certificate = exposureManager.getCertificate(kid.toBase64())
@@ -250,19 +245,46 @@ class GreenCertificateViewModel(
 //                    return@withContext
 //                }
 //                cryptoService.validate(cose, certificate, verificationResult)
-            }
-            _loading.value = false
-            val cert = greenCertificate?.toCertificateModel()
-            val verRes = verificationResult
+//            }
 
-            var d = ""
-        }
+        return greenCertificate
     }
 
-    private fun validateCertData(certificate: GreenCertificate?, verificationResult: VerificationResult) {
+    private fun decodeImage(encodedImage: String): String {
+        val decodedString: ByteArray = Base64.decode(encodedImage, Base64.DEFAULT)
+        val qrcodeImage = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        var contents = ""
+        val intArray = IntArray(qrcodeImage.width * qrcodeImage.height)
+        qrcodeImage.getPixels(
+            intArray,
+            0,
+            qrcodeImage.width,
+            0,
+            0,
+            qrcodeImage.width,
+            qrcodeImage.height
+        )
+        val source: LuminanceSource =
+            RGBLuminanceSource(qrcodeImage.width, qrcodeImage.height, intArray)
+        val bitmap = BinaryBitmap(HybridBinarizer(source))
+        val reader: Reader = MultiFormatReader()
+        try {
+            val result: Result = reader.decode(bitmap)
+            contents = result.text
+        } catch (e: Exception) {
+            Log.e("QrTest", "Error decoding barcode", e)
+        }
+        return contents
+    }
+
+    private fun validateCertData(
+        certificate: GreenCertificate?,
+        verificationResult: VerificationResult
+    ) {
         certificate?.tests?.let {
             if (it.isNotEmpty()) {
-                verificationResult.testVerification = TestVerificationResult(it.first().isTestValid())
+                verificationResult.testVerification =
+                    TestVerificationResult(it.first().isTestValid())
             }
         }
     }

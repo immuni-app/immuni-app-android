@@ -57,14 +57,21 @@ interface ExposureIngestionService {
     ): Response<ResponseBody>
 
     @JsonClass(generateAdapter = true)
-    data class GreenCardResponse(val greenPass: String)
+    data class GreenCardRequest(
+        @field:Json(name = "padding") override val padding: String = "",
+        @field:Json(name = "token_type") val token_type: String,
+        @field:Json(name = "last_his_number") val healthInsuranceCard: String,
+        @field:Json(name = "his_expiring_date") val his_expiring_date: String
+    ) : RequestWithPadding
 
-    @GET("v1/ingestion/get-dgc")
+    @JsonClass(generateAdapter = true)
+    data class GreenCardResponse(val qrcode: String)
+
+    @POST("v1/ingestion/get-dgc")
     suspend fun getGreenCard(
         @Header("Authorization") authorization: String,
-        @Query("token_typestring") token_typestring: String,
-        @Query("last_his_number") healthInsurance: String,
-        @Query("expired_healt_ID_date") expiredHealthIDDate: String
+        @Header("Immuni-Dummy-Data") isDummyData: Int,
+        @Body body: GreenCardRequest
     ): Response<GreenCardResponse>
 
     // endregion

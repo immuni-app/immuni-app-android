@@ -43,7 +43,6 @@ class DefaultCoseService : CoseService {
             }
             val kidByteString = kid.GetByteString()
             CoseData(content, kidByteString)
-
         } catch (e: Throwable) {
             null
         }

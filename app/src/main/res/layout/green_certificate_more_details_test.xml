@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="@string/green_certificate_type_test_label"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_type_test" />
+
+    <TextView
+        android:id="@+id/testType"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_dark"
+        android:fontFamily="@font/euclid_circular_bold" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="@string/green_certificate_test_result_label"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_test_result" />
+
+    <TextView
+        android:id="@+id/resultTest"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_dark"
+        android:fontFamily="@font/euclid_circular_bold" />
+
+    <TextView
+        android:id="@+id/ratNameTestLabelEng"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="@string/green_certificate_rat_test_label"
+        android:layout_marginTop="24dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/ratNameTestLabel"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_rat_test"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/ratNameTest"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_dark"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/naaNameTestLabelEng"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="@string/green_certificate_naa_test_label"
+        android:layout_marginTop="24dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/nameNaaLabel"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_naa_test"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/nameNaa"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_dark"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:visibility="gone" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="@string/green_certificate_date_time_sc_label"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_date_time_sc" />
+
+    <TextView
+        android:id="@+id/dateTimeSampleCollection"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_dark"
+        android:fontFamily="@font/euclid_circular_bold" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="@string/green_certificate_date_time_test_result_label"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_date_time_test_result" />
+
+    <TextView
+        android:id="@+id/dateTimeTestResult"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:textColor="@color/grey_dark" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="@string/green_certificate_testing_centre_label"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_testing_centre" />
+
+    <TextView
+        android:id="@+id/testingCentre"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:textColor="@color/grey_dark" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="@string/green_certificate_country_test_label"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_country_test" />
+
+    <TextView
+        android:id="@+id/countryTest"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:textColor="@color/grey_dark" />
+
+</LinearLayout>

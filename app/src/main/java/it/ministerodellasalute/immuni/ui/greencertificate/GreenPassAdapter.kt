@@ -1,11 +1,13 @@
 package it.ministerodellasalute.immuni.ui.greencertificate
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +20,8 @@ import it.ministerodellasalute.immuni.util.ImageUtils
 
 class GreenPassAdapter(
     val context: Context,
-    val fragment: GreenCertificateFragment
+    val fragment: GreenCertificateFragment,
+    val viewModel: GreenCertificateViewModel
 ) :
     RecyclerView.Adapter<GreenPassAdapter.GreenPassVH>() {
 
@@ -29,6 +32,7 @@ class GreenPassAdapter(
         }
 
     inner class GreenPassVH(v: View) : RecyclerView.ViewHolder(v) {
+        val container: LinearLayout = v.findViewById(R.id.container)
         val qrCode: ImageView = v.findViewById(R.id.qrCode)
         val downloadButton: Button = v.findViewById(R.id.downloadButton)
         val deleteButton: Button = v.findViewById(R.id.deleteButton)
@@ -48,9 +52,11 @@ class GreenPassAdapter(
         return GreenPassVH(v)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: GreenPassVH, position: Int) {
+        val greenCertificate = data[position]
         if (data.isNotEmpty()) {
-            holder.qrCode.setImageBitmap(ImageUtils.convert(data[position].base64))
+            holder.qrCode.setImageBitmap(ImageUtils.convert(greenCertificate.base64))
         }
         if (data.size > 1) {
             holder.swipeToShowQR.visibility = View.VISIBLE
@@ -58,12 +64,28 @@ class GreenPassAdapter(
             holder.swipeToShowQR.visibility = View.GONE
         }
 
-        holder.surnameNameText.text = data[position].nameSurname
-        holder.birthDateText.text = data[position].birthDate
-        holder.certificateIdText.text = data[position].certificateID
+        holder.surnameNameText.text =
+            greenCertificate.data?.person?.familyName + " " + greenCertificate.data?.person?.givenName
+
+        if (holder.surnameNameText.text.isBlank()) holder.surnameNameText.text = "-"
+        holder.birthDateText.text = greenCertificate.data?.dateOfBirth ?: "-"
+
+        holder.certificateIdText.text = when (true) {
+            greenCertificate.data?.recoveryStatements != null -> {
+                greenCertificate.data!!.recoveryStatements!![0].certificateIdentifier
+            }
+            greenCertificate.data?.tests != null -> {
+                greenCertificate.data?.tests!![0].certificateIdentifier
+            }
+            greenCertificate.data?.vaccinations != null -> {
+                greenCertificate.data!!.vaccinations!![0].certificateIdentifier
+            }
+            else -> null
+        }
 
         holder.moreDetails.setSafeOnClickListener {
-            val action = GreenCertificateDirections.actionMoreDetailsGreenCertificateDialog(data[position])
+            val action =
+                GreenCertificateDirections.actionMoreDetailsGreenCertificateDialog(data[position])
             fragment.findNavController().navigate(action)
         }
 

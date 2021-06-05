@@ -34,7 +34,7 @@ object ImageUtils {
     fun convert(base64Str: String): Bitmap {
         val decodedBytes: ByteArray = Base64.decode(
             base64Str.substring(base64Str.indexOf(",") + 1),
-            Base64.DEFAULT
+            Base64.CRLF
         )
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
     }
