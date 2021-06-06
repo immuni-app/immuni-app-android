@@ -65,25 +65,25 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
                 subHeading.text = getString(R.string.green_certificate_subHeading_vaccine)
                 vaccineType.text = setTextOrDefault(
-                    DecodeData.maFromCode(
-                        greenCertificateDetail.data?.vaccinations?.get(0)!!.manufacturer
+                    DecodeData.vpFromCode(
+                        greenCertificateDetail.data?.vaccinations?.get(0)!!.vaccine
                     )?.let {
                         getString(it)
                     })
                 denomVaccine.text =
                     setTextOrDefault(
-                        DecodeData.vpFromCode(
+                        DecodeData.mpFromCode(
                             greenCertificateDetail.data?.vaccinations?.get(
                                 0
-                            )!!.vaccine
+                            )!!.medicinalProduct
                         )?.let {
                             getString(it)
                         })
                 producerVaccine.text =
-                    setTextOrDefault(DecodeData.mpFromCode(
+                    setTextOrDefault(DecodeData.maFromCode(
                         greenCertificateDetail.data?.vaccinations?.get(
                             0
-                        )!!.medicinalProduct
+                        )!!.manufacturer
                     )
                         ?.let { getString(it) })
                 validityVaccine.text =
@@ -127,18 +127,18 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                                 )
                             })
 
-                if (greenCertificateDetail.data?.tests?.get(0)!!.testName != null) {
-                    nameNaa.text =
-                        setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testName)
-                    nameNaaLabel.visibility = View.VISIBLE
-                    nameNaa.visibility = View.VISIBLE
-                    naaNameTestLabelEng.visibility = View.VISIBLE
-                } else {
+                if (!greenCertificateDetail.data?.tests?.get(0)!!.testNameAndManufacturer.isNullOrBlank()) {
                     ratNameTest.text =
                         setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testNameAndManufacturer)
                     ratNameTestLabelEng.visibility = View.VISIBLE
                     ratNameTestLabel.visibility = View.VISIBLE
                     ratNameTest.visibility = View.VISIBLE
+                } else {
+                    nameNaa.text =
+                        setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testName)
+                    nameNaaLabel.visibility = View.VISIBLE
+                    nameNaa.visibility = View.VISIBLE
+                    naaNameTestLabelEng.visibility = View.VISIBLE
                 }
                 dateTimeSampleCollection.text =
                     setTextOrDefault(convertDate(greenCertificateDetail.data?.tests?.get(0)!!.dateTimeOfCollection))

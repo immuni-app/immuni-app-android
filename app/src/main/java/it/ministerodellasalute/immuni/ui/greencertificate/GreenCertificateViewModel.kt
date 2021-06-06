@@ -44,6 +44,7 @@ import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.logic.user.models.User
 import it.ministerodellasalute.immuni.util.DigitValidator
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 
@@ -92,25 +93,27 @@ class GreenCertificateViewModel(
                 typeToken, token, healthInsurance, dateToPost
             )) {
                 is GreenPassValidationResult.Success -> {
+                    val user = userManager.user
                     val greenCertificate =
                         decode(decodeImage(result.greenpass.greenPass.toString()))
                     if (greenCertificate == null) {
                         _navigateToSuccessPage.value = Event(false)
                     } else {
-                        val user = userManager.user
-                        user.value?.greenPass!!.add(
-                            GreenCertificateUser(
-                                base64 = result.greenpass.greenPass.toString(),
-                                data = greenCertificate
+                        if (!checkIfExists(greenCertificate, user)) {
+                            user.value?.greenPass!!.add(
+                                GreenCertificateUser(
+                                    base64 = result.greenpass.greenPass.toString(),
+                                    data = greenCertificate
+                                )
                             )
-                        )
-                        userManager.save(
-                            User(
-                                region = user.value?.region!!,
-                                province = user.value?.province!!,
-                                greenPass = user.value?.greenPass!!
+                            userManager.save(
+                                User(
+                                    region = user.value?.region!!,
+                                    province = user.value?.province!!,
+                                    greenPass = user.value?.greenPass!!
+                                )
                             )
-                        )
+                        }
                         _navigateToSuccessPage.value = Event(true)
                     }
                 }
@@ -275,5 +278,41 @@ class GreenCertificateViewModel(
                     TestVerificationResult(it.first().isTestValid())
             }
         }
+    }
+
+    private fun checkIfExists(greenCertificate: GreenCertificate, user: StateFlow<User?>): Boolean {
+        var saved = false
+        val issuerID = when (true) {
+            greenCertificate.tests != null -> {
+                greenCertificate.tests!![0].certificateIdentifier
+            }
+            greenCertificate.vaccinations != null -> {
+                greenCertificate.vaccinations!![0].certificateIdentifier
+            }
+            greenCertificate.recoveryStatements != null -> {
+                greenCertificate.recoveryStatements!![0].certificateIdentifier
+            }
+            else -> null
+        }
+
+        if (issuerID != null) {
+            for (greenPass in user.value?.greenPass!!) {
+                when (true) {
+                    greenPass.data?.tests != null -> {
+                        if (greenPass.data?.tests!![0].certificateIdentifier == issuerID) saved =
+                            true
+                    }
+                    greenPass.data?.vaccinations != null -> {
+                        if (greenPass.data?.vaccinations!![0].certificateIdentifier == issuerID) saved =
+                            true
+                    }
+                    greenPass.data?.recoveryStatements != null -> {
+                        if (greenPass.data?.recoveryStatements!![0].certificateIdentifier == issuerID) saved =
+                            true
+                    }
+                }
+            }
+        }
+        return saved
     }
 }

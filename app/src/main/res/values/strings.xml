@@ -442,8 +442,8 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_pass_generation_successfully">EU Digital Covid Certificate recuperato con successo</string>
     <string name="green_pass_select_type_token">Seleziona tipologia</string>
     <string-array name="type_token">
-        <item>CUN</item>
         <item>NRFE</item>
+        <item>CUN</item>
         <item>NUCG</item>
         <item>AUTHCODE</item>
     </string-array>
@@ -477,11 +477,11 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="dcg_clear_code">Elimina codice</string>
     <string name="get_dgc_loading">Recupero EU Digital Covid Certificate in corso..</string>
     <string name="green_certificate_tab_swipe">Scorri per visualizzare gli altri certificati</string>
-    <string name="green_certificate_tab_surname_name_label" translatable="false">Surname Name</string>
-    <string name="green_certificate_tab_surname_name">Cognome e Nome</string>
+    <string name="green_certificate_tab_surname_name_label" translatable="false">Surname and name</string>
+    <string name="green_certificate_tab_surname_name">Cognome e nome</string>
     <string name="green_certificate_tab_birth_date_label" translatable="false">Birth date (aaaa-mm-gg)</string>
     <string name="green_certificate_tab_birth_date">Data di nascita (aaaa-mm-gg)</string>
-    <string name="green_certificate_tab_certificate_id_label" translatable="false">Unique Certificate Identifier, UVCI</string>
+    <string name="green_certificate_tab_certificate_id_label" translatable="false">Unique certificate identifier: UVCI</string>
     <string name="green_certificate_tab_certificate_id">Identificativo univoco del certificato</string>
     <string name="green_certificate_tab_more_details">Più dettagli</string>
     <string name="green_certificate_tab_download">Scarica</string>
@@ -500,41 +500,41 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_disease_label" translatable="false">Disease or agent targeted</string>
     <string name="green_certificate_disease">Malattia o agente bersaglio</string>
     <string name="green_certificate_disease_text" translatable="false">Covid-19</string>
-    <string name="green_certificate_certificate_issuer_label" translatable="false">Certificate Issuer</string>
+    <string name="green_certificate_certificate_issuer_label" translatable="false">Certificate issuer</string>
     <string name="green_certificate_certificate_issuer">Ente che ha rilasciato il certificato</string>
-    <string name="green_certificate_vaccine_type_label" translatable="false">vaccine or prophylaxis</string>
+    <string name="green_certificate_vaccine_type_label" translatable="false">Vaccine or prophylaxis</string>
     <string name="green_certificate_vaccine_type">Tipo di vaccino</string>
-    <string name="green_certificate_vaccine_medicinal_product_label" translatable="false">vaccine medicinal product</string>
+    <string name="green_certificate_vaccine_medicinal_product_label" translatable="false">Vaccine medicinal product</string>
     <string name="green_certificate_vaccine_medicinal_product">Denominazione del vaccino</string>
     <string name="green_certificate_producer_vaccine_label" translatable="false">Marketing Authorization Holder - if no MAH present, then manufacturer</string>
     <string name="green_certificate_producer_vaccine">Produttore o titolare dell\'AIC del vaccino</string>
-    <string name="green_certificate_dose_number_label" translatable="false">Dose Number</string>
+    <string name="green_certificate_dose_number_label" translatable="false">Dose number/total series of doses</string>
     <string name="green_certificate_dose_number">Numero della dose effettuata/numero totale dosi previste</string>
-    <string name="green_certificate_date_of_vaccination_label" translatable="false">Date of Vaccination</string>
+    <string name="green_certificate_date_of_vaccination_label" translatable="false">Date of vaccination</string>
     <string name="green_certificate_date_of_vaccination">Data dell\'ultima somministrazione</string>
-    <string name="green_certificate_country_of_vaccination_label" translatable="false">Country of Vaccination</string>
+    <string name="green_certificate_country_of_vaccination_label" translatable="false">Country of vaccination</string>
     <string name="green_certificate_country_of_vaccination">Nazione in cui è stata eseguita la vaccinazione</string>
-    <string name="green_certificate_date_of_first_positive_label" translatable="false">Date of First Positive Test Result</string>
+    <string name="green_certificate_date_of_first_positive_label" translatable="false">Date of first positive test result</string>
     <string name="green_certificate_date_of_first_positive">Data del primo test positivo</string>
-    <string name="green_certificate_certificate_valid_from_label" translatable="false">Certificate Valid From</string>
+    <string name="green_certificate_certificate_valid_from_label" translatable="false">Certificate valid from:</string>
     <string name="green_certificate_certificate_valid_from">Certificato valido da:</string>
-    <string name="green_certificate_certificate_valid_until_label" translatable="false">Certificate Valid Until</string>
+    <string name="green_certificate_certificate_valid_until_label" translatable="false">Certificate valid until:</string>
     <string name="green_certificate_certificate_valid_until">Certificato valido a:</string>
-    <string name="green_certificate_type_test_label" translatable="false">Type of Test</string>
+    <string name="green_certificate_type_test_label" translatable="false">Type of test</string>
     <string name="green_certificate_type_test">Tipo di Test</string>
-    <string name="green_certificate_test_result_label" translatable="false">Test Result</string>
+    <string name="green_certificate_test_result_label" translatable="false">Test result</string>
     <string name="green_certificate_test_result">Risultato del test</string>
-    <string name="green_certificate_rat_test_label" translatable="false">RAT Test name and manufacturer</string>
+    <string name="green_certificate_rat_test_label" translatable="false">RAT test name and manufacturer</string>
     <string name="green_certificate_rat_test">Nome del test antigienico e nome del produttore</string>
-    <string name="green_certificate_naa_test_label" translatable="false">NAA Test Name</string>
+    <string name="green_certificate_naa_test_label" translatable="false">NAA test name</string>
     <string name="green_certificate_naa_test">Nome del test molecolare</string>
-    <string name="green_certificate_date_time_sc_label" translatable="false">Date/Time of Sample Collection</string>
+    <string name="green_certificate_date_time_sc_label" translatable="false">Date/time of sample collection</string>
     <string name="green_certificate_date_time_sc">Data/ora del campione raccolto</string>
-    <string name="green_certificate_date_time_test_result_label" translatable="false">Date/Time of Test Result</string>
+    <string name="green_certificate_date_time_test_result_label" translatable="false">Date/time of test result</string>
     <string name="green_certificate_date_time_test_result">Data e ora del risultato del test</string>
-    <string name="green_certificate_testing_centre_label" translatable="false">Testing Centre</string>
+    <string name="green_certificate_testing_centre_label" translatable="false">Testing centre</string>
     <string name="green_certificate_testing_centre">Centro in cui è stato fatto il test</string>
-    <string name="green_certificate_country_test_label" translatable="false">Country of Test</string>
+    <string name="green_certificate_country_test_label" translatable="false">Country of test</string>
     <string name="green_certificate_country_test">Nazione in cui è stato eseguito il test</string>
     <string name="green_certificate_subHeading_vaccine">Dati Vaccino</string>
     <string name="green_certificate_subHeading_test">Dati Tampone</string>
@@ -547,8 +547,8 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_no_dcc_found">Nessun EU Digital Covid Certificate trovato</string>
 
     <string name="green_certificate_certificate_issuer_const" translatable="false">Ministero della salute</string>
-    <string name="green_certificate_rapid_test_label" translatable="false">Test molecolare</string>
-    <string name="green_certificate_molecolar_test_label" translatable="false">test antigenico rapido</string>
+    <string name="green_certificate_rapid_test_label" translatable="false">Test antigenico rapido</string>
+    <string name="green_certificate_molecolar_test_label" translatable="false">Test molecolare</string>
     <string name="green_certificate_negative_label" translatable="false">Negativo</string>
     <string name="green_certificate_positive_label" translatable="false">Positivo</string>
     <string name="green_certificate_mrna_vaccine_label" translatable="false">SARS-CoV-2 mRNA vaccine</string>

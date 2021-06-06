@@ -39,7 +39,6 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.utils.byAdding
-import it.ministerodellasalute.immuni.extensions.view.hideKeyboard
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
@@ -176,7 +175,6 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
                 symptomOnsetDateInput.clearFocus()
             } else {
                 cunInput.hint = getString(R.string.cun_placeholder)
-                cunInput.hideKeyboard()
             }
         }
 
@@ -220,8 +218,6 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
                     })
                 cunInput.clearFocus()
                 symptomOnsetDateInput.clearFocus()
-            } else {
-                healthInsuranceCardInput.hideKeyboard()
             }
         }
         healthInsuranceCardInput.addTextChangedListener(

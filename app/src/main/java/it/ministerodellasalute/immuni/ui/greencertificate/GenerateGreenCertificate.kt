@@ -38,7 +38,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.GreenCertificateDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
-import it.ministerodellasalute.immuni.extensions.view.hideKeyboard
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
@@ -153,14 +152,14 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                 codeInputLayout.isEnabled = true
                 codeInputLayout.prefixText = when (position) {
                     0 -> {
-                        codeLabel.text = getString(R.string.cun_title)
-                        codeInput.setHint(R.string.code_placeholder)
-                        getString(R.string.const_cun)
-                    }
-                    1 -> {
                         codeLabel.text = getString(R.string.nrfe_title)
                         codeInput.setHint(R.string.code_placeholder)
                         ""
+                    }
+                    1 -> {
+                        codeLabel.text = getString(R.string.cun_title)
+                        codeInput.setHint(R.string.code_placeholder)
+                        getString(R.string.const_cun)
                     }
                     2 -> {
                         codeLabel.text = getString(R.string.nucg_title)
@@ -176,8 +175,8 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                 }
 
                 val lengthFilter = when (position) {
-                    0 -> LengthFilter(10)
-                    1 -> LengthFilter(17)
+                    0 -> LengthFilter(17)
+                    1 -> LengthFilter(10)
                     2 -> LengthFilter(10)
                     3 -> LengthFilter(12)
                     else -> LengthFilter(0)
@@ -201,7 +200,6 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                 expiredDateHealthIDDateInput.clearFocus()
             } else {
                 codeInput.hint = getString(R.string.code_placeholder)
-                codeInput.hideKeyboard()
             }
         }
 
@@ -246,8 +244,6 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                     })
                 codeInput.clearFocus()
                 expiredDateHealthIDDateInput.clearFocus()
-            } else {
-                healthInsuranceCardInput.hideKeyboard()
             }
         }
         healthInsuranceCardInput.addTextChangedListener(
