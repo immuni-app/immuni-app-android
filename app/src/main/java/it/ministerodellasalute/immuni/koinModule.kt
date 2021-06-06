@@ -49,6 +49,7 @@ import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.exposure.repositories.*
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
+import it.ministerodellasalute.immuni.logic.greencovidcertificate.DCCManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsNetworkRepository
@@ -141,6 +142,21 @@ val appModule = module {
             androidContext(), ExposureAnalyticsNetworkConfiguration(androidContext(), get())
         )
         network.createServiceAPI(ExposureAnalyticsService::class)
+    }
+
+    /**
+     * GDC Service APIs
+     */
+    single {
+        val network = Network(
+            androidContext(),
+            DigitalCovidCertificateNetworkConfiguration(
+                androidContext(),
+                get(),
+                get()
+            )
+        )
+        network.createServiceAPI(DCCService::class)
     }
 
     /**
@@ -246,6 +262,10 @@ val appModule = module {
     }
 
     single {
+        DCCManager(get())
+    }
+
+    single {
         ExposureAnalyticsStoreRepository(
             KVStorage(
                 name = "ExposureAnalyticsStoreRepository",
@@ -322,6 +342,10 @@ val appModule = module {
     }
 
     single {
+        GCDRepository(get())
+    }
+
+    single {
         PushNotificationManager(androidContext())
     }
 
@@ -389,7 +413,7 @@ val appModule = module {
     viewModel { StateCloseViewModel(get(), get()) }
     viewModel { SupportViewModel(androidContext(), get(), get()) }
     viewModel { CunViewModel(get(), get(), get()) }
-    viewModel { GreenCertificateViewModel(androidContext(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { GreenCertificateViewModel(androidContext(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 }
 
 val immuniMoshi = moshi(

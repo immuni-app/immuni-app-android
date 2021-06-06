@@ -193,20 +193,6 @@ class ExposureManager(
         return exposureIngestionRepository.validateCun(cun, healthInsuranceCard, symptom_onset_date)
     }
 
-    suspend fun getGreenCard(
-        typeToken: String,
-        token: String,
-        healthInsurance: String,
-        expiredHealthIDDate: String
-    ): GreenPassValidationResult {
-        return exposureIngestionRepository.getGreenCard(
-            typeToken,
-            token,
-            healthInsurance,
-            expiredHealthIDDate
-        )
-    }
-
     suspend fun dummyUpload(): Boolean {
         return exposureIngestionRepository.dummyUpload()
     }

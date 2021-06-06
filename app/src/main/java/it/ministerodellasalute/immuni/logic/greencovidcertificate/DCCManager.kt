@@ -13,18 +13,25 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.logic.exposure.models
+package it.ministerodellasalute.immuni.logic.greencovidcertificate
 
-import java.util.*
+import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassValidationResult
+import it.ministerodellasalute.immuni.logic.exposure.repositories.GCDRepository
 
-data class GreenPassToken(val greenPass: String?, val serverDate: Date?)
-
-sealed class GreenPassValidationResult {
-    data class Success(val greenpass: GreenPassToken) : GreenPassValidationResult()
-    data class Valid(val valid: Boolean) : GreenPassValidationResult()
-    object GCDNotFound : GreenPassValidationResult()
-    object ConnectionError : GreenPassValidationResult()
-    object ServerError : GreenPassValidationResult()
-    object TokenWrong : GreenPassValidationResult()
-    object TokenLengthWrong : GreenPassValidationResult()
+class DCCManager(
+    private val gcdRepository: GCDRepository
+) {
+    suspend fun getGreenCard(
+        typeToken: String,
+        token: String,
+        healthInsurance: String,
+        expiredHealthIDDate: String
+    ): GreenPassValidationResult {
+        return gcdRepository.getGreenCard(
+            typeToken,
+            token,
+            healthInsurance,
+            expiredHealthIDDate
+        )
+    }
 }

@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+ * Please refer to the AUTHORS file for more information.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package it.ministerodellasalute.immuni.ui.greencertificate
 
 import android.os.Bundle
@@ -49,27 +64,46 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 includeDynamicView(R.layout.green_certificate_more_details_vaccination)
 
                 subHeading.text = getString(R.string.green_certificate_subHeading_vaccine)
-                vaccineType.text = DecodeData.maFromCode(greenCertificateDetail.data?.vaccinations?.get(0)!!.manufacturer)?.let {
+                vaccineType.text = setTextOrDefault(
+                    DecodeData.maFromCode(
+                        greenCertificateDetail.data?.vaccinations?.get(0)!!.manufacturer
+                    )?.let {
                         getString(it)
-                    } ?: "-"
+                    })
                 denomVaccine.text =
-                    DecodeData.vpFromCode(greenCertificateDetail.data?.vaccinations?.get(0)!!.vaccine)?.let {
-                        getString(it)
-                    } ?: "-"
+                    setTextOrDefault(
+                        DecodeData.vpFromCode(
+                            greenCertificateDetail.data?.vaccinations?.get(
+                                0
+                            )!!.vaccine
+                        )?.let {
+                            getString(it)
+                        })
                 producerVaccine.text =
-                    DecodeData.mpFromCode(greenCertificateDetail.data?.vaccinations?.get(0)!!.medicinalProduct)
-                        ?.let { getString(it) } ?: "-"
+                    setTextOrDefault(DecodeData.mpFromCode(
+                        greenCertificateDetail.data?.vaccinations?.get(
+                            0
+                        )!!.medicinalProduct
+                    )
+                        ?.let { getString(it) })
+                validityVaccine.text =
+                    if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber == greenCertificateDetail.data?.vaccinations?.get(
+                            0
+                        )!!.totalSeriesOfDoses
+                    ) {
+                        getString(R.string.green_certificate_validity_vaccine_complete)
+                    } else {
+                        getString(R.string.green_certificate_validity_vaccine_partial)
+                    }
                 dosesNumber.text = String.format(
                     requireContext().getString(R.string.green_certificate_more_details_doses_number_text),
-                    greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber,
-                    greenCertificateDetail.data?.vaccinations?.get(0)!!.totalSeriesOfDoses
+                    setTextOrDefault(greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber.toString()),
+                    setTextOrDefault(greenCertificateDetail.data?.vaccinations?.get(0)!!.totalSeriesOfDoses.toString())
                 )
                 lastAdministration.text =
-                    convertDate(greenCertificateDetail.data?.vaccinations?.get(0)!!.dateOfVaccination) ?: "-"
+                    setTextOrDefault(convertDate(greenCertificateDetail.data?.vaccinations?.get(0)!!.dateOfVaccination))
                 countryVaccination.text =
-                    greenCertificateDetail.data?.vaccinations?.get(0)!!.countryOfVaccination
-                entityIssuedCertificate.text =
-                    greenCertificateDetail.data?.vaccinations?.get(0)!!.certificateIssuer
+                    setTextOrDefault(greenCertificateDetail.data?.vaccinations?.get(0)!!.countryOfVaccination)
             }
             greenCertificateDetail.data?.tests != null -> {
                 // Inflate layout dynamically
@@ -77,38 +111,43 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
                 subHeading.text = getString(R.string.green_certificate_subHeading_test)
                 testType.text =
-                    DecodeData.ttFromCode(greenCertificateDetail.data?.tests?.get(0)!!.typeOfTest)?.let {
-                        getString(
-                            it
-                        )
-                    } ?: "-"
+                    setTextOrDefault(
+                        DecodeData.ttFromCode(greenCertificateDetail.data?.tests?.get(0)!!.typeOfTest)
+                            ?.let {
+                                getString(
+                                    it
+                                )
+                            })
                 resultTest.text =
-                    DecodeData.trFromCode(greenCertificateDetail.data?.tests?.get(0)!!.testResult)?.let {
-                        getString(
-                            it
-                        )
-                    } ?: "-"
+                    setTextOrDefault(
+                        DecodeData.trFromCode(greenCertificateDetail.data?.tests?.get(0)!!.testResult)
+                            ?.let {
+                                getString(
+                                    it
+                                )
+                            })
 
                 if (greenCertificateDetail.data?.tests?.get(0)!!.testName != null) {
-                    nameNaa.text = greenCertificateDetail.data?.tests?.get(0)!!.testName ?: "-"
+                    nameNaa.text =
+                        setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testName)
                     nameNaaLabel.visibility = View.VISIBLE
                     nameNaa.visibility = View.VISIBLE
                     naaNameTestLabelEng.visibility = View.VISIBLE
                 } else {
                     ratNameTest.text =
-                        greenCertificateDetail.data?.tests?.get(0)!!.testNameAndManufacturer ?: "-"
+                        setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testNameAndManufacturer)
                     ratNameTestLabelEng.visibility = View.VISIBLE
                     ratNameTestLabel.visibility = View.VISIBLE
                     ratNameTest.visibility = View.VISIBLE
                 }
                 dateTimeSampleCollection.text =
-                    convertDate(greenCertificateDetail.data?.tests?.get(0)!!.dateTimeOfCollection) ?: "-"
+                    setTextOrDefault(convertDate(greenCertificateDetail.data?.tests?.get(0)!!.dateTimeOfCollection))
                 dateTimeTestResult.text =
-                    convertDate(greenCertificateDetail.data?.tests?.get(0)!!.dateTimeOfTestResult) ?: "-"
-                testingCentre.text = greenCertificateDetail.data?.tests?.get(0)!!.testingCentre
-                countryTest.text = greenCertificateDetail.data?.tests?.get(0)!!.countryOfVaccination
-                entityIssuedCertificate.text =
-                    greenCertificateDetail.data?.tests?.get(0)!!.certificateIssuer
+                    setTextOrDefault(convertDate(greenCertificateDetail.data?.tests?.get(0)!!.dateTimeOfTestResult))
+                testingCentre.text =
+                    setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testingCentre)
+                countryTest.text =
+                    setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.countryOfVaccination)
             }
             greenCertificateDetail.data?.recoveryStatements != null -> {
                 // Inflate layout dynamically
@@ -116,17 +155,24 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
                 subHeading.text = getString(R.string.green_certificate_subHeading_recovery)
                 dateOfFirstPositiveResult.text =
-                    convertDate(greenCertificateDetail.data?.recoveryStatements?.get(0)!!.dateOfFirstPositiveTest) ?: "-"
+                    setTextOrDefault(
+                        convertDate(
+                            greenCertificateDetail.data?.recoveryStatements?.get(
+                                0
+                            )!!.dateOfFirstPositiveTest
+                        )
+                    )
                 countryTestRecovery.text =
-                    greenCertificateDetail.data?.recoveryStatements?.get(0)!!.countryOfVaccination
+                    setTextOrDefault(greenCertificateDetail.data?.recoveryStatements?.get(0)!!.countryOfVaccination)
                 certificateValidFrom.text =
-                    greenCertificateDetail.data?.recoveryStatements?.get(0)!!.certificateValidFrom
+                    setTextOrDefault(greenCertificateDetail.data?.recoveryStatements?.get(0)!!.certificateValidFrom)
                 certificateValidUntil.text =
-                    greenCertificateDetail.data?.recoveryStatements?.get(0)!!.certificateValidUntil
-                entityIssuedCertificate.text =
-                    greenCertificateDetail.data?.recoveryStatements?.get(0)!!.certificateIssuer
+                    setTextOrDefault(greenCertificateDetail.data?.recoveryStatements?.get(0)!!.certificateValidUntil)
             }
         }
+
+        entityIssuedCertificate.text =
+            getString(R.string.green_certificate_certificate_issuer_const)
 
         val europeRestrictionUrl =
             getString(R.string.green_certificate_more_details_europe_restriction_url)
@@ -159,6 +205,14 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
             format.parse(date)!!.isoDateString
         } else {
             null
+        }
+    }
+
+    private fun setTextOrDefault(text: String?): String {
+        return if (text.isNullOrBlank()) {
+            "---"
+        } else {
+            return text
         }
     }
 }

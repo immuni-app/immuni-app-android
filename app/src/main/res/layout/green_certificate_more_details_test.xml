@@ -45,6 +45,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="italic"
+        android:text="@string/green_certificate_validity_dgc_label"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_validity_dgc" />
+
+    <TextView
+        android:id="@+id/validityTest"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_dark"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:text="@string/green_certificate_validity_test"/>
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
         android:text="@string/green_certificate_test_result_label"
         android:layout_marginTop="24dp" />
 

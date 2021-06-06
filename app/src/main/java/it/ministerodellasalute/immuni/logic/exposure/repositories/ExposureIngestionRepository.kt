@@ -32,8 +32,6 @@ class ExposureIngestionRepository(
         @VisibleForTesting
         fun authorization(otp: String): String = "Bearer ${otp.sha256()}"
         fun authorizationCun(cun: String): String = "Bearer ${("CUN-$cun").sha256()}"
-        fun authorizationNrfe(nrfe: String): String = "Bearer ${nrfe.sha256()}"
-        fun authorizationNucg(nucg: String): String = "Bearer ${("NUCG-$nucg").sha256()}"
     }
 
     suspend fun validateOtp(otp: String): OtpValidationResult {
@@ -97,53 +95,6 @@ class ExposureIngestionRepository(
                     }
                 } else {
                     CunValidationResult.ConnectionError
-                }
-            }
-        }
-    }
-
-    suspend fun getGreenCard(
-        typeToken: String,
-        token: String,
-        healthInsurance: String,
-        expiredHealthIDDate: String
-    ): GreenPassValidationResult {
-        val authorization = when (typeToken) {
-            "CUN" -> authorizationCun(token)
-            "NRFE" -> authorizationNrfe(token)
-            "NUCG" -> authorizationNucg(token)
-            "OTP" -> authorization(token)
-            else -> authorization(token)
-        }
-        val response = immuniApiCall {
-            exposureIngestionService.getGreenCard(
-                isDummyData = 0,
-                authorization = authorization,
-                body = ExposureIngestionService.GreenCardRequest(
-                    token_type = typeToken.toLowerCase(Locale.ROOT),
-                    healthInsuranceCard = healthInsurance,
-                    his_expiring_date = expiredHealthIDDate
-                )
-
-            )
-        }
-        return when (response) {
-            is NetworkResource.Success -> GreenPassValidationResult.Success(
-                GreenPassToken(response.data?.qrcode, response.serverDate!!)
-            )
-            is NetworkResource.Error -> {
-                val errorResponse = response.error
-                if (errorResponse is NetworkError.HttpError) {
-                    when (errorResponse.httpCode) {
-                        401 -> {
-                            GreenPassValidationResult.Unauthorized
-                        }
-                        else -> {
-                            GreenPassValidationResult.ServerError
-                        }
-                    }
-                } else {
-                    GreenPassValidationResult.ConnectionError
                 }
             }
         }

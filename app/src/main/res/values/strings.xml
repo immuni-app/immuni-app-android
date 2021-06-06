@@ -425,12 +425,20 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_pass_no_certificate_available">Non sono ancora stati recuperati EU Digital Covid Certificate</string>
     <string name="green_pass_button_generate">Recupera EU Digital Covid Certificate</string>
     <string name="green_pass_generate_title">Recupera EU Digital Covid Certificate</string>
-    <string name="green_pass_generate_description">Questa funzione ti permette di generare l\'EU Digital Covid Certificate inserendo direttamente i dati richiesti.</string>
+    <string name="green_pass_generate_description">Questa funzione ti permette di scaricare la Certificazione verde COVID-19 (EU Digital Covid Certificate) dalla Piattaforma nazionale-DGC del Ministero della Salute inserendo i dati richiesti.</string>
     <string name="green_pass_code_hint">NRFE/CUN/NUCG/AUTHCODE</string>
     <string name="green_pass_health_insurance_hint">Ultime 8 cifre Tessera Sanitaria</string>
     <string name="green_pass_expired_date_hs_hint">Data scadenza Tessera Sanitaria</string>
     <string name="green_pass_confirm_button">Conferma</string>
-    <string name="green_pass_how_to_generate_title">Come generare l\'EU Digital Covid Certificate</string>
+    <string name="green_pass_how_to_generate_title">Come acquisire l\'EU Digital Covid Certificate</string>
+    <string name="green_pass_how_to_generate_first">L\'"EU Digital Covid Certificate", in Italia "Certificazione verde COVID-19", è rilasciata dal Ministero della Salute in formato digitale a chi è stato vaccinato o ha ottenuto un risultato negativo al test molecolare/antigenico o è guarito da COVID-19.</string>
+    <string name="green_pass_how_to_generate_second">Il certificato dispone di un codice a barre bidimensionale (QR code) che contiene le informazioni essenziali dell’intestatario del certificato e dell’evento sanitario a cui il certificato è associato (vaccinazione, test negativo, guarigione COVID-19) e firmato digitalmente per garantirne l’autenticità.</string>
+    <string name="green_pass_how_to_generate_third">Se hai ricevuto via email o SMS il codice per recuperare la certificazione puoi utilizzare questa App inserendo uno dei codici univoci CUN, NRFE, NUCG (ricevuti rispettivamente in sede di esecuzione del tampone molecolare o di esecuzione del tampone antigenico o di redazione del certificato di guarigione), oppure il codice autorizzativo AUTHCODE ricevuto via e-mail o SMS insieme con le ultime 8 cifre del numero identificativo e la data di scadenza della Tessera Sanitaria.</string>
+    <string name="green_pass_how_to_generate_fourth">Tutti questi codici sono univocamente associati al Certificato verde COVID-19 relativo all’evento sanitario che l’ha generato.</string>
+    <string name="green_pass_how_to_generate_fiveth">La Certificazione verde COVID–19 viene mostrata sullo schermo dello smartphone e il QR code può essere da te salvato nel dispositivo mobile in modo che possa essere visualizzato e mostrato su richiesta, in caso di verifica, anche in modalità offline. Il tasto "Elimina" ti consente di cancellare il tuo certificato dal smartphone in autonomia in qualsiasi momento.</string>
+    <string name="green_pass_how_to_generate_sixth">Per ulteriori informazioni visita il sito www.dgc.gov.it</string>
+    <string name="green_pass_how_to_generate_link" translatable="false">www.dgc.gov.it</string>
+
     <string name="green_pass_generation_successfully">EU Digital Covid Certificate recuperato con successo</string>
     <string name="green_pass_select_type_token">Seleziona tipologia</string>
     <string-array name="type_token">
@@ -467,7 +475,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="form_expired_date_placeholder">Data scadenza</string>
     <string name="form_symptoms_date_placeholder">Data</string>
     <string name="dcg_clear_code">Elimina codice</string>
-    <string name="get_dgc_loading">Recupero DGC in corso..</string>
+    <string name="get_dgc_loading">Recupero EU Digital Covid Certificate in corso..</string>
     <string name="green_certificate_tab_swipe">Scorri per visualizzare gli altri certificati</string>
     <string name="green_certificate_tab_surname_name_label" translatable="false">Surname Name</string>
     <string name="green_certificate_tab_surname_name">Cognome e Nome</string>
@@ -528,6 +536,17 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_testing_centre">Centro in cui è stato fatto il test</string>
     <string name="green_certificate_country_test_label" translatable="false">Country of Test</string>
     <string name="green_certificate_country_test">Nazione in cui è stato eseguito il test</string>
+    <string name="green_certificate_subHeading_vaccine">Dati Vaccino</string>
+    <string name="green_certificate_subHeading_test">Dati Tampone</string>
+    <string name="green_certificate_subHeading_recovery">Dati Certificato di Guarigione</string>
+    <string name="green_certificate_validity_dgc_label">Validità dell\'EU Digital Covid Certificate</string>
+    <string name="green_certificate_validity_dgc">Validità dell\'EU Digital Covid Certificate</string>
+    <string name="green_certificate_validity_vaccine_partial">Certificazione valida fino alla prossima dose</string>
+    <string name="green_certificate_validity_vaccine_complete">Certificazione valida 270 giorni (9 mesi) dalla data dell\'ultima somministrazione</string>
+    <string name="green_certificate_validity_test">Certificazione valida 48 ore dall\'ora del prelievo</string>
+    <string name="green_certificate_no_dcc_found">Nessun EU Digital Covid Certificate trovato</string>
+
+    <string name="green_certificate_certificate_issuer_const" translatable="false">Ministero della salute</string>
     <string name="green_certificate_rapid_test_label" translatable="false">Test molecolare</string>
     <string name="green_certificate_molecolar_test_label" translatable="false">test antigenico rapido</string>
     <string name="green_certificate_negative_label" translatable="false">Negativo</string>
@@ -535,7 +554,6 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_mrna_vaccine_label" translatable="false">SARS-CoV-2 mRNA vaccine</string>
     <string name="green_certificate_antigen_vaccine_label" translatable="false">SARS-CoV-2 antigen vaccine</string>
     <string name="green_certificate_covid19_vaccine_label" translatable="false">covid-19 vaccines</string>
-
     <string name="green_certificate_astrazeneca" translatable="false">AstraZeneca AB</string>
     <string name="green_certificate_biontech" translatable="false">Biontech Manufacturing GmbH</string>
     <string name="green_certificate_janssen" translatable="false">Janssen-Cilag International</string>
@@ -550,9 +568,5 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_vector_institute" translatable="false">Vector Institute</string>
     <string name="green_certificate_sinovac" translatable="false">Sinovac Biotech</string>
     <string name="green_certificate_bharat" translatable="false">Bharat Biotech</string>
-    <string name="green_certificate_subHeading_vaccine">Dati Vaccino</string>
-    <string name="green_certificate_subHeading_test">Dati Tampone</string>
-    <string name="green_certificate_subHeading_recovery">Dati Certificato di Guarigione</string>
-
 
 </resources>

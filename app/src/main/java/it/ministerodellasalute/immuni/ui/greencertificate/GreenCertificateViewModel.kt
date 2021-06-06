@@ -30,7 +30,6 @@ import dgca.verifier.app.decoder.base45.Base45Service
 import dgca.verifier.app.decoder.cbor.CborService
 import dgca.verifier.app.decoder.compression.CompressorService
 import dgca.verifier.app.decoder.cose.CoseService
-import dgca.verifier.app.decoder.cose.CryptoService
 import dgca.verifier.app.decoder.model.GreenCertificate
 import dgca.verifier.app.decoder.model.TestVerificationResult
 import dgca.verifier.app.decoder.model.VerificationResult
@@ -38,13 +37,12 @@ import dgca.verifier.app.decoder.prefixvalidation.PrefixValidationService
 import dgca.verifier.app.decoder.schema.SchemaValidator
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.livedata.Event
-import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.GreenPassValidationResult
+import it.ministerodellasalute.immuni.logic.greencovidcertificate.DCCManager
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.logic.user.models.User
 import it.ministerodellasalute.immuni.util.DigitValidator
-import kotlinx.android.synthetic.main.report_positivity_cun.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
@@ -57,13 +55,12 @@ class GreenCertificateViewModel(
     private val prefixValidationService: PrefixValidationService,
     private val base45Service: Base45Service,
     private val compressorService: CompressorService,
-    private val cryptoService: CryptoService,
     private val coseService: CoseService,
     private val schemaValidator: SchemaValidator,
     private val cborService: CborService,
-    private val exposureManager: ExposureManager,
     private val userManager: UserManager,
-    private val digitValidator: DigitValidator
+    private val digitValidator: DigitValidator,
+    private val gcdManager: DCCManager
 ) : ViewModel(),
     KoinComponent {
 
@@ -91,11 +88,12 @@ class GreenCertificateViewModel(
             delay(1000)
             val dateSplitted = expiredHealthIDDate.split("/")
             val dateToPost = dateSplitted.reversed().joinToString("-")
-            when (val result = exposureManager.getGreenCard(
+            when (val result = gcdManager.getGreenCard(
                 typeToken, token, healthInsurance, dateToPost
             )) {
                 is GreenPassValidationResult.Success -> {
-                    val greenCertificate = decode(decodeImage(result.greenpass.greenPass.toString()))
+                    val greenCertificate =
+                        decode(decodeImage(result.greenpass.greenPass.toString()))
                     if (greenCertificate == null) {
                         _navigateToSuccessPage.value = Event(false)
                     } else {
@@ -134,12 +132,12 @@ class GreenCertificateViewModel(
                             )
                         )
                 }
-                is GreenPassValidationResult.Unauthorized -> {
+                is GreenPassValidationResult.GCDNotFound -> {
                     _alertError.value =
                         Event(
                             listOf(
                                 context.getString(R.string.upload_data_api_error_title),
-                                context.getString(R.string.cun_unauthorized)
+                                context.getString(R.string.green_certificate_no_dcc_found)
                             )
                         )
                 }
@@ -236,16 +234,6 @@ class GreenCertificateViewModel(
         schemaValidator.validate(coseData.cbor, verificationResult)
         greenCertificate = cborService.decode(coseData.cbor, verificationResult)
         validateCertData(greenCertificate, verificationResult)
-
-//                // Load from API for now. Replace with cache logic.
-//                val certificate = exposureManager.getCertificate(kid.toBase64())
-
-//                if (certificate == null) {
-//                    Log.d(TAG, "Verification failed: failed to load certificate")
-//                    return@withContext
-//                }
-//                cryptoService.validate(cose, certificate, verificationResult)
-//            }
 
         return greenCertificate
     }
