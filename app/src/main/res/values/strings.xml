@@ -333,7 +333,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="verify_immuni_works_third"><b>If you\'re exposed to someone who later tests positive for the virus, Immuni will send you a notification to warn you of the risk of infection.</b> When you open the app, you will receive clear and comprehensive guidance on what to do.</string>
     <string name="verify_immuni_works_fourth">For technical reasons, <b>some Android smartphone models may stop Immuni from working if the app remains closed for a few days</b>. When this happens, random codes are still exchanged with other devices, but Immuni is not able to verify if you have been exposed to potentially infectious users and warn you if you are at risk. To prevent this from happening, open the app once a day. Google is working with the manufacturers of these models to solve the problem.</string>
     <string name="localisation_explanation_title">Why location services must be turned on</string>
-    <string name="localisation_explanation_message_first">Immuni uses the exposure notification system developed by Apple and Google. Due to an operating system limitation, location services must be turned on to allow background scanning of Bluetooth signals (necessary to exchange random codes and consequently log any contact that occurs).</string>
+    <string name="localisation_explanation_message_first">Immuni uses the exposure notification system developed by Apple, Google and Huawei. Due to an operating system limitation, location services must be turned on to allow background scanning of Bluetooth signals (necessary to exchange random codes and consequently log any contact that occurs).</string>
     <string name="localisation_explanation_message_second">However, the app does not have access to your location and therefore cannot track your movements. You can easily verify this by checking the list of permissions required by Immuni (available in your phone\'s Settings menu) and noting that authorisation to access your location is not required.</string>
     <string name="home_view_service_active_discover_more">Find out more</string>
     <string name="faq_search_bar_placeholder">Search for a question</string>
@@ -418,29 +418,27 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="cun_unauthorized">Attention. Invalid CUN. Make sure you have entered the last 10 digits of the CUN you received by SMS or in the report associated with a positive swab</string>
     <string name="warning_title_modal">Attention</string>
     <string name="warning_message_modal">It is important to communicate the exact symptom onset date to initiate accurate contact tracking. Select \"no symptoms\" only in case of complete absence of symptoms or the appearance of symptoms after the swab.</string>
-
-    <string name="home_what_do_you_want_today">Cosa vuoi fare oggi?</string>
+    <string name="home_what_do_you_want_today">What do you want to do today?</string>
     <string name="home_green_certificate_title">EU Digital Covid Certificate</string>
     <string name="green_pass_title">EU Digital Covid Certificate</string>
-    <string name="green_pass_no_certificate_available">Non sono ancora stati recuperati EU Digital Covid Certificate</string>
-    <string name="green_pass_button_generate">Recupera EU Digital Covid Certificate</string>
-    <string name="green_pass_generate_title">Recupera EU Digital Covid Certificate</string>
-    <string name="green_pass_generate_description">Questa funzione ti permette di scaricare la Certificazione verde COVID-19 (EU Digital Covid Certificate) dalla Piattaforma nazionale-DGC del Ministero della Salute inserendo i dati richiesti.</string>
-    <string name="green_pass_code_hint">NRFE/CUN/NUCG/AUTHCODE</string>
-    <string name="green_pass_health_insurance_hint">Ultime 8 cifre Tessera Sanitaria</string>
-    <string name="green_pass_expired_date_hs_hint">Data scadenza Tessera Sanitaria</string>
-    <string name="green_pass_confirm_button">Conferma</string>
-    <string name="green_pass_how_to_generate_title">Come acquisire l\'EU Digital Covid Certificate</string>
-    <string name="green_pass_how_to_generate_first">L\'"EU Digital Covid Certificate", in Italia "Certificazione verde COVID-19", è rilasciata dal Ministero della Salute in formato digitale a chi è stato vaccinato o ha ottenuto un risultato negativo al test molecolare/antigenico o è guarito da COVID-19.</string>
-    <string name="green_pass_how_to_generate_second">Il certificato dispone di un codice a barre bidimensionale (QR code) che contiene le informazioni essenziali dell’intestatario del certificato e dell’evento sanitario a cui il certificato è associato (vaccinazione, test negativo, guarigione COVID-19) e firmato digitalmente per garantirne l’autenticità.</string>
-    <string name="green_pass_how_to_generate_third">Se hai ricevuto via email o SMS il codice per recuperare la certificazione puoi utilizzare questa App inserendo uno dei codici univoci CUN, NRFE, NUCG (ricevuti rispettivamente in sede di esecuzione del tampone molecolare o di esecuzione del tampone antigenico o di redazione del certificato di guarigione), oppure il codice autorizzativo AUTHCODE ricevuto via e-mail o SMS insieme con le ultime 8 cifre del numero identificativo e la data di scadenza della Tessera Sanitaria.</string>
-    <string name="green_pass_how_to_generate_fourth">Tutti questi codici sono univocamente associati al Certificato verde COVID-19 relativo all’evento sanitario che l’ha generato.</string>
-    <string name="green_pass_how_to_generate_fiveth">La Certificazione verde COVID–19 viene mostrata sullo schermo dello smartphone e il QR code può essere da te salvato nel dispositivo mobile in modo che possa essere visualizzato e mostrato su richiesta, in caso di verifica, anche in modalità offline. Il tasto "Elimina" ti consente di cancellare il tuo certificato dal smartphone in autonomia in qualsiasi momento.</string>
-    <string name="green_pass_how_to_generate_sixth">Per ulteriori informazioni visita il sito www.dgc.gov.it</string>
+    <string name="green_pass_no_certificate_available">The EU Digital Covid Certificate has not yet been recovered</string>
+    <string name="green_pass_button_generate">Retrieve EU Digital Covid Certificate</string>
+    <string name="green_pass_generate_title">Retrieve EU Digital Covid Certificate</string>
+    <string name="green_pass_generate_description">This function allows you to download the COVID-19 green certification (EU Digital Covid Certificate) from the national platform-DGC of the Ministry of Health by entering the required data.</string>
+    <string name="green_pass_code_hint" translatable="false">NRFE/CUN/NUCG/AUTHCODE</string>
+    <string name="green_pass_health_insurance_hint">The last eight digits of your Health ID Card</string>
+    <string name="green_pass_expired_date_hs_hint">Health Card expiry date</string>
+    <string name="green_pass_confirm_button">Done</string>
+    <string name="green_pass_how_to_generate_title">How to acquire the EU Digital Covid Certificate</string>
+    <string name="green_pass_how_to_generate_first">The \"EU Digital Covid Certificate\", in Italy \"COVID-19 green certification\", is issued by the Ministry of Health in digital format to those who have been vaccinated or have obtained a negative result on the molecular / antigen test or are cured of COVID- 19.</string>
+    <string name="green_pass_how_to_generate_second">The certificate has a two-dimensional barcode (QR code) that contains the essential information of the holder of the certificate and the health event to which the certificate is associated (vaccination, negative test, COVID-19 cure) and digitally signed to guarantee authenticity.</string>
+    <string name="green_pass_how_to_generate_third">If you have received the code to recover the certification via email or SMS, you can use this App by entering one of the unique codes CUN, NRFE, NUCG (received respectively during the execution of the molecular swab or the execution of the antigenic swab or the preparation of the healing certificate ), or the AUTHCODE authorization code received via e-mail or SMS together with the last 8 digits of the identification number and the expiry date of the Health Card.</string>
+    <string name="green_pass_how_to_generate_fourth">All these codes are uniquely associated with the COVID-19 green certificate relating to the health event that generated it.</string>
+    <string name="green_pass_how_to_generate_fiveth">The green COVID – 19 certification is shown on the smartphone screen and the QR code can be saved by you in the mobile device so that it can be viewed and shown on request, in case of verification, even in offline mode. The \"Delete\" button allows you to delete your certificate from your smartphone independently at any time.</string>
+    <string name="green_pass_how_to_generate_sixth">For more information visit the website www.dgc.gov.it</string>
     <string name="green_pass_how_to_generate_link" translatable="false">www.dgc.gov.it</string>
-
-    <string name="green_pass_generation_successfully">EU Digital Covid Certificate recuperato con successo</string>
-    <string name="green_pass_select_type_token">Seleziona tipologia</string>
+    <string name="green_pass_generation_successfully">EU Digital Covid Certificate successfully recovered</string>
+    <string name="green_pass_select_type_token">Select type</string>
     <string-array name="type_token">
         <item>NRFE</item>
         <item>CUN</item>
@@ -450,103 +448,101 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="const_nrfe" translatable="false">NRFE-</string>
     <string name="const_nucg" translatable="false">NUCG-</string>
     <string name="const_otp" translatable="false">OTP-</string>
-    <string name="form_code_cun_empty">- Inserisci gli ultimi 10 caratteri del codice CUN che ti è stato comunicato\n</string>
-    <string name="form_code_nrfe_empty">- Inserisci gli ultimi 17 caratteri del codice NRFE che ti è stato comunicato\n</string>
-    <string name="form_code_nucg_empty">- Inserisci gli ultimi 10 caratteri del codice NUCG che ti è stato comunicato\n</string>
-    <string name="form_code_otp_empty">- Inserisci gli ultimi 12 caratteri del codice OTP che ti è stato comunicato\n</string>
-    <string name="form_code_cun_wrong">- Il CUN inserito non risulta formalmente valido. Assicurati di aver inserito le ultime 10 cifre del CUN che hai ricevuto per SMS o nel referto associato a un tampone positivo\n</string>
-    <string name="form_code_nrfe_wrong">- Il codice NRFE inserito non risulta formalmente valido. Assicurati di aver inserito le ultime 17 cifre del codice NRFE che hai ricevuto\n</string>
-    <string name="form_code_nucg_wrong">- Il codice NUCG inserito non risulta formalmente valido. Assicurati di aver inserito le ultime 10 cifre del codice NUCG che hai ricevuto\n</string>
-    <string name="form_code_otp_wrong">- Il codice AUTHCODE inserito non risulta formalmente valido. Assicurati di aver inserito le ultime 12 cifre del codice AUTHCODE che hai ricevuto\n</string>
-    <string name="form_type_code_empty">- Seleziona la tipologia del codice\n</string>
-    <string name="form_expired_health_date">- Inserisci la data di scadenza della tessera sanitaria\n</string>
-    <string name="code_placeholder">Inserisci il codice</string>
-    <string name="cun_title">CUN</string>
-    <string name="nrfe_title">NRFE</string>
-    <string name="nucg_title">NUCG</string>
-    <string name="authcode_title">AUTHCODE</string>
-    <string name="title_modal_confirm_delete_dcg">Elimina Digital Green Certificate</string>
-    <string name="message_modal_confirm_delete_dcg">Sei sicuro di voler eliminare il tuo Digital Green Certificate?</string>
-    <string name="form_type_code_label">Tipologia del Codice</string>
-    <string name="form_code_label">Codice</string>
-    <string name="form_code_placeholder">Inserisci il codice</string>
-    <string name="form_health_id_placeholder">Tessera sanitaria</string>
-    <string name="form_expired_date_healt_id_label">Data scadenza Tessera Sanitaria</string>
-    <string name="form_expired_date_placeholder">Data scadenza</string>
-    <string name="form_symptoms_date_placeholder">Data</string>
-    <string name="dcg_clear_code">Elimina codice</string>
-    <string name="get_dgc_loading">Recupero EU Digital Covid Certificate in corso..</string>
-    <string name="green_certificate_tab_swipe">Scorri per visualizzare gli altri certificati</string>
-    <string name="green_certificate_tab_surname_name_label" translatable="false">Surname and name</string>
+    <string name="form_code_cun_empty">- Enter the last 10 characters of the CUN code that was communicated to you\n</string>
+    <string name="form_code_nrfe_empty">- Enter the last 17 characters of the NRFE code that was communicated to you\n</string>
+    <string name="form_code_nucg_empty">- Enter the last 10 characters of the NUCG code that was communicated to you\n</string>
+    <string name="form_code_otp_empty">- Enter the last 12 characters of the AUTHCODE that was communicated to you\n</string>
+    <string name="form_code_cun_wrong">- The entered CUN is not formally valid. Make sure you have entered the last 10 digits of the CUN you received by SMS or in the report associated with a positive swab\n</string>
+    <string name="form_code_nrfe_wrong">- The entered NRFE code is not formally valid. Make sure you have entered the last 17 digits of the NRFE code you received\n</string>
+    <string name="form_code_nucg_wrong">- The entered NUCG code is not formally valid. Make sure you have entered the last 10 digits of the NUCG code you received\n</string>
+    <string name="form_code_otp_wrong">- The AUTHCODE entered is not formally valid. Make sure you have entered the last 12 digits of the AUTHCODE you received\n</string>
+    <string name="form_type_code_empty">- Select the type of code\n</string>
+    <string name="form_expired_health_date">- Enter the expiration date of the health card\n</string>
+    <string name="code_placeholder">Enter the code</string>
+    <string name="cun_title" translatable="false">CUN</string>
+    <string name="nrfe_title" translatable="false">NRFE</string>
+    <string name="nucg_title" translatable="false">NUCG</string>
+    <string name="authcode_title" translatable="false">AUTHCODE</string>
+    <string name="title_modal_confirm_delete_dcg">Delete EU Digital Covid Certificate</string>
+    <string name="message_modal_confirm_delete_dcg">Are you sure you want to delete your EU Digital Covid Certificate?</string>
+    <string name="form_type_code_label">Type of Code</string>
+    <string name="form_code_label">Code</string>
+    <string name="form_health_id_placeholder">Health insurance card</string>
+    <string name="form_expired_date_healt_id_label">Health Card expiry date</string>
+    <string name="form_expired_date_placeholder">Expiry date</string>
+    <string name="form_symptoms_date_placeholder">Date</string>
+    <string name="dcg_clear_code">Delete code</string>
+    <string name="get_dgc_loading">EU Digital Covid Certificate recovery in progress..</string>
+    <string name="green_certificate_tab_swipe">Scroll to view other certificates</string>
+    <string name="green_certificate_tab_surname_name_label" translatable="false">Surname(s) and forename(s)</string>
     <string name="green_certificate_tab_surname_name">Cognome e nome</string>
-    <string name="green_certificate_tab_birth_date_label" translatable="false">Birth date (aaaa-mm-gg)</string>
-    <string name="green_certificate_tab_birth_date">Data di nascita (aaaa-mm-gg)</string>
-    <string name="green_certificate_tab_certificate_id_label" translatable="false">Unique certificate identifier: UVCI</string>
+    <string name="green_certificate_tab_birth_date_label" translatable="false">Date of birth (yyyy-mm-dd)</string>
+    <string name="green_certificate_tab_birth_date">Data di nascita</string>
+    <string name="green_certificate_tab_certificate_id_label" translatable="false">Unique certificate identifier</string>
     <string name="green_certificate_tab_certificate_id">Identificativo univoco del certificato</string>
-    <string name="green_certificate_tab_more_details">Più dettagli</string>
-    <string name="green_certificate_tab_download">Scarica</string>
-    <string name="green_certificate_tab_delete">Elimina</string>
+    <string name="green_certificate_tab_more_details">More details</string>
+    <string name="green_certificate_tab_download" translatable="false">Scarica</string>
+    <string name="green_certificate_tab_delete">Delete</string>
     <string name="green_pass_more_details_title">EU Digital Covid Certificate</string>
-
-    <string name="green_certificate_more_details_last_description">Questo certificato non è un documento di viaggio. Le evidenze scientifiche sulla vaccinazione, sui test e sulla guarigione da COVID-19 continuano ad evolversi, anche in considerazioni delle nuove varianti del virus. Prima di viaggiare si prega di controllare le misure di salute pubblica applicate nel luogo di destinazione e le relative restrizioni anche consultando il sito:</string>
+    <string name="green_certificate_more_details_last_description">This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, including in consideration of the new variants of the virus. Before traveling, please check the public health measures applied in the place of destination and the related restrictions also by consulting the website:</string>
     <string name="green_certificate_more_details_europe_restriction_url" translatable="false">https://reopen.europa.eu</string>
-    <string name="green_certificate_more_details_doses_number_text">%s di %s</string>
-    <string name="permission_go_to_settings">Vai a Impostazioni</string>
-    <string name="permission_needed_permission_message">E\' necessario attivare i permessi di scrittura per poter scaricare l\'EU Digital Covid Certificate.</string>
-    <string name="permission_need_permission_title">Permesso richiesto</string>
-
-
-
+    <string name="green_certificate_more_details_doses_number_text" translatable="false">%s di %s</string>
+    <string name="permission_go_to_settings" translatable="false">Vai a Impostazioni</string>
+    <string name="permission_needed_permission_message" translatable="false">E\' necessario attivare i permessi di scrittura per poter scaricare l\'EU Digital Covid Certificate.</string>
+    <string name="permission_need_permission_title" translatable="false">Permesso richiesto</string>
     <string name="green_certificate_disease_label" translatable="false">Disease or agent targeted</string>
     <string name="green_certificate_disease">Malattia o agente bersaglio</string>
+    <string name="green_certificate_disease_recovery_label" translatable="false">Disease or agent the citizen has recovered from</string>
+    <string name="green_certificate_disease_recovery">Malattia o agente bersaglio da cui la persona è guarita</string>
     <string name="green_certificate_disease_text" translatable="false">Covid-19</string>
     <string name="green_certificate_certificate_issuer_label" translatable="false">Certificate issuer</string>
-    <string name="green_certificate_certificate_issuer">Ente che ha rilasciato il certificato</string>
-    <string name="green_certificate_vaccine_type_label" translatable="false">Vaccine or prophylaxis</string>
-    <string name="green_certificate_vaccine_type">Tipo di vaccino</string>
+    <string name="green_certificate_certificate_issuer">Struttura che ha rilasciato la certificazione verde COVID-19</string>
+    <string name="green_certificate_certificate_issuer_vaccination">Struttura che ha rilasciato la certificazione</string>
+    <string name="green_certificate_vaccine_type_label" translatable="false">Vaccine/prophylaxis</string>
+    <string name="green_certificate_vaccine_type">Tipo di vaccino somministrato</string>
     <string name="green_certificate_vaccine_medicinal_product_label" translatable="false">Vaccine medicinal product</string>
     <string name="green_certificate_vaccine_medicinal_product">Denominazione del vaccino</string>
-    <string name="green_certificate_producer_vaccine_label" translatable="false">Marketing Authorization Holder - if no MAH present, then manufacturer</string>
+    <string name="green_certificate_producer_vaccine_label" translatable="false">Vaccine marketing authorisation holder or manufacturer</string>
     <string name="green_certificate_producer_vaccine">Produttore o titolare dell\'AIC del vaccino</string>
-    <string name="green_certificate_dose_number_label" translatable="false">Dose number/total series of doses</string>
+    <string name="green_certificate_dose_number_label" translatable="false">Number in a series of vaccinations/doses and the overall</string>
     <string name="green_certificate_dose_number">Numero della dose effettuata/numero totale dosi previste</string>
-    <string name="green_certificate_date_of_vaccination_label" translatable="false">Date of vaccination</string>
+    <string name="green_certificate_date_of_vaccination_label" translatable="false">Date of vaccination (yyyy-mm-dd)</string>
     <string name="green_certificate_date_of_vaccination">Data dell\'ultima somministrazione</string>
-    <string name="green_certificate_country_of_vaccination_label" translatable="false">Country of vaccination</string>
-    <string name="green_certificate_country_of_vaccination">Nazione in cui è stata eseguita la vaccinazione</string>
-    <string name="green_certificate_date_of_first_positive_label" translatable="false">Date of first positive test result</string>
-    <string name="green_certificate_date_of_first_positive">Data del primo test positivo</string>
-    <string name="green_certificate_certificate_valid_from_label" translatable="false">Certificate valid from:</string>
-    <string name="green_certificate_certificate_valid_from">Certificato valido da:</string>
-    <string name="green_certificate_certificate_valid_until_label" translatable="false">Certificate valid until:</string>
-    <string name="green_certificate_certificate_valid_until">Certificato valido a:</string>
+    <string name="green_certificate_country_of_vaccination_label" translatable="false">Member State of vaccination</string>
+    <string name="green_certificate_country_of_vaccination">Stato Membro in cui è stata eseguita la vaccinazione</string>
+    <string name="green_certificate_date_of_first_positive_label" translatable="false">Date of first positive NAAT test result (yyyy-mm-dd)</string>
+    <string name="green_certificate_date_of_first_positive">Data del primo test molecolare positivo</string>
+    <string name="green_certificate_certificate_valid_from_label" translatable="false">Certificate valid from (yyyy-mm-dd)</string>
+    <string name="green_certificate_certificate_valid_from">Certificato valido da</string>
+    <string name="green_certificate_certificate_valid_until_label" translatable="false">Certificate valid until (yyyy-mm-dd)</string>
+    <string name="green_certificate_certificate_valid_until">Certificato valido a</string>
     <string name="green_certificate_type_test_label" translatable="false">Type of test</string>
-    <string name="green_certificate_type_test">Tipo di Test</string>
-    <string name="green_certificate_test_result_label" translatable="false">Test result</string>
+    <string name="green_certificate_type_test">Tipo di test</string>
+    <string name="green_certificate_test_result_label" translatable="false">Result of the test</string>
     <string name="green_certificate_test_result">Risultato del test</string>
     <string name="green_certificate_rat_test_label" translatable="false">RAT test name and manufacturer</string>
     <string name="green_certificate_rat_test">Nome del test antigienico e nome del produttore</string>
     <string name="green_certificate_naa_test_label" translatable="false">NAA test name</string>
     <string name="green_certificate_naa_test">Nome del test molecolare</string>
-    <string name="green_certificate_date_time_sc_label" translatable="false">Date/time of sample collection</string>
-    <string name="green_certificate_date_time_sc">Data/ora del campione raccolto</string>
-    <string name="green_certificate_date_time_test_result_label" translatable="false">Date/time of test result</string>
-    <string name="green_certificate_date_time_test_result">Data e ora del risultato del test</string>
-    <string name="green_certificate_testing_centre_label" translatable="false">Testing centre</string>
-    <string name="green_certificate_testing_centre">Centro in cui è stato fatto il test</string>
-    <string name="green_certificate_country_test_label" translatable="false">Country of test</string>
-    <string name="green_certificate_country_test">Nazione in cui è stato eseguito il test</string>
+    <string name="green_certificate_date_time_sc_label" translatable="false">Date and time of the test sample collection</string>
+    <string name="green_certificate_date_time_sc">Data e ora del prelievo del campione</string>
+    <string name="green_certificate_date_time_test_result_label" translatable="false">Date and time of the test result production (optional for rapid antigen test)</string>
+    <string name="green_certificate_date_time_test_result">Data e ora del risultato del test (facoltativo per test antigenici rapidi)</string>
+    <string name="green_certificate_testing_centre_label" translatable="false">Testing centre or facility</string>
+    <string name="green_certificate_testing_centre">Centro o struttura in cui è stato eseguito il test</string>
+    <string name="green_certificate_country_test_label" translatable="false">Member State of test</string>
+    <string name="green_certificate_country_test">Stato Membro in cui è stato eseguito il test</string>
+    <string name="green_certificate_country_recovery">Stato Membro in cui è stato eseguito primo test molecolare positivo</string>
     <string name="green_certificate_subHeading_vaccine">Dati Vaccino</string>
     <string name="green_certificate_subHeading_test">Dati Tampone</string>
     <string name="green_certificate_subHeading_recovery">Dati Certificato di Guarigione</string>
-    <string name="green_certificate_validity_dgc_label">Validità dell\'EU Digital Covid Certificate</string>
+    <string name="green_certificate_validity_dgc_label" translatable="false">Validity of the EU Digital Covid Certificate</string>
     <string name="green_certificate_validity_dgc">Validità dell\'EU Digital Covid Certificate</string>
-    <string name="green_certificate_validity_vaccine_partial">Certificazione valida fino alla prossima dose</string>
-    <string name="green_certificate_validity_vaccine_complete">Certificazione valida 270 giorni (9 mesi) dalla data dell\'ultima somministrazione</string>
-    <string name="green_certificate_validity_test">Certificazione valida 48 ore dall\'ora del prelievo</string>
-    <string name="green_certificate_no_dcc_found">Nessun EU Digital Covid Certificate trovato</string>
-
-    <string name="green_certificate_certificate_issuer_const" translatable="false">Ministero della salute</string>
+    <string name="green_certificate_validity_vaccine_partial">Certification valid until next dose</string>
+    <string name="green_certificate_validity_vaccine_complete">Certification valid for 270 days (9 months) from the date of the last administration</string>
+    <string name="green_certificate_validity_test">Certification valid for 48 hours from the time of collection</string>
+    <string name="green_certificate_no_dcc_found">No EU Digital Covid Certificate found</string>
+    <string name="green_certificate_certificate_issuer_const" translatable="false">Ministero della Salute</string>
     <string name="green_certificate_rapid_test_label" translatable="false">Test antigenico rapido</string>
     <string name="green_certificate_molecolar_test_label" translatable="false">Test molecolare</string>
     <string name="green_certificate_negative_label" translatable="false">Negativo</string>

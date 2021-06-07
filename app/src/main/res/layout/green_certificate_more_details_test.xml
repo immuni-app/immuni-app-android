@@ -34,11 +34,10 @@
 
     <TextView
         android:id="@+id/testType"
-        style="@style/P1Text"
+        style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/grey_dark"
-        android:fontFamily="@font/euclid_circular_bold" />
+        android:textColor="@color/grey_dark" />
 
     <TextView
         style="@style/P1Text"
@@ -56,34 +55,11 @@
 
     <TextView
         android:id="@+id/validityTest"
-        style="@style/P1Text"
+        style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/grey_dark"
-        android:fontFamily="@font/euclid_circular_bold"
         android:text="@string/green_certificate_validity_test"/>
-
-    <TextView
-        style="@style/P1Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="italic"
-        android:text="@string/green_certificate_test_result_label"
-        android:layout_marginTop="24dp" />
-
-    <TextView
-        style="@style/P1Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/green_certificate_test_result" />
-
-    <TextView
-        android:id="@+id/resultTest"
-        style="@style/P1Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/grey_dark"
-        android:fontFamily="@font/euclid_circular_bold" />
 
     <TextView
         android:id="@+id/ratNameTestLabelEng"
@@ -105,11 +81,10 @@
 
     <TextView
         android:id="@+id/ratNameTest"
-        style="@style/P1Text"
+        style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/grey_dark"
-        android:fontFamily="@font/euclid_circular_bold"
         android:visibility="gone" />
 
     <TextView
@@ -132,11 +107,10 @@
 
     <TextView
         android:id="@+id/nameNaa"
-        style="@style/P1Text"
+        style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/grey_dark"
-        android:fontFamily="@font/euclid_circular_bold"
         android:visibility="gone" />
 
     <TextView
@@ -155,11 +129,10 @@
 
     <TextView
         android:id="@+id/dateTimeSampleCollection"
-        style="@style/P1Text"
+        style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/grey_dark"
-        android:fontFamily="@font/euclid_circular_bold" />
+        android:textColor="@color/grey_dark" />
 
     <TextView
         style="@style/P1Text"
@@ -177,10 +150,30 @@
 
     <TextView
         android:id="@+id/dateTimeTestResult"
+        style="@style/P1Text.SemiBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_dark" />
+
+    <TextView
         style="@style/P1Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/euclid_circular_bold"
+        android:textStyle="italic"
+        android:text="@string/green_certificate_test_result_label"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_test_result" />
+
+    <TextView
+        android:id="@+id/resultTest"
+        style="@style/P1Text.SemiBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textColor="@color/grey_dark" />
 
     <TextView
@@ -199,10 +192,9 @@
 
     <TextView
         android:id="@+id/testingCentre"
-        style="@style/P1Text"
+        style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/euclid_circular_bold"
         android:textColor="@color/grey_dark" />
 
     <TextView
@@ -221,10 +213,9 @@
 
     <TextView
         android:id="@+id/countryTest"
-        style="@style/P1Text"
+        style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/euclid_circular_bold"
         android:textColor="@color/grey_dark" />
 
 </LinearLayout>

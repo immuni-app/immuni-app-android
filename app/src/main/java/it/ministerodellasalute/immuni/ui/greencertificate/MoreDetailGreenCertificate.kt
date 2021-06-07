@@ -104,12 +104,14 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     setTextOrDefault(convertDate(greenCertificateDetail.data?.vaccinations?.get(0)!!.dateOfVaccination))
                 countryVaccination.text =
                     setTextOrDefault(greenCertificateDetail.data?.vaccinations?.get(0)!!.countryOfVaccination)
+                certificateIssuerLabel.text = getText(R.string.green_certificate_certificate_issuer_vaccination)
             }
             greenCertificateDetail.data?.tests != null -> {
                 // Inflate layout dynamically
                 includeDynamicView(R.layout.green_certificate_more_details_test)
 
                 subHeading.text = getString(R.string.green_certificate_subHeading_test)
+                diseaseLabel.text = getString(R.string.green_certificate_disease)
                 testType.text =
                     setTextOrDefault(
                         DecodeData.ttFromCode(greenCertificateDetail.data?.tests?.get(0)!!.typeOfTest)
@@ -148,12 +150,15 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testingCentre)
                 countryTest.text =
                     setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.countryOfVaccination)
+                certificateIssuerLabel.text = getText(R.string.green_certificate_certificate_issuer)
             }
             greenCertificateDetail.data?.recoveryStatements != null -> {
                 // Inflate layout dynamically
                 includeDynamicView(R.layout.green_certificate_more_details_recovery)
 
                 subHeading.text = getString(R.string.green_certificate_subHeading_recovery)
+                diseaseLabelEng.text = getString(R.string.green_certificate_disease_recovery_label)
+                diseaseLabel.text = getString(R.string.green_certificate_disease_recovery)
                 dateOfFirstPositiveResult.text =
                     setTextOrDefault(
                         convertDate(
@@ -168,6 +173,9 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     setTextOrDefault(greenCertificateDetail.data?.recoveryStatements?.get(0)!!.certificateValidFrom)
                 certificateValidUntil.text =
                     setTextOrDefault(greenCertificateDetail.data?.recoveryStatements?.get(0)!!.certificateValidUntil)
+                certificateIssuerLabelEng.visibility = View.GONE
+                certificateIssuerLabel.visibility = View.GONE
+                entityIssuedCertificate.visibility = View.GONE
             }
         }
 

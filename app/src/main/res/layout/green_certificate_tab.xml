@@ -28,7 +28,7 @@
 
     <TextView
         android:id="@+id/swipeToShowQR"
-        style="@style/H5Section"
+        style="@style/SText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -42,113 +42,89 @@
 
     <TextView
         android:id="@+id/surnameNameLabelEng"
-        style="@style/H5Section"
+        style="@style/P1Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="15dp"
-        android:textStyle="italic"
-        android:fontFamily="@font/euclid_circular"
+        android:layout_marginEnd="15dp"
         android:text="@string/green_certificate_tab_surname_name_label"
-        android:textColor="@color/grey_normal" />
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/surnameNameLabel"
-        style="@style/H5Section"
+        style="@style/P1Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:fontFamily="@font/euclid_circular"
-        android:text="@string/green_certificate_tab_surname_name"
-        android:textColor="@color/grey_normal" />
+        android:text="@string/green_certificate_tab_surname_name" />
 
     <TextView
         android:id="@+id/surnameNameText"
-        style="@style/H5Section"
+        style="@style/P1Text.SemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:fontFamily="@font/euclid_circular_bold"
         android:textColor="@color/grey_dark" />
 
     <TextView
         android:id="@+id/birthDateLabelEng"
-        style="@style/H5Section"
+        style="@style/P1Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="15dp"
-        android:textStyle="italic"
-        android:fontFamily="@font/euclid_circular"
+        android:layout_marginEnd="15dp"
         android:text="@string/green_certificate_tab_birth_date_label"
-        android:textColor="@color/grey_normal" />
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/birthDateLabel"
-        style="@style/H5Section"
+        style="@style/P1Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:fontFamily="@font/euclid_circular"
-        android:text="@string/green_certificate_tab_birth_date"
-        android:textColor="@color/grey_normal" />
+        android:text="@string/green_certificate_tab_birth_date" />
 
     <TextView
         android:id="@+id/birthDateText"
-        style="@style/H5Section"
+        style="@style/P1Text.SemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:fontFamily="@font/euclid_circular_bold"
         android:textColor="@color/grey_dark" />
 
     <TextView
         android:id="@+id/certificateIDLabelEng"
-        style="@style/H5Section"
+        style="@style/P1Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:layout_marginTop="15dp"
-        android:textStyle="italic"
-        android:fontFamily="@font/euclid_circular"
+        android:layout_marginEnd="15dp"
         android:text="@string/green_certificate_tab_certificate_id_label"
-        android:textColor="@color/grey_normal" />
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/certificateIDLabel"
-        style="@style/H5Section"
+        style="@style/P1Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:fontFamily="@font/euclid_circular"
-        android:text="@string/green_certificate_tab_certificate_id"
-        android:textColor="@color/grey_normal" />
+        android:text="@string/green_certificate_tab_certificate_id" />
 
     <TextView
         android:id="@+id/certificateIDText"
-        style="@style/H5Section"
+        style="@style/P1Text.SemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:fontFamily="@font/euclid_circular_bold"
         android:textColor="@color/grey_dark" />
 
     <TextView
@@ -158,6 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
+        android:fontFamily="@font/euclid_circular_bold"
         android:text="@string/green_certificate_tab_more_details" />
 
     <View
@@ -176,9 +153,10 @@
             android:id="@+id/downloadButton"
             style="@style/ButtonBottomRadius"
             android:layout_gravity="center"
-            android:visibility="gone"
             android:layout_weight="1"
+            android:fontFamily="@font/euclid_circular_bold"
             android:text="@string/green_certificate_tab_download"
+            android:visibility="gone"
             app:icon="@drawable/ic_download"
             app:iconGravity="textStart"
             app:iconTintMode="multiply" />
@@ -190,6 +168,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:fontFamily="@font/euclid_circular_bold"
             android:text="@string/green_certificate_tab_delete"
             app:icon="@drawable/ic_cancel"
             app:iconGravity="textStart"

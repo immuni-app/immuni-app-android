@@ -34,11 +34,10 @@
 
     <TextView
         android:id="@+id/dateOfFirstPositiveResult"
-        style="@style/P1Text"
+        style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/grey_dark"
-        android:fontFamily="@font/euclid_circular_bold" />
+        android:textColor="@color/grey_dark" />
 
     <TextView
         style="@style/P1Text"
@@ -52,15 +51,35 @@
         style="@style/P1Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/green_certificate_country_test" />
+        android:text="@string/green_certificate_country_recovery" />
 
     <TextView
         android:id="@+id/countryTestRecovery"
+        style="@style/P1Text.SemiBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey_dark" />
+
+    <TextView
         style="@style/P1Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:text="@string/green_certificate_certificate_issuer_label"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/green_certificate_certificate_issuer" />
+
+    <TextView
+        style="@style/P1Text.SemiBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textColor="@color/grey_dark"
-        android:fontFamily="@font/euclid_circular_bold" />
+        android:text="@string/green_certificate_certificate_issuer_const" />
 
     <TextView
         style="@style/P1Text"
@@ -78,11 +97,10 @@
 
     <TextView
         android:id="@+id/certificateValidFrom"
-        style="@style/P1Text"
+        style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/grey_dark"
-        android:fontFamily="@font/euclid_circular_bold" />
+        android:textColor="@color/grey_dark" />
 
     <TextView
         style="@style/P1Text"
@@ -100,10 +118,9 @@
 
     <TextView
         android:id="@+id/certificateValidUntil"
-        style="@style/P1Text"
+        style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/grey_dark"
-        android:fontFamily="@font/euclid_circular_bold" />
+        android:textColor="@color/grey_dark" />
 
 </LinearLayout>

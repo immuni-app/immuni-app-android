@@ -82,8 +82,9 @@ class GreenPassAdapter(
         holder.surnameNameText.text =
             greenCertificate.data?.person?.familyName + " " + greenCertificate.data?.person?.givenName
 
-        if (holder.surnameNameText.text.isBlank()) holder.surnameNameText.text = "-"
-        holder.birthDateText.text = greenCertificate.data?.dateOfBirth ?: "-"
+        if (holder.surnameNameText.text.isBlank()) holder.surnameNameText.text = "----"
+        holder.birthDateText.text = greenCertificate.data?.dateOfBirth ?: "---"
+        if (holder.birthDateText.text.isBlank()) holder.birthDateText.text = "----"
 
         holder.certificateIdText.text = when (true) {
             greenCertificate.data?.recoveryStatements != null -> {
