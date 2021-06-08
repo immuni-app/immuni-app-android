@@ -532,9 +532,9 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_country_test_label" translatable="false">Member State of test</string>
     <string name="green_certificate_country_test">Stato Membro in cui è stato eseguito il test</string>
     <string name="green_certificate_country_recovery">Stato Membro in cui è stato eseguito primo test molecolare positivo</string>
-    <string name="green_certificate_subHeading_vaccine">Dati Vaccino</string>
-    <string name="green_certificate_subHeading_test">Dati Tampone</string>
-    <string name="green_certificate_subHeading_recovery">Dati Certificato di Guarigione</string>
+    <string name="green_certificate_subHeading_vaccine">Vaccination Certificate</string>
+    <string name="green_certificate_subHeading_test">Test certificate</string>
+    <string name="green_certificate_subHeading_recovery">Recovery Certificate</string>
     <string name="green_certificate_validity_dgc_label" translatable="false">Validity of the EU Digital Covid Certificate</string>
     <string name="green_certificate_validity_dgc">Validità dell\'EU Digital Covid Certificate</string>
     <string name="green_certificate_validity_vaccine_partial">Certification valid until next dose</string>

@@ -492,9 +492,9 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="form_expired_date_healt_id_label">Fecha de vencimiento de la tarjeta sanitaria</string>
   <string name="form_expired_date_placeholder">Fecha de vencimiento</string>
   <string name="green_certificate_more_details_last_description">Este certificado no es un documento de viaje. La evidencia científica sobre la vacunación, las pruebas y la recuperación del COVID-19 continúa evolucionando, incluso teniendo en cuenta las nuevas variantes del virus. Antes de viajar, verifica las medidas de salud pública aplicadas en el lugar de destino y las restricciones relacionadas también consultando el sitio web:</string>
-  <string name="green_certificate_subHeading_vaccine">Datos de vacunas</string>
-  <string name="green_certificate_subHeading_test">Datos del hisopo</string>
-  <string name="green_certificate_subHeading_recovery">Certificado de datos de curación</string>
+  <string name="green_certificate_subHeading_vaccine">Certificado de vacunacion</string>
+  <string name="green_certificate_subHeading_test">Certificado de prueba</string>
+  <string name="green_certificate_subHeading_recovery">Certificado de recuperación</string>
   <string name="green_certificate_validity_dgc">Validez del EU Digital Covid Certificate</string>
   <string name="green_certificate_validity_vaccine_partial">Certificación válida hasta la próxima dosis</string>
   <string name="green_certificate_validity_vaccine_complete">Certificación válida por 270 días (9 meses) a partir de la fecha de la última administración.</string>

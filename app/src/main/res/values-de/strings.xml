@@ -487,9 +487,9 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="green_certificate_testing_centre">Zentrum oder Einrichtung, in der Test durchgeführt wurde</string>
   <string name="green_certificate_country_test">Mitgliedstaat, in dem der Test durchgeführt wurde</string>
   <string name="green_certificate_country_recovery">Mitgliedstaat, in dem der erste positive Molekulartest durchgeführt wurde</string>
-  <string name="green_certificate_subHeading_vaccine">Impfstoffdaten</string>
-  <string name="green_certificate_subHeading_test">Pufferdaten</string>
-  <string name="green_certificate_subHeading_recovery">Datenzertifikat der Heilung</string>
+  <string name="green_certificate_subHeading_vaccine">Impfbescheinigung</string>
+  <string name="green_certificate_subHeading_test">Test Zertifikat</string>
+  <string name="green_certificate_subHeading_recovery">Wiederherstellungszertifikat</string>
   <string name="green_certificate_validity_dgc">Gültigkeit des EU Digital Covid Certificate</string>
   <string name="green_certificate_validity_vaccine_partial">Zertifizierung gültig bis zur nächsten Dosis</string>
   <string name="green_certificate_validity_vaccine_complete">Zertifizierung gültig für 270 Tage (9 Monate) ab dem Datum der letzten Verabreichung</string>
