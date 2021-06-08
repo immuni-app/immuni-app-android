@@ -471,7 +471,6 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="form_expired_date_healt_id_label">Health Card expiry date</string>
     <string name="form_expired_date_placeholder">Expiry date</string>
     <string name="form_symptoms_date_placeholder">Date</string>
-    <string name="dcg_clear_code">Delete code</string>
     <string name="get_dgc_loading">EU Digital Covid Certificate recovery in progress..</string>
     <string name="green_certificate_tab_swipe">Scroll to view other certificates</string>
     <string name="green_certificate_tab_surname_name_label" translatable="false">Surname(s) and forename(s)</string>
@@ -486,7 +485,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_pass_more_details_title">EU Digital Covid Certificate</string>
     <string name="green_certificate_more_details_last_description">This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, including in consideration of the new variants of the virus. Before traveling, please check the public health measures applied in the place of destination and the related restrictions also by consulting the website:</string>
     <string name="green_certificate_more_details_europe_restriction_url" translatable="false">https://reopen.europa.eu</string>
-    <string name="green_certificate_more_details_doses_number_text" translatable="false">%s di %s</string>
+    <string name="green_certificate_more_details_doses_number_text">%s of %s</string>
     <string name="permission_go_to_settings" translatable="false">Vai a Impostazioni</string>
     <string name="permission_needed_permission_message" translatable="false">E\' necessario attivare i permessi di scrittura per poter scaricare l\'EU Digital Covid Certificate.</string>
     <string name="permission_need_permission_title" translatable="false">Permesso richiesto</string>
@@ -513,9 +512,9 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_date_of_first_positive_label" translatable="false">Date of first positive NAAT test result (yyyy-mm-dd)</string>
     <string name="green_certificate_date_of_first_positive">Data del primo test molecolare positivo</string>
     <string name="green_certificate_certificate_valid_from_label" translatable="false">Certificate valid from (yyyy-mm-dd)</string>
-    <string name="green_certificate_certificate_valid_from">Certificato valido da</string>
+    <string name="green_certificate_certificate_valid_from">Certificazione valida dal</string>
     <string name="green_certificate_certificate_valid_until_label" translatable="false">Certificate valid until (yyyy-mm-dd)</string>
-    <string name="green_certificate_certificate_valid_until">Certificato valido a</string>
+    <string name="green_certificate_certificate_valid_until">Certificazione valida fino al</string>
     <string name="green_certificate_type_test_label" translatable="false">Type of test</string>
     <string name="green_certificate_type_test">Tipo di test</string>
     <string name="green_certificate_test_result_label" translatable="false">Result of the test</string>

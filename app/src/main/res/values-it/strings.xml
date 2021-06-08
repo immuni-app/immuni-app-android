@@ -458,7 +458,6 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="form_expired_date_healt_id_label">Data scadenza Tessera Sanitaria</string>
   <string name="form_expired_date_placeholder">Data scadenza</string>
   <string name="form_symptoms_date_placeholder">Data</string>
-  <string name="dcg_clear_code">Elimina codice</string>
   <string name="get_dgc_loading">Recupero EU Digital Covid Certificate in corso..</string>
   <string name="green_certificate_tab_swipe">Scorri per visualizzare gli altri certificati</string>
   <string name="green_certificate_tab_surname_name">Cognome e nome</string>
@@ -479,8 +478,8 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_certificate_date_of_vaccination">Data dell\'ultima somministrazione</string>
   <string name="green_certificate_country_of_vaccination">Stato Membro in cui è stata eseguita la vaccinazione</string>
   <string name="green_certificate_date_of_first_positive">Data del primo test molecolare positivo</string>
-  <string name="green_certificate_certificate_valid_from">Certificato valido da</string>
-  <string name="green_certificate_certificate_valid_until">Certificato valido a</string>
+  <string name="green_certificate_certificate_valid_from">Certificazione valida dal</string>
+  <string name="green_certificate_certificate_valid_until">Certificazione valida fino al</string>
   <string name="green_certificate_type_test">Tipo di test</string>
   <string name="green_certificate_test_result">Risultato del test</string>
   <string name="green_certificate_rat_test">Nome del test antigenico e nome del produttore</string>
@@ -499,4 +498,5 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_certificate_validity_test">Certificazione valida 48 ore dall\'ora del prelievo</string>
   <string name="green_certificate_no_dcc_found">Nessun EU Digital Covid Certificate trovato</string>
   <string name="green_pass_confirm_button">Conferma</string>
+  <string name="green_certificate_more_details_doses_number_text">%s di %s</string>
 </resources>
