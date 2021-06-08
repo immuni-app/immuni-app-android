@@ -89,6 +89,8 @@ class HomeListAdapter(
 
     inner class ReportPositivityVH(v: View) : RecyclerView.ViewHolder(v)
 
+    inner class GreenPassVH(v: View) : RecyclerView.ViewHolder(v)
+
     inner class DisableExposureApiVH(v: View) : RecyclerView.ViewHolder(v) {
         val disableExposureApi: Button = v.findViewById(R.id.disableExposureApi)
 
@@ -111,11 +113,12 @@ class HomeListAdapter(
         val (layout, cardType) = when (viewType) {
             0 -> Pair(R.layout.home_protection_state_card, ProtectionCardVH::class)
             1 -> Pair(R.layout.home_section_header_item, SectionHeaderVH::class)
-            2 -> Pair(R.layout.home_report_positivity_card, ReportPositivityVH::class)
-            3 -> Pair(R.layout.home_countries_of_interest, CountriesOfInterestVH::class)
-            4 -> Pair(R.layout.home_information_how_app_works_card, InformationHowAppWorksVH::class)
-            5 -> Pair(R.layout.home_information_self_care_card, InformationSelfCareVH::class)
-            6 -> Pair(R.layout.home_disable_exposure_api, DisableExposureApiVH::class)
+            2 -> Pair(R.layout.home_green_certificate_card, GreenPassVH::class)
+            3 -> Pair(R.layout.home_report_positivity_card, ReportPositivityVH::class)
+            4 -> Pair(R.layout.home_countries_of_interest, CountriesOfInterestVH::class)
+            5 -> Pair(R.layout.home_information_how_app_works_card, InformationHowAppWorksVH::class)
+            6 -> Pair(R.layout.home_information_self_care_card, InformationSelfCareVH::class)
+            7 -> Pair(R.layout.home_disable_exposure_api, DisableExposureApiVH::class)
             else -> error("Unhandled viewType $viewType")
         }
 
@@ -148,8 +151,10 @@ class HomeListAdapter(
                     holder.knowMore.visible()
                     holder.reactivate.gone()
                     holder.title.text = resources.getString(R.string.home_protection_active)
-                        .color('{', '}',
-                            resources.getColor(R.color.colorPrimary))
+                        .color(
+                            '{', '}',
+                            resources.getColor(R.color.colorPrimary)
+                        )
 
                     val reopenReminder = settingsManager.settings.value.reopenReminder
 
@@ -172,9 +177,12 @@ class HomeListAdapter(
                     holder.knowMore.gone()
                     holder.reactivate.visible()
                     holder.title.text = resources.getString(R.string.home_protection_not_active)
-                        .color('{', '}',
-                            resources.getColor(R.color.danger))
-                    holder.subtitle.text = resources.getString(R.string.home_view_service_not_active_subtitle)
+                        .color(
+                            '{', '}',
+                            resources.getColor(R.color.danger)
+                        )
+                    holder.subtitle.text =
+                        resources.getString(R.string.home_view_service_not_active_subtitle)
                     holder.lottieBg.alpha = 0f
                     holder.lottieBg.setAnimation(R.raw.lottie_protection_not_active)
                     holder.lottieBg.visible()
@@ -191,7 +199,8 @@ class HomeListAdapter(
                 }
             }
             is DisableExposureApiVH -> {
-                holder.disableExposureApi.isEnabled = (items[position] as DisableExposureApi).isEnabled
+                holder.disableExposureApi.isEnabled =
+                    (items[position] as DisableExposureApi).isEnabled
             }
         }
     }
@@ -200,11 +209,12 @@ class HomeListAdapter(
         return when (items[position]) {
             is ProtectionCard -> 0
             is SectionHeader -> 1
-            is ReportPositivityCard -> 2
-            is CountriesOfInterestCard -> 3
-            is HowItWorksCard -> 4
-            is SelfCareCard -> 5
-            is DisableExposureApi -> 6
+            is GreenPassCard -> 2
+            is ReportPositivityCard -> 3
+            is CountriesOfInterestCard -> 4
+            is HowItWorksCard -> 5
+            is SelfCareCard -> 6
+            is DisableExposureApi -> 7
         }
     }
 

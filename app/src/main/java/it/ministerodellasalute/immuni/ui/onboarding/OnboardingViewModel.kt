@@ -125,7 +125,8 @@ class OnboardingViewModel(
             userManager.save(
                 User(
                     region = region,
-                    province = province
+                    province = province,
+                    greenPass = mutableListOf()
                 )
             )
         }

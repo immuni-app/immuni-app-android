@@ -38,5 +38,6 @@ object HowItWorksCard : InformationCard()
 object SelfCareCard : InformationCard()
 object CountriesOfInterestCard : InformationCard()
 object ReportPositivityCard : InformationCard()
+object GreenPassCard : InformationCard()
 
 data class DisableExposureApi(val isEnabled: Boolean) : HomeItemType()
