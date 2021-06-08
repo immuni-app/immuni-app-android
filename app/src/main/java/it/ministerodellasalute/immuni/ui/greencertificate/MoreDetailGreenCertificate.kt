@@ -47,6 +47,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
     private val molecolarTest = "LP6464-4"
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val argument = navArgs<MoreDetailGreenCertificateArgs>()
@@ -145,6 +146,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     ratNameTestLabelEng.visibility = View.VISIBLE
                     ratNameTestLabel.visibility = View.VISIBLE
                     ratNameTest.visibility = View.VISIBLE
+
 
                     nameNaa.text =
                         setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testName)
