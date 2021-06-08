@@ -452,7 +452,7 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="green_pass_more_details_title">EU Digital Covid Certificate</string>
   <string name="green_certificate_disease">Enfermedad o agente objetivo</string>
   <string name="green_certificate_disease_recovery">Enfermedad o agente objetivo del que se cura la persona</string>
-  <string name="green_certificate_certificate_issuer">Estructura que emitió la certificación verde COVID-19</string>
+  <string name="green_certificate_certificate_issuer">Estructura que emitió la certificación</string>
   <string name="green_certificate_certificate_issuer_vaccination">Estructura que emitió la certificación</string>
   <string name="green_certificate_vaccine_type">Tipo de vacuna administrada</string>
   <string name="green_certificate_vaccine_medicinal_product">Nombre de la vacuna</string>

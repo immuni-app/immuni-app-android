@@ -45,6 +45,8 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
     val format = SimpleDateFormat("yyyy-MM-dd")
 
+    private val molecolarTest = "LP6464-4"
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val argument = navArgs<MoreDetailGreenCertificateArgs>()
@@ -104,7 +106,8 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     setTextOrDefault(convertDate(greenCertificateDetail.data?.vaccinations?.get(0)!!.dateOfVaccination))
                 countryVaccination.text =
                     setTextOrDefault(greenCertificateDetail.data?.vaccinations?.get(0)!!.countryOfVaccination)
-                certificateIssuerLabel.text = getText(R.string.green_certificate_certificate_issuer_vaccination)
+                certificateIssuerLabel.text =
+                    getText(R.string.green_certificate_certificate_issuer_vaccination)
             }
             greenCertificateDetail.data?.tests != null -> {
                 // Inflate layout dynamically
@@ -129,13 +132,20 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                                 )
                             })
 
-                if (!greenCertificateDetail.data?.tests?.get(0)!!.testNameAndManufacturer.isNullOrBlank()) {
+                if (greenCertificateDetail.data?.tests?.get(0)!!.typeOfTest == molecolarTest) {
+                    nameNaaLabel.visibility = View.GONE
+                    nameNaa.visibility = View.GONE
+                    naaNameTestLabelEng.visibility = View.GONE
+                    ratNameTestLabelEng.visibility = View.GONE
+                    ratNameTestLabel.visibility = View.GONE
+                    ratNameTest.visibility = View.GONE
+                } else {
                     ratNameTest.text =
                         setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testNameAndManufacturer)
                     ratNameTestLabelEng.visibility = View.VISIBLE
                     ratNameTestLabel.visibility = View.VISIBLE
                     ratNameTest.visibility = View.VISIBLE
-                } else {
+
                     nameNaa.text =
                         setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testName)
                     nameNaaLabel.visibility = View.VISIBLE
