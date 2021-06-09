@@ -163,8 +163,8 @@ class GreenCertificateViewModel(
                 "CUN" -> digitValidator.validaCheckDigitCUN(token)
                 "NRFE" -> digitValidator.validaCheckDigitNRFE(token)
                 "NUCG" -> digitValidator.validaCheckDigitNUCG(token)
-                "OTP" -> digitValidator.validaCheckDigitOTP(token)
-                else -> digitValidator.validaCheckDigitOTP(token)
+                "AUTHCODE" -> digitValidator.validaCheckDigitAuthcode(token)
+                else -> digitValidator.validaCheckDigitAuthcode(token)
             }
         } else if (typeToken.isBlank()) {
             message += context.getString(R.string.form_type_code_empty)
@@ -173,7 +173,7 @@ class GreenCertificateViewModel(
                 "CUN" -> context.getString(R.string.form_code_cun_empty)
                 "NRFE" -> context.getString(R.string.form_code_nrfe_empty)
                 "NUCG" -> context.getString(R.string.form_code_nucg_empty)
-                "OTP" -> context.getString(R.string.form_code_otp_empty)
+                "AUTHCODE" -> context.getString(R.string.form_code_otp_empty)
                 else -> ""
             }
         }
@@ -183,7 +183,7 @@ class GreenCertificateViewModel(
                 "CUN" -> context.getString(R.string.form_code_cun_wrong)
                 "NRFE" -> context.getString(R.string.form_code_nrfe_wrong)
                 "NUCG" -> context.getString(R.string.form_code_nucg_wrong)
-                "OTP" -> context.getString(R.string.form_code_otp_wrong)
+                "AUTHCODE" -> context.getString(R.string.form_code_otp_wrong)
                 else -> ""
             }
         } else if (resultValidateToken == GreenPassValidationResult.TokenLengthWrong) {
@@ -191,7 +191,7 @@ class GreenCertificateViewModel(
                 "CUN" -> context.getString(R.string.form_code_cun_empty)
                 "NRFE" -> context.getString(R.string.form_code_nrfe_empty)
                 "NUCG" -> context.getString(R.string.form_code_nucg_empty)
-                "OTP" -> context.getString(R.string.form_code_otp_empty)
+                "AUTHCODE" -> context.getString(R.string.form_code_otp_empty)
                 else -> ""
             }
         }

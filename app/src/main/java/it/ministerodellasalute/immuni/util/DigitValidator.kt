@@ -38,7 +38,7 @@ class DigitValidator {
         }
     }
 
-    fun validaCheckDigitOTP(token: String): GreenPassValidationResult {
+    fun validaCheckDigitAuthcode(token: String): GreenPassValidationResult {
         if (token.length != OTP_CODE_LENGTH) {
             return GreenPassValidationResult.TokenLengthWrong
         }

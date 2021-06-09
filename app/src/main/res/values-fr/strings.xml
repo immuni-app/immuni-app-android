@@ -435,8 +435,7 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="green_pass_how_to_generate_second">Le certificat comporte un code-barres bidimensionnel (QR code) qui contient les informations essentielles du titulaire du certificat et l\'événement de santé auquel le certificat est associé (vaccination, test négatif, cure COVID-19) et signé numériquement pour garantir l\'authenticité .</string>
   <string name="green_pass_how_to_generate_third">Si vous avez reçu le code pour récupérer la certification par e-mail ou SMS, vous pouvez utiliser cette App en saisissant l\'un des codes uniques CUN, NRFE, NUCG (reçus respectivement lors de l\'exécution de l\'écouvillonnage moléculaire ou lors de l\'écouvillonnage antigénique ou lors de la préparation le certificat de guérison. ), ou le code d\'autorisation AUTHCODE reçu par e-mail ou SMS accompagné des 8 derniers chiffres du numéro d\'identification et de la date d\'expiration de la Carte Santé.</string>
   <string name="green_pass_how_to_generate_fourth">Tous ces codes sont associés de manière unique au certificat vert COVID-19 relatif à l\'événement sanitaire qui l\'a généré.</string>
-  <string name="green_pass_how_to_generate_fiveth">La certification verte COVID-19 est affichée sur l\'écran du smartphone et le code QR peut être enregistré par vous dans l\'appareil mobile afin qu\'il puisse être consulté et affiché sur demande, en cas de vérification, même en mode hors ligne. Le bouton «Supprimer» vous permet de supprimer votre certificat de votre smartphone de manière autonome à tout moment.</string>
-  <string name="green_pass_how_to_generate_sixth">Pour plus d\'informations, visitez le site Web www.dgc.gov.it</string>
+    <string name="green_pass_how_to_generate_sixth">Pour plus d\'informations, visitez le site Web www.dgc.gov.it</string>
   <string name="green_pass_generation_successfully">EU Digital Covid Certificate récupéré avec succès</string>
   <string name="green_pass_select_type_token">Sélectionner le genre</string>
   <string name="form_code_cun_empty">- Saisissez les 10 derniers caractères du code CUN qui vous a été communiqué\n</string>
@@ -491,7 +490,7 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="green_certificate_country_recovery">État membre où le premier test moléculaire positif a été effectué</string>
   <string name="green_certificate_subHeading_vaccine">Certificat de vaccination</string>
   <string name="green_certificate_subHeading_test">Certificat de test</string>
-  <string name="green_certificate_subHeading_recovery">Certificat de récupération</string>
+  <string name="green_certificate_subHeading_recovery">Certificat de guérison</string>
   <string name="green_certificate_validity_dgc">Validité du EU Digital Covid Certificate</string>
   <string name="green_certificate_validity_vaccine_partial">Certification valable jusqu\'à la prochaine dose</string>
   <string name="green_certificate_validity_vaccine_complete">Certification valable 270 jours (9 mois) à compter de la date de la dernière administration</string>
@@ -499,4 +498,5 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="green_certificate_no_dcc_found">Aucun EU Digital Covid Certificate trouvé</string>
   <string name="green_pass_confirm_button">Confirmation</string>
   <string name="green_certificate_more_details_doses_number_text">%s sur %s</string>
+  <string name="green_pass_how_to_generate_fiveth">La certification verte COVID-19 est affichée sur l\'écran du smartphone afin qu\'elle puisse être consultée et affichée sur demande, en cas de vérification, même en mode hors ligne. Le bouton «Supprimer» vous permet de supprimer votre certificat de votre smartphone de manière autonome à tout moment.</string>
 </resources>
