@@ -431,9 +431,9 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="form_code_nucg_empty">- Ingrese los últimos 10 caracteres del código NUCG que se le comunicaron\n</string>
   <string name="form_code_otp_empty">- Inserisci gli ultimi 12 caratteri del codice AUTHCODE che ti è stato comunicato\n</string>
   <string name="form_code_cun_wrong">- El CUN ingresado no es formalmente válido. Asegúrese de haber ingresado los últimos 10 códigos CUN recibidos a través de SMS o en el informe asociado con el búfer positivo\n</string>
-  <string name="form_code_nrfe_wrong">- El código NRFE introducido no es formalmente válido. Asegúrese de haber ingresado los últimos 17 dígitos del código NRFE que recibió\n</string>
-  <string name="form_code_nucg_wrong">- El código NUCG ingresado no es formalmente válido. Asegúrese de haber ingresado los últimos 10 dígitos del código NUCG que recibió\n</string>
-  <string name="form_code_otp_wrong">- El AUTHCODE ingresado no es formalmente válido. Asegúrese de haber ingresado los últimos 12 dígitos del AUTHCODE que recibió\n</string>
+  <string name="form_code_nrfe_wrong">- El código NRFE introducido no es formalmente válido. Asegúrese de haber ingresado los últimos 17 dígitos del código NRFE que recibiste\n</string>
+  <string name="form_code_nucg_wrong">- El código NUCG ingresado no es formalmente válido. Asegúrese de haber ingresado los últimos 10 dígitos del código NUCG que recibiste\n</string>
+  <string name="form_code_otp_wrong">- El AUTHCODE ingresado no es formalmente válido. Asegúrese de haber ingresado los últimos 12 dígitos del AUTHCODE que recibiste\n</string>
   <string name="form_type_code_empty">- Seleccione el tipo de código\n</string>
   <string name="form_expired_health_date">- Ingrese la fecha de vencimiento de la tarjeta sanitaria\n</string>
   <string name="code_placeholder">Introduzca el código</string>
@@ -484,8 +484,7 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="green_pass_how_to_generate_second">El certificado tiene un código de barras bidimensional (código QR) que contiene la información esencial del titular del certificado y el evento de salud al que se asocia el certificado (vacunación, prueba negativa, cura COVID-19) y firmado digitalmente para garantizar la autenticidad.</string>
   <string name="green_pass_how_to_generate_third">Si has recibido el código para recuperar la certificación por correo electrónico o SMS, puedes utilizar esta aplicación ingresando uno de los códigos únicos CUN, NRFE, NUCG (recibidos respectivamente durante la ejecución del hisopo molecular o del hisopo antigénico o al preparar el certificado de curación.), o el código de autorización AUTHCODE recibido vía e-mail o SMS junto con los últimos 8 dígitos del número de identificación y la fecha de vencimiento de la Tarjeta Sanitaria.</string>
   <string name="green_pass_how_to_generate_fourth">Todos estos códigos están asociados de forma única con el certificado verde COVID-19 relacionado con el evento de salud que lo generó.</string>
-  <string name="green_pass_how_to_generate_fiveth">La certificación verde COVID-19 se muestra en la pantalla del teléfono y usted puede guardar el código QR en el dispositivo móvil para que pueda ser visto y mostrado bajo pedido, en caso de verificación, incluso en modo fuera de línea. El botón \"Eliminar\" le permite eliminar su certificado de su teléfono de forma independiente en cualquier momento.</string>
-  <string name="green_pass_how_to_generate_sixth">Para obtener más información, visita el sitio web www.dgc.gov.it</string>
+    <string name="green_pass_how_to_generate_sixth">Para obtener más información, visita el sitio web www.dgc.gov.it</string>
   <string name="green_pass_generation_successfully">EU Digital Covid Certificate recuperado con éxito</string>
   <string name="green_pass_select_type_token">Selecciona tipo</string>
   <string name="message_modal_confirm_delete_dcg">¿Está seguro de que deseas eliminar tu EU Digital Covid Certificate?</string>
@@ -494,10 +493,11 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="green_certificate_more_details_last_description">Este certificado no es un documento de viaje. La evidencia científica sobre la vacunación, las pruebas y la recuperación del COVID-19 continúa evolucionando, incluso teniendo en cuenta las nuevas variantes del virus. Antes de viajar, verifica las medidas de salud pública aplicadas en el lugar de destino y las restricciones relacionadas también consultando el sitio web:</string>
   <string name="green_certificate_subHeading_vaccine">Certificado de vacunacion</string>
   <string name="green_certificate_subHeading_test">Certificado de prueba</string>
-  <string name="green_certificate_subHeading_recovery">Certificado de recuperación</string>
+  <string name="green_certificate_subHeading_recovery">Certificado de curación</string>
   <string name="green_certificate_validity_dgc">Validez del EU Digital Covid Certificate</string>
   <string name="green_certificate_validity_vaccine_partial">Certificación válida hasta la próxima dosis</string>
   <string name="green_certificate_validity_vaccine_complete">Certificación válida por 270 días (9 meses) a partir de la fecha de la última administración.</string>
   <string name="green_certificate_validity_test">Certificación válida por 48 horas desde el momento de la extracción.</string>
   <string name="green_certificate_no_dcc_found">No se encontró ningún EU Digital Covid Certificate</string>
+  <string name="green_pass_how_to_generate_fiveth">La certificación verde COVID-19 se muestra en la pantalla del teléfono inteligente para que se pueda ver y mostrar a pedido, en caso de verificación, incluso en modo fuera de línea. El botón \"Eliminar\" le permite eliminar su certificado de su teléfono inteligente de forma independiente en cualquier momento.</string>
 </resources>

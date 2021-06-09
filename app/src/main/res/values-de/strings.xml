@@ -433,7 +433,6 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="green_pass_how_to_generate_second">Das Zertifikat ist mit einem zweidimensionalen Barcode (QR-Code) versehen, der die wesentlichen Angaben des Zertifikatsinhabers und des mit dem Zertifikat verbundenen Gesundheitsereignisses (Impfung, Negativtest, COVID-19-Kur) enthält und zur Garantie der Echtheit digital signiert ist .</string>
   <string name="green_pass_how_to_generate_third">Wenn Sie den Code zum Abrufen der Zertifizierung per E-Mail oder SMS erhalten haben, können Sie diese App verwenden, indem Sie einen der eindeutigen Codes CUN, NRFE, NUCG eingeben (erhalten Sie jeweils während der Durchführung des Molekularabstrichs oder beim Antigenabstrich oder bei der Vorbereitung das Heilzertifikat. ) oder den per E-Mail oder SMS erhaltenen Autorisierungscode AUTHCODE zusammen mit den letzten 8 Ziffern der Identifikationsnummer und dem Ablaufdatum der Gesundheitskarte.</string>
   <string name="green_pass_how_to_generate_fourth">Alle diese Codes sind eindeutig mit dem grünen COVID-19-Zertifikat verbunden, das sich auf das Gesundheitsereignis bezieht, das es generiert hat.</string>
-  <string name="green_pass_how_to_generate_fiveth">Die grüne COVID-19-Zertifizierung wird auf dem Smartphone-Bildschirm angezeigt und der QR-Code kann von Ihnen im Mobilgerät gespeichert werden, damit dieser auf Wunsch, bei Verifizierung, auch im Offline-Modus eingesehen und angezeigt werden kann. Über die Schaltfläche „Löschen“ können Sie Ihr Zertifikat jederzeit selbstständig von Ihrem Smartphone löschen.</string>
   <string name="green_pass_how_to_generate_sixth">Weitere Informationen finden Sie auf der Website www.dgc.gov.it</string>
   <string name="green_pass_generation_successfully">EU Digital Covid Certificate erfolgreich wiederhergestellt</string>
   <string name="green_pass_select_type_token">Art auswählen</string>
@@ -489,7 +488,7 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="green_certificate_country_recovery">Mitgliedstaat, in dem der erste positive Molekulartest durchgeführt wurde</string>
   <string name="green_certificate_subHeading_vaccine">Impfbescheinigung</string>
   <string name="green_certificate_subHeading_test">Test Zertifikat</string>
-  <string name="green_certificate_subHeading_recovery">Wiederherstellungszertifikat</string>
+  <string name="green_certificate_subHeading_recovery">Heilungsurkunde</string>
   <string name="green_certificate_validity_dgc">Gültigkeit des EU Digital Covid Certificate</string>
   <string name="green_certificate_validity_vaccine_partial">Zertifizierung gültig bis zur nächsten Dosis</string>
   <string name="green_certificate_validity_vaccine_complete">Zertifizierung gültig für 270 Tage (9 Monate) ab dem Datum der letzten Verabreichung</string>
@@ -497,4 +496,5 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="green_certificate_no_dcc_found">Kein EU Digital Covid Certificate gefunden</string>
   <string name="green_pass_confirm_button">Bestätigung</string>
   <string name="green_certificate_more_details_doses_number_text">%s von %s</string>
+  <string name="green_pass_how_to_generate_fiveth">Die grüne COVID-19-Zertifizierung wird auf dem Smartphone-Bildschirm angezeigt, so dass sie auf Wunsch, bei Verifizierung, auch im Offline-Modus eingesehen und gezeigt werden kann. Über die Schaltfläche „Löschen“ können Sie Ihr Zertifikat jederzeit selbstständig von Ihrem Smartphone löschen.</string>
 </resources>
