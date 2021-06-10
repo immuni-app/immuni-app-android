@@ -440,7 +440,7 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_pass_generation_successfully">EU Digital Covid Certificate recuperato con successo</string>
   <string name="green_pass_select_type_token">Seleziona tipologia</string>
   <string name="form_code_cun_empty">- Inserisci gli ultimi 10 caratteri del codice CUN che ti è stato comunicato\n</string>
-  <string name="form_code_nrfe_empty">- Inserisci gli ultimi 10 caratteri del codice NRFE che ti è stato comunicato\n</string>
+  <string name="form_code_nrfe_empty">- Inserisci gli ultimi 17 caratteri del codice NRFE che ti è stato comunicato\n</string>
   <string name="form_code_nucg_empty">- Inserisci gli ultimi 10 caratteri del codice NUCG che ti è stato comunicato\n</string>
   <string name="form_code_otp_empty">- Inserisci gli ultimi 12 caratteri del codice AUTHCODE che ti è stato comunicato\n</string>
   <string name="form_code_cun_wrong">- Il CUN inserito non risulta formalmente valido. Assicurati di aver inserito le ultime 10 cifre del CUN che hai ricevuto per SMS o nel referto associato a un tampone positivo\n</string>
