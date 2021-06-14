@@ -471,7 +471,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="form_expired_date_placeholder">Expiry date</string>
     <string name="form_symptoms_date_placeholder">Date</string>
     <string name="get_dgc_loading">EU Digital Covid Certificate recovery in progress..</string>
-    <string name="green_certificate_tab_swipe">Scroll to view other certificates</string>
+    <string name="green_certificate_tab_swipe">Swipe to view other certificates</string>
     <string name="green_certificate_tab_surname_name_label" translatable="false">Surname(s) and forename(s)</string>
     <string name="green_certificate_tab_surname_name">Cognome e nome</string>
     <string name="green_certificate_tab_birth_date_label" translatable="false">Date of birth (yyyy-mm-dd)</string>
