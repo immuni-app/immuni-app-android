@@ -494,8 +494,8 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_disease_recovery">Malattia o agente bersaglio da cui la persona è guarita</string>
     <string name="green_certificate_disease_text" translatable="false">Covid-19</string>
     <string name="green_certificate_certificate_issuer_label" translatable="false">Certificate issuer</string>
-    <string name="green_certificate_certificate_issuer">Struttura che ha rilasciato la certificazione</string>
-    <string name="green_certificate_certificate_issuer_vaccination">Struttura che ha rilasciato la certificazione</string>
+    <string name="green_certificate_certificate_issuer">Soggetto che ha rilasciato la certificazione</string>
+    <string name="green_certificate_certificate_issuer_vaccination">Soggetto che ha rilasciato la certificazione</string>
     <string name="green_certificate_vaccine_type_label" translatable="false">Vaccine/prophylaxis</string>
     <string name="green_certificate_vaccine_type">Tipo di vaccino somministrato</string>
     <string name="green_certificate_vaccine_medicinal_product_label" translatable="false">Vaccine medicinal product</string>
@@ -506,8 +506,8 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_dose_number">Numero della dose effettuata/numero totale dosi previste</string>
     <string name="green_certificate_date_of_vaccination_label" translatable="false">Date of vaccination (yyyy-mm-dd)</string>
     <string name="green_certificate_date_of_vaccination">Data dell\'ultima somministrazione</string>
-    <string name="green_certificate_country_of_vaccination_label" translatable="false">Member State of vaccination</string>
-    <string name="green_certificate_country_of_vaccination">Stato Membro in cui è stata eseguita la vaccinazione</string>
+    <string name="green_certificate_country_of_vaccination_label" translatable="false">State of vaccination</string>
+    <string name="green_certificate_country_of_vaccination">Stato in cui è stata eseguita la vaccinazione</string>
     <string name="green_certificate_date_of_first_positive_label" translatable="false">Date of first positive NAAT test result (yyyy-mm-dd)</string>
     <string name="green_certificate_date_of_first_positive">Data del primo test molecolare positivo</string>
     <string name="green_certificate_certificate_valid_from_label" translatable="false">Certificate valid from (yyyy-mm-dd)</string>
@@ -524,13 +524,11 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_naa_test">Nome del test molecolare</string>
     <string name="green_certificate_date_time_sc_label" translatable="false">Date and time of the test sample collection</string>
     <string name="green_certificate_date_time_sc">Data e ora del prelievo del campione</string>
-    <string name="green_certificate_date_time_test_result_label" translatable="false">Date and time of the test result production (optional for rapid antigen test)</string>
-    <string name="green_certificate_date_time_test_result">Data e ora del risultato del test (facoltativo per test antigenici rapidi)</string>
     <string name="green_certificate_testing_centre_label" translatable="false">Testing centre or facility</string>
     <string name="green_certificate_testing_centre">Centro o struttura in cui è stato eseguito il test</string>
-    <string name="green_certificate_country_test_label" translatable="false">Member State of test</string>
-    <string name="green_certificate_country_test">Stato Membro in cui è stato eseguito il test</string>
-    <string name="green_certificate_country_recovery">Stato Membro in cui è stato eseguito primo test molecolare positivo</string>
+    <string name="green_certificate_country_test_label" translatable="false">State of test</string>
+    <string name="green_certificate_country_test">Stato in cui è stato eseguito il test</string>
+    <string name="green_certificate_country_recovery">Stato in cui è stato eseguito primo test molecolare positivo</string>
     <string name="green_certificate_subHeading_vaccine">Vaccination certificate</string>
     <string name="green_certificate_subHeading_test">Test certificate</string>
     <string name="green_certificate_subHeading_recovery">Recovery certificate</string>

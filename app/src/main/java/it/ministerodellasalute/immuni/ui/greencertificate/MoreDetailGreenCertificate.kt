@@ -157,13 +157,6 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                             formatDateTime
                         )
                     )
-                dateTimeTestResult.text =
-                    setTextOrDefault(
-                        convertDate(
-                            greenCertificateDetail.data?.tests?.get(0)!!.dateTimeOfTestResult,
-                            formatDateTime
-                        )
-                    )
                 testingCentre.text =
                     setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testingCentre)
                 countryTest.text =
