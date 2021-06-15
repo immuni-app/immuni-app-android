@@ -140,9 +140,6 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                             })
 
                 if (greenCertificateDetail.data?.tests?.get(0)!!.typeOfTest == molecolarTest) {
-                    nameNaaLabel.visibility = View.GONE
-                    nameNaa.visibility = View.GONE
-                    naaNameTestLabelEng.visibility = View.GONE
                     ratNameTestLabelEng.visibility = View.GONE
                     ratNameTestLabel.visibility = View.GONE
                     ratNameTest.visibility = View.GONE
@@ -152,12 +149,6 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     ratNameTestLabelEng.visibility = View.VISIBLE
                     ratNameTestLabel.visibility = View.VISIBLE
                     ratNameTest.visibility = View.VISIBLE
-
-                    nameNaa.text =
-                        setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testName)
-                    nameNaaLabel.visibility = View.VISIBLE
-                    nameNaa.visibility = View.VISIBLE
-                    naaNameTestLabelEng.visibility = View.VISIBLE
                 }
                 dateTimeSampleCollection.text =
                     setTextOrDefault(

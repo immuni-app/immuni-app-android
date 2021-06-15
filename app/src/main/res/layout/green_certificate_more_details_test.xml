@@ -88,32 +88,6 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/naaNameTestLabelEng"
-        style="@style/P1Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="italic"
-        android:text="@string/green_certificate_naa_test_label"
-        android:layout_marginTop="24dp"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/nameNaaLabel"
-        style="@style/P1Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/green_certificate_naa_test"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/nameNaa"
-        style="@style/P1Text.SemiBold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/grey_dark"
-        android:visibility="gone" />
-
-    <TextView
         style="@style/P1Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
