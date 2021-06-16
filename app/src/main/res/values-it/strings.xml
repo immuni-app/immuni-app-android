@@ -232,12 +232,12 @@ dei dati&#8230;</string>
   <string name="notification_steps_instruction_2">2. Abilita la voce \"Consenti notifiche\"</string>
   <string name="notification_settings_allow">Consenti notifiche</string>
   <string name="open_settings">Apri Impostazioni</string>
-  <string name="force_update_play_services_title">Aggiorna Google Play Services per proseguire</string>
-  <string name="force_update_play_services_message">Una versione più recente di Google Play Services è necessaria per attivare le notifiche di esposizione.</string>
-  <string name="force_update_not_available_title">Google Play Services non è ancora pronto</string>
-  <string name="force_update_not_available_message"> Google Play Services è aggiornato ma non può ancora abilitare le notifiche di esposizione. Riprova più tardi.</string>
-  <string name="force_update_gps_not_available_yet_title">Attendi l\'aggiornamento di Google Play Services</string>
-  <string name="force_update_gps_not_available_yet_message">Non è ancora disponibile la versione di Google Play Services necessaria per attivare le notifiche di esposizione. Riprova più tardi.</string>
+  <string name="force_update_play_services_title">Aggiorna %1$s per proseguire</string>
+  <string name="force_update_play_services_message">Una versione più recente di %1$s è necessaria per attivare le notifiche di esposizione.</string>
+  <string name="force_update_not_available_title">%1$s non è ancora pronto</string>
+  <string name="force_update_not_available_message"> %1$s è aggiornato ma non può ancora abilitare le notifiche di esposizione. Riprova più tardi.</string>
+  <string name="force_update_gps_not_available_yet_title">Attendi l\'aggiornamento di %1$s</string>
+  <string name="force_update_gps_not_available_yet_message">Non è ancora disponibile la versione di %1$s necessaria per attivare le notifiche di esposizione. Riprova più tardi.</string>
   <string name="onboarding_exposure_message_extended">A causa di una limitazione del sistema operativo, il servizio di geolocalizzazione deve essere attivo per consentire lo scambio di codici casuali via Bluetooth. <b>Immuni non accede alla tua localizzazione, come puoi verificare consultando la lista dei permessi richiesti dall\'app.</b></string>
   <string name="suggestions_alert_hide_alert_title">Vuoi nascondere questo avviso?</string>
   <string name="suggestions_alert_hide_alert_description">A meno che tu abbia una ragione valida, ti sconsigliamo vivamente di farlo. Ne potrebbe andare della tua salute e di quella delle persone che ti circondano.</string>
@@ -336,7 +336,7 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="verify_immuni_works_first"><b>Se leggi \"Servizio attivo\" significa che Immuni sta già funzionando correttamente.</b></string>
   <string name="verify_immuni_works_second"><b>Se invece dovessero esserci problemi, leggerai “Servizio non attivo”.</b> Immuni ti fornirà istruzioni semplici per ripristinarne il corretto funzionamento.</string>
   <string name="verify_immuni_works_third"><b>Se sei esposto a una persona che in seguito risulti positiva al virus, Immuni ti invierà una notifica per avvertirti del rischio di contagio.</b> Aprendo l’app, riceverai indicazioni chiare ed esaustive sul da farsi.</string>
-  <string name="verify_immuni_works_fourth">Per motivi tecnici, <b>alcuni modelli di smartphone Android possono interrompere il funzionamento di Immuni se l’app rimane chiusa per qualche giorno</b>. Quando questo accade, lo scambio di codici casuali con altri dispositivi rimane attivo, ma Immuni non è in grado di verificare se sei stato esposto a utenti potenzialmente contagiosi, avvertendoti in caso di rischio. Per evitare che ciò accada, apri l’app una volta al giorno. Google sta collaborando con i produttori di questi modelli per risolvere il problema.</string>
+  <string name="verify_immuni_works_fourth">Per motivi tecnici, <b>alcuni modelli di smartphone Android possono interrompere il funzionamento di Immuni se l’app rimane chiusa per qualche giorno</b>. Quando questo accade, lo scambio di codici casuali con altri dispositivi rimane attivo, ma Immuni non è in grado di verificare se sei stato esposto a utenti potenzialmente contagiosi, avvertendoti in caso di rischio. Per evitare che ciò accada, apri l’app una volta al giorno.</string>
   <string name="localisation_explanation_title">Perché il servizio di localizzazione dev\'essere attivo</string>
   <string name="localisation_explanation_message_first">Immuni sfrutta il sistema di notifiche di esposizione sviluppato da Apple, Google e Huawei. A causa di una limitazione del sistema operativo, la scansione di segnali Bluetooth nel background, necessaria per lo scambio dei codici casuali e la conseguente registrazione dei contatti avvenuti, richiede che il servizio di localizzazione sia attivo.</string>
   <string name="localisation_explanation_message_second">L’app non ha tuttavia accesso alla tua posizione e non può quindi conoscere i tuoi spostamenti. Puoi verificarlo facilmente, consultando la lista di autorizzazioni richieste da Immuni disponibile nel menù Impostazioni del tuo smartphone e constatando che non è richiesta l’autorizzazione di accesso alla tua localizzazione.</string>

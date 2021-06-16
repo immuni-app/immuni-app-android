@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'com.huawei.agconnect'
 
 // Template properties file
 def mockPropertiesFile = rootProject.file("template.properties")
@@ -53,6 +54,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -80,6 +84,14 @@ android {
 
     testOptions {
         unitTests.returnDefaultValues = true
+    }
+
+    flavorDimensions 'store'
+    productFlavors {
+        google {
+        }
+        huawei {
+        }
     }
 }
 

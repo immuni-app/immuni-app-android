@@ -15,6 +15,7 @@
 
 package it.ministerodellasalute.immuni.extensions.nearby
 
+import android.app.Activity
 import android.util.Base64
 import com.google.android.gms.nearby.exposurenotification.*
 import java.io.File
@@ -36,7 +37,7 @@ class ExposureNotificationClientWrapper(
 
     override fun deviceSupportsLocationlessScanning(): Boolean = client.deviceSupportsLocationlessScanning()
 
-    override suspend fun isEnabled(): Boolean = client.isEnabled.await()
+    override suspend fun isEnabled(activity: Activity?): Boolean = client.isEnabled.await()
 
     override suspend fun getTemporaryExposureKeyHistory(): List<ExposureNotificationClient.TemporaryExposureKey> {
         val history = client.temporaryExposureKeyHistory.await()

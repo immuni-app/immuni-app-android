@@ -20,6 +20,7 @@ import android.content.Intent
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClient
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
+import it.ministerodellasalute.immuni.extensions.nearby.OldVersionException
 import it.ministerodellasalute.immuni.logic.exposure.models.*
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
 import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository

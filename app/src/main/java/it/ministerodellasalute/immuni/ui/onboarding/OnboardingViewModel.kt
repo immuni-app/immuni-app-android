@@ -194,8 +194,8 @@ class OnboardingViewModel(
                     }
                 }
 
-                val title = activity.getString(R.string.force_update_not_available_title)
-                var message = activity.getString(R.string.force_update_not_available_message)
+                val title = activity.getString(R.string.force_update_not_available_title, activity.getString(R.string.services_name))
+                var message = activity.getString(R.string.force_update_not_available_message, activity.getString(R.string.services_name))
                 errorCode?.let { code ->
                     message += "\n\nError code: $code."
                 }

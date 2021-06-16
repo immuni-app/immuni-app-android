@@ -17,9 +17,9 @@ package it.ministerodellasalute.immuni.ui.forceupdate
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.common.GoogleApiAvailability
 import it.ministerodellasalute.immuni.extensions.playstore.PlayStoreActions
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
+import it.ministerodellasalute.immuni.storeservices.StoreServices
 import org.koin.core.KoinComponent
 
 class ForceUpdateViewModel(
@@ -42,7 +42,6 @@ class ForceUpdateViewModel(
         get() = forceUpdateManager.exposureNotificationsNotAvailable
 
     fun updatePlayServices(context: Context) {
-        val playServicesPackage = GoogleApiAvailability.GOOGLE_PLAY_SERVICES_PACKAGE
-        PlayStoreActions.goToPlayStoreAppDetails(context, playServicesPackage)
+        StoreServices().checkUpdate(context)
     }
 }

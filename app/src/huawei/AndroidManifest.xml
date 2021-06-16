@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="it.ministerodellasalute.immuni">
+
+    <application>
+
+        <service
+            android:name=".BackgroundContactShieldIntentService"
+            android:enabled="true"
+            />
+
+    </application>
+
+</manifest>

@@ -27,15 +27,6 @@
             </intent-filter>
         </receiver>
 
-        <receiver
-            android:name=".receivers.ExposureNotificationReceiver"
-            android:permission="com.google.android.gms.nearby.exposurenotification.EXPOSURE_CALLBACK"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.android.gms.exposurenotification.ACTION_EXPOSURE_STATE_UPDATED" />
-            </intent-filter>
-        </receiver>
-
         <activity
             android:name=".ui.setup.SetupActivity"
             android:screenOrientation="portrait">
