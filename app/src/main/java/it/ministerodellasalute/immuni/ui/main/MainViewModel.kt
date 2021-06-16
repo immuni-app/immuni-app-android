@@ -16,13 +16,19 @@
 package it.ministerodellasalute.immuni.ui.main
 
 import android.content.Context
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.ui.home.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class MainViewModel(
     private val context: Context,
@@ -55,9 +61,11 @@ class MainViewModel(
         protectionActive?.let {
             items.add(ProtectionCard(it, exposureManager.exposureStatus.value))
         }
-        items.add(SectionHeader(context.getString(R.string.home_view_info_header_title)))
+        items.add(SectionHeader(context.getString(R.string.home_what_do_you_want_today)))
+        items.add(GreenPassCard)
         items.add(ReportPositivityCard)
         items.add(CountriesOfInterestCard)
+        items.add(SectionHeader(context.getString(R.string.home_view_info_header_title)))
         items.add(HowItWorksCard)
         items.add(SelfCareCard)
         items.add(DisableExposureApi(protectionActive ?: false))

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:paddingLeft="30dp"
+    android:paddingTop="24dp"
+    android:paddingRight="30dp"
+    android:paddingBottom="32dp">
+
+    <TextView
+        android:id="@+id/question"
+        style="@style/H1Heading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:text="@string/green_pass_more_details_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question">
+
+        <TextView
+            android:id="@+id/subHeading"
+            style="@style/H3SectionHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="@color/grey_dark"
+            android:fontFamily="@font/euclid_circular_bold"
+            android:text="@string/green_certificate_disease_text"/>
+
+        <TextView
+            android:id="@+id/diseaseLabelEng"
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:layout_marginTop="24dp"
+            android:text="@string/green_certificate_disease_label" />
+
+        <TextView
+            android:id="@+id/diseaseLabel"
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/green_certificate_disease" />
+
+        <TextView
+            android:id="@+id/diseaseOrtargetAgent"
+            style="@style/P1Text.SemiBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey_dark"
+            android:text="@string/green_certificate_disease_text"/>
+
+        <TextView
+            android:id="@+id/certificateIssuerLabelEng"
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:text="@string/green_certificate_certificate_issuer_label"
+            android:layout_marginTop="24dp" />
+
+        <TextView
+            android:id="@+id/certificateIssuerLabel"
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/green_certificate_certificate_issuer" />
+
+        <TextView
+            android:id="@+id/entityIssuedCertificate"
+            style="@style/P1Text.SemiBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey_dark"
+            android:text="@string/green_certificate_certificate_issuer_const" />
+
+        <TextView
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/green_certificate_more_details_last_description" />
+
+        <TextView
+            android:id="@+id/europeRestrictionSite"
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

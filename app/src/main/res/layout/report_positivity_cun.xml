@@ -15,7 +15,6 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/uploadDataLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -101,16 +100,30 @@
                         app:drawableStartCompat="@drawable/ic_smartphone"
                         app:layout_constraintTop_toTopOf="parent" />
 
+
+                    <TextView
+                        android:id="@+id/codeLabel"
+                        style="@style/P1Text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:fontFamily="@font/euclid_circular_bold"
+                        android:text="@string/cun_placeholder"
+                        android:textColor="@color/grey_dark"
+                        app:layout_constraintEnd_toEndOf="@id/titleForm"
+                        app:layout_constraintStart_toStartOf="@id/titleForm"
+                        app:layout_constraintTop_toBottomOf="@id/titleForm" />
+
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/cunCard"
                         style="@style/SettingsMenuCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="25dp"
-                        app:layout_constraintTop_toBottomOf="@id/titleForm">
+                        app:layout_constraintTop_toBottomOf="@id/codeLabel">
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/cunInputLayout"
@@ -135,16 +148,30 @@
                                 android:id="@+id/cunInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/cun_placeholder"
+                                android:hint="@string/code_placeholder"
                                 android:inputType="text"
                                 android:maxLength="10"
                                 android:maxLines="1"
                                 android:padding="16dp"
                                 android:textColor="@color/colorPrimary"
                                 android:textColorHint="@color/grey_normal"
-                                android:textSize="14sp" />
+                                android:textSize="16sp" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </com.google.android.material.card.MaterialCardView>
+
+
+                    <TextView
+                        android:id="@+id/healtInsuranceLabel"
+                        style="@style/P1Text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/euclid_circular_bold"
+                        android:text="@string/health_insurance_card_placeholder"
+                        android:textColor="@color/grey_dark"
+                        app:layout_constraintEnd_toEndOf="@id/cunCard"
+                        app:layout_constraintStart_toStartOf="@id/cunCard"
+                        app:layout_constraintTop_toBottomOf="@id/cunCard" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/healthInsuranceCard"
@@ -152,10 +179,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="25dp"
-                        app:layout_constraintTop_toBottomOf="@+id/cunCard">
+                        app:layout_constraintTop_toBottomOf="@+id/healtInsuranceLabel">
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/healthInsuranceCardInputLayout"
@@ -178,7 +205,8 @@
                                 android:id="@+id/healthInsuranceCardInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="@string/health_insurance_card_placeholder"
+                                android:ellipsize="end"
+                                android:hint="@string/form_health_id_placeholder"
                                 android:inputType="number"
                                 android:maxLength="8"
                                 android:maxLines="1"
@@ -189,16 +217,29 @@
                         </com.google.android.material.textfield.TextInputLayout>
                     </com.google.android.material.card.MaterialCardView>
 
+                    <TextView
+                        android:id="@+id/symptomOnsetDateLabel"
+                        style="@style/P1Text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/euclid_circular_bold"
+                        android:text="@string/symptom_onset_date_placeholder"
+                        android:textColor="@color/grey_dark"
+                        app:layout_constraintEnd_toEndOf="@id/healthInsuranceCard"
+                        app:layout_constraintStart_toStartOf="@id/healthInsuranceCard"
+                        app:layout_constraintTop_toBottomOf="@id/healthInsuranceCard" />
+
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/symptomOnsetDateCard"
                         style="@style/SettingsMenuCard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="25dp"
-                        app:layout_constraintTop_toBottomOf="@+id/healthInsuranceCard">
+                        app:layout_constraintTop_toBottomOf="@+id/symptomOnsetDateLabel">
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/symptomOnsetDateInputLayout"
@@ -221,14 +262,15 @@
                                 android:id="@+id/symptomOnsetDateInput"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:ellipsize="end"
                                 android:focusable="false"
-                                android:hint="@string/symptom_onset_date_placeholder"
+                                android:hint="@string/form_symptoms_date_placeholder"
                                 android:inputType="none"
                                 android:maxLines="1"
                                 android:padding="16dp"
                                 android:textColor="@color/colorPrimary"
                                 android:textColorHint="@color/color_state_text_view"
-                                android:textSize="14sp" />
+                                android:textSize="16sp" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -277,7 +319,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/formCard" />
-
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/callCenterCard"

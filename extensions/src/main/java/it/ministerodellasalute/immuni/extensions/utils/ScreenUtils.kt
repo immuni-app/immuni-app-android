@@ -16,6 +16,7 @@
 package it.ministerodellasalute.immuni.extensions.utils
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Point
 import android.os.Build
 import android.util.DisplayMetrics
@@ -103,5 +104,17 @@ object ScreenUtils {
     fun convertPixelsToInches(context: Context, pixels: Int): Double {
         val r = context.resources
         return pixels.toDouble() / r.displayMetrics.xdpi
+    }
+
+    /**
+     * Convert pixels to density independent unit.
+     */
+    fun convertPixelsToDp(context: Context, pixels: Float): Float {
+        val r: Resources = context.resources
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            pixels,
+            r.displayMetrics
+        )
     }
 }

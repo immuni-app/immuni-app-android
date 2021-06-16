@@ -22,7 +22,9 @@ import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationClie
 import it.ministerodellasalute.immuni.extensions.nearby.ExposureNotificationManager
 import it.ministerodellasalute.immuni.extensions.nearby.OldVersionException
 import it.ministerodellasalute.immuni.logic.exposure.models.*
-import it.ministerodellasalute.immuni.logic.exposure.repositories.*
+import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureIngestionRepository
+import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureReportingRepository
+import it.ministerodellasalute.immuni.logic.exposure.repositories.ExposureStatusRepository
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.notifications.NotificationType
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
@@ -31,7 +33,7 @@ import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
 import java.io.File
 import java.util.*
 import kotlin.math.max
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.StateFlow
 
 class ExposureManager(
     private val settingsManager: ConfigurationSettingsManager,
@@ -55,7 +57,8 @@ class ExposureManager(
 
     val lastSuccessfulCheckDate = exposureReportingRepository.lastSuccessfulCheckDate
 
-    fun deviceSupportsLocationlessScanning() = exposureNotificationManager.deviceSupportsLocationlessScanning()
+    fun deviceSupportsLocationlessScanning() =
+        exposureNotificationManager.deviceSupportsLocationlessScanning()
 
     suspend fun updateAndGetServiceIsActive(): Boolean {
         exposureNotificationManager.update()
@@ -183,7 +186,11 @@ class ExposureManager(
         return exposureIngestionRepository.validateOtp(otp)
     }
 
-    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String?): CunValidationResult {
+    suspend fun validateCun(
+        cun: String,
+        healthInsuranceCard: String,
+        symptom_onset_date: String?
+    ): CunValidationResult {
         return exposureIngestionRepository.validateCun(cun, healthInsuranceCard, symptom_onset_date)
     }
 
@@ -204,7 +211,10 @@ class ExposureManager(
             cun = cun,
             province = userRepository.user.value!!.province,
             tekHistory = tekHistory.map { it.serviceTemporaryExposureKey },
-            exposureSummaries = exposureSummaries.prepareForUpload(settings, token?.serverDate ?: cun!!.serverDate!!),
+            exposureSummaries = exposureSummaries.prepareForUpload(
+                settings,
+                token?.serverDate ?: cun!!.serverDate!!
+            ),
             countries = countriesOfInterest
         )
 

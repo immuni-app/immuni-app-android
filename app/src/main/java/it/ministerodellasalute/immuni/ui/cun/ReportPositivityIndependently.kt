@@ -30,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -44,6 +45,7 @@ import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.report_positivity_cun.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -78,6 +80,12 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
         )
 
         viewModel = getViewModel()
+
+        // Fade out toolbar on scroll
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val ratio = abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
+            toolbarSeparator?.alpha = ratio
+        })
 
         setInput()
 
@@ -180,12 +188,6 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
                     if (!s.toString().matches(regexAlphaNum) && "" != s.toString()) {
                         cunInput.setText(beforeText)
                         cunInput.setSelection(cunInput.text.toString().length)
-                    } else {
-                        if (cunInput.text?.isNotBlank()!!) {
-                            cunInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
-                        } else {
-                            cunInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
-                        }
                     }
                 }
 
@@ -253,7 +255,6 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
     private fun setDatePicker() {
         symptomOnsetDateInput.inputType = InputType.TYPE_NULL
         symptomOnsetDateInputLayout.setEndIconOnClickListener {
-            symptomOnsetDateInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
             symptomOnsetDateInput.text?.clear()
         }
         symptomOnsetDateInput.setOnTouchListener(OnTouchListener { _, event ->
@@ -292,7 +293,6 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
             val date = Date(it)
             val format = SimpleDateFormat("dd/MM/yyyy")
             symptomOnsetDateInput.setText(format.format(date))
-            symptomOnsetDateInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
         }
         materialDatePicker.addOnDismissListener {
             symptomOnsetDateInputLayout.setStartIconTintList(
@@ -329,9 +329,9 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
                     })
             } else {
                 symptomOnsetDateInputLayout.setStartIconTintList(
-                context?.getColor(R.color.grey_normal)?.let {
-                    ColorStateList.valueOf(it)
-                })
+                    context?.getColor(R.color.grey_normal)?.let {
+                        ColorStateList.valueOf(it)
+                    })
             }
         }
     }

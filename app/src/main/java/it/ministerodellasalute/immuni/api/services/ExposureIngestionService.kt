@@ -19,9 +19,7 @@ import com.squareup.moshi.*
 import java.util.*
 import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * Exposure Ingestion Service API.
@@ -57,6 +55,7 @@ interface ExposureIngestionService {
         @Header("Immuni-Dummy-Data") isDummyData: Int,
         @Body body: ValidateCunRequest
     ): Response<ResponseBody>
+
     // endregion
 
     // region: Upload Teks

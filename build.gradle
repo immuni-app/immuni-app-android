@@ -4,8 +4,8 @@ buildscript {
     ext {
         // App version digits
         versionMajor = 2
-        versionMinor = 4
-        versionPatch = 0
+        versionMinor = 5
+        versionPatch = 1
 
         // Version name follows the <major>.<minor>.<patch> convention
         computeVersionName = { ->
@@ -23,7 +23,7 @@ buildscript {
 
         // SDK and tools
         compileSdkVersion = 30
-        minSdkVersion = 23
+        minSdkVersion = 24
         targetSdkVersion = 29
         buildToolsVersion = "29.0.3"
 
@@ -39,7 +39,7 @@ buildscript {
         appcompatVersion = "1.1.0"
         ktxCoreVersion = "1.2.0"
         securityVersion = "1.0.0-rc02"
-        materialVersion = "1.3.0-alpha02"
+        materialVersion = "1.4.0-beta01"
         glideVersion = "4.9.0"
         lottieVersion = "3.4.0"
         jUnitVersion = "4.12"
@@ -61,6 +61,12 @@ buildscript {
         conscryptVersion = "2.4.0"
         testCoreKtxVersion = "1.2.0"
         testFragmentVersion = "1.2.4"
+        coseJavaVersion = "1.1.0"
+        jsonSchemaValidatorVersion = "2.2.6"
+        jacksonDataformatCborVersion = "2.12.3"
+        bcpkixVersion = "1.68"
+        jUnitJupiterVersion = "5.7.1"
+        hamcrestVersion = "2.2"
         contactShieldVersion = "5.2.1.300"
         safetyDetectVersion = "5.0.3.300"
         huaweiBaseVersion = "5.0.3.300"
@@ -75,7 +81,7 @@ buildscript {
         maven { url 'https://developer.huawei.com/repo/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.google.gms:google-services:4.3.3'
         classpath 'android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0'
