@@ -23,7 +23,8 @@ import androidx.navigation.fragment.navArgs
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.extensions.utils.coloredClickable
-import it.ministerodellasalute.immuni.extensions.utils.isoDateString
+import it.ministerodellasalute.immuni.extensions.utils.formatDateString
+import it.ministerodellasalute.immuni.extensions.utils.formatDateTimeString
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.logic.greencovidcertificate.enum.DecodeData
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
@@ -44,6 +45,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
     lateinit var greenCertificateDetail: GreenCertificateUser
 
     val format = SimpleDateFormat("yyyy-MM-dd")
+    val formatDateTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
     private val molecolarTest = "LP6464-4"
 
@@ -103,7 +105,12 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     setTextOrDefault(greenCertificateDetail.data?.vaccinations?.get(0)!!.totalSeriesOfDoses.toString())
                 )
                 lastAdministration.text =
-                    setTextOrDefault(convertDate(greenCertificateDetail.data?.vaccinations?.get(0)!!.dateOfVaccination))
+                    setTextOrDefault(
+                        convertDate(
+                            greenCertificateDetail.data?.vaccinations?.get(0)!!.dateOfVaccination,
+                            format
+                        )
+                    )
                 countryVaccination.text =
                     setTextOrDefault(greenCertificateDetail.data?.vaccinations?.get(0)!!.countryOfVaccination)
                 certificateIssuerLabel.text =
@@ -133,9 +140,6 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                             })
 
                 if (greenCertificateDetail.data?.tests?.get(0)!!.typeOfTest == molecolarTest) {
-                    nameNaaLabel.visibility = View.GONE
-                    nameNaa.visibility = View.GONE
-                    naaNameTestLabelEng.visibility = View.GONE
                     ratNameTestLabelEng.visibility = View.GONE
                     ratNameTestLabel.visibility = View.GONE
                     ratNameTest.visibility = View.GONE
@@ -145,17 +149,14 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     ratNameTestLabelEng.visibility = View.VISIBLE
                     ratNameTestLabel.visibility = View.VISIBLE
                     ratNameTest.visibility = View.VISIBLE
-
-                    nameNaa.text =
-                        setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testName)
-                    nameNaaLabel.visibility = View.VISIBLE
-                    nameNaa.visibility = View.VISIBLE
-                    naaNameTestLabelEng.visibility = View.VISIBLE
                 }
                 dateTimeSampleCollection.text =
-                    setTextOrDefault(convertDate(greenCertificateDetail.data?.tests?.get(0)!!.dateTimeOfCollection))
-                dateTimeTestResult.text =
-                    setTextOrDefault(convertDate(greenCertificateDetail.data?.tests?.get(0)!!.dateTimeOfTestResult))
+                    setTextOrDefault(
+                        convertDate(
+                            greenCertificateDetail.data?.tests?.get(0)!!.dateTimeOfCollection,
+                            formatDateTime
+                        )
+                    )
                 testingCentre.text =
                     setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testingCentre)
                 countryTest.text =
@@ -174,7 +175,8 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                         convertDate(
                             greenCertificateDetail.data?.recoveryStatements?.get(
                                 0
-                            )!!.dateOfFirstPositiveTest
+                            )!!.dateOfFirstPositiveTest,
+                            format
                         )
                     )
                 countryTestRecovery.text =
@@ -218,9 +220,13 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
         )
     }
 
-    private fun convertDate(date: String?): String? {
+    private fun convertDate(date: String?, pattern: SimpleDateFormat): String? {
         return if (date != null) {
-            format.parse(date)!!.isoDateString
+            if (pattern == formatDateTime) {
+                date.formatDateTimeString(date)
+            } else {
+                date.formatDateString(date)
+            }
         } else {
             null
         }

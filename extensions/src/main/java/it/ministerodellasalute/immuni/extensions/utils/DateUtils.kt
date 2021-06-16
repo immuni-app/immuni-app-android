@@ -61,12 +61,22 @@ fun Date.byAdding(
 }
 
 private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+private val dateTimeFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
 
 val Date.isoDateString: String get() = dateFormatter.format(this)
+val Date.isoDateTimeString: String get() = dateTimeFormatter.format(this)
 
 fun String.formatDateString(date: String?): String? {
     return if (date != null) {
         SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(date)!!.isoDateString
+    } else {
+        null
+    }
+}
+
+fun String.formatDateTimeString(date: String?): String? {
+    return if (date != null) {
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US).parse(date)!!.isoDateTimeString
     } else {
         null
     }
