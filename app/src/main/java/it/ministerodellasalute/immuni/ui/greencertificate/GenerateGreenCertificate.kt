@@ -152,33 +152,34 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                 codeInputLayout.isEnabled = true
                 codeInputLayout.prefixText = when (position) {
                     0 -> {
+                        codeLabel.text = getString(R.string.authcode_title)
+                        codeInput.setHint(R.string.code_placeholder)
+                        ""
+                    }
+
+                    1 -> {
                         codeLabel.text = getString(R.string.nrfe_title)
                         codeInput.setHint(R.string.code_placeholder)
                         ""
                     }
-                    1 -> {
+                    2 -> {
                         codeLabel.text = getString(R.string.cun_title)
                         codeInput.setHint(R.string.code_placeholder)
                         getString(R.string.const_cun)
                     }
-                    2 -> {
+                    3 -> {
                         codeLabel.text = getString(R.string.nucg_title)
                         codeInput.setHint(R.string.code_placeholder)
                         getString(R.string.const_nucg)
-                    }
-                    3 -> {
-                        codeLabel.text = getString(R.string.authcode_title)
-                        codeInput.setHint(R.string.code_placeholder)
-                        ""
                     }
                     else -> ""
                 }
 
                 val lengthFilter = when (position) {
-                    0 -> LengthFilter(17)
-                    1 -> LengthFilter(10)
+                    0 -> LengthFilter(12)
+                    1 -> LengthFilter(17)
                     2 -> LengthFilter(10)
-                    3 -> LengthFilter(12)
+                    3 -> LengthFilter(10)
                     else -> LengthFilter(0)
                 }
                 codeInput.filters = arrayOf(InputFilter.AllCaps(), lengthFilter)
