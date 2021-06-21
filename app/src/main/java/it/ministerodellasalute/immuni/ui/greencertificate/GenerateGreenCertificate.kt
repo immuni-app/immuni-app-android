@@ -41,13 +41,13 @@ import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.abs
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.generate_green_certificate.*
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.math.abs
 
 class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
     ConfirmationDialogListener {

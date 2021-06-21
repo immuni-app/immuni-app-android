@@ -30,13 +30,13 @@ import it.ministerodellasalute.immuni.logic.greencovidcertificate.DecodeData
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
+import java.text.SimpleDateFormat
 import kotlinx.android.synthetic.main.green_certificate_more_details.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_recovery.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_test.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_vaccination.*
 import org.koin.android.ext.android.get
 import org.koin.core.KoinComponent
-import java.text.SimpleDateFormat
 
 class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
