@@ -41,13 +41,13 @@ import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.math.abs
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.generate_green_certificate.*
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.abs
 
 class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
     ConfirmationDialogListener {
@@ -152,33 +152,34 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                 codeInputLayout.isEnabled = true
                 codeInputLayout.prefixText = when (position) {
                     0 -> {
+                        codeLabel.text = getString(R.string.authcode_title)
+                        codeInput.setHint(R.string.code_placeholder)
+                        ""
+                    }
+
+                    1 -> {
                         codeLabel.text = getString(R.string.nrfe_title)
                         codeInput.setHint(R.string.code_placeholder)
                         ""
                     }
-                    1 -> {
+                    2 -> {
                         codeLabel.text = getString(R.string.cun_title)
                         codeInput.setHint(R.string.code_placeholder)
                         getString(R.string.const_cun)
                     }
-                    2 -> {
+                    3 -> {
                         codeLabel.text = getString(R.string.nucg_title)
                         codeInput.setHint(R.string.code_placeholder)
                         getString(R.string.const_nucg)
-                    }
-                    3 -> {
-                        codeLabel.text = getString(R.string.authcode_title)
-                        codeInput.setHint(R.string.code_placeholder)
-                        ""
                     }
                     else -> ""
                 }
 
                 val lengthFilter = when (position) {
-                    0 -> LengthFilter(17)
-                    1 -> LengthFilter(10)
+                    0 -> LengthFilter(12)
+                    1 -> LengthFilter(17)
                     2 -> LengthFilter(10)
-                    3 -> LengthFilter(12)
+                    3 -> LengthFilter(10)
                     else -> LengthFilter(0)
                 }
                 codeInput.filters = arrayOf(InputFilter.AllCaps(), lengthFilter)

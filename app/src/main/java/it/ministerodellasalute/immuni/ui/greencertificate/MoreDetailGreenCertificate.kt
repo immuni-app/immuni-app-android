@@ -26,17 +26,17 @@ import it.ministerodellasalute.immuni.extensions.utils.coloredClickable
 import it.ministerodellasalute.immuni.extensions.utils.formatDateString
 import it.ministerodellasalute.immuni.extensions.utils.formatDateTimeString
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
-import it.ministerodellasalute.immuni.logic.greencovidcertificate.enum.DecodeData
+import it.ministerodellasalute.immuni.logic.greencovidcertificate.DecodeData
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
-import java.text.SimpleDateFormat
 import kotlinx.android.synthetic.main.green_certificate_more_details.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_recovery.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_test.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_vaccination.*
 import org.koin.android.ext.android.get
 import org.koin.core.KoinComponent
+import java.text.SimpleDateFormat
 
 class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
@@ -84,12 +84,13 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                             getString(it)
                         })
                 producerVaccine.text =
-                    setTextOrDefault(DecodeData.maFromCode(
-                        greenCertificateDetail.data?.vaccinations?.get(
-                            0
-                        )!!.manufacturer
-                    )
-                        ?.let { getString(it) })
+                    setTextOrDefault(
+                        DecodeData.maFromCode(
+                            greenCertificateDetail.data?.vaccinations?.get(
+                                0
+                            )!!.manufacturer
+                        )
+                            ?.let { getString(it) })
                 validityVaccine.text =
                     if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber == greenCertificateDetail.data?.vaccinations?.get(
                             0

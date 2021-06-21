@@ -13,7 +13,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.logic.greencovidcertificate.enum
+package it.ministerodellasalute.immuni.logic.greencovidcertificate
 
 import it.ministerodellasalute.immuni.R
 
@@ -68,7 +68,19 @@ object DecodeData {
         "Gamaleya-Research-Institute" to R.string.green_certificate_gamaleya,
         "Vector-Institute" to R.string.green_certificate_vector_institute,
         "Sinovac-Biotech" to R.string.green_certificate_sinovac,
-        "Bharat-Biotech" to R.string.green_certificate_bharat
+        "Bharat-Biotech" to R.string.green_certificate_bharat,
+        "EU/1/20/1528" to R.string.green_certificate_vac_comirnaty,
+        "EU/1/20/1507" to R.string.green_certificate_vac_moderna,
+        "EU/1/21/1529" to R.string.green_certificate_vac_vaxzevria,
+        "EU/1/20/1525" to R.string.green_certificate_vac_janssen,
+        "CVnCoV" to R.string.green_certificate_vac_cvncov,
+        "Sputnik-V" to R.string.green_certificate_vac_sputnik_v,
+        "Convidecia" to R.string.green_certificate_vac_convidecia,
+        "EpiVacCorona" to R.string.green_certificate_vac_epi_vac_corona,
+        "BBIBP-CorV" to R.string.green_certificate_vac_bbibp_corv,
+        "Inactivated-SARS-CoV-2-Vero-Cell" to R.string.green_certificate_vac_vero_cell,
+        "CoronaVac" to R.string.green_certificate_vac_corona_vac,
+        "Covaxin" to R.string.green_certificate_vac_covaxin
     )
 
     fun ttFromCode(code: String): Int? {

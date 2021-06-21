@@ -439,10 +439,10 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_pass_generation_successfully">EU Digital Covid Certificate successfully recovered</string>
     <string name="green_pass_select_type_token">Select type</string>
     <string-array name="type_token">
+        <item>AUTHCODE</item>
         <item>NRFE</item>
         <item>CUN</item>
         <item>NUCG</item>
-        <item>AUTHCODE</item>
     </string-array>
     <string name="const_nrfe" translatable="false">NRFE-</string>
     <string name="const_nucg" translatable="false">NUCG-</string>
@@ -560,6 +560,18 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_vector_institute" translatable="false">Vector Institute</string>
     <string name="green_certificate_sinovac" translatable="false">Sinovac Biotech</string>
     <string name="green_certificate_bharat" translatable="false">Bharat Biotech</string>
+    <string name="green_certificate_vac_comirnaty" translatable="false">Comirnaty</string>
+    <string name="green_certificate_vac_moderna" translatable="false">COVID-19 Vaccine Moderna</string>
+    <string name="green_certificate_vac_vaxzevria" translatable="false">Vaxzevria</string>
+    <string name="green_certificate_vac_janssen" translatable="false">COVID-19 Vaccine Janssen</string>
+    <string name="green_certificate_vac_cvncov" translatable="false">CVnCoV</string>
+    <string name="green_certificate_vac_sputnik_v" translatable="false">Sputnik-V</string>
+    <string name="green_certificate_vac_convidecia" translatable="false">Convidecia</string>
+    <string name="green_certificate_vac_epi_vac_corona" translatable="false">EpiVacCorona</string>
+    <string name="green_certificate_vac_bbibp_corv" translatable="false">BBIBP-CorV</string>
+    <string name="green_certificate_vac_vero_cell" translatable="false">Inactivated SARS-CoV-2 (Vero Cell)</string>
+    <string name="green_certificate_vac_corona_vac" translatable="false">CoronaVac</string>
+    <string name="green_certificate_vac_covaxin" translatable="false">Covaxin (also known as BBV152 A, B, C)</string>
     <string name="green_pass_how_to_generate_fiveth">The green COVID–19 certification is shown on the smartphone screen so that it can be viewed and shown on request, in case of verification, even in offline mode. The \"Delete\" button allows you to delete your certificate from your smartphone independently at any time.</string>
 
 </resources>
