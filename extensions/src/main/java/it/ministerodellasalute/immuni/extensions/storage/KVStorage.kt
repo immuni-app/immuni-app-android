@@ -24,12 +24,11 @@ import androidx.security.crypto.MasterKey
 import com.squareup.moshi.Moshi
 import it.ministerodellasalute.immuni.extensions.utils.fromJson
 import it.ministerodellasalute.immuni.extensions.utils.toJson
+import java.io.IOException
+import java.lang.ref.WeakReference
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onCompletion
-import java.io.IOException
-import java.lang.ref.WeakReference
-
 
 /**
  * A Key-Value storage, backed by [SharedPreferences].
