@@ -19,10 +19,7 @@ import androidx.annotation.VisibleForTesting
 import it.ministerodellasalute.immuni.api.immuniApiCall
 import it.ministerodellasalute.immuni.api.services.ExposureIngestionService
 import it.ministerodellasalute.immuni.extensions.utils.sha256
-import it.ministerodellasalute.immuni.logic.exposure.models.CunToken
-import it.ministerodellasalute.immuni.logic.exposure.models.CunValidationResult
-import it.ministerodellasalute.immuni.logic.exposure.models.OtpToken
-import it.ministerodellasalute.immuni.logic.exposure.models.OtpValidationResult
+import it.ministerodellasalute.immuni.logic.exposure.models.*
 import it.ministerodellasalute.immuni.logic.user.models.Province
 import it.ministerodellasalute.immuni.network.api.NetworkError
 import it.ministerodellasalute.immuni.network.api.NetworkResource
@@ -63,7 +60,11 @@ class ExposureIngestionRepository(
         }
     }
 
-    suspend fun validateCun(cun: String, healthInsuranceCard: String, symptom_onset_date: String): CunValidationResult {
+    suspend fun validateCun(
+        cun: String,
+        healthInsuranceCard: String,
+        symptom_onset_date: String?
+    ): CunValidationResult {
         val response = immuniApiCall {
             exposureIngestionService.validateCun(
                 isDummyData = 0,

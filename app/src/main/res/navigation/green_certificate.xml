@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/green_certificate"
+    app:startDestination="@id/greenCertificate">
+
+    <fragment
+        android:id="@+id/greenCertificate"
+        android:name="it.ministerodellasalute.immuni.ui.greencertificate.GreenCertificateFragment"
+        android:label="GreenCertificate"
+        tools:layout="@layout/green_certificate" />
+
+    <fragment
+        android:id="@+id/generateGCFragment"
+        android:name="it.ministerodellasalute.immuni.ui.greencertificate.GenerateGreenCertificate"
+        android:label="Generate Green Certificate"
+        tools:layout="@layout/generate_green_certificate" />
+
+    <action
+        android:id="@+id/action_generateGC"
+        app:destination="@id/generateGCFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/generateGCSuccessFragment"
+        android:name="it.ministerodellasalute.immuni.ui.greencertificate.GCCreateSuccessFragment"
+        android:label="Generate Green Certificate Success"
+        tools:layout="@layout/gcgeneratesuccess" />
+
+    <action
+        android:id="@+id/action_generate_green_certificate_success"
+        app:destination="@id/generateGCSuccessFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <dialog
+        android:id="@+id/knowMoreGreenCertificateFragment"
+        android:name="it.ministerodellasalute.immuni.ui.greencertificate.KnowMoreGreenCertificate"
+        android:label="knowMoreGreenCertificateFragment"
+        tools:layout="@layout/green_certificate_know_more" />
+
+    <action
+        android:id="@+id/action_know_more_green_certificate_dialog"
+        app:destination="@id/knowMoreGreenCertificateFragment" />
+
+    <dialog
+        android:id="@+id/moreDetailsGreenCertificateFragment"
+        android:name="it.ministerodellasalute.immuni.ui.greencertificate.MoreDetailGreenCertificate"
+        android:label="moreDetailGreenCertificate"
+        tools:layout="@layout/green_certificate_more_details">
+        <argument
+            android:name="greenCertificate"
+            app:argType="it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser" />
+    </dialog>
+
+    <action
+        android:id="@+id/action_more_details_green_certificate_dialog"
+        app:destination="@id/moreDetailsGreenCertificateFragment" />
+</navigation>

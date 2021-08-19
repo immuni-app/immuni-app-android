@@ -125,8 +125,8 @@ class OnboardingViewModel(
             userManager.save(
                 User(
                     region = region,
-                    province = province
-                )
+                    province = province,
+                    greenPass = if (userManager.user.value == null) mutableListOf() else userManager.user.value!!.greenPass)
             )
         }
     }

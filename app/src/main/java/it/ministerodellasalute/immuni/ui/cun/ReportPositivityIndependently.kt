@@ -30,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -39,17 +40,22 @@ import it.ministerodellasalute.immuni.extensions.activity.loading
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.extensions.utils.byAdding
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
+import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
+import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.report_positivity_cun.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
+class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
+    ConfirmationDialogListener {
 
     companion object {
         var NAVIGATE_UP = false
+        const val ALERT_CONFIRM_SAVE = 212
     }
 
     private lateinit var viewModel: CunViewModel
@@ -75,6 +81,12 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
 
         viewModel = getViewModel()
 
+        // Fade out toolbar on scroll
+        appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val ratio = abs(verticalOffset / appBarLayout.totalScrollRange.toFloat())
+            toolbarSeparator?.alpha = ratio
+        })
+
         setInput()
 
         navigationIcon.setSafeOnClickListener {
@@ -87,12 +99,14 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
         }
 
         verify.setSafeOnClickListener {
-            var symptomOnsetDate: String = symptomOnsetDateInput.text.toString()
-            if (symptomOnsetDateInput.text!!.isNotBlank()) {
-                val dateSplitted = symptomOnsetDateInput.text!!.split("/")
-                symptomOnsetDate = dateSplitted.reversed().joinToString("-")
+            var symptomOnsetDate: String? = null
+            if (!checkboxDate.isChecked) {
+                symptomOnsetDate = symptomOnsetDateInput.text.toString()
+                if (symptomOnsetDateInput.text!!.isNotBlank()) {
+                    val dateSplitted = symptomOnsetDateInput.text!!.split("/")
+                    symptomOnsetDate = dateSplitted.reversed().joinToString("-")
+                }
             }
-
             viewModel.verifyIndependently(
                 cun = cunInput.text.toString(),
                 health_insurance_card = healthInsuranceCardInput.text.toString(),
@@ -141,6 +155,7 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setInput() {
         val regexAlphaNum = "^[A-Z0-9]*$".toRegex()
 
@@ -173,12 +188,6 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
                     if (!s.toString().matches(regexAlphaNum) && "" != s.toString()) {
                         cunInput.setText(beforeText)
                         cunInput.setSelection(cunInput.text.toString().length)
-                    } else {
-                        if (cunInput.text?.isNotBlank()!!) {
-                            cunInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
-                        } else {
-                            cunInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
-                        }
                     }
                 }
 
@@ -232,7 +241,13 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             }
         )
-
+        checkboxDate.setOnTouchListener(OnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                checkboxClick()
+                return@OnTouchListener true
+            }
+            false
+        })
         setDatePicker()
     }
 
@@ -240,7 +255,6 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
     private fun setDatePicker() {
         symptomOnsetDateInput.inputType = InputType.TYPE_NULL
         symptomOnsetDateInputLayout.setEndIconOnClickListener {
-            symptomOnsetDateInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
             symptomOnsetDateInput.text?.clear()
         }
         symptomOnsetDateInput.setOnTouchListener(OnTouchListener { _, event ->
@@ -279,13 +293,46 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun) {
             val date = Date(it)
             val format = SimpleDateFormat("dd/MM/yyyy")
             symptomOnsetDateInput.setText(format.format(date))
-            symptomOnsetDateInput.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
         }
         materialDatePicker.addOnDismissListener {
             symptomOnsetDateInputLayout.setStartIconTintList(
                 context?.getColor(R.color.grey_normal)?.let {
                     ColorStateList.valueOf(it)
                 })
+        }
+    }
+
+    private fun checkboxClick() {
+        openConfirmationDialog(
+            positiveButton = getString(R.string.countries_of_interest_dialog_positive),
+            negativeButton = getString(R.string.countries_of_interest_dialog_negative),
+            message = getString(R.string.warning_message_modal),
+            title = getString(R.string.warning_title_modal),
+            cancelable = true,
+            requestCode = ALERT_CONFIRM_SAVE
+        )
+    }
+
+    override fun onDialogNegative(requestCode: Int) {
+        // Do nothing, user does not want to exit
+    }
+
+    override fun onDialogPositive(requestCode: Int) {
+        if (requestCode == ALERT_CONFIRM_SAVE) {
+            checkboxDate.isChecked = !checkboxDate.isChecked
+            symptomOnsetDateInput.text?.clear()
+            symptomOnsetDateInput.isEnabled = !checkboxDate.isChecked
+            if (!symptomOnsetDateInput.isEnabled) {
+                symptomOnsetDateInputLayout.setStartIconTintList(
+                    context?.getColor(R.color.grey_light)?.let {
+                        ColorStateList.valueOf(it)
+                    })
+            } else {
+                symptomOnsetDateInputLayout.setStartIconTintList(
+                    context?.getColor(R.color.grey_normal)?.let {
+                        ColorStateList.valueOf(it)
+                    })
+            }
         }
     }
 }

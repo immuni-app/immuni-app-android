@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
+  ~ Please refer to the AUTHORS file for more information.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU Affero General Public License for more details.
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <ImageView
+            android:id="@+id/qrCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/swipeToShowQR"
+        style="@style/SText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/euclid_circular"
+        android:text="@string/green_certificate_tab_swipe"
+        android:textAlignment="center"
+        android:textColor="@color/grey_normal" />
+
+
+    <TextView
+        android:id="@+id/surnameNameLabelEng"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/green_certificate_tab_surname_name_label"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/surnameNameLabel"
+        style="@style/P1Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/green_certificate_tab_surname_name" />
+
+    <TextView
+        android:id="@+id/surnameNameText"
+        style="@style/P1Text.SemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/grey_dark" />
+
+    <TextView
+        android:id="@+id/birthDateLabelEng"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/green_certificate_tab_birth_date_label"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/birthDateLabel"
+        style="@style/P1Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/green_certificate_tab_birth_date" />
+
+    <TextView
+        android:id="@+id/birthDateText"
+        style="@style/P1Text.SemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/grey_dark" />
+
+    <TextView
+        android:id="@+id/certificateIDLabelEng"
+        style="@style/P1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/green_certificate_tab_certificate_id_label"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/certificateIDLabel"
+        style="@style/P1Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/green_certificate_tab_certificate_id" />
+
+    <TextView
+        android:id="@+id/certificateIDText"
+        style="@style/P1Text.SemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/grey_dark" />
+
+    <TextView
+        android:id="@+id/moreDetails"
+        style="@style/OnboardingKnowMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:text="@string/green_certificate_tab_more_details" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:background="#1A495D74" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/downloadButton"
+            style="@style/ButtonBottomRadius"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/euclid_circular_bold"
+            android:text="@string/green_certificate_tab_download"
+            android:visibility="gone"
+            app:icon="@drawable/ic_download"
+            app:iconGravity="textStart"
+            app:iconTintMode="multiply" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            style="@style/RoundedButton.Light"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/euclid_circular_bold"
+            android:text="@string/green_certificate_tab_delete"
+            app:icon="@drawable/ic_cancel"
+            app:iconGravity="textStart"
+            app:iconTintMode="multiply" />
+
+    </LinearLayout>
+
+</LinearLayout>

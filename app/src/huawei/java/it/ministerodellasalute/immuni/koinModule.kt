@@ -20,6 +20,20 @@ import android.app.PendingIntent
 import android.content.Intent
 import android.os.Build
 import androidx.lifecycle.SavedStateHandle
+import dgca.verifier.app.decoder.base45.Base45Service
+import dgca.verifier.app.decoder.base45.DefaultBase45Service
+import dgca.verifier.app.decoder.cbor.CborService
+import dgca.verifier.app.decoder.cbor.DefaultCborService
+import dgca.verifier.app.decoder.compression.CompressorService
+import dgca.verifier.app.decoder.compression.DefaultCompressorService
+import dgca.verifier.app.decoder.cose.CoseService
+import dgca.verifier.app.decoder.cose.CryptoService
+import dgca.verifier.app.decoder.cose.DefaultCoseService
+import dgca.verifier.app.decoder.cose.VerificationCryptoService
+import dgca.verifier.app.decoder.prefixvalidation.DefaultPrefixValidationService
+import dgca.verifier.app.decoder.prefixvalidation.PrefixValidationService
+import dgca.verifier.app.decoder.schema.DefaultSchemaValidator
+import dgca.verifier.app.decoder.schema.SchemaValidator
 import it.ministerodellasalute.immuni.BackgroundContactShieldIntentService
 import it.ministerodellasalute.immuni.BuildConfig
 import it.ministerodellasalute.immuni.api.services.*
@@ -40,10 +54,12 @@ import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.exposure.repositories.*
 import it.ministerodellasalute.immuni.logic.forceupdate.ForceUpdateManager
+import it.ministerodellasalute.immuni.logic.greencovidcertificate.DCCManager
 import it.ministerodellasalute.immuni.logic.notifications.AppNotificationManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsNetworkRepository
 import it.ministerodellasalute.immuni.logic.settings.repositories.ConfigurationSettingsStoreRepository
+import it.ministerodellasalute.immuni.logic.upload.CunValidator
 import it.ministerodellasalute.immuni.logic.upload.OtpGenerator
 import it.ministerodellasalute.immuni.logic.upload.UploadDisabler
 import it.ministerodellasalute.immuni.logic.upload.UploadDisablerStore
@@ -52,8 +68,10 @@ import it.ministerodellasalute.immuni.logic.user.repositories.RegionRepository
 import it.ministerodellasalute.immuni.logic.user.repositories.UserRepository
 import it.ministerodellasalute.immuni.logic.worker.WorkerManager
 import it.ministerodellasalute.immuni.network.Network
+import it.ministerodellasalute.immuni.ui.cun.CunViewModel
 import it.ministerodellasalute.immuni.ui.faq.FaqViewModel
 import it.ministerodellasalute.immuni.ui.forceupdate.ForceUpdateViewModel
+import it.ministerodellasalute.immuni.ui.greencertificate.GreenCertificateViewModel
 import it.ministerodellasalute.immuni.ui.howitworks.HowItWorksDataSource
 import it.ministerodellasalute.immuni.ui.main.MainViewModel
 import it.ministerodellasalute.immuni.ui.onboarding.OnboardingViewModel
@@ -64,6 +82,7 @@ import it.ministerodellasalute.immuni.ui.suggestions.StateCloseViewModel
 import it.ministerodellasalute.immuni.ui.support.SupportViewModel
 import it.ministerodellasalute.immuni.ui.upload.UploadViewModel
 import it.ministerodellasalute.immuni.util.CoroutineContextProvider
+import it.ministerodellasalute.immuni.util.DigitValidator
 import it.ministerodellasalute.immuni.workers.models.ServiceNotActiveNotificationWorkerStatus
 import it.ministerodellasalute.immuni.workers.repositories.ServiceNotActiveNotificationWorkerRepository
 import java.security.SecureRandom
@@ -75,6 +94,15 @@ import org.koin.dsl.module
  * Dependency Injection Koin module.
  */
 val appModule = module {
+
+    single { DefaultPrefixValidationService() as PrefixValidationService }
+    single { DefaultBase45Service() as Base45Service }
+    single { DefaultCompressorService() as CompressorService }
+    single { VerificationCryptoService() as CryptoService }
+    single { DefaultCoseService() as CoseService }
+    single { DefaultSchemaValidator() as SchemaValidator }
+    single { DefaultCborService() as CborService }
+
     /**
      * App Configuration Service APIs
      */
@@ -120,7 +148,20 @@ val appModule = module {
         )
         network.createServiceAPI(ExposureAnalyticsService::class)
     }
-
+    /**
+     * GDC Service APIs
+     */
+    single {
+        val network = Network(
+            androidContext(),
+            DigitalCovidCertificateNetworkConfiguration(
+                androidContext(),
+                get(),
+                get()
+            )
+        )
+        network.createServiceAPI(DCCService::class)
+    }
     /**
      * Debug Menu module.
      */
@@ -238,6 +279,10 @@ val appModule = module {
     }
 
     single {
+        DCCManager(get())
+    }
+
+    single {
         ExposureAnalyticsStoreRepository(
             KVStorage(
                 name = "ExposureAnalyticsStoreRepository",
@@ -300,11 +345,18 @@ val appModule = module {
             )
         )
     }
-
+    single {
+        CunValidator()
+    }
+    single {
+        DigitValidator()
+    }
     single {
         ExposureIngestionRepository(get())
     }
-
+    single {
+        GCDRepository(get())
+    }
     single {
         PushNotificationManager(androidContext())
     }
@@ -372,6 +424,9 @@ val appModule = module {
     viewModel { SettingsViewModel(get()) }
     viewModel { StateCloseViewModel(get(), get()) }
     viewModel { SupportViewModel(androidContext(), get(), get()) }
+    viewModel { CunViewModel(get(), get(), get()) }
+    viewModel { GreenCertificateViewModel(androidContext(), get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+
 }
 
 val immuniMoshi = moshi(

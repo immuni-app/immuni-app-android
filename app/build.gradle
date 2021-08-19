@@ -22,18 +22,19 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
 
+    packagingOptions {
+        exclude 'META-INF/ASL-2.0.txt'
+        pickFirst 'draftv4/schema'
+        pickFirst 'draftv3/schema'
+        exclude 'META-INF/LGPL-3.0.txt'
+    }
+
     signingConfigs {
-        /*release {
+        release {
             keyAlias appProperties['keyAlias']
             keyPassword appProperties['keyPassword']
             storeFile file(appProperties['storeFile'])
             storePassword appProperties['storePassword']
-        }*/
-        release {
-            storeFile file('./keystoreDebug.jks')
-            keyAlias 'key0'
-            keyPassword 'test123'
-            storePassword 'test123'
         }
     }
     defaultConfig {
@@ -64,6 +65,7 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -90,7 +92,6 @@ android {
         google {
         }
         huawei {
-            applicationId "it.ministerodellasalute.immuni.huaweidevitaly"
         }
     }
 }
@@ -120,7 +121,9 @@ dependencies {
     implementation project(':extensions')
     implementation project(':debugmenu')
     implementation project(':network')
+    implementation project(':decoder1.0.0')
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion"
@@ -190,4 +193,8 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test:core-ktx:$testCoreKtxVersion"
     debugImplementation "androidx.fragment:fragment-testing:$testFragmentVersion"
+
+    implementation "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava"
+    implementation "com.journeyapps:zxing-android-embedded:4.2.0"
+
 }

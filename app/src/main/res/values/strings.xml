@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?xml version="1.0" encoding="UTF-8"?><!--
   ~ Copyright (C) 2020 Presidenza del Consiglio dei Ministri.
   ~ Please refer to the AUTHORS file for more information.
   ~ This program is free software: you can redistribute it and/or modify
@@ -14,407 +13,565 @@
   ~ along with this program. If not, see <https://www.gnu.org/licenses/>.
   -->
 <resources>
-  <string name="accessibility_back">Back</string>
-  <string name="accessibility_close">Close</string>
-  <string name="accessibility_app_name">Immuni</string>
-  <string name="tabbar_title_home">Home</string>
-  <string name="tabbar_title_settings">Settings</string>
-  <string name="notifications_update_os_title">The service isn\'t activated yet</string>
-  <string name="notifications_update_os_description">Open the app to finish activating it.</string>
-  <string name="notifications_update_app_title">⚠️ You need to update the app</string>
-  <string name="notifications_update_app_description">An important update is available. Update the app now to make sure it keeps working.</string>
-  <string name="notifications_not_active_service_title">⚠️ The service is inactive</string>
-  <string name="notifications_not_active_service_description">Reactivate Immuni as soon as possible so that it can warn you in the case of risk.</string>
-  <string name="notifications_apple_exposure_notification_message">Someone you\'ve had close contact with has tested positive.</string>
-  <string name="notifications_risk_title">Important message for you</string>
-  <string name="notifications_risk_description">Open the app for more information.</string>
-  <string name="notifications_update_positive_state_title">Update your status</string>
-  <string name="notifications_update_positive_state_description">Open the app if you have any updates about your situation.</string>
-  <string name="force_update_view_app_title">Update the app to continue</string>
-  <string name="force_update_view_app_details">An important update is available. Update the app now to make sure it keeps working.</string>
-  <string name="force_update_view_update">Update</string>
-  <string name="force_update_view_os_title">Update your operating system to continue</string>
-  <string name="force_update_view_os_details">A newer version of iOS (13.5 or higher) is required to enable exposure notifications.</string>
-  <string name="permission_tutorial_update_os_title">To update your operating system</string>
-  <string name="permission_tutorial_update_os_second"><b>2. Go to \'General\'</b></string>
-  <string name="permission_tutorial_update_os_third"><b>3. Go to \'Software Update\'</b></string>
-  <string name="permission_tutorial_update_os_fourth"><b>4. Select \'Download and install\' and follow the instructions</b></string>
-  <string name="app_setup_view_network_error">Connection failed. Please check your internet connection and try again.</string>
-  <string name="app_setup_view_generic_error">Unable to connect. Please try again later.</string>
-  <string name="welcome_view_items_first_title">Hi!</string>
-  <string name="welcome_view_items_first_description">With everyone\'s contribution, Immuni will help contain the virus and get us back to normal as soon as possible.</string>
-  <string name="welcome_view_items_second_title">Immuni takes care of you</string>
-  <string name="welcome_view_items_second_description">If you\'ve been in contact with a user who has subsequently tested positive for the virus, Immuni notifies you and gives you instructions to protect your health and the health of your loved ones.</string>
-  <string name="welcome_view_items_third_title">Slowing down the epidemic together</string>
-  <string name="welcome_view_items_third_description">Users who discover that they have been exposed to the virus can self-isolate, slowing down the spread of the virus and helping us return to normal life faster.</string>
-  <string name="welcome_view_items_fourth_title">Your privacy is protected</string>
-  <string name="welcome_view_items_fourth_description">The app works without tracking your movements and without knowing your identity or the identity of the people you come into contact with.</string>
-  <string name="welcome_view_next_page_title">Next</string>
-  <string name="welcome_view_go_next">Let\'s get started</string>
-  <string name="privacy_title">Your privacy is safe</string>
-  <string name="privacy_item_identity"><b>Immuni does not collect your first name, surname, date of birth, address, telephone number, or email address.</b></string>
-  <string name="privacy_item_people"><b>Immuni cannot determine your identity</b> or the identity of the people you come into contact with.</string>
-  <string name="privacy_item_location"><b>Immuni does not collect any geolocation data</b>, including GPS data. Your movements are not tracked in any way.</string>
-  <string name="privacy_item_secure"><b>The data saved on your smartphone and the connections to the server are encrypted.</b></string>
-  <string name="privacy_item_ministry"><b>To help the National Health Service</b> take care of you, Immuni tells the Ministry of Health server the following:\n- The province where you live\n- If the app is working properly\n- If you have been warned of a high-risk contact</string>
-  <string name="privacy_item_italy">Your data is saved on servers in Italy, <b>managed by public bodies, and controlled by the Ministry of Health.</b></string>
-  <string name="privacy_item_data_deletion"><b>All data is deleted when it is no longer needed.</b></string>
-  <string name="privacy_checkbox_above14">I declare that I am at least 14 years old</string>
-  <string name="privacy_checkbox_privacypolicyread"><![CDATA[I have read the <l>privacy notice</l>]]></string>
-  <string name="privacy_tos"><![CDATA[By continuing, I declare that I have read and accepted the <l>terms of use</l>]]></string>
-  <string name="privacy_next">Next</string>
-  <string name="privacy_settings_title">Your privacy is safe</string>
-  <string name="privacy_settings_show_full">Show full notice</string>
-  <string name="onboarding_common_next">Next</string>
-  <string name="onboarding_common_discover_more">Find out more</string>
-  <string name="onboarding_region_title">Which region do you live in?</string>
-  <string name="onboarding_region_description">Select the region where you live to help the National Health Service provide the best possible assistance.</string>
-  <string name="onboarding_province_title">Which province do you live in?</string>
-  <string name="onboarding_province_description">Select the province where you live to help the National Health Service provide the best possible assistance.</string>
-  <string name="onboarding_exposure_permission_title">Enable COVID-19 exposure notifications</string>
-  <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus. You can temporarily disable the service from the home screen.</string>
-  <string name="onboarding_exposure_permission_action">Enable</string>
-  <string name="onboarding_exposure_permission_overlay_hint">Select \'<b>Enable</b>\' in the pop-up that appears below</string>
-  <string name="onboarding_bluetooth_off_title">Turn on Bluetooth</string>
-  <string name="onboarding_bluetooth_off_description">Immuni uses Bluetooth Low Energy to log your contact with other users and to enable COVID-19 exposure notifications.</string>
-  <string name="onboarding_bluetooth_off_action">Turn on</string>
-  <string name="onboarding_push_permission_title">Let us communicate with you</string>
-  <string name="onboarding_push_permission_description">Notifications allow Immuni to alert you quickly should the need arise.</string>
-  <string name="onboarding_push_permission_action">Allow</string>
-  <string name="onboarding_push_permission_overlay_hint">Select \'<b>Allow</b>\' in the pop-up that appears below</string>
-  <string name="onboarding_pin_advice_title">Protect your device</string>
-  <string name="onboarding_pin_advice_description">Immuni is strictly for personal use. If you haven\'t done so already, set up a lock code on your smartphone to prevent others from accessing the app\'s features and any messages the app might send you.</string>
-  <string name="onboarding_pin_advice_action">Got it</string>
-  <string name="onboarding_communication_advice_title">Watch out for scam messages</string>
-  <string name="onboarding_communication_advice_description">Immuni will only ever communicate with you via the app and the corresponding notifications. <b>Be wary of any text, phone call, email, or other kind of alert</b> that appears to be from Immuni, especially if it asks you for personal information.</string>
-  <string name="onboarding_communication_advice_action">Got it</string>
-  <string name="onboarding_complete_title">Setup complete</string>
-  <string name="home_view_service_active_title">Service <b>active</b></string>
-  <string name="home_view_service_active_subtitle">Even when the app is closed, Immuni continues to operate.</string>
-  <string name="home_view_service_not_active_title">Service <b>inactive</b></string>
-  <string name="home_view_service_not_active_subtitle">Take action now to allow Immuni to work properly.</string>
-  <string name="home_view_service_not_active_button">Reactivate Immuni</string>
-  <string name="home_view_info_protection_title">What you can do to protect yourself</string>
-  <string name="home_view_info_app_title">How does the app work?</string>
-  <string name="home_view_info_button_title">Find out more</string>
-  <string name="home_view_info_header_title">Information</string>
-  <string name="home_view_header_card_risk_title">Risky exposure detected: contact with a COVID-19-positive person</string>
-  <string name="home_view_header_card_risk_button">Find out what to do now ›</string>
-  <string name="home_view_header_card_positive_title">Follow the instructions provided by your general practitioner or local health authority</string>
-  <string name="home_view_header_card_positive_button">Recovered? Update your status ›</string>
-  <string name="permission_tutorial_how_immuni_works_title">How the app works</string>
-  <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni assigns a random code to each phone</h>]]></string>
-  <string name="permission_tutorial_how_immuni_works_first_message">The code is generated randomly and does not contain information about your device, let alone about you. It also changes several times an hour to ensure your privacy is protected.</string>
-  <string name="permission_tutorial_how_immuni_works_second_title"><![CDATA[<h>Phones that come into contact exchange their random codes</h>]]></string>
-  <string name="permission_tutorial_how_immuni_works_second_message">When you come into contact with another Immuni user, the devices exchange their codes via Bluetooth Low Energy. That\'s how the app can keep track of the contact without knowing your identities or where you came into contact.</string>
-  <string name="permission_tutorial_how_immuni_works_third_title"><![CDATA[<h>Users who test positive can choose if they want to share their random codes</h>]]></string>
-  <string name="permission_tutorial_how_immuni_works_third_message">Users who have tested positive for the virus can upload to a server the random codes that their devices have sent out over the previous days, making them available to other users. This process is carried out with the assistance of the healthcare operator who informs you that your swab has tested positive.</string>
-  <string name="permission_tutorial_how_immuni_works_fourth_title"><![CDATA[<h>Each phone checks if it has previously encountered any of the shared codes</h>]]></string>
-  <string name="permission_tutorial_how_immuni_works_fourth_message">Immuni periodically checks the codes on the server and compares them with those saved on your device. This allows it to determine if you have been exposed to a potential infection risk.</string>
-  <string name="permission_tutorial_how_immuni_works_fifth_title"><![CDATA[<h>The user is notified if there is a positive match</h>]]></string>
-  <string name="permission_tutorial_how_immuni_works_fifth_message">If you\'ve been in contact with a positive user, Immuni notifies you and tells you what to do. It does all this without ever knowing where you\'ve been and who you\'ve met. Your privacy is safe.</string>
-  <string name="permission_tutorial_how_immuni_works_action_description">Want to know more?</string>
-  <string name="permission_tutorial_how_immuni_works_action_cta">Read the FAQ</string>
-  <string name="settings_setting_section_info">Information</string>
-  <string name="settings_setting_section_general">General</string>
-  <string name="settings_setting_section_data">Upload data</string>
-  <string name="settings_setting_faq">FAQ</string>
-  <string name="settings_setting_tos">Terms of use</string>
-  <string name="settings_setting_privacy">Privacy notice</string>
-  <string name="settings_setting_chage_province">Change your province</string>
-  <string name="settings_setting_leave_review">Leave a review</string>
-  <string name="settings_setting_contact_support">Contact Support</string>
-  <string name="settings_setting_debug_utilities">Debug menu</string>
-  <string name="settings_update_province_update_province">Update</string>
-  <string name="permission_tutorial_notifications_title">To enable notifications</string>
-  <string name="permission_tutorial_notifications_first"><b>1. Open Settings</b> using the button below</string>
-  <string name="permission_tutorial_notifications_second"><b>2. Go to \'Notifications\'</b></string>
-  <string name="permission_tutorial_notifications_third"><b>3. Enable the \'Allow notifications\' option</b></string>
-  <string name="permission_tutorial_notifications_action">Open Settings</string>
-  <string name="permission_tutorial_bluetooth_title">To turn on Bluetooth</string>
-  <string name="permission_tutorial_bluetooth_first"><b>1. Go to the Control Centre.</b> Depending on your device, either swipe down from the top right corner, or up from the bottom of the screen.</string>
-  <string name="permission_tutorial_bluetooth_second"><b>2. Turn on Bluetooth</b></string>
-  <string name="permission_tutorial_bluetooth_action">Open Settings</string>
-  <string name="permission_tutorial_exposure_notification_restricted_title">To enable exposure notifications</string>
-  <string name="permission_tutorial_exposure_notification_restricted_first"><b>1. Open the system settings</b></string>
-  <string name="permission_tutorial_exposure_notification_restricted_second"><b>2. Go to \'Privacy\'</b></string>
-  <string name="permission_tutorial_exposure_notification_restricted_third"><b>3. Go to \'Health\'</b></string>
-  <string name="permission_tutorial_exposure_notification_restricted_fourth"><b>4. Go to Exposure Logging</b></string>
-  <string name="permission_tutorial_exposure_notification_restricted_fifth"><b>5. Enable Exposure Logging</b></string>
-  <string name="permission_tutorial_exposure_notification_unauthorized_title">To enable exposure notifications</string>
-  <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Open Settings</b> using the button below</string>
-  <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Enable exposure notifications</b></string>
-  <string name="permission_tutorial_exposure_notification_unauthorized_action">Open Settings</string>
-  <string name="upload_data_warning_message">This feature requires assistance from the healthcare operator, who will inform you by phone of the positive result of the swab test.</string>
-  <string name="upload_data_code_message">Give the operator the one-time code:</string>
-  <string name="upload_data_wait_operator_message">Wait for the healthcare operator to confirm</string>
-  <string name="upload_data_verify_message">Continue to verify code authorisation</string>
-  <string name="upload_data_verify_button">Continue</string>
-  <string name="upload_data_verify_error">Code not authorised yet</string>
-  <string name="upload_data_verify_loading">Checking authorisation&#8230;</string>
-  <string name="upload_data_verify_loading_button" formatted="false">Wait %d %@</string>
-  <string name="upload_data_verify_loading_button_second">second</string>
-  <string name="upload_data_verify_loading_button_seconds">seconds</string>
-  <string name="upload_data_verify_loading_button_minutes">minutes</string>
-  <string name="upload_data_send_data_loading">Uploading data&#8230;</string>
-  <string name="upload_data_missing_authorization_title">Reactivate exposure notifications to continue</string>
-  <string name="upload_data_missing_authorization_message">Exposure notifications are required for this process. Please reactivate them now to continue.</string>
-  <string name="upload_data_missing_authorization_close">Close</string>
-  <string name="upload_data_missing_authorization_enable">Enable</string>
-  <string name="upload_data_connection_error_title">Connection error</string>
-  <string name="upload_data_connection_error_message">Something went wrong. Please check your internet connection and try again.</string>
-  <string name="upload_data_connection_error_action">OK</string>
-  <string name="upload_data_api_error_title">Something went wrong</string>
-  <string name="upload_data_api_error_message">An error occurred during the operation. Please try again. If the problem persists, we suggest using a mobile network.</string>
-  <string name="upload_data_api_error_action">OK</string>
-  <string name="upload_data_vpn_error_title">Something went wrong</string>
-  <string name="upload_data_vpn_error_message_europe">An error occurred during the operation. Please try again. If you are using a VPN, we suggest that you select a European server or temporarily disable it.</string>
-  <string name="upload_data_vpn_error_action">OK</string>
-  <string name="confirm_data_title">The following data will be uploaded</string>
-  <string name="confirm_data_footer_message">Wait for confirmation from the healthcare operator before uploading your data.</string>
-  <string name="confirm_data_button_title">Upload data</string>
-  <string name="confirm_data_cell_result_title">Test result</string>
-  <string name="confirm_data_cell_proximity_data_title">Your random codes</string>
-  <string name="confirm_data_cell_exposition_data_title">Risk indicators of previous contact with people who have tested positive for COVID-19</string>
-  <string name="confirm_data_cell_province_title">Your province</string>
-  <string name="confirm_data_confirmation_title">Data uploaded successfully</string>
-  <string name="confirm_data_confirmation_subtitle">Thank you for your help</string>
-  <string name="confirm_data_exposure_permission_overlay_hint">Select \'<b>OK</b>\' in the pop-up that appears below</string>
-  <string name="confirm_data_close_verify_alert_title">Are you sure you want to exit?</string>
-  <string name="confirm_data_close_verify_alert_message">Your data hasn\'t been uploaded yet.</string>
-  <string name="confirm_data_close_verify_alert_affermative_answer">Yes, exit</string>
-  <string name="confirm_data_close_verify_alert_negative_answer">Cancel</string>
-  <string name="suggestions_header_short_title_neutral">Instructions for you</string>
-  <string name="suggestions_neutral_alert">If you are in contact with your general practitioner or your local health authority\'s healthcare service, follow all the instructions provided to you.</string>
-  <string name="suggestions_neutral_message">In any case, <b>try to follow these general guidelines at all times:</b></string>
-  <string name="suggestions_risk_title">Risky exposure</string>
-  <string name="suggestions_risk_subtitle">Immuni has detected that you came into close contact with a COVID-19-positive user on %@.</string>
-  <string name="suggestions_positive_title">Follow the instructions</string>
-  <string name="suggestions_positive_subtitle"><b>Follow all the instructions that you have received from your general practitioner or from your local health authority\'s healthcare service.</b></string>
-  <string name="suggestions_instruction_ministerial_decree"><b>Comply with the current regulations in your area.</b></string>
-  <string name="suggestions_instruction_wash_hands"><b>Wash your hands frequently</b> with soap and water or with alcohol hand sanitiser.</string>
-  <string name="suggestions_instruction_use_napkins"><b>Cough and sneeze directly into a tissue or into the crook of your elbow.</b></string>
-  <string name="suggestions_instruction_social_distance"><b>Respect physical distancing measures</b> and avoid gatherings.</string>
-  <string name="suggestions_instruction_mask"><b>Wear a mask in indoor public places.</b> This includes public transport and all situations where it is not possible to ensure that a safe distance is maintained at all times.</string>
-  <string name="suggestions_instruction_follow_instructions">To protect your health and the health of your loved ones, <b>please follow these guidelines:</b></string>
-  <string name="suggestions_instruction_contact_doctor_title"><b>Contact your general practitioner (or primary care paediatrician)</b></string>
-  <string name="suggestions_instruction_contact_doctor_message">Explain to your general practitioner that you have received a COVID-19 close contact notification from Immuni. Follow your general practitioner\'s instructions. Your general practitioner will contact your local health authority\'s healthcare service. Therefore, you should ensure that you remain contactable by your local health authority for health monitoring activities.</string>
-  <string name="suggestions_instruction_hide_if_contact_doctor_message">If you\'re in contact with your general practitioner or local health authority, you can hide this alert.</string>
-  <string name="suggestions_instruction_hide_if_contact_doctor_action">I have contacted my general practitioner</string>
-  <string name="suggestions_instruction_while_waiting_doctor">As a precaution, while you wait for instructions from your general practitioner or local health authority:</string>
-  <string name="suggestions_instruction_stay_home"><b>Stay at home for 14 days</b> after the date of contact.</string>
-  <string name="suggestions_instruction_check_symptoms_title"><b>Measure your body temperature at least twice a day and assess if you are exhibiting symptoms, even mild ones.</b></string>
-  <string name="suggestions_instruction_check_symptoms_message">In particular, fever or at least one of the following: sore throat, cough, cold or blocked nose, breathing difficulty, muscle pain, loss or alteration of sense of smell or taste, diarrhoea.</string>
-  <string name="suggestions_instruction_isolate_title"><b>If you display symptoms, isolate yourself from the people you live with.</b></string>
-  <string name="suggestions_instruction_isolate_message">Wear a surgical mask and immediately contact your general practitioner (or primary care paediatrician) and your local health authority\'s healthcare service.</string>
-  <string name="suggestions_instruction_phone_contact"><b>If you are having difficulty breathing, contact 112/118.</b></string>
-  <string name="suggestions_instruction_hide_alert_message">If necessary, you can hide this alert. Unless you have a valid reason, we strongly advise against doing this.</string>
-  <string name="suggestions_instruction_hide_alert_action">Hide alert</string>
-  <string name="suggestions_alert_asl_contact_confirmation_title">Do you confirm that you are in contact with your general practitioner or local health authority?</string>
-  <string name="suggestions_alert_asl_contact_confirmation_description">Immuni will hide the contact alert. You will still need to follow all the instructions you have received from your general practitioner or local health authority.</string>
-  <string name="suggestions_positive_info_title">Immuni is still working: don\'t uninstall it!</string>
-  <string name="suggestions_positive_info_subtitle">For the time being, you will not receive any new notifications in the event of a risky exposure to a COVID-19-positive user.</string>
-  <string name="suggestions_positive_covid_negative_message"><b>Let us know if your local health authority has confirmed that you are COVID-19 negative, to reactivate risky exposure notifications.</b></string>
-  <string name="suggestions_positive_covid_negative_action">I\'m COVID-19 negative</string>
-  <string name="suggestions_alert_covid_negative_title">Do you confirm that you are COVID-19 negative?</string>
-  <string name="suggestions_alert_covid_negative_description">Your local health authority needs to have confirmed that you have tested negative for the virus and can leave the house again.</string>
-  <string name="suggestions_alert_covid_negative_negative_answer">No</string>
-  <string name="suggestions_alert_covid_negative_positive_answer">I confirm</string>
-  <string name="suggestions_alert_asl_contact_confirmation_negative_answer">No</string>
-  <string name="suggestions_alert_asl_contact_confirmation_positive_answer">Yes</string>
-  <string name="notification_steps_title">To enable notifications</string>
-  <string name="notification_steps_instruction_1">1. Open Settings using the button below</string>
-  <string name="notification_steps_instruction_2">2. Enable the \'Allow notifications\' option</string>
-  <string name="notification_settings_allow">Allow notifications</string>
-  <string name="open_settings">Open Settings</string>
-  <string name="force_update_play_services_title">Update %1$s to continue</string>
-  <string name="force_update_play_services_message">A newer version of %1$s is required to enable exposure notifications.</string>
-  <string name="force_update_not_available_title">%1$s isn\'t ready yet</string>
-  <string name="force_update_not_available_message">%1$s is up to date but cannot enable exposure notifications yet. Please try again later.</string>
-  <string name="force_update_gps_not_available_yet_title">Please wait for the %1$s update</string>
-  <string name="force_update_gps_not_available_yet_message">The %1$s version required to enable exposure notifications is not available yet. Please try again later.</string>
-  <string name="onboarding_exposure_message_extended">Due to an operating system limitation, geolocation services must be turned on to allow the random codes to be exchanged via Bluetooth. <b>Immuni does not access your location, and you can verify this by checking the list of permissions required by the app.</b></string>
-  <string name="suggestions_alert_hide_alert_title">Do you want to hide this warning?</string>
-  <string name="suggestions_alert_hide_alert_description">Unless you have a valid reason, we strongly advise against doing this. It could put your health and the health of those around you at risk.</string>
-  <string name="suggestions_alert_hide_alert_negative_answer">No</string>
-  <string name="suggestions_alert_hide_alert_positive_answer">Yes</string>
-  <string name="next">Next</string>
-  <string name="exit">Exit</string>
-  <string name="cancel">Cancel</string>
-  <string name="retry">Try again</string>
-  <string name="how_it_works_tile_1">Immuni assigns a random code to each phone</string>
-  <string name="how_it_works_tile_2">Phones that come into contact exchange their random codes</string>
-  <string name="how_it_works_tile_3">Users who test positive can choose if they want to share their random codes</string>
-  <string name="how_it_works_tile_4">Each phone checks if it has previously encountered any of the shared codes</string>
-  <string name="how_it_works_tile_5">The user is notified if there is a positive match</string>
-  <string name="exposure_notification_channel">Exposure notifications</string>
-  <string name="onboarding_exposure_api_not_activated">Exposure notifications not enabled</string>
-  <string name="home_protection_not_active">Service\n{inactive}</string>
-  <string name="home_protection_active">Service\n{active}</string>
-  <string name="app_exit_title">Exit</string>
-  <string name="app_exit_message">Are you sure you want to exit?</string>
-  <plurals name="upload_data_verify_loading_button_seconds">
-    <item quantity="one">Wait %d second</item>
-    <item quantity="other">Wait %d seconds</item>
-  </plurals>
-  <plurals name="upload_data_verify_loading_button_minutes">
-    <item quantity="one">Wait %d minute</item>
-    <item quantity="other">Wait %d minutes</item>
-  </plurals>
-  <string name="settings_app_version" formatted="false">Immuni v%s (%d)</string>
-  <string name="upload_data_diagnosis_keys_overlay_hint">Select \'<b>Share</b>\' in the pop-up that appears below</string>
-  <string name="suggestions_instruction_stay_home_message">On indication of the ASL, the quarantine period may be reduced to 10 days in the event of a negative antigen or molecular test performed on the tenth day.</string>
-  <string name="suggestions_instruction_limit_movement"><b>Use a well-ventilated private room, if possible with its own bathroom,</b> and minimise the time you spend in other common areas of the house.</string>
-  <string name="suggestions_instruction_distance"><b>Keep a distance of at least one metre when around other people.</b></string>
-  <string name="suggestions_instruction_mask_title"><b>Always carry a mask with you</b> and wear it in indoor places other than your home.</string>
-  <string name="suggestions_instruction_mask_message">Wear it at home in presence of non-cohabiting people. Also use it outdoors when it is not possible to remain isolated.</string>
-  <string name="upload_data_vpn_error_message">An error occurred during the operation. Please try again. If you are using a VPN, we suggest that you select an Italian server or temporarily disable it.</string>
-  <string name="suggestions_risk_footer">To help the National Health Service take care of you should the need arise, the app has informed the Ministry of Health of the notification you have received. <b>Please note, the Ministry of Health cannot determine your identity based on this information.</b></string>
-  <string name="home_view_service_active_advice">Open Immuni once a day to check its status.</string>
-  <string name="aso_1">Protect yourself and help slow down the epidemic.</string>
-  <string name="aso_2">Immuni does not collect your name, date of birth, address, telephone number, or email address.
+    <string name="accessibility_back">Back</string>
+    <string name="accessibility_close">Close</string>
+    <string name="accessibility_app_name">Immuni</string>
+    <string name="tabbar_title_home">Home</string>
+    <string name="tabbar_title_settings">Settings</string>
+    <string name="notifications_update_os_title">The service isn\'t activated yet</string>
+    <string name="notifications_update_os_description">Open the app to finish activating it.</string>
+    <string name="notifications_update_app_title">⚠️ You need to update the app</string>
+    <string name="notifications_update_app_description">An important update is available. Update the app now to make sure it keeps working.</string>
+    <string name="notifications_not_active_service_title">⚠️ The service is inactive</string>
+    <string name="notifications_not_active_service_description">Reactivate Immuni as soon as possible so that it can warn you in the case of risk.</string>
+    <string name="notifications_apple_exposure_notification_message">Someone you\'ve had close contact with has tested positive.</string>
+    <string name="notifications_risk_title">Important message for you</string>
+    <string name="notifications_risk_description">Open the app for more information.</string>
+    <string name="notifications_update_positive_state_title">Update your status</string>
+    <string name="notifications_update_positive_state_description">Open the app if you have any updates about your situation.</string>
+    <string name="force_update_view_app_title">Update the app to continue</string>
+    <string name="force_update_view_app_details">An important update is available. Update the app now to make sure it keeps working.</string>
+    <string name="force_update_view_update">Update</string>
+    <string name="force_update_view_os_title">Update your operating system to continue</string>
+    <string name="force_update_view_os_details">A newer version of iOS (13.5 or higher) is required to enable exposure notifications.</string>
+    <string name="permission_tutorial_update_os_title">To update your operating system</string>
+    <string name="permission_tutorial_update_os_second"><b>2. Go to \'General\'</b></string>
+    <string name="permission_tutorial_update_os_third"><b>3. Go to \'Software Update\'</b></string>
+    <string name="permission_tutorial_update_os_fourth"><b>4. Select \'Download and install\' and follow the instructions</b></string>
+    <string name="app_setup_view_network_error">Connection failed. Please check your internet connection and try again.</string>
+    <string name="app_setup_view_generic_error">Unable to connect. Please try again later.</string>
+    <string name="welcome_view_items_first_title">Hi!</string>
+    <string name="welcome_view_items_first_description">With everyone\'s contribution, Immuni will help contain the virus and get us back to normal as soon as possible.</string>
+    <string name="welcome_view_items_second_title">Immuni takes care of you</string>
+    <string name="welcome_view_items_second_description">If you\'ve been in contact with a user who has subsequently tested positive for the virus, Immuni notifies you and gives you instructions to protect your health and the health of your loved ones.</string>
+    <string name="welcome_view_items_third_title">Slowing down the epidemic together</string>
+    <string name="welcome_view_items_third_description">Users who discover that they have been exposed to the virus can self-isolate, slowing down the spread of the virus and helping us return to normal life faster.</string>
+    <string name="welcome_view_items_fourth_title">Your privacy is protected</string>
+    <string name="welcome_view_items_fourth_description">The app works without tracking your movements and without knowing your identity or the identity of the people you come into contact with.</string>
+    <string name="welcome_view_next_page_title">Next</string>
+    <string name="welcome_view_go_next">Let\'s get started</string>
+    <string name="privacy_title">Your privacy is safe</string>
+    <string name="privacy_item_identity"><b>Immuni does not collect your first name, surname, date of birth, address, telephone number, or email address.</b></string>
+    <string name="privacy_item_people"><b>Immuni cannot determine your identity</b> or the identity of the people you come into contact with.</string>
+    <string name="privacy_item_location"><b>Immuni does not collect any geolocation data</b>, including GPS data. Your movements are not tracked in any way.</string>
+    <string name="privacy_item_secure"><b>The data saved on your smartphone and the connections to the server are encrypted.</b></string>
+    <string name="privacy_item_ministry"><b>To help the National Health Service</b> take care of you, Immuni tells the Ministry of Health server the following:\n- The province where you live\n- If the app is working properly\n- If you have been warned of a high-risk contact</string>
+    <string name="privacy_item_italy">Your data is saved on servers in Italy, <b>managed by public bodies, and controlled by the Ministry of Health.</b></string>
+    <string name="privacy_item_data_deletion"><b>All data is deleted when it is no longer needed.</b></string>
+    <string name="privacy_checkbox_above14">I declare that I am at least 14 years old</string>
+    <string name="privacy_checkbox_privacypolicyread"><![CDATA[I have read the <l>privacy notice</l>]]></string>
+    <string name="privacy_tos"><![CDATA[By continuing, I declare that I have read and accepted the <l>terms of use</l>]]></string>
+    <string name="privacy_next">Next</string>
+    <string name="privacy_settings_title">Your privacy is safe</string>
+    <string name="privacy_settings_show_full">Show full notice</string>
+    <string name="onboarding_common_next">Next</string>
+    <string name="onboarding_common_discover_more">Find out more</string>
+    <string name="onboarding_region_title">Which region do you live in?</string>
+    <string name="onboarding_region_description">Select the region where you live to help the National Health Service provide the best possible assistance.</string>
+    <string name="onboarding_province_title">Which province do you live in?</string>
+    <string name="onboarding_province_description">Select the province where you live to help the National Health Service provide the best possible assistance.</string>
+    <string name="onboarding_exposure_permission_title">Enable COVID-19 exposure notifications</string>
+    <string name="onboarding_exposure_permission_description">Immuni uses Bluetooth Low Energy to log contact with other users so that it can inform you if you have been exposed to the virus. You can temporarily disable the service from the home screen. <b>This service is not available if you\'re running Immuni in a secondary profile or in a work profile.</b></string>
+    <string name="onboarding_exposure_permission_action">Enable</string>
+    <string name="onboarding_exposure_permission_overlay_hint">Select \'<b>Enable</b>\' in the pop-up that appears below</string>
+    <string name="onboarding_bluetooth_off_title">Turn on Bluetooth</string>
+    <string name="onboarding_bluetooth_off_description">Immuni uses Bluetooth Low Energy to log your contact with other users and to enable COVID-19 exposure notifications.</string>
+    <string name="onboarding_bluetooth_off_action">Turn on</string>
+    <string name="onboarding_push_permission_title">Let us communicate with you</string>
+    <string name="onboarding_push_permission_description">Notifications allow Immuni to alert you quickly should the need arise.</string>
+    <string name="onboarding_push_permission_action">Allow</string>
+    <string name="onboarding_push_permission_overlay_hint">Select \'<b>Allow</b>\' in the pop-up that appears below</string>
+    <string name="onboarding_pin_advice_title">Protect your device</string>
+    <string name="onboarding_pin_advice_description">Immuni is strictly for personal use. If you haven\'t done so already, set up a lock code on your smartphone to prevent others from accessing the app\'s features and any messages the app might send you.</string>
+    <string name="onboarding_pin_advice_action">Got it</string>
+    <string name="onboarding_communication_advice_title">Watch out for scam messages</string>
+    <string name="onboarding_communication_advice_description">Immuni will only ever communicate with you via the app and the corresponding notifications. <b>Be wary of any text, phone call, email, or other kind of alert</b> that appears to be from Immuni, especially if it asks you for personal information.</string>
+    <string name="onboarding_communication_advice_action">Got it</string>
+    <string name="onboarding_complete_title">Setup complete</string>
+    <string name="home_view_service_active_title">Service <b>active</b></string>
+    <string name="home_view_service_active_subtitle">Even when the app is closed, Immuni continues to operate.</string>
+    <string name="home_view_service_not_active_title">Service <b>inactive</b></string>
+    <string name="home_view_service_not_active_subtitle">Take action now to allow Immuni to work properly.</string>
+    <string name="home_view_service_not_active_button">Reactivate Immuni</string>
+    <string name="home_view_info_protection_title">What you can do to protect yourself</string>
+    <string name="home_view_info_app_title">How does the app work?</string>
+    <string name="home_view_info_button_title">Find out more</string>
+    <string name="home_view_info_header_title">Information</string>
+    <string name="home_view_header_card_risk_title">Risky exposure detected: contact with a COVID-19-positive person</string>
+    <string name="home_view_header_card_risk_button">Find out what to do now ›</string>
+    <string name="home_view_header_card_positive_title">Follow the instructions provided by your general practitioner or local health authority</string>
+    <string name="home_view_header_card_positive_button">Recovered? Update your status ›</string>
+    <string name="permission_tutorial_how_immuni_works_title">How the app works</string>
+    <string name="permission_tutorial_how_immuni_works_first_title"><![CDATA[<h>Immuni assigns a random code to each phone</h>]]></string>
+    <string name="permission_tutorial_how_immuni_works_first_message">The code is generated randomly and does not contain information about your device, let alone about you. It also changes several times an hour to ensure your privacy is protected.</string>
+    <string name="permission_tutorial_how_immuni_works_second_title"><![CDATA[<h>Phones that come into contact exchange their random codes</h>]]></string>
+    <string name="permission_tutorial_how_immuni_works_second_message">When you come into contact with another Immuni user, the devices exchange their codes via Bluetooth Low Energy. That\'s how the app can keep track of the contact without knowing your identities or where you came into contact.</string>
+    <string name="permission_tutorial_how_immuni_works_third_title"><![CDATA[<h>Users who test positive can choose if they want to share their random codes</h>]]></string>
+    <string name="permission_tutorial_how_immuni_works_third_message">Users who have tested positive for the virus can upload to a server the random codes that their devices have sent out over the previous days, making them available to other users. This process is carried out with the assistance of the healthcare operator who informs you that your swab has tested positive.</string>
+    <string name="permission_tutorial_how_immuni_works_fourth_title"><![CDATA[<h>Each phone checks if it has previously encountered any of the shared codes</h>]]></string>
+    <string name="permission_tutorial_how_immuni_works_fourth_message">Immuni periodically checks the codes on the server and compares them with those saved on your device. This allows it to determine if you have been exposed to a potential infection risk.</string>
+    <string name="permission_tutorial_how_immuni_works_fifth_title"><![CDATA[<h>The user is notified if there is a positive match</h>]]></string>
+    <string name="permission_tutorial_how_immuni_works_fifth_message">If you\'ve been in contact with a positive user, Immuni notifies you and tells you what to do. It does all this without ever knowing where you\'ve been and who you\'ve met. Your privacy is safe.</string>
+    <string name="permission_tutorial_how_immuni_works_action_description">Want to know more?</string>
+    <string name="permission_tutorial_how_immuni_works_action_cta">Read the FAQ</string>
+    <string name="settings_setting_section_info">Information</string>
+    <string name="settings_setting_section_general">General</string>
+    <string name="settings_setting_section_data">Upload data</string>
+    <string name="settings_setting_faq">FAQ</string>
+    <string name="settings_setting_tos">Terms of use</string>
+    <string name="settings_setting_privacy">Privacy notice</string>
+    <string name="settings_setting_chage_province">Change your province</string>
+    <string name="settings_setting_leave_review">Leave a review</string>
+    <string name="settings_setting_contact_support">Contact Support</string>
+    <string name="settings_setting_debug_utilities">Debug menu</string>
+    <string name="settings_update_province_update_province">Update</string>
+    <string name="permission_tutorial_notifications_title">To enable notifications</string>
+    <string name="permission_tutorial_notifications_first"><b>1. Open Settings</b> using the button below</string>
+    <string name="permission_tutorial_notifications_second"><b>2. Go to \'Notifications\'</b></string>
+    <string name="permission_tutorial_notifications_third"><b>3. Enable the \'Allow notifications\' option</b></string>
+    <string name="permission_tutorial_notifications_action">Open Settings</string>
+    <string name="permission_tutorial_bluetooth_title">To turn on Bluetooth</string>
+    <string name="permission_tutorial_bluetooth_first"><b>1. Go to the Control Centre.</b> Depending on your device, either swipe down from the top right corner, or up from the bottom of the screen.</string>
+    <string name="permission_tutorial_bluetooth_second"><b>2. Turn on Bluetooth</b></string>
+    <string name="permission_tutorial_bluetooth_action">Open Settings</string>
+    <string name="permission_tutorial_exposure_notification_restricted_title">To enable exposure notifications</string>
+    <string name="permission_tutorial_exposure_notification_restricted_first"><b>1. Open the system settings</b></string>
+    <string name="permission_tutorial_exposure_notification_restricted_second"><b>2. Go to \'Privacy\'</b></string>
+    <string name="permission_tutorial_exposure_notification_restricted_third"><b>3. Go to \'Health\'</b></string>
+    <string name="permission_tutorial_exposure_notification_restricted_fourth"><b>4. Go to Exposure Logging</b></string>
+    <string name="permission_tutorial_exposure_notification_restricted_fifth"><b>5. Enable Exposure Logging</b></string>
+    <string name="permission_tutorial_exposure_notification_unauthorized_title">To enable exposure notifications</string>
+    <string name="permission_tutorial_exposure_notification_unauthorized_first"><b>1. Open Settings</b> using the button below</string>
+    <string name="permission_tutorial_exposure_notification_unauthorized_second"><b>2. Enable exposure notifications</b></string>
+    <string name="permission_tutorial_exposure_notification_unauthorized_action">Open Settings</string>
+    <string name="upload_data_warning_message">This feature requires assistance from the healthcare operator, who will inform you by phone of the positive result of the swab test.</string>
+    <string name="upload_data_code_message">Give the operator the one-time code:</string>
+    <string name="upload_data_wait_operator_message">Wait for the healthcare operator to confirm</string>
+    <string name="upload_data_verify_message">Continue to verify code authorisation</string>
+    <string name="upload_data_verify_button">Continue</string>
+    <string name="upload_data_verify_error">Code not authorised yet</string>
+    <string name="upload_data_verify_loading">Checking authorisation&#8230;</string>
+    <string name="upload_data_verify_loading_button" formatted="false">Wait %d %@</string>
+    <string name="upload_data_verify_loading_button_second">second</string>
+    <string name="upload_data_verify_loading_button_seconds">seconds</string>
+    <string name="upload_data_verify_loading_button_minutes">minutes</string>
+    <string name="upload_data_send_data_loading">Uploading data&#8230;</string>
+    <string name="upload_data_missing_authorization_title">Reactivate exposure notifications to continue</string>
+    <string name="upload_data_missing_authorization_message">Exposure notifications are required for this process. Please reactivate them now to continue.</string>
+    <string name="upload_data_missing_authorization_close">Close</string>
+    <string name="upload_data_missing_authorization_enable">Enable</string>
+    <string name="upload_data_connection_error_title">Connection error</string>
+    <string name="upload_data_connection_error_message">Something went wrong. Please check your internet connection and try again.</string>
+    <string name="upload_data_connection_error_action">OK</string>
+    <string name="upload_data_api_error_title">Something went wrong</string>
+    <string name="upload_data_api_error_message">An error occurred during the operation. Please try again. If the problem persists, we suggest using a mobile network.</string>
+    <string name="upload_data_api_error_action">OK</string>
+    <string name="upload_data_vpn_error_title">Something went wrong</string>
+    <string name="upload_data_vpn_error_message_europe">An error occurred during the operation. Please try again. If you are using a VPN, we suggest that you select a European server or temporarily disable it.</string>
+    <string name="upload_data_vpn_error_action">OK</string>
+    <string name="confirm_data_title">The following data will be uploaded</string>
+    <string name="confirm_data_footer_message">Wait for confirmation from the healthcare operator before uploading your data.</string>
+    <string name="confirm_data_button_title">Upload data</string>
+    <string name="confirm_data_cell_result_title">Test result</string>
+    <string name="confirm_data_cell_proximity_data_title">Your random codes</string>
+    <string name="confirm_data_cell_exposition_data_title">Risk indicators of previous contact with people who have tested positive for COVID-19</string>
+    <string name="confirm_data_cell_province_title">Your province</string>
+    <string name="confirm_data_confirmation_title">Data uploaded successfully</string>
+    <string name="confirm_data_confirmation_subtitle">Thank you for your help</string>
+    <string name="confirm_data_exposure_permission_overlay_hint">Select \'<b>OK</b>\' in the pop-up that appears below</string>
+    <string name="confirm_data_close_verify_alert_title">Are you sure you want to exit?</string>
+    <string name="confirm_data_close_verify_alert_message">Your data hasn\'t been uploaded yet.</string>
+    <string name="confirm_data_close_verify_alert_affermative_answer">Yes, exit</string>
+    <string name="confirm_data_close_verify_alert_negative_answer">Cancel</string>
+    <string name="suggestions_header_short_title_neutral">Instructions for you</string>
+    <string name="suggestions_neutral_alert">If you are in contact with your general practitioner or your local health authority\'s healthcare service, follow all the instructions provided to you.</string>
+    <string name="suggestions_neutral_message">In any case, <b>try to follow these general guidelines at all times:</b></string>
+    <string name="suggestions_risk_title">Risky exposure</string>
+    <string name="suggestions_risk_subtitle">Immuni has detected that you came into close contact with a COVID-19-positive user on %@.</string>
+    <string name="suggestions_positive_title">Follow the instructions</string>
+    <string name="suggestions_positive_subtitle"><b>Follow all the instructions that you have received from your general practitioner or from your local health authority\'s healthcare service.</b></string>
+    <string name="suggestions_instruction_ministerial_decree"><b>Comply with the current regulations in your area.</b></string>
+    <string name="suggestions_instruction_wash_hands"><b>Wash your hands frequently</b> with soap and water or with alcohol hand sanitiser.</string>
+    <string name="suggestions_instruction_use_napkins"><b>Cough and sneeze directly into a tissue or into the crook of your elbow.</b></string>
+    <string name="suggestions_instruction_social_distance"><b>Respect physical distancing measures</b> and avoid gatherings.</string>
+    <string name="suggestions_instruction_mask"><b>Wear a mask in indoor public places.</b> This includes public transport and all situations where it is not possible to ensure that a safe distance is maintained at all times.</string>
+    <string name="suggestions_instruction_follow_instructions">To protect your health and the health of your loved ones, <b>please follow these guidelines:</b></string>
+    <string name="suggestions_instruction_contact_doctor_title"><b>Contact your general practitioner (or primary care paediatrician)</b></string>
+    <string name="suggestions_instruction_contact_doctor_message">Explain to your general practitioner that you have received a COVID-19 close contact notification from Immuni. Follow your general practitioner\'s instructions. Your general practitioner will contact your local health authority\'s healthcare service. Therefore, you should ensure that you remain contactable by your local health authority for health monitoring activities.</string>
+    <string name="suggestions_instruction_hide_if_contact_doctor_message">If you\'re in contact with your general practitioner or local health authority, you can hide this alert.</string>
+    <string name="suggestions_instruction_hide_if_contact_doctor_action">I have contacted my general practitioner</string>
+    <string name="suggestions_instruction_while_waiting_doctor">As a precaution, while you wait for instructions from your general practitioner or local health authority:</string>
+    <string name="suggestions_instruction_stay_home"><b>Stay at home for 14 days</b> after the date of contact.</string>
+    <string name="suggestions_instruction_check_symptoms_title"><b>Measure your body temperature at least twice a day and assess if you are exhibiting symptoms, even mild ones.</b></string>
+    <string name="suggestions_instruction_check_symptoms_message">In particular, fever or at least one of the following: sore throat, cough, cold or blocked nose, breathing difficulty, muscle pain, loss or alteration of sense of smell or taste, diarrhoea.</string>
+    <string name="suggestions_instruction_isolate_title"><b>If you display symptoms, isolate yourself from the people you live with.</b></string>
+    <string name="suggestions_instruction_isolate_message">Wear a surgical mask and immediately contact your general practitioner (or primary care paediatrician) and your local health authority\'s healthcare service.</string>
+    <string name="suggestions_instruction_phone_contact"><b>If you are having difficulty breathing, contact 112/118.</b></string>
+    <string name="suggestions_instruction_hide_alert_message">If necessary, you can hide this alert. Unless you have a valid reason, we strongly advise against doing this.</string>
+    <string name="suggestions_instruction_hide_alert_action">Hide alert</string>
+    <string name="suggestions_alert_asl_contact_confirmation_title">Do you confirm that you are in contact with your general practitioner or local health authority?</string>
+    <string name="suggestions_alert_asl_contact_confirmation_description">Immuni will hide the contact alert. You will still need to follow all the instructions you have received from your general practitioner or local health authority.</string>
+    <string name="suggestions_positive_info_title">Immuni is still working: don\'t uninstall it!</string>
+    <string name="suggestions_positive_info_subtitle">For the time being, you will not receive any new notifications in the event of a risky exposure to a COVID-19-positive user.</string>
+    <string name="suggestions_positive_covid_negative_message"><b>Let us know if your local health authority has confirmed that you are COVID-19 negative, to reactivate risky exposure notifications.</b></string>
+    <string name="suggestions_positive_covid_negative_action">I\'m COVID-19 negative</string>
+    <string name="suggestions_alert_covid_negative_title">Do you confirm that you are COVID-19 negative?</string>
+    <string name="suggestions_alert_covid_negative_description">Your local health authority needs to have confirmed that you have tested negative for the virus and can leave the house again.</string>
+    <string name="suggestions_alert_covid_negative_negative_answer">No</string>
+    <string name="suggestions_alert_covid_negative_positive_answer">I confirm</string>
+    <string name="suggestions_alert_asl_contact_confirmation_negative_answer">No</string>
+    <string name="suggestions_alert_asl_contact_confirmation_positive_answer">Yes</string>
+    <string name="notification_steps_title">To enable notifications</string>
+    <string name="notification_steps_instruction_1">1. Open Settings using the button below</string>
+    <string name="notification_steps_instruction_2">2. Enable the \'Allow notifications\' option</string>
+    <string name="notification_settings_allow">Allow notifications</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="force_update_play_services_title">Update Google Play Services to continue</string>
+    <string name="force_update_play_services_message">A newer version of Google Play Services is required to enable exposure notifications.</string>
+    <string name="force_update_not_available_title">Google Play Services isn\'t ready yet</string>
+    <string name="force_update_not_available_message">Google Play Services is up to date but cannot enable exposure notifications yet. Please try again later.</string>
+    <string name="force_update_gps_not_available_yet_title">Please wait for the Google Play Services update</string>
+    <string name="force_update_gps_not_available_yet_message">The Google Play Services version required to enable exposure notifications is not available yet. Please try again later.</string>
+    <string name="onboarding_exposure_message_extended">Due to an operating system limitation, geolocation services must be turned on to allow the random codes to be exchanged via Bluetooth. <b>Immuni does not access your location, and you can verify this by checking the list of permissions required by the app.</b></string>
+    <string name="suggestions_alert_hide_alert_title">Do you want to hide this warning?</string>
+    <string name="suggestions_alert_hide_alert_description">Unless you have a valid reason, we strongly advise against doing this. It could put your health and the health of those around you at risk.</string>
+    <string name="suggestions_alert_hide_alert_negative_answer">No</string>
+    <string name="suggestions_alert_hide_alert_positive_answer">Yes</string>
+    <string name="next">Next</string>
+    <string name="exit">Exit</string>
+    <string name="cancel">Cancel</string>
+    <string name="retry">Try again</string>
+    <string name="how_it_works_tile_1">Immuni assigns a random code to each phone</string>
+    <string name="how_it_works_tile_2">Phones that come into contact exchange their random codes</string>
+    <string name="how_it_works_tile_3">Users who test positive can choose if they want to share their random codes</string>
+    <string name="how_it_works_tile_4">Each phone checks if it has previously encountered any of the shared codes</string>
+    <string name="how_it_works_tile_5">The user is notified if there is a positive match</string>
+    <string name="exposure_notification_channel">Exposure notifications</string>
+    <string name="onboarding_exposure_api_not_activated">Exposure notifications not enabled</string>
+    <string name="home_protection_not_active">Service\n{inactive}</string>
+    <string name="home_protection_active">Service\n{active}</string>
+    <string name="app_exit_title">Exit</string>
+    <string name="app_exit_message">Are you sure you want to exit?</string>
+    <plurals name="upload_data_verify_loading_button_seconds">
+        <item quantity="one">Wait %d second</item>
+        <item quantity="other">Wait %d seconds</item>
+    </plurals>
+    <plurals name="upload_data_verify_loading_button_minutes">
+        <item quantity="one">Wait %d minute</item>
+        <item quantity="other">Wait %d minutes</item>
+    </plurals>
+    <string name="settings_app_version" formatted="false">Immuni v%s (%d)</string>
+    <string name="upload_data_diagnosis_keys_overlay_hint">Select \'<b>Share</b>\' in the pop-up that appears below</string>
+    <string name="suggestions_instruction_stay_home_message">On indication of the ASL, the quarantine period may be reduced to 10 days in the event of a negative antigen or molecular test performed on the tenth day.</string>
+    <string name="suggestions_instruction_limit_movement"><b>Use a well-ventilated private room, if possible with its own bathroom,</b> and minimise the time you spend in other common areas of the house.</string>
+    <string name="suggestions_instruction_distance"><b>Keep a distance of at least one metre when around other people.</b></string>
+    <string name="suggestions_instruction_mask_title"><b>Always carry a mask with you</b> and wear it in indoor places other than your home.</string>
+    <string name="suggestions_instruction_mask_message">Wear it at home in presence of non-cohabiting people. Also use it outdoors when it is not possible to remain isolated.</string>
+    <string name="upload_data_vpn_error_message">An error occurred during the operation. Please try again. If you are using a VPN, we suggest that you select an Italian server or temporarily disable it.</string>
+    <string name="suggestions_risk_footer">To help the National Health Service take care of you should the need arise, the app has informed the Ministry of Health of the notification you have received. <b>Please note, the Ministry of Health cannot determine your identity based on this information.</b></string>
+    <string name="home_view_service_active_advice">Open Immuni once a day to check its status.</string>
+    <string name="aso_1">Protect yourself and help slow down the epidemic.</string>
+    <string name="aso_2">Immuni does not collect your name, date of birth, address, telephone number, or email address.
 Immuni cannot determine your identity or that of the people you come into contact with.
 Immuni does not collect any geolocation data, including GPS data.
 The data saved on your smartphone and the connections to the server are encrypted.</string>
-  <string name="home_view_service_deactivate">Disable the service</string>
-  <string name="onboarding_pilot_title">Testing in progress</string>
-  <string name="onboarding_pilot_description">During the testing phase, you will only be notified of a high-risk contact with a COVID-19-positive person if this person is assisted by a local health authority in the following regions: Abruzzo, Liguria, Marche, or Puglia.</string>
-  <string name="onboarding_pilot_action">Got it</string>
-  <string name="permission_tutorial_deactivate_service_title">How to disable the service</string>
-  <string name="permission_tutorial_deactivate_service_first_message"><![CDATA[<red>To protect your health and the health of your loved ones, only disable the service if necessary and reactivate it as soon as you can.</red>]]></string>
-  <string name="permission_tutorial_deactivate_service_second_message">In certain cases, it may make sense to temporarily disable the app, such as while at work if you are a healthcare professional in contact with COVID-19 patients.</string>
-  <string name="permission_tutorial_deactivate_service_third_message">If you disable exposure notifications, subsequent contact with other users will not be logged.</string>
-  <string name="permission_tutorial_deactivate_service_fourth_message"><![CDATA[<h3>To disable exposure notifications</h3>]]></string>
-  <string name="permission_tutorial_deactivate_service_fifth_message"><b>1. Open Settings using the button below</b></string>
-  <string name="permission_tutorial_deactivate_service_sixth_message"><b>2. Disable exposure notifications</b></string>
-  <string name="permission_tutorial_deactivate_service_action_cta">Open Settings</string>
-  <string name="suggestions_risk_first_message">The app shows you this warning based on the information available (duration of the contact and approximate estimate of the distance), but it cannot know if both parties were wearing masks or had their backs to each other during the contact. Therefore, the risk of infection could be overestimated.</string>
-  <string name="suggestions_risk_second_message">To help the National Health Service take care of you should the need arise, the app has informed the Ministry of Health of the notification you have received.</string>
-  <string name="suggestions_risk_fourth_message">For more information on the data sent to the Ministry of Health, you can read the {privacy notice}, point 4.</string>
-  <string name="suggestions_risk_third_message"><b>The Ministry of Health cannot determine your identity from this information.</b></string>
-  <string name="suggestions_risk_third_message_android">For more information on the data sent to the Ministry of Health, you can read the {privacy notice}, point 4.</string>
-  <string name="support_email_template">\n\n\n------------------------------
+    <string name="home_view_service_deactivate">Disable the service</string>
+    <string name="onboarding_pilot_title">Testing in progress</string>
+    <string name="onboarding_pilot_description">During the testing phase, you will only be notified of a high-risk contact with a COVID-19-positive person if this person is assisted by a local health authority in the following regions: Abruzzo, Liguria, Marche, or Puglia.</string>
+    <string name="onboarding_pilot_action">Got it</string>
+    <string name="permission_tutorial_deactivate_service_title">How to disable the service</string>
+    <string name="permission_tutorial_deactivate_service_first_message"><![CDATA[<red>To protect your health and the health of your loved ones, only disable the service if necessary and reactivate it as soon as you can.</red>]]></string>
+    <string name="permission_tutorial_deactivate_service_second_message">In certain cases, it may make sense to temporarily disable the app, such as while at work if you are a healthcare professional in contact with COVID-19 patients.</string>
+    <string name="permission_tutorial_deactivate_service_third_message">If you disable exposure notifications, subsequent contact with other users will not be logged.</string>
+    <string name="permission_tutorial_deactivate_service_fourth_message"><![CDATA[<h3>To disable exposure notifications</h3>]]></string>
+    <string name="permission_tutorial_deactivate_service_fifth_message"><b>1. Open Settings using the button below</b></string>
+    <string name="permission_tutorial_deactivate_service_sixth_message"><b>2. Disable exposure notifications</b></string>
+    <string name="permission_tutorial_deactivate_service_action_cta">Open Settings</string>
+    <string name="suggestions_risk_first_message">The app shows you this warning based on the information available (duration of the contact and approximate estimate of the distance), but it cannot know if both parties were wearing masks or had their backs to each other during the contact. Therefore, the risk of infection could be overestimated.</string>
+    <string name="suggestions_risk_second_message">To help the National Health Service take care of you should the need arise, the app has informed the Ministry of Health of the notification you have received.</string>
+    <string name="suggestions_risk_fourth_message">For more information on the data sent to the Ministry of Health, you can read the {privacy notice}, point 4.</string>
+    <string name="suggestions_risk_third_message"><b>The Ministry of Health cannot determine your identity from this information.</b></string>
+    <string name="suggestions_risk_third_message_android">For more information on the data sent to the Ministry of Health, you can read the {privacy notice}, point 4.</string>
+    <string name="support_email_template">\n\n\n------------------------------
 Above the line, describe your queries or issues with the app. If possible, do not delete the text below. It will help the Immuni Support team to better assist you.
 Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; [other useful info, same as the info displayed on the contact support screen]</string>
-  <string name="settings_setting_support">Contact Support</string>
-  <string name="support_title">Need help?</string>
-  <string name="support_faq_description">If you\'re unsure about anything or you\'re having problems using the app, please go to the \'FAQ\' section.</string>
-  <string name="support_faq_action">Read the FAQ</string>
-  <string name="support_contact_support">If you can\'t find the answer you\'re looking for, <b>you can contact the Immuni Support service.</b></string>
-  <string name="support_phone_title">Call the freephone number</string>
-  <string name="support_phone_description" formatted="false">Lines open from %@ to %@.</string>
-  <string name="support_email_title">Send an email</string>
-  <string name="support_email_description">If you choose to contact Support via email, the Customer Service team will be able to see your email address.</string>
-  <string name="support_info_title">Useful information</string>
-  <string name="support_info_item_os">Operating system</string>
-  <string name="support_info_item_device">Model</string>
-  <string name="support_info_item_exposurenotificationenabled">Exposure notifications</string>
-  <string name="support_info_item_bluetoothenabled">Bluetooth</string>
-  <string name="support_info_item_appversion">App version</string>
-  <string name="support_info_item_connectiontype">Connection</string>
-  <string name="permission_tutorial_deactivate_service_first_message_android">To protect your health and the health of your loved ones, only disable the service if necessary and reactivate it as soon as you can.</string>
-  <string name="support_info_active">Active</string>
-  <string name="support_info_not_active">Not active</string>
-  <string name="support_info_active_plural">Active</string>
-  <string name="support_info_not_active_plural">Not Active</string>
-  <string name="support_phone_description_android">Lines open from %1$s to %2$s.</string>
-  <string name="support_info_item_connectiontype_wifi">Wi-Fi</string>
-  <string name="support_info_item_connectiontype_mobile">Mobile</string>
-  <string name="support_info_item_connectiontype_none">None</string>
-  <string name="permission_tutorial_update_os_first"><b>1. Make sure you\'re connected via Wi-Fi.</b> The update cannot be downloaded using mobile data.</string>
-  <string name="permission_tutorial_cant_update_title">Can\'t update?</string>
-  <string name="permission_tutorial_cant_update_first"><b>1. Make sure you\'re connected via Wi-Fi.</b> The update cannot be downloaded using mobile data.</string>
-  <string name="permission_tutorial_cant_update_second"><b>2. Once you\'re connected to Wi-Fi, go back to Settings &gt; General &gt; Software Update.</b></string>
-  <string name="permission_tutorial_cant_update_third"><b>3. Select \'Download and install\'.</b></string>
-  <string name="permission_tutorial_cant_update_fourth"><b>4.</b> After downloading the update, <b>make sure you\'ve installed it by selecting \'Install now\'.</b></string>
-  <string name="force_update_view_os_seconday_button">Can\'t update?</string>
-  <string name="support_email_body_message">Above the line, describe your queries or issues with the app. If possible, do not delete the text below. It will help the Immuni Support team to better assist you.</string>
-  <string name="verify_immuni_works_first"><b>If you see \'Service active\', Immuni is already working properly.</b></string>
-  <string name="verify_immuni_works_second"><b>If there are any problems, you will see \'Service not active\'.</b> Immuni will provide straightforward instructions to get the app working properly again.</string>
-  <string name="verify_immuni_works_third"><b>If you\'re exposed to someone who later tests positive for the virus, Immuni will send you a notification to warn you of the risk of infection.</b> When you open the app, you will receive clear and comprehensive guidance on what to do.</string>
-  <string name="verify_immuni_works_fourth">For technical reasons, <b>some Android smartphone models may stop Immuni from working if the app remains closed for a few days</b>. When this happens, random codes are still exchanged with other devices, but Immuni is not able to verify if you have been exposed to potentially infectious users and warn you if you are at risk. To prevent this from happening, open the app once a day.</string>
-  <string name="localisation_explanation_title">Why location services must be turned on</string>
-  <string name="localisation_explanation_message_first">Immuni uses the exposure notification system developed by Apple, Google and Huawei. Due to an operating system limitation, location services must be turned on to allow background scanning of Bluetooth signals (necessary to exchange random codes and consequently log any contact that occurs).</string>
-  <string name="localisation_explanation_message_second">However, the app does not have access to your location and therefore cannot track your movements. You can easily verify this by checking the list of permissions required by Immuni (available in your phone\'s Settings menu) and noting that authorisation to access your location is not required.</string>
-  <string name="home_view_service_active_discover_more">Find out more</string>
-  <string name="faq_search_bar_placeholder">Search for a question</string>
-  <string name="faq_no_result_title">No topics found</string>
-  <string name="faq_no_result_message">We couldn\'t find any topics that match your search.</string>
-  <string name="settings_setting_load_data">Report a positive result</string>
-  <string name="permission_tutorial_verify_immuni_works_title">How to check that Immuni is working</string>
-  <string name="permission_tutorial_verify_immuni_works_first"><b>If you see \'Service active\', Immuni is already working properly.</b> You don\'t need to do anything else: the app will continue working, even when you close it.</string>
-  <string name="permission_tutorial_verify_immuni_works_second"><b>If there are any problems, you will see \'Service not active\'.</b> Immuni will provide straightforward instructions to get the app working properly again.</string>
-  <string name="permission_tutorial_verify_immuni_works_third"><b>If you come into contact with someone who later tests positive for the virus, Immuni will send you a notification to warn you of the risk of infection.</b> When you open the app, you will receive clear and comprehensive guidance on what to do.</string>
-  <string name="upload_data_warning_discover_more">Find out more</string>
-  <string name="permission_tutorial_how_to_upload_positive_title">How to report a positive result</string>
-  <string name="permission_tutorial_how_to_upload_positive_first">If you test positive for the virus, you can report this to Immuni and upload your random codes. By doing so, you allow the app to warn users with whom you have been in contact over the previous days that there is a risk of infection.</string>
-  <string name="permission_tutorial_how_to_upload_positive_second">The healthcare operator who informs you that your swab has tested positive will assist you by phone. They will ask you for the one-time code displayed on the previous screen, which they will use to give you authorisation to upload your data.</string>
-  <string name="permission_tutorial_how_to_upload_positive_third">These authorization processes prevent users who have not actually tested positive for the virus from uploading their data and causing false alarms. The one-time code and the data uploaded are not associated with your identity in any way.</string>
-  <string name="suggestions_instruction_under_18_message">If you\'re under 18, please have your parents/legal guardian read this message.</string>
-  <string name="privacy_tos_read">By continuing, I declare that I have read and accepted the {terms of use}</string>
-  <string name="privacy_checkbox_read">I have read the {privacy notice}</string>
-  <string name="suggestions_risk_with_date_subtitle">Immuni has detected that you came into close contact with a COVID-19-positive user on %s.</string>
-  <string name="welcome_view_discover_more">Find out how the app works</string>
-  <string name="permission_tutorial_why_province_region_title">Why we ask you to enter your home region and province</string>
-  <string name="permission_tutorial_why_province_region_first"><b>The National Health Service uses your home region and province details to help prevent new outbreaks,</b> as well as to estimate how widely the app is being used across the country. Your home province is sent to the Ministry of Health server along with information on whether the app is functioning properly and whether you have been informed of a high-risk contact. Immuni fully protects your privacy in collecting this information.</string>
-  <string name="permission_tutorial_why_province_region_second">You can change your home region and province at any time from the app\'s settings menu. We advise you to change them only if you decide to move house. In all other cases, including occasional trips, you do not need to do so.</string>
-  <string name="permission_tutorial_why_province_region_third"><b>If you live abroad but intend to travel to Italy, we suggest that you now select the region (and then the province) where you will be staying for the longest during your visit.</b> You can use Immuni even if you are abroad. The app will log your contact with other users as normal. However, you will not be able to upload your random codes if you test positive until you are in Italy.</string>
-  <string name="onboarding_region_abroad_item">I don\'t live in Italy</string>
-  <string name="onboarding_region_abroad_alert_title">Are you sure?</string>
-  <string name="onboarding_region_abroad_alert_message">If you don\'t live in Italy but intend to visit, we suggest that you now select the region (and then the province) where you will be staying for the longest. The same applies if you are already in Italy.</string>
-  <string name="onboarding_region_abroad_alert_cancel">Cancel</string>
-  <string name="onboarding_region_abroad_alert_confirm">Continue</string>
-  <string name="support_info_item_lastencheck">Last verified</string>
-  <string name="settings_setting_share">Share the app</string>
-  <string name="settings_setting_share_message">Help us fight the COVID-19 epidemic together. Download Immuni. https://www.immuni.italia.it/</string>
-  <string name="support_info_item_lastencheck_none">None</string>
-  <string name="support_info_item_lastencheck_date" formatted="false">%@ at %@</string>
-  <string name="support_info_item_lastencheck_date_android">%1$s at %2$s</string>
-  <string name="exposure_check_in_progress">Exposure check in progress</string>
-  <string name="countries_of_interest_description">If you are going to Europe you can select the country/s of Interest, if it has/have already joined interoperability, so that Immuni can connect with the other European contact tracing APP\'s and help to contain the spread of Covid-19 in Europe. You can select up to maximum of 3 countries. Your selection will be valid and unchangeable for the next 14 days.</string>
-  <string name="home_countries_of_interest_title">If you are going to another European country</string>
-  <string name="countries_of_interest_dialog_title">Are you sure you want to proceed?</string>
-  <string name="countries_of_interest_dialog_message">By confirming you will not be able to remove the chosen countries for the next 14 days</string>
-  <string name="countries_of_interest_dialog_positive">Done</string>
-  <string name="countries_of_interest_dialog_negative">Cancel</string>
-  <string name="settings_countries_of_interest">Select European country</string>
-  <string name="countries_of_interest_title">Are you going to one or more of these European countries?</string>
-  <string name="countries_of_interest_limit_dialog_title">Selection limit exceeded</string>
-  <string name="countries_of_interest_limit_dialog_message">You can select up to a maximum of 3 countries. Your selection will be valid and unchangeable for 14 days</string>
-  <string name="home_report_positivity_card_title">Report a positive result</string>
-  <string name="cdum_title_OS">Are you in contact with a healthcare provider?</string>
-  <string name="cdum_description_OS">Follow the procedure to report your being positive</string>
-  <string name="continue_label">Continue</string>
-  <string name="cdum_title_independently">Do you have a CUN code?</string>
-  <string name="cdum_description_independently">You can enter the data directly in the app or by calling the call center at 800.91.24.91</string>
-  <string name="report_positivity_description_independently">This function allows you to report your positivity by directly entering the requested data.</string>
-  <string name="form_report_positivity_title">Unblock freely</string>
-  <string name="call_center_report_positivity_title">Call the Call Center at 800.91.24.91</string>
-  <string name="cun_placeholder">CUN of the report</string>
-  <string name="health_insurance_card_placeholder">The last eight digits of your Health ID Card</string>
-  <string name="symptom_onset_date_placeholder">Initial beginning date of the Symptoms*</string>
-  <string name="symptom_date_hint">*If you are asymptomatic, enter the date of the swab test</string>
-  <string name="or_label">or</string>
-  <string name="button_dialog_confirm">OK</string>
-  <string name="how_to_upload_positive_call_center_title">How to report a positive result</string>
-  <string name="how_to_upload_positive_call_center_first">If you test positive for the virus, you can report this to Immuni and upload your random codes. By doing so, you allow the app to warn users with whom you have been in contact over the previous days that there is a risk of infection.</string>
-  <string name="how_to_upload_positive_call_center_second">The call center operator 800.91.24.91 will assist you by phone. They will ask you for the CUN code, the last 8 digits of the health card, the start date of symptoms and the one-time code displayed on the previous screen, which they will use to give you authorisation to upload your data.</string>
-  <string name="how_to_upload_positive_call_center_third">The CUN code is a unique national alphanumeric code (e.g. CUN-AB1234C567) associated with the molecular swab result. It is communicated to citizens via SMS, email or through the electronic health record.</string>
-  <string name="how_to_upload_positive_call_center_fourth">The health card number is a 20-digit code found on the last line on the back of the health card. Remember that it is important to communicate the exact date  the  symptoms began to initiate accurate contact tracking.</string>
-  <string name="how_to_upload_positive_independently_title">How can I make a report of testing positive</string>
-  <string name="how_to_upload_positive_independently_first">If you test positive for the virus, you can report it independently to Immuni by uploading the CUN code, the last 8 digits of the health card and the beginning date of the symptoms.</string>
-  <string name="how_to_upload_positive_independently_second">By entering this information Immuni will automatically send notifications to other users who have had close contact with you starting two days before the beginning of the symptoms or up to 14 days before the date you took the Swab Test.</string>
-  <string name="how_to_upload_positive_independently_third">The CUN code is a unique national alphanumeric code (e.g. CUN-AB1234C567) associated with the molecular swab result. It is communicated to citizens via SMS, email or through the electronic health record.</string>
-  <string name="how_to_upload_positive_independently_fourth">The health card number is a 20-digit code found on the last line on the back of the health card. Remember that it is important to communicate the exact date  the  symptoms began to initiate accurate contact tracking.</string>
-  <string name="dialog_error_form_title">Error in entering data</string>
-  <string name="cun_form_error">- Enter the last 10 characters of the CUN code that was communicated to you\n</string>
-  <string name="health_insurance_card_form_error">- Enter the last 8 digits you see on the back of your Health ID Card \n</string>
-  <string name="symptom_onset_date_form_error">- Enter the date when your symptoms began\n</string>
-  <string name="call_center_title">Do you have a CUN code?</string>
-  <string name="call_center_description">Once you have received the National Unique Code (CUN) you can report your positivity through the toll-free number 800.91.24.91</string>
-  <string name="cun_already_used">CUN already used</string>
-  <string name="const_cun" translatable="false">CUN-</string>
-  <string name="call_center_number" translatable="false">800.91.24.91</string>
-  <string name="cun_wrong">- Wrong CUN\n</string>
-  <string name="cun_unauthorized">No matches found. Verify that CUN and the last 8 digits of the Health Card are correct.</string>
+    <string name="settings_setting_support">Contact Support</string>
+    <string name="support_title">Need help?</string>
+    <string name="support_faq_description">If you\'re unsure about anything or you\'re having problems using the app, please go to the \'FAQ\' section.</string>
+    <string name="support_faq_action">Read the FAQ</string>
+    <string name="support_contact_support">If you can\'t find the answer you\'re looking for, <b>you can contact the Immuni Support service.</b></string>
+    <string name="support_phone_title">Call the freephone number</string>
+    <string name="support_phone_description" formatted="false">Lines open from %@ to %@.</string>
+    <string name="support_email_title">Send an email</string>
+    <string name="support_email_description">If you choose to contact Support via email, the Customer Service team will be able to see your email address.</string>
+    <string name="support_info_title">Useful information</string>
+    <string name="support_info_item_os">Operating system</string>
+    <string name="support_info_item_device">Model</string>
+    <string name="support_info_item_exposurenotificationenabled">Exposure notifications</string>
+    <string name="support_info_item_bluetoothenabled">Bluetooth</string>
+    <string name="support_info_item_appversion">App version</string>
+    <string name="support_info_item_connectiontype">Connection</string>
+    <string name="permission_tutorial_deactivate_service_first_message_android">To protect your health and the health of your loved ones, only disable the service if necessary and reactivate it as soon as you can.</string>
+    <string name="support_info_active">Active</string>
+    <string name="support_info_not_active">Not active</string>
+    <string name="support_info_active_plural">Active</string>
+    <string name="support_info_not_active_plural">Not Active</string>
+    <string name="support_phone_description_android">Lines open from %1$s to %2$s.</string>
+    <string name="support_info_item_connectiontype_wifi">Wi-Fi</string>
+    <string name="support_info_item_connectiontype_mobile">Mobile</string>
+    <string name="support_info_item_connectiontype_none">None</string>
+    <string name="permission_tutorial_update_os_first"><b>1. Make sure you\'re connected via Wi-Fi.</b> The update cannot be downloaded using mobile data.</string>
+    <string name="permission_tutorial_cant_update_title">Can\'t update?</string>
+    <string name="permission_tutorial_cant_update_first"><b>1. Make sure you\'re connected via Wi-Fi.</b> The update cannot be downloaded using mobile data.</string>
+    <string name="permission_tutorial_cant_update_second"><b>2. Once you\'re connected to Wi-Fi, go back to Settings &gt; General &gt; Software Update.</b></string>
+    <string name="permission_tutorial_cant_update_third"><b>3. Select \'Download and install\'.</b></string>
+    <string name="permission_tutorial_cant_update_fourth"><b>4.</b> After downloading the update, <b>make sure you\'ve installed it by selecting \'Install now\'.</b></string>
+    <string name="force_update_view_os_seconday_button">Can\'t update?</string>
+    <string name="support_email_body_message">Above the line, describe your queries or issues with the app. If possible, do not delete the text below. It will help the Immuni Support team to better assist you.</string>
+    <string name="verify_immuni_works_first"><b>If you see \'Service active\', Immuni is already working properly.</b></string>
+    <string name="verify_immuni_works_second"><b>If there are any problems, you will see \'Service not active\'.</b> Immuni will provide straightforward instructions to get the app working properly again.</string>
+    <string name="verify_immuni_works_third"><b>If you\'re exposed to someone who later tests positive for the virus, Immuni will send you a notification to warn you of the risk of infection.</b> When you open the app, you will receive clear and comprehensive guidance on what to do.</string>
+    <string name="verify_immuni_works_fourth">For technical reasons, <b>some Android smartphone models may stop Immuni from working if the app remains closed for a few days</b>. When this happens, random codes are still exchanged with other devices, but Immuni is not able to verify if you have been exposed to potentially infectious users and warn you if you are at risk. To prevent this from happening, open the app once a day. Google is working with the manufacturers of these models to solve the problem.</string>
+    <string name="localisation_explanation_title">Why location services must be turned on</string>
+    <string name="localisation_explanation_message_first">Immuni uses the exposure notification system developed by Apple, Google and Huawei. Due to an operating system limitation, location services must be turned on to allow background scanning of Bluetooth signals (necessary to exchange random codes and consequently log any contact that occurs).</string>
+    <string name="localisation_explanation_message_second">However, the app does not have access to your location and therefore cannot track your movements. You can easily verify this by checking the list of permissions required by Immuni (available in your phone\'s Settings menu) and noting that authorisation to access your location is not required.</string>
+    <string name="home_view_service_active_discover_more">Find out more</string>
+    <string name="faq_search_bar_placeholder">Search for a question</string>
+    <string name="faq_no_result_title">No topics found</string>
+    <string name="faq_no_result_message">We couldn\'t find any topics that match your search.</string>
+    <string name="settings_setting_load_data">Report a positive result</string>
+    <string name="permission_tutorial_verify_immuni_works_title">How to check that Immuni is working</string>
+    <string name="permission_tutorial_verify_immuni_works_first"><b>If you see \'Service active\', Immuni is already working properly.</b> You don\'t need to do anything else: the app will continue working, even when you close it.</string>
+    <string name="permission_tutorial_verify_immuni_works_second"><b>If there are any problems, you will see \'Service not active\'.</b> Immuni will provide straightforward instructions to get the app working properly again.</string>
+    <string name="permission_tutorial_verify_immuni_works_third"><b>If you come into contact with someone who later tests positive for the virus, Immuni will send you a notification to warn you of the risk of infection.</b> When you open the app, you will receive clear and comprehensive guidance on what to do.</string>
+    <string name="upload_data_warning_discover_more">Find out more</string>
+    <string name="permission_tutorial_how_to_upload_positive_title">How to report a positive result</string>
+    <string name="permission_tutorial_how_to_upload_positive_first">If you test positive for the virus, you can report this to Immuni and upload your random codes. By doing so, you allow the app to warn users with whom you have been in contact over the previous days that there is a risk of infection.</string>
+    <string name="permission_tutorial_how_to_upload_positive_second">The healthcare operator who informs you that your swab has tested positive will assist you by phone. They will ask you for the one-time code displayed on the previous screen, which they will use to give you authorisation to upload your data.</string>
+    <string name="permission_tutorial_how_to_upload_positive_third">These authorization processes prevent users who have not actually tested positive for the virus from uploading their data and causing false alarms. The one-time code and the data uploaded are not associated with your identity in any way.</string>
+    <string name="suggestions_instruction_under_18_message">If you\'re under 18, please have your parents/legal guardian read this message.</string>
+    <string name="privacy_tos_read">By continuing, I declare that I have read and accepted the {terms of use}</string>
+    <string name="privacy_checkbox_read">I have read the {privacy notice}</string>
+    <string name="suggestions_risk_with_date_subtitle">Immuni has detected that you came into close contact with a COVID-19-positive user on %s.</string>
+    <string name="welcome_view_discover_more">Find out how the app works</string>
+    <string name="permission_tutorial_why_province_region_title">Why we ask you to enter your home region and province</string>
+    <string name="permission_tutorial_why_province_region_first"><b>The National Health Service uses your home region and province details to help prevent new outbreaks,</b> as well as to estimate how widely the app is being used across the country. Your home province is sent to the Ministry of Health server along with information on whether the app is functioning properly and whether you have been informed of a high-risk contact. Immuni fully protects your privacy in collecting this information.</string>
+    <string name="permission_tutorial_why_province_region_second">You can change your home region and province at any time from the app\'s settings menu. We advise you to change them only if you decide to move house. In all other cases, including occasional trips, you do not need to do so.</string>
+    <string name="permission_tutorial_why_province_region_third"><b>If you live abroad but intend to travel to Italy, we suggest that you now select the region (and then the province) where you will be staying for the longest during your visit.</b> You can use Immuni even if you are abroad. The app will log your contact with other users as normal. However, you will not be able to upload your random codes if you test positive until you are in Italy.</string>
+    <string name="onboarding_region_abroad_item">I don\'t live in Italy</string>
+    <string name="onboarding_region_abroad_alert_title">Are you sure?</string>
+    <string name="onboarding_region_abroad_alert_message">If you don\'t live in Italy but intend to visit, we suggest that you now select the region (and then the province) where you will be staying for the longest. The same applies if you are already in Italy.</string>
+    <string name="onboarding_region_abroad_alert_cancel">Cancel</string>
+    <string name="onboarding_region_abroad_alert_confirm">Continue</string>
+    <string name="support_info_item_lastencheck">Last verified</string>
+    <string name="settings_setting_share">Share the app</string>
+    <string name="settings_setting_share_message">Help us fight the COVID-19 epidemic together. Download Immuni. https://www.immuni.italia.it/</string>
+    <string name="support_info_item_lastencheck_none">None</string>
+    <string name="support_info_item_lastencheck_date" formatted="false">%@ at %@</string>
+    <string name="support_info_item_lastencheck_date_android">%1$s at %2$s</string>
+    <string name="exposure_check_in_progress">Exposure check in progress</string>
+    <string name="countries_of_interest_description">If you are going to Europe you can select the country/s of Interest, if it has/have already joined interoperability, so that Immuni can connect with the other European contact tracing APP\'s and help to contain the spread of Covid-19 in Europe. You can select up to maximum of 3 countries. Your selection will be valid and unchangeable for the next 14 days.</string>
+    <string name="home_countries_of_interest_title">If you are going to another European country</string>
+    <string name="countries_of_interest_dialog_title">Are you sure you want to proceed?</string>
+    <string name="countries_of_interest_dialog_message">By confirming you will not be able to remove the chosen countries for the next 14 days</string>
+    <string name="countries_of_interest_dialog_positive">Done</string>
+    <string name="countries_of_interest_dialog_negative">Cancel</string>
+    <string name="settings_countries_of_interest">Select European country</string>
+    <string name="countries_of_interest_title">Are you going to one or more of these European countries?</string>
+    <string name="countries_of_interest_limit_dialog_title">Selection limit exceeded</string>
+    <string name="countries_of_interest_limit_dialog_message">You can select up to a maximum of 3 countries. Your selection will be valid and unchangeable for 14 days</string>
+    <string name="home_report_positivity_card_title">Report a positive result</string>
+    <string name="cdum_title_OS">Are you in contact with a healthcare provider?</string>
+    <string name="cdum_description_OS">Follow the procedure to report your being positive</string>
+    <string name="continue_label">Continue</string>
+    <string name="cdum_title_independently">Do you have a CUN code?</string>
+    <string name="cdum_description_independently">You can enter the data directly in the app or by calling the call center at 800.91.24.91</string>
+    <string name="report_positivity_description_independently">This function allows you to report your positivity by directly entering the requested data.</string>
+    <string name="form_report_positivity_title">Unblock freely</string>
+    <string name="call_center_report_positivity_title">Call the Call Center at 800.91.24.91</string>
+    <string name="cun_placeholder">CUN of the positive swab</string>
+    <string name="health_insurance_card_placeholder">The last eight digits of your Health ID Card</string>
+    <string name="symptom_onset_date_placeholder">Initial beginning date of the Symptoms</string>
+    <string name="symptom_date_hint">No symptoms</string>
+    <string name="or_label">or</string>
+    <string name="button_dialog_confirm">OK</string>
+    <string name="how_to_upload_positive_call_center_title">How to report a positive result</string>
+    <string name="how_to_upload_positive_call_center_first">If you test positive for the virus, you can report this to Immuni and upload your random codes. By doing so, you allow the app to warn users with whom you have been in contact over the previous days that there is a risk of infection.</string>
+    <string name="how_to_upload_positive_call_center_second">The call center operator 800.91.24.91 will assist you by phone. They will ask you for the CUN code, the last 8 digits of the health card, the start date of symptoms and the one-time code displayed on the previous screen, which they will use to give you authorisation to upload your data.</string>
+    <string name="how_to_upload_positive_call_center_third">The CUN code is a unique national alphanumeric code (e.g. CUN-AB1234C567) associated with the molecular swab result. It is communicated to citizens via SMS, email or through the electronic health record.</string>
+    <string name="how_to_upload_positive_call_center_fourth">The health card number is a 20-digit code found on the last line on the back of the health card. Remember that it is important to communicate the exact date  the  symptoms began to initiate accurate contact tracking.</string>
+    <string name="how_to_upload_positive_independently_title">How can I make a report of testing positive</string>
+    <string name="how_to_upload_positive_independently_first">If you test positive for the virus, you can report it independently to Immuni by uploading the CUN code, the last 8 digits of the health card and the beginning date of the symptoms.</string>
+    <string name="how_to_upload_positive_independently_second">By entering this information Immuni will automatically send notifications to other users who have had close contact with you starting two days before the beginning of the symptoms or up to 14 days before the date you took the Swab Test.</string>
+    <string name="how_to_upload_positive_independently_third">The CUN code is a unique national alphanumeric code (e.g. CUN-AB1234C567) associated with the molecular swab result. It is communicated to citizens via SMS, email or through the electronic health record.</string>
+    <string name="how_to_upload_positive_independently_fourth">The health card number is a 20-digit code found on the last line on the back of the health card. Remember that it is important to communicate the exact date  the  symptoms began to initiate accurate contact tracking.</string>
+    <string name="dialog_error_form_title">Error in entering data</string>
+    <string name="cun_form_error">- Enter the last 10 characters of the CUN code that was communicated to you\n</string>
+    <string name="health_insurance_card_form_error">- The health card number entered is not formally valid. Make sure you have entered the last 8 digits of your Health Card associated with a positive swab\n</string>
+    <string name="symptom_onset_date_form_error">- Enter the date when your symptoms began, if you are symptomatic or check the box if you have no symptoms\n</string>
+    <string name="call_center_title">Do you have a CUN code?</string>
+    <string name="call_center_description">Once you have received the National Unique Code (CUN) you can report your positivity through the toll-free number 800.91.24.91</string>
+    <string name="cun_already_used">CUN already used</string>
+    <string name="const_cun" translatable="false">CUN-</string>
+    <string name="call_center_number" translatable="false">800.91.24.91</string>
+    <string name="cun_wrong">- The entered CUN is not formally valid. Make sure you have entered the last 10 digits of the CUN you received by SMS or in the report associated with a positive swab\n</string>
+    <string name="cun_unauthorized">Attention. Invalid CUN. Make sure you have entered the last 10 digits of the CUN you received by SMS or in the report associated with a positive swab</string>
+    <string name="warning_title_modal">Attention</string>
+    <string name="warning_message_modal">It is important to communicate the exact symptom onset date to initiate accurate contact tracking. Select \"no symptoms\" only in case of complete absence of symptoms or the appearance of symptoms after the swab.</string>
+    <string name="home_what_do_you_want_today">What do you want to do today?</string>
+    <string name="home_green_certificate_title">EU Digital Covid Certificate</string>
+    <string name="green_pass_title">EU Digital Covid Certificate</string>
+    <string name="green_pass_no_certificate_available">The EU Digital Covid Certificate has not yet been recovered</string>
+    <string name="green_pass_button_generate">Retrieve EU Digital Covid Certificate</string>
+    <string name="green_pass_generate_title">Retrieve EU Digital Covid Certificate</string>
+    <string name="green_pass_generate_description">This function allows you to download the COVID-19 green certification (EU Digital Covid Certificate) from the national platform-DGC of the Ministry of Health by entering the required data.</string>
+    <string name="green_pass_code_hint" translatable="false">NRFE/CUN/NUCG/AUTHCODE</string>
+    <string name="green_pass_health_insurance_hint">The last eight digits of your Health ID Card</string>
+    <string name="green_pass_expired_date_hs_hint">Health Card expiry date</string>
+    <string name="green_pass_confirm_button">Done</string>
+    <string name="green_pass_how_to_generate_title">How to acquire the EU Digital Covid Certificate</string>
+    <string name="green_pass_how_to_generate_first">The \"EU Digital Covid Certificate\", in Italy \"COVID-19 green certification\", is issued by the Ministry of Health in digital format to those who have been vaccinated or have obtained a negative result on the molecular / antigen test or are cured of COVID- 19.</string>
+    <string name="green_pass_how_to_generate_second">The certificate has a two-dimensional barcode (QR code) that contains the essential information of the holder of the certificate and the health event to which the certificate is associated (vaccination, negative test, COVID-19 cure) and digitally signed to guarantee authenticity.</string>
+    <string name="green_pass_how_to_generate_third">If you have received the code to recover the certification via email or SMS, you can use this App by entering one of the unique codes CUN, NRFE, NUCG (received respectively during the execution of the molecular swab or the execution of the antigenic swab or the preparation of the healing certificate ), or the AUTHCODE authorization code received via e-mail or SMS together with the last 8 digits of the identification number and the expiry date of the Health Card.</string>
+    <string name="green_pass_how_to_generate_fourth">All these codes are uniquely associated with the COVID-19 green certificate relating to the health event that generated it.</string>
+    <string name="green_pass_how_to_generate_sixth">For more information visit the website www.dgc.gov.it</string>
+    <string name="green_pass_how_to_generate_link" translatable="false">www.dgc.gov.it</string>
+    <string name="green_pass_generation_successfully">EU Digital Covid Certificate successfully recovered</string>
+    <string name="green_pass_select_type_token">Select type</string>
+    <string-array name="type_token">
+        <item>AUTHCODE</item>
+        <item>NRFE</item>
+        <item>CUN</item>
+        <item>NUCG</item>
+    </string-array>
+    <string name="const_nrfe" translatable="false">NRFE-</string>
+    <string name="const_nucg" translatable="false">NUCG-</string>
+    <string name="const_authcode" translatable="false">AUTHCODE-</string>
+    <string name="form_code_cun_empty">- Enter the last 10 characters of the CUN code that was communicated to you\n</string>
+    <string name="form_code_nrfe_empty">- Enter the last 17 characters of the NRFE code that was communicated to you\n</string>
+    <string name="form_code_nucg_empty">- Enter the last 10 characters of the NUCG code that was communicated to you\n</string>
+    <string name="form_code_otp_empty">- Enter the last 12 characters of the AUTHCODE that was communicated to you\n</string>
+    <string name="form_code_cun_wrong">- The entered CUN is not formally valid. Make sure you have entered the last 10 digits of the CUN you received by SMS or in the report associated with a positive swab\n</string>
+    <string name="form_code_nrfe_wrong">- The entered NRFE code is not formally valid. Make sure you have entered the last 17 digits of the NRFE code you received\n</string>
+    <string name="form_code_nucg_wrong">- The entered NUCG code is not formally valid. Make sure you have entered the last 10 digits of the NUCG code you received\n</string>
+    <string name="form_code_otp_wrong">- The AUTHCODE entered is not formally valid. Make sure you have entered the last 12 digits of the AUTHCODE you received\n</string>
+    <string name="form_type_code_empty">- Select the type of code\n</string>
+    <string name="form_expired_health_date">- Enter the expiration date of the health card\n</string>
+    <string name="code_placeholder">Enter the code</string>
+    <string name="cun_title" translatable="false">CUN</string>
+    <string name="nrfe_title" translatable="false">NRFE</string>
+    <string name="nucg_title" translatable="false">NUCG</string>
+    <string name="authcode_title" translatable="false">AUTHCODE</string>
+    <string name="title_modal_confirm_delete_dcg">Delete EU Digital Covid Certificate</string>
+    <string name="message_modal_confirm_delete_dcg">Are you sure you want to delete your EU Digital Covid Certificate?</string>
+    <string name="form_type_code_label">Type of Code</string>
+    <string name="form_code_label">Code</string>
+    <string name="form_health_id_placeholder">Health insurance card</string>
+    <string name="form_expired_date_healt_id_label">Health Card expiry date</string>
+    <string name="form_expired_date_placeholder">Expiry date</string>
+    <string name="form_symptoms_date_placeholder">Date</string>
+    <string name="get_dgc_loading">EU Digital Covid Certificate recovery in progress..</string>
+    <string name="green_certificate_tab_swipe">Swipe to view other certificates</string>
+    <string name="green_certificate_tab_surname_name_label" translatable="false">Surname(s) and forename(s)</string>
+    <string name="green_certificate_tab_surname_name">Cognome e nome</string>
+    <string name="green_certificate_tab_birth_date_label" translatable="false">Date of birth (yyyy-mm-dd)</string>
+    <string name="green_certificate_tab_birth_date">Data di nascita</string>
+    <string name="green_certificate_tab_certificate_id_label" translatable="false">Unique certificate identifier</string>
+    <string name="green_certificate_tab_certificate_id">Identificativo univoco del certificato</string>
+    <string name="green_certificate_tab_more_details">More details</string>
+    <string name="green_certificate_tab_download" translatable="false">Scarica</string>
+    <string name="green_certificate_tab_delete">Delete</string>
+    <string name="green_pass_more_details_title">EU Digital Covid Certificate</string>
+    <string name="green_certificate_more_details_last_description">This certificate is not a travel document. The scientific evidence on COVID-19 vaccination, testing and recovery continues to evolve, including in consideration of the new variants of the virus. Before traveling, please check the public health measures applied in the place of destination and the related restrictions also by consulting the website:</string>
+    <string name="green_certificate_more_details_europe_restriction_url" translatable="false">https://reopen.europa.eu</string>
+    <string name="green_certificate_more_details_doses_number_text">%s of %s</string>
+    <string name="permission_go_to_settings" translatable="false">Vai a Impostazioni</string>
+    <string name="permission_needed_permission_message" translatable="false">E\' necessario attivare i permessi di scrittura per poter scaricare l\'EU Digital Covid Certificate.</string>
+    <string name="permission_need_permission_title" translatable="false">Permesso richiesto</string>
+    <string name="green_certificate_disease_label" translatable="false">Disease or agent targeted</string>
+    <string name="green_certificate_disease">Malattia o agente bersaglio</string>
+    <string name="green_certificate_disease_recovery_label" translatable="false">Disease or agent the citizen has recovered from</string>
+    <string name="green_certificate_disease_recovery">Malattia o agente bersaglio da cui la persona è guarita</string>
+    <string name="green_certificate_disease_text" translatable="false">Covid-19</string>
+    <string name="green_certificate_certificate_issuer_label" translatable="false">Certificate issuer</string>
+    <string name="green_certificate_certificate_issuer">Soggetto che ha rilasciato la certificazione</string>
+    <string name="green_certificate_certificate_issuer_vaccination">Soggetto che ha rilasciato la certificazione</string>
+    <string name="green_certificate_vaccine_type_label" translatable="false">Vaccine/prophylaxis</string>
+    <string name="green_certificate_vaccine_type">Tipo di vaccino somministrato</string>
+    <string name="green_certificate_vaccine_medicinal_product_label" translatable="false">Vaccine medicinal product</string>
+    <string name="green_certificate_vaccine_medicinal_product">Denominazione del vaccino</string>
+    <string name="green_certificate_producer_vaccine_label" translatable="false">Vaccine marketing authorisation holder or manufacturer</string>
+    <string name="green_certificate_producer_vaccine">Produttore o titolare dell\'AIC del vaccino</string>
+    <string name="green_certificate_dose_number_label" translatable="false">Number in a series of vaccinations/doses and the overall</string>
+    <string name="green_certificate_dose_number">Numero della dose effettuata/numero totale dosi previste</string>
+    <string name="green_certificate_date_of_vaccination_label" translatable="false">Date of vaccination (yyyy-mm-dd)</string>
+    <string name="green_certificate_date_of_vaccination">Data dell\'ultima somministrazione</string>
+    <string name="green_certificate_country_of_vaccination_label" translatable="false">State of vaccination</string>
+    <string name="green_certificate_country_of_vaccination">Stato in cui è stata eseguita la vaccinazione</string>
+    <string name="green_certificate_date_of_first_positive_label" translatable="false">Date of first positive NAAT test result (yyyy-mm-dd)</string>
+    <string name="green_certificate_date_of_first_positive">Data del primo test molecolare positivo</string>
+    <string name="green_certificate_certificate_valid_from_label" translatable="false">Certificate valid from (yyyy-mm-dd)</string>
+    <string name="green_certificate_certificate_valid_from">Certificazione valida dal</string>
+    <string name="green_certificate_certificate_valid_until_label" translatable="false">Certificate valid until (yyyy-mm-dd)</string>
+    <string name="green_certificate_certificate_valid_until">Certificazione valida fino al</string>
+    <string name="green_certificate_type_test_label" translatable="false">Type of test</string>
+    <string name="green_certificate_type_test">Tipo di test</string>
+    <string name="green_certificate_test_result_label" translatable="false">Result of the test</string>
+    <string name="green_certificate_test_result">Risultato del test</string>
+    <string name="green_certificate_rat_test_label" translatable="false">RAT test name and manufacturer</string>
+    <string name="green_certificate_rat_test">Nome del test antigienico e nome del produttore</string>
+    <string name="green_certificate_naa_test_label" translatable="false">NAA test name</string>
+    <string name="green_certificate_naa_test">Nome del test molecolare</string>
+    <string name="green_certificate_date_time_sc_label" translatable="false">Date and time of the test sample collection</string>
+    <string name="green_certificate_date_time_sc">Data e ora del prelievo del campione</string>
+    <string name="green_certificate_testing_centre_label" translatable="false">Testing centre or facility</string>
+    <string name="green_certificate_testing_centre">Centro o struttura in cui è stato eseguito il test</string>
+    <string name="green_certificate_country_test_label" translatable="false">State of test</string>
+    <string name="green_certificate_country_test">Stato in cui è stato eseguito il test</string>
+    <string name="green_certificate_country_recovery">Stato in cui è stato eseguito primo test molecolare positivo</string>
+    <string name="green_certificate_subHeading_vaccine">Vaccination certificate</string>
+    <string name="green_certificate_subHeading_test">Test certificate</string>
+    <string name="green_certificate_subHeading_recovery">Recovery certificate</string>
+    <string name="green_certificate_validity_dgc_label" translatable="false">Validity of the EU Digital Covid Certificate</string>
+    <string name="green_certificate_validity_dgc">Validità dell\'EU Digital Covid Certificate</string>
+    <string name="green_certificate_validity_vaccine_partial">Certification valid until next dose</string>
+    <string name="green_certificate_validity_vaccine_complete">Certification valid for 270 days (9 months) from the date of the last administration</string>
+    <string name="green_certificate_validity_test">Certification valid for 48 hours from the time of collection</string>
+    <string name="green_certificate_no_dcc_found">No EU Digital Covid Certificate found</string>
+    <string name="green_certificate_certificate_issuer_const" translatable="false">Ministero della Salute</string>
+    <string name="green_certificate_rapid_test_label" translatable="false">Test antigenico rapido</string>
+    <string name="green_certificate_molecolar_test_label" translatable="false">Test molecolare</string>
+    <string name="green_certificate_negative_label" translatable="false">Negativo</string>
+    <string name="green_certificate_positive_label" translatable="false">Positivo</string>
+    <string name="green_certificate_mrna_vaccine_label" translatable="false">SARS-CoV-2 mRNA vaccine</string>
+    <string name="green_certificate_antigen_vaccine_label" translatable="false">SARS-CoV-2 antigen vaccine</string>
+    <string name="green_certificate_covid19_vaccine_label" translatable="false">covid-19 vaccines</string>
+    <string name="green_certificate_astrazeneca" translatable="false">AstraZeneca AB</string>
+    <string name="green_certificate_biontech" translatable="false">Biontech Manufacturing GmbH</string>
+    <string name="green_certificate_janssen" translatable="false">Janssen-Cilag International</string>
+    <string name="green_certificate_moderna" translatable="false">Moderna Biotech Spain S.L.</string>
+    <string name="green_certificate_curevac_ag" translatable="false">Curevac AG</string>
+    <string name="green_certificate_cansino" translatable="false">CanSino Biologics</string>
+    <string name="green_certificate_china_sinopharm" translatable="false">China Sinopharm International Corp. - Beijing location</string>
+    <string name="green_certificate_sinopharm_weigida" translatable="false">Sinopharm Weiqida Europe Pharmaceutical s.r.o. - Prague location</string>
+    <string name="green_certificate_sinopharm_zhijun" translatable="false">Sinopharm Zhijun (Shenzhen) Pharmaceutical Co. Ltd. - Shenzhen location</string>
+    <string name="green_certificate_novavax_cz" translatable="false">Novavax CZ AS</string>
+    <string name="green_certificate_gamaleya" translatable="false">Gamaleya Research Institute</string>
+    <string name="green_certificate_vector_institute" translatable="false">Vector Institute</string>
+    <string name="green_certificate_sinovac" translatable="false">Sinovac Biotech</string>
+    <string name="green_certificate_bharat" translatable="false">Bharat Biotech</string>
+    <string name="green_certificate_vac_comirnaty" translatable="false">Comirnaty</string>
+    <string name="green_certificate_vac_moderna" translatable="false">COVID-19 Vaccine Moderna</string>
+    <string name="green_certificate_vac_vaxzevria" translatable="false">Vaxzevria</string>
+    <string name="green_certificate_vac_janssen" translatable="false">COVID-19 Vaccine Janssen</string>
+    <string name="green_certificate_vac_cvncov" translatable="false">CVnCoV</string>
+    <string name="green_certificate_vac_sputnik_v" translatable="false">Sputnik-V</string>
+    <string name="green_certificate_vac_convidecia" translatable="false">Convidecia</string>
+    <string name="green_certificate_vac_epi_vac_corona" translatable="false">EpiVacCorona</string>
+    <string name="green_certificate_vac_bbibp_corv" translatable="false">BBIBP-CorV</string>
+    <string name="green_certificate_vac_vero_cell" translatable="false">Inactivated SARS-CoV-2 (Vero Cell)</string>
+    <string name="green_certificate_vac_corona_vac" translatable="false">CoronaVac</string>
+    <string name="green_certificate_vac_covaxin" translatable="false">Covaxin (also known as BBV152 A, B, C)</string>
+    <string name="green_pass_how_to_generate_fiveth">The green COVID–19 certification is shown on the smartphone screen so that it can be viewed and shown on request, in case of verification, even in offline mode. The \"Delete\" button allows you to delete your certificate from your smartphone independently at any time.</string>
+
 </resources>
