@@ -61,7 +61,9 @@ data class ConfigurationSettings(
     @field:Json(name = "operational_info_with_exposure_sampling_rate") val operationalInfoWithExposureSamplingRate: Double,
     @field:Json(name = "operational_info_without_exposure_sampling_rate") val operationalInfoWithoutExposureSamplingRate: Double,
     @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int,
-    @field:Json(name = "countries") val countries: Map<String, Map<String, String>>
+    @field:Json(name = "countries") val countries: Map<String, Map<String, String>>,
+    @field:Json(name = "eudcc_expiration") val eudcc_expiration: Map<String, Map<String, String>>
+
 )
 
 @JsonClass(generateAdapter = true)
@@ -182,6 +184,40 @@ private fun countriesMap(): Map<String, Map<String, String>> {
     )
 }
 
+private fun eudccMap(): Map<String, Map<String, String>> {
+    return mapOf(
+        "it" to mapOf(
+            "molecular_test" to "Certificazione valida 72 ore dall'ora del prelievo",
+            "rapid_test" to "Certificazione valida 48 ore dall'ora del prelievo",
+            "vaccine_first_dose" to "Certificazione valida fino alla prossima dose",
+            "vaccine_fully_completed" to "Certificazione valida 365 giorni (12 mesi) dalla data dell'ultima somministrazione"
+        ),
+        "de" to mapOf(
+            "molecular_test" to "Bescheinigung gültig für 72 Stunden ab dem Zeitpunkt der Abholung",
+            "rapid_test" to "Bescheinigung gültig für 48 Stunden ab dem Zeitpunkt der Abholung",
+            "vaccine_first_dose" to "Zertifizierung gültig bis zur nächsten Dosis",
+            "vaccine_fully_completed" to "Zertifizierung gültig für 365 Tage (12 Monate) ab dem Datum der letzten Verabreichung"
+        ),
+        "en" to mapOf(
+            "molecular_test" to "Certification valid for 72 hours from the time of collection",
+            "rapid_test" to "Certification valid for 48 hours from the time of collection",
+            "vaccine_first_dose" to "Certification valid until next dose",
+            "vaccine_fully_completed" to "Certification valid for 365 days (12 months) from the date of the last administration"
+        ),
+        "es" to mapOf(
+            "molecular_test" to "Certificación válida por 72 horas desde el momento de la recogida.",
+            "rapid_test" to "Certificación válida por 48 horas desde el momento de la recogida.",
+            "vaccine_first_dose" to "Certificación válida hasta la próxima dosis",
+            "vaccine_fully_completed" to "Certificación válida por 365 días (12 meses) a partir de la fecha de la última administración."
+        ),
+        "fr" to mapOf(
+            "molecular_test" to "Attestation valable 72h à compter de la collecte",
+            "rapid_test" to "Attestation valable 48h à compter de la collecte",
+            "vaccine_first_dose" to "Certification valable jusqu'à la prochaine dose",
+            "vaccine_fully_completed" to "Certification valable 365 jours (12 mois) à compter de la date de la dernière administration"
+        )
+    )
+}
 val defaultSettings = ConfigurationSettings(
     minimumBuildVersion = 0,
     faqUrls = languageMap { "https://get.immuni.gov.it/docs/faq-${it.code}.json" },
@@ -217,5 +253,6 @@ val defaultSettings = ConfigurationSettings(
     operationalInfoWithExposureSamplingRate = 1.0,
     operationalInfoWithoutExposureSamplingRate = 0.6,
     dummyAnalyticsWaitingTime = 2_592_000,
-    countries = countriesMap()
+    countries = countriesMap(),
+    eudcc_expiration = eudccMap()
 )
