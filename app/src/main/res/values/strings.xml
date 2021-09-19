@@ -535,8 +535,9 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_validity_dgc_label" translatable="false">Validity of the EU Digital Covid Certificate</string>
     <string name="green_certificate_validity_dgc">Validità dell\'EU Digital Covid Certificate</string>
     <string name="green_certificate_validity_vaccine_partial">Certification valid until next dose</string>
-    <string name="green_certificate_validity_vaccine_complete">Certification valid for 270 days (9 months) from the date of the last administration</string>
-    <string name="green_certificate_validity_test">Certification valid for 48 hours from the time of collection</string>
+    <string name="green_certificate_validity_vaccine_complete">Certification valid for 365 days (12 months) from the date of the last administration</string>
+    <string name="green_certificate_validity_Quicktest">Certification valid for 48 hours from the time of collection</string>
+    <string name="green_certificate_validity_Moleculartest">Certification valid for 72 hours from the time of collection</string>
     <string name="green_certificate_no_dcc_found">No EU Digital Covid Certificate found</string>
     <string name="green_certificate_certificate_issuer_const" translatable="false">Ministero della Salute</string>
     <string name="green_certificate_rapid_test_label" translatable="false">Test antigenico rapido</string>

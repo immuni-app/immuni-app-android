@@ -493,8 +493,9 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_certificate_subHeading_recovery">Certificato di guarigione</string>
   <string name="green_certificate_validity_dgc">Validità dell\'EU Digital Covid Certificate</string>
   <string name="green_certificate_validity_vaccine_partial">Certificazione valida fino alla prossima dose</string>
-  <string name="green_certificate_validity_vaccine_complete">Certificazione valida 270 giorni (9 mesi) dalla data dell\'ultima somministrazione</string>
-  <string name="green_certificate_validity_test">Certificazione valida 48 ore dall\'ora del prelievo</string>
+  <string name="green_certificate_validity_vaccine_complete">Certificazione valida 365 giorni (12 mesi) dalla data dell\'ultima somministrazione</string>
+  <string name="green_certificate_validity_Quicktest">Certificazione valida 48 ore dall\'ora del prelievo</string>
+  <string name="green_certificate_validity_Moleculartest">Certificazione valida 72 ore dall\'ora del prelievo</string>
   <string name="green_certificate_no_dcc_found">Nessun EU Digital Covid Certificate trovato</string>
   <string name="green_pass_confirm_button">Conferma</string>
   <string name="green_certificate_more_details_doses_number_text">%s di %s</string>
