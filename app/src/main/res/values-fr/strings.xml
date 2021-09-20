@@ -492,8 +492,9 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="green_certificate_subHeading_recovery">Certificat de guérison</string>
   <string name="green_certificate_validity_dgc">Validité du EU Digital Covid Certificate</string>
   <string name="green_certificate_validity_vaccine_partial">Certification valable jusqu\'à la prochaine dose</string>
-  <string name="green_certificate_validity_vaccine_complete">Certification valable 270 jours (9 mois) à compter de la date de la dernière administration</string>
-  <string name="green_certificate_validity_test">Attestation valable 48h à compter de la collecte</string>
+  <string name="green_certificate_validity_vaccine_complete">Certification valable 365 jours (12 mois) à compter de la date de la dernière administration</string>
+  <string name="green_certificate_validity_Quicktest">Attestation valable 48h à compter de la collecte</string>
+  <string name="green_certificate_validity_Moleculartest">Attestation valable 72h à compter de la collecte</string>
   <string name="green_certificate_no_dcc_found">Aucun EU Digital Covid Certificate trouvé</string>
   <string name="green_pass_confirm_button">Confirmation</string>
   <string name="green_certificate_more_details_doses_number_text">%s sur %s</string>

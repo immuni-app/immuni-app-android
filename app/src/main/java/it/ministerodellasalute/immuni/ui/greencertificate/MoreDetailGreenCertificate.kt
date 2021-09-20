@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.ui.greencertificate
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
@@ -37,6 +38,7 @@ import kotlinx.android.synthetic.main.green_certificate_more_details_test.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_vaccination.*
 import org.koin.android.ext.android.get
 import org.koin.core.KoinComponent
+import java.util.*
 
 class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
@@ -58,10 +60,21 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
         setTitle(getString(R.string.green_pass_more_details_title))
 
-        setUI()
+        val vaccineFullyCompleted = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["vaccine_fully_completed"]
+        val vaccineFirstDose = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["vaccine_first_dose"]
+        val rapidTest = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["rapid_test"]
+        val molecularTest = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["molecular_test"]
+
+        setUI(
+            vaccineFullyCompleted,
+            vaccineFirstDose,
+            molecularTest,
+            rapidTest
+        )
+
     }
 
-    private fun setUI() {
+    private fun setUI(validUntilCompleteVaccine: String?,validUntilnotCompleteVaccine: String?, validUntilMolecularTest: String?, validUntilQuickTest: String?) {
         when (true) {
             greenCertificateDetail.data?.vaccinations != null -> {
                 // Inflate layout dynamically
@@ -96,9 +109,9 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                             0
                         )!!.totalSeriesOfDoses
                     ) {
-                        getString(R.string.green_certificate_validity_vaccine_complete)
+                        validUntilCompleteVaccine ?: getString(R.string.green_certificate_validity_vaccine_complete)
                     } else {
-                        getString(R.string.green_certificate_validity_vaccine_partial)
+                        validUntilnotCompleteVaccine ?: getString(R.string.green_certificate_validity_vaccine_partial)
                     }
                 dosesNumber.text = String.format(
                     requireContext().getString(R.string.green_certificate_more_details_doses_number_text),
@@ -120,7 +133,6 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
             greenCertificateDetail.data?.tests != null -> {
                 // Inflate layout dynamically
                 includeDynamicView(R.layout.green_certificate_more_details_test)
-
                 subHeading.text = getString(R.string.green_certificate_subHeading_test)
                 diseaseLabel.text = getString(R.string.green_certificate_disease)
                 testType.text =
@@ -144,12 +156,13 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     ratNameTestLabelEng.visibility = View.GONE
                     ratNameTestLabel.visibility = View.GONE
                     ratNameTest.visibility = View.GONE
+                    validityTest.text = validUntilMolecularTest ?: getString(R.string.green_certificate_validity_Moleculartest)
                 } else {
-                    ratNameTest.text =
-                        setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testNameAndManufacturer)
+                    ratNameTest.text = setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testNameAndManufacturer)
                     ratNameTestLabelEng.visibility = View.VISIBLE
                     ratNameTestLabel.visibility = View.VISIBLE
                     ratNameTest.visibility = View.VISIBLE
+                    validityTest.text = validUntilQuickTest ?: getString(R.string.green_certificate_validity_Quicktest)
                 }
                 dateTimeSampleCollection.text =
                     setTextOrDefault(

@@ -58,8 +58,7 @@
         style="@style/P1Text.SemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/grey_dark"
-        android:text="@string/green_certificate_validity_test"/>
+        android:textColor="@color/grey_dark"/>
 
     <TextView
         android:id="@+id/ratNameTestLabelEng"
