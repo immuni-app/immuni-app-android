@@ -17,7 +17,6 @@ package it.ministerodellasalute.immuni.ui.greencertificate
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
@@ -32,13 +31,13 @@ import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManage
 import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 import java.text.SimpleDateFormat
+import java.util.*
 import kotlinx.android.synthetic.main.green_certificate_more_details.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_recovery.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_test.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_vaccination.*
 import org.koin.android.ext.android.get
 import org.koin.core.KoinComponent
-import java.util.*
 
 class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
@@ -71,10 +70,9 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
             molecularTest,
             rapidTest
         )
-
     }
 
-    private fun setUI(validUntilCompleteVaccine: String?,validUntilnotCompleteVaccine: String?, validUntilMolecularTest: String?, validUntilQuickTest: String?) {
+    private fun setUI(validUntilCompleteVaccine: String?, validUntilnotCompleteVaccine: String?, validUntilMolecularTest: String?, validUntilQuickTest: String?) {
         when (true) {
             greenCertificateDetail.data?.vaccinations != null -> {
                 // Inflate layout dynamically
@@ -105,7 +103,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                         )
                             ?.let { getString(it) })
                 validityVaccine.text =
-                    if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber == greenCertificateDetail.data?.vaccinations?.get(
+                    if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber >= greenCertificateDetail.data?.vaccinations?.get(
                             0
                         )!!.totalSeriesOfDoses
                     ) {
