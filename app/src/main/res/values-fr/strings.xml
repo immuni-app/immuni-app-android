@@ -499,4 +499,5 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="green_pass_confirm_button">Confirmation</string>
   <string name="green_certificate_more_details_doses_number_text">%s sur %s</string>
   <string name="green_pass_how_to_generate_fiveth">La certification verte COVID-19 est affichée sur l\'écran du smartphone afin qu\'elle puisse être consultée et affichée sur demande, en cas de vérification, même en mode hors ligne. Le bouton «Supprimer» vous permet de supprimer votre certificat de votre smartphone de manière autonome à tout moment.</string>
+    <string name="green_certificate_validity_healing">Certification valable dans l\'Union européenne jusqu\'à la date de fin de validité et valable uniquement en Italie jusqu\'à 6 mois à compter de la date de début de validité</string>
 </resources>

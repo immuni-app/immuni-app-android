@@ -499,4 +499,5 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_certificate_no_dcc_found">Nessun EU Digital Covid Certificate trovato</string>
   <string name="green_pass_confirm_button">Conferma</string>
   <string name="green_certificate_more_details_doses_number_text">%s di %s</string>
+  <string name="green_certificate_validity_healing">Certificazione valida in Unione Europea fino alla data di fine validità e valida solo in Italia fino a 6 mesi dalla data di inizio validità</string>
 </resources>

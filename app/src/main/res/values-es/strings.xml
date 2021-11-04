@@ -500,4 +500,5 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="green_certificate_validity_Moleculartest">Certificación válida por 72 horas desde el momento de la extracción.</string>
   <string name="green_certificate_no_dcc_found">No se encontró ningún EU Digital Covid Certificate</string>
   <string name="green_pass_how_to_generate_fiveth">La certificación verde COVID-19 se muestra en la pantalla del teléfono inteligente para que se pueda ver y mostrar a pedido, en caso de verificación, incluso en modo fuera de línea. El botón \"Eliminar\" le permite eliminar su certificado de su teléfono inteligente de forma independiente en cualquier momento.</string>
+    <string name="green_certificate_validity_healing">Certificación válida en la Unión Europea hasta el final de la fecha de validez y válida solo en Italia hasta 6 meses desde el inicio de la fecha de validez</string>
 </resources>
