@@ -104,7 +104,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                         )
                             ?.let { getString(it) })
                 validityVaccine.text =
-                    if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber == greenCertificateDetail.data?.vaccinations?.get(
+                    if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber >= greenCertificateDetail.data?.vaccinations?.get(
                             0
                         )!!.totalSeriesOfDoses
                     ) {
