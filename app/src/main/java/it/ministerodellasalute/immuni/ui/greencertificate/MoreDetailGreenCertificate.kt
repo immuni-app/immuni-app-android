@@ -63,16 +63,17 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
         val vaccineFirstDose = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["vaccine_first_dose"]
         val rapidTest = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["rapid_test"]
         val molecularTest = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["molecular_test"]
-
+        val healing_certificate = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["healing_certificate"]
         setUI(
             vaccineFullyCompleted,
             vaccineFirstDose,
             molecularTest,
-            rapidTest
+            rapidTest,
+            healing_certificate
         )
     }
 
-    private fun setUI(validUntilCompleteVaccine: String?, validUntilnotCompleteVaccine: String?, validUntilMolecularTest: String?, validUntilQuickTest: String?) {
+    private fun setUI(validUntilCompleteVaccine: String?, validUntilnotCompleteVaccine: String?, validUntilMolecularTest: String?, validUntilQuickTest: String?, healing_certificate: String?) {
         when (true) {
             greenCertificateDetail.data?.vaccinations != null -> {
                 // Inflate layout dynamically
@@ -200,6 +201,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 certificateIssuerLabelEng.visibility = View.GONE
                 certificateIssuerLabel.visibility = View.GONE
                 entityIssuedCertificate.visibility = View.GONE
+                validityHealing.text = healing_certificate ?: getString(R.string.green_certificate_validity_healing)
             }
         }
 

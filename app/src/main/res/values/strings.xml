@@ -574,5 +574,6 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_vac_corona_vac" translatable="false">CoronaVac</string>
     <string name="green_certificate_vac_covaxin" translatable="false">Covaxin (also known as BBV152 A, B, C)</string>
     <string name="green_pass_how_to_generate_fiveth">The green COVID–19 certification is shown on the smartphone screen so that it can be viewed and shown on request, in case of verification, even in offline mode. The \"Delete\" button allows you to delete your certificate from your smartphone independently at any time.</string>
+    <string name="green_certificate_validity_healing">Certification valid in the European Union until the end of validity date and valid only in Italy up to 6 months from the start of validity date</string>
 
 </resources>
