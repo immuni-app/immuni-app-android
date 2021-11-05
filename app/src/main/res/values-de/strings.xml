@@ -497,4 +497,5 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="green_pass_confirm_button">Bestätigung</string>
   <string name="green_certificate_more_details_doses_number_text">%s von %s</string>
   <string name="green_pass_how_to_generate_fiveth">Die grüne COVID-19-Zertifizierung wird auf dem Smartphone-Bildschirm angezeigt, so dass sie auf Wunsch, bei Verifizierung, auch im Offline-Modus eingesehen und gezeigt werden kann. Über die Schaltfläche „Löschen“ können Sie Ihr Zertifikat jederzeit selbstständig von Ihrem Smartphone löschen.</string>
+  <string name="green_certificate_validity_healing">Zertifizierung gültig in der Europäischen Union bis zum Gültigkeitsende und nur in Italien bis zu 6 Monate ab Gültigkeitsbeginn gültig</string>
 </resources>
