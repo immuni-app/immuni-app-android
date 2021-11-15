@@ -352,7 +352,7 @@ jobs:
             - pip-packages-v3-{{ .Branch }}-
             - pip-packages-v3-
       - run:
-          name: "[pr_setup] Configure poetry"
+          name: "[scheduler] Configure poetry"
           command: |
             pip3 install poetry
             poetry config virtualenvs.in-project true
