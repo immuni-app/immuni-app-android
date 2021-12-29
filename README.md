@@ -39,7 +39,6 @@
 
 - [Introduction](#introduction)
 - [Installation](#installation)
-  - [Backend services](#backend-services)
 - [Testing](#testing)
 - [Checking the build](#checking-the-build)
 - [Contributing](#contributing)
