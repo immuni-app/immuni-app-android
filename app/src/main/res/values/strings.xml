@@ -385,7 +385,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="cdum_description_OS">Follow the procedure to report your being positive</string>
     <string name="continue_label">Continue</string>
     <string name="cdum_title_independently">Do you have a CUN code?</string>
-    <string name="cdum_description_independently">You can enter the data directly in the app or by calling the call center at 800.91.24.91</string>
+    <string name="cdum_description_independently">You can enter the data directly in the app</string>
     <string name="report_positivity_description_independently">This function allows you to report your positivity by directly entering the requested data.</string>
     <string name="form_report_positivity_title">Unblock freely</string>
     <string name="call_center_report_positivity_title">Call the Call Center at 800.91.24.91</string>

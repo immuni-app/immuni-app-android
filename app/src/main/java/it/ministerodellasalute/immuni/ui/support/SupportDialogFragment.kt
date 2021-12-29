@@ -28,7 +28,6 @@ import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.gone
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
-import it.ministerodellasalute.immuni.util.startPhoneDial
 import it.ministerodellasalute.immuni.util.startSendingEmail
 import kotlinx.android.synthetic.main.support_dialog.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -45,21 +44,21 @@ class SupportDialogFragment : PopupDialogFragment() {
         setContentLayout(R.layout.support_dialog)
         setTitle(getString(R.string.support_title))
 
-        contactSupport.movementMethod = LinkMovementMethod.getInstance()
-        viewModel.contactSupportPhone.observe(viewLifecycleOwner) {
-
-            if (it == null) phoneContainer.gone()
-            else {
-                @SuppressLint("SetTextI18n")
-                contactSupport.text = "{$it}"
-                    .coloredClickable(
-                        color = requireContext().getColorCompat(R.color.colorPrimary),
-                        bold = true
-                    ) {
-                        startPhoneDial(it)
-                    }
-            }
-        }
+//        contactSupport.movementMethod = LinkMovementMethod.getInstance()
+//        viewModel.contactSupportPhone.observe(viewLifecycleOwner) {
+//
+//            if (it == null) phoneContainer.gone()
+//            else {
+//                @SuppressLint("SetTextI18n")
+//                contactSupport.text = "{$it}"
+//                    .coloredClickable(
+//                        color = requireContext().getColorCompat(R.color.colorPrimary),
+//                        bold = true
+//                    ) {
+//                        startPhoneDial(it)
+//                    }
+//            }
+//        }
 
         mailSupport.movementMethod = LinkMovementMethod.getInstance()
         viewModel.contactSupportEmail.observe(viewLifecycleOwner) {
@@ -88,9 +87,9 @@ class SupportDialogFragment : PopupDialogFragment() {
                     }
             }
         }
-        viewModel.supportWorkingHours.observe(viewLifecycleOwner) { (from, to) ->
-            phoneDescription.text = getString(R.string.support_phone_description_android, from, to)
-        }
+//        viewModel.supportWorkingHours.observe(viewLifecycleOwner) { (from, to) ->
+//            phoneDescription.text = getString(R.string.support_phone_description_android, from, to)
+//        }
 
         viewModel.osVersion.observe(viewLifecycleOwner) {
             osVersion.text = it

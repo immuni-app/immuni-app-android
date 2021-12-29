@@ -391,7 +391,7 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="cdum_description_OS">Suivez la procédure pour signaler votre positivité</string>
   <string name="continue_label">Continuer</string>
   <string name="cdum_title_independently">Avez-vous le code CUN?</string>
-  <string name="cdum_description_independently">Vous pouvez saisir les données directement dans l\'application ou en appelant le centre d\'appels 800.91.24.91</string>
+  <string name="cdum_description_independently">Vous pouvez saisir les données directement dans l\'application</string>
   <string name="report_positivity_description_independently">Cette fonction vous permet de signaler votre positivité en saisissant directement les données demandées.</string>
   <string name="form_report_positivity_title">Déverrouillez vous-même</string>
   <string name="call_center_report_positivity_title">Appelez le centre d\'appels 800.91.24.91</string>
