@@ -114,11 +114,6 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
             )
         }
 
-        goTo.setSafeOnClickListener {
-            val action = DataUploadDirections.actionUploadData(true)
-            findNavController().navigate(action)
-        }
-
         viewModel.loading.observe(viewLifecycleOwner) {
             activity?.loading(it, ProgressDialogFragment(), Bundle().apply {
                 putString(

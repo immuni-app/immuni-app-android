@@ -388,7 +388,7 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="cdum_description_OS">Folgen Sie die Anweisungen, um Ihre Positivität zu melden</string>
   <string name="continue_label">Weiter</string>
   <string name="cdum_title_independently">Haben Sie den CUN-Code?</string>
-  <string name="cdum_description_independently">Sie können die Daten direkt in die App oder telefonisch beim Call Center 800.91.24.91 eingeben</string>
+  <string name="cdum_description_independently">Sie können die Daten direkt in die App</string>
   <string name="report_positivity_description_independently">Mit dieser Funktion können Sie Ihre Positivität melden, indem Sie die angeforderten Daten direkt eingeben.</string>
   <string name="form_report_positivity_title">Freischalten in Autonomie</string>
   <string name="call_center_report_positivity_title">Rufen Sie das Callcenter unter 800.91.24.91 an</string>

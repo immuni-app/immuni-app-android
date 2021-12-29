@@ -19,7 +19,7 @@ commands:
   build:
     description: Perform a build of the Immuni Android application.
     steps:
-      - run: 
+      - run:
           name: "[build] Configure app.properties"
           command: echo $APP_PROPERTIES | base64 --decode > app.properties
       - run:
@@ -104,7 +104,7 @@ commands:
             echo "export BUILD_KIND=$BUILD_KIND" >> $BASH_ENV
 
   check_release_branch:
-    description: Verify if the commit of the build being released is on master. 
+    description: Verify if the commit of the build being released is on master.
     steps:
       - run:
           name: "[release] Stop if not executed on master"
@@ -272,7 +272,7 @@ commands:
 executors:
   default:
     docker:
-      - image: circleci/android:api-29-node
+      - image: cimg/android:2021.10.2-node
     environment:
       GRADLE_OPTS: '-Dorg.gradle.daemon=false'
       JVM_OPTS: -Xmx3200m
@@ -348,24 +348,24 @@ jobs:
       - restore_cache:
           name: "[scheduler] Restore Python Cache"
           keys:
-            - pip-packages-v2-{{ .Branch }}-{{ checksum "scheduler/Pipfile.lock" }}
-            - pip-packages-v2-{{ .Branch }}-
-            - pip-packages-v2-
+            - pip-packages-v3-{{ .Branch }}-{{ checksum "scheduler/poetry.lock" }}
+            - pip-packages-v3-{{ .Branch }}-
+            - pip-packages-v3-
+      - run:
+          name: "[scheduler] Configure poetry"
+          command: |
+            pip3 install poetry
+            poetry config virtualenvs.in-project true
       - run:
           name: "[scheduler] Install dependencies"
           working_directory: scheduler
-          environment:
-            PIPENV_NOSPIN: 1
-            PIPENV_VENV_IN_PROJECT: 1
-          command: |
-            pip3 install pipenv
-            pipenv install
+          command: poetry install
       - save_cache:
           name: "[scheduler] Save Python Cache"
           paths:
             - ~/.cache/pip
             - scheduler/.venv
-          key: pip-packages-v2-{{ .Branch }}-{{ checksum "scheduler/Pipfile.lock" }}
+          key: pip-packages-v3-{{ .Branch }}-{{ checksum "scheduler/poetry.lock" }}
       - run:
           name: "[scheduler] Configure scheduler"
           command: |
@@ -376,7 +376,7 @@ jobs:
           no_output_timeout: 120m
           command: |
             export REPOSITORY="${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
-            pipenv run python scheduler.py
+            poetry run python scheduler.py
 
   unit_tests:
     working_directory: ~/code
