@@ -44,22 +44,6 @@ class SupportDialogFragment : PopupDialogFragment() {
         setContentLayout(R.layout.support_dialog)
         setTitle(getString(R.string.support_title))
 
-//        contactSupport.movementMethod = LinkMovementMethod.getInstance()
-//        viewModel.contactSupportPhone.observe(viewLifecycleOwner) {
-//
-//            if (it == null) phoneContainer.gone()
-//            else {
-//                @SuppressLint("SetTextI18n")
-//                contactSupport.text = "{$it}"
-//                    .coloredClickable(
-//                        color = requireContext().getColorCompat(R.color.colorPrimary),
-//                        bold = true
-//                    ) {
-//                        startPhoneDial(it)
-//                    }
-//            }
-//        }
-
         mailSupport.movementMethod = LinkMovementMethod.getInstance()
         viewModel.contactSupportEmail.observe(viewLifecycleOwner) {
             if (it == null) mailContainer.gone()
@@ -87,9 +71,6 @@ class SupportDialogFragment : PopupDialogFragment() {
                     }
             }
         }
-//        viewModel.supportWorkingHours.observe(viewLifecycleOwner) { (from, to) ->
-//            phoneDescription.text = getString(R.string.support_phone_description_android, from, to)
-//        }
 
         viewModel.osVersion.observe(viewLifecycleOwner) {
             osVersion.text = it

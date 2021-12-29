@@ -62,58 +62,6 @@
         android:layout_marginEnd="32dp"
         android:text="@string/support_contact_support" />
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/phoneContainer"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="30dp">-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/phoneIcon"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:srcCompat="@drawable/ic_call" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/phoneTitle"-->
-<!--            style="@style/P1Text.Bold"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:paddingBottom="5dp"-->
-<!--            android:text="@string/support_phone_title"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@id/phoneIcon"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/phoneDescription"-->
-<!--            style="@style/P1Text.Generic"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:paddingBottom="5dp"-->
-<!--            android:text="@string/support_phone_description_android"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@id/phoneIcon"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/phoneTitle" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/contactSupport"-->
-<!--            style="@style/P1Text.Generic"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@id/phoneIcon"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/phoneDescription"-->
-<!--            tools:text="128120 2912" />-->
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mailContainer"
         android:layout_width="match_parent"
