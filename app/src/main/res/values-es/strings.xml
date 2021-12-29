@@ -391,7 +391,7 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="cdum_description_OS">Sigue el procedimiento para informar tu positividad</string>
   <string name="continue_label">Continúa</string>
   <string name="cdum_title_independently">¿Tienes el codigo CUN?</string>
-  <string name="cdum_description_independently">Puede ingresar los datos directamente en la aplicación o llamando al centro de llamadas 800.91.24.91</string>
+  <string name="cdum_description_independently">Puede ingresar los datos directamente en la aplicación</string>
   <string name="report_positivity_description_independently">Esta función te permite reportar tu positividad ingresando directamente los datos solicitados.</string>
   <string name="form_report_positivity_title">Desbloquea por tu cuenta</string>
   <string name="call_center_report_positivity_title">Llama el centro de llamadas 800.91.24.91</string>
