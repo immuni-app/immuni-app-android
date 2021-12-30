@@ -22,7 +22,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlin.system.exitProcess
 
 /**
- * This ia a way to force quit the app in a reliable way.
+ * This is a way to force quit the app in a reliable way.
  * They key here is the android:autoRemoveFromRecents="true" in the manifest.
  */
 class ExitActivity : AppCompatActivity() {
