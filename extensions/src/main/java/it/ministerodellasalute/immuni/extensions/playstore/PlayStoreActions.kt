@@ -46,7 +46,7 @@ object PlayStoreActions {
         } catch (e: ActivityNotFoundException) {
             val intent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("http://play.google.com/store/apps/details?id=" + (appPackage ?: context.packageName))
+                Uri.parse("https://play.google.com/store/apps/details?id=" + (appPackage ?: context.packageName))
             )
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
