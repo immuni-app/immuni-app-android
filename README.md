@@ -142,7 +142,7 @@ To run the instrumentation/UI tests, execute the following Gradle task:
 
 # Checking the build
 
-In addition to making the code open-source, we wish to help people verify that builds published on the App Store are coming from a specific commit of this repository. Please refer to the [Immuni Technology Description](https://github.com/immuni-app/documentation/blob/master/Technology%20Description.md#android-app-technologies) for a complete overview of the goals and status of this effort.
+In addition to making the code open-source, we wish to help people verify that builds published on the App Store are coming from a specific commit of this repository. Please refer to the [Immuni Technology Description](https://github.com/immuni-app/documentation/blob/master/Technology.md#android-app-technologies) for a complete overview of the goals and status of this effort.
 
 Currently, we have a working open continuous integration for building the client. [Here](.circleci/config.yml) is the full specification. When it comes to reproducible builds, we will instead open an issue explaining what we have done so far and any missing steps.
 
