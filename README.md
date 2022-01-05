@@ -2,7 +2,7 @@
 <h1 align="center">Immuni Android</h1>
  
 <div align="center">
-<img widht="256" height="256" src=".github/logo.png">
+<img width="256" height="256" src=".github/logo.png">
 </div>
 
 <br />
