@@ -260,7 +260,7 @@ commands:
             sudo mv ktlint /usr/local/bin/
       - run:
           name: "[pr_setup] Configure corepack"
-          command: "sudo npm i -g corepack; sudo corepack enable"
+          command: "sudo npm i -g --force corepack; sudo corepack enable"
       - run:
           name: "[pr_setup] Install danger"
           command: yarn add -D
