@@ -48,6 +48,7 @@
 
         <!-- Alert dialog theme -->
         <item name="materialAlertDialogTheme">@style/AlertDialogTheme</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
