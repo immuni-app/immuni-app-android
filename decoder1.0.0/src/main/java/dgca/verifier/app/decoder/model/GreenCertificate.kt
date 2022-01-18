@@ -43,7 +43,10 @@ data class GreenCertificate(
     val tests: List<Test>?,
 
     @JsonProperty("r")
-    val recoveryStatements: List<RecoveryStatement>?
+    val recoveryStatements: List<RecoveryStatement>?,
+
+    @JsonProperty("e")
+    val exemptions: List<Exemption>?
 
 ) : Serializable {
 
@@ -53,6 +56,7 @@ data class GreenCertificate(
                 vaccinations?.isNotEmpty() == true -> vaccinations.last().certificateIdentifier
                 tests?.isNotEmpty() == true -> tests.last().certificateIdentifier
                 recoveryStatements?.isNotEmpty() == true -> recoveryStatements.last().certificateIdentifier
+                exemptions?.isNotEmpty() == true -> exemptions.last().certificateIdentifier
                 else -> ""
             }
         } catch (ex: Exception) {
