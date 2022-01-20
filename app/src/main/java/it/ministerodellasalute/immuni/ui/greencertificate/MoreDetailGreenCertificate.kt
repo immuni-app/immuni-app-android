@@ -211,11 +211,12 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
             }
             greenCertificateDetail.data?.exemptions != null -> {
                 isExemption = true
+                flagEsenzione.visibility = View.VISIBLE
+                question.text = getString(R.string.green_certificate_exemption_title)
                 // Inflate layout dynamically
                 includeDynamicView(R.layout.green_certificate_more_details_exemption)
 
                 subHeading.text = getString(R.string.green_certificate_subHeading_exemption)
-                textExemption.visibility = View.VISIBLE
                 certifying_physician_exemption.text = greenCertificateDetail.data?.exemptions?.get(0)!!.fiscalCode
                 exemptionValidFrom.text = greenCertificateDetail.data?.exemptions?.get(0)!!.certificateValidFrom
                 exemptionValidUntil.text = setTextOrDefault(greenCertificateDetail.data?.exemptions?.get(0)!!.certificateValidUntil)
@@ -229,8 +230,10 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
             getString(R.string.green_certificate_certificate_issuer_const)
 
         if (isExemption) {
-            textFooter.text = getString(R.string.green_certificate_exemption_footer)
+            setTitle(getString(R.string.green_certificate_exemption_title))
+            textFooter.visibility = View.GONE
             europeRestrictionSite.visibility = View.GONE
+            textFooterExemption.visibility = View.VISIBLE
         } else {
             val europeRestrictionUrl =
                 getString(R.string.green_certificate_more_details_europe_restriction_url)
@@ -251,7 +254,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
         val v = layoutInflater.inflate(layout, null)
         container.addView(
             v,
-            5,
+            4,
             ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT

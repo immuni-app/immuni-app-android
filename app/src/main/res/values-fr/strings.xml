@@ -506,10 +506,9 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
     <string name="green_certificate_validity_exemption">Certificat d\'exonération (illimité)</string>
   <string name="green_certificate_certifying_physician_exemption">Code fiscal du médecin certificateur</string>
     <string name="green_certificate_start_date_validity_exemption">Valide à partir du</string>
-    <string name="green_certificate_exemption">Personne exemptée de vaccination anti SARS-CoV-2 / COVID-19</string>
-    <string name="green_certificate_end_date_validity_exemption">Données de fin de validité de la certification, le cas échéant</string>
+  <string name="green_certificate_end_date_validity_exemption">Données de fin de validité de la certification, le cas échéant</string>
     <string name="green_certificate_cuev_exemption">Code unique d\'exemption de vaccination (CUEV)</string>
-    <string name="green_certificate_exemption_footer">Cette certification est valable uniquement en Italie et peut être utilisée pour remplacer la certification verte COVIDE-19 pour la réalisation d\'activités et l\'utilisation de services conformément à la législation nationale en vigueur.</string>
-    <string name="green_certificate_valid_only_italy_exemption">CERTIFICATION VALABLE UNIQUEMENT EN ITALIE</string>
-  <string name="green_certificate_valid_only_italy_text_exemption">remplacement, là où la législation en vigueur l\'exige, de la certification verte COVID-19</string>
+    <string name="green_certificate_exemption_footer">Cette certification est valable uniquement en <b>Italie</b> et peut être utilisée pour remplacer la certification verte COVIDE-19 pour la réalisation d\'activités et l\'utilisation de services conformément à la législation nationale en vigueur.</string>
+  <string name="green_certificate_subHeading_exemption">VALABLE UNIQUEMENT EN ITALIE</string>
+  <string name="green_certificate_exemption_title">Certification numérique de l\'exemption de vaccination COVID-19</string>
 </resources>

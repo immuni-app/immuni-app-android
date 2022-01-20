@@ -55,8 +55,6 @@ class GreenPassAdapter(
         val surnameNameText: TextView = v.findViewById(R.id.surnameNameText)
         val birthDateText: TextView = v.findViewById(R.id.birthDateText)
         val certificateIdText: TextView = v.findViewById(R.id.certificateIDText)
-        val exemptionLabelEng: TextView = v.findViewById(R.id.exemptionLabelEng)
-        val exemptionText: TextView = v.findViewById(R.id.exemptionText)
         val moreDetails: TextView = v.findViewById(R.id.moreDetails)
         val swipeToShowQR: TextView = v.findViewById(R.id.swipeToShowQR)
     }
@@ -99,8 +97,6 @@ class GreenPassAdapter(
                 greenCertificate.data!!.vaccinations!![0].certificateIdentifier
             }
             greenCertificate.data?.exemptions != null -> {
-                holder.exemptionLabelEng.visibility = View.VISIBLE
-                holder.exemptionText.visibility = View.VISIBLE
                 greenCertificate.data!!.exemptions!![0].certificateIdentifier
             }
             else -> null

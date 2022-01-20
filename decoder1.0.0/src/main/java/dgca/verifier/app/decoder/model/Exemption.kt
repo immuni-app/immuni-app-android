@@ -8,7 +8,7 @@ data class Exemption(
     val fiscalCode: String,
 
     @JsonProperty("du")
-    val certificateValidUntil: String,
+    val certificateValidUntil: String?,
 
     @JsonProperty("co")
     val countryOfExemption: String,

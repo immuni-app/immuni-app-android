@@ -530,7 +530,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_country_test">Stato in cui è stato eseguito il test</string>
     <string name="green_certificate_country_recovery">Stato in cui è stato eseguito primo test molecolare positivo</string>
     <string name="green_certificate_subHeading_vaccine">Vaccination certificate</string>
-    <string name="green_certificate_subHeading_exemption">Exemption certificate</string>
+    <string name="green_certificate_subHeading_exemption">VALID ONLY IN ITALY</string>
     <string name="green_certificate_subHeading_test">Test certificate</string>
     <string name="green_certificate_subHeading_recovery">Recovery certificate</string>
     <string name="green_certificate_validity_dgc_label" translatable="false">Validity of the EU Digital Covid Certificate</string>
@@ -585,14 +585,10 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_start_date_validity_exemption_label" translatable="false">Valid from</string>
     <string name="green_certificate_start_date_validity_exemption">Data di inizio validità della certificazione</string>
     <string name="green_certificate_exemption_label" translatable="false">Person exempt from SARS-CoV-2 / COVID-19 vaccination</string>
-    <string name="green_certificate_exemption">Soggetto esente alla vaccinazione anti SARS-CoV2/COVID-19</string>
     <string name="green_certificate_end_date_validity_exemption_label" translatable="false">Valid until</string>
     <string name="green_certificate_end_date_validity_exemption">Dati di fine validità della certificazione, ove previsto</string>
     <string name="green_certificate_cuev_exemption_label" translatable="false">Unique vaccination exemption code (CUEV)</string>
     <string name="green_certificate_cuev_exemption">Codice univoco esenzione vaccinale (CUEV)</string>
-    <string name="green_certificate_exemption_footer">This certification is valid only in Italy and can be used to replace the COVIDE-19 green certification for carrying out activities and the use of services in accordance with the current national legislation.</string>
-    <string name="green_certificate_valid_only_italy_exemption">CERTIFICATION VALID ONLY IN ITALY</string>
-    <string name="green_certificate_valid_only_italy_text_exemption">replacement, where required by current legislation, of the COVID-19 green certification</string>
-
-
+    <string name="green_certificate_exemption_footer">This certification is valid only in <b>Italy</b> and can be used to replace the COVIDE-19 green certification for carrying out activities and the use of services in accordance with the current national legislation.</string>
+    <string name="green_certificate_exemption_title">Digital certification of COVID-19 vaccination exemption</string>
 </resources>

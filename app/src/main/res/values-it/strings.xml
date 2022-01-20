@@ -503,14 +503,12 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_certificate_modal_order_title">Abbiamo cambiato l\'ordine dei tuoi Certificati</string>
   <string name="green_certificate_modal_order_message">Se stai leggendo questo messaggio vuol dire che hai più di un Certificato Verde COVID-19 installato sul tuo dispositivo: ora sono visualizzati in ordine cronologico a partire dal più recente. Ricordati che puoi eliminarli o spostarti da uno all\'altro scorrendo lateralmente con il dito</string>
   <string name="green_certificate_modal_order_button">Ho capito</string>
-  <string name="green_certificate_subHeading_exemption">Certificato di esenzione</string>
+  <string name="green_certificate_subHeading_exemption">VALIDA SOLO IN ITALIA</string>
   <string name="green_certificate_validity_exemption">Certificato esenzione (illimitata)</string>
   <string name="green_certificate_certifying_physician_exemption">Codice fiscale del medico certificatore</string>
   <string name="green_certificate_start_date_validity_exemption">Data di inizio validità della certificazione</string>
-  <string name="green_certificate_exemption">"Soggetto esente alla vaccinazione anti SARS-CoV2/COVID-19 "</string>
-    <string name="green_certificate_end_date_validity_exemption">Dati di fine validità della certificazione, ove previsto</string>
+  <string name="green_certificate_end_date_validity_exemption">Dati di fine validità della certificazione, ove previsto</string>
     <string name="green_certificate_cuev_exemption">Codice univoco esenzione vaccinale (CUEV)</string>
-    <string name="green_certificate_exemption_footer">Questa certificazione è valida solo in Italia e può essere utilizzata in sostituzione della Certificazione verde COVIDE-19 per lo svolgimento di attività e la fruizione di servizi secondo quanto previsto dalla normativa nazionale vigente</string>
-    <string name="green_certificate_valid_only_italy_exemption">CERTIFICAZIONE VALIDA SOLO IN ITALIA</string>
-  <string name="green_certificate_valid_only_italy_text_exemption">sostitutiva, ove previsto dalla normativa vigente, della Certificazione verde COVID-19</string>
+    <string name="green_certificate_exemption_footer">Questa certificazione è valida solo in <b>Italia</b> e può essere utilizzata in sostituzione della Certificazione verde COVIDE-19 per lo svolgimento di attività e la fruizione di servizi secondo quanto previsto dalla normativa nazionale vigente.</string>
+  <string name="green_certificate_exemption_title">Certificazione digitale di esenzione dalla vaccinazione anti-COVID-19</string>
 </resources>
