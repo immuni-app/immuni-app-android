@@ -256,7 +256,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
         val v = layoutInflater.inflate(layout, null)
         container.addView(
             v,
-            4,
+            5,
             ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
