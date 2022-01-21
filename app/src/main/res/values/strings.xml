@@ -530,6 +530,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_country_test">Stato in cui è stato eseguito il test</string>
     <string name="green_certificate_country_recovery">Stato in cui è stato eseguito primo test molecolare positivo</string>
     <string name="green_certificate_subHeading_vaccine">Vaccination certificate</string>
+    <string name="green_certificate_subHeading_exemption">VALID ONLY IN ITALY</string>
     <string name="green_certificate_subHeading_test">Test certificate</string>
     <string name="green_certificate_subHeading_recovery">Recovery certificate</string>
     <string name="green_certificate_validity_dgc_label" translatable="false">Validity of the EU Digital Covid Certificate</string>
@@ -538,7 +539,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_validity_vaccine_complete">Certification valid for 365 days (12 months) from the date of the last administration</string>
     <string name="green_certificate_validity_Quicktest">Certification valid for 48 hours from the time of collection</string>
     <string name="green_certificate_validity_Moleculartest">Certification valid for 72 hours from the time of collection</string>
-    <string name="green_certificate_no_dcc_found">No EU Digital Covid Certificate found</string>
+    <string name="green_certificate_no_dcc_found">No EU Digital Covid Certificate found. Check that the data entered is correct</string>
     <string name="green_certificate_certificate_issuer_const" translatable="false">Ministero della Salute</string>
     <string name="green_certificate_rapid_test_label" translatable="false">Test antigenico rapido</string>
     <string name="green_certificate_molecolar_test_label" translatable="false">Test molecolare</string>
@@ -575,5 +576,20 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_vac_covaxin" translatable="false">Covaxin (also known as BBV152 A, B, C)</string>
     <string name="green_pass_how_to_generate_fiveth">The green COVID–19 certification is shown on the smartphone screen so that it can be viewed and shown on request, in case of verification, even in offline mode. The \"Delete\" button allows you to delete your certificate from your smartphone independently at any time.</string>
     <string name="green_certificate_validity_healing">Certification valid in the European Union until the end of validity date and valid only in Italy up to 6 months from the start of validity date</string>
-
+    <string name="green_certificate_modal_order_title">We have changed the order of your Certificates</string>
+    <string name="green_certificate_modal_order_message">If you are reading this message it means that you have more than one COVID-19 Green Certificate installed on your device: they are now displayed in chronological order starting with the most recent. Remember that you can delete them or move from one to the other by swiping sideways with your finger</string>
+    <string name="green_certificate_modal_order_button">I understand</string>
+    <string name="green_certificate_validity_exemption">Certificate of exemption (unlimited)</string>
+    <string name="green_certificate_certifying_physician_exemption_label" translatable="false">Fiscal code of the certifying physician</string>
+    <string name="green_certificate_certifying_physician_exemption">Codice fiscale del medico certificatore</string>
+    <string name="green_certificate_start_date_validity_exemption_label" translatable="false">Valid from</string>
+    <string name="green_certificate_start_date_validity_exemption">Data di inizio validità della certificazione</string>
+    <string name="green_certificate_exemption_label" translatable="false">Person exempt from SARS-CoV-2 / COVID-19 vaccination</string>
+    <string name="green_certificate_end_date_validity_exemption_label" translatable="false">Valid until</string>
+    <string name="green_certificate_end_date_validity_exemption">Data di fine validità della certificazione</string>
+    <string name="green_certificate_cuev_exemption_label" translatable="false">Unique vaccination exemption identifier</string>
+    <string name="green_certificate_cuev_exemption">Codice univoco esenzione vaccinale (CUEV)</string>
+    <string name="green_certificate_exemption_footer">This certification is valid only in <b>Italy</b> and can be used to replace the COVID-19 green certification for carrying out activities and the use of services in accordance with the current national legislation</string>
+    <string name="green_certificate_exemption_title">Digital certification of COVID-19 vaccination exemption</string>
+    <string name="green_certificate_certificate_issuer_exemption">Soggetto che ha rilasciato la certificazione digitale di esenzione</string>
 </resources>

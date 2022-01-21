@@ -496,8 +496,21 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_certificate_validity_vaccine_complete">Certificazione valida 365 giorni (12 mesi) dalla data dell\'ultima somministrazione</string>
   <string name="green_certificate_validity_Quicktest">Certificazione valida 48 ore dall\'ora del prelievo</string>
   <string name="green_certificate_validity_Moleculartest">Certificazione valida 72 ore dall\'ora del prelievo</string>
-  <string name="green_certificate_no_dcc_found">Nessun EU Digital Covid Certificate trovato</string>
+  <string name="green_certificate_no_dcc_found">Nessun EU Digital Covid Certificate trovato. Controlla che i dati inseriti siano corretti</string>
   <string name="green_pass_confirm_button">Conferma</string>
   <string name="green_certificate_more_details_doses_number_text">%s di %s</string>
   <string name="green_certificate_validity_healing">Certificazione valida in Unione Europea fino alla data di fine validità e valida solo in Italia fino a 6 mesi dalla data di inizio validità</string>
+  <string name="green_certificate_modal_order_title">Abbiamo cambiato l\'ordine dei tuoi Certificati</string>
+  <string name="green_certificate_modal_order_message">Se stai leggendo questo messaggio vuol dire che hai più di un Certificato Verde COVID-19 installato sul tuo dispositivo: ora sono visualizzati in ordine cronologico a partire dal più recente. Ricordati che puoi eliminarli o spostarti da uno all\'altro scorrendo lateralmente con il dito</string>
+  <string name="green_certificate_modal_order_button">Ho capito</string>
+  <string name="green_certificate_subHeading_exemption">VALIDA SOLO IN ITALIA</string>
+  <string name="green_certificate_validity_exemption">Certificato esenzione (illimitata)</string>
+  <string name="green_certificate_certifying_physician_exemption">Codice fiscale del medico certificatore</string>
+  <string name="green_certificate_start_date_validity_exemption">Data di inizio validità della certificazione</string>
+  <string name="green_certificate_end_date_validity_exemption">Data di fine validità della certificazione</string>
+    <string name="green_certificate_cuev_exemption">Codice univoco esenzione vaccinale (CUEV)</string>
+    <string name="green_certificate_exemption_footer">Questa certificazione è valida solo in <b>Italia</b> e può essere utilizzata in sostituzione della Certificazione verde COVID-19 per lo svolgimento di attività e la fruizione di servizi secondo quanto previsto dalla normativa nazionale vigente</string>
+  <string name="green_certificate_exemption_title">Certificazione digitale di esenzione dalla vaccinazione anti-COVID-19</string>
+  <string name="green_certificate_certificate_issuer_exemption">Soggetto che ha rilasciato la certificazione digitale di esenzione</string>
+
 </resources>

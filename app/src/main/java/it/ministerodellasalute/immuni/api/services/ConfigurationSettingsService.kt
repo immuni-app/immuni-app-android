@@ -63,7 +63,6 @@ data class ConfigurationSettings(
     @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int,
     @field:Json(name = "countries") val countries: Map<String, Map<String, String>>,
     @field:Json(name = "eudcc_expiration") val eudcc_expiration: Map<String, Map<String, String>>
-
 )
 
 @JsonClass(generateAdapter = true)
@@ -191,38 +190,44 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "rapid_test" to "Certificazione valida 48 ore dall'ora del prelievo",
             "vaccine_first_dose" to "Certificazione valida fino alla prossima dose",
             "vaccine_fully_completed" to "Certificazione valida 365 giorni (12 mesi) dalla data dell'ultima somministrazione",
-            "healing_certificate" to "Certificazione valida in Unione Europea fino alla data di fine validità e valida solo in Italia fino a 6 mesi dalla data di inizio validità"
+            "healing_certificate" to "Certificazione valida in Unione Europea fino alla data di fine validità e valida solo in Italia fino a 6 mesi dalla data di inizio validità",
+            "exemption_certificate" to "Certificato esenzione (illimitata)"
         ),
         "de" to mapOf(
             "molecular_test" to "Bescheinigung gültig für 72 Stunden ab dem Zeitpunkt der Abholung",
             "rapid_test" to "Bescheinigung gültig für 48 Stunden ab dem Zeitpunkt der Abholung",
             "vaccine_first_dose" to "Zertifizierung gültig bis zur nächsten Dosis",
             "vaccine_fully_completed" to "Zertifizierung gültig für 365 Tage (12 Monate) ab dem Datum der letzten Verabreichung",
-            "healing_certificate" to "Zertifizierung gültig in der Europäischen Union bis zum Gültigkeitsende und nur in Italien bis zu 6 Monate ab Gültigkeitsbeginn gültig"
+            "healing_certificate" to "Zertifizierung gültig in der Europäischen Union bis zum Gültigkeitsende und nur in Italien bis zu 6 Monate ab Gültigkeitsbeginn gültig",
+            "exemption_certificate" to "Befreiungsbescheinigung (unbefristet)"
         ),
         "en" to mapOf(
             "molecular_test" to "Certification valid for 72 hours from the time of collection",
             "rapid_test" to "Certification valid for 48 hours from the time of collection",
             "vaccine_first_dose" to "Certification valid until next dose",
             "vaccine_fully_completed" to "Certification valid for 365 days (12 months) from the date of the last administration",
-            "healing_certificate" to "Certification valid in the European Union until the end of validity date and valid only in Italy up to 6 months from the start of validity date"
+            "healing_certificate" to "Certification valid in the European Union until the end of validity date and valid only in Italy up to 6 months from the start of validity date",
+            "exemption_certificate" to "Certificate of exemption (unlimited)"
         ),
         "es" to mapOf(
             "molecular_test" to "Certificación válida por 72 horas desde el momento de la recogida.",
             "rapid_test" to "Certificación válida por 48 horas desde el momento de la recogida.",
             "vaccine_first_dose" to "Certificación válida hasta la próxima dosis",
             "vaccine_fully_completed" to "Certificación válida por 365 días (12 meses) a partir de la fecha de la última administración.",
-            "healing_certificate" to "Certificación válida en la Unión Europea hasta el final de la fecha de validez y válida solo en Italia hasta 6 meses desde el inicio de la fecha de validez"
+            "healing_certificate" to "Certificación válida en la Unión Europea hasta el final de la fecha de validez y válida solo en Italia hasta 6 meses desde el inicio de la fecha de validez",
+            "exemption_certificate" to "Certificado de exención (ilimitado)"
         ),
         "fr" to mapOf(
             "molecular_test" to "Attestation valable 72h à compter de la collecte",
             "rapid_test" to "Attestation valable 48h à compter de la collecte",
             "vaccine_first_dose" to "Certification valable jusqu'à la prochaine dose",
             "vaccine_fully_completed" to "Certification valable 365 jours (12 mois) à compter de la date de la dernière administration",
-            "healing_certificate" to "Certification valable dans l'Union européenne jusqu'à la date de fin de validité et valable uniquement en Italie jusqu'à 6 mois à compter de la date de début de validité"
+            "healing_certificate" to "Certification valable dans l'Union européenne jusqu'à la date de fin de validité et valable uniquement en Italie jusqu'à 6 mois à compter de la date de début de validité",
+            "exemption_certificate" to "Certificat d'exonération (illimité)"
         )
     )
 }
+
 val defaultSettings = ConfigurationSettings(
     minimumBuildVersion = 0,
     faqUrls = languageMap { "https://get.immuni.gov.it/docs/faq-${it.code}.json" },

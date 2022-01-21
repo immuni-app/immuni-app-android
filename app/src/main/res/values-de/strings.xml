@@ -493,9 +493,21 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="green_certificate_validity_vaccine_complete">Zertifizierung gültig für 365 Tage (12 Monate) ab dem Datum der letzten Verabreichung</string>
   <string name="green_certificate_validity_Quicktest">Bescheinigung gültig für 48 Stunden ab dem Zeitpunkt der Abholung</string>
   <string name="green_certificate_validity_Moleculartest">Bescheinigung gültig für 72 Stunden ab dem Zeitpunkt der Abholung</string>
-  <string name="green_certificate_no_dcc_found">Kein EU Digital Covid Certificate gefunden</string>
+  <string name="green_certificate_no_dcc_found">Kein EU Digital Covid Certificate gefunden. Überprüfen Sie, ob die eingegebenen Daten korrekt sind</string>
   <string name="green_pass_confirm_button">Bestätigung</string>
   <string name="green_certificate_more_details_doses_number_text">%s von %s</string>
   <string name="green_pass_how_to_generate_fiveth">Die grüne COVID-19-Zertifizierung wird auf dem Smartphone-Bildschirm angezeigt, so dass sie auf Wunsch, bei Verifizierung, auch im Offline-Modus eingesehen und gezeigt werden kann. Über die Schaltfläche „Löschen“ können Sie Ihr Zertifikat jederzeit selbstständig von Ihrem Smartphone löschen.</string>
   <string name="green_certificate_validity_healing">Zertifizierung gültig in der Europäischen Union bis zum Gültigkeitsende und nur in Italien bis zu 6 Monate ab Gültigkeitsbeginn gültig</string>
+    <string name="green_certificate_modal_order_button">Ich verstehe</string>
+    <string name="green_certificate_modal_order_title">Wir haben die Reihenfolge Ihrer Zertifikate geändert</string>
+  <string name="green_certificate_modal_order_message">Wenn Sie diese Nachricht lesen, bedeutet dies, dass Sie mehr als ein grünes COVID-19-Zertifikat auf Ihrem Gerät installiert haben: Sie werden jetzt in chronologischer Reihenfolge angezeigt, beginnend mit dem neuesten. Denken Sie daran, dass Sie sie löschen oder von einem zum anderen wechseln können, indem Sie mit Ihrem Finger zur Seite wischen</string>
+    <string name="green_certificate_validity_exemption">Befreiungsbescheinigung (unbefristet)</string>
+  <string name="green_certificate_certifying_physician_exemption">Steuernummer des zertifizierenden Arztes</string>
+    <string name="green_certificate_start_date_validity_exemption">Gültigkeitsbeginn der Zertifizierung</string>
+  <string name="green_certificate_end_date_validity_exemption">Endgültigkeitsdatum der Zertifizierung</string>
+    <string name="green_certificate_cuev_exemption">Eindeutiger Impfbefreiungscode (CUEV)</string>
+  <string name="green_certificate_subHeading_exemption">NUR IN ITALIEN GÜLTIG</string>
+  <string name="green_certificate_exemption_title">Digitale Bescheinigung der COVID-19-Impfbefreiung</string>
+  <string name="green_certificate_certificate_issuer_exemption">Subjekt, das die digitale Freistellungsbescheinigung ausgestellt hat</string>
+  <string name="green_certificate_exemption_footer">Diese Zertifizierung ist nur in <b>Italien</b> gültig und kann verwendet werden, um die grüne COVID-19-Zertifizierung für die Durchführung von Aktivitäten und die Nutzung von Dienstleistungen gemäß der geltenden nationalen Gesetzgebung zu ersetzen</string>
 </resources>
