@@ -589,6 +589,6 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_end_date_validity_exemption">Dati di fine validità della certificazione, ove previsto</string>
     <string name="green_certificate_cuev_exemption_label" translatable="false">Unique vaccination exemption code (CUEV)</string>
     <string name="green_certificate_cuev_exemption">Codice univoco esenzione vaccinale (CUEV)</string>
-    <string name="green_certificate_exemption_footer">This certification is valid only in <b>Italy</b> and can be used to replace the COVIDE-19 green certification for carrying out activities and the use of services in accordance with the current national legislation.</string>
+    <string name="green_certificate_exemption_footer">This certification is valid only in <b>Italy</b> and can be used to replace the COVID-19 green certification for carrying out activities and the use of services in accordance with the current national legislation.</string>
     <string name="green_certificate_exemption_title">Digital certification of COVID-19 vaccination exemption</string>
 </resources>

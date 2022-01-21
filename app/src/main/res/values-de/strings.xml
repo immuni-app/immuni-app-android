@@ -506,7 +506,7 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
     <string name="green_certificate_start_date_validity_exemption">Gültig ab</string>
   <string name="green_certificate_end_date_validity_exemption">Daten zum Gültigkeitsende der Zertifizierung, sofern erforderlich</string>
     <string name="green_certificate_cuev_exemption">Codice univoco esenzione vaccinale (CUEV)</string>
-    <string name="green_certificate_exemption_footer">Diese Zertifizierung ist nur in <b>Italien</b> gültig und kann verwendet werden, um die grüne COVIDE-19-Zertifizierung für die Durchführung von Aktivitäten und die Nutzung von Dienstleistungen gemäß der geltenden nationalen Gesetzgebung zu ersetzen.</string>
+    <string name="green_certificate_exemption_footer">Diese Zertifizierung ist nur in <b>Italien</b> gültig und kann verwendet werden, um die grüne COVID-19-Zertifizierung für die Durchführung von Aktivitäten und die Nutzung von Dienstleistungen gemäß der geltenden nationalen Gesetzgebung zu ersetzen.</string>
   <string name="green_certificate_subHeading_exemption">NUR IN ITALIEN GÜLTIG</string>
   <string name="green_certificate_exemption_title">Digitale Bescheinigung der COVID-19-Impfbefreiung</string>
 </resources>

@@ -216,7 +216,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 // Inflate layout dynamically
                 includeDynamicView(R.layout.green_certificate_more_details_exemption)
 
-                subHeading.text = getString(R.string.green_certificate_subHeading_exemption)
+                subHeadingExemption.text = getString(R.string.green_certificate_subHeading_exemption)
                 certifying_physician_exemption.text = greenCertificateDetail.data?.exemptions?.get(0)!!.fiscalCode
                 exemptionValidFrom.text = greenCertificateDetail.data?.exemptions?.get(0)!!.certificateValidFrom
                 exemptionValidUntil.text = setTextOrDefault(greenCertificateDetail.data?.exemptions?.get(0)!!.certificateValidUntil)
@@ -234,6 +234,8 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
             textFooter.visibility = View.GONE
             europeRestrictionSite.visibility = View.GONE
             textFooterExemption.visibility = View.VISIBLE
+            subHeading.visibility = View.GONE
+            subHeadingExemption.visibility = View.VISIBLE
         } else {
             val europeRestrictionUrl =
                 getString(R.string.green_certificate_more_details_europe_restriction_url)
