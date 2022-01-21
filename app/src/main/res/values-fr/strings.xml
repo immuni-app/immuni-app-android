@@ -495,20 +495,22 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="green_certificate_validity_vaccine_complete">Certification valable 365 jours (12 mois) à compter de la date de la dernière administration</string>
   <string name="green_certificate_validity_Quicktest">Attestation valable 48h à compter de la collecte</string>
   <string name="green_certificate_validity_Moleculartest">Attestation valable 72h à compter de la collecte</string>
-  <string name="green_certificate_no_dcc_found">Aucun EU Digital Covid Certificate trouvé. Vérifiez que les données saisies sont correctes.</string>
+  <string name="green_certificate_no_dcc_found">Aucun EU Digital Covid Certificate trouvé. Vérifiez que les données saisies sont correctes</string>
   <string name="green_pass_confirm_button">Confirmation</string>
   <string name="green_certificate_more_details_doses_number_text">%s sur %s</string>
   <string name="green_pass_how_to_generate_fiveth">La certification verte COVID-19 est affichée sur l\'écran du smartphone afin qu\'elle puisse être consultée et affichée sur demande, en cas de vérification, même en mode hors ligne. Le bouton «Supprimer» vous permet de supprimer votre certificat de votre smartphone de manière autonome à tout moment.</string>
   <string name="green_certificate_validity_healing">Certification valable dans l\'Union européenne jusqu\'à la date de fin de validité et valable uniquement en Italie jusqu\'à 6 mois à compter de la date de début de validité</string>
-    <string name="green_certificate_modal_order_button">je comprend</string>
+    <string name="green_certificate_modal_order_button">Je comprend</string>
     <string name="green_certificate_modal_order_title">Nous avons modifié l\'ordre de vos Certificats</string>
-  <string name="green_certificate_modal_order_message">Si vous lisez ce message, cela signifie que plusieurs certificats verts COVID-19 sont installés sur votre appareil : ils sont désormais affichés par ordre chronologique en commençant par le plus récent. N\'oubliez pas que vous pouvez les supprimer ou passer de l\'un à l\'autre en balayant latéralement avec votre doigt</string>
+  <string name="green_certificate_modal_order_message">Si vous lisez ce message, cela signifie que plusieurs certificats verts COVID-19 sont installés sur votre appareil: ils sont désormais affichés par ordre chronologique en commençant par le plus récent. N\'oubliez pas que vous pouvez les supprimer ou passer de l\'un à l\'autre en balayant latéralement avec votre doigt</string>
     <string name="green_certificate_validity_exemption">Certificat d\'exonération (illimité)</string>
   <string name="green_certificate_certifying_physician_exemption">Code fiscal du médecin certificateur</string>
-    <string name="green_certificate_start_date_validity_exemption">Valide à partir du</string>
-  <string name="green_certificate_end_date_validity_exemption">Données de fin de validité de la certification, le cas échéant</string>
+    <string name="green_certificate_start_date_validity_exemption">Date de début de validité de la certification</string>
+  <string name="green_certificate_end_date_validity_exemption">Date de fin de validité de la certification</string>
     <string name="green_certificate_cuev_exemption">Code unique d\'exemption de vaccination (CUEV)</string>
-    <string name="green_certificate_exemption_footer">Cette certification est valable uniquement en <b>Italie</b> et peut être utilisée pour remplacer la certification verte COVID-19 pour la réalisation d\'activités et l\'utilisation de services conformément à la législation nationale en vigueur.</string>
+    <string name="green_certificate_exemption_footer">Cette certification est valable uniquement en <b>Italie</b> et peut être utilisée comme substitut de la certification verte COVID-19 pour l\'exécution d\'activités et l\'utilisation de services conformément à la législation nationale en vigueur</string>
   <string name="green_certificate_subHeading_exemption">VALABLE UNIQUEMENT EN ITALIE</string>
   <string name="green_certificate_exemption_title">Certification numérique de l\'exemption de vaccination COVID-19</string>
+  <string name="green_certificate_certificate_issuer_exemption">Sujet qui a délivré le certificat d\'exemption numérique</string>
+
 </resources>

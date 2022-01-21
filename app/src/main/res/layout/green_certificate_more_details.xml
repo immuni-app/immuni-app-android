@@ -116,6 +116,13 @@
             android:text="@string/green_certificate_certificate_issuer" />
 
         <TextView
+            android:id="@+id/certificateIssuerLabelExemption"
+            style="@style/P1Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/green_certificate_certificate_issuer_exemption" />
+
+        <TextView
             android:id="@+id/entityIssuedCertificate"
             style="@style/P1Text.SemiBold"
             android:layout_width="match_parent"

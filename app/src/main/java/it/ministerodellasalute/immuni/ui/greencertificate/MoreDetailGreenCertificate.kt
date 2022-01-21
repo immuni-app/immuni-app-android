@@ -134,6 +134,8 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     setTextOrDefault(greenCertificateDetail.data?.vaccinations?.get(0)!!.countryOfVaccination)
                 certificateIssuerLabel.text =
                     getText(R.string.green_certificate_certificate_issuer_vaccination)
+                certificateIssuerLabelExemption.visibility = View.GONE
+
             }
             greenCertificateDetail.data?.tests != null -> {
                 // Inflate layout dynamically
@@ -181,6 +183,8 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 countryTest.text =
                     setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.countryOfVaccination)
                 certificateIssuerLabel.text = getText(R.string.green_certificate_certificate_issuer)
+                certificateIssuerLabelExemption.visibility = View.GONE
+
             }
             greenCertificateDetail.data?.recoveryStatements != null -> {
                 // Inflate layout dynamically
@@ -208,6 +212,8 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 certificateIssuerLabel.visibility = View.GONE
                 entityIssuedCertificate.visibility = View.GONE
                 validityHealing.text = healing_certificate ?: getString(R.string.green_certificate_validity_healing)
+                certificateIssuerLabelExemption.visibility = View.GONE
+
             }
             greenCertificateDetail.data?.exemptions != null -> {
                 isExemption = true
@@ -221,8 +227,6 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 exemptionValidFrom.text = greenCertificateDetail.data?.exemptions?.get(0)!!.certificateValidFrom
                 exemptionValidUntil.text = setTextOrDefault(greenCertificateDetail.data?.exemptions?.get(0)!!.certificateValidUntil)
                 uniqueCodeExemption.text = greenCertificateDetail.data?.exemptions?.get(0)!!.uniqueVaccinationExemptionIdentifier
-                certificateIssuerLabel.text =
-                    getText(R.string.green_certificate_certificate_issuer_vaccination)
             }
         }
 
@@ -230,6 +234,9 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
             getString(R.string.green_certificate_certificate_issuer_const)
 
         if (isExemption) {
+            certificateIssuerLabel.visibility = View.GONE
+            certificateIssuerLabelExemption.visibility = View.VISIBLE
+            certificateIssuerLabel.text = getString(R.string.green_certificate_certificate_issuer_exemption)
             setTitle(getString(R.string.green_certificate_exemption_title))
             textFooter.visibility = View.GONE
             europeRestrictionSite.visibility = View.GONE
