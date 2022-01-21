@@ -135,7 +135,6 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 certificateIssuerLabel.text =
                     getText(R.string.green_certificate_certificate_issuer_vaccination)
                 certificateIssuerLabelExemption.visibility = View.GONE
-
             }
             greenCertificateDetail.data?.tests != null -> {
                 // Inflate layout dynamically
@@ -184,7 +183,6 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.countryOfVaccination)
                 certificateIssuerLabel.text = getText(R.string.green_certificate_certificate_issuer)
                 certificateIssuerLabelExemption.visibility = View.GONE
-
             }
             greenCertificateDetail.data?.recoveryStatements != null -> {
                 // Inflate layout dynamically
@@ -213,7 +211,6 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 entityIssuedCertificate.visibility = View.GONE
                 validityHealing.text = healing_certificate ?: getString(R.string.green_certificate_validity_healing)
                 certificateIssuerLabelExemption.visibility = View.GONE
-
             }
             greenCertificateDetail.data?.exemptions != null -> {
                 isExemption = true
