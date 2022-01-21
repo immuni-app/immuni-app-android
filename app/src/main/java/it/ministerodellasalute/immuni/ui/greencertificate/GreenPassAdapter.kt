@@ -96,6 +96,9 @@ class GreenPassAdapter(
             greenCertificate.data?.vaccinations != null -> {
                 greenCertificate.data!!.vaccinations!![0].certificateIdentifier
             }
+            greenCertificate.data?.exemptions != null -> {
+                greenCertificate.data!!.exemptions!![0].certificateIdentifier
+            }
             else -> null
         }
 

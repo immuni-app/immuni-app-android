@@ -46,21 +46,18 @@ class SetupViewModel(
             val minDelay = async {
                 delay(4000)
             }
-            val isFirstLaunch = !userManager.isSetupComplete.value
-            if (isFirstLaunch) {
-                // Let's fetch the configuration settings,
-                // waiting no more than 10 seconds for them to download before proceeding
-                val completion = CompletableDeferred<Unit>()
-                async {
-                    delay(10_000)
-                    completion.complete(Unit)
-                }
-                async {
-                    settingsManager.fetchSettingsAsync().await()
-                    completion.complete(Unit)
-                }
-                completion.await()
+            // Let's fetch the configuration settings,
+            // waiting no more than 10 seconds for them to download before proceeding
+            val completion = CompletableDeferred<Unit>()
+            async {
+                delay(10_000)
+                completion.complete(Unit)
             }
+            async {
+                settingsManager.fetchSettingsAsync().await()
+                completion.complete(Unit)
+            }
+            completion.await()
             minDelay.await()
             userManager.setSetupComplete(true)
             triggerNavigation()

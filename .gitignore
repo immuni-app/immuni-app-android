@@ -20,6 +20,13 @@ icon.png
 /app/google-services.json
 /app.properties
 /app/src/debug/res/values/endpoints.xml
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+node_modules
 
 app/agconnect-services.json
 

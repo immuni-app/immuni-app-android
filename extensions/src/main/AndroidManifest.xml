@@ -1,4 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.ministerodellasalute.immuni.extensions">
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <queries>
+        <!-- Browser -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
+        </intent>
+    </queries>
 </manifest>

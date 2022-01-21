@@ -101,7 +101,7 @@
   <string name="home_view_info_app_title">Come funziona l\'app?</string>
   <string name="home_view_info_button_title">Scopri di più</string>
   <string name="home_view_info_header_title">Informazioni</string>
-  <string name="home_view_header_card_risk_title">Rilevata esposizione a rischio con una persona COVID-19 positiva</string>
+  <string name="home_view_header_card_risk_title">Rilevata esposizione a rischio con una persona positiva al COVID-19</string>
   <string name="home_view_header_card_risk_button">Scopri subito cosa fare ›</string>
   <string name="home_view_header_card_positive_title">Segui le indicazioni che ti hanno fornito il tuo medico o la tua ASL</string>
   <string name="home_view_header_card_positive_button">Sei guarito? Aggiorna il tuo stato ›</string>
@@ -180,7 +180,7 @@ dei dati&#8230;</string>
   <string name="confirm_data_button_title">Carica i dati</string>
   <string name="confirm_data_cell_result_title">Il risultato dell\'esame</string>
   <string name="confirm_data_cell_proximity_data_title">I tuoi codici casuali</string>
-  <string name="confirm_data_cell_exposition_data_title">Gli indicatori di rischio di precedenti contatti con persone COVID-19 positive</string>
+  <string name="confirm_data_cell_exposition_data_title">Gli indicatori di rischio di precedenti contatti con persone positive al COVID-19</string>
   <string name="confirm_data_cell_province_title">La tua provincia</string>
   <string name="confirm_data_confirmation_title">Dati caricati con successo</string>
   <string name="confirm_data_confirmation_subtitle">Grazie per il tuo contributo</string>
@@ -193,7 +193,7 @@ dei dati&#8230;</string>
   <string name="suggestions_neutral_alert">Se sei in contatto con il tuo medico o con il Dipartimento di Prevenzione della tua ASL, segui tutte le indicazioni che hai ricevuto.</string>
   <string name="suggestions_neutral_message">In ogni caso, <b>cerca sempre di rispettare queste indicazioni generali:</b></string>
   <string name="suggestions_risk_title">Esposizione a rischio</string>
-  <string name="suggestions_risk_subtitle">Immuni ha rilevato che il giorno %@ sei stato vicino a un utente COVID-19 positivo.</string>
+  <string name="suggestions_risk_subtitle">Immuni ha rilevato che il giorno %@ sei stato vicino ad una persona positiva al COVID-19.</string>
   <string name="suggestions_positive_title">Segui le indicazioni</string>
   <string name="suggestions_positive_subtitle"><b>Segui tutte le indicazioni che hai ricevuto dal tuo medico o dal Dipartimento di Prevenzione della tua ASL.</b></string>
   <string name="suggestions_instruction_ministerial_decree"><b>Rispetta la normativa vigente nella tua area.</b></string>
@@ -218,10 +218,10 @@ dei dati&#8230;</string>
   <string name="suggestions_alert_asl_contact_confirmation_title">Confermi di essere in contatto con il tuo medico o con la tua ASL?</string>
   <string name="suggestions_alert_asl_contact_confirmation_description">Immuni nasconderà l’avviso di contatto. Dovrai comunque seguire tutte le indicazioni che hai ricevuto dal tuo medico o dalla tua ASL.</string>
   <string name="suggestions_positive_info_title">Immuni sta continuando a funzionare: non disinstallarla!</string>
-  <string name="suggestions_positive_info_subtitle">Per il momento, non riceverai eventuali nuove notifiche in caso di esposizione a rischio con un utente COVID-19 positivo.</string>
-  <string name="suggestions_positive_covid_negative_message"><b>Indicaci se la tua ASL ha confermato che sei COVID-19 negativo per riattivare le notifiche in caso di esposizione a rischio.</b></string>
-  <string name="suggestions_positive_covid_negative_action">Sono COVID-19 negativo</string>
-  <string name="suggestions_alert_covid_negative_title">Confermi di essere COVID-19 negativo?</string>
+  <string name="suggestions_positive_info_subtitle">Per il momento, non riceverai eventuali nuove notifiche in caso di esposizione a rischio con persone positive al COVID-19.</string>
+  <string name="suggestions_positive_covid_negative_message"><b>Indicaci se la tua ASL ha confermato che sei negativo al COVID-19 per riattivare le notifiche in caso di esposizione a rischio.</b></string>
+  <string name="suggestions_positive_covid_negative_action">Sono negativo al COVID-19</string>
+  <string name="suggestions_alert_covid_negative_title">Confermi di essere negativo al COVID-19?</string>
   <string name="suggestions_alert_covid_negative_description">La tua ASL deve aver confermato che sei negativo al virus e che puoi tornare a uscire di casa.</string>
   <string name="suggestions_alert_covid_negative_negative_answer">No</string>
   <string name="suggestions_alert_covid_negative_positive_answer">Confermo</string>
@@ -357,7 +357,7 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="suggestions_instruction_under_18_message">Se hai meno di 18 anni, fai leggere questo messaggio ai tuoi genitori.</string>
   <string name="privacy_tos_read">Proseguendo, dichiaro di aver letto e accettato i {termini di utilizzo}</string>
   <string name="privacy_checkbox_read">Ho letto l\'{informativa privacy}</string>
-  <string name="suggestions_risk_with_date_subtitle">Immuni ha rilevato che il giorno %s sei stato vicino a un utente COVID-19 positivo.</string>
+  <string name="suggestions_risk_with_date_subtitle">Immuni ha rilevato che il giorno %s sei stato vicino ad una persona positiva al COVID-19.</string>
   <string name="welcome_view_discover_more">Scopri come funziona l\'app</string>
   <string name="permission_tutorial_why_province_region_title">A cosa serve inserire regione e provincia di domicilio</string>
   <string name="permission_tutorial_why_province_region_first"><b>Regione e provincia di domicilio sono utili al Servizio Sanitario Nazionale per poter prevenire l\'insorgenza di nuovi focolai,</b> oltre che per poter stimare la diffusione dell\'app sul territorio nazionale. La provincia di domicilio viene inviata al server del Ministero della Salute contestualmente alle informazioni sul corretto funzionamento dell\'app e sul fatto che tu sia stato o meno avvertito di un contatto a rischio. Immuni raccoglie queste informazioni nella piena tutela della tua privacy.</string>
@@ -496,8 +496,21 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_certificate_validity_vaccine_complete">Certificazione valida 365 giorni (12 mesi) dalla data dell\'ultima somministrazione</string>
   <string name="green_certificate_validity_Quicktest">Certificazione valida 48 ore dall\'ora del prelievo</string>
   <string name="green_certificate_validity_Moleculartest">Certificazione valida 72 ore dall\'ora del prelievo</string>
-  <string name="green_certificate_no_dcc_found">Nessun EU Digital Covid Certificate trovato</string>
+  <string name="green_certificate_no_dcc_found">Nessun EU Digital Covid Certificate trovato. Controlla che i dati inseriti siano corretti</string>
   <string name="green_pass_confirm_button">Conferma</string>
   <string name="green_certificate_more_details_doses_number_text">%s di %s</string>
   <string name="green_certificate_validity_healing">Certificazione valida in Unione Europea fino alla data di fine validità e valida solo in Italia fino a 6 mesi dalla data di inizio validità</string>
+  <string name="green_certificate_modal_order_title">Abbiamo cambiato l\'ordine dei tuoi Certificati</string>
+  <string name="green_certificate_modal_order_message">Se stai leggendo questo messaggio vuol dire che hai più di un Certificato Verde COVID-19 installato sul tuo dispositivo: ora sono visualizzati in ordine cronologico a partire dal più recente. Ricordati che puoi eliminarli o spostarti da uno all\'altro scorrendo lateralmente con il dito</string>
+  <string name="green_certificate_modal_order_button">Ho capito</string>
+  <string name="green_certificate_subHeading_exemption">VALIDA SOLO IN ITALIA</string>
+  <string name="green_certificate_validity_exemption">Certificato esenzione (illimitata)</string>
+  <string name="green_certificate_certifying_physician_exemption">Codice fiscale del medico certificatore</string>
+  <string name="green_certificate_start_date_validity_exemption">Data di inizio validità della certificazione</string>
+  <string name="green_certificate_end_date_validity_exemption">Data di fine validità della certificazione</string>
+    <string name="green_certificate_cuev_exemption">Codice univoco esenzione vaccinale (CUEV)</string>
+    <string name="green_certificate_exemption_footer">Questa certificazione è valida solo in <b>Italia</b> e può essere utilizzata in sostituzione della Certificazione verde COVID-19 per lo svolgimento di attività e la fruizione di servizi secondo quanto previsto dalla normativa nazionale vigente</string>
+  <string name="green_certificate_exemption_title">Certificazione digitale di esenzione dalla vaccinazione anti-COVID-19</string>
+  <string name="green_certificate_certificate_issuer_exemption">Soggetto che ha rilasciato la certificazione digitale di esenzione</string>
+
 </resources>

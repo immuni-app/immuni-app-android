@@ -25,8 +25,10 @@ import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -40,6 +42,7 @@ import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.util.ImageUtils
 import kotlin.math.abs
 import kotlinx.android.synthetic.main.green_certificate.*
+import kotlinx.android.synthetic.main.green_certificate_tab.*
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
@@ -58,6 +61,7 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
     companion object {
         const val DELETE_QR = 200
         const val GO_TO_SETTINGS = 201
+        const val INFORMATION_ORDER = 202
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,6 +90,20 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
                 positionOffsetPixels: Int
             ) {
             }
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                val currentView = (viewpager[0] as RecyclerView).layoutManager?.findViewByPosition(position)
+                currentView?.post {
+                    val wMeasureSpec = View.MeasureSpec.makeMeasureSpec(currentView.width, View.MeasureSpec.EXACTLY)
+                    val hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                    currentView.measure(wMeasureSpec, hMeasureSpec)
+
+                    if (viewpager.layoutParams.height != currentView.measuredHeight) {
+                        viewpager.layoutParams = (viewpager.layoutParams).also { lp -> lp.height = currentView.measuredHeight }
+                    }
+                }
+            }
         }
 
         greenPassAdapter = GreenPassAdapter(
@@ -93,7 +111,7 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
             fragment = this@GreenCertificateFragment,
             viewModel = viewModel
         )
-        greenPassAdapter.data = userManager.user.value?.greenPass!!
+        greenPassAdapter.data = userManager.user.value?.greenPass!!.asReversed()
 
         with(viewpager) {
             adapter = greenPassAdapter
@@ -116,34 +134,54 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
             findNavController().navigate(action)
         }
         setVisibilityLayout()
+        informationOrder()
     }
 
     override fun onDialogPositive(requestCode: Int) {
-        if (requestCode == DELETE_QR) {
-            val user = userManager.user
-            user.value?.greenPass!!.removeAt(positionToDelete!!)
-            userManager.save(
-                User(
-                    region = user.value?.region!!,
-                    province = user.value?.province!!,
-                    greenPass = user.value?.greenPass!!
+        when (requestCode) {
+            DELETE_QR -> {
+                val user = userManager.user
+                user.value?.greenPass!!.asReversed().removeAt(positionToDelete!!)
+                userManager.save(
+                    User(
+                        region = user.value?.region!!,
+                        province = user.value?.province!!,
+                        greenPass = user.value?.greenPass!!
+                    )
                 )
-            )
-            greenPassAdapter.notifyItemRemoved(positionToDelete!!)
-            greenPassAdapter.notifyItemRangeChanged(positionToDelete!!, greenPassAdapter.itemCount)
-            setVisibilityLayout()
-            positionToDelete = null
-        } else {
-            val intent =
-                Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-            val uri: Uri = Uri.fromParts("package", requireContext().packageName, null)
-            intent.data = uri
-            startActivity(intent)
+                greenPassAdapter.notifyItemRemoved(positionToDelete!!)
+                greenPassAdapter.notifyItemRangeChanged(positionToDelete!!, greenPassAdapter.itemCount)
+                setVisibilityLayout()
+                positionToDelete = null
+            }
+            INFORMATION_ORDER -> {
+                userManager.setShowModalDGC(show = false)
+            }
+            GO_TO_SETTINGS -> {
+                val intent =
+                    Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri: Uri = Uri.fromParts("package", requireContext().packageName, null)
+                intent.data = uri
+                startActivity(intent)
+            }
         }
     }
 
     override fun onDialogNegative(requestCode: Int) {
         // Pass
+    }
+
+    private fun informationOrder() {
+        if (userManager.showModalDGC.value && userManager.user.value!!.greenPass.size > 1) {
+            openConfirmationDialog(
+                positiveButton = getString(R.string.green_certificate_modal_order_button),
+                negativeButton = null,
+                message = getString(R.string.green_certificate_modal_order_message),
+                title = getString(R.string.green_certificate_modal_order_title),
+                cancelable = false,
+                requestCode = INFORMATION_ORDER
+            )
+        }
     }
 
     private fun setVisibilityLayout() {

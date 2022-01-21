@@ -292,6 +292,9 @@ class GreenCertificateViewModel(
             greenCertificate.recoveryStatements != null -> {
                 greenCertificate.recoveryStatements!![0].certificateIdentifier
             }
+            greenCertificate.exemptions != null -> {
+                greenCertificate.exemptions!![0].certificateIdentifier
+            }
             else -> null
         }
 
@@ -308,6 +311,10 @@ class GreenCertificateViewModel(
                     }
                     greenPass.data?.recoveryStatements != null -> {
                         if (greenPass.data?.recoveryStatements!![0].certificateIdentifier == issuerID) saved =
+                            true
+                    }
+                    greenPass.data?.exemptions != null -> {
+                        if (greenPass.data?.exemptions!![0].certificateIdentifier == issuerID) saved =
                             true
                     }
                 }
