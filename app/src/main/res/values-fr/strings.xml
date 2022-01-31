@@ -512,5 +512,6 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="green_certificate_subHeading_exemption">VALABLE UNIQUEMENT EN ITALIE</string>
   <string name="green_certificate_exemption_title">Certification numérique de l\'exemption de vaccination COVID-19</string>
   <string name="green_certificate_certificate_issuer_exemption">Sujet qui a délivré le certificat d\'exemption numérique</string>
+    <string name="green_certificate_validity_vaccine_booster">Certification valable 180 jours (6 mois) à compter de la date de la dernière administration, sous réserve de modifications réglementaires</string>
 
 </resources>

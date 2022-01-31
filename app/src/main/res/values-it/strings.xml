@@ -512,5 +512,6 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
     <string name="green_certificate_exemption_footer">Questa certificazione è valida solo in <b>Italia</b> e può essere utilizzata in sostituzione della Certificazione verde COVID-19 per lo svolgimento di attività e la fruizione di servizi secondo quanto previsto dalla normativa nazionale vigente</string>
   <string name="green_certificate_exemption_title">Certificazione digitale di esenzione dalla vaccinazione anti-COVID-19</string>
   <string name="green_certificate_certificate_issuer_exemption">Soggetto che ha rilasciato la certificazione digitale di esenzione</string>
+    <string name="green_certificate_validity_vaccine_booster">Certificazione valida 180 giorni (6 mesi) dalla data dell\'ultima somministrazione, salvo modifiche normative</string>
 
 </resources>

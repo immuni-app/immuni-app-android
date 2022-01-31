@@ -513,4 +513,5 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="green_certificate_subHeading_exemption">VÁLIDO SOLO EN ITALIA</string>
   <string name="green_certificate_exemption_title">Certificación digital de exención de vacunación COVID-19</string>
   <string name="green_certificate_certificate_issuer_exemption">Sujeto que emitió el certificado de exención digital</string>
+  <string name="green_certificate_validity_vaccine_booster">Certificación válida por 180 días (6 meses) a partir de la fecha de la última administración, sujeta a cambios regulatorios</string>
 </resources>
