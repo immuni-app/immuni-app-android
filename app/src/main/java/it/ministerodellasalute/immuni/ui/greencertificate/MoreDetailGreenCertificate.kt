@@ -66,19 +66,19 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
         val vaccineFirstDose = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["vaccine_first_dose"]
         val rapidTest = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["rapid_test"]
         val molecularTest = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["molecular_test"]
-        val healing_certificate = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["healing_certificate"]
-        val exemptionCertificate = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["exemption_certificate"]
+        val healingCertificate = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["healing_certificate"]
+        val vaccineBooster = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["vaccine_booster"]
         setUI(
             vaccineFullyCompleted,
             vaccineFirstDose,
             molecularTest,
             rapidTest,
-            healing_certificate,
-            exemptionCertificate
+            healingCertificate,
+            vaccineBooster
         )
     }
 
-    private fun setUI(validUntilCompleteVaccine: String?, validUntilnotCompleteVaccine: String?, validUntilMolecularTest: String?, validUntilQuickTest: String?, healing_certificate: String?, exemptionCertificate: String?) {
+    private fun setUI(validUntilCompleteVaccine: String?, validUntilnotCompleteVaccine: String?, validUntilMolecularTest: String?, validUntilQuickTest: String?, healingCertificate: String?, vaccineBooster: String?) {
         var isExemption = false
         when (true) {
             greenCertificateDetail.data?.vaccinations != null -> {
@@ -110,13 +110,12 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                         )
                             ?.let { getString(it) })
                 validityVaccine.text =
-                    if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber >= greenCertificateDetail.data?.vaccinations?.get(
-                            0
-                        )!!.totalSeriesOfDoses
-                    ) {
+                    if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber < greenCertificateDetail.data?.vaccinations?.get(0)!!.totalSeriesOfDoses) {
+                        validUntilnotCompleteVaccine ?: getString(R.string.green_certificate_validity_vaccine_partial)
+                    } else if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber == greenCertificateDetail.data?.vaccinations?.get(0)!!.totalSeriesOfDoses && greenCertificateDetail.data?.vaccinations?.get(0)!!.totalSeriesOfDoses < 3) {
                         validUntilCompleteVaccine ?: getString(R.string.green_certificate_validity_vaccine_complete)
                     } else {
-                        validUntilnotCompleteVaccine ?: getString(R.string.green_certificate_validity_vaccine_partial)
+                        vaccineBooster ?: getString(R.string.green_certificate_validity_vaccine_booster)
                     }
                 dosesNumber.text = String.format(
                     requireContext().getString(R.string.green_certificate_more_details_doses_number_text),
@@ -209,7 +208,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 certificateIssuerLabelEng.visibility = View.GONE
                 certificateIssuerLabel.visibility = View.GONE
                 entityIssuedCertificate.visibility = View.GONE
-                validityHealing.text = healing_certificate ?: getString(R.string.green_certificate_validity_healing)
+                validityHealing.text = healingCertificate ?: getString(R.string.green_certificate_validity_healing)
                 certificateIssuerLabelExemption.visibility = View.GONE
             }
             greenCertificateDetail.data?.exemptions != null -> {

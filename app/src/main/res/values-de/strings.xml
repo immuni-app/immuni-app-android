@@ -510,4 +510,5 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="green_certificate_exemption_title">Digitale Bescheinigung der COVID-19-Impfbefreiung</string>
   <string name="green_certificate_certificate_issuer_exemption">Subjekt, das die digitale Freistellungsbescheinigung ausgestellt hat</string>
   <string name="green_certificate_exemption_footer">Diese Zertifizierung ist nur in <b>Italien</b> gültig und kann verwendet werden, um die grüne COVID-19-Zertifizierung für die Durchführung von Aktivitäten und die Nutzung von Dienstleistungen gemäß der geltenden nationalen Gesetzgebung zu ersetzen</string>
+    <string name="green_certificate_validity_vaccine_booster">Zertifizierung gültig für 180 Tage (6 Monate) ab dem Datum der letzten Verabreichung, vorbehaltlich behördlicher Änderungen</string>
 </resources>
