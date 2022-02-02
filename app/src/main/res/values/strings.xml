@@ -425,14 +425,14 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_pass_button_generate">Retrieve EU Digital Covid Certificate</string>
     <string name="green_pass_generate_title">Retrieve EU Digital Covid Certificate</string>
     <string name="green_pass_generate_description">This function allows you to download the COVID-19 green certification (EU Digital Covid Certificate) from the national platform-DGC of the Ministry of Health by entering the required data.</string>
-    <string name="green_pass_code_hint" translatable="false">NRFE/CUN/NUCG/AUTHCODE</string>
+    <string name="green_pass_code_hint" translatable="false">NRFE/CUN/NUCG/AUTHCODE/CUEV</string>
     <string name="green_pass_health_insurance_hint">The last eight digits of your Health ID Card</string>
     <string name="green_pass_expired_date_hs_hint">Health Card expiry date</string>
     <string name="green_pass_confirm_button">Done</string>
     <string name="green_pass_how_to_generate_title">How to acquire the EU Digital Covid Certificate</string>
     <string name="green_pass_how_to_generate_first">The \"EU Digital Covid Certificate\", in Italy \"COVID-19 green certification\", is issued by the Ministry of Health in digital format to those who have been vaccinated or have obtained a negative result on the molecular / antigen test or are cured of COVID- 19.</string>
     <string name="green_pass_how_to_generate_second">The certificate has a two-dimensional barcode (QR code) that contains the essential information of the holder of the certificate and the health event to which the certificate is associated (vaccination, negative test, COVID-19 cure) and digitally signed to guarantee authenticity.</string>
-    <string name="green_pass_how_to_generate_third">If you have received the code to recover the certification via email or SMS, you can use this App by entering one of the unique codes CUN, NRFE, NUCG (received respectively during the execution of the molecular swab or the execution of the antigenic swab or the preparation of the healing certificate ), or the AUTHCODE authorization code received via e-mail or SMS together with the last 8 digits of the identification number and the expiry date of the Health Card.</string>
+    <string name="green_pass_how_to_generate_third">If you have received the code to recover the certification via email or SMS, you can use this App by entering one of the unique codes CUN, NRFE, NUCG, CUEV (received respectively during the execution of the molecular swab or the execution of the antigenic swab or the preparation of the healing certificate ), or the AUTHCODE authorization code received via e-mail or SMS together with the last 8 digits of the identification number and the expiry date of the Health Card.</string>
     <string name="green_pass_how_to_generate_fourth">All these codes are uniquely associated with the COVID-19 green certificate relating to the health event that generated it.</string>
     <string name="green_pass_how_to_generate_sixth">For more information visit the website www.dgc.gov.it</string>
     <string name="green_pass_how_to_generate_link" translatable="false">www.dgc.gov.it</string>
@@ -443,17 +443,21 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
         <item>NRFE</item>
         <item>CUN</item>
         <item>NUCG</item>
+        <item>CUEV</item>
     </string-array>
     <string name="const_nrfe" translatable="false">NRFE-</string>
     <string name="const_nucg" translatable="false">NUCG-</string>
     <string name="const_authcode" translatable="false">AUTHCODE-</string>
+    <string name="const_cuev" translatable="false">CUEV-</string>
     <string name="form_code_cun_empty">- Enter the last 10 characters of the CUN code that was communicated to you\n</string>
     <string name="form_code_nrfe_empty">- Enter the last 17 characters of the NRFE code that was communicated to you\n</string>
     <string name="form_code_nucg_empty">- Enter the last 10 characters of the NUCG code that was communicated to you\n</string>
+    <string name="form_code_cuev_empty">- Enter the last 10 characters of the CUEV code that was communicated to you\n</string>
     <string name="form_code_otp_empty">- Enter the last 12 characters of the AUTHCODE that was communicated to you\n</string>
     <string name="form_code_cun_wrong">- The entered CUN is not formally valid. Make sure you have entered the last 10 digits of the CUN you received by SMS or in the report associated with a positive swab\n</string>
     <string name="form_code_nrfe_wrong">- The entered NRFE code is not formally valid. Make sure you have entered the last 17 digits of the NRFE code you received\n</string>
     <string name="form_code_nucg_wrong">- The entered NUCG code is not formally valid. Make sure you have entered the last 10 digits of the NUCG code you received\n</string>
+    <string name="form_code_cuev_wrong">- The entered CUEV code is not formally valid. Make sure you have entered the last 10 digits of the CUEV code you received\n</string>
     <string name="form_code_otp_wrong">- The AUTHCODE entered is not formally valid. Make sure you have entered the last 12 digits of the AUTHCODE you received\n</string>
     <string name="form_type_code_empty">- Select the type of code\n</string>
     <string name="form_expired_health_date">- Enter the expiration date of the health card\n</string>
@@ -462,6 +466,7 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="nrfe_title" translatable="false">NRFE</string>
     <string name="nucg_title" translatable="false">NUCG</string>
     <string name="authcode_title" translatable="false">AUTHCODE</string>
+    <string name="cuev_title" translatable="false">CUEV</string>
     <string name="title_modal_confirm_delete_dcg">Delete EU Digital Covid Certificate</string>
     <string name="message_modal_confirm_delete_dcg">Are you sure you want to delete your EU Digital Covid Certificate?</string>
     <string name="form_type_code_label">Type of Code</string>
