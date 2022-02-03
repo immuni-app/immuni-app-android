@@ -29,7 +29,7 @@ class DigitValidator {
             checkSum += (if (it.isEven) ODD_MAP else EVEN_MAP).getValue(char)
         }
 
-        val checkDigit = CHECK_DIGIT_MAP[checkSum % ALPHABET_CUN.size]
+        val checkDigit = CHECK_DIGIT_MAP_CUN[checkSum % ALPHABET_CUN.size]
 
         return if (checkDigit == token[CUN_CODE_LENGTH - 1]) {
             GreenPassValidationResult.Valid(true)
@@ -48,7 +48,7 @@ class DigitValidator {
             checkSum += (if (it.isEven) ODD_MAP else EVEN_MAP).getValue(char)
         }
 
-        val checkDigit = CHECK_DIGIT_MAP_NUCG_OTP[checkSum % ALPHABET_NUCG_OTP.size]
+        val checkDigit = CHECK_DIGIT_MAP[checkSum % ALPHABET.size]
 
         return if (checkDigit == token[OTP_CODE_LENGTH - 1]) {
             GreenPassValidationResult.Valid(true)
@@ -77,9 +77,28 @@ class DigitValidator {
             checkSum += (if (it.isEven) ODD_MAP else EVEN_MAP).getValue(char)
         }
 
-        val checkDigit = CHECK_DIGIT_MAP_NUCG_OTP[checkSum % ALPHABET_NUCG_OTP.size]
+        val checkDigit = CHECK_DIGIT_MAP[checkSum % ALPHABET.size]
 
         return if (checkDigit == token[NUCG_CODE_LENGTH - 1]) {
+            GreenPassValidationResult.Valid(true)
+        } else {
+            GreenPassValidationResult.TokenWrong
+        }
+    }
+
+    fun validaCheckDigitCUEV(token: String): GreenPassValidationResult {
+        if (token.length != CUEV_CODE_LENGTH) {
+            return GreenPassValidationResult.TokenLengthWrong
+        }
+        var checkSum = 0
+        repeat(CUEV_CODE_LENGTH - 1) {
+            val char = token[it]
+            checkSum += (if (it.isEven) ODD_MAP else EVEN_MAP).getValue(char)
+        }
+
+        val checkDigit = CHECK_DIGIT_MAP[checkSum % ALPHABET.size]
+
+        return if (checkDigit == token[CUEV_CODE_LENGTH - 1]) {
             GreenPassValidationResult.Valid(true)
         } else {
             GreenPassValidationResult.TokenWrong
@@ -92,6 +111,7 @@ private inline val Int.isEven get() = (this and 1) == 0
 const val CUN_CODE_LENGTH = 10
 const val NRFE_CODE_LENGTH = 17
 const val NUCG_CODE_LENGTH = 10
+const val CUEV_CODE_LENGTH = 10
 const val OTP_CODE_LENGTH = 12
 const val NRFE_START_WITH = "99"
 
@@ -198,7 +218,7 @@ val ALPHABET_CUN = arrayOf(
     '8',
     '9'
 )
-val ALPHABET_NUCG_OTP = arrayOf(
+val ALPHABET = arrayOf(
     'A',
     'B',
     'C',
@@ -234,6 +254,6 @@ val ALPHABET_NUCG_OTP = arrayOf(
     '9'
 )
 
-val CHECK_DIGIT_MAP = ALPHABET_CUN.asSequence().mapIndexed { index, c -> index to c }.toMap()
-val CHECK_DIGIT_MAP_NUCG_OTP =
-    ALPHABET_NUCG_OTP.asSequence().mapIndexed { index, c -> index to c }.toMap()
+val CHECK_DIGIT_MAP_CUN = ALPHABET_CUN.asSequence().mapIndexed { index, c -> index to c }.toMap()
+val CHECK_DIGIT_MAP =
+    ALPHABET.asSequence().mapIndexed { index, c -> index to c }.toMap()
