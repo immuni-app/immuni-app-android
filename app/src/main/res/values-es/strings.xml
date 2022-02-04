@@ -429,10 +429,12 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="form_code_cun_empty">- Ingrese los últimos 10 caracteres del código CUN que se le comunicaron\n</string>
   <string name="form_code_nrfe_empty">- Ingrese los últimos 17 caracteres del código NRFE que se le comunicaron\n</string>
   <string name="form_code_nucg_empty">- Ingrese los últimos 10 caracteres del código NUCG que se le comunicaron\n</string>
+  <string name="form_code_cuev_empty">- Ingrese los últimos 10 caracteres del código CUEV que se le comunicaron\n</string>
   <string name="form_code_otp_empty">- Inserisci gli ultimi 12 caratteri del codice AUTHCODE che ti è stato comunicato\n</string>
   <string name="form_code_cun_wrong">- El CUN ingresado no es formalmente válido. Asegúrese de haber ingresado los últimos 10 códigos CUN recibidos a través de SMS o en el informe asociado con el búfer positivo\n</string>
   <string name="form_code_nrfe_wrong">- El código NRFE introducido no es formalmente válido. Asegúrese de haber ingresado los últimos 17 dígitos del código NRFE que recibiste\n</string>
   <string name="form_code_nucg_wrong">- El código NUCG ingresado no es formalmente válido. Asegúrese de haber ingresado los últimos 10 dígitos del código NUCG que recibiste\n</string>
+  <string name="form_code_cuev_wrong">- El código CUEV ingresado no es formalmente válido. Asegúrese de haber ingresado los últimos 10 dígitos del código CUEV que recibiste\n</string>
   <string name="form_code_otp_wrong">- El AUTHCODE ingresado no es formalmente válido. Asegúrese de haber ingresado los últimos 12 dígitos del AUTHCODE que recibiste\n</string>
   <string name="form_type_code_empty">- Seleccione el tipo de código\n</string>
   <string name="form_expired_health_date">- Ingrese la fecha de vencimiento de la tarjeta sanitaria\n</string>
@@ -481,7 +483,7 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="green_certificate_more_details_doses_number_text">%s de %s</string>
   <string name="green_pass_how_to_generate_first">El \"EU Digital Covid Certificate\", en Italia \"Certificación verde COVID-19\", es emitido por el Ministerio de Salud en formato digital para aquellos que han sido vacunados o han obtenido un resultado negativo en la prueba molecular / de antígenos o están curados de COVID- 19.</string>
   <string name="green_pass_how_to_generate_second">El certificado tiene un código de barras bidimensional (código QR) que contiene la información esencial del titular del certificado y el evento de salud al que se asocia el certificado (vacunación, prueba negativa, cura COVID-19) y firmado digitalmente para garantizar la autenticidad.</string>
-  <string name="green_pass_how_to_generate_third">Si has recibido el código para recuperar la certificación por correo electrónico o SMS, puedes utilizar esta aplicación ingresando uno de los códigos únicos CUN, NRFE, NUCG (recibidos respectivamente durante la ejecución del hisopo molecular o del hisopo antigénico o al preparar el certificado de curación.), o el código de autorización AUTHCODE recibido vía e-mail o SMS junto con los últimos 8 dígitos del número de identificación y la fecha de vencimiento de la Tarjeta Sanitaria.</string>
+  <string name="green_pass_how_to_generate_third">Si has recibido el código para recuperar la certificación por correo electrónico o SMS, puedes utilizar esta aplicación ingresando uno de los códigos únicos CUN, NRFE, NUCG, CUEV (recibidos respectivamente durante la ejecución del hisopo molecular o del hisopo antigénico o al preparar el certificado de curación.), o el código de autorización AUTHCODE recibido vía e-mail o SMS junto con los últimos 8 dígitos del número de identificación y la fecha de vencimiento de la Tarjeta Sanitaria.</string>
   <string name="green_pass_how_to_generate_fourth">Todos estos códigos están asociados de forma única con el certificado verde COVID-19 relacionado con el evento de salud que lo generó.</string>
     <string name="green_pass_how_to_generate_sixth">Para obtener más información, visita el sitio web www.dgc.gov.it</string>
   <string name="green_pass_generation_successfully">EU Digital Covid Certificate recuperado con éxito</string>

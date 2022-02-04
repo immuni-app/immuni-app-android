@@ -433,7 +433,7 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="green_pass_how_to_generate_title">Comment acquérir le EU Digital Covid Certificate</string>
   <string name="green_pass_how_to_generate_first">Le «EU Digital Covid Certificate», en Italie «certification verte COVID-19», est délivré par le ministère de la Santé au format numérique à ceux qui ont été vaccinés ou ont obtenu un résultat négatif au test moléculaire / antigène ou sont guéris de COVID-19.</string>
   <string name="green_pass_how_to_generate_second">Le certificat comporte un code-barres bidimensionnel (QR code) qui contient les informations essentielles du titulaire du certificat et l\'événement de santé auquel le certificat est associé (vaccination, test négatif, cure COVID-19) et signé numériquement pour garantir l\'authenticité .</string>
-  <string name="green_pass_how_to_generate_third">Si vous avez reçu le code pour récupérer la certification par e-mail ou SMS, vous pouvez utiliser cette App en saisissant l\'un des codes uniques CUN, NRFE, NUCG (reçus respectivement lors de l\'exécution de l\'écouvillonnage moléculaire ou lors de l\'écouvillonnage antigénique ou lors de la préparation le certificat de guérison. ), ou le code d\'autorisation AUTHCODE reçu par e-mail ou SMS accompagné des 8 derniers chiffres du numéro d\'identification et de la date d\'expiration de la Carte Santé.</string>
+  <string name="green_pass_how_to_generate_third">Si vous avez reçu le code pour récupérer la certification par e-mail ou SMS, vous pouvez utiliser cette App en saisissant l\'un des codes uniques CUN, NRFE, NUCG, CUEV (reçus respectivement lors de l\'exécution de l\'écouvillonnage moléculaire ou lors de l\'écouvillonnage antigénique ou lors de la préparation le certificat de guérison. ), ou le code d\'autorisation AUTHCODE reçu par e-mail ou SMS accompagné des 8 derniers chiffres du numéro d\'identification et de la date d\'expiration de la Carte Santé.</string>
   <string name="green_pass_how_to_generate_fourth">Tous ces codes sont associés de manière unique au certificat vert COVID-19 relatif à l\'événement sanitaire qui l\'a généré.</string>
     <string name="green_pass_how_to_generate_sixth">Pour plus d\'informations, visitez le site Web www.dgc.gov.it</string>
   <string name="green_pass_generation_successfully">EU Digital Covid Certificate récupéré avec succès</string>
@@ -441,10 +441,12 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="form_code_cun_empty">- Saisissez les 10 derniers caractères du code CUN qui vous a été communiqué\n</string>
   <string name="form_code_nrfe_empty">- Saisissez les 17 derniers caractères du code NRFE qui vous a été communiqué\n</string>
   <string name="form_code_nucg_empty">- Saisissez les 10 derniers caractères du code NUCG qui vous a été communiqué\n</string>
+  <string name="form_code_cuev_empty">- Saisissez les 10 derniers caractères du code CUEV qui vous a été communiqué\n</string>
   <string name="form_code_otp_empty">- Saisissez les 12 derniers caractères de l\'AUTHCODE qui vous a été communiqué\n</string>
   <string name="form_code_cun_wrong">- Le CUN saisi n\'est pas formellement valide. Assurez-vous d\'avoir bien saisi les 10 derniers chiffres du CUN que vous avez reçu par SMS ou dans le rapport associé à un écouvillon positif\n</string>
   <string name="form_code_nrfe_wrong">- Le code NRFE saisi n\'est pas formellement valable. Assurez-vous d\'avoir entré les 17 derniers chiffres du code NRFE que vous avez reçu\n</string>
   <string name="form_code_nucg_wrong">- Le code NUCG saisi n\'est pas formellement valide. Assurez-vous d\'avoir entré les 10 derniers chiffres du code NUCG que vous avez reçu\n</string>
+  <string name="form_code_cuev_wrong">- Le code CUEV saisi n\'est pas formellement valide. Assurez-vous d\'avoir entré les 10 derniers chiffres du code CUEV que vous avez reçu\n</string>
   <string name="form_code_otp_wrong">- L\'AUTHCODE saisi n\'est pas formellement valide. Assurez-vous d\'avoir entré les 12 derniers chiffres du CODE AUTHCODE que vous avez reçu\n</string>
   <string name="form_type_code_empty">- Sélectionnez le type de code\n</string>
   <string name="form_expired_health_date">- Entrez la date d\'expiration de la carte de santé\n</string>
