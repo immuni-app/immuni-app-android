@@ -26,6 +26,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.utils.boldLinkSpan
 import it.ministerodellasalute.immuni.extensions.utils.coloredClickable
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
@@ -61,6 +62,17 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
 
         hideNotice.setSafeOnClickListener {
             showHideAlert()
+        }
+
+        val quarantineIsolationRawText = getString(R.string.suggestions_instruction_stay_home)
+        quarantineIsolationLink.movementMethod = LinkMovementMethod.getInstance()
+        quarantineIsolationLink.text = quarantineIsolationRawText.boldLinkSpan(
+            colorLink = requireContext().getColorCompat(R.color.colorPrimary),
+            boldLink = true,
+            color = requireContext().getColorCompat(R.color.grey_dark),
+            bold = true
+        ) {
+            viewModel.onQuarantineIsolationClick(this)
         }
 
         val privacyRawText = getString(R.string.suggestions_risk_third_message_android)

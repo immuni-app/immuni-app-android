@@ -74,36 +74,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/question" />
 
-        <TextView
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/green_pass_how_to_generate_fourth"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/question" />
-
-        <TextView
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/green_pass_how_to_generate_fiveth"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/question" />
-
-        <TextView
-            android:id="@+id/green_pass_sixth"
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/green_pass_how_to_generate_sixth"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/question" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

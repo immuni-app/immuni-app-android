@@ -206,7 +206,7 @@ los datos&#8230;</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_message">Si estás en contacto con tu médico o tu Agencia Sanitaria Local, puedes ocultar este aviso.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_action">He contactado con el médico</string>
   <string name="suggestions_instruction_while_waiting_doctor">Como precaución, mientras esperas las indicaciones de tu médico o de la Agencia Sanitaria Local:</string>
-  <string name="suggestions_instruction_stay_home"><b>Quédate en casa durante 14 días</b> a partir de la fecha de contacto.</string>
+  <string name="suggestions_instruction_stay_home">[Siga las pautas actuales de autovigilancia o cuarentena.] Para información: {cuarentena y aislamiento}</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Mide la temperatura corporal al menos dos veces al día y evalúa los posibles síntomas, aunque sean leves.</b></string>
   <string name="suggestions_instruction_check_symptoms_message">En especial, fiebre o al menos uno de los siguientes: dolor de garganta, tos, catarro o congestión nasal, dificultad para respirar, dolor muscular, pérdida o alteración del olfato o el gusto, diarrea.</string>
   <string name="suggestions_instruction_isolate_title"><b>Si muestras síntomas, aíslate de las personas con las que vivas.</b></string>
@@ -481,11 +481,9 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="green_pass_expired_date_hs_hint">Fecha de vencimiento de la tarjeta sanitaria</string>
   <string name="green_pass_how_to_generate_title">Cómo adquirir el EU Digital Covid Certificate</string>
   <string name="green_certificate_more_details_doses_number_text">%s de %s</string>
-  <string name="green_pass_how_to_generate_first">El \"EU Digital Covid Certificate\", en Italia \"Certificación verde COVID-19\", es emitido por el Ministerio de Salud en formato digital para aquellos que han sido vacunados o han obtenido un resultado negativo en la prueba molecular / de antígenos o están curados de COVID- 19.</string>
-  <string name="green_pass_how_to_generate_second">El certificado tiene un código de barras bidimensional (código QR) que contiene la información esencial del titular del certificado y el evento de salud al que se asocia el certificado (vacunación, prueba negativa, cura COVID-19) y firmado digitalmente para garantizar la autenticidad.</string>
-  <string name="green_pass_how_to_generate_third">Si has recibido el código para recuperar la certificación por correo electrónico o SMS, puedes utilizar esta aplicación ingresando uno de los códigos únicos CUN, NRFE, NUCG, CUEV (recibidos respectivamente durante la ejecución del hisopo molecular o del hisopo antigénico o al preparar el certificado de curación.), o el código de autorización AUTHCODE recibido vía e-mail o SMS junto con los últimos 8 dígitos del número de identificación y la fecha de vencimiento de la Tarjeta Sanitaria.</string>
-  <string name="green_pass_how_to_generate_fourth">Todos estos códigos están asociados de forma única con el certificado verde COVID-19 relacionado con el evento de salud que lo generó.</string>
-    <string name="green_pass_how_to_generate_sixth">Para obtener más información, visita el sitio web www.dgc.gov.it</string>
+  <string name="green_pass_how_to_generate_first">En Italia, la certificación verde COVID-19 es emitida por el Ministerio de Salud, en formato digital, a quienes han sido vacunados o han obtenido un resultado negativo en una prueba molecular o antigénica o están curados de COVID-19. Cuenta con un código QR que contiene la información esencial del titular y el evento de salud que lo generó (vacunación, test negativo, recuperación de COVID-19) y está firmado digitalmente para garantizar su autenticidad.</string>
+  <string name="green_pass_how_to_generate_second">Puedes recuperar tu Certificación Verde COVID-19 con esta App ingresando el código único recibido después de la vacunación, el hisopado (CUN, NRFE) o recuperación (NUCG), o con el código AUTHCODE, junto con los últimos 8 dígitos del número de identificación y la fecha de vencimiento de su Tarjeta Sanitaria. También puede usar esta aplicación para descargar la certificación de exención de vacunación Covid-19, utilizando el código CUEV o AUTHCODE.</string>
+  <string name="green_pass_how_to_generate_third">La certificación verde COVID–19 se muestra en la pantalla del smartphone para que, en caso de verificación, se pueda mostrar bajo petición incluso en modo offline. El botón \"Eliminar\" le permite cancelar la certificación desde su teléfono inteligente en cualquier momento.</string>
   <string name="green_pass_generation_successfully">EU Digital Covid Certificate recuperado con éxito</string>
   <string name="green_pass_select_type_token">Selecciona tipo</string>
   <string name="message_modal_confirm_delete_dcg">¿Está seguro de que deseas eliminar tu EU Digital Covid Certificate?</string>
@@ -501,7 +499,6 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="green_certificate_validity_Quicktest">Certificación válida por 48 horas desde el momento de la extracción.</string>
   <string name="green_certificate_validity_Moleculartest">Certificación válida por 72 horas desde el momento de la extracción.</string>
   <string name="green_certificate_no_dcc_found">No se encontró ningún EU Digital Covid Certificate. Comprueba que los datos introducidos son correctos</string>
-  <string name="green_pass_how_to_generate_fiveth">La certificación verde COVID-19 se muestra en la pantalla del teléfono inteligente para que se pueda ver y mostrar a pedido, en caso de verificación, incluso en modo fuera de línea. El botón \"Eliminar\" le permite eliminar su certificado de su teléfono inteligente de forma independiente en cualquier momento.</string>
   <string name="green_certificate_validity_healing">Certificación válida en la Unión Europea hasta el final de la fecha de validez y válida solo en Italia hasta 6 meses desde el inicio de la fecha de validez</string>
     <string name="green_certificate_modal_order_button">Entiendo</string>
     <string name="green_certificate_modal_order_title">Hemos cambiado el orden de sus Certificados</string>

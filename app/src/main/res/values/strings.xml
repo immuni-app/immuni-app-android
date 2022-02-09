@@ -201,7 +201,7 @@
     <string name="suggestions_instruction_hide_if_contact_doctor_message">If you\'re in contact with your general practitioner or local health authority, you can hide this alert.</string>
     <string name="suggestions_instruction_hide_if_contact_doctor_action">I have contacted my general practitioner</string>
     <string name="suggestions_instruction_while_waiting_doctor">As a precaution, while you wait for instructions from your general practitioner or local health authority:</string>
-    <string name="suggestions_instruction_stay_home"><b>Stay at home for 14 days</b> after the date of contact.</string>
+    <string name="suggestions_instruction_stay_home">[Follow the current self-surveillance or quarantine guidelines.] For information: {quarantine and isolation}</string>
     <string name="suggestions_instruction_check_symptoms_title"><b>Measure your body temperature at least twice a day and assess if you are exhibiting symptoms, even mild ones.</b></string>
     <string name="suggestions_instruction_check_symptoms_message">In particular, fever or at least one of the following: sore throat, cough, cold or blocked nose, breathing difficulty, muscle pain, loss or alteration of sense of smell or taste, diarrhoea.</string>
     <string name="suggestions_instruction_isolate_title"><b>If you display symptoms, isolate yourself from the people you live with.</b></string>
@@ -430,12 +430,9 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_pass_expired_date_hs_hint">Health Card expiry date</string>
     <string name="green_pass_confirm_button">Done</string>
     <string name="green_pass_how_to_generate_title">How to acquire the EU Digital Covid Certificate</string>
-    <string name="green_pass_how_to_generate_first">The \"EU Digital Covid Certificate\", in Italy \"COVID-19 green certification\", is issued by the Ministry of Health in digital format to those who have been vaccinated or have obtained a negative result on the molecular / antigen test or are cured of COVID- 19.</string>
-    <string name="green_pass_how_to_generate_second">The certificate has a two-dimensional barcode (QR code) that contains the essential information of the holder of the certificate and the health event to which the certificate is associated (vaccination, negative test, COVID-19 cure) and digitally signed to guarantee authenticity.</string>
-    <string name="green_pass_how_to_generate_third">If you have received the code to recover the certification via email or SMS, you can use this App by entering one of the unique codes CUN, NRFE, NUCG, CUEV (received respectively during the execution of the molecular swab or the execution of the antigenic swab or the preparation of the healing certificate ), or the AUTHCODE authorization code received via e-mail or SMS together with the last 8 digits of the identification number and the expiry date of the Health Card.</string>
-    <string name="green_pass_how_to_generate_fourth">All these codes are uniquely associated with the COVID-19 green certificate relating to the health event that generated it.</string>
-    <string name="green_pass_how_to_generate_sixth">For more information visit the website www.dgc.gov.it</string>
-    <string name="green_pass_how_to_generate_link" translatable="false">www.dgc.gov.it</string>
+    <string name="green_pass_how_to_generate_first">In Italy, the COVID-19 green certification is issued by the Ministry of Health, in digital format, to those who have been vaccinated or have obtained a negative result in a molecular or antigenic test or are cured of COVID-19. It has a QR code that contains the essential information of the holder and the health event that generated it (vaccination, negative test, recovery from COVID-19) and is digitally signed to guarantee its authenticity.</string>
+    <string name="green_pass_how_to_generate_second">You can retrieve your COVID-19 Green Certification with this App by entering the unique code received after vaccination, the swab (CUN, NRFE) or recovery (NUCG), or with the AUTHCODE code, together with the last 8 digits of the identification number and the expiration date of your Health Card. You can also use this App to download the Covid-19 vaccination exemption certification, using the CUEV or AUTHCODE code.</string>
+    <string name="green_pass_how_to_generate_third">The green COVID–19 certification is shown on the smartphone screen so that, in case of verification, it can be shown on request even in offline mode. The \"Delete\" button allows you to cancel the certification from your smartphone at any time.</string>
     <string name="green_pass_generation_successfully">EU Digital Covid Certificate successfully recovered</string>
     <string name="green_pass_select_type_token">Select type</string>
     <string-array name="type_token">
@@ -579,7 +576,6 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_vac_vero_cell" translatable="false">Inactivated SARS-CoV-2 (Vero Cell)</string>
     <string name="green_certificate_vac_corona_vac" translatable="false">CoronaVac</string>
     <string name="green_certificate_vac_covaxin" translatable="false">Covaxin (also known as BBV152 A, B, C)</string>
-    <string name="green_pass_how_to_generate_fiveth">The green COVID–19 certification is shown on the smartphone screen so that it can be viewed and shown on request, in case of verification, even in offline mode. The \"Delete\" button allows you to delete your certificate from your smartphone independently at any time.</string>
     <string name="green_certificate_validity_healing">Certification valid in the European Union until the end of validity date and valid only in Italy up to 6 months from the start of validity date</string>
     <string name="green_certificate_modal_order_title">We have changed the order of your Certificates</string>
     <string name="green_certificate_modal_order_message">If you are reading this message it means that you have more than one COVID-19 Green Certificate installed on your device: they are now displayed in chronological order starting with the most recent. Remember that you can delete them or move from one to the other by swiping sideways with your finger</string>
@@ -598,4 +594,5 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_exemption_title">Digital certification of COVID-19 vaccination exemption</string>
     <string name="green_certificate_certificate_issuer_exemption">Soggetto che ha rilasciato la certificazione digitale di esenzione</string>
     <string name="green_certificate_validity_vaccine_booster">Certification valid for 180 days (6 months) from the date of the last administration, subject to regulatory changes</string>
+    <string name="url_quarantine_and_isolation" translatable="false">https://www.salute.gov.it/portale/nuovocoronavirus/dettaglioFaqNuovoCoronavirus.jsp?lingua=italiano&amp;id=244#19</string>
 </resources>

@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.ui.suggestions
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
@@ -30,6 +31,13 @@ class StateCloseViewModel(
         ExternalLinksHelper.openLink(
             fragment.requireContext(),
             settingsManager.privacyNoticeUrl
+        )
+    }
+
+    fun onQuarantineIsolationClick(fragment: StateCloseDialogFragment) {
+        ExternalLinksHelper.openLink(
+            fragment.requireContext(),
+            fragment.getString(R.string.url_quarantine_and_isolation)
         )
     }
 
