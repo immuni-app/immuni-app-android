@@ -201,7 +201,7 @@
     <string name="suggestions_instruction_hide_if_contact_doctor_message">If you\'re in contact with your general practitioner or local health authority, you can hide this alert.</string>
     <string name="suggestions_instruction_hide_if_contact_doctor_action">I have contacted my general practitioner</string>
     <string name="suggestions_instruction_while_waiting_doctor">As a precaution, while you wait for instructions from your general practitioner or local health authority:</string>
-    <string name="suggestions_instruction_stay_home">[Follow the current self-surveillance or quarantine guidelines.] For information: {quarantine and isolation}</string>
+    <string name="suggestions_instruction_stay_home">[Follow the current self-surveillance or quarantine guidelines.]\n\n{Find out more}</string>
     <string name="suggestions_instruction_check_symptoms_title"><b>Measure your body temperature at least twice a day and assess if you are exhibiting symptoms, even mild ones.</b></string>
     <string name="suggestions_instruction_check_symptoms_message">In particular, fever or at least one of the following: sore throat, cough, cold or blocked nose, breathing difficulty, muscle pain, loss or alteration of sense of smell or taste, diarrhoea.</string>
     <string name="suggestions_instruction_isolate_title"><b>If you display symptoms, isolate yourself from the people you live with.</b></string>
@@ -595,4 +595,5 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_certificate_issuer_exemption">Soggetto che ha rilasciato la certificazione digitale di esenzione</string>
     <string name="green_certificate_validity_vaccine_booster">Certification valid for 180 days (6 months) from the date of the last administration, subject to regulatory changes</string>
     <string name="url_quarantine_and_isolation" translatable="false">https://www.salute.gov.it/portale/nuovocoronavirus/dettaglioFaqNuovoCoronavirus.jsp?lingua=italiano&amp;id=244#19</string>
+    <string name="title_dialog_find_out_more_state_close">Quarantine and isolation</string>
 </resources>

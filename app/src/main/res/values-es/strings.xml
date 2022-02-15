@@ -206,7 +206,7 @@ los datos&#8230;</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_message">Si estás en contacto con tu médico o tu Agencia Sanitaria Local, puedes ocultar este aviso.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_action">He contactado con el médico</string>
   <string name="suggestions_instruction_while_waiting_doctor">Como precaución, mientras esperas las indicaciones de tu médico o de la Agencia Sanitaria Local:</string>
-  <string name="suggestions_instruction_stay_home">[Siga las pautas actuales de autovigilancia o cuarentena.] Para información: {cuarentena y aislamiento}</string>
+  <string name="suggestions_instruction_stay_home">[Siga las pautas actuales de autovigilancia o cuarentena.]\n\n{Más información}</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Mide la temperatura corporal al menos dos veces al día y evalúa los posibles síntomas, aunque sean leves.</b></string>
   <string name="suggestions_instruction_check_symptoms_message">En especial, fiebre o al menos uno de los siguientes: dolor de garganta, tos, catarro o congestión nasal, dificultad para respirar, dolor muscular, pérdida o alteración del olfato o el gusto, diarrea.</string>
   <string name="suggestions_instruction_isolate_title"><b>Si muestras síntomas, aíslate de las personas con las que vivas.</b></string>
@@ -513,4 +513,5 @@ Sistema operativo: iOS 13.5.1; modelo: iPhone XS; notificaciones de exposición:
   <string name="green_certificate_exemption_title">Certificación digital de exención de vacunación COVID-19</string>
   <string name="green_certificate_certificate_issuer_exemption">Sujeto que emitió el certificado de exención digital</string>
   <string name="green_certificate_validity_vaccine_booster">Certificación válida por 180 días (6 meses) a partir de la fecha de la última administración, sujeta a cambios regulatorios</string>
+  <string name="title_dialog_find_out_more_state_close">Cuarentena y aislamiento</string>
 </resources>

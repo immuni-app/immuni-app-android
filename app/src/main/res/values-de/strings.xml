@@ -204,7 +204,7 @@
   <string name="suggestions_instruction_hide_if_contact_doctor_message">Wenn Sie mit Ihrem Arzt oder Ihrer örtlichen Gesundheitsbehörde in Kontakt stehen, können Sie diese Warnung ausblenden.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_action">Ich habe den Arzt kontaktiert</string>
   <string name="suggestions_instruction_while_waiting_doctor">Als Vorsichtsmaßnahme, bis die Angaben Ihres Arztes oder Ihrer örtlichen Gesundheitsbehörde vorliegen:</string>
-  <string name="suggestions_instruction_stay_home">[Befolgen Sie die aktuellen Richtlinien zur Selbstüberwachung oder Quarantäne.] Zur Information: {Quarantäne und Isolation}</string>
+  <string name="suggestions_instruction_stay_home">[Befolgen Sie die aktuellen Richtlinien zur Selbstüberwachung oder Quarantäne.]\n\n{Mehr erfahren}</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Messen Sie die Körpertemperatur mindestens zweimal täglich und beurteilen Sie das Auftreten auch milder Symptome.</b></string>
   <string name="suggestions_instruction_check_symptoms_message">Insbesondere bei Fieber oder Auftreten von mindestens einem der folgenden Symptome: Halsschmerzen, Husten, Erkältung oder verstopfte Nase, Atembeschwerden, Muskelschmerzen, Verlust oder Veränderung von Geruch oder Geschmack, Durchfall.</string>
   <string name="suggestions_instruction_isolate_title"><b>Wenn Symptome auftreten, isolieren Sie sich vom Rest Ihrer Mitbewohner.</b></string>
@@ -510,4 +510,5 @@ Betriebssystem: iOS 13.5.1; Modell: iPhone XS; Expositionsmeldungen: Aktiv; [wei
   <string name="green_certificate_certificate_issuer_exemption">Subjekt, das die digitale Freistellungsbescheinigung ausgestellt hat</string>
   <string name="green_certificate_exemption_footer">Diese Zertifizierung ist nur in <b>Italien</b> gültig und kann verwendet werden, um die grüne COVID-19-Zertifizierung für die Durchführung von Aktivitäten und die Nutzung von Dienstleistungen gemäß der geltenden nationalen Gesetzgebung zu ersetzen</string>
     <string name="green_certificate_validity_vaccine_booster">Zertifizierung gültig für 180 Tage (6 Monate) ab dem Datum der letzten Verabreichung, vorbehaltlich behördlicher Änderungen</string>
+    <string name="title_dialog_find_out_more_state_close">Quarantäne und Isolation</string>
 </resources>

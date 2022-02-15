@@ -86,8 +86,12 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
 
         viewModel.exposureDate.observe(viewLifecycleOwner, Observer {
             if (it is ExposureStatus.Exposed) {
-                val dateStr = DateFormat.getLongDateFormat(requireContext()).format(it.lastExposureDate)
-                pageSubtitle.text = String.format(requireContext().getString(R.string.suggestions_risk_with_date_subtitle), dateStr)
+                val dateStr =
+                    DateFormat.getLongDateFormat(requireContext()).format(it.lastExposureDate)
+                pageSubtitle.text = String.format(
+                    requireContext().getString(R.string.suggestions_risk_with_date_subtitle),
+                    dateStr
+                )
             }
         })
     }

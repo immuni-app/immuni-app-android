@@ -207,7 +207,7 @@ dei dati&#8230;</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_message">Se sei in contatto con il tuo medico o la tua ASL, puoi nascondere questo avviso.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_action">Ho contattato il medico</string>
   <string name="suggestions_instruction_while_waiting_doctor">In via precauzionale, in attesa delle indicazioni del tuo medico o della ASL:</string>
-  <string name="suggestions_instruction_stay_home">[Segui le indicazione di autosorveglianza o quarantena attualmente previste.] Per informazioni: {quarantena e isolamento}</string>
+  <string name="suggestions_instruction_stay_home">[Segui le indicazione di autosorveglianza o quarantena attualmente previste.]\n\n{Scopri di più}</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Misura la temperatura corporea almeno due volte al giorno e valuta la comparsa di sintomi, anche lievi.</b></string>
   <string name="suggestions_instruction_check_symptoms_message">In particolare febbre o almeno uno dei seguenti: mal di gola, tosse, raffreddore o naso chiuso, difficoltà respiratoria, dolori muscolari, perdita o alterazioni di olfatto o gusto, diarrea.</string>
   <string name="suggestions_instruction_isolate_title"><b>In caso di comparsa dei sintomi, isolati dal resto dei tuoi conviventi.</b></string>
@@ -512,5 +512,6 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_certificate_exemption_title">Certificazione digitale di esenzione dalla vaccinazione anti-COVID-19</string>
   <string name="green_certificate_certificate_issuer_exemption">Soggetto che ha rilasciato la certificazione digitale di esenzione</string>
     <string name="green_certificate_validity_vaccine_booster">Certificazione valida 180 giorni (6 mesi) dalla data dell\'ultima somministrazione, salvo modifiche normative</string>
+    <string name="title_dialog_find_out_more_state_close">Quarantena e isolamento</string>
 
 </resources>
