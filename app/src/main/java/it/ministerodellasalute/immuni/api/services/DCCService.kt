@@ -36,7 +36,7 @@ interface DCCService {
     ) : RequestWithPadding
 
     @JsonClass(generateAdapter = true)
-    data class GreenCardResponse(val qrcode: String)
+    data class GreenCardResponse(val qrcode: String, val fglTipoDgc: String?)
 
     @POST("v1/ingestion/get-dgc")
     suspend fun getGreenCard(

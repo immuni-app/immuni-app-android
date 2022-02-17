@@ -596,4 +596,5 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="green_certificate_validity_vaccine_booster">Certification valid for 180 days (6 months) from the date of the last administration, subject to regulatory changes</string>
     <string name="url_quarantine_and_isolation" translatable="false">https://www.salute.gov.it/portale/nuovocoronavirus/dettaglioFaqNuovoCoronavirus.jsp?lingua=italiano&amp;id=244#19</string>
     <string name="title_dialog_find_out_more_state_close">Quarantine and isolation</string>
+    <string name="green_certificate_validity_healing_cbis">Certification valid in the European Union until the end of validity date and valid in Italy 540 days (18 months) from the start of validity date, subject to regulatory changes</string>
 </resources>

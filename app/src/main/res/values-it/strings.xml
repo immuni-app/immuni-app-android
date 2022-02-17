@@ -513,5 +513,6 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_certificate_certificate_issuer_exemption">Soggetto che ha rilasciato la certificazione digitale di esenzione</string>
     <string name="green_certificate_validity_vaccine_booster">Certificazione valida 180 giorni (6 mesi) dalla data dell\'ultima somministrazione, salvo modifiche normative</string>
     <string name="title_dialog_find_out_more_state_close">Quarantena e isolamento</string>
+    <string name="green_certificate_validity_healing_cbis">Certificazione valida in Unione Europea fino alla data di fine validità e valida in Italia 540 giorni (18 mesi) dalla data di inizio validità, salvo modifiche normative</string>
 
 </resources>

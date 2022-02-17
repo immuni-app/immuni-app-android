@@ -192,7 +192,8 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "vaccine_first_dose" to "Certificazione valida fino alla prossima dose",
             "vaccine_fully_completed" to "Certificazione valida 365 giorni (12 mesi) dalla data dell'ultima somministrazione",
             "healing_certificate" to "Certificazione valida in Unione Europea fino alla data di fine validità e valida solo in Italia fino a 6 mesi dalla data di inizio validità",
-            "vaccine_booster" to "Certificazione valida 180 giorni (6 mesi) dalla data dell'ultima somministrazione, salvo modifiche normative"
+            "vaccine_booster" to "Certificazione valida 180 giorni (6 mesi) dalla data dell'ultima somministrazione, salvo modifiche normative",
+            "cbis" to "Certificazione valida in Unione Europea fino alla data di fine validità e valida in Italia 540 giorni (18 mesi) dalla data di inizio validità, salvo modifiche normative"
         ),
         "de" to mapOf(
             "molecular_test" to "Bescheinigung gültig für 72 Stunden ab dem Zeitpunkt der Abholung",
@@ -200,7 +201,8 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "vaccine_first_dose" to "Zertifizierung gültig bis zur nächsten Dosis",
             "vaccine_fully_completed" to "Zertifizierung gültig für 365 Tage (12 Monate) ab dem Datum der letzten Verabreichung",
             "healing_certificate" to "Zertifizierung gültig in der Europäischen Union bis zum Gültigkeitsende und nur in Italien bis zu 6 Monate ab Gültigkeitsbeginn gültig",
-            "vaccine_booster" to "Zertifizierung gültig für 180 Tage (6 Monate) ab dem Datum der letzten Verabreichung, vorbehaltlich behördlicher Änderungen"
+            "vaccine_booster" to "Zertifizierung gültig für 180 Tage (6 Monate) ab dem Datum der letzten Verabreichung, vorbehaltlich behördlicher Änderungen",
+            "cbis" to "Zertifizierung gültig in der Europäischen Union bis Gültigkeitsende und gültig in Italien 540 Tage (18 Monate) ab Gültigkeitsbeginn, vorbehaltlich behördlicher Änderungen"
         ),
         "en" to mapOf(
             "molecular_test" to "Certification valid for 72 hours from the time of collection",
@@ -208,7 +210,8 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "vaccine_first_dose" to "Certification valid until next dose",
             "vaccine_fully_completed" to "Certification valid for 365 days (12 months) from the date of the last administration",
             "healing_certificate" to "Certification valid in the European Union until the end of validity date and valid only in Italy up to 6 months from the start of validity date",
-            "vaccine_booster" to "Certification valid for 180 days (6 months) from the date of the last administration, subject to regulatory changes"
+            "vaccine_booster" to "Certification valid for 180 days (6 months) from the date of the last administration, subject to regulatory changes",
+            "cbis" to "Certification valid in the European Union until the end of validity date and valid in Italy 540 days (18 months) from the start of validity date, subject to regulatory changes"
         ),
         "es" to mapOf(
             "molecular_test" to "Certificación válida por 72 horas desde el momento de la recogida.",
@@ -216,7 +219,8 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "vaccine_first_dose" to "Certificación válida hasta la próxima dosis",
             "vaccine_fully_completed" to "Certificación válida por 365 días (12 meses) a partir de la fecha de la última administración.",
             "healing_certificate" to "Certificación válida en la Unión Europea hasta el final de la fecha de validez y válida solo en Italia hasta 6 meses desde el inicio de la fecha de validez",
-            "vaccine_booster" to "Certificación válida por 180 días (6 meses) a partir de la fecha de la última administración, sujeta a cambios regulatorios"
+            "vaccine_booster" to "Certificación válida por 180 días (6 meses) a partir de la fecha de la última administración, sujeta a cambios regulatorios",
+            "cbis" to "Certificación válida en la Unión Europea hasta el final de la fecha de validez y válida en Italia 540 días (18 meses) desde el inicio de la fecha de validez, sujeta a cambios regulatorios"
         ),
         "fr" to mapOf(
             "molecular_test" to "Attestation valable 72h à compter de la collecte",
@@ -224,7 +228,8 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "vaccine_first_dose" to "Certification valable jusqu'à la prochaine dose",
             "vaccine_fully_completed" to "Certification valable 365 jours (12 mois) à compter de la date de la dernière administration",
             "healing_certificate" to "Certification valable dans l'Union européenne jusqu'à la date de fin de validité et valable uniquement en Italie jusqu'à 6 mois à compter de la date de début de validité",
-            "vaccine_booster" to "Certification valable 180 jours (6 mois) à compter de la date de la dernière administration, sous réserve de modifications réglementaires"
+            "vaccine_booster" to "Certification valable 180 jours (6 mois) à compter de la date de la dernière administration, sous réserve de modifications réglementaires",
+            "cbis" to "Certification valable dans l'Union européenne jusqu'à la date de fin de validité et valable en Italie 540 jours (18 mois) à compter de la date de début de validité, sous réserve de modifications réglementaires"
         )
     )
 }

@@ -513,5 +513,6 @@ Système d\'exploitation : iOS 13.5.1; Modèle iPhone XS ; Notifications de risq
   <string name="green_certificate_certificate_issuer_exemption">Sujet qui a délivré le certificat d\'exemption numérique</string>
     <string name="green_certificate_validity_vaccine_booster">Certification valable 180 jours (6 mois) à compter de la date de la dernière administration, sous réserve de modifications réglementaires</string>
     <string name="title_dialog_find_out_more_state_close">Quarantaine et isolement</string>
+    <string name="green_certificate_validity_healing_cbis">Certification valable dans l\'Union européenne jusqu\'à la date de fin de validité et valable en Italie 540 jours (18 mois) à compter de la date de début de validité, sous réserve de modifications réglementaires</string>
 
 </resources>
