@@ -17,9 +17,11 @@ package it.ministerodellasalute.immuni.ui.suggestions
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.extensions.utils.ExternalLinksHelper
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.ui.home.HomeFragmentDirections
 
 class StateCloseViewModel(
     private val exposureManager: ExposureManager,
@@ -31,6 +33,11 @@ class StateCloseViewModel(
             fragment.requireContext(),
             settingsManager.privacyNoticeUrl
         )
+    }
+
+    fun onQuarantineIsolationClick(fragment: StateCloseDialogFragment) {
+        val action = HomeFragmentDirections.actionFindOutMoreStateClose()
+        fragment.findNavController().navigate(action)
     }
 
     val exposureDate = exposureManager.exposureStatus.asLiveData()

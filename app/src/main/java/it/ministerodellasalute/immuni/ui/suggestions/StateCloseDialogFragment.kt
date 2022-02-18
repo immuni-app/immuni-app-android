@@ -26,6 +26,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.extensions.utils.boldLinkSpan
 import it.ministerodellasalute.immuni.extensions.utils.coloredClickable
 import it.ministerodellasalute.immuni.extensions.view.getColorCompat
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
@@ -63,6 +64,17 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
             showHideAlert()
         }
 
+        val quarantineIsolationRawText = getString(R.string.suggestions_instruction_stay_home)
+        quarantineIsolationLink.movementMethod = LinkMovementMethod.getInstance()
+        quarantineIsolationLink.text = quarantineIsolationRawText.boldLinkSpan(
+            colorLink = requireContext().getColorCompat(R.color.colorPrimary),
+            boldLink = true,
+            color = requireContext().getColorCompat(R.color.grey_dark),
+            bold = true
+        ) {
+            viewModel.onQuarantineIsolationClick(this)
+        }
+
         val privacyRawText = getString(R.string.suggestions_risk_third_message_android)
         footerPrivacyLink.movementMethod = LinkMovementMethod.getInstance()
         footerPrivacyLink.text = privacyRawText.coloredClickable(
@@ -74,8 +86,12 @@ class StateCloseDialogFragment : BaseStateDialogFragment(R.layout.state_close_di
 
         viewModel.exposureDate.observe(viewLifecycleOwner, Observer {
             if (it is ExposureStatus.Exposed) {
-                val dateStr = DateFormat.getLongDateFormat(requireContext()).format(it.lastExposureDate)
-                pageSubtitle.text = String.format(requireContext().getString(R.string.suggestions_risk_with_date_subtitle), dateStr)
+                val dateStr =
+                    DateFormat.getLongDateFormat(requireContext()).format(it.lastExposureDate)
+                pageSubtitle.text = String.format(
+                    requireContext().getString(R.string.suggestions_risk_with_date_subtitle),
+                    dateStr
+                )
             }
         })
     }

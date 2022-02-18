@@ -13,20 +13,28 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.ui.greencertificate
+package it.ministerodellasalute.immuni.ui.suggestions
 
 import android.os.Bundle
 import android.view.View
 import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
-import kotlinx.android.synthetic.main.green_certificate_know_more.*
+import java.util.*
+import kotlinx.android.synthetic.main.find_out_more_close_dialog.*
+import org.koin.android.ext.android.get
 
-class KnowMoreGreenCertificate : PopupDialogFragment() {
+class FindOutMoreCloseDialogFragment : PopupDialogFragment() {
+
+    private lateinit var settingsManager: ConfigurationSettingsManager
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setContentLayout(R.layout.green_certificate_know_more)
+        settingsManager = get()
+        setContentLayout(R.layout.find_out_more_close_dialog)
+        setTitle(getString(R.string.title_dialog_find_out_more_state_close))
 
-        setTitle(getString(R.string.green_pass_how_to_generate_title))
+        testTesto.text =
+            settingsManager.settings.value.risk_exposure[Locale.getDefault().language]!!
     }
 }

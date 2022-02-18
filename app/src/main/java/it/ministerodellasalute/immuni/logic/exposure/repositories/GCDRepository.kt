@@ -50,7 +50,7 @@ class GCDRepository(
         }
         return when (response) {
             is NetworkResource.Success -> GreenPassValidationResult.Success(
-                GreenPassToken(response.data?.qrcode, response.serverDate!!)
+                GreenPassToken(response.data?.qrcode, response.data?.fglTipoDgc, response.serverDate!!)
             )
             is NetworkResource.Error -> {
                 val errorResponse = response.error

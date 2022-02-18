@@ -62,7 +62,8 @@ data class ConfigurationSettings(
     @field:Json(name = "operational_info_without_exposure_sampling_rate") val operationalInfoWithoutExposureSamplingRate: Double,
     @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int,
     @field:Json(name = "countries") val countries: Map<String, Map<String, String>>,
-    @field:Json(name = "eudcc_expiration") val eudcc_expiration: Map<String, Map<String, String>>
+    @field:Json(name = "eudcc_expiration") val eudcc_expiration: Map<String, Map<String, String>>,
+    @field:Json(name = "risk_exposure") val risk_exposure: Map<String, String>
 )
 
 @JsonClass(generateAdapter = true)
@@ -191,7 +192,8 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "vaccine_first_dose" to "Certificazione valida fino alla prossima dose",
             "vaccine_fully_completed" to "Certificazione valida 365 giorni (12 mesi) dalla data dell'ultima somministrazione",
             "healing_certificate" to "Certificazione valida in Unione Europea fino alla data di fine validità e valida solo in Italia fino a 6 mesi dalla data di inizio validità",
-            "vaccine_booster" to "Certificazione valida 180 giorni (6 mesi) dalla data dell'ultima somministrazione, salvo modifiche normative"
+            "vaccine_booster" to "Certificazione valida 180 giorni (6 mesi) dalla data dell'ultima somministrazione, salvo modifiche normative",
+            "cbis" to "Certificazione valida in Unione Europea fino alla data di fine validità e valida in Italia 540 giorni (18 mesi) dalla data di inizio validità, salvo modifiche normative"
         ),
         "de" to mapOf(
             "molecular_test" to "Bescheinigung gültig für 72 Stunden ab dem Zeitpunkt der Abholung",
@@ -199,7 +201,8 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "vaccine_first_dose" to "Zertifizierung gültig bis zur nächsten Dosis",
             "vaccine_fully_completed" to "Zertifizierung gültig für 365 Tage (12 Monate) ab dem Datum der letzten Verabreichung",
             "healing_certificate" to "Zertifizierung gültig in der Europäischen Union bis zum Gültigkeitsende und nur in Italien bis zu 6 Monate ab Gültigkeitsbeginn gültig",
-            "vaccine_booster" to "Zertifizierung gültig für 180 Tage (6 Monate) ab dem Datum der letzten Verabreichung, vorbehaltlich behördlicher Änderungen"
+            "vaccine_booster" to "Zertifizierung gültig für 180 Tage (6 Monate) ab dem Datum der letzten Verabreichung, vorbehaltlich behördlicher Änderungen",
+            "cbis" to "Zertifizierung gültig in der Europäischen Union bis Gültigkeitsende und gültig in Italien 540 Tage (18 Monate) ab Gültigkeitsbeginn, vorbehaltlich behördlicher Änderungen"
         ),
         "en" to mapOf(
             "molecular_test" to "Certification valid for 72 hours from the time of collection",
@@ -207,7 +210,8 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "vaccine_first_dose" to "Certification valid until next dose",
             "vaccine_fully_completed" to "Certification valid for 365 days (12 months) from the date of the last administration",
             "healing_certificate" to "Certification valid in the European Union until the end of validity date and valid only in Italy up to 6 months from the start of validity date",
-            "vaccine_booster" to "Certification valid for 180 days (6 months) from the date of the last administration, subject to regulatory changes"
+            "vaccine_booster" to "Certification valid for 180 days (6 months) from the date of the last administration, subject to regulatory changes",
+            "cbis" to "Certification valid in the European Union until the end of validity date and valid in Italy 540 days (18 months) from the start of validity date, subject to regulatory changes"
         ),
         "es" to mapOf(
             "molecular_test" to "Certificación válida por 72 horas desde el momento de la recogida.",
@@ -215,7 +219,8 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "vaccine_first_dose" to "Certificación válida hasta la próxima dosis",
             "vaccine_fully_completed" to "Certificación válida por 365 días (12 meses) a partir de la fecha de la última administración.",
             "healing_certificate" to "Certificación válida en la Unión Europea hasta el final de la fecha de validez y válida solo en Italia hasta 6 meses desde el inicio de la fecha de validez",
-            "vaccine_booster" to "Certificación válida por 180 días (6 meses) a partir de la fecha de la última administración, sujeta a cambios regulatorios"
+            "vaccine_booster" to "Certificación válida por 180 días (6 meses) a partir de la fecha de la última administración, sujeta a cambios regulatorios",
+            "cbis" to "Certificación válida en la Unión Europea hasta el final de la fecha de validez y válida en Italia 540 días (18 meses) desde el inicio de la fecha de validez, sujeta a cambios regulatorios"
         ),
         "fr" to mapOf(
             "molecular_test" to "Attestation valable 72h à compter de la collecte",
@@ -223,8 +228,19 @@ private fun eudccMap(): Map<String, Map<String, String>> {
             "vaccine_first_dose" to "Certification valable jusqu'à la prochaine dose",
             "vaccine_fully_completed" to "Certification valable 365 jours (12 mois) à compter de la date de la dernière administration",
             "healing_certificate" to "Certification valable dans l'Union européenne jusqu'à la date de fin de validité et valable uniquement en Italie jusqu'à 6 mois à compter de la date de début de validité",
-            "vaccine_booster" to "Certification valable 180 jours (6 mois) à compter de la date de la dernière administration, sous réserve de modifications réglementaires"
+            "vaccine_booster" to "Certification valable 180 jours (6 mois) à compter de la date de la dernière administration, sous réserve de modifications réglementaires",
+            "cbis" to "Certification valable dans l'Union européenne jusqu'à la date de fin de validité et valable en Italie 540 jours (18 mois) à compter de la date de début de validité, sous réserve de modifications réglementaires"
         )
+    )
+}
+
+fun risk_exposure(): Map<String, String> {
+    return mapOf(
+        "it" to "Se non hai sintomi e hai ricevuto la dose booster oppure hai completato il ciclo vaccinale primario nei 120 giorni precedenti, oppure sei guarito da infezione da SARS-CoV-2 nei 120 giorni precedenti, oppure sei guarito dopo il completamento del ciclo primario, non è prevista la quarantena e si applica la misura dell’autosorveglianza della durata di 5 giorni. \n \n Alla prima comparsa di sintomi effettua un test antigenico rapido o molecolare per la rilevazione di Sars-Cov-2 e, se ancora sintomatico, al quinto giorno successivo alla data dell’ultimo contatto stretto con soggetti confermati positivi al Covid 19. Indossa dispositivi di protezione delle vie respiratorie di tipo FFP2 per almeno 10 giorni dall’ultima esposizione al caso.\n \n Se non hai sintomi e non sei vaccinato o non hai completato il ciclo vaccinale primario (hai ricevuto una sola dose di vaccino delle due previste) o se hai completato il ciclo vaccinale primario da meno di 14 giorni, oppure sei asintomatico e hai completato il ciclo vaccinale primario o sei guarito da precedente infezione da SARS-CoV-2 da più di 120 giorni senza aver ricevuto la dose di richiamo, rimani a casa per la durata della quarantena di 5 giorni dall’ultimo contatto con il caso positivo. Dopo tale periodo devi effettuare un test antigenico rapido o molecolare. Se il risultato è negativo, la quarantena cessa ma per i cinque giorni successivi devi indossare i dispositivi di protezione FFP2.\n \n Se durante il periodo di quarantena manifesti sintomi suggestivi di possibile infezione da Sars-Cov-2 è raccomandata l’esecuzione immediata di un test diagnostico.",
+        "en" to "You are not quarantine is foreseen and the self-surveillance measure lasting 5 days is applied. \n \n At the first appearance of symptoms carry out a rapid or molecular antigen test for the detection of Sars-Cov-2 and, if still symptomatic, on the fifth day following the date of the last close contact with subjects confirmed positive for Covid 19. Wear devices FFP2 respiratory protection for at least 10 days from the last exposure to the case. \n \n If you have no symptoms and are not vaccinated or have not completed the primary vaccination course (you have received only one of the two vaccine doses) or if you have completed the primary vaccination course for less than 14 days, or are asymptomatic and have completed the primary vaccination course or have recovered from a previous SARS-CoV-2 infection for more than 120 days without receiving the booster dose, stay at house for the duration of the quarantine of 5 days from the last contact with the positive case. After this time, you need to do a rapid or molecular antigen test. If the result is negative, the quarantine ends but you must wear FFP2 protective equipment for the next five days. \n \n If during the quarantine period you experience symptoms suggestive of possible Sars-Cov-2 infection, immediate execution of the a diagnostic test.",
+        "es" to "No está prevista la cuarentena y se aplica la medida de autovigilancia de 5 días. \n \n A la primera aparición de síntomas realizar una prueba rápida o de antígeno molecular para la detección de Sars-Cov-2 y, si continúa sintomático, al quinto día siguiente a la fecha del último contacto cercano con sujetos confirmados positivos para Covid 19 .Usar dispositivos de protección respiratoria FFP2 durante al menos 10 días desde la última exposición al caso.\n \n Si no tiene síntomas y no está vacunado o no ha completado el ciclo de vacunación primaria (ha recibido solo una de las dos dosis de vacuna) o si completó el ciclo de vacunación primaria durante menos de 14 días, o está asintomático y completó el ciclo de vacunación primaria o se recuperó de una infección previa por SARS-CoV-2 durante más de 120 días sin recibir la dosis de refuerzo, quédese en casa mientras dure la cuarentena de 5 días a partir del último contacto con el caso positivo. Pasado este tiempo, es necesario realizar una prueba rápida o de antígeno molecular. Si el resultado es negativo, finaliza la cuarentena pero debe llevar equipo de protección FFP2 durante los cinco días siguientes.\n \n Si durante el periodo de cuarentena presenta síntomas sugestivos de posible infección por Sars-Cov-2, realización inmediata de una prueba diagnóstica.",
+        "fr" to "Vous n'êtes pas en quarantaine est prévue et la mesure d'auto-surveillance d'une durée de 5 jours est appliquée. \n \n À la première apparition des symptômes effectuer un test antigénique rapide ou moléculaire pour la détection du Sars-Cov-2 et, si toujours symptomatique, le cinquième jour suivant la date du dernier contact rapproché avec des sujets confirmés positifs au Covid 19 Porter des appareils de protection respiratoire FFP2 pendant au moins 10 jours à compter de la dernière exposition au cas.\n \n Si vous ne présentez aucun symptôme et n'êtes pas vacciné ou n'avez pas terminé la primovaccination (vous n'avez reçu qu'une seule des deux doses de vaccin) ou si vous avez terminé la primo-vaccination depuis moins de 14 jours, ou si vous êtes asymptomatique et avez terminé la primo-vaccination ou vous êtes remis d'une précédente infection par le SRAS-CoV-2 depuis plus de 120 jours sans avoir reçu la dose de rappel, restez à maison pendant la durée de la quarantaine de 5 jours à compter du dernier contact avec le cas positif. Passé ce délai, vous devez effectuer un test d'antigène rapide ou moléculaire. Si le résultat est négatif, la quarantaine prend fin mais vous devez porter un équipement de protection FFP2 pendant les cinq prochains jours.\n \n Si pendant la période de quarantaine vous présentez des symptômes évocateurs d'une éventuelle infection au Sars-Cov-2, exécution immédiate d'un test de diagnostic.",
+        "de" to "Für Sie ist keine Quarantäne vorgesehen und die Selbstüberwachungsmaßnahme für 5 Tage wird angewendet. \n \n Beim ersten Auftreten von Symptomen einen schnellen oder molekularen Antigentest zum Nachweis von Sars-Cov-2 durchführen und, falls noch symptomatisch, am fünften Tag nach dem Datum des letzten engen Kontakts mit positiv auf Covid 19 positiv getesteten Personen . Tragen Sie Geräte FFP2-Atemschutz für mindestens 10 Tage nach dem letzten Kontakt mit dem Fall. \n \n Wenn Sie keine Symptome haben und nicht geimpft sind oder die Grundimmunisierung nicht abgeschlossen haben (Sie haben nur eine der beiden Impfdosen erhalten) oder wenn Sie die Grundimmunisierung weniger als 14 Tage abgeschlossen haben oder asymptomatisch sind und die Grundimmunisierung abgeschlossen haben oder sich seit mehr als 120 Tagen ohne Auffrischimpfung von einer früheren SARS-CoV-2-Infektion erholt haben, bleiben Sie bei Haus für die Dauer der Quarantäne von 5 Tagen ab dem letzten Kontakt mit dem positiven Fall. Nach dieser Zeit müssen Sie einen schnellen oder molekularen Antigentest durchführen. Bei negativem Ergebnis endet die Quarantäne, aber Sie müssen für die nächsten fünf Tage FFP2-Schutzausrüstung tragen. \n \n Sollten während der Quarantänezeit Symptome auftreten, die auf eine mögliche Sars-Cov-2-Infektion hindeuten, wird ein sofortiger diagnostischer Test empfohlen."
     )
 }
 
@@ -264,5 +280,6 @@ val defaultSettings = ConfigurationSettings(
     operationalInfoWithoutExposureSamplingRate = 0.6,
     dummyAnalyticsWaitingTime = 2_592_000,
     countries = countriesMap(),
-    eudcc_expiration = eudccMap()
+    eudcc_expiration = eudccMap(),
+    risk_exposure = risk_exposure()
 )
