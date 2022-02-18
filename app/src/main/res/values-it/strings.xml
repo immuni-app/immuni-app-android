@@ -207,7 +207,7 @@ dei dati&#8230;</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_message">Se sei in contatto con il tuo medico o la tua ASL, puoi nascondere questo avviso.</string>
   <string name="suggestions_instruction_hide_if_contact_doctor_action">Ho contattato il medico</string>
   <string name="suggestions_instruction_while_waiting_doctor">In via precauzionale, in attesa delle indicazioni del tuo medico o della ASL:</string>
-  <string name="suggestions_instruction_stay_home"><b>Rimani a casa per i 14 giorni</b> successivi alla data del contatto.</string>
+  <string name="suggestions_instruction_stay_home">[Segui le indicazione di autosorveglianza o quarantena attualmente previste.]\n\n{Scopri di più}</string>
   <string name="suggestions_instruction_check_symptoms_title"><b>Misura la temperatura corporea almeno due volte al giorno e valuta la comparsa di sintomi, anche lievi.</b></string>
   <string name="suggestions_instruction_check_symptoms_message">In particolare febbre o almeno uno dei seguenti: mal di gola, tosse, raffreddore o naso chiuso, difficoltà respiratoria, dolori muscolari, perdita o alterazioni di olfatto o gusto, diarrea.</string>
   <string name="suggestions_instruction_isolate_title"><b>In caso di comparsa dei sintomi, isolati dal resto dei tuoi conviventi.</b></string>
@@ -431,12 +431,9 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_pass_health_insurance_hint">Ultime 8 cifre Tessera Sanitaria</string>
   <string name="green_pass_expired_date_hs_hint">Data scadenza Tessera Sanitaria</string>
   <string name="green_pass_how_to_generate_title">Come acquisire l\'EU Digital Covid Certificate</string>
-  <string name="green_pass_how_to_generate_first">L\'\"EU Digital Covid Certificate\", in Italia \"Certificazione verde COVID-19\", è rilasciata dal Ministero della Salute in formato digitale a chi è stato vaccinato o ha ottenuto un risultato negativo al test molecolare/antigenico o è guarito da COVID-19.</string>
-  <string name="green_pass_how_to_generate_second">Il certificato dispone di un codice a barre bidimensionale (QR code) che contiene le informazioni essenziali dell’intestatario del certificato e dell’evento sanitario a cui il certificato è associato (vaccinazione, test negativo, guarigione COVID-19) e firmato digitalmente per garantirne l’autenticità.</string>
-  <string name="green_pass_how_to_generate_third">Se hai ricevuto via email o SMS il codice per recuperare la certificazione puoi utilizzare questa App inserendo uno dei codici univoci CUN, NRFE, NUCG, CUEV (ricevuti rispettivamente in sede di esecuzione del tampone molecolare o di esecuzione del tampone antigenico o di redazione del certificato di guarigione), oppure il codice autorizzativo AUTHCODE ricevuto via e-mail o SMS insieme con le ultime 8 cifre del numero identificativo e la data di scadenza della Tessera Sanitaria.</string>
-  <string name="green_pass_how_to_generate_fourth">Tutti questi codici sono univocamente associati al Certificato verde COVID-19 relativo all’evento sanitario che l’ha generato.</string>
-  <string name="green_pass_how_to_generate_fiveth">La Certificazione verde COVID–19 viene mostrata sullo schermo dello smartphone in modo che possa essere visualizzato e mostrato su richiesta, in caso di verifica, anche in modalità offline. Il tasto \"Elimina\" ti consente di cancellare il tuo certificato dallo smartphone in autonomia in qualsiasi momento.</string>
-  <string name="green_pass_how_to_generate_sixth">Per ulteriori informazioni visita il sito www.dgc.gov.it</string>
+  <string name="green_pass_how_to_generate_first">In Italia, la Certificazione verde COVID-19, è rilasciata dal Ministero della Salute, in formato digitale, a chi è stato vaccinato o ha ottenuto un risultato negativo a un test molecolare o antigenico o è guarito dal COVID-19. Dispone di un QR code che contiene le informazioni essenziali dell’intestatario e dell’evento sanitario che l’ha generata (vaccinazione, test negativo, guarigione da COVID-19) ed è firmata digitalmente per garantirne l’autenticità.</string>
+  <string name="green_pass_how_to_generate_second">Puoi recuperare la tua Certificazione verde COVID-19 con questa App inserendo il codice univoco ricevuto dopo la vaccinazione, il tampone (CUN, NRFE)  o la guarigione (NUCG), oppure con il codice AUTHCODE, insieme alle ultime 8 cifre del numero identificativo e la data di scadenza della tua Tessera Sanitaria. Puoi utilizzare questa App anche per scaricare la certificazione di esenzione dalla vaccinazione anti Covid-19, utilizzando il codice CUEV o AUTHCODE.</string>
+  <string name="green_pass_how_to_generate_third">La Certificazione verde COVID–19 viene mostrata sullo schermo dello smartphone in modo che, in caso di verifica, possa essere mostrata su richiesta anche in modalità offline. Il tasto \"Elimina\" ti consente di cancellare la certificazione dallo smartphone in qualsiasi momento.</string>
   <string name="green_pass_generation_successfully">EU Digital Covid Certificate recuperato con successo</string>
   <string name="green_pass_select_type_token">Seleziona tipologia</string>
   <string name="form_code_cun_empty">- Inserisci gli ultimi 10 caratteri del codice CUN che ti è stato comunicato\n</string>
@@ -515,5 +512,7 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="green_certificate_exemption_title">Certificazione digitale di esenzione dalla vaccinazione anti-COVID-19</string>
   <string name="green_certificate_certificate_issuer_exemption">Soggetto che ha rilasciato la certificazione digitale di esenzione</string>
     <string name="green_certificate_validity_vaccine_booster">Certificazione valida 180 giorni (6 mesi) dalla data dell\'ultima somministrazione, salvo modifiche normative</string>
+    <string name="title_dialog_find_out_more_state_close">Quarantena e isolamento</string>
+    <string name="green_certificate_validity_healing_cbis">Certificazione valida in Unione Europea fino alla data di fine validità e valida in Italia 540 giorni (18 mesi) dalla data di inizio validità, salvo modifiche normative</string>
 
 </resources>

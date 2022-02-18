@@ -68,17 +68,20 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
         val molecularTest = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["molecular_test"]
         val healingCertificate = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["healing_certificate"]
         val vaccineBooster = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["vaccine_booster"]
+        val cbis = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["cbis"]
+
         setUI(
             vaccineFullyCompleted,
             vaccineFirstDose,
             molecularTest,
             rapidTest,
             healingCertificate,
-            vaccineBooster
+            vaccineBooster,
+            cbis
         )
     }
 
-    private fun setUI(validUntilCompleteVaccine: String?, validUntilnotCompleteVaccine: String?, validUntilMolecularTest: String?, validUntilQuickTest: String?, healingCertificate: String?, vaccineBooster: String?) {
+    private fun setUI(validUntilCompleteVaccine: String?, validUntilnotCompleteVaccine: String?, validUntilMolecularTest: String?, validUntilQuickTest: String?, healingCertificate: String?, vaccineBooster: String?, cbis: String?) {
         var isExemption = false
         when (true) {
             greenCertificateDetail.data?.vaccinations != null -> {
@@ -208,7 +211,10 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 certificateIssuerLabelEng.visibility = View.GONE
                 certificateIssuerLabel.visibility = View.GONE
                 entityIssuedCertificate.visibility = View.GONE
-                validityHealing.text = healingCertificate ?: getString(R.string.green_certificate_validity_healing)
+                validityHealing.text = when (greenCertificateDetail.fglTipoDgc) {
+                    "cbis" -> cbis ?: getString(R.string.green_certificate_validity_healing_cbis)
+                    else -> healingCertificate ?: getString(R.string.green_certificate_validity_healing)
+                }
                 certificateIssuerLabelExemption.visibility = View.GONE
             }
             greenCertificateDetail.data?.exemptions != null -> {

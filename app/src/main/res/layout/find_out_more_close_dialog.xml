@@ -24,12 +24,12 @@
     android:paddingBottom="32dp">
 
     <TextView
-        android:id="@+id/question"
+        android:id="@+id/title"
         style="@style/H1Heading"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/euclid_circular_bold"
-        android:text="@string/green_pass_how_to_generate_title"
+        android:text="@string/title_dialog_find_out_more_state_close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,37 +42,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question"
+        app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
+            android:id="@+id/testTesto"
             style="@style/P1Text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/green_pass_how_to_generate_first"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/question" />
-
-        <TextView
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/green_pass_how_to_generate_second"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/question" />
-
-        <TextView
-            style="@style/P1Text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/green_pass_how_to_generate_third"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/question" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

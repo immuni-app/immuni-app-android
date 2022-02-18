@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.extensions.utils
 
 import android.text.SpannableStringBuilder
 import android.text.SpannedString
+import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
@@ -39,7 +40,6 @@ fun String.spanPlaceholder(
     val text = this
     val startIdx = this.indexOf(startPlaceholder)
     val endIdx = this.indexOf(endPlaceholder)
-
     return buildSpannedString {
         append(text.subSequence(0, startIdx))
         builderAction(text.subSequence(startIdx + 1, endIdx))
@@ -58,6 +58,22 @@ inline fun SpannableStringBuilder.clickable(
 ) = inSpans(object : ClickableSpan() {
     override fun onClick(p0: View) {
         onClick()
+    }
+}, builderAction = builderAction)
+
+/**
+ * Add click handler to spannable string
+ */
+inline fun SpannableStringBuilder.clickableWithoutUnderline(
+    crossinline onClick: () -> Unit,
+    builderAction: SpannableStringBuilder.() -> Unit
+) = inSpans(object : ClickableSpan() {
+    override fun onClick(p0: View) {
+        onClick()
+    }
+
+    override fun updateDrawState(ds: TextPaint) {
+        ds.isUnderlineText = false
     }
 }, builderAction = builderAction)
 
@@ -143,5 +159,93 @@ fun String.colorHighlight(
         }
         // append last part
         append(text.subSequence(currStart, text.length))
+    }
+}
+
+fun String.boldLinkSpan(
+    startPlaceholderLink: Char = '{',
+    endPlaceholderLink: Char = '}',
+    @ColorInt colorLink: Int,
+    linkUnderlined: Boolean = true,
+    boldLink: Boolean = false,
+    startPlaceholderBold: Char = '[',
+    endPlaceholderBold: Char = ']',
+    @ColorInt color: Int,
+    bold: Boolean = false,
+    onClick: () -> Unit
+): SpannedString {
+    val text = this
+    val startIdx = this.indexOf(startPlaceholderBold)
+    val endIdx = this.indexOf(endPlaceholderBold)
+    val startIdxLink = this.indexOf(startPlaceholderLink)
+    val endIdxLink = this.indexOf(endPlaceholderLink)
+    if (startIdx < startIdxLink) {
+        return buildSpannedString {
+            append(text.subSequence(0, startIdx))
+            color(color) {
+                if (bold) {
+                    bold {
+                        append(text.subSequence(startIdx + 1, endIdx))
+                    }
+                } else append(text.subSequence(startIdx + 1, endIdx))
+            }
+            append(text.subSequence(endIdx + 1, startIdxLink))
+            color(colorLink) {
+                if (linkUnderlined) {
+                    clickable(onClick) {
+                        if (boldLink) {
+                            bold {
+                                append(text.subSequence(startIdxLink + 1, endIdxLink))
+                            }
+                        } else append(text.subSequence(startIdxLink + 1, endIdxLink))
+                    }
+                } else {
+                    clickableWithoutUnderline(onClick) {
+                        if (boldLink) {
+                            bold {
+                                append(text.subSequence(startIdxLink + 1, endIdxLink))
+                            }
+                        } else append(text.subSequence(startIdxLink + 1, endIdxLink))
+                    }
+                }
+            }
+            if (endIdxLink < text.length - 1) {
+                append(text.subSequence(endIdxLink + 1, text.length))
+            }
+        }
+    } else {
+        return buildSpannedString {
+            append(text.subSequence(0, startIdxLink))
+            color(colorLink) {
+                if (linkUnderlined) {
+                    clickable(onClick) {
+                        if (boldLink) {
+                            bold {
+                                append(text.subSequence(startIdxLink + 1, endIdxLink))
+                            }
+                        } else append(text.subSequence(startIdxLink + 1, endIdxLink))
+                    }
+                } else {
+                    clickableWithoutUnderline(onClick) {
+                        if (boldLink) {
+                            bold {
+                                append(text.subSequence(startIdxLink + 1, endIdxLink))
+                            }
+                        } else append(text.subSequence(startIdxLink + 1, endIdxLink))
+                    }
+                }
+            }
+            append(text.subSequence(endIdxLink + 1, startIdx))
+            color(color) {
+                if (bold) {
+                    bold {
+                        append(text.subSequence(startIdx + 1, endIdx))
+                    }
+                } else append(text.subSequence(startIdx + 1, endIdx))
+            }
+            if (endIdx < text.length - 1) {
+                append(text.subSequence(endIdx + 1, text.length))
+            }
+        }
     }
 }

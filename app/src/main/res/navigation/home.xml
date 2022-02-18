@@ -104,6 +104,14 @@
     <action
         android:id="@+id/action_state_close"
         app:destination="@id/stateCloseDialog" />
+
+    <dialog
+        android:id="@+id/findOutMoreStateCloseDialog"
+        android:name="it.ministerodellasalute.immuni.ui.suggestions.FindOutMoreCloseDialogFragment"
+        tools:layout="@layout/find_out_more_close_dialog" />
+    <action
+        android:id="@+id/action_find_out_more_state_close"
+        app:destination="@id/findOutMoreStateCloseDialog" />
     <!-- Positive -->
     <dialog
         android:id="@+id/statePositiveDialog"

@@ -103,7 +103,8 @@ class GreenCertificateViewModel(
                             user.value?.greenPass!!.add(
                                 GreenCertificateUser(
                                     base64 = result.greenpass.greenPass.toString(),
-                                    data = greenCertificate
+                                    data = greenCertificate,
+                                    fglTipoDgc = result.greenpass.fglTipoDgc
                                 )
                             )
                             userManager.save(

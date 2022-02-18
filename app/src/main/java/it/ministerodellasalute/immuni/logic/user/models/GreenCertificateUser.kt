@@ -10,5 +10,6 @@ import kotlinx.android.parcel.Parcelize
 @JsonClass(generateAdapter = true)
 data class GreenCertificateUser(
     @field:Json(name = "base64") val base64: String,
-    @field:Json(name = "greenCertificate") val data: GreenCertificate?
+    @field:Json(name = "greenCertificate") val data: GreenCertificate?,
+    @field:Json(name = "fglTipoDgc") val fglTipoDgc: String? = null
 ) : Parcelable

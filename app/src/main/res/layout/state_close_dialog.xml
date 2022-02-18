@@ -198,17 +198,11 @@
                 android:layout_marginBottom="20dp"
                 android:text="@string/suggestions_instruction_while_waiting_doctor" />
 
-            <LinearLayout style="@style/ParagraphCard.Layout">
-
-                <TextView
-                    style="@style/ParagraphCard.Title"
-                    android:text="@string/suggestions_instruction_stay_home"
-                    app:drawableStartCompat="@drawable/ic_stay_home" />
-
-                <TextView
-                    style="@style/ParagraphCard.Message"
-                    android:text="@string/suggestions_instruction_stay_home_message" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/quarantineIsolationLink"
+                style="@style/ParagraphCard"
+                android:text="@string/suggestions_instruction_stay_home"
+                app:drawableStartCompat="@drawable/ic_stay_home" />
 
             <TextView
                 style="@style/ParagraphCard"
