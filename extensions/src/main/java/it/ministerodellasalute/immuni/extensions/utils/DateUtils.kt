@@ -61,6 +61,7 @@ fun Date.byAdding(
 }
 
 private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+private val dateFormatterReversed = SimpleDateFormat("dd-MM-yyyy", Locale.US)
 private val dateTimeFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
 
 val Date.isoDateString: String get() = dateFormatter.format(this)
@@ -80,4 +81,40 @@ fun String.formatDateTimeString(date: String?): String? {
     } else {
         null
     }
+}
+
+fun Date.dateToString(): String {
+    return dateFormatterReversed.format(this)
+}
+
+fun Date.getDayFromDate(): String {
+    val date = this
+    val day = Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
+        time = date
+    }[Calendar.DAY_OF_MONTH]
+    return if (day < 10) {
+        "0$day"
+    } else {
+        day.toString()
+    }
+}
+
+fun Date.getMonthFromDate(): String {
+    val date = this
+    val month = Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
+        time = date
+    }[Calendar.MONTH] + 1
+    return if (month < 10) {
+        "0$month"
+    } else {
+        month.toString()
+    }
+}
+
+fun Date.getYearFromDate(): String {
+    val date = this
+    val year = Calendar.getInstance(TimeZone.getTimeZone("UTC")).apply {
+        time = date
+    }[Calendar.YEAR]
+    return year.toString()
 }

@@ -597,4 +597,31 @@ Operating system: iOS 13.5.1; Model: iPhone XS; Exposure notifications: Active; 
     <string name="url_quarantine_and_isolation" translatable="false">https://www.salute.gov.it/portale/nuovocoronavirus/dettaglioFaqNuovoCoronavirus.jsp?lingua=italiano&amp;id=244#19</string>
     <string name="title_dialog_find_out_more_state_close">Quarantine and isolation</string>
     <string name="green_certificate_validity_healing_cbis">Certification valid in the European Union until the end of validity date and valid in Italy 540 days (18 months) from the start of validity date, subject to regulatory changes</string>
+
+    <string name="tabbar_title_certificate_dgc">Certificati</string>
+    <string name="title_certificate_dgc">I tuoi EU Digital Covid Certificate</string>
+    <string name="subtitle_certificate_dgc">Aggiungi la tua EU Digital Covid in home per averla a portata di mano tutti i giorni.</string>
+    <string name="green_certificate_list_dgc_valid">Valido fino al %1$s in Italia</string>
+    <string name="green_certificate_list_dgc_expired">Scaduto in Italia</string>
+    <string name="green_certificate_button_add_home">Aggiungi a home</string>
+    <string name="green_certificate_button_remove_home">Rimuovi da home</string>
+    <string name="green_certificate_card_vaccination">Vaccinazione dose %d/%d</string>
+    <string name="green_certificate_card_molecular_test">Tampone Molecolare</string>
+    <string name="green_certificate_card_rapid_test">Tampone Antigenico</string>
+    <string name="green_certificate_card_exemption">Esenzione</string>
+    <string name="green_certificate_card_recovery">Guarigione</string>
+    <string name="green_certificate_added_home_dialog_title">Aggiunto a home</string>
+    <string name="green_certificate_added_home_dialog_message">Da ora potrai visualizzare la tua EU Digital Covid Certificate in home</string>
+    <string name="green_certificate_added_home_dialog_confirm">OK</string>
+    <string name="green_certificate_removed_home_dialog_title">Rimosso da home</string>
+    <string name="green_certificate_removed_home_dialog_message">Il tuo EU Digital Covid Certificate è stato rimosso da home, potrai recuperarlo dalla sezione certificati</string>
+    <string name="green_certificate_removed_home_dialog_confirm">OK</string>
+    <string name="green_certificate_replace_home_dialog_title">Attenzione</string>
+    <string name="green_certificate_replace_home_dialog_message">Esiste già un EU Digital Covid Certificate in home, vuoi sostituirlo con questo?</string>
+    <string name="green_certificate_replace_home_dialog_confirm">Si, sostituisci</string>
+    <string name="green_certificate_replace_home_dialog_cancel">No</string>
+    <string name="home_your_eu_dgc">Il tuo EU Digital Covid Certificate</string>
+    <string name="certificate_dgc_know_more_title">Come aggiungere in home la tua Eu Digital Covid Certificate</string>
+    <string name="certificate_dgc_know_more_first">Se hai già recuperato i tuoi EU Digital Covid Certificate, entra nella sezione Certificati, scegli quello che utilizzerai tutti i giorni e aprilo, in basso, sotto i dettagli, troverai la voce Aggiungi a home. Potrai sempre rimuoverlo dopo averlo aggiunto e inserirne un altro a tua scelta.</string>
+    <string name="certificate_dgc_know_more_second">Da questo momento il Certificato sarà sempre in home quando aprirai l’app Immuni.</string>
 </resources>

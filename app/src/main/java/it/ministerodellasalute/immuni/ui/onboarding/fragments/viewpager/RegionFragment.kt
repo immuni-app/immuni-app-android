@@ -107,7 +107,7 @@ class RegionFragment :
         viewModel.onRegionSelected(item)
     }
 
-    override fun onDialogPositive(requestCode: Int) {
+    override fun onDialogPositive(requestCode: Int, argument: String?) {
         viewModel.onAbroadRegionConfirmed()
     }
 

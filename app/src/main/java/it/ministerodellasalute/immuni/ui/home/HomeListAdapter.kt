@@ -15,11 +15,13 @@
 
 package it.ministerodellasalute.immuni.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.DiffUtil
@@ -30,12 +32,16 @@ import it.ministerodellasalute.immuni.extensions.utils.color
 import it.ministerodellasalute.immuni.extensions.view.*
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.logic.user.UserManager
+import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
+import it.ministerodellasalute.immuni.util.ImageUtils
 import kotlin.reflect.full.primaryConstructor
 
 class HomeListAdapter(
     val context: Context,
     private val clickListener: HomeClickListener,
-    val settingsManager: ConfigurationSettingsManager
+    val settingsManager: ConfigurationSettingsManager,
+    val userManager: UserManager
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -91,6 +97,11 @@ class HomeListAdapter(
 
     inner class GreenPassVH(v: View) : RecyclerView.ViewHolder(v)
 
+    inner class CertificateVH(v: View) : RecyclerView.ViewHolder(v) {
+        val person: TextView = v.findViewById(R.id.person)
+        val qrCodeHome: ImageView = v.findViewById(R.id.qrCodeHome)
+    }
+
     inner class DisableExposureApiVH(v: View) : RecyclerView.ViewHolder(v) {
         val disableExposureApi: Button = v.findViewById(R.id.disableExposureApi)
 
@@ -113,12 +124,13 @@ class HomeListAdapter(
         val (layout, cardType) = when (viewType) {
             0 -> Pair(R.layout.home_protection_state_card, ProtectionCardVH::class)
             1 -> Pair(R.layout.home_section_header_item, SectionHeaderVH::class)
-            2 -> Pair(R.layout.home_green_certificate_card, GreenPassVH::class)
-            3 -> Pair(R.layout.home_report_positivity_card, ReportPositivityVH::class)
-            4 -> Pair(R.layout.home_countries_of_interest, CountriesOfInterestVH::class)
-            5 -> Pair(R.layout.home_information_how_app_works_card, InformationHowAppWorksVH::class)
-            6 -> Pair(R.layout.home_information_self_care_card, InformationSelfCareVH::class)
-            7 -> Pair(R.layout.home_disable_exposure_api, DisableExposureApiVH::class)
+            2 -> Pair(R.layout.home_certificate_card, CertificateVH::class)
+            3 -> Pair(R.layout.home_green_certificate_card, GreenPassVH::class)
+            4 -> Pair(R.layout.home_report_positivity_card, ReportPositivityVH::class)
+            5 -> Pair(R.layout.home_countries_of_interest, CountriesOfInterestVH::class)
+            6 -> Pair(R.layout.home_information_how_app_works_card, InformationHowAppWorksVH::class)
+            7 -> Pair(R.layout.home_information_self_care_card, InformationSelfCareVH::class)
+            8 -> Pair(R.layout.home_disable_exposure_api, DisableExposureApiVH::class)
             else -> error("Unhandled viewType $viewType")
         }
 
@@ -129,6 +141,7 @@ class HomeListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {}
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
         position: Int,
@@ -202,6 +215,13 @@ class HomeListAdapter(
                 holder.disableExposureApi.isEnabled =
                     (items[position] as DisableExposureApi).isEnabled
             }
+            is CertificateVH -> {
+                val listGreenCertificateHome = getCertificateHome()
+                if (listGreenCertificateHome.isNotEmpty()) {
+                    holder.person.text = "${listGreenCertificateHome[0].data?.person?.givenName} ${listGreenCertificateHome[0].data?.person?.familyName}"
+                    holder.qrCodeHome.setImageBitmap(ImageUtils.convert(listGreenCertificateHome[0].base64))
+                }
+            }
         }
     }
 
@@ -209,16 +229,21 @@ class HomeListAdapter(
         return when (items[position]) {
             is ProtectionCard -> 0
             is SectionHeader -> 1
-            is GreenPassCard -> 2
-            is ReportPositivityCard -> 3
-            is CountriesOfInterestCard -> 4
-            is HowItWorksCard -> 5
-            is SelfCareCard -> 6
-            is DisableExposureApi -> 7
+            is CertificateCard -> 2
+            is GreenPassCard -> 3
+            is ReportPositivityCard -> 4
+            is CountriesOfInterestCard -> 5
+            is HowItWorksCard -> 6
+            is SelfCareCard -> 7
+            is DisableExposureApi -> 8
         }
     }
 
     override fun getItemCount(): Int = items.size
+
+    private fun getCertificateHome(): List<GreenCertificateUser> {
+        return userManager.user.value?.greenPass!!.filter { greenCertificateUser -> greenCertificateUser.addedHomeDgc}
+    }
 }
 
 interface HomeClickListener {

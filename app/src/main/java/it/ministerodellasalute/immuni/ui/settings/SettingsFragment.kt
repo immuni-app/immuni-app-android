@@ -140,7 +140,7 @@ class SettingsFragment : Fragment(R.layout.settings_fragment), ConfirmationDialo
         }
     }
 
-    override fun onDialogPositive(requestCode: Int) {}
+    override fun onDialogPositive(requestCode: Int, argument: String?) {}
 
     override fun onDialogNegative(requestCode: Int) {}
 }

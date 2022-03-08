@@ -44,9 +44,17 @@ class ConfirmationDialogFragment : DialogFragment() {
             .setCancelable(args.getBoolean(ARG_CANCELABLE))
             .setMessage(args.getString(ARG_MESSAGE))
             .setPositiveButton(args.getString(ARG_POSITIVE_BUTTON)) { _, _ ->
-                listener.onDialogPositive(
-                    targetRequestCode
-                )
+                if (args.getString(ARG_ARGUMENT) != null) {
+                    listener.onDialogPositive(
+                        targetRequestCode,
+                        args.getString(ARG_ARGUMENT)
+                    )
+                } else {
+                    listener.onDialogPositive(
+                        targetRequestCode
+                    )
+                }
+
             }
             .setNegativeButton(args.getString(ARG_NEGATIVE_BUTTON)) { _, _ ->
                 listener.onDialogNegative(
@@ -64,6 +72,7 @@ class ConfirmationDialogFragment : DialogFragment() {
         private const val ARG_CANCELABLE = "ARG_CANCELABLE"
         private const val ARG_MESSAGE = "ARG_MESSAGE"
         private const val ARG_REQUEST_CODE = "ARG_REQUEST_CODE"
+        private const val ARG_ARGUMENT = "ARG_ARGUMENT"
 
         fun createInstance(
             positiveButton: String,
@@ -71,7 +80,8 @@ class ConfirmationDialogFragment : DialogFragment() {
             message: String? = null,
             title: String,
             cancelable: Boolean,
-            requestCode: Int
+            requestCode: Int,
+            argument: String? = null
         ): ConfirmationDialogFragment {
             return ConfirmationDialogFragment().apply {
                 arguments = bundleOf(
@@ -80,7 +90,8 @@ class ConfirmationDialogFragment : DialogFragment() {
                     ARG_MESSAGE to message,
                     ARG_TITLE to title,
                     ARG_CANCELABLE to cancelable,
-                    ARG_REQUEST_CODE to requestCode
+                    ARG_REQUEST_CODE to requestCode,
+                    ARG_ARGUMENT to argument
                 )
             }
         }
@@ -88,7 +99,7 @@ class ConfirmationDialogFragment : DialogFragment() {
 }
 
 interface ConfirmationDialogListener {
-    fun onDialogPositive(requestCode: Int)
+    fun onDialogPositive(requestCode: Int, argument: String? = null)
     fun onDialogNegative(requestCode: Int)
 }
 
@@ -103,7 +114,8 @@ fun <T> T.openConfirmationDialog(
     message: String? = null,
     title: String,
     cancelable: Boolean = true,
-    requestCode: Int
+    requestCode: Int,
+    argument: String? = null
 ) where T : Fragment, T : ConfirmationDialogListener {
     val fragment = ConfirmationDialogFragment.createInstance(
         positiveButton,
@@ -111,7 +123,8 @@ fun <T> T.openConfirmationDialog(
         message,
         title,
         cancelable,
-        requestCode
+        requestCode,
+        argument
     )
     fragment.setTargetFragment(this, requestCode)
     fragment.show(parentFragmentManager, "CONFIRMATION_DIALOG_$requestCode")

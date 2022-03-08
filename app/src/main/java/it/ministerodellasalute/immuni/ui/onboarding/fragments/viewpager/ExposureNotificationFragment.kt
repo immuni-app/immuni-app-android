@@ -92,6 +92,6 @@ class ExposureNotificationFragment :
     }
 
     private fun canProceed(): Boolean {
-        return viewModel.isBroadcastingActive.value ?: false
+        return true //viewModel.isBroadcastingActive.value ?: false
     }
 }

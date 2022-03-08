@@ -59,11 +59,11 @@ class MainActivity : ImmuniActivity() {
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
-        val navGraphIds = listOf(R.navigation.home, R.navigation.settings)
-        val menuItemsIds = listOf(R.id.home_nav, R.id.settings_nav)
+        val navGraphIds = listOf(R.navigation.home, R.navigation.certificate_dgc, R.navigation.settings)
+        val menuItemsIds = listOf(R.id.home_nav, R.id.certificate_nav, R.id.settings_nav)
         val defaultIconsIds =
-            listOf(R.drawable.ic_home_unselected, R.drawable.ic_settings_unselected)
-        val selectedIconsIds = listOf(R.drawable.ic_home_selected, R.drawable.ic_settings_selected)
+            listOf(R.drawable.ic_home_unselected, R.drawable.ic_certificates_unselected, R.drawable.ic_settings_unselected)
+        val selectedIconsIds = listOf(R.drawable.ic_home_selected, R.drawable.ic_certificates_selected, R.drawable.ic_settings_selected)
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(

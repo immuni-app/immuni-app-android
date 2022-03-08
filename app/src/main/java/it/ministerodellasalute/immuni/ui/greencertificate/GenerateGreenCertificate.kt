@@ -28,6 +28,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -37,6 +38,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.GreenCertificateDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
+import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
@@ -70,7 +72,12 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (activity as? AppCompatActivity)?.setLightStatusBar(
+            resources.getColor(
+                R.color.background_darker,
+                null
+            )
+        )
         viewModel = getViewModel()
         userManager = get()
 
@@ -319,7 +326,7 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
         // Do nothing, user does not want to exit
     }
 
-    override fun onDialogPositive(requestCode: Int) {
+    override fun onDialogPositive(requestCode: Int, argument: String?) {
         if (requestCode == ALERT_CONFIRM_SAVE) {
             expiredDateHealthIDDateInput.text?.clear()
             if (!expiredDateHealthIDDateInput.isEnabled) {

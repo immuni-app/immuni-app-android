@@ -17,6 +17,7 @@ package it.ministerodellasalute.immuni.ui.main
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -24,6 +25,8 @@ import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.extensions.notifications.PushNotificationManager
 import it.ministerodellasalute.immuni.logic.exposure.ExposureManager
+import it.ministerodellasalute.immuni.logic.user.UserManager
+import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.ui.home.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filter
@@ -34,7 +37,8 @@ class MainViewModel(
     private val context: Context,
     private val pushNotificationManager: PushNotificationManager,
     private val exposureManager: ExposureManager,
-    appLifecycleObserver: AppLifecycleObserver
+    appLifecycleObserver: AppLifecycleObserver,
+    private val userManager: UserManager
 ) : ViewModel() {
 
     val homeListModel = MutableLiveData<List<HomeItemType>>(listOf())
@@ -61,6 +65,12 @@ class MainViewModel(
         protectionActive?.let {
             items.add(ProtectionCard(it, exposureManager.exposureStatus.value))
         }
+        userManager.showDGCHome.value.let {
+            if (it == true) {
+                items.add(SectionHeader(context.getString(R.string.home_your_eu_dgc)))
+                items.add(CertificateCard)
+            }
+        }
         items.add(SectionHeader(context.getString(R.string.home_what_do_you_want_today)))
         items.add(GreenPassCard)
         items.add(ReportPositivityCard)
@@ -70,5 +80,25 @@ class MainViewModel(
         items.add(SelfCareCard)
         items.add(DisableExposureApi(protectionActive ?: false))
         return items
+    }
+
+    fun updateHomeListModel(addedHomeDGC: Boolean?) {
+        if (homeListModel.value!!.isEmpty()) return
+        val homeItems = homeListModel.value!!.toMutableList()
+        val indexTitleCertificate = homeItems.indexOf(SectionHeader(context.getString(R.string.home_your_eu_dgc)))
+        if (addedHomeDGC !== null && addedHomeDGC) {
+            if (indexTitleCertificate == -1) {
+                val indexTitle = homeItems.indexOf(SectionHeader(context.getString(R.string.home_what_do_you_want_today)))
+                homeItems.add(indexTitle, SectionHeader(context.getString(R.string.home_your_eu_dgc)))
+                homeItems.add(indexTitle + 1, CertificateCard)
+                homeListModel.postValue(homeItems)
+            }
+        } else {
+            if (indexTitleCertificate != -1) {
+                homeItems.remove(SectionHeader(context.getString(R.string.home_your_eu_dgc)))
+                homeItems.remove(CertificateCard)
+                homeListModel.postValue(homeItems)
+            }
+        }
     }
 }

@@ -22,6 +22,11 @@
         android:title="@string/tabbar_title_home" />
 
     <item
+        android:id="@+id/certificate_nav"
+        android:icon="@drawable/ic_tab_certificate"
+        android:title="@string/tabbar_title_certificate_dgc" />
+
+    <item
         android:id="@+id/settings_nav"
         android:icon="@drawable/ic_tab_settings"
         android:title="@string/tabbar_title_settings" />

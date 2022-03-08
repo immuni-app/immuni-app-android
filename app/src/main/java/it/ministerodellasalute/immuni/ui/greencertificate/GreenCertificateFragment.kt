@@ -28,23 +28,24 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import it.ministerodellasalute.immuni.GreenCertificateDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.logic.user.UserManager
+import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.logic.user.models.User
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.util.ImageUtils
-import kotlin.math.abs
 import kotlinx.android.synthetic.main.green_certificate.*
 import kotlinx.android.synthetic.main.green_certificate_tab.*
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import kotlin.math.abs
 
 class GreenCertificateFragment : Fragment(R.layout.green_certificate), ConfirmationDialogListener {
 
@@ -62,6 +63,9 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
         const val DELETE_QR = 200
         const val GO_TO_SETTINGS = 201
         const val INFORMATION_ORDER = 202
+        const val REPLACE_DGC = 203
+        const val ALERT_ADD = 204
+        const val ALERT_REMOVE = 205
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,6 +76,7 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
                 null
             )
         )
+        val argument = navArgs<GreenCertificateFragmentArgs>()
 
         userManager = get()
         viewModel = getViewModel()
@@ -93,14 +98,21 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                val currentView = (viewpager[0] as RecyclerView).layoutManager?.findViewByPosition(position)
+                val currentView =
+                    (viewpager[0] as RecyclerView).layoutManager?.findViewByPosition(position)
                 currentView?.post {
-                    val wMeasureSpec = View.MeasureSpec.makeMeasureSpec(currentView.width, View.MeasureSpec.EXACTLY)
-                    val hMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                    val wMeasureSpec = View.MeasureSpec.makeMeasureSpec(
+                        currentView.width,
+                        View.MeasureSpec.EXACTLY
+                    )
+                    val hMeasureSpec =
+                        View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
                     currentView.measure(wMeasureSpec, hMeasureSpec)
 
                     if (viewpager.layoutParams.height != currentView.measuredHeight) {
-                        viewpager.layoutParams = (viewpager.layoutParams).also { lp -> lp.height = currentView.measuredHeight }
+                        viewpager.layoutParams = (viewpager.layoutParams).also { lp ->
+                            lp.height = currentView.measuredHeight
+                        }
                     }
                 }
             }
@@ -109,7 +121,8 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
         greenPassAdapter = GreenPassAdapter(
             context = requireContext(),
             fragment = this@GreenCertificateFragment,
-            viewModel = viewModel
+            viewModel = viewModel,
+            userManager = userManager
         )
         greenPassAdapter.data = userManager.user.value?.greenPass!!.asReversed()
 
@@ -121,6 +134,19 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
             registerOnPageChangeCallback(pageChangeCallback)
         }
 
+        if (arguments?.containsKey("greenCertificateSelected") == true) {
+            if (viewpager != null) {
+                viewpager.post {
+                    viewpager.setCurrentItem(
+                        findCurrentItemFromUid(uid = argument.value.greenCertificateSelected),
+                        true
+                    )
+                    arguments!!.remove("greenCertificateSelected")
+                }
+            }
+        }
+
+
         TabLayoutMediator(tabLayoutDot, viewpager) { tab, position ->
             // Some implementation
         }.attach()
@@ -128,19 +154,16 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
         navigationIcon.setOnClickListener {
             findNavController().popBackStack()
         }
-
-        getDGCButton.setOnClickListener {
-            val action = GreenCertificateDirections.actionGenerateGC()
-            findNavController().navigate(action)
-        }
-        setVisibilityLayout()
         informationOrder()
     }
 
-    override fun onDialogPositive(requestCode: Int) {
+    override fun onDialogPositive(requestCode: Int, argument: String?) {
         when (requestCode) {
             DELETE_QR -> {
                 val user = userManager.user
+                if (user.value?.greenPass!!.asReversed()[positionToDelete!!].addedHomeDgc) {
+                    userManager.setShowDGCHome(show = false)
+                }
                 user.value?.greenPass!!.asReversed().removeAt(positionToDelete!!)
                 userManager.save(
                     User(
@@ -150,9 +173,13 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
                     )
                 )
                 greenPassAdapter.notifyItemRemoved(positionToDelete!!)
-                greenPassAdapter.notifyItemRangeChanged(positionToDelete!!, greenPassAdapter.itemCount)
-                setVisibilityLayout()
+                greenPassAdapter.notifyItemRangeChanged(
+                    positionToDelete!!,
+                    greenPassAdapter.itemCount
+                )
                 positionToDelete = null
+                if (user.value?.greenPass!!.isEmpty())
+                    findNavController().popBackStack()
             }
             INFORMATION_ORDER -> {
                 userManager.setShowModalDGC(show = false)
@@ -163,6 +190,48 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
                 val uri: Uri = Uri.fromParts("package", requireContext().packageName, null)
                 intent.data = uri
                 startActivity(intent)
+            }
+            ALERT_ADD -> {
+                val user = userManager.user
+                val listDgcUpdated =
+                    editDGC(uid = argument!!, removeCurrent = false, removeOther = false)
+                userManager.setShowDGCHome(show = true)
+                userManager.save(
+                    User(
+                        region = user.value?.region!!,
+                        province = user.value?.province!!,
+                        greenPass = listDgcUpdated
+                    )
+                )
+                greenPassAdapter.notifyDataSetChanged()
+            }
+            ALERT_REMOVE -> {
+                val user = userManager.user
+                val listDgcUpdated =
+                    editDGC(uid = argument!!, removeCurrent = true, removeOther = false)
+                userManager.setShowDGCHome(show = false)
+                userManager.save(
+                    User(
+                        region = user.value?.region!!,
+                        province = user.value?.province!!,
+                        greenPass = listDgcUpdated
+                    )
+                )
+                greenPassAdapter.notifyDataSetChanged()
+            }
+            REPLACE_DGC -> {
+                val user = userManager.user
+                val listDgcUpdated =
+                    editDGC(uid = argument!!, removeCurrent = false, removeOther = true)
+                userManager.setShowDGCHome(show = true)
+                userManager.save(
+                    User(
+                        region = user.value?.region!!,
+                        province = user.value?.province!!,
+                        greenPass = listDgcUpdated
+                    )
+                )
+                greenPassAdapter.notifyDataSetChanged()
             }
         }
     }
@@ -181,16 +250,6 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
                 cancelable = false,
                 requestCode = INFORMATION_ORDER
             )
-        }
-    }
-
-    private fun setVisibilityLayout() {
-        if (userManager.user.value?.greenPass!!.isEmpty()) {
-            noQrCodeLayout.visibility = View.VISIBLE
-            qrCodeLayout.visibility = View.GONE
-        } else {
-            noQrCodeLayout.visibility = View.GONE
-            qrCodeLayout.visibility = View.VISIBLE
         }
     }
 
@@ -240,5 +299,107 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
                 requestCode = GO_TO_SETTINGS
             )
         }
+    }
+
+    private fun findCurrentItemFromUid(uid: String?): Int {
+        if (uid.isNullOrBlank()) {
+            return 0
+        }
+        var i = 0;
+        var indexSelected = 0
+        loop@ for (greenPass in userManager.user.value?.greenPass!!.asReversed()) {
+            when (true) {
+                greenPass.data?.vaccinations != null -> {
+                    if (uid === greenPass.data?.vaccinations?.get(0)?.certificateIdentifier) {
+                        indexSelected = i
+                        break@loop
+                    }
+                    i++
+                }
+                greenPass.data?.tests != null -> {
+                    if (uid === greenPass.data?.tests?.get(0)?.certificateIdentifier) {
+                        indexSelected = i
+                        break@loop
+                    }
+                    i++
+                }
+                greenPass.data?.recoveryStatements != null -> {
+                    if (uid === greenPass.data?.recoveryStatements?.get(0)?.certificateIdentifier) {
+                        indexSelected = i
+                        break@loop
+                    }
+                    i++
+                }
+                greenPass.data?.exemptions != null -> {
+                    if (uid === greenPass.data?.exemptions?.get(0)?.certificateIdentifier) {
+                        indexSelected = i
+                        break@loop
+                    }
+                    i++
+                }
+            }
+        }
+        return indexSelected
+    }
+
+    private fun editDGC(
+        uid: String,
+        removeCurrent: Boolean,
+        removeOther: Boolean
+    ): MutableList<GreenCertificateUser> {
+        val listDGC = userManager.user.value?.greenPass!!
+        loop@ for (greenPass in listDGC) {
+            when (true) {
+                greenPass.data?.vaccinations != null -> {
+                    if (uid === greenPass.data?.vaccinations?.get(0)?.certificateIdentifier) {
+                        greenPass.addedHomeDgc = !removeCurrent
+                        if (!removeOther) {
+                            break@loop
+                        }
+                    } else {
+                        if (removeOther) {
+                            greenPass.addedHomeDgc = false
+                        }
+                    }
+                }
+                greenPass.data?.tests != null -> {
+                    if (uid === greenPass.data?.tests?.get(0)?.certificateIdentifier) {
+                        greenPass.addedHomeDgc = !removeCurrent
+                        if (!removeOther) {
+                            break@loop
+                        }
+                    } else {
+                        if (removeOther) {
+                            greenPass.addedHomeDgc = false
+                        }
+                    }
+                }
+                greenPass.data?.recoveryStatements != null -> {
+                    if (uid === greenPass.data?.recoveryStatements?.get(0)?.certificateIdentifier) {
+                        greenPass.addedHomeDgc = !removeCurrent
+                        if (!removeOther) {
+                            break@loop
+                        }
+                    } else {
+                        if (removeOther) {
+                            greenPass.addedHomeDgc = false
+                        }
+                    }
+                }
+                greenPass.data?.exemptions != null -> {
+                    if (uid === greenPass.data?.exemptions?.get(0)?.certificateIdentifier) {
+                        greenPass.addedHomeDgc = !removeCurrent
+                        if (!removeOther) {
+                            break@loop
+                        }
+                    } else {
+                        if (removeOther) {
+                            greenPass.addedHomeDgc = false
+                        }
+                    }
+                }
+            }
+        }
+        return listDGC
     }
 }
