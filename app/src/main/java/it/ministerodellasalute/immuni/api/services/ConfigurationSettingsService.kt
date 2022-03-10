@@ -64,7 +64,7 @@ data class ConfigurationSettings(
     @field:Json(name = "countries") val countries: Map<String, Map<String, String>>,
     @field:Json(name = "eudcc_expiration") val eudcc_expiration: Map<String, Map<String, String>>,
     @field:Json(name = "risk_exposure") val risk_exposure: Map<String, String>,
-    @field:Json(name = "eudcc_validity") val days_expiration_dgc: Map<String, Int?>
+    @field:Json(name = "eu_dcc_deadlines") val eu_dcc_deadlines: Map<String, Int?>
 )
 
 @JsonClass(generateAdapter = true)
@@ -248,13 +248,13 @@ fun risk_exposure(): Map<String, String> {
 fun daysExpirationDgc(): Map<String, Int?> {
     return mapOf(
         "cbis" to 540,
-        "molecular_test" to 3,
-        "rapid_test" to 2,
+        "molecular_test" to 72,
+        "rapid_test" to 48,
         "vaccine_first_dose" to 43,
         "vaccine_fully_completed" to 180,
         "vaccine_booster" to 540,
         "healing_certificate" to 180,
-        "exemption" to null
+        "exemption" to 540
     )
 }
 
@@ -296,5 +296,5 @@ val defaultSettings = ConfigurationSettings(
     countries = countriesMap(),
     eudcc_expiration = eudccMap(),
     risk_exposure = risk_exposure(),
-    days_expiration_dgc = daysExpirationDgc()
+    eu_dcc_deadlines = daysExpirationDgc()
 )

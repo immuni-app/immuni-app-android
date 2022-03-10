@@ -309,6 +309,5 @@ class HomeFragment : Fragment(),
     }
 
     private fun openCertificate() {
-
     }
 }

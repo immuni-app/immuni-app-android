@@ -218,7 +218,7 @@ class HomeListAdapter(
             is CertificateVH -> {
                 val listGreenCertificateHome = getCertificateHome()
                 if (listGreenCertificateHome.isNotEmpty()) {
-                    holder.person.text = "${listGreenCertificateHome[0].data?.person?.givenName} ${listGreenCertificateHome[0].data?.person?.familyName}"
+                    holder.person.text = "${listGreenCertificateHome[0].data?.person?.familyName} ${listGreenCertificateHome[0].data?.person?.givenName}"
                     holder.qrCodeHome.setImageBitmap(ImageUtils.convert(listGreenCertificateHome[0].base64))
                 }
             }
@@ -242,7 +242,7 @@ class HomeListAdapter(
     override fun getItemCount(): Int = items.size
 
     private fun getCertificateHome(): List<GreenCertificateUser> {
-        return userManager.user.value?.greenPass!!.filter { greenCertificateUser -> greenCertificateUser.addedHomeDgc}
+        return userManager.user.value?.greenPass!!.filter { greenCertificateUser -> greenCertificateUser.addedHomeDgc }
     }
 }
 

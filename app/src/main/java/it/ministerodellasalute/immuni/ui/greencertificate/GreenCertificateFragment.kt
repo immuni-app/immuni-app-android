@@ -41,11 +41,11 @@ import it.ministerodellasalute.immuni.logic.user.models.User
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.util.ImageUtils
+import kotlin.math.abs
 import kotlinx.android.synthetic.main.green_certificate.*
 import kotlinx.android.synthetic.main.green_certificate_tab.*
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import kotlin.math.abs
 
 class GreenCertificateFragment : Fragment(R.layout.green_certificate), ConfirmationDialogListener {
 
@@ -145,7 +145,6 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
                 }
             }
         }
-
 
         TabLayoutMediator(tabLayoutDot, viewpager) { tab, position ->
             // Some implementation
@@ -305,7 +304,7 @@ class GreenCertificateFragment : Fragment(R.layout.green_certificate), Confirmat
         if (uid.isNullOrBlank()) {
             return 0
         }
-        var i = 0;
+        var i = 0
         var indexSelected = 0
         loop@ for (greenPass in userManager.user.value?.greenPass!!.asReversed()) {
             when (true) {

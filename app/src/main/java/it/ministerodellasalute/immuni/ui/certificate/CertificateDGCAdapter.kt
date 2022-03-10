@@ -17,7 +17,6 @@ package it.ministerodellasalute.immuni.ui.certificate
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +41,8 @@ class CertificateDGCAdapter(
 
     private val molecolarTest = "LP6464-4"
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-    private val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
+    private val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+    private val dateFormatString = SimpleDateFormat("dd-MM-yyyy", Locale.US)
 
     var data: List<GreenCertificateUser> = emptyList()
         set(value) {
@@ -67,8 +67,6 @@ class CertificateDGCAdapter(
                 }
                 else -> null
             }
-
-
             clickListener.onClick(uid!!)
         }
     }
@@ -99,77 +97,109 @@ class CertificateDGCAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: GreenPassVH, position: Int) {
         val greenCertificate = data[position]
-        val daysExpiredDgcMap = settingsManager.settings.value.days_expiration_dgc
+        val daysExpiredDgcMap = settingsManager.settings.value.eu_dcc_deadlines
         holder.nameForename.text =
-            "${greenCertificate.data?.person?.givenName} ${greenCertificate.data?.person?.familyName}"
+            "${greenCertificate.data?.person?.familyName} ${greenCertificate.data?.person?.givenName}"
         holder.addedInHome.visibility = if (greenCertificate.addedHomeDgc) {
             View.VISIBLE
         } else {
             View.GONE
         }
+        val todayDateMill = Date().byAdding().time
         when (true) {
             greenCertificate.data?.recoveryStatements != null -> {
-                holder.dateEvent.text = when(greenCertificate.fglTipoDgc) {
-                    "cbis" -> dateExpired(
-                        greenCertificate.data?.recoveryStatements?.get(0)?.certificateValidFrom!!,
-                        dateFormat,
-                        daysExpiredDgcMap["cbis"]!!,
-                        holder
-                    )
-                    else -> dateExpired(
-                        greenCertificate.data?.recoveryStatements?.get(0)?.certificateValidFrom!!,
-                        dateFormat,
-                        daysExpiredDgcMap["healing_certificate"]!!,
-                        holder
-                    )
+                val validityDays = if (greenCertificate.fglTipoDgc == "cbis") {
+                    daysExpiredDgcMap["cbis"]
+                } else {
+                    daysExpiredDgcMap["healing_certificate"]
                 }
-
+                val maxDateValidity = if (validityDays != null) {
+                    dateFormat.parse(greenCertificate.data?.recoveryStatements?.get(0)?.certificateValidFrom!!)!!
+                        .byAdding(days = validityDays)
+                } else {
+                    null
+                }
+                holder.dateEvent.text =
+                    if (maxDateValidity !== null && maxDateValidity.time > todayDateMill) {
+                        holder.validityDGC.backgroundTintList =
+                            context.resources.getColorStateList(R.color.colorPrimary, null)
+                        context.getString(
+                            R.string.green_certificate_list_dgc_valid,
+                            dateFormatString.format(maxDateValidity)
+                        )
+                    } else {
+                        holder.validityDGC.backgroundTintList =
+                            context.resources.getColorStateList(R.color.danger, null)
+                        context.getString(R.string.green_certificate_list_dgc_expired)
+                    }
                 holder.eventType.text = context.getString(R.string.green_certificate_card_recovery)
             }
             greenCertificate.data?.tests != null -> {
-                if (greenCertificate.data?.tests?.get(0)!!.typeOfTest == molecolarTest) {
-                    holder.eventType.text =
-                        context.getString(R.string.green_certificate_card_molecular_test)
-                    holder.dateEvent.text = dateExpired(
-                        greenCertificate.data.tests?.get(0)?.dateTimeOfTestResult!!,
-                        dateTimeFormat,
-                        daysExpiredDgcMap["molecular_test"]!!,
-                        holder
-                    )
+                val validityHours =
+                    if (greenCertificate.data?.tests?.get(0)!!.typeOfTest == molecolarTest) {
+                        holder.eventType.text =
+                            context.getString(R.string.green_certificate_card_molecular_test)
+                        daysExpiredDgcMap["molecular_test"]
+                    } else {
+                        holder.eventType.text =
+                            context.getString(R.string.green_certificate_card_rapid_test)
+                        daysExpiredDgcMap["rapid_test"]
+                    }
+                val maxDateValidity = if (validityHours != null) {
+                    dateTimeFormat.parse(greenCertificate.data.tests?.get(0)?.dateTimeOfCollection!!)!!
+                        .byAdding(hours = validityHours)
                 } else {
-                    holder.eventType.text =
-                        context.getString(R.string.green_certificate_card_rapid_test)
-                    holder.dateEvent.text = dateExpired(
-                        greenCertificate.data.tests?.get(0)?.dateTimeOfTestResult!!,
-                        dateTimeFormat,
-                        daysExpiredDgcMap["rapid_test"]!!,
-                        holder
-                    )
+                    null
                 }
+                holder.dateEvent.text =
+                    if (maxDateValidity !== null && maxDateValidity.time > todayDateMill) {
+                        holder.validityDGC.backgroundTintList =
+                            context.resources.getColorStateList(R.color.colorPrimary, null)
+                        if (greenCertificate.data.tests?.get(0)!!.typeOfTest == molecolarTest) {
+                            settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["molecular_test"]
+                        } else {
+                            settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["rapid_test"]
+                        }
+                    } else {
+                        holder.validityDGC.backgroundTintList =
+                            context.resources.getColorStateList(R.color.danger, null)
+                        context.getString(R.string.green_certificate_list_dgc_expired)
+                    }
             }
             greenCertificate.data?.vaccinations != null -> {
-                holder.dateEvent.text = if (greenCertificate.data?.vaccinations?.get(0)!!.doseNumber < greenCertificate.data.vaccinations?.get(0)!!.totalSeriesOfDoses) {
-                    dateExpired(
-                        greenCertificate.data.vaccinations?.get(0)?.dateOfVaccination!!,
-                        dateFormat,
-                        daysExpiredDgcMap["vaccine_first_dose"]!!,
-                        holder
-                    )
-                } else if (greenCertificate.data.vaccinations?.get(0)!!.doseNumber == greenCertificate.data.vaccinations?.get(0)!!.totalSeriesOfDoses && greenCertificate.data.vaccinations?.get(0)!!.totalSeriesOfDoses < 3) {
-                    dateExpired(
-                        greenCertificate.data.vaccinations?.get(0)?.dateOfVaccination!!,
-                        dateFormat,
-                        daysExpiredDgcMap["vaccine_fully_completed"]!!,
-                        holder
-                    )
+                val validityDays =
+                    if (greenCertificate.data?.vaccinations?.get(0)!!.doseNumber < greenCertificate.data.vaccinations?.get(
+                            0
+                        )!!.totalSeriesOfDoses
+                    ) {
+                        daysExpiredDgcMap["vaccine_first_dose"]
+                    } else if (greenCertificate.data.vaccinations?.get(0)!!.doseNumber == greenCertificate.data.vaccinations?.get(
+                            0
+                        )!!.totalSeriesOfDoses && greenCertificate.data.vaccinations?.get(0)!!.totalSeriesOfDoses < 3
+                    ) {
+                        daysExpiredDgcMap["vaccine_fully_completed"]
+                    } else {
+                        daysExpiredDgcMap["vaccine_booster"]
+                    }
+                val maxDateValidity = if (validityDays != null) {
+                    dateFormat.parse(greenCertificate.data.vaccinations?.get(0)?.dateOfVaccination!!)!!
+                        .byAdding(days = validityDays)
                 } else {
-                    dateExpired(
-                        greenCertificate.data.vaccinations?.get(0)?.dateOfVaccination!!,
-                        dateFormat,
-                        daysExpiredDgcMap["vaccine_booster"]!!,
-                        holder
-                    )
+                    null
                 }
+                holder.dateEvent.text =
+                    if (maxDateValidity !== null && maxDateValidity.time > todayDateMill) {
+                        holder.validityDGC.backgroundTintList =
+                            context.resources.getColorStateList(R.color.colorPrimary, null)
+                        context.getString(
+                            R.string.green_certificate_list_dgc_valid,
+                            dateFormatString.format(maxDateValidity)
+                        )
+                    } else {
+                        holder.validityDGC.backgroundTintList =
+                            context.resources.getColorStateList(R.color.danger, null)
+                        context.getString(R.string.green_certificate_list_dgc_expired)
+                    }
                 holder.eventType.text = context.getString(
                     R.string.green_certificate_card_vaccination,
                     greenCertificate.data.vaccinations?.get(0)?.doseNumber,
@@ -177,31 +207,31 @@ class CertificateDGCAdapter(
                 )
             }
             greenCertificate.data?.exemptions != null -> {
-                holder.dateEvent.text = if (greenCertificate.data?.exemptions!![0].certificateValidUntil != null) {
-                    val todayDateMill = Date().byAdding().time
-                    val maxDateValidity = dateFormat.parse(greenCertificate.data.exemptions!![0].certificateValidUntil!!)!!
-                    if (maxDateValidity.time > todayDateMill) {
-                        context.getString(R.string.green_certificate_list_dgc_valid, DateFormat.getDateFormat(context).format(greenCertificate.data.exemptions!![0].certificateValidUntil))
+                val maxDateValidity =
+                    if (!greenCertificate.data?.exemptions!![0].certificateValidUntil.isNullOrBlank()) {
+                        dateFormat.parse(greenCertificate.data.exemptions?.get(0)?.certificateValidUntil!!)!!
+                    } else if (daysExpiredDgcMap["exemption"] != null) {
+                        dateFormat.parse(greenCertificate.data.exemptions?.get(0)?.certificateValidFrom!!)!!
+                            .byAdding(days = daysExpiredDgcMap["exemption"]!!)
                     } else {
+                        null
+                    }
+
+                holder.dateEvent.text =
+                    if (maxDateValidity != null && maxDateValidity.time > todayDateMill) {
+                        holder.validityDGC.backgroundTintList =
+                            context.resources.getColorStateList(R.color.colorPrimary, null)
+                        context.getString(
+                            R.string.green_certificate_list_dgc_valid,
+                            dateFormatString.format(maxDateValidity)
+                        )
+                    } else {
+                        holder.validityDGC.backgroundTintList =
+                            context.resources.getColorStateList(R.color.danger, null)
                         context.getString(R.string.green_certificate_list_dgc_expired)
                     }
-                } else {
-                    context.getString(R.string.green_certificate_list_dgc_expired)
-                }
                 holder.eventType.text = context.getString(R.string.green_certificate_card_exemption)
             }
-        }
-    }
-
-    private fun dateExpired(dateFrom: String,simpleDateFormat: SimpleDateFormat, daysValidity: Int, holder: GreenPassVH): String {
-        val todayDateMill = Date().byAdding().time
-        val maxDateValidity = simpleDateFormat.parse(dateFrom)!!.byAdding(days = daysValidity)
-        return if (maxDateValidity.time > todayDateMill) {
-            holder.validityDGC.backgroundTintList = context.resources.getColorStateList(R.color.colorPrimary, null)
-            context.getString(R.string.green_certificate_list_dgc_valid, DateFormat.getDateFormat(context).format(maxDateValidity))
-        } else {
-            holder.validityDGC.backgroundTintList = context.resources.getColorStateList(R.color.danger, null)
-            context.getString(R.string.green_certificate_list_dgc_expired)
         }
     }
 }

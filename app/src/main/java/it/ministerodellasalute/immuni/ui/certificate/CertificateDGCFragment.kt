@@ -27,9 +27,9 @@ import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
+import kotlin.math.abs
 import kotlinx.android.synthetic.main.certificate_dgc.*
 import org.koin.android.ext.android.get
-import kotlin.math.abs
 
 class CertificateDGCFragment : Fragment(R.layout.certificate_dgc), CertificateDGCClickListener {
 
@@ -104,5 +104,4 @@ class CertificateDGCFragment : Fragment(R.layout.certificate_dgc), CertificateDG
         // important keep here, after navigating
         findNavController().popBackStack()
     }
-
 }

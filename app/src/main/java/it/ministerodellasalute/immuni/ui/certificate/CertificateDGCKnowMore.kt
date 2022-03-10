@@ -5,7 +5,7 @@ import android.view.View
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 
-class CertificateDGCKnowMore: PopupDialogFragment() {
+class CertificateDGCKnowMore : PopupDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

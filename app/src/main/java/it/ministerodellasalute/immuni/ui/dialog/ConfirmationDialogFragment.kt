@@ -54,7 +54,6 @@ class ConfirmationDialogFragment : DialogFragment() {
                         targetRequestCode
                     )
                 }
-
             }
             .setNegativeButton(args.getString(ARG_NEGATIVE_BUTTON)) { _, _ ->
                 listener.onDialogNegative(
