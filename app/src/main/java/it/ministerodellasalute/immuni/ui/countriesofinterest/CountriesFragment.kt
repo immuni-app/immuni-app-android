@@ -115,7 +115,7 @@ class CountriesFragment :
         // Do nothing, user does not want to exit
     }
 
-    override fun onDialogPositive(requestCode: Int) {
+    override fun onDialogPositive(requestCode: Int, argument: String?) {
         if (requestCode == ALERT_CONFIRM_SAVE) {
             for (country in adapter.selectedCountries) {
                 if (country.insertDate == null) {

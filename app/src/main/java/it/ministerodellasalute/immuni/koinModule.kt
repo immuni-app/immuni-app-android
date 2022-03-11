@@ -397,6 +397,7 @@ val appModule = module {
             androidContext(),
             get(),
             get(),
+            get(),
             get()
         )
     }

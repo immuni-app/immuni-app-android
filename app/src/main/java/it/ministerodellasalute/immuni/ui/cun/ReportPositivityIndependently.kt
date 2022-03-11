@@ -312,7 +312,7 @@ class ReportPositivityIndependently : Fragment(R.layout.report_positivity_cun),
         // Do nothing, user does not want to exit
     }
 
-    override fun onDialogPositive(requestCode: Int) {
+    override fun onDialogPositive(requestCode: Int, argument: String?) {
         if (requestCode == ALERT_CONFIRM_SAVE) {
             checkboxDate.isChecked = !checkboxDate.isChecked
             symptomOnsetDateInput.text?.clear()

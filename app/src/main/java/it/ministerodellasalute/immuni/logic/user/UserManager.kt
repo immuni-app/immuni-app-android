@@ -75,5 +75,11 @@ class UserManager(
     fun setShowModalDGC(show: Boolean) {
         userRepository.setShowModalDGC(show)
     }
+
+    val showDGCHome = userRepository.showDGCHome
+
+    fun setShowDGCHome(show: Boolean) {
+        userRepository.setShowDGCHome(show)
+    }
     // END DGC
 }

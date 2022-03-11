@@ -422,7 +422,7 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="warning_title_modal">Attenzione</string>
   <string name="warning_message_modal">È importante comunicare la data esatta di inizio sintomi per avviare un tracciamento preciso dei contatti. Seleziona \"nessun sintomo\" solo in caso di completa assenza di sintomi o di comparsa dei sintomi dopo il tampone.</string>
   <string name="home_what_do_you_want_today">Cosa vuoi fare oggi?</string>
-  <string name="home_green_certificate_title">EU Digital Covid Certificate</string>
+  <string name="home_green_certificate_title">Recupera EU Digital Covid Certificate</string>
   <string name="green_pass_no_certificate_available">Non sono ancora stati recuperati EU Digital Covid Certificate</string>
   <string name="green_pass_title">EU Digital Covid Certificate</string>
   <string name="green_pass_button_generate">Recupera EU Digital Covid Certificate</string>
@@ -514,5 +514,31 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
     <string name="green_certificate_validity_vaccine_booster">Certificazione valida 180 giorni (6 mesi) dalla data dell\'ultima somministrazione, salvo modifiche normative</string>
     <string name="title_dialog_find_out_more_state_close">Quarantena e isolamento</string>
     <string name="green_certificate_validity_healing_cbis">Certificazione valida in Unione Europea fino alla data di fine validità e valida in Italia 540 giorni (18 mesi) dalla data di inizio validità, salvo modifiche normative</string>
+    <string name="tabbar_title_certificate_dgc">Certificati</string>
+    <string name="title_certificate_dgc">I tuoi EU Digital Covid Certificate</string>
+  <string name="subtitle_certificate_dgc">Aggiungi la tua EU Digital Covid in home per averla a portata di mano tutti i giorni.</string>
+  <string name="green_certificate_list_dgc_valid">Valido fino al %1$s in Italia</string>
+  <string name="green_certificate_list_dgc_expired">Scaduto in Italia</string>
+  <string name="green_certificate_button_add_home">Aggiungi a home</string>
+  <string name="green_certificate_button_remove_home">Rimuovi da home</string>
+  <string name="green_certificate_card_vaccination">Vaccinazione dose %d/%d</string>
+  <string name="green_certificate_card_molecular_test">Tampone molecolare</string>
+  <string name="green_certificate_card_rapid_test">Tampone antigenico</string>
+  <string name="green_certificate_card_exemption">Esenzione</string>
+  <string name="green_certificate_card_recovery">Guarigione</string>
+  <string name="green_certificate_added_home_dialog_title">Aggiunto a home</string>
+  <string name="green_certificate_added_home_dialog_message">Da ora potrai visualizzare la tua EU Digital Covid Certificate in home</string>
+  <string name="green_certificate_added_home_dialog_confirm">OK</string>
+  <string name="green_certificate_removed_home_dialog_title">Rimosso da home</string>
+  <string name="green_certificate_removed_home_dialog_message">Il tuo EU Digital Covid Certificate è stato rimosso da home, potrai recuperarlo dalla sezione certificati</string>
+  <string name="green_certificate_removed_home_dialog_confirm">OK</string>
+  <string name="green_certificate_replace_home_dialog_title">Attenzione</string>
+  <string name="green_certificate_replace_home_dialog_message">Esiste già un EU Digital Covid Certificate in home, vuoi sostituirlo con questo?</string>
+  <string name="green_certificate_replace_home_dialog_confirm">Si, sostituisci</string>
+  <string name="green_certificate_replace_home_dialog_cancel">No</string>
+  <string name="home_your_eu_dgc">La tua EU Digital Covid Certificate</string>
+  <string name="certificate_dgc_know_more_title">Come aggiungere in home la tua Eu Digital Covid Certificate</string>
+  <string name="certificate_dgc_know_more_first">Se hai già recuperato i tuoi EU Digital Covid Certificate, entra nella sezione Certificati, scegli quello che utilizzerai tutti i giorni e aprilo, in basso, sotto i dettagli, troverai la voce \"Aggiungi a home\". Potrai sempre rimuoverlo dopo averlo aggiunto e inserirne un altro a tua scelta.</string>
+  <string name="certificate_dgc_know_more_second">Da questo momento il Certificato sarà sempre in home quando aprirai l’app Immuni.</string>
 
 </resources>

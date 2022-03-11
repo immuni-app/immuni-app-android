@@ -25,6 +25,7 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.setDarkStatusBarFullscreen
@@ -35,8 +36,10 @@ import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.extensions.view.visible
 import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
+import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.home_fragment.*
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 
@@ -44,6 +47,7 @@ class HomeFragment : Fragment(),
     HomeClickListener {
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var userManager: UserManager
 
     // this value varies depending on device models
     // so will be overridden later
@@ -55,6 +59,7 @@ class HomeFragment : Fragment(),
         savedInstanceState: Bundle?
     ): View? {
         viewModel = getSharedViewModel()
+        userManager = get()
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
@@ -78,7 +83,8 @@ class HomeFragment : Fragment(),
             adapter = HomeListAdapter(
                 requireContext(),
                 this@HomeFragment,
-                settingsManager
+                settingsManager,
+                userManager
             )
         }
 
@@ -108,6 +114,12 @@ class HomeFragment : Fragment(),
                 }
             }
         }
+
+        userManager.showDGCHome.asLiveData().observe(viewLifecycleOwner, Observer {
+            (homeList.adapter as? HomeListAdapter)?.apply {
+                viewModel.updateHomeListModel(it)
+            }
+        })
 
         viewModel.homeListModel.observe(viewLifecycleOwner, Observer { newList ->
             (homeList.adapter as? HomeListAdapter)?.apply {
@@ -247,6 +259,9 @@ class HomeFragment : Fragment(),
             GreenPassCard -> {
                 openGreenPass()
             }
+            CertificateCard -> {
+                openCertificate()
+            }
             is DisableExposureApi -> {
                 openDisableExposureApi()
             }
@@ -291,5 +306,8 @@ class HomeFragment : Fragment(),
     private fun openGreenPass() {
         val action = HomeFragmentDirections.actionGreenCertificateNav()
         findNavController().navigate(action)
+    }
+
+    private fun openCertificate() {
     }
 }
