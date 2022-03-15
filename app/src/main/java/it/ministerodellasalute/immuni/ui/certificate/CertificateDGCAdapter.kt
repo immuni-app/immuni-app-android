@@ -25,7 +25,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import it.ministerodellasalute.immuni.R
-import it.ministerodellasalute.immuni.extensions.utils.*
+import it.ministerodellasalute.immuni.extensions.utils.byAdding
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
 import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManager
 import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
@@ -41,7 +41,7 @@ class CertificateDGCAdapter(
 
     private val molecolarTest = "LP6464-4"
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-    private val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+    private val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
     private val dateFormatString = SimpleDateFormat("dd-MM-yyyy", Locale.US)
 
     var data: List<GreenCertificateUser> = emptyList()
