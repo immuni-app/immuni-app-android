@@ -27,6 +27,7 @@ class UserRepository(
         private val welcomeCompleteKey = KVStorage.Key<Boolean>("WelcomeComplete")
         private val onboardingCompleteKey = KVStorage.Key<Boolean>("OnboardingComplete")
         private val showModalDGCKey = KVStorage.Key<Boolean>("showModalDGC")
+        private val showDGCHomeKey = KVStorage.Key<Boolean>("showDGCHome")
     }
 
     val user = storage.stateFlow(userKey)
@@ -57,5 +58,11 @@ class UserRepository(
 
     fun setShowModalDGC(show: Boolean) {
         storage[showModalDGCKey] = show
+    }
+
+    val showDGCHome = storage.stateFlow(showDGCHomeKey)
+
+    fun setShowDGCHome(show: Boolean) {
+        storage[showDGCHomeKey] = show
     }
 }

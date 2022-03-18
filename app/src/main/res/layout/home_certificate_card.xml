@@ -32,49 +32,43 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="140dp">
-
-        <it.ministerodellasalute.immuni.ui.view.ImageScaleView
-            android:id="@+id/icon"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="matrix"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.4"
-            app:matrixType="bottom_left"
-            app:srcCompat="@drawable/dgc" />
+        android:minHeight="300dp">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/person"
             style="@style/H4Section"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/home_green_certificate_title"
+            android:layout_marginTop="15dp"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toTopOf="@+id/subtitle"
-            app:layout_constraintEnd_toStartOf="@+id/icon"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/addedInHome"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <TextView
-            android:id="@+id/subtitle"
-            style="@style/SText"
+        <ImageView
+            android:id="@+id/addedInHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="30dp"
-            android:text="@string/home_view_info_button_title"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/title"
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintVertical_bias="0.0" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/ic_icon_pin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/qrCodeHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:padding="15dp"
+            android:scaleType="fitXY"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/person" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

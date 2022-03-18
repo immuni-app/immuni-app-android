@@ -63,7 +63,8 @@ data class ConfigurationSettings(
     @field:Json(name = "dummy_analytics_waiting_time") val dummyAnalyticsWaitingTime: Int,
     @field:Json(name = "countries") val countries: Map<String, Map<String, String>>,
     @field:Json(name = "eudcc_expiration") val eudcc_expiration: Map<String, Map<String, String>>,
-    @field:Json(name = "risk_exposure") val risk_exposure: Map<String, String>
+    @field:Json(name = "risk_exposure") val risk_exposure: Map<String, String>,
+    @field:Json(name = "eu_dcc_deadlines") val eu_dcc_deadlines: Map<String, Int?>
 )
 
 @JsonClass(generateAdapter = true)
@@ -244,6 +245,19 @@ fun risk_exposure(): Map<String, String> {
     )
 }
 
+fun daysExpirationDgc(): Map<String, Int?> {
+    return mapOf(
+        "cbis" to 540,
+        "molecular_test" to 72,
+        "rapid_test" to 48,
+        "vaccine_first_dose" to 43,
+        "vaccine_fully_completed" to 180,
+        "vaccine_booster" to 540,
+        "healing_certificate" to 180,
+        "exemption" to 540
+    )
+}
+
 val defaultSettings = ConfigurationSettings(
     minimumBuildVersion = 0,
     faqUrls = languageMap { "https://get.immuni.gov.it/docs/faq-${it.code}.json" },
@@ -281,5 +295,6 @@ val defaultSettings = ConfigurationSettings(
     dummyAnalyticsWaitingTime = 2_592_000,
     countries = countriesMap(),
     eudcc_expiration = eudccMap(),
-    risk_exposure = risk_exposure()
+    risk_exposure = risk_exposure(),
+    eu_dcc_deadlines = daysExpirationDgc()
 )
