@@ -262,6 +262,9 @@ class HomeFragment : Fragment(),
             CertificateCard -> {
                 openCertificate()
             }
+            NewsCard -> {
+                openNews()
+            }
             is DisableExposureApi -> {
                 openDisableExposureApi()
             }
@@ -305,6 +308,11 @@ class HomeFragment : Fragment(),
 
     private fun openGreenPass() {
         val action = HomeFragmentDirections.actionGreenCertificateNav()
+        findNavController().navigate(action)
+    }
+
+    private fun openNews() {
+        val action = HomeFragmentDirections.actionNews()
         findNavController().navigate(action)
     }
 

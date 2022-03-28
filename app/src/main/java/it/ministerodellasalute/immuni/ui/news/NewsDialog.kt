@@ -13,33 +13,18 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package it.ministerodellasalute.immuni.ui.home
+package it.ministerodellasalute.immuni.ui.news
 
-import it.ministerodellasalute.immuni.logic.exposure.models.ExposureStatus
+import android.os.Bundle
+import android.view.View
+import it.ministerodellasalute.immuni.R
+import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 
-/**
- * Represents an item in the home list.
- */
+class NewsDialog : PopupDialogFragment() {
 
-sealed class HomeItemType
-
-class ProtectionCard(
-    val active: Boolean,
-    val status: ExposureStatus
-) : HomeItemType()
-
-data class SectionHeader(
-    val title: String
-) : HomeItemType()
-
-sealed class InformationCard : HomeItemType()
-
-object HowItWorksCard : InformationCard()
-object SelfCareCard : InformationCard()
-object CountriesOfInterestCard : InformationCard()
-object ReportPositivityCard : InformationCard()
-object GreenPassCard : InformationCard()
-object CertificateCard : InformationCard()
-object NewsCard : InformationCard()
-
-data class DisableExposureApi(val isEnabled: Boolean) : HomeItemType()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setContentLayout(R.layout.news_dialog)
+        setTitle(getString(R.string.news_dialog_title))
+    }
+}

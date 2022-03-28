@@ -540,5 +540,13 @@ Sistema operativo: iOS 13.5.1; Modello iPhone XS; Notifiche di esposizione: Atti
   <string name="certificate_dgc_know_more_title">Come aggiungere in home la tua Eu Digital Covid Certificate</string>
   <string name="certificate_dgc_know_more_first">Se hai già recuperato i tuoi EU Digital Covid Certificate, entra nella sezione Certificati, scegli quello che utilizzerai tutti i giorni e aprilo, in basso, sotto i dettagli, troverai la voce \"Aggiungi a home\". Potrai sempre rimuoverlo dopo averlo aggiunto e inserirne un altro a tua scelta.</string>
   <string name="certificate_dgc_know_more_second">Da questo momento il Certificato sarà sempre in home quando aprirai l’app Immuni.</string>
-
+  <string name="home_card_news_title">Tutti i tuoi certificati in un solo posto!</string>
+  <string name="news_dialog_title">Novità!</string>
+  <string name="news_dialog_subtitle">Versione 2.0</string>
+  <string name="news_dialog_first"><b>Le tue Eu Digital Covid Certificate tutte in un solo posto!</b></string>
+  <string name="news_dialog_second">Attraverso la barra posizionata in basso potrai ritrovare tutti i tuoi certificati, basta selezionare la voce \"Certificati\".</string>
+  <string name="news_dialog_third"><b>Aggiungi a home la tua Eu Digital Covid Certificate per averla sempre a portata di mano tutti i giorni.</b></string>
+  <string name="news_dialog_fourth">Se hai già recuperato i tuoi Eu Digital Covid Certificate, entra nella sezione Certificati, scegli quello che utilizzerai tutti i giorni e aprila, in basso, sotto i dettagli, troverai la voce \"Aggiungi a home\".</string>
+  <string name="news_dialog_fifth">Potrai sempre rimuoverlo dopo averlo aggiunto e inserirne un altro a tua scelta.</string>
+  <string name="news_dialog_sixth">Da questo momento il Certificato sarà sempre in home quando aprirai l\'app Immuni.</string>
 </resources>

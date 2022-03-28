@@ -102,6 +102,8 @@ class HomeListAdapter(
         val qrCodeHome: ImageView = v.findViewById(R.id.qrCodeHome)
     }
 
+    inner class NewsVH(v: View) : RecyclerView.ViewHolder(v)
+
     inner class DisableExposureApiVH(v: View) : RecyclerView.ViewHolder(v) {
         val disableExposureApi: Button = v.findViewById(R.id.disableExposureApi)
 
@@ -125,12 +127,13 @@ class HomeListAdapter(
             0 -> Pair(R.layout.home_protection_state_card, ProtectionCardVH::class)
             1 -> Pair(R.layout.home_section_header_item, SectionHeaderVH::class)
             2 -> Pair(R.layout.home_certificate_card, CertificateVH::class)
-            3 -> Pair(R.layout.home_green_certificate_card, GreenPassVH::class)
-            4 -> Pair(R.layout.home_report_positivity_card, ReportPositivityVH::class)
-            5 -> Pair(R.layout.home_countries_of_interest, CountriesOfInterestVH::class)
-            6 -> Pair(R.layout.home_information_how_app_works_card, InformationHowAppWorksVH::class)
-            7 -> Pair(R.layout.home_information_self_care_card, InformationSelfCareVH::class)
-            8 -> Pair(R.layout.home_disable_exposure_api, DisableExposureApiVH::class)
+            3 -> Pair(R.layout.home_news_card, NewsVH::class)
+            4 -> Pair(R.layout.home_green_certificate_card, GreenPassVH::class)
+            5 -> Pair(R.layout.home_report_positivity_card, ReportPositivityVH::class)
+            6 -> Pair(R.layout.home_countries_of_interest, CountriesOfInterestVH::class)
+            7 -> Pair(R.layout.home_information_how_app_works_card, InformationHowAppWorksVH::class)
+            8 -> Pair(R.layout.home_information_self_care_card, InformationSelfCareVH::class)
+            9 -> Pair(R.layout.home_disable_exposure_api, DisableExposureApiVH::class)
             else -> error("Unhandled viewType $viewType")
         }
 
@@ -218,7 +221,8 @@ class HomeListAdapter(
             is CertificateVH -> {
                 val listGreenCertificateHome = getCertificateHome()
                 if (listGreenCertificateHome.isNotEmpty()) {
-                    holder.person.text = "${listGreenCertificateHome[0].data?.person?.familyName} ${listGreenCertificateHome[0].data?.person?.givenName}"
+                    holder.person.text =
+                        "${listGreenCertificateHome[0].data?.person?.familyName} ${listGreenCertificateHome[0].data?.person?.givenName}"
                     holder.qrCodeHome.setImageBitmap(ImageUtils.convert(listGreenCertificateHome[0].base64))
                 }
             }
@@ -230,12 +234,13 @@ class HomeListAdapter(
             is ProtectionCard -> 0
             is SectionHeader -> 1
             is CertificateCard -> 2
-            is GreenPassCard -> 3
-            is ReportPositivityCard -> 4
-            is CountriesOfInterestCard -> 5
-            is HowItWorksCard -> 6
-            is SelfCareCard -> 7
-            is DisableExposureApi -> 8
+            is NewsCard -> 3
+            is GreenPassCard -> 4
+            is ReportPositivityCard -> 5
+            is CountriesOfInterestCard -> 6
+            is HowItWorksCard -> 7
+            is SelfCareCard -> 8
+            is DisableExposureApi -> 9
         }
     }
 
