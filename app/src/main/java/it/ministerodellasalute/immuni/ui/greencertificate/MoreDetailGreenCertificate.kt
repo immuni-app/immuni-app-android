@@ -31,10 +31,14 @@ import it.ministerodellasalute.immuni.logic.settings.ConfigurationSettingsManage
 import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
 import it.ministerodellasalute.immuni.ui.dialog.PopupDialogFragment
 import java.text.SimpleDateFormat
+import java.util.*
 import kotlinx.android.synthetic.main.green_certificate_more_details.*
+import kotlinx.android.synthetic.main.green_certificate_more_details_exemption.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_recovery.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_test.*
 import kotlinx.android.synthetic.main.green_certificate_more_details_vaccination.*
+import kotlinx.android.synthetic.main.green_certificate_more_details_vaccination.countryVaccination
+import kotlinx.android.synthetic.main.green_certificate_more_details_vaccination.validityVaccine
 import org.koin.android.ext.android.get
 import org.koin.core.KoinComponent
 
@@ -58,10 +62,27 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
 
         setTitle(getString(R.string.green_pass_more_details_title))
 
-        setUI()
+        val vaccineFullyCompleted = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["vaccine_fully_completed"]
+        val vaccineFirstDose = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["vaccine_first_dose"]
+        val rapidTest = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["rapid_test"]
+        val molecularTest = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["molecular_test"]
+        val healingCertificate = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["healing_certificate"]
+        val vaccineBooster = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["vaccine_booster"]
+        val cbis = settingsManager.settings.value.eudcc_expiration[Locale.getDefault().language]!!["cbis"]
+
+        setUI(
+            vaccineFullyCompleted,
+            vaccineFirstDose,
+            molecularTest,
+            rapidTest,
+            healingCertificate,
+            vaccineBooster,
+            cbis
+        )
     }
 
-    private fun setUI() {
+    private fun setUI(validUntilCompleteVaccine: String?, validUntilnotCompleteVaccine: String?, validUntilMolecularTest: String?, validUntilQuickTest: String?, healingCertificate: String?, vaccineBooster: String?, cbis: String?) {
+        var isExemption = false
         when (true) {
             greenCertificateDetail.data?.vaccinations != null -> {
                 // Inflate layout dynamically
@@ -92,13 +113,12 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                         )
                             ?.let { getString(it) })
                 validityVaccine.text =
-                    if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber == greenCertificateDetail.data?.vaccinations?.get(
-                            0
-                        )!!.totalSeriesOfDoses
-                    ) {
-                        getString(R.string.green_certificate_validity_vaccine_complete)
+                    if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber < greenCertificateDetail.data?.vaccinations?.get(0)!!.totalSeriesOfDoses) {
+                        validUntilnotCompleteVaccine ?: getString(R.string.green_certificate_validity_vaccine_partial)
+                    } else if (greenCertificateDetail.data?.vaccinations?.get(0)!!.doseNumber == greenCertificateDetail.data?.vaccinations?.get(0)!!.totalSeriesOfDoses && greenCertificateDetail.data?.vaccinations?.get(0)!!.totalSeriesOfDoses < 3) {
+                        validUntilCompleteVaccine ?: getString(R.string.green_certificate_validity_vaccine_complete)
                     } else {
-                        getString(R.string.green_certificate_validity_vaccine_partial)
+                        vaccineBooster ?: getString(R.string.green_certificate_validity_vaccine_booster)
                     }
                 dosesNumber.text = String.format(
                     requireContext().getString(R.string.green_certificate_more_details_doses_number_text),
@@ -116,11 +136,11 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     setTextOrDefault(greenCertificateDetail.data?.vaccinations?.get(0)!!.countryOfVaccination)
                 certificateIssuerLabel.text =
                     getText(R.string.green_certificate_certificate_issuer_vaccination)
+                certificateIssuerLabelExemption.visibility = View.GONE
             }
             greenCertificateDetail.data?.tests != null -> {
                 // Inflate layout dynamically
                 includeDynamicView(R.layout.green_certificate_more_details_test)
-
                 subHeading.text = getString(R.string.green_certificate_subHeading_test)
                 diseaseLabel.text = getString(R.string.green_certificate_disease)
                 testType.text =
@@ -144,12 +164,13 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                     ratNameTestLabelEng.visibility = View.GONE
                     ratNameTestLabel.visibility = View.GONE
                     ratNameTest.visibility = View.GONE
+                    validityTest.text = validUntilMolecularTest ?: getString(R.string.green_certificate_validity_Moleculartest)
                 } else {
-                    ratNameTest.text =
-                        setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testNameAndManufacturer)
+                    ratNameTest.text = setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.testNameAndManufacturer)
                     ratNameTestLabelEng.visibility = View.VISIBLE
                     ratNameTestLabel.visibility = View.VISIBLE
                     ratNameTest.visibility = View.VISIBLE
+                    validityTest.text = validUntilQuickTest ?: getString(R.string.green_certificate_validity_Quicktest)
                 }
                 dateTimeSampleCollection.text =
                     setTextOrDefault(
@@ -163,6 +184,7 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 countryTest.text =
                     setTextOrDefault(greenCertificateDetail.data?.tests?.get(0)!!.countryOfVaccination)
                 certificateIssuerLabel.text = getText(R.string.green_certificate_certificate_issuer)
+                certificateIssuerLabelExemption.visibility = View.GONE
             }
             greenCertificateDetail.data?.recoveryStatements != null -> {
                 // Inflate layout dynamically
@@ -189,31 +211,61 @@ class MoreDetailGreenCertificate : PopupDialogFragment(), KoinComponent {
                 certificateIssuerLabelEng.visibility = View.GONE
                 certificateIssuerLabel.visibility = View.GONE
                 entityIssuedCertificate.visibility = View.GONE
+                validityHealing.text = when (greenCertificateDetail.fglTipoDgc) {
+                    "cbis" -> cbis ?: getString(R.string.green_certificate_validity_healing_cbis)
+                    else -> healingCertificate ?: getString(R.string.green_certificate_validity_healing)
+                }
+                certificateIssuerLabelExemption.visibility = View.GONE
+            }
+            greenCertificateDetail.data?.exemptions != null -> {
+                isExemption = true
+                flagEsenzione.visibility = View.VISIBLE
+                question.text = getString(R.string.green_certificate_exemption_title)
+                // Inflate layout dynamically
+                includeDynamicView(R.layout.green_certificate_more_details_exemption)
+
+                subHeadingExemption.text = getString(R.string.green_certificate_subHeading_exemption)
+                certifying_physician_exemption.text = greenCertificateDetail.data?.exemptions?.get(0)!!.fiscalCode
+                exemptionValidFrom.text = greenCertificateDetail.data?.exemptions?.get(0)!!.certificateValidFrom
+                exemptionValidUntil.text = setTextOrDefault(greenCertificateDetail.data?.exemptions?.get(0)!!.certificateValidUntil)
+                uniqueCodeExemption.text = greenCertificateDetail.data?.exemptions?.get(0)!!.uniqueVaccinationExemptionIdentifier
             }
         }
 
         entityIssuedCertificate.text =
             getString(R.string.green_certificate_certificate_issuer_const)
 
-        val europeRestrictionUrl =
-            getString(R.string.green_certificate_more_details_europe_restriction_url)
-        europeRestrictionSite.text = "{$europeRestrictionUrl}".coloredClickable(
-            color = requireContext().getColorCompat(R.color.colorPrimary),
-            bold = true
-        ) {
-            ExternalLinksHelper.openLink(
-                requireContext(),
-                europeRestrictionUrl
-            )
+        if (isExemption) {
+            certificateIssuerLabel.visibility = View.GONE
+            certificateIssuerLabelExemption.visibility = View.VISIBLE
+            certificateIssuerLabel.text = getString(R.string.green_certificate_certificate_issuer_exemption)
+            setTitle(getString(R.string.green_certificate_exemption_title))
+            textFooter.visibility = View.GONE
+            europeRestrictionSite.visibility = View.GONE
+            textFooterExemption.visibility = View.VISIBLE
+            subHeading.visibility = View.GONE
+            subHeadingExemption.visibility = View.VISIBLE
+        } else {
+            val europeRestrictionUrl =
+                getString(R.string.green_certificate_more_details_europe_restriction_url)
+            europeRestrictionSite.text = "{$europeRestrictionUrl}".coloredClickable(
+                color = requireContext().getColorCompat(R.color.colorPrimary),
+                bold = true
+            ) {
+                ExternalLinksHelper.openLink(
+                    requireContext(),
+                    europeRestrictionUrl
+                )
+            }
+            europeRestrictionSite.movementMethod = LinkMovementMethod.getInstance()
         }
-        europeRestrictionSite.movementMethod = LinkMovementMethod.getInstance()
     }
 
     private fun includeDynamicView(layout: Int) {
         val v = layoutInflater.inflate(layout, null)
         container.addView(
             v,
-            4,
+            5,
             ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT

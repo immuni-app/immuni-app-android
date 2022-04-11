@@ -24,19 +24,23 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import it.ministerodellasalute.immuni.GreenCertificateDirections
+import com.google.android.material.button.MaterialButton
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.view.setSafeOnClickListener
+import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.logic.user.models.GreenCertificateUser
+import it.ministerodellasalute.immuni.ui.certificate.CertificateDGCFragmentDirections
 import it.ministerodellasalute.immuni.ui.dialog.openConfirmationDialog
 import it.ministerodellasalute.immuni.util.ImageUtils
 
 class GreenPassAdapter(
     val context: Context,
     val fragment: GreenCertificateFragment,
-    val viewModel: GreenCertificateViewModel
+    val viewModel: GreenCertificateViewModel,
+    val userManager: UserManager
 ) :
     RecyclerView.Adapter<GreenPassAdapter.GreenPassVH>() {
 
@@ -51,6 +55,7 @@ class GreenPassAdapter(
         val qrCode: ImageView = v.findViewById(R.id.qrCode)
         val downloadButton: Button = v.findViewById(R.id.downloadButton)
         val deleteButton: Button = v.findViewById(R.id.deleteButton)
+        val addRemoveHomeButton: MaterialButton = v.findViewById(R.id.addRemoveHomeButton)
 
         val surnameNameText: TextView = v.findViewById(R.id.surnameNameText)
         val birthDateText: TextView = v.findViewById(R.id.birthDateText)
@@ -96,12 +101,15 @@ class GreenPassAdapter(
             greenCertificate.data?.vaccinations != null -> {
                 greenCertificate.data!!.vaccinations!![0].certificateIdentifier
             }
+            greenCertificate.data?.exemptions != null -> {
+                greenCertificate.data!!.exemptions!![0].certificateIdentifier
+            }
             else -> null
         }
 
         holder.moreDetails.setSafeOnClickListener {
             val action =
-                GreenCertificateDirections.actionMoreDetailsGreenCertificateDialog(data[position])
+                CertificateDGCFragmentDirections.actionMoreDetailsGreenCertificateDialog(data[position])
             fragment.findNavController().navigate(action)
         }
 
@@ -120,5 +128,79 @@ class GreenPassAdapter(
                 requestCode = GreenCertificateFragment.DELETE_QR
             )
         }
+
+        if (data[position].addedHomeDgc) {
+            holder.addRemoveHomeButton.icon = ContextCompat.getDrawable(context, R.drawable.ic_icon_pin)
+            holder.addRemoveHomeButton.text = context.getString(R.string.green_certificate_button_remove_home)
+        } else {
+            holder.addRemoveHomeButton.icon = ContextCompat.getDrawable(context, R.drawable.ic_icon_pin_empty)
+            holder.addRemoveHomeButton.text = context.getString(R.string.green_certificate_button_add_home)
+        }
+
+        holder.addRemoveHomeButton.setSafeOnClickListener {
+            if (userManager.showDGCHome.value == null || userManager.showDGCHome.value == false) {
+                openDialogAddRemoveHome(
+                    positiveButton = context.getString(R.string.green_certificate_added_home_dialog_confirm),
+                    negativeButton = null,
+                    message = context.getString(R.string.green_certificate_added_home_dialog_message),
+                    title = context.getString(R.string.green_certificate_added_home_dialog_title),
+                    requestCode = GreenCertificateFragment.ALERT_ADD,
+                    greenCertificateUser = data[position]
+                )
+            } else {
+                if (data[position].addedHomeDgc) {
+                    openDialogAddRemoveHome(
+                        positiveButton = context.getString(R.string.green_certificate_removed_home_dialog_confirm),
+                        negativeButton = null,
+                        message = context.getString(R.string.green_certificate_removed_home_dialog_message),
+                        title = context.getString(R.string.green_certificate_removed_home_dialog_title),
+                        requestCode = GreenCertificateFragment.ALERT_REMOVE,
+                        greenCertificateUser = data[position]
+                    )
+                } else {
+                    openDialogAddRemoveHome(
+                        positiveButton = context.getString(R.string.green_certificate_replace_home_dialog_confirm),
+                        negativeButton = context.getString(R.string.green_certificate_replace_home_dialog_cancel),
+                        message = context.getString(R.string.green_certificate_replace_home_dialog_message),
+                        title = context.getString(R.string.green_certificate_replace_home_dialog_title),
+                        requestCode = GreenCertificateFragment.REPLACE_DGC,
+                        greenCertificateUser = data[position]
+                    )
+                }
+            }
+        }
+    }
+
+    private fun openDialogAddRemoveHome(
+        title: String,
+        message: String,
+        positiveButton: String,
+        negativeButton: String?,
+        requestCode: Int,
+        greenCertificateUser: GreenCertificateUser
+    ) {
+        val uid = when (true) {
+            greenCertificateUser.data?.recoveryStatements != null -> {
+                greenCertificateUser.data?.recoveryStatements?.get(0)?.certificateIdentifier
+            }
+            greenCertificateUser.data?.tests != null -> {
+                greenCertificateUser.data?.tests?.get(0)?.certificateIdentifier
+            }
+            greenCertificateUser.data?.vaccinations != null -> {
+                greenCertificateUser.data?.vaccinations?.get(0)?.certificateIdentifier
+            }
+            greenCertificateUser.data?.exemptions != null -> {
+                greenCertificateUser.data?.exemptions?.get(0)?.certificateIdentifier
+            }
+            else -> null
+        }
+        fragment.openConfirmationDialog(
+            positiveButton = positiveButton,
+            negativeButton = negativeButton,
+            message = message,
+            title = title,
+            requestCode = requestCode,
+            argument = uid
+        )
     }
 }

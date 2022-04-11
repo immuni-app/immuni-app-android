@@ -19,6 +19,7 @@ class GCDRepository(
         fun authorizationCun(cun: String): String = "Bearer ${("CUN-$cun").sha256()}"
         fun authorizationNrfe(nrfe: String): String = "Bearer ${nrfe.sha256()}"
         fun authorizationNucg(nucg: String): String = "Bearer ${("NUCG-$nucg").sha256()}"
+        fun authorizationCUEV(cuev: String): String = "Bearer ${("CUEV-$cuev").sha256()}"
     }
 
     suspend fun getGreenCard(
@@ -32,6 +33,7 @@ class GCDRepository(
             "NRFE" -> authorizationNrfe(token)
             "NUCG" -> authorizationNucg(token)
             "OTP" -> authorization(token)
+            "CUEV" -> authorizationCUEV(token)
             else -> authorization(token)
         }
         val response = immuniApiCall {
@@ -48,7 +50,7 @@ class GCDRepository(
         }
         return when (response) {
             is NetworkResource.Success -> GreenPassValidationResult.Success(
-                GreenPassToken(response.data?.qrcode, response.serverDate!!)
+                GreenPassToken(response.data?.qrcode, response.data?.fglTipoDgc, response.serverDate!!)
             )
             is NetworkResource.Error -> {
                 val errorResponse = response.error

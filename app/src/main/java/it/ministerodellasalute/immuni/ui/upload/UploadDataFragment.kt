@@ -133,7 +133,7 @@ class UploadDataFragment : Fragment(R.layout.upload_data_fragment), Confirmation
         // Do nothing, user does not want to exit
     }
 
-    override fun onDialogPositive(requestCode: Int) {
+    override fun onDialogPositive(requestCode: Int, argument: String?) {
         if (requestCode == ALERT_CONFIRM_EXIT) {
             activity?.finish()
         }

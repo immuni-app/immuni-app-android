@@ -28,23 +28,23 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import it.ministerodellasalute.immuni.GreenCertificateDirections
 import it.ministerodellasalute.immuni.R
 import it.ministerodellasalute.immuni.extensions.activity.loading
+import it.ministerodellasalute.immuni.extensions.activity.setLightStatusBar
 import it.ministerodellasalute.immuni.logic.user.UserManager
 import it.ministerodellasalute.immuni.ui.dialog.ConfirmationDialogListener
 import it.ministerodellasalute.immuni.util.ProgressDialogFragment
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
-import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.generate_green_certificate.*
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -72,7 +72,12 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (activity as? AppCompatActivity)?.setLightStatusBar(
+            resources.getColor(
+                R.color.background_darker,
+                null
+            )
+        )
         viewModel = getViewModel()
         userManager = get()
 
@@ -172,6 +177,11 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                         codeInput.setHint(R.string.code_placeholder)
                         getString(R.string.const_nucg)
                     }
+                    4 -> {
+                        codeLabel.text = getString(R.string.cuev_title)
+                        codeInput.setHint(R.string.code_placeholder)
+                        getString(R.string.const_cuev)
+                    }
                     else -> ""
                 }
 
@@ -180,6 +190,7 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                     1 -> LengthFilter(17)
                     2 -> LengthFilter(10)
                     3 -> LengthFilter(10)
+                    4 -> LengthFilter(10)
                     else -> LengthFilter(0)
                 }
                 codeInput.filters = arrayOf(InputFilter.AllCaps(), lengthFilter)
@@ -295,20 +306,6 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
 
     @SuppressLint("SimpleDateFormat")
     private fun openDatePicker() {
-//        val endYear = Calendar.getInstance()
-//        endYear.set(endYear.get(Calendar.YEAR), 11, 31)
-//        val minDate = Date().byAdding(days = -1).time
-//        val maxDate = Date(endYear.timeInMillis).byAdding(year = 11).time
-//        val constraintsBuilder = CalendarConstraints.Builder()
-//        constraintsBuilder.setEnd(maxDate)
-//        constraintsBuilder.setStart(minDate)
-//        constraintsBuilder.setValidator(
-//            RangeValidator(
-//                minDate,
-//                maxDate
-//            )
-//        )
-//        builder.setCalendarConstraints(constraintsBuilder.build())
         builder.setTheme(R.style.Widget_AppTheme_MaterialDatePicker)
         materialDatePicker = builder.build()
         materialDatePicker.show(requireActivity().supportFragmentManager, "DATE PICKER")
@@ -329,7 +326,7 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
         // Do nothing, user does not want to exit
     }
 
-    override fun onDialogPositive(requestCode: Int) {
+    override fun onDialogPositive(requestCode: Int, argument: String?) {
         if (requestCode == ALERT_CONFIRM_SAVE) {
             expiredDateHealthIDDateInput.text?.clear()
             if (!expiredDateHealthIDDateInput.isEnabled) {
@@ -344,16 +341,5 @@ class GenerateGreenCertificate : Fragment(R.layout.generate_green_certificate),
                     })
             }
         }
-    }
-}
-
-@Parcelize
-internal class RangeValidator(
-    private var minDate: Long = 0,
-    private var maxDate: Long = 0
-) : CalendarConstraints.DateValidator {
-
-    override fun isValid(date: Long): Boolean {
-        return !(minDate > date || maxDate < date)
     }
 }

@@ -23,17 +23,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp">
+
         <ImageView
             android:id="@+id/qrCode"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
             android:adjustViewBounds="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitXY"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:visibility="visible" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -151,6 +152,23 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="15dp"
+        android:background="#1A495D74" />
+
+    <Button
+        android:id="@+id/addRemoveHomeButton"
+        style="@style/RoundedButton.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/euclid_circular_bold"
+        android:text="@string/green_certificate_button_add_home"
+        app:icon="@drawable/ic_icon_pin"
+        app:iconGravity="textStart"
+        app:iconTintMode="multiply" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:background="#1A495D74" />
 
     <LinearLayout

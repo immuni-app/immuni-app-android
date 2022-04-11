@@ -103,7 +103,8 @@ class GreenCertificateViewModel(
                             user.value?.greenPass!!.add(
                                 GreenCertificateUser(
                                     base64 = result.greenpass.greenPass.toString(),
-                                    data = greenCertificate
+                                    data = greenCertificate,
+                                    fglTipoDgc = result.greenpass.fglTipoDgc
                                 )
                             )
                             userManager.save(
@@ -164,6 +165,7 @@ class GreenCertificateViewModel(
                 "NRFE" -> digitValidator.validaCheckDigitNRFE(token)
                 "NUCG" -> digitValidator.validaCheckDigitNUCG(token)
                 "AUTHCODE" -> digitValidator.validaCheckDigitAuthcode(token)
+                "CUEV" -> digitValidator.validaCheckDigitCUEV(token)
                 else -> digitValidator.validaCheckDigitAuthcode(token)
             }
         } else if (typeToken.isBlank()) {
@@ -174,6 +176,7 @@ class GreenCertificateViewModel(
                 "NRFE" -> context.getString(R.string.form_code_nrfe_empty)
                 "NUCG" -> context.getString(R.string.form_code_nucg_empty)
                 "AUTHCODE" -> context.getString(R.string.form_code_otp_empty)
+                "CUEV" -> context.getString(R.string.form_code_cuev_empty)
                 else -> ""
             }
         }
@@ -184,6 +187,7 @@ class GreenCertificateViewModel(
                 "NRFE" -> context.getString(R.string.form_code_nrfe_wrong)
                 "NUCG" -> context.getString(R.string.form_code_nucg_wrong)
                 "AUTHCODE" -> context.getString(R.string.form_code_otp_wrong)
+                "CUEV" -> context.getString(R.string.form_code_cuev_wrong)
                 else -> ""
             }
         } else if (resultValidateToken == GreenPassValidationResult.TokenLengthWrong) {
@@ -192,6 +196,7 @@ class GreenCertificateViewModel(
                 "NRFE" -> context.getString(R.string.form_code_nrfe_empty)
                 "NUCG" -> context.getString(R.string.form_code_nucg_empty)
                 "AUTHCODE" -> context.getString(R.string.form_code_otp_empty)
+                "CUEV" -> context.getString(R.string.form_code_cuev_empty)
                 else -> ""
             }
         }
@@ -292,6 +297,9 @@ class GreenCertificateViewModel(
             greenCertificate.recoveryStatements != null -> {
                 greenCertificate.recoveryStatements!![0].certificateIdentifier
             }
+            greenCertificate.exemptions != null -> {
+                greenCertificate.exemptions!![0].certificateIdentifier
+            }
             else -> null
         }
 
@@ -308,6 +316,10 @@ class GreenCertificateViewModel(
                     }
                     greenPass.data?.recoveryStatements != null -> {
                         if (greenPass.data?.recoveryStatements!![0].certificateIdentifier == issuerID) saved =
+                            true
+                    }
+                    greenPass.data?.exemptions != null -> {
+                        if (greenPass.data?.exemptions!![0].certificateIdentifier == issuerID) saved =
                             true
                     }
                 }

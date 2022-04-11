@@ -33,8 +33,6 @@ class WebViewPopup : PopupDialogFragment() {
         val args = navArgs<WebViewPopupArgs>()
         webView.webViewClient = WebViewClient()
         webView.loadUrl(args.value.url)
-        webView.settings.javaScriptEnabled = true
-        webView.settings.javaScriptCanOpenWindowsAutomatically = false
 
         // force resize the web view to fix bottom sheet height
         webView.updateLayoutParams {

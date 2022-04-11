@@ -68,4 +68,18 @@ class UserManager(
     fun provinces(region: Region) = regionRepository.provinces(region = region)
 
     // endregion
+
+    // DGC
+    val showModalDGC = userRepository.showModalDGC
+
+    fun setShowModalDGC(show: Boolean) {
+        userRepository.setShowModalDGC(show)
+    }
+
+    val showDGCHome = userRepository.showDGCHome
+
+    fun setShowDGCHome(show: Boolean) {
+        userRepository.setShowDGCHome(show)
+    }
+    // END DGC
 }
