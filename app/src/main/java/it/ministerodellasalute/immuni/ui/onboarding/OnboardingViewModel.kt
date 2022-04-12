@@ -188,6 +188,10 @@ class OnboardingViewModel(
                     e.message?.contains("39508") == true -> {
                         "39508"
                     }
+                    // HMS - The location permission needs to set to 'always on'
+                    e.message?.contains("8103") == true -> {
+                        e.message
+                    }
                     else -> {
                         null
                     }
