@@ -21,6 +21,7 @@ import android.content.Context
 import android.content.Intent
 import com.huawei.hms.common.ApiException
 import com.huawei.hms.contactshield.ContactShield
+import com.huawei.hms.contactshield.StatusCode
 import it.ministerodellasalute.immuni.extensions.bluetooth.BluetoothStateFlow
 import it.ministerodellasalute.immuni.extensions.lifecycle.AppLifecycleObserver
 import it.ministerodellasalute.immuni.extensions.location.LocationStateFlow
@@ -149,7 +150,11 @@ class ExposureNotificationManager(
                 return
             }
 
-            if (exception !is ApiException) {
+            if (exception is ApiException) {
+                if (exception.statusCode == StatusCode.STATUS_MISSING_PERMISSION_LOCATION) {
+                    throw java.lang.Exception("${StatusCode.STATUS_MISSING_PERMISSION_LOCATION} - ${exception.message}")
+                }
+            } else {
                 log("Unknown error")
                 throw exception
             }
