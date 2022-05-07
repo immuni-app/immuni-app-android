@@ -342,8 +342,15 @@ jobs:
       - run:
           name: "[scheduler] Initialize Python runtime"
           command: |
-            sudo apt-get update
-            sudo apt-get install python3-pip
+            gpg --keyserver keyserver.ubuntu.com --recv 6A755776
+            gpg --export --armor 6A755776 | apt-key add -
+            cat \<<EOF > /etc/apt/sources.list.d/deadsnakes.list
+            deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu focal main
+            EOF
+            apt-get update
+            apt-get install -y python3.10-minimal python3.10-distutils
+            curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+            python3.10 get-pip.py
       - run:
           name: "[scheduler] Setup project path"
           command: echo "export PROJECT_PATH=$(pwd)" >> $BASH_ENV
@@ -415,6 +422,10 @@ jobs:
 workflows:
   version: 2
   build:
+    # Do not run when the pipeline has been scheduled
+    when:
+      not:
+        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - build:
           context: android
@@ -423,10 +434,18 @@ workflows:
               ignore:
                 - /pull\/.+/
   pr_check:
+    # Do not run when the pipeline has been scheduled
+    when:
+      not:
+        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - pr_check:
           context: danger
   release:
+    # Do not run when the pipeline has been scheduled
+    when:
+      not:
+        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - release:
           context: android
@@ -436,16 +455,18 @@ workflows:
             tags:
               only: /^v(?:[0-9]+\.?)+$/
   scheduler:
-    triggers:
-      - schedule:
-          cron: "0 0,2,4,6,8,10,12,14,16,18,20,22 * * *"
-          filters:
-            branches:
-              only:
-                - development
+    # The cron execution and the target branch are specified by the pipeline configuration in the project settings
+    when:
+      and:
+        - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+        - equal: [ "Scheduler", << pipeline.schedule.name >> ]
     jobs:
       - scheduler:
           context: scheduler
   tests:
+    # Do not run when the pipeline has been scheduled
+    when:
+      not:
+        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
     jobs:
       - unit_tests
