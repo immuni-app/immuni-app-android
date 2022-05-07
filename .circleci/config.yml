@@ -357,9 +357,9 @@ jobs:
       - restore_cache:
           name: "[scheduler] Restore Python Cache"
           keys:
-            - pip-packages-v3-{{ .Branch }}-{{ checksum "scheduler/poetry.lock" }}
-            - pip-packages-v3-{{ .Branch }}-
-            - pip-packages-v3-
+            - pip-packages-v4-{{ .Branch }}-{{ checksum "scheduler/poetry.lock" }}
+            - pip-packages-v4-{{ .Branch }}-
+            - pip-packages-v4-
       - run:
           name: "[scheduler] Configure poetry"
           command: |
@@ -374,7 +374,7 @@ jobs:
           paths:
             - ~/.cache/pip
             - scheduler/.venv
-          key: pip-packages-v3-{{ .Branch }}-{{ checksum "scheduler/poetry.lock" }}
+          key: pip-packages-v4-{{ .Branch }}-{{ checksum "scheduler/poetry.lock" }}
       - run:
           name: "[scheduler] Configure scheduler"
           command: |
