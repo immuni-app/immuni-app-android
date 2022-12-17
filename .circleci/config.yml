@@ -368,7 +368,7 @@ jobs:
       - run:
           name: "[scheduler] Install dependencies"
           working_directory: scheduler
-          command: poetry install
+          command: poetry install --no-ansi
       - save_cache:
           name: "[scheduler] Save Python Cache"
           paths:
